@@ -136,6 +136,13 @@ return [
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 
+		/**
+		 * Extension Service Providers...
+		 */
+		'TwigBridge\ServiceProvider',
+		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
+
+
 		/*
 		 * Application Service Providers...
 		 */
@@ -144,7 +151,6 @@ return [
 		'MyBB\Core\Providers\ConfigServiceProvider',
 		'MyBB\Core\Providers\EventServiceProvider',
 		'MyBB\Core\Providers\RouteServiceProvider',
-
 	],
 
 	/*
@@ -190,6 +196,11 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		/**
+		 * Extension Facades...
+		 */
+		'Twig' => 'TwigBridge\Facade\Twig',
 
 	],
 
