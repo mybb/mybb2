@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core;
+<?php
+
+namespace MyBB\Core\Database\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

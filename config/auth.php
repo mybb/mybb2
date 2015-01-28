@@ -28,7 +28,7 @@ return [
 	|
 	*/
 
-	'model' => 'MyBB\Core\User',
+	'model' => 'MyBB\Core\Database\Models\User',
 
 	/*
 	|--------------------------------------------------------------------------
