@@ -414,12 +414,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "4001019dc17c569ddb15cc61f66eed7c6b79b21a"
+                "reference": "4034d5e29430394ba016c5594965e1fa9dfea1fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/4001019dc17c569ddb15cc61f66eed7c6b79b21a",
-                "reference": "4001019dc17c569ddb15cc61f66eed7c6b79b21a",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4034d5e29430394ba016c5594965e1fa9dfea1fa",
+                "reference": "4034d5e29430394ba016c5594965e1fa9dfea1fa",
                 "shasum": ""
             },
             "require": {
@@ -531,7 +531,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-01-28 20:03:26"
+            "time": "2015-01-29 04:09:14"
         },
         {
             "name": "league/flysystem",
@@ -998,12 +998,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rcrowe/TwigBridge.git",
-                "reference": "5e0af7528ea46daf1dbd550eeb04da7b9abba82c"
+                "reference": "95c70cad52b09c445b8dcb5640d13d91b11e8fc6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/5e0af7528ea46daf1dbd550eeb04da7b9abba82c",
-                "reference": "5e0af7528ea46daf1dbd550eeb04da7b9abba82c",
+                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/95c70cad52b09c445b8dcb5640d13d91b11e8fc6",
+                "reference": "95c70cad52b09c445b8dcb5640d13d91b11e8fc6",
                 "shasum": ""
             },
             "require": {
@@ -1054,7 +1054,7 @@
                 "laravel",
                 "twig"
             ],
-            "time": "2015-01-26 08:15:26"
+            "time": "2015-01-29 09:18:18"
         },
         {
             "name": "swiftmailer/swiftmailer",
