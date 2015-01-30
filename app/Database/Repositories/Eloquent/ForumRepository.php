@@ -23,7 +23,7 @@ class ForumRepository implements IForumRepository
     protected $forumModel;
 
     /**
-     * @param Thread $threadModel The model to use for threads.
+     * @param Forum $forumModel The model to use for forums.
      */
     public function __construct(Forum $forumModel) // TODO: Inject permissions container? So we can check thread permissions before querying?
     {
