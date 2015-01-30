@@ -9,7 +9,6 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-
 use MyBB\Core\Database\Models\Thread;
 use MyBB\Core\Database\Repositories\IThreadRepository;
 
@@ -61,5 +60,17 @@ class ThreadRepository implements IThreadRepository
     public function find($id = 0)
     {
         return $this->threadModel->find($id);
+    }
+
+    /**
+     * Find a single thread by its slug.
+     *
+     * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug = '')
+    {
+        return $this->threadModel->where('slug', '=', $slug)->first();
     }
 }

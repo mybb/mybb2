@@ -66,6 +66,16 @@ class Thread extends Model implements HasPresenter
     }
 
     /**
+     * A thread belongs to one forum.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function forum()
+    {
+        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Forum');
+    }
+
+    /**
      * A thread is created by (and belongs to) a user/author.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

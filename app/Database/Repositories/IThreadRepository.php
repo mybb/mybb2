@@ -35,4 +35,13 @@ interface IThreadRepository
      * @return mixed
      */
     public function find($id = 0);
+
+    /**
+     * Find a single thread by its slug.
+     *
+     * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug = '');
 }
