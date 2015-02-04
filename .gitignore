@@ -12,6 +12,7 @@ vendor/
 
 ### Laravel
 /bootstrap/compiled.php
+/node_modules
 .env.*.php
 .env.php
 
