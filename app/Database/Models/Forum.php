@@ -9,10 +9,10 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Forum extends Model implements HasPresenter
+class Forum extends Node implements HasPresenter
 {
     /**
      * The table associated with the model.
@@ -34,6 +34,20 @@ class Forum extends Model implements HasPresenter
      * @var array
      */
     protected $with = array();
+
+    /**
+     * Nested set column IDs.
+     */
+    const LFT = 'left_id';
+    const RGT = 'right_id';
+    const PARENT_ID = 'parent_id';
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = ['left_id', 'right_id', 'parent_id'];
 
     /**
      * Get the presenter class.

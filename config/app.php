@@ -201,6 +201,8 @@ return [
 		 * Extension Facades...
 		 */
 		'Twig' => 'TwigBridge\Facade\Twig',
+		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
+		'Node' => 'Kalnoy\Nestedset\Node',
 
 	],
 
