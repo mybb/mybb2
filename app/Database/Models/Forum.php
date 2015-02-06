@@ -68,4 +68,14 @@ class Forum extends Node implements HasPresenter
     {
         return $this->hasMany('MyBB\\Core\\Database\\Models\\Thread');
     }
+
+    /**
+     * A forum contains many posts, through its threads.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function posts()
+    {
+        return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\Post', 'MyBB\\Core\\Database\\Models\\Thread');
+    }
 }
