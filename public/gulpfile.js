@@ -24,40 +24,46 @@ var paths = {
     },
     images: {
         src: "./images",
-        dest: "./images"
+        dest: "./assets/images"
+    },
+    fonts: {
+        src: "./fonts",
+        dest: "./assets/fonts"
     }
 };
 
-gulp.task("default", ["images", "scripts", "styles"]);
+gulp.task("default", ["images", "scripts", "styles", "fonts"]);
 
-gulp.task("clean", function (cb) {
+gulp.task("clean", function(cb) {
     del(
         [
-            paths.assets.js.dest + "/**",
-            paths.assets.css.dest + "/**",
-            paths.assets.images.dest + "/**"
+            paths.js.dest + "/**",
+            paths.css.dest + "/**",
+            paths.images.dest + "/**",
+            paths.fonts.dest + "/**"
         ]
         , cb);
 });
 
-gulp.task("watch", ["default"], function () {
+gulp.task("watch", ["default"], function() {
     gulp.watch(paths.js.src + "/**/*.js", ["scripts"]);
     gulp.watch(paths.images.src + "/**/*", ["images"]);
     gulp.watch(paths.css.src + "/**/*.scss", ["styles"]);
+    gulp.watch(paths.fonts.src + "/**/*", ["fonts"]);
 });
 
-gulp.task("images", function () {
+gulp.task("images", function() {
     return gulp.src(paths.images.src + "/*")
         .pipe(changed(paths.images.dest))
         .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
         .pipe(gulp.dest(paths.images.dest));
 });
 
-gulp.task("scripts", function () {
+gulp.task("scripts", function() {
     // Compile scripts, will use browserify...
 });
 
-gulp.task("styles", function () {
+gulp.task("styles", function() {
     return gulp.src([paths.bower + "/normalize-css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/main.scss"])
         .pipe(sass({
             includePaths: [
@@ -70,4 +76,8 @@ gulp.task("styles", function () {
         .pipe(rename({suffix: ".min"}))
         .pipe(minifycss())
         .pipe(gulp.dest(paths.css.dest));
+});
+
+gulp.task("fonts", function() {
+    return gulp.src(paths.bower + "/fontawesome/fonts/**.*").pipe(gulp.dest(paths.fonts.dest));
 });
