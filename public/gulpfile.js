@@ -58,7 +58,7 @@ gulp.task("scripts", function () {
 });
 
 gulp.task("styles", function () {
-    return gulp.src([paths.bower + "/normalize-css/normalize.css", paths.css.src + "/main.scss"])
+    return gulp.src([paths.bower + "/normalize-css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/main.scss"])
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"
