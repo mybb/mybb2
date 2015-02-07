@@ -1,0 +1,26 @@
+{
+  "name": "mybb",
+  "version": "2.0.0",
+  "homepage": "http://mybb.com",
+  "authors": [
+    "MyBB Group"
+  ],
+  "description": "MyBB is the free and open source, intuitive, extensible, and incredibly powerful forum software you've been looking for.",
+  "main": "index.php",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "MyBB",
+    "Forum"
+  ],
+  "license": "BSD-3",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
