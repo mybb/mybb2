@@ -1,0 +1,33 @@
+<div class="header-container">
+            <header>
+                <div class="wrapper clearfix">
+                    <h1 class="title"><a href="index.php" id="logo"><span>MyBB Community Forums</span></a></h1>
+                    <nav id="main-menu" class="menu-bar">
+                        <a class="menu-button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
+                        <div class="main-menu-container">
+                            <ul>
+                                <li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
+                                <li><a href="index.php?page=members">Members</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+                <nav class="menu-bar user-navigation">
+                    <div class="wrapper clearfix">
+                        {% include "header.welcomeblock_member" %}
+                        <div id="search">
+                            <a href="index.php?page=search" class="search-button"><i class="fa fa-search"></i><span class="text">Search</span></a>
+                            <div class="search-container" for="query">
+                                <input type="search" placeholder="" value="" class="search-field" />
+                                <span class="search-controls">
+                                    <button type="submit" class="search-submit">
+                                        <i class="fa fa-search"></i><span class="text">Search</span>
+                                    </button>
+                                    <a href="index.php?page=search" class="advanced-search" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </div>

@@ -12,5 +12,10 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.less('app.less');
+    mix.styles([
+    	'css/normalize.css',
+    	'css/font-awesome.css',
+    	'css/main.css', 
+    	'css/plugins.css'
+    ]);
 });
