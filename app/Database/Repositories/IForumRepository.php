@@ -19,6 +19,13 @@ interface IForumRepository
     public function all();
 
     /**
+     * Get the forum tree for the index, consisting of root forums (categories), and one level of descendants.
+     *
+     * @return mixed
+     */
+    public function getIndexTree();
+
+    /**
      * Get a single forum by ID.
      *
      * @param int $id The ID of the forum.

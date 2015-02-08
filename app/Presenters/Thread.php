@@ -16,10 +16,10 @@ class Thread extends BasePresenter
     /** @var \MyBB\Core\Database\Models\Thread $wrappedObject */
 
     /**
-     * @param \MyBB\Core\Database\Models\Thread $thread The thread being wrapped by this presenter.
+     * @param \MyBB\Core\Database\Models\Thread $resource The thread being wrapped by this presenter.
      */
-    public function __construct(\MyBB\Core\Database\Models\Thread $thread)
+    public function __construct(\MyBB\Core\Database\Models\Thread $resource)
     {
-        $this->wrappedObject = $thread;
+        $this->wrappedObject = $resource;
     }
 }

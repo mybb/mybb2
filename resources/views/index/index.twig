@@ -162,43 +162,26 @@
                 <aside>
                     <section>
                         <h3 class="linked-header"><a href="index.php?page=all-forums">All Forums</a></h3>
+
                         <div class="compressed-forum-list">
-                            <div class="category">
-                                <h4><a href="index.php?page=category">Support</a></h4>
-                                <ul class="forum-list">
-                                    <li><a href="index.php?page=forum">General Support</a> <span class="unread-count">17</span></li>
-                                    <li><a href="index.php?page=forum">Security Management &amp; Support</a></li>
-                                    <li><a href="index.php?page=forum">Merge Support</a></li>
-                                    <li><a href="index.php?page=forum">International Support</a></li>
-                                </ul>
+                        {% for category in forums %}
+                            {% if category.isRoot %}
+                                <div class="category">
+                                    <h4><a href="">{{ category.title }}</a></h4>
+                                        <ul class="forum-list">
+                                        {% for forum in category.children.toTree %}
+                                            <li><a href="">{{ forum.title }}</a></li>
+                                        {% else %}
+                                            {#Do nothing, no subforums for this category#}
+                                        {% endfor %}
+                                        </ul>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            No Forums Found!
+                        {% endfor %}
                             </div>
-                            <div class="category">
-                                <h4><a href="index.php?page=category">Development</a></h4>
-                                <ul class="forum-list">
-                                    <li><a href="index.php?page=forum">2.0 Development</a> <span class="unread-count">4</span></li>
-                                    <li><a href="index.php?page=forum">Merge Development</a></li>
-                                </ul>
-                            </div>
-                            <div class="category">
-                                <h4><a href="index.php?page=category">Resources</a></h4>
-                                <ul class="forum-list">
-                                    <li><a href="index.php?page=forum">Plugins</a> <span class="unread-count">8</span></li>
-                                    <li><a href="index.php?page=forum">Themes</a> <span class="unread-count">3</span></li>
-                                    <li><a href="index.php?page=forum">Translations</a></li>
-                                    <li><a href="index.php?page=forum">Third Party Integrations</a></li>
-                                    <li><a href="index.php?page=forum">Tutorials</a></li>
-                                </ul>
-                            </div>
-                            <div class="category">
-                                <h4><a href="index.php?page=category">Community</a></h4>
-                                <ul class="forum-list">
-                                    <li><a href="index.php?page=forum">General Discussion</a> <span class="unread-count">10</span></li>
-                                    <li><a href="index.php?page=forum">Showcase</a></li>
-                                    <li><a href="index.php?page=forum">MyBB.com Community &amp; Site Issues</a></li>
-                                    <li><a href="index.php?page=forum">Testing</a></li>
-                                </ul>
-                            </div>
-                        </section>
+                    </section>
                         <section>
                             <h3 class="linked-header"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
                             <div class="compact-users-list online-users">

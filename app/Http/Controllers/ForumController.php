@@ -1,26 +1,20 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-class ForumController extends Controller {
+use MyBB\Core\Database\Repositories\IForumRepository;
 
-	/*
-	|--------------------------------------------------------------------------
-	| Forum Controller
-	|--------------------------------------------------------------------------
-	| Renders the index page, 
-	| 
-	| 
-	| @TODO - subforums, Posts
-	|
-	*/
+class ForumController extends Controller
+{
+	/** @var IForumRepository $forumRepository */
+	private $forumRepository;
 
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @return void
+	 * @param IForumRepository $forumRepository Forum repository instance to use in order to load forum information.
 	 */
-	public function __construct()
+	public function __construct(IForumRepository $forumRepository)
 	{
-		// Eventually Something will go here
+		$this->forumRepository  = $forumRepository;
 	}
 
 	/**
@@ -30,7 +24,9 @@ class ForumController extends Controller {
 	 */
 	public function index()
 	{
-		return view('index.index');
+		$forums = $this->forumRepository->getIndexTree();
+
+		return view('index.index', compact('forums'));
 	}
 
 }

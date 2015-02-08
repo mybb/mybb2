@@ -32,9 +32,9 @@ class CachingDecorator implements IForumRepository
      */
     public function all()
     {
-        if (($forums = $this->cache->get('forums')) == null) {
+        if (($forums = $this->cache->get('forums.all')) == null) {
             $forums = $this->decoratedRepository->all();
-            $this->cache->remember('forums', $forums);
+            $this->cache->forever('forums.all', $forums);
         }
 
         return $forums;
@@ -62,5 +62,20 @@ class CachingDecorator implements IForumRepository
     public function findBySlug($slug = '')
     {
         // TODO: Implement findBySlug() method.
+    }
+
+    /**
+     * Get the forum tree for the index, consisting of root forums (categories), and one level of descendants.
+     *
+     * @return mixed
+     */
+    public function getIndexTree()
+    {
+        if (($forums = $this->cache->get('forums.index_tree')) == null) {
+            $forums = $this->decoratedRepository->getIndexTree();
+            $this->cache->forever('forums.index_tree', $forums);
+        }
+
+        return $forums;
     }
 }

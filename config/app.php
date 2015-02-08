@@ -141,6 +141,7 @@ return [
 		 */
 		'TwigBridge\ServiceProvider',
 		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 
 		/*

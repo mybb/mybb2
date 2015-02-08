@@ -25,7 +25,7 @@ class CreatePostsTable extends Migration {
 		});
 
 		Schema::table('forums', function(Blueprint $table) {
-			$table->foreign('last_post_id', 'forums_last_post_id_foreign')->references('id')->on('posts');
+			$table->foreign('last_post_id')->references('id')->on('posts');
 		});
 	}
 

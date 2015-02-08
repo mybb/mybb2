@@ -64,4 +64,14 @@ class ForumRepository implements IForumRepository
     {
         return $this->forumModel->where('slug', '=', $slug)->first();
     }
+
+    /**
+     * Get the forum tree for the index, consisting of root forums (categories), and one level of descendants.
+     *
+     * @return mixed
+     */
+    public function getIndexTree()
+    {
+        return $this->forumModel->withDepth()->having('depth', '<', 2)->with('children')->get();
+    }
 }

@@ -20,13 +20,13 @@ class CreateForumsTable extends Migration {
 			$table->text('description');
 
 			// Link forums
-			$table->boolean('is_link');
+			$table->boolean('is_link')->default(false);
 			$table->string('link')->nullable();
 
 			// Cached data
 			$table->integer('num_threads')->default(0);
 			$table->integer('num_posts')->default(0);
-			$table->integer('last_post_id')->unisgned()->nullable();
+			$table->integer('last_post_id')->unsigned()->nullable();
 			$table->integer('last_post_user_id')->unsigned()->nullable();
 
 			// Nested sets

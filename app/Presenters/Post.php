@@ -16,10 +16,10 @@ class Post extends BasePresenter
     /** @var \MyBB\Core\Database\Models\Post $wrappedObject */
 
     /**
-     * @param \MyBB\Core\Database\Models\Post $post The post being wrapped by this presenter.
+     * @param \MyBB\Core\Database\Models\Post $resource The post being wrapped by this presenter.
      */
-    public function __construct(\MyBB\Core\Database\Models\Post $post)
+    public function __construct(\MyBB\Core\Database\Models\Post $resource)
     {
-        $this->wrappedObject = $post;
+        $this->wrappedObject = $resource;
     }
 }
