@@ -49,7 +49,7 @@ class CachingDecorator implements IForumRepository
      */
     public function find($id = 0)
     {
-        // TODO: Implement find() method.
+        return $this->decoratedRepository->find($id);
     }
 
     /**
@@ -61,7 +61,7 @@ class CachingDecorator implements IForumRepository
      */
     public function findBySlug($slug = '')
     {
-        // TODO: Implement findBySlug() method.
+        return $this->decoratedRepository->findBySlug($slug);
     }
 
     /**

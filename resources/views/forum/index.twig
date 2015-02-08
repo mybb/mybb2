@@ -167,13 +167,13 @@
                         {% for category in forums %}
                             <div class="category">
                                 <h4><a href="{{ url_route("forums.show", [category.slug]) }}">{{ category.title }}</a></h4>
-                                    <ul class="forum-list">
-                                    {% for forum in category.children.toTree %}
-                                        <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
-                                    {% else %}
-                                        {#Do nothing, no subforums for this category#}
-                                    {% endfor %}
-                                    </ul>
+                                <ul class="forum-list">
+                                {% for forum in category.children.toTree %}
+                                    <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
+                                {% else %}
+                                    {#Do nothing, no subforums for this category#}
+                                {% endfor %}
+                                </ul>
                             </div>
                         {% else %}
                             No Forums Found!
