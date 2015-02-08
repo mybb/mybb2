@@ -10,6 +10,7 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Thread;
 use MyBB\Core\Database\Repositories\IPostRepository;
 
 class PostRepository implements IPostRepository
@@ -50,5 +51,17 @@ class PostRepository implements IPostRepository
     public function find($id = 0)
     {
         return $this->postModel->find($id);
+    }
+
+    /**
+     * Get all posts for a thread.
+     *
+     * @param Thread $thread The thread to fetch the posts for.
+     *
+     * @return mixed
+     */
+    public function allForThread(Thread $thread)
+    {
+        return $this->postModel->with(['author'])->where('thread_id', '=', $thread->id)->get();
     }
 }

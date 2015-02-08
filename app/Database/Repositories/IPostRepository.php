@@ -9,6 +9,8 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Thread;
+
 interface IPostRepository
 {
     /**
@@ -19,6 +21,15 @@ interface IPostRepository
      * @return mixed
      */
     public function allForUser($userId = 0);
+
+    /**
+     * Get all posts for a thread.
+     *
+     * @param Thread $thread The thread to fetch the posts for.
+     *
+     * @return mixed
+     */
+    public function allForThread(Thread $thread);
 
     /**
      * Find a single post by its ID.
