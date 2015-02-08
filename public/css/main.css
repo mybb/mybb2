@@ -129,6 +129,7 @@ a.multi-link:hover {
 /* User Navigation Links */
 .user-navigation ul.user-links {
     margin: 0 -8px;
+	list-style: none;
 }
 
 .user-navigation ul.user-links > li {
@@ -469,6 +470,7 @@ h1.title {
 nav.menu-bar ul {
     margin: 0;
     padding: 0;
+	list-style: none;
 }
 
 nav.menu-bar ul li a {
