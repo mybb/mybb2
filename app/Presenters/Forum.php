@@ -23,9 +23,4 @@ class Forum extends BasePresenter
     {
         $this->wrappedObject = $resource;
     }
-
-    public function title()
-    {
-        return $this->wrappedObject->title;
-    }
 }
