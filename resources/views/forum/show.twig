@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <title>{{ forum.title }} &bull; MyBB Community Forums</title>
+    {% include "partials.headerinclude" %}
+    <meta name="description" content="{{ forum.description }}" />
+    <link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
+</head>
+<body>
+{% include "header.header" %}
+<div class="main-container">
+    <div class="main wrapper clearfix">
+        <div class="breadcrumb">
+            Breadcrumb Goes here
+        </div>
+        <article class="forum">
+            <header class="forum__details">
+                <h1>{{ forum.title }}</h1>
+                <p>{{ forum.description }}</p>
+            </header>
+            {% if forum.children.count > 0 %}
+                <section class="forum__child-forums">
+                    <h2 class="linked-header bold"><a>Child Forums</a></h2>
+
+                    <div class="compressed-forum-list">
+                        <ul class="forum-list">
+                            {% for forum in forum.children.toTree %}
+                                <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
+                            {% else %}
+                                No Forums Found!
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+            {% endif %}
+        </article>
+
+        <section class="threads">
+            <header class="threads__header">
+                <h2 class="linked-header bold">Threads</h2>
+            </header>
+            <ul class="thread-list">
+                {% for thread in threads %}
+                    <li><a href="{{ url_route("threads.show", [thread.slug]) }}">{{ thread.title }}</a></li>
+                {% else %}
+                    <li class="thread-list__error error error-no-results">No threads found!</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <aside>
+            <section>
+                <h3 class="linked-header"><a href="index.php?page=all-forums">All Forums</a></h3>
+
+                <div class="compressed-forum-list">
+                    {% for category in forums %}
+                        <div class="category">
+                            <h4><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ category.title }}</a></h4>
+                            <ul class="forum-list">
+                                {% for forum in category.children.toTree %}
+                                    <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
+                                {% else %}
+                                    {#Do nothing, no subforums for this category#}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        No Forums Found!
+                    {% endfor %}
+                </div>
+            </section>
+            <section>
+                <h3 class="linked-header"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
+                <div class="compact-users-list online-users">
+                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Clank</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31011.png?dateline=1373556215" class="avatar" />envira</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_13376.jpg?dateline=1401219544" class="avatar" />Eric J.</a>
+                    <a href="index.php?page=profile"><img src="http://i.imgur.com/92dvjzh.png?dateline=1362534988" class="avatar" />Jason L.</a>
+                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Jetto</a>
+                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Julz</a>
+                    <a href="index.php?page=profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Justin</span></a>
+                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />MrGinos</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_25096.png?dateline=1395716559" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Omar G.</span></a>
+                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Penn</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_57932.jpg?dateline=1346006198" class="avatar" />psock</a>
+                    <a href="index.php?page=profile"><img src="https://es.gravatar.com/userimage/36446230/6a242edbd3e0ff86c6b18fde2c31e46b.png?dateline=1358073091" class="avatar" />Solstice</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_78269.jpg?dateline=1400055145" class="avatar" />Wage</a>
+                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31006.jpg?dateline=1376184165" class="avatar" />Zueq</a>
+                </div>
+            </section>
+        </aside>
+    </div> <!-- #main -->
+</div>
+</div>
+{% include "footer.footer" %}
+</body>
+</html>

@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Thread;
 use MyBB\Core\Database\Repositories\IThreadRepository;
 
@@ -72,5 +73,17 @@ class ThreadRepository implements IThreadRepository
     public function findBySlug($slug = '')
     {
         return $this->threadModel->where('slug', '=', $slug)->first();
+    }
+
+    /**
+     * Get all threads within a forum.
+     *
+     * @param Forum $forum The forum the threads belong to.
+     *
+     * @return mixed
+     */
+    public function allForForum(Forum $forum)
+    {
+        return $this->threadModel->where('forum_id', '=', $forum->id)->get();
     }
 }

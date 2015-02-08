@@ -62,7 +62,7 @@ class ForumRepository implements IForumRepository
      */
     public function findBySlug($slug = '')
     {
-        return $this->forumModel->where('slug', '=', $slug)->first();
+        return $this->forumModel->whereSlug($slug)->with(['children'])->first();
     }
 
     /**
@@ -72,6 +72,6 @@ class ForumRepository implements IForumRepository
      */
     public function getIndexTree()
     {
-        return $this->forumModel->withDepth()->having('depth', '<', 2)->with('children')->get();
+        return $this->forumModel->where('parent_id', '=', null)->with(['children'])->get();
     }
 }

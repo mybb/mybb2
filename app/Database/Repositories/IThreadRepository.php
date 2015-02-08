@@ -9,6 +9,8 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Forum;
+
 interface IThreadRepository
 {
     /**
@@ -17,6 +19,15 @@ interface IThreadRepository
      * @return mixed
      */
     public function all();
+
+    /**
+     * Get all threads within a forum.
+     *
+     * @param Forum $forum The forum the threads belong to.
+     *
+     * @return mixed
+     */
+    public function allForForum(Forum $forum);
 
     /**
      * Get all threads created by a user.
