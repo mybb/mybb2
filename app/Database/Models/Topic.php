@@ -19,7 +19,7 @@ class Topic extends Model implements HasPresenter
      *
      * @var string
      */
-    protected $table = 'threads';
+    protected $table = 'topics';
 
     /**
      * Indicates if the model should be timestamped.

@@ -4,7 +4,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThreadsTable extends Migration {
+class CreateTopicsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,12 +13,12 @@ class CreateThreadsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('threads', function(Blueprint $table) {
+		Schema::create('topics', function(Blueprint $table) {
 			$table->increments('id');
 			$table->string('title');
 			$table->string('slug')->unique();
 			$table->integer('forum_id')->unsigned();
-			$table->integer('author_id')->unsigned();
+			$table->integer('user_id')->unsigned();
 			$table->integer('first_post_id')->unsigned()->nullable();
 			$table->integer('last_post_id')->unsigned()->nullable();
 			$table->integer('views')->default(0);
@@ -38,7 +38,7 @@ class CreateThreadsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('threads');
+		Schema::drop('topics');
 	}
 
 }
