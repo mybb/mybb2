@@ -1,32 +1,32 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
 use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IThreadRepository;
+use MyBB\Core\Database\Repositories\ITopicRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ForumController extends Controller
 {
 	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
-	/** @var IThreadRepository $threadRepository */
-	private $threadRepository;
+	/** @var ITopicRepository $topicRepository */
+	private $topicRepository;
 
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @param IForumRepository  $forumRepository Forum repository instance to use in order to load forum information.
-	 * @param IThreadRepository $threadRepository Thread repository instance to use in order to load threads within a forum.
+	 * @param ITopicRepository $topicRepository Thread repository instance to use in order to load threads within a forum.
 	 */
-	public function __construct(IForumRepository $forumRepository, IThreadRepository $threadRepository)
+	public function __construct(IForumRepository $forumRepository, ITopicRepository $topicRepository)
 	{
 		$this->forumRepository  = $forumRepository;
-		$this->threadRepository = $threadRepository;
+		$this->topicRepository = $topicRepository;
 	}
 
 	/**
 	 * Shows the Index Page
 	 *
-	 * @return Response
+	 * @return \Illuminate\View\View
 	 */
 	public function index()
 	{
@@ -39,6 +39,8 @@ class ForumController extends Controller
 	 * Shows a specific forum.
 	 *
 	 * @param string $slug The slug of the forum to show.
+	 *
+	 * @return \Illuminate\View\View
 	 */
 	public function show($slug = '')
 	{
@@ -48,8 +50,8 @@ class ForumController extends Controller
 			throw new NotFoundHttpException('Forum not found.');
 		}
 
-		$threads = $this->threadRepository->allForForum($forum);
+		$topics = $this->topicRepository->allForForum($forum);
 
-		return view('forum.show', compact('forum', 'threads'));
+		return view('forum.show', compact('forum', 'topics'));
 	}
 }

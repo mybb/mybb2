@@ -14,7 +14,7 @@
 Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
 Route::get('forum/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
-Route::get('thread/{slug}', ['as' => 'threads.show', 'uses' => 'ThreadController@show']);
+Route::get('topic/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
 
 Route::get('home', 'HomeController@index');
 

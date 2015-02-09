@@ -12,7 +12,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Thread extends Model implements HasPresenter
+class Topic extends Model implements HasPresenter
 {
     /**
      * The table associated with the model.

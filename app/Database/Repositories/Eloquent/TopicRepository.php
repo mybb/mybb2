@@ -10,23 +10,23 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Thread;
-use MyBB\Core\Database\Repositories\IThreadRepository;
+use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Repositories\ITopicRepository;
 
-class ThreadRepository implements IThreadRepository
+class TopicRepository implements ITopicRepository
 {
     /**
-     * @var Thread $threadModel
+     * @var Topic $topicModel
      * @access protected
      */
-    protected $threadModel;
+    protected $topicModel;
 
     /**
-     * @param Thread $threadModel The model to use for threads.
+     * @param Topic $topicModel The model to use for threads.
      */
-    public function __construct(Thread $threadModel) // TODO: Inject permissions container? So we can check thread permissions before querying?
+    public function __construct(Topic $topicModel) // TODO: Inject permissions container? So we can check thread permissions before querying?
     {
-        $this->threadModel = $threadModel;
+        $this->topicModel = $topicModel;
     }
 
     /**
@@ -36,7 +36,7 @@ class ThreadRepository implements IThreadRepository
      */
     public function all()
     {
-        return $this->threadModel->all();
+        return $this->topicModel->all();
     }
 
     /**
@@ -48,7 +48,7 @@ class ThreadRepository implements IThreadRepository
      */
     public function allForUser($userId = 0)
     {
-        return $this->threadModel->where('user_id', '=', $userId)->get();
+        return $this->topicModel->where('user_id', '=', $userId)->get();
     }
 
     /**
@@ -60,7 +60,7 @@ class ThreadRepository implements IThreadRepository
      */
     public function find($id = 0)
     {
-        return $this->threadModel->find($id);
+        return $this->topicModel->find($id);
     }
 
     /**
@@ -72,7 +72,7 @@ class ThreadRepository implements IThreadRepository
      */
     public function findBySlug($slug = '')
     {
-        return $this->threadModel->where('slug', '=', $slug)->first();
+        return $this->topicModel->where('slug', '=', $slug)->first();
     }
 
     /**
@@ -84,6 +84,6 @@ class ThreadRepository implements IThreadRepository
      */
     public function allForForum(Forum $forum)
     {
-        return $this->threadModel->where('forum_id', '=', $forum->id)->get();
+        return $this->topicModel->where('forum_id', '=', $forum->id)->get();
     }
 }

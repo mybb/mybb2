@@ -10,7 +10,7 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Thread;
+use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
 
 

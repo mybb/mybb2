@@ -11,7 +11,7 @@ namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Forum;
 
-interface IThreadRepository
+interface ITopicRepository
 {
     /**
      * Get all threads.

@@ -13,12 +13,12 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 
 class Thread extends BasePresenter
 {
-    /** @var \MyBB\Core\Database\Models\Thread $wrappedObject */
+    /** @var \MyBB\Core\Database\Models\Topic $wrappedObject */
 
     /**
-     * @param \MyBB\Core\Database\Models\Thread $resource The thread being wrapped by this presenter.
+     * @param \MyBB\Core\Database\Models\Topic $resource The thread being wrapped by this presenter.
      */
-    public function __construct(\MyBB\Core\Database\Models\Thread $resource)
+    public function __construct(\MyBB\Core\Database\Models\Topic $resource)
     {
         $this->wrappedObject = $resource;
     }

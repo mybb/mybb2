@@ -49,8 +49,8 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\IThreadRepository',
-            'MyBB\Core\Database\Repositories\Eloquent\ThreadRepository'
+            'MyBB\Core\Database\Repositories\ITopicRepository',
+            'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
         );
     }
 }

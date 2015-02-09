@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\Thread;
+use MyBB\Core\Database\Models\Topic;
 
 interface IPostRepository
 {
@@ -25,11 +25,11 @@ interface IPostRepository
     /**
      * Get all posts for a thread.
      *
-     * @param Thread $thread The thread to fetch the posts for.
+     * @param Topic $thread The thread to fetch the posts for.
      *
      * @return mixed
      */
-    public function allForThread(Thread $thread);
+    public function allForThread(Topic $thread);
 
     /**
      * Find a single post by its ID.

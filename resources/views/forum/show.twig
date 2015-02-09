@@ -38,15 +38,15 @@
             {% endif %}
         </article>
 
-        <section class="threads">
-            <header class="threads__header">
-                <h2 class="linked-header bold">Threads</h2>
+        <section class="topics">
+            <header class="topics__header">
+                <h2 class="linked-header bold">Topics</h2>
             </header>
-            <ul class="thread-list">
-                {% for thread in threads %}
-                    <li><a href="{{ url_route("threads.show", [thread.slug]) }}">{{ thread.title }}</a></li>
+            <ul class="topics-list">
+                {% for topic in topics %}
+                    <li class="topic" data-topic-id="{{ topic.id }}"><a href="{{ url_route("topics.show", [topic.slug]) }}" class="topic__title">{{ topic.title }}</a></li>
                 {% else %}
-                    <li class="thread-list__error error error-no-results">No threads found!</li>
+                    <li class="thread-list__error error error-no-results">No topics found!</li>
                 {% endfor %}
             </ul>
         </section>
