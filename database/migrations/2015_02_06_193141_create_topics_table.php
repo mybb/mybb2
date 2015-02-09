@@ -25,9 +25,13 @@ class CreateTopicsTable extends Migration {
 			$table->timestamps();
 
 			$table->foreign('forum_id')->references('id')->on('forums');
-			$table->foreign('author_id')->references('id')->on('users');
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->foreign('first_post_id')->references('id')->on('posts');
 			$table->foreign('last_post_id')->references('id')->on('posts');
+		});
+
+		Schema::table('posts', function(Blueprint $table) {
+			$table->foreign('topic_id')->references('id')->on('topics');
 		});
 	}
 
@@ -38,6 +42,10 @@ class CreateTopicsTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('posts', function(Blueprint $table) {
+			$table->dropForeign('posts_topic_id_foreign');
+		});
+
 		Schema::drop('topics');
 	}
 
