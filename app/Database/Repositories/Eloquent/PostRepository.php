@@ -56,12 +56,12 @@ class PostRepository implements IPostRepository
     /**
      * Get all posts for a thread.
      *
-     * @param Topic $thread The thread to fetch the posts for.
+     * @param Topic $topic The thread to fetch the posts for.
      *
      * @return mixed
      */
-    public function allForTopic(Topic $thread)
+    public function allForTopic(Topic $topic)
     {
-        return $this->postModel->with(['author'])->where('thread_id', '=', $thread->id)->get();
+        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->get();
     }
 }

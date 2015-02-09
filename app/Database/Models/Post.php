@@ -50,9 +50,9 @@ class Post extends Model implements HasPresenter
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function thread()
+    public function topic()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Thread');
+        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic');
     }
 
     /**
@@ -62,6 +62,6 @@ class Post extends Model implements HasPresenter
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User');
+        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
     }
 }

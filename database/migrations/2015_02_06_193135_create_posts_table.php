@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration {
 		Schema::create('posts', function(Blueprint $table) {
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->integer('thread_id')->unsigned();
+			$table->integer('topic_id')->unsigned();
 			$table->text('content');
 			$table->text('content_parsed'); // Store parsed HTML in DB or not? Would be much quicker, as parser is current bottleneck...
 			$table->timestamps();

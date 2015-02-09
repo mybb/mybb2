@@ -82,7 +82,7 @@ class Topic extends Model implements HasPresenter
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User');
+        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
     }
 
     // TODO: Other relations? Are the below necessary? Will probably be quicker to store last post and first post ID than alternatives...

@@ -72,7 +72,7 @@ class TopicRepository implements ITopicRepository
      */
     public function findBySlug($slug = '')
     {
-        return $this->topicModel->where('slug', '=', $slug)->first();
+        return $this->topicModel->with(['author', 'firstPost'])->where('slug', '=', $slug)->first();
     }
 
     /**
