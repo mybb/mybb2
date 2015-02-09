@@ -16,82 +16,96 @@
         <div class="breadcrumb">
             Breadcrumb Goes here
         </div>
-        <article class="forum">
-            <header class="forum__details">
-                <h1>{{ forum.title }}</h1>
-                <p>{{ forum.description }}</p>
-            </header>
-            {% if forum.children.count > 0 %}
-                <section class="forum__child-forums">
-                    <h2 class="linked-header bold"><a>Child Forums</a></h2>
 
-                    <div class="compressed-forum-list">
-                        <ul class="forum-list">
-                            {% for forum in forum.children.toTree %}
-                                <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
-                            {% else %}
-                                No Forums Found!
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </section>
-            {% endif %}
-        </article>
-
-        <section class="topics">
-            <header class="topics__header">
-                <h2 class="linked-header bold">Topics</h2>
-            </header>
-            <ul class="topics-list">
-                {% for topic in topics %}
-                    <li class="topic" data-topic-id="{{ topic.id }}"><a href="{{ url_route("topics.show", [topic.slug]) }}" class="topic__title">{{ topic.title }}</a></li>
-                {% else %}
-                    <li class="thread-list__error error error-no-results">No topics found!</li>
-                {% endfor %}
-            </ul>
-        </section>
-
-        <aside>
-            <section>
-                <h3 class="linked-header"><a href="index.php?page=all-forums">All Forums</a></h3>
-
-                <div class="compressed-forum-list">
-                    {% for category in forums %}
-                        <div class="category">
-                            <h4><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ category.title }}</a></h4>
-                            <ul class="forum-list">
-                                {% for forum in category.children.toTree %}
-                                    <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
-                                {% else %}
-                                    {#Do nothing, no subforums for this category#}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% else %}
-                        No Forums Found!
-                    {% endfor %}
-                </div>
-            </section>
-            <section>
-                <h3 class="linked-header"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
-                <div class="compact-users-list online-users">
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Clank</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31011.png?dateline=1373556215" class="avatar" />envira</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_13376.jpg?dateline=1401219544" class="avatar" />Eric J.</a>
-                    <a href="index.php?page=profile"><img src="http://i.imgur.com/92dvjzh.png?dateline=1362534988" class="avatar" />Jason L.</a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Jetto</a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Julz</a>
-                    <a href="index.php?page=profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Justin</span></a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />MrGinos</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_25096.png?dateline=1395716559" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Omar G.</span></a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Penn</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_57932.jpg?dateline=1346006198" class="avatar" />psock</a>
-                    <a href="index.php?page=profile"><img src="https://es.gravatar.com/userimage/36446230/6a242edbd3e0ff86c6b18fde2c31e46b.png?dateline=1358073091" class="avatar" />Solstice</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_78269.jpg?dateline=1400055145" class="avatar" />Wage</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31006.jpg?dateline=1376184165" class="avatar" />Zueq</a>
-                </div>
-            </section>
-        </aside>
+		<article class="full-width">
+			<header>
+				<h1>{{ forum.title }}</h1>
+				<p class="description">
+					{{ forum.description }}
+				</p>
+			</header>
+		   <section>
+				{% if forum.children.count > 0 %}
+					<h2 class="bold">Child Forums</h2>
+					 <div class="forum-list thread-list">
+						{% for forum in forum.children.toTree %}
+						   <div class="forum">
+								<div class="forum-info">
+									<h3 class="forum-title"><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></h3>
+									<p class="description">{{ forum.description }} </p>
+									{% if forum.children.count > 0 %}
+										{% for subforum in forum.children.toTree %}
+											<ul class="subforums">
+												<i class="fa fa-level-up"></i>
+												<li><a href="{{ url_route("forums.show", [subforum.slug]) }}" class="subforum-title">{{ subforum.title }}</a></li>
+											</ul>
+										{% endfor %}
+									{% endif %}
+								</div>
+							</div>
+						{% else %}
+							No Forums Found!
+						{% endfor %}
+					</div>
+				{% endif %}
+			</section>
+		</article>
+		{% if topics.count > 0 %}
+			<h2>Topics</h2>
+			<div class="page-controls">
+				<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">Mark Read</span></a>
+				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+				<a href="index.php?page=new-thread" class="button"><i class="fa fa-edit"></i><span class="text">Post Thread</span></a>
+			</div>
+			<section class="forum topic-list">
+				<div class="sort-topics clearfix">
+					<a href="#" class="sort-column primary-column-one">
+						Topic Title
+					</a>
+					<a href="#" class="sort-column primary-column-two">
+						Start Date
+					</a>
+					<a href="#" class="sort-column replies-column">
+						Replies
+					</a>
+					<a href="#" class="sort-column latest-column">
+						Latest Post <i class="fa fa-caret-down"></i>
+					</a>
+				</div>
+				<div class="topics-container">
+					{% for topic in topics %}
+						<div class="topic">
+							<div class="primary-column">
+								<h3 class="topic-title">
+									<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
+								</h3>
+								<h4>First Post</h4>
+								<p class="first-post">
+									<!-- it should be change later -->
+									<span class="post-author"><a href="index.php?page=thread">Fábio Maia</a></span>
+									<a href="index.php?page=thread#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
+								</p>
+							</div>
+							<div class="replies-column">
+								<h4>Replies</h4>
+								<!-- it should be change later -->
+								<p class="thread-replies caption" title="450 replies &middot; {{ topic.views }} views">450</p>
+							</div>
+							<div class="latest-column">
+								<h4>Latest</h4>
+								<!-- it should be change later -->
+								<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
+								<p class="latest-post">
+									<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
+									<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
+								</p>
+							</div>
+					{% else %}
+						<li class="thread-list__error error error-no-results">No topics found!</li>
+					{% endfor %}
+				</ul>
+			</section>
+		{% endif %}
     </div> <!-- #main -->
 </div>
 </div>

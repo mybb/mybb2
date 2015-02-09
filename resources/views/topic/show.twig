@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
     <title>{{ topic.title }} &bull; MyBB Community Forums</title>
-    {% include "partials.headerinclude" %}
+    {% include "partials.headerinclude" %}	
     <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
     <link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
 </head>
@@ -16,70 +16,46 @@
         <div class="breadcrumb">
             Breadcrumb Goes here
         </div>
+		<article class="full-width">
+		<header>
+			<h1>{{topis.title }}</h1>
+			<div class="page-controls">
+				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
+			</div>
+		</header>
         <section class="topic">
-            <header class="topic__details">
-                <h1>{{ topic.title }}</h1>
-                Created by {{ topic.author.name }} on {{ topic.created_at }}
-            </header>
-
-            <div class="topic__posts">
-                {% for post in posts %}
-                    <article class="post">
-                        <header class="post__details">
-                            <div class="author">
-                                {{ post.author.name }}
-                            </div>
-                        </header>
-
-                        <div class="post__content">
-                            {{ post.content }}
-                        </div>
-                    </article>
-                {% endfor %}
-            </div>
+			{% for post in posts %}
+				<div class="post">
+					<div class="post-meta">
+						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
+						<h3><a href="index.php?page=profile"><span style="color: #ff7500;">{{ post.author.name }}</span></a></h3>
+						<a href="#permalink" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
+						<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ post.updated_at }}"><i class="fa fa-pencil"></i></a>
+						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
+						<input type="checkbox" class="inline-mod" />
+					</div>
+					<div class="post-body">
+						<p>
+							{{ post.content }}
+						</p>
+					</div>
+					<div class="post-foot">
+						<ul class="post-controls">
+							<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
+							<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-left"></i><span class="text">Quote</span></a></li>
+							<li class="edit"><a href="index.php?page=edit-post" title="Edit"><i class="fa fa-edit"></i><span class="text">Edit</span></a></li>
+							<li class="delete"><a href="index.php?page=delete-post" title="Delete"><i class="fa fa-trash-o"></i><span class="text">Delete</span></a></li>
+							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
+							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
+						</ul>
+						<!--<div class="likes">
+							<i class="fa fa-caret-right"></i> <a href="index.php?page=profile">You</a>, <a href="index.php?page=profile">brad-t</a>, <a href="index.php?page=profile">Dennis Tsang</a>, and <a href="index.php?page=post-likes">14 others</a> like this</a>
+						</div>-->
+					</div>
+				</div>
+            {% endfor %}
         </section>
-
-        <aside>
-            <section>
-                <h3 class="linked-header"><a href="index.php?page=all-forums">All Forums</a></h3>
-
-                <div class="compressed-forum-list">
-                    {% for category in forums %}
-                        <div class="category">
-                            <h4><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ category.title }}</a></h4>
-                            <ul class="forum-list">
-                                {% for forum in category.children.toTree %}
-                                    <li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
-                                {% else %}
-                                    {#Do nothing, no subforums for this category#}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% else %}
-                        No Forums Found!
-                    {% endfor %}
-                </div>
-            </section>
-            <section>
-                <h3 class="linked-header"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
-                <div class="compact-users-list online-users">
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Clank</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31011.png?dateline=1373556215" class="avatar" />envira</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_13376.jpg?dateline=1401219544" class="avatar" />Eric J.</a>
-                    <a href="index.php?page=profile"><img src="http://i.imgur.com/92dvjzh.png?dateline=1362534988" class="avatar" />Jason L.</a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Jetto</a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Julz</a>
-                    <a href="index.php?page=profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Justin</span></a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />MrGinos</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_25096.png?dateline=1395716559" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Omar G.</span></a>
-                    <a href="index.php?page=profile"><img src="img/avatar.png" class="avatar" />Penn</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_57932.jpg?dateline=1346006198" class="avatar" />psock</a>
-                    <a href="index.php?page=profile"><img src="https://es.gravatar.com/userimage/36446230/6a242edbd3e0ff86c6b18fde2c31e46b.png?dateline=1358073091" class="avatar" />Solstice</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_78269.jpg?dateline=1400055145" class="avatar" />Wage</a>
-                    <a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31006.jpg?dateline=1376184165" class="avatar" />Zueq</a>
-                </div>
-            </section>
-        </aside>
     </div> <!-- #main -->
 </div>
 </div>

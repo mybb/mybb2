@@ -1029,19 +1029,19 @@ section ul.notifications time {
 
 .forum:before,
 .forum:after,
-.thread:before,
-.thread:after {
+.topic:before,
+.topic:after {
     content: " ";
     display: table;
 }
 
 .forum:after,
-.thread:after {
+.topic:after {
     clear: both;
 }
 
 .forum,
-.thread {
+.topic {
     *zoom: 1;
 }
 
@@ -1098,36 +1098,36 @@ section ul.notifications time {
 }
 
 
-.forum-list .forum .thread {
+.forum-list .forum .topic {
     margin-top: 6px;
     padding: 8px 0 0 2px;
     border-top: 1px dotted #ddd;
 }
 
-.forum-list .forum .thread.compact .avatar-profile-link {
+.forum-list .forum .topic.compact .avatar-profile-link {
     width: 24px;
     height: 24px;
     margin: -2px 10px 0 0 ;
 }
 
-.forum-list .forum .thread.compact .avatar {
+.forum-list .forum .topic.compact .avatar {
     width: 24px;
     height: 24px;
 }
 
-.forum-list .forum .thread.compact i {
+.forum-list .forum .topic.compact i {
     color: #ff7500;
     font-size: 14px;
     margin-right: 3px;
 }
 
-.forum-list .forum .thread.compact .thread-title {
+.forum-list .forum .topic.compact .topic-title {
     display: inline-block;
     margin-right: 4px;
     font-weight: normal;
 }
 
-.forum.thread-list .sort-threads {
+.forum.topic-list .sort-topics {
     margin-bottom: 0;
     background: #007fd0;
     padding: 5px;
@@ -1139,17 +1139,17 @@ section ul.notifications time {
     font-size: 0.8em;
 }
 
-.forum.thread-list .sort-threads .primary-column-one {
+.forum.topic-list .sort-topics .primary-column-one {
     width: 50%;
 }
 
-.forum.thread-list .sort-threads .latest-column {
+.forum.topic-list .sort-topics .latest-column {
     width: 50%;
     text-align: right;
 }
 
-.forum.thread-list .sort-threads a:link,
-.forum.thread-list .sort-threads a:visited {
+.forum.topic-list .sort-topics a:link,
+.forum.topic-list .sort-topics a:visited {
     color: #fff;
     display: inline-block;
     padding: 3px 5px;
@@ -1162,54 +1162,54 @@ section ul.notifications time {
     box-sizing: border-box;
 }
 
-.forum.thread-list .sort-threads a:hover,
-.forum.thread-list .sort-threads a:active {
+.forum.topic-list .sort-topics a:hover,
+.forum.topic-list .sort-topics a:active {
     background: #ff7500;
     text-decoration: none;
 }
 
-.forum.thread-list .sort-threads a.primary-column-two,
-.forum.thread-list .sort-threads a.replies-column {
+.forum.topic-list .sort-topics a.primary-column-two,
+.forum.topic-list .sort-topics a.replies-column {
     display: none;
 }
 
-.forum.thread-list .sort-threads i {
+.forum.topic-list .sort-topics i {
     font-size: 14px;
     color: rgba(255,255,255,0.7);
     margin-left: 4px;
 }
 
-.forum.thread-list .threads-container {
+.forum.topic-list .topics-container {
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
 }
 
-.forum.thread-list .important-threads {
+.forum.topic-list .important-topics {
     border-bottom: 2px solid #ddd;
 }
 
-.forum.thread-list .thread {
+.forum.topic-list .topic {
     padding: 8px 12px;
     border-bottom: 1px solid #ddd;
     line-height: 1.4;
     padding-left: 60px;
 }
 
-.forum.thread-list .thread:before,
-.forum.thread-list .thread:after {
+.forum.topic-list .topic:before,
+.forum.topic-list .topic:after {
     content: " ";
     display: table;
 }
 
-.forum.thread-list .thread:after {
+.forum.topic-list .topic:after {
     clear: both;
 }
 
-.forum.thread-list .thread {
+.forum.topic-list .topic {
     *zoom: 1;
 }
 
-.forum.thread-list .thread .unread-count {
+.forum.topic-list .topic .unread-count {
     background: #eb5257;
     color: #fff;
     -moz-border-radius: 3px;
@@ -1222,15 +1222,15 @@ section ul.notifications time {
     text-decoration: none;
 }
 
-.forum.thread-list .thread .unread-count:hover {
+.forum.topic-list .topic .unread-count:hover {
     background-color: #c8212e;
 }
 
-.forum.thread-list .thread .unread-count i {
+.forum.topic-list .topic .unread-count i {
     margin-left: 3px;
 }
 
-.forum.thread-list .thread .contains-new-posts {
+.forum.topic-list .topic .contains-new-posts {
     color: #eb5257;
     font-weight: normal;
     font-size: 0.9em;
@@ -1238,35 +1238,35 @@ section ul.notifications time {
     text-decoration: none;
 }
 
-.forum.thread-list .thread .contains-new-posts i {
+.forum.topic-list .topic .contains-new-posts i {
     font-size: 14px;
     margin-right: 2px;
 }
 
-.forum.thread-list .thread .contains-new-posts:hover {
+.forum.topic-list .topic .contains-new-posts:hover {
     color: #c8212e;
 }
 
-.forum.thread-list .thread .primary-column .thread-title {
+.forum.topic-list .topic .primary-column .topic-title {
     margin: 0;
     padding: 0;
     font-size: 0.9em;
     font-weight: normal;
 }
 
-.forum.thread-list .thread .primary-column .thread-title.unread {
+.forum.topic-list .topic .primary-column .topic-title.unread {
     font-weight: bold;
 }
 
-.forum.thread-list .thread .primary-column .thread-title.moved {
+.forum.topic-list .topic .primary-column .topic-title.moved {
     color: #888;
 }
 
-.forum.thread-list .thread .primary-column {
+.forum.topic-list .topic .primary-column {
     position: relative;
 }
 
-.forum.thread-list .thread .icons {
+.forum.topic-list .topic .icons {
     float: right;
     color: #666;
     font-size: 14px;
@@ -1275,20 +1275,20 @@ section ul.notifications time {
     right: 0;
 }
 
-.forum.thread-list .thread .icons i {
+.forum.topic-list .topic .icons i {
     margin-left: 8px;
 }
 
-.forum.thread-list .thread .icons i.fa-thumb-tack {
+.forum.topic-list .topic .icons i.fa-thumb-tack {
     color: #007fd0;
 }
 
-.forum.thread-list .thread .replies-column {
+.forum.topic-list .topic .replies-column {
     display: none;
 }
 
-.forum.thread-list .thread .first-post,
-.forum.thread-list .thread .latest-post {
+.forum.topic-list .topic .first-post,
+.forum.topic-list .topic .latest-post {
     font-size: 0.8em;
     color: #999;
     margin: 0;
@@ -1296,34 +1296,34 @@ section ul.notifications time {
     padding: 0;
 }
 
-.forum.thread-list .thread .first-post a {
+.forum.topic-list .topic .first-post a {
     color: #666;
 }
 
-.forum.thread-list .thread .first-post .post-author:after {
+.forum.topic-list .topic .first-post .post-author:after {
     content: ",";
 }
 
 @media only screen and (max-width: 768px) { 
-    .forum.thread-list .thread .latest-post .post-author:after {
+    .forum.topic-list .topic .latest-post .post-author:after {
         content: ",";
     }
 }
 
-.forum.thread-list .thread a.post-date {
+.forum.topic-list .topic a.post-date {
     color: #999;
 }
 
-.forum.thread-list .thread .first-post,
-.forum.thread-list .thread h4 {
+.forum.topic-list .topic .first-post,
+.forum.topic-list .topic h4 {
     display: none;
 }
 
-.forum.thread-list .thread {
+.forum.topic-list .topic {
     position: relative;
 }
 
-.forum.thread-list .thread .avatar-profile-link {
+.forum.topic-list .topic .avatar-profile-link {
     width: 44px;
     float: left;
     margin: 8px 12px 0 6px;
@@ -1332,19 +1332,19 @@ section ul.notifications time {
     left: 0;
 }
 
-.forum.thread-list .thread .avatar-profile-link .avatar {
+.forum.topic-list .topic .avatar-profile-link .avatar {
     width: 44px;
     height: 44px;
 }
 
-.thread-list .thread {
+.topic-list .topic {
     line-height: 1.4em;
     padding: 12px;
     border-bottom: 1px solid #ddd;
 }
 
 
-.forum-list .thread {
+.forum-list .topic {
     padding: 0;
     border: 0;
 }
@@ -1353,61 +1353,61 @@ aside .latest-discussions h3 {
     margin-bottom: 0;
 }
 
-aside .latest-discussions .thread .thread-title {
+aside .latest-discussions .topic .topic-title {
     font-size: 1em;
 }
 
-aside .latest-discussions .thread:last-child {
+aside .latest-discussions .topic:last-child {
     border-bottom: 0;
 }
 
 
 /* Generic Thread List (e.g. following page, latest discussions, etc.) */
-.thread-list .thread .avatar-profile-link {
+.topic-list .topic .avatar-profile-link {
     width: 40px;
     float: left;
     margin: 3px 12px 3px 0;
 }
 
-aside .latest-discussions .thread .avatar-profile-link {
+aside .latest-discussions .topic .avatar-profile-link {
     margin: 0 12px 0 -8px;
 }
 
-.thread-list .thread .avatar-profile-link .avatar {
+.topic-list .topic .avatar-profile-link .avatar {
     width: 40px;
     height: 40px;
 }
 
-.thread-list .thread .thread-info {
+.topic-list .topic .topic-info {
     margin-left: 52px;
 }
 
-aside .latest-discussions .thread .thread-info {
+aside .latest-discussions .topic .topic-info {
     margin-left: 40px;
 }
 
-.thread-list .thread .thread-title {
+.topic-list .topic .topic-title {
     margin: 1px 0 0 0;
     font-size: 1em;
     font-weight: normal;
 }
 
-.thread-list .thread .thread-title.unread {
+.topic-list .topic .topic-title.unread {
     font-weight: bold;
 }
 
-.thread-list .thread .latest-post {
+.topic-list .topic .latest-post {
     font-size: 0.8em;
     color: #999;
     margin: 0;
     display: inline-block;
 }
 
-.thread-list .thread .latest-post a {
+.topic-list .topic .latest-post a {
     color: #666;
 }
 
-.thread-list .thread .forum {
+.topic-list .topic .forum {
     display: inline-block;
     font-size: 0.8em;
     color: #999;
@@ -1415,11 +1415,11 @@ aside .latest-discussions .thread .thread-info {
     display: none;
 }
 
-.thread-list .thread .forum a {
+.topic-list .topic .forum a {
     color: #888;
 }
 
-.thread-list .thread .thread-replies {
+.topic-list .topic .topic-replies {
     margin: 0;
     margin-left: 12px;
     font-size: 0.8em;
@@ -1427,38 +1427,38 @@ aside .latest-discussions .thread .thread-info {
     display: none;
 }
 
-.thread-list .thread .thread-replies i {
+.topic-list .topic .topic-replies i {
     color: #bbb;
     margin-right: 4px;
 }
 
-.thread-list .thread .thread-replies .text {
+.topic-list .topic .topic-replies .text {
     display: none;
 }
 
 .forum-list .forum .icons,
-.thread-list .thread .icons {
+.topic-list .topic .icons {
     margin-left: 16px;
 }
 
 .forum-list .forum .icons i.fa-envelope,
-.thread-list .thread .icons i.fa-envelope {
+.topic-list .topic .icons i.fa-envelope {
     color: #007fd0;
     font-size: 14px;
 }
 
-aside .thread-list .thread .latest-post {
+aside .topic-list .topic .latest-post {
     margin-right: 8px;
 }
 
-aside .thread-list .thread .thread-replies {
+aside .topic-list .topic .topic-replies {
     float: none;
     color: #999;
     margin-left: 0;
 }
 
-/* Post Listing within a thread */
-.thread.highlight,
+/* Post Listing within a topic */
+.topic.highlight,
 .forum.highlight {
     background-color: #ebf4fb;
     border-color: #afd9fa;
@@ -1467,49 +1467,49 @@ aside .thread-list .thread .thread-replies {
 }
 
 
-.thread .post.soft-deleted {
+.topic .post.soft-deleted {
     background: #ece3fa;
     border-color: #ddcafa;
 }
 
-.thread .post.pending-approval {
+.topic .post.pending-approval {
     background: #f2dede;
     border-color: #f2aaab;
 }
 
-.thread .post.highlight {
+.topic .post.highlight {
     background-color: #ebf4fb;
     border-color: #afd9fa;
 }
 
-.thread .post .post-meta {
+.topic .post .post-meta {
     padding: 4px 6px 12px 0;
 }
 
-.thread .post .post-meta .status-notice {
+.topic .post .post-meta .status-notice {
     margin-left: 16px;
     font-size: 0.8em;
     font-weight: bold;
 }
 
-.thread .post .post-meta .status-notice i {
+.topic .post .post-meta .status-notice i {
     color: #666;
     font-size: 14px;
     margin-right: 3px;
 }
 
-.thread .post .avatar-profile-link {
+.topic .post .avatar-profile-link {
     float: left;
     width: 40px;
     margin: 7px 10px 0 0;
 }
 
-.thread .post .avatar {
+.topic .post .avatar {
     width: 40px;
     height: 40px;
 }
 
-.thread .post {
+.topic .post {
     border: 1px solid #ccc;
     padding: 8px 12px;
     -moz-border-radius: 4px;
@@ -1518,109 +1518,109 @@ aside .thread-list .thread .thread-replies {
     margin-bottom: 25px;
 }
 
-.thread .post .post-meta h3 {
+.topic .post .post-meta h3 {
     font-size: 1em;
     margin: 0;
 }
 
-.thread .post .post-meta h3 a:link,
-.thread .post .post-meta h3 a:visited {
+.topic .post .post-meta h3 a:link,
+.topic .post .post-meta h3 a:visited {
     color: #007fd0;
 }
 
-.thread .post .post-meta h3 a:hover,
-.thread .post .post-meta h3 a:active {
+.topic .post .post-meta h3 a:hover,
+.topic .post .post-meta h3 a:active {
     color: #ff7500;
 }
 
-.thread .post .post-meta .post-date {
+.topic .post .post-meta .post-date {
     font-size: 0.8em;
     color: #666;
 }
 
-.thread .post .post-meta .edit-log {
+.topic .post .post-meta .edit-log {
     font-size: 0.7em;
     margin-left: 4px;
 }
 
-.thread .post .post-meta a:link,
-.thread .post .post-meta a:visited {
+.topic .post .post-meta a:link,
+.topic .post .post-meta a:visited {
     color: #666;
 }
 
-.thread .post .post-meta a:hover,
-.thread .post .post-meta a:active {
+.topic .post .post-meta a:hover,
+.topic .post .post-meta a:active {
     color: #ff7500;
 }
 
-.thread .post .team-badge {
+.topic .post .team-badge {
     display: none;
 }
 
-.thread .post .post-body {
+.topic .post .post-body {
     padding: 0 6px 3px 6px;
 }
 
-.thread .post .post-body p {
+.topic .post .post-body p {
     font-size: 0.9em;
     margin: 0 0 6px 0;
 }
 
-.thread .post .signature {
+.topic .post .signature {
     border-top: 1px dotted #ccc;
     padding: 6px 6px 0;
     margin: 12px 0 0 0;
     font-size: 0.8em;
 }
 
-.thread .post .post-controls {
+.topic .post .post-controls {
     list-style: none;
     margin: 0 0 0;
     padding: 4px;
     text-align: right;
 }
 
-.thread .post .post-controls li {
+.topic .post .post-controls li {
     display: inline-block;
 }
 
-.thread .post .post-controls li a:link,
-.thread .post .post-controls li a:visited {
+.topic .post .post-controls li a:link,
+.topic .post .post-controls li a:visited {
     color: #777;
     padding: 0 5px;
 }
 
-.thread .post .post-controls li a:hover,
-.thread .post .post-controls li a:active {
+.topic .post .post-controls li a:hover,
+.topic .post .post-controls li a:active {
     color: #ff7500;
     text-decoration: none;
 }
 
-.thread .post .post-controls i {
+.topic .post .post-controls i {
     font-size: 14px;
 }
 
-.thread .post .post-controls .text {
+.topic .post .post-controls .text {
     display: none;
     font-size: 0.7em;
     margin-left: 6px;
 }
 
-.thread .post .post-controls li.like,
-.thread .post .post-controls li.quote,
-.thread .post .post-controls li.approve,
-.thread .post .post-controls li.restore {
+.topic .post .post-controls li.like,
+.topic .post .post-controls li.quote,
+.topic .post .post-controls li.approve,
+.topic .post .post-controls li.restore {
     float: left;
 }
 
-.thread .post .post-controls li.like .text,
-.thread .post .post-controls li.quote .text,
-.thread .post .post-controls li.approve .text,
-.thread .post .post-controls li.restore .text {
+.topic .post .post-controls li.like .text,
+.topic .post .post-controls li.quote .text,
+.topic .post .post-controls li.approve .text,
+.topic .post .post-controls li.restore .text {
     display: inline;
 }
 
-.thread .post .likes {
+.topic .post .likes {
     font-size: 0.8em;
     padding: 8px 8px 4px 8px;
     margin: 8px 0 0 0;
@@ -1628,55 +1628,55 @@ aside .thread-list .thread .thread-replies {
     color: #999;
 }
 
-.thread .post .likes i {
+.topic .post .likes i {
     margin-right: 5px;
 }
 
-.thread .post .likes a {
+.topic .post .likes a {
     color: #666;
 }
 
-.thread .post .inline-mod {
+.topic .post .inline-mod {
     float: right;
     margin: -20px 0 0 7px;
 }
 
-.thread .post .post-body img {
+.topic .post .post-body img {
     max-width: 100%;
 }
 
-.thread .post .post-body blockquote {
+.topic .post .post-body blockquote {
     border-left: 2px solid #007fd0;
     padding: 10px 20px;
     margin: 20px 12px;
     font-size: 0.9em;
 }
 
-.thread .post .post-body blockquote cite {
+.topic .post .post-body blockquote cite {
     font-weight: normal;
     display: block;
     font-style: normal;
     color: #666;
 }
 
-.thread .post .post-body blockquote cite .quote-user {
+.topic .post .post-body blockquote cite .quote-user {
     font-weight: bold;
     color: #000;
 }
 
-.thread .post .post-body blockquote cite .quote-date {
+.topic .post .post-body blockquote cite .quote-date {
     color: #444;
 }
 
-.thread .post.reply .full-reply {
+.topic .post.reply .full-reply {
     float: right;
 }
 
-.thread .post.reply .full-reply span.text {
+.topic .post.reply .full-reply span.text {
     display: none;
 }
 
-.thread .post.reply .post-foot {
+.topic .post.reply .post-foot {
     margin: 5px 0;
 }
 
@@ -1995,7 +1995,7 @@ section.form label {
     cursor: pointer;
 }
 
-section.form .thread-title {
+section.form .topic-title {
     font-size: 1.3em;
 }
 
@@ -2468,7 +2468,7 @@ section.form .change-avatar .buttons {
 
 @media only screen and (max-width: 320px) {
 
-    .forum.thread-list .thread .icons {
+    .forum.topic-list .topic .icons {
         display: none;
     }
 
@@ -2507,42 +2507,42 @@ section.form .change-avatar .buttons {
         margin-bottom: -30px;
     }
 
-    .thread-list .thread .forum {
+    .topic-list .topic .forum {
         display: inline-block;
     }
 
-    .thread-list .thread .thread-replies {
+    .topic-list .topic .topic-replies {
         display: inline-block;
     }
 
-    .thread .post .post-meta h3 {
+    .topic .post .post-meta h3 {
         display: inline-block;
     }
 
-    .thread .post .post-meta .post-date {
+    .topic .post .post-meta .post-date {
         margin: 0 0 0 10px;
     }
 
-    .thread .post .post-meta {
+    .topic .post .post-meta {
         padding: 4px 6px 8px 6px;
     }
 
-    .thread .post .avatar-profile-link {
+    .topic .post .avatar-profile-link {
         float: left;
         width: 70px;
         margin: -13px 0 0 -100px;
     }
 
-    .thread .post .avatar-profile-link .avatar {
+    .topic .post .avatar-profile-link .avatar {
         width: 70px;
         height: 70px;
     }
 
-    .thread .post {
+    .topic .post {
         margin-left: 80px;
     }
 
-    .thread .post .inline-mod {
+    .topic .post .inline-mod {
         margin-top: 7px;
     }
 
@@ -2667,7 +2667,7 @@ section.form .change-avatar .buttons {
         width: 60%;
     }
 
-    .full-width .forum-list .forum .thread.compact {
+    .full-width .forum-list .forum .topic.compact {
         float: right;
         width: 35%;
         border: none;
@@ -2675,52 +2675,52 @@ section.form .change-avatar .buttons {
         padding: 4px 0;
     }
 
-    .full-width .forum-list .forum .thread.compact .avatar-profile-link {
+    .full-width .forum-list .forum .topic.compact .avatar-profile-link {
         width: 36px;
         height: 36px;
         margin: 6px 10px 0 0;
     }
 
-    .full-width .forum-list .forum .thread.compact .avatar {
+    .full-width .forum-list .forum .topic.compact .avatar {
         width: 36px;
         height: 36px;
     }
 
-    .full-width .forum-list .forum .thread.compact .thread-title {
+    .full-width .forum-list .forum .topic.compact .topic-title {
         font-size: 0.8em;
     }
 
-    .full-width .forum-list .forum .thread.compact .latest-post {
+    .full-width .forum-list .forum .topic.compact .latest-post {
         margin-left: 34px;
         display: block;
     }
 
-    .forum.thread-list .sort-threads a.primary-column-one,
-    .forum.thread-list .sort-threads a.primary-column-two {
+    .forum.topic-list .sort-topics a.primary-column-one,
+    .forum.topic-list .sort-topics a.primary-column-two {
         width: 29%;
     }
 
-    .forum.thread-list .sort-threads a.primary-column-two {
+    .forum.topic-list .sort-topics a.primary-column-two {
         text-align: right;
         display: inline-block;
     }
 
-    .forum.thread-list .sort-threads a.replies-column {
+    .forum.topic-list .sort-topics a.replies-column {
         width: 12%;
         display: inline-block;
         text-align: center;
     }
 
-    .forum.thread-list .sort-threads a.latest-column {
+    .forum.topic-list .sort-topics a.latest-column {
         width: 30%;
         text-align: left;
     }
 
-    .forum.thread-list .thread {
+    .forum.topic-list .topic {
         padding: 8px 12px;
     }
 
-    .forum.thread-list .thread .primary-column {
+    .forum.topic-list .topic .primary-column {
         width: 58%;
         float: left;
         -moz-box-sizing: border-box;
@@ -2728,37 +2728,37 @@ section.form .change-avatar .buttons {
         box-sizing: border-box;
     }
 
-    .forum.thread-list .thread .primary-column .thread-title {
+    .forum.topic-list .topic .primary-column .topic-title {
         margin: 0;
         padding: 0;
         font-size: 1em;
         font-weight: normal;
     }
 
-    .forum.thread-list .thread .primary-column .thread-title.unread {
+    .forum.topic-list .topic .primary-column .topic-title.unread {
         font-weight: bold;
     }
 
-    .forum.thread-list .thread .primary-column .thread-title.moved {
+    .forum.topic-list .topic .primary-column .topic-title.moved {
         color: #888;
     }
 
-    .forum.thread-list .thread .icons {
+    .forum.topic-list .topic .icons {
         float: right;
         color: #666;
         font-size: 14px;
     }
 
-    .forum.thread-list .thread .icons i {
+    .forum.topic-list .topic .icons i {
         margin-left: 8px;
     }
 
-    .forum.thread-list .thread .icons i.fa-thumb-tack {
+    .forum.topic-list .topic .icons i.fa-thumb-tack {
         color: #007fd0;
     }
 
-    .forum.thread-list .thread .first-post,
-    .forum.thread-list .thread .latest-post {
+    .forum.topic-list .topic .first-post,
+    .forum.topic-list .topic .latest-post {
         font-size: 0.8em;
         color: #999;
         margin: 0;
@@ -2766,24 +2766,24 @@ section.form .change-avatar .buttons {
         padding: 0;
     }
 
-    .forum.thread-list .thread .first-post a {
+    .forum.topic-list .topic .first-post a {
         color: #666;
     }
 
-    .forum.thread-list .thread .first-post .post-author:after {
+    .forum.topic-list .topic .first-post .post-author:after {
         content: ",";
     }
 
-    .forum.thread-list .thread a.post-date {
+    .forum.topic-list .topic a.post-date {
         color: #999;
     }
 
-    .forum.thread-list .thread .latest-post .post-author {
+    .forum.topic-list .topic .latest-post .post-author {
         display: block;
         font-size: 1.2em;
     }
 
-    .forum.thread-list .thread .replies-column {
+    .forum.topic-list .topic .replies-column {
         width: 12%;
         float: left;
         text-align: center;
@@ -2791,39 +2791,39 @@ section.form .change-avatar .buttons {
         display: block;
     }
 
-    .forum.thread-list .thread .replies-column p {
+    .forum.topic-list .topic .replies-column p {
         margin: 11px 0;
         float: none;
 
     }
 
-    .forum.thread-list .thread .latest-column {
+    .forum.topic-list .topic .latest-column {
         width: 30%;
         float: left;
     }
 
-    .forum.thread-list .thread .avatar-profile-link {
+    .forum.topic-list .topic .avatar-profile-link {
         margin: 0 12px 0 6px;
         position: relative;
         top: auto;
         left: auto;
     }
 
-    .thread .post .avatar-profile-link {
+    .topic .post .avatar-profile-link {
         width: 100px;
         margin-left: -130px;
     }
 
-    .thread .post .avatar-profile-link .avatar {
+    .topic .post .avatar-profile-link .avatar {
         width: 100px;
         height: 100px;
     }
 
-    .thread .post {
+    .topic .post {
         margin-left: 110px;
     }
 
-    .thread .post .post-meta .team-badge {
+    .topic .post .post-meta .team-badge {
         font-size: 0.7em;
         padding: 3px 8px;
         border: 1px solid #ddd;
@@ -2835,7 +2835,7 @@ section.form .change-avatar .buttons {
         display: inline;
     }
 
-    .thread .post .post-meta .team-badge i {
+    .topic .post .post-meta .team-badge i {
         margin-right: 5px;
     }
 
