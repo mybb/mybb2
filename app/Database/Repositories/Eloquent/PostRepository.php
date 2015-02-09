@@ -60,7 +60,7 @@ class PostRepository implements IPostRepository
      *
      * @return mixed
      */
-    public function allForThread(Topic $thread)
+    public function allForTopic(Topic $thread)
     {
         return $this->postModel->with(['author'])->where('thread_id', '=', $thread->id)->get();
     }

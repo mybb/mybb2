@@ -29,7 +29,7 @@ interface IPostRepository
      *
      * @return mixed
      */
-    public function allForThread(Topic $thread);
+    public function allForTopic(Topic $thread);
 
     /**
      * Find a single post by its ID.
