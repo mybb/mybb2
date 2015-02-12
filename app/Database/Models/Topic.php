@@ -2,7 +2,7 @@
 /**
  * Thread model class.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
@@ -42,7 +42,7 @@ class Topic extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return \MyBB\Core\Presenters\Thread::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+        return \MyBB\Core\Presenters\Topic::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
     }
 
     /**

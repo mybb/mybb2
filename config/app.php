@@ -135,6 +135,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
 
 		/**
 		 * Extension Service Providers...
@@ -142,8 +143,6 @@ return [
 		'TwigBridge\ServiceProvider',
 		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
-
 
 		/*
 		 * Application Service Providers...
@@ -198,6 +197,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Form'=> 'Illuminate\Html\FormFacade',
+		'HTML'=> 'Illuminate\Html\HtmlFacade',
 
 		/**
 		 * Extension Facades...
@@ -205,8 +206,6 @@ return [
 		'Twig' => 'TwigBridge\Facade\Twig',
 		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
 		'Node' => 'Kalnoy\Nestedset\Node',
-		'Form'=> 'Illuminate\Html\FormFacade',
-		'HTML'=> 'Illuminate\Html\HtmlFacade',
 
 	],
 

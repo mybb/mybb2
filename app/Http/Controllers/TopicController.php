@@ -4,13 +4,14 @@
  *
  * Used to view, create, delete and update topics.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
 
 namespace MyBB\Core\Http\Controllers;
 
+use Illuminate\Html\FormBuilder;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
@@ -67,11 +68,10 @@ class TopicController extends Controller
             throw new NotFoundHttpException('Topic not found');
         }
 
-        //$post = $topic->posts()->create([]);
+        $post = $this->postRepository->addPostToTopic($topic, [
+            'content' => $replyRequest->input('content'),
+        ]);
 
-        var_dump($replyRequest);
-        die();
-
-        return redirect()->route('topics.show', ['slug' => $slug]);
+        return redirect()->route('topics.show', ['slug' => $topic->slug]);
     }
 }

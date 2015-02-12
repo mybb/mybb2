@@ -52,5 +52,13 @@ class AppServiceProvider extends ServiceProvider
             'MyBB\Core\Database\Repositories\ITopicRepository',
             'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
         );
+
+        // Temporary fix for Form...
+        $this->app->bind('Illuminate\Html\FormBuilder', function($app)
+        {
+            $form = new \Illuminate\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
+
+            return $form->setSessionStore($app['session.store']);
+        });
     }
 }

@@ -24,15 +24,15 @@
                 </div>
             </header>
             <section class="post">
-                <form class="form-section clearfix" method="post" action="{{ url_route("topics.reply", [topic.slug]) }}">
+                {{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
                     <div class="form-row">
-                        <h3><label for="content">Reply</label></h3>
-                        <textarea name="content" id="content"></textarea>
+                        <h3>{{ form_label('content', 'Reply') }}</h3>
+                        {{ form_textarea('content') }}
                     </div>
                     <div class="form-submit">
-                        <button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">Post Reply</span></button>
+                        {{ form_button('<i class="fa fa-sign-in"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
                     </div>
-                </form>
+                {{ form_close() }}
             </section>
         </article>
     </div> <!-- #main -->

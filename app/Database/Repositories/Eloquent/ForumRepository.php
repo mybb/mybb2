@@ -2,7 +2,7 @@
 /**
  * Thread repository implementation, using Eloquent ORM.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
@@ -12,7 +12,6 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
-
 
 class ForumRepository implements IForumRepository
 {

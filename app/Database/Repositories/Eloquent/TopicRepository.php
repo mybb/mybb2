@@ -2,7 +2,7 @@
 /**
  * Thread repository implementation, using Eloquent ORM.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */

@@ -2,7 +2,7 @@
 /**
  * Post repository contract.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
@@ -39,4 +39,14 @@ interface IPostRepository
      * @return mixed
      */
     public function find($id = 0);
+
+    /**
+     * Add a post to a topic.
+     *
+     * @param Topic $topic The topic to add a post to.
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function addPostToTopic(Topic $topic, array $postDetails);
 }

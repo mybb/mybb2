@@ -2,7 +2,7 @@
 /**
  * Post repository implementation, using Eloquent ORM.
  *
- * @version 1.0.0
+ * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
@@ -63,5 +63,26 @@ class PostRepository implements IPostRepository
     public function allForTopic(Topic $topic)
     {
         return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->get();
+    }
+
+    /**
+     * Add a post to a topic.
+     *
+     * @param Topic $topic       The topic to add a post to.
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function addPostToTopic(Topic $topic, array $postDetails)
+    {
+        $basePostDetails = [
+            'user_id' => 0,
+            'content' => '',
+            'content_parsed' => '', // TODO: Auto-populate parsed content with parser once parser is written.
+        ];
+
+        $postDetails = array_merge($basePostDetails, $postDetails);
+
+        return $topic->posts()->save(new Post($postDetails));
     }
 }
