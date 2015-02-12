@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IPostRepository;
@@ -20,13 +21,19 @@ class PostRepository implements IPostRepository
      * @access protected
      */
     protected $postModel;
+    /**
+     * @var Guard $guard
+     * @access protected
+     */
+    protected $guard;
 
     /**
      * @param Post $postModel The model to use for posts.
      */
-    public function __construct(Post $postModel) // TODO: Inject permissions container? So we can check post permissions before querying?
+    public function __construct(Post $postModel, Guard $guard) // TODO: Inject permissions container? So we can check post permissions before querying?
     {
         $this->postModel = $postModel;
+        $this->guard = $guard;
     }
 
     /**
@@ -76,7 +83,7 @@ class PostRepository implements IPostRepository
     public function addPostToTopic(Topic $topic, array $postDetails)
     {
         $basePostDetails = [
-            'user_id' => 0,
+            'user_id' => $this->guard->user()->id,
             'content' => '',
             'content_parsed' => '', // TODO: Auto-populate parsed content with parser once parser is written.
         ];

@@ -20,20 +20,24 @@ class Post extends Model implements HasPresenter
      * @var string
      */
     protected $table = 'posts';
-
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = true;
-
     /**
      * The relations to eager load on every query.
      *
      * @var array
      */
     protected $with = array();
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = array();
 
     /**
      * Get the presenter class.
