@@ -1,43 +1,27 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-    <title>Post reply to {{ topic.title }} &bull; MyBB Community Forums</title>
-    {% include "partials.headerinclude" %}
+{% extends "layouts.base" %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block head %}
     <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
     <link rel="canonical" href="{{ url_route("topics.reply", [topic.slug]) }}" />
-</head>
-<body>
-{% include "header.header" %}
-<div class="main-container">
-    <div class="main wrapper clearfix">
-        <div class="breadcrumb">
-            Breadcrumb Goes here
-        </div>
-        <article class="full-width">
-            <header>
-                <h1>Post reply to {{topic.title }}</h1>
-                <div class="page-controls">
-                    <a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">Cancel</span></a>
-                </div>
-            </header>
-            <section class="post">
-                {{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
-                    <div class="form-row">
-                        <h3>{{ form_label('content', 'Reply') }}</h3>
-                        {{ form_textarea('content') }}
-                    </div>
-                    <div class="form-submit">
-                        {{ form_button('<i class="fa fa-sign-in"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
-                    </div>
-                {{ form_close() }}
-            </section>
-        </article>
-    </div> <!-- #main -->
-</div>
-</div>
-{% include "footer.footer" %}
-</body>
-</html>
+{% endblock %}
+{% block contents %}
+	<article class="full-width">
+		<header>
+			<h1>Post reply to {{topic.title }}</h1>
+			<div class="page-controls">
+				<a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">Cancel</span></a>
+			</div>
+		</header>
+		<section class="post">
+			{{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
+				<div class="form-row">
+					<h3>{{ form_label('content', 'Reply') }}</h3>
+					{{ form_textarea('content') }}
+				</div>
+				<div class="form-submit">
+					{{ form_button('<i class="fa fa-sign-in"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
+				</div>
+			{{ form_close() }}
+		</section>
+	</article>
+{% endblock %}

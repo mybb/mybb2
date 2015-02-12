@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+		<title>
+			{% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %}MyBB Community Forums
+		</title>
+		{% include "partials.headerinclude" %}
+		{% block head %}{% endblock %}
+	</head>
+	<body>
+		{% include "header.header" %}
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+                <div class="breadcrumb">
+                    Breadcrumb Goes here
+                </div>
+				{% block contents %}{% endblock %}
+			</div>
+		</div>
+		{% include "footer.footer" %}
+	</body>
+</html>

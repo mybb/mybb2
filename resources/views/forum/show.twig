@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-    <title>{{ forum.title }} &bull; MyBB Community Forums</title>
-    {% include "partials.headerinclude" %}
+{% extends "layouts.base" %}
+{% block title %}{{ forum.title }}{% endblock %}
+{% block head %}
     <meta name="description" content="{{ forum.description }}" />
     <link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
-</head>
-<body>
-{% include "header.header" %}
-<div class="main-container">
-    <div class="main wrapper clearfix">
-        <div class="breadcrumb">
-            Breadcrumb Goes here
-        </div>
-
+{% endblock %}
+{% block contents %}
 		<article class="full-width">
 			<header>
 				<h1>{{ forum.title }}</h1>
@@ -106,9 +94,4 @@
 				</ul>
 			</section>
 		{% endif %}
-    </div> <!-- #main -->
-</div>
-</div>
-{% include "footer.footer" %}
-</body>
-</html>
+{% endblock %}
