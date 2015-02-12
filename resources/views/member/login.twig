@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <title>MyBB Community Forums</title>
+        {% include "partials.headerinclude" %}
+    </head>
+    <body>
+        {% include "header.header" %}
+        <form action="{{ url('auth/login') }}" method="post">
+            <article class="centered-full-width">
+                <header>
+                    <h1>Log In</h1>
+                </header>
+                <section class="form">
+                    <div class="form-section clearfix">
+                        <div class="form-row">
+                            <h3><label for="username">Username/Email</label></h3>
+                            <input type="text" name="login" id="username" />
+                        </div>
+                        <div class="form-row">
+                            <h3><label for="password">Password</label></h3>
+                            <p class="description"><a href="index.php?page=forgot-password" onclick="modal('forgot-password'); return false;">Forgotten your password?</a></p>
+                            <input type="password" name="password" id="password" class="password-toggle" />
+                        </div>
+                    </div>
+                </section>
+                <div class="form-submit">
+                    <button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">Log In</span></button>
+                </div>
+            </article>
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        </form>
+        {% include "footer.footer" %}
+    </body>
+</html>

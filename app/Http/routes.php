@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
+Route::get('/', ['as' => 'forum.index', 'middleware' => 'checkaccess', 'except' => 'banned', 'uses' => 'ForumController@index']);
 Route::get('forum/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
 Route::get('topic/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
@@ -22,3 +22,6 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('admin', ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
+
