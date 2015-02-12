@@ -24,7 +24,7 @@ class CreateForumsTable extends Migration {
 			$table->string('link')->nullable();
 
 			// Cached data
-			$table->integer('num_threads')->default(0);
+			$table->integer('num_topics')->default(0);
 			$table->integer('num_posts')->default(0);
 			$table->integer('last_post_id')->unsigned()->nullable();
 			$table->integer('last_post_user_id')->unsigned()->nullable();
