@@ -11,8 +11,10 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends Controller
@@ -43,5 +45,33 @@ class TopicController extends Controller
         $posts = $this->postRepository->allForTopic($topic);
 
         return view('topic.show', compact('topic', 'posts'));
+    }
+
+    public function reply($slug = '')
+    {
+        $topic = $this->topicRepository->findBySlug($slug);
+
+        if (!$topic) {
+            throw new NotFoundHttpException('Topic not found');
+        }
+
+        return view('topic.reply', compact('topic'));
+    }
+
+    public function postReply($slug = '', ReplyRequest $replyRequest)
+    {
+        /** @var Topic $topic */
+        $topic = $this->topicRepository->findBySlug($slug);
+
+        if (!$topic) {
+            throw new NotFoundHttpException('Topic not found');
+        }
+
+        //$post = $topic->posts()->create([]);
+
+        var_dump($replyRequest);
+        die();
+
+        return redirect()->route('topics.show', ['slug' => $slug]);
     }
 }

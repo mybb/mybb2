@@ -111,8 +111,8 @@ return [
             'TwigBridge\Extension\Laravel\Translator',
             'TwigBridge\Extension\Laravel\Url',
 
-            //'TwigBridge\Extension\Laravel\Form',
-            //'TwigBridge\Extension\Laravel\Html',
+            'TwigBridge\Extension\Laravel\Form',
+            'TwigBridge\Extension\Laravel\Html',
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',
         ],
 

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <title>Post reply to {{ topic.title }} &bull; MyBB Community Forums</title>
+    {% include "partials.headerinclude" %}
+    <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
+    <link rel="canonical" href="{{ url_route("topics.reply", [topic.slug]) }}" />
+</head>
+<body>
+{% include "header.header" %}
+<div class="main-container">
+    <div class="main wrapper clearfix">
+        <div class="breadcrumb">
+            Breadcrumb Goes here
+        </div>
+        <article class="full-width">
+            <header>
+                <h1>Post reply to {{topic.title }}</h1>
+                <div class="page-controls">
+                    <a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">Cancel</span></a>
+                </div>
+            </header>
+            <section class="post">
+                <form class="form-section clearfix" method="post" action="{{ url_route("topics.reply", [topic.slug]) }}">
+                    <div class="form-row">
+                        <h3><label for="content">Reply</label></h3>
+                        <textarea name="content" id="content"></textarea>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">Post Reply</span></button>
+                    </div>
+                </form>
+            </section>
+        </article>
+    </div> <!-- #main -->
+</div>
+</div>
+{% include "footer.footer" %}
+</body>
+</html>

@@ -142,6 +142,7 @@ return [
 		'TwigBridge\ServiceProvider',
 		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'Illuminate\Html\HtmlServiceProvider',
 
 
 		/*
@@ -204,6 +205,8 @@ return [
 		'Twig' => 'TwigBridge\Facade\Twig',
 		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
 		'Node' => 'Kalnoy\Nestedset\Node',
+		'Form'=> 'Illuminate\Html\FormFacade',
+		'HTML'=> 'Illuminate\Html\HtmlFacade',
 
 	],
 

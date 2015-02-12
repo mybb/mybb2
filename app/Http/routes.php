@@ -16,6 +16,10 @@ Route::get('forum/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@sh
 
 Route::get('topic/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
 
+Route::get('topic/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
+
+Route::post('topic/{slug}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
