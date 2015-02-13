@@ -1,11 +1,11 @@
 {% extends "layouts.base" %}
 {% block title %}
-	All Forums
+	{{ trans('forum.all') }}
 {% endblock %}
 {% block contents %}
 <article class="full-width">
     <header>
-        <h1>All Forums</h1>
+        <h1>{{ trans('forum.all') }}</h1>
     </header>
     {% for category in forums %}
 		<section>
