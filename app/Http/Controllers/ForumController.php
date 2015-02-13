@@ -24,6 +24,18 @@ class ForumController extends Controller
 	}
 
 	/**
+	 * Shows all Forums
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function all()
+	{
+		$forums = $this->forumRepository->getIndexTree();
+
+		return view('forum.all', compact('forums'));
+	}
+
+	/**
 	 * Shows the Index Page
 	 *
 	 * @return \Illuminate\View\View

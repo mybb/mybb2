@@ -1,0 +1,39 @@
+{% extends "layouts.base" %}
+{% block title %}
+	All Forums
+{% endblock %}
+{% block contents %}
+<article class="full-width">
+    <header>
+        <h1>All Forums</h1>
+    </header>
+    {% for category in forums %}
+		<section>
+			<h2 class="bold">{{ category.title }}</h2>
+			 <div class="forum-list topic-list">
+				{% for forum in category.children.toTree %}
+					<div class="forum">
+						<div class="forum-info">
+							<h3 class="forum-title"><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></h3>
+							<p class="description">{{ forum.description }}</p>
+							{% if forum.children.toTree %}
+								<ul class="subforums">
+									<i class="fa fa-level-up"></i>
+									{% for subforum in forum.children.toTree %}
+										<li><a href="{{ url_route("forums.show", [subforum.slug]) }}" class="subforum-title">{{ subforum.title }}</a></li>
+									{% endfor %}
+								</ul>
+							{% endif %}
+						</div>
+						<div class="topic compact">
+							<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Nemo Hoes's profile"><img src="images/avatar.png" class="avatar" /></a>
+							<h4 class="topic-title"><a href="index.php?page=topic">Please Help</a></h4>
+							<p class="latest-post"><a href="index.php?page=topic#latest" class="post-date" title="March 8, 2014 at 12:07 PM">12 minutes ago</a> by <a href="index.php?page=topic" class="post-author">Nemo Hoes</a></p>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+	{% endfor %}
+</article>
+{% endblock %}
