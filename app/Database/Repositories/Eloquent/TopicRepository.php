@@ -84,6 +84,6 @@ class TopicRepository implements ITopicRepository
      */
     public function allForForum(Forum $forum)
     {
-        return $this->topicModel->where('forum_id', '=', $forum->id)->get();
+        return $this->topicModel->with(['posts', 'author'])->where('forum_id', '=', $forum->id)->get();
     }
 }

@@ -38,60 +38,57 @@
 				{% endif %}
 			</section>
 		</article>
-		{% if topics.count > 0 %}
-			<h2>Topics</h2>
-			<div class="page-controls">
-				<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">Mark Read</span></a>
-				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				<a href="index.php?page=new-thread" class="button"><i class="fa fa-edit"></i><span class="text">Post Thread</span></a>
+		<h2>Topics</h2>
+		<div class="page-controls">
+			<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">Mark Read</span></a>
+			<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+			<a href="index.php?page=new-thread" class="button"><i class="fa fa-edit"></i><span class="text">Post Thread</span></a>
+		</div>
+		<section class="forum topic-list">
+			<div class="sort-topics clearfix">
+				<a href="#" class="sort-column primary-column-one">
+					Topic Title
+				</a>
+				<a href="#" class="sort-column primary-column-two">
+					Start Date
+				</a>
+				<a href="#" class="sort-column replies-column">
+					Replies
+				</a>
+				<a href="#" class="sort-column latest-column">
+					Latest Post <i class="fa fa-caret-down"></i>
+				</a>
 			</div>
-			<section class="forum topic-list">
-				<div class="sort-topics clearfix">
-					<a href="#" class="sort-column primary-column-one">
-						Topic Title
-					</a>
-					<a href="#" class="sort-column primary-column-two">
-						Start Date
-					</a>
-					<a href="#" class="sort-column replies-column">
-						Replies
-					</a>
-					<a href="#" class="sort-column latest-column">
-						Latest Post <i class="fa fa-caret-down"></i>
-					</a>
-				</div>
-				<div class="topics-container">
-					{% for topic in topics %}
-						<div class="topic">
-							<div class="primary-column">
-								<h3 class="topic-title">
-									<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
-								</h3>
-								<h4>First Post</h4>
-								<p class="first-post">
-									<!-- it should be change later -->
-									<span class="post-author"><a href="index.php?page=thread">Fábio Maia</a></span>
-									<a href="index.php?page=thread#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
-								</p>
-							</div>
-							<div class="replies-column">
-								<h4>Replies</h4>
-								<!-- it should be change later -->
-								<p class="thread-replies caption" title="450 replies &middot; {{ topic.views }} views">450</p>
-							</div>
-							<div class="latest-column">
-								<h4>Latest</h4>
-								<!-- it should be change later -->
-								<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
-								<p class="latest-post">
-									<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
-									<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
-								</p>
-							</div>
-					{% else %}
-						<li class="thread-list__error error error-no-results">No topics found!</li>
-					{% endfor %}
-				</ul>
-			</section>
-		{% endif %}
+			<div class="topics-container">
+				{% for topic in topics %}
+					<div class="topic">
+						<div class="primary-column">
+							<h3 class="topic-title">
+								<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
+							</h3>
+							<h4>First Post</h4>
+							<p class="first-post">
+								<span class="post-author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
+								<a href="{{ url_route('topics.show', [topic.slug]) }}#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
+							</p>
+						</div>
+						<div class="replies-column">
+							<h4>Replies</h4>
+							<!-- it should be change later -->
+							<p class="thread-replies caption" title="{{ topic.posts.count }} replies &middot; {{ topic.views }} views">{{ topic.posts.count }}</p>
+						</div>
+						<div class="latest-column">
+							<h4>Latest</h4>
+							<!-- it should be change later -->
+							<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
+							<p class="latest-post">
+								<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
+								<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
+							</p>
+						</div>
+				{% else %}
+					<div class="topic topic-list__error error error-no-results">No topics found!</div>
+				{% endfor %}
+			</ul>
+		</section>
 {% endblock %}
