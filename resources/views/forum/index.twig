@@ -148,7 +148,7 @@
 
 <aside>
 	<section>
-		<h3 class="linked-header"><a href="{{ url_route('forums.all') }}">All Forums</a></h3>
+		<h3 class="linked-header"><a href="{{ url_route('forums.all') }}">{{ trans('forum.allforums') }}</a></h3>
 
 		<div class="compressed-forum-list">
 		{% for category in forums %}
@@ -163,7 +163,7 @@
 				</ul>
 			</div>
 		{% else %}
-			No Forums Found!
+			{{ trans('forum.notfound') }}
 		{% endfor %}
 			</div>
 	</section>
