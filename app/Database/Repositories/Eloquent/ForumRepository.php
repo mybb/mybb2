@@ -73,4 +73,40 @@ class ForumRepository implements IForumRepository
     {
         return $this->forumModel->where('parent_id', '=', null)->with(['children'])->get();
     }
+
+    /**
+     * Increment the number of posts in the forum by one.
+     *
+     * @param int $id The ID of the forum to increment the post count for.
+     *
+     * @return mixed
+     */
+    public function incrementPostCount($id = 0)
+    {
+        $forum = $this->find($id);
+
+        if ($forum) {
+            $forum->increment('num_posts');
+        }
+
+        return $forum;
+    }
+
+    /**
+     * Increment the number of topics in the forum by one.
+     *
+     * @param int $id The ID of the forum to increment the topic count for.
+     *
+     * @return mixed
+     */
+    public function incrementTopicCount($id = 0)
+    {
+        $forum = $this->find($id);
+
+        if ($forum) {
+            $forum->increment('num_topics');
+        }
+
+        return $forum;
+    }
 }

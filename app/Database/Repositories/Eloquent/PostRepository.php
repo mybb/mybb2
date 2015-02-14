@@ -90,6 +90,13 @@ class PostRepository implements IPostRepository
 
         $postDetails = array_merge($basePostDetails, $postDetails);
 
-        return $topic->posts()->save(new Post($postDetails));
+        $post = $topic->posts()->save(new Post($postDetails));
+
+        if ($post !== false) {
+            $topic->increment('num_posts');
+            $topic->forum->increment('num_posts');
+        }
+
+        return $post;
     }
 }

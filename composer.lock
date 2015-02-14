@@ -891,21 +891,23 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "ad44705ec7857917e9e010a5cfe6e62510598b88"
+                "reference": "e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/ad44705ec7857917e9e010a5cfe6e62510598b88",
-                "reference": "ad44705ec7857917e9e010a5cfe6e62510598b88",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358",
+                "reference": "e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358",
                 "shasum": ""
             },
             "require": {
+                "illuminate/auth": "~5.0",
+                "illuminate/hashing": "~5.0",
                 "illuminate/support": "~5.0"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "MyBB\\Auth": "src/"
+                "psr-4": {
+                    "MyBB\\Auth\\": "src/"
                 }
             },
             "license": [
@@ -921,7 +923,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-02-14 12:45:45"
+            "time": "2015-02-14 21:59:46"
         },
         {
             "name": "nesbot/carbon",

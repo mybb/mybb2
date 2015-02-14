@@ -42,4 +42,22 @@ interface IForumRepository
      * @return mixed
      */
     public function findBySlug($slug = '');
+
+    /**
+     * Increment the number of posts in the forum by one.
+     *
+     * @param int $id The ID of the forum to increment the post count for.
+     *
+     * @return mixed
+     */
+    public function incrementPostCount($id = 0);
+
+    /**
+     * Increment the number of topics in the forum by one.
+     *
+     * @param int $id The ID of the forum to increment the topic count for.
+     *
+     * @return mixed
+     */
+    public function incrementTopicCount($id = 0);
 }
