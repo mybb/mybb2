@@ -89,20 +89,20 @@ class AuthController extends Controller {
 	{
 
 		$this->validate($request, [
-			'login' => 'required', 'password' => 'required',
+			'username' => 'required', 'password' => 'required'
 		]);
 
-		$credentials = $request->only('login', 'password');
+		$credentials = $request->only('username', 'password');
 
-		if ($this->auth->attempt(['name' => $credentials['login'], 'password' => $credentials['password']]))
+		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']], $request->input('remember_me')))
 		{
 			return redirect()->intended($this->redirectPath());
 		}
 
 		return redirect('/auth/login')
-					->withInput($request->only('email'))
+					->withInput($request->only('username'))
 					->withErrors([
-						'email' => 'These credentials do not match our records.',
+						'username' => trans('member.invalidCredentials'),
 					]);
 	}
 

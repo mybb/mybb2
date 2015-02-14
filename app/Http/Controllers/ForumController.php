@@ -58,7 +58,8 @@ class ForumController extends Controller
 	{
 		$forum = $this->forumRepository->findBySlug($slug);
 
-		if (!$forum) {
+		if (!$forum)
+		{
 			throw new NotFoundHttpException('Forum not found.');
 		}
 
