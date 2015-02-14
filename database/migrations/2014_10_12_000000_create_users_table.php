@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration {
 			$table->string('hasher')->nullable();
 			$table->rememberToken();
 			$table->integer('role_id');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

@@ -17,7 +17,7 @@ class CreatePermissionsTable extends Migration {
 			$table->increments('id');
 			$table->string('permission_display')->nullable();
 			$table->string('permission_slug');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 
