@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-<head>
-    <title>{{ forum.title }} &bull; MyBB Community Forums</title>
-    {% include "partials.headerinclude" %}
+{% extends "layouts.base" %}
+{% block title %}{{ forum.title }}{% endblock %}
+{% block head %}
     <meta name="description" content="{{ forum.description }}" />
     <link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
-</head>
-<body>
-{% include "header.header" %}
-<div class="main-container">
-    <div class="main wrapper clearfix">
-        <div class="breadcrumb">
-            Breadcrumb Goes here
-        </div>
-
+{% endblock %}
+{% block contents %}
 		<article class="full-width">
 			<header>
 				<h1>{{ forum.title }}</h1>
@@ -26,7 +14,7 @@
 			</header>
 		   <section>
 				{% if forum.children.count > 0 %}
-					<h2 class="bold">Child Forums</h2>
+					<h2 class="bold">{{ trans('forum.childforums') }}</h2>
 					 <div class="forum-list thread-list">
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">
@@ -44,71 +32,63 @@
 								</div>
 							</div>
 						{% else %}
-							No Forums Found!
+							{{ trans('forum.notfound') }}
 						{% endfor %}
 					</div>
 				{% endif %}
 			</section>
 		</article>
-		{% if topics.count > 0 %}
-			<h2>Topics</h2>
-			<div class="page-controls">
-				<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">Mark Read</span></a>
-				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				<a href="index.php?page=new-thread" class="button"><i class="fa fa-edit"></i><span class="text">Post Thread</span></a>
+		<h2>{{ trans('forum.topics') }}</h2>
+		<div class="page-controls">
+			<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
+			<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
+			<a href="index.php?page=new-thread" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+		</div>
+		<section class="forum topic-list">
+			<div class="sort-topics clearfix">
+				<a href="#" class="sort-column primary-column-one">
+					{{ trans('forum.topictitle') }}
+				</a>
+				<a href="#" class="sort-column primary-column-two">
+					{{ trans('forum.startdate') }}
+				</a>
+				<a href="#" class="sort-column replies-column">
+					{{ trans('forum.replies') }}
+				</a>
+				<a href="#" class="sort-column latest-column">
+					{{ trans('forum.latestpost') }} <i class="fa fa-caret-down"></i>
+				</a>
 			</div>
-			<section class="forum topic-list">
-				<div class="sort-topics clearfix">
-					<a href="#" class="sort-column primary-column-one">
-						Topic Title
-					</a>
-					<a href="#" class="sort-column primary-column-two">
-						Start Date
-					</a>
-					<a href="#" class="sort-column replies-column">
-						Replies
-					</a>
-					<a href="#" class="sort-column latest-column">
-						Latest Post <i class="fa fa-caret-down"></i>
-					</a>
-				</div>
-				<div class="topics-container">
-					{% for topic in topics %}
-						<div class="topic">
-							<div class="primary-column">
-								<h3 class="topic-title">
-									<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
-								</h3>
-								<h4>First Post</h4>
-								<p class="first-post">
-									<!-- it should be change later -->
-									<span class="post-author"><a href="index.php?page=thread">Fábio Maia</a></span>
-									<a href="index.php?page=thread#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
-								</p>
-							</div>
-							<div class="replies-column">
-								<h4>Replies</h4>
-								<!-- it should be change later -->
-								<p class="thread-replies caption" title="450 replies &middot; {{ topic.views }} views">450</p>
-							</div>
-							<div class="latest-column">
-								<h4>Latest</h4>
-								<!-- it should be change later -->
-								<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
-								<p class="latest-post">
-									<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
-									<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
-								</p>
-							</div>
-					{% else %}
-						<li class="thread-list__error error error-no-results">No topics found!</li>
-					{% endfor %}
-				</ul>
-			</section>
-		{% endif %}
-    </div> <!-- #main -->
-</div>
-</div>
-{% include "footer.footer" %}
-</body>
-</html>
+			<div class="topics-container">
+				{% for topic in topics %}
+					<div class="topic">
+						<div class="primary-column">
+							<h3 class="topic-title">
+								<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
+							</h3>
+							<h4>First Post</h4>
+							<p class="first-post">
+								<span class="post-author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
+								<a href="{{ url_route('topics.show', [topic.slug]) }}#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
+							</p>
+						</div>
+						<div class="replies-column">
+							<h4>{{ trans('topic.replies') }}</h4>
+							{# It should be change later #}
+							<p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.posts.count, {'count':topic.posts.count}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.posts.count }}</p>
+						</div>
+						<div class="latest-column">
+							<h4>{{ trans('topic.latest') }}</h4>
+							<!-- it should be change later -->
+							<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
+							<p class="latest-post">
+								<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
+								<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
+							</p>
+						</div>
+				{% else %}
+					<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
+				{% endfor %}
+			</ul>
+		</section>
+{% endblock %}

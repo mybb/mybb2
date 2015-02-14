@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7007dd68c2f884addf8ce7310f1dc00a",
+    "hash": "23689dd6a760d30479fc118c3e29d192",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -502,16 +502,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.4",
+            "version": "v5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b5eafda7dba3d1367a63095b83a068a73d32d97f"
+                "reference": "b1aea041cbc0cd54563e2d3709a54a71eed57653"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b5eafda7dba3d1367a63095b83a068a73d32d97f",
-                "reference": "b5eafda7dba3d1367a63095b83a068a73d32d97f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b1aea041cbc0cd54563e2d3709a54a71eed57653",
+                "reference": "b1aea041cbc0cd54563e2d3709a54a71eed57653",
                 "shasum": ""
             },
             "require": {
@@ -623,7 +623,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-11 20:37:48"
+            "time": "2015-02-13 19:10:59"
         },
         {
             "name": "league/flysystem",
@@ -886,6 +886,44 @@
             "time": "2015-01-11 23:07:46"
         },
         {
+            "name": "mybb/auth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mybb/Auth.git",
+                "reference": "ad44705ec7857917e9e010a5cfe6e62510598b88"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/ad44705ec7857917e9e010a5cfe6e62510598b88",
+                "reference": "ad44705ec7857917e9e010a5cfe6e62510598b88",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "MyBB\\Auth": "src/"
+                }
+            },
+            "license": [
+                "LGPL3"
+            ],
+            "description": "The authentication system used by MyBB 2",
+            "keywords": [
+                "forum",
+                "laravel",
+                "mybb"
+            ],
+            "support": {
+                "source": "https://github.com/mybb/Auth/tree/master",
+                "issues": "https://github.com/mybb/Auth/issues"
+            },
+            "time": "2015-02-14 12:45:45"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "1.14.0",
             "source": {
@@ -1016,16 +1054,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.3.4",
+            "version": "v0.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "218ea9e49c9fe21e28fce6cf77f22615af92daef"
+                "reference": "2ce0e8f3020fd292c2ad2a496c5d83939823f642"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/218ea9e49c9fe21e28fce6cf77f22615af92daef",
-                "reference": "218ea9e49c9fe21e28fce6cf77f22615af92daef",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/2ce0e8f3020fd292c2ad2a496c5d83939823f642",
+                "reference": "2ce0e8f3020fd292c2ad2a496c5d83939823f642",
                 "shasum": ""
             },
             "require": {
@@ -1075,14 +1113,14 @@
                 }
             ],
             "description": "An interactive shell for modern PHP.",
-            "homepage": "https://github.com/bobthecow/psysh",
+            "homepage": "http://psysh.org",
             "keywords": [
                 "REPL",
                 "console",
                 "interactive",
                 "shell"
             ],
-            "time": "2015-02-12 05:21:32"
+            "time": "2015-02-12 19:35:52"
         },
         {
             "name": "rcrowe/twigbridge",
@@ -3178,6 +3216,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "mccool/laravel-auto-presenter": 10,
+        "mybb/auth": 20,
         "barryvdh/laravel-debugbar": 20
     },
     "prefer-stable": true,

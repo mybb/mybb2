@@ -64,9 +64,9 @@ class Forum extends Node implements HasPresenter
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function threads()
+    public function topics()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\Thread');
+        return $this->hasMany('MyBB\\Core\\Database\\Models\\Topic');
     }
 
     /**
@@ -76,6 +76,6 @@ class Forum extends Node implements HasPresenter
      */
     public function posts()
     {
-        return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\Post', 'MyBB\\Core\\Database\\Models\\Thread');
+        return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\Post', 'MyBB\\Core\\Database\\Models\\Topic');
     }
 }

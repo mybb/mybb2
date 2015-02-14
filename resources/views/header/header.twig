@@ -1,7 +1,7 @@
 <div class="header-container">
             <header>
                 <div class="wrapper clearfix">
-                    <h1 class="title"><a href="index.php" id="logo"><span>MyBB Community Forums</span></a></h1>
+                    <h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>MyBB Community Forums</span></a></h1>
                     <nav id="main-menu" class="menu-bar">
                         <a class="menu-button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
                          {% if auth_check() %}

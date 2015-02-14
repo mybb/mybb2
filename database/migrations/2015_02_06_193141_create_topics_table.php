@@ -22,7 +22,7 @@ class CreateTopicsTable extends Migration {
 			$table->integer('first_post_id')->unsigned()->nullable();
 			$table->integer('last_post_id')->unsigned()->nullable();
 			$table->integer('views')->default(0);
-			$table->timestamps();
+			$table->nullableTimestamps();
 
 			$table->foreign('forum_id')->references('id')->on('forums');
 			$table->foreign('user_id')->references('id')->on('users');
