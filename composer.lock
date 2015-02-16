@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "23689dd6a760d30479fc118c3e29d192",
+    "hash": "b775c9663510ff36982a82a34e23ca9e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -221,6 +221,50 @@
                 "string"
             ],
             "time": "2014-12-20 21:24:13"
+        },
+        {
+            "name": "ezyang/htmlpurifier",
+            "version": "v4.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ezyang/htmlpurifier.git",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "reference": "6f389f0f25b90d0b495308efcfa073981177f0fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HTMLPurifier": "library/"
+                },
+                "files": [
+                    "library/HTMLPurifier.composer.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Edward Z. Yang",
+                    "email": "admin@htmlpurifier.org",
+                    "homepage": "http://ezyang.com"
+                }
+            ],
+            "description": "Standards compliant HTML filter written in PHP",
+            "homepage": "http://htmlpurifier.org/",
+            "keywords": [
+                "html"
+            ],
+            "time": "2013-11-30 08:25:19"
         },
         {
             "name": "illuminate/html",
@@ -456,16 +500,16 @@
         },
         {
             "name": "kalnoy/nestedset",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lazychaser/laravel-nestedset.git",
-                "reference": "87e9240539b290dc56f542d21083a82e5f2a9ac1"
+                "reference": "933557daf8c548dd4b4a52fdf7de0e0cd157d267"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/87e9240539b290dc56f542d21083a82e5f2a9ac1",
-                "reference": "87e9240539b290dc56f542d21083a82e5f2a9ac1",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/933557daf8c548dd4b4a52fdf7de0e0cd157d267",
+                "reference": "933557daf8c548dd4b4a52fdf7de0e0cd157d267",
                 "shasum": ""
             },
             "require": {
@@ -498,7 +542,7 @@
                 "nested sets",
                 "nsm"
             ],
-            "time": "2015-02-11 06:41:26"
+            "time": "2015-02-15 05:00:44"
         },
         {
             "name": "laravel/framework",
@@ -924,6 +968,45 @@
                 "issues": "https://github.com/mybb/Auth/issues"
             },
             "time": "2015-02-14 21:59:46"
+        },
+        {
+            "name": "mybb/parser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mybb/Parser.git",
+                "reference": "af4d6f3793e70fe0594311ad409d44e74ca0d5a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/af4d6f3793e70fe0594311ad409d44e74ca0d5a2",
+                "reference": "af4d6f3793e70fe0594311ad409d44e74ca0d5a2",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "~4.6",
+                "illuminate/support": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyBB\\Parser\\": "src/"
+                }
+            },
+            "license": [
+                "LGPL3"
+            ],
+            "description": "The parser used by MyBB 2. Supports BBCode, Markdown and HTML",
+            "keywords": [
+                "forum",
+                "laravel",
+                "mybb"
+            ],
+            "support": {
+                "source": "https://github.com/mybb/Parser/tree/master",
+                "issues": "https://github.com/mybb/Parser/issues"
+            },
+            "time": "2015-02-16 18:18:23"
         },
         {
             "name": "nesbot/carbon",
@@ -2044,20 +2127,20 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "343dbc07007272511727c9272e568d707682fc24"
+                "reference": "77b9cc071f4bbd839923269668b14d308778d8b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/343dbc07007272511727c9272e568d707682fc24",
-                "reference": "343dbc07007272511727c9272e568d707682fc24",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/77b9cc071f4bbd839923269668b14d308778d8b0",
+                "reference": "77b9cc071f4bbd839923269668b14d308778d8b0",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.0.*",
+                "illuminate/support": "5.0.x",
                 "maximebf/debugbar": "~1.10.2",
                 "php": ">=5.4.0",
                 "symfony/finder": "~2.6"
@@ -2094,7 +2177,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2015-02-03 19:52:06"
+            "time": "2015-02-15 14:11:42"
         },
         {
             "name": "doctrine/instantiator",
@@ -3219,6 +3302,7 @@
     "stability-flags": {
         "mccool/laravel-auto-presenter": 10,
         "mybb/auth": 20,
+        "mybb/parser": 20,
         "barryvdh/laravel-debugbar": 20
     },
     "prefer-stable": true,

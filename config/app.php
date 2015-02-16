@@ -152,6 +152,7 @@ return [
 		'MyBB\Core\Providers\ConfigServiceProvider',
 		'MyBB\Core\Providers\EventServiceProvider',
 		'MyBB\Core\Providers\RouteServiceProvider',
+		'MyBB\Parser\ParserServiceProvider',
 	],
 
 	/*

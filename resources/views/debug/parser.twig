@@ -1,0 +1,40 @@
+{% extends "layouts.base" %}
+{% block title %}
+	Parser Debug
+{% endblock %}
+{% block head %}
+    <style>
+        .highlight {
+            color: orange;
+        }
+    </style>
+{% endblock %}
+{% block contents %}
+		{{ parsed|raw }}
+		<form action="{{ url('parser') }}" method="post">
+		<article class="centered-full-width">
+			<header>
+				<h1>Parser</h1>
+			</header>
+			<section class="form">
+				<div class="form-section clearfix">
+					<div class="form-row">
+						<h3><label for="parser">Parser to use</label></h3>
+						<select name="parser" id="parser">
+							<option value="bbcode">BBCode</option>
+							<option value="markdown">Markdown</option>
+						</select>
+					</div>
+					<div class="form-row">
+						<h3><label for="text">Text</label></h3>
+						<textarea name="text" id="text">{{ orig }}</textarea>
+					</div>
+				</div>
+			</section>
+			<div class="form-submit">
+				<button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">Parse</span></button>
+			</div>
+		</article>
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	</form>
+{% endblock %}

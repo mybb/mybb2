@@ -30,3 +30,4 @@ Route::controllers([
 
 Route::get('admin', ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
 
+Route::any('parser', ['uses' => 'DebugController@parser']);
