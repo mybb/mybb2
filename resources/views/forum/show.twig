@@ -80,10 +80,10 @@
 						<div class="latest-column">
 							<h4>{{ trans('topic.latest') }}</h4>
 							<!-- it should be change later -->
-							<a href="index.php?page=profile" class="avatar-profile-link" title="Go to JonathanP's profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
+							<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" alt="JonathanP's avatar" class="avatar" /></a>
 							<p class="latest-post">
-								<span class="post-author"><a href="index.php?page=thread">JonathanP</a></span>
-								<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">Mar 8, 2014</a>
+								<span class="post-author"><a href="">{{ topic.lastPost.author.name }}</a></span>
+								<a href="index.php?page=thread#latest" class="post-date" title="March 8, 2014 at 5:46 PM">{{ topic.lastPost.createdAt }}</a>
 							</p>
 						</div>
                         </div>

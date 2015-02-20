@@ -101,7 +101,7 @@ class TopicRepository implements ITopicRepository
      */
     public function findBySlug($slug = '')
     {
-        return $this->topicModel->with(['author', 'firstPost'])->where('slug', '=', $slug)->first();
+        return $this->topicModel->with(['author'])->where('slug', '=', $slug)->first();
     }
 
     /**
@@ -113,7 +113,7 @@ class TopicRepository implements ITopicRepository
      */
     public function allForForum(Forum $forum)
     {
-        return $this->topicModel->with(['posts', 'author'])->where('forum_id', '=', $forum->id)->get();
+        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->where('forum_id', '=', $forum->id)->get();
     }
 
     /**
