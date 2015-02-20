@@ -71,7 +71,7 @@ class ForumRepository implements IForumRepository
      */
     public function getIndexTree()
     {
-        return $this->forumModel->where('parent_id', '=', null)->with(['children'])->get();
+        return $this->forumModel->where('parent_id', '=', null)->with(['children', 'lastPost', 'lastPostAuthor'])->get();
     }
 
     /**

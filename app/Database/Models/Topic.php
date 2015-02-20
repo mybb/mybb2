@@ -98,7 +98,7 @@ class Topic extends Model implements HasPresenter
      */
     public function firstPost()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post');
+        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'first_post_id');
     }
 
     /**
@@ -108,6 +108,6 @@ class Topic extends Model implements HasPresenter
      */
     public function lastPost()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post');
+        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
     }
 }

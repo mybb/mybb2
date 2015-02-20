@@ -78,4 +78,24 @@ class Forum extends Node implements HasPresenter
     {
         return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\Post', 'MyBB\\Core\\Database\\Models\\Topic');
     }
+
+    /**
+     * A forum has a single last post.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lastPost()
+    {
+        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+    }
+
+    /**
+     * A forum has a single last post author.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function lastPostAuthor()
+    {
+        return $this->hasOne('MyBB\\Core\\Database\\Models\\User', 'id', 'last_post_user_id');
+    }
 }
