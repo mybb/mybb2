@@ -12,7 +12,7 @@ class TopicsTableSeeder extends Seeder {
 				'slug' => 'my-topic',
 				'forum_id' => DB::table('forums')->where('slug', 'my-forum')->pluck('id'),
 				'user_id' => DB::table('users')->where('name', 'Admin')->pluck('id'),
-				'first_post_id' => null,
+				'first_post_id' => 'null',
 				'last_post_id' => 1,
 				'views' => 0,
                 'created_at' => new \DateTime(),
