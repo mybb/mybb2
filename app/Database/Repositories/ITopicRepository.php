@@ -55,4 +55,13 @@ interface ITopicRepository
      * @return mixed
      */
     public function findBySlug($slug = '');
+
+    /**
+     * Create a new topic
+     *
+     * @param array $details Details about the topic.
+     *
+     * @return mixed
+     */
+    public function create(array $details = []);
 }

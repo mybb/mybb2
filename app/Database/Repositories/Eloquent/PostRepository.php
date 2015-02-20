@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Parser\MessageFormatter;
 
 class PostRepository implements IPostRepository
 {
@@ -26,14 +27,22 @@ class PostRepository implements IPostRepository
      * @access protected
      */
     protected $guard;
+    /**
+     * @var MessageFormatter $formatter
+     * @access protected
+     */
+    protected $formatter;
 
     /**
-     * @param Post $postModel The model to use for posts.
+     * @param Post             $postModel The model to use for posts.
+     * @param Guard            $guard     Laravel guard instance, used to get user ID.
+     * @param MessageFormatter $formatter Post formatter instance.
      */
-    public function __construct(Post $postModel, Guard $guard) // TODO: Inject permissions container? So we can check post permissions before querying?
+    public function __construct(Post $postModel, Guard $guard, MessageFormatter $formatter) // TODO: Inject permissions container? So we can check post permissions before querying?
     {
         $this->postModel = $postModel;
         $this->guard = $guard;
+        $this->formatter = $formatter;
     }
 
     /**
@@ -82,13 +91,14 @@ class PostRepository implements IPostRepository
      */
     public function addPostToTopic(Topic $topic, array $postDetails)
     {
-        $basePostDetails = [
-            'user_id' => $this->guard->user()->id,
-            'content' => '',
-            'content_parsed' => '', // TODO: Auto-populate parsed content with parser once parser is written.
-        ];
 
-        $postDetails = array_merge($basePostDetails, $postDetails);
+        $postDetails = array_merge([
+                                       'user_id' => $this->guard->user()->id,
+                                       'content' => '',
+                                       'content_parsed' => '', // TODO: Auto-populate parsed content with parser once parser is written.
+                                   ], $postDetails);
+
+        $postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
 
         $post = $topic->posts()->save(new Post($postDetails));
 

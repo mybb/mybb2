@@ -20,20 +20,24 @@ class Topic extends Model implements HasPresenter
      * @var string
      */
     protected $table = 'topics';
-
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = true;
-
     /**
      * The relations to eager load on every query.
      *
      * @var array
      */
-    protected $with = array();
+    protected $with = [];
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
     /**
      * Get the presenter class.

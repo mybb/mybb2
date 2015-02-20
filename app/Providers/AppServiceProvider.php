@@ -53,6 +53,21 @@ class AppServiceProvider extends ServiceProvider
             'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
         );
 
+        $this->app->bind(
+            'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
+            function(Application $app) {
+                $repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
+                $cache = $app->make('Illuminate\Contracts\Cache\Repository');
+
+                return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
+            }
+        );
+
+        $this->app->bind(
+            'MyBB\Parser\Parser\IParser',
+            'MyBB\Parser\Parser\MyCode'
+        );
+
         // Temporary fix for Form...
         $this->app->bind('Illuminate\Html\FormBuilder', function($app)
         {

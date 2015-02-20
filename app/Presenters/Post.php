@@ -10,15 +10,16 @@
 namespace MyBB\Core\Presenters;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\Post as PostModel;
 
 class Post extends BasePresenter
 {
-    /** @var \MyBB\Core\Database\Models\Post $wrappedObject */
+    /** @var PostModel $wrappedObject */
 
     /**
-     * @param \MyBB\Core\Database\Models\Post $resource The post being wrapped by this presenter.
+     * @param PostModel $resource The post being wrapped by this presenter.
      */
-    public function __construct(\MyBB\Core\Database\Models\Post $resource)
+    public function __construct(PostModel $resource)
     {
         $this->wrappedObject = $resource;
     }

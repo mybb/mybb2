@@ -21,6 +21,10 @@ Route::get('topic/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicContro
 
 Route::post('topic/{slug}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
 
+Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
+
+Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([

@@ -28,7 +28,7 @@
 					</div>
 					<div class="post-body">
 						<p>
-							{{ post.content }}
+							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
 						</p>
 					</div>
 					<div class="post-foot">

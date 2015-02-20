@@ -12,9 +12,12 @@ class TopicsTableSeeder extends Seeder {
 				'slug' => 'my-topic',
 				'forum_id' => DB::table('forums')->where('slug', 'my-forum')->pluck('id'),
 				'user_id' => DB::table('users')->where('name', 'Admin')->pluck('id'),
-				'first_post_id' => NULL,
-				'last_post_id' => NULL,
-				'views' => 0
+				'first_post_id' => 1,
+				'last_post_id' => 1,
+				'views' => 0,
+                'created_at' => new \DateTime(),
+                'updated_at' => new \DateTime(),
+                'num_posts' => 1,
 		];
 
 		DB::table('topics')->insert($topic);

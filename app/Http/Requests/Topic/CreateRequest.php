@@ -1,11 +1,12 @@
 <?php
 /**
- * Topic reply request.
+ * Topic create request.
  *
  * @version 2.0.0
  * @author MyBB Group
  * @license LGPL v3
  */
+
 
 namespace MyBB\Core\Http\Requests\Topic;
 
@@ -13,14 +14,14 @@ namespace MyBB\Core\Http\Requests\Topic;
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\Request;
 
-class ReplyRequest extends Request
+class CreateRequest extends Request
 {
     /**
      * The route to redirect to if validation fails.
      *
      * @var string
      */
-    protected $redirectRoute = 'topics.reply';
+    protected $redirectRoute = 'topics.show';
     /** @var Guard $guard */
     private $guard;
 
@@ -33,6 +34,8 @@ class ReplyRequest extends Request
     {
         return [
             'content' => 'required',
+            'title' => 'required',
+            'forum_id' => 'required|exists:forums,id',
         ];
     }
 
