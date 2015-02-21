@@ -3,6 +3,7 @@
 return [
 
 	'login' => 'Log In',
+	'logout' => 'Log Out',
 	'signup' => 'Sign Up',
 	'UsernameOrEmail' => 'Username/Email',
 	'password' => 'Password',
