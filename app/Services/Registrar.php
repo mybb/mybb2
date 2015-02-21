@@ -1,6 +1,7 @@
 <?php namespace MyBB\Core\Services;
 
-use MyBB\Core\User;
+use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Models\Role;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -15,7 +16,7 @@ class Registrar implements RegistrarContract {
 	public function validator(array $data)
 	{
 		return Validator::make($data, [
-			'name' => 'required|max:255',
+			'name' => 'required|max:255|unique:users',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
 		]);
@@ -33,6 +34,7 @@ class Registrar implements RegistrarContract {
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
+			'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
 		]);
 	}
 

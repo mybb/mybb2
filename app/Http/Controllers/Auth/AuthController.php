@@ -42,9 +42,9 @@ class AuthController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function getRegister()
+	public function getSignup()
 	{
-		return view('auth.register');
+		return view('member.signup');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class AuthController extends Controller {
 	 * @param  \Illuminate\Foundation\Http\FormRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postRegister(Request $request)
+	public function postSignup(Request $request)
 	{
 		$validator = $this->registrar->validator($request->all());
 
@@ -89,7 +89,8 @@ class AuthController extends Controller {
 	{
 
 		$this->validate($request, [
-			'username' => 'required', 'password' => 'required'
+			'username' => 'required',
+			'password' => 'required',
 		]);
 
 		$credentials = $request->only('username', 'password');

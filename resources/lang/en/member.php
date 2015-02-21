@@ -10,5 +10,8 @@ return [
 	'forgotpassword' => 'Forgotten your password?',
 	'remember_me' => "Remember me?",
 	'invalidCredentials' => 'These credentials do not match our records.',
+	'username' => 'Username',
+	'email' => 'Email',
+	'password_confirm' => 'Please confirm your password',
 
 ];
