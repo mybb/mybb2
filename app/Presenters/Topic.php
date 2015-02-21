@@ -23,4 +23,9 @@ class Topic extends BasePresenter
     {
         $this->wrappedObject = $resource;
     }
+
+    public function replies()
+    {
+        return $this->wrappedObject->num_posts-1;
+    }
 }

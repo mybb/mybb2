@@ -75,7 +75,7 @@
 						<div class="replies-column">
 							<h4>{{ trans('topic.replies') }}</h4>
 							{# It should be change later #}
-							<p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.num_posts, {'count':topic.num_posts}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.num_posts }}</p>
+							<p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
 						</div>
 						<div class="latest-column">
 							<h4>{{ trans('topic.latest') }}</h4>

@@ -17,11 +17,13 @@
                         <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [post.topic.slug]) }}">{{ post.topic.title }}</a></h3>
                         <p class="latest-post"><a href="{{ url_route("topics.show", [post.topic.slug]) }}#latest" class="post-date" title="March 9, 2014 at 10:10 AM">{{ post.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ post.author.name }}</a></p>
                         <p class="forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [post.topic.forum.slug]) }}">{{ post.topic.forum.title }}</a></p>
-                        <p class="topic-replies caption" title="{{ trans_choice('topic.numposts', post.topic.num_posts) }} &middot; {{ trans_choice('topic.numviews', post.topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ post.topic.num_posts }}</span><span class="text"> {{ trans('topic.posts') }}</span></p>
+                        <p class="topic-replies caption" title="{{ trans_choice('topic.numreplies', post.topic.replies) }} &middot; {{ trans_choice('topic.numviews', post.topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ post.topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
                     </div>
                 </div>
             {% else %}
-
+                <div class="topic">
+                    {{ trans('topic.notfound') }}
+                </div>
             {% endfor %}
 		</div>
 	</section>

@@ -11,7 +11,7 @@ class ForumController extends Controller
 	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
-	private $topicRepository;,
+	private $topicRepository;
 	/** @var IPostRepository $postRepository */
 	private $postRepository;
 
