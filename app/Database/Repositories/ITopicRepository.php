@@ -10,6 +10,7 @@
 namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Topic;
 
 interface ITopicRepository
 {
@@ -19,6 +20,11 @@ interface ITopicRepository
      * @return mixed
      */
     public function all();
+
+    /**
+     * Increment view count for topic
+     */
+    public function incrementViewCount(Topic $topic);
 
     /**
      * Get all threads within a forum.

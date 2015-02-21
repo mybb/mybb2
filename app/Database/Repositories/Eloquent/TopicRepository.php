@@ -69,6 +69,14 @@ class TopicRepository implements ITopicRepository
     }
 
     /**
+     * Increment view count for topic
+     */
+    public function incrementViewCount(Topic $topic)
+    {
+        $topic->increment('views');
+    }
+
+    /**
      * Get all threads created by a user.
      *
      * @param int $userId The ID of the user.

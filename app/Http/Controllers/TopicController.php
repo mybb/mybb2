@@ -50,8 +50,7 @@ class TopicController extends Controller
             throw new NotFoundHttpException('Topic not found');
         }
 
-        $topic->views++;
-        $topic->save();
+        $this->topicRepository->incrementViewCount($topic);
 
         $posts = $this->postRepository->allForTopic($topic);
 
