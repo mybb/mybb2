@@ -32,6 +32,15 @@ interface IPostRepository
     public function allForTopic(Topic $topic);
 
     /**
+     * Get the newest posts
+     *
+     * @param int $num The number of posts to return
+     *
+     * @return mixed
+     */
+    public function getNewest($num = 20);
+
+    /**
      * Find a single post by its ID.
      *
      * @param int $id The ID of the post to find.

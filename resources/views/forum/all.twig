@@ -26,9 +26,9 @@
 							{% endif %}
 						</div>
 						<div class="topic compact">
-							<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Nemo Hoes's profile"><img src="images/avatar.png" class="avatar" /></a>
-							<h4 class="topic-title"><a href="index.php?page=topic">Please Help</a></h4>
-							<p class="latest-post"><a href="index.php?page=topic#latest" class="post-date" title="March 8, 2014 at 12:07 PM">12 minutes ago</a> by <a href="index.php?page=topic" class="post-author">Nemo Hoes</a></p>
+							<a href="" class="avatar-profile-link" title="Go to Nemo Hoes's profile"><img src="images/avatar.png" class="avatar" /></a>
+							<h4 class="topic-title"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug]) }}">{{ forum.lastPost.topic.title }}</a></h4>
+							<p class="latest-post"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug]) }}#latest" class="post-date" title="March 8, 2014 at 12:07 PM">{{ forum.lastPost.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ forum.lastPostAuthor.name }}</a></p>
 						</div>
 					</div>
 				{% endfor %}

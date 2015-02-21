@@ -50,6 +50,9 @@ class TopicController extends Controller
             throw new NotFoundHttpException('Topic not found');
         }
 
+        $topic->views++;
+        $topic->save();
+
         $posts = $this->postRepository->allForTopic($topic);
 
         return view('topic.show', compact('topic', 'posts'));

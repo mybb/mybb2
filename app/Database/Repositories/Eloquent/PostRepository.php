@@ -57,6 +57,11 @@ class PostRepository implements IPostRepository
         return $this->postModel->where('user_id', '=', $userId)->get();
     }
 
+    public function getNewest($num = 20)
+    {
+        return $this->postModel->orderBy('created_at', 'desc')->with(['topic', 'topic.forum', 'author'])->take($num)->get();
+    }
+
     /**
      * Find a single post by its ID.
      *

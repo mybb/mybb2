@@ -1,6 +1,8 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -9,18 +11,22 @@ class ForumController extends Controller
 	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
-	private $topicRepository;
+	private $topicRepository;,
+	/** @var IPostRepository $postRepository */
+	private $postRepository;
 
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @param IForumRepository  $forumRepository Forum repository instance to use in order to load forum information.
 	 * @param ITopicRepository $topicRepository Thread repository instance to use in order to load threads within a forum.
+	 * @param IPostRepository $postRepository Post repository instance to use in order to load posts for the latest discussion table.
 	 */
-	public function __construct(IForumRepository $forumRepository, ITopicRepository $topicRepository)
+	public function __construct(IForumRepository $forumRepository, ITopicRepository $topicRepository, IPostRepository $postRepository)
 	{
 		$this->forumRepository  = $forumRepository;
 		$this->topicRepository = $topicRepository;
+		$this->postRepository = $postRepository;
 	}
 
 	/**
@@ -43,8 +49,9 @@ class ForumController extends Controller
 	public function index()
 	{
 		$forums = $this->forumRepository->getIndexTree();
+		$posts = $this->postRepository->getNewest();
 
-		return view('forum.index', compact('forums'));
+		return view('forum.index', compact('forums', 'posts'));
 	}
 
 	/**
