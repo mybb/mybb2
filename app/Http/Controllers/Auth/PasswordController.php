@@ -20,6 +20,8 @@ class PasswordController extends Controller {
 
 	use ResetsPasswords;
 
+    private $redirectTo = '';
+
 	/**
 	 * Create a new password controller instance.
 	 *
@@ -35,4 +37,8 @@ class PasswordController extends Controller {
 		$this->middleware('guest');
 	}
 
+    protected function getEmailSubject()
+    {
+        return trans('passwords.email_subject');
+    }
 }

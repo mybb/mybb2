@@ -26,7 +26,7 @@
 					</div>
 					<div class="form-row">
 						<h3><label for="password">{{ trans('member.password') }}</label></h3>
-						<p class="description"><a href="index.php?page=forgot-password" onclick="modal('forgot-password'); return false;">{{ trans('member.forgotpassword') }}</a></p>
+						<p class="description"><a href="{{ url('password/email') }}" onclick="modal('forgot-password'); return false;">{{ trans('member.forgotpassword') }}</a></p>
 						<input type="password" name="password" id="password" class="password-toggle" />
 					</div>
 					<div class="form-row">
