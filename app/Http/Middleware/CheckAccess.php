@@ -27,7 +27,8 @@ class CheckAccess {
             return $next($request);
         }
 
-        return "<h1>Error No Permission</h1>";
+        // TODO: The acp should probably create another view
+        return view('errors.no_permission');
     }
 
     /**
