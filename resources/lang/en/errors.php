@@ -3,6 +3,6 @@
 return [
 
     'no_permission' => 'No Permission',
-    'no_permission_desc' => 'Unfortunaly you don\'t have permissions to access this page.'
+    'no_permission_desc' => 'Unfortunately you don\'t have permission to access this page.'
 
 ];
