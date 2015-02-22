@@ -202,7 +202,7 @@ class TopicRepository implements ITopicRepository
     public function editTopic(Topic $topic, array $topicDetails)
     {
 
-        if($topicDetails['title'])
+        if($topicDetails['title'] && $topicDetails['title'] != $topic['title'])
 		{
 			$topicDetails['slug'] = $this->createSlugForTitle($topicDetails['title']);
 		}
