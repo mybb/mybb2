@@ -114,4 +114,27 @@ class PostRepository implements IPostRepository
 
         return $post;
     }
+	
+    /**
+     * Edit a post
+     *
+     * @param Post $post       The post to edit
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function editPost(Post $post, array $postDetails)
+    {
+
+        if($postDetails['content'])
+		{
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
+		}
+		
+		$postDetails['updated_at'] = new \DateTime;
+
+		$post->update($postDetails);
+
+        return $post;
+    }
 }

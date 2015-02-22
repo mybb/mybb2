@@ -1,0 +1,32 @@
+{% extends "layouts.base" %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block head %}
+    <link rel="canonical" href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" />
+{% endblock %}
+{% block contents %}
+	<article class="full-width">
+		<header>
+			<h1>Edit Post</h1>
+			<div class="page-controls">
+				<a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">Cancel</span></a>
+			</div>
+		</header>
+		<section class="post">
+			{{ form_open({'route': ['topics.edit', topic.slug, post.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
+				{% if topic.first_post_id == post.id %}
+					<div class="form-row">
+						<h3>{{ form_label('title', 'Title') }}</h3>
+						{{ form_text('title', topic.title, {'placeholder': 'Enter a meaningful title...', 'title': 'Enter a meaningful title...'}) }}
+					</div>
+				{% endif %}
+				<div class="form-row">
+					<h3>{{ form_label('content', 'Content') }}</h3>
+					{{ form_textarea('content', post.content) }}
+				</div>
+				<div class="form-submit">
+					{{ form_button('<i class="fa fa-sign-in"></i><span class="text">Edit Post</span>', {'type': 'submit', 'class': 'button'}) }}
+				</div>
+			{{ form_close() }}
+		</section>
+	</article>
+{% endblock %}

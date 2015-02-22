@@ -190,4 +190,27 @@ class TopicRepository implements ITopicRepository
 
         return $sluggedTitle;
     }
+
+    /**
+     * Edit a topic
+     *
+     * @param Topic $topic       The topic to edit
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function editTopic(Topic $topic, array $topicDetails)
+    {
+
+        if($topicDetails['title'])
+		{
+			$topicDetails['slug'] = $this->createSlugForTitle($topicDetails['title']);
+		}
+		
+		$topicDetails['updated_at'] = new \DateTime;
+
+		$topic->update($topicDetails);
+
+        return $topic;
+    }
 }

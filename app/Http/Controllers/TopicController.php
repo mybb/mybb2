@@ -88,6 +88,44 @@ class TopicController extends Controller
         return new \Exception('Error creating post'); // TODO: Redirect back with error...
     }
 
+    public function edit($slug = '', $id = 0)
+    {
+        $topic = $this->topicRepository->findBySlug($slug);
+        $post = $this->postRepository->find($id);
+
+        if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+            throw new NotFoundHttpException('Post not found');
+        }
+
+        return view('topic.edit', compact('post', 'topic'));
+    }
+
+    public function postEdit($slug = '', $id = 0, ReplyRequest $replyRequest)
+    {
+        $topic = $this->topicRepository->findBySlug($slug);
+        $post = $this->postRepository->find($id);
+
+        if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+            throw new NotFoundHttpException('Post not found');
+        }
+
+        $post = $this->postRepository->editPost($post, [
+            'content' => $replyRequest->input('content'),
+        ]);
+		if($post['id'] == $topic['first_post_id'])
+		{
+			$topic = $this->topicRepository->editTopic($topic, [
+				'title' => $replyRequest->input('title'),
+			]);
+		}
+
+        if ($post) {
+            return redirect()->route('topics.show', ['slug' => $topic->slug]);
+        }
+
+        return new \Exception('Error editing post'); // TODO: Redirect back with error...
+    }
+
     public function create($forumId)
     {
         $forum = $this->forumRepository->find($forumId);
