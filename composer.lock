@@ -500,16 +500,16 @@
         },
         {
             "name": "kalnoy/nestedset",
-            "version": "v2.3.1",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lazychaser/laravel-nestedset.git",
-                "reference": "933557daf8c548dd4b4a52fdf7de0e0cd157d267"
+                "reference": "1ebd9119265ba19fee182ad6e4446ef2558adee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/933557daf8c548dd4b4a52fdf7de0e0cd157d267",
-                "reference": "933557daf8c548dd4b4a52fdf7de0e0cd157d267",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/1ebd9119265ba19fee182ad6e4446ef2558adee9",
+                "reference": "1ebd9119265ba19fee182ad6e4446ef2558adee9",
                 "shasum": ""
             },
             "require": {
@@ -542,20 +542,20 @@
                 "nested sets",
                 "nsm"
             ],
-            "time": "2015-02-15 05:00:44"
+            "time": "2015-02-16 17:28:51"
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.5",
+            "version": "v5.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b1aea041cbc0cd54563e2d3709a54a71eed57653"
+                "reference": "43637b796f1ac0b1a960984231251ff04b438006"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b1aea041cbc0cd54563e2d3709a54a71eed57653",
-                "reference": "b1aea041cbc0cd54563e2d3709a54a71eed57653",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/43637b796f1ac0b1a960984231251ff04b438006",
+                "reference": "43637b796f1ac0b1a960984231251ff04b438006",
                 "shasum": ""
             },
             "require": {
@@ -667,7 +667,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-02-13 19:10:59"
+            "time": "2015-02-20 16:22:21"
         },
         {
             "name": "league/commonmark",
@@ -994,12 +994,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358"
+                "reference": "1a887d3767569f54538ab4c118c28e57fb694103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358",
-                "reference": "e4d6b0dbb1d5876480a10d85c0f6a39ec3c5b358",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/1a887d3767569f54538ab4c118c28e57fb694103",
+                "reference": "1a887d3767569f54538ab4c118c28e57fb694103",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1026,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-02-14 21:59:46"
+            "time": "2015-02-20 16:35:15"
         },
         {
             "name": "mybb/parser",
@@ -1034,12 +1034,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Parser.git",
-                "reference": "ad6470a9880addcd720a4efdc35d97419b51fc53"
+                "reference": "6d4c7e186a70822fe98a47828364ec3b94ea5158"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Parser/zipball/ad6470a9880addcd720a4efdc35d97419b51fc53",
-                "reference": "ad6470a9880addcd720a4efdc35d97419b51fc53",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/6d4c7e186a70822fe98a47828364ec3b94ea5158",
+                "reference": "6d4c7e186a70822fe98a47828364ec3b94ea5158",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-02-20 12:27:10"
+            "time": "2015-02-20 16:46:59"
         },
         {
             "name": "nesbot/carbon",
