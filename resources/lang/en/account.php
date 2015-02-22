@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+	'youraccount' => 'Your Account',
     'account' => 'Account',
     'dashboard' => 'Dashboard',
     'profile' => 'Profile',
@@ -11,5 +11,6 @@ return [
     'preferences' => 'Preferences',
     'privacy' => 'Privacy',
     'drafts' => 'Drafts & Files',
+	'messages' => 'Messages'
 
 ];
