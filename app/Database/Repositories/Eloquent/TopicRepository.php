@@ -202,13 +202,6 @@ class TopicRepository implements ITopicRepository
     public function editTopic(Topic $topic, array $topicDetails)
     {
 
-        if($topicDetails['title'] && $topicDetails['title'] != $topic['title'])
-		{
-			$topicDetails['slug'] = $this->createSlugForTitle($topicDetails['title']);
-		}
-		
-		$topicDetails['updated_at'] = new \DateTime;
-
 		$topic->update($topicDetails);
 
         return $topic;

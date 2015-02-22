@@ -131,8 +131,6 @@ class PostRepository implements IPostRepository
 			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
 		}
 		
-		$postDetails['updated_at'] = new \DateTime;
-
 		$post->update($postDetails);
 
         return $post;
