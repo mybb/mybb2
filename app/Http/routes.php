@@ -24,6 +24,8 @@ Route::post('topic/{slug}/reply', ['as' => 'topics.reply.post', 'uses' => 'Topic
 Route::get('topic/{slug}/edit/{id}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
 Route::post('topic/{slug}/edit/{id}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
 
+Route::get('topic/{slug}/delete/{id}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 
 Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);

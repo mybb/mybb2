@@ -135,4 +135,31 @@ class PostRepository implements IPostRepository
 
         return $post;
     }
+
+    /**
+     * Delete posts of topic
+     *
+     * @param Topic $topic       The topic that you want to delete its posts
+     *
+     * @return mixed
+     */
+
+	public function deletePostsForTopic(Topic $topic)
+	{
+		return $this->postModel->where('topic_id', '=', $topic->id)->delete();
+	}
+
+    /**
+     * Delete a post
+     *
+     * @param Post $post       The post to delete
+     *
+     * @return mixed
+     */
+
+	public function deletePost(Post $post)
+	{
+		$post->topic->decrement('num_posts');
+		return $post->delete();
+	}
 }

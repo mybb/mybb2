@@ -155,4 +155,33 @@ class TopicController extends Controller
 
         return new \Exception('Error creating topic'); // TODO: Redirect back with error...
     }
+
+
+
+    public function delete($slug = '', $id = 0)
+    {
+        $topic = $this->topicRepository->findBySlug($slug);
+        $post = $this->postRepository->find($id);
+
+        if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+            throw new NotFoundHttpException('Post not found');
+        }
+		
+
+
+		if($post['id'] == $topic['first_post_id'])
+		{
+			$forum = $this->forumRepository->find($topic['forum_id']);
+
+			$this->topicRepository->deleteTopic($topic);
+			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
+		}
+		else
+		{
+			$this->postRepository->deletePost($post);
+			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
+		}
+
+        return new \Exception('Error deleting post'); // TODO: Redirect back with error...
+    }
 }

@@ -206,4 +206,25 @@ class TopicRepository implements ITopicRepository
 
         return $topic;
     }
+
+    /**
+     * Delete a topic
+     *
+     * @param Topic $topic       The topic to delete
+     *
+     * @return mixed
+     */
+
+	public function deleteTopic(Topic $topic)
+	{
+		$topic->update([
+			'first_post_id' => null,
+			'last_post_id' => null
+		]);
+		$topic->forum->decrement('num_topics');
+		$topic->forum->decrement('num_posts', $topic->num_posts);
+
+		$this->postRepository->deletePostsForTopic($topic);
+		return $topic->delete();
+	}
 }
