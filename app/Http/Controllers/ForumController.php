@@ -5,6 +5,7 @@ use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
@@ -61,7 +62,7 @@ class ForumController extends Controller
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show($slug = '')
+	public function show(Request $request, $slug = '')
 	{
 		$forum = $this->forumRepository->findBySlug($slug);
 
@@ -70,8 +71,39 @@ class ForumController extends Controller
 			throw new NotFoundHttpException('Forum not found.');
 		}
 
-		$topics = $this->topicRepository->allForForum($forum);
+        // Build the order by/dir parts
+        $allowed = ['lastpost', 'replies', 'startdate', 'title'];
 
-		return view('forum.show', compact('forum', 'topics'));
+        $orderBy = $request->get('orderBy', 'lastpost');
+        if(!in_array($orderBy, $allowed))
+        {
+            $orderBy = 'lastpost';
+        }
+
+        $orderDir = $request->get('orderDir', 'desc');
+        if($orderDir != 'asc' && $orderDir != 'desc')
+        {
+            $orderDir = 'desc';
+        }
+
+        // We need to know how to build the url...
+        $urlDirs = [
+            'lastpost' => 'desc',
+            'replies' => 'desc',
+            'startdate' => 'desc',
+            'title' => 'asc',
+        ];
+        if($orderDir == 'desc' && $urlDirs[$orderBy] == 'desc')
+        {
+            $urlDirs[$orderBy] = 'asc';
+        }
+        elseif($orderDir == 'asc' && $urlDirs[$orderBy] == 'asc')
+        {
+            $urlDirs[$orderBy] = 'desc';
+        }
+
+		$topics = $this->topicRepository->allForForum($forum, $orderBy, $orderDir);
+
+		return view('forum.show', compact('forum', 'topics', 'orderBy', 'orderDir', 'urlDirs'));
 	}
 }
