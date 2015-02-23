@@ -17,3 +17,5 @@ vendor/
 .env.php
 
 .env
+
+composer.lock
