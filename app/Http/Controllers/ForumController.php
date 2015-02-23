@@ -104,6 +104,8 @@ class ForumController extends Controller
 
 		$topics = $this->topicRepository->allForForum($forum, $orderBy, $orderDir);
 
+        $topics->appends(['orderBy' => $orderBy, 'orderDir' => $orderDir]);
+
 		return view('forum.show', compact('forum', 'topics', 'orderBy', 'orderDir', 'urlDirs'));
 	}
 }

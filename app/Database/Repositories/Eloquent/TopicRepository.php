@@ -137,7 +137,7 @@ class TopicRepository implements ITopicRepository
                 break;
         }
 
-        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)->orderBy($orderBy, $orderDir)->get(['topics.*']);
+        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)->orderBy($orderBy, $orderDir)->paginate(10, ['topics.*']);
     }
 
     /**
