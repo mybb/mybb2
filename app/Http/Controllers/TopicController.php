@@ -82,7 +82,7 @@ class TopicController extends Controller
         ]);
 
         if ($post) {
-            return redirect()->route('topics.show', ['slug' => $topic->slug]);
+            return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-'.$post->id]);
         }
 
         return new \Exception('Error creating post'); // TODO: Redirect back with error...

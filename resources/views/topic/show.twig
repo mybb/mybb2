@@ -12,12 +12,12 @@
 			<h1>{{topic.title }}</h1>
 			<div class="page-controls">
 				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				<a href="{{ url_route("topics.reply", [topic.slug]) }}" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</header>
         <section class="topic">
 			{% for post in posts %}
-				<div class="post">
+				<div class="post" id="post-{{ post.id }}">
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile"><span style="color: #ff7500;">{{ post.author.name }}</span></a></h3>
@@ -46,6 +46,7 @@
 					</div>
 				</div>
             {% endfor %}
+			{% include 'topic.quickreply' with {'topic': topic} %}
         </section>
 	</article>
 {% endblock %}
