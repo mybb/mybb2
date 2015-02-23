@@ -83,7 +83,7 @@ class PostRepository implements IPostRepository
      */
     public function allForTopic(Topic $topic)
     {
-        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->get();
+        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate(10);
     }
 
     /**

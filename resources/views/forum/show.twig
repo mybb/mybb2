@@ -47,7 +47,7 @@
 		<section class="forum topic-list">
             {{ topics.render|raw }}
 			<div class="sort-topics clearfix">
-				<a href="{{ url_route("forums.show", [forum.slug]) }}?orderBy=title&amp;orderDir={{ urlDirs.title }}" class="sort-column primary-column-one">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 					{{ trans('forum.topictitle') }}
                     {% if orderBy == 'title' %}
                         {% if orderDir == 'desc' %}
@@ -57,7 +57,7 @@
                         {% endif %}
                     {% endif %}
 				</a>
-				<a href="{{ url_route("forums.show", [forum.slug]) }}?orderBy=startdate&amp;orderDir={{ urlDirs.startdate }}" class="sort-column primary-column-two">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
 					{{ trans('forum.startdate') }}
                     {% if orderBy == 'startdate' %}
                         {% if orderDir == 'desc' %}
@@ -67,7 +67,7 @@
                         {% endif %}
                     {% endif %}
                 </a>
-				<a href="{{ url_route("forums.show", [forum.slug]) }}?orderBy=replies&amp;orderDir={{ urlDirs.replies }}" class="sort-column replies-column">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
 					{{ trans('forum.replies') }}
                     {% if orderBy == 'replies' %}
                         {% if orderDir == 'desc' %}
@@ -77,7 +77,7 @@
                         {% endif %}
                     {% endif %}
                 </a>
-				<a href="{{ url_route("forums.show", [forum.slug]) }}?orderBy=lastpost&amp;orderDir={{ urlDirs.lastpost }}" class="sort-column latest-column">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
 					{{ trans('forum.latestpost') }}
                     {% if orderBy == 'lastpost' %}
                         {% if orderDir == 'desc' %}

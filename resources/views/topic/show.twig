@@ -16,6 +16,7 @@
 			</div>
 		</header>
         <section class="topic">
+            {{ posts.render|raw }}
 			{% for post in posts %}
 				<div class="post" id="post-{{ post.id }}">
 					<div class="post-meta">
@@ -46,6 +47,7 @@
 					</div>
 				</div>
             {% endfor %}
+            {{ posts.render|raw }}
 			{% include 'topic.quickreply' with {'topic': topic} %}
         </section>
 	</article>
