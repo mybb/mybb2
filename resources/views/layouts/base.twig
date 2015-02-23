@@ -17,8 +17,10 @@
                 <div class="breadcrumb">
                     Breadcrumb Goes here
                 </div>
-				{% block contents %}{% endblock %}
-			</div>
+                <div id="content">
+    				{% block contents %}{% endblock %}
+                </div>
+            </div>
 		</div>
 		{% include "footer.footer" %}
 	</body>
