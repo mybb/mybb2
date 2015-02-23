@@ -110,6 +110,9 @@ class PostRepository implements IPostRepository
         if ($post !== false) {
             $topic->increment('num_posts');
             $topic->forum->increment('num_posts');
+			$topic->update([
+				'last_post_id' => $post['id']
+			]);
         }
 
         return $post;

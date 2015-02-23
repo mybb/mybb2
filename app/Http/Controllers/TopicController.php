@@ -178,6 +178,13 @@ class TopicController extends Controller
 		}
 		else
 		{
+			if($post['id'] == $topic['last_post_id'])
+			{
+				$posts = $this->postRepository->allForTopic($topic);
+				$topic = $this->topicRepository->editTopic($topic, [
+					'last_post_id' => $posts[count($posts)-2]['id']
+				]);
+			}
 			$this->postRepository->deletePost($post);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
