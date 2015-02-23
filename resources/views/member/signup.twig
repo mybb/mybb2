@@ -13,7 +13,7 @@
 				</ul>
 			</div>
 		{% endif %}
-		<form action="{{ url('auth/signup') }}" method="post">
+    {{ form_open({'url': ['auth/signup'], 'method': 'post'}) }}
 		<article class="centered-full-width">
 			<header>
 				<h1>{{ trans('member.signup') }}</h1>
@@ -21,21 +21,21 @@
 			<section class="form">
 				<div class="form-section clearfix">
 					<div class="form-row">
-						<h3><label for="name">{{ trans('member.username') }}</label></h3>
-						<input type="text" name="name" id="name" value="{{ input_old('name') }}" />
+						<h3>{{ form_label('name', trans('member.username')) }}</h3>
+                        {{ form_text('name') }}
 					</div>
                     <div class="form-row">
-                        <h3><label for="email">{{ trans('member.email') }}</label></h3>
-                        <input type="text" name="email" id="email" value="{{ input_old('email') }}" />
+                        <h3>{{ form_label('email', trans('member.email')) }}</h3>
+                        {{ form_text('email') }}
                     </div>
 					<div class="form-row">
-						<h3><label for="password">{{ trans('member.password') }}</label></h3>
-						<input type="password" name="password" id="password" class="password-toggle" />
+                        <h3>{{ form_label('password', trans('member.password')) }}</h3>
+                        {{ form_password('password', {'class': 'password-toggle'}) }}
 					</div>
                     <div class="form-row">
-                        <h3><label for="password_confirmation">{{ trans('member.password') }}</label></h3>
+                        <h3>{{ form_label('password_confirmation', trans('member.password')) }}</h3>
                         <p class="description">{{ trans('member.password_confirm') }}</p>
-                        <input type="password" name="password_confirmation" id="password_confirmation" class="password-toggle" />
+                        {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
                     </div>
                     <div class="form-row">
                         <h3>Captcha goes here!</h3>
@@ -43,9 +43,8 @@
 				</div>
 			</section>
 			<div class="form-submit">
-				<button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">{{ trans('member.signup') }}</span></button>
+                {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('member.signup')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			</div>
 		</article>
-		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-	</form>
+	{{ form_close() }}
 {% endblock %}
