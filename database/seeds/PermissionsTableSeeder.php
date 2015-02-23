@@ -17,6 +17,10 @@ class PermissionsTableSeeder extends Seeder {
                 'permission_display'    => 'Site Access',
                 'permission_slug'       => 'site_access',
             ],
+            [
+                'permission_display'    => 'Account Access',
+                'permission_slug'       => 'account_access',
+            ],
         ];
 
        DB::table('permissions')->insert($permissions);

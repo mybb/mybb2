@@ -1,0 +1,14 @@
+{% extends "layouts.base" %}
+{% block title %}
+	{{ trans('errors.no_permission') }}
+{% endblock %}
+{% block contents %}
+<article class="full-width">
+    <header>
+        <h1>{{ trans('errors.no_permission') }}</h1>
+    </header>
+    <section>
+        {{ trans('errors.no_permission_desc') }}
+    </section>
+</article>
+{% endblock %}

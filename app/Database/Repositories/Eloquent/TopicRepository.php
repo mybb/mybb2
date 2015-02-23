@@ -116,12 +116,28 @@ class TopicRepository implements ITopicRepository
      * Get all threads within a forum.
      *
      * @param Forum $forum The forum the threads belong to.
+     * @param string $orderBy The order by column
+     * @param string $orderDir asc|desc
      *
      * @return mixed
      */
-    public function allForForum(Forum $forum)
+    public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
     {
-        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->where('forum_id', '=', $forum->id)->get();
+        // Build the correct order_by column - nice versions may be submitted
+        switch($orderBy)
+        {
+            case 'lastpost':
+                $orderBy = 'posts.created_at';
+                break;
+            case 'replies':
+                $orderBy = 'num_posts';
+                break;
+            case 'startdate':
+                $orderBy = 'topics.created_at';
+                break;
+        }
+
+        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)->orderBy($orderBy, $orderDir)->paginate(10, ['topics.*']);
     }
 
     /**
@@ -190,4 +206,41 @@ class TopicRepository implements ITopicRepository
 
         return $sluggedTitle;
     }
+
+    /**
+     * Edit a topic
+     *
+     * @param Topic $topic       The topic to edit
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function editTopic(Topic $topic, array $topicDetails)
+    {
+
+		$topic->update($topicDetails);
+
+        return $topic;
+    }
+
+    /**
+     * Delete a topic
+     *
+     * @param Topic $topic       The topic to delete
+     *
+     * @return mixed
+     */
+
+	public function deleteTopic(Topic $topic)
+	{
+		$topic->update([
+			'first_post_id' => null,
+			'last_post_id' => null
+		]);
+		$topic->forum->decrement('num_topics');
+		$topic->forum->decrement('num_posts', $topic->num_posts);
+
+		$this->postRepository->deletePostsForTopic($topic);
+		return $topic->delete();
+	}
 }

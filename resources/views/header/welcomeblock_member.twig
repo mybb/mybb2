@@ -1,6 +1,6 @@
                         <ul class="user-links">
                             <li class="active-user dropdown-link">
-                                <a href="index.php?page=account/index" class="multi-link base-link">
+                                <a href="{{ url_route('account.index') }}" class="multi-link base-link">
                                     <span class="text">{{ auth_user().name }}</span>
                                     <i class="fa fa-caret-down"></i>
                                     <i class="fa fa-caret-up"></i>
@@ -8,10 +8,10 @@
                                 <div class="dropdown">
                                     <a href="index.php?page=profile" class="avatar-profile-link" title="Go to your profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" alt="Your avatar" class="avatar" /></a>
                                     <ul class="account-links">
-                                        <li><a href="index.php?page=account/index" class="multi-link"><i class="fa fa-dashboard"></i><span class="text">Your Account</span></a></li>
-                                        <li><a href="index.php?page=account/following" class="multi-link"><i class="fa fa-plus"></i><span class="text">Following</span></a></li>
-                                        <li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments"></i><span class="text">Messages</span></a></li>
-                                        <li><a href="index.php?guest=1"><i class="fa fa-sign-out"></i><span class="text">Log Out</span></a></li>
+                                        <li><a href="{{ url_route('account.index') }}" class="multi-link"><i class="fa fa-dashboard"></i><span class="text">{{ trans('account.youraccount') }}</span></a></li>
+                                        <li><a href="{{ url_route('account.following') }}" class="multi-link"><i class="fa fa-plus"></i><span class="text">{{ trans('account.following') }}</span></a></li>
+                                        <li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments"></i><span class="text">{{ trans('account.messages') }}</span></a></li>
+                                        <li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i><span class="text">{{ trans('member.logout') }}</span></a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -102,11 +102,5 @@
                                         </ul>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="log-in">
-                                <a href="{{ url('auth/logout') }}" class="multi-link">
-                                    <i class="fa fa-sign-in"></i>
-                                    <span class="text">{{ trans('member.logout') }}</span>
-                                </a>
                             </li>
                         </ul>

@@ -1,0 +1,48 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('passwords.resetpw') }}
+{% endblock %}
+{% block contents %}
+    {% if errors.any %}
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                {% for error in errors.all %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {{ form_open({'url': ['password/reset'], 'method': 'post'}) }}
+        <article class="centered-full-width">
+            {{ form_hidden('token', token) }}
+
+            <header>
+                <h1>{{ trans('passwords.resetpw') }}</h1>
+            </header>
+
+            <section class="form">
+                <div class="form-section clearfix">
+                    <div class="form-row">
+                        <h3>{{ form_label('email', trans('member.email')) }}</h3>
+                        {{ form_text('email') }}
+                    </div>
+                    <div class="form-row">
+                        <h3>{{ form_label('password', trans('member.password')) }}</h3>
+                        {{ form_password('password', {'class': 'password-toggle'}) }}
+                    </div>
+                    <div class="form-row">
+                        <h3>{{ form_label('password_confirmation', trans('member.password')) }}</label></h3>
+                        <p class="description">{{ trans('member.password_confirm') }}</p>
+                        {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
+                    </div>
+                </div>
+            </section>
+
+            <div class="form-submit">
+                {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('passwords.resetpw')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+            </div>
+        </article>
+    {{ form_close() }}
+{% endblock %}

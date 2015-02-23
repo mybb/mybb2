@@ -83,7 +83,7 @@ class PostRepository implements IPostRepository
      */
     public function allForTopic(Topic $topic)
     {
-        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->get();
+        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate(10);
     }
 
     /**
@@ -110,8 +110,59 @@ class PostRepository implements IPostRepository
         if ($post !== false) {
             $topic->increment('num_posts');
             $topic->forum->increment('num_posts');
+			$topic->update([
+				'last_post_id' => $post['id']
+			]);
         }
 
         return $post;
     }
+	
+    /**
+     * Edit a post
+     *
+     * @param Post $post       The post to edit
+     * @param array $postDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function editPost(Post $post, array $postDetails)
+    {
+
+        if($postDetails['content'])
+		{
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
+		}
+		
+		$post->update($postDetails);
+
+        return $post;
+    }
+
+    /**
+     * Delete posts of topic
+     *
+     * @param Topic $topic       The topic that you want to delete its posts
+     *
+     * @return mixed
+     */
+
+	public function deletePostsForTopic(Topic $topic)
+	{
+		return $this->postModel->where('topic_id', '=', $topic->id)->delete();
+	}
+
+    /**
+     * Delete a post
+     *
+     * @param Post $post       The post to delete
+     *
+     * @return mixed
+     */
+
+	public function deletePost(Post $post)
+	{
+		$post->topic->decrement('num_posts');
+		return $post->delete();
+	}
 }

@@ -11,4 +11,7 @@ return [
 	'latest' => 'Latest',
     'create.title' => 'Create New Topic',
     'create.description' => "Create a new topic in the forum '{0}'.",
+	'edit' => 'Edit',
+	'editpost' => 'Edit Post',
+	'delete' => 'Delete',
 ];

@@ -45,18 +45,47 @@
 			<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
 		</div>
 		<section class="forum topic-list">
+            {{ topics.render|raw }}
 			<div class="sort-topics clearfix">
-				<a href="#" class="sort-column primary-column-one">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 					{{ trans('forum.topictitle') }}
+                    {% if orderBy == 'title' %}
+                        {% if orderDir == 'desc' %}
+                            <i class="fa fa-caret-down"></i>
+                        {% else %}
+                            <i class="fa fa-caret-up"></i>
+                        {% endif %}
+                    {% endif %}
 				</a>
-				<a href="#" class="sort-column primary-column-two">
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
 					{{ trans('forum.startdate') }}
-				</a>
-				<a href="#" class="sort-column replies-column">
+                    {% if orderBy == 'startdate' %}
+                        {% if orderDir == 'desc' %}
+                            <i class="fa fa-caret-down"></i>
+                        {% else %}
+                            <i class="fa fa-caret-up"></i>
+                        {% endif %}
+                    {% endif %}
+                </a>
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
 					{{ trans('forum.replies') }}
-				</a>
-				<a href="#" class="sort-column latest-column">
-					{{ trans('forum.latestpost') }} <i class="fa fa-caret-down"></i>
+                    {% if orderBy == 'replies' %}
+                        {% if orderDir == 'desc' %}
+                            <i class="fa fa-caret-down"></i>
+                        {% else %}
+                            <i class="fa fa-caret-up"></i>
+                        {% endif %}
+                    {% endif %}
+                </a>
+				<a href="{{ url_route("forums.show", {0: forum.slug, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
+					{{ trans('forum.latestpost') }}
+                    {% if orderBy == 'lastpost' %}
+                        {% if orderDir == 'desc' %}
+                            <i class="fa fa-caret-down"></i>
+                        {% else %}
+                            <i class="fa fa-caret-up"></i>
+                        {% endif %}
+                    {% endif %}
 				</a>
 			</div>
 			<div class="topics-container">
@@ -91,5 +120,6 @@
 					<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
 				{% endfor %}
 			</div>
+            {{ topics.render|raw }}
 		</section>
 {% endblock %}

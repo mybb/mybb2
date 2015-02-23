@@ -27,7 +27,8 @@ class CheckAccess {
             return $next($request);
         }
 
-        return "<h1>Error No Permission</h1>";
+        // TODO: The acp should probably create another view
+        return view('errors.no_permission');
     }
 
     /**
@@ -45,12 +46,17 @@ class CheckAccess {
         // Weed out the Guests first
         if(!$this->auth->user())
         {
-            // Is this Route Guest Only
+            // Guests are set to except
             if(isset($action['except']) && $action['except'] == 'guest')
                 return false;
 
+            // Don't require permissions? Good to go
             if(!$requiredPermisions)
                 return true;
+
+            // TODO: How can we easily check permissions for guests?
+            // As all of the things below would throw an error for guests atm we simply let them die
+            return false;
         }
 
         // Check if route is protected

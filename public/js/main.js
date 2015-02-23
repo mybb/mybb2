@@ -120,7 +120,7 @@ $(function () {
 	    $('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
-	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
+/*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
         plugins: 'bbcode',
         style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
         emoticonsRoot: 'assets/images/',
@@ -128,11 +128,13 @@ $(function () {
         resizeWidth: false,
         autofocus: false,
         autofocusEnd: false
-	});
+	});*/
 });
 
 function modal(page) {
-	$.get('pages/'+page+'.html', function(html) {
+	$.get('/'+page, function(ans) {
+        var obj = $(ans);
+        var html = $('#content', obj).html();
 		$('<div class="modalDialog">'+html+'</div>').appendTo('body').modal();
 		$('.modalHide').hide();
 		$("input[type=number]").stepper();	

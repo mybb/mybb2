@@ -13,7 +13,7 @@
 				</ul>
 			</div>
 		{% endif %}
-		<form action="{{ url('auth/login') }}" method="post">
+    {{ form_open({'url': ['auth/login'], 'method': 'post'}) }}
 		<article class="centered-full-width">
 			<header>
 				<h1>{{ trans('member.login') }}</h1>
@@ -21,23 +21,22 @@
 			<section class="form">
 				<div class="form-section clearfix">
 					<div class="form-row">
-						<h3><label for="username">{{ trans('member.UsernameOrEmail') }}</label></h3>
-						<input type="text" name="username" id="username" value="{{ input_old('username') }}" />
+                        <h3>{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
+                        {{ form_text('username') }}
 					</div>
 					<div class="form-row">
-						<h3><label for="password">{{ trans('member.password') }}</label></h3>
-						<p class="description"><a href="index.php?page=forgot-password" onclick="modal('forgot-password'); return false;">{{ trans('member.forgotpassword') }}</a></p>
-						<input type="password" name="password" id="password" class="password-toggle" />
+						<h3>{{ form_label('password', trans('member.password')) }}</h3>
+						<p class="description"><a href="{{ url('password/email') }}" onclick="modal('password/email'); return false;">{{ trans('member.forgotpassword') }}</a></p>
+                        {{ form_password('password', {'class': 'password-toggle'}) }}
 					</div>
 					<div class="form-row">
-						<input type="checkbox" name="remember_me" id="remember_me" checked="checked" /> <label for="remember_me">{{ trans('member.remember_me') }}</label>
+                        {{ form_checkbox('remember_me', 1, true) }} {{ form_label('remember_me', trans('member.remember_me')) }}
 					</div>
 				</div>
 			</section>
 			<div class="form-submit">
-				<button type="submit" class="button"><i class="fa fa-sign-in"></i><span class="text">{{ trans('member.login') }}</span></button>
+                {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('member.login')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			</div>
 		</article>
-		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-	</form>
+    {{ form_close() }}
 {% endblock %}

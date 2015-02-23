@@ -12,12 +12,13 @@
 			<h1>{{topic.title }}</h1>
 			<div class="page-controls">
 				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				<a href="{{ url_route("topics.reply", [topic.slug]) }}" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</header>
         <section class="topic">
+            {{ posts.render|raw }}
 			{% for post in posts %}
-				<div class="post">
+				<div class="post" id="post-{{ post.id }}">
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile"><span style="color: #ff7500;">{{ post.author.name }}</span></a></h3>
@@ -35,8 +36,8 @@
 						<ul class="post-controls">
 							<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
 							<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-left"></i><span class="text">Quote</span></a></li>
-							<li class="edit"><a href="index.php?page=edit-post" title="Edit"><i class="fa fa-edit"></i><span class="text">Edit</span></a></li>
-							<li class="delete"><a href="index.php?page=delete-post" title="Delete"><i class="fa fa-trash-o"></i><span class="text">Delete</span></a></li>
+							<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
+							<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
 							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
 						</ul>
@@ -46,6 +47,8 @@
 					</div>
 				</div>
             {% endfor %}
+            {{ posts.render|raw }}
+			{% include 'topic.quickreply' with {'topic': topic} %}
         </section>
 	</article>
 {% endblock %}
