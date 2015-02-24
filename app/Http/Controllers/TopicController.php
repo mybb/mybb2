@@ -30,12 +30,14 @@ class TopicController extends Controller
     private $postRepository;
     /** @var IForumRepository $forumRepository */
     private $forumRepository;
+    /** @var Guard $guard */
     private $guard;
 
     /**
      * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
      * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
      * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
+     * @param Guard $guard Guard implementation
      */
     public function __construct(ITopicRepository $topicRepository, IPostRepository $postRepository, IForumRepository $forumRepository, Guard $guard)
     {

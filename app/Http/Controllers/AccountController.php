@@ -4,19 +4,20 @@ use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller {
+    /** @var Guard $guard */
     private $guard;
 
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @return void
+     * @param Guard $guard
 	 */
 	public function __construct(Guard $guard)
 	{
         $this->guard = $guard;
 	}
 
-	public function index()
+    public function index()
 	{
 		return view('account.dashboard')->withActive('dashboard');
 	}
@@ -46,6 +47,10 @@ class AccountController extends Controller {
         return view('account.preferences')->withActive('preferences');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postPreferences(Request $request)
     {
         $this->validate($request, [
