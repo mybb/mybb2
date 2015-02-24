@@ -25,6 +25,11 @@
   ],
   "dependencies": {
     "fontawesome": "~4.3.0",
-    "normalize.css": "~3.0.2"
+    "normalize.css": "~3.0.2",
+    "jquery": "2",
+    "jquery-dropdown": "*"
+  },
+  "resolutions": {
+    "jquery": "2"
   }
 }
