@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddNumPostsToTopicsTable extends Migration {
+class AddNumPostsToTopicsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -24,7 +25,7 @@ class AddNumPostsToTopicsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('topics', function(Blueprint $table) {
+		Schema::table('topics', function (Blueprint $table) {
 			$table->dropColumn('num_posts');
 		});
 	}

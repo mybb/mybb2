@@ -3,7 +3,7 @@
  * Forum presenter class.
  *
  * @version 2.0.0
- * @author MyBB Group
+ * @author  MyBB Group
  * @license LGPL v3
  */
 
@@ -14,13 +14,13 @@ use MyBB\Core\Database\Models\Forum as ForumModel;
 
 class Forum extends BasePresenter
 {
-    /** @var ForumModel $wrappedObject */
+	/** @var ForumModel $wrappedObject */
 
-    /**
-     * @param ForumModel $resource The forum being wrapped by this presenter.
-     */
-    public function __construct(ForumModel $resource)
-    {
-        $this->wrappedObject = $resource;
-    }
+	/**
+	 * @param ForumModel $resource The forum being wrapped by this presenter.
+	 */
+	public function __construct(ForumModel $resource)
+	{
+		$this->wrappedObject = $resource;
+	}
 }

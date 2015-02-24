@@ -3,7 +3,8 @@
 use Illuminate\Database\Eloquent\Model;
 
 
-class RolePermission extends Model {
+class RolePermission extends Model
+{
 
 	/**
 	 * The database table used by the model.

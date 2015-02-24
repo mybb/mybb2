@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTopicsTable extends Migration {
+class CreateTopicsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -13,7 +14,7 @@ class CreateTopicsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('topics', function(Blueprint $table) {
+		Schema::create('topics', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('title');
 			$table->string('slug')->unique();
@@ -30,7 +31,7 @@ class CreateTopicsTable extends Migration {
 			$table->foreign('last_post_id')->references('id')->on('posts');
 		});
 
-		Schema::table('posts', function(Blueprint $table) {
+		Schema::table('posts', function (Blueprint $table) {
 			$table->foreign('topic_id')->references('id')->on('topics');
 		});
 	}
@@ -42,7 +43,7 @@ class CreateTopicsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('posts', function(Blueprint $table) {
+		Schema::table('posts', function (Blueprint $table) {
 			$table->dropForeign('posts_topic_id_foreign');
 		});
 

@@ -3,7 +3,7 @@
  * Thread presenter class.
  *
  * @version 2.0.0
- * @author MyBB Group
+ * @author  MyBB Group
  * @license LGPL v3
  */
 
@@ -14,18 +14,18 @@ use MyBB\Core\Database\Models\Topic as TopicModel;
 
 class Topic extends BasePresenter
 {
-    /** @var TopicModel $wrappedObject */
+	/** @var TopicModel $wrappedObject */
 
-    /**
-     * @param TopicModel $resource The thread being wrapped by this presenter.
-     */
-    public function __construct(TopicModel $resource)
-    {
-        $this->wrappedObject = $resource;
-    }
+	/**
+	 * @param TopicModel $resource The thread being wrapped by this presenter.
+	 */
+	public function __construct(TopicModel $resource)
+	{
+		$this->wrappedObject = $resource;
+	}
 
-    public function replies()
-    {
-        return $this->wrappedObject->num_posts-1;
-    }
+	public function replies()
+	{
+		return $this->wrappedObject->num_posts - 1;
+	}
 }

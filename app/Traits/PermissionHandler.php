@@ -1,13 +1,13 @@
 <?php namespace MyBB\Core\Traits;
 
 
-trait PermissionHandler {
+trait PermissionHandler
+{
 
 
 	public function canAccess($requiredPermission = false)
 	{
-		if($requiredPermission)
-		{
+		if ($requiredPermission) {
 			return $this->checkPermission($requiredPermission);
 		}
 
@@ -20,7 +20,7 @@ trait PermissionHandler {
 
 		$permissions = array_map('strtolower', $permissions->toArray());
 
-      	return count(array_intersect($permissions, $requiredPermission));
+		return count(array_intersect($permissions, $requiredPermission));
 
 	}
 

@@ -2,28 +2,29 @@
 
 use Illuminate\Database\Seeder;
 
-class PermissionsTableSeeder extends Seeder {
+class PermissionsTableSeeder extends Seeder
+{
 
-    public function run()
-    {
-        DB::table('permissions')->delete();
+	public function run()
+	{
+		DB::table('permissions')->delete();
 
-        $permissions = [
-            [
-                'permission_display'    => 'AdmiCP Access',
-                'permission_slug'       => 'admin_access',
-            ],
-            [
-                'permission_display'    => 'Site Access',
-                'permission_slug'       => 'site_access',
-            ],
-            [
-                'permission_display'    => 'Account Access',
-                'permission_slug'       => 'account_access',
-            ],
-        ];
+		$permissions = [
+			[
+				'permission_display' => 'AdmiCP Access',
+				'permission_slug' => 'admin_access',
+			],
+			[
+				'permission_display' => 'Site Access',
+				'permission_slug' => 'site_access',
+			],
+			[
+				'permission_display' => 'Account Access',
+				'permission_slug' => 'account_access',
+			],
+		];
 
-       DB::table('permissions')->insert($permissions);
-    }
+		DB::table('permissions')->insert($permissions);
+	}
 
 }

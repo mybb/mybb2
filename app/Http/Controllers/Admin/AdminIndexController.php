@@ -2,7 +2,8 @@
 
 use MyBB\Core\Http\Controllers\AdminController;
 
-class AdminIndexController extends AdminController{
+class AdminIndexController extends AdminController
+{
 
 	/*
 	|--------------------------------------------------------------------------

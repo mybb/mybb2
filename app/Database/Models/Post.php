@@ -3,7 +3,7 @@
  * Post model class.
  *
  * @version 2.0.0
- * @author MyBB Group
+ * @author  MyBB Group
  * @license LGPL v3
  */
 
@@ -14,58 +14,58 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Post extends Model implements HasPresenter
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'posts';
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps = true;
-    /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = array();
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = array();
+	/**
+	 * Indicates if the model should be timestamped.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = true;
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'posts';
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = array();
+	/**
+	 * The attributes that aren't mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $guarded = array();
 
-    /**
-     * Get the presenter class.
-     *
-     * @return string
-     */
-    public function getPresenterClass()
-    {
-        return \MyBB\Core\Presenters\Post::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
-    }
+	/**
+	 * Get the presenter class.
+	 *
+	 * @return string
+	 */
+	public function getPresenterClass()
+	{
+		return \MyBB\Core\Presenters\Post::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+	}
 
-    /**
-     * A post belongs to a thread.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function topic()
-    {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic');
-    }
+	/**
+	 * A post belongs to a thread.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function topic()
+	{
+		return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic');
+	}
 
-    /**
-     * A post is created by (and belongs to) a user/author.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function author()
-    {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
-    }
+	/**
+	 * A post is created by (and belongs to) a user/author.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function author()
+	{
+		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+	}
 }

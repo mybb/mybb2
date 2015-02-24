@@ -3,7 +3,7 @@
  * Post presenter class.
  *
  * @version 2.0.0
- * @author MyBB Group
+ * @author  MyBB Group
  * @license LGPL v3
  */
 
@@ -14,13 +14,13 @@ use MyBB\Core\Database\Models\Post as PostModel;
 
 class Post extends BasePresenter
 {
-    /** @var PostModel $wrappedObject */
+	/** @var PostModel $wrappedObject */
 
-    /**
-     * @param PostModel $resource The post being wrapped by this presenter.
-     */
-    public function __construct(PostModel $resource)
-    {
-        $this->wrappedObject = $resource;
-    }
+	/**
+	 * @param PostModel $resource The post being wrapped by this presenter.
+	 */
+	public function __construct(PostModel $resource)
+	{
+		$this->wrappedObject = $resource;
+	}
 }

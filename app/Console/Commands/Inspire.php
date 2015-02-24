@@ -2,10 +2,9 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
-class Inspire extends Command {
+class Inspire extends Command
+{
 
 	/**
 	 * The console command name.
@@ -28,7 +27,7 @@ class Inspire extends Command {
 	 */
 	public function handle()
 	{
-		$this->comment(PHP_EOL.Inspiring::quote().PHP_EOL);
+		$this->comment(PHP_EOL . Inspiring::quote() . PHP_EOL);
 	}
 
 }

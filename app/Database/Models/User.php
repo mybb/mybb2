@@ -2,14 +2,15 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use MyBB\Core\Traits\PermissionHandler;
+use Illuminate\Database\Eloquent\Model;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
+use MyBB\Core\Traits\PermissionHandler;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+{
 
 	use Authenticatable, CanResetPassword;
 
@@ -42,8 +43,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasOne('MyBB\Core\Database\Models\Role', 'id', 'role_id');
 	}
 
-    public function settings()
-    {
-        return $this->hasOne('MyBB\Core\Database\Models\UserSettings');
-    }
+	public function settings()
+	{
+		return $this->hasOne('MyBB\Core\Database\Models\UserSettings');
+	}
 }

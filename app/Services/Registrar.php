@@ -1,17 +1,19 @@
 <?php namespace MyBB\Core\Services;
 
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Models\Role;
-use Validator;
-use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 use DB;
+use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use MyBB\Core\Database\Models\Role;
+use MyBB\Core\Database\Models\User;
+use Validator;
 
-class Registrar implements RegistrarContract {
+class Registrar implements RegistrarContract
+{
 
 	/**
 	 * Get a validator for an incoming registration request.
 	 *
-	 * @param  array  $data
+	 * @param  array $data
+	 *
 	 * @return \Illuminate\Contracts\Validation\Validator
 	 */
 	public function validator(array $data)
@@ -26,21 +28,22 @@ class Registrar implements RegistrarContract {
 	/**
 	 * Create a new user instance after a valid registration.
 	 *
-	 * @param  array  $data
+	 * @param  array $data
+	 *
 	 * @return User
 	 */
 	public function create(array $data)
 	{
 		$user = User::create([
-			'name' => $data['name'],
-			'email' => $data['email'],
-			'password' => bcrypt($data['password']),
-			'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
-		]);
+			                     'name' => $data['name'],
+			                     'email' => $data['email'],
+			                     'password' => bcrypt($data['password']),
+			                     'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
+		                     ]);
 
-        DB::table('user_settings')->insert(['user_id' => $user->id]);
+		DB::table('user_settings')->insert(['user_id' => $user->id]);
 
-        return $user;
+		return $user;
 	}
 
 }

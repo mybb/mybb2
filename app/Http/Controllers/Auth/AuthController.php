@@ -1,12 +1,13 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
-use MyBB\Core\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use MyBB\Core\Http\Controllers\Controller;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
 	/*
 	|--------------------------------------------------------------------------
@@ -24,8 +25,9 @@ class AuthController extends Controller {
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
-	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
+	 * @param  \Illuminate\Contracts\Auth\Guard     $auth
+	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
+	 *
 	 * @return void
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
@@ -50,15 +52,15 @@ class AuthController extends Controller {
 	/**
 	 * Handle a registration request for the application.
 	 *
-	 * @param  \Illuminate\Foundation\Http\FormRequest  $request
+	 * @param  \Illuminate\Foundation\Http\FormRequest $request
+	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function postSignup(Request $request)
 	{
 		$validator = $this->registrar->validator($request->all());
 
-		if ($validator->fails())
-		{
+		if ($validator->fails()) {
 			$this->throwValidationException(
 				$request, $validator
 			);
@@ -82,7 +84,8 @@ class AuthController extends Controller {
 	/**
 	 * Handle a login request to the application.
 	 *
-	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \Illuminate\Http\Request $request
+	 *
 	 * @return \Illuminate\Http\Response
 	 */
 	public function postLogin(Request $request)
@@ -95,16 +98,17 @@ class AuthController extends Controller {
 
 		$credentials = $request->only('username', 'password');
 
-		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']], $request->input('remember_me')))
-		{
+		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
+		                         $request->input('remember_me'))
+		) {
 			return redirect()->intended($this->redirectPath());
 		}
 
 		return redirect('/auth/login')
-					->withInput($request->only('username'))
-					->withErrors([
-						'username' => trans('member.invalidCredentials'),
-					]);
+			->withInput($request->only('username'))
+			->withErrors([
+				             'username' => trans('member.invalidCredentials'),
+			             ]);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-class HomeController extends Controller {
+class HomeController extends Controller
+{
 
 	/*
 	|--------------------------------------------------------------------------

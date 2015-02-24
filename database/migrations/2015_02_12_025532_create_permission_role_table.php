@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreatePermissionRoleTable extends Migration {
+class CreatePermissionRoleTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -12,8 +13,7 @@ class CreatePermissionRoleTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('permission_role', function(Blueprint $table)
-		{
+		Schema::create('permission_role', function (Blueprint $table) {
 			$table->increments('id');
 			$table->integer('permission_id');
 			$table->integer('role_id');

@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateRolesTable extends Migration {
+class CreateRolesTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -12,8 +13,7 @@ class CreateRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('roles', function(Blueprint $table)
-		{
+		Schema::create('roles', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('role_display_name');
 			$table->string('role_description')->nullable();
