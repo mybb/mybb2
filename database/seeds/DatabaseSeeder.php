@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('TopicsTableSeeder');
 		$this->call('PostsTableSeeder');
+
+        $this->call('UserSettingsTableSeeder');
 	}
 
 }

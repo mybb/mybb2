@@ -11,6 +11,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use Illuminate\Auth\Guard;
 use Illuminate\Html\FormBuilder;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
@@ -29,17 +30,19 @@ class TopicController extends Controller
     private $postRepository;
     /** @var IForumRepository $forumRepository */
     private $forumRepository;
+    private $guard;
 
     /**
      * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
      * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
      * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
      */
-    public function __construct(ITopicRepository $topicRepository, IPostRepository $postRepository, IForumRepository $forumRepository)
+    public function __construct(ITopicRepository $topicRepository, IPostRepository $postRepository, IForumRepository $forumRepository, Guard $guard)
     {
         $this->topicRepository = $topicRepository;
         $this->postRepository = $postRepository;
         $this->forumRepository = $forumRepository;
+        $this->guard = $guard;
     }
 
     public function show($slug = '')
@@ -82,7 +85,7 @@ class TopicController extends Controller
         ]);
 
         if ($post) {
-            return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/10), '#post-'.$post->id]);
+            return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$this->guard->user()->settings->posts_per_page), '#post-'.$post->id]);
         }
 
         return new \Exception(trans('errors.error_creating_post')); // TODO: Redirect back with error...

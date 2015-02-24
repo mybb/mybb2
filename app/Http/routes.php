@@ -49,6 +49,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
     Route::get('/following', ['as' => 'account.following', 'uses' => 'AccountController@getFollowing']);
     Route::get('/buddies', ['as' => 'account.buddies', 'uses' => 'AccountController@getBuddies']);
     Route::get('/preferences', ['as' => 'account.preferences', 'uses' => 'AccountController@getPreferences']);
+    Route::post('/preferences', ['as' => 'account.preferences', 'uses' => 'AccountController@postPreferences']);
     Route::get('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@getPrivacy']);
     Route::get('/drafts', ['as' => 'account.drafts', 'uses' => 'AccountController@getDrafts']);
 });

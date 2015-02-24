@@ -4,6 +4,7 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use DB;
 
 class Registrar implements RegistrarContract {
 
@@ -30,12 +31,16 @@ class Registrar implements RegistrarContract {
 	 */
 	public function create(array $data)
 	{
-		return User::create([
+		$user = User::create([
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 			'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
 		]);
+
+        DB::table('user_settings')->insert(['user_id' => $user->id]);
+
+        return $user;
 	}
 
 }
