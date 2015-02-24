@@ -63,7 +63,7 @@ class PostRepository implements IPostRepository
 
 	public function getNewest($num = 20)
 	{
-		return $this->postModel->orderBy('created_at', 'desc')->groupBy('topic_id')->with([
+		return $this->postModel->orderBy('created_at', 'desc')->with([
 			                                                                                  'topic',
 			                                                                                  'topic.forum',
 			                                                                                  'author'
