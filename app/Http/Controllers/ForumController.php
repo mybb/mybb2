@@ -68,7 +68,7 @@ class ForumController extends Controller
 
 		if (!$forum)
 		{
-			throw new NotFoundHttpException('Forum not found.');
+			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
 
         // Build the order by/dir parts
