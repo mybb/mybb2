@@ -9,15 +9,15 @@
 	<section>
 		<h2 class="linked-header bold"><a href="index.php?page=new-posts">Latest Discussions <span class="count">42 <i class="fa fa-angle-right"></i></span></a></h2>
 		<div class="topic-list">
-            {% for post in posts %}
+            {% for topic in topics %}
                 <div class="topic">
                     <a href="" class="avatar-profile-link" title="Go to spork985's profile"><img src="images/avatar.png" alt="spork985's avatar" class="avatar" /></a>
                     <div class="topic-info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
-                        <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [post.topic.slug]) }}">{{ post.topic.title }}</a></h3>
-                        <p class="latest-post"><a href="{{ url_route("topics.last", [post.topic.slug]) }}" class="post-date" title="March 9, 2014 at 10:10 AM">{{ post.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ post.author.name }}</a></p>
-                        <p class="forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [post.topic.forum.slug]) }}">{{ post.topic.forum.title }}</a></p>
-                        <p class="topic-replies caption" title="{{ trans_choice('topic.numreplies', post.topic.replies) }} &middot; {{ trans_choice('topic.numviews', post.topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ post.topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
+                        <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a></h3>
+                        <p class="latest-post"><a href="{{ url_route("topics.last", [topic.slug]) }}" class="post-date" title="March 9, 2014 at 10:10 AM">{{ topic.lastPost.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ topic.lastPost.author.name }}</a></p>
+                        <p class="forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [topic.forum.slug]) }}">{{ topic.forum.title }}</a></p>
+                        <p class="topic-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies) }} &middot; {{ trans_choice('topic.numviews', topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
                     </div>
                 </div>
             {% else %}

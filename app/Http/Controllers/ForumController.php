@@ -54,9 +54,9 @@ class ForumController extends Controller
 	public function index()
 	{
 		$forums = $this->forumRepository->getIndexTree();
-		$posts = $this->postRepository->getNewest();
+		$topics = $this->topicRepository->getNewest();
 
-		return view('forum.index', compact('forums', 'posts'));
+		return view('forum.index', compact('forums', 'topics'));
 	}
 
 	/**

@@ -118,6 +118,16 @@ class TopicRepository implements ITopicRepository
 		return $this->topicModel->with(['author'])->where('slug', '=', $slug)->first();
 	}
 
+
+	public function getNewest($num = 20)
+	{
+		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
+			                                                                                  'lastPost',
+			                                                                                  'forum',
+			                                                                                  'lastPost.author'
+		                                                                                  ])->take($num)->get();
+	}
+
 	/**
 	 * Get all threads within a forum.
 	 *
