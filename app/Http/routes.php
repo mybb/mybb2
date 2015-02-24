@@ -16,6 +16,7 @@ Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
 Route::get('forum/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
 Route::get('topic/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
+Route::get('topic/{slug}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
 Route::get('topic/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
 

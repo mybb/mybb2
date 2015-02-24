@@ -98,7 +98,7 @@
 							<h4>First Post</h4>
 							<p class="first-post">
 								<span class="post-author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
-								<a href="{{ url_route('topics.show', [topic.slug]) }}#latest" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
+								<a href="{{ url_route('topics.last', [topic.slug]) }}" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
 							</p>
 						</div>
 						<div class="replies-column">
@@ -112,7 +112,7 @@
 							<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
 							<p class="latest-post">
 								<span class="post-author"><a href="">{{ topic.lastPost.author.name }}</a></span>
-								<a href="{{ url_route('topics.show', [topic.slug]) }}#latest" class="post-date" title="{{ topic.lastPost.created_at }}">{{ topic.lastPost.created_at }}</a>
+								<a href="{{ url_route('topics.last', [topic.slug]) }}" class="post-date" title="{{ topic.lastPost.created_at }}">{{ topic.lastPost.created_at }}</a>
 							</p>
 						</div>
                         </div>

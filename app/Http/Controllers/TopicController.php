@@ -62,6 +62,31 @@ class TopicController extends Controller
         return view('topic.show', compact('topic', 'posts'));
     }
 
+	public function last($slug = '')
+	{
+        $topic = $this->topicRepository->findBySlug($slug);
+
+        if (!$topic) {
+            throw new NotFoundHttpException(trans('errors.topic_not_found'));
+        }
+
+		if($this->guard->user() == null) {
+			// Todo: default to board setting
+			$ppp = 10;
+		}
+		else {
+			$ppp = $this->guard->user()->settings->posts_per_page;
+		}
+		if(ceil($topic->num_posts/$ppp) == 1)
+		{
+			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-'.$topic->last_post_id]);
+		}
+		else
+		{
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$ppp), '#post-'.$post->id]);
+		}
+	}
+
     public function reply($slug = '')
     {
         $topic = $this->topicRepository->findBySlug($slug);
@@ -94,7 +119,14 @@ class TopicController extends Controller
             else {
                 $ppp = $this->guard->user()->settings->posts_per_page;
             }
-            return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$ppp), '#post-'.$post->id]);
+            if(ceil($topic->num_posts/$ppp) == 1)
+			{
+				return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-'.$post->id]);
+			}
+			else
+			{
+				return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$ppp), '#post-'.$post->id]);
+			}
         }
 
         return new \Exception(trans('errors.error_creating_post')); // TODO: Redirect back with error...
