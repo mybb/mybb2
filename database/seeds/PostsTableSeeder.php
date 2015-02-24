@@ -16,7 +16,12 @@ class PostsTableSeeder extends Seeder {
 				'updated_at' => new DateTime
 		];
 
-		DB::table('posts')->insert($post);
+		$id = DB::table('posts')->insertGetId($post);
+		DB::table('topics')->where('slug', 'my-topic')->update([
+			'last_post_id' => $id,
+			'first_post_id' => $id,
+			'num_posts' => 1
+		]);
     }
 
 }
