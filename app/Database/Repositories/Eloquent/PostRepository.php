@@ -103,7 +103,9 @@ class PostRepository implements IPostRepository
                                        'content_parsed' => '', // TODO: Auto-populate parsed content with parser once parser is written.
                                    ], $postDetails);
 
-        $postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
+        $postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
+            MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+        ]); // TODO: Parser options...
 
         $post = $topic->posts()->save(new Post($postDetails));
 
@@ -131,7 +133,9 @@ class PostRepository implements IPostRepository
 
         if($postDetails['content'])
 		{
-			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content']); // TODO: Parser options...
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
+                MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+            ]); // TODO: Parser options...
 		}
 		
 		$post->update($postDetails);
