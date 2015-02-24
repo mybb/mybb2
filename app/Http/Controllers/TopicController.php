@@ -85,7 +85,14 @@ class TopicController extends Controller
         ]);
 
         if ($post) {
-            return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$this->guard->user()->settings->posts_per_page), '#post-'.$post->id]);
+            if($this->guard->user() == null) {
+                // Todo: default to board setting
+                $ppp = 10;
+            }
+            else {
+                $ppp = $this->guard->user()->settings->posts_per_page;
+            }
+            return redirect()->route('topics.show', ['slug' => $topic->slug, 'page' => ceil($topic->num_posts/$ppp), '#post-'.$post->id]);
         }
 
         return new \Exception(trans('errors.error_creating_post')); // TODO: Redirect back with error...

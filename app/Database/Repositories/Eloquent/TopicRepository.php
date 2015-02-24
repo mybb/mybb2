@@ -137,7 +137,17 @@ class TopicRepository implements ITopicRepository
                 break;
         }
 
-        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)->orderBy($orderBy, $orderDir)->paginate($this->guard->user()->settings->topics_per_page, ['topics.*']);
+        if($this->guard->user() == null)
+        {
+            // Todo: default to board setting
+            $tpp = 10;
+        }
+        else
+        {
+            $tpp = $this->guard->user()->settings->topics_per_page;
+        }
+
+        return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)->orderBy($orderBy, $orderDir)->paginate($tpp, ['topics.*']);
     }
 
     /**

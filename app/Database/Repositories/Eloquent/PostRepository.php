@@ -83,7 +83,18 @@ class PostRepository implements IPostRepository
      */
     public function allForTopic(Topic $topic)
     {
-        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($this->guard->user()->settings->posts_per_page);
+        if($this->guard->user() == null)
+        {
+            // Todo: default to board setting
+            $ppp = 10;
+        }
+        else
+        {
+            $ppp = $this->guard->user()->settings->posts_per_page;
+        }
+
+
+        return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
     }
 
     /**
