@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
 			$table->string('avatar')->default('');
 			$table->string('dob', 10)->default('1-1-');
 			$table->string('usertitle')->default('');
+			$table->integer('num_posts')->unsigned()->default(0);
+			$table->integer('num_topics')->unsigned()->default(0);
 			$table->nullableTimestamps();
 		});
 	}

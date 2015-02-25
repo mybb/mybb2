@@ -21,10 +21,10 @@
 				<div class="post" id="post-{{ post.id }}">
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
-						<h3><a href="index.php?page=profile">{{ post.author.name }}</a></h3>
+						<h3><a href="index.php?page=profile">{{ post.author.role.role_username_style|replace({':user': post.author.name})|raw }}</a></h3>
 						<a href="#permalink" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
 						{% if post.updated_at != post.created_at %}
-						<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ post.updated_at }}"><i class="fa fa-pencil"></i></a>
+							<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ post.updated_at }}"><i class="fa fa-pencil"></i></a>
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
 						<input type="checkbox" class="inline-mod" />
