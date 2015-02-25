@@ -150,7 +150,7 @@ class PostRepository implements IPostRepository
 
 		if ($postDetails['content']) {
 			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
-				MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				MessageFormatter::ME_USERNAME => $post->author->name,
 			]); // TODO: Parser options...
 		}
 
