@@ -206,6 +206,8 @@ class TopicRepository implements ITopicRepository
 				               'num_posts' => 1,
 			               ]);
 		});
+		
+		$topic->author->increment('num_topics');
 
 		return $topic;
 	}
@@ -263,6 +265,9 @@ class TopicRepository implements ITopicRepository
 		               ]);
 		$topic->forum->decrement('num_topics');
 		$topic->forum->decrement('num_posts', $topic->num_posts);
+
+		$topic->author->decrement('num_topics');
+		$topic->author->decrement('num_posts', $topic->num_posts);
 
 		$this->postRepository->deletePostsForTopic($topic);
 

@@ -134,6 +134,8 @@ class PostRepository implements IPostRepository
 			               ]);
 		}
 
+		$post->author->increment('num_posts');
+
 		return $post;
 	}
 
@@ -183,6 +185,7 @@ class PostRepository implements IPostRepository
 	public function deletePost(Post $post)
 	{
 		$post->topic->decrement('num_posts');
+		$post->author->decrement('num_posts');
 
 		return $post->delete();
 	}
