@@ -24,21 +24,21 @@ $(function () {
 	$('.clear-selection-posts a').click(function(event) {
 		event.preventDefault();
 		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-	    $('.inline-moderation').removeClass('floating');	
+		$('.inline-moderation').removeClass('floating');
 	});
 
 	$('.clear-selection-threads a').click(function(event) {
 		event.preventDefault();
 		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
 		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-	    $('.inline-moderation').removeClass('floating');	
+		$('.inline-moderation').removeClass('floating');
 	});
 
 	$('.clear-selection-forums a').click(function(event) {
 		event.preventDefault();
 		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
 		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-	    $('.inline-moderation').removeClass('floating');	
+		$('.inline-moderation').removeClass('floating');
 	});
 
 	$("#search .search-button").click(function(event) {
@@ -47,94 +47,100 @@ $(function () {
 	});
 
 	$(".post :checkbox").change(function() {
-	    $(this).closest(".post").toggleClass("highlight", this.checked);
+		$(this).closest(".post").toggleClass("highlight", this.checked);
 
-	    var checked_boxes = $('.highlight').length;
+		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
-	    {
-	    	$('.inline-moderation').addClass('floating');
-	    }
+		{
+			$('.inline-moderation').addClass('floating');
+		}
 
-	    if(checked_boxes == 0)
-	    {
-	    	$('.inline-moderation').removeClass('floating');	
-	    }
+		if(checked_boxes == 0)
+		{
+			$('.inline-moderation').removeClass('floating');
+		}
 
-	    $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
 	$(".thread .checkbox-select :checkbox").change(function() {
-	    $(this).closest(".thread").toggleClass("highlight", this.checked);
+		$(this).closest(".thread").toggleClass("highlight", this.checked);
 
-	    var checked_boxes = $('.highlight').length;
+		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
-	    {
-	    	$('.inline-moderation').addClass('floating');
-	    }
+		{
+			$('.inline-moderation').addClass('floating');
+		}
 
-	    if(checked_boxes == 0)
-	    {
-	    	$('.inline-moderation').removeClass('floating');	
-	    }
+		if(checked_boxes == 0)
+		{
+			$('.inline-moderation').removeClass('floating');
+		}
 
-	    $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
 	$(".forum .checkbox-select :checkbox").change(function() {
-	    $(this).closest(".forum").toggleClass("highlight", this.checked);
+		$(this).closest(".forum").toggleClass("highlight", this.checked);
 
-	    var checked_boxes = $('.highlight').length;
+		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
-	    {
-	    	$('.inline-moderation').addClass('floating');
-	    }
+		{
+			$('.inline-moderation').addClass('floating');
+		}
 
-	    if(checked_boxes == 0)
-	    {
-	    	$('.inline-moderation').removeClass('floating');	
-	    }
+		if(checked_boxes == 0)
+		{
+			$('.inline-moderation').removeClass('floating');
+		}
 
-	    $('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
+		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
 	$(".checkbox-select.check-all :checkbox").click(function() {
 		$(this).closest('section').find('input[type=checkbox]').prop('checked', this.checked);
-	    $(this).closest('section').find('.checkbox-select').closest('.thread').toggleClass("highlight", this.checked);
-	    $(this).closest('section').find('.checkbox-select').closest('.forum').toggleClass("highlight", this.checked);
+		$(this).closest('section').find('.checkbox-select').closest('.thread').toggleClass("highlight", this.checked);
+		$(this).closest('section').find('.checkbox-select').closest('.forum').toggleClass("highlight", this.checked);
 
-	    var checked_boxes = $('.highlight').length;
+		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes >= 1)
-	    {
-	    	$('.inline-moderation').addClass('floating');
-	    }
+		{
+			$('.inline-moderation').addClass('floating');
+		}
 
-	    if(checked_boxes == 0)
-	    {
-	    	$('.inline-moderation').removeClass('floating');	
-	    }
+		if(checked_boxes == 0)
+		{
+			$('.inline-moderation').removeClass('floating');
+		}
 
-	    $('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
+		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
-        plugins: 'bbcode',
-        style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
-        emoticonsRoot: 'assets/images/',
-        toolbar: 'bold,italic,underline|font,size,color,removeformat|left,center,right|image,link,unlink|emoticon,youtube|bulletlist,orderedlist|quote,code|source',
-        resizeWidth: false,
-        autofocus: false,
-        autofocusEnd: false
+		plugins: 'bbcode',
+		style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
+		emoticonsRoot: 'assets/images/',
+		toolbar: 'bold,italic,underline|font,size,color,removeformat|left,center,right|image,link,unlink|emoticon,youtube|bulletlist,orderedlist|quote,code|source',
+		resizeWidth: false,
+		autofocus: false,
+		autofocusEnd: false
 	});*/
 });
 
-function modal(page) {
+function modal(page, find) {
+	if(page[0] == '/')
+		page = page.substr(1);
+
 	$.get('/'+page, function(ans) {
-        var obj = $(ans);
-        var html = $('#content', obj).html();
+		// find is optional and defaults to '#content'
+		if(typeof find == 'undefined') { find = '#content'; }
+
+		var obj = $(ans);
+		var html = $(find, obj).html();
 		$('<div class="modalDialog">'+html+'</div>').appendTo('body').modal();
 		$('.modalHide').hide();
 		$("input[type=number]").stepper();	

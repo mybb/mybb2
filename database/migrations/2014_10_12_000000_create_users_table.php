@@ -22,6 +22,9 @@ class CreateUsersTable extends Migration
 			$table->string('hasher')->nullable();
 			$table->rememberToken();
 			$table->integer('role_id');
+			$table->string('avatar')->default('');
+			$table->string('dob', 10)->default('1-1-');
+			$table->string('usertitle')->default('');
 			$table->nullableTimestamps();
 		});
 	}

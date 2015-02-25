@@ -53,6 +53,13 @@ Route::any('parser', ['uses' => 'DebugController@parser']);
 Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
 	Route::get('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@getProfile']);
+	Route::post('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@postProfile']);
+	Route::get('/username', ['as' => 'account.username', 'uses' => 'AccountController@getUsername']);
+	Route::post('/username', ['as' => 'account.username', 'uses' => 'AccountController@postUsername']);
+	Route::get('/email', ['as' => 'account.email', 'uses' => 'AccountController@getEmail']);
+	Route::post('/email', ['as' => 'account.email', 'uses' => 'AccountController@postEmail']);
+	Route::get('/password', ['as' => 'account.password', 'uses' => 'AccountController@getPassword']);
+	Route::post('/password', ['as' => 'account.password', 'uses' => 'AccountController@postPassword']);
 	Route::get('/notifications', ['as' => 'account.notifications', 'uses' => 'AccountController@getNotifications']);
 	Route::get('/following', ['as' => 'account.following', 'uses' => 'AccountController@getFollowing']);
 	Route::get('/buddies', ['as' => 'account.buddies', 'uses' => 'AccountController@getBuddies']);

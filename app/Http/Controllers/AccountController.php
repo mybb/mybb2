@@ -2,6 +2,7 @@
 
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use Hash;
 
 class AccountController extends Controller
 {
@@ -25,7 +26,141 @@ class AccountController extends Controller
 
 	public function getProfile()
 	{
-		return view('account.profile')->withActive('profile');
+		$dob = explode('-', $this->guard->user()->dob);
+
+		$dob = [
+			'day' => $dob[0],
+			'month' => $dob[1],
+			'year' => $dob[2],
+		];
+
+		return view('account.profile', compact('dob'))->withActive('profile');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postProfile(Request $request)
+	{
+		$this->validate($request, [
+			'date_of_birth_day' => 'integer|min:1|max:31',
+			'date_of_birth_month' => 'integer|min:1|max:12',
+			'date_of_birth_year' => 'integer',
+			'usertitle' => 'string',
+		]);
+
+		$input = $request->only(['usertitle']);
+
+		$input['dob'] = $request->get('date_of_birth_day').'-'.$request->get('date_of_birth_month').'-'.$request->get('date_of_birth_year');
+
+		$this->guard->user()->update($input);
+
+		return redirect()->route('account.profile');
+	}
+
+	public function getUsername()
+	{
+		return view('account.username')->withActive('profile');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postUsername(Request $request)
+	{
+		$this->validate($request, [
+			'name' => 'required|max:255|unique:users',
+			'password' => 'required',
+		]);
+
+		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
+		{
+			// Valid password so update
+			$this->guard->user()->update($request->only('name'));
+
+			return redirect()->route('account.profile');
+		}
+
+		return redirect()
+			->route('account.username')
+			->withInput($request->only('name'))
+			->withErrors([
+				'name' => trans('member.invalidCredentials'),
+			]);
+	}
+
+	public function getEmail()
+	{
+		return view('account.email')->withActive('profile');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postEmail(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required',
+		]);
+
+		// TODO: some sort of confirmation needs to be added
+
+		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
+		{
+			// Valid password so update
+			$this->guard->user()->update($request->only('email'));
+
+			return redirect()->route('account.profile');
+		}
+
+		return redirect()
+			->route('account.email')
+			->withInput($request->only('email'))
+			->withErrors([
+				'email' => trans('member.invalidCredentials'),
+			]);
+	}
+
+	public function getPassword()
+	{
+		return view('account.password')->withActive('profile');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postPassword(Request $request)
+	{
+		$this->validate($request, [
+			'password1' => 'required|min:6',
+			'password' => 'required',
+		]);
+
+		// TODO: some sort of confirmation needs to be added
+
+		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
+		{
+			// Valid password so update
+			$this->guard->user()->update(['password' => Hash::make($request->get('password1'))]);
+
+			return redirect()->route('account.profile');
+		}
+
+		return redirect()
+			->route('account.password')
+			->withInput($request->only('password1'))
+			->withErrors([
+				'password1' => trans('member.invalidCredentials'),
+			]);
 	}
 
 	public function getNotifications()

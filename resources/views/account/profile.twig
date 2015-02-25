@@ -1,9 +1,101 @@
 {% extends "account.base" %}
 {% block inner_title %}
-    {{ trans('account.profile') }}
+	{{ trans('account.profile') }}
 {% endblock %}
 {% block inner_contents %}
 		<header>
-            <h1>{{ trans('account.profile') }}</h1>
-        </header>
+			<h1>{{ trans('account.profile') }}</h1>
+		</header>
+
+	{{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
+	<section class="form">
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.avatar') }}</h2>
+			<div class="form-row-container change-avatar">
+				<a href="index.php?page=account/avatar" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+				<p>{{ trans('account.avatar_desc') }}</p>
+				<div class="buttons">
+					<a href="index.php?page=account/avatar" class="button secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
+					<a href="index.php?page=account/avatar" class="button secondary"><i class="fa fa-times"></i><span class="text">{{ trans('account.avatar_remove') }}</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.details') }}</h2>
+			<div class="form-row-container">
+				<div class="buttons">
+					<a href="{{ url_route('account.username') }}" onclick="modal('{{ url_route('account.username', [], false) }}'); return false;"  class="button secondary"><i class="fa fa-user"></i><span class="text">{{ trans('account.change_username') }}</span></a>
+					<a href="index.php?page=account/email" onclick="modal('account/email'); return false;" class="button secondary"><i class="fa fa-paper-plane-o"></i><span class="text">{{ trans('account.change_email') }}</span></a>
+					<a href="index.php?page=account/password" onclick="modal('account/password'); return false;" class="button secondary"><i class="fa fa-key"></i><span class="text">{{ trans('account.change_password') }}</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.groups') }}</h2>
+			<div class="form-row-container">
+				{{ auth_user().role.role_display_name }}
+			</div>
+		</div>
+		{# this part should be written as profilefields #}
+		<div class="form-section clearfix">
+			<h2>Contact Details</h2>
+			<div class="form-row-container">
+				<div class="form-row">
+					<h3><label for="profile_website">Website</label></h3>
+					<input type="text" name="profile_website" id="profile_website" value="http://jsoltesz.com" />
+				</div>
+				<div class="form-row">
+					<h3><label for="profile_twitter">Twitter</label></h3>
+					<input type="text" name="profile_twitter" id="profile_twitter" value="justinsoltesz" />
+				</div>
+				<div class="form-row">
+					<h3><label for="profile_skype">Skype</label></h3>
+					<input type="text" name="profile_skype" id="profile_skype" value="" />
+				</div>
+			</div>
+		</div>
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.about_you') }}</h2>
+			<div class="form-row-container">
+				<div class="form-row">
+					<h3>{{ trans('general.dob') }}</h3>
+					{# Another raw using #}
+					<p class="description">{{ trans('account.dob_desc', {'link': url_route('account.privacy')})|raw }}</p>
+					{{ form_selectRange('date_of_birth_day', 1, 31, dob.day) }}
+					{{ form_selectMonth('date_of_birth_month', dob.month) }}
+					{{ form_text('date_of_birth_year', dob.year, {'maxlength': 4, 'class': 'short'}) }}
+				</div>
+				<div class="form-row">
+					<h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
+					<p class="description">{{ trans('account.usertitle_desc') }}</p>
+					{{ form_text('usertitle', auth_user().usertitle) }}
+				</div>
+				{# everything below should use profilefields #}
+				<div class="form-row">
+					<h3><label for="profile_sex">Sex</label></h3>
+					<select name="profile_sex" id="profile_sex">
+						<option>Undisclosed</option>
+						<option selected="selected">Male</option>
+						<option>Female</option>
+						<option>Other</option>
+					</select>
+				</div>
+				<div class="form-row">
+					<h3><label for="profile_location">Location</label></h3>
+					<p class="description">Where in the world do you live?</p>
+					<input type="text" name="profile_location" id="profile_location" value="Columbus, Ohio" />
+				</div>
+				<div class="form-row">
+					<h3><label for="profile_bio">Bio</label></h3>
+					<p class="description">Enter a few short details about yourself, your life story etc.</p>
+					<textarea rows="6" cols="40" id="profile_bio" name="profile_bio">I build things.</textarea>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="form-submit">
+		{{ form_button('<i class="fa fa-user"></i><span class="text">'~trans('account.update_profile')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+	</div>
+	{{ form_close() }}
+
 {% endblock %}
