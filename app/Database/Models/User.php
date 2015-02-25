@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\PermissionHandler;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter
 {
 
 	use Authenticatable, CanResetPassword;
@@ -36,6 +37,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+	/**
+	 * Get the presenter class.
+	 *
+	 * @return string
+	 */
+	public function getPresenterClass()
+	{
+		return \MyBB\Core\Presenters\User::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+	}
 
 
 	public function role()
