@@ -9339,3 +9339,832 @@ if (jQuery) (function ($) {
     $(window).on('resize', position);
 
 })(jQuery);
+.modal {
+  display: none;
+  width: 400px;
+  background: #fff;
+  padding: 15px 30px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  -o-box-shadow: 0 0 10px #000;
+  -ms-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;
+}
+
+.modal a.close-modal {
+  position: absolute;
+  top: -12.5px;
+  right: -12.5px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-indent: -9999px;
+  background: url(close.png) no-repeat 0 0;
+}
+
+.modal-spinner {
+  display: none;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -32px;
+  margin-top: -32px;
+  background: url(spinner.gif) #111 no-repeat center center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+}
+/* 
+ * Stepper v3.0.8 - 2014-09-14 
+ * A jQuery plugin for cross browser number inputs. Part of the Formstone Library. 
+ * http://formstone.it/stepper/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */ 
+
+;(function ($, window) {
+	"use strict";
+
+	/**
+	 * @options
+	 * @param customClass [string] <''> "Class applied to instance"
+	 * @param lables.up [string] <'Up'> "Up arrow label"
+	 * @param lables.down [string] <'Down'> "Down arrow label"
+	 */
+	var options = {
+		customClass: "",
+		labels: {
+			up: "Up",
+			down: "Down"
+		}
+	};
+
+	var pub = {
+
+		/**
+		 * @method
+		 * @name defaults
+		 * @description Sets default plugin options
+		 * @param opts [object] <{}> "Options object"
+		 * @example $.stepper("defaults", opts);
+		 */
+		defaults: function(opts) {
+			options = $.extend(options, opts || {});
+			return $(this);
+		},
+
+		/**
+		 * @method
+		 * @name destroy
+		 * @description Removes instance of plugin
+		 * @example $(".target").stepper("destroy");
+		 */
+		destroy: function() {
+			return $(this).each(function(i) {
+				var data = $(this).data("stepper");
+
+				if (data) {
+					// Unbind click events
+					data.$stepper.off(".stepper")
+								 .find(".stepper-arrow")
+								 .remove();
+
+					// Restore DOM
+					data.$input.unwrap()
+							   .removeClass("stepper-input");
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name disable
+		 * @description Disables target instance
+		 * @example $(".target").stepper("disable");
+		 */
+		disable: function() {
+			return $(this).each(function(i) {
+				var data = $(this).data("stepper");
+
+				if (data) {
+					data.$input.attr("disabled", "disabled");
+					data.$stepper.addClass("disabled");
+				}
+			});
+		},
+
+		/**
+		 * @method
+		 * @name enable
+		 * @description Enables target instance
+		 * @example $(".target").stepper("enable");
+		 */
+		enable: function() {
+			return $(this).each(function(i) {
+				var data = $(this).data("stepper");
+
+				if (data) {
+					data.$input.attr("disabled", null);
+					data.$stepper.removeClass("disabled");
+				}
+			});
+		}
+	};
+
+	/**
+	 * @method private
+	 * @name _init
+	 * @description Initializes plugin
+	 * @param opts [object] "Initialization options"
+	 */
+	function _init(opts) {
+		// Local options
+		opts = $.extend({}, options, opts || {});
+
+		// Apply to each element
+		var $items = $(this);
+		for (var i = 0, count = $items.length; i < count; i++) {
+			_build($items.eq(i), opts);
+		}
+		return $items;
+	}
+
+	/**
+	 * @method private
+	 * @name _build
+	 * @description Builds each instance
+	 * @param $select [jQuery object] "Target jQuery object"
+	 * @param opts [object] <{}> "Options object"
+	 */
+	function _build($input, opts) {
+		if (!$input.hasClass("stepper-input")) {
+			// EXTEND OPTIONS
+			opts = $.extend({}, opts, $input.data("stepper-options"));
+
+			// HTML5 attributes
+			var min = parseFloat($input.attr("min")),
+				max = parseFloat($input.attr("max")),
+				step = parseFloat($input.attr("step")) || 1;
+
+			// Modify DOM
+			$input.addClass("stepper-input")
+				  .wrap('<div class="stepper ' + opts.customClass + '" />')
+				  .after('<span class="stepper-arrow up">' + opts.labels.up + '</span><span class="stepper-arrow down">' + opts.labels.down + '</span>');
+
+			// Store data
+			var $stepper = $input.parent(".stepper"),
+				data = $.extend({
+					$stepper: $stepper,
+					$input: $input,
+					$arrow: $stepper.find(".stepper-arrow"),
+					min: (typeof min !== undefined && !isNaN(min)) ? min : false,
+					max: (typeof max !== undefined && !isNaN(max)) ? max : false,
+					step: (typeof step !== undefined && !isNaN(step)) ? step : 1,
+					timer: null
+				}, opts);
+
+			data.digits = _digits(data.step);
+
+			// Check disabled
+			if ($input.is(":disabled")) {
+				$stepper.addClass("disabled");
+			}
+
+			// Bind keyboard events
+			$stepper.on("keypress", ".stepper-input", data, _onKeyup);
+
+			// Bind click events
+			$stepper.on("touchstart.stepper mousedown.stepper", ".stepper-arrow", data, _onMouseDown)
+					.data("stepper", data);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onKeyup
+	 * @description Handles keypress event on inputs
+	 * @param e [object] "Event data"
+	 */
+	function _onKeyup(e) {
+		var data = e.data;
+
+		// If arrow keys
+		if (e.keyCode === 38 || e.keyCode === 40) {
+			e.preventDefault();
+
+			_step(data, (e.keyCode === 38) ? data.step : -data.step);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onMouseDown
+	 * @description Handles mousedown event on instance arrows
+	 * @param e [object] "Event data"
+	 */
+	function _onMouseDown(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		// Make sure we reset the states
+		_onMouseUp(e);
+
+		var data = e.data;
+
+		if (!data.$input.is(':disabled') && !data.$stepper.hasClass("disabled")) {
+			var change = $(e.target).hasClass("up") ? data.step : -data.step;
+
+			data.timer = _startTimer(data.timer, 125, function() {
+				_step(data, change, false);
+			});
+			_step(data, change);
+
+			$("body").on("touchend.stepper mouseup.stepper", data, _onMouseUp);
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _onMouseUp
+	 * @description Handles mouseup event on instance arrows
+	 * @param e [object] "Event data"
+	 */
+	function _onMouseUp(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		var data = e.data;
+
+		_clearTimer(data.timer);
+
+		$("body").off(".stepper");
+	}
+
+	/**
+	 * @method private
+	 * @name _step
+	 * @description Steps through values
+	 * @param e [object] "Event data"
+	 * @param change [string] "Change value"
+	 */
+	function _step(data, change) {
+		var originalValue = parseFloat(data.$input.val()),
+			value = change;
+
+		if (typeof originalValue === undefined || isNaN(originalValue)) {
+			if (data.min !== false) {
+				value = data.min;
+			} else {
+				value = 0;
+			}
+		} else if (data.min !== false && originalValue < data.min) {
+			value = data.min;
+		} else {
+			value += originalValue;
+		}
+
+		var diff = (value - data.min) % data.step;
+		if (diff !== 0) {
+			value -= diff;
+		}
+
+		if (data.min !== false && value < data.min) {
+			value = data.min;
+		}
+		if (data.max !== false && value > data.max) {
+			value -= data.step;
+		}
+
+		if (value !== originalValue) {
+			value = _round(value, data.digits);
+
+			data.$input.val(value)
+					   .trigger("change");
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _startTimer
+	 * @description Starts an internal timer
+	 * @param timer [int] "Timer ID"
+	 * @param time [int] "Time until execution"
+	 * @param callback [int] "Function to execute"
+	 */
+	function _startTimer(timer, time, callback) {
+		_clearTimer(timer);
+		return setInterval(callback, time);
+	}
+
+	/**
+	 * @method private
+	 * @name _clearTimer
+	 * @description Clears an internal timer
+	 * @param timer [int] "Timer ID"
+	 */
+	function _clearTimer(timer) {
+		if (timer) {
+			clearInterval(timer);
+			timer = null;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _digits
+	 * @description Analyzes and returns significant digit count
+	 * @param value [float] "Value to analyze"
+	 * @return [int] "Number of significant digits"
+	 */
+	function _digits(value) {
+		var test = String(value);
+		if (test.indexOf(".") > -1) {
+			return test.length - test.indexOf(".") - 1;
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * @method private
+	 * @name _round
+	 * @description Rounds a number to a sepcific significant digit count
+	 * @param value [float] "Value to round"
+	 * @param digits [float] "Digits to round to"
+	 * @return [number] "Rounded number"
+	 */
+	function _round(value, digits) {
+		var exp = Math.pow(10, digits);
+		return Math.round(value * exp) / exp;
+	}
+
+	$.fn.stepper = function(method) {
+		if (pub[method]) {
+			return pub[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || !method) {
+			return _init.apply(this, arguments);
+		}
+		return this;
+	};
+
+	$.stepper = function(method) {
+		if (method === "defaults") {
+			pub.defaults.apply(this, Array.prototype.slice.call(arguments, 1));
+		}
+	};
+})(jQuery, this);
+
+(function (factory, global) {
+
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else {
+    // Browser globals.
+    factory(global.jQuery);
+  }
+
+}(function ($, undef) {
+
+  var dataKey = 'plugin_hideShowPassword'
+    , shorthandArgs = ['show', 'innerToggle']
+    , SPACE = 32
+    , ENTER = 13;
+
+  var canSetInputAttribute = (function(){
+    var body = document.body
+      , input = document.createElement('input')
+      , result = true;
+    if (! body) {
+      body = document.createElement('body');
+    }
+    input = body.appendChild(input);
+    try {
+      input.setAttribute('type', 'text');
+    } catch (e) {
+      result = false;
+    }
+    body.removeChild(input);
+    return result;
+  }());
+
+  var defaults = {
+    // Visibility of the password text. Can be true, false, 'toggle'
+    // or 'infer'. If 'toggle', it will be the opposite of whatever
+    // it currently is. If 'infer', it will be based on the input
+    // type (false if 'password', otherwise true).
+    show: 'infer',
+
+    // Set to true to create an inner toggle for this input. Can
+    // also be sent to an event name to delay visibility of toggle
+    // until that event is triggered on the input element.
+    innerToggle: false,
+
+    // If false, the plugin will be disabled entirely. Set to
+    // the outcome of a test to insure input attributes can be
+    // set after input has been inserted into the DOM.
+    enable: canSetInputAttribute,
+
+    // Class to add to input element when the plugin is enabled.
+    className: 'hideShowPassword-field',
+
+    // Event to trigger when the plugin is initialized and enabled.
+    initEvent: 'hideShowPasswordInit',
+
+    // Event to trigger whenever the visibility changes.
+    changeEvent: 'passwordVisibilityChange',
+
+    // Properties to add to the input element.
+    props: {
+      autocapitalize: 'off',
+      autocomplete: 'off',
+      autocorrect: 'off',
+      spellcheck: 'false'
+    },
+
+    // Options specific to the inner toggle.
+    toggle: {
+      // The element to create.
+      element: '<button type="button">',
+      // Class name of element.
+      className: 'hideShowPassword-toggle',
+      // Whether or not to support touch-specific enhancements.
+      // Defaults to the value of Modernizr.touch if available,
+      // otherwise false.
+      touchSupport: (typeof Modernizr === 'undefined') ? false : Modernizr.touch,
+      // Non-touch event to bind to.
+      attachToEvent: 'click',
+      // Event to bind to when touchSupport is true.
+      attachToTouchEvent: 'touchstart mousedown',
+      // Key event to bind to if attachToKeyCodes is an array
+      // of at least one keycode.
+      attachToKeyEvent: 'keyup',
+      // Key codes to bind the toggle event to for accessibility.
+      // If false, this feature is disabled entirely.
+      // If true, the array of key codes will be determined based
+      // on the value of the element option.
+      attachToKeyCodes: true,
+      // Styles to add to the toggle element. Does not include
+      // positioning styles.
+      styles: { position: 'absolute' },
+      // Styles to add only when touchSupport is true.
+      touchStyles: { pointerEvents: 'none' },
+      // Where to position the inner toggle relative to the
+      // input element. Can be 'right', 'left' or 'infer'. If
+      // 'infer', it will be based on the text-direction of the
+      // input element.
+      position: 'infer',
+      // Where to position the inner toggle on the y-axis
+      // relative to the input element. Can be 'top', 'bottom'
+      // or 'middle'.
+      verticalAlign: 'middle',
+      // Amount by which to "offset" the toggle from the edge
+      // of the input element.
+      offset: 0,
+      // Attributes to add to the toggle element.
+      attr: {
+        role: 'button',
+        'aria-label': 'Show Password',
+        tabIndex: 0
+      }
+    },
+
+    // Options specific to the wrapper element, created
+    // when the innerToggle is initialized to help with
+    // positioning of that element.
+    wrapper: {
+      // The element to create.
+      element: '<div>',
+      // Class name of element.
+      className: 'hideShowPassword-wrapper',
+      // If true, the width of the wrapper will be set
+      // unless it is already the same width as the inner
+      // element. If false, the width will never be set. Any
+      // other value will be used as the width.
+      enforceWidth: true,
+      // Styles to add to the wrapper element. Does not
+      // include inherited styles or width if enforceWidth
+      // is not false.
+      styles: { position: 'relative' },
+      // Styles to "inherit" from the input element, allowing
+      // the wrapper to avoid disrupting page styles.
+      inheritStyles: [
+        'display',
+        'verticalAlign',
+        'marginTop',
+        'marginRight',
+        'marginBottom',
+        'marginLeft'
+      ],
+      // Styles for the input element when wrapped.
+      innerElementStyles: {
+        marginTop: 0,
+        marginRight: 0,
+        marginBottom: 0,
+        marginLeft: 0
+      }
+    },
+
+    // Options specific to the 'shown' or 'hidden'
+    // states of the input element.
+    states: {
+      shown: {
+        className: 'hideShowPassword-shown',
+        changeEvent: 'passwordShown',
+        props: { type: 'text' },
+        toggle: {
+          className: 'hideShowPassword-toggle-hide',
+          content: 'Hide',
+          attr: { 'aria-pressed': 'true' }
+        }
+      },
+      hidden: {
+        className: 'hideShowPassword-hidden',
+        changeEvent: 'passwordHidden',
+        props: { type: 'password' },
+        toggle: {
+          className: 'hideShowPassword-toggle-show',
+          content: 'Show',
+          attr: { 'aria-pressed': 'false' }
+        }
+      }
+    }
+
+  };
+
+  function HideShowPassword (element, options) {
+    this.element = $(element);
+    this.wrapperElement = $();
+    this.toggleElement = $();
+    this.init(options);
+  }
+
+  HideShowPassword.prototype = {
+
+    init: function (options) {
+      if (this.update(options, defaults)) {
+        this.element.addClass(this.options.className);
+        if (this.options.innerToggle) {
+          this.wrapElement(this.options.wrapper);
+          this.initToggle(this.options.toggle);
+          if (typeof this.options.innerToggle === 'string') {
+            this.toggleElement.hide();
+            this.element.one(this.options.innerToggle, $.proxy(function(){
+              this.toggleElement.show();
+            }, this));
+          }
+        }
+        this.element.trigger(this.options.initEvent, [ this ]);
+      }
+    },
+
+    update: function (options, base) {
+      this.options = this.prepareOptions(options, base);
+      if (this.updateElement()) {
+        this.element
+          .trigger(this.options.changeEvent, [ this ])
+          .trigger(this.state().changeEvent, [ this ]);
+      }
+      return this.options.enable;
+    },
+
+    toggle: function (showVal) {
+      showVal = showVal || 'toggle';
+      return this.update({ show: showVal });
+    },
+
+    prepareOptions: function (options, base) {
+      var keyCodes = []
+        , testElement;
+      base = base || this.options;
+      options = $.extend(true, {}, base, options);
+      if (options.enable) {
+        if (options.show === 'toggle') {
+          options.show = this.isType('hidden', options.states);
+        } else if (options.show === 'infer') {
+          options.show = this.isType('shown', options.states);
+        }
+        if (options.toggle.position === 'infer') {
+          options.toggle.position = (this.element.css('text-direction') === 'rtl') ? 'left' : 'right';
+        }
+        if (! $.isArray(options.toggle.attachToKeyCodes)) {
+          if (options.toggle.attachToKeyCodes === true) {
+            testElement = $(options.toggle.element);
+            switch(testElement.prop('tagName').toLowerCase()) {
+              case 'button':
+              case 'input':
+                break;
+              case 'a':
+                if (testElement.filter('[href]').length) {
+                  keyCodes.push(SPACE);
+                  break;
+                }
+              default:
+                keyCodes.push(SPACE, ENTER);
+                break;
+            }
+          }
+          options.toggle.attachToKeyCodes = keyCodes;
+        }
+      }
+      return options;
+    },
+
+    updateElement: function () {
+      if (! this.options.enable || this.isType()) return false;
+      this.element
+        .prop($.extend({}, this.options.props, this.state().props))
+        .addClass(this.state().className)
+        .removeClass(this.otherState().className);
+      this.updateToggle();
+      return true;
+    },
+
+    isType: function (comparison, states) {
+      states = states || this.options.states;
+      comparison = comparison || this.state(undef, undef, states).props.type;
+      if (states[comparison]) {
+        comparison = states[comparison].props.type;
+      }
+      return this.element.prop('type') === comparison;
+    },
+
+    state: function (key, invert, states) {
+      states = states || this.options.states;
+      if (key === undef) {
+        key = this.options.show;
+      }
+      if (typeof key === 'boolean') {
+        key = key ? 'shown' : 'hidden';
+      }
+      if (invert) {
+        key = (key === 'shown') ? 'hidden' : 'shown';
+      }
+      return states[key];
+    },
+
+    otherState: function (key) {
+      return this.state(key, true);
+    },
+
+    wrapElement: function (options) {
+      var enforceWidth = options.enforceWidth
+        , targetWidth;
+      if (! this.wrapperElement.length) {
+        targetWidth = this.element.outerWidth();
+        $.each(options.inheritStyles, $.proxy(function (index, prop) {
+          options.styles[prop] = this.element.css(prop);
+        }, this));
+        this.element.css(options.innerElementStyles).wrap(
+          $(options.element).addClass(options.className).css(options.styles)
+        );
+        this.wrapperElement = this.element.parent();
+        if (enforceWidth === true) {
+          enforceWidth = (this.wrapperElement.outerWidth() === targetWidth) ? false : targetWidth;
+        }
+        if (enforceWidth !== false) {
+          this.wrapperElement.css('width', enforceWidth);
+        }
+      }
+      return this.wrapperElement;
+    },
+
+    initToggle: function (options) {
+      if (! this.toggleElement.length) {
+        // Create element
+        this.toggleElement = $(options.element)
+          .attr(options.attr)
+          .addClass(options.className)
+          .css(options.styles)
+          .appendTo(this.wrapperElement);
+        // Update content/attributes
+        this.updateToggle();
+        // Position
+        this.positionToggle(options.position, options.verticalAlign, options.offset);
+        // Events
+        if (options.touchSupport) {
+          this.toggleElement.css(options.touchStyles);
+          this.element.on(options.attachToTouchEvent, $.proxy(this.toggleTouchEvent, this));
+        } else {
+          this.toggleElement.on(options.attachToEvent, $.proxy(this.toggleEvent, this));
+        }
+        if (options.attachToKeyCodes.length) {
+          this.toggleElement.on(options.attachToKeyEvent, $.proxy(this.toggleKeyEvent, this));
+        }
+      }
+      return this.toggleElement;
+    },
+
+    positionToggle: function (position, verticalAlign, offset) {
+      var styles = {};
+      styles[position] = offset;
+      switch (verticalAlign) {
+        case 'top':
+        case 'bottom':
+          styles[verticalAlign] = offset;
+          break;
+        case 'middle':
+          styles['top'] = '50%';
+          styles['marginTop'] = this.toggleElement.outerHeight() / -2;
+          break;
+      }
+      return this.toggleElement.css(styles);
+    },
+
+    updateToggle: function (state, otherState) {
+      var paddingProp
+        , targetPadding;
+      if (this.toggleElement.length) {
+        paddingProp = 'padding-' + this.options.toggle.position;
+        state = state || this.state().toggle;
+        otherState = otherState || this.otherState().toggle;
+        this.toggleElement
+          .attr(state.attr)
+          .addClass(state.className)
+          .removeClass(otherState.className)
+          .html(state.content);
+        targetPadding = this.toggleElement.outerWidth() + (this.options.toggle.offset * 2);
+        if (this.element.css(paddingProp) !== targetPadding) {
+          this.element.css(paddingProp, targetPadding);
+        }
+      }
+      return this.toggleElement;
+    },
+
+    toggleEvent: function (event) {
+      event.preventDefault();
+      this.toggle();
+    },
+
+    toggleKeyEvent: function (event) {
+      $.each(this.options.toggle.attachToKeyCodes, $.proxy(function(index, keyCode) {
+        if (event.which === keyCode) {
+          this.toggleEvent(event);
+          return false;
+        }
+      }, this));
+    },
+
+    toggleTouchEvent: function (event) {
+      var toggleX = this.toggleElement.offset().left
+        , eventX
+        , lesser
+        , greater;
+      if (toggleX) {
+        eventX = event.pageX || event.originalEvent.pageX;
+        if (this.options.toggle.position === 'left') {
+          toggleX+= this.toggleElement.outerWidth();
+          lesser = eventX;
+          greater = toggleX;
+        } else {
+          lesser = toggleX;
+          greater = eventX;
+        }
+        if (greater >= lesser) {
+          this.toggleEvent(event);
+        }
+      }
+    }
+
+  };
+
+  $.fn.hideShowPassword = function () {
+    var options = {};
+    $.each(arguments, function (index, value) {
+      var newOptions = {};
+      if (typeof value === 'object') {
+        newOptions = value;
+      } else if (shorthandArgs[index]) {
+        newOptions[shorthandArgs[index]] = value;
+      } else {
+        return false;
+      }
+      $.extend(true, options, newOptions);
+    });
+    return this.each(function(){
+      var $this = $(this)
+        , data = $this.data(dataKey);
+      if (data) {
+        data.update(options);
+      } else {
+        $this.data(dataKey, new HideShowPassword(this, options));
+      }
+    });
+  };
+
+  $.each({ 'show':true, 'hide':false, 'toggle':'toggle' }, function (verb, showVal) {
+    $.fn[verb + 'Password'] = function (innerToggle, options) {
+      return this.hideShowPassword(showVal, innerToggle, options);
+    };
+  });
+
+}, this));

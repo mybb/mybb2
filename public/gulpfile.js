@@ -4,7 +4,7 @@ var gulp = require("gulp"),
     imagemin = require("gulp-imagemin"),
     concat = require("gulp-concat"),
     uglify = require("gulp-uglify"),
-    stripDebug = require("gulp-strip-debug"),
+    //stripDebug = require("gulp-strip-debug"),
     sass = require("gulp-sass"),
     autoprefixer = require("gulp-autoprefixer"),
     minifycss = require("gulp-minify-css"),
@@ -14,6 +14,8 @@ var gulp = require("gulp"),
     buffer = require('vinyl-buffer'),
     browserify = require("browserify"),
     sourcemaps = require('gulp-sourcemaps');
+//
+     jsValidate = require('gulp-jsvalidate');
 
 var paths = {
     bower: "./bower_components",
@@ -38,7 +40,10 @@ var paths = {
 
 var vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
-    paths.bower + "/jquery-dropdown/jquery.dropdown.js"
+    paths.bower + "/jquery-dropdown/jquery.dropdown.js",
+    paths.bower + "/jquery-modal/jquery.modal.css",
+    paths.bower + "/Stepper/jquery.fs.stepper.js",
+    paths.bower + "/hideShowPassword/hideShowPassword.js"
 ];
 
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "fonts"]);
@@ -63,7 +68,7 @@ gulp.task("watch", ["default"], function() {
 });
 
 gulp.task("images", function() {
-    return gulp.src(paths.images.src + "/*")
+    return gulp.src([paths.images.src + "/*", paths.bower + "/jquery-modal/close.png", paths.bower + "/jquery-modal/spinner.gif"])
         .pipe(changed(paths.images.dest))
         .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
         .pipe(gulp.dest(paths.images.dest));
@@ -71,11 +76,14 @@ gulp.task("images", function() {
 
 gulp.task("vendor_scripts", function() {
     return gulp.src(vendor_scripts)
+    .pipe(jsValidate())
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat("vendor.js"))
         .pipe(gulp.dest(paths.js.dest + "/"))
-        .pipe(stripDebug())
-        .pipe(uglify())
+        //.pipe(stripDebug())
+        //.pipe(uglify()) 
+        
+.pipe(uglify().on('error', gutil.log)) // notice the event here
         .pipe(sourcemaps.write('./'))
         .pipe(rename({
             suffix: ".min"
@@ -96,7 +104,7 @@ gulp.task("scripts", function() {
             .pipe(buffer())
             .pipe(gulp.dest(paths.js.dest + "/"))
             .pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(stripDebug())
+            //.pipe(stripDebug())
             .pipe(uglify())
             .pipe(sourcemaps.write('./'))
             .pipe(rename({
