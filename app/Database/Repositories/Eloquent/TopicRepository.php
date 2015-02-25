@@ -152,7 +152,7 @@ class TopicRepository implements ITopicRepository
 				break;
 		}
 
-		if ($this->guard->user() == null) {
+		if ($this->guard->check() == false) {
 			// Todo: default to board setting
 			$tpp = 10;
 		} else {

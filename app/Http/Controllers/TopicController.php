@@ -59,7 +59,7 @@ class TopicController extends Controller
 
 		$this->topicRepository->incrementViewCount($topic);
 
-		$posts = $this->postRepository->allForTopic($topic);
+		$posts = $this->postRepository->allForTopic($topic, true);
 
 		return view('topic.show', compact('topic', 'posts'));
 	}
@@ -202,6 +202,35 @@ class TopicController extends Controller
 	}
 
 
+	public function restore($slug = '', $id = 0)
+	{
+		$topic = $this->topicRepository->findBySlug($slug);
+		$post = $this->postRepository->find($id);
+
+		if (!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at']) {
+			throw new NotFoundHttpException(trans('errors.post_not_found'));
+		}
+
+		/*if ($post['id'] == $topic['first_post_id']) {
+			$forum = $this->forumRepository->find($topic['forum_id']);
+
+			$this->topicRepository->deleteTopic($topic);
+
+			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
+		} else {*/// I'll work on it later.
+			$this->postRepository->restorePost($post);
+			$posts = $this->postRepository->allForTopic($topic);
+			$topic = $this->topicRepository->editTopic($topic, [
+				'last_post_id' => $posts[count($posts) - 1]['id']
+			]);
+			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
+		//}
+
+		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
+	}
+
+
+
 	public function delete($slug = '', $id = 0)
 	{
 		$topic = $this->topicRepository->findBySlug($slug);
@@ -219,7 +248,7 @@ class TopicController extends Controller
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
 		} else {
-			if ($post['id'] == $topic['last_post_id']) {
+			if ($post['id'] == $topic['last_post_id'] && $post['deleted_at'] == null) {
 				$posts = $this->postRepository->allForTopic($topic);
 				$topic = $this->topicRepository->editTopic($topic, [
 					'last_post_id' => $posts[count($posts) - 2]['id']
