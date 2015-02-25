@@ -23,6 +23,9 @@ class PostsTableSeeder extends Seeder
 			                                                       'first_post_id' => $id,
 			                                                       'num_posts' => 1
 		                                                       ]);
+
+		DB::table('forums')->where('slug', 'my-forum')->increment('num_posts');
+		DB::table('users')->where('name', 'Admin')->increment('num_posts');
 	}
 
 }

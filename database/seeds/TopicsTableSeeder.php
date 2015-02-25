@@ -22,6 +22,8 @@ class TopicsTableSeeder extends Seeder
 		];
 
 		DB::table('topics')->insert($topic);
+		DB::table('users')->where('name', 'Admin')->increment('num_topics');
+		DB::table('forums')->where('slug', 'my-forum')->increment('num_topics');
 	}
 
 }
