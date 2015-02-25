@@ -45,7 +45,7 @@ class CheckAccess
 		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
 		// Weed out the Guests first
-		if (!$this->auth->user()) {
+		if (!$this->auth->user() || !$this->auth->user()->role) {
 			// Guests are set to except
 			if (isset($action['except']) && $action['except'] == 'guest') {
 				return false;
@@ -67,7 +67,7 @@ class CheckAccess
 			$notAllowed = explode('|', $action['except']);
 
 
-			if (!$this->auth->user()->role || in_array($this->auth->user()->role->role_slug, $notAllowed)) {
+			if (in_array($this->auth->user()->role->role_slug, $notAllowed)) {
 				return false;
 			}
 		}
