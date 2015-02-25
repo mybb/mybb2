@@ -9,8 +9,11 @@ var gulp = require("gulp"),
     autoprefixer = require("gulp-autoprefixer"),
     minifycss = require("gulp-minify-css"),
     rename = require("gulp-rename"),
-    del = require('del'),
-    browserify = require("browserify");
+    del = require("del"),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
+    browserify = require("browserify"),
+    sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
     bower: "./bower_components",
@@ -33,7 +36,12 @@ var paths = {
     }
 };
 
-gulp.task("default", ["images", "scripts", "styles", "fonts"]);
+var vendor_scripts = [
+    paths.bower + "/jquery/dist/jquery.js",
+    paths.bower + "/jquery-dropdown/jquery.dropdown.js"
+];
+
+gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "fonts"]);
 
 gulp.task("clean", function(cb) {
     del(
@@ -47,6 +55,7 @@ gulp.task("clean", function(cb) {
 });
 
 gulp.task("watch", ["default"], function() {
+    gulp.watch("./bower_components/**/*.js", ["vendor_scripts"]);
     gulp.watch(paths.js.src + "/**/*.js", ["scripts"]);
     gulp.watch(paths.images.src + "/**/*", ["images"]);
     gulp.watch(paths.css.src + "/**/*.scss", ["styles"]);
@@ -60,8 +69,43 @@ gulp.task("images", function() {
         .pipe(gulp.dest(paths.images.dest));
 });
 
+gulp.task("vendor_scripts", function() {
+    return gulp.src(vendor_scripts)
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(concat("vendor.js"))
+        .pipe(gulp.dest(paths.js.dest + "/"))
+        .pipe(stripDebug())
+        .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(gulp.dest(paths.js.dest + "/"));
+});
+
 gulp.task("scripts", function() {
-    // Compile scripts, will use browserify...
+    var bundler = browserify({
+        entries: [paths.js.src + "/main.js"],
+        debug: true
+    });
+
+    var bundle = function() {
+        return bundler
+            .bundle()
+            .pipe(source("main.js"))
+            .pipe(buffer())
+            .pipe(gulp.dest(paths.js.dest + "/"))
+            .pipe(sourcemaps.init({loadMaps: true}))
+            .pipe(stripDebug())
+            .pipe(uglify())
+            .pipe(sourcemaps.write('./'))
+            .pipe(rename({
+                suffix: ".min"
+            }))
+            .pipe(gulp.dest(paths.js.dest + "/"));
+    };
+
+    return bundle();
 });
 
 gulp.task("styles", function() {
