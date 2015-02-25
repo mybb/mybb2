@@ -41,9 +41,9 @@ Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist
 Route::get('home', 'HomeController@index');
 
 Route::controllers([
-	                   'auth' => 'Auth\AuthController',
-	                   'password' => 'Auth\PasswordController',
-                   ]);
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
 
 Route::get('admin',
            ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
@@ -59,5 +59,6 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::get('/preferences', ['as' => 'account.preferences', 'uses' => 'AccountController@getPreferences']);
 	Route::post('/preferences', ['as' => 'account.preferences', 'uses' => 'AccountController@postPreferences']);
 	Route::get('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@getPrivacy']);
+	Route::post('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@postPrivacy']);
 	Route::get('/drafts', ['as' => 'account.drafts', 'uses' => 'AccountController@getDrafts']);
 });

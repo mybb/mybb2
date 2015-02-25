@@ -1,9 +1,181 @@
 {% extends "account.base" %}
 {% block inner_title %}
-    {{ trans('account.privacy') }}
+	{{ trans('account.privacy') }}
 {% endblock %}
 {% block inner_contents %}
 		<header>
-            <h1>{{ trans('account.privacy') }}</h1>
-        </header>
+			<h1>{{ trans('account.privacy') }}</h1>
+		</header>
+
+	{{ form_open({'url_route': 'account.privacy', 'method': 'post'}) }}
+	<section class="form">
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.blocked_users') }}</h2>
+			<div class="form-row-container">
+				<div class="compact-users-list blocked-users">
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Always Annoying</a>
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Angry</a>
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Annoying</a>
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Really Annoying</a>
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Super Needy</a>
+					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Unavoidably Annoying</a>
+				</div>
+				<div class="buttons">
+					<a href="index.php?page=account/blocked" class="button secondary"><i class="fa fa-shield"></i><span class="text">{{ trans('account.manage_blocked') }}</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="form-section clearfix">
+			<h2>{{ trans('general.forum') }}</h2>
+			<div class="form-row-container">
+				<div class="form-row">
+					<p class="checkbox"><label>{{ form_checkbox('showonline', 1, auth_user().settings.showonline) }} {{ trans('account.showonline') }}</label></p>
+					<p class="checkbox"><label>{{ form_checkbox('receive_messages', 1, auth_user().settings.receive_messages) }} {{ trans('account.receive_messages') }}</label></p>
+					<p class="checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, auth_user().settings.block_blocked_messages) }} {{ trans('account.block_blocked_messages') }}</label></p>
+					<p class="checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, auth_user().settings.hide_blocked_posts) }} {{ trans('account.hide_blocked_posts') }}</label></p>
+					{# another raw value #}
+					<p class="checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, auth_user().settings.only_buddy_messages) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
+					<p class="checkbox"><label>{{ form_checkbox('receive_email', 1, auth_user().settings.receive_email) }} {{ trans('account.receive_email') }}</label></p>
+				</div>
+			</div>
+		</div>
+		<div class="form-section clearfix">
+			<h2>{{ trans('account.profile') }}</h2>
+			<div class="form-row-container">
+				<div class="form-row">
+					<h3>{{ trans('account.dob_privacy') }}</h3>
+					<p class="description">{{ trans('account.dob_privacy_desc') }}</p>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								{{ form_radio('dob_privacy', 0, auth_user().settings.dob_privacy == 0, {'id': 'no_dob'}) }}
+								<label class="radio-button" for="no_dob">
+									<span class="text">{{ trans('general.nothing') }}</span>
+								</label>
+							</span><span class="button-container">
+								{{ form_radio('dob_privacy', 1, auth_user().settings.dob_privacy == 1, {'id': 'age_only'}) }}
+								<label class="radio-button" for="age_only">
+									<span class="text">{{ trans('general.age') }}</span>
+								</label>
+							</span><span class="button-container">
+								{{ form_radio('dob_privacy', 2, auth_user().settings.dob_privacy == 2, {'id': 'dob_age'}) }}
+								<label class="radio-button" for="dob_age">
+									<span class="text">{{ trans('general.dob') }}</span>
+								</label>
+							</span>
+					</div>
+				</div>
+				<div class="form-row">
+					<h3>{{ trans('account.dob_visibility') }}</h3>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								{{ form_radio('dob_visibility', 0, auth_user().settings.dob_visibility == 0, {'id': 'dob_everyone'}) }}
+								<label class="radio-button" for="dob_everyone">
+									<span class="text">{{ trans('general.everyone') }}</span>
+								</label>
+							</span><span class="button-container">
+								{{ form_radio('dob_visibility', 1, auth_user().settings.dob_visibility == 1, {'id': 'dob_members'}) }}
+								<label class="radio-button" for="dob_members">
+									<span class="text">{{ trans('member.members') }}</span>
+								</label>
+							</span><span class="button-container">
+								{{ form_radio('dob_visibility', 2, auth_user().settings.dob_visibility == 2, {'id': 'dob_buddies'}) }}
+								<label class="radio-button" for="dob_buddies">
+									<span class="text">{{ trans('account.buddies') }}</span>
+								</label>
+							</span>
+					</div>
+				</div>
+				{# everything below refers to profilefields and should be dynamic #}
+				<div class="form-row">
+					<h3>Show your sex to:</h3>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								<input type="radio" name="sex_visibility" id="sex_everyone" checked="checked" />
+								<label class="radio-button" for="sex_everyone">
+									<span class="text">Everyone</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="sex_visibility" id="sex_members" />
+								<label class="radio-button" for="sex_members">
+									<span class="text">Members</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="sex_visibility" id="sex_buddies" />
+								<label class="radio-button" for="sex_buddies">
+									<span class="text">Buddies</span>
+								</label>
+							</span>
+					</div>
+				</div>
+				<div class="form-row">
+					<h3>Show your location to:</h3>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								<input type="radio" name="location_visibility" id="location_everyone" checked="checked" />
+								<label class="radio-button" for="location_everyone">
+									<span class="text">Everyone</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="location_visibility" id="location_members" />
+								<label class="radio-button" for="location_members">
+									<span class="text">Members</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="location_visibility" id="location_buddies" />
+								<label class="radio-button" for="location_buddies">
+									<span class="text">Buddies</span>
+								</label>
+							</span>
+					</div>
+				</div>
+				<div class="form-row">
+					<h3>Show your bio to:</h3>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								<input type="radio" name="bio_visibility" id="bio_everyone" />
+								<label class="radio-button" for="bio_everyone">
+									<span class="text">Everyone</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="bio_visibility" id="bio_members" checked="checked" />
+								<label class="radio-button" for="bio_members">
+									<span class="text">Members</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="bio_visibility" id="bio_buddies" />
+								<label class="radio-button" for="bio_buddies">
+									<span class="text">Buddies</span>
+								</label>
+							</span>
+					</div>
+				</div>
+				<div class="form-row">
+					<h3>Show your contact details to:</h3>
+					<div class="radio-buttons inline">
+							<span class="button-container">
+								<input type="radio" name="contact_visibility" id="contact_everyone" />
+								<label class="radio-button" for="contact_everyone">
+									<span class="text">Everyone</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="contact_visibility" id="contact_members" />
+								<label class="radio-button" for="contact_members">
+									<span class="text">Members</span>
+								</label>
+							</span><span class="button-container">
+								<input type="radio" name="contact_visibility" id="contact_buddies" checked="checked" />
+								<label class="radio-button" for="contact_buddies">
+									<span class="text">Buddies</span>
+								</label>
+							</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div class="form-submit">
+		{{ form_button('<i class="fa fa-shield"></i><span class="text">'~trans('account.update_privacy')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+	</div>
+	{{ form_close() }}
+
 {% endblock %}

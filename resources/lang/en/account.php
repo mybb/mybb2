@@ -52,4 +52,17 @@ return [
 	'notification_mails' => 'Notification Summary Emails',
 	'notification_mails_desc' => 'You can choose to receive daily or weekly summary emails of any <a href=":noti">forum notifications</a> you receive. This does not affect any instant notifications you have opted to receive for threads or forums you are <a href=":following">following</a>.',
 	'update_preferences' => 'Update Preferences',
+
+	'blocked_users' => 'Blocked Users',
+	'manage_blocked' => 'Manage Blocked Users',
+	'showonline' => 'Show my online status',
+	'receive_messages' => 'Receive private messages from other members',
+	'block_blocked_messages' => 'Prevent blocked users from sending me private messages',
+	'hide_blocked_posts' => 'Hide posts and threads by blocked users',
+	'only_buddy_messages' => 'Only allow <a href=":link">my buddies</a> to send me private messages',
+	'receive_email' => 'Receive email newsletters from the forum administration',
+	'dob_privacy' => 'Date of Birth Privacy',
+	'dob_privacy_desc' => 'Select what you would like to be shown on your profile for your date of birth.',
+	'dob_visibility' => 'Show your date of birth or age to:',
+	'update_privacy' => 'Update Privacy Settings',
 ];

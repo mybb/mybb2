@@ -119,6 +119,38 @@ class AccountController extends Controller
 		return view('account.privacy')->withActive('privacy');
 	}
 
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postPrivacy(Request $request)
+	{
+		$this->validate($request, [
+			'showonline' => 'boolean',
+			'receive_messages' => 'boolean',
+			'block_blocked_messages' => 'boolean',
+			'hide_blocked_posts' => 'boolean',
+			'only_buddy_messages' => 'boolean',
+			'receive_email' => 'boolean',
+			'dob_privacy' => 'required|in:0,1,2',
+			'dob_visibility' => 'required|in:0,1,2',
+		]);
+
+		$input = $request->except(['_token']);
+
+		$input['showonline'] = isset($input['showonline']);
+		$input['receive_messages'] = isset($input['receive_messages']);
+		$input['block_blocked_messages'] = isset($input['block_blocked_messages']);
+		$input['hide_blocked_posts'] = isset($input['hide_blocked_posts']);
+		$input['only_buddy_messages'] = isset($input['only_buddy_messages']);
+		$input['receive_email'] = isset($input['receive_email']);
+
+		$this->guard->user()->settings->update($input);
+
+		return redirect()->route('account.privacy');
+	}
+
 	public function getDrafts()
 	{
 		return view('account.drafts')->withActive('drafts');

@@ -49,7 +49,15 @@ class UserSettings extends Model
 		'notify_on_moderation_post',
 		'notify_on_report',
 		'notify_on_username_change',
-		'notification_mails'
+		'notification_mails',
+		'showonline',
+		'receive_messages',
+		'block_blocked_messages',
+		'hide_blocked_posts',
+		'only_buddy_messages',
+		'receive_email',
+		'dob_privacy',
+		'dob_visibility',
 	];
 	/**
 	 * The attributes that aren't mass assignable.

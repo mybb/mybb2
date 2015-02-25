@@ -11,5 +11,10 @@ return [
 	'none' => 'None',
 	'daily' => 'Daily',
 	'weekly' => 'Weekly',
+	'forum' => 'Forum',
+	'nothing' => 'Nothing',
+	'age' => 'Age',
+	'dob' => 'Date of Birth',
+	'everyone' => 'Everyone'
 
 ];

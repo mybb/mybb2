@@ -42,7 +42,15 @@ class CreateUserSettingsTable extends Migration
 			$table->boolean('notify_on_moderation_post')->default(true);
 			$table->boolean('notify_on_report')->default(true);
 			$table->boolean('notify_on_username_change')->default(true);
-			$table->integer('notification_mails', false, true)->default(0); // No emails
+			$table->integer('notification_mails')->unsigned()->default(0); // No emails
+			$table->boolean('showonline')->default(true);
+			$table->boolean('receive_messages')->default(true);
+			$table->boolean('block_blocked_messages')->default(true);
+			$table->boolean('hide_blocked_posts')->default(true);
+			$table->boolean('only_buddy_messages')->default(false);
+			$table->boolean('receive_email')->default(true);
+			$table->integer('dob_privacy')->unsigned()->default(2);
+			$table->integer('dob_visibility')->unsigned()->default(1);
 
 			$table->foreign('user_id')->references('id')->on('users');
 //            $table->foreign('style')->references('id')->on('styles');
