@@ -99,7 +99,7 @@ class PostRepository implements IPostRepository
 		}
 
 
-		return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
 	}
 
 	/**
