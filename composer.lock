@@ -994,12 +994,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "1a887d3767569f54538ab4c118c28e57fb694103"
+                "reference": "1416de66af30f4506fcc7b7b48637a1fdc352794"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/1a887d3767569f54538ab4c118c28e57fb694103",
-                "reference": "1a887d3767569f54538ab4c118c28e57fb694103",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/1416de66af30f4506fcc7b7b48637a1fdc352794",
+                "reference": "1416de66af30f4506fcc7b7b48637a1fdc352794",
                 "shasum": ""
             },
             "require": {
@@ -1026,7 +1026,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-02-20 16:35:15"
+            "time": "2015-02-25 16:11:27"
         },
         {
             "name": "mybb/parser",
@@ -1034,12 +1034,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Parser.git",
-                "reference": "6d4c7e186a70822fe98a47828364ec3b94ea5158"
+                "reference": "954e003f949678bf0f675c8226db0e4ac9b62b54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Parser/zipball/6d4c7e186a70822fe98a47828364ec3b94ea5158",
-                "reference": "6d4c7e186a70822fe98a47828364ec3b94ea5158",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/954e003f949678bf0f675c8226db0e4ac9b62b54",
+                "reference": "954e003f949678bf0f675c8226db0e4ac9b62b54",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-02-20 16:46:59"
+            "time": "2015-02-25 16:06:15"
         },
         {
             "name": "nesbot/carbon",

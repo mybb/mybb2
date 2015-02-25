@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Http\Controllers;
+<?php
+
+namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\IForumRepository;

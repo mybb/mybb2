@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\Decorators\Forum\CachingDecorator;
 
 class AppServiceProvider extends ServiceProvider
@@ -73,11 +74,25 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\MyCode'
 		);
 
+		$this->initDefaultUser();
+
 		// Temporary fix for Form...
 		$this->app->bind('Illuminate\Html\FormBuilder', function ($app) {
 			$form = new \Illuminate\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
 
 			return $form->setSessionStore($app['session.store']);
 		});
+	}
+
+	/**
+	 * Initialise the default (guest) user, using the custom Guard implementation.
+	 */
+	private function initDefaultUser()
+	{
+		/** @var \MyBB\Auth\Contracts\Guard $guard */
+		$guard = $this->app->make('Illuminate\Auth\Guard');
+		$defaultUser = new User();
+		$defaultUser->name = 'Guest';
+		$guard->registerDefaultUser($defaultUser);
 	}
 }

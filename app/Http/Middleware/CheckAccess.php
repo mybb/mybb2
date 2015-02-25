@@ -66,7 +66,8 @@ class CheckAccess
 			// Check if our role is allowed
 			$notAllowed = explode('|', $action['except']);
 
-			if (in_array($this->auth->user()->role->role_slug, $notAllowed)) {
+
+			if (!$this->auth->user()->role || in_array($this->auth->user()->role->role_slug, $notAllowed)) {
 				return false;
 			}
 		}

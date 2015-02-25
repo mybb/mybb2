@@ -9,7 +9,8 @@ var gulp = require("gulp"),
     autoprefixer = require("gulp-autoprefixer"),
     minifycss = require("gulp-minify-css"),
     rename = require("gulp-rename"),
-    del = require('del');
+    del = require('del'),
+    browserify = require("browserify");
 
 var paths = {
     bower: "./bower_components",
