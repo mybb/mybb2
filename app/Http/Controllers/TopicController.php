@@ -59,7 +59,7 @@ class TopicController extends Controller
 
 		$this->topicRepository->incrementViewCount($topic);
 
-		$posts = $this->postRepository->allForTopic($topic);
+		$posts = $this->postRepository->allForTopic($topic, true);
 
 		return view('topic.show', compact('topic', 'posts'));
 	}
@@ -220,9 +220,9 @@ class TopicController extends Controller
 		} else {*/// I'll work on it later.
 			$this->postRepository->restorePost($post);
 			$posts = $this->postRepository->allForTopic($topic);
-			/*$topic = $this->topicRepository->editTopic($topic, [
+			$topic = $this->topicRepository->editTopic($topic, [
 				'last_post_id' => $posts[count($posts) - 1]['id']
-			]);*/
+			]);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		//}
 
@@ -248,7 +248,7 @@ class TopicController extends Controller
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
 		} else {
-			if ($post['id'] == $topic['last_post_id']) {
+			if ($post['id'] == $topic['last_post_id'] && $post['deleted_at'] == null) {
 				$posts = $this->postRepository->allForTopic($topic);
 				$topic = $this->topicRepository->editTopic($topic, [
 					'last_post_id' => $posts[count($posts) - 2]['id']

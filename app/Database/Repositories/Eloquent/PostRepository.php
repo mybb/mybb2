@@ -86,10 +86,11 @@ class PostRepository implements IPostRepository
 	 * Get all posts for a thread.
 	 *
 	 * @param Topic $topic The thread to fetch the posts for.
+	 * @param bool $withTrashed Find trashed posts?
 	 *
 	 * @return mixed
 	 */
-	public function allForTopic(Topic $topic)
+	public function allForTopic(Topic $topic, $withTrashed = false)
 	{
 		if ($this->guard->check() == false) {
 			// Todo: default to board setting
@@ -98,8 +99,14 @@ class PostRepository implements IPostRepository
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
 
-
-		return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		if($withTrashed)
+		{
+			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		}
+		else
+		{
+			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		}
 	}
 
 	/**
