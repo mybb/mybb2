@@ -29,7 +29,8 @@
     "jquery": "2",
     "jquery-dropdown": "*",
     "hideShowPassword": "https://github.com/cloudfour/hideShowPassword.git#~2.0.3",
-    "jquery-modal": "https://github.com/kylefox/jquery-modal.git#~0.5.2"
+    "jquery-modal": "https://github.com/kylefox/jquery-modal.git#~0.5.2",
+    "Stepper": "https://github.com/Formstone/Stepper.git#~3.0.8"
   },
   "resolutions": {
     "jquery": "2"
