@@ -79,7 +79,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->postModel->find($id);
+		return $this->postModel->withTrashed()->find($id);
 	}
 
 	/**
@@ -184,9 +184,31 @@ class PostRepository implements IPostRepository
 
 	public function deletePost(Post $post)
 	{
-		$post->topic->decrement('num_posts');
-		$post->author->decrement('num_posts');
+		if($post['deleted_at'] == null)
+		{
+			$post->topic->decrement('num_posts');
+			$post->author->decrement('num_posts');
+			return $post->delete();
+		}
+		else
+		{
+			return $post->forceDelete();
+		}
+	}
 
-		return $post->delete();
+	/**
+	 * Restore a post
+	 *
+	 * @param Post $post The post to restore
+	 *
+	 * @return mixed
+	 */
+
+	public function restorePost(Post $post)
+	{
+		$post->topic->increment('num_posts');
+		$post->author->increment('num_posts');
+
+		return $post->restore();
 	}
 }
