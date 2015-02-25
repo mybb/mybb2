@@ -2,7 +2,7 @@
 				{{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ asset('images/avatar.png') }}" alt="Your avatar" class="avatar" /></a>
-						<h3><a href="index.php?page=profile">{{ auth_user().name }}</a></h3>
+						<h3><a href="index.php?page=profile">{{ auth_user().role.role_username_style|replace({':user': auth_user().name})|raw }}</a></h3>
 						<span class="post-date">Now</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
 						<a href="{{ url_route("topics.reply", [topic.slug]) }}" class="full-reply" title="Open Full Editor"><i class="fa fa-external-link"></i><span class="text">Full Editor</a>

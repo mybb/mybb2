@@ -79,17 +79,18 @@ class PostRepository implements IPostRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->postModel->find($id);
+		return $this->postModel->withTrashed()->find($id);
 	}
 
 	/**
 	 * Get all posts for a thread.
 	 *
 	 * @param Topic $topic The thread to fetch the posts for.
+	 * @param bool $withTrashed Find trashed posts?
 	 *
 	 * @return mixed
 	 */
-	public function allForTopic(Topic $topic)
+	public function allForTopic(Topic $topic, $withTrashed = false)
 	{
 		if (!$this->guard->check()) {
 			// Todo: default to board setting
@@ -98,8 +99,14 @@ class PostRepository implements IPostRepository
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
 
-
-		return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		if($withTrashed)
+		{
+			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		}
+		else
+		{
+			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+		}
 	}
 
 	/**
@@ -133,6 +140,8 @@ class PostRepository implements IPostRepository
 				               'last_post_id' => $post['id']
 			               ]);
 		}
+
+		$post->author->increment('num_posts');
 
 		return $post;
 	}
@@ -182,8 +191,31 @@ class PostRepository implements IPostRepository
 
 	public function deletePost(Post $post)
 	{
-		$post->topic->decrement('num_posts');
+		if($post['deleted_at'] == null)
+		{
+			$post->topic->decrement('num_posts');
+			$post->author->decrement('num_posts');
+			return $post->delete();
+		}
+		else
+		{
+			return $post->forceDelete();
+		}
+	}
 
-		return $post->delete();
+	/**
+	 * Restore a post
+	 *
+	 * @param Post $post The post to restore
+	 *
+	 * @return mixed
+	 */
+
+	public function restorePost(Post $post)
+	{
+		$post->topic->increment('num_posts');
+		$post->author->increment('num_posts');
+
+		return $post->restore();
 	}
 }

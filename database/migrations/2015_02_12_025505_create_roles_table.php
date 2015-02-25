@@ -18,6 +18,7 @@ class CreateRolesTable extends Migration
 			$table->string('role_display_name');
 			$table->string('role_description')->nullable();
 			$table->string('role_slug');
+			$table->string('role_username_style')->default(':user');
 			$table->nullableTimestamps();
 		});
 	}

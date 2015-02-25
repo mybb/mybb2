@@ -15,6 +15,7 @@ return [
 	'password_confirm' => 'Please confirm your password',
 	'members' => 'Members',
 	'posts' => 'Posts',
+	'topics' => 'Topics',
 	'joinDate' => 'Join Date',
 	'lastVisit' => 'Last Visit'
 ];

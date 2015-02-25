@@ -12,12 +12,14 @@
 			{% for user in users %}
 				<div class="user">
 					<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ asset('images/avatar.png') }}" class="avatar" /></a>
-					<h3 class="username"><a href="index.php?page=profile">{{ user.name }}</a></h3>
+					<h3 class="username"><a href="index.php?page=profile">{{ user.role.role_username_style|replace({':user': user.name})|raw }}</a></h3>
 					<h4 class="usertitle">{{ user.usertitle?:user.role.role_display_name }}</h4>
 					<span class="team-badge"><span class="text">{{ user.role.role_display_name }}</span></span>
 					<dl class="user-statistics stats">
-						{# <dt>{{ trans('member.posts') }}</dt>
-						<dd>1,565</dd> #}
+						<dt>{{ trans('member.posts') }}</dt>
+						<dd>{{ user.num_posts }}</dd>
+						<dt>{{ trans('member.topics') }}</dt>
+						<dd>{{ user.num_topics }}</dd>
 						<dt>{{ trans('member.joinDate') }}</dt>
 						<dd>{{ user.created_at }}</dd>
 						<dt>{{ trans('member.lastVisit') }}</dt>
