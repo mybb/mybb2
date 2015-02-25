@@ -1,6 +1,6 @@
 <?php
 /**
- * Thread repository implementation, using Eloquent ORM.
+ * Forum repository implementation, using Eloquent ORM.
  *
  * @version 2.0.0
  * @author  MyBB Group

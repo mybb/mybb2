@@ -36,6 +36,8 @@ Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicC
 
 Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);
 
+Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
+
 Route::get('home', 'HomeController@index');
 
 Route::controllers([

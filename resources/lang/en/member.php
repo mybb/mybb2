@@ -13,5 +13,8 @@ return [
 	'username' => 'Username',
 	'email' => 'Email',
 	'password_confirm' => 'Please confirm your password',
-
+	'members' => 'Members',
+	'posts' => 'Posts',
+	'joinDate' => 'Join Date',
+	'lastVisit' => 'Last Visit'
 ];

@@ -54,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\IUserRepository',
+			'MyBB\Core\Database\Repositories\Eloquent\UserRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
 			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
