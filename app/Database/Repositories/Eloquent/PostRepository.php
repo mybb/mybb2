@@ -91,7 +91,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function allForTopic(Topic $topic)
 	{
-		if ($this->guard->check() == null) {
+		if ($this->guard->check() == false) {
 			// Todo: default to board setting
 			$ppp = 10;
 		} else {
