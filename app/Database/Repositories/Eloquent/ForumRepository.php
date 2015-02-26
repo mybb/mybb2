@@ -62,7 +62,7 @@ class ForumRepository implements IForumRepository
 	 */
 	public function findBySlug($slug = '')
 	{
-		return $this->forumModel->whereSlug($slug)->with(['children'])->first();
+		return $this->forumModel->whereSlug($slug)->with(['children', 'parent'])->first();
 	}
 
 	/**

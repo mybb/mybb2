@@ -4,6 +4,9 @@
     <meta name="description" content="{{ forum.description }}" />
     <link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
 {% endblock %}
+{% block breadcrumb %}
+	{{ Breadcrumbs.render('forum', forum) }}
+{% endblock %}
 {% block contents %}
 		<article class="full-width">
 			<header>

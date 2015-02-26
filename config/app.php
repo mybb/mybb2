@@ -135,6 +135,7 @@ return [
 		'TwigBridge\ServiceProvider',
 		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 		/*
 		 * Application Service Providers...
 		 */
@@ -196,6 +197,7 @@ return [
 		'Twig' => 'TwigBridge\Facade\Twig',
 		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
 		'Node' => 'Kalnoy\Nestedset\Node',
+		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
 
 	],
 

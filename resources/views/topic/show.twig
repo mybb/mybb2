@@ -6,6 +6,9 @@
     <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
     <link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
 {% endblock %}
+{% block breadcrumb %}
+	{{ Breadcrumbs.render('topic', topic) }}
+{% endblock %}
 {% block contents %}
 	<article class="full-width">
 		<header>
