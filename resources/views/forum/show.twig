@@ -109,7 +109,7 @@
 						<div class="latest-column">
 							<h4>{{ trans('topic.latest') }}</h4>
 							<!-- it should be change later -->
-							<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
+							<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
 							<p class="latest-post">
 								<span class="post-author"><a href="">{{ topic.lastPost.author.name }}</a></span>
 								<a href="{{ url_route('topics.last', [topic.slug]) }}" class="post-date" title="{{ topic.lastPost.created_at }}">{{ topic.lastPost.created_at }}</a>

@@ -49,6 +49,10 @@ return [
 	'updatedPassword' => 'Your password has been changed',
 	'unconfirmedChange' => 'There\'s already a confirmation mail somewhere on the internet. If you request a new change the link in that mail will get invalid.',
 
+	'avatar_file' => 'Upload a new avatar',
+	'avatar_file_desc' => 'Choose an avatar on your local computer to upload.',
+	'avatar_link' => 'Avatar URL or Gravatar Email',
+
 	'datetime' => 'Date and Time',
 	'dateformat' => 'Date Format',
 	'timeformat' => 'Time Format',

@@ -2395,6 +2395,11 @@ section.form .change-avatar p {
 	line-height: 1.4;
 }
 
+section.form .change-avatar .avatar-profile-link .avatar {
+	width: 100px;
+	height: 100px;
+}
+
 section.form .change-avatar .buttons {
 	margin-left: 0;
 }

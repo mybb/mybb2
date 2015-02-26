@@ -20,7 +20,7 @@
 			{% for post in posts %}
 				<div class="post{{ post.trashed ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post-meta">
-						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
+						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
 						<a href="#permalink" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
 						{% if post.trashed %}

@@ -1,0 +1,29 @@
+{% extends "account.base" %}
+{% block inner_title %}
+	{{ trans('account.avatar') }}
+{% endblock %}
+{% block inner_contents %}
+		<header>
+			<h1>{{ trans('account.avatar') }}</h1>
+		</header>
+
+	{{ form_open({'url_route': 'account.avatar', 'method': 'post', 'files': true}) }}
+	<section class="form">
+		<div class="form-section clearfix">
+			<div class="form-row">
+				<h3>{{ form_label('avatar_file', trans('account.avatar_file')) }}</label></h3>
+				<p class="description">{{ trans('account.avatar_file_desc') }}</p>
+				{{ form_file('avatar_file') }}
+			</div>
+			<div class="form-row">
+				<h3>{{ form_label('avatar_link', trans('account.avatar_link')) }}</h3>
+				{{ form_text('avatar_link', auth_user.avatar_link) }}
+			</div>
+		</div>
+	</section>
+	<div class="form-submit">
+		{{ form_button('<i class="fa fa-picture-o"></i><span class="text">'~trans('account.avatar_change')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+	</div>
+	{{ form_close() }}
+
+{% endblock %}

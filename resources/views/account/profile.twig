@@ -12,11 +12,11 @@
 		<div class="form-section clearfix">
 			<h2>{{ trans('account.avatar') }}</h2>
 			<div class="form-row-container change-avatar">
-				<a href="index.php?page=account/avatar" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+				<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
 				<p>{{ trans('account.avatar_desc') }}</p>
 				<div class="buttons">
-					<a href="index.php?page=account/avatar" class="button secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
-					<a href="index.php?page=account/avatar" class="button secondary"><i class="fa fa-times"></i><span class="text">{{ trans('account.avatar_remove') }}</span></a>
+					<a href="{{ url_route('account.avatar') }}" class="button secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
+					<a href="{{ url_route('account.avatar.remove') }}" class="button secondary"><i class="fa fa-times"></i><span class="text">{{ trans('account.avatar_remove') }}</span></a>
 				</div>
 			</div>
 		</div>

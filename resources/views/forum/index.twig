@@ -11,7 +11,7 @@
 		<div class="topic-list">
             {% for topic in topics %}
                 <div class="topic">
-                    <a href="" class="avatar-profile-link" title="Go to spork985's profile"><img src="images/avatar.png" alt="spork985's avatar" class="avatar" /></a>
+                    <a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author }} avatar" class="avatar" /></a>
                     <div class="topic-info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
                         <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a></h3>

@@ -122,10 +122,10 @@ class TopicRepository implements ITopicRepository
 	public function getNewest($num = 20)
 	{
 		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
-			                                                                                  'lastPost',
-			                                                                                  'forum',
-			                                                                                  'lastPost.author'
-		                                                                                  ])->take($num)->get();
+			'lastPost',
+			'forum',
+			'lastPost.author'
+		])->take($num)->get();
 	}
 
 	/**

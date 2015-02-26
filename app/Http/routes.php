@@ -63,6 +63,9 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::get('/password', ['as' => 'account.password', 'uses' => 'AccountController@getPassword']);
 	Route::post('/password', ['as' => 'account.password', 'uses' => 'AccountController@postPassword']);
 	Route::get('/password/confirm/{token}', ['as' => 'account.password.confirm', 'uses' => 'AccountController@confirmPassword']);
+	Route::get('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@getAvatar']);
+	Route::post('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@postAvatar']);
+	Route::get('/avatar/remove', ['as' => 'account.avatar.remove', 'uses' => 'AccountController@removeAvatar']);
 	Route::get('/notifications', ['as' => 'account.notifications', 'uses' => 'AccountController@getNotifications']);
 	Route::get('/following', ['as' => 'account.following', 'uses' => 'AccountController@getFollowing']);
 	Route::get('/buddies', ['as' => 'account.buddies', 'uses' => 'AccountController@getBuddies']);

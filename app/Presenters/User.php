@@ -32,4 +32,50 @@ class User extends BasePresenter
 		}
 		return $this->wrappedObject->name;
 	}
+
+	public function avatar()
+	{
+		$avatar = $this->wrappedObject->avatar;
+
+		// Empty? Default avatar
+		if(empty($avatar))
+		{
+			return asset('images/avatar.png');
+		}
+		// Link? Nice!
+		elseif(filter_var($avatar, FILTER_VALIDATE_URL) !== false)
+		{
+			return $avatar;
+		}
+		// Email? Set up Gravatar
+		elseif(filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
+		{
+			// TODO: Replace with euans package
+			return "http://gravatar.com/avatar/".md5(strtolower(trim($avatar)));
+		}
+		// File?
+		elseif(file_exists(public_path("uploads/avatars/{$avatar}")))
+		{
+			return asset("uploads/avatars/{$avatar}");
+		}
+		// Nothing?
+		else
+		{
+			return asset('images/avatar.png');
+		}
+	}
+
+	public function avatar_link()
+	{
+		$avatar = $this->wrappedObject->avatar;
+
+		// If we have an email or link we'll return it - otherwise nothing
+		// Link? Nice!
+		if(filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
+		{
+			return $avatar;
+		}
+
+		return '';
+	}
 }

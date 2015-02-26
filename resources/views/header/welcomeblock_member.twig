@@ -1,106 +1,107 @@
-                        <ul class="user-links">
-                            <li class="active-user dropdown-link">
-                                <a href="{{ url_route('account.index') }}" class="multi-link base-link">
-                                    <span class="text">{{ auth_user().name }}</span>
-                                    <i class="fa fa-caret-down"></i>
-                                    <i class="fa fa-caret-up"></i>
-                                </a>
-                                <div class="dropdown">
-                                    <a href="index.php?page=profile" class="avatar-profile-link" title="Go to your profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" alt="Your avatar" class="avatar" /></a>
-                                    <ul class="account-links">
-                                        <li><a href="{{ url_route('account.index') }}" class="multi-link"><i class="fa fa-dashboard"></i><span class="text">{{ trans('account.youraccount') }}</span></a></li>
-                                        <li><a href="{{ url_route('account.following') }}" class="multi-link"><i class="fa fa-plus"></i><span class="text">{{ trans('account.following') }}</span></a></li>
-                                        <li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments"></i><span class="text">{{ trans('account.messages') }}</span></a></li>
-                                        <li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i><span class="text">{{ trans('member.logout') }}</span></a></li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="notifications dropdown-link">
-                                <a href="index.php?page=account/notifications" class="multi-link">
-                                    <i class="fa fa-globe"></i>
-                                    <span class="text">Notifications</span>
-                                    <span class="unread-count">4</span>
-                                    <i class="fa fa-caret-down"></i>
-                                    <i class="fa fa-caret-up"></i>
-                                </a>
-                                <div class="dropdown">
-                                    <div class="notifications-container">
-                                        <h2>
-                                            <a href="index.php?page=account/notifications">
-                                                <span class="text">Notifications</span>
-                                            </a>
-                                            <a href="index.php?page=account/preferences" title="Notification Preferences" class="option"><i class="fa fa-cog"></i><span class="text">Preferences</span></a>
-                                        </h2>
-                                        <ul class="notifications">
-                                            <li class="quote">
-                                                <a href="index.php?page=thread#post">
-                                                    <i class="fa fa-comment"></i>
-                                                    <span class="text"><span class="username">Ryan Loos</span> quoted your post in Layout mock-ups</span>
-                                                    <time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
-                                                </a>
-                                            </li>
-                                            <li class="like">
-                                                <a href="index.php?page=thread#post">
-                                                    <i class="fa fa-thumbs-up"></i>
-                                                    <span class="text"><span class="username">Tim B.</span> liked your post in Responsive theme</span>
-                                                    <time datetime="2013-03-22T10:42" title="Mar 22, 2013, 10:42 AM">2 hours ago</time>
-                                                </a>
-                                            </li>
-                                            <li class="groupJoinRequest">
-                                                <a href="index.php?page=account/groups-join-requests">
-                                                    <i class="fa fa-group"></i>
-                                                    <span class="text"><span class="username">MattRogowski</span> requested to join Awesome Group</span>
-                                                    <time datetime="2013-03-22T10:40" title="Mar 22, 2013, 10:40 AM">2 hours ago</time>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="index.php?page=thread">
-                                                    <i class="fa fa-thumb-tack"></i>
-                                                    <span class="text"><span class="username">User A</span> posted a thread requiring moderation</span>
-                                                    <time datetime="2013-03-22T10:40" title="Mar 22, 2013, 9:40 AM">3 hours ago</time>
-                                                </a>
-                                            </li>
-                                            <li class="view-all">
-                                                <a href="index.php?page=account/notifications"><span class="text">View All Recent Notifications</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="messages dropdown-link">
-                                <a href="index.php?page=messages" class="multi-link">
-                                    <i class="fa fa-comments"></i>
-                                    <span class="text">Messages</span>
-                                    <span class="unread-count">2</span>
-                                    <i class="fa fa-caret-down"></i>
-                                    <i class="fa fa-caret-up"></i>
-                                </a>
-                                 <div class="dropdown">
-                                    <div class="messages-container">
-                                        <h2>
-                                            <a href="index.php?page=messages/index">
-                                                <span class="text">Unread Messages</span>
-                                            </a>
-                                            <a href="index.php?page=messages/compose" title="Compose New Message" class="option"><i class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
-                                        </h2>
-                                        <ul class="messages">
-                                            <li>
-                                                <a href="index.php?page=profile" class="avatar-profile-link" title="Go to Ryan Loos's profile"><img src="http://ih2.redbubble.net/avatar.116723.100x100.jpg?dateline=1365291398" alt="Ryan Loos's avatar" class="avatar" /></a>
-                                                <a href="index.php?page=messages/message" class="conversation-title">MyBB 2.0 testing</a>
-                                                from <a href="index.php?page=profile" class="message-author">Ryan Loos</a>
-                                                <time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
-                                            </li>
-                                            <li>
-                                                <a href="index.php?page=profile" class="avatar-profile-link" title="Go to Tim B.'s profile"><img src="http://i50.tinypic.com/2v8nvc4_th.jpg?dateline=1346633969" alt="Tim B.'s avatar" class="avatar" /></a>
-                                                <a href="index.php?page=messages/message" class="conversation-title">New website rollout</a>
-                                                from <a href="index.php?page=profile" class="message-author">Tim B.</a>
-                                                <time datetime="2013-03-22T11:34" title="Mar 22, 2013, 11:34 AM">1 hour ago</time>
-                                            </li>
-                                            <li class="view-all">
-                                                <a href="index.php?page=messages/index"><span class="text">View All Messages</span></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+						<ul class="user-links">
+							<li class="active-user dropdown-link">
+								<a href="{{ url_route('account.index') }}" class="multi-link base-link">
+									<span class="text">{{ auth_user().name }}</span>
+									<i class="fa fa-caret-down"></i>
+									<i class="fa fa-caret-up"></i>
+								</a>
+								<div class="dropdown">
+									{# TODO: nope, doesn't work #}
+									<a href="index.php?page=profile" class="avatar-profile-link" title="Go to your profile"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
+									<ul class="account-links">
+										<li><a href="{{ url_route('account.index') }}" class="multi-link"><i class="fa fa-dashboard"></i><span class="text">{{ trans('account.youraccount') }}</span></a></li>
+										<li><a href="{{ url_route('account.following') }}" class="multi-link"><i class="fa fa-plus"></i><span class="text">{{ trans('account.following') }}</span></a></li>
+										<li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments"></i><span class="text">{{ trans('account.messages') }}</span></a></li>
+										<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out"></i><span class="text">{{ trans('member.logout') }}</span></a></li>
+									</ul>
+								</div>
+							</li>
+							<li class="notifications dropdown-link">
+								<a href="index.php?page=account/notifications" class="multi-link">
+									<i class="fa fa-globe"></i>
+									<span class="text">Notifications</span>
+									<span class="unread-count">4</span>
+									<i class="fa fa-caret-down"></i>
+									<i class="fa fa-caret-up"></i>
+								</a>
+								<div class="dropdown">
+									<div class="notifications-container">
+										<h2>
+											<a href="index.php?page=account/notifications">
+												<span class="text">Notifications</span>
+											</a>
+											<a href="index.php?page=account/preferences" title="Notification Preferences" class="option"><i class="fa fa-cog"></i><span class="text">Preferences</span></a>
+										</h2>
+										<ul class="notifications">
+											<li class="quote">
+												<a href="index.php?page=thread#post">
+													<i class="fa fa-comment"></i>
+													<span class="text"><span class="username">Ryan Loos</span> quoted your post in Layout mock-ups</span>
+													<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
+												</a>
+											</li>
+											<li class="like">
+												<a href="index.php?page=thread#post">
+													<i class="fa fa-thumbs-up"></i>
+													<span class="text"><span class="username">Tim B.</span> liked your post in Responsive theme</span>
+													<time datetime="2013-03-22T10:42" title="Mar 22, 2013, 10:42 AM">2 hours ago</time>
+												</a>
+											</li>
+											<li class="groupJoinRequest">
+												<a href="index.php?page=account/groups-join-requests">
+													<i class="fa fa-group"></i>
+													<span class="text"><span class="username">MattRogowski</span> requested to join Awesome Group</span>
+													<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 10:40 AM">2 hours ago</time>
+												</a>
+											</li>
+											<li>
+												<a href="index.php?page=thread">
+													<i class="fa fa-thumb-tack"></i>
+													<span class="text"><span class="username">User A</span> posted a thread requiring moderation</span>
+													<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 9:40 AM">3 hours ago</time>
+												</a>
+											</li>
+											<li class="view-all">
+												<a href="index.php?page=account/notifications"><span class="text">View All Recent Notifications</span></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+							<li class="messages dropdown-link">
+								<a href="index.php?page=messages" class="multi-link">
+									<i class="fa fa-comments"></i>
+									<span class="text">Messages</span>
+									<span class="unread-count">2</span>
+									<i class="fa fa-caret-down"></i>
+									<i class="fa fa-caret-up"></i>
+								</a>
+								 <div class="dropdown">
+									<div class="messages-container">
+										<h2>
+											<a href="index.php?page=messages/index">
+												<span class="text">Unread Messages</span>
+											</a>
+											<a href="index.php?page=messages/compose" title="Compose New Message" class="option"><i class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
+										</h2>
+										<ul class="messages">
+											<li>
+												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Ryan Loos's profile"><img src="http://ih2.redbubble.net/avatar.116723.100x100.jpg?dateline=1365291398" alt="Ryan Loos's avatar" class="avatar" /></a>
+												<a href="index.php?page=messages/message" class="conversation-title">MyBB 2.0 testing</a>
+												from <a href="index.php?page=profile" class="message-author">Ryan Loos</a>
+												<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
+											</li>
+											<li>
+												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Tim B.'s profile"><img src="http://i50.tinypic.com/2v8nvc4_th.jpg?dateline=1346633969" alt="Tim B.'s avatar" class="avatar" /></a>
+												<a href="index.php?page=messages/message" class="conversation-title">New website rollout</a>
+												from <a href="index.php?page=profile" class="message-author">Tim B.</a>
+												<time datetime="2013-03-22T11:34" title="Mar 22, 2013, 11:34 AM">1 hour ago</time>
+											</li>
+											<li class="view-all">
+												<a href="index.php?page=messages/index"><span class="text">View All Messages</span></a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</li>
+						</ul>

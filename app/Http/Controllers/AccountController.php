@@ -19,6 +19,8 @@ class AccountController extends Controller
 	public function __construct(Guard $guard)
 	{
 		$this->guard = $guard;
+
+		view()->share('auth_user', $guard->user());
 	}
 
 	public function index()
@@ -206,6 +208,58 @@ class AccountController extends Controller
 		// We need show some sort of feedback to the user
 		Session::flash('success', trans('account.updatedPassword'));
 
+		return redirect()->route('account.profile');
+	}
+
+	public function getAvatar()
+	{
+		return view('account.avatar')->withActive('profile');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postAvatar(Request $request)
+	{
+		// TODO: validation. Upload size, valid link, valid email
+		$this->validate($request, [
+			'avatar_file' => 'image',
+		]);
+
+		// TODO: Delete the old file if an uploaded was used
+
+		// File?
+		if($request->hasFile('avatar_file'))
+		{
+			$file = $request->file('avatar_file');
+
+			$name = "avatar_{$this->guard->user()->id}_" . time() . "." . $file->getClientOriginalExtension();
+			$file->move(public_path('uploads/avatars'), $name);
+			$this->guard->user()->update(['avatar' => $name]);
+		}
+		// URL? Email?
+		elseif(filter_var($request->get('avatar_link'), FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'), FILTER_VALIDATE_EMAIL) !== false)
+		{
+			//$url = str_replace(array('http://', 'https://', 'ftp://'), '', strtolower($value));
+			//return checkdnsrr($url, 'A');
+
+			$this->guard->user()->update(['avatar' => $request->get('avatar_link')]);
+		}
+		else
+		{
+			// Nothing we want here, empty it!
+			$this->guard->user()->update(['avatar' => '']);
+		}
+
+		return redirect()->route('account.profile');
+	}
+
+	public function removeAvatar()
+	{
+		// TODO: Delete the old file if an uploaded was used
+		$this->guard->user()->update(['avatar' => '']);
 		return redirect()->route('account.profile');
 	}
 
