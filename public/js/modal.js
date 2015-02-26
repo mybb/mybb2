@@ -1,4 +1,4 @@
-var modal = function mymodal(page, find) {
+function modal(page, find) {
 	if(page[0] == '/')
 		page = page.substr(1);
 
@@ -14,6 +14,3 @@ var modal = function mymodal(page, find) {
 		$(".password-toggle").hideShowPassword(false, true);
 	});
 }
-
-module.exports = modal;
-console.log(modal);

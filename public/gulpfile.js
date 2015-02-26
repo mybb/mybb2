@@ -53,6 +53,11 @@ var vendor_scripts = [
     paths.bower + "/dropzone/dist/dropzone.js"
 ];
 
+var scripts = [
+    paths.js.src + "/modal.js",
+    paths.js.src + "/other.js"
+];
+
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "fonts"]);
 
 gulp.task("clean", function(cb) {
@@ -96,28 +101,18 @@ gulp.task("vendor_scripts", function() {
 });
 
 gulp.task("scripts", function() {
-    var bundler = browserify({
-        entries: [paths.js.src + "/main.js"],
-        debug: true
-    });
-
-    var bundle = function() {
-        return bundler
-            .bundle()
-            .pipe(source("main.js"))
-            .pipe(buffer())
-            .pipe(gulp.dest(paths.js.dest + "/"))
-            //.pipe(sourcemaps.init({loadMaps: true}))
-            .pipe(stripDebug())
-            .pipe(uglify())
-            .pipe(sourcemaps.write('./'))
-            .pipe(rename({
-                suffix: ".min"
-            }))
-            .pipe(gulp.dest(paths.js.dest + "/"));
-    };
-
-    return bundle();
+	console.log(paths.js.dest);
+    return gulp.src(scripts)
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(concat("main.js"))
+        .pipe(gulp.dest(paths.js.dest + "/"))
+        .pipe(stripDebug())
+        .pipe(uglify())
+        .pipe(sourcemaps.write('./'))
+        .pipe(rename({
+            suffix: ".min"
+        }))
+        .pipe(gulp.dest(paths.js.dest + "/"));
 });
 
 gulp.task("styles", function() {

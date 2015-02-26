@@ -14,11 +14,11 @@
             </footer>
         </div>
 
-        {# This is useless - if we pack jQuery with MyBB we can always use it and not google's version. Left it as jQuery isn't included yet #}
+        {# This is useless - if we pack jQuery with MyBB we can always use it and not google's version. Left it as jQuery isn't included yet 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-        <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
-        <script src="{{ asset('assets/js/main.min.js') }}"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script> #}
+        <script src="{{ asset('assets/js/vendor.js') }}"></script>
+        <script src="{{ asset('assets/js/main.js') }}"></script>
             <!--<script>
                 var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
                 (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
