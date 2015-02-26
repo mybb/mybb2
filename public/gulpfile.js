@@ -40,10 +40,19 @@ var paths = {
 
 var vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
+    paths.bower + "/modernizr/modernizr.js",
     paths.bower + "/jquery-dropdown/jquery.dropdown.js",
     paths.bower + "/jquery-modal/jquery.modal.js",
     paths.bower + "/Stepper/jquery.fs.stepper.js",
-    paths.bower + "/hideShowPassword/hideShowPassword.js"
+    paths.bower + "/hideShowPassword/hideShowPassword.js",
+    paths.bower + "/PowerTip/src/core.js",
+    paths.bower + "/PowerTip/src/csscoordinates.js",
+    paths.bower + "/PowerTip/src/displaycontroller.js",
+    paths.bower + "/PowerTip/src/placementcalculator.js",
+    paths.bower + "/PowerTip/src/tooltipcontroller.js",
+    paths.bower + "/PowerTip/src/utility.js",
+    paths.bower + "/dropit/dropit.js",
+    paths.bower + "/dropzone/dist/dropzone.js"
 ];
 
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "fonts"]);
