@@ -20,6 +20,9 @@ composer.phar
 
 composer.lock
 
+### Uploads
+/public/uploads
+
 ### MyBB/Parser
 config/video_codes.php
 database/migrations/2015_02_16_164601_create_parser_badwords_table.php
