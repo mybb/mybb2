@@ -18,7 +18,7 @@
         <section class="topic">
             {{ posts.render|raw }}
 			{% for post in posts %}
-				<div class="post{{ post.trashed ? ' soft-deleted' }}" id="post-{{ post.id }}">
+				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
@@ -40,7 +40,7 @@
 					<div class="post-foot">
 						<ul class="post-controls">
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
-							{% if post.trashed %}
+							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, post.id]) }}" title="Restore"><i class="fa fa-circle"></i><span class="text">Restore</span></a></li>
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
