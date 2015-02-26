@@ -1467,7 +1467,7 @@ aside .topic-list .topic .topic-replies {
 }
 
 
-.topic .post.soft-deleted {
+.soft-deleted {
     background: #ece3fa;
     border-color: #ddcafa;
 }

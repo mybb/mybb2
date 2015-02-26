@@ -90,7 +90,7 @@
 			</div>
 			<div class="topics-container">
 				{% for topic in topics %}
-					<div class="topic">
+					<div class="topic{{ topic.trashed ? ' soft-deleted' }}">
 						<div class="primary-column">
 							<h3 class="topic-title">
 								<a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a>
