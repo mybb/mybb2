@@ -41,7 +41,7 @@ var paths = {
 var vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
     paths.bower + "/jquery-dropdown/jquery.dropdown.js",
-    paths.bower + "/jquery-modal/jquery.modal.css",
+    paths.bower + "/jquery-modal/jquery.modal.js",
     paths.bower + "/Stepper/jquery.fs.stepper.js",
     paths.bower + "/hideShowPassword/hideShowPassword.js"
 ];
