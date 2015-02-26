@@ -3,6 +3,8 @@
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use Hash;
+use MyBB\Core\Services\ConfirmationManager;
+use Session;
 
 class AccountController extends Controller
 {
@@ -95,7 +97,7 @@ class AccountController extends Controller
 
 	public function getEmail()
 	{
-		return view('account.email')->withActive('profile');
+		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('email', $this->guard->user()));
 	}
 
 	/**
@@ -110,12 +112,12 @@ class AccountController extends Controller
 			'password' => 'required',
 		]);
 
-		// TODO: some sort of confirmation needs to be added
-
 		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
 		{
-			// Valid password so update
-			$this->guard->user()->update($request->only('email'));
+			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'), $request->only('email'));
+
+			// We need show some sort of feedback to the user
+			Session::flash('success', trans('account.confirmEmail'));
 
 			return redirect()->route('account.profile');
 		}
@@ -128,9 +130,30 @@ class AccountController extends Controller
 			]);
 	}
 
+	public function confirmEmail($token)
+	{
+		$email = ConfirmationManager::get('email', $token);
+
+		if($email === false)
+		{
+			return redirect()
+				->route('account.profile')
+				->withErrors([
+					'token' => trans('confirmation.invalidToken'),
+				]);
+		}
+
+		$this->guard->user()->update(['email' => $email]);
+
+		// We need show some sort of feedback to the user
+		Session::flash('success', trans('account.updatedEmail'));
+
+		return redirect()->route('account.profile');
+	}
+
 	public function getPassword()
 	{
-		return view('account.password')->withActive('profile');
+		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('password', $this->guard->user()));
 	}
 
 	/**
@@ -145,12 +168,13 @@ class AccountController extends Controller
 			'password' => 'required',
 		]);
 
-		// TODO: some sort of confirmation needs to be added
-
 		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
 		{
-			// Valid password so update
-			$this->guard->user()->update(['password' => Hash::make($request->get('password1'))]);
+			// Don't save the password in plaintext!
+			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm', Hash::make($request->get('password1')));
+
+			// We need show some sort of feedback to the user
+			Session::flash('success', trans('account.confirm'));
 
 			return redirect()->route('account.profile');
 		}
@@ -161,6 +185,28 @@ class AccountController extends Controller
 			->withErrors([
 				'password1' => trans('member.invalidCredentials'),
 			]);
+	}
+
+	public function confirmPassword($token)
+	{
+		$password = ConfirmationManager::get('password', $token);
+
+		if($password === false)
+		{
+			return redirect()
+				->route('account.profile')
+				->withErrors([
+					'token' => trans('confirmation.invalidToken'),
+				]);
+		}
+
+		// Valid password so update
+		$this->guard->user()->update(['password' => $password]);
+
+		// We need show some sort of feedback to the user
+		Session::flash('success', trans('account.updatedPassword'));
+
+		return redirect()->route('account.profile');
 	}
 
 	public function getNotifications()

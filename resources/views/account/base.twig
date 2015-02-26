@@ -1,6 +1,6 @@
 {% extends "layouts.base" %}
 {% block title %}
-    {% block inner_title %}{% endblock %}{% if block('inner_title') != '' %} &bull; {% endif %} {{ trans('account.account') }}
+	{% block inner_title %}{% endblock %}{% if block('inner_title') != '' %} &bull; {% endif %} {{ trans('account.account') }}
 {% endblock %}
 {% block contents %}
 		{% if errors.any %}
@@ -14,21 +14,27 @@
 			</div>
 		{% endif %}
 
-        <article class="full-width-with-menu">
-            <nav class="account-menu">
-                <ul class="sidebar-navigation clearfix">
-                    <li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}"><i class="fa fa-dashboard"></i><span class="text">{{ trans('account.dashboard') }}</span></a></li>
-                    <li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}"><i class="fa fa-user"></i><span class="text">{{ trans('account.profile') }}</span></a></li>
-                    <li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}"><i class="fa fa-flag"></i><span class="text">{{ trans('account.notifications') }}</span></a></li>
-                    <li {% if active == 'following' %}class="active"{% endif %}><a href="{{ url_route('account.following') }}"><i class="fa fa-plus"></i><span class="text">{{ trans('account.following') }}</span></a></li>
-                    <li {% if active == 'buddies' %}class="active"{% endif %}><a href="{{ url_route('account.buddies') }}"><i class="fa fa-heart"></i><span class="text">{{ trans('account.buddies') }}</span></a></li>
-                    <li {% if active == 'preferences' %}class="active"{% endif %}><a href="{{ url_route('account.preferences') }}"><i class="fa fa-cog"></i><span class="text">{{ trans('account.preferences') }}</span></a></li>
-                    <li {% if active == 'privacy' %}class="active"{% endif %}><a href="{{ url_route('account.privacy') }}"><i class="fa fa-shield"></i><span class="text">{{ trans('account.privacy') }}</span></a></li>
-                    <li {% if active == 'drafts' %}class="active"{% endif %}><a href="{{ url_route('account.drafts') }}"><i class="fa fa-file-text-o"></i><span class="text">{{ trans('account.drafts') }}</span></a></li>
-                </ul>
-            </nav>
-            <div class="account-body">
-                {% block inner_contents %}{% endblock %}
-            </div>
-        </article>
+		{% if session_has('success') %}
+			<div class="success">
+				{{ session_get('success') }}
+			</div>
+		{% endif %}
+
+		<article class="full-width-with-menu">
+			<nav class="account-menu">
+				<ul class="sidebar-navigation clearfix">
+					<li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}"><i class="fa fa-dashboard"></i><span class="text">{{ trans('account.dashboard') }}</span></a></li>
+					<li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}"><i class="fa fa-user"></i><span class="text">{{ trans('account.profile') }}</span></a></li>
+					<li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}"><i class="fa fa-flag"></i><span class="text">{{ trans('account.notifications') }}</span></a></li>
+					<li {% if active == 'following' %}class="active"{% endif %}><a href="{{ url_route('account.following') }}"><i class="fa fa-plus"></i><span class="text">{{ trans('account.following') }}</span></a></li>
+					<li {% if active == 'buddies' %}class="active"{% endif %}><a href="{{ url_route('account.buddies') }}"><i class="fa fa-heart"></i><span class="text">{{ trans('account.buddies') }}</span></a></li>
+					<li {% if active == 'preferences' %}class="active"{% endif %}><a href="{{ url_route('account.preferences') }}"><i class="fa fa-cog"></i><span class="text">{{ trans('account.preferences') }}</span></a></li>
+					<li {% if active == 'privacy' %}class="active"{% endif %}><a href="{{ url_route('account.privacy') }}"><i class="fa fa-shield"></i><span class="text">{{ trans('account.privacy') }}</span></a></li>
+					<li {% if active == 'drafts' %}class="active"{% endif %}><a href="{{ url_route('account.drafts') }}"><i class="fa fa-file-text-o"></i><span class="text">{{ trans('account.drafts') }}</span></a></li>
+				</ul>
+			</nav>
+			<div class="account-body">
+				{% block inner_contents %}{% endblock %}
+			</div>
+		</article>
 {% endblock %}

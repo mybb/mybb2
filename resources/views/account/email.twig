@@ -7,6 +7,12 @@
 			<h1>{{ trans('account.email') }}</h1>
 		</header>
 
+	{# TODO: check whether this get's blocked in the modals, if so move it inside the form #}
+	{% if has_confirmation %}
+		<div class="alert alert-danger">
+			{{ trans('account.unconfirmedChange') }}
+		</div>
+	{% endif %}
 	{{ form_open({'url_route': 'account.email', 'method': 'post'}) }}
 	<section class="form">
 		<div class="form-section clearfix">
