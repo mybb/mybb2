@@ -259,12 +259,24 @@ class TopicRepository implements ITopicRepository
 
 	public function deleteTopic(Topic $topic)
 	{
-		$topic->forum->decrement('num_topics');
-		$topic->forum->decrement('num_posts', $topic->num_posts);
+		if($topic['deleted_at'] == null)
+		{
+			$topic->forum->decrement('num_topics');
+			$topic->forum->decrement('num_posts', $topic->num_posts);
 
-		$topic->author->decrement('num_topics');
+			$topic->author->decrement('num_topics');
 
-		return $topic->delete();
+			return $topic->delete();
+		}
+		else
+		{
+			$topic->update([
+				'first_post_id' => null,
+				'last_post_id' => null
+			]);
+			$this->postRepository->deletePostsForTopic($topic, true);
+			return $topic->forceDelete();
+		}
 	}
 
 	/**
@@ -283,25 +295,5 @@ class TopicRepository implements ITopicRepository
 		$topic->author->increment('num_topics');
 
 		return $topic->restore();
-	}
-
-
-	/**
-	 * Force Delete a topic
-	 *
-	 * @param Topic $topic The topic to delete
-	 *
-	 * @return mixed
-	 */
-
-	public function forceDeleteTopic(Topic $topic)
-	{
-		$topic->update([
-			               'first_post_id' => null,
-			               'last_post_id' => null
-		               ]);
-		$this->postRepository->forceDeletePostsForTopic($topic);
-
-		return $topic->forceDelete();
 	}
 }

@@ -176,9 +176,16 @@ class PostRepository implements IPostRepository
 	 * @return mixed
 	 */
 
-	public function deletePostsForTopic(Topic $topic)
+	public function deletePostsForTopic(Topic $topic, $force = false)
 	{
-		return $this->postModel->where('topic_id', '=', $topic->id)->delete();
+		if($force)
+		{
+			return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
+		}
+		else
+		{
+			return $this->postModel->where('topic_id', '=', $topic->id)->delete();
+		}
 	}
 
 	/**
