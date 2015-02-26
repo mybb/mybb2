@@ -15,9 +15,6 @@
         <div class="main-container">
             <div class="main wrapper clearfix">
 				{% block breadcrumb %}{% endblock %}
-				{% if block('breadcrumb') == '' %}
-					{{ Breadcrumbs.renderIfExists() }}
-				{% endif %}
                 <div id="content">
     				{% block contents %}{% endblock %}
                 </div>
