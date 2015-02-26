@@ -107,7 +107,7 @@ gulp.task("scripts", function() {
             .pipe(source("main.js"))
             .pipe(buffer())
             .pipe(gulp.dest(paths.js.dest + "/"))
-            .pipe(sourcemaps.init({loadMaps: true}))
+            //.pipe(sourcemaps.init({loadMaps: true}))
             .pipe(stripDebug())
             .pipe(uglify())
             .pipe(sourcemaps.write('./'))
