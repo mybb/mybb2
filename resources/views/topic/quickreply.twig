@@ -1,8 +1,7 @@
 			<div class="post reply" id="post-reply">
 				{{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
 					<div class="post-meta">
-						{# TODO: presenter doesn't work here #}
-						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user().avatar }}" alt="Your avatar" class="avatar" /></a>
+						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ auth_user().name }}</a></h3>
 						<span class="post-date">Now</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->

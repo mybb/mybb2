@@ -18,9 +18,9 @@ class AccountController extends Controller
 	 */
 	public function __construct(Guard $guard)
 	{
-		$this->guard = $guard;
+		parent::__construct($guard);
 
-		view()->share('auth_user', $guard->user());
+		$this->guard = $guard;
 	}
 
 	public function index()

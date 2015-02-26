@@ -33,6 +33,8 @@ class PasswordController extends Controller
 	 */
 	public function __construct(Guard $auth, PasswordBroker $passwords)
 	{
+		parent::__construct($auth);
+
 		$this->auth = $auth;
 		$this->passwords = $passwords;
 

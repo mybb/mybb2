@@ -1,6 +1,7 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Repositories\IUserRepository;
 
 
@@ -18,9 +19,12 @@ class MemberController extends Controller
 	 * @param Guard $guard
 	 */
 	public function __construct(
-		IUserRepository $userRepository
+		IUserRepository $userRepository,
+		Guard $guard
 	)
 	{
+		parent::__construct($guard);
+
 		$this->userRepository = $userRepository;
 	}
 

@@ -43,6 +43,8 @@ class TopicController extends Controller
 		IForumRepository $forumRepository,
 		Guard $guard
 	) {
+		parent::__construct($guard);
+
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
@@ -84,7 +86,7 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'page' => ceil($topic->num_posts / $ppp),
-				'#post-' . $post->id
+				'#post-' . $topic->last_post_id
 			]);
 		}
 	}

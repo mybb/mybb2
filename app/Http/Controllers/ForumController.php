@@ -3,6 +3,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
@@ -29,8 +30,11 @@ class ForumController extends Controller
 	public function __construct(
 		IForumRepository $forumRepository,
 		ITopicRepository $topicRepository,
-		IPostRepository $postRepository
+		IPostRepository $postRepository,
+		Guard $guard
 	) {
+		parent::__construct($guard);
+
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
