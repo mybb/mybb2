@@ -115,7 +115,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	public function findBySlug($slug = '')
 	{
-		return $this->topicModel->with(['author'])->where('slug', '=', $slug)->first();
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->first();
 	}
 
 
@@ -159,7 +159,7 @@ class TopicRepository implements ITopicRepository
 			$tpp = $this->guard->user()->settings->topics_per_page;
 		}
 
-		return $this->topicModel->with(['author', 'lastPost', 'lastPost.author'])
+		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
 		                        ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
 		                        ->orderBy($orderBy, $orderDir)->paginate($tpp, ['topics.*']);
 	}
@@ -259,18 +259,49 @@ class TopicRepository implements ITopicRepository
 
 	public function deleteTopic(Topic $topic)
 	{
-		$topic->update([
-			               'first_post_id' => null,
-			               'last_post_id' => null
-		               ]);
 		$topic->forum->decrement('num_topics');
 		$topic->forum->decrement('num_posts', $topic->num_posts);
 
 		$topic->author->decrement('num_topics');
-		$topic->author->decrement('num_posts', $topic->num_posts);
-
-		$this->postRepository->deletePostsForTopic($topic);
 
 		return $topic->delete();
+	}
+
+	/**
+	 * Restore a topic
+	 *
+	 * @param Topic $topic The topic to restore
+	 *
+	 * @return mixed
+	 */
+
+	public function restoreTopic(Topic $topic)
+	{
+		$topic->forum->increment('num_topics');
+		$topic->forum->increment('num_posts', $topic->num_posts);
+
+		$topic->author->increment('num_topics');
+
+		return $topic->restore();
+	}
+
+
+	/**
+	 * Force Delete a topic
+	 *
+	 * @param Topic $topic The topic to delete
+	 *
+	 * @return mixed
+	 */
+
+	public function forceDeleteTopic(Topic $topic)
+	{
+		$topic->update([
+			               'first_post_id' => null,
+			               'last_post_id' => null
+		               ]);
+		$this->postRepository->forceDeletePostsForTopic($topic);
+
+		return $topic->forceDelete();
 	}
 }

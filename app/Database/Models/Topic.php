@@ -11,9 +11,11 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model implements HasPresenter
 {
+	use SoftDeletes;
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
@@ -38,6 +40,13 @@ class Topic extends Model implements HasPresenter
 	 * @var array
 	 */
 	protected $guarded = [];
+
+	/**
+	 * The date attributes.
+	 *
+	 * @var array
+	 */
+    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
 	/**
 	 * Get the presenter class.
