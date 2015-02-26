@@ -11,6 +11,14 @@ use Mail;
 class ConfirmationManager
 {
 
+	/**
+	 * @param string        $type      The confirmation type. Used to get the language strings
+	 * @param User          $user      The user who needs to confirm something
+	 * @param string        $route     The named route where the token is checked. Should have one parameter
+	 * @param null|string   $newData   The newData which needs to be confirmed (eg new email). Can be null
+	 * @param array         $langData  Array of additional language data
+	 * @param bool          $delete    Whether or not old tokens for this type/user combination should be deleted
+	 */
 	public static function send($type, User $user, $route, $newData = null, $langData = array(), $delete = true)
 	{
 		// Generate the token - always needed
@@ -62,6 +70,13 @@ class ConfirmationManager
 		});
 	}
 
+	/**
+	 * @param string $type    The confirmation type
+	 * @param string $token   The token which needs to be confirmed
+	 * @param bool   $delete  Whether or not the found data should be deleted
+	 *
+	 * @return mixed returns the new data passed to send on success or false on failure
+	 */
 	public static function get($type, $token, $delete = true)
 	{
 		$baseQuery = DB::table('confirmations')->where('type', $type)->where('token', $token);
@@ -82,6 +97,12 @@ class ConfirmationManager
 		return $newData;
 	}
 
+	/**
+	 * @param string $type The confirmation type
+	 * @param User   $user The user to test
+	 *
+	 * @return bool
+	 */
 	public static function has($type, User $user)
 	{
 		$count = DB::table('confirmations')->where('type', $type)->where('user_id', $user->id)->count();
