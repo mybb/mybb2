@@ -19,8 +19,8 @@ class MemberController extends Controller
 	 * @param Guard $guard
 	 */
 	public function __construct(
-		IUserRepository $userRepository,
-		Guard $guard
+		Guard $guard,
+		IUserRepository $userRepository
 	)
 	{
 		parent::__construct($guard);

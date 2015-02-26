@@ -16,7 +16,8 @@ class UsersTableSeeder extends Seeder
 				'password' => Hash::make('password'),
 				'role_id' => 1,
 				'created_at' => new DateTime,
-				'updated_at' => new DateTime
+				'updated_at' => new DateTime,
+				'last_visit' => new DateTime
 			],
 			[
 				'name' => 'Registered',
@@ -24,7 +25,8 @@ class UsersTableSeeder extends Seeder
 				'password' => Hash::make('password'),
 				'role_id' => 2,
 				'created_at' => new DateTime,
-				'updated_at' => new DateTime
+				'updated_at' => new DateTime,
+				'last_visit' => new DateTime
 			],
 			[
 				'name' => 'Banned',
@@ -32,7 +34,8 @@ class UsersTableSeeder extends Seeder
 				'password' => Hash::make('password'),
 				'role_id' => 3,
 				'created_at' => new DateTime,
-				'updated_at' => new DateTime
+				'updated_at' => new DateTime,
+				'last_visit' => new DateTime
 			],
 		];
 
