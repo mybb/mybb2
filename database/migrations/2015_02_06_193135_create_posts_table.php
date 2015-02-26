@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
 			$table->text('content');
 			$table->text('content_parsed'); // Store parsed HTML in DB or not? Would be much quicker, as parser is current bottleneck...
 			$table->nullableTimestamps();
-			$table->softDeletes();
 
 			$table->foreign('user_id')->references('id')->on('users');
 		});

@@ -24,7 +24,6 @@ class CreateTopicsTable extends Migration
 			$table->integer('last_post_id')->unsigned()->nullable();
 			$table->integer('views')->default(0);
 			$table->nullableTimestamps();
-			$table->softDeletes();
 
 			$table->foreign('forum_id')->references('id')->on('forums');
 			$table->foreign('user_id')->references('id')->on('users');
