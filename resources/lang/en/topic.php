@@ -14,4 +14,6 @@ return [
 	'edit' => 'Edit',
 	'editpost' => 'Edit Post',
 	'delete' => 'Delete',
+	'restore' => 'Restore',
+	'softDeleted' => 'Soft Deleted'
 ];

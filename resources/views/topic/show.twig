@@ -24,7 +24,7 @@
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
 						<a href="#permalink" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
 						{% if post.trashed or (topic.trashed and loop.first) %}
-							<span class="status-notice"><i class="fa fa-trash-o"></i> Soft Deleted</span>
+							<span class="status-notice"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
 						{% if post.updated_at != post.created_at %}
 							<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ post.updated_at }}"><i class="fa fa-pencil"></i></a>
@@ -41,7 +41,7 @@
 						<ul class="post-controls">
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
-								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, post.id]) }}" title="Restore"><i class="fa fa-circle"></i><span class="text">Restore</span></a></li>
+								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
