@@ -13,6 +13,7 @@ namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
@@ -228,14 +229,8 @@ class TopicController extends Controller
 			$this->topicRepository->deleteTopic($topic);
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
 		} else {
-			if ($post['id'] == $topic['last_post_id'] && $post['deleted_at'] == null) {
-				$posts = $this->postRepository->allForTopic($topic);
-				$topic = $this->topicRepository->editTopic($topic, [
-					'last_post_id' => $posts[count($posts) - 2]['id']
-				]);
-			}
 			$this->postRepository->deletePost($post);
-
+			$topic = $this->postRepository->updateLastPost($topic);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 
@@ -256,10 +251,7 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		} else {
 			$this->postRepository->restorePost($post);
-			$posts = $this->postRepository->allForTopic($topic);
-			$topic = $this->topicRepository->editTopic($topic, [
-				'last_post_id' => $posts[count($posts) - 1]['id']
-			]);
+			$topic = $this->postRepository->updateLastPost($topic);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 

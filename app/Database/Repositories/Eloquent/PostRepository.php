@@ -243,4 +243,20 @@ class PostRepository implements IPostRepository
 
 		return $post->restore();
 	}
+
+	/**
+	 * Update the last post of the topic
+	 *
+	 * @param Topic $topic The topic to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Topic $topic)
+	{
+		$topic->update([
+			'last_post_id' => $this->postModel->where('topic_id', '=', $topic->id)->orderBy('id', 'desc')->first()->id
+		]);
+		return $topic;
+	}
 }
