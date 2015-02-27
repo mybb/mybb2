@@ -11,6 +11,7 @@ namespace MyBB\Core\Presenters;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Post as PostModel;
+use MyBB\Core\Database\Models\User as UserModel;
 
 class Post extends BasePresenter
 {
@@ -22,5 +23,23 @@ class Post extends BasePresenter
 	public function __construct(PostModel $resource)
 	{
 		$this->wrappedObject = $resource;
+	}
+
+	public function author()
+	{
+		if($this->wrappedObject->user_id == null)
+		{
+			$user = new UserModel();
+			if($this->wrappedObject->username != null)
+				$user->name = $this->wrappedObject->username;
+			else
+				$user->name = trans('general.guest');
+
+			$decoratedUser = new User($user);
+
+			return $decoratedUser;
+		}
+
+		return $this->wrappedObject->author;
 	}
 }

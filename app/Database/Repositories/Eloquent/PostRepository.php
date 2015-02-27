@@ -12,6 +12,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Parser\MessageFormatter;
 
@@ -121,15 +122,29 @@ class PostRepository implements IPostRepository
 	{
 
 		$postDetails = array_merge([
-			                           'user_id' => $this->guard->user()->id,
-			                           'content' => '',
-			                           'content_parsed' => '',
-			                           // TODO: Auto-populate parsed content with parser once parser is written.
-		                           ], $postDetails);
+			'user_id' => $this->guard->user()->id,
+			'username' => null,
+			'content' => '',
+			'content_parsed' => '',
+			// TODO: Auto-populate parsed content with parser once parser is written.
+		], $postDetails);
 
 		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
 			MessageFormatter::ME_USERNAME => $this->guard->user()->name,
 		]); // TODO: Parser options...
+
+		if($postDetails['user_id'] > 0)
+		{
+			$postDetails['username'] = User::find($postDetails['user_id'])->name;
+		}
+		else
+		{
+			$postDetails['user_id'] = null;
+			if($postDetails['username'] == trans('general.guest'))
+			{
+				$postDetails['username'] = null;
+			}
+		}
 
 		$post = $topic->posts()->save(new Post($postDetails));
 
@@ -137,11 +152,14 @@ class PostRepository implements IPostRepository
 			$topic->increment('num_posts');
 			$topic->forum->increment('num_posts');
 			$topic->update([
-				               'last_post_id' => $post['id']
-			               ]);
+				'last_post_id' => $post['id']
+			]);
 		}
 
-		$post->author->increment('num_posts');
+		if($post->user_id > 0)
+		{
+			$post->author->increment('num_posts');
+		}
 
 		return $post;
 	}

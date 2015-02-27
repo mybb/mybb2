@@ -16,6 +16,7 @@ return [
 	'age' => 'Age',
 	'dob' => 'Date of Birth',
 	'everyone' => 'Everyone',
-	'cancel' => 'Cancel'
+	'cancel' => 'Cancel',
+	'guest' => 'Guest'
 
 ];

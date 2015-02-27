@@ -14,6 +14,7 @@ use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Str;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 
@@ -174,40 +175,59 @@ class TopicRepository implements ITopicRepository
 	public function create(array $details = [])
 	{
 		$details = array_merge([
-			                       'title' => '',
-			                       'forum_id' => 0,
-			                       'user_id' => $this->guard->user()->id,
-			                       'first_post_id' => 0,
-			                       'last_post_id' => 0,
-			                       'views' => 0,
-			                       'num_posts' => 0,
-			                       'content' => '',
-		                       ], $details);
+			'title' => '',
+			'forum_id' => 0,
+			'user_id' => $this->guard->user()->id,
+			'username' => null,
+			'first_post_id' => 0,
+			'last_post_id' => 0,
+			'views' => 0,
+			'num_posts' => 0,
+			'content' => '',
+		], $details);
 
 		$details['slug'] = $this->createSlugForTitle($details['title']);
+
+		if($details['user_id'] > 0)
+		{
+			$details['username'] = User::find($details['user_id'])->name;
+		}
+		else
+		{
+			$details['user_id'] = null;
+			if($details['username'] == trans('general.guest'))
+			{
+				$details['username'] = null;
+			}
+		}
 
 		$topic = null;
 
 		$this->dbManager->transaction(function () use ($details, &$topic) {
 			$topic = $this->topicModel->create([
-				                                   'title' => $details['title'],
-				                                   'slug' => $details['slug'],
-				                                   'forum_id' => $details['forum_id'],
-				                                   'user_id' => $details['user_id'],
-			                                   ]);
+				'title' => $details['title'],
+				'slug' => $details['slug'],
+				'forum_id' => $details['forum_id'],
+				'user_id' => $details['user_id'],
+				'username' => $details['username'],
+			]);
 
 			$firstPost = $this->postRepository->addPostToTopic($topic, [
 				'content' => $details['content'],
+				'username' => $details['username'],
 			]);
 
 			$topic->update([
-				               'first_post_id' => $firstPost->id,
-				               'last_post_id' => $firstPost->id,
-				               'num_posts' => 1,
-			               ]);
+				'first_post_id' => $firstPost->id,
+				'last_post_id' => $firstPost->id,
+				'num_posts' => 1,
+			]);
 		});
-		
-		$topic->author->increment('num_topics');
+
+		if($topic->user_id > 0)
+		{
+			$topic->author->increment('num_topics');
+		}
 
 		return $topic;
 	}

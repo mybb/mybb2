@@ -77,7 +77,7 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if ($this->guard->user() == null) {
+		if ($this->guard->check() == false) {
 			// Todo: default to board setting
 			$ppp = 10;
 		} else {
@@ -118,10 +118,11 @@ class TopicController extends Controller
 
 		$post = $this->postRepository->addPostToTopic($topic, [
 			'content' => $replyRequest->input('content'),
+			'username' => $replyRequest->input('username'),
 		]);
 
 		if ($post) {
-			if ($this->guard->user() == null) {
+			if ($this->guard->check() == false) {
 				// Todo: default to board setting
 				$ppp = 10;
 			} else {
@@ -203,6 +204,7 @@ class TopicController extends Controller
 			                                        'views' => 0,
 			                                        'num_posts' => 0,
 			                                        'content' => $createRequest->input('content'),
+			                                        'username' => $createRequest->input('username'),
 		                                        ]);
 
 		if ($topic) {
