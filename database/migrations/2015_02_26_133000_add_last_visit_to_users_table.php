@@ -14,7 +14,7 @@ class AddLastVisitToUsersTable extends Migration
 	public function up()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->timestamp('last_visit');
+			$table->timestamp('last_visit')->nullable();
 		});
 	}
 
