@@ -14,9 +14,7 @@
 		{% include "header.header" %}
         <div class="main-container">
             <div class="main wrapper clearfix">
-                <div class="breadcrumb">
-                    Breadcrumb Goes here
-                </div>
+				{% block breadcrumb %}{% endblock %}
                 <div id="content">
     				{% block contents %}{% endblock %}
                 </div>

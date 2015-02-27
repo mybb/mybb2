@@ -1,0 +1,12 @@
+{% if breadcrumbs %}
+    <div class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+            {% if breadcrumb.last == false %}
+                <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
+				<i class="fa fa-angle-right"></i>
+            {% else %}
+                <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

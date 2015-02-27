@@ -129,7 +129,14 @@ return [
 		| in order to be marked as safe.
 		|
 		*/
-		'facades' => [],
+		'facades' => [
+			'Breadcrumbs' => [
+				'is_safe' => [
+					'render',
+					'renderIfExists',
+				]
+			]
+		],
 		/*
 		|--------------------------------------------------------------------------
 		| Functions
@@ -158,7 +165,8 @@ return [
 		| </code>
 		|
 		*/
-		'functions' => [],
+		'functions' => [
+		],
 		/*
 		|--------------------------------------------------------------------------
 		| Filters
