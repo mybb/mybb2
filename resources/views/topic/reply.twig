@@ -4,22 +4,25 @@
     <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
     <link rel="canonical" href="{{ url_route("topics.reply", [topic.slug]) }}" />
 {% endblock %}
+{% block breadcrumb %}
+	{{ Breadcrumbs.render('topics.reply', topic) }}
+{% endblock %}
 {% block contents %}
 	<article class="full-width">
 		<header>
-			<h1>Post reply to {{topic.title }}</h1>
+			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
 			<div class="page-controls">
-				<a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">Cancel</span></a>
+				<a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
 		<section class="post">
 			{{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
 				<div class="form-row">
-					<h3>{{ form_label('content', 'Reply') }}</h3>
+					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
 					{{ form_textarea('content') }}
 				</div>
 				<div class="form-submit">
-					{{ form_button('<i class="fa fa-sign-in"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
+					{{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 				</div>
 			{{ form_close() }}
 		</section>

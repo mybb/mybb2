@@ -1,5 +1,8 @@
 {% extends "layouts.base" %}
 {% block title %}{% endblock %}
+{% block breadcrumb %}
+	{{ Breadcrumbs.render('forum.index') }}
+{% endblock %}
 {% block contents %}
 <article>
 	<header>

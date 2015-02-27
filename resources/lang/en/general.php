@@ -15,6 +15,7 @@ return [
 	'nothing' => 'Nothing',
 	'age' => 'Age',
 	'dob' => 'Date of Birth',
-	'everyone' => 'Everyone'
+	'everyone' => 'Everyone',
+	'cancel' => 'Cancel'
 
 ];
