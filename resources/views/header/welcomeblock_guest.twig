@@ -1,12 +1,12 @@
                         <ul class="user-links">
                              <li class="sign-up">
-                                <a href="{{ url('auth/signup') }}" class="multi-link" onclick="modal('auth/signup'); return false;">
+                                <a href="{{ url('auth/signup') }}" class="multi-link" data-modal="auth/signup">
                                     <i class="fa fa-user"></i>
                                     <span class="text">{{ trans('member.signup') }}</span>
                                 </a>
                             </li>
                             <li class="log-in">
-                                <a href="{{ url('auth/login') }}" class="multi-link" onclick="modal('auth/login'); return false;">
+                                <a href="{{ url('auth/login') }}" class="multi-link" data-modal="auth/login">
                                     <i class="fa fa-sign-in"></i>
                                     <span class="text">{{ trans('member.login') }}</span>
                                 </a>
