@@ -27,13 +27,13 @@ class User extends BasePresenter
 	public function styled_name()
 	{
 		if($this->wrappedObject->id == -1)
-			return trans('general.guest');
+			return e(trans('general.guest'));
 
 		if($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style)
 		{
-			return str_replace(':user', $this->wrappedObject->name, $this->wrappedObject->role->role_username_style);
+			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
 		}
-		return $this->wrappedObject->name;
+		return e($this->wrappedObject->name);
 	}
 
 	public function avatar()
