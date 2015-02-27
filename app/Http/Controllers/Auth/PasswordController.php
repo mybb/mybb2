@@ -4,6 +4,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use MyBB\Core\Http\Controllers\Controller;
+use Breadcrumbs;
 
 class PasswordController extends Controller
 {
@@ -39,6 +40,8 @@ class PasswordController extends Controller
 		$this->passwords = $passwords;
 
 		$this->middleware('guest');
+
+		Breadcrumbs::setCurrentRoute('auth.login');
 	}
 
 	protected function getEmailSubject()

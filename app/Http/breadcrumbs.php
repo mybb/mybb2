@@ -138,3 +138,15 @@ Breadcrumbs::register('account.drafts', function($breadcrumbs)
 	$breadcrumbs->parent('account');
 	$breadcrumbs->push(trans('account.drafts'), route('account.drafts'));
 });
+
+Breadcrumbs::register('auth.signup', function($breadcrumbs)
+{
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(trans('member.signup'), url('auth/signup'));
+});
+
+Breadcrumbs::register('auth.login', function($breadcrumbs)
+{
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(trans('member.login'), url('auth/login'));
+});
