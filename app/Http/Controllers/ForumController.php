@@ -8,6 +8,7 @@ use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Breadcrumbs;
 
 class ForumController extends Controller
 {
@@ -79,6 +80,8 @@ class ForumController extends Controller
 		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
+		
+		Breadcrumbs::setCurrentRoute('forums.show', $forum);
 
 		// Build the order by/dir parts
 		$allowed = ['lastpost', 'replies', 'startdate', 'title'];

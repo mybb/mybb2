@@ -3,9 +3,6 @@
 {% block head %}
     <link rel="canonical" href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" />
 {% endblock %}
-{% block breadcrumb %}
-	{{ Breadcrumbs.render('topics.edit', topic) }}
-{% endblock %}
 {% block contents %}
 	<article class="full-width">
 		<header>

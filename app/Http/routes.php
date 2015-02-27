@@ -39,8 +39,6 @@ Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => '
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 
-Route::get('home', 'HomeController@index');
-
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

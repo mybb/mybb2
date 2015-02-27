@@ -14,7 +14,7 @@
 		{% include "header.header" %}
         <div class="main-container">
             <div class="main wrapper clearfix">
-				{% block breadcrumb %}{% endblock %}
+				{{ Breadcrumbs.renderIfExists() }}
                 <div id="content">
     				{% block contents %}{% endblock %}
                 </div>

@@ -19,6 +19,7 @@ use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Breadcrumbs;
 
 class TopicController extends Controller
 {
@@ -59,6 +60,8 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
+		Breadcrumbs::setCurrentRoute('topics.show', $topic);
+
 		$this->topicRepository->incrementViewCount($topic);
 
 		$posts = $this->postRepository->allForTopic($topic, true);
@@ -98,6 +101,8 @@ class TopicController extends Controller
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
+		
+		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
 		return view('topic.reply', compact('topic'));
 	}
@@ -145,6 +150,8 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
+		Breadcrumbs::setCurrentRoute('topics.edit', $topic);
+
 		return view('topic.edit', compact('post', 'topic'));
 	}
 
@@ -180,6 +187,8 @@ class TopicController extends Controller
 		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
+		
+		Breadcrumbs::setCurrentRoute('topics.create', $forum);
 
 		return view('topic.create', compact('forum'));
 	}

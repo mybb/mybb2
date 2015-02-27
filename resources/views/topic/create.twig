@@ -4,9 +4,6 @@
     <meta name="description" content="{{ trans('topic.create.description', [forum.title]) }}" />
     <link rel="canonical" href="{{ url_route("topics.create", [forum.id]) }}" />
 {% endblock %}
-{% block breadcrumb %}
-	{{ Breadcrumbs.render('topics.create', forum) }}
-{% endblock %}
 {% block contents %}
     <article class="full-width">
         <header>
