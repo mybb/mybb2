@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use MyBB\Core\Http\Controllers\Controller;
+use Breadcrumbs;
 
 class AuthController extends Controller
 {
@@ -48,6 +49,7 @@ class AuthController extends Controller
 	 */
 	public function getSignup()
 	{
+		Breadcrumbs::setCurrentRoute('auth.signup');
 		return view('member.signup');
 	}
 
@@ -80,6 +82,7 @@ class AuthController extends Controller
 	 */
 	public function getLogin()
 	{
+		Breadcrumbs::setCurrentRoute('auth.login');
 		return view('member.login');
 	}
 

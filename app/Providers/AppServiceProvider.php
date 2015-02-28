@@ -93,6 +93,7 @@ class AppServiceProvider extends ServiceProvider
 		$guard = $this->app->make('Illuminate\Auth\Guard');
 		$defaultUser = new User();
 		$defaultUser->name = 'Guest';
+		$defaultUser->id = -1;
 		$guard->registerDefaultUser($defaultUser);
 	}
 }

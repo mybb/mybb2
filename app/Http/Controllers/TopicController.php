@@ -13,6 +13,7 @@ namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
@@ -77,7 +78,7 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if ($this->guard->user() == null) {
+		if ($this->guard->check() == false) {
 			// Todo: default to board setting
 			$ppp = 10;
 		} else {
@@ -118,10 +119,11 @@ class TopicController extends Controller
 
 		$post = $this->postRepository->addPostToTopic($topic, [
 			'content' => $replyRequest->input('content'),
+			'username' => $replyRequest->input('username'),
 		]);
 
 		if ($post) {
-			if ($this->guard->user() == null) {
+			if ($this->guard->check() == false) {
 				// Todo: default to board setting
 				$ppp = 10;
 			} else {
@@ -203,6 +205,7 @@ class TopicController extends Controller
 			                                        'views' => 0,
 			                                        'num_posts' => 0,
 			                                        'content' => $createRequest->input('content'),
+			                                        'username' => $createRequest->input('username'),
 		                                        ]);
 
 		if ($topic) {
@@ -226,14 +229,8 @@ class TopicController extends Controller
 			$this->topicRepository->deleteTopic($topic);
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
 		} else {
-			if ($post['id'] == $topic['last_post_id'] && $post['deleted_at'] == null) {
-				$posts = $this->postRepository->allForTopic($topic);
-				$topic = $this->topicRepository->editTopic($topic, [
-					'last_post_id' => $posts[count($posts) - 2]['id']
-				]);
-			}
 			$this->postRepository->deletePost($post);
-
+			$topic = $this->postRepository->updateLastPost($topic);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 
@@ -254,10 +251,7 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		} else {
 			$this->postRepository->restorePost($post);
-			$posts = $this->postRepository->allForTopic($topic);
-			$topic = $this->topicRepository->editTopic($topic, [
-				'last_post_id' => $posts[count($posts) - 1]['id']
-			]);
+			$topic = $this->postRepository->updateLastPost($topic);
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 

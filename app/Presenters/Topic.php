@@ -11,6 +11,7 @@ namespace MyBB\Core\Presenters;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Topic as TopicModel;
+use MyBB\Core\Database\Models\User as UserModel;
 
 class Topic extends BasePresenter
 {
@@ -27,5 +28,23 @@ class Topic extends BasePresenter
 	public function replies()
 	{
 		return $this->wrappedObject->num_posts - 1;
+	}
+
+	public function author()
+	{
+		if($this->wrappedObject->user_id == null)
+		{
+			$user = new UserModel();
+			if($this->wrappedObject->username != null)
+				$user->name = $this->wrappedObject->username;
+			else
+				$user->name = trans('general.guest');
+
+			$decoratedUser = new User($user);
+
+			return $decoratedUser;
+		}
+
+		return $this->wrappedObject->author;
 	}
 }
