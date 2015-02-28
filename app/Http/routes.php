@@ -2,6 +2,23 @@
 
 /*
 |--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+| tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+| quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+|
+*/
+
+Route::group(['prefix' => 'api/v1'], function()
+{
+	Route::get('topics',       ['as' => 'api.v1.topics.all',  'uses' => 'Api\TopicApiController@index']);
+	Route::get('topic/{slug}', ['as' => 'api.v1.topics.show', 'uses' => 'Api\TopicApiController@show']);
+});
+
+/*
+|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
