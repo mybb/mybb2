@@ -1,27 +1,16 @@
-<div class="footer-container">
-            <footer class="wrapper">
-                <h3>MyBB Community</h3>
-                <nav class="menu-bar">
-                    <ul>
-                        <li><a href="#">Contact</a></li>
-                        <!--<li><a href="#">Members</a></li>-->
-                        <li><a href="#">MyBB Home</a></li>
-                        <li><a href="#">RSS Syndication</a></li>
-                        <li><a href="#">Help</a></li>
-                    </ul>
-                </nav>
-                <p class="powered-by">Forum software by <a href="http://mybb.com" title="The best free and open source forum software">MyBB</a></p>
-            </footer>
-        </div>
-
-        {# This is useless - if we pack jQuery with MyBB we can always use it and not google's version. Left it as jQuery isn't included yet 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script> #}
-        <script src="{{ asset('assets/js/vendor.js') }}"></script>
-        <script src="{{ asset('assets/js/main.js') }}"></script>
-            <!--<script>
-                var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-                (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-                g.src='//www.google-analytics.com/ga.js';
-                s.parentNode.insertBefore(g,s)}(document,'script'));
-            </script>-->
+		<footer>
+			<div class="wrapper">
+				<h3>MyBB Community</h3>
+				<nav class="footer-menu menu-bar">
+					<ul>
+						<li><a href="#">Contact</a></li>
+						<li><a href="#">MyBB Home</a></li>
+						<li><a href="#">RSS Syndication</a></li>
+						<li><a href="#">Help</a></li>
+					</ul>
+				</nav>
+				<p class="powered-by">Forum software by <a href="http://mybb.com" title="The best free and open source forum software">MyBB</a></p>
+			</div>
+		</footer>
+		<script src="{{ asset('assets/js/vendor.js') }}"></script>
+		<script src="{{ asset('assets/js/main.js') }}"></script>

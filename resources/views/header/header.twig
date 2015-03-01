@@ -1,39 +1,35 @@
-<div class="header-container">
-            <header>
-                <div class="wrapper clearfix">
-                    <h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>MyBB Community Forums</span></a></h1>
-                    <nav id="main-menu" class="menu-bar">
-                        <a class="menu-button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
-                         {% if auth_check() %}
-                        <div class="main-menu-container">
-                            <ul>
-                                <li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
-                                <li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
-                            </ul>
-                        </div>
-                        {% endif %}
-                    </nav>
-                </div>
-                <nav class="menu-bar user-navigation">
-                    <div class="wrapper clearfix">
-                        {% if auth_check() %}
-                            {% include "header.welcomeblock_member" %}
-                        {% else %}
-                            {% include "header.welcomeblock_guest" %}
-                        {% endif %}
-                        <div id="search">
-                            <a href="index.php?page=search" class="search-button"><i class="fa fa-search"></i><span class="text">Search</span></a>
-                            <div class="search-container" for="query">
-                                <input type="search" placeholder="" value="" class="search-field" />
-                                <span class="search-controls">
-                                    <button type="submit" class="search-submit">
-                                        <i class="fa fa-search"></i><span class="text">Search</span>
-                                    </button>
-                                    <a href="index.php?page=search" class="advanced-search" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-        </div>
+		<header>
+			<div class="wrapper clearfix">
+				<h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>MyBB Community Forums</span></a></h1>
+				<nav class="main-menu menu-bar">
+					<a class="main-menu__button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
+					<div class="main-menu__container">
+						<ul>
+							<li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
+							<li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<nav class="user-navigation">
+				<div class="wrapper clearfix">
+					{% if auth_check() %}
+						{% include "header.welcomeblock_member" %}
+					{% else %}
+						{% include "header.welcomeblock_guest" %}
+					{% endif %}
+					<div id="search" class="search">
+						<a href="index.php?page=search" class="search__button"><i class="fa fa-search"></i><span class="text">Search</span></a>
+						<div class="search__container" for="query">
+							<input type="search" placeholder="" value="" class="search__field" />
+							<span class="search__controls">
+								<button type="submit" class="search__submit">
+									<i class="fa fa-search"></i><span class="text">Search</span>
+								</button>
+								<a href="index.php?page=search" class="search__advanced" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
+							</span>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</header>

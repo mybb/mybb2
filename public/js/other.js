@@ -16,7 +16,7 @@ $(function () {
 		$('span.icons i, a, .caption').powerTip({ placement: 's', smartPlacement: true });
 	}
 
-	$('.user-links, #main-menu').dropit({ submenuEl: 'div.dropdown' });
+	$('.user-navigation__links, #main-menu').dropit({ submenuEl: 'div.dropdown' });
 	$('.dropdown-menu').dropit({ submenuEl: 'ul.dropdown', triggerEl: 'span.dropdown-button' });
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);

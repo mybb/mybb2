@@ -1,0 +1,462 @@
+.modal {
+  display: none;
+  width: 580px;
+  padding: 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;/*
+  -webkit-box-shadow: 0 0 10px #000;
+  -moz-box-shadow: 0 0 10px #000;
+  -o-box-shadow: 0 0 10px #000;
+  -ms-box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px #000;*/
+  border: 8px solid rgba(0,0,0,.5);
+}
+
+.modal article {
+	background: #fff;
+	border: 1px solid rgba(0,0,0,0.7);
+}
+
+.modal article header {
+	background: #007fd0;
+	border-bottom: 2px solid #0a539b;
+}
+
+.modal article header h1 {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font-size: 1.2em;
+	padding: 16px;
+}
+
+.modal article header .page-controls {
+	margin: -50px 8px 0 0;
+}
+
+.modal article header .button,
+.modal article header .button.secondary {
+	color: #fff;
+    background: #007fd0;
+    border-color: rgba(255,255,255,0.3);
+}
+
+.modal article header .button:hover,
+.modal article header .button.secondary:hover {
+	background: #ff7500;
+	border-color: #ff7500;
+}
+
+.modal article section.form {
+	border: none;
+	/*padding-bottom: 0;*/
+	padding-bottom: 15px;
+	margin: 0;
+	overflow: auto;
+}
+
+.modal article section.form h2 {
+	margin: 0 0 12px 0;
+    padding: 0 8px 8px 8px;
+    color: #007fd0;
+    font-size: 1.1em;
+    border-bottom: 1px dotted #ccc;
+    text-align: left;
+    float: none;
+    width: auto;
+}
+
+.modal article section.form .form-row-container {
+	float: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	width: auto;
+}
+
+.modal article .form-section:last-child {
+	padding-bottom: 0px;
+}
+
+.modal article .form-submit {
+	margin: 0;
+	padding: 6px 0;
+	background: #f8f8f8;
+	border-top: 1px solid #ddd;
+}
+
+.modal article .account-menu {
+	display: none;
+}
+
+.modal article .account-body {
+	float: none;
+	width: 100%;
+}
+
+.modal article .account-body header {
+	margin: 0;
+}
+
+.modal a.close-modal {
+  position: absolute;
+  top: -12.5px;
+  right: -12.5px;
+  width: 11px;
+  height: 19px;
+  display: block;
+  border: 2px solid #fff;
+  padding: 2px 6px 2px 6px;
+  color: #fff;
+  background: #000;
+  border-radius: 15px;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 1px 4px #000;
+  line-height: 1;
+  /*text-indent: -9999px;
+  background: url("../images/close.png") no-repeat 0 0;*/
+}
+
+.modal a.close-modal i {
+  font-size: 14px;
+}
+
+.modal a.close-modal:hover {
+  background-color: #bb0000;
+}
+
+.modal a.close-modal span {
+  display: none;
+}
+
+.modal-spinner {
+  display: none;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -32px;
+  margin-top: -32px;
+  background: url("../images/spinner.gif") #111 no-repeat center center;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 758px) {
+
+  .modal {
+    width: 450px;
+  }
+
+}
+
+@media screen and (max-width: 524px) {
+
+  .modal {
+    width: 290px;
+  }
+
+}
+
+
+@media screen and (max-height: 758px) {
+
+  .modal article section.form {
+    max-height: 400px;
+    overflow: auto;
+  }
+
+}
+
+
+@media screen and (max-height: 524px) {
+
+  .modal article section.form {
+    max-height: 300px;
+    overflow: auto;
+  }
+
+}
+
+
+
+@media screen and (max-height: 458px) {
+
+  .modal article section.form {
+    max-height: 150px;
+    overflow: auto;
+    /*background: red;*/
+  }
+
+}
+
+
+/* PowerTip Plugin */
+#powerTip {
+	cursor: default;
+	background-color: #333;
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 4px;
+	color: #fff;
+	display: none;
+	padding: 3px 9px;
+	position: absolute;
+	white-space: nowrap;
+	z-index: 2147483647;
+	font-size: 0.8em;
+}
+#powerTip:before {
+	content: "";
+	position: absolute;
+}
+#powerTip.n:before, #powerTip.s:before {
+	border-right: 5px solid transparent;
+	border-left: 5px solid transparent;
+	left: 50%;
+	margin-left: -5px;
+}
+#powerTip.e:before, #powerTip.w:before {
+	border-bottom: 5px solid transparent;
+	border-top: 5px solid transparent;
+	margin-top: -5px;
+	top: 50%;
+}
+#powerTip.n:before {
+	border-top: 5px solid #333;
+	border-top: 5px solid rgba(0, 0, 0, 0.8);
+	bottom: -5px;
+}
+#powerTip.e:before {
+	border-right: 5px solid #333;
+	border-right: 5px solid rgba(0, 0, 0, 0.8);
+	left: -5px;
+}
+#powerTip.s:before {
+	border-bottom: 5px solid #333;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+	top: -5px;
+}
+#powerTip.w:before {
+	border-left: 5px solid #333;
+	border-left: 5px solid rgba(0, 0, 0, 0.8);
+	right: -5px;
+}
+#powerTip.ne:before, #powerTip.se:before {
+	border-right: 5px solid transparent;
+	border-left: 0;
+	left: 10px;
+}
+#powerTip.nw:before, #powerTip.sw:before {
+	border-left: 5px solid transparent;
+	border-right: 0;
+	right: 10px;
+}
+#powerTip.ne:before, #powerTip.nw:before {
+	border-top: 5px solid #333;
+	border-top: 5px solid rgba(0, 0, 0, 0.8);
+	bottom: -5px;
+}
+#powerTip.se:before, #powerTip.sw:before {
+	border-bottom: 5px solid #333;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+	top: -5px;
+}
+#powerTip.nw-alt:before, #powerTip.ne-alt:before,
+#powerTip.sw-alt:before, #powerTip.se-alt:before {
+	border-top: 5px solid #333;
+	border-top: 5px solid rgba(0, 0, 0, 0.8);
+	bottom: -5px;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	left: 10px;
+}
+#powerTip.ne-alt:before {
+	left: auto;
+	right: 10px;
+}
+#powerTip.sw-alt:before, #powerTip.se-alt:before {
+	border-top: none;
+	border-bottom: 5px solid #333;
+	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+	bottom: auto;
+	top: -5px;
+}
+#powerTip.se-alt:before {
+	left: auto;
+	right: 10px;
+}
+
+
+/* 
+ * Stepper v3.0.7 - 2014-05-07 
+ * A jQuery plugin for cross browser number inputs. Part of the Formstone Library. 
+ * http://formstone.it/stepper/ 
+ * 
+ * Copyright 2014 Ben Plum; MIT Licensed 
+ */ 
+
+.stepper {
+	border-radius: 3px;
+	margin: 0 0 10px 0;
+	overflow: hidden;
+	position: relative;
+	width: 130px;
+	border: 1px solid #ccc;
+}
+
+.stepper .stepper-input {
+	background: #fff;
+	border: 0;
+	border-radius: 4px;
+	font-size: 0.9em;
+	margin: 0;
+	overflow: hidden;
+	padding: 4px 10px;
+	text-align: center;
+	width: 100%;
+	width: 60px;
+	margin: 0 35px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	z-index: 49;
+	-moz-appearance: textfield;
+}
+
+.stepper .stepper-input:focus {
+	outline: 0;
+}
+
+.stepper .stepper-input::-webkit-inner-spin-button,
+.stepper .stepper-input::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+.stepper .stepper-input:focus {
+	/*background-color: #fff;*/
+}
+
+.stepper .stepper-arrow {
+	cursor: pointer;
+	display: block;
+	height: 100%;
+	padding: 0px 0;
+	position: absolute;
+	width: 35px;
+	text-align: center;
+	z-index: 50;
+	font-weight: bold;
+	color: #666;
+	font-size: 20px;
+}
+
+.stepper .stepper-arrow:hover {
+	color: #666;
+}
+/*
+.stepper .stepper-arrow i {
+	font-size: 14px;
+	color: #666;
+}
+
+.stepper .stepper-arrow span.text {
+	display: none;
+}
+
+.stepper .stepper-arrow:hover i {
+	color: #ff7500;
+}*/
+
+.stepper .stepper-arrow.up {
+	float: right;
+	top: 0;
+	right: 0;
+	border-left: 1px solid #ccc;
+}
+
+.stepper .stepper-arrow.down {
+	float: left;
+	top: 0;
+	left: 0;
+	border-right: 1px solid #ccc;
+}
+
+.stepper.disabled .stepper-input {
+	background: #fff;
+	border-color: #eee;
+	color: #ccc;
+}
+
+.stepper.disabled .stepper-arrow {
+	background: #fff;
+	border-color: #eee;
+	cursor: default;
+}
+
+
+/* hide/show password */
+::-ms-reveal,
+::-ms-clear {
+  display: none !important;
+}
+
+.hideShowPassword-toggle {
+  background: transparent;
+  border: 0;
+  border-radius: 0.25em;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-right: 2px;
+  padding: 3px 8px;
+  text-transform: uppercase;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+.hideShowPassword-toggle:hover,
+.hideShowPassword-toggle:focus {
+  background-color: #eee;
+  color: #555;
+  outline: transparent;
+}
+
+
+/*
+ * Dropit v1.1.0
+ * http://dev7studios.com/dropit
+ *
+ * Copyright 2012, Dev7studios
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+
+/* These styles assume you are using ul and li */
+.dropit {
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.dropit .dropit-trigger { position: relative; }
+.dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0; /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 150px;
+    list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.dropit .dropit-open .dropit-submenu { display: block; }

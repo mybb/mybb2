@@ -1,15 +1,14 @@
-                        <ul class="user-links">
-                             <li class="sign-up">
-                                <a href="{{ url('auth/signup') }}" class="multi-link" data-modal="auth/signup">
-                                    <i class="fa fa-user"></i>
-                                    <span class="text">{{ trans('member.signup') }}</span>
-                                </a>
-                            </li>
-                            <li class="log-in">
-                                <a href="{{ url('auth/login') }}" class="multi-link" data-modal="auth/login">
-                                    <i class="fa fa-sign-in"></i>
-                                    <span class="text">{{ trans('member.login') }}</span>
-                                </a>
-                            </li>
-                            <!--<li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>-->
-                        </ul>
+						<ul class="user-navigation__links">
+							 <li class="user-navigation__sign-up">
+								<a href="{{ url('auth/signup') }}" class="multi-link" data-modal="auth/signup">
+									<i class="fa fa-user"></i>
+									<span class="text">{{ trans('member.signup') }}</span>
+								</a>
+							</li>
+							<li class="user-navigation__log-in">
+								<a href="{{ url('auth/login') }}" class="multi-link" data-modal="auth/login">
+									<i class="fa fa-sign-in"></i>
+									<span class="text">{{ trans('member.login') }}</span>
+								</a>
+							</li>
+						</ul>
