@@ -70,6 +70,35 @@ class TopicController extends Controller
 		return view('topic.show', compact('topic', 'posts'));
 	}
 
+	public function showPost($slug = '', $id = 0)
+	{
+		$topic = $this->topicRepository->findBySlug($slug);
+		$post = $this->postRepository->find($id);
+
+		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+		}
+
+		if ($this->guard->check() == false) {
+			// Todo: default to board setting
+			$ppp = 10;
+		} else {
+			$ppp = $this->guard->user()->settings->posts_per_page;
+		}
+
+		$numPost = $this->postRepository->getNumForPost($post, true);
+
+		if (ceil($numPost / $ppp) == 1) {
+			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $post->id]);
+		} else {
+			return redirect()->route('topics.show', [
+				'slug' => $topic->slug,
+				'page' => ceil($numPost / $ppp),
+				'#post-' . $post->id
+			]);
+		}
+	}
+
 	public function last($slug = '')
 	{
 		$topic = $this->topicRepository->findBySlug($slug);

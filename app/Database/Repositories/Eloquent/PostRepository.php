@@ -111,6 +111,28 @@ class PostRepository implements IPostRepository
 	}
 
 	/**
+	 * Get's the number of this post in the thread. Eg '1' for the first, '2' for the second etc
+	 *
+	 * @param Post $post The post we want the number for
+	 * @param bool $withTrashed Count trashed posts?
+	 *
+	 * @return int
+	 */
+	public function getNumForPost(Post $post, $withTrashed = false)
+	{
+		// Get all posts in this thread created before this one...
+		$baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)->where('created_at', '<', $post->created_at);
+
+		if($withTrashed)
+		{
+			$baseQuery = $baseQuery->withTrashed();
+		}
+
+		// ... and add 1 (the first post doesn't have one created before it etc)
+		return $baseQuery->count()+1;
+	}
+
+	/**
 	 * Add a post to a topic.
 	 *
 	 * @param Topic $topic       The topic to add a post to.
@@ -174,11 +196,18 @@ class PostRepository implements IPostRepository
 	 */
 	public function editPost(Post $post, array $postDetails)
 	{
-
 		if ($postDetails['content']) {
-			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
-				MessageFormatter::ME_USERNAME => $post->author->name,
-			]); // TODO: Parser options...
+			$options = [];
+			if($post->user_id > 0)
+			{
+				$options[MessageFormatter::ME_USERNAME] = $post->author->name;
+			}
+			else
+			{
+				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
+			}
+
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], $options); // TODO: Parser options...
 		}
 
 		$post->update($postDetails);
