@@ -76,6 +76,8 @@ class AccountController extends Controller
 	 */
 	public function postUsername(Request $request)
 	{
+		$this->failedValidationRedirect = route('account.username');
+
 		$this->validate($request, [
 			'name' => 'required|max:255|unique:users',
 			'password' => 'required',
@@ -109,6 +111,8 @@ class AccountController extends Controller
 	 */
 	public function postEmail(Request $request)
 	{
+		$this->failedValidationRedirect = route('account.email');
+
 		$this->validate($request, [
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required',
@@ -165,6 +169,8 @@ class AccountController extends Controller
 	 */
 	public function postPassword(Request $request)
 	{
+		$this->failedValidationRedirect = route('account.password');
+
 		$this->validate($request, [
 			'password1' => 'required|min:6',
 			'password' => 'required',
@@ -223,6 +229,8 @@ class AccountController extends Controller
 	 */
 	public function postAvatar(Request $request)
 	{
+		$this->failedValidationRedirect = route('account.avatar');
+
 		// TODO: validation. Upload size, valid link, valid email
 		$this->validate($request, [
 			'avatar_file' => 'image',

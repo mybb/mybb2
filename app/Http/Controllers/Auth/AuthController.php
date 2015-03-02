@@ -62,6 +62,8 @@ class AuthController extends Controller
 	 */
 	public function postSignup(Request $request)
 	{
+		$this->failedValidationRedirect = url('auth/signup');
+
 		$validator = $this->registrar->validator($request->all());
 
 		if ($validator->fails()) {
@@ -95,6 +97,7 @@ class AuthController extends Controller
 	 */
 	public function postLogin(Request $request)
 	{
+		$this->failedValidationRedirect = url('auth/login');
 
 		$this->validate($request, [
 			'username' => 'required',

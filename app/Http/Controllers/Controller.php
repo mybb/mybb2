@@ -10,7 +10,11 @@ use View;
 abstract class Controller extends BaseController
 {
 
-	use DispatchesCommands, ValidatesRequests;
+	use DispatchesCommands, ValidatesRequests {
+		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
+	}
+
+	protected $failedValidationRedirect = '';
 
 	public function __construct(Guard $guard)
 	{
@@ -19,5 +23,15 @@ abstract class Controller extends BaseController
 		$guard->user()->update([
 			'last_visit' => new \DateTime()
 		]);
+	}
+
+	protected function getRedirectUrl()
+	{
+		if(!empty($this->failedValidationRedirect))
+		{
+			return $this->failedValidationRedirect;
+		}
+
+		return $this->parentGetRedirectUrl();
 	}
 }
