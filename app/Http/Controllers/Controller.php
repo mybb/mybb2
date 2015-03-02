@@ -20,9 +20,12 @@ abstract class Controller extends BaseController
 	{
 		View::share('auth_user', $guard->user());
 
-		$guard->user()->update([
-			'last_visit' => new \DateTime()
-		]);
+		if($guard->check())
+		{
+			$guard->user()->update([
+				'last_visit' => new \DateTime()
+			]);
+		}
 	}
 
 	protected function getRedirectUrl()
