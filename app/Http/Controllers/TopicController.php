@@ -205,7 +205,7 @@ class TopicController extends Controller
 		}
 
 		if ($post) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug]);
+			return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $post->id]);
 		}
 
 		return new \Exception('Error editing post'); // TODO: Redirect back with error...
