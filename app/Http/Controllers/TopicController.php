@@ -113,12 +113,13 @@ class TopicController extends Controller
 		} else {
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
-		if (ceil($topic->num_posts / $ppp) == 1) {
+        $numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
+		if (ceil($numPost / $ppp) == 1) {
 			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $topic->last_post_id]);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
-				'page' => ceil($topic->num_posts / $ppp),
+				'page' => ceil($numPost / $ppp),
 				'#post-' . $topic->last_post_id
 			]);
 		}
