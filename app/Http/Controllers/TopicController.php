@@ -11,16 +11,15 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Auth\Guard;
+use Breadcrumbs;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Breadcrumbs;
 
 class TopicController extends Controller
 {
@@ -37,7 +36,7 @@ class TopicController extends Controller
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param Guard            $guard           Guard implementation
+	 * @param Guard        $guard           Guard implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
@@ -113,7 +112,7 @@ class TopicController extends Controller
 		} else {
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
-        $numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
+		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
 		if (ceil($numPost / $ppp) == 1) {
 			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $topic->last_post_id]);
 		} else {
@@ -132,7 +131,7 @@ class TopicController extends Controller
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
-		
+
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
 		return view('topic.reply', compact('topic'));
@@ -219,7 +218,7 @@ class TopicController extends Controller
 		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
-		
+
 		Breadcrumbs::setCurrentRoute('topics.create', $forum);
 
 		return view('topic.create', compact('forum'));
@@ -257,10 +256,12 @@ class TopicController extends Controller
 
 		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->deleteTopic($topic);
+
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
 		} else {
 			$this->postRepository->deletePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
+
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 
@@ -278,10 +279,12 @@ class TopicController extends Controller
 
 		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->restoreTopic($topic);
+
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		} else {
 			$this->postRepository->restorePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
+
 			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
 		}
 
