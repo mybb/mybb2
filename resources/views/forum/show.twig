@@ -12,8 +12,9 @@
 					{{ forum.description }}
 				</p>
 			</header>
-		   <section>
-				{% if forum.children.count > 0 %}
+
+			{% if forum.children.count > 0 %}
+                <section>
 					<h2 class="bold">{{ trans('forum.childforums') }}</h2>
 					 <div class="forum-list thread-list">
 						{% for forum in forum.children.toTree %}
@@ -35,8 +36,8 @@
 							{{ trans('forum.notfound') }}
 						{% endfor %}
 					</div>
-				{% endif %}
-			</section>
+                </section>
+            {% endif %}
 		</article>
 		<h2>{{ trans('forum.topics') }}</h2>
 		<div class="page-controls">
