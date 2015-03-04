@@ -8,8 +8,8 @@ use MyBB\Core\Database\Models\User;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
-class RecountCommand extends Command {
-
+class RecountCommand extends Command
+{
 	/**
 	 * The console command name.
 	 *
