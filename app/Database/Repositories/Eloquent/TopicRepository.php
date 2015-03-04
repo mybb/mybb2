@@ -96,7 +96,7 @@ class TopicRepository implements ITopicRepository
 	}
 
 	/**
-	 * Find a single thread by ID.
+	 * Find a single topic by ID.
 	 *
 	 * @param int $id The ID of the thread to find.
 	 *
@@ -108,7 +108,7 @@ class TopicRepository implements ITopicRepository
 	}
 
 	/**
-	 * Find a single thread by its slug.
+	 * Find a single topic by its slug.
 	 *
 	 * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
 	 *
@@ -245,12 +245,6 @@ class TopicRepository implements ITopicRepository
 		$title = (string) $title;
 		$sluggedTitle = $this->stringUtils->slug($title, '-');
 
-		$numExistingWithSlug = $this->topicModel->where('slug', 'LIKE', $sluggedTitle . '%')->count();
-
-		if ($numExistingWithSlug > 0) {
-			$sluggedTitle .= '-' . $numExistingWithSlug;
-		}
-
 		return $sluggedTitle;
 	}
 
@@ -316,5 +310,18 @@ class TopicRepository implements ITopicRepository
 		$topic->author->increment('num_topics');
 
 		return $topic->restore();
+	}
+
+	/**
+	 * Find a single topic with a specific slug and ID.
+	 *
+	 * @param string $slug The slug for the topic.
+	 * @param int    $id   The ID of the topic to find.
+	 *
+	 * @return mixed
+	 */
+	public function findBySlugAndId($slug = '', $id = 0)
+	{
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)->first();
 	}
 }

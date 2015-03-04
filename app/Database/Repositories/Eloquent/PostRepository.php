@@ -95,18 +95,18 @@ class PostRepository implements IPostRepository
 	{
 		if (!$this->guard->check()) {
 			// Todo: default to board setting
-			$ppp = 10;
+			$postsPerPage = 10;
 		} else {
-			$ppp = $this->guard->user()->settings->posts_per_page;
+			$postsPerPage = $this->guard->user()->settings->posts_per_page;
 		}
 
 		if($withTrashed)
 		{
-			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
 		}
 		else
 		{
-			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
 		}
 	}
 
