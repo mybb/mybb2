@@ -21,7 +21,7 @@ Breadcrumbs::register('forums.show', function($breadcrumbs, $forum)
 	{
 		$breadcrumbs->parent('forum.index');
 	}
-    $breadcrumbs->push($forum->title, route('forums.show', [$forum->slug]));
+    $breadcrumbs->push($forum->title, route('forums.show', [$forum->slug, $forum->id]));
 });
 
 Breadcrumbs::register('topics.show', function($breadcrumbs, $topic)
@@ -30,25 +30,25 @@ Breadcrumbs::register('topics.show', function($breadcrumbs, $topic)
 	{
 		$breadcrumbs->parent('forums.show', $topic->forum);
 	}
-    $breadcrumbs->push($topic->title, route('topics.show', [$topic->slug]));
+    $breadcrumbs->push($topic->title, route('topics.show', [$topic->slug, $topic->id]));
 });
 
 Breadcrumbs::register('topics.reply', function($breadcrumbs, $topic)
 {
 	$breadcrumbs->parent('topics.show', $topic);
-    $breadcrumbs->push(trans('topic.reply'), route('topics.reply', [$topic->slug]));
+    $breadcrumbs->push(trans('topic.reply'), route('topics.reply', [$topic->slug, $topic->id]));
 });
 
 Breadcrumbs::register('topics.edit', function($breadcrumbs, $topic)
 {
 	$breadcrumbs->parent('topics.show', $topic);
-    $breadcrumbs->push(trans('topic.edit'), route('topics.edit', [$topic->slug]));
+    $breadcrumbs->push(trans('topic.edit'), route('topics.edit', [$topic->slug, $topic->id]));
 });
 
 Breadcrumbs::register('topics.create', function($breadcrumbs, $forum)
 {
 	$breadcrumbs->parent('forums.show', $forum);
-    $breadcrumbs->push(trans('topic.create.title'), route('topics.create', [$forum->slug]));
+    $breadcrumbs->push(trans('topic.create.title'), route('topics.create', [$forum->slug, $forum->id]));
 });
 
 Breadcrumbs::register('members', function($breadcrumbs)
