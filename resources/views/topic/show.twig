@@ -22,7 +22,7 @@
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
-						<a href="{{ url_route('topics.showPost', [topic.slug, post.id]) }}" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
+						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="status-notice"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
