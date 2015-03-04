@@ -13,6 +13,7 @@ class Kernel extends ConsoleKernel
 	 */
 	protected $commands = [
 		'MyBB\Core\Console\Commands\Inspire',
+		'MyBB\Core\Console\Commands\RecountCommand',
 	];
 
 	/**
