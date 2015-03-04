@@ -104,7 +104,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->topicModel->find($id);
+		return $this->topicModel->withTrashed()->with(['author'])->find($id);
 	}
 
 	/**
