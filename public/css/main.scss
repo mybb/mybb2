@@ -1,13 +1,37 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
+
 /* 
  *	Base variables
  */
+
+// Theme colors
 $primary-color:		#007fd0;
 $secondary-color:	#ff7500;
+
+// Font colors
 $font-color: 		#222;
 $invert-font-color: #fff;
+$alt-font-color-1:	#666;
+$alt-font-color-2:	#999;
+$alt-font-color-3:	#ccc;
+$alt-font-color-4:	#333;
+
+// Border colors
+$border-1:			#dfdfdf;
+
+// Background colors
+$background-1:		#fafafa;
+$background-2:		#ddd;
+$red-highlight:		#eb5257;
+
+// Fonts
 $font-stack:		Open Sans, Helvetica Neue, Helvetica, Arial;
+
+
+/*
+ *	Mixins 
+ */
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -31,7 +55,11 @@ $font-stack:		Open Sans, Helvetica Neue, Helvetica, Arial;
 	color: rgba(255,255,255,$transparency);
 }
 
-/* Base styling */
+
+/*
+ *	Base styling
+ */
+
 html, button, input, select, textarea {
 	color: $font-color;
 }
@@ -112,7 +140,17 @@ a:active {
 
 }
 
+/*
+ *	Import our sub files
+ */
+
 @import 'header_footer';
+@import 'base';
+
+
+/*
+ *	Helper classes
+ */
 
 .clearfix:before,
 .clearfix:after {
@@ -128,6 +166,10 @@ a:active {
     *zoom: 1;
 }
 
-// Legacy CSS is all the stuff that still needs to be rewritten
+
+/*
+ *	Import legacy CSS (this is to be rewritten)
+ */
+
 @import 'plugins';
 @import 'legacy';

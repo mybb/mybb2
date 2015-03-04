@@ -41,12 +41,12 @@ h1.title {
 				margin-right: 1%;
 				float: left;
 				text-align: center;
-				background: #eee;
+				background: $background-1;
 				@include box-sizing(border-box);
 			}
 
 			.unread-count {
-				background: #eb5257;
+				background: $red-highlight;
 				color: #fff;
 				padding: 2px 5px 1px 4px;
 				margin: 0 0 0 2px;
@@ -103,9 +103,9 @@ h1.title {
 		> a:visited {
 			color: $invert-font-color;
 			padding: 2px 8px;
-			@include border-radius(4px);
 			display: inline-block;
 			margin: -3px 0 -2px 0;
+			@include border-radius(4px);
 		}
 
 		> a:hover,
@@ -121,8 +121,8 @@ h1.title {
 		border-right: 2px solid transparent;
 
 		i.fa-caret-down {
-			@include white-transparency(0.7);
 			font-size: 14px;
+			@include white-transparency(0.7);
 		}
 
 		i.fa-caret-up {
@@ -138,14 +138,14 @@ h1.title {
 
 		> a {
 			background: none;
-			@include border-radius(0);
 			color: #333;
+			@include border-radius(0);
 		}
 
 		i.fa-caret-up {
-			@include black-transparency(0.7);
 			display: inline;
 			font-size: 14px;
+			@include black-transparency(0.7);
 		}
 
 		i.fa-caret-down {
@@ -172,8 +172,8 @@ h1.title {
 	}
 
 	.unread-count {
-		background: #eb5257;
-		color: #fff;
+		background: $red-highlight;
+		color: $invert-font-color;
 		@include border-radius(2px);
 		padding: 2px 5px 1px 4px;
 		margin: 0 0 0 2px;
@@ -187,7 +187,7 @@ h1.title {
 	display: none;
 	background: #f2f2f2;
 	@include border-radius(0 4px 4px 4px);
-	border: 2px solid #ddd;
+	border: 2px solid $border-1;
 	border-top: 0;
 	padding: 6px 12px 12px;
 	font-size: 0.9em;
@@ -205,7 +205,7 @@ h1.title {
 		margin: 0;
 		padding: 0;
 		display: block;
-		border-bottom: 1px solid #e9e9e9;
+		border-bottom: 1px solid $border-1;
 
 		a {
 			display: block;
@@ -237,8 +237,8 @@ h1.title {
 
 	.notifications-container,
 	.messages-container {
-		background: #fafafa;
-		border: 1px solid #ddd;
+		background: $background-1;
+		border: 1px solid $border-1;
 		@include border-radius(3px);
 		margin: 10px 0 0 0;
 	}
@@ -313,7 +313,7 @@ h1.title {
 
 		li {
 			padding: 8px;
-			color: #666;
+			color: $alt-font-color-1;
 
 			a {
 				padding: 0;
@@ -346,7 +346,7 @@ h1.title {
 	time {
 		font-size: 0.9em;
 		margin: 3px 0 0 4px;
-		color: #666;
+		color: $alt-font-color-1;
 		float: right;
 	}
 
@@ -363,7 +363,7 @@ h1.title {
 #search {
 
 	.search__button {
-		color: #999;
+		color: $alt-font-color-2;
 		float: right;
 		margin: 8px 0 0 0;
 		padding: 5px 2px;
@@ -378,7 +378,7 @@ h1.title {
 	}
 
 	.search__button:hover {
-		color: #ccc;
+		color: $alt-font-color-3;
 	}
 
 	.search__container {
@@ -418,7 +418,7 @@ h1.title {
 		border: 0;
 		cursor: pointer;
 		background: none;
-		color: #888;
+		color: $alt-font-color-2;
 		font-size: 14px;
 
 		.text {
@@ -428,14 +428,31 @@ h1.title {
 
 	button.search__submit:hover,
 	a.search__advanced:hover {
-		color: #555;
+		color: $alt-font-color-1;
+	}
+}
+
+.breadcrumb {
+	display: block;
+	font-size: 0.8em;
+	color: $alt-font-color-3;
+	padding: 0;
+	margin: 0 0 10px 0;
+
+	a {
+		color: $alt-font-color-1;
+	}
+
+	i {
+		color: $alt-font-color-1;
+		margin: 0 4px 0 6px;
 	}
 }
 
 footer {
-	border-top: 1px solid #ddd;
-	background: #f5f5f5;
-	border-bottom: 1px solid #ddd;
+	border-top: 1px solid $border-1;
+	background: $background-1;
+	border-bottom: 1px solid $border-1;
 	margin-bottom: 30px;
 
 	h3 {
@@ -453,12 +470,12 @@ footer {
 	p.powered-by {
 		clear: both;
 		font-size: 0.8em;
-		color: #666;
+		color: $alt-font-color-1;
 		padding: 10px 0;
 		margin: 0;
 
 		a {
-			color: #333;
+			color: $alt-font-color-4;
 		}
 	}
 }
@@ -560,7 +577,7 @@ footer {
 	.menu-bar ul li a {
 		width: auto;
 		background: none;
-		border-left: 1px solid #ddd;
+		border-left: 1px solid $border-1;
 		margin: 0;
 		padding: 2px 12px;
 	}
