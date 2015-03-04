@@ -2,18 +2,18 @@
 {% block title %}{{ topic.title }}{% endblock %}
 {% block head %}
     <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
-    <link rel="canonical" href="{{ url_route("topics.reply", [topic.slug]) }}" />
+    <link rel="canonical" href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" />
 {% endblock %}
 {% block contents %}
 	<article class="full-width">
 		<header>
 			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
 			<div class="page-controls">
-				<a href="{{ url_route("topics.show", [topic.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
 		<section class="post">
-			{{ form_open({'route': ['topics.reply', topic.slug], 'method': 'post', 'class': 'form-section clearfix'}) }}
+			{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
 				<div class="form-row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
 					{{ form_textarea('content') }}

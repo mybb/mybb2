@@ -9,7 +9,7 @@
 		<header>
 			<h1>{{ trans('topic.create.title') }}</h1>
 			<div class="page-controls">
-				<a href="{{ url_route("forums.show", [forum.slug]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+				<a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
 		<section class="post">
