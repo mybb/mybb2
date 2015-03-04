@@ -88,7 +88,7 @@ class TopicController extends Controller
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
 		if (ceil($numPost / $ppp) == 1) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $post->id]);
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
