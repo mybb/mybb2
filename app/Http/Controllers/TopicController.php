@@ -115,7 +115,7 @@ class TopicController extends Controller
 		}
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
 		if (ceil($numPost / $ppp) == 1) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $topic->last_post_id]);
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
