@@ -92,6 +92,7 @@ class TopicController extends Controller
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
+				'id' => $topic->id,
 				'page' => ceil($numPost / $ppp),
 				'#post-' . $post->id
 			]);
@@ -118,6 +119,7 @@ class TopicController extends Controller
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
+				'id' => $topic->id,
 				'page' => ceil($numPost / $ppp),
 				'#post-' . $topic->last_post_id
 			]);
@@ -159,10 +161,11 @@ class TopicController extends Controller
 				$ppp = $this->guard->user()->settings->posts_per_page;
 			}
 			if (ceil($topic->num_posts / $ppp) == 1) {
-				return redirect()->route('topics.show', ['slug' => $topic->slug, '#post-' . $post->id]);
+				return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
 			} else {
 				return redirect()->route('topics.show', [
 					'slug' => $topic->slug,
+					'id' => $topic->id,
 					'page' => ceil($topic->num_posts / $ppp),
 					'#post-' . $post->id
 				]);
@@ -205,7 +208,7 @@ class TopicController extends Controller
 		}
 
 		if ($post) {
-			return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $post->id]);
+			return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
 		return new \Exception('Error editing post'); // TODO: Redirect back with error...
@@ -238,7 +241,7 @@ class TopicController extends Controller
 		                                        ]);
 
 		if ($topic) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug]);
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
 		return new \Exception(trans('errors.error_creating_topic')); // TODO: Redirect back with error...
@@ -257,12 +260,12 @@ class TopicController extends Controller
 		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->deleteTopic($topic);
 
-			return redirect()->route('forums.show', ['slug' => $topic->forum['slug']]);
+			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
 		} else {
 			$this->postRepository->deletePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 
-			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
+			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		}
 
 		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
@@ -280,12 +283,12 @@ class TopicController extends Controller
 		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->restoreTopic($topic);
 
-			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
+			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		} else {
 			$this->postRepository->restorePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 
-			return redirect()->route('topics.show', ['slug' => $topic['slug']]);
+			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		}
 
 		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
