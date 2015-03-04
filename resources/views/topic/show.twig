@@ -22,7 +22,7 @@
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
-						<a href="{{ url_route('topics.showPost', [topic.slug, post.id]) }}" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
+						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="status-notice"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
@@ -39,12 +39,12 @@
 					</div>
 					<div class="post-foot">
 						<ul class="post-controls">
-								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
+								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
-								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
 								<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-left"></i><span class="text">Quote</span></a></li>
 							{% endif %}

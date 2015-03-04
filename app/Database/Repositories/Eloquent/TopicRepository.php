@@ -96,7 +96,7 @@ class TopicRepository implements ITopicRepository
 	}
 
 	/**
-	 * Find a single thread by ID.
+	 * Find a single topic by ID.
 	 *
 	 * @param int $id The ID of the thread to find.
 	 *
@@ -104,11 +104,11 @@ class TopicRepository implements ITopicRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->topicModel->find($id);
+		return $this->topicModel->withTrashed()->with(['author'])->find($id);
 	}
 
 	/**
-	 * Find a single thread by its slug.
+	 * Find a single topic by its slug.
 	 *
 	 * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
 	 *
@@ -142,27 +142,28 @@ class TopicRepository implements ITopicRepository
 	{
 		// Build the correct order_by column - nice versions may be submitted
 		switch ($orderBy) {
-			case 'lastpost':
-				$orderBy = 'posts.created_at';
-				break;
 			case 'replies':
 				$orderBy = 'num_posts';
 				break;
 			case 'startdate':
 				$orderBy = 'topics.created_at';
 				break;
+			case 'lastpost':
+			default:
+				$orderBy = 'posts.created_at';
+				break;
 		}
 
 		if ($this->guard->check() == false) {
 			// Todo: default to board setting
-			$tpp = 10;
+			$topicsPerPage = 10;
 		} else {
-			$tpp = $this->guard->user()->settings->topics_per_page;
+			$topicsPerPage = $this->guard->user()->settings->topics_per_page;
 		}
 
 		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
 		                        ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-		                        ->orderBy($orderBy, $orderDir)->paginate($tpp, ['topics.*']);
+		                        ->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
 	}
 
 	/**
@@ -190,7 +191,7 @@ class TopicRepository implements ITopicRepository
 
 		if($details['user_id'] > 0)
 		{
-			$details['username'] = User::find($details['user_id'])->name;
+			$details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
 		}
 		else
 		{
@@ -244,12 +245,6 @@ class TopicRepository implements ITopicRepository
 		$title = (string) $title;
 		$sluggedTitle = $this->stringUtils->slug($title, '-');
 
-		$numExistingWithSlug = $this->topicModel->where('slug', 'LIKE', $sluggedTitle . '%')->count();
-
-		if ($numExistingWithSlug > 0) {
-			$sluggedTitle .= '-' . $numExistingWithSlug;
-		}
-
 		return $sluggedTitle;
 	}
 
@@ -257,7 +252,7 @@ class TopicRepository implements ITopicRepository
 	 * Edit a topic
 	 *
 	 * @param Topic $topic       The topic to edit
-	 * @param array $postDetails The details of the post to add.
+	 * @param array $topicDetails The details of the post to add.
 	 *
 	 * @return mixed
 	 */
@@ -315,5 +310,18 @@ class TopicRepository implements ITopicRepository
 		$topic->author->increment('num_topics');
 
 		return $topic->restore();
+	}
+
+	/**
+	 * Find a single topic with a specific slug and ID.
+	 *
+	 * @param string $slug The slug for the topic.
+	 * @param int    $id   The ID of the topic to find.
+	 *
+	 * @return mixed
+	 */
+	public function findBySlugAndId($slug = '', $id = 0)
+	{
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)->first();
 	}
 }

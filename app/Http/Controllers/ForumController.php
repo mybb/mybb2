@@ -69,13 +69,16 @@ class ForumController extends Controller
 	/**
 	 * Shows a specific forum.
 	 *
-	 * @param string $slug The slug of the forum to show.
+	 * @param Request $request
+	 * @param string  $slug The slug of the forum to show.
+	 *
+	 * @param int     $id The ID of the forum to show.
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show(Request $request, $slug = '')
+	public function show(Request $request, $slug = '', $id = 0)
 	{
-		$forum = $this->forumRepository->findBySlug($slug);
+		$forum = $this->forumRepository->find($id);
 
 		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));

@@ -50,7 +50,7 @@ class ForumRepository implements IForumRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->forumModel->find($id);
+		return $this->forumModel->with(['children', 'parent'])->find($id);
 	}
 
 	/**

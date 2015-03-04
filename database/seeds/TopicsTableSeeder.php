@@ -13,6 +13,7 @@ class TopicsTableSeeder extends Seeder
 			'slug' => 'my-topic',
 			'forum_id' => DB::table('forums')->where('slug', 'my-forum')->pluck('id'),
 			'user_id' => DB::table('users')->where('name', 'Admin')->pluck('id'),
+			'username' => 'Admin',
 			'first_post_id' => null,
 			'last_post_id' => null,
 			'views' => 0,

@@ -35,21 +35,21 @@ Route::get('/', [
 	'uses' => 'ForumController@index'
 ]);
 Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
-Route::get('forum/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
+Route::get('forum/{slug}.{id}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
-Route::get('topic/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
-Route::get('topic/{slug}/post/{id}', ['as' => 'topics.showPost', 'uses' => 'TopicController@showPost']);
-Route::get('topic/{slug}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
+Route::get('topic/{slug}.{id}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
+Route::get('topic/{slug}.{id}/post/{postId}', ['as' => 'topics.showPost', 'uses' => 'TopicController@showPost']);
+Route::get('topic/{slug}.{id}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
-Route::get('topic/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
+Route::get('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
 
-Route::post('topic/{slug}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
+Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
 
-Route::get('topic/{slug}/edit/{id}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
-Route::post('topic/{slug}/edit/{id}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
+Route::get('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
+Route::post('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
 
-Route::get('topic/{slug}/delete/{id}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
-Route::get('topic/{slug}/restore/{id}', ['as' => 'topics.restore', 'uses' => 'TopicController@restore']);
+Route::get('topic/{slug}.{id}/delete/{postId}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'uses' => 'TopicController@restore']);
 
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 

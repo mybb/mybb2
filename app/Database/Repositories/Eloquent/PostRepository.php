@@ -95,18 +95,18 @@ class PostRepository implements IPostRepository
 	{
 		if (!$this->guard->check()) {
 			// Todo: default to board setting
-			$ppp = 10;
+			$postsPerPage = 10;
 		} else {
-			$ppp = $this->guard->user()->settings->posts_per_page;
+			$postsPerPage = $this->guard->user()->settings->posts_per_page;
 		}
 
 		if($withTrashed)
 		{
-			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
 		}
 		else
 		{
-			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($ppp);
+			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
 		}
 	}
 
@@ -148,7 +148,6 @@ class PostRepository implements IPostRepository
 			'username' => null,
 			'content' => '',
 			'content_parsed' => '',
-			// TODO: Auto-populate parsed content with parser once parser is written.
 		], $postDetails);
 
 		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
@@ -168,7 +167,7 @@ class PostRepository implements IPostRepository
 			}
 		}
 
-		$post = $topic->posts()->save(new Post($postDetails));
+		$post = $topic->posts()->create($postDetails);
 
 		if ($post !== false) {
 			$topic->increment('num_posts');
@@ -219,6 +218,7 @@ class PostRepository implements IPostRepository
 	 * Delete posts of topic
 	 *
 	 * @param Topic $topic The topic that you want to delete its posts
+	 * @param bool $force Whether to force a hard delete of the post.
 	 *
 	 * @return mixed
 	 */
