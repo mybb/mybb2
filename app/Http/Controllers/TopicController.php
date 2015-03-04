@@ -12,7 +12,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Breadcrumbs;
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
