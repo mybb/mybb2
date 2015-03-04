@@ -115,7 +115,7 @@ class RecountCommand extends Command {
 
 	private function recountTopics()
 	{
-		$this->info('Recounting topic counteres...');
+		$this->info('Recounting topic counters...');
 
 		$topics = Topic::all();
 		foreach($topics as $topic)
