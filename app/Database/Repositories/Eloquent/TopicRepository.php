@@ -142,27 +142,28 @@ class TopicRepository implements ITopicRepository
 	{
 		// Build the correct order_by column - nice versions may be submitted
 		switch ($orderBy) {
-			case 'lastpost':
-				$orderBy = 'posts.created_at';
-				break;
 			case 'replies':
 				$orderBy = 'num_posts';
 				break;
 			case 'startdate':
 				$orderBy = 'topics.created_at';
 				break;
+			case 'lastpost':
+			default:
+				$orderBy = 'posts.created_at';
+				break;
 		}
 
 		if ($this->guard->check() == false) {
 			// Todo: default to board setting
-			$tpp = 10;
+			$topicsPerPage = 10;
 		} else {
-			$tpp = $this->guard->user()->settings->topics_per_page;
+			$topicsPerPage = $this->guard->user()->settings->topics_per_page;
 		}
 
 		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
 		                        ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-		                        ->orderBy($orderBy, $orderDir)->paginate($tpp, ['topics.*']);
+		                        ->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
 	}
 
 	/**
@@ -190,7 +191,7 @@ class TopicRepository implements ITopicRepository
 
 		if($details['user_id'] > 0)
 		{
-			$details['username'] = User::find($details['user_id'])->name;
+			$details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
 		}
 		else
 		{
@@ -257,7 +258,7 @@ class TopicRepository implements ITopicRepository
 	 * Edit a topic
 	 *
 	 * @param Topic $topic       The topic to edit
-	 * @param array $postDetails The details of the post to add.
+	 * @param array $topicDetails The details of the post to add.
 	 *
 	 * @return mixed
 	 */

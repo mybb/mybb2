@@ -148,7 +148,6 @@ class PostRepository implements IPostRepository
 			'username' => null,
 			'content' => '',
 			'content_parsed' => '',
-			// TODO: Auto-populate parsed content with parser once parser is written.
 		], $postDetails);
 
 		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
@@ -168,7 +167,7 @@ class PostRepository implements IPostRepository
 			}
 		}
 
-		$post = $topic->posts()->save(new Post($postDetails));
+		$post = $topic->posts()->create($postDetails);
 
 		if ($post !== false) {
 			$topic->increment('num_posts');
@@ -219,6 +218,7 @@ class PostRepository implements IPostRepository
 	 * Delete posts of topic
 	 *
 	 * @param Topic $topic The topic that you want to delete its posts
+	 * @param bool $force Whether to force a hard delete of the post.
 	 *
 	 * @return mixed
 	 */
