@@ -14,9 +14,9 @@
                     <a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author }} avatar" class="avatar" /></a>
                     <div class="topic-info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
-                        <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [topic.slug]) }}">{{ topic.title }}</a></h3>
-                        <p class="latest-post"><a href="{{ url_route("topics.last", [topic.slug]) }}" class="post-date" title="March 9, 2014 at 10:10 AM">{{ topic.lastPost.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ topic.lastPost.author.name }}</a></p>
-                        <p class="forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [topic.forum.slug]) }}">{{ topic.forum.title }}</a></p>
+                        <h3 class="topic-title unread"><a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a></h3>
+                        <p class="latest-post"><a href="{{ url_route("topics.last", [topic.slug, topic.id]) }}" class="post-date" title="March 9, 2014 at 10:10 AM">{{ topic.lastPost.created_at }}</a> {{ trans('general.by') }} <a href="" class="post-author">{{ topic.lastPost.author.name }}</a></p>
+                        <p class="forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [topic.forum.slug, topic.forum.id]) }}">{{ topic.forum.title }}</a></p>
                         <p class="topic-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies) }} &middot; {{ trans_choice('topic.numviews', topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 				<h4><a href="{{ url_route("forums.show", [category.slug]) }}">{{ category.title }}</a></h4>
 				<ul class="forum-list">
 				{% for forum in category.children.toTree %}
-					<li><a href="{{ url_route("forums.show", [forum.slug]) }}">{{ forum.title }}</a></li>
+					<li><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></li>
 				{% else %}
 					{#Do nothing, no subforums for this category#}
 				{% endfor %}
