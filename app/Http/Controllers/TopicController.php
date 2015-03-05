@@ -154,22 +154,7 @@ class TopicController extends Controller
 		]);
 
 		if ($post) {
-			if ($this->guard->check() == false) {
-				// Todo: default to board setting
-				$ppp = 10;
-			} else {
-				$ppp = $this->guard->user()->settings->posts_per_page;
-			}
-			if (ceil($topic->num_posts / $ppp) == 1) {
-				return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
-			} else {
-				return redirect()->route('topics.show', [
-					'slug' => $topic->slug,
-					'id' => $topic->id,
-					'page' => ceil($topic->num_posts / $ppp),
-					'#post-' . $post->id
-				]);
-			}
+			return redirect()->route('topics.last', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
 		return new \Exception(trans('errors.error_creating_post')); // TODO: Redirect back with error...
@@ -282,14 +267,14 @@ class TopicController extends Controller
 
 		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->restoreTopic($topic);
-
-			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		} else {
 			$this->postRepository->restorePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
-
-			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		}
+        if($topic)
+        {
+            return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+        }
 
 		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
 	}
