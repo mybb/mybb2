@@ -150,31 +150,31 @@
 				<div class="form__row">
 					<h3>{{ trans('account.threadsForums') }}</h3>
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="checkbox-buttons">
-						<p class="button-container">
+					<div class="select-control">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_like', 1, auth_user().settings.notify_on_like, {'id': 'notify_on_like'}) }}
-							<label for="notify_on_like" class="checkbox-button">
+							<label for="notify_on_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_like') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_quote', 1, auth_user().settings.notify_on_quote, {'id': 'notify_on_quote'}) }}
-							<label for="notify_on_quote" class="checkbox-button">
+							<label for="notify_on_quote" class="select-control__button">
 								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_quote') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_reply', 1, auth_user().settings.notify_on_reply, {'id': 'notify_on_reply'}) }}
-							<label for="notify_on_reply" class="checkbox-button">
+							<label for="notify_on_reply" class="select-control__button">
 								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_new_post', 1, auth_user().settings.notify_on_new_post, {'id': 'notify_on_new_post'}) }}
-							<label for="notify_on_new_post" class="checkbox-button">
+							<label for="notify_on_new_post" class="select-control__button">
 								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_post') }}</span>
 							</label>
@@ -184,38 +184,38 @@
 				<div class="form__row">
 					<h3>{{ trans('account.profiles') }}</h3>
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="checkbox-buttons">
-						<p class="button-container">
+					<div class="select-control">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_new_comment', 1, auth_user().settings.notify_on_new_comment, {'id': 'notify_on_new_comment'}) }}
-							<label for="notify_on_new_comment" class="checkbox-button">
+							<label for="notify_on_new_comment" class="select-control__button">
 								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_comment') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_comment_like', 1, auth_user().settings.notify_on_comment_like, {'id': 'notify_on_comment_like'}) }}
-							<label for="notify_on_comment_like" class="checkbox-button">
+							<label for="notify_on_comment_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_like') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_my_comment_like', 1, auth_user().settings.notify_on_my_comment_like, {'id': 'notify_on_my_comment_like'}) }}
-							<label for="notify_on_my_comment_like" class="checkbox-button">
+							<label for="notify_on_my_comment_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_like') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_comment_reply', 1, auth_user().settings.notify_on_comment_reply, {'id': 'notify_on_comment_reply'}) }}
-							<label for="notify_on_comment_reply" class="checkbox-button">
+							<label for="notify_on_comment_reply" class="select-control__button">
 								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_reply') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_my_comment_reply', 1, auth_user().settings.notify_on_my_comment_reply, {'id': 'notify_on_my_comment_reply'}) }}
-							<label for="notify_on_my_comment_reply" class="checkbox-button">
+							<label for="notify_on_my_comment_reply" class="select-control__button">
 								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_reply') }}</span>
 							</label>
@@ -225,17 +225,17 @@
 				<div class="form__row">
 					<h3>{{ trans('account.messages') }}</h3>
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="checkbox-buttons">
-						<p class="button-container">
+					<div class="select-control">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_new_message', 1, auth_user().settings.notify_on_new_message, {'id': 'notify_on_new_message'}) }}
-							<label for="notify_on_new_message" class="checkbox-button">
+							<label for="notify_on_new_message" class="select-control__button">
 								<i class="fa fa-inbox fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_message') }}</span>
 							</label>
 						</p>
-						<p class="button-container">
+						<p class="select-control__block">
 							{{ form_checkbox('notify_on_reply_message', 1, auth_user().settings.notify_on_reply_message, {'id': 'notify_on_reply_message'}) }}
-							<label for="notify_on_reply_message" class="checkbox-button">
+							<label for="notify_on_reply_message" class="select-control__button">
 								<i class="fa fa-reply fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply_message') }}</span>
 							</label>
@@ -245,34 +245,34 @@
 				<div class="form__row">
 					<h3>{{ trans('account.moderation') }}</h3>
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="checkbox-buttons">
+					<div class="select-control">
 						{# TODO: if auth_user().isGroupLeader #}
-							<p class="button-container">
+							<p class="select-control__block">
 								{{ form_checkbox('notify_on_group_request', 1, auth_user().settings.notify_on_group_request, {'id': 'notify_on_group_request'}) }}
-								<label for="notify_on_group_request" class="checkbox-button">
+								<label for="notify_on_group_request" class="select-control__button">
 									<i class="fa fa-users fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_group_request') }}</span>
 								</label>
 							</p>
 						{# endif #}
 						{# TODO: if auth_user().isModerator #}
-							<p class="button-container">
+							<p class="select-control__block">
 								{{ form_checkbox('notify_on_moderation_post', 1, auth_user().settings.notify_on_moderation_post, {'id': 'notify_on_moderation_post'}) }}
-								<label for="notify_on_moderation_post" class="checkbox-button">
+								<label for="notify_on_moderation_post" class="select-control__button">
 									<i class="fa fa-thumb-tack fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_moderation_post') }}</span>
 								</label>
 							</p>
-							<p class="button-container">
+							<p class="select-control__block">
 								{{ form_checkbox('notify_on_report', 1, auth_user().settings.notify_on_report, {'id': 'notify_on_report'}) }}
-								<label for="notify_on_report" class="checkbox-button">
+								<label for="notify_on_report" class="select-control__button">
 									<i class="fa fa-flag fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_report') }}</span>
 								</label>
 							</p>
-							<p class="button-container">
+							<p class="select-control__block">
 								{{ form_checkbox('notify_on_username_change', 1, auth_user().settings.notify_on_username_change, {'id': 'notify_on_username_change'}) }}
-								<label for="notify_on_username_change" class="checkbox-button">
+								<label for="notify_on_username_change" class="select-control__button">
 									<i class="fa fa-pencil-square-o fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_username_change') }}</span>
 								</label>
