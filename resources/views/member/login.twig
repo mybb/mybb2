@@ -14,7 +14,7 @@
 			</div>
 		{% endif %}
     {{ form_open({'url': ['auth/login'], 'method': 'post'}) }}
-		<article class="centered-full-width">
+		<div class="page-content page-content--centered">
 			<header>
 				<h1>{{ trans('member.login') }}</h1>
 			</header>
@@ -37,6 +37,6 @@
 			<div class="form-submit">
                 {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('member.login')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			</div>
-		</article>
+		</div>
     {{ form_close() }}
 {% endblock %}

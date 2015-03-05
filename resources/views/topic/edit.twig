@@ -4,7 +4,7 @@
     <link rel="canonical" href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" />
 {% endblock %}
 {% block contents %}
-	<article class="full-width">
+	<div class="page-content">
 		<header>
 			<h1>{{ trans('topic.editpost') }}</h1>
 			<div class="page-controls">
@@ -28,5 +28,5 @@
 				</div>
 			{{ form_close() }}
 		</section>
-	</article>
+	</div>
 {% endblock %}

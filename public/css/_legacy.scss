@@ -1456,15 +1456,6 @@ nav.account-menu ul li a i {
 	display: inline-block;
 }
 
-article .account-body header {
-	margin-bottom: 10px;
-}
-
-article .account-body header h1 {
-	font-size: 1.2em;
-	margin-bottom: 0;
-}
-
 section.form .form-section .form-row-container.change-avatar {
 	padding-left: 130px;
 }
@@ -1649,35 +1640,14 @@ section.form .change-avatar .buttons {
 
 @media only screen and (min-width: 768px) {
 
-	.main article {
+	
+
+	.page-content--full-width .forum-list .forum .forum-info {
 		float: left;
 		width: 60%;
 	}
 
-	.main article.full-width,
-	.main article.full-width-with-menu {
-		width: 100%;
-		float: none;
-	}
-
-	.main article.centered-full-width {
-		width: 60%;
-		float: none;
-		margin: auto auto;
-	}
-
-	.main aside {
-		float: right;
-		width: 35%;
-		margin-top: 0;
-	}
-
-	.full-width .forum-list .forum .forum-info {
-		float: left;
-		width: 60%;
-	}
-
-	.full-width .forum-list .forum .topic.compact {
+	.page-content--full-width .forum-list .forum .topic.compact {
 		float: right;
 		width: 35%;
 		border: none;
@@ -1685,22 +1655,22 @@ section.form .change-avatar .buttons {
 		padding: 4px 0;
 	}
 
-	.full-width .forum-list .forum .topic.compact .avatar-profile-link {
+	.page-content--full-width .forum-list .forum .topic.compact .avatar-profile-link {
 		width: 36px;
 		height: 36px;
 		margin: 6px 10px 0 0;
 	}
 
-	.full-width .forum-list .forum .topic.compact .avatar {
+	.page-content--full-width .forum-list .forum .topic.compact .avatar {
 		width: 36px;
 		height: 36px;
 	}
 
-	.full-width .forum-list .forum .topic.compact .topic-title {
+	.page-content--full-width .forum-list .forum .topic.compact .topic-title {
 		font-size: 0.8em;
 	}
 
-	.full-width .forum-list .forum .topic.compact .latest-post {
+	.page-content--full-width .forum-list .forum .topic.compact .latest-post {
 		margin-left: 34px;
 		display: block;
 	}
@@ -1893,11 +1863,6 @@ section.form .change-avatar .buttons {
 
 	nav.account-menu ul li:last-child a {
 		border-bottom: 0;
-	}
-
-	.account-body {
-		float: left;
-		width: 78%;
 	}
 
 	section.form .form-section {

@@ -7,7 +7,7 @@
     <link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
 {% endblock %}
 {% block contents %}
-	<article class="full-width">
+	<div class="page-content">
 		<header>
 			<h1>{{topic.title }}</h1>
 			<div class="page-controls">
@@ -60,5 +60,5 @@
             {{ posts.render|raw }}
 			{% include 'topic.quickreply' with {'topic': topic} %}
         </section>
-	</article>
+	</div>
 {% endblock %}

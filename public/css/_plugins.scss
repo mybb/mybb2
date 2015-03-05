@@ -15,17 +15,17 @@
   border: 8px solid rgba(0,0,0,.5);
 }
 
-.modal article {
+.modal .page-content {
 	background: #fff;
 	border: 1px solid rgba(0,0,0,0.7);
 }
 
-.modal article header {
+.modal .page-content header {
 	background: #007fd0;
 	border-bottom: 2px solid #0a539b;
 }
 
-.modal article header h1 {
+.modal .page-content header h1 {
 	margin: 0;
 	padding: 0;
 	color: #fff;
@@ -33,24 +33,24 @@
 	padding: 16px;
 }
 
-.modal article header .page-controls {
+.modal .page-content header .page-controls {
 	margin: -50px 8px 0 0;
 }
 
-.modal article header .button,
-.modal article header .button.secondary {
+.modal .page-content header .button,
+.modal .page-content header .button.secondary {
 	color: #fff;
     background: #007fd0;
     border-color: rgba(255,255,255,0.3);
 }
 
-.modal article header .button:hover,
-.modal article header .button.secondary:hover {
+.modal .page-content header .button:hover,
+.modal .page-content header .button.secondary:hover {
 	background: #ff7500;
 	border-color: #ff7500;
 }
 
-.modal article section.form {
+.modal .page-content section.form {
 	border: none;
 	/*padding-bottom: 0;*/
 	padding-bottom: 15px;
@@ -58,7 +58,7 @@
 	overflow: auto;
 }
 
-.modal article section.form h2 {
+.modal .page-content section.form h2 {
 	margin: 0 0 12px 0;
     padding: 0 8px 8px 8px;
     color: #007fd0;
@@ -69,7 +69,7 @@
     width: auto;
 }
 
-.modal article section.form .form-row-container {
+.modal .page-content section.form .form-row-container {
 	float: none;
 	margin: 0;
 	padding: 0;
@@ -77,27 +77,27 @@
 	width: auto;
 }
 
-.modal article .form-section:last-child {
+.modal .page-content .form-section:last-child {
 	padding-bottom: 0px;
 }
 
-.modal article .form-submit {
+.modal .page-content .form-submit {
 	margin: 0;
 	padding: 6px 0;
 	background: #f8f8f8;
 	border-top: 1px solid #ddd;
 }
 
-.modal article .account-menu {
+.modal .page-content .account-menu {
 	display: none;
 }
 
-.modal article .account-body {
+.modal .page-content .account-body {
 	float: none;
 	width: 100%;
 }
 
-.modal article .account-body header {
+.modal .page-content .account-body header {
 	margin: 0;
 }
 
@@ -169,7 +169,7 @@
 
 @media screen and (max-height: 758px) {
 
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 400px;
     overflow: auto;
   }
@@ -179,7 +179,7 @@
 
 @media screen and (max-height: 524px) {
 
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 300px;
     overflow: auto;
   }
@@ -190,7 +190,7 @@
 
 @media screen and (max-height: 458px) {
 
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 150px;
     overflow: auto;
     /*background: red;*/

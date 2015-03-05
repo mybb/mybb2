@@ -15,7 +15,7 @@
     {% endif %}
 
     {{ form_open({'url': ['password/reset'], 'method': 'post'}) }}
-        <article class="centered-full-width">
+        <div class="page-content page-content--centered">
             {{ form_hidden('token', token) }}
 
             <header>
@@ -43,6 +43,6 @@
             <div class="form-submit">
                 {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('passwords.resetpw')~'</span>', {'type': 'submit', 'class': 'button'}) }}
             </div>
-        </article>
+        </div>
     {{ form_close() }}
 {% endblock %}

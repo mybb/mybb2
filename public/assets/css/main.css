@@ -2512,16 +2512,21 @@ footer {
  */
 .main {
   padding: 15px 0 30px; }
-  .main article header {
+  .main .page-content header {
     margin-bottom: 20px; }
-    .main article header h1 {
+    .main .page-content header h1 {
       font-size: 1.5em;
       margin: 0 0 10px 0;
       padding: 0; }
-    .main article header p {
+    .main .page-content header p {
       color: #666;
       font-size: 0.9em;
       margin: 0 0 10px; }
+  .main .page-content--menu header {
+    margin-bottom: 10px; }
+    .main .page-content--menu header h1 {
+      font-size: 1.2em;
+      margin-bottom: 0; }
   .main aside {
     padding: 0 0 10px 0;
     font-size: 0.9em;
@@ -2529,8 +2534,8 @@ footer {
     .main aside section {
       border: 1px solid #dfdfdf;
       padding: 12px 15px;
-      border-radius: 4px;
-      margin-bottom: 30px; }
+      margin-bottom: 30px;
+      border-radius: 4px; }
 
 h2, aside h3 {
   border-bottom: 1px solid #dfdfdf;
@@ -2611,6 +2616,25 @@ h2.bold.linked-header {
 img.avatar {
   border-radius: 4px; }
 
+@media only screen and (min-width: 768px) {
+  .main .page-content--sidebar {
+    float: left;
+    width: 60%; }
+  .main .page-content--full-width {
+    width: 100%;
+    float: none; }
+  .main .page-content--centered {
+    width: 60%;
+    float: none;
+    margin: auto auto; }
+  .main .page-content--menu {
+    float: left;
+    width: 78%; }
+  .main aside {
+    float: right;
+    width: 35%;
+    margin-top: 0; } }
+
 /*
  *	Helper classes
  */
@@ -2640,41 +2664,41 @@ img.avatar {
   box-shadow: 0 0 10px #000;*/
   border: 8px solid rgba(0, 0, 0, 0.5); }
 
-.modal article {
+.modal .page-content {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.7); }
 
-.modal article header {
+.modal .page-content header {
   background: #007fd0;
   border-bottom: 2px solid #0a539b; }
 
-.modal article header h1 {
+.modal .page-content header h1 {
   margin: 0;
   padding: 0;
   color: #fff;
   font-size: 1.2em;
   padding: 16px; }
 
-.modal article header .page-controls {
+.modal .page-content header .page-controls {
   margin: -50px 8px 0 0; }
 
-.modal article header .button, .modal article header .button.secondary {
+.modal .page-content header .button, .modal .page-content header .button.secondary {
   color: #fff;
   background: #007fd0;
   border-color: rgba(255, 255, 255, 0.3); }
 
-.modal article header .button:hover, .modal article header .button.secondary:hover {
+.modal .page-content header .button:hover, .modal .page-content header .button.secondary:hover {
   background: #ff7500;
   border-color: #ff7500; }
 
-.modal article section.form {
+.modal .page-content section.form {
   border: none;
   /*padding-bottom: 0;*/
   padding-bottom: 15px;
   margin: 0;
   overflow: auto; }
 
-.modal article section.form h2 {
+.modal .page-content section.form h2 {
   margin: 0 0 12px 0;
   padding: 0 8px 8px 8px;
   color: #007fd0;
@@ -2684,30 +2708,30 @@ img.avatar {
   float: none;
   width: auto; }
 
-.modal article section.form .form-row-container {
+.modal .page-content section.form .form-row-container {
   float: none;
   margin: 0;
   padding: 0;
   border: none;
   width: auto; }
 
-.modal article .form-section:last-child {
+.modal .page-content .form-section:last-child {
   padding-bottom: 0px; }
 
-.modal article .form-submit {
+.modal .page-content .form-submit {
   margin: 0;
   padding: 6px 0;
   background: #f8f8f8;
   border-top: 1px solid #ddd; }
 
-.modal article .account-menu {
+.modal .page-content .account-menu {
   display: none; }
 
-.modal article .account-body {
+.modal .page-content .account-body {
   float: none;
   width: 100%; }
 
-.modal article .account-body header {
+.modal .page-content .account-body header {
   margin: 0; }
 
 .modal a.close-modal {
@@ -2759,17 +2783,17 @@ img.avatar {
     width: 290px; } }
 
 @media screen and (max-height: 758px) {
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 400px;
     overflow: auto; } }
 
 @media screen and (max-height: 524px) {
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 300px;
     overflow: auto; } }
 
 @media screen and (max-height: 458px) {
-  .modal article section.form {
+  .modal .page-content section.form {
     max-height: 150px;
     overflow: auto;
     /*background: red;*/ } }
@@ -4141,13 +4165,6 @@ nav.account-menu ul li a i {
   text-align: center;
   display: inline-block; }
 
-article .account-body header {
-  margin-bottom: 10px; }
-
-article .account-body header h1 {
-  font-size: 1.2em;
-  margin-bottom: 0; }
-
 section.form .form-section .form-row-container.change-avatar {
   padding-left: 130px; }
 
@@ -4276,39 +4293,25 @@ section.form .change-avatar .buttons {
 
 ---- */
 @media only screen and (min-width: 768px) {
-  .main article {
+  .page-content--full-width .forum-list .forum .forum-info {
     float: left;
     width: 60%; }
-  .main article.full-width, .main article.full-width-with-menu {
-    width: 100%;
-    float: none; }
-  .main article.centered-full-width {
-    width: 60%;
-    float: none;
-    margin: auto auto; }
-  .main aside {
-    float: right;
-    width: 35%;
-    margin-top: 0; }
-  .full-width .forum-list .forum .forum-info {
-    float: left;
-    width: 60%; }
-  .full-width .forum-list .forum .topic.compact {
+  .page-content--full-width .forum-list .forum .topic.compact {
     float: right;
     width: 35%;
     border: none;
     margin: 0;
     padding: 4px 0; }
-  .full-width .forum-list .forum .topic.compact .avatar-profile-link {
+  .page-content--full-width .forum-list .forum .topic.compact .avatar-profile-link {
     width: 36px;
     height: 36px;
     margin: 6px 10px 0 0; }
-  .full-width .forum-list .forum .topic.compact .avatar {
+  .page-content--full-width .forum-list .forum .topic.compact .avatar {
     width: 36px;
     height: 36px; }
-  .full-width .forum-list .forum .topic.compact .topic-title {
+  .page-content--full-width .forum-list .forum .topic.compact .topic-title {
     font-size: 0.8em; }
-  .full-width .forum-list .forum .topic.compact .latest-post {
+  .page-content--full-width .forum-list .forum .topic.compact .latest-post {
     margin-left: 34px;
     display: block; }
   .forum.topic-list .sort-topics a.primary-column-one, .forum.topic-list .sort-topics a.primary-column-two {
@@ -4422,9 +4425,6 @@ section.form .change-avatar .buttons {
     margin-right: 0; }
   nav.account-menu ul li:last-child a {
     border-bottom: 0; }
-  .account-body {
-    float: left;
-    width: 78%; }
   section.form .form-section {
     padding: 20px 12px; }
   section.form .form-section:last-child {

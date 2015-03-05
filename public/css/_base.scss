@@ -8,7 +8,7 @@
 .main {
 	padding: 15px 0 30px;
 
-	article header {
+	.page-content header {
 
 		margin-bottom: 20px;
 
@@ -26,6 +26,18 @@
 
 	}
 
+	.page-content--menu {
+		
+		header {
+			margin-bottom: 10px;
+
+			h1 {
+				font-size: 1.2em;
+				margin-bottom: 0;
+			}
+		}
+	}
+
 	aside {
 		padding: 0 0 10px 0;
 		font-size: 0.9em;
@@ -34,8 +46,8 @@
 		section {
 			border: 1px solid $border-1;
 			padding: 12px 15px;
-			@include border-radius(4px);
 			margin-bottom: 30px;
+			@include border-radius(4px);
 		}
 	}
 }
@@ -154,4 +166,37 @@ h2.bold.linked-header {
 
 img.avatar {
 	@include border-radius(4px);
+}
+
+@media only screen and (min-width: 768px) {
+	
+	.main {
+
+		.page-content--sidebar {
+			float: left;
+			width: 60%;
+		}
+
+		.page-content--full-width {
+			width: 100%;
+			float: none;
+		}
+
+		.page-content--centered {
+			width: 60%;
+			float: none;
+			margin: auto auto;
+		}
+
+		.page-content--menu {
+			float: left;
+			width: 78%;
+		}
+
+		aside {
+			float: right;
+			width: 35%;
+			margin-top: 0;
+		}
+	}
 }
