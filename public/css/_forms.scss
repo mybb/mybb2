@@ -155,6 +155,60 @@ section.form {
 	}
 }
 
+.segmented-control {
+	margin: 5px 0 0 0;
+	border: 1px solid $border-2;
+	font-size: 0.8em;
+	display: inline-block;
+	@include border-radius(4px);
+
+	.segmented-control__block {
+		display: inline-block;
+	}
+
+	.segmented-control__button {
+		display: block;
+		padding: 3px 8px;
+		margin: 0;
+		border-left: 1px solid $border-2;
+		border-right: 1px solid transparent;
+		position: relative;
+		z-index: 10;
+		cursor: pointer;
+
+		i {
+			margin: 0 6px 0 0;
+			float: none;
+		}
+	}
+
+	:first-child .segmented-control__button {
+		border-left: 1px solid transparent;
+		@include border-radius(4px 0 0 4px);
+	}
+
+	:last-child .segmented-control__button {
+		@include border-radius(0 4px 4px 0);
+	}
+
+	input {
+		position: absolute;
+		visibility: hidden;
+	}
+
+	input:checked + .segmented-control__button {
+		background: $primary-color;
+		color: $invert-font-color;
+		margin: -1px;
+		border: 1px solid $primary-color;
+		z-index: 15;
+
+		i {
+			color: $invert-font-color;
+		}
+	}
+}
+
 /* begin still to be rewritten */
 
 section.form .buttons {
@@ -168,20 +222,6 @@ section.form .buttons {
 section.form .radio-buttons,
 section.form .checkbox-buttons {
 	font-size: 0.8em;
-}
-
-section.form .radio-buttons.inline {
-	padding: 0;
-	margin: 5px 0 0 0;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	display: inline-block;
-}
-
-section.form .radio-buttons.inline .button-container {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
 }
 
 section.form .radio-buttons .button-container,
@@ -203,38 +243,12 @@ section.form .checkbox-buttons .checkbox-button {
 	cursor: pointer;
 }
 
-section.form .radio-buttons.inline .radio-button {
-	display: inline-block;
-	margin: 0;
-	padding: 3px 8px;
-	background: none;
-	border-radius: 0;
-	border-left: 1px solid #ccc;
-	border-right: 1px solid transparent;
-	position: relative;
-	z-index: 10;
-}
-
-section.form .radio-buttons.inline :first-child .radio-button {
-	border-radius: 4px 0 0 4px;
-	border-left: 1px solid transparent;
-}
-
-section.form .radio-buttons.inline :last-child .radio-button {
-	border-radius: 0 4px 4px 0;
-}
-
 section.form .radio-buttons .radio-button i,
 section.form .checkbox-buttons .checkbox-button i {
 	color: #999;
 	font-size: 14px;
 	margin: 6px 8px -20px -20px;
 	float: left;
-}
-
-section.form .radio-buttons.inline .radio-button i {
-	margin: 0 6px 0 0;
-	float: none;
 }
 
 section.form .radio-buttons .button-container input,
@@ -250,17 +264,7 @@ section.form .radio-buttons input:checked + .radio-button {
 	background-color: #ccc;
 }
 
-section.form .radio-buttons.inline input:checked + .radio-button {
-	background-color: #007fd0;
-	color: #fff;
-	margin: -1px;
-	border: 1px solid #007fd0;
-	z-index: 15;
-}
 
-section.form .radio-buttons.inline input:checked + .radio-button i {
-	color: #fff;
-}
 
 section.form .checkbox-buttons input:checked + .checkbox-button {
 	background-color: #ccc;

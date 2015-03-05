@@ -27,19 +27,19 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.timeformat') }}</h3>
-					<div class="radio-buttons inline">
-							{# we can't use form_label here as laravel escapes the value and we need html in it #}
-							<span class="button-container">
-								{{ form_radio('time_format', 12, auth_user().settings.time_format == 12, {'id': 'twelvehour'}) }}
-								<label class="radio-button" for="twelvehour">
-									<span class="text">{{ trans('account.12-hour') }}</span>
-								</label>
-							</span><span class="button-container">
-								{{ form_radio('time_format', 24, auth_user().settings.time_format == 24, {'id': 'twentyfourhour'}) }}
-								<label class="radio-button" for="twentyfourhour">
-									<span class="text">{{ trans('account.24-hour') }}</span>
-								</label>
-							</span>
+					<div class="segmented-control">
+						{# we can't use form_label here as laravel escapes the value and we need html in it #}
+						<span class="segmented-control__block">
+							{{ form_radio('time_format', 12, auth_user().settings.time_format == 12, {'id': 'twelvehour'}) }}
+							<label class="segmented-control__button" for="twelvehour">
+								<span class="text">{{ trans('account.12-hour') }}</span>
+							</label>
+						</span><span class="segmented-control__block">
+							{{ form_radio('time_format', 24, auth_user().settings.time_format == 24, {'id': 'twentyfourhour'}) }}
+							<label class="segmented-control__button" for="twentyfourhour">
+								<span class="text">{{ trans('account.24-hour') }}</span>
+							</label>
+						</span>
 					</div>
 				</div>
 				<div class="form__row">
@@ -81,22 +81,22 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.dst') }}</h3>
-					<p class="description">{{ trans('account.dst_desc') }}</p>
-					<div class="radio-buttons inline">
+					<p class="form__description">{{ trans('account.dst_desc') }}</p>
+					<div class="segmented-control">
 							{# as above: form_label not usable #}
-							<span class="button-container">
+							<span class="segmented-control__block">
 								{{ form_radio('dst', 0, auth_user().settings.dst == 0, {'id': 'dst_on'}) }}
-								<label class="radio-button" for="dst_on">
+								<label class="segmented-control__button" for="dst_on">
 									<span class="text">{{ trans('general.enable') }}</span>
 								</label>
-							</span><span class="button-container">
+							</span><span class="segmented-control__block">
 								{{ form_radio('dst', 1, auth_user().settings.dst == 1, {'id': 'dst_off'}) }}
-								<label class="radio-button" for="dst_off">
+								<label class="segmented-control__button" for="dst_off">
 									<span class="text">{{ trans('general.disable') }}</span>
 								</label>
-							</span><span class="button-container">
+							</span><span class="segmented-control__block">
 								{{ form_radio('dst', 2, auth_user().settings.dst == 2, {'id': 'dst_auto'}) }}
-								<label class="radio-button" for="dst_auto">
+								<label class="segmented-control__button" for="dst_auto">
 									<span class="text">{{ trans('general.auto') }}</span>
 								</label>
 							</span>
@@ -109,9 +109,9 @@
 			<div class="form__section__container">
 				<div class="form__row">
 					{# is there a better way than using raw here? #}
-					<p class="checkbox"><label>{{ form_checkbox('follow_started_topics', 1, auth_user().settings.follow_started_topics) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, auth_user().settings.follow_replied_topics) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('show_editor', 1, auth_user().settings.show_editor) }} {{ trans('account.show_editor') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('follow_started_topics', 1, auth_user().settings.follow_started_topics) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, auth_user().settings.follow_replied_topics) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, auth_user().settings.show_editor) }} {{ trans('account.show_editor') }}</label></p>
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
@@ -149,7 +149,7 @@
 			<div class="form__section__container">
 				<div class="form__row">
 					<h3>{{ trans('account.threadsForums') }}</h3>
-					<p class="description">{{ trans('account.notify_me') }}</p>
+					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_like', 1, auth_user().settings.notify_on_like, {'id': 'notify_on_like'}) }}
@@ -183,7 +183,7 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.profiles') }}</h3>
-					<p class="description">{{ trans('account.notify_me') }}</p>
+					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_new_comment', 1, auth_user().settings.notify_on_new_comment, {'id': 'notify_on_new_comment'}) }}
@@ -224,7 +224,7 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.messages') }}</h3>
-					<p class="description">{{ trans('account.notify_me') }}</p>
+					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_new_message', 1, auth_user().settings.notify_on_new_message, {'id': 'notify_on_new_message'}) }}
@@ -244,7 +244,7 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.moderation') }}</h3>
-					<p class="description">{{ trans('account.notify_me') }}</p>
+					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						{# TODO: if auth_user().isGroupLeader #}
 							<p class="button-container">
@@ -283,21 +283,21 @@
 				<div class="form__row">
 					<h3>{{ trans('account.notification_mails') }}</h3>
 					{# TODO: raw again - not nice #}
-					<p class="description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
-					<div class="radio-buttons inline">
-							<span class="button-container">
+					<p class="form__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
+					<div class="segmented-control">
+							<span class="segmented-control__block">
 								{{ form_radio('notification_mails', 0, auth_user().settings.notification_mails == 0, {'id': 'no_emails'}) }}
-								<label class="radio-button" for="no_emails">
+								<label class="segmented-control__button" for="no_emails">
 									<span class="text">{{ trans('general.none') }}</span>
 								</label>
-							</span><span class="button-container">
+							</span><span class="segmented-control__block">
 								{{ form_radio('notification_mails', 1, auth_user().settings.notification_mails == 1, {'id': 'daily_emails'}) }}
-								<label class="radio-button" for="daily_emails">
+								<label class="segmented-control__button" for="daily_emails">
 									<span class="text">{{ trans('general.daily') }}</span>
 								</label>
-							</span><span class="button-container">
+							</span><span class="segmented-control__block">
 								{{ form_radio('notification_mails', 2, auth_user().settings.notification_mails == 2, {'id': 'weekly_emails'}) }}
-								<label class="radio-button" for="weekly_emails">
+								<label class="segmented-control__button" for="weekly_emails">
 									<span class="text">{{ trans('general.weekly') }}</span>
 								</label>
 							</span>
