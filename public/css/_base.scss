@@ -27,7 +27,7 @@
 	}
 
 	.page-content--menu {
-		
+
 		header {
 			margin-bottom: 10px;
 
@@ -52,23 +52,73 @@
 	}
 }
 
-h2, aside h3 {
-	border-bottom: 1px solid $border-1;
-	padding: 8px;
-	margin-bottom: 5px;
-}
-
 section {
 
 	margin-bottom: 30px;
 
-	h2.bold, header {
-		margin-bottom: 0;
+	h2 {
+		font-size: 1.2em;
+	}
+
+	.heading {
+		border-bottom: 1px solid $border-1;
+		padding: 8px;
+		margin: 0 0 5px 0;
+	}
+
+	.heading--linked {
+		border-bottom: 0;
+		padding: 0;
+
+		a {
+			padding: 8px 12px;
+			border-bottom: 1px solid $border-1;
+			text-decoration: none;
+			display: block;
+
+			.count {
+				float: right;
+				font-size: 0.8em;
+				color: $alt-font-color-1;
+				font-weight: normal;
+
+				i {
+					margin-left: 4px;
+				}
+			}
+		}
+	}
+
+	.heading--major {
 		background: $primary-color;
-		padding: 8px 12px;
-		border: 0;
 		color: $invert-font-color;
+		border: 0;
+		padding: 8px 12px;
+		margin-bottom: 0;
 		@include border-radius(4px);
+	}
+
+	.heading--major.heading--linked {
+		padding: 0;
+
+		a {
+			border: none;
+			color: $invert-font-color;
+			text-decoration: none;
+
+			.count {
+				@include white-transparency(0.7);
+			}
+		}
+
+		a:hover,
+		a:active {
+			text-decoration: underline;
+
+			.count {
+				color: $invert-font-color;
+			}
+		}
 	}
 
 	.page-tabs {
@@ -116,52 +166,6 @@ section.container {
 
 section:last-child {
 	margin-bottom: 0;
-}
-
-.linked-header {
-	border-bottom: 0;
-	padding: 0;
-
-	a {
-		padding: 8px 12px;
-		border-bottom: 1px solid $border-1;
-		text-decoration: none;
-		display: block;
-
-		.count {
-			float: right;
-			font-size: 0.9em;
-			color: $alt-font-color-1;
-			font-weight: normal;
-
-			i {
-				margin-left: 4px;
-			}
-		}
-	}
-}
-
-h2.bold.linked-header {
-	padding: 0;
-
-	a {
-		border: none;
-		color: $invert-font-color;
-		text-decoration: none;
-
-		.count {
-			@include white-transparency(0.7);
-		}
-	}
-
-	a:hover,
-	a:active {
-		text-decoration: underline;
-
-		.count {
-			color: $invert-font-color;
-		}
-	}
 }
 
 img.avatar {

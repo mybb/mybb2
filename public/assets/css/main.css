@@ -2537,20 +2537,48 @@ footer {
       margin-bottom: 30px;
       border-radius: 4px; }
 
-h2, aside h3 {
-  border-bottom: 1px solid #dfdfdf;
-  padding: 8px;
-  margin-bottom: 5px; }
-
 section {
   margin-bottom: 30px; }
-  section h2.bold, section header {
-    margin-bottom: 0;
+  section h2 {
+    font-size: 1.2em; }
+  section .heading {
+    border-bottom: 1px solid #dfdfdf;
+    padding: 8px;
+    margin: 0 0 5px 0; }
+  section .heading--linked {
+    border-bottom: 0;
+    padding: 0; }
+    section .heading--linked a {
+      padding: 8px 12px;
+      border-bottom: 1px solid #dfdfdf;
+      text-decoration: none;
+      display: block; }
+      section .heading--linked a .count {
+        float: right;
+        font-size: 0.8em;
+        color: #666;
+        font-weight: normal; }
+        section .heading--linked a .count i {
+          margin-left: 4px; }
+  section .heading--major {
     background: #007fd0;
-    padding: 8px 12px;
-    border: 0;
     color: #fff;
+    border: 0;
+    padding: 8px 12px;
+    margin-bottom: 0;
     border-radius: 4px; }
+  section .heading--major.heading--linked {
+    padding: 0; }
+    section .heading--major.heading--linked a {
+      border: none;
+      color: #fff;
+      text-decoration: none; }
+      section .heading--major.heading--linked a .count {
+        color: rgba(255, 255, 255, 0.7); }
+    section .heading--major.heading--linked a:hover, section .heading--major.heading--linked a:active {
+      text-decoration: underline; }
+      section .heading--major.heading--linked a:hover .count, section .heading--major.heading--linked a:active .count {
+        color: #fff; }
   section .page-tabs {
     list-style: none;
     margin: 0;
@@ -2583,35 +2611,6 @@ section.container {
 
 section:last-child {
   margin-bottom: 0; }
-
-.linked-header {
-  border-bottom: 0;
-  padding: 0; }
-  .linked-header a {
-    padding: 8px 12px;
-    border-bottom: 1px solid #dfdfdf;
-    text-decoration: none;
-    display: block; }
-    .linked-header a .count {
-      float: right;
-      font-size: 0.9em;
-      color: #666;
-      font-weight: normal; }
-      .linked-header a .count i {
-        margin-left: 4px; }
-
-h2.bold.linked-header {
-  padding: 0; }
-  h2.bold.linked-header a {
-    border: none;
-    color: #fff;
-    text-decoration: none; }
-    h2.bold.linked-header a .count {
-      color: rgba(255, 255, 255, 0.7); }
-  h2.bold.linked-header a:hover, h2.bold.linked-header a:active {
-    text-decoration: underline; }
-    h2.bold.linked-header a:hover .count, h2.bold.linked-header a:active .count {
-      color: #fff; }
 
 img.avatar {
   border-radius: 4px; }
@@ -2666,7 +2665,9 @@ img.avatar {
 
 .modal .page-content {
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.7); }
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  width: 100%;
+  float: none; }
 
 .modal .page-content header {
   background: #007fd0;
@@ -2724,14 +2725,10 @@ img.avatar {
   background: #f8f8f8;
   border-top: 1px solid #ddd; }
 
-.modal .page-content .account-menu {
+.modal .account-menu {
   display: none; }
 
-.modal .page-content .account-body {
-  float: none;
-  width: 100%; }
-
-.modal .page-content .account-body header {
+.modal .page-content--menu header {
   margin: 0; }
 
 .modal a.close-modal {

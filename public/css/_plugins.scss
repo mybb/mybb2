@@ -18,6 +18,8 @@
 .modal .page-content {
 	background: #fff;
 	border: 1px solid rgba(0,0,0,0.7);
+	width: 100%;
+	float: none;
 }
 
 .modal .page-content header {
@@ -88,16 +90,11 @@
 	border-top: 1px solid #ddd;
 }
 
-.modal .page-content .account-menu {
+.modal .account-menu {
 	display: none;
 }
 
-.modal .page-content .account-body {
-	float: none;
-	width: 100%;
-}
-
-.modal .page-content .account-body header {
+.modal .page-content--menu header {
 	margin: 0;
 }
 

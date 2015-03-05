@@ -15,7 +15,7 @@
 
 			{% if forum.children.count > 0 %}
                 <section>
-					<h2 class="bold">{{ trans('forum.childforums') }}</h2>
+					<h2 class="heading heading--major">{{ trans('forum.childforums') }}</h2>
 					 <div class="forum-list thread-list">
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">

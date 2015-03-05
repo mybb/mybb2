@@ -9,7 +9,7 @@
     </header>
     {% for category in forums %}
 		<section>
-			<h2 class="bold">{{ category.title }}</h2>
+			<h2 class="heading heading--major">{{ category.title }}</h2>
 			 <div class="forum-list topic-list">
 				{% for forum in category.children.toTree %}
 					<div class="forum">

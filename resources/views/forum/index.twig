@@ -7,7 +7,7 @@
 		<p>The official community for MyBB, the best free and open source forum software.</p>
 	</header>
 	<section>
-		<h2 class="linked-header bold"><a href="index.php?page=new-posts">Latest Discussions <span class="count">42 <i class="fa fa-angle-right"></i></span></a></h2>
+		<h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts">Latest Discussions <span class="count">42 <i class="fa fa-angle-right"></i></span></a></h2>
 		<div class="topic-list">
             {% for topic in topics %}
                 <div class="topic">
@@ -31,7 +31,7 @@
 
 <aside>
 	<section>
-		<h3 class="linked-header"><a href="{{ url_route('forums.all') }}">{{ trans('forum.allforums') }}</a></h3>
+		<h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}">{{ trans('forum.allforums') }}</a></h3>
 
 		<div class="compressed-forum-list">
 		{% for category in forums %}
@@ -51,7 +51,7 @@
 			</div>
 	</section>
 		<section>
-			<h3 class="linked-header"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
+			<h3 class="heading heading--linked"><a href="index.php?page=online">Online Now <span class="count">14 <i class="fa fa-angle-right"></i></span></a></h3>
 			<div class="compact-users-list online-users">
 				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />Clank</a>
 				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31011.png?dateline=1373556215" class="avatar" />envira</a>
