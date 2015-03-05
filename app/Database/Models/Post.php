@@ -66,7 +66,7 @@ class Post extends Model implements HasPresenter
 	 */
 	public function topic()
 	{
-		return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic');
+		return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic')->withTrashed();
 	}
 
 	/**
