@@ -2649,6 +2649,49 @@ img.avatar {
     width: 35%;
     margin-top: 0; } }
 
+input[type="text"], input[type="password"] {
+  border: 1px solid #ccc;
+  padding: 6px;
+  width: 100%;
+  font-size: 0.9em;
+  outline: 0;
+  border-radius: 4px;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+select {
+  border: 1px solid #ccc;
+  padding: 4px;
+  font-size: 0.9em;
+  outline: none;
+  max-width: 100%;
+  border-radius: 4px;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+select[multiple="multiple"] {
+  width: 100%;
+  height: 200px; }
+
+input.short {
+  width: 50px;
+  font: 12px Open Sans, Helvetica Neue, Helvetica, Arial; }
+
+input.small {
+  width: 50px;
+  margin-left: 6px;
+  margin-right: 6px; }
+
+textarea {
+  border: 1px solid #ccc;
+  padding: 6px;
+  width: 100%;
+  font-size: 0.9em;
+  outline: 0;
+  border-radius: 4px;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
 section.form {
   border: 1px solid #dfdfdf;
   margin-bottom: 10px;
@@ -2677,35 +2720,35 @@ section.form {
       text-transform: uppercase;
       color: #007fd0;
       margin: 0; }
-    section.form .form__row p.form__checkbox {
-      font-size: 0.9em;
-      margin: 5px 0;
-      padding: 0 0 0 30px; }
-      section.form .form__row p.form__checkbox input[type="checkbox"] {
-        float: left;
-        margin: 6px 0 0 -26px; }
-      section.form .form__row p.form__checkbox i {
-        color: #999;
-        padding-right: 5px;
-        width: 16px;
-        font-size: 14px;
-        text-align: center;
-        display: inline-block; }
-    section.form .form__row p.form__checkbox:last-child {
-      margin-bottom: 0; }
-    section.form .form__row p.form__description {
-      font-size: 0.8em;
-      line-height: 1.4;
-      color: #666;
-      margin: -4px 0 4px 0; }
-    section.form .form__row p.form__data {
-      margin: 0 0 0;
-      font-size: 0.9em; }
   section.form .form__row:first-child {
     padding-top: 0; }
   section.form .form__row:last-child {
     border-bottom: 0;
     padding-bottom: 6px; }
+  section.form p.form__checkbox {
+    font-size: 0.9em;
+    margin: 5px 0;
+    padding: 0 0 0 30px; }
+    section.form p.form__checkbox input[type="checkbox"] {
+      float: left;
+      margin: 6px 0 0 -26px; }
+    section.form p.form__checkbox i {
+      color: #999;
+      padding-right: 5px;
+      width: 16px;
+      font-size: 14px;
+      text-align: center;
+      display: inline-block; }
+  section.form p.form__checkbox:last-child {
+    margin-bottom: 0; }
+  section.form p.form__description {
+    font-size: 0.8em;
+    line-height: 1.4;
+    color: #666;
+    margin: -4px 0 4px 0; }
+  section.form p.form__data {
+    margin: 0 0 0;
+    font-size: 0.9em; }
   section.form label {
     cursor: pointer; }
   section.form .topic-title {
@@ -2822,55 +2865,6 @@ section.form .radio-buttons input:checked + .radio-button i, section.form .check
 section.form .radio-buttons input:checked + .radio-button .custom-tool {
   color: #fff;
   border-color: rgba(255, 255, 255, 0.4); }
-
-input[type="text"], input[type="password"] {
-  border: 1px solid #ccc;
-  padding: 6px;
-  width: 100%;
-  font-size: 0.9em;
-  outline: 0;
-  border-radius: 4px;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box; }
-
-select {
-  border: 1px solid #ccc;
-  padding: 4px;
-  font-size: 0.9em;
-  outline: none;
-  max-width: 100%;
-  border-radius: 4px;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box; }
-
-select[multiple="multiple"] {
-  width: 100%;
-  height: 200px; }
-
-input.short {
-  width: 50px;
-  font: 12px Open Sans, Helvetica, Helvetica Neue, Arial; }
-
-input.small {
-  width: 50px;
-  margin-left: 6px;
-  margin-right: 6px; }
-
-input[type="password"].confirm-password {
-  width: 49%;
-  margin-right: 2%; }
-
-input[type="password"].confirm-password:last-child {
-  margin-right: 0; }
-
-textarea {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 6px;
-  width: 100%;
-  box-sizing: border-box;
-  font-size: 0.9em;
-  outline: 0; }
 
 /* end still to be rewritten */
 @media only screen and (min-width: 768px) {
