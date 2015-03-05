@@ -9,10 +9,10 @@
 
 	{{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}
 	<section class="form">
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.datetime') }}</h2>
-			<div class="form-row-container">
-				<div class="form-row">
+			<div class="form__section__container">
+				<div class="form__row">
 					<h3>{{ form_label('date_format', trans('account.dateformat')) }}</h3>
 					{# TODO: Make the display dynamic #}
 					{{ form_select('date_format', {
@@ -25,7 +25,7 @@
 						6: '28 December 2010'
 					}, auth_user().settings.date_format_raw) }}
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.timeformat') }}</h3>
 					<div class="radio-buttons inline">
 							{# we can't use form_label here as laravel escapes the value and we need html in it #}
@@ -42,7 +42,7 @@
 							</span>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ form_label('timezone', trans('account.timezone')) }}</h3>
 					{# TODO: translatable, time should be dynamic and we should probably use real timezones #}
 					{{ form_select('timezone', {
@@ -79,7 +79,7 @@
 						'12': 'GMT +12:00 (1:40 AM)',
 					}, auth_user().settings.timezone) }}
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.dst') }}</h3>
 					<p class="description">{{ trans('account.dst_desc') }}</p>
 					<div class="radio-buttons inline">
@@ -104,37 +104,37 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.discussions') }}</h2>
-			<div class="form-row-container">
-				<div class="form-row">
+			<div class="form__section__container">
+				<div class="form__row">
 					{# is there a better way than using raw here? #}
 					<p class="checkbox"><label>{{ form_checkbox('follow_started_topics', 1, auth_user().settings.follow_started_topics) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
 					<p class="checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, auth_user().settings.follow_replied_topics) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
 					<p class="checkbox"><label>{{ form_checkbox('show_editor', 1, auth_user().settings.show_editor) }} {{ trans('account.show_editor') }}</label></p>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
 					{{ form_input('number', 'topics_per_page', auth_user().settings.topics_per_page, {'min': 5, 'max': 50, 'step': 5}) }}
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
 					{{ form_input('number', 'posts_per_page', auth_user().settings.posts_per_page, {'min': 5, 'max': 50, 'step': 5}) }}
 				</div>
 			</div>
 		</div>
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.styleLanguage') }}</h2>
 			{# TODO: both, styles and languages are dynamic and an array need to be generated in the controller #}
-			<div class="form-row-container">
-				<div class="form-row">
+			<div class="form__section__container">
+				<div class="form__row">
 					<h3>{{ form_label('style', trans('account.style')) }}</h3>
 					{{ form_select('style', {
 						'default': trans('account.usedefault')~' - MyBB Default',
 						1: 'MyBB Default',
 					}) }}
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ form_label('language', trans('account.language')) }}</h3>
 					{{ form_select('language', {
 						'default': trans('account.usedefault')~' - English (American)',
@@ -143,106 +143,106 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.notifications') }}</h2>
 			{# All of the labels below use HTML as their value and therefor we can't use form_label #}
-			<div class="form-row-container">
-				<div class="form-row">
+			<div class="form__section__container">
+				<div class="form__row">
 					<h3>{{ trans('account.threadsForums') }}</h3>
 					<p class="description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_like', 1, auth_user().settings.notify_on_like, {'id': 'notify_on_like'}) }}
 							<label for="notify_on_like" class="checkbox-button">
-								<i class="fa fa-thumbs-up"></i>
+								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_like') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_quote', 1, auth_user().settings.notify_on_quote, {'id': 'notify_on_quote'}) }}
 							<label for="notify_on_quote" class="checkbox-button">
-								<i class="fa fa-comment"></i>
+								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_quote') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_reply', 1, auth_user().settings.notify_on_reply, {'id': 'notify_on_reply'}) }}
 							<label for="notify_on_reply" class="checkbox-button">
-								<i class="fa fa-plus"></i>
+								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_new_post', 1, auth_user().settings.notify_on_new_post, {'id': 'notify_on_new_post'}) }}
 							<label for="notify_on_new_post" class="checkbox-button">
-								<i class="fa fa-plus"></i>
+								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_post') }}</span>
 							</label>
 						</p>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.profiles') }}</h3>
 					<p class="description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_new_comment', 1, auth_user().settings.notify_on_new_comment, {'id': 'notify_on_new_comment'}) }}
 							<label for="notify_on_new_comment" class="checkbox-button">
-								<i class="fa fa-comment"></i>
+								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_comment') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_comment_like', 1, auth_user().settings.notify_on_comment_like, {'id': 'notify_on_comment_like'}) }}
 							<label for="notify_on_comment_like" class="checkbox-button">
-								<i class="fa fa-thumbs-up"></i>
+								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_like') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_my_comment_like', 1, auth_user().settings.notify_on_my_comment_like, {'id': 'notify_on_my_comment_like'}) }}
 							<label for="notify_on_my_comment_like" class="checkbox-button">
-								<i class="fa fa-thumbs-up"></i>
+								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_like') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_comment_reply', 1, auth_user().settings.notify_on_comment_reply, {'id': 'notify_on_comment_reply'}) }}
 							<label for="notify_on_comment_reply" class="checkbox-button">
-								<i class="fa fa-comments"></i>
+								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_reply') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_my_comment_reply', 1, auth_user().settings.notify_on_my_comment_reply, {'id': 'notify_on_my_comment_reply'}) }}
 							<label for="notify_on_my_comment_reply" class="checkbox-button">
-								<i class="fa fa-comments"></i>
+								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_reply') }}</span>
 							</label>
 						</p>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.messages') }}</h3>
 					<p class="description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
 						<p class="button-container">
 							{{ form_checkbox('notify_on_new_message', 1, auth_user().settings.notify_on_new_message, {'id': 'notify_on_new_message'}) }}
 							<label for="notify_on_new_message" class="checkbox-button">
-								<i class="fa fa-inbox"></i>
+								<i class="fa fa-inbox fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_message') }}</span>
 							</label>
 						</p>
 						<p class="button-container">
 							{{ form_checkbox('notify_on_reply_message', 1, auth_user().settings.notify_on_reply_message, {'id': 'notify_on_reply_message'}) }}
 							<label for="notify_on_reply_message" class="checkbox-button">
-								<i class="fa fa-reply"></i>
+								<i class="fa fa-reply fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply_message') }}</span>
 							</label>
 						</p>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.moderation') }}</h3>
 					<p class="description">{{ trans('account.notify_me') }}</p>
 					<div class="checkbox-buttons">
@@ -250,7 +250,7 @@
 							<p class="button-container">
 								{{ form_checkbox('notify_on_group_request', 1, auth_user().settings.notify_on_group_request, {'id': 'notify_on_group_request'}) }}
 								<label for="notify_on_group_request" class="checkbox-button">
-									<i class="fa fa-users"></i>
+									<i class="fa fa-users fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_group_request') }}</span>
 								</label>
 							</p>
@@ -259,28 +259,28 @@
 							<p class="button-container">
 								{{ form_checkbox('notify_on_moderation_post', 1, auth_user().settings.notify_on_moderation_post, {'id': 'notify_on_moderation_post'}) }}
 								<label for="notify_on_moderation_post" class="checkbox-button">
-									<i class="fa fa-thumb-tack"></i>
+									<i class="fa fa-thumb-tack fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_moderation_post') }}</span>
 								</label>
 							</p>
 							<p class="button-container">
 								{{ form_checkbox('notify_on_report', 1, auth_user().settings.notify_on_report, {'id': 'notify_on_report'}) }}
 								<label for="notify_on_report" class="checkbox-button">
-									<i class="fa fa-flag"></i>
+									<i class="fa fa-flag fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_report') }}</span>
 								</label>
 							</p>
 							<p class="button-container">
 								{{ form_checkbox('notify_on_username_change', 1, auth_user().settings.notify_on_username_change, {'id': 'notify_on_username_change'}) }}
 								<label for="notify_on_username_change" class="checkbox-button">
-									<i class="fa fa-pencil-square-o"></i>
+									<i class="fa fa-pencil-square-o fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_username_change') }}</span>
 								</label>
 							</p>
 						{# endif #}
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.notification_mails') }}</h3>
 					{# TODO: raw again - not nice #}
 					<p class="description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
@@ -306,7 +306,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="form-submit">
+	<div class="form__submit">
 		{{ form_button('<i class="fa fa-cog"></i><span class="text">'~trans('account.update_preferences')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 	</div>
 	{{ form_close() }}

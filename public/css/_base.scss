@@ -160,8 +160,8 @@ section {
 
 section.container {
 	border: 1px solid $border-1;
-	@include border-radius(4px);
 	margin-bottom: 10px;
+	@include border-radius(4px);
 }
 
 section:last-child {

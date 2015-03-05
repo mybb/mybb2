@@ -19,22 +19,22 @@
 				<h1>{{ trans('member.login') }}</h1>
 			</header>
 			<section class="form">
-				<div class="form-section clearfix">
-					<div class="form-row">
+				<div class="form__section clearfix">
+					<div class="form__row">
                         <h3>{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
                         {{ form_text('username') }}
 					</div>
-					<div class="form-row">
+					<div class="form__row">
 						<h3>{{ form_label('password', trans('member.password')) }}</h3>
-						<p class="description"><a href="{{ url('password/email') }}" data-modal="password/email">{{ trans('member.forgotpassword') }}</a></p>
+						<p class="form__description"><a href="{{ url('password/email') }}" data-modal="password/email">{{ trans('member.forgotpassword') }}</a></p>
                         {{ form_password('password', {'class': 'password-toggle'}) }}
 					</div>
-					<div class="form-row">
-                        {{ form_checkbox('remember_me', 1, true) }} {{ form_label('remember_me', trans('member.remember_me')) }}
+					<div class="form__row">
+                        <p class="form__checkbox">{{ form_checkbox('remember_me', 1, true) }} {{ form_label('remember_me', trans('member.remember_me')) }}</p>
 					</div>
 				</div>
 			</section>
-			<div class="form-submit">
+			<div class="form__submit">
                 {{ form_button('<i class="fa fa-sign-in"></i><span class="text">'~trans('member.login')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			</div>
 		</div>

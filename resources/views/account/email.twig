@@ -15,21 +15,21 @@
 	{% endif %}
 	{{ form_open({'url_route': 'account.email', 'method': 'post'}) }}
 	<section class="form">
-		<div class="form-section clearfix">
-			<div class="form-row">
+		<div class="form__section clearfix">
+			<div class="form__row">
 				<h3>{{ form_label('email', trans('account.new_email')) }}</label></h3>
-				<p class="description">{{ trans('account.new_email_desc') }}</p>
+				<p class="form__description">{{ trans('account.new_email_desc') }}</p>
 				{{ form_text('email') }}
 			</div>
-			<div class="form-row">
+			<div class="form__row">
 				<h3>{{ form_label('password', trans('account.current_password')) }}</h3>
-				<p class="description">{{ trans('account.current_password_email') }}</p>
+				<p class="form__description">{{ trans('account.current_password_email') }}</p>
 				{{ form_password('password', {'class': 'password-toggle'}) }}
 			</div>
 		</div>
 	</section>
-	<div class="form-submit">
-		{{ form_button('<i class="fa fa-user"></i><span class="text">'~trans('account.change_email')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+	<div class="form__submit">
+		{{ form_button('<i class="fa fa-envelope"></i><span class="text">'~trans('account.change_email')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 	</div>
 	{{ form_close() }}
 

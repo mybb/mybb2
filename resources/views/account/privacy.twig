@@ -9,9 +9,9 @@
 
 	{{ form_open({'url_route': 'account.privacy', 'method': 'post'}) }}
 	<section class="form">
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.blocked_users') }}</h2>
-			<div class="form-row-container">
+			<div class="form__section__container">
 				<div class="compact-users-list blocked-users">
 					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Always Annoying</a>
 					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Angry</a>
@@ -25,26 +25,26 @@
 				</div>
 			</div>
 		</div>
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('general.forum') }}</h2>
-			<div class="form-row-container">
-				<div class="form-row">
-					<p class="checkbox"><label>{{ form_checkbox('showonline', 1, auth_user().settings.showonline) }} {{ trans('account.showonline') }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('receive_messages', 1, auth_user().settings.receive_messages) }} {{ trans('account.receive_messages') }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, auth_user().settings.block_blocked_messages) }} {{ trans('account.block_blocked_messages') }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, auth_user().settings.hide_blocked_posts) }} {{ trans('account.hide_blocked_posts') }}</label></p>
+			<div class="form__section__container">
+				<div class="form__row">
+					<p class="form__checkbox"><label>{{ form_checkbox('showonline', 1, auth_user().settings.showonline) }} {{ trans('account.showonline') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('receive_messages', 1, auth_user().settings.receive_messages) }} {{ trans('account.receive_messages') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, auth_user().settings.block_blocked_messages) }} {{ trans('account.block_blocked_messages') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, auth_user().settings.hide_blocked_posts) }} {{ trans('account.hide_blocked_posts') }}</label></p>
 					{# another raw value #}
-					<p class="checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, auth_user().settings.only_buddy_messages) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
-					<p class="checkbox"><label>{{ form_checkbox('receive_email', 1, auth_user().settings.receive_email) }} {{ trans('account.receive_email') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, auth_user().settings.only_buddy_messages) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('receive_email', 1, auth_user().settings.receive_email) }} {{ trans('account.receive_email') }}</label></p>
 				</div>
 			</div>
 		</div>
-		<div class="form-section clearfix">
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.profile') }}</h2>
-			<div class="form-row-container">
-				<div class="form-row">
+			<div class="form__section__container">
+				<div class="form__row">
 					<h3>{{ trans('account.dob_privacy') }}</h3>
-					<p class="description">{{ trans('account.dob_privacy_desc') }}</p>
+					<p class="form__description">{{ trans('account.dob_privacy_desc') }}</p>
 					<div class="radio-buttons inline">
 							<span class="button-container">
 								{{ form_radio('dob_privacy', 0, auth_user().settings.dob_privacy == 0, {'id': 'no_dob'}) }}
@@ -64,7 +64,7 @@
 							</span>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>{{ trans('account.dob_visibility') }}</h3>
 					<div class="radio-buttons inline">
 							<span class="button-container">
@@ -86,7 +86,7 @@
 					</div>
 				</div>
 				{# everything below refers to profilefields and should be dynamic #}
-				<div class="form-row">
+				<div class="form__row">
 					<h3>Show your sex to:</h3>
 					<div class="radio-buttons inline">
 							<span class="button-container">
@@ -107,7 +107,7 @@
 							</span>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>Show your location to:</h3>
 					<div class="radio-buttons inline">
 							<span class="button-container">
@@ -128,7 +128,7 @@
 							</span>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>Show your bio to:</h3>
 					<div class="radio-buttons inline">
 							<span class="button-container">
@@ -149,7 +149,7 @@
 							</span>
 					</div>
 				</div>
-				<div class="form-row">
+				<div class="form__row">
 					<h3>Show your contact details to:</h3>
 					<div class="radio-buttons inline">
 							<span class="button-container">
@@ -173,7 +173,7 @@
 			</div>
 		</div>
 	</section>
-	<div class="form-submit">
+	<div class="form__submit">
 		{{ form_button('<i class="fa fa-shield"></i><span class="text">'~trans('account.update_privacy')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 	</div>
 	{{ form_close() }}

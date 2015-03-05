@@ -71,7 +71,7 @@
     width: auto;
 }
 
-.modal .page-content section.form .form-row-container {
+.modal .page-content section.form .form__section__container {
 	float: none;
 	margin: 0;
 	padding: 0;
@@ -79,11 +79,11 @@
 	width: auto;
 }
 
-.modal .page-content .form-section:last-child {
+.modal .page-content .form__section:last-child {
 	padding-bottom: 0px;
 }
 
-.modal .page-content .form-submit {
+.modal .page-content .form__submit {
 	margin: 0;
 	padding: 6px 0;
 	background: #f8f8f8;

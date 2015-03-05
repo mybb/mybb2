@@ -12,27 +12,29 @@
 				<a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
-		<section class="post">
-			{{ form_open({'route': ['topics.create', forum.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
-			{% if auth_check() == false %}
-				<div class="form-row">
-					<h3>{{ form_label('username', 'Username') }}</h3>
-					{{ form_text('username', trans('general.guest')) }}
+		{{ form_open({'route': ['topics.create', forum.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
+		<section class="form">
+			<div class="form__section">
+				{% if auth_check() == false %}
+					<div class="form__row">
+						<h3>{{ form_label('username', 'Username') }}</h3>
+						{{ form_text('username', trans('general.guest')) }}
+					</div>
+				{% endif %}
+				<div class="form__row">
+					<h3>{{ form_label('title', 'Title') }}</h3>
+					{{ form_text('title', '', {'placeholder': 'Enter a meaningful title...', 'title': 'Enter a meaningful title...'}) }}
 				</div>
-			{% endif %}
-			<div class="form-row">
-				<h3>{{ form_label('title', 'Title') }}</h3>
-				{{ form_text('title', '', {'placeholder': 'Enter a meaningful title...', 'title': 'Enter a meaningful title...'}) }}
+				<div class="form__row">
+					<h3>{{ form_label('content', 'Content') }}</h3>
+					{{ form_textarea('content') }}
+				</div>
 			</div>
-			<div class="form-row">
-				<h3>{{ form_label('content', 'Content') }}</h3>
-				{{ form_textarea('content') }}
-			</div>
-			{{ form_hidden('forum_id', forum.id) }}
-			<div class="form-submit">
-				{{ form_button('<i class="fa fa-sign-in"></i><span class="text">Post Topic</span>', {'type': 'submit', 'class': 'button'}) }}
-			</div>
-			{{ form_close() }}
 		</section>
+		{{ form_hidden('forum_id', forum.id) }}
+		<div class="form__submit">
+			{{ form_button('<i class="fa fa-edit"></i><span class="text">Post Topic</span>', {'type': 'submit', 'class': 'button'}) }}
+		</div>
+		{{ form_close() }}
 	</div>
 {% endblock %}
