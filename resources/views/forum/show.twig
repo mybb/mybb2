@@ -41,8 +41,8 @@
             
 			<h2>{{ trans('forum.topics') }}</h2>
 			<div class="page-controls">
-				<a href="#" class="button secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
-				<a href="#" class="button secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
+				<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
+				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
 				<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
 			</div>
 			<section class="forum topic-list">

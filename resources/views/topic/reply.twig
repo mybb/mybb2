@@ -9,7 +9,7 @@
 		<header>
 			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
 			<div class="page-controls">
-				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
 		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'class': 'form-section clearfix'}) }}

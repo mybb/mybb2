@@ -176,7 +176,7 @@ img.avatar {
 	color: $invert-font-color;
 	background: $primary-color;
 	border: 1px solid $primary-color;
-	padding: 5px 10px;
+	padding: 3px 10px;
 	margin: 5px;
 	font-size: 0.9em;
 	text-decoration: none;
@@ -188,7 +188,7 @@ img.avatar {
 		border-color: $secondary-color;	
 	}
 
-	&.secondary {
+	&.button--secondary {
 		border: 1px solid $border-1;
 		background: none;
 		color: $primary-color;

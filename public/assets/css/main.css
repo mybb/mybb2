@@ -2059,6 +2059,28 @@ html, button, input, select, textarea {
   color: #fff;
   text-shadow: none; }
 
+body {
+  margin: 0;
+  font: 16px/26px Open Sans, Helvetica Neue, Helvetica, Arial; }
+
+.wrapper {
+  width: 90%;
+  margin: 0 5%; }
+
+input, select, textarea, button {
+  font: 16px Open Sans, Helvetica Neue, Helvetica, Arial; }
+
+a:link, a:visited {
+  color: #007fd0;
+  text-decoration: none; }
+
+a:hover, a:active {
+  color: #ff7500;
+  text-decoration: underline; }
+
+a:focus, button:focus {
+  outline: 0; }
+
 hr {
   display: block;
   height: 1px;
@@ -2077,25 +2099,6 @@ fieldset {
 
 textarea {
   resize: vertical; }
-
-body {
-  margin: 0;
-  font: 16px/26px Open Sans, Helvetica Neue, Helvetica, Arial; }
-
-input, select, textarea, button {
-  font: 16px Open Sans, Helvetica Neue, Helvetica, Arial; }
-
-a:link, a:visited {
-  color: #007fd0;
-  text-decoration: none; }
-
-a:hover, a:active {
-  color: #ff7500;
-  text-decoration: underline; }
-
-.wrapper {
-  width: 90%;
-  margin: 0 5%; }
 
 @media only screen and (min-width: 1140px) {
   .wrapper {
@@ -2214,8 +2217,8 @@ h1.title {
     font-weight: bold; }
   .user-navigation__links .user-navigation__sign-up > a {
     background-color: #007fd0; }
-  .user-navigation__links .user-navigation__sign-up > a:hover {
-    background-color: #ff7500; }
+    .user-navigation__links .user-navigation__sign-up > a:hover {
+      background-color: #ff7500; }
   .user-navigation__links .user-navigation__notifications > a > span.text, .user-navigation__links .user-navigation__messages > a > span.text {
     display: none; }
   .user-navigation__links .unread-count {
@@ -2353,8 +2356,8 @@ h1.title {
     font-size: 18px; }
   #search .search__button .text {
     display: none; }
-#search .search__button:hover {
-  color: #ccc; }
+  #search .search__button:hover {
+    color: #ccc; }
 #search .search__container {
   clear: both;
   display: none;
@@ -2391,8 +2394,8 @@ h1.title {
   font-size: 14px; }
   #search button.search__submit .text, #search a.search__advanced .text {
     display: none; }
-#search button.search__submit:hover, #search a.search__advanced:hover {
-  color: #666; }
+  #search button.search__submit:hover, #search a.search__advanced:hover {
+    color: #666; }
 
 .breadcrumb {
   display: block;
@@ -2431,40 +2434,40 @@ footer {
 @media only screen and (max-width: 768px) {
   .main-menu.menu-bar {
     margin-top: 10px; }
-  .main-menu.menu-bar:hover .main-menu__container {
-    position: absolute;
-    right: 0;
-    float: right;
-    width: 100%;
-    padding-top: 45px;
-    display: block; }
-  .main-menu.menu-bar:hover ul {
-    display: block;
-    position: relative;
-    top: 0;
-    border-top: 2px solid #222;
-    border-bottom: 2px solid #222;
-    right: 0;
-    z-index: 500;
-    background: #444;
-    padding: 1px 2px 2px;
-    text-align: center; }
-    .main-menu.menu-bar:hover ul li {
-      display: inline-block; }
-      .main-menu.menu-bar:hover ul li a {
-        width: auto;
-        display: inline-block;
-        margin: 4px;
-        padding: 7px 8px 6px;
-        float: none;
-        background: transparent;
-        border-radius: 4px; }
-        .main-menu.menu-bar:hover ul li a:link, .main-menu.menu-bar:hover ul li a:visited {
-          color: #fff; }
-        .main-menu.menu-bar:hover ul li a:hover, .main-menu.menu-bar:hover ul li a:active {
-          background: #333;
-          color: #fff;
-          text-decoration: none; } }
+    .main-menu.menu-bar:hover .main-menu__container {
+      position: absolute;
+      right: 0;
+      float: right;
+      width: 100%;
+      padding-top: 45px;
+      display: block; }
+    .main-menu.menu-bar:hover ul {
+      display: block;
+      position: relative;
+      top: 0;
+      border-top: 2px solid #222;
+      border-bottom: 2px solid #222;
+      right: 0;
+      z-index: 500;
+      background: #444;
+      padding: 1px 2px 2px;
+      text-align: center; }
+      .main-menu.menu-bar:hover ul li {
+        display: inline-block; }
+        .main-menu.menu-bar:hover ul li a {
+          width: auto;
+          display: inline-block;
+          margin: 4px;
+          padding: 7px 8px 6px;
+          float: none;
+          background: transparent;
+          border-radius: 4px; }
+          .main-menu.menu-bar:hover ul li a:link, .main-menu.menu-bar:hover ul li a:visited {
+            color: #fff; }
+          .main-menu.menu-bar:hover ul li a:hover, .main-menu.menu-bar:hover ul li a:active {
+            background: #333;
+            color: #fff;
+            text-decoration: none; } }
 
 @media only screen and (min-width: 768px) {
   h1.title {
@@ -2634,7 +2637,7 @@ img.avatar {
   color: #fff;
   background: #007fd0;
   border: 1px solid #007fd0;
-  padding: 5px 10px;
+  padding: 3px 10px;
   margin: 5px;
   font-size: 0.9em;
   text-decoration: none;
@@ -2643,11 +2646,11 @@ img.avatar {
   .button:hover, a.button:hover {
     background: #ff7500;
     border-color: #ff7500; }
-  .button.secondary, a.button.secondary {
+  .button.button--secondary, a.button.button--secondary {
     border: 1px solid #dfdfdf;
     background: none;
     color: #007fd0; }
-    .button.secondary:hover, a.button.secondary:hover {
+    .button.button--secondary:hover, a.button.button--secondary:hover {
       color: #ff7500; }
   .button i, a.button i {
     margin-right: 5px;
@@ -4060,9 +4063,6 @@ dl.stats dd {
 
 .pagination .ellipsis .text {
   display: none; }
-
-a:focus, button:focus {
-  outline: 0; }
 
 section.form .form-row.secondary-buttons {
   padding: 6px 4px; }
