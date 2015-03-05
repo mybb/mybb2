@@ -172,6 +172,42 @@ img.avatar {
 	@include border-radius(4px);
 }
 
+.button, a.button {
+	color: $invert-font-color;
+	background: $primary-color;
+	border: 1px solid $primary-color;
+	padding: 5px 10px;
+	margin: 5px;
+	font-size: 0.9em;
+	text-decoration: none;
+	display: inline-block;
+	@include border-radius(4px);
+
+	&:hover {
+		background: $secondary-color;
+		border-color: $secondary-color;	
+	}
+
+	&.secondary {
+		border: 1px solid $border-1;
+		background: none;
+		color: $primary-color;
+
+		&:hover {
+			color: $secondary-color;
+		}
+	}
+
+	i {
+		margin-right: 5px;
+		font-size: 14px;
+	}
+
+	&:hover, &:active {
+		outline: none;
+	}
+}
+
 @media only screen and (min-width: 768px) {
 	
 	.main {

@@ -61,10 +61,10 @@ section.form {
 			font-size: 1.1em;
 			border-bottom: 1px dotted #ccc;
 		}
-	}
 
-	.form__section:last-child {
-		border-bottom: 0;
+		&:last-child {
+			border-bottom: 0;
+		}
 	}
 
 	.form__row {
@@ -84,15 +84,15 @@ section.form {
 			color: $primary-color;
 			margin: 0;
 		}
-	}
 
-	.form__row:first-child {
-		padding-top: 0;
-	}
+		&:first-child {
+			padding-top: 0;
+		}
 
-	.form__row:last-child {
-		border-bottom: 0;
-		padding-bottom: 6px;
+		&:last-child {
+			border-bottom: 0;
+			padding-bottom: 6px;
+		}
 	}
 
 	p.form__checkbox {
@@ -113,10 +113,10 @@ section.form {
 			text-align: center;
 			display: inline-block;
 		}
-	}
 
-	p.form__checkbox:last-child {
-		margin-bottom: 0;
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	p.form__description {
@@ -245,7 +245,6 @@ section.form {
 			@include black-transparency(0.6);
 		}
 	}
-
 }
 
 @media only screen and (min-width: 768px) {

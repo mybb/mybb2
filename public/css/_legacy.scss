@@ -1024,56 +1024,6 @@ dl.stats dd {
 	display: none;
 }
 
-
-a:focus,
-button:focus {
-	outline: 0;
-}
-
-.button {
-	color: #fff;
-	background: #007fd0; /* Old browsers */
-	padding: 5px 10px;
-	font-size: 0.9em;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	border: 1px solid #007fd0;
-	margin: 5px;
-}
-
-a.button {
-	color: #fff;
-	padding: 2px 10px;
-	text-decoration: none;
-	display: inline-block;
-}
-
-.button:hover {
-	background: #ff7500;
-	border-color: #ff7500;
-}
-
-.button.secondary {
-	border: 1px solid #ddd;
-	background: #fff;
-	color: #007fd0;
-}
-
-.button.secondary:hover {
-	color: #ff7500;
-}
-
-.button i {
-	margin-right: 5px;
-	font-size: 14px;
-}
-
-.button:hover,
-.button:active {
-	outline: none;
-}
-
 section.form .form-row.secondary-buttons {
 	padding: 6px 4px;
 }

@@ -73,6 +73,37 @@ html, button, input, select, textarea {
 	text-shadow: none;
 }
 
+body {
+	margin: 0;
+	font: 16px/26px $font-stack;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 5%;
+}
+
+input, select, textarea, button {
+	font: 16px $font-stack;
+}
+
+a:link,
+a:visited {
+	color: $primary-color;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: $secondary-color;
+	text-decoration: underline;
+}
+
+a:focus,
+button:focus {
+	outline: 0;
+}
+
 hr {
 	display: block;
 	height: 1px;
@@ -94,32 +125,6 @@ fieldset {
 
 textarea {
 	resize: vertical;
-}
-
-body {
-	margin: 0;
-	font: 16px/26px $font-stack;
-}
-
-input, select, textarea, button {
-	font: 16px $font-stack;
-}
-
-a:link,
-a:visited {
-	color: $primary-color;
-	text-decoration: none;
-}
-
-a:hover,
-a:active {
-	color: $secondary-color;
-	text-decoration: underline;
-}
-
-.wrapper {
-	width: 90%;
-	margin: 0 5%;
 }
 
 @media only screen and (max-width: 320px) {

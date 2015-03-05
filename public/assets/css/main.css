@@ -2291,8 +2291,8 @@ h1.title {
         display: none; }
       .user-navigation ul .user-navigation__dropdown h2 a.option i {
         color: rgba(0, 0, 0, 0.5); }
-    .user-navigation ul .user-navigation__dropdown h2 a.option:hover i {
-      color: rgba(0, 0, 0, 0.6); }
+      .user-navigation ul .user-navigation__dropdown h2 a.option:hover i {
+        color: rgba(0, 0, 0, 0.6); }
   .user-navigation ul .user-navigation__dropdown ul.notifications {
     margin: 0;
     font-size: 0.8em;
@@ -2301,8 +2301,8 @@ h1.title {
       text-decoration: none;
       padding: 8px 8px 8px 16px;
       overflow: hidden; }
-    .user-navigation ul .user-navigation__dropdown ul.notifications a:hover span.text {
-      text-decoration: underline; }
+      .user-navigation ul .user-navigation__dropdown ul.notifications a:hover span.text {
+        text-decoration: underline; }
     .user-navigation ul .user-navigation__dropdown ul.notifications span.username {
       font-weight: bold; }
     .user-navigation ul .user-navigation__dropdown ul.notifications i {
@@ -2459,12 +2459,12 @@ footer {
         float: none;
         background: transparent;
         border-radius: 4px; }
-      .main-menu.menu-bar:hover ul li a:link, .main-menu.menu-bar:hover ul li a:visited {
-        color: #fff; }
-      .main-menu.menu-bar:hover ul li a:hover, .main-menu.menu-bar:hover ul li a:active {
-        background: #333;
-        color: #fff;
-        text-decoration: none; } }
+        .main-menu.menu-bar:hover ul li a:link, .main-menu.menu-bar:hover ul li a:visited {
+          color: #fff; }
+        .main-menu.menu-bar:hover ul li a:hover, .main-menu.menu-bar:hover ul li a:active {
+          background: #333;
+          color: #fff;
+          text-decoration: none; } }
 
 @media only screen and (min-width: 768px) {
   h1.title {
@@ -2630,6 +2630,31 @@ section:last-child {
 img.avatar {
   border-radius: 4px; }
 
+.button, a.button {
+  color: #fff;
+  background: #007fd0;
+  border: 1px solid #007fd0;
+  padding: 5px 10px;
+  margin: 5px;
+  font-size: 0.9em;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px; }
+  .button:hover, a.button:hover {
+    background: #ff7500;
+    border-color: #ff7500; }
+  .button.secondary, a.button.secondary {
+    border: 1px solid #dfdfdf;
+    background: none;
+    color: #007fd0; }
+    .button.secondary:hover, a.button.secondary:hover {
+      color: #ff7500; }
+  .button i, a.button i {
+    margin-right: 5px;
+    font-size: 14px; }
+  .button:hover, .button:active, a.button:hover, a.button:active {
+    outline: none; }
+
 @media only screen and (min-width: 768px) {
   .main .page-content--sidebar {
     float: left;
@@ -2705,8 +2730,8 @@ section.form {
       color: #007fd0;
       font-size: 1.1em;
       border-bottom: 1px dotted #ccc; }
-  section.form .form__section:last-child {
-    border-bottom: 0; }
+    section.form .form__section:last-child {
+      border-bottom: 0; }
   section.form .form__row {
     border-bottom: 1px solid #dfdfdf;
     padding: 12px 8px; }
@@ -2720,11 +2745,11 @@ section.form {
       text-transform: uppercase;
       color: #007fd0;
       margin: 0; }
-  section.form .form__row:first-child {
-    padding-top: 0; }
-  section.form .form__row:last-child {
-    border-bottom: 0;
-    padding-bottom: 6px; }
+    section.form .form__row:first-child {
+      padding-top: 0; }
+    section.form .form__row:last-child {
+      border-bottom: 0;
+      padding-bottom: 6px; }
   section.form p.form__checkbox {
     font-size: 0.9em;
     margin: 5px 0;
@@ -2739,8 +2764,8 @@ section.form {
       font-size: 14px;
       text-align: center;
       display: inline-block; }
-  section.form p.form__checkbox:last-child {
-    margin-bottom: 0; }
+    section.form p.form__checkbox:last-child {
+      margin-bottom: 0; }
   section.form p.form__description {
     font-size: 0.8em;
     line-height: 1.4;
@@ -4038,41 +4063,6 @@ dl.stats dd {
 
 a:focus, button:focus {
   outline: 0; }
-
-.button {
-  color: #fff;
-  background: #007fd0;
-  /* Old browsers */
-  padding: 5px 10px;
-  font-size: 0.9em;
-  border-radius: 4px;
-  border: 1px solid #007fd0;
-  margin: 5px; }
-
-a.button {
-  color: #fff;
-  padding: 2px 10px;
-  text-decoration: none;
-  display: inline-block; }
-
-.button:hover {
-  background: #ff7500;
-  border-color: #ff7500; }
-
-.button.secondary {
-  border: 1px solid #ddd;
-  background: #fff;
-  color: #007fd0; }
-
-.button.secondary:hover {
-  color: #ff7500; }
-
-.button i {
-  margin-right: 5px;
-  font-size: 14px; }
-
-.button:hover, .button:active {
-  outline: none; }
 
 section.form .form-row.secondary-buttons {
   padding: 6px 4px; }

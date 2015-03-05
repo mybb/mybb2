@@ -160,10 +160,10 @@ h1.title {
 
 	.user-navigation__sign-up > a {
 		background-color: $primary-color;
-	}
 
-	.user-navigation__sign-up > a:hover {
-		background-color: $secondary-color;
+		&:hover {
+			background-color: $secondary-color;
+		}
 	}
 
 	.user-navigation__notifications > a > span.text,
@@ -273,10 +273,10 @@ h1.title {
 			i {
 				@include black-transparency(0.5);
 			}
-		}
 
-		a.option:hover i {
-			@include black-transparency(0.6);
+			&:hover i {
+				@include black-transparency(0.6);
+			}
 		}
 	}
 
@@ -289,10 +289,10 @@ h1.title {
 			text-decoration: none;
 			padding: 8px 8px 8px 16px;
 			overflow: hidden;
-		}
 
-		a:hover span.text {
-			text-decoration: underline;
+			&:hover span.text {
+				text-decoration: underline;
+			}
 		}
 
 		span.username {
@@ -376,10 +376,10 @@ h1.title {
 		.text {
 			display: none;
 		}
-	}
 
-	.search__button:hover {
-		color: $alt-font-color-3;
+		&:hover {
+			color: $alt-font-color-3;	
+		}
 	}
 
 	.search__container {
@@ -425,11 +425,10 @@ h1.title {
 		.text {
 			display: none;
 		}
-	}
 
-	button.search__submit:hover,
-	a.search__advanced:hover {
-		color: $alt-font-color-1;
+		&:hover {
+			color: $alt-font-color-1;
+		}
 	}
 }
 
@@ -485,54 +484,52 @@ footer {
 
 	.main-menu.menu-bar {
 		margin-top: 10px;
-	}
 
-	.main-menu.menu-bar:hover {
+		&:hover {
 		
-		.main-menu__container {
-			position: absolute;
-			right: 0;
-			float: right;
-			width: 100%;
-			padding-top: 45px;
-			display: block;
-		}
+			.main-menu__container {
+				position: absolute;
+				right: 0;
+				float: right;
+				width: 100%;
+				padding-top: 45px;
+				display: block;
+			}
 
-		ul {
-			display: block;
-			position: relative;
-			top: 0;
-			border-top: 2px solid $dark-border-1;
-			border-bottom: 2px solid $dark-border-1;
-			right: 0;
-			z-index: 500;
-			background: $dark-background-2;
-			padding: 1px 2px 2px;
-			text-align: center;
-			
-			li {
-				display: inline-block;
-
-				a {
-					width: auto;
+			ul {
+				display: block;
+				position: relative;
+				top: 0;
+				border-top: 2px solid $dark-border-1;
+				border-bottom: 2px solid $dark-border-1;
+				right: 0;
+				z-index: 500;
+				background: $dark-background-2;
+				padding: 1px 2px 2px;
+				text-align: center;
+				
+				li {
 					display: inline-block;
-					margin: 4px;
-					padding: 7px 8px 6px;
-					float: none;
-					background: transparent;
-					@include border-radius(4px);
-				}
 
-				a:link,
-				a:visited {
-					color: $invert-font-color;
-				}
+					a {
+						width: auto;
+						display: inline-block;
+						margin: 4px;
+						padding: 7px 8px 6px;
+						float: none;
+						background: transparent;
+						@include border-radius(4px);
 
-				a:hover,
-				a:active {
-					background: $dark-background-1;
-					color: $invert-font-color;
-					text-decoration: none;
+						&:link, &:visited {
+							color: $invert-font-color;	
+						}
+
+						&:hover, &:active {
+							background: $dark-background-1;
+							color: $invert-font-color;
+							text-decoration: none;	
+						}
+					}
 				}
 			}
 		}
