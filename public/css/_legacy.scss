@@ -1896,44 +1896,6 @@ section.form .change-avatar .buttons {
 
 /* ----
 
-	EXTRA WIDE
-
----- */
-
-@media only screen and (min-width: 1140px) {
-
-	.wrapper {
-		max-width: 1250px;
-		margin: 0 auto;
-	}
-}
-
-
-/* ----
-
-	"RETINA" DISPLAY LOGO
-
----- */
-
-@media all and (-webkit-min-device-pixel-ratio: 2) {
-	
-	.title a#logo {
-		background-image: url("../images/logo2@2x.png");
-		background-size: 188px 55px;
-	}
-
-}
-
-@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
-
-	.title a#logo {
-		background-image: url("../images/logo_mobile@2x.png");
-		background-size: 137px 40px;
-	}
-
-}
-/* ----
-
 	HELPER CLASSES
 
 ---- */

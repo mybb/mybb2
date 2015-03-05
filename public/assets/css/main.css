@@ -2198,12 +2198,12 @@ h1.title {
       display: none; }
   .user-navigation__links > li.dropit-link.dropit-open {
     background: #f2f2f2;
-    border: 2px solid #ddd;
+    border: 2px solid #dfdfdf;
     border-bottom-color: #f2f2f2;
     margin: -2px 0; }
     .user-navigation__links > li.dropit-link.dropit-open > a {
       background: none;
-      color: #333;
+      color: #444;
       border-radius: 0; }
     .user-navigation__links > li.dropit-link.dropit-open i.fa-caret-up {
       display: inline;
@@ -2278,7 +2278,8 @@ h1.title {
     margin: 0;
     padding: 8px 12px 8px 8px;
     color: #444;
-    background: #eee; }
+    background: #eee;
+    border-bottom: 1px solid #dfdfdf; }
     .user-navigation ul .user-navigation__dropdown h2 a:link, .user-navigation ul .user-navigation__dropdown h2 a:visited {
       color: #444;
       display: inline-block;
@@ -2426,7 +2427,7 @@ footer {
     padding: 10px 0;
     margin: 0; }
     footer p.powered-by a {
-      color: #333; }
+      color: #444; }
 
 @media only screen and (max-width: 768px) {
   .main-menu.menu-bar {
@@ -2503,6 +2504,21 @@ footer {
       margin: 0 0;
       float: left;
       padding: 3px 12px 3px 0; } }
+
+@media only screen and (min-width: 1140px) {
+  .wrapper {
+    max-width: 1250px;
+    margin: 0 auto; } }
+
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+  .title a#logo {
+    background-image: url("../images/logo2@2x.png");
+    background-size: 188px 55px; } }
+
+@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
+  .title a#logo {
+    background-image: url("../images/logo_mobile@2x.png");
+    background-size: 137px 40px; } }
 
 /*
  *
@@ -4440,31 +4456,6 @@ section.form .change-avatar .buttons {
     border-left: 1px dotted #ccc;
     width: 74%;
     box-sizing: border-box; } }
-
-/* ----
-
-	EXTRA WIDE
-
----- */
-@media only screen and (min-width: 1140px) {
-  .wrapper {
-    max-width: 1250px;
-    margin: 0 auto; } }
-
-/* ----
-
-	"RETINA" DISPLAY LOGO
-
----- */
-@media all and (-webkit-min-device-pixel-ratio: 2) {
-  .title a#logo {
-    background-image: url("../images/logo2@2x.png");
-    background-size: 188px 55px; } }
-
-@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
-  .title a#logo {
-    background-image: url("../images/logo_mobile@2x.png");
-    background-size: 137px 40px; } }
 
 /* ----
 

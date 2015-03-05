@@ -70,7 +70,7 @@ h1.title {
 
 	i {
 		font-size: 21px;
-		color: #444;
+		color: $alt-font-color-4;
 	}
 
 	span.text {
@@ -131,14 +131,14 @@ h1.title {
 	}
 
 	> li.dropit-link.dropit-open {
-		background: #f2f2f2;
-		border: 2px solid #ddd;
-		border-bottom-color: #f2f2f2;
+		background: $background-2;
+		border: 2px solid $border-1;
+		border-bottom-color: $background-2;
 		margin: -2px 0;
 
 		> a {
 			background: none;
-			color: #333;
+			color: $alt-font-color-4;
 			@include border-radius(0);
 		}
 
@@ -185,7 +185,7 @@ h1.title {
 
 .user-navigation ul .user-navigation__dropdown {
 	display: none;
-	background: #f2f2f2;
+	background: $background-2;
 	@include border-radius(0 4px 4px 4px);
 	border: 2px solid $border-1;
 	border-top: 0;
@@ -247,12 +247,13 @@ h1.title {
 		font-size: 1em;
 		margin: 0;
 		padding: 8px 12px 8px 8px;
-		color: #444;
-		background: #eee;
+		color: $alt-font-color-4;
+		background: $background-3;
+		border-bottom: 1px solid $border-1;
 
 		a:link,
 		a:visited {
-			color: #444;
+			color: $alt-font-color-4;
 			display: inline-block;
 			background: transparent;
 		}
@@ -602,4 +603,30 @@ footer {
 			padding: 3px 12px 3px 0;
 		}
 	}
+}
+
+@media only screen and (min-width: 1140px) {
+
+	.wrapper {
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+	
+	.title a#logo {
+		background-image: url("../images/logo2@2x.png");
+		background-size: 188px 55px;
+	}
+
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
+
+	.title a#logo {
+		background-image: url("../images/logo_mobile@2x.png");
+		background-size: 137px 40px;
+	}
+
 }
