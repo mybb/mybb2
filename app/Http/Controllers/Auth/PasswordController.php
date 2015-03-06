@@ -32,6 +32,7 @@ class PasswordController extends Controller
 	 * Create a new password controller instance.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard          $auth
+	 * @param  \Illuminate\Http\Request                  $request
 	 * @param  \Illuminate\Contracts\Auth\PasswordBroker $passwords
 	 *
 	 * @return void

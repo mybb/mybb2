@@ -23,14 +23,25 @@ class User extends BasePresenter
 {
 	/** @var UserModel $wrappedObject */
 
+	/** @var Router $router */
 	private $router;
+	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
+	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
+	/** @var IPostRepository $postRepository */
 	private $postRepository;
+	/** @var IUserRepository $userRepository */
 	private $userRepository;
+
 
 	/**
 	 * @param UserModel $resource The user being wrapped by this presenter.
+	 * @param Router $router
+	 * @param IForumRepository $forumRepository
+	 * @param ITopicRepository $topicRepository
+	 * @param IPostRepository $postRepository
+	 * @param IUserRepository $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,

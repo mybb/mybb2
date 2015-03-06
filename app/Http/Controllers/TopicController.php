@@ -38,6 +38,7 @@ class TopicController extends Controller
 	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
+	 * @param Request          $request         Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,

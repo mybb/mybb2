@@ -39,6 +39,14 @@ class UserRepository implements IUserRepository
 		return $this->userModel->paginate(10);
 	}
 
+	/**
+	 * Get all users active in the last x minutes
+	 *
+	 * @param int $minutes
+	 * @param int $num
+	 *
+	 * @return mixed
+	 */
 	public function online($minutes = 15, $num = 20)
 	{
 		// If the user visited the logout page as last he's not online anymore

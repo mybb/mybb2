@@ -15,6 +15,7 @@ class AccountController extends Controller
 	 * Create a new controller instance.
 	 *
 	 * @param Guard $guard
+	 * @param Request $request
 	 */
 	public function __construct(Guard $guard, Request $request)
 	{
