@@ -56,6 +56,7 @@ Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicC
 Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
+Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
 Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);

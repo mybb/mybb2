@@ -13,6 +13,7 @@ namespace MyBB\Core\Http\Controllers;
 
 use Breadcrumbs;
 use Illuminate\Auth\Guard;
+use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
@@ -42,9 +43,10 @@ class TopicController extends Controller
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IForumRepository $forumRepository,
-		Guard $guard
+		Guard $guard,
+		Request $request
 	) {
-		parent::__construct($guard);
+		parent::__construct($guard, $request);
 
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;

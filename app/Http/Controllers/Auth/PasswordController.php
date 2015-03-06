@@ -36,9 +36,9 @@ class PasswordController extends Controller
 	 *
 	 * @return void
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords)
+	public function __construct(Guard $auth, Request $request, PasswordBroker $passwords)
 	{
-		parent::__construct($auth);
+		parent::__construct($auth, $request);
 
 		$this->auth = $auth;
 		$this->passwords = $passwords;

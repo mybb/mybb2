@@ -1,6 +1,7 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Auth\Guard;
+use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\IUserRepository;
 
 
@@ -19,9 +20,10 @@ class MemberController extends Controller
 	 */
 	public function __construct(
 		Guard $guard,
+		Request $request,
 		IUserRepository $userRepository
 	) {
-		parent::__construct($guard);
+		parent::__construct($guard, $request);
 
 		$this->userRepository = $userRepository;
 	}
@@ -33,4 +35,9 @@ class MemberController extends Controller
 		return view('member.list', compact('users'));
 	}
 
+	public function online()
+	{
+		$users = $this->userRepository->online(15, 20); // TODO both should be settings
+		return view('member.online', compact('users'));
+	}
 }

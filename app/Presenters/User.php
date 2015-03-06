@@ -9,19 +9,44 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Request;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
+use Lang;
+use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\IUserRepository;
 
 class User extends BasePresenter
 {
 	/** @var UserModel $wrappedObject */
 
+	private $router;
+	private $forumRepository;
+	private $topicRepository;
+	private $postRepository;
+	private $userRepository;
+
 	/**
 	 * @param UserModel $resource The user being wrapped by this presenter.
 	 */
-	public function __construct(UserModel $resource)
+	public function __construct(
+		UserModel $resource,
+		Router $router,
+		IForumRepository $forumRepository,
+		ITopicRepository $topicRepository,
+		IPostRepository $postRepository,
+		IUserRepository $userRepository
+	)
 	{
 		$this->wrappedObject = $resource;
+		$this->router = $router;
+		$this->forumRepository = $forumRepository;
+		$this->topicRepository = $topicRepository;
+		$this->postRepository = $postRepository;
+		$this->userRepository = $userRepository;
 	}
 
 	public function styled_name()
@@ -72,12 +97,69 @@ class User extends BasePresenter
 		$avatar = $this->wrappedObject->avatar;
 
 		// If we have an email or link we'll return it - otherwise nothing
-		// Link? Nice!
 		if(filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
 		{
 			return $avatar;
 		}
 
 		return '';
+	}
+
+	public function last_page()
+	{
+		$lang = null;
+
+		$collection = $this->router->getRoutes();
+		$route = $collection->match(Request::create($this->wrappedObject->last_page));
+
+		if($route->getName() != null && Lang::has('online.'.$route->getName()))
+		{
+			$langOptions = $this->getWioData($route->getName(), $route->parameters());
+
+			if(!isset($langOptions['url']))
+				$langOptions['url'] = route($route->getName(), $route->parameters());
+
+			$lang = Lang::get('online.'.$route->getName(), $langOptions);
+
+			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
+			if(is_array($lang))
+				$lang = Lang::get('online.'.$route->getName().'.index', $langOptions);
+		}
+
+		if($lang == null)
+		{
+//			$lang = Lang::get('online.unknown', ['url' => '']);
+			$lang = 'online.'.$route->getName(); // Used for debugging
+		}
+
+		return $lang;
+	}
+
+	private function getWioData($route, $parameters)
+	{
+		$data = array();
+
+		switch($route)
+		{
+			case 'forums.show':
+				$data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
+				break;
+			case 'topics.show':
+			case 'topics.reply':
+			case 'topics.reply.post':
+			case 'topics.edit':
+			case 'topics.delete':
+			case 'topics.restore':
+				$data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
+				break;
+			case 'topics.create':
+			case 'topics.create.post':
+				$data['forum'] = e($this->forumRepository->find($parameters['forumId'])->title);
+				break;
+		}
+
+		// TODO: Here's a nice place for a plugin hook
+
+		return $data;
 	}
 }

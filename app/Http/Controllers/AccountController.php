@@ -16,9 +16,9 @@ class AccountController extends Controller
 	 *
 	 * @param Guard $guard
 	 */
-	public function __construct(Guard $guard)
+	public function __construct(Guard $guard, Request $request)
 	{
-		parent::__construct($guard);
+		parent::__construct($guard, $request);
 
 		$this->guard = $guard;
 	}

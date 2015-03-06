@@ -26,10 +26,12 @@ class SearchController extends Controller
 	 */
 	public function __construct(
 		Guard $guard,
+		Request $request,
 		ITopicRepository $topicRepository,
 		IUserRepository $userRepository
 	) {
-		parent::__construct($guard);
+		parent::__construct($guard, $request);
+
 
 		$this->userRepository = $userRepository;
 		$this->topicRepository = $topicRepository;

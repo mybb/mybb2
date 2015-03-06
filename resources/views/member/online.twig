@@ -1,0 +1,41 @@
+{% extends "layouts.base" %}
+{% block title %}
+	{{ trans('member.online') }}
+{% endblock %}
+{% block contents %}
+<div class="page-content--full-width">
+	<header>
+		<h1>{{ trans('member.online') }}</h1>
+	</header>
+	<section>
+		<section class="forum topic-list">
+			{{ users.render|raw }}
+			<div class="sort-topics clearfix">
+				<span>{{ trans('general.username') }}</span>
+				<span>{{ trans('general.time') }}</span>
+					<span>{{ trans('general.location') }}</span>
+			</div>
+			<div class="topics-container">
+				{% for user in users %}
+					<div class="topic">
+						<div class="primary-column">
+							<h3 class="topic-title">
+								<a href="#">{{ user.styled_name|raw }}</a>
+							</h3>
+						</div>
+						<div class="replies-column">
+							{{ user.last_visit }}
+						</div>
+						<div class="latest-column">
+							{{ user.last_page|raw }}
+						</div>
+					</div>
+				{% else %}
+					<div class="topic topic-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
+				{% endfor %}
+			</div>
+		</section>
+		{{ users.render|raw }}
+	</section>
+</div>
+{% endblock %}

@@ -39,6 +39,14 @@ class UserRepository implements IUserRepository
 		return $this->userModel->paginate(10);
 	}
 
+	public function online($minutes = 15, $num = 20)
+	{
+		// If the user visited the logout page as last he's not online anymore
+		return $this->userModel->where('last_visit', '>=', new \DateTime("{$minutes} minutes ago"))
+			->where('last_page', '!=', 'auth/logout')
+			->orderBy('last_visit', 'desc')
+			->paginate($num);
+	}
 
 	/**
 	 * Find a single user by ID.

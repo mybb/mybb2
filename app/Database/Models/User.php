@@ -38,6 +38,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'dob',
 		'usertitle',
 		'last_visit',
+		'last_page',
 		'num_posts',
 		'num_topics'
 	];
