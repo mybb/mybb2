@@ -10,6 +10,6 @@ class ParserCallbacks
 	{
 		$post = Post::find($pid);
 
-		return route('topics.showPost', [$post->topic->slug, $post->id]);
+		return route('topics.showPost', [$post->topic->slug, $post->topic->id, $post->id]);
 	}
 }
