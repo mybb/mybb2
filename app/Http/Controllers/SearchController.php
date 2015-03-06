@@ -1,5 +1,6 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
+use Breadcrumbs;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
@@ -149,6 +150,7 @@ class SearchController extends Controller
 		$searchlog = $this->searchRepository->create([
 			'topics' => implode(',', $topics),
 			'posts' => implode(',', $posts),
+			'keywords' => $searchRequest->keyword,
 			'as_topic' => true // TODO: show results as posts
 		]);
 		return redirect()->route('search.results', [
@@ -167,6 +169,8 @@ class SearchController extends Controller
 		{
 			throw new NotFoundHttpException();
 		}
+
+		Breadcrumbs::setCurrentRoute('search.results', $search);
 
 		$sortBy = $request->get('orderBy');
 		$sortDir = $request->get('orderDir');

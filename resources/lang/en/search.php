@@ -26,6 +26,7 @@ return [
     'posts' => 'Posts',
 
 	'results' => 'Results',
+	'resultsforx' => 'Results for :keyword',
 
 
     'atmost' => 'at most',
