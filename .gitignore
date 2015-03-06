@@ -29,3 +29,7 @@ database/migrations/2015_02_16_164601_create_parser_badwords_table.php
 database/migrations/2015_02_16_164601_create_parser_mycode_table.php
 database/migrations/2015_02_16_164601_create_parser_smilies_table.php
 resources/lang/en/parser.php
+
+### MyBB/Settings
+database/migrations/2015_03_06_110928_create_settings_table.php
+database/migrations/2015_03_06_110933_create_setting_values_table.php
