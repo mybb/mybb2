@@ -25,8 +25,7 @@ class UserRepository implements IUserRepository
 	 */
 	public function __construct(
 		User $userModel
-	)
-	{
+	) {
 		$this->userModel = $userModel;
 	}
 

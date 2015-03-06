@@ -35,7 +35,8 @@ class AppServiceProvider extends ServiceProvider
 
 		$this->app->bind(
 			'MyBB\Core\Database\Repositories\IForumRepository',
-			function (Application $app) {
+			function (Application $app)
+			{
 				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
 
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
@@ -61,7 +62,8 @@ class AppServiceProvider extends ServiceProvider
 
 		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
-			function (Application $app) {
+			function (Application $app)
+			{
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
 
@@ -77,7 +79,8 @@ class AppServiceProvider extends ServiceProvider
 		$this->initDefaultUser();
 
 		// Temporary fix for Form...
-		$this->app->bind('Illuminate\Html\FormBuilder', function ($app) {
+		$this->app->bind('Illuminate\Html\FormBuilder', function ($app)
+		{
 			$form = new \Illuminate\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
 
 			return $form->setSessionStore($app['session.store']);

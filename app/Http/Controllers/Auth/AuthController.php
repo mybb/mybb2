@@ -1,11 +1,11 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
+use Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use MyBB\Core\Http\Controllers\Controller;
-use Breadcrumbs;
 
 class AuthController extends Controller
 {
@@ -50,6 +50,7 @@ class AuthController extends Controller
 	public function getSignup()
 	{
 		Breadcrumbs::setCurrentRoute('auth.signup');
+
 		return view('member.signup');
 	}
 
@@ -66,7 +67,8 @@ class AuthController extends Controller
 
 		$validator = $this->registrar->validator($request->all());
 
-		if ($validator->fails()) {
+		if($validator->fails())
+		{
 			$this->throwValidationException(
 				$request, $validator
 			);
@@ -85,6 +87,7 @@ class AuthController extends Controller
 	public function getLogin()
 	{
 		Breadcrumbs::setCurrentRoute('auth.login');
+
 		return view('member.login');
 	}
 
@@ -106,9 +109,10 @@ class AuthController extends Controller
 
 		$credentials = $request->only('username', 'password');
 
-		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
-		                         $request->input('remember_me'))
-		) {
+		if($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
+		                        $request->input('remember_me'))
+		)
+		{
 			return redirect()->intended($this->redirectPath());
 		}
 

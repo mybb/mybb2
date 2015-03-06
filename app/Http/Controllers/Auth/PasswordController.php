@@ -1,11 +1,11 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
+use Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use MyBB\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Breadcrumbs;
+use MyBB\Core\Http\Controllers\Controller;
 
 class PasswordController extends Controller
 {
@@ -21,7 +21,8 @@ class PasswordController extends Controller
 	|
 	*/
 
-	use ResetsPasswords {
+	use ResetsPasswords
+	{
 		postEmail as parentPostEmail;
 	}
 

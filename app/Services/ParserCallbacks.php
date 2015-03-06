@@ -9,6 +9,7 @@ class ParserCallbacks
 	public static function getPostLink($pid)
 	{
 		$post = Post::find($pid);
+
 		return route('topics.showPost', [$post->topic->slug, $post->id]);
 	}
 }

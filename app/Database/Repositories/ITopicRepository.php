@@ -68,7 +68,7 @@ interface ITopicRepository
 	 * Find a single topic with a specific slug and ID.
 	 *
 	 * @param string $slug The slug for the topic.
-	 * @param int    $id The ID of the topic to find.
+	 * @param int    $id   The ID of the topic to find.
 	 *
 	 * @return mixed
 	 */

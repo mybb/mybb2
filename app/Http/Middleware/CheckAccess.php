@@ -23,7 +23,8 @@ class CheckAccess
 	 */
 	public function handle($request, Closure $next)
 	{
-		if ($this->checkPermissions($request)) {
+		if($this->checkPermissions($request))
+		{
 			return $next($request);
 		}
 
@@ -45,14 +46,17 @@ class CheckAccess
 		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
 		// Weed out the Guests first
-		if (!$this->auth->user() || !$this->auth->user()->role) {
+		if(!$this->auth->user() || !$this->auth->user()->role)
+		{
 			// Guests are set to except
-			if (isset($action['except']) && $action['except'] == 'guest') {
+			if(isset($action['except']) && $action['except'] == 'guest')
+			{
 				return false;
 			}
 
 			// Don't require permissions? Good to go
-			if (!$requiredPermisions) {
+			if(!$requiredPermisions)
+			{
 				return true;
 			}
 
@@ -62,12 +66,14 @@ class CheckAccess
 		}
 
 		// Check if route is protected
-		if (isset($action['except'])) {
+		if(isset($action['except']))
+		{
 			// Check if our role is allowed
 			$notAllowed = explode('|', $action['except']);
 
 
-			if (in_array($this->auth->user()->role->role_slug, $notAllowed)) {
+			if(in_array($this->auth->user()->role->role_slug, $notAllowed))
+			{
 				return false;
 			}
 		}

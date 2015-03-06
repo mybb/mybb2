@@ -92,7 +92,8 @@ class ForumRepository implements IForumRepository
 	{
 		$forum = $this->find($id);
 
-		if ($forum) {
+		if($forum)
+		{
 			$forum->increment('num_posts');
 		}
 
@@ -110,7 +111,8 @@ class ForumRepository implements IForumRepository
 	{
 		$forum = $this->find($id);
 
-		if ($forum) {
+		if($forum)
+		{
 			$forum->increment('num_topics');
 		}
 

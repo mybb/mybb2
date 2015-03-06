@@ -85,7 +85,8 @@ class UserSettings extends Model
 	 */
 	public function getDateFormatAttribute($value)
 	{
-		if ($value == null) {
+		if($value == null)
+		{
 			// TODO: Return board default
 			return 3;
 		}
@@ -110,7 +111,8 @@ class UserSettings extends Model
 	 */
 	public function getTimeFormatAttribute($value)
 	{
-		if ($value == null) {
+		if($value == null)
+		{
 			// TODO: Return board default
 			return 24;
 		}
@@ -135,7 +137,8 @@ class UserSettings extends Model
 	 */
 	public function getTimezoneAttribute($value)
 	{
-		if ($value == null) {
+		if($value == null)
+		{
 			// TODO: Return board default
 			return '0';
 		}
@@ -159,7 +162,8 @@ class UserSettings extends Model
 	 */
 	public function getStyleAttribute($value)
 	{
-		if ($value == null) {
+		if($value == null)
+		{
 			// TODO: Return board default
 		}
 	}
@@ -181,7 +185,8 @@ class UserSettings extends Model
 	 */
 	public function getLanguageAttribute($value)
 	{
-		if ($value == null) {
+		if($value == null)
+		{
 			// TODO: Return board default
 			return 'en';
 		}

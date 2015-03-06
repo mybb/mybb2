@@ -5,10 +5,10 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\PermissionHandler;
-use McCool\LaravelAutoPresenter\HasPresenter;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter
 {
@@ -29,7 +29,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'role_id', 'avatar', 'dob', 'usertitle', 'last_visit', 'num_posts', 'num_topics'];
+	protected $fillable = [
+		'name',
+		'email',
+		'password',
+		'role_id',
+		'avatar',
+		'dob',
+		'usertitle',
+		'last_visit',
+		'num_posts',
+		'num_topics'
+	];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

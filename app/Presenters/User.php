@@ -27,12 +27,15 @@ class User extends BasePresenter
 	public function styled_name()
 	{
 		if($this->wrappedObject->id == -1)
+		{
 			return e(trans('general.guest'));
+		}
 
 		if($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style)
 		{
 			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
 		}
+
 		return e($this->wrappedObject->name);
 	}
 
@@ -44,24 +47,20 @@ class User extends BasePresenter
 		if(empty($avatar))
 		{
 			return asset('images/avatar.png');
-		}
-		// Link? Nice!
+		} // Link? Nice!
 		elseif(filter_var($avatar, FILTER_VALIDATE_URL) !== false)
 		{
 			return $avatar;
-		}
-		// Email? Set up Gravatar
+		} // Email? Set up Gravatar
 		elseif(filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
 		{
 			// TODO: Replace with euans package
-			return "http://gravatar.com/avatar/".md5(strtolower(trim($avatar)));
-		}
-		// File?
+			return "http://gravatar.com/avatar/" . md5(strtolower(trim($avatar)));
+		} // File?
 		elseif(file_exists(public_path("uploads/avatars/{$avatar}")))
 		{
 			return asset("uploads/avatars/{$avatar}");
-		}
-		// Nothing?
+		} // Nothing?
 		else
 		{
 			return asset('images/avatar.png');

@@ -10,8 +10,8 @@
 namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use McCool\LaravelAutoPresenter\HasPresenter;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
 
 class Post extends Model implements HasPresenter
@@ -47,7 +47,7 @@ class Post extends Model implements HasPresenter
 	 *
 	 * @var array
 	 */
-    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
 	/**
 	 * Get the presenter class.

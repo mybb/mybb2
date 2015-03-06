@@ -31,9 +31,12 @@ class Post extends BasePresenter
 		{
 			$user = new UserModel();
 			if($this->wrappedObject->username != null)
+			{
 				$user->name = $this->wrappedObject->username;
-			else
+			} else
+			{
 				$user->name = trans('general.guest');
+			}
 
 			$decoratedUser = new User($user);
 

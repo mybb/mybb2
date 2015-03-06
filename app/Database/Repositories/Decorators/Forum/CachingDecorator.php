@@ -32,7 +32,8 @@ class CachingDecorator implements IForumRepository
 	 */
 	public function all()
 	{
-		if (($forums = $this->cache->get('forums.all')) == null) {
+		if(($forums = $this->cache->get('forums.all')) == null)
+		{
 			$forums = $this->decoratedRepository->all();
 			$this->cache->forever('forums.all', $forums);
 		}
@@ -71,7 +72,8 @@ class CachingDecorator implements IForumRepository
 	 */
 	public function getIndexTree()
 	{
-		if (($forums = $this->cache->get('forums.index_tree')) == null) {
+		if(($forums = $this->cache->get('forums.index_tree')) == null)
+		{
 			$forums = $this->decoratedRepository->getIndexTree();
 			$this->cache->forever('forums.index_tree', $forums);
 		}

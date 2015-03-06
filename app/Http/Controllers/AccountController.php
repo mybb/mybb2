@@ -1,8 +1,8 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
+use Hash;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
-use Hash;
 use MyBB\Core\Services\ConfirmationManager;
 use Session;
 
@@ -57,7 +57,7 @@ class AccountController extends Controller
 
 		$input = $request->only(['usertitle']);
 
-		$input['dob'] = $request->get('date_of_birth_day').'-'.$request->get('date_of_birth_month').'-'.$request->get('date_of_birth_year');
+		$input['dob'] = $request->get('date_of_birth_day') . '-' . $request->get('date_of_birth_month') . '-' . $request->get('date_of_birth_year');
 
 		$this->guard->user()->update($input);
 
@@ -95,13 +95,14 @@ class AccountController extends Controller
 			->route('account.username')
 			->withInput($request->only('name'))
 			->withErrors([
-				'name' => trans('member.invalidCredentials'),
-			]);
+				             'name' => trans('member.invalidCredentials'),
+			             ]);
 	}
 
 	public function getEmail()
 	{
-		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('email', $this->guard->user()));
+		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('email',
+		                                                                                                  $this->guard->user()));
 	}
 
 	/**
@@ -120,7 +121,8 @@ class AccountController extends Controller
 
 		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
 		{
-			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'), $request->only('email'));
+			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'),
+			                          $request->only('email'));
 
 			// We need show some sort of feedback to the user
 			Session::flash('success', trans('account.confirmEmail'));
@@ -132,8 +134,8 @@ class AccountController extends Controller
 			->route('account.email')
 			->withInput($request->only('email'))
 			->withErrors([
-				'email' => trans('member.invalidCredentials'),
-			]);
+				             'email' => trans('member.invalidCredentials'),
+			             ]);
 	}
 
 	public function confirmEmail($token)
@@ -145,8 +147,8 @@ class AccountController extends Controller
 			return redirect()
 				->route('account.profile')
 				->withErrors([
-					'token' => trans('confirmation.invalidToken'),
-				]);
+					             'token' => trans('confirmation.invalidToken'),
+				             ]);
 		}
 
 		$this->guard->user()->update(['email' => $email]);
@@ -159,7 +161,8 @@ class AccountController extends Controller
 
 	public function getPassword()
 	{
-		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('password', $this->guard->user()));
+		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('password',
+		                                                                                                     $this->guard->user()));
 	}
 
 	/**
@@ -179,7 +182,8 @@ class AccountController extends Controller
 		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
 		{
 			// Don't save the password in plaintext!
-			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm', Hash::make($request->get('password1')));
+			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
+			                          Hash::make($request->get('password1')));
 
 			// We need show some sort of feedback to the user
 			Session::flash('success', trans('account.confirm'));
@@ -191,8 +195,8 @@ class AccountController extends Controller
 			->route('account.password')
 			->withInput($request->only('password1'))
 			->withErrors([
-				'password1' => trans('member.invalidCredentials'),
-			]);
+				             'password1' => trans('member.invalidCredentials'),
+			             ]);
 	}
 
 	public function confirmPassword($token)
@@ -204,8 +208,8 @@ class AccountController extends Controller
 			return redirect()
 				->route('account.profile')
 				->withErrors([
-					'token' => trans('confirmation.invalidToken'),
-				]);
+					             'token' => trans('confirmation.invalidToken'),
+				             ]);
 		}
 
 		// Valid password so update
@@ -246,16 +250,17 @@ class AccountController extends Controller
 			$name = "avatar_{$this->guard->user()->id}_" . time() . "." . $file->getClientOriginalExtension();
 			$file->move(public_path('uploads/avatars'), $name);
 			$this->guard->user()->update(['avatar' => $name]);
-		}
-		// URL? Email?
-		elseif(filter_var($request->get('avatar_link'), FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'), FILTER_VALIDATE_EMAIL) !== false)
+		} // URL? Email?
+		elseif(filter_var($request->get('avatar_link'),
+		                  FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'),
+		                                                               FILTER_VALIDATE_EMAIL) !== false
+		)
 		{
 			//$url = str_replace(array('http://', 'https://', 'ftp://'), '', strtolower($value));
 			//return checkdnsrr($url, 'A');
 
 			$this->guard->user()->update(['avatar' => $request->get('avatar_link')]);
-		}
-		else
+		} else
 		{
 			// Nothing we want here, empty it!
 			$this->guard->user()->update(['avatar' => '']);
@@ -268,6 +273,7 @@ class AccountController extends Controller
 	{
 		// TODO: Delete the old file if an uploaded was used
 		$this->guard->user()->update(['avatar' => '']);
+
 		return redirect()->route('account.profile');
 	}
 
@@ -326,10 +332,12 @@ class AccountController extends Controller
 		]);
 
 		$input = $request->except(['_token']);
-		if ($input['style'] == 'default') {
+		if($input['style'] == 'default')
+		{
 			$input['style'] = null;
 		}
-		if ($input['language'] == 'default') {
+		if($input['language'] == 'default')
+		{
 			$input['language'] = null;
 		}
 

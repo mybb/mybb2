@@ -36,7 +36,7 @@ class TopicController extends Controller
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param Guard        $guard           Guard implementation
+	 * @param Guard            $guard           Guard implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
@@ -56,7 +56,8 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if (!$topic) {
+		if(!$topic)
+		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -74,22 +75,27 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
+		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if ($this->guard->check() == false) {
+		if($this->guard->check() == false)
+		{
 			// Todo: default to board setting
 			$ppp = 10;
-		} else {
+		} else
+		{
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
 
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
-		if (ceil($numPost / $ppp) == 1) {
+		if(ceil($numPost / $ppp) == 1)
+		{
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
-		} else {
+		} else
+		{
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
@@ -103,20 +109,26 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if (!$topic) {
+		if(!$topic)
+		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if ($this->guard->check() == false) {
+		if($this->guard->check() == false)
+		{
 			// Todo: default to board setting
 			$ppp = 10;
-		} else {
+		} else
+		{
 			$ppp = $this->guard->user()->settings->posts_per_page;
 		}
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
-		if (ceil($numPost / $ppp) == 1) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
-		} else {
+		if(ceil($numPost / $ppp) == 1)
+		{
+			return redirect()->route('topics.show',
+			                         ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
+		} else
+		{
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
@@ -130,7 +142,8 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if (!$topic) {
+		if(!$topic)
+		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -144,7 +157,8 @@ class TopicController extends Controller
 		/** @var Topic $topic */
 		$topic = $this->topicRepository->find($id);
 
-		if (!$topic) {
+		if(!$topic)
+		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -153,7 +167,8 @@ class TopicController extends Controller
 			'username' => $replyRequest->input('username'),
 		]);
 
-		if ($post) {
+		if($post)
+		{
 			return redirect()->route('topics.last', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
@@ -165,7 +180,8 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
+		{
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
@@ -179,21 +195,25 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
+		{
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
 		$post = $this->postRepository->editPost($post, [
 			'content' => $replyRequest->input('content'),
 		]);
-		if ($post['id'] == $topic['first_post_id']) {
+		if($post['id'] == $topic['first_post_id'])
+		{
 			$topic = $this->topicRepository->editTopic($topic, [
 				'title' => $replyRequest->input('title'),
 			]);
 		}
 
-		if ($post) {
-			return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+		if($post)
+		{
+			return redirect()->route('topics.showPost',
+			                         ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
 		return new \Exception('Error editing post'); // TODO: Redirect back with error...
@@ -203,7 +223,8 @@ class TopicController extends Controller
 	{
 		$forum = $this->forumRepository->find($forumId);
 
-		if (!$forum) {
+		if(!$forum)
+		{
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
 
@@ -225,28 +246,32 @@ class TopicController extends Controller
 			                                        'username' => $createRequest->input('username'),
 		                                        ]);
 
-		if ($topic) {
+		if($topic)
+		{
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
 		return new \Exception(trans('errors.error_creating_topic')); // TODO: Redirect back with error...
 	}
 
-	public function delete($slug = '', $id = 0,  $postId = 0)
+	public function delete($slug = '', $id = 0, $postId = 0)
 	{
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
+		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
+		{
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
 
-		if ($post['id'] == $topic['first_post_id']) {
+		if($post['id'] == $topic['first_post_id'])
+		{
 			$this->topicRepository->deleteTopic($topic);
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
-		} else {
+		} else
+		{
 			$this->postRepository->deletePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 
@@ -261,20 +286,24 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if (!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at'] && !$topic['deleted_at']) {
+		if(!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at'] && !$topic['deleted_at'])
+		{
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
-		if ($post['id'] == $topic['first_post_id']) {
+		if($post['id'] == $topic['first_post_id'])
+		{
 			$this->topicRepository->restoreTopic($topic);
-		} else {
+		} else
+		{
 			$this->postRepository->restorePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 		}
-        if($topic)
-        {
-            return redirect()->route('topics.showPost', ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
-        }
+		if($topic)
+		{
+			return redirect()->route('topics.showPost',
+			                         ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+		}
 
 		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
 	}

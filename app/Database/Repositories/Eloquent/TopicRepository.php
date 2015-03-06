@@ -123,10 +123,10 @@ class TopicRepository implements ITopicRepository
 	public function getNewest($num = 20)
 	{
 		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
-			'lastPost',
-			'forum',
-			'lastPost.author'
-		])->take($num)->get();
+			                                                                'lastPost',
+			                                                                'forum',
+			                                                                'lastPost.author'
+		                                                                ])->take($num)->get();
 	}
 
 	/**
@@ -141,7 +141,8 @@ class TopicRepository implements ITopicRepository
 	public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
 	{
 		// Build the correct order_by column - nice versions may be submitted
-		switch ($orderBy) {
+		switch($orderBy)
+		{
 			case 'replies':
 				$orderBy = 'num_posts';
 				break;
@@ -154,10 +155,12 @@ class TopicRepository implements ITopicRepository
 				break;
 		}
 
-		if ($this->guard->check() == false) {
+		if($this->guard->check() == false)
+		{
 			// Todo: default to board setting
 			$topicsPerPage = 10;
-		} else {
+		} else
+		{
 			$topicsPerPage = $this->guard->user()->settings->topics_per_page;
 		}
 
@@ -176,24 +179,23 @@ class TopicRepository implements ITopicRepository
 	public function create(array $details = [])
 	{
 		$details = array_merge([
-			'title' => '',
-			'forum_id' => 0,
-			'user_id' => $this->guard->user()->id,
-			'username' => null,
-			'first_post_id' => 0,
-			'last_post_id' => 0,
-			'views' => 0,
-			'num_posts' => 0,
-			'content' => '',
-		], $details);
+			                       'title' => '',
+			                       'forum_id' => 0,
+			                       'user_id' => $this->guard->user()->id,
+			                       'username' => null,
+			                       'first_post_id' => 0,
+			                       'last_post_id' => 0,
+			                       'views' => 0,
+			                       'num_posts' => 0,
+			                       'content' => '',
+		                       ], $details);
 
 		$details['slug'] = $this->createSlugForTitle($details['title']);
 
 		if($details['user_id'] > 0)
 		{
 			$details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
-		}
-		else
+		} else
 		{
 			$details['user_id'] = null;
 			if($details['username'] == trans('general.guest'))
@@ -204,14 +206,15 @@ class TopicRepository implements ITopicRepository
 
 		$topic = null;
 
-		$this->dbManager->transaction(function () use ($details, &$topic) {
+		$this->dbManager->transaction(function () use ($details, &$topic)
+		{
 			$topic = $this->topicModel->create([
-				'title' => $details['title'],
-				'slug' => $details['slug'],
-				'forum_id' => $details['forum_id'],
-				'user_id' => $details['user_id'],
-				'username' => $details['username'],
-			]);
+				                                   'title' => $details['title'],
+				                                   'slug' => $details['slug'],
+				                                   'forum_id' => $details['forum_id'],
+				                                   'user_id' => $details['user_id'],
+				                                   'username' => $details['username'],
+			                                   ]);
 
 			$firstPost = $this->postRepository->addPostToTopic($topic, [
 				'content' => $details['content'],
@@ -219,10 +222,10 @@ class TopicRepository implements ITopicRepository
 			]);
 
 			$topic->update([
-				'first_post_id' => $firstPost->id,
-				'last_post_id' => $firstPost->id,
-				'num_posts' => 1,
-			]);
+				               'first_post_id' => $firstPost->id,
+				               'last_post_id' => $firstPost->id,
+				               'num_posts' => 1,
+			               ]);
 		});
 
 		if($topic->user_id > 0)
@@ -251,7 +254,7 @@ class TopicRepository implements ITopicRepository
 	/**
 	 * Edit a topic
 	 *
-	 * @param Topic $topic       The topic to edit
+	 * @param Topic $topic        The topic to edit
 	 * @param array $topicDetails The details of the post to add.
 	 *
 	 * @return mixed
@@ -282,14 +285,14 @@ class TopicRepository implements ITopicRepository
 			$topic->author->decrement('num_topics');
 
 			return $topic->delete();
-		}
-		else
+		} else
 		{
 			$topic->update([
-				'first_post_id' => null,
-				'last_post_id' => null
-			]);
+				               'first_post_id' => null,
+				               'last_post_id' => null
+			               ]);
 			$this->postRepository->deletePostsForTopic($topic, true);
+
 			return $topic->forceDelete();
 		}
 	}
@@ -322,6 +325,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	public function findBySlugAndId($slug = '', $id = 0)
 	{
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)->first();
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)
+		                        ->first();
 	}
 }

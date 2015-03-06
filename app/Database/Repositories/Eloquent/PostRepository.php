@@ -65,10 +65,10 @@ class PostRepository implements IPostRepository
 	public function getNewest($num = 20)
 	{
 		return $this->postModel->orderBy('created_at', 'desc')->with([
-			                                                                                  'topic',
-			                                                                                  'topic.forum',
-			                                                                                  'author'
-		                                                                                  ])->take($num)->get();
+			                                                             'topic',
+			                                                             'topic.forum',
+			                                                             'author'
+		                                                             ])->take($num)->get();
 	}
 
 	/**
@@ -86,25 +86,27 @@ class PostRepository implements IPostRepository
 	/**
 	 * Get all posts for a thread.
 	 *
-	 * @param Topic $topic The thread to fetch the posts for.
-	 * @param bool $withTrashed Find trashed posts?
+	 * @param Topic $topic       The thread to fetch the posts for.
+	 * @param bool  $withTrashed Find trashed posts?
 	 *
 	 * @return mixed
 	 */
 	public function allForTopic(Topic $topic, $withTrashed = false)
 	{
-		if (!$this->guard->check()) {
+		if(!$this->guard->check())
+		{
 			// Todo: default to board setting
 			$postsPerPage = 10;
-		} else {
+		} else
+		{
 			$postsPerPage = $this->guard->user()->settings->posts_per_page;
 		}
 
 		if($withTrashed)
 		{
-			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
-		}
-		else
+			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)
+			                       ->paginate($postsPerPage);
+		} else
 		{
 			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
 		}
@@ -113,7 +115,7 @@ class PostRepository implements IPostRepository
 	/**
 	 * Get's the number of this post in the thread. Eg '1' for the first, '2' for the second etc
 	 *
-	 * @param Post $post The post we want the number for
+	 * @param Post $post        The post we want the number for
 	 * @param bool $withTrashed Count trashed posts?
 	 *
 	 * @return int
@@ -121,7 +123,8 @@ class PostRepository implements IPostRepository
 	public function getNumForPost(Post $post, $withTrashed = false)
 	{
 		// Get all posts in this thread created before this one...
-		$baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)->where('created_at', '<', $post->created_at);
+		$baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)
+		                             ->where('created_at', '<', $post->created_at);
 
 		if($withTrashed)
 		{
@@ -129,7 +132,7 @@ class PostRepository implements IPostRepository
 		}
 
 		// ... and add 1 (the first post doesn't have one created before it etc)
-		return $baseQuery->count()+1;
+		return $baseQuery->count() + 1;
 	}
 
 	/**
@@ -144,11 +147,11 @@ class PostRepository implements IPostRepository
 	{
 
 		$postDetails = array_merge([
-			'user_id' => $this->guard->user()->id,
-			'username' => null,
-			'content' => '',
-			'content_parsed' => '',
-		], $postDetails);
+			                           'user_id' => $this->guard->user()->id,
+			                           'username' => null,
+			                           'content' => '',
+			                           'content_parsed' => '',
+		                           ], $postDetails);
 
 		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
 			MessageFormatter::ME_USERNAME => $this->guard->user()->name,
@@ -157,8 +160,7 @@ class PostRepository implements IPostRepository
 		if($postDetails['user_id'] > 0)
 		{
 			$postDetails['username'] = User::find($postDetails['user_id'])->name;
-		}
-		else
+		} else
 		{
 			$postDetails['user_id'] = null;
 			if($postDetails['username'] == trans('general.guest'))
@@ -169,12 +171,13 @@ class PostRepository implements IPostRepository
 
 		$post = $topic->posts()->create($postDetails);
 
-		if ($post !== false) {
+		if($post !== false)
+		{
 			$topic->increment('num_posts');
 			$topic->forum->increment('num_posts');
 			$topic->update([
-				'last_post_id' => $post['id']
-			]);
+				               'last_post_id' => $post['id']
+			               ]);
 		}
 
 		if($post->user_id > 0)
@@ -195,18 +198,19 @@ class PostRepository implements IPostRepository
 	 */
 	public function editPost(Post $post, array $postDetails)
 	{
-		if ($postDetails['content']) {
+		if($postDetails['content'])
+		{
 			$options = [];
 			if($post->user_id > 0)
 			{
 				$options[MessageFormatter::ME_USERNAME] = $post->author->name;
-			}
-			else
+			} else
 			{
 				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
 			}
 
-			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], $options); // TODO: Parser options...
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'],
+			                                                         $options); // TODO: Parser options...
 		}
 
 		$post->update($postDetails);
@@ -218,7 +222,7 @@ class PostRepository implements IPostRepository
 	 * Delete posts of topic
 	 *
 	 * @param Topic $topic The topic that you want to delete its posts
-	 * @param bool $force Whether to force a hard delete of the post.
+	 * @param bool  $force Whether to force a hard delete of the post.
 	 *
 	 * @return mixed
 	 */
@@ -228,8 +232,7 @@ class PostRepository implements IPostRepository
 		if($force)
 		{
 			return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
-		}
-		else
+		} else
 		{
 			return $this->postModel->where('topic_id', '=', $topic->id)->delete();
 		}
@@ -249,9 +252,9 @@ class PostRepository implements IPostRepository
 		{
 			$post->topic->decrement('num_posts');
 			$post->author->decrement('num_posts');
+
 			return $post->delete();
-		}
-		else
+		} else
 		{
 			return $post->forceDelete();
 		}
@@ -284,8 +287,10 @@ class PostRepository implements IPostRepository
 	public function updateLastPost(Topic $topic)
 	{
 		$topic->update([
-			'last_post_id' => $this->postModel->where('topic_id', '=', $topic->id)->orderBy('id', 'desc')->first()->id
-		]);
+			               'last_post_id' => $this->postModel->where('topic_id', '=', $topic->id)->orderBy('id', 'desc')
+			                                                 ->first()->id
+		               ]);
+
 		return $topic;
 	}
 }

@@ -1,12 +1,12 @@
 <?php namespace MyBB\Core\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use Symfony\Component\Console\Input\InputOption;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 class RecountCommand extends Command
 {
@@ -110,7 +110,7 @@ class RecountCommand extends Command
 		// We could also recache this cache but the recount tool is already busy so probably better to leave it to the first user
 		$this->cache->forget('forums.index_tree');
 
-		$this->info('Done'.PHP_EOL);
+		$this->info('Done' . PHP_EOL);
 	}
 
 	private function recountTopics()
@@ -128,7 +128,7 @@ class RecountCommand extends Command
 			$topic->save();
 		}
 
-		$this->info('Done'.PHP_EOL);
+		$this->info('Done' . PHP_EOL);
 	}
 
 	private function recountUsers()
@@ -144,6 +144,6 @@ class RecountCommand extends Command
 			$user->save();
 		}
 
-		$this->info('Done'.PHP_EOL);
+		$this->info('Done' . PHP_EOL);
 	}
 }

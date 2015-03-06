@@ -7,7 +7,8 @@ trait PermissionHandler
 
 	public function canAccess($requiredPermission = false)
 	{
-		if ($requiredPermission) {
+		if($requiredPermission)
+		{
 			return $this->checkPermission($requiredPermission);
 		}
 

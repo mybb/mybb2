@@ -3,8 +3,8 @@
 {% block contents %}
 <div class="page-content page-content--sidebar">
 	<header>
-		<h1>MyBB Community</h1>
-		<p>The official community for MyBB, the best free and open source forum software.</p>
+		<h1>{{ setting('general.board_name', 'MyBB Community Forums') }}</h1>
+		<p>{{ setting('general.board_desc', '') }}</p>
 	</header>
 	<section>
 		<h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts">Latest Discussions <span class="count">42 <i class="fa fa-angle-right"></i></span></a></h2>

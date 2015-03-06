@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "039ed70e82f3d5cc6703f732bbafb49a",
+    "hash": "3a8b3b5ebf45faacbb61e09be088bf96",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1593,16 +1593,16 @@
         },
         {
             "name": "mybb/settings",
-            "version": "dev-master",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "ddc7e3ca74020260dce5edc332c6a7ec7b9f576f"
+                "reference": "6a956ee286cc637f76b9e835f23fd4a9a37f7abe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/ddc7e3ca74020260dce5edc332c6a7ec7b9f576f",
-                "reference": "ddc7e3ca74020260dce5edc332c6a7ec7b9f576f",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/6a956ee286cc637f76b9e835f23fd4a9a37f7abe",
+                "reference": "6a956ee286cc637f76b9e835f23fd4a9a37f7abe",
                 "shasum": ""
             },
             "require": {
@@ -1634,10 +1634,10 @@
             ],
             "description": "MyBB 2.0 settings package.",
             "support": {
-                "source": "https://github.com/mybb/Settings/tree/master",
+                "source": "https://github.com/mybb/Settings/tree/v2.0.0",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-06 13:45:05"
+            "time": "2015-03-06 13:56:09"
         },
         {
             "name": "nesbot/carbon",
@@ -3935,7 +3935,6 @@
         "mccool/laravel-auto-presenter": 10,
         "mybb/auth": 20,
         "mybb/parser": 20,
-        "mybb/settings": 20,
         "davejamesmiller/laravel-breadcrumbs": 20,
         "league/fractal": 20,
         "barryvdh/laravel-debugbar": 20
