@@ -17,6 +17,13 @@ return [
 	'dob' => 'Date of Birth',
 	'everyone' => 'Everyone',
 	'cancel' => 'Cancel',
-	'guest' => 'Guest'
+	'guest' => 'Guest',
+    'and' => 'and',
+    'or' => 'or',
+    'yesterday' => 'yesterday',
+    'xdayago' => 'a day ago|:count days ago',
+    'xweekago' => 'a week ago|:count weeks ago',
+    'xmonthago' => 'a month ago|:count months ago',
+    'xyearago' => 'a year ago|:count years ago'
 
 ];

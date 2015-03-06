@@ -57,6 +57,9 @@ Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => '
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 
+Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
+Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
