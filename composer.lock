@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "942dce5c81f20ed4d31da68d9e94c2d8",
+    "hash": "039ed70e82f3d5cc6703f732bbafb49a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1395,16 +1395,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.12.0",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f"
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
-                "reference": "1fbe8c2641f2b163addf49cc5e18f144bec6b19f",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c41c218e239b50446fd883acb1ecfd4b770caeae",
+                "reference": "c41c218e239b50446fd883acb1ecfd4b770caeae",
                 "shasum": ""
             },
             "require": {
@@ -1421,6 +1421,7 @@
                 "phpunit/phpunit": "~4.0",
                 "raven/raven": "~0.5",
                 "ruflin/elastica": "0.90.*",
+                "swiftmailer/swiftmailer": "~5.3",
                 "videlalvaro/php-amqplib": "~2.4"
             },
             "suggest": {
@@ -1437,7 +1438,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12.x-dev"
+                    "dev-master": "1.13.x-dev"
                 }
             },
             "autoload": {
@@ -1463,7 +1464,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2014-12-29 21:29:35"
+            "time": "2015-03-05 01:12:12"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -1589,6 +1590,54 @@
                 "issues": "https://github.com/mybb/Parser/issues"
             },
             "time": "2015-02-25 16:06:15"
+        },
+        {
+            "name": "mybb/settings",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:mybb/Settings.git",
+                "reference": "ddc7e3ca74020260dce5edc332c6a7ec7b9f576f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/ddc7e3ca74020260dce5edc332c6a7ec7b9f576f",
+                "reference": "ddc7e3ca74020260dce5edc332c6a7ec7b9f576f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "~5.0",
+                "illuminate/cache": "~5.0",
+                "illuminate/config": "~5.0",
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyBB\\Settings\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Euan T.",
+                    "email": "euantor@mybb.com"
+                }
+            ],
+            "description": "MyBB 2.0 settings package.",
+            "support": {
+                "source": "https://github.com/mybb/Settings/tree/master",
+                "issues": "https://github.com/mybb/Settings/issues"
+            },
+            "time": "2015-03-06 13:45:05"
         },
         {
             "name": "nesbot/carbon",
@@ -3886,6 +3935,7 @@
         "mccool/laravel-auto-presenter": 10,
         "mybb/auth": 20,
         "mybb/parser": 20,
+        "mybb/settings": 20,
         "davejamesmiller/laravel-breadcrumbs": 20,
         "league/fractal": 20,
         "barryvdh/laravel-debugbar": 20

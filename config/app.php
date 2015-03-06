@@ -145,6 +145,7 @@ return [
 		'MyBB\Core\Providers\EventServiceProvider',
 		'MyBB\Core\Providers\RouteServiceProvider',
 		'MyBB\Parser\ParserServiceProvider',
+	    'MyBB\Settings\ServiceProvider',
 	],
 	/*
 	|--------------------------------------------------------------------------
@@ -197,6 +198,8 @@ return [
 		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
 		'Node' => 'Kalnoy\Nestedset\Node',
 		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+
+	    'Settings' => 'MyBB\Settings\Facade',
 
 	],
 

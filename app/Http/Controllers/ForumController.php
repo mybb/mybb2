@@ -32,7 +32,8 @@ class ForumController extends Controller
 		IForumRepository $forumRepository,
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
-		Guard $guard
+		Guard $guard,
+		\MyBB\Settings\Store $settings
 	) {
 		parent::__construct($guard);
 

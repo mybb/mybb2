@@ -12,6 +12,7 @@
 		"illuminate/html": "~5.0",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
+        "mybb/settings": "dev-master",
 		"davejamesmiller/laravel-breadcrumbs": "dev-master",
 		"doctrine/dbal": "~2.5",
 		"league/fractal": "0.12.*@dev"
@@ -29,7 +30,11 @@
 		{
 			"type": "vcs",
 			"url":  "git@github.com:mybb/parser.git"
-		}
+		},
+        {
+          "type": "vcs",
+          "url":  "git@github.com:mybb/Settings.git"
+        }
 	],
 	"autoload": {
 		"classmap": [
