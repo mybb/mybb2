@@ -38,12 +38,13 @@ class Topic extends BasePresenter
 			if($this->wrappedObject->username != null)
 			{
 				$user->name = $this->wrappedObject->username;
-			} else
+			}
+			else
 			{
 				$user->name = trans('general.guest');
 			}
 
-			$decoratedUser = new User($user);
+			$decoratedUser = app()->make('MyBB\Core\Presenters\User', $user);
 
 			return $decoratedUser;
 		}
