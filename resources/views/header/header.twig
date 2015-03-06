@@ -18,18 +18,18 @@
 					{% else %}
 						{% include "header.welcomeblock_guest" %}
 					{% endif %}
-					<div id="search" class="search">
-						<a href="index.php?page=search" class="search__button"><i class="fa fa-search"></i><span class="text">Search</span></a>
+					{{ form_open({'route':'search','id':'search','class':'search'}) }}
+						<a href="{{ url_route('search') }}" class="search__button"><i class="fa fa-search"></i><span class="text">Search</span></a>
 						<div class="search__container" for="query">
-							<input type="search" placeholder="" value="" class="search__field" />
+							<input type="search" name="keyword" placeholder="" value="" class="search__field" />
 							<span class="search__controls">
 								<button type="submit" class="search__submit">
 									<i class="fa fa-search"></i><span class="text">Search</span>
 								</button>
-								<a href="index.php?page=search" class="search__advanced" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
+								<a href="{{ url_route('search') }}" class="search__advanced" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
 							</span>
 						</div>
-					</div>
+					{{ form_close() }}
 				</div>
 			</nav>
 		</header>

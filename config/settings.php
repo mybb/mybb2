@@ -14,7 +14,7 @@ return [
 	/**
 	 * The type of store to use to load settings from.
 	 */
-	'store' => 'cache',
+	'store' => 'database',
 	/**
 	 * The name of the database table containing the settings.
 	 */
@@ -26,5 +26,5 @@ return [
 	/**
 	 * Cache name for settings when caching core settings.
 	 */
-    'settings_cache_name' => 'mybb.core.settings',
+	'settings_cache_name' => 'mybb.core.settings',
 ];

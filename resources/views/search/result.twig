@@ -1,0 +1,89 @@
+{% extends "layouts.base" %}
+{% block title %}
+	{{ trans('search.results') }}
+{% endblock %}
+{% block contents %}
+<div class="page-content">
+	<header>
+		<h1>{{ trans('search.results') }}</h1>
+	</header>
+	<section class="forum topic-list">
+		{{ results.render|raw }}
+		<div class="sort-topics clearfix">
+			<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
+				{{ trans('forum.topictitle') }}
+				{% if orderBy == 'title' %}
+					{% if orderDir == 'desc' %}
+						<i class="fa fa-caret-down"></i>
+					{% else %}
+						<i class="fa fa-caret-up"></i>
+					{% endif %}
+				{% endif %}
+			</a>
+			<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
+				{{ trans('forum.startdate') }}
+				{% if orderBy == 'startdate' %}
+					{% if orderDir == 'desc' %}
+						<i class="fa fa-caret-down"></i>
+					{% else %}
+						<i class="fa fa-caret-up"></i>
+					{% endif %}
+				{% endif %}
+			</a>
+			<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
+				{{ trans('forum.replies') }}
+				{% if orderBy == 'replies' %}
+					{% if orderDir == 'desc' %}
+						<i class="fa fa-caret-down"></i>
+					{% else %}
+						<i class="fa fa-caret-up"></i>
+					{% endif %}
+				{% endif %}
+			</a>
+			<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
+				{{ trans('forum.latestpost') }}
+				{% if orderBy == 'lastpost' %}
+					{% if orderDir == 'desc' %}
+						<i class="fa fa-caret-down"></i>
+					{% else %}
+						<i class="fa fa-caret-up"></i>
+					{% endif %}
+				{% endif %}
+			</a>
+		</div>
+		<div class="topics-container">
+			{% for topic in results %}
+				<div class="topic{{ topic.trashed ? ' soft-deleted' }}">
+					<div class="primary-column">
+						<h3 class="topic-title">
+							<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+						</h3>
+						<h4>First Post</h4>
+						<p class="first-post">
+							<span class="post-author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
+							<a href="{{ url_route('topics.last', [topic.slug, topic.id]) }}" class="post-date" title="{{ topic.created_at }}">{{ topic.created_at }}</a>
+						</p>
+					</div>
+					<div class="replies-column">
+						<h4>{{ trans('topic.replies') }}</h4>
+						{# It should be change later #}
+						<p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
+					</div>
+					<div class="latest-column">
+						<h4>{{ trans('topic.latest') }}</h4>
+						<!-- it should be change later -->
+						<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
+						<p class="latest-post">
+							<span class="post-author"><a href="">{{ topic.lastPost.author.name }}</a></span>
+							<a href="{{ url_route('topics.last', [topic.slug, topic.id]) }}" class="post-date" title="{{ topic.lastPost.created_at }}">{{ topic.lastPost.created_at }}</a>
+						</p>
+					</div>
+				</div>
+			{% else %}
+				<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
+			{% endfor %}
+		</div>
+		{{ results.render|raw }}
+	</section>
+</div>
+{% endblock %}

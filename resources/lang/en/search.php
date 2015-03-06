@@ -25,6 +25,9 @@ return [
     'topics' => 'Topics',
     'posts' => 'Posts',
 
+	'results' => 'Results',
+
+
     'atmost' => 'at most',
     'atleast' => 'at least',
     'exactly' => 'exactly',

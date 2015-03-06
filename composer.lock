@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3a8b3b5ebf45faacbb61e09be088bf96",
+    "hash": "9c1f3e735c6211c1bf0f42e04ab2dd7c",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1275,12 +1275,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/fractal.git",
-                "reference": "d1fb35a877ef9bacb08430c0e45b785b068e3f24"
+                "reference": "033e8cfdfa69ecdb9bf6b262c7e8c3c9f3e3d10c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/d1fb35a877ef9bacb08430c0e45b785b068e3f24",
-                "reference": "d1fb35a877ef9bacb08430c0e45b785b068e3f24",
+                "url": "https://api.github.com/repos/thephpleague/fractal/zipball/033e8cfdfa69ecdb9bf6b262c7e8c3c9f3e3d10c",
+                "reference": "033e8cfdfa69ecdb9bf6b262c7e8c3c9f3e3d10c",
                 "shasum": ""
             },
             "require": {
@@ -1330,7 +1330,7 @@
                 "league",
                 "rest"
             ],
-            "time": "2015-02-26 21:20:14"
+            "time": "2015-03-06 20:01:44"
         },
         {
             "name": "mccool/laravel-auto-presenter",

@@ -61,6 +61,11 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ISearchRepository',
+			'MyBB\Core\Database\Repositories\Eloquent\SearchRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
 			function (Application $app)
 			{
