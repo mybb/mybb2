@@ -155,8 +155,8 @@ class SearchController extends Controller
 		]);
 		return redirect()->route('search.results', [
 			'id' => $searchlog->id,
-			'orderBy' => $this->sorts[$searchRequest->sortby]['name'],
-			'orderDir' => $this->sorts[$searchRequest->sortby][$searchRequest->sorttype]
+			'orderBy' => $searchRequest->sortby,
+			'orderDir' => $searchRequest->sorttype
 		]);
 	}
 
@@ -181,7 +181,7 @@ class SearchController extends Controller
 		}
 		if($sortDir != 'asc')
 		{
-			$sortDir = 'asc';
+			$sortDir = 'desc';
 		}
 
 
