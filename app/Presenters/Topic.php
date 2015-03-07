@@ -44,7 +44,7 @@ class Topic extends BasePresenter
 				$user->name = trans('general.guest');
 			}
 
-			$decoratedUser = app()->make('MyBB\Core\Presenters\User', $user);
+			$decoratedUser = app()->make('MyBB\Core\Presenters\User', [$user]);
 
 			return $decoratedUser;
 		}
