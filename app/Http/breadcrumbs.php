@@ -56,6 +56,12 @@ Breadcrumbs::register('members', function ($breadcrumbs)
 	$breadcrumbs->push(trans('member.members'), route('members'));
 });
 
+Breadcrumbs::register('members.online', function ($breadcrumbs)
+{
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(trans('member.online'), route('members.online'));
+});
+
 Breadcrumbs::register('account', function ($breadcrumbs)
 {
 	$breadcrumbs->parent('forum.index');
@@ -148,16 +154,4 @@ Breadcrumbs::register('auth.login', function ($breadcrumbs)
 {
 	$breadcrumbs->parent('forum.index');
 	$breadcrumbs->push(trans('member.login'), url('auth/login'));
-});
-
-Breadcrumbs::register('search', function ($breadcrumbs)
-{
-	$breadcrumbs->parent('forum.index');
-	$breadcrumbs->push(trans('search.search'), route('search'));
-});
-
-Breadcrumbs::register('search.results', function ($breadcrumbs, $searchlog)
-{
-	$breadcrumbs->parent('search');
-	$breadcrumbs->push(trans('search.resultsforx', ['keyword' => $searchlog->keywords]), route('search.results', ['id' => $searchlog->id]));
 });
