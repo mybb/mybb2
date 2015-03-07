@@ -3,6 +3,7 @@
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Settings\Store;
 
 
 class MemberController extends Controller
@@ -35,9 +36,9 @@ class MemberController extends Controller
 		return view('member.list', compact('users'));
 	}
 
-	public function online()
+	public function online(Store $settings)
 	{
-		$users = $this->userRepository->online(15, 20); // TODO both should be settings
+		$users = $this->userRepository->online($settings->get('wio.minutes', 15));
 		return view('member.online', compact('users'));
 	}
 }

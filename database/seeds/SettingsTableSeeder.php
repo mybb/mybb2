@@ -12,13 +12,57 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 		DB::table('settings')->insert([
 			['name' => 'general.board_name'],
 			['name' => 'general.board_desc'],
-		                              ]);
+			['name' => 'wio.minutes'],
+/*			['name' => 'user.date_format'],
+			['name' => 'user.time_format'],
+			['name' => 'user.timezone'],
+			['name' => 'user.dst'],
+			['name' => 'user.follow_started_topics'],
+			['name' => 'user.follow_replied_topics'],
+			['name' => 'user.show_editor'],
+			['name' => 'user.topics_per_page'],
+			['name' => 'user.posts_per_page'],
+			['name' => 'user.style'],
+			['name' => 'user.language'],
+			['name' => 'user.notify_on_like'],
+			['name' => 'user.notify_on_quote'],
+			['name' => 'user.notify_on_reply'],
+			['name' => 'user.notify_on_new_post'],
+			['name' => 'user.notify_on_new_comment'],
+			['name' => 'user.notify_on_comment_like'],
+			['name' => 'user.notify_on_my_comment_like'],
+			['name' => 'user.notify_on_comment_reply'],
+			['name' => 'user.notify_on_my_comment_reply'],
+			['name' => 'user.notify_on_new_message'],
+			['name' => 'user.notify_on_reply_message'],
+			['name' => 'user.notify_on_group_request'],
+			['name' => 'user.notify_on_moderation_post'],
+			['name' => 'user.notify_on_report'],
+			['name' => 'user.notify_on_uername_change'],
+			['name' => 'user.notification_mails'],
+			['name' => 'user.showonline'],
+			['name' => 'user.receive_messages'],
+			['name' => 'user.block_blocked_messages'],
+			['name' => 'user.hide_blocked_posts'],
+			['name' => 'user.only_buddy_messages'],
+			['name' => 'user.receive_email'],
+			['name' => 'user.dob_privacy'],
+			['name' => 'user.dob_visibility'],*/
+		]);
 
 		DB::table('setting_values')->insert([
-			['setting_id' => DB::table('settings')->where('name', 'general.board_name')->pluck('id'),
-			'value' => 'MyBB 2.0 Test Install'],
-			['setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
-			 'value' => 'MyBB 2.0 Test Install'],
-		                                    ]);
+			[
+				'setting_id' => DB::table('settings')->where('name', 'general.board_name')->pluck('id'),
+				'value' => 'MyBB 2.0 Test Install'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
+				 'value' => 'MyBB 2.0 Test Install'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),
+				'value' => '15'
+			]
+		]);
 	}
 }
