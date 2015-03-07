@@ -185,7 +185,7 @@ class SearchController extends Controller
 		}
 
 
-		$results = Topic::whereIn('id', explode(',', $search->topics))->with(['lastPost', 'author'])->orderBy($this->sorts[$sortBy]['name'], $this->sorts[$sortBy][$sortDir])->paginate(10);
+		$results = Topic::whereIn('id', explode(',', $search->topics))->with(['lastPost', 'author', 'lastPost.author'])->orderBy($this->sorts[$sortBy]['name'], $this->sorts[$sortBy][$sortDir])->paginate(10);
 		return view('search.result', compact('results'));
 	}
 }
