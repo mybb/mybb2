@@ -12,5 +12,5 @@ return [
 	'startdate' => 'Start Date',
 	'replies' => 'Replies',
 	'latestpost' => 'Latest Post',
-
+	'author' => 'Author'
 ];

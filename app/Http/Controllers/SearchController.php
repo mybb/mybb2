@@ -21,6 +21,12 @@ class SearchController extends Controller
 	protected $searchRepository;
 
 	/**
+	 * @var SearchRequest $searchRequest
+	 * @access protected
+	 */
+	protected $searchRequest;
+
+	/**
 	 * Create a new controller instance.
 	 *
 	 * @param Guard $guard
@@ -49,14 +55,19 @@ class SearchController extends Controller
 			'asc' => 'asc'
 		],
 		'subject' => [
-			'name' => 'title',
+			'name' => 'topics.title',
 			'asc' => 'asc',
 			'desc' => 'desc'
 		],
 		'forum' => [
-			'name' => 'forum_id',
+			'name' => 'tppics.forum_id',
 			'asc' => 'asc',
 			'desc' => 'desc'
+		],
+		'replies' => [
+			'name' => 'topics.num_posts',
+			'asc' => 'desc',
+			'desc' => 'asc'
 		]
 	];
 
@@ -67,10 +78,45 @@ class SearchController extends Controller
 
 	public function makeSearch(SearchRequest $searchRequest)
 	{
-		$query = Topic::where('title', 'like', '%'.$searchRequest->keyword.'%');
+		$this->searchRequest = &$searchRequest;
+		if($searchRequest->result != 'posts')
+		{
+			$searchRequest->result = 'topics';
+		}
+
+		if($searchRequest->result == 'topics')
+		{
+			$query = Topic::with(['firstPost']);
+			$query->leftJoin('posts', 'topics.first_post_id', '=', 'posts.id');
+			$query->where(function($query)
+			{
+				$query->where('topics.title', 'like', '%'.$this->searchRequest->keyword.'%');
+				$query->orWhere('posts.content', 'like', '%'.$this->searchRequest->keyword.'%');
+			});
+		}
+		else
+		{
+			$query = Post::with(['topic']);
+			$query->leftJoin('topics', 'posts.topic_id', '=', 'topics.id');
+			$query->where('posts.content', 'like', '%'.$this->searchRequest->keyword.'%');
+		}
+
 		if($searchRequest->author)
 		{
-			// TODO
+			$query->leftJoin('users', 'posts.user_id', '=', 'users.id');
+			$query->where(function($query)
+			{
+				if($this->searchRequest->matchusername)
+				{
+					$query->where('users.name', $this->searchRequest->author);
+					$query->orWhere('posts.username', $this->searchRequest->author);
+				}
+				else
+				{
+					$query->where('users.name', 'like', '%'.$this->searchRequest->author.'%');
+					$query->orWhere('posts.username', 'like', '%'.$this->searchRequest->author.'%');
+				}
+			});
 		}
 
 		if($searchRequest->topic_replies_type)
@@ -78,14 +124,14 @@ class SearchController extends Controller
 			switch ($searchRequest->topic_replies_type)
 			{
 				case 'atmost':
-					$query->where('num_posts', '<=', $searchRequest->topic_replies);
+					$query->where('topics.num_posts', '<=', $searchRequest->topic_replies);
 					break;
 				case 'atleast':
-					$query->where('num_posts', '>=', $searchRequest->topic_replies);
+					$query->where('topics.num_posts', '>=', $searchRequest->topic_replies);
 					break;
 				case 'exactly':
 				default:
-					$query->where('num_posts', $searchRequest->topic_replies);
+					$query->where('topics.num_posts', $searchRequest->topic_replies);
 					break;
 			}
 		}
@@ -125,7 +171,7 @@ class SearchController extends Controller
 					break;
 			}
 			if ($postDate) {
-				$query->where('created_at', $postDateType, new \DateTime('today ' . $postDate));
+				$query->where($searchRequest->result.'.created_at', $postDateType, new \DateTime('today ' . $postDate));
 			}
 		}
 		
@@ -142,16 +188,28 @@ class SearchController extends Controller
 		$topics = [];
 		$posts = [];
 		$results = $query->get();
-		foreach($results as $result)
+
+		if($searchRequest->result == 'topics')
 		{
-			$topics[] = $result->id;
-			$posts[] = $result->firstPost->id;
+			foreach($results as $result)
+			{
+				$topics[] = $result->id;
+				$posts[] = $result->firstPost->id;
+			}
+		}
+		else
+		{
+			foreach($results as $result)
+			{
+				$topics[] = $result->topic->id;
+				$posts[] = $result->id;
+			}
 		}
 		$searchlog = $this->searchRepository->create([
 			'topics' => implode(',', $topics),
 			'posts' => implode(',', $posts),
 			'keywords' => $searchRequest->keyword,
-			'as_topic' => true // TODO: show results as posts
+			'as_topics' => ($searchRequest->result == 'topics')
 		]);
 		return redirect()->route('search.results', [
 			'id' => $searchlog->id,
@@ -162,7 +220,6 @@ class SearchController extends Controller
 
 	public function results(Request $request, $id = 0)
 	{
-		// TODO: show results as topics/posts
 		// TODO: sorts
 		$search = $this->searchRepository->find($id);
 		if(!$search)
@@ -170,22 +227,54 @@ class SearchController extends Controller
 			throw new NotFoundHttpException();
 		}
 
+
 		Breadcrumbs::setCurrentRoute('search.results', $search);
 
-		$sortBy = $request->get('orderBy');
-		$sortDir = $request->get('orderDir');
+		$orderBy = $request->get('orderBy');
+		$orderDir = $request->get('orderDir');
 
-		if(!isset($this->sorts[$sortBy]))
+		if(!isset($this->sorts[$orderBy]))
 		{
-			$sortBy = 'postdate';
+			$orderBy = 'postdate';
 		}
-		if($sortDir != 'asc')
+		if($orderDir != 'asc')
 		{
-			$sortDir = 'desc';
+			$orderDir = 'desc';
+		}
+		$urlDirs = [];
+		foreach($this->sorts as $sortName => $sort)
+		{
+			$urlDirs[$sortName] = $sort['asc'];
+		}
+		if($orderDir == $urlDirs[$orderBy])
+		{
+			if($urlDirs[$orderBy] == 'desc')
+			{
+				$urlDirs[$orderBy] = 'asc';
+			}
+			else
+			{
+				$urlDirs[$orderBy] = 'desc';
+			}
+		}
+
+		if($search->as_topics)
+		{
+			$results = Topic::whereIn('id', explode(',', $search->topics))->with(['lastPost', 'author', 'lastPost.author'])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
+		}
+		else
+		{
+			$results = Post::whereIn('id', explode(',', $search->posts))->with(['topic', 'author'])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
 		}
 
 
-		$results = Topic::whereIn('id', explode(',', $search->topics))->with(['lastPost', 'author', 'lastPost.author'])->orderBy($this->sorts[$sortBy]['name'], $this->sorts[$sortBy][$sortDir])->paginate(10);
-		return view('search.result', compact('results'));
+		if($search->as_topics)
+		{
+			return view('search.result_topics', compact('results', 'search', 'orderDir', 'orderBy', 'urlDirs'));
+		}
+		else
+		{
+			return view('search.result_posts', compact('results', 'search'));
+		}
 	}
 }
