@@ -48,7 +48,12 @@ class SearchRepository implements ISearchRepository
 	 */
 	public function find($id)
 	{
-		return $this->searchModel->find($id);
+		$userId = $this->guard->user()->id;
+		if($userId <= 0)
+		{
+			$userId = null;
+		}
+		return $this->searchModel->where('user_id', $userId)->find($id);
 	}
 
 	/**
@@ -68,6 +73,11 @@ class SearchRepository implements ISearchRepository
 			'topics' => '',
 			'posts' => ''
 		], $details);
+
+		if($details['user_id'] < 0)
+		{
+			$details['user_id'] = null;
+		}
 
 		$searchlog = $this->searchModel->create($details);
 		return $searchlog;
