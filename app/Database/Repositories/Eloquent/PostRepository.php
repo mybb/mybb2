@@ -15,6 +15,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Parser\MessageFormatter;
+use MyBB\Settings\Store;
 
 class PostRepository implements IPostRepository
 {
@@ -34,20 +35,26 @@ class PostRepository implements IPostRepository
 	 */
 	protected $formatter;
 
+	/** @var  Store $settings */
+	private $settings;
+
 	/**
 	 * @param Post             $postModel The model to use for posts.
 	 * @param Guard            $guard     Laravel guard instance, used to get user ID.
 	 * @param MessageFormatter $formatter Post formatter instance.
+	 * @param Store            $settings  The settings container
 	 */
 	public function __construct(
 		Post $postModel,
 		Guard $guard,
-		MessageFormatter $formatter
+		MessageFormatter $formatter,
+		Store $settings
 	) // TODO: Inject permissions container? So we can check post permissions before querying?
 	{
 		$this->postModel = $postModel;
 		$this->guard = $guard;
 		$this->formatter = $formatter;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -93,14 +100,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function allForTopic(Topic $topic, $withTrashed = false)
 	{
-		if(!$this->guard->check())
-		{
-			// Todo: default to board setting
-			$postsPerPage = 10;
-		} else
-		{
-			$postsPerPage = $this->guard->user()->settings->posts_per_page;
-		}
+		$postsPerPage = $this->settings->get('user.posts_per_page', 20);
 
 		if($withTrashed)
 		{

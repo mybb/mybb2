@@ -140,7 +140,8 @@ class User extends BasePresenter
 		if($lang == null)
 		{
 //			$lang = Lang::get('online.unknown', ['url' => '']);
-			$lang = 'online.'.$route->getName(); // Used for debugging
+			// Used for debugging, should be left here until we have added all routes
+			$lang = 'online.'.$route->getName();
 		}
 
 		return $lang;

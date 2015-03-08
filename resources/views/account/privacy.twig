@@ -29,13 +29,13 @@
 			<h2>{{ trans('general.forum') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">
-					<p class="form__checkbox"><label>{{ form_checkbox('showonline', 1, auth_user().settings.showonline) }} {{ trans('account.showonline') }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('receive_messages', 1, auth_user().settings.receive_messages) }} {{ trans('account.receive_messages') }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, auth_user().settings.block_blocked_messages) }} {{ trans('account.block_blocked_messages') }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, auth_user().settings.hide_blocked_posts) }} {{ trans('account.hide_blocked_posts') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('showonline', 1, setting('user.showonline', true)) }} {{ trans('account.showonline') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('receive_messages', 1, setting('user.receive_messages', true)) }} {{ trans('account.receive_messages') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, setting('user.block_blocked_messages', true)) }} {{ trans('account.block_blocked_messages') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, setting('user.hide_blocked_posts', true)) }} {{ trans('account.hide_blocked_posts') }}</label></p>
 					{# another raw value #}
-					<p class="form__checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, auth_user().settings.only_buddy_messages) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('receive_email', 1, auth_user().settings.receive_email) }} {{ trans('account.receive_email') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, setting('user.only_buddy_messages', false)) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('receive_email', 1, setting('user.receive_email', true)) }} {{ trans('account.receive_email') }}</label></p>
 				</div>
 			</div>
 		</div>
@@ -47,17 +47,17 @@
 					<p class="form__description">{{ trans('account.dob_privacy_desc') }}</p>
 					<div class="segmented-control">
 							<span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 0, auth_user().settings.dob_privacy == 0, {'id': 'no_dob'}) }}
+								{{ form_radio('dob_privacy', 0, setting('user.dob_privacy', 2) == 0, {'id': 'no_dob'}) }}
 								<label class="segmented-control__button" for="no_dob">
 									<span class="text">{{ trans('general.nothing') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 1, auth_user().settings.dob_privacy == 1, {'id': 'age_only'}) }}
+								{{ form_radio('dob_privacy', 1, setting('user.dob_privacy', 2) == 1, {'id': 'age_only'}) }}
 								<label class="segmented-control__button" for="age_only">
 									<span class="text">{{ trans('general.age') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 2, auth_user().settings.dob_privacy == 2, {'id': 'dob_age'}) }}
+								{{ form_radio('dob_privacy', 2, setting('user.dob_privacy', 2) == 2, {'id': 'dob_age'}) }}
 								<label class="segmented-control__button" for="dob_age">
 									<span class="text">{{ trans('general.dob') }}</span>
 								</label>
@@ -68,17 +68,17 @@
 					<h3>{{ trans('account.dob_visibility') }}</h3>
 					<div class="segmented-control">
 							<span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 0, auth_user().settings.dob_visibility == 0, {'id': 'dob_everyone'}) }}
+								{{ form_radio('dob_visibility', 0, setting('user.dob_visibility', 1) == 0, {'id': 'dob_everyone'}) }}
 								<label class="segmented-control__button" for="dob_everyone">
 									<span class="text">{{ trans('general.everyone') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 1, auth_user().settings.dob_visibility == 1, {'id': 'dob_members'}) }}
+								{{ form_radio('dob_visibility', 1, setting('user.dob_visibility', 1) == 1, {'id': 'dob_members'}) }}
 								<label class="segmented-control__button" for="dob_members">
 									<span class="text">{{ trans('member.members') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 2, auth_user().settings.dob_visibility == 2, {'id': 'dob_buddies'}) }}
+								{{ form_radio('dob_visibility', 2, setting('user.dob_visibility', 1) == 2, {'id': 'dob_buddies'}) }}
 								<label class="segmented-control__button" for="dob_buddies">
 									<span class="text">{{ trans('account.buddies') }}</span>
 								</label>

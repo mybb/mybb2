@@ -20,6 +20,7 @@ use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
+use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends Controller
@@ -73,7 +74,7 @@ class TopicController extends Controller
 		return view('topic.show', compact('topic', 'posts'));
 	}
 
-	public function showPost($slug = '', $id = 0, $postId = 0)
+	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)
 	{
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
@@ -83,18 +84,11 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if($this->guard->check() == false)
-		{
-			// Todo: default to board setting
-			$ppp = 10;
-		} else
-		{
-			$ppp = $this->guard->user()->settings->posts_per_page;
-		}
+		$postsPerPage = $settings->get('user.posts_per_page', 10);
 
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
-		if(ceil($numPost / $ppp) == 1)
+		if(ceil($numPost / $postsPerPage) == 1)
 		{
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
 		} else
@@ -102,13 +96,13 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
-				'page' => ceil($numPost / $ppp),
+				'page' => ceil($numPost / $postsPerPage),
 				'#post-' . $post->id
 			]);
 		}
 	}
 
-	public function last($slug = '', $id = 0)
+	public function last(Store $settings, $slug = '', $id = 0)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -117,16 +111,11 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		if($this->guard->check() == false)
-		{
-			// Todo: default to board setting
-			$ppp = 10;
-		} else
-		{
-			$ppp = $this->guard->user()->settings->posts_per_page;
-		}
+		$postsPerPage = $settings->get('user.posts_per_page', 10);
+
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
-		if(ceil($numPost / $ppp) == 1)
+
+		if(ceil($numPost / $postsPerPage) == 1)
 		{
 			return redirect()->route('topics.show',
 			                         ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
@@ -135,7 +124,7 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
-				'page' => ceil($numPost / $ppp),
+				'page' => ceil($numPost / $postsPerPage),
 				'#post-' . $topic->last_post_id
 			]);
 		}

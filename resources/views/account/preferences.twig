@@ -23,19 +23,19 @@
 						4: '28 Dec 2010',
 						5: 'December 28, 2010',
 						6: '28 December 2010'
-					}, auth_user().settings.date_format_raw) }}
+					}, setting('user.date_format', 0)) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.timeformat') }}</h3>
 					<div class="segmented-control">
 						{# we can't use form_label here as laravel escapes the value and we need html in it #}
 						<span class="segmented-control__block">
-							{{ form_radio('time_format', 12, auth_user().settings.time_format == 12, {'id': 'twelvehour'}) }}
+							{{ form_radio('time_format', 12, setting('user.time_format', 24) == 12, {'id': 'twelvehour'}) }}
 							<label class="segmented-control__button" for="twelvehour">
 								<span class="text">{{ trans('account.12-hour') }}</span>
 							</label>
 						</span><span class="segmented-control__block">
-							{{ form_radio('time_format', 24, auth_user().settings.time_format == 24, {'id': 'twentyfourhour'}) }}
+							{{ form_radio('time_format', 24, setting('user.time_format', 24) == 24, {'id': 'twentyfourhour'}) }}
 							<label class="segmented-control__button" for="twentyfourhour">
 								<span class="text">{{ trans('account.24-hour') }}</span>
 							</label>
@@ -77,7 +77,7 @@
 						'10': 'GMT +10:00 (11:40 AM)',
 						'11': 'GMT +11:00 (12:40 AM)',
 						'12': 'GMT +12:00 (1:40 AM)',
-					}, auth_user().settings.timezone) }}
+					}, setting('user.timezone', 0)) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.dst') }}</h3>
@@ -85,17 +85,17 @@
 					<div class="segmented-control">
 							{# as above: form_label not usable #}
 							<span class="segmented-control__block">
-								{{ form_radio('dst', 0, auth_user().settings.dst == 0, {'id': 'dst_on'}) }}
+								{{ form_radio('dst', 0, setting('user.dst', 2) == 0, {'id': 'dst_on'}) }}
 								<label class="segmented-control__button" for="dst_on">
 									<span class="text">{{ trans('general.enable') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dst', 1, auth_user().settings.dst == 1, {'id': 'dst_off'}) }}
+								{{ form_radio('dst', 1, setting('user.dst', 2) == 1, {'id': 'dst_off'}) }}
 								<label class="segmented-control__button" for="dst_off">
 									<span class="text">{{ trans('general.disable') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('dst', 2, auth_user().settings.dst == 2, {'id': 'dst_auto'}) }}
+								{{ form_radio('dst', 2, setting('user.dst', 2) == 2, {'id': 'dst_auto'}) }}
 								<label class="segmented-control__button" for="dst_auto">
 									<span class="text">{{ trans('general.auto') }}</span>
 								</label>
@@ -109,17 +109,17 @@
 			<div class="form__section__container">
 				<div class="form__row">
 					{# is there a better way than using raw here? #}
-					<p class="form__checkbox"><label>{{ form_checkbox('follow_started_topics', 1, auth_user().settings.follow_started_topics) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, auth_user().settings.follow_replied_topics) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, auth_user().settings.show_editor) }} {{ trans('account.show_editor') }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('follow_started_topics', 1, setting('user.follow_started_topics', true)) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, setting('user.follow_replied_topics', true)) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, setting('user.show_editor', true)) }} {{ trans('account.show_editor') }}</label></p>
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
-					{{ form_input('number', 'topics_per_page', auth_user().settings.topics_per_page, {'min': 5, 'max': 50, 'step': 5}) }}
+					{{ form_input('number', 'topics_per_page', setting('user.topics_per_page', 20), {'min': 5, 'max': 50, 'step': 5}) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
-					{{ form_input('number', 'posts_per_page', auth_user().settings.posts_per_page, {'min': 5, 'max': 50, 'step': 5}) }}
+					{{ form_input('number', 'posts_per_page', setting('user.posts_per_page', 10), {'min': 5, 'max': 50, 'step': 5}) }}
 				</div>
 			</div>
 		</div>
@@ -152,28 +152,28 @@
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="select-control">
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_like', 1, auth_user().settings.notify_on_like, {'id': 'notify_on_like'}) }}
+							{{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like'}) }}
 							<label for="notify_on_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_like') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_quote', 1, auth_user().settings.notify_on_quote, {'id': 'notify_on_quote'}) }}
+							{{ form_checkbox('notify_on_quote', 1, setting('user.notify_on_quote', true), {'id': 'notify_on_quote'}) }}
 							<label for="notify_on_quote" class="select-control__button">
 								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_quote') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_reply', 1, auth_user().settings.notify_on_reply, {'id': 'notify_on_reply'}) }}
+							{{ form_checkbox('notify_on_reply', 1,setting('user.notify_on_reply', true), {'id': 'notify_on_reply'}) }}
 							<label for="notify_on_reply" class="select-control__button">
 								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_post', 1, auth_user().settings.notify_on_new_post, {'id': 'notify_on_new_post'}) }}
+							{{ form_checkbox('notify_on_new_post', 1, setting('user.notify_on_new_post', true), {'id': 'notify_on_new_post'}) }}
 							<label for="notify_on_new_post" class="select-control__button">
 								<i class="fa fa-plus fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_post') }}</span>
@@ -186,35 +186,35 @@
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="select-control">
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_comment', 1, auth_user().settings.notify_on_new_comment, {'id': 'notify_on_new_comment'}) }}
+							{{ form_checkbox('notify_on_new_comment', 1, setting('user.notify_on_new_comment', true), {'id': 'notify_on_new_comment'}) }}
 							<label for="notify_on_new_comment" class="select-control__button">
 								<i class="fa fa-comment fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_comment') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_comment_like', 1, auth_user().settings.notify_on_comment_like, {'id': 'notify_on_comment_like'}) }}
+							{{ form_checkbox('notify_on_comment_like', 1, setting('user.notify_on_comment_like', true), {'id': 'notify_on_comment_like'}) }}
 							<label for="notify_on_comment_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_like') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_my_comment_like', 1, auth_user().settings.notify_on_my_comment_like, {'id': 'notify_on_my_comment_like'}) }}
+							{{ form_checkbox('notify_on_my_comment_like', 1, setting('user.notify_on_my_comment_like', true), {'id': 'notify_on_my_comment_like'}) }}
 							<label for="notify_on_my_comment_like" class="select-control__button">
 								<i class="fa fa-thumbs-up fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_like') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_comment_reply', 1, auth_user().settings.notify_on_comment_reply, {'id': 'notify_on_comment_reply'}) }}
+							{{ form_checkbox('notify_on_comment_reply', 1, setting('user.notify_on_comment_reply', true), {'id': 'notify_on_comment_reply'}) }}
 							<label for="notify_on_comment_reply" class="select-control__button">
 								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_comment_reply') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_my_comment_reply', 1, auth_user().settings.notify_on_my_comment_reply, {'id': 'notify_on_my_comment_reply'}) }}
+							{{ form_checkbox('notify_on_my_comment_reply', 1, setting('user.notify_on_my_comment_reply', true), {'id': 'notify_on_my_comment_reply'}) }}
 							<label for="notify_on_my_comment_reply" class="select-control__button">
 								<i class="fa fa-comments fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_my_comment_reply') }}</span>
@@ -227,14 +227,14 @@
 					<p class="form__description">{{ trans('account.notify_me') }}</p>
 					<div class="select-control">
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_message', 1, auth_user().settings.notify_on_new_message, {'id': 'notify_on_new_message'}) }}
+							{{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message'}) }}
 							<label for="notify_on_new_message" class="select-control__button">
 								<i class="fa fa-inbox fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_new_message') }}</span>
 							</label>
 						</p>
 						<p class="select-control__block">
-							{{ form_checkbox('notify_on_reply_message', 1, auth_user().settings.notify_on_reply_message, {'id': 'notify_on_reply_message'}) }}
+							{{ form_checkbox('notify_on_reply_message', 1, setting('user.notify_on_reply_message', true), {'id': 'notify_on_reply_message'}) }}
 							<label for="notify_on_reply_message" class="select-control__button">
 								<i class="fa fa-reply fa-fw"></i>
 								<span class="text">{{ trans('account.notify_on_reply_message') }}</span>
@@ -248,7 +248,7 @@
 					<div class="select-control">
 						{# TODO: if auth_user().isGroupLeader #}
 							<p class="select-control__block">
-								{{ form_checkbox('notify_on_group_request', 1, auth_user().settings.notify_on_group_request, {'id': 'notify_on_group_request'}) }}
+								{{ form_checkbox('notify_on_group_request', 1, setting('user.notify_on_group_request', true), {'id': 'notify_on_group_request'}) }}
 								<label for="notify_on_group_request" class="select-control__button">
 									<i class="fa fa-users fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_group_request') }}</span>
@@ -257,21 +257,21 @@
 						{# endif #}
 						{# TODO: if auth_user().isModerator #}
 							<p class="select-control__block">
-								{{ form_checkbox('notify_on_moderation_post', 1, auth_user().settings.notify_on_moderation_post, {'id': 'notify_on_moderation_post'}) }}
+								{{ form_checkbox('notify_on_moderation_post', 1, setting('user.notify_on_moderation_post', true), {'id': 'notify_on_moderation_post'}) }}
 								<label for="notify_on_moderation_post" class="select-control__button">
 									<i class="fa fa-thumb-tack fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_moderation_post') }}</span>
 								</label>
 							</p>
 							<p class="select-control__block">
-								{{ form_checkbox('notify_on_report', 1, auth_user().settings.notify_on_report, {'id': 'notify_on_report'}) }}
+								{{ form_checkbox('notify_on_report', 1, setting('user.notify_on_report', true), {'id': 'notify_on_report'}) }}
 								<label for="notify_on_report" class="select-control__button">
 									<i class="fa fa-flag fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_report') }}</span>
 								</label>
 							</p>
 							<p class="select-control__block">
-								{{ form_checkbox('notify_on_username_change', 1, auth_user().settings.notify_on_username_change, {'id': 'notify_on_username_change'}) }}
+								{{ form_checkbox('notify_on_username_change', 1, setting('user.notify_on_username_change', true), {'id': 'notify_on_username_change'}) }}
 								<label for="notify_on_username_change" class="select-control__button">
 									<i class="fa fa-pencil-square-o fa-fw"></i>
 									<span class="text">{{ trans('account.notify_on_username_change') }}</span>
@@ -286,17 +286,17 @@
 					<p class="form__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
 					<div class="segmented-control">
 							<span class="segmented-control__block">
-								{{ form_radio('notification_mails', 0, auth_user().settings.notification_mails == 0, {'id': 'no_emails'}) }}
+								{{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails'}) }}
 								<label class="segmented-control__button" for="no_emails">
 									<span class="text">{{ trans('general.none') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('notification_mails', 1, auth_user().settings.notification_mails == 1, {'id': 'daily_emails'}) }}
+								{{ form_radio('notification_mails', 1, setting('user.notification_mails', 0) == 1, {'id': 'daily_emails'}) }}
 								<label class="segmented-control__button" for="daily_emails">
 									<span class="text">{{ trans('general.daily') }}</span>
 								</label>
 							</span><span class="segmented-control__block">
-								{{ form_radio('notification_mails', 2, auth_user().settings.notification_mails == 2, {'id': 'weekly_emails'}) }}
+								{{ form_radio('notification_mails', 2, setting('user.notification_mails', 0) == 2, {'id': 'weekly_emails'}) }}
 								<label class="segmented-control__button" for="weekly_emails">
 									<span class="text">{{ trans('general.weekly') }}</span>
 								</label>

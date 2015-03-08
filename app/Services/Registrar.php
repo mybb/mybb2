@@ -41,8 +41,6 @@ class Registrar implements RegistrarContract
 			                     'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
 		                     ]);
 
-		DB::table('user_settings')->insert(['user_id' => $user->id]);
-
 		return $user;
 	}
 

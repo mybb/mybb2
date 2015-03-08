@@ -4,6 +4,7 @@ use Hash;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Services\ConfirmationManager;
+use MyBB\Settings\Store;
 use Session;
 
 class AccountController extends Controller
@@ -303,7 +304,7 @@ class AccountController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPreferences(Request $request)
+	public function postPreferences(Request $request, Store $settings)
 	{
 		$this->validate($request, [
 			'dst' => 'required|in:0,1,2',
@@ -333,14 +334,6 @@ class AccountController extends Controller
 		]);
 
 		$input = $request->except(['_token']);
-		if($input['style'] == 'default')
-		{
-			$input['style'] = null;
-		}
-		if($input['language'] == 'default')
-		{
-			$input['language'] = null;
-		}
 
 		$input['follow_started_topics'] = isset($input['follow_started_topics']);
 		$input['follow_replied_topics'] = isset($input['follow_replied_topics']);
@@ -361,7 +354,13 @@ class AccountController extends Controller
 		$input['notify_on_report'] = isset($input['notify_on_report']);
 		$input['notify_on_username_change'] = isset($input['notify_on_username_change']);
 
-		$this->guard->user()->settings->update($input);
+		// Prefix all settings with "user."
+		$modifiedSettings = [];
+		foreach($input as $key => $value)
+			$modifiedSettings["user.{$key}"] = $value;
+
+		$settings->set($modifiedSettings, null, true);
+		$settings->save();
 
 		return redirect()->route('account.preferences');
 	}
@@ -376,7 +375,7 @@ class AccountController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPrivacy(Request $request)
+	public function postPrivacy(Request $request, Store $settings)
 	{
 		$this->validate($request, [
 			'showonline' => 'boolean',
@@ -398,7 +397,13 @@ class AccountController extends Controller
 		$input['only_buddy_messages'] = isset($input['only_buddy_messages']);
 		$input['receive_email'] = isset($input['receive_email']);
 
-		$this->guard->user()->settings->update($input);
+		// Prefix all settings with "user."
+		$modifiedSettings = [];
+		foreach($input as $key => $value)
+			$modifiedSettings["user.{$key}"] = $value;
+
+		$settings->set($modifiedSettings, null, true);
+		$settings->save();
 
 		return redirect()->route('account.privacy');
 	}

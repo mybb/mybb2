@@ -17,6 +17,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Settings\Store;
 
 class TopicRepository implements ITopicRepository
 {
@@ -43,19 +44,24 @@ class TopicRepository implements ITopicRepository
 	 */
 	protected $stringUtils;
 
+	/** @var Store $settings */
+	private $settings;
+
 	/**
 	 * @param Topic           $topicModel     The model to use for threads.
 	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
 	 * @param IPostRepository $postRepository Used to manage posts for topics.
 	 * @param Str             $stringUtils    String utilities, used for creating slugs.
 	 * @param DatabaseManager $dbManager      Database manager, needed to do transactions.
+	 * @param Store           $settings       The settings container
 	 */
 	public function __construct(
 		Topic $topicModel,
 		Guard $guard,
 		IPostRepository $postRepository,
 		Str $stringUtils,
-		DatabaseManager $dbManager
+		DatabaseManager $dbManager,
+		Store $settings
 	) // TODO: Inject permissions container? So we can check thread permissions before querying?
 	{
 		$this->topicModel = $topicModel;
@@ -63,6 +69,7 @@ class TopicRepository implements ITopicRepository
 		$this->postRepository = $postRepository;
 		$this->stringUtils = $stringUtils;
 		$this->dbManager = $dbManager;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -155,14 +162,7 @@ class TopicRepository implements ITopicRepository
 				break;
 		}
 
-		if($this->guard->check() == false)
-		{
-			// Todo: default to board setting
-			$topicsPerPage = 10;
-		} else
-		{
-			$topicsPerPage = $this->guard->user()->settings->topics_per_page;
-		}
+		$topicsPerPage = $this->settings->get('user.topics_per_page', 20);
 
 		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
 		                        ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)

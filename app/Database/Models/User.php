@@ -65,9 +65,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->hasOne('MyBB\Core\Database\Models\Role', 'id', 'role_id');
 	}
-
-	public function settings()
-	{
-		return $this->hasOne('MyBB\Core\Database\Models\UserSettings');
-	}
 }

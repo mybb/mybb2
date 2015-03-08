@@ -1593,16 +1593,16 @@
         },
         {
             "name": "mybb/settings",
-            "version": "v2.0.0",
+            "version": "v2.0.4",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "6a956ee286cc637f76b9e835f23fd4a9a37f7abe"
+                "reference": "28ebd7d3c24bf7a64200253be5aa6e0594befd42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/6a956ee286cc637f76b9e835f23fd4a9a37f7abe",
-                "reference": "6a956ee286cc637f76b9e835f23fd4a9a37f7abe",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/28ebd7d3c24bf7a64200253be5aa6e0594befd42",
+                "reference": "28ebd7d3c24bf7a64200253be5aa6e0594befd42",
                 "shasum": ""
             },
             "require": {
@@ -1634,10 +1634,10 @@
             ],
             "description": "MyBB 2.0 settings package.",
             "support": {
-                "source": "https://github.com/mybb/Settings/tree/v2.0.0",
+                "source": "https://github.com/mybb/Settings/tree/v2.0.4",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-06 13:56:09"
+            "time": "2015-03-08 11:35:11"
         },
         {
             "name": "nesbot/carbon",

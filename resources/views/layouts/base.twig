@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
 		<title>
-			{% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %} {{ setting('general.board_name') }}
+			{% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %} {{ setting('general.board_name', 'MyBB Community Forums') }}
 		</title>
 		{% include "partials.headerinclude" %}
 		{% block head %}{% endblock %}
