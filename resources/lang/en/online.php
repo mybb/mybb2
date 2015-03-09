@@ -34,6 +34,7 @@ return [
 	'search' => [
 		'index' => '<a href=":url">Searchs</a>',
 		'post' => 'Views <a href=":url">Search Results</a>',
+		'results' => 'Views <a href=":url">Search Results</a>',
 	],
 	'topics' => [
 		'show' => 'Views Topic <a href=":url">:topic</a>',

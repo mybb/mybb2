@@ -164,7 +164,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_userename_change')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_uername_change')->pluck('id'),
 				'value' => '1'
 			],
 			[
@@ -192,7 +192,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'value' => '0'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.receive_mail')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.receive_email')->pluck('id'),
 				'value' => '1'
 			],
 			[

@@ -168,6 +168,10 @@ class User extends BasePresenter
 			case 'topics.create.post':
 				$data['forum'] = e($this->forumRepository->find($parameters['forumId'])->title);
 				break;
+			case 'search.post':
+			case 'search.results':
+				$data['url'] = route('search');
+				break;
 		}
 
 		// TODO: Here's a nice place for a plugin hook
