@@ -18,6 +18,6 @@ return [
 	'topics' => 'Topics',
 	'joinDate' => 'Join Date',
 	'lastVisit' => 'Last Visit',
-	'online' => 'Who is online?',
+	'online' => 'Online Now',
 	'noOnline' => 'Nobody is online'
 ];
