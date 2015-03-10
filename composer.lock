@@ -1188,16 +1188,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "efa1d394bb45b0984a863854c608c607b9c2a9a4"
+                "reference": "51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/efa1d394bb45b0984a863854c608c607b9c2a9a4",
-                "reference": "efa1d394bb45b0984a863854c608c607b9c2a9a4",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a",
+                "reference": "51cd7cd7ee0defbaafc6ec0d3620110a5d71e11a",
                 "shasum": ""
             },
             "require": {
@@ -1209,21 +1209,21 @@
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "~2.0.0",
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.0",
+                "phpunit/phpunit": "~4.1",
                 "predis/predis": "~1.0",
                 "tedivm/stash": "~0.12.0"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
-                "league/flysystem-aws-s3-v2": "Use S3 storage with AWS SDK v2",
-                "league/flysystem-aws-s3-v3": "Use S3 storage with AWS SDK v3",
+                "league/flysystem-aws-s3-v2": "Allows you to use S3 storage with AWS SDK v2",
+                "league/flysystem-aws-s3-v3": "Allows you to use S3 storage with AWS SDK v3",
                 "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
                 "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
                 "league/flysystem-copy": "Allows you to use Copy.com storage",
-                "league/flysystem-dropbox": "Use Dropbox storage",
+                "league/flysystem-dropbox": "Allows you to use Dropbox storage",
                 "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
                 "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
-                "league/flysystem-sftp": "Allows SFTP server storage via phpseclib",
+                "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
                 "league/flysystem-webdav": "Allows you to use WebDAV storage",
                 "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
                 "predis/predis": "Allows you to use Predis for caching"
@@ -1267,7 +1267,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-01-23 09:43:34"
+            "time": "2015-03-10 11:04:14"
         },
         {
             "name": "league/fractal",
@@ -1593,16 +1593,16 @@
         },
         {
             "name": "mybb/settings",
-            "version": "v2.0.4",
+            "version": "v2.0.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "28ebd7d3c24bf7a64200253be5aa6e0594befd42"
+                "reference": "35bbbe8cade99fc2e076168dff94087821cdddc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/28ebd7d3c24bf7a64200253be5aa6e0594befd42",
-                "reference": "28ebd7d3c24bf7a64200253be5aa6e0594befd42",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/35bbbe8cade99fc2e076168dff94087821cdddc7",
+                "reference": "35bbbe8cade99fc2e076168dff94087821cdddc7",
                 "shasum": ""
             },
             "require": {
@@ -1634,10 +1634,10 @@
             ],
             "description": "MyBB 2.0 settings package.",
             "support": {
-                "source": "https://github.com/mybb/Settings/tree/v2.0.4",
+                "source": "https://github.com/mybb/Settings/tree/v2.0.5",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-08 11:35:11"
+            "time": "2015-03-08 12:36:14"
         },
         {
             "name": "nesbot/carbon",
@@ -1845,12 +1845,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rcrowe/TwigBridge.git",
-                "reference": "88a563d57b1e910ab50996e4afb5df15c5536a46"
+                "reference": "25c3556d98a312fdba2133b6cf1bf5675a99245b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/88a563d57b1e910ab50996e4afb5df15c5536a46",
-                "reference": "88a563d57b1e910ab50996e4afb5df15c5536a46",
+                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/25c3556d98a312fdba2133b6cf1bf5675a99245b",
+                "reference": "25c3556d98a312fdba2133b6cf1bf5675a99245b",
                 "shasum": ""
             },
             "require": {
@@ -1901,7 +1901,7 @@
                 "laravel",
                 "twig"
             ],
-            "time": "2015-02-12 09:50:31"
+            "time": "2015-03-10 09:53:52"
         },
         {
             "name": "swiftmailer/swiftmailer",

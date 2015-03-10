@@ -2,7 +2,9 @@
 
 use Hash;
 use Illuminate\Auth\Guard;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 use Session;
@@ -294,9 +296,28 @@ class AccountController extends Controller
 		return view('account.buddies')->withActive('buddies');
 	}
 
-	public function getPreferences()
+	public function getPreferences(Store $settings, Filesystem $files, Translator $trans)
 	{
-		return view('account.preferences')->withActive('preferences');
+		// Build the language array used by the select box
+		$defaultLocale = $settings->get('user.language', 'en', false);
+
+		$languages['default'] = trans('account.usedefault')." - ".trans('general.language', [], '', $defaultLocale);
+
+		$dirs = $files->directories(base_path('resources/lang/'));
+		foreach($dirs as $dir)
+		{
+			$lang = substr($dir, strrpos($dir, "\\")+1);
+			if($trans->has('general.language', $lang))
+			{
+				$languages[$lang] = trans('general.language', [], '', $lang);
+			}
+		}
+
+		$selectedLanguage = $settings->get('user.language', 'en');
+		if($selectedLanguage == $defaultLocale)
+			$selectedLanguage = 'default';
+
+		return view('account.preferences', compact('languages', 'selectedLanguage'))->withActive('preferences');
 	}
 
 	/**
@@ -304,7 +325,7 @@ class AccountController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPreferences(Request $request, Store $settings)
+	public function postPreferences(Request $request, Store $settings, Translator $trans)
 	{
 		$this->validate($request, [
 			'dst' => 'required|in:0,1,2',
@@ -335,6 +356,7 @@ class AccountController extends Controller
 
 		$input = $request->except(['_token']);
 
+		// Make checkboxes booleans
 		$input['follow_started_topics'] = isset($input['follow_started_topics']);
 		$input['follow_replied_topics'] = isset($input['follow_replied_topics']);
 		$input['show_editor'] = isset($input['show_editor']);
@@ -353,6 +375,13 @@ class AccountController extends Controller
 		$input['notify_on_moderation_post'] = isset($input['notify_on_moderation_post']);
 		$input['notify_on_report'] = isset($input['notify_on_report']);
 		$input['notify_on_username_change'] = isset($input['notify_on_username_change']);
+
+		// Unset non existant language and default (don't override the board default)
+		if($input['language'] == 'default' || !$trans->has('general.language', $input['language']))
+		{
+			// TODO: euan needs to add a way to delete settings first
+			$input['language'] = null;
+		}
 
 		// Prefix all settings with "user."
 		$modifiedSettings = [];

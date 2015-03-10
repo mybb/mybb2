@@ -5,6 +5,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use MyBB\Auth\Contracts\Guard;
+use Settings;
 use View;
 
 abstract class Controller extends BaseController
@@ -19,6 +20,8 @@ abstract class Controller extends BaseController
 
 	public function __construct(Guard $guard, Request $request)
 	{
+		app()->setLocale(Settings::get('user.language', 'en'));
+
 		View::share('auth_user', $guard->user());
 
 		if($guard->check())

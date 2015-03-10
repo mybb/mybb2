@@ -136,10 +136,7 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('language', trans('account.language')) }}</h3>
-					{{ form_select('language', {
-						'default': trans('account.usedefault')~' - English (American)',
-						'en': 'English (American)',
-					}) }}
+					{{ form_select('language', languages, selectedLanguage) }}
 				</div>
 			</div>
 		</div>

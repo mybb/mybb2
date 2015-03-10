@@ -2,6 +2,8 @@
 
 return [
 
+	'language' => 'English',
+
 	'by' => 'by',
 	'in' => 'in',
 	'reset' => 'Reset',
