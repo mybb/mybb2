@@ -1,8 +1,8 @@
 {% extends "layouts.base" %}
 {% block title %}{{ forum.title }}{% endblock %}
 {% block head %}
-    <meta name="description" content="{{ forum.description }}" />
-    <link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
+	<meta name="description" content="{{ forum.description }}" />
+	<link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
 {% endblock %}
 {% block contents %}
 		<div class="page-content">
@@ -14,8 +14,8 @@
 			</header>
 
 			{% if forum.children.count > 0 %}
-                <section>
-					<h2 class="heading heading--major">{{ trans('forum.childforums') }}</h2>
+				<section class="container">
+					<h2 class="visuallyhidden">{{ trans('forum.childforums') }}</h2>
 					 <div class="forum-list thread-list">
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">
@@ -36,57 +36,59 @@
 							{{ trans('forum.notfound') }}
 						{% endfor %}
 					</div>
-                </section>
-            {% endif %}
-            
-			<h2>{{ trans('forum.topics') }}</h2>
-			<div class="page-controls">
-				<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
-				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
-				<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+				</section>
+			{% endif %}
+			
+			<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
+			<div class="clearfix">
+				{{ topics.render|raw }}
+				<div class="page-controls">
+					<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
+					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
+					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+				</div>
 			</div>
 			<section class="forum topic-list">
-	            {{ topics.render|raw }}
 				<div class="sort-topics clearfix">
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 						{{ trans('forum.topictitle') }}
-	                    {% if orderBy == 'title' %}
-	                        {% if orderDir == 'desc' %}
-	                            <i class="fa fa-caret-down"></i>
-	                        {% else %}
-	                            <i class="fa fa-caret-up"></i>
-	                        {% endif %}
-	                    {% endif %}
+						{% if orderBy == 'title' %}
+							{% if orderDir == 'desc' %}
+								<i class="fa fa-caret-down"></i>
+							{% else %}
+								<i class="fa fa-caret-up"></i>
+							{% endif %}
+						{% endif %}
 					</a>
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
 						{{ trans('forum.startdate') }}
-	                    {% if orderBy == 'startdate' %}
-	                        {% if orderDir == 'desc' %}
-	                            <i class="fa fa-caret-down"></i>
-	                        {% else %}
-	                            <i class="fa fa-caret-up"></i>
-	                        {% endif %}
-	                    {% endif %}
-	                </a>
+						{% if orderBy == 'startdate' %}
+							{% if orderDir == 'desc' %}
+								<i class="fa fa-caret-down"></i>
+							{% else %}
+								<i class="fa fa-caret-up"></i>
+							{% endif %}
+						{% endif %}
+					</a>
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
 						{{ trans('forum.replies') }}
-	                    {% if orderBy == 'replies' %}
-	                        {% if orderDir == 'desc' %}
-	                            <i class="fa fa-caret-down"></i>
-	                        {% else %}
-	                            <i class="fa fa-caret-up"></i>
-	                        {% endif %}
-	                    {% endif %}
-	                </a>
+						{% if orderBy == 'replies' %}
+							{% if orderDir == 'desc' %}
+								<i class="fa fa-caret-down"></i>
+							{% else %}
+								<i class="fa fa-caret-up"></i>
+							{% endif %}
+						{% endif %}
+					</a>
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
 						{{ trans('forum.latestpost') }}
-	                    {% if orderBy == 'lastpost' %}
-	                        {% if orderDir == 'desc' %}
-	                            <i class="fa fa-caret-down"></i>
-	                        {% else %}
-	                            <i class="fa fa-caret-up"></i>
-	                        {% endif %}
-	                    {% endif %}
+						{% if orderBy == 'lastpost' %}
+							{% if orderDir == 'desc' %}
+								<i class="fa fa-caret-down"></i>
+							{% else %}
+								<i class="fa fa-caret-up"></i>
+							{% endif %}
+						{% endif %}
 					</a>
 				</div>
 				<div class="topics-container">
@@ -116,12 +118,17 @@
 									<a href="{{ url_route('topics.last', [topic.slug, topic.id]) }}" class="post-date" title="{{ topic.lastPost.created_at }}">{{ topic.lastPost.created_at }}</a>
 								</p>
 							</div>
-	                        </div>
+						</div>
 					{% else %}
 						<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
 					{% endfor %}
 				</div>
-	            {{ topics.render|raw }}
 			</section>
+			<div class="clearfix">
+				{{ topics.render|raw }}
+				<div class="page-controls">
+					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+				</div>
+			</div>
 		</div>
 {% endblock %}

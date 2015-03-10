@@ -50,6 +50,46 @@
 			@include border-radius(4px);
 		}
 	}
+
+	.page-controls {
+		margin: -5px;
+	}
+
+	.pagination {
+		list-style: none;
+		margin: 10px 0 0 -5px;
+		padding: 0;
+		font-size: 0.9em;
+		
+		li {
+			display: inline-block;
+			margin: 0 5px;
+
+			a {
+				background: $background-1;
+				padding: 1px 8px;
+				display: inline-block;
+				@include border-radius(4px);
+
+				&:hover {
+					background: $secondary-color;
+					color: $invert-font-color;
+					text-decoration: none;
+				}
+			}
+
+			&.active {
+				padding: 1px 8px;
+				background: $primary-color;
+				color: $invert-font-color;
+				@include border-radius(4px);
+			}
+
+			&.disabled {
+				display: none;
+			}
+		}		
+	}
 }
 
 section {
@@ -159,7 +199,6 @@ section {
 
 	&.container {
 		border: 1px solid $border-1;
-		margin-bottom: 10px;
 		@include border-radius(4px);	
 	}
 
@@ -176,7 +215,7 @@ img.avatar {
 	color: $invert-font-color;
 	background: $primary-color;
 	border: 1px solid $primary-color;
-	padding: 3px 10px;
+	padding: 4px 10px;
 	margin: 5px;
 	font-size: 0.9em;
 	text-decoration: none;
@@ -285,6 +324,15 @@ nav.section-menu {
 			float: right;
 			width: 35%;
 			margin-top: 0;
+		}
+
+		.page-controls {
+			float: right;
+			margin: 0 -5px 8px 0;
+		}
+
+		.pagination {
+			float: left;
 		}
 	}
 

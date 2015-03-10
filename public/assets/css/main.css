@@ -2554,6 +2554,32 @@ footer {
       padding: 12px 15px;
       margin-bottom: 30px;
       border-radius: 4px; }
+  .main .page-controls {
+    margin: -5px; }
+  .main .pagination {
+    list-style: none;
+    margin: 10px 0 0 -5px;
+    padding: 0;
+    font-size: 0.9em; }
+    .main .pagination li {
+      display: inline-block;
+      margin: 0 5px; }
+      .main .pagination li a {
+        background: #fafafa;
+        padding: 1px 8px;
+        display: inline-block;
+        border-radius: 4px; }
+        .main .pagination li a:hover {
+          background: #ff7500;
+          color: #fff;
+          text-decoration: none; }
+      .main .pagination li.active {
+        padding: 1px 8px;
+        background: #007fd0;
+        color: #fff;
+        border-radius: 4px; }
+      .main .pagination li.disabled {
+        display: none; }
 
 section {
   margin-bottom: 30px; }
@@ -2623,7 +2649,6 @@ section {
       text-decoration: none; }
   section.container {
     border: 1px solid #dfdfdf;
-    margin-bottom: 10px;
     border-radius: 4px; }
   section:last-child {
     margin-bottom: 0; }
@@ -2635,7 +2660,7 @@ img.avatar {
   color: #fff;
   background: #007fd0;
   border: 1px solid #007fd0;
-  padding: 3px 10px;
+  padding: 4px 10px;
   margin: 5px;
   font-size: 0.9em;
   text-decoration: none;
@@ -2703,6 +2728,11 @@ nav.section-menu ul {
     float: right;
     width: 35%;
     margin-top: 0; }
+  .main .page-controls {
+    float: right;
+    margin: 0 -5px 8px 0; }
+  .main .pagination {
+    float: left; }
   nav.section-menu {
     float: left;
     width: 19%;
@@ -2922,6 +2952,20 @@ section.form {
 
 .clearfix {
   *zoom: 1; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
 
 /*
  *	Import legacy CSS (this is to be rewritten)
@@ -3479,6 +3523,12 @@ section ul.notifications time {
   display: inline-block;
   margin-right: 4px;
   font-weight: normal; }
+
+section.container .forum-list {
+  padding: 0 6px; }
+
+section.container .forum-list .forum:last-child {
+  border-bottom: 0; }
 
 .forum.topic-list .sort-topics {
   margin-bottom: 0;
@@ -4041,67 +4091,6 @@ dl.stats dd {
   margin: 0;
   display: table-cell; }
 
-.pagination {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  clear: both;
-  /*display: none;*/ }
-
-.pagination li {
-  display: inline-block;
-  margin: 0 5px; }
-
-.pagination a {
-  padding: 4px 7px;
-  border-radius: 4px; }
-
-.pagination li a:hover, .pagination span.next-page a:hover, .pagination span.previous-page a:hover {
-  background: #ff7500;
-  color: #fff;
-  text-decoration: none; }
-
-.pagination .next-page a, .pagination .previous-page a {
-  background: #007fd0;
-  color: #fff;
-  padding: 4px 10px; }
-
-.pagination .next-page {
-  width: 50%;
-  float: right;
-  margin: 0 0 20px 0; }
-
-.pagination .next-page i {
-  margin-left: 5px; }
-
-.pagination .previous-page {
-  width: 50%;
-  float: left;
-  margin: 0 0 20px 0; }
-
-.pagination .previous-page i {
-  margin-right: 5px; }
-
-.pagination .pages {
-  clear: both;
-  margin: 0;
-  padding: 0; }
-
-.pagination .current-page a {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #000; }
-
-.pagination .ellipsis a {
-  color: #999; }
-
-.pagination .ellipsis i {
-  font-size: 14px; }
-
-.pagination .ellipsis .text {
-  display: none; }
-
 section.form .form-row.secondary-buttons {
   padding: 6px 4px; }
 
@@ -4110,9 +4099,6 @@ section.form .form-row.secondary-buttons {
   margin-top: 5px;
   font-size: 0.8em;
   float: right; }
-
-.page-controls {
-  margin: -5px; }
 
 section.form .buttons {
   margin: -5px; }
@@ -4359,9 +4345,6 @@ section.form .change-avatar .buttons {
     width: 49%;
     margin: 0 1% 12px 0;
     box-sizing: border-box; }
-  .page-controls {
-    float: right;
-    margin: -46px -5px 0 0; }
   .pagination .next-page, .pagination .previous-page {
     margin: 0;
     width: 20%; }

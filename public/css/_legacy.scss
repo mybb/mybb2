@@ -213,6 +213,14 @@ section ul.notifications time {
 	font-weight: normal;
 }
 
+section.container .forum-list {
+	padding: 0 6px;
+}
+
+section.container .forum-list .forum:last-child {
+	border-bottom: 0;
+}
+
 .forum.topic-list .sort-topics {
 	margin-bottom: 0;
 	background: #007fd0;
@@ -944,86 +952,6 @@ dl.stats dd {
    display: table-cell;
 }
 
-.pagination {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	clear: both;
-	/*display: none;*/
-}
-
-.pagination li {
-	display: inline-block;
-	margin: 0 5px;
-}
-
-.pagination a {
-	padding: 4px 7px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-}
-
-.pagination li a:hover,
-.pagination span.next-page a:hover,
-.pagination span.previous-page a:hover {
-	background: #ff7500;
-	color: #fff;
-	text-decoration: none;
-}
-
-.pagination .next-page a,
-.pagination .previous-page a {
-	background: #007fd0;
-	color: #fff;
-	padding: 4px 10px;
-}
-
-.pagination .next-page {
-	width: 50%;
-	float: right;
-	margin: 0 0 20px 0;
-}
-
-.pagination .next-page i {
-	margin-left: 5px;
-}
-
-.pagination .previous-page {
-	width: 50%;
-	float: left;
-	margin: 0 0 20px 0;
-}
-
-.pagination .previous-page i {
-	margin-right: 5px;
-}
-
-.pagination .pages {
-	clear: both;
-	margin: 0;
-	padding: 0;
-}
-
-.pagination .current-page a {
-	font-size: 1.1em;
-	font-weight: bold;
-	color: #000;
-}
-
-.pagination .ellipsis a {
-	color: #999;
-}
-
-.pagination .ellipsis i {
-	font-size: 14px;
-}
-
-.pagination .ellipsis .text {
-	display: none;
-}
-
 section.form .form-row.secondary-buttons {
 	padding: 6px 4px;
 }
@@ -1033,10 +961,6 @@ section.form .form-row.secondary-buttons {
 	margin-top: 5px;
 	font-size: 0.8em;
 	float: right;
-}
-
-.page-controls {
-	margin: -5px;
 }
 
 section.form .buttons {
@@ -1416,11 +1340,6 @@ section.form .change-avatar .buttons {
 		width: 49%;
 		margin: 0 1% 12px 0;
 		box-sizing: border-box;
-	}
-
-	.page-controls {
-		float: right;
-		margin: -46px -5px 0 0;
 	}
 
 	.pagination .next-page,
