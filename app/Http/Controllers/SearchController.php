@@ -36,6 +36,8 @@ class SearchController extends Controller
 	 *
 	 * @param Guard $guard
 	 * @param ISearchRepository $searchRepository
+	 * @param IForumRepository $forumRepository
+	 * @param Request $request
 	 */
 	public function __construct(
 		Guard $guard,
