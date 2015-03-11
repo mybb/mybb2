@@ -2644,11 +2644,11 @@ section {
         text-decoration: none;
         background: #ff7500;
         color: #fff; }
-    section .page-tabs li.page-tabs__active a, section .page-tabs li.page-tabs__active a:hover {
-      color: #fff;
-      font-weight: bold;
-      background: #007fd0;
-      text-decoration: none; }
+      section .page-tabs li.page-tabs__active a, section .page-tabs li.page-tabs__active a:hover {
+        color: #fff;
+        font-weight: bold;
+        background: #007fd0;
+        text-decoration: none; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
@@ -2956,6 +2956,56 @@ section.form {
     width: 74%;
     -ms-box-sizing: border-box;
     box-sizing: border-box; } }
+
+.user-list {
+  padding: 12px 12px 0 12px; }
+  .user-list .user-list__user {
+    border: 1px solid #dfdfdf;
+    padding: 8px;
+    margin: 0 0 12px 0;
+    border-radius: 4px; }
+    .user-list .user-list__user .avatar-profile-link {
+      float: left;
+      width: 80px;
+      height: 80px;
+      margin: 0 12px 0 0; }
+      .user-list .user-list__user .avatar-profile-link img.avatar {
+        width: 80px;
+        height: 80px; }
+    .user-list .user-list__user h3 {
+      margin: 0;
+      font-size: 1em; }
+    .user-list .user-list__user h4 {
+      font-size: 0.8em;
+      font-weight: normal;
+      margin: -4px 0 0 0; }
+    .user-list .user-list__user .team-badge {
+      float: right;
+      position: relative;
+      margin: -48px 0 0 0; }
+
+.team-badge {
+  padding: 3px 8px;
+  border: 1px solid #dfdfdf;
+  color: #666;
+  display: inline;
+  line-height: 1.6;
+  font-size: 0.7em;
+  border-radius: 4px; }
+  .team-badge i {
+    margin-right: 5px; }
+
+@media only screen and (min-width: 768px) {
+  .user-list .user-list__user {
+    float: left;
+    width: 49.5%;
+    margin: 0 0 12px 0;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box; }
+    .user-list .user-list__user:nth-child(odd) {
+      margin-right: 0.5%; }
+    .user-list .user-list__user:nth-child(even) {
+      margin-left: 0.5%; } }
 
 /*
  *	Helper classes
@@ -4048,46 +4098,6 @@ html.js .inline-moderation.floating i {
 .sort-footer .button {
   padding: 0 8px; }
 
-.user-list .user {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 8px;
-  margin: 0 0 12px 0; }
-
-.user-list .user .avatar-profile-link {
-  float: left;
-  width: 80px;
-  height: 80px;
-  margin: 0 12px 0 0; }
-
-.user-list .user .avatar-profile-link img.avatar {
-  width: 80px;
-  height: 80px; }
-
-.user-list .user h3.username {
-  margin: 0;
-  font-size: 1em; }
-
-.user-list .user h4.usertitle {
-  font-size: 0.8em;
-  font-weight: normal;
-  margin: -4px 0 0 0; }
-
-.user-list .user .team-badge {
-  float: right;
-  position: relative;
-  margin: -48px 0 0 0;
-  font-size: 0.7em;
-  padding: 3px 8px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  color: #666;
-  display: inline;
-  line-height: 1.6; }
-
-.user-list .user .team-badge i {
-  margin-right: 5px; }
-
 dl.stats {
   line-height: 1.6;
   margin: 0;
@@ -4356,14 +4366,4 @@ section.form .change-avatar .buttons {
     margin: 0 0 0 10px;
     display: inline; }
   .topic .post .post-meta .team-badge i {
-    margin-right: 5px; }
-  .user-list .user {
-    float: left;
-    width: 49%;
-    margin: 0 1% 12px 0;
-    box-sizing: border-box; }
-  .pagination .next-page, .pagination .previous-page {
-    margin: 0;
-    width: 20%; }
-  .pagination .pages {
-    clear: none; } }
+    margin-right: 5px; } }

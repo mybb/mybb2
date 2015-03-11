@@ -187,14 +187,15 @@ section {
 				background: $secondary-color;
 				color: $invert-font-color;
 			}
-		}
+			
+			&.page-tabs__active {
 
-		li.page-tabs__active {
-			a, a:hover {
-				color: $invert-font-color;
-				font-weight: bold;
-				background: $primary-color;
-				text-decoration: none;
+				a, a:hover {
+					color: $invert-font-color;
+					font-weight: bold;
+					background: $primary-color;
+					text-decoration: none;
+				}
 			}
 		}
 	}
