@@ -17,6 +17,7 @@ class Kernel extends HttpKernel
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken',
+	    'MyBB\Settings\Middleware\SaveSettingsOnTerminate',
 	];
 
 	/**
