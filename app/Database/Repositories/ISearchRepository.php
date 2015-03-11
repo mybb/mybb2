@@ -21,4 +21,13 @@ interface ISearchRepository
 	 */
 	public function find($id);
 
+	/**
+	 * Create a new searchlog
+	 *
+	 * @param array $details Details about the searchlog.
+	 *
+	 * @return mixed
+	 */
+	public function create(array $details = []);
+
 }
