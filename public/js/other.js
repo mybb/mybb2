@@ -13,7 +13,7 @@ $(function () {
 
 	else
 	{
-		$('span.icons i, a, .caption').powerTip({ placement: 's', smartPlacement: true });
+		$('span.icons i, a, .caption, time').powerTip({ placement: 's', smartPlacement: true });
 	}
 
 	$('.user-navigation__links, #main-menu').dropit({ submenuEl: 'div.dropdown' });
