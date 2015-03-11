@@ -411,7 +411,7 @@ class AccountController extends Controller
 
 		$timeformat = 'H:i';
 		if($input['time_format'] == 12)
-			$timeformat = 'h:i a';
+			$timeformat = 'h:i A';
 		$input['time_format'] = $timeformat;
 
 		if($timeformat == trans('general.timeformat'))

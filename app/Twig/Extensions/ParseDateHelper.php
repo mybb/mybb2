@@ -71,18 +71,23 @@ class ParseDateHelper
 		else
 			$showTime = $this->humanDate($date);
 		$attributeTime = $this->formatDate($date, true, $attributeFormat);
+		$dateTimeFormat = $this->formatDate($date, true, 'c');
 
-		return "<time datetime=\"{$attributeTime}\">{$showTime}</time>";
+		return "<time datetime=\"{$dateTimeFormat}\" title=\"{$attributeTime}\">{$showTime}</time>";
 	}
 
 	private function getDateObject($date)
 	{
-		// Create the correct date class - we support timestamps and DateTime instances
+		// We've already a valid date object. Don't set the timezone, it may get messy otherwise
+		if($date instanceof TransDate)
+			return $date;
+
+		// If it's a valid date format or a DateTime object we can simply call the constructor
 		if(is_int($date) || @strtotime($date) !== false || $date == null || $date instanceof \DateTime)
 		{
 			$date = new TransDate($date);
 		}
-		elseif(!($date instanceof TransDate))
+		else
 		{
 			throw new \Exception('$date needs to be either an integer (timestamp) or an instance of either DateTime or Date');
 		}
