@@ -102,14 +102,14 @@ class PostRepository implements IPostRepository
 	{
 		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
+		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
+
 		if($withTrashed)
 		{
-			return $this->postModel->withTrashed()->with(['author'])->where('topic_id', '=', $topic->id)
-			                       ->paginate($postsPerPage);
-		} else
-		{
-			return $this->postModel->with(['author'])->where('topic_id', '=', $topic->id)->paginate($postsPerPage);
+			$baseQuery = $baseQuery->withTrashed();
 		}
+
+		return $$baseQuery->paginate($postsPerPage);
 	}
 
 	/**
@@ -229,12 +229,14 @@ class PostRepository implements IPostRepository
 
 	public function deletePostsForTopic(Topic $topic, $force = false)
 	{
+		$baseQuery = $this->postModel->where('topic_id', '=', $topic->id);
+
 		if($force)
 		{
-			return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
+			return $baseQuery->forceDelete();
 		} else
 		{
-			return $this->postModel->where('topic_id', '=', $topic->id)->delete();
+			return $baseQuery->delete();
 		}
 	}
 
