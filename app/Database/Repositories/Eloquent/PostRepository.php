@@ -109,7 +109,7 @@ class PostRepository implements IPostRepository
 			$baseQuery = $baseQuery->withTrashed();
 		}
 
-		return $$baseQuery->paginate($postsPerPage);
+		return $baseQuery->paginate($postsPerPage);
 	}
 
 	/**

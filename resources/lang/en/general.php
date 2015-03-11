@@ -3,9 +3,14 @@
 return [
 
 	'language' => 'English',
+	'dateformat' => 'M d, Y',
+	'timeformat' => 'h:i A',
+	'timezone' => 'Europe/London',
 
 	'by' => 'by',
 	'in' => 'in',
+	'at' => 'at',
+	'now' => 'Now',
 	'reset' => 'Reset',
 	'enable' => 'Enable',
 	'disable' => 'Disable',

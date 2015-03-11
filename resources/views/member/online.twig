@@ -24,7 +24,7 @@
 							</h3>
 						</div>
 						<div class="replies-column">
-							{{ user.last_visit }}
+							{{ human_date(user.last_visit) }}
 						</div>
 						<div class="latest-column">
 							{{ user.last_page|raw }}

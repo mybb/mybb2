@@ -64,18 +64,6 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'value' => '15'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.date_format')->pluck('id'),
-				'value' => '3'
-			],
-			[
-				'setting_id' => DB::table('settings')->where('name', 'user.time_format')->pluck('id'),
-				'value' => '24'
-			],
-			[
-				'setting_id' => DB::table('settings')->where('name', 'user.timezone')->pluck('id'),
-				'value' => '0'
-			],
-			[
 				'setting_id' => DB::table('settings')->where('name', 'user.dst')->pluck('id'),
 				'value' => '2'
 			],

@@ -136,6 +136,7 @@ return [
 		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+		'Jenssegers\Date\DateServiceProvider',
 		/*
 		 * Application Service Providers...
 		 */
@@ -198,6 +199,7 @@ return [
 		'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
 		'Node' => 'Kalnoy\Nestedset\Node',
 		'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+		'Date' => 'Jenssegers\Date\Date',
 
 	    'Settings' => 'MyBB\Settings\Facade',
 

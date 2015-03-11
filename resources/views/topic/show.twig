@@ -24,12 +24,12 @@
 					<div class="post-meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
 						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
-						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post-date" title="{{ post.created_at }}">{{ post.created_at }}</a>
+						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post-date" title="{{ format_date(post.created_at) }}">{{ human_date(post.created_at) }}</a>
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="status-notice"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
 						{% if post.updated_at != post.created_at %}
-							<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ post.updated_at }}"><i class="fa fa-pencil"></i></a>
+							<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
 						<input type="checkbox" class="inline-mod" />

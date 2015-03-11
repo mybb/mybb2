@@ -16,26 +16,26 @@
 					<h3>{{ form_label('date_format', trans('account.dateformat')) }}</h3>
 					{# TODO: Make the display dynamic #}
 					{{ form_select('date_format', {
-						0: trans('account.usedefault')~' (Dec 28, 2010)',
-						1: '12-28-2010',
-						2: '28-12-2010',
-						3: 'Dec 28, 2010',
-						4: '28 Dec 2010',
-						5: 'December 28, 2010',
-						6: '28 December 2010'
-					}, setting('user.date_format', 0)) }}
+						'default': trans('account.uselangdefault')~' ('~format_date(null, false, 'default')~')',
+						'm-d-Y': format_date(null, false, 'm-d-Y'),
+						'd-m-Y': format_date(null, false, 'd-m-Y'),
+						'M d, Y': format_date(null, false, 'M d, Y'),
+						'd M Y': format_date(null, false, 'd M Y'),
+						'F d, Y': format_date(null, false, 'F d, Y'),
+						'd F Y': format_date(null, false, 'd F Y')
+					}, setting('user.date_format', 'default')) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.timeformat') }}</h3>
 					<div class="segmented-control">
 						{# we can't use form_label here as laravel escapes the value and we need html in it #}
 						<span class="segmented-control__block">
-							{{ form_radio('time_format', 12, setting('user.time_format', 24) == 12, {'id': 'twelvehour'}) }}
+							{{ form_radio('time_format', 12, timeformat == 12, {'id': 'twelvehour'}) }}
 							<label class="segmented-control__button" for="twelvehour">
 								<span class="text">{{ trans('account.12-hour') }}</span>
 							</label>
 						</span><span class="segmented-control__block">
-							{{ form_radio('time_format', 24, setting('user.time_format', 24) == 24, {'id': 'twentyfourhour'}) }}
+							{{ form_radio('time_format', 24, timeformat == 24, {'id': 'twentyfourhour'}) }}
 							<label class="segmented-control__button" for="twentyfourhour">
 								<span class="text">{{ trans('account.24-hour') }}</span>
 							</label>
@@ -45,39 +45,7 @@
 				<div class="form__row">
 					<h3>{{ form_label('timezone', trans('account.timezone')) }}</h3>
 					{# TODO: translatable, time should be dynamic and we should probably use real timezones #}
-					{{ form_select('timezone', {
-						'-12': 'GMT -12:00 (1:40 PM)',
-						'-11': 'GMT -11:00 (2:40 PM)',
-						'-10': 'GMT -10:00 (3:40 PM)',
-						'-9': 'GMT -9:00 (4:40 PM)',
-						'-8': 'GMT -8:00 (5:40 PM)',
-						'-7': 'GMT -7:00 (6:40 PM)',
-						'-6': 'GMT -6:00 (7:40 PM)',
-						'-5': 'GMT -5:00 (8:40 PM)',
-						'-4.5': 'GMT -4:30 (9:10 PM)',
-						'-4': 'GMT -4:00 (9:40 PM)',
-						'-3.5': 'GMT -3:30 (10:10 PM)',
-						'-3': 'GMT -3:00 (10:40 PM)',
-						'-2': 'GMT -2:00 (11:40 PM)',
-						'-1': 'GMT -1:00 (12:40 AM)',
-						'0': 'GMT  (1:40 AM)',
-						'1': 'GMT +1:00 (2:40 AM)',
-						'2': 'GMT +2:00 (3:40 AM)',
-						'3': 'GMT +3:00 (4:40 AM)',
-						'3.5': 'GMT +3:30 (5:10 AM)',
-						'4': 'GMT +4:00 (5:40 AM)',
-						'4.5': 'GMT +4:30 (6:10 AM)',
-						'5': 'GMT +5:00 (6:40 AM)',
-						'5.5': 'GMT +5:30 (7:10 AM)',
-						'6': 'GMT +6:00 (7:40 AM)',
-						'7': 'GMT +7:00 (8:40 AM)',
-						'8': 'GMT +8:00 (9:40 AM)',
-						'9': 'GMT +9:00 (10:40 AM)',
-						'9.5': 'GMT +9:30 (11:10 AM)',
-						'10': 'GMT +10:00 (11:40 AM)',
-						'11': 'GMT +11:00 (12:40 AM)',
-						'12': 'GMT +12:00 (1:40 AM)',
-					}, setting('user.timezone', 0)) }}
+					{{ form_select('timezone', selectTimezones, timezone) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.dst') }}</h3>

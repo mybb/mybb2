@@ -13,6 +13,7 @@ return [
 	'drafts' => 'Drafts & Files',
 	'messages' => 'Messages',
 	'usedefault' => 'Use Forum Default',
+	'uselangdefault' => 'Use Language Default',
 
 	'avatar' => 'Avatar',
 	'your_avatar' => 'Your Avatar',

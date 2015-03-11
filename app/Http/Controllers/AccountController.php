@@ -317,7 +317,21 @@ class AccountController extends Controller
 		if($selectedLanguage == $defaultLocale)
 			$selectedLanguage = 'default';
 
-		return view('account.preferences', compact('languages', 'selectedLanguage'))->withActive('preferences');
+		// Build the timezone array
+		$timezones = \DateTimeZone::listIdentifiers();
+		$selectTimezones = [];
+		foreach($timezones as $tz)
+			$selectTimezones[$tz] = $tz;
+
+		$timezone = $settings->get('user.timezone', 'default');
+		if($timezone == 'default')
+			$timezone = trans('general.timezone');
+
+		$timeformat = 24;
+		if($settings->get('user.time_format', trans('general.timeformat')) == 'h:i A')
+			$timeformat = 12;
+
+		return view('account.preferences', compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone', 'timeformat'))->withActive('preferences');
 	}
 
 	/**
@@ -381,6 +395,28 @@ class AccountController extends Controller
 		{
 			// TODO: euan needs to add a way to delete settings first
 			$input['language'] = $settings->get('user.language', 'en', false);
+		}
+
+		// TODO: delete default date format and timezone!
+		if($input['date_format'] == 'default')
+		{
+
+		}
+
+		$timezones = \DateTimeZone::listIdentifiers();
+		if($input['timezone'] == trans('general.timezone') || !in_array($input['timezone'], $timezones))
+		{
+
+		}
+
+		$timeformat = 'H:i';
+		if($input['time_format'] == 12)
+			$timeformat = 'h:i a';
+		$input['time_format'] = $timeformat;
+
+		if($timeformat == trans('general.timeformat'))
+		{
+
 		}
 
 		// Prefix all settings with "user."
