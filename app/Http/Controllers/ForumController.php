@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ForumController extends Controller
@@ -33,7 +34,7 @@ class ForumController extends Controller
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		Guard $guard,
-		\MyBB\Settings\Store $settings,
+		Store $settings,
 		Request $request
 	) {
 		parent::__construct($guard, $request);

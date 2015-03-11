@@ -100,7 +100,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function allForTopic(Topic $topic, $withTrashed = false)
 	{
-		$postsPerPage = $this->settings->get('user.posts_per_page', 20);
+		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
 		if($withTrashed)
 		{

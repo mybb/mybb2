@@ -380,7 +380,7 @@ class AccountController extends Controller
 		if($input['language'] == 'default' || !$trans->has('general.language', $input['language']))
 		{
 			// TODO: euan needs to add a way to delete settings first
-			$input['language'] = null;
+			$input['language'] = $settings->get('user.language', 'en', false);
 		}
 
 		// Prefix all settings with "user."
