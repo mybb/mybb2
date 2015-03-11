@@ -98,76 +98,16 @@
 					</div>
 				</div>
 			</div>
-			{# <div class="form__section clearfix">
+			<div class="form__section clearfix">
 				<h2>Filters</h2>
 				<div class="form__section__container">
 					<div class="form__row">
 						<h3><label for="forum_search">Forum</label></h3>
-						<select name="forums" id="forum_search" multiple="multiple">
-							<option value="0" selected="selected">Find threads in all forums</option>
-							<option value="1">Announcements</option>
-							<option value="80">MyBB 2.0 Series</option>
-							<option value="81">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 2.0 General Support</option>
-							<option value="87">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installation Help</option>
-							<option value="7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB Suggestions and Feedback</option>
-							<option value="34">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Included Suggestions / Feedback</option>
-							<option value="35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dismissed Suggestions</option>
-							<option value="95">Merge System for MyBB 2.0</option>
-							<option value="96">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB Merge Support</option>
-							<option value="8">MyBB Resources</option>
-							<option value="73">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Plugins &amp; Code Modifications</option>
-							<option value="102">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Releases</option>
-							<option value="72">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion &amp; Support</option>
-							<option value="65">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requests</option>
-							<option value="68">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Development</option>
-							<option value="103">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Themes and Templates</option>
-							<option value="104">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Releases</option>
-							<option value="10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Discussion &amp; Support</option>
-							<option value="105">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requests &amp; Development</option>
-							<option value="117">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyCodes</option>
-							<option value="21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internationalization</option>
-							<option value="22">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dutch (Nederlands)</option>
-							<option value="24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Spanish (Espanol)</option>
-							<option value="38">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User Submitted Tutorials</option>
-							<option value="12" > General Discussion</option>
-							<option value="11">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Chit-Chat</option>
-							<option value="91">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Requests/Services/Jobs</option>
-							<option value="17">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Showcase</option>
-							<option value="19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBBoard.Net</option>
-							<option value="13">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testing &amp; Trashing</option>
-							<option value="106">Community Archive</option>
-							<option value="74">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Archived Bug Reports</option>
-							<option value="82">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.x Bug Reports</option>
-							<option value="88">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed Bugs</option>
-							<option value="84">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duplicate or Bogus Bugs</option>
-							<option value="49">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.2.2</option>
-							<option value="51">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.2.3</option>
-							<option value="55">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.2.7</option>
-							<option value="83">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.0 Beta</option>
-							<option value="90">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.0</option>
-							<option value="93">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.1</option>
-							<option value="100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.2</option>
-							<option value="110">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.4</option>
-							<option value="116">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.4.6</option>
-							<option value="97">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB Merge for 1.4 - Bug Reports</option>
-							<option value="98">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed Bugs</option>
-							<option value="99">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duplicate / Bogus Reports</option>
-							<option value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Old Announcements</option>
-							<option value="31">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Announcements Discussion</option>
-							<option value="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.2 Series</option>
-							<option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB 1.2 General Support</option>
-							<option value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Installation Help</option>
-							<option value="75">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Merge System for MyBB 1.2</option>
-							<option value="76">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General Support</option>
-							<option value="77">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bug Reports</option>
-							<option value="78">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed Bugs</option>
-							<option value="79">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duplicate / Bogus Reports</option>
-							<option value="111">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MyBB Merge System for 1.4 (B4)</option>
-							<option value="112">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;General Support</option>
-							<option value="113">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bug Reports</option>
-							<option value="114">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fixed Bugs</option>
-							<option value="115">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Duplicate/Bogus</option>
-						</select>
+						{{ form_select('forums[]', {'-1':trans('search.allforums')}|merge(forums), null, {
+								'id': 'forum_search',
+								'multiple': 'multiple'
+							})
+						}}
 					</div>
 					<div class="form__row">
 						<h3><label for="prefix_search">Thread Prefix</label></h3>
@@ -191,7 +131,7 @@
 						</select>
 					</div>
 				</div>
-			</div> #}
+			</div>
 		</section>
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-search"></i><span class="text">'~trans('search.searchforum')~'</span>', {'type': 'submit', 'class': 'button'}) }}

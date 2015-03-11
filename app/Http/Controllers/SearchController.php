@@ -7,6 +7,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Search;
+use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\ISearchRepository;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -19,6 +20,10 @@ class SearchController extends Controller
 	 * @access protected
 	 */
 	protected $searchRepository;
+
+	/** @var IForumRepository $forumRepository */
+	private $forumRepository;
+
 
 	/**
 	 * @var SearchRequest $searchRequest
@@ -35,12 +40,14 @@ class SearchController extends Controller
 	public function __construct(
 		Guard $guard,
 		ISearchRepository $searchRepository,
+		IForumRepository $forumRepository,
 		Request $request
 	)
 	{
 		parent::__construct($guard, $request);
 
 		$this->searchRepository = $searchRepository;
+		$this->forumRepository = $forumRepository;
 	}
 	
 	public 	$sorts = [
@@ -73,12 +80,30 @@ class SearchController extends Controller
 
 	public function index()
 	{
-		return view('search.index');
+		$forumsList = $this->forumRepository->getIndexTree();
+
+		$forums = [];
+
+		$makeLists = function(&$forums, &$list, $tab = '') use (&$makeLists)
+		{
+			foreach($list as $forum)
+			{
+				$forums[$forum->id] = $tab.$forum->title;
+				if(!empty($forum->children))
+				{
+					$makeLists($forums, $forum->children, $tab.'&nbsp;&nbsp;&nbsp;&nbsp;');
+				}
+			}
+		};
+
+		$makeLists($forums, $forumsList);
+
+
+		return view('search.index', compact('forums'));
 	}
 
 	public function makeSearch(SearchRequest $searchRequest)
 	{
-		$this->searchRequest = &$searchRequest;
 		if($searchRequest->result != 'posts')
 		{
 			$searchRequest->result = 'topics';
@@ -88,33 +113,36 @@ class SearchController extends Controller
 		{
 			$query = Topic::with(['firstPost']);
 			$query->leftJoin('posts', 'topics.first_post_id', '=', 'posts.id');
-			$query->where(function($query)
+			$query->where(function($query) use(&$searchRequest)
 			{
-				$query->where('topics.title', 'like', '%'.$this->searchRequest->keyword.'%');
-				$query->orWhere('posts.content', 'like', '%'.$this->searchRequest->keyword.'%');
+				$query->where(function($query) use(&$searchRequest)
+				{
+					$query->where('topics.title', 'like', '%'.$searchRequest->keyword.'%');
+					$query->orWhere('posts.content', 'like', '%'.$searchRequest->keyword.'%');
+				});
 			});
 		}
 		else
 		{
 			$query = Post::with(['topic']);
 			$query->leftJoin('topics', 'posts.topic_id', '=', 'topics.id');
-			$query->where('posts.content', 'like', '%'.$this->searchRequest->keyword.'%');
+			$query->where('posts.content', 'like', '%'.$searchRequest->keyword.'%');
 		}
 
 		if($searchRequest->author)
 		{
 			$query->leftJoin('users', 'posts.user_id', '=', 'users.id');
-			$query->where(function($query)
+			$query->where(function($query) use(&$searchRequest)
 			{
-				if($this->searchRequest->matchusername)
+				if($searchRequest->matchusername)
 				{
-					$query->where('users.name', $this->searchRequest->author);
-					$query->orWhere('posts.username', $this->searchRequest->author);
+					$query->where('users.name', $searchRequest->author);
+					$query->orWhere('posts.username', $searchRequest->author);
 				}
 				else
 				{
-					$query->where('users.name', 'like', '%'.$this->searchRequest->author.'%');
-					$query->orWhere('posts.username', 'like', '%'.$this->searchRequest->author.'%');
+					$query->where('users.name', 'like', '%'.$searchRequest->author.'%');
+					$query->orWhere('posts.username', 'like', '%'.$searchRequest->author.'%');
 				}
 			});
 		}
@@ -173,6 +201,11 @@ class SearchController extends Controller
 			if ($postDate) {
 				$query->where($searchRequest->result.'.created_at', $postDateType, new \DateTime('today ' . $postDate));
 			}
+		}
+
+		if(!empty($searchRequest->forums) || !in_array('-1', $searchRequest->forums))
+		{
+			$query->whereIn('topics.forum_id', $searchRequest->forums);
 		}
 		
 		if(!$searchRequest->sortby)

@@ -41,7 +41,8 @@ class SearchRequest extends Request
 			'post_date_type' => 'in:newer,older',
 			'sortby' => 'in:postdate,author,subject,forum',
 			'sorttype' => 'in:asc,desc',
-			'result' => 'in:topics,posts'
+			'result' => 'in:topics,posts',
+			'forums' => 'array'
 		];
 	}
 

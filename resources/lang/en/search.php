@@ -28,6 +28,8 @@ return [
 	'results' => 'Results',
 	'resultsforx' => 'Results for :keyword',
 
+	'allforums' => 'Find topics in all forums',
+
 
     'atmost' => 'at most',
     'atleast' => 'at least',
