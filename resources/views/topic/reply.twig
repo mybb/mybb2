@@ -8,7 +8,7 @@
 	<div class="page-content">
 		<header>
 			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
-			<div class="page-controls">
+			<div class="page-buttons">
 				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-left"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>

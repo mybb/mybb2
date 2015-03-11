@@ -2554,13 +2554,15 @@ footer {
       padding: 12px 15px;
       margin-bottom: 30px;
       border-radius: 4px; }
-  .main .page-controls {
-    margin: -5px; }
+  .main .page-buttons {
+    margin: -10px -5px 15px -5px;
+    text-align: center; }
   .main .pagination {
     list-style: none;
-    margin: 10px 0 0 -5px;
+    margin: 0 0 25px -5px;
     padding: 0;
-    font-size: 0.9em; }
+    font-size: 0.9em;
+    text-align: center; }
     .main .pagination li {
       display: inline-block;
       margin: 0 5px; }
@@ -2728,11 +2730,26 @@ nav.section-menu ul {
     float: right;
     width: 35%;
     margin-top: 0; }
-  .main .page-controls {
+  .main .page-buttons {
     float: right;
-    margin: 0 -5px 8px 0; }
+    margin: -45px -5px 8px 0; }
   .main .pagination {
-    float: left; }
+    text-align: center;
+    margin: 0 -5px 25px -5px; }
+  .main .page-controls {
+    margin-top: -20px; }
+    .main .page-controls .page-buttons {
+      margin-top: 0; }
+    .main .page-controls .pagination {
+      float: left;
+      text-align: left;
+      margin: 10px -5px 0 -5px; }
+    .main .page-controls .pagination + .page-buttons {
+      margin-top: 0; }
+  .main header + .page-controls {
+    margin-top: -20px; }
+    .main header + .page-controls .page-buttons {
+      margin-top: -30px; }
   nav.section-menu {
     float: left;
     width: 19%;

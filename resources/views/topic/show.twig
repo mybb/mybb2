@@ -3,22 +3,22 @@
 	{{ topic.title }}
 {% endblock %}
 {% block head %}
-    <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
-    <link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
+	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
+	<link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
 {% endblock %}
 {% block contents %}
 	<div class="page-content">
 		<header>
 			<h1>{{topic.title }}</h1>
-			<div class="clearfix">
-				{{ posts.render|raw }}
-				<div class="page-controls">
-					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-					<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
-				</div>
-			</div>
 		</header>
-        <section class="topic">
+		<div class="page-controls clearfix">
+			{{ posts.render|raw }}
+			<div class="page-buttons">
+				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
+			</div>
+		</div>
+		<section class="topic">
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post-meta">
@@ -58,11 +58,9 @@
 						</div>-->
 					</div>
 				</div>
-            {% endfor %}
-            <div class="clearfix">
-            	{{ posts.render|raw }}
-            </div>
+			{% endfor %}
+			{{ posts.render|raw }}
 			{% include 'topic.quickreply' with {'topic': topic} %}
-        </section>
+		</section>
 	</div>
 {% endblock %}

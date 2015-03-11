@@ -39,16 +39,16 @@
 				</section>
 			{% endif %}
 			
-			<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
-			<div class="clearfix">
+			<div class="page-controls clearfix">
 				{{ topics.render|raw }}
-				<div class="page-controls">
+				<div class="page-buttons">
 					<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
 					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
 					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
 				</div>
 			</div>
 			<section class="forum topic-list">
+				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
 				<div class="sort-topics clearfix">
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 						{{ trans('forum.topictitle') }}
@@ -124,11 +124,7 @@
 					{% endfor %}
 				</div>
 			</section>
-			<div class="clearfix">
-				{{ topics.render|raw }}
-				<div class="page-controls">
-					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
-				</div>
+			{{ topics.render|raw }}
 			</div>
 		</div>
 {% endblock %}
