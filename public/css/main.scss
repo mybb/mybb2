@@ -3,33 +3,41 @@
  */
 
 // Theme colors
-$primary-color:		#007fd0;
-$secondary-color:	#ff7500;
+$primary-color: #007fd0;
+$secondary-color: #ff7500;
 
 // Font colors
-$font-color: 		#222;
+$font-color: #222;
 $invert-font-color: #fff;
-$alt-font-color-1:	#666;
-$alt-font-color-2:	#999;
-$alt-font-color-3:	#ccc;
-$alt-font-color-4:	#444;
+$alt-font-color-1: #666;
+$alt-font-color-2: #999;
+$alt-font-color-3: #ccc;
+$alt-font-color-4: #444;
 
 // Border colors
-$border-1:			#dfdfdf;
-$border-2:			#ccc;
-$dark-border-1:		#222;
+$border-1: #dfdfdf;
+$border-2: #ccc;
+$dark-border-1: #222;
 
 // Background colors
-$background-1:		#fafafa;
-$background-2:		#f2f2f2;
-$background-3:		#eee;
-$background-4:		#ccc;
+$background-1: #fafafa;
+$background-2: #f2f2f2;
+$background-3: #eee;
+$background-4: #ccc;
 $dark-background-1:	#333;
 $dark-background-2: #444;
-$red-highlight:		#eb5257;
+$unread-count: #eb5257;
+
+// Status background & border colors
+$status-highlight: #ebf4fb;
+$status-highlight-border: #afd9fa;
+$status-deleted: #ece3fa;
+$status-deleted-border: #ddcafa;
+$status-pending: #f2dede;
+$status-pending-border: #f2aaab;
 
 // Fonts
-$font-stack:		Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
+$font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
 
 
 /*
@@ -155,6 +163,7 @@ textarea {
 @import 'header_footer';
 @import 'base';
 @import 'forms';
+@import 'topics';
 @import 'users';
 
 

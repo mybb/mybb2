@@ -21,26 +21,26 @@
 		<section class="topic">
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
-					<div class="post-meta">
+					<div class="post__meta">
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
-						<h3><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
-						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post-date" title="{{ format_date(post.created_at) }}">{{ human_date(post.created_at) }}</a>
+						<h3 class="post__author"><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
+						<a href="{{ url_route('topics.showPost', [topic.slug, topic.id, post.id]) }}" class="post__date" title="{{ format_date(post.created_at) }}">{{ human_date(post.created_at) }}</a>
 						{% if post.trashed or (topic.trashed and loop.first) %}
-							<span class="status-notice"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
+							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
 						{% if post.updated_at != post.created_at %}
-							<a href="index.php?page=edit-log" class="edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
+							<a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
-						<input type="checkbox" class="inline-mod" />
+						<input type="checkbox" class="post__inline-mod" />
 					</div>
-					<div class="post-body">
+					<div class="post__body">
 						<p>
 							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
 						</p>
 					</div>
-					<div class="post-foot">
-						<ul class="post-controls">
+					<div class="post__foot">
+						<ul class="post__controls">
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
@@ -53,7 +53,7 @@
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
 							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
 						</ul>
-						<!--<div class="likes">
+						<!--<div class="post__likes">
 							<i class="fa fa-caret-right"></i> <a href="index.php?page=profile">You</a>, <a href="index.php?page=profile">brad-t</a>, <a href="index.php?page=profile">Dennis Tsang</a>, and <a href="index.php?page=post-likes">14 others</a> like this</a>
 						</div>-->
 					</div>

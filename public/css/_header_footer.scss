@@ -46,7 +46,7 @@ h1.title {
 			}
 
 			.unread-count {
-				background: $red-highlight;
+				background: $unread-count;
 				color: $invert-font-color;
 				padding: 2px 5px 1px 4px;
 				margin: 0 0 0 2px;
@@ -172,7 +172,7 @@ h1.title {
 	}
 
 	.unread-count {
-		background: $red-highlight;
+		background: $unread-count;
 		color: $invert-font-color;
 		@include border-radius(2px);
 		padding: 2px 5px 1px 4px;

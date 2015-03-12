@@ -1,0 +1,271 @@
+.post {
+	border: 1px solid $border-2;
+	padding: 8px 12px;
+	margin-bottom: 25px;
+	@include border-radius(4px);
+
+	&.highlight {
+		background-color: $status-highlight;
+		border-color: $status-highlight-border;
+	}
+
+	&.soft-deleted {
+		background-color: $status-deleted;
+		border-color: $status-deleted-border;
+	}
+
+	&.pending-approval {
+		background-color: $status-pending;
+		border-color: $status-pending-border;
+	}
+
+	.post__meta {
+		padding: 4px 6px 12px 6px;
+
+		a:link,
+		a:visited {
+			color: $alt-font-color-1;
+		}
+
+		a:hover,
+		a:active {
+			color: $secondary-color;
+		}
+
+		h3 {
+			font-size: 1em;
+			margin: 0;
+
+			a:link,
+			a:visited {
+				color: $primary-color;
+			}
+
+			a:hover,
+			a:active {
+				color: $secondary-color;
+			}
+		}
+
+		.post__date {
+			font-size: 0.8em;
+			color: $alt-font-color-1;
+		}
+
+		.post__edit-log {
+			font-size: 0.7em;
+			margin-left: 4px;
+		}
+
+		.post__status {
+			margin-left: 16px;
+			font-size: 0.8em;
+			font-weight: bold;
+
+			i {
+				color: $alt-font-color-1;
+				font-size: 14px;
+				margin-right: 3px;
+			}
+		}
+	}
+
+	.post__inline-mod {
+		float: right;
+		margin: -20px 0 0 7px;
+	}
+
+	.team-badge {
+		display: none;
+	}
+
+	.avatar-profile-link {
+		float: left;
+		width: 40px;
+		height: 40px;
+		margin: 7px 10px 0 0;
+
+		img.avatar {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	.post__body {
+		padding: 0 6px 3px 6px;
+
+		p {
+			font-size: 0.9em;
+			margin: 0 0 6px 0;
+		}
+
+		img {
+			max-width: 100%;
+		}
+
+		blockquote {
+			border-left: 2px solid $primary-color;
+			padding: 10px 20px;
+			margin: 20px 12px;
+			font-size: 0.9em;
+
+			cite {
+				font-weight: normal;
+				font-size: normal;
+				color: $alt-font-color-1;
+				display: block;
+
+				.quote-author {
+					font-weight: bold;
+					color: $font-color;
+				}
+
+				.quote-date {
+					color: $alt-font-color-4;
+				}
+			}
+		}
+	}
+
+	.post__signature {
+		border-top: 1px dotted $border-2;
+		padding: 6px 6px 0;
+		margin: 12px 0 0 0;
+		font-size: 0.8em;
+	}
+
+	.post__controls {
+		list-style: none;
+		margin: 0;
+		padding: 4px;
+		text-align: right;
+
+		li {
+			display: inline-block;
+
+			a:link,
+			a:visited {
+				color: $alt-font-color-1;
+				padding: 0 5px;
+			}
+
+			a:hover,
+			a:active {
+				color: $secondary-color;
+				text-decoration: none;
+			}
+
+			&.like,
+			&.quote,
+			&.approve,
+			&.restore {
+				float: left;
+
+				.text {
+					display: inline;
+				}
+			}
+		}
+
+		i {
+			font-size: 14px;
+		}
+
+		.text {
+			display: none;
+			font-size: 0.7em;
+			margin-left: 6px;
+		}
+	}
+
+	.post__likes {
+		font-size: 0.8em;
+		padding: 8px 8px 4px 8px;
+		margin: 8px 0 0 0;
+		border-top: 1px solid $border-1;
+		color: $alt-font-color-2;
+
+		i {
+			margin-right: 5px;
+		}
+
+		a {
+			color: $alt-font-color-1;
+		}
+	}
+
+	&.post--reply {
+		
+		.full-reply {
+			float: right;
+
+			.text {
+				display: none;
+			}
+		}
+
+		.post__foot {
+			margin: 5px 0;
+		}
+	}
+}
+
+@media only screen and (min-width: 480px) {
+
+	.post {
+		margin-left: 80px;
+
+		.post__meta {
+			padding: 4px 6px 8px 6px;
+
+			h3 {
+				display: inline-block;
+			}
+
+			.post__date {
+				margin: 0 0 0 10px;
+			}
+		}
+
+		.avatar-profile-link {
+			float: left;
+			width: 70px;
+			height: 70px;
+			margin: -13px 0 0 -100px;
+
+			img.avatar {
+				width: 70px;
+				height: 70px;
+			}
+		}
+
+		.post__inline-mod {
+			margin-top: 7px;
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) {
+
+	.post {
+		margin-left: 110px;
+
+		.post__meta {
+
+			.team-badge {
+				display: inline;
+			}
+		}
+
+		.avatar-profile-link {
+			width: 100px;
+			height: 100px;
+			margin-left: -130px;
+
+			img.avatar {
+				width: 100px;
+				height: 100px;
+			}
+		}
+	}
+}

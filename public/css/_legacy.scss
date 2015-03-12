@@ -420,10 +420,7 @@ section.container .forum-list .forum:last-child {
 .forum.topic-list .topic .avatar-profile-link {
 	width: 44px;
 	float: left;
-	margin: 8px 12px 0 6px;
-	position: absolute;
-	top: 0;
-	left: 0;
+	margin: 0 12px 0 6px;
 }
 
 .forum.topic-list .topic .avatar-profile-link .avatar {
@@ -560,218 +557,9 @@ aside .topic-list .topic .topic-replies {
 	margin-top: -1px;
 }
 
-
 .soft-deleted {
 	background: #ece3fa;
 	border-color: #ddcafa;
-}
-
-.topic .post.pending-approval {
-	background: #f2dede;
-	border-color: #f2aaab;
-}
-
-.topic .post.highlight {
-	background-color: #ebf4fb;
-	border-color: #afd9fa;
-}
-
-.topic .post .post-meta {
-	padding: 4px 6px 12px 0;
-}
-
-.topic .post .post-meta .status-notice {
-	margin-left: 16px;
-	font-size: 0.8em;
-	font-weight: bold;
-}
-
-.topic .post .post-meta .status-notice i {
-	color: #666;
-	font-size: 14px;
-	margin-right: 3px;
-}
-
-.topic .post .avatar-profile-link {
-	float: left;
-	width: 40px;
-	margin: 7px 10px 0 0;
-}
-
-.topic .post .avatar {
-	width: 40px;
-	height: 40px;
-}
-
-.topic .post {
-	border: 1px solid #ccc;
-	padding: 8px 12px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
-	margin-bottom: 25px;
-}
-
-.topic .post .post-meta h3 {
-	font-size: 1em;
-	margin: 0;
-}
-
-.topic .post .post-meta h3 a:link,
-.topic .post .post-meta h3 a:visited {
-	color: #007fd0;
-}
-
-.topic .post .post-meta h3 a:hover,
-.topic .post .post-meta h3 a:active {
-	color: #ff7500;
-}
-
-.topic .post .post-meta .post-date {
-	font-size: 0.8em;
-	color: #666;
-}
-
-.topic .post .post-meta .edit-log {
-	font-size: 0.7em;
-	margin-left: 4px;
-}
-
-.topic .post .post-meta a:link,
-.topic .post .post-meta a:visited {
-	color: #666;
-}
-
-.topic .post .post-meta a:hover,
-.topic .post .post-meta a:active {
-	color: #ff7500;
-}
-
-.topic .post .team-badge {
-	display: none;
-}
-
-.topic .post .post-body {
-	padding: 0 6px 3px 6px;
-}
-
-.topic .post .post-body p {
-	font-size: 0.9em;
-	margin: 0 0 6px 0;
-}
-
-.topic .post .signature {
-	border-top: 1px dotted #ccc;
-	padding: 6px 6px 0;
-	margin: 12px 0 0 0;
-	font-size: 0.8em;
-}
-
-.topic .post .post-controls {
-	list-style: none;
-	margin: 0 0 0;
-	padding: 4px;
-	text-align: right;
-}
-
-.topic .post .post-controls li {
-	display: inline-block;
-}
-
-.topic .post .post-controls li a:link,
-.topic .post .post-controls li a:visited {
-	color: #777;
-	padding: 0 5px;
-}
-
-.topic .post .post-controls li a:hover,
-.topic .post .post-controls li a:active {
-	color: #ff7500;
-	text-decoration: none;
-}
-
-.topic .post .post-controls i {
-	font-size: 14px;
-}
-
-.topic .post .post-controls .text {
-	display: none;
-	font-size: 0.7em;
-	margin-left: 6px;
-}
-
-.topic .post .post-controls li.like,
-.topic .post .post-controls li.quote,
-.topic .post .post-controls li.approve,
-.topic .post .post-controls li.restore {
-	float: left;
-}
-
-.topic .post .post-controls li.like .text,
-.topic .post .post-controls li.quote .text,
-.topic .post .post-controls li.approve .text,
-.topic .post .post-controls li.restore .text {
-	display: inline;
-}
-
-.topic .post .likes {
-	font-size: 0.8em;
-	padding: 8px 8px 4px 8px;
-	margin: 8px 0 0 0;
-	border-top: 1px solid #ddd;
-	color: #999;
-}
-
-.topic .post .likes i {
-	margin-right: 5px;
-}
-
-.topic .post .likes a {
-	color: #666;
-}
-
-.topic .post .inline-mod {
-	float: right;
-	margin: -20px 0 0 7px;
-}
-
-.topic .post .post-body img {
-	max-width: 100%;
-}
-
-.topic .post .post-body blockquote {
-	border-left: 2px solid #007fd0;
-	padding: 10px 20px;
-	margin: 20px 12px;
-	font-size: 0.9em;
-}
-
-.topic .post .post-body blockquote cite {
-	font-weight: normal;
-	display: block;
-	font-style: normal;
-	color: #666;
-}
-
-.topic .post .post-body blockquote cite .quote-user {
-	font-weight: bold;
-	color: #000;
-}
-
-.topic .post .post-body blockquote cite .quote-date {
-	color: #444;
-}
-
-.topic .post.reply .full-reply {
-	float: right;
-}
-
-.topic .post.reply .full-reply span.text {
-	display: none;
-}
-
-.topic .post.reply .post-foot {
-	margin: 5px 0;
 }
 
 .inline-moderation {
@@ -1039,37 +827,6 @@ section.form .change-avatar .buttons {
 		display: inline-block;
 	}
 
-	.topic .post .post-meta h3 {
-		display: inline-block;
-	}
-
-	.topic .post .post-meta .post-date {
-		margin: 0 0 0 10px;
-	}
-
-	.topic .post .post-meta {
-		padding: 4px 6px 8px 6px;
-	}
-
-	.topic .post .avatar-profile-link {
-		float: left;
-		width: 70px;
-		margin: -13px 0 0 -100px;
-	}
-
-	.topic .post .avatar-profile-link .avatar {
-		width: 70px;
-		height: 70px;
-	}
-
-	.topic .post {
-		margin-left: 80px;
-	}
-
-	.topic .post .inline-mod {
-		margin-top: 7px;
-	}
-
 	.dropdown-menu .dropdown-button .full {
 		display: inline;
 	}
@@ -1243,43 +1000,6 @@ section.form .change-avatar .buttons {
 	.forum.topic-list .topic .latest-column {
 		width: 30%;
 		float: left;
-	}
-
-	.forum.topic-list .topic .avatar-profile-link {
-		margin: 0 12px 0 6px;
-		position: relative;
-		top: auto;
-		left: auto;
-	}
-
-	.topic .post .avatar-profile-link {
-		width: 100px;
-		margin-left: -130px;
-	}
-
-	.topic .post .avatar-profile-link .avatar {
-		width: 100px;
-		height: 100px;
-	}
-
-	.topic .post {
-		margin-left: 110px;
-	}
-
-	.topic .post .post-meta .team-badge {
-		font-size: 0.7em;
-		padding: 3px 8px;
-		border: 1px solid #ddd;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		border-radius: 3px;
-		color: #666;
-		margin: 0 0 0 10px;
-		display: inline;
-	}
-
-	.topic .post .post-meta .team-badge i {
-		margin-right: 5px;
 	}
 
 }

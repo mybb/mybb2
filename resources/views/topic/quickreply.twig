@@ -1,6 +1,6 @@
-			<div class="post reply" id="post-reply">
+			<div class="post post--reply" id="post-reply">
 				{{ form_open({'route': ['topics.reply.post', topic.slug, topic.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
-					<div class="post-meta">
+					<div class="post__meta">
 						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
 
 						{% if auth_check() %}
@@ -8,14 +8,14 @@
 						{% else %}
 							{{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
 						{% endif %}
-						<span class="post-date">Now</span>
+						<span class="post__date">Now</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
 						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"><i class="fa fa-external-link"></i><span class="text">Full Editor</a>
 					</div>
-					<div class="post-body">
+					<div class="post__body">
 						{{ form_textarea('content', '', {'class':'textarea', 'rows': '10'}) }}
 					</div>
-					<div class="post-foot">
+					<div class="post__foot">
 						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
