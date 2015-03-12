@@ -5,68 +5,6 @@
 
 /* Main Body */
 
-section ul.notifications {
-	margin: 0;
-	font-size: 0.9em;
-	line-height: 1.6;
-	list-style: none;
-	padding: 0;
-}
-
-section ul.notifications li {
-	overflow: hidden;
-	margin: 0;
-	padding: 8px;
-	border-bottom: 1px solid #ddd;
-}
-
-section ul.notifications li:last-child {
-	border-bottom: 0;
-}
-
-section ul.notifications a.avatar-profile-link {
-	float: left;
-	margin: 0 12px 0 0;
-	width: 40px;
-	height: 40px;
-}
-
-section ul.notifications a.avatar-profile-link img.avatar {
-	width: 40px;
-	height: 40px;
-}
-
-section ul.notifications a.notification {
-	text-decoration: none;
-	margin-left: 52px;
-	padding-left: 24px;
-	display: block;
-}
-
-section ul.notifications span.username {
-	font-weight: bold;
-}
-
-section ul.notifications i {
-	color: #aaa;
-	font-size: 14px;
-	width: 16px;
-	text-align: center;
-	margin: 4px 8px 4px -24px;
-	float: left;
-}
-
-section h2 a:hover span.text,
-section ul.notifications a:hover span.text {
-	text-decoration: underline;
-}
-
-section ul.notifications time {
-	font-size: 0.8em;
-	color: #666;
-	display: block;
-}
-
 .compressed-forum-list .category {
 	border-bottom: 1px solid #eee;
 	padding: 8px 12px;
@@ -704,33 +642,6 @@ section.form .buttons {
 
 .compact-users-list.blocked-users {
 	margin-bottom: 10px;
-}
-
-
-section.form .form__section .form__section__container.change-avatar {
-	padding-left: 130px;
-}
-
-section.form .change-avatar .avatar-profile-link {
-	float: left;
-	margin: 0 10px 0 -110px;
-}
-
-section.form .change-avatar p {
-	padding: 0 0 0 5px;
-	margin: 0 0 10px 0;
-	font-size: 0.9em;
-	color: #666;
-	line-height: 1.4;
-}
-
-section.form .change-avatar .avatar-profile-link .avatar {
-	width: 100px;
-	height: 100px;
-}
-
-section.form .change-avatar .buttons {
-	margin-left: 0;
 }
 
 /* Dropdown Menus */

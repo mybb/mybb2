@@ -1,0 +1,82 @@
+
+section.form {
+
+	.form__section__container.change-avatar {
+		padding-left: 130px;
+
+		.avatar-profile-link {
+			float: left;
+			margin: 0 10px 0 -110px;
+
+			img.avatar {
+				width: 100px;
+				height: 100px;
+			}
+		}
+
+		p {
+			padding: 0 0 0 5px;
+			margin: 0 0 10px 0;
+			font-size: 0.9em;
+			color: $alt-font-color-1;
+		}
+	}
+}
+
+// this may need additional revisions once notifications are implemented
+ul.notifications {
+	margin: 0;
+	font-size: 0.9em;
+	line-height: 1.6;
+	list-style: none;
+	padding: 0;
+
+	li {
+		overflow: hidden;
+		margin: 0;
+		padding: 8px;
+		border-bottom: 1px solid $border-1;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	a.avatar-profile-link {
+		float: left;
+		margin: 0 12px 0 0;
+		width: 40px;
+		height: 40px;
+
+		img.avatar {
+			width: 40px;
+			height: 40px;
+		}
+	}
+
+	h2 a:hover .text,
+	a:hover .text {
+		text-decoration: underline;
+	}
+
+	a.notification {
+		text-decoration: none;
+		margin-left: 52px;
+		padding-left: 24px;
+		display: block;
+	}
+
+	.notification__username {
+		font-weight: bold;
+	}
+
+	i {
+		color: $alt-font-color-2;
+	}
+
+	time {
+		font-size: 0.8em;
+		color: $alt-font-color-1;
+		display: block;
+	}
+}
