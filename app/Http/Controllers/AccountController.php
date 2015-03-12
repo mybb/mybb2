@@ -435,7 +435,6 @@ class AccountController extends Controller
 		}
 
 		$settings->set($modifiedSettings, null, true);
-		$settings->save();
 
 		return redirect()->route('account.preferences');
 	}
@@ -480,7 +479,6 @@ class AccountController extends Controller
 		}
 
 		$settings->set($modifiedSettings, null, true);
-		$settings->save();
 
 		return redirect()->route('account.privacy');
 	}

@@ -854,16 +854,16 @@
         },
         {
             "name": "jenssegers/date",
-            "version": "v2.0.18",
+            "version": "v2.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jenssegers/laravel-date.git",
-                "reference": "c94babb5cf417151d6b54dfd4fd78d62f38cf5c1"
+                "reference": "50a1b264186661d1654e9a1f55f015f5b5c63907"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jenssegers/laravel-date/zipball/c94babb5cf417151d6b54dfd4fd78d62f38cf5c1",
-                "reference": "c94babb5cf417151d6b54dfd4fd78d62f38cf5c1",
+                "url": "https://api.github.com/repos/jenssegers/laravel-date/zipball/50a1b264186661d1654e9a1f55f015f5b5c63907",
+                "reference": "50a1b264186661d1654e9a1f55f015f5b5c63907",
                 "shasum": ""
             },
             "require": {
@@ -898,7 +898,7 @@
                 "laravel",
                 "time"
             ],
-            "time": "2015-03-02 18:19:30"
+            "time": "2015-03-12 12:45:03"
         },
         {
             "name": "jeremeamia/SuperClosure",
@@ -1006,16 +1006,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.14",
+            "version": "v5.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "f61e0098151c73db9068a6be6d86bfc60b01de25"
+                "reference": "ec3a166c504acedffd8ed878b08481f9cb1497fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/f61e0098151c73db9068a6be6d86bfc60b01de25",
-                "reference": "f61e0098151c73db9068a6be6d86bfc60b01de25",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/ec3a166c504acedffd8ed878b08481f9cb1497fb",
+                "reference": "ec3a166c504acedffd8ed878b08481f9cb1497fb",
                 "shasum": ""
             },
             "require": {
@@ -1123,11 +1123,12 @@
                 }
             ],
             "description": "The Laravel Framework.",
+            "homepage": "http://laravel.com",
             "keywords": [
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-07 03:18:10"
+            "time": "2015-03-12 14:09:40"
         },
         {
             "name": "laravelcollective/html",
@@ -1649,12 +1650,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "c2eb14a34fce3c4c2c78e6dde6be00a645b18ed8"
+                "reference": "83cc0f64bfb653f2b4a29314291e6b210c11d709"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/c2eb14a34fce3c4c2c78e6dde6be00a645b18ed8",
-                "reference": "c2eb14a34fce3c4c2c78e6dde6be00a645b18ed8",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/83cc0f64bfb653f2b4a29314291e6b210c11d709",
+                "reference": "83cc0f64bfb653f2b4a29314291e6b210c11d709",
                 "shasum": ""
             },
             "require": {
@@ -1686,10 +1687,10 @@
             ],
             "description": "MyBB 2.0 settings package.",
             "support": {
-                "source": "https://github.com/mybb/Settings/tree/master",
+                "source": "https://github.com/mybb/Settings/tree/v2.0.6",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-11 21:01:45"
+            "time": "2015-03-12 15:21:02"
         },
         {
             "name": "nesbot/carbon",
