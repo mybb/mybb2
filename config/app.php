@@ -128,7 +128,7 @@ return [
 		'Illuminate\Translation\TranslationServiceProvider',
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
-		'Illuminate\Html\HtmlServiceProvider',
+		'Collective\Html\HtmlServiceProvider',
 		/**
 		 * Extension Service Providers...
 		 */
@@ -190,8 +190,8 @@ return [
 		'URL' => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View' => 'Illuminate\Support\Facades\View',
-		'Form' => 'Illuminate\Html\FormFacade',
-		'HTML' => 'Illuminate\Html\HtmlFacade',
+		'Form' => 'Collective\Html\FormFacade',
+		'HTML' => 'Collective\Html\HtmlFacade',
 		/**
 		 * Extension Facades...
 		 */

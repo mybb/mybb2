@@ -84,9 +84,9 @@ class AppServiceProvider extends ServiceProvider
 		$this->initDefaultUser();
 
 		// Temporary fix for Form...
-		$this->app->bind('Illuminate\Html\FormBuilder', function ($app)
+		$this->app->bind('Collective\Html\FormBuilder', function ($app)
 		{
-			$form = new \Illuminate\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
+			$form = new \Collective\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
 
 			return $form->setSessionStore($app['session.store']);
 		});
