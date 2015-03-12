@@ -100,7 +100,8 @@ return [
 			'TwigBridge\Extension\Laravel\Url',
 			'TwigBridge\Extension\Laravel\Form',
 			'TwigBridge\Extension\Laravel\Html',
-		    'MyBB\Core\Twig\Extensions\Settings',
+			'MyBB\Core\Twig\Extensions\Settings',
+			'MyBB\Core\Twig\Extensions\Date',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*

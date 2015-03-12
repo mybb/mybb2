@@ -315,21 +315,29 @@ class AccountController extends Controller
 
 		$selectedLanguage = $settings->get('user.language', 'en');
 		if($selectedLanguage == $defaultLocale)
+		{
 			$selectedLanguage = 'default';
+		}
 
 		// Build the timezone array
 		$timezones = \DateTimeZone::listIdentifiers();
 		$selectTimezones = [];
 		foreach($timezones as $tz)
+		{
 			$selectTimezones[$tz] = $tz;
+		}
 
 		$timezone = $settings->get('user.timezone', 'default');
 		if($timezone == 'default')
+		{
 			$timezone = trans('general.timezone');
+		}
 
 		$timeformat = 24;
 		if($settings->get('user.time_format', trans('general.timeformat')) == 'h:i A')
+		{
 			$timeformat = 12;
+		}
 
 		return view('account.preferences', compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone', 'timeformat'))->withActive('preferences');
 	}
@@ -393,36 +401,38 @@ class AccountController extends Controller
 		// Unset non existant language and default (don't override the board default)
 		if($input['language'] == 'default' || !$trans->has('general.language', $input['language']))
 		{
-			// TODO: euan needs to add a way to delete settings first
-			$input['language'] = $settings->get('user.language', 'en', false);
+			$input['language'] = null;
 		}
 
-		// TODO: delete default date format and timezone!
 		if($input['date_format'] == 'default')
 		{
-
+			$input['date_format'] = null;
 		}
 
 		$timezones = \DateTimeZone::listIdentifiers();
 		if($input['timezone'] == trans('general.timezone') || !in_array($input['timezone'], $timezones))
 		{
-
+			$input['timezone'] = null;
 		}
 
 		$timeformat = 'H:i';
 		if($input['time_format'] == 12)
+		{
 			$timeformat = 'h:i A';
+		}
 		$input['time_format'] = $timeformat;
 
 		if($timeformat == trans('general.timeformat'))
 		{
-
+			$input['time_format'] = null;
 		}
 
 		// Prefix all settings with "user."
 		$modifiedSettings = [];
 		foreach($input as $key => $value)
+		{
 			$modifiedSettings["user.{$key}"] = $value;
+		}
 
 		$settings->set($modifiedSettings, null, true);
 		$settings->save();
@@ -465,7 +475,9 @@ class AccountController extends Controller
 		// Prefix all settings with "user."
 		$modifiedSettings = [];
 		foreach($input as $key => $value)
+		{
 			$modifiedSettings["user.{$key}"] = $value;
+		}
 
 		$settings->set($modifiedSettings, null, true);
 		$settings->save();

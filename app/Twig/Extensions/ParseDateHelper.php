@@ -19,14 +19,18 @@ class ParseDateHelper
 		{
 			$format = $this->settings->get('user.date_format', 'default');
 			if($format == 'default')
+			{
 				$format = trans('general.dateformat');
+			}
 
 			// Show time?
 			if($showTime)
 			{
 				$timeFormat = $this->settings->get('user.time_format', 'default');
 				if($timeFormat == 'default')
+				{
 					$timeFormat = trans('general.timeformat');
+				}
 
 				$format .= ' '.$this->at().' '.$timeFormat;
 			}
@@ -53,11 +57,15 @@ class ParseDateHelper
 
 		// Should be some kind of dynamic - however displaying something like "3 years ago" may not be usefull
 		if($date->diffInDays() > 7)
+		{
 			return $this->formatDate($date);
+		}
 
 		// Everything below 5 is "loading time"
 		if($date->diffInSeconds() < 5)
+		{
 			return trans('general.now');
+		}
 
 		return $date->diffForHumans();
 	}
@@ -67,9 +75,13 @@ class ParseDateHelper
 		$date = $this->getDateObject($date);
 
 		if($showFormat != null)
+		{
 			$showTime = $this->formatDate($date, true, $showFormat);
+		}
 		else
+		{
 			$showTime = $this->humanDate($date);
+		}
 		$attributeTime = $this->formatDate($date, true, $attributeFormat);
 		$dateTimeFormat = $this->formatDate($date, true, 'c');
 
@@ -80,7 +92,9 @@ class ParseDateHelper
 	{
 		// We've already a valid date object. Don't set the timezone, it may get messy otherwise
 		if($date instanceof TransDate)
+		{
 			return $date;
+		}
 
 		// If it's a valid date format or a DateTime object we can simply call the constructor
 		if(is_int($date) || @strtotime($date) !== false || $date == null || $date instanceof \DateTime)
@@ -95,7 +109,9 @@ class ParseDateHelper
 		// Figure out our timezone
 		$timezone = $this->settings->get('user.timezone', 'default');
 		if($timezone == 'default')
+		{
 			$timezone = trans('general.timezone');
+		}
 
 		return $date->setTimezone($timezone);
 	}
