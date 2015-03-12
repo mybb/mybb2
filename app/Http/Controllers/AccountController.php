@@ -306,7 +306,7 @@ class AccountController extends Controller
 		$dirs = $files->directories(base_path('resources/lang/'));
 		foreach($dirs as $dir)
 		{
-			$lang = substr($dir, strrpos($dir, "\\")+1);
+			$lang = substr($dir, strrpos($dir, DIRECTORY_SEPARATOR)+1);
 			if($trans->has('general.language', $lang))
 			{
 				$languages[$lang] = trans('general.language', [], '', $lang);
