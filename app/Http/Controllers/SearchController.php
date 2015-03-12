@@ -205,8 +205,7 @@ class SearchController extends Controller
 			}
 		}
 
-		$searchRequest->forums = (array)$searchRequest->forums;
-		if(!empty($searchRequest->forums) || !in_array('-1', $searchRequest->forums))
+		if(is_array($searchRequest->forums) && (!empty($searchRequest->forums) || !in_array('-1', $searchRequest->forums)))
 		{
 			$query->whereIn('topics.forum_id', $searchRequest->forums);
 		}
