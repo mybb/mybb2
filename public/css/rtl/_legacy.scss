@@ -46,7 +46,7 @@ html[dir="rtl"] {
 	}
 	.forum.topic-list .topic {
 		padding-right: 60px;
-		padding-left: 0;
+		padding-left: 12px;
 	}
 	.forum.topic-list .topic .unread-count {
 		padding: 2px 6px 2px 7px;
@@ -192,6 +192,9 @@ html[dir="rtl"] {
 		}
 		.forum.topic-list .topic .primary-column {
 			float: right;
+		}
+		.forum.topic-list .topic {
+			padding: 8px 12px;
 		}
 		.forum.topic-list .topic .icons {
 			float: left;

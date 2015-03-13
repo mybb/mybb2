@@ -4639,7 +4639,7 @@ html[dir="rtl"] .forum.topic-list .topics-container {
   border-left: 1px solid #ccc; }
 html[dir="rtl"] .forum.topic-list .topic {
   padding-right: 60px;
-  padding-left: 0; }
+  padding-left: 12px; }
 html[dir="rtl"] .forum.topic-list .topic .unread-count {
   padding: 2px 6px 2px 7px;
   margin: 0 6px 0 0; }
@@ -4741,6 +4741,8 @@ html[dir="rtl"] .checkbox-select.check-all {
     text-align: right; }
   html[dir="rtl"] .forum.topic-list .topic .primary-column {
     float: right; }
+  html[dir="rtl"] .forum.topic-list .topic {
+    padding: 8px 12px; }
   html[dir="rtl"] .forum.topic-list .topic .icons {
     float: left; }
   html[dir="rtl"] .forum.topic-list .topic .icons i {
