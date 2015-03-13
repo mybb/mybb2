@@ -1,0 +1,33 @@
+html[dir="rtl"] {
+	section.form {
+
+		.form__section__container.change-avatar {
+			padding-right: 130px;
+
+			.avatar-profile-link {
+				float: right;
+				margin: 0 -110px 0 10px;
+
+			}
+
+			p {
+				padding: 0 5px 0 0;
+			}
+		}
+	}
+
+	// this may need additional revisions once notifications are implemented
+	ul.notifications {
+
+		a.avatar-profile-link {
+			float: right;
+			margin: 0 0 0 12px;
+		}
+
+		a.notification {
+			margin-right: 52px;
+			padding-right: 24px;
+		}
+
+	}
+}

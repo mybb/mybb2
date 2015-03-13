@@ -1,0 +1,29 @@
+html[dir="rtl"] {
+	.user-list {
+		.user-list__user {
+			.avatar-profile-link {
+				float: right;
+				margin: 0 0 0 12px;
+			}
+			.team-badge {
+				float: left;
+			}
+		}
+	}
+	.team-badge {
+		i {
+			margin-left: 5px;
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		.user-list .user-list__user {
+			float: right;
+			&:nth-child(odd) {
+				margin-left: 0.5%;
+			}
+			&:nth-child(even) {
+				margin-right: 0.5%;
+			}
+		}
+	}
+}

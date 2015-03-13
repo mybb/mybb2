@@ -1,0 +1,80 @@
+html[dir="rtl"] {
+	.main {
+		.pagination {
+			margin: 0 -5px 25px 0;
+		}
+	}
+	section {
+		.heading--linked {
+			a {
+				.count {
+					float: left;
+					i {
+						margin-right: 4px;
+					}
+				}
+			}
+		}
+		.page-tabs {
+			li {
+				margin: 0 0 0 8px;
+			}
+		}
+	}
+	.button, a.button {
+		i {
+			margin-left: 5px;
+		}
+	}
+	nav.section-menu {
+		ul {
+			li {
+				float: right;
+				&:nth-child(odd) {
+					margin-left: 2%;
+				}
+				&:nth-child(even) {
+					margin-right: 2%;
+				}
+				a {
+					i {
+						padding-left: 5px;
+					}
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		.main {
+			.page-content--sidebar {
+				float: right;
+			}
+			.page-content--menu {
+				float: right;
+			}
+			aside {
+				float: left;
+			}
+			.page-buttons {
+				float: left;
+				margin: -45px 0 8px -5px;
+			}
+			.page-controls {
+				.pagination {
+					float: right;
+					text-align: right;
+				}
+			}
+		}
+		nav.section-menu {
+			float: right;
+			margin-left: 3%;
+			ul {
+				li, li:nth-child(odd), li:nth-child(even) {
+					margin-right: 0;
+					margin-left: 0;
+				}
+			}
+		}
+	}
+}

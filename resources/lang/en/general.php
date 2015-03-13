@@ -6,6 +6,7 @@ return [
 	'dateformat' => 'M d, Y',
 	'timeformat' => 'h:i A',
 	'timezone' => 'Europe/London',
+	'direction' => 'ltr',
 
 	'by' => 'by',
 	'in' => 'in',
