@@ -1,0 +1,134 @@
+html[dir="rtl"] {
+	h1.title {
+		float: right;
+		a#logo {
+			background-position: top right;
+		}
+	}
+	.main-menu {
+		float: left;
+	}
+	.menu-bar {
+		ul {
+			li {
+				a {
+					float: right;
+				}
+				.unread-count {
+					padding: 2px 4px 1px 5px;
+					margin: 0 2px 0 0;
+				}
+			}
+		}
+	}
+	.main-menu__button {
+		float: left;
+	}
+	.user-navigation__links {
+		> li {
+			float: right;
+		}
+		> li.dropit-link {
+			border-right: 2px solid transparent;
+			border-left: 2px solid transparent;
+		}
+		.unread-count {
+			padding: 2px 4px 1px 5px;
+			margin: 0 2px 0 0;
+		}
+	}
+	.user-navigation ul .user-navigation__dropdown {
+		right: -2px;
+		left: auto;
+		li {
+			a {
+				border-right: 0;
+				text-align: right;
+				i {
+					padding-left: 8px;
+				}
+			}
+		}
+		a.avatar-profile-link {
+			float: left;
+		}
+		h2 {
+			padding: 8px 8px 8px 12px;
+			a.option {
+				float: left;
+			}
+		}
+		ul.notifications {
+			a {
+				padding: 8px 16px 8px 8px;
+			}
+			i {
+				margin: 4px -8px 4px 0;
+				float: right;
+			}
+		}
+		ul.messages {
+			a.avatar-profile-link {
+				float: right;
+				margin: 0 0 0 8px;
+			}
+		}
+		time {
+			margin: 3px 4px 0 0;
+			float: left;
+		}
+	}
+	#search {
+		.search__button {
+			float: left;
+		}
+		.search__controls {
+			text-align: left;
+			float: left;
+			padding-left: 8px;
+			padding-right: 0;
+		}
+		button.search__submit,
+		a.search__advanced {
+			margin: 0 8px 0 0;
+		}
+	}
+	.breadcrumb {
+		i {
+			margin: 0 6px 0 4px;
+		}
+	}
+	@media only screen and (max-width: 768px) {
+		.main-menu.menu-bar {
+			&:hover {
+				.main-menu__container {
+					left: 0;
+					float: left;
+				}
+				ul {
+					left: 0;
+				}
+			}
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		.menu-bar ul li a {
+			border-right: 1px solid $border-1;
+			border-left: none;
+		}
+		.main-menu.menu-bar ul li:first-child a {
+			border-right: 0;
+		}
+		#search {
+			.search__container {
+				float: left;
+			}
+		}
+		footer {
+			h3 {
+				float: right;
+				padding: 3px 0 3px 12px;
+			}
+		}
+	}
+}

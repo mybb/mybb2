@@ -3,7 +3,7 @@
         {% for breadcrumb in breadcrumbs %}
             {% if breadcrumb.last == false %}
                 <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
-				<i class="fa fa-angle-right"></i>
+				<i class="fa fa-angle-{{ (trans('general.direction') == 'ltr')?'right':'left' }}"></i>
             {% else %}
                 <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
             {% endif %}

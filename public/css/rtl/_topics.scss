@@ -1,0 +1,84 @@
+html[dir="rtl"] {
+	.post {
+		.post__meta {
+			.post__edit-log {
+				margin-right: 4px;
+				margin-left: auto;
+			}
+			.post__status {
+				margin-right: 16px;
+				i {
+					margin-left: 3px;
+					margin-right: 0;
+				}
+			}
+		}
+		.post__inline-mod {
+			float: left;
+			margin: -20px 7px 0 0;
+		}
+		.avatar-profile-link {
+			float: right;
+			margin: 7px 0 0 10px;
+		}
+		.post__body {
+			blockquote {
+				border-right: 2px solid $primary-color;
+				border-left: none;
+			}
+		}
+		.post__controls {
+			text-align: left;
+			li {
+				&.like,
+				&.quote,
+				&.approve,
+				&.restore {
+					float: right;
+				}
+			}
+			.text {
+				margin-right: 6px;
+				margin-left: 0;
+			}
+		}
+		.post__likes {
+			i {
+				margin-left: 5px;
+				margin-right: 0;
+			}
+		}
+		&.post--reply {
+			.full-reply {
+				float: left;
+			}
+		}
+	}
+	@media only screen and (min-width: 480px) {
+		.post {
+			margin-right: 80px;
+			.post__meta {
+				.post__date {
+					margin: 0 10px 0 0;
+				}
+			}
+			.avatar-profile-link {
+				float: right;
+				margin: -13px -100px 0 0;
+			}
+			.post__inline-mod {
+				margin-top: 7px;
+			}
+		}
+	}
+	@media only screen and (min-width: 768px) {
+		.post {
+			margin-right: 110px;
+			margin-left: 0;
+			.avatar-profile-link {
+				margin-right: -130px;
+				margin-left: 0;
+			}
+		}
+	}
+}
