@@ -12,6 +12,7 @@ html[dir="rtl"] {
 			}
 			i {
 				padding-left: 5px;
+				padding-right: 0;
 			}
 		}
 	}
@@ -19,6 +20,7 @@ html[dir="rtl"] {
 		.button {
 			i {
 				margin-left: 8px;
+				margin-right: 0;
 			}
 		}
 	}
@@ -32,6 +34,7 @@ html[dir="rtl"] {
 		}
 		:first-child .segmented-control__button {
 			border-right: 1px solid transparent;
+			border-left: 1px solid $border-2;
 		}
 	}
 	.select-control {
@@ -52,7 +55,7 @@ html[dir="rtl"] {
 			}
 			.form__section__container {
 				float: right;
-				margin: 0 3 0 0%;
+				margin: 0 3% 0 0;
 				padding: 0 20px 0 0;
 				border-right: 1px dotted #ccc;
 			}

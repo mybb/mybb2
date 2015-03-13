@@ -4313,8 +4313,6 @@ html[dir="rtl"] h1.title {
 html[dir="rtl"] .main-menu {
   float: left; }
 html[dir="rtl"] .menu-bar ul li a {
-  margin-right: 1%;
-  margin-left: 1%;
   float: right; }
 html[dir="rtl"] .menu-bar ul li .unread-count {
   padding: 2px 4px 1px 5px;
@@ -4330,7 +4328,8 @@ html[dir="rtl"] .user-navigation__links .unread-count {
   padding: 2px 4px 1px 5px;
   margin: 0 2px 0 0; }
 html[dir="rtl"] .user-navigation ul .user-navigation__dropdown {
-  right: -2px; }
+  right: -2px;
+  left: auto; }
   html[dir="rtl"] .user-navigation ul .user-navigation__dropdown li a {
     border-right: 0;
     text-align: right; }
@@ -4344,8 +4343,6 @@ html[dir="rtl"] .user-navigation ul .user-navigation__dropdown {
       float: left; }
   html[dir="rtl"] .user-navigation ul .user-navigation__dropdown ul.notifications a {
     padding: 8px 16px 8px 8px; }
-  html[dir="rtl"] .user-navigation ul .user-navigation__dropdown ul.notifications span.username {
-    font-weight: bold; }
   html[dir="rtl"] .user-navigation ul .user-navigation__dropdown ul.notifications i {
     margin: 4px -8px 4px 0;
     float: right; }
@@ -4360,7 +4357,8 @@ html[dir="rtl"] #search .search__button {
 html[dir="rtl"] #search .search__controls {
   text-align: left;
   float: left;
-  padding-left: 8px; }
+  padding-left: 8px;
+  padding-right: 0; }
 html[dir="rtl"] #search button.search__submit, html[dir="rtl"] #search a.search__advanced {
   margin: 0 8px 0 0; }
 html[dir="rtl"] .breadcrumb i {
@@ -4373,7 +4371,8 @@ html[dir="rtl"] .breadcrumb i {
     left: 0; } }
 @media only screen and (min-width: 768px) {
   html[dir="rtl"] .menu-bar ul li a {
-    border-right: 1px solid #dfdfdf; }
+    border-right: 1px solid #dfdfdf;
+    border-left: none; }
   html[dir="rtl"] .main-menu.menu-bar ul li:first-child a {
     border-right: 0; }
   html[dir="rtl"] #search .search__container {
@@ -4387,19 +4386,24 @@ html[dir="rtl"] .main .pagination {
 html[dir="rtl"] section .heading--linked a .count {
   float: left; }
   html[dir="rtl"] section .heading--linked a .count i {
-    margin-right: 4px; }
+    margin-right: 4px;
+    margin-left: 0; }
 html[dir="rtl"] section .page-tabs li {
   margin: 0 0 0 8px; }
 html[dir="rtl"] .button i, html[dir="rtl"] a.button i {
-  margin-left: 5px; }
+  margin-left: 5px;
+  margin-right: 0; }
 html[dir="rtl"] nav.section-menu ul li {
   float: right; }
   html[dir="rtl"] nav.section-menu ul li:nth-child(odd) {
-    margin-left: 2%; }
+    margin-left: 2%;
+    margin-right: 0; }
   html[dir="rtl"] nav.section-menu ul li:nth-child(even) {
-    margin-right: 2%; }
+    margin-right: 2%;
+    margin-left: 0; }
   html[dir="rtl"] nav.section-menu ul li a i {
-    padding-left: 5px; }
+    padding-left: 5px;
+    padding-right: 0; }
 @media only screen and (min-width: 768px) {
   html[dir="rtl"] .main .page-content--sidebar {
     float: right; }
@@ -4410,15 +4414,15 @@ html[dir="rtl"] nav.section-menu ul li {
   html[dir="rtl"] .main .page-buttons {
     float: left;
     margin: -45px 0 8px -5px; }
+  html[dir="rtl"] .main .page-controls .page-buttons {
+    margin-top: 0; }
   html[dir="rtl"] .main .page-controls .pagination {
     float: right;
     text-align: right; }
   html[dir="rtl"] nav.section-menu {
     float: right;
-    margin-left: 3%; }
-    html[dir="rtl"] nav.section-menu ul li, html[dir="rtl"] nav.section-menu ul li:nth-child(odd), html[dir="rtl"] nav.section-menu ul li:nth-child(even) {
-      margin-right: 0;
-      margin-left: 0; } }
+    margin-left: 3%;
+    margin-right: 0; } }
 
 html[dir="rtl"] input.small {
   margin-right: 6px;
@@ -4429,16 +4433,19 @@ html[dir="rtl"] section.form p.form__checkbox {
     float: right;
     margin: 6px -26px 0 0; }
   html[dir="rtl"] section.form p.form__checkbox i {
-    padding-left: 5px; }
+    padding-left: 5px;
+    padding-right: 0; }
 html[dir="rtl"] .form__submit .button i {
-  margin-left: 8px; }
+  margin-left: 8px;
+  margin-right: 0; }
 html[dir="rtl"] .segmented-control .segmented-control__button {
   border-right: 1px solid #ccc;
   border-left: 1px solid transparent; }
   html[dir="rtl"] .segmented-control .segmented-control__button i {
     margin: 0 0 0 6px; }
 html[dir="rtl"] .segmented-control :first-child .segmented-control__button {
-  border-right: 1px solid transparent; }
+  border-right: 1px solid transparent;
+  border-left: 1px solid #ccc; }
 html[dir="rtl"] .select-control .select-control__button {
   margin: 5px 0 0 10px; }
   html[dir="rtl"] .select-control .select-control__button i {
@@ -4449,16 +4456,18 @@ html[dir="rtl"] .select-control .select-control__button {
     text-align: left; }
   html[dir="rtl"] section.form .form__section__container {
     float: right;
-    margin: 0 3 0 0%;
+    margin: 0 3% 0 0;
     padding: 0 20px 0 0;
     border-right: 1px dotted #ccc; } }
 
 html[dir="rtl"] .post .post__meta .post__edit-log {
-  margin-right: 4px; }
+  margin-right: 4px;
+  margin-left: auto; }
 html[dir="rtl"] .post .post__meta .post__status {
   margin-right: 16px; }
   html[dir="rtl"] .post .post__meta .post__status i {
-    margin-left: 3px; }
+    margin-left: 3px;
+    margin-right: 0; }
 html[dir="rtl"] .post .post__inline-mod {
   float: left;
   margin: -20px 7px 0 0; }
@@ -4466,15 +4475,18 @@ html[dir="rtl"] .post .avatar-profile-link {
   float: right;
   margin: 7px 0 0 10px; }
 html[dir="rtl"] .post .post__body blockquote {
-  border-right: 2px solid #007fd0; }
+  border-right: 2px solid #007fd0;
+  border-left: none; }
 html[dir="rtl"] .post .post__controls {
   text-align: left; }
   html[dir="rtl"] .post .post__controls li.like, html[dir="rtl"] .post .post__controls li.quote, html[dir="rtl"] .post .post__controls li.approve, html[dir="rtl"] .post .post__controls li.restore {
     float: right; }
   html[dir="rtl"] .post .post__controls .text {
-    margin-right: 6px; }
+    margin-right: 6px;
+    margin-left: 0; }
 html[dir="rtl"] .post .post__likes i {
-  margin-left: 5px; }
+  margin-left: 5px;
+  margin-right: 0; }
 html[dir="rtl"] .post.post--reply .full-reply {
   float: left; }
 @media only screen and (min-width: 480px) {
@@ -4489,9 +4501,11 @@ html[dir="rtl"] .post.post--reply .full-reply {
       margin-top: 7px; } }
 @media only screen and (min-width: 768px) {
   html[dir="rtl"] .post {
-    margin-right: 110px; }
+    margin-right: 110px;
+    margin-left: 0; }
     html[dir="rtl"] .post .avatar-profile-link {
-      margin-right: -130px; } }
+      margin-right: -130px;
+      margin-left: 0; } }
 
 html[dir="rtl"] .user-list .user-list__user .avatar-profile-link {
   float: right;
@@ -4499,17 +4513,21 @@ html[dir="rtl"] .user-list .user-list__user .avatar-profile-link {
 html[dir="rtl"] .user-list .user-list__user .team-badge {
   float: left; }
 html[dir="rtl"] .team-badge i {
-  margin-left: 5px; }
+  margin-left: 5px;
+  margin-right: 0; }
 @media only screen and (min-width: 768px) {
   html[dir="rtl"] .user-list .user-list__user {
     float: right; }
     html[dir="rtl"] .user-list .user-list__user:nth-child(odd) {
-      margin-left: 0.5%; }
+      margin-left: 0.5%;
+      margin-right: 0; }
     html[dir="rtl"] .user-list .user-list__user:nth-child(even) {
-      margin-right: 0.5%; } }
+      margin-right: 0.5%;
+      margin-left: 0; } }
 
 html[dir="rtl"] section.form .form__section__container.change-avatar {
-  padding-right: 130px; }
+  padding-right: 130px;
+  padding-left: auto; }
   html[dir="rtl"] section.form .form__section__container.change-avatar .avatar-profile-link {
     float: right;
     margin: 0 -110px 0 10px; }
@@ -4520,14 +4538,17 @@ html[dir="rtl"] ul.notifications a.avatar-profile-link {
   margin: 0 0 0 12px; }
 html[dir="rtl"] ul.notifications a.notification {
   margin-right: 52px;
-  padding-right: 24px; }
+  margin-left: 0;
+  padding-right: 24px;
+  padding-left: 0; }
 
 html[dir="rtl"] .modal .page-content header .page-controls {
   margin: -50px 0 0 8px; }
 html[dir="rtl"] .modal .page-content section.form h2 {
   text-align: right; }
 html[dir="rtl"] .modal a.close-modal {
-  left: -12.5px; }
+  left: -12.5px;
+  right: auto; }
 html[dir="rtl"] .modal-spinner {
   right: 50%;
   margin-left: -32px; }
@@ -4535,15 +4556,19 @@ html[dir="rtl"] #powerTip.n:before, html[dir="rtl"] #powerTip.s:before {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   right: 50%;
-  margin-right: -5px; }
+  left: auto;
+  margin-right: -5px;
+  margin-left: 0; }
 html[dir="rtl"] #powerTip.e:before {
   border-left: 5px solid #333;
   border-left: 5px solid rgba(0, 0, 0, 0.8);
-  right: -5px; }
+  right: -5px;
+  left: auto; }
 html[dir="rtl"] #powerTip.w:before {
   border-right: 5px solid #333;
   border-right: 5px solid rgba(0, 0, 0, 0.8);
-  left: -5px; }
+  left: -5px;
+  right: auto; }
 html[dir="rtl"] #powerTip.ne:before, html[dir="rtl"] #powerTip.se:before {
   border-left: 5px solid transparent;
   border-right: 0;
@@ -4551,11 +4576,13 @@ html[dir="rtl"] #powerTip.ne:before, html[dir="rtl"] #powerTip.se:before {
 html[dir="rtl"] #powerTip.nw:before, html[dir="rtl"] #powerTip.sw:before {
   border-right: 5px solid transparent;
   border-left: 0;
-  left: 10px; }
+  left: 10px;
+  right: auto; }
 html[dir="rtl"] #powerTip.nw-alt:before, html[dir="rtl"] #powerTip.ne-alt:before, html[dir="rtl"] #powerTip.sw-alt:before, html[dir="rtl"] #powerTip.se-alt:before {
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
-  right: 10px; }
+  right: 10px;
+  left: auto; }
 html[dir="rtl"] #powerTip.ne-alt:before {
   right: auto;
   left: 10px; }
@@ -4565,15 +4592,19 @@ html[dir="rtl"] #powerTip.se-alt:before {
 html[dir="rtl"] .stepper .stepper-arrow.up {
   float: left;
   left: 0;
+  right: auto;
   border-right: 1px solid #ccc; }
 html[dir="rtl"] .stepper .stepper-arrow.down {
   float: right;
   right: 0;
+  left: auto;
   border-left: 1px solid #ccc; }
 html[dir="rtl"] .hideShowPassword-toggle {
-  margin-left: 2px; }
+  margin-left: 2px;
+  margin-right: 0; }
 html[dir="rtl"] .dropit .dropit-submenu {
-  right: 0; }
+  right: 0;
+  left: auto; }
 
 html[dir="rtl"] .compressed-forum-list .category ul {
   padding: 0 15px 0 0; }
@@ -4591,34 +4622,43 @@ html[dir="rtl"] .forum-list .forum .topic {
 html[dir="rtl"] .forum-list .forum .topic.compact .avatar-profile-link {
   margin: -2px 0 0 10px; }
 html[dir="rtl"] .forum-list .forum .topic.compact i {
-  margin-left: 3px; }
+  margin-left: 3px;
+  margin-right: 0; }
 html[dir="rtl"] .forum-list .forum .topic.compact .topic-title {
-  margin-left: 4px; }
+  margin-left: 4px;
+  margin-right: 0; }
 html[dir="rtl"] .forum.topic-list .sort-topics .latest-column {
   text-align: left; }
 html[dir="rtl"] .forum.topic-list .sort-topics a:link, html[dir="rtl"] .forum.topic-list .sort-topics a:visited {
   float: right; }
 html[dir="rtl"] .forum.topic-list .sort-topics i {
-  margin-right: 4px; }
+  margin-right: 4px;
+  margin-left: 0; }
 html[dir="rtl"] .forum.topic-list .topics-container {
   border-right: 1px solid #ccc;
   border-left: 1px solid #ccc; }
 html[dir="rtl"] .forum.topic-list .topic {
-  padding-right: 60px; }
+  padding-right: 60px;
+  padding-left: 0; }
 html[dir="rtl"] .forum.topic-list .topic .unread-count {
   padding: 2px 6px 2px 7px;
   margin: 0 6px 0 0; }
 html[dir="rtl"] .forum.topic-list .topic .unread-count i {
-  margin-right: 3px; }
+  margin-right: 3px;
+  margin-left: 0; }
 html[dir="rtl"] .forum.topic-list .topic .contains-new-posts {
-  margin-right: 10px; }
+  margin-right: 10px;
+  margin-left: 0; }
 html[dir="rtl"] .forum.topic-list .topic .contains-new-posts i {
-  margin-left: 2px; }
+  margin-left: 2px;
+  margin-riight: 0; }
 html[dir="rtl"] .forum.topic-list .topic .icons {
   float: left;
-  left: 0; }
+  left: 0;
+  right: auto; }
 html[dir="rtl"] .forum.topic-list .topic .icons i {
-  margin-right: 8px; }
+  margin-right: 8px;
+  margin-left: 0; }
 html[dir="rtl"] .forum.topic-list .topic .avatar-profile-link {
   float: right;
   margin: 0 6px 0 12px; }
@@ -4628,17 +4668,23 @@ html[dir="rtl"] .topic-list .topic .avatar-profile-link {
 html[dir="rtl"] aside .latest-discussions .topic .avatar-profile-link {
   margin: 0 -8px 0 12px; }
 html[dir="rtl"] .topic-list .topic .topic-info {
-  margin-right: 52px; }
+  margin-right: 52px;
+  margin-left: 0; }
 html[dir="rtl"] aside .latest-discussions .topic .topic-info {
-  margin-right: 40px; }
+  margin-right: 40px;
+  margin-right: 0; }
 html[dir="rtl"] .topic-list .topic .topic-replies {
-  margin-right: 12px; }
+  margin-right: 12px;
+  margin-left: 0; }
 html[dir="rtl"] .topic-list .topic .topic-replies i {
-  margin-left: 4px; }
+  margin-left: 4px;
+  margin-right: 0; }
 html[dir="rtl"] .forum-list .forum .icons, html[dir="rtl"] .topic-list .topic .icons {
-  margin-right: 16px; }
+  margin-right: 16px;
+  margin-left: 0; }
 html[dir="rtl"] aside .topic-list .topic .latest-post {
-  margin-left: 8px; }
+  margin-left: 8px;
+  margin-right: 0; }
 html[dir="rtl"] aside .topic-list .topic .topic-replies {
   margin-right: 0; }
 html[dir="rtl"] html.js .inline-moderation.floating {
@@ -4648,7 +4694,8 @@ html[dir="rtl"] html.js .inline-moderation.floating {
 html[dir="rtl"] .inline-moderation h2 {
   margin: 0 0 0 8px; }
 html[dir="rtl"] .inline-moderation i {
-  margin-left: 4px; }
+  margin-left: 4px;
+  margin-right: 0; }
 html[dir="rtl"] .compact-users-list a {
   margin: 0 0 10px 12px; }
 html[dir="rtl"] .compact-users-list .avatar {
@@ -4697,7 +4744,8 @@ html[dir="rtl"] .checkbox-select.check-all {
   html[dir="rtl"] .forum.topic-list .topic .icons {
     float: left; }
   html[dir="rtl"] .forum.topic-list .topic .icons i {
-    margin-right: 8px; }
+    margin-right: 8px;
+    margin-left: 0; }
   html[dir="rtl"] .forum.topic-list .topic .replies-column {
     float: right; }
   html[dir="rtl"] .forum.topic-list .topic .latest-column {

@@ -12,8 +12,6 @@ html[dir="rtl"] {
 		ul {
 			li {
 				a {
-					margin-right: 1%;
-					margin-left: 1%;
 					float: right;
 				}
 				.unread-count {
@@ -41,6 +39,7 @@ html[dir="rtl"] {
 	}
 	.user-navigation ul .user-navigation__dropdown {
 		right: -2px;
+		left: auto;
 		li {
 			a {
 				border-right: 0;
@@ -63,9 +62,6 @@ html[dir="rtl"] {
 			a {
 				padding: 8px 16px 8px 8px;
 			}
-			span.username {
-				font-weight: bold
-			}
 			i {
 				margin: 4px -8px 4px 0;
 				float: right;
@@ -75,8 +71,6 @@ html[dir="rtl"] {
 			a.avatar-profile-link {
 				float: right;
 				margin: 0 0 0 8px;
-				img.avatar {
-				}
 			}
 		}
 		time {
@@ -92,6 +86,7 @@ html[dir="rtl"] {
 			text-align: left;
 			float: left;
 			padding-left: 8px;
+			padding-right: 0;
 		}
 		button.search__submit,
 		a.search__advanced {
@@ -119,6 +114,7 @@ html[dir="rtl"] {
 	@media only screen and (min-width: 768px) {
 		.menu-bar ul li a {
 			border-right: 1px solid $border-1;
+			border-left: none;
 		}
 		.main-menu.menu-bar ul li:first-child a {
 			border-right: 0;

@@ -13,6 +13,7 @@ html[dir="rtl"] {
 	.team-badge {
 		i {
 			margin-left: 5px;
+			margin-right: 0;
 		}
 	}
 	@media only screen and (min-width: 768px) {
@@ -20,9 +21,11 @@ html[dir="rtl"] {
 			float: right;
 			&:nth-child(odd) {
 				margin-left: 0.5%;
+				margin-right: 0;
 			}
 			&:nth-child(even) {
 				margin-right: 0.5%;
+				margin-left: 0;
 			}
 		}
 	}

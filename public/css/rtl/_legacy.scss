@@ -23,9 +23,11 @@ html[dir="rtl"] {
 	}
 	.forum-list .forum .topic.compact i {
 		margin-left: 3px;
+		margin-right: 0;
 	}
 	.forum-list .forum .topic.compact .topic-title {
 		margin-left: 4px;
+		margin-right: 0;
 	}
 	.forum.topic-list .sort-topics .latest-column {
 		text-align: left;
@@ -36,6 +38,7 @@ html[dir="rtl"] {
 	}
 	.forum.topic-list .sort-topics i {
 		margin-right: 4px;
+		margin-left: 0;
 	}
 	.forum.topic-list .topics-container {
 		border-right: 1px solid #ccc;
@@ -43,6 +46,7 @@ html[dir="rtl"] {
 	}
 	.forum.topic-list .topic {
 		padding-right: 60px;
+		padding-left: 0;
 	}
 	.forum.topic-list .topic .unread-count {
 		padding: 2px 6px 2px 7px;
@@ -50,19 +54,24 @@ html[dir="rtl"] {
 	}
 	.forum.topic-list .topic .unread-count i {
 		margin-right: 3px;
+		margin-left: 0;
 	}
 	.forum.topic-list .topic .contains-new-posts {
 		margin-right: 10px;
+		margin-left: 0;
 	}
 	.forum.topic-list .topic .contains-new-posts i {
 		margin-left: 2px;
+		margin-riight: 0;
 	}
 	.forum.topic-list .topic .icons {
 		float: left;
 		left: 0;
+		right: auto;
 	}
 	.forum.topic-list .topic .icons i {
 		margin-right: 8px;
+		margin-left: 0;
 	}
 	.forum.topic-list .topic .avatar-profile-link {
 		float: right;
@@ -77,22 +86,28 @@ html[dir="rtl"] {
 	}
 	.topic-list .topic .topic-info {
 		margin-right: 52px;
+		margin-left: 0;
 	}
 	aside .latest-discussions .topic .topic-info {
 		margin-right: 40px;
+		margin-right: 0;
 	}
 	.topic-list .topic .topic-replies {
 		margin-right: 12px;
+		margin-left: 0;
 	}
 	.topic-list .topic .topic-replies i {
 		margin-left: 4px;
+		margin-right: 0;
 	}
 	.forum-list .forum .icons,
 	.topic-list .topic .icons {
 		margin-right: 16px;
+		margin-left: 0;
 	}
 	aside .topic-list .topic .latest-post {
 		margin-left: 8px;
+		margin-right: 0;
 	}
 	aside .topic-list .topic .topic-replies {
 		margin-right: 0;
@@ -107,6 +122,7 @@ html[dir="rtl"] {
 	}
 	.inline-moderation i {
 		margin-left: 4px;
+		margin-right: 0;
 	}
 	.compact-users-list a {
 		margin: 0 0 10px 12px;
@@ -182,11 +198,10 @@ html[dir="rtl"] {
 		}
 		.forum.topic-list .topic .icons i {
 			margin-right: 8px;
+			margin-left: 0;
 		}
 		.forum.topic-list .topic .replies-column {
 			float: right;
-		}
-		.forum.topic-list .topic .replies-column p {
 		}
 		.forum.topic-list .topic .latest-column {
 			float: right;

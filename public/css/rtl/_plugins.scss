@@ -7,38 +7,31 @@ html[dir="rtl"] {
 	}
 	.modal a.close-modal {
 		left: -12.5px;
+		right: auto;
 	}
 	.modal-spinner {
 		right: 50%;
 		margin-left: -32px;
 	}
-	@media screen and (max-height: 758px) {
-		.modal .page-content section.form {
-		}
-	}
-	@media screen and (max-height: 524px) {
-		.modal .page-content section.form {
-		}
-	}
-	@media screen and (max-height: 458px) {
-		.modal .page-content section.form {
-		}
-	}
 	#powerTip.n:before, #powerTip.s:before {
 		border-left: 5px solid transparent;
 		border-right: 5px solid transparent;
 		right: 50%;
+		left: auto;
 		margin-right: -5px;
+		margin-left: 0;
 	}
 	#powerTip.e:before {
 		border-left: 5px solid #333;
 		border-left: 5px solid rgba(0, 0, 0, 0.8);
 		right: -5px;
+		left: auto;
 	}
 	#powerTip.w:before {
 		border-right: 5px solid #333;
 		border-right: 5px solid rgba(0, 0, 0, 0.8);
 		left: -5px;
+		right: auto;
 	}
 	#powerTip.ne:before, #powerTip.se:before {
 		border-left: 5px solid transparent;
@@ -49,12 +42,14 @@ html[dir="rtl"] {
 		border-right: 5px solid transparent;
 		border-left: 0;
 		left: 10px;
+		right: auto;
 	}
 	#powerTip.nw-alt:before, #powerTip.ne-alt:before,
 	#powerTip.sw-alt:before, #powerTip.se-alt:before {
 		border-right: 5px solid transparent;
 		border-left: 5px solid transparent;
 		right: 10px;
+		left: auto;
 	}
 	#powerTip.ne-alt:before {
 		right: auto;
@@ -67,17 +62,21 @@ html[dir="rtl"] {
 	.stepper .stepper-arrow.up {
 		float: left;
 		left: 0;
+		right: auto;
 		border-right: 1px solid #ccc;
 	}
 	.stepper .stepper-arrow.down {
 		float: right;
 		right: 0;
+		left: auto;
 		border-left: 1px solid #ccc;
 	}
 	.hideShowPassword-toggle {
 		margin-left: 2px;
+		margin-right: 0;
 	}
 	.dropit .dropit-submenu {
 		right: 0;
+		left: auto;
 	}
 }

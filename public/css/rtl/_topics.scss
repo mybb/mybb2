@@ -1,15 +1,15 @@
 html[dir="rtl"] {
 	.post {
 		.post__meta {
-			.post__date {
-			}
 			.post__edit-log {
 				margin-right: 4px;
+				margin-left: auto;
 			}
 			.post__status {
 				margin-right: 16px;
 				i {
 					margin-left: 3px;
+					margin-right: 0;
 				}
 			}
 		}
@@ -24,6 +24,7 @@ html[dir="rtl"] {
 		.post__body {
 			blockquote {
 				border-right: 2px solid $primary-color;
+				border-left: none;
 			}
 		}
 		.post__controls {
@@ -38,11 +39,13 @@ html[dir="rtl"] {
 			}
 			.text {
 				margin-right: 6px;
+				margin-left: 0;
 			}
 		}
 		.post__likes {
 			i {
 				margin-left: 5px;
+				margin-right: 0;
 			}
 		}
 		&.post--reply {
@@ -71,8 +74,10 @@ html[dir="rtl"] {
 	@media only screen and (min-width: 768px) {
 		.post {
 			margin-right: 110px;
+			margin-left: 0;
 			.avatar-profile-link {
 				margin-right: -130px;
+				margin-left: 0;
 			}
 		}
 	}
