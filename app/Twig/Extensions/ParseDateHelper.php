@@ -32,7 +32,13 @@ class ParseDateHelper
 					$timeFormat = trans('general.timeformat');
 				}
 
-				$format .= ' '.$this->at().' '.$timeFormat;
+				$time = 'H:i';
+				if($timeFormat == 12)
+				{
+					$time = 'h:i A';
+				}
+
+				$format .= ' '.$this->at().' '.$time;
 			}
 		}
 		elseif($format == 'default')
@@ -44,7 +50,13 @@ class ParseDateHelper
 			{
 				$timeFormat = trans('general.timeformat');
 
-				$format .= ' '.$this->at().' '.$timeFormat;
+				$time = 'H:i';
+				if($timeFormat == 12)
+				{
+					$time = 'h:i A';
+				}
+
+				$format .= ' '.$this->at().' '.$time;
 			}
 		}
 
@@ -86,6 +98,23 @@ class ParseDateHelper
 		$dateTimeFormat = $this->formatDate($date, true, 'c');
 
 		return "<time datetime=\"{$dateTimeFormat}\" title=\"{$attributeTime}\">{$showTime}</time>";
+	}
+
+	public function postDateLink($url, $date = null, $showFormat = null, $attributeFormat = null)
+	{
+		$date = $this->getDateObject($date);
+
+		if($showFormat != null)
+		{
+			$showTime = $this->formatDate($date, true, $showFormat);
+		}
+		else
+		{
+			$showTime = $this->humanDate($date);
+		}
+		$attributeTime = $this->formatDate($date, true, $attributeFormat);
+
+		return "<a href=\"{$url}\" class=\"post__date\" title=\"{$attributeTime}\">{$showTime}</a>";
 	}
 
 	private function getDateObject($date)

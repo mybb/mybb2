@@ -30,12 +30,12 @@
 					<div class="segmented-control">
 						{# we can't use form_label here as laravel escapes the value and we need html in it #}
 						<span class="segmented-control__block">
-							{{ form_radio('time_format', 12, timeformat == 12, {'id': 'twelvehour'}) }}
+							{{ form_radio('time_format', 12, setting('user.time_format', trans('general.timeformat')) == 12, {'id': 'twelvehour'}) }}
 							<label class="segmented-control__button" for="twelvehour">
 								<span class="text">{{ trans('account.12-hour') }}</span>
 							</label>
 						</span><span class="segmented-control__block">
-							{{ form_radio('time_format', 24, timeformat == 24, {'id': 'twentyfourhour'}) }}
+							{{ form_radio('time_format', 24, setting('user.time_format', trans('general.timeformat')) == 24, {'id': 'twentyfourhour'}) }}
 							<label class="segmented-control__button" for="twentyfourhour">
 								<span class="text">{{ trans('account.24-hour') }}</span>
 							</label>
@@ -44,7 +44,6 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('timezone', trans('account.timezone')) }}</h3>
-					{# TODO: translatable, time should be dynamic and we should probably use real timezones #}
 					{{ form_select('timezone', selectTimezones, timezone) }}
 				</div>
 				<div class="form__row">

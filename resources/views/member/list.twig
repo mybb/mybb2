@@ -20,9 +20,9 @@
 					<dt>{{ trans('member.topics') }}</dt>
 					<dd>{{ user.num_topics }}</dd>
 					<dt>{{ trans('member.joinDate') }}</dt>
-					<dd>{{ generate_time(user.created_at)|raw }}</dd>
+					<dd>{{ generate_time(user.created_at) }}</dd>
 					<dt>{{ trans('member.lastVisit') }}</dt>
-					<dd>{{ generate_time(user.last_visit)|raw }}</dd>
+					<dd>{{ generate_time(user.last_visit) }}</dd>
 				</dl>
 			</div>
 		{% endfor %}

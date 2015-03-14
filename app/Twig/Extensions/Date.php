@@ -47,8 +47,9 @@ class Date extends Twig_Extension
 	{
 		return [
 			new Twig_SimpleFunction('format_date', [$this->_dateParser, 'formatDate']),
-			new Twig_SimpleFunction('generate_time', [$this->_dateParser, 'generateTime']),
+			new Twig_SimpleFunction('generate_time', [$this->_dateParser, 'generateTime'], ['is_safe' => ['html']]),
 			new Twig_SimpleFunction('human_date', [$this->_dateParser, 'humanDate']),
+			new Twig_SimpleFunction('post_date_link', [$this->_dateParser, 'postDateLink'], ['is_safe' => ['html']]),
 		];
 	}
 }

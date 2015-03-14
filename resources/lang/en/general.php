@@ -4,7 +4,7 @@ return [
 
 	'language' => 'English',
 	'dateformat' => 'M d, Y',
-	'timeformat' => 'h:i A',
+	'timeformat' => '12',
 	'timezone' => 'Europe/London',
 	'direction' => 'ltr',
 

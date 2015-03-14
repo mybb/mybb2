@@ -333,13 +333,7 @@ class AccountController extends Controller
 			$timezone = trans('general.timezone');
 		}
 
-		$timeformat = 24;
-		if($settings->get('user.time_format', trans('general.timeformat')) == 'h:i A')
-		{
-			$timeformat = 12;
-		}
-
-		return view('account.preferences', compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone', 'timeformat'))->withActive('preferences');
+		return view('account.preferences', compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone'))->withActive('preferences');
 	}
 
 	/**
@@ -415,14 +409,7 @@ class AccountController extends Controller
 			$input['timezone'] = null;
 		}
 
-		$timeformat = 'H:i';
-		if($input['time_format'] == 12)
-		{
-			$timeformat = 'h:i A';
-		}
-		$input['time_format'] = $timeformat;
-
-		if($timeformat == trans('general.timeformat'))
+		if($input['time_format'] == trans('general.timeformat'))
 		{
 			$input['time_format'] = null;
 		}
