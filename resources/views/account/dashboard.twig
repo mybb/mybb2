@@ -3,7 +3,21 @@
     {{ trans('account.dashboard') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-            <h1>{{ trans('account.dashboard') }}</h1>
-        </header>
+	<header>
+		<h1>{{ trans('account.dashboard') }}</h1>
+	</header>
+
+	{# TODO: add a proper dashboard and move styling to css files #}
+	<section>
+		<h2 class="heading heading--major">{{ trans('account.summary') }}</h2>
+		<div style="float: left; padding-left: 130px; margin-top: 10px;">
+			<img src="{{ auth_user.avatar }}" class="avatar" style="width: 100px; height: 100px; float: left; margin: 0 10px 0 -110px;" />
+			<p>
+				{{ auth_user.styled_name|raw }}<br />
+				{{ trans('topic.posts') }}: {{ auth_user.num_posts }}<br />
+				{{ trans('account.email') }}: {{ auth_user.email }}<br />
+				{{ trans('member.joinDate') }}: {{ generate_time(auth_user.created_at) }}
+			</p>
+		</div>
+	</section>
 {% endblock %}

@@ -15,6 +15,8 @@ return [
 	'usedefault' => 'Use Forum Default',
 	'uselangdefault' => 'Use Language Default',
 
+	'summary' => 'Account Summary',
+
 	'avatar' => 'Avatar',
 	'your_avatar' => 'Your Avatar',
 	'avatar_desc' => 'This photo is your identity on the forum and appears with all your posts.',
