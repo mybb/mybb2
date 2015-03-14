@@ -47,12 +47,12 @@ class UserRepository implements IUserRepository
 	 *
 	 * @return mixed
 	 */
-	public function online($minutes = 15, $orderBy = 'last_visit', $num = 20)
+	public function online($minutes = 15, $orderBy = 'last_visit', $orderDir = 'desc', $num = 20)
 	{
 		// If the user visited the logout page as last he's not online anymore
 		return $this->userModel->where('last_visit', '>=', new \DateTime("{$minutes} minutes ago"))
 			->where('last_page', '!=', 'auth/logout')
-			->orderBy($orderBy, 'desc')
+			->orderBy($orderBy, $orderDir)
 			->paginate($num);
 	}
 

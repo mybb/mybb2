@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\IUserRepository;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -19,6 +20,8 @@ class ForumController extends Controller
 	private $topicRepository;
 	/** @var IPostRepository $postRepository */
 	private $postRepository;
+	/** @var  IUserRepository $userRepository */
+	private $userRepository;
 
 	/**
 	 * Create a new controller instance.
@@ -33,8 +36,8 @@ class ForumController extends Controller
 		IForumRepository $forumRepository,
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
+		IUserRepository $userRepository,
 		Guard $guard,
-		Store $settings,
 		Request $request
 	) {
 		parent::__construct($guard, $request);
@@ -42,6 +45,7 @@ class ForumController extends Controller
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
+		$this->userRepository = $userRepository;
 	}
 
 	/**
@@ -61,12 +65,13 @@ class ForumController extends Controller
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function index()
+	public function index(Store $settings)
 	{
 		$forums = $this->forumRepository->getIndexTree();
 		$topics = $this->topicRepository->getNewest();
+		$users = $this->userRepository->online($settings->get('wio.minutes', 15), 'name', 'asc', 0);
 
-		return view('forum.index', compact('forums', 'topics'));
+		return view('forum.index', compact('forums', 'topics', 'users'));
 	}
 
 	/**

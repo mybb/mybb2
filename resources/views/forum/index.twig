@@ -51,22 +51,13 @@
 			</div>
 	</section>
 		<section>
-			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">Online Now <span class="count">14 <i class="fa fa-angle-{{ (trans('general.direction') == 'ltr')?'right':'left' }}"></i></span></a></h3>
+			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ (trans('general.direction') == 'ltr')?'right':'left' }}"></i></span></a></h3>
 			<div class="compact-users-list online-users">
-				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />Clank</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31011.png?dateline=1373556215" class="avatar" />envira</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_13376.jpg?dateline=1401219544" class="avatar" />Eric J.</a>
-				<a href="index.php?page=profile"><img src="http://i.imgur.com/92dvjzh.png?dateline=1362534988" class="avatar" />Jason L.</a>
-				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />Jetto</a>
-				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />Julz</a>
-				<a href="index.php?page=profile"><img src="https://s.gravatar.com/avatar/6341d8857df6d5b3a7b76318c980bbe8?s=100?dateline=1390444813" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Justin</span></a>
-				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />MrGinos</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_25096.png?dateline=1395716559" class="avatar" /><span style="color: #ff7500; font-weight: bold;">Omar G.</span></a>
-				<a href="index.php?page=profile"><img src="images/avatar.png" class="avatar" />Penn</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_57932.jpg?dateline=1346006198" class="avatar" />psock</a>
-				<a href="index.php?page=profile"><img src="https://es.gravatar.com/userimage/36446230/6a242edbd3e0ff86c6b18fde2c31e46b.png?dateline=1358073091" class="avatar" />Solstice</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_78269.jpg?dateline=1400055145" class="avatar" />Wage</a>
-				<a href="index.php?page=profile"><img src="http://community.mybb.com/uploads/avatars/avatar_31006.jpg?dateline=1376184165" class="avatar" />Zueq</a>
+				{% for user in users %}
+					<a href="index.php?page=profile"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
+				{% else %}
+					{{ trans('member.noOnline') }}
+				{% endfor %}
 			</div>
 		</section>
 	</aside>
