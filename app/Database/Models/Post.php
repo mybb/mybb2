@@ -12,11 +12,14 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Traits\UserActivityStoreable;
 
 
 class Post extends Model implements HasPresenter
 {
 	use SoftDeletes;
+	use UserActivityStoreable;
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
@@ -77,5 +80,20 @@ class Post extends Model implements HasPresenter
 	public function author()
 	{
 		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+	}
+
+	/**
+	 * Get extra details about a model.
+	 *
+	 * @param Post $model The model being created and stored as activity.
+	 *
+	 * @return array The extra details to store.
+	 */
+	public static function getActivityDetails(Post $model)
+	{
+		return [
+			'topic_id' => $model->topic_id,
+		    'content' => $model->content_parsed,
+		];
 	}
 }
