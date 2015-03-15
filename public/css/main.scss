@@ -39,6 +39,12 @@ $status-pending-border: #f2aaab;
 // Fonts
 $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
 
+/*
+ *	Import directional CSS library
+ */
+
+@import 'directional';
+
 
 /*
  *	Mixins 
@@ -64,96 +70,6 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 
 @mixin white-transparency($transparency) {
 	color: rgba(255,255,255,$transparency);
-}
-
-
-/*
- *	Base styling
- */
-
-html, button, input, select, textarea {
-	color: $font-color;
-}
-
-::selection {
-	background: $secondary-color;
-	color: $invert-font-color;
-	text-shadow: none;
-}
-
-body {
-	margin: 0;
-	font: 16px/26px $font-stack;
-}
-
-.wrapper {
-	width: 90%;
-	margin: 0 5%;
-}
-
-input, select, textarea, button {
-	font: 16px $font-stack;
-}
-
-a:link,
-a:visited {
-	color: $primary-color;
-	text-decoration: none;
-}
-
-a:hover,
-a:active {
-	color: $secondary-color;
-	text-decoration: underline;
-}
-
-a:focus,
-button:focus {
-	outline: 0;
-}
-
-hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 1px solid #ccc;
-	margin: 1em 0;
-	padding: 0;
-}
-
-img {
-	vertical-align: middle;
-}
-
-fieldset {
-	border: 0;
-	margin: 0;
-	padding: 0;
-}
-
-textarea {
-	resize: vertical;
-}
-
-@media only screen and (max-width: 320px) {
-
-}
-
-@media only screen and (min-width: 480px) {
-
-}
-
-@media only screen and (min-width: 768px) {
-
-}
-
-@media only screen and (min-width: 1140px) {
-
-	.wrapper {
-        max-width: 1250px;
-        margin: 0 auto;
-    }
-
 }
 
 /*
@@ -213,4 +129,4 @@ textarea {
 
 
 // RTL Direction
-@import 'rtl';
+// @import 'rtl';

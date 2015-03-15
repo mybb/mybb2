@@ -1,11 +1,11 @@
 h1.title {
-	float: left;
-	margin: 10px 2% 5px 0;
+	float: $left;
+	margin: side-values(10px 2% 5px 0);
 
 	a#logo {
 		background-image: url("../images/logo_mobile.png");
 		background-repeat: no-repeat;
-		background-position: top left;
+		background-position: top $left;
 		width: 137px;
 		height: 40px;
 		display: block;
@@ -18,8 +18,8 @@ h1.title {
 
 .main-menu {
 	
-	float: right;
-	margin: 25px 0 0 0;
+	float: $right;
+	margin: side-values(25px 0 0 0);
 
 }
 
@@ -37,9 +37,9 @@ h1.title {
 				margin-bottom: 10px;
 				padding: 8px 0;
 				width: 48%;
-				margin-left: 1%;
-				margin-right: 1%;
-				float: left;
+				margin-#{$left}: 1%;
+				margin-#{$right}: 1%;
+				float: $left;
 				text-align: center;
 				background: $background-1;
 				@include box-sizing(border-box);
@@ -48,8 +48,8 @@ h1.title {
 			.unread-count {
 				background: $unread-count;
 				color: $invert-font-color;
-				padding: 2px 5px 1px 4px;
-				margin: 0 0 0 2px;
+				padding: side-values(2px 5px 1px 4px);
+				margin: side-values(0 0 0 2px);
 				font-weight: normal;
 				font-size: 0.8em;
 				text-decoration: none;
@@ -66,7 +66,7 @@ h1.title {
 .main-menu__button {
 	padding-top: 5px;
 	display: inline-block;
-	float: right;
+	float: $right;
 
 	i {
 		font-size: 21px;
@@ -94,7 +94,7 @@ h1.title {
 	list-style: none;
 
 	> li {
-		float: left;
+		float: $left;
 		margin: 0;
 		padding: 12px 6px;
 		position: relative;
@@ -104,7 +104,7 @@ h1.title {
 			color: $invert-font-color;
 			padding: 2px 8px;
 			display: inline-block;
-			margin: -3px 0 -2px 0;
+			margin: side-values(-3px 0 -2px 0);
 			@include border-radius(4px);
 		}
 
@@ -155,7 +155,7 @@ h1.title {
 	}
 
 	.user-navigation__active-user > a > span.text {
-	font-weight: bold;
+		font-weight: bold;
 	}
 
 	.user-navigation__sign-up > a {
@@ -175,8 +175,8 @@ h1.title {
 		background: $unread-count;
 		color: $invert-font-color;
 		@include border-radius(2px);
-		padding: 2px 5px 1px 4px;
-		margin: 0 0 0 2px;
+		padding: side-values(2px 5px 1px 4px);
+		margin: side-values(0 0 0 2px);
 		font-weight: normal;
 		font-size: 0.8em;
 		text-decoration: none;
@@ -186,12 +186,12 @@ h1.title {
 .user-navigation ul .user-navigation__dropdown {
 	display: none;
 	background: $background-2;
-	@include border-radius(0 4px 4px 4px);
+	@include border-radius(corner-values(0 4px 4px 4px));
 	border: 2px solid $border-1;
 	border-top: 0;
-	padding: 6px 12px 12px;
+	padding: side-values(6px 12px 12px 12px);
 	font-size: 0.9em;
-	left: -2px;
+	#{$left}: -2px;
 	width: 270px;
 
 	ul {
@@ -212,19 +212,19 @@ h1.title {
 			margin: 0;
 			padding: 4px;
 			float: none;
-			border-left: 0;
-			text-align: left;
+			border-#{$left}: 0;
+			text-align: $left;
 			background: transparent;
 
 			i {
 				@include black-transparency(0.3);
-				padding-right: 8px;
+				padding-#{$right}: 8px;
 			}
 		}
 	}
 
 	a.avatar-profile-link {
-		float: right;
+		float: $right;
 		width: 80px;
 		height: 80px;
 		margin: 6px 0 0 0;
@@ -240,13 +240,13 @@ h1.title {
 		background: $background-1;
 		border: 1px solid $border-1;
 		@include border-radius(3px);
-		margin: 10px 0 0 0;
+		margin: side-values(10px 0 0 0);
 	}
 
 	h2 {
 		font-size: 1em;
 		margin: 0;
-		padding: 8px 12px 8px 8px;
+		padding: side-values(8px 12px 8px 8px);
 		color: $alt-font-color-4;
 		background: $background-3;
 		border-bottom: 1px solid $border-1;
@@ -264,7 +264,7 @@ h1.title {
 		}
 
 		a.option {
-			float: right;
+			float: $right;
 
 			span.text {
 				display: none;
@@ -287,7 +287,7 @@ h1.title {
 
 		a {
 			text-decoration: none;
-			padding: 8px 8px 8px 16px;
+			padding: side-values(8px 8px 8px 16px);
 			overflow: hidden;
 
 			&:hover span.text {
@@ -302,8 +302,8 @@ h1.title {
 		i {
 			@include black-transparency(0.3);
 			font-size: 14px;
-			margin: 4px 0 4px -8px;
-			float: left;
+			margin: side-values(4px 0 4px -8px);
+			float: $left;
 		}
 	}
 
@@ -322,8 +322,8 @@ h1.title {
 		}
 
 		a.avatar-profile-link {
-			float: left;
-			margin: 0 8px 0 0;
+			float: $left;
+			margin: side-values(0 8px 0 0);
 			width: 40px;
 			height: 40px;
 
@@ -346,9 +346,9 @@ h1.title {
 
 	time {
 		font-size: 0.9em;
-		margin: 3px 0 0 4px;
+		margin: side-values(3px 0 0 4px);
 		color: $alt-font-color-1;
-		float: right;
+		float: $right;
 	}
 
 	.view-all {
@@ -365,8 +365,8 @@ h1.title {
 
 	.search__button {
 		color: $alt-font-color-2;
-		float: right;
-		margin: 8px 0 0 0;
+		float: $right;
+		margin: side-values(8px 0 0 0);
 		padding: 5px 2px;
 
 		i {
@@ -389,7 +389,7 @@ h1.title {
 		padding: 2px 5px;
 		cursor: text;
 		background: #fff;
-		margin: 0 0 8px 0;
+		margin: side-values(0 0 8px 0);
 		width: auto;
 		@include box-sizing(border-box);
 	}
@@ -405,16 +405,16 @@ h1.title {
 
 	.search__controls {
 		width: 24%;
-		text-align: right;
-		float: right;
-		padding-right: 8px;
+		text-align: $right;
+		float: $right;
+		padding-#{$right}: 8px;
 		@include box-sizing(border-box);
 	}
 		
 	button.search__submit,
 	a.search__advanced {
 		height: 24px;
-		margin: 0 0 0 8px;
+		margin: side-values(0 0 0 8px);
 		padding: 0;
 		border: 0;
 		cursor: pointer;
@@ -437,15 +437,15 @@ h1.title {
 	font-size: 0.8em;
 	color: $alt-font-color-3;
 	padding: 0;
-	margin: 0 0 10px 0;
+	margin: side-values(0 0 10px 0);
 
-	a {
+	a:link, a:visited, a:active, a:hover {
 		color: $alt-font-color-1;
 	}
 
 	i {
 		color: $alt-font-color-1;
-		margin: 0 4px 0 6px;
+		margin: side-values(0 4px 0 6px);
 	}
 }
 
@@ -489,8 +489,8 @@ footer {
 		
 			.main-menu__container {
 				position: absolute;
-				right: 0;
-				float: right;
+				#{$right}: 0;
+				float: $right;
 				width: 100%;
 				padding-top: 45px;
 				display: block;
@@ -502,10 +502,10 @@ footer {
 				top: 0;
 				border-top: 2px solid $dark-border-1;
 				border-bottom: 2px solid $dark-border-1;
-				right: 0;
+				#{$right}: 0;
 				z-index: 500;
 				background: $dark-background-2;
-				padding: 1px 2px 2px;
+				padding: side-values(1px 2px 2px 2px);
 				text-align: center;
 				
 				li {
@@ -515,7 +515,7 @@ footer {
 						width: auto;
 						display: inline-block;
 						margin: 4px;
-						padding: 7px 8px 6px;
+						padding: side-values(7px 8px 6px 8px);
 						float: none;
 						background: transparent;
 						@include border-radius(4px);
@@ -539,7 +539,7 @@ footer {
 @media only screen and (min-width: 768px) {
 
 	h1.title {
-		margin: 20px 2% 15px 0;
+		margin: side-values(20px 2% 15px 0);
 		
 		a#logo {
 			background-image: url("../images/logo2.png");
@@ -567,13 +567,13 @@ footer {
 	.menu-bar ul li a {
 		width: auto;
 		background: none;
-		border-left: 1px solid $border-1;
+		border-#{$left}: 1px solid $border-1;
 		margin: 0;
 		padding: 2px 12px;
 	}
 
 	.main-menu.menu-bar ul li:first-child a {
-		border-left: 0;
+		border-#{$left}: 0;
 	}
 
 	#search {
@@ -583,7 +583,7 @@ footer {
 		}
 
 		.search__container {
-			float: right;
+			float: $right;
 			display: block;
 			width: 35%;
 			clear: none;
@@ -592,12 +592,12 @@ footer {
 	}
 
 	footer {
-		padding: 20px 0 10px;
+		padding: side-values(20px 0 10px 0);
 
 		h3 {
-			margin: 0 0;
-			float: left;
-			padding: 3px 12px 3px 0;
+			margin: 0;
+			float: $left;
+			padding: side-values(3px 12px 3px 0);
 		}
 	}
 }

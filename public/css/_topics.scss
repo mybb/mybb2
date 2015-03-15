@@ -20,7 +20,7 @@
 	}
 
 	.post__meta {
-		padding: 4px 6px 12px 6px;
+		padding: side-values(4px 6px 12px 6px);
 
 		a:link,
 		a:visited {
@@ -54,25 +54,25 @@
 
 		.post__edit-log {
 			font-size: 0.7em;
-			margin-left: 4px;
+			margin-#{$left}: 4px;
 		}
 
 		.post__status {
-			margin-left: 16px;
+			margin-#{$left}: 16px;
 			font-size: 0.8em;
 			font-weight: bold;
 
 			i {
 				color: $alt-font-color-1;
 				font-size: 14px;
-				margin-right: 3px;
+				margin-#{$right}: 3px;
 			}
 		}
 	}
 
 	.post__inline-mod {
-		float: right;
-		margin: -20px 0 0 7px;
+		float: $right;
+		margin: side-values(-20px 0 0 7px);
 	}
 
 	.team-badge {
@@ -80,10 +80,10 @@
 	}
 
 	.avatar-profile-link {
-		float: left;
+		float: $left;
 		width: 40px;
 		height: 40px;
-		margin: 7px 10px 0 0;
+		margin: side-values(7px 10px 0 0);
 
 		img.avatar {
 			width: 40px;
@@ -92,11 +92,11 @@
 	}
 
 	.post__body {
-		padding: 0 6px 3px 6px;
+		padding: side-values(0 6px 3px 6px);
 
 		p {
 			font-size: 0.9em;
-			margin: 0 0 6px 0;
+			margin: side-values(0 0 6px 0);
 		}
 
 		img {
@@ -129,8 +129,8 @@
 
 	.post__signature {
 		border-top: 1px dotted $border-2;
-		padding: 6px 6px 0;
-		margin: 12px 0 0 0;
+		padding: side-values(6px 6px 0 6px);
+		margin: side-values(12px 0 0 0);
 		font-size: 0.8em;
 	}
 
@@ -138,7 +138,7 @@
 		list-style: none;
 		margin: 0;
 		padding: 4px;
-		text-align: right;
+		text-align: $right;
 
 		li {
 			display: inline-block;
@@ -159,7 +159,7 @@
 			&.quote,
 			&.approve,
 			&.restore {
-				float: left;
+				float: $left;
 
 				.text {
 					display: inline;
@@ -174,19 +174,19 @@
 		.text {
 			display: none;
 			font-size: 0.7em;
-			margin-left: 6px;
+			margin-#{$left}: 6px;
 		}
 	}
 
 	.post__likes {
 		font-size: 0.8em;
-		padding: 8px 8px 4px 8px;
-		margin: 8px 0 0 0;
+		padding: side-values(8px 8px 4px 8px);
+		margin: side-values(8px 0 0 0);
 		border-top: 1px solid $border-1;
 		color: $alt-font-color-2;
 
 		i {
-			margin-right: 5px;
+			margin-#{$right}: 5px;
 		}
 
 		a {
@@ -197,7 +197,7 @@
 	&.post--reply {
 		
 		.full-reply {
-			float: right;
+			float: $right;
 
 			.text {
 				display: none;
@@ -213,25 +213,25 @@
 @media only screen and (min-width: 480px) {
 
 	.post {
-		margin-left: 80px;
+		margin-#{$left}: 80px;
 
 		.post__meta {
-			padding: 4px 6px 8px 6px;
+			padding: side-values(4px 6px 8px 6px);
 
 			h3 {
 				display: inline-block;
 			}
 
 			.post__date {
-				margin: 0 0 0 10px;
+				margin: side-values(0 0 0 10px);
 			}
 		}
 
 		.avatar-profile-link {
-			float: left;
+			float: $left;
 			width: 70px;
 			height: 70px;
-			margin: -13px 0 0 -100px;
+			margin: side-values(-13px 0 0 -100px);
 
 			img.avatar {
 				width: 70px;
@@ -248,7 +248,7 @@
 @media only screen and (min-width: 768px) {
 
 	.post {
-		margin-left: 110px;
+		margin-#{$left}: 110px;
 
 		.post__meta {
 
@@ -260,7 +260,7 @@
 		.avatar-profile-link {
 			width: 100px;
 			height: 100px;
-			margin-left: -130px;
+			margin-#{$left}: -130px;
 
 			img.avatar {
 				width: 100px;

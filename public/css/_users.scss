@@ -1,18 +1,18 @@
 .user-list {
 
-	padding: 12px 12px 0 12px;
+	padding: side-values(12px 12px 0 12px);
 
 	.user-list__user {
 		border: 1px solid $border-1;
 		padding: 8px;
-		margin: 0 0 12px 0;
+		margin: side-values(0 0 12px 0);
 		@include border-radius(4px);
 
 		.avatar-profile-link {
-			float: left;
+			float: $left;
 			width: 80px;
 			height: 80px;
-			margin: 0 12px 0 0;
+			margin: side-values(0 12px 0 0);
 		
 			img.avatar {
 				width: 80px;
@@ -28,13 +28,13 @@
 		h4 {
 			font-size: 0.8em;
 			font-weight: normal;
-			margin: -4px 0 0 0;
+			margin: side-values(-4px 0 0 0);
 		}
 
 		.team-badge {
 			float: right;
 			position: relative;
-			margin: -48px 0 0 0;
+			margin: side-values(-48px 0 0 0);
 		}
 	}
 }
@@ -49,24 +49,24 @@
 	@include border-radius(4px);
 
 	i {
-		margin-right: 5px;
+		margin-#{$right}: 5px;
 	}
 }
 
 @media only screen and (min-width: 768px) {
 	
 	.user-list .user-list__user {
-		float: left;
+		float: $left;
 		width: 49.5%;
-		margin: 0 0 12px 0;
+		margin: side-values(0 0 12px 0);
 		@include box-sizing(border-box);
 
 		&:nth-child(odd) {
-			margin-right: 0.5%;
+			margin-#{$right}: 0.5%;
 		}
 
 		&:nth-child(even) {
-			margin-left: 0.5%;
+			margin-#{$left}: 0.5%;
 		}
 	}
 

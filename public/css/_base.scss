@@ -1,12 +1,69 @@
-/*
- *
- *	ATTENTION
- *	This file is incomplete -- forthcoming markup changes will result in much of this changing
- *
- */
+html, button, input, select, textarea {
+	color: $font-color;
+}
+
+::selection {
+	background: $secondary-color;
+	color: $invert-font-color;
+	text-shadow: none;
+}
+
+body {
+	margin: 0;
+	font: 16px/26px $font-stack;
+}
+
+.wrapper {
+	width: 90%;
+	margin: 0 5%;
+}
+
+input, select, textarea, button {
+	font: 16px $font-stack;
+}
+
+a:link,
+a:visited {
+	color: $primary-color;
+	text-decoration: none;
+}
+
+a:hover,
+a:active {
+	color: $secondary-color;
+	text-decoration: underline;
+}
+
+a:focus,
+button:focus {
+	outline: 0;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+img {
+	vertical-align: middle;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+textarea {
+	resize: vertical;
+}
 
 .main {
-	padding: 15px 0 30px;
+	padding: side-values(15px 0 30px 0);
 
 	.page-content header {
 
@@ -14,14 +71,14 @@
 
 		h1 {
 			font-size: 1.5em;
-			margin: 0 0 10px 0;
+			margin: side-values(0 0 10px 0);
 			padding: 0;
 		}
 
 		p {
 			color: $alt-font-color-1;
 			font-size: 0.9em;
-			margin: 0 0 10px;
+			margin: side-values(0 0 10px 0);
 		}
 
 	}
@@ -29,7 +86,6 @@
 	.page-content--menu {
 
 		header {
-			margin-bottom: 10px;
 
 			h1 {
 				font-size: 1.2em;
@@ -39,7 +95,7 @@
 	}
 
 	aside {
-		padding: 0 0 10px 0;
+		padding-bottom: 10px;
 		font-size: 0.9em;
 		margin-top: 30px;
 
@@ -52,13 +108,13 @@
 	}
 
 	.page-buttons {
-		margin: -10px -5px 15px -5px;
+		margin: side-values(-10px -5px 15px -5px);
 		text-align: center;
 	}
 
 	.pagination {
 		list-style: none;
-		margin: 0 0 25px -5px;
+		margin: side-values(0 0 25px -5px);
 		padding: 0;
 		font-size: 0.9em;
 		text-align: center;
@@ -105,7 +161,7 @@ section {
 	.heading {
 		border-bottom: 1px solid $border-1;
 		padding: 8px;
-		margin: 0 0 5px 0;
+		margin: side-values(0 0 5px 0);
 	}
 
 	.heading--linked {
@@ -119,13 +175,13 @@ section {
 			display: block;
 
 			.count {
-				float: right;
+				float: $right;
 				font-size: 0.8em;
 				color: $alt-font-color-1;
 				font-weight: normal;
 
 				i {
-					margin-left: 4px;
+					margin-#{$left}: 4px;
 				}
 			}
 		}
@@ -173,7 +229,7 @@ section {
 
 		li {
 			display: inline-block;
-			margin: 0 8px 0 0;
+			margin: side-values(0 8px 0 0);
 
 			a {
 				padding: 4px 8px;
@@ -241,7 +297,7 @@ img.avatar {
 	}
 
 	i {
-		margin-right: 5px;
+		margin-#{$right}: 5px;
 		font-size: 14px;
 	}
 
@@ -253,21 +309,21 @@ img.avatar {
 nav.section-menu {
 	
 	ul {
-		margin: 0 0 15px 0;
+		margin: side-values(0 0 15px 0);
 		padding: 0;
 		list-style: none;
 
 		li {
-			float: left;
+			float: $left;
 			width: 48%;
 			margin-bottom: 4px;
 
 			&:nth-child(odd) {
-				margin-right: 2%;
+				margin-#{$right}: 2%;
 			}
 
 			&:nth-child(even) {
-				margin-left: 2%;
+				margin-#{$left}: 2%;
 			}
 
 			a {
@@ -284,7 +340,7 @@ nav.section-menu {
 				}
 
 				i {
-					padding-right: 5px;
+					padding-#{$right}: 5px;
 				}
 			}
 
@@ -302,7 +358,7 @@ nav.section-menu {
 	.main {
 
 		.page-content--sidebar {
-			float: left;
+			float: $left;
 			width: 60%;
 		}
 
@@ -318,24 +374,24 @@ nav.section-menu {
 		}
 
 		.page-content--menu {
-			float: left;
+			float: $left;
 			width: 78%;
 		}
 
 		aside {
-			float: right;
+			float: $right;
 			width: 35%;
 			margin-top: 0;
 		}
 
 		.page-buttons {
-			float: right;
-			margin: -45px -5px 8px 0;
+			float: $right;
+			margin: side-values(-45px -5px 8px 0);
 		}
 		
 		.pagination {
-			text-align: center;
-			margin: 0 -5px 25px -5px;
+			text-align: $right;
+			margin: side-values(0 -5px 25px -5px);
 		}
 
 		.page-controls {
@@ -346,9 +402,9 @@ nav.section-menu {
 			}
 
 			.pagination {
-				float: left;
-				text-align: left;
-				margin: 10px -5px 0 -5px;
+				float: $left;
+				text-align: $left;
+				margin: side-values(10px -5px 0 -5px);
 			}
 
 			.pagination + .page-buttons {
@@ -366,9 +422,9 @@ nav.section-menu {
 	}
 
 	nav.section-menu {
-		float: left;
+		float: $left;
 		width: 19%;
-		margin-right: 3%;
+		margin-#{$right}: 3%;
 
 		ul {
 			margin: 0;
@@ -376,9 +432,18 @@ nav.section-menu {
 			li, li:nth-child(odd), li:nth-child(even) {
 				float: none;
 				width: 100%;
-				margin-left: 0;
-				margin-right: 0;
+				margin-#{$left}: 0;
+				margin-#{$right}: 0;
 			}
 		}
 	}
+}
+
+@media only screen and (min-width: 1140px) {
+
+	.wrapper {
+        max-width: 1250px;
+        margin: 0 auto;
+    }
+
 }

@@ -2,13 +2,6 @@ html[dir="rtl"] {
 	direction: rtl;
 }
 
-@import 'rtl/header_footer';
-@import 'rtl/base';
-@import 'rtl/forms';
-@import 'rtl/topics';
-@import 'rtl/users';
-@import 'rtl/account';
+$dir: rtl;
 
-
-@import 'rtl/plugins';
-@import 'rtl/legacy';
+@import 'main';

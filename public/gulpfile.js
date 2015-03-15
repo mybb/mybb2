@@ -58,7 +58,7 @@ var scripts = [
     paths.js.src + "/other.js"
 ];
 
-gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "fonts"]);
+gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "rtl_styles", "fonts"]);
 
 gulp.task("clean", function(cb) {
     del(
@@ -76,6 +76,7 @@ gulp.task("watch", ["default"], function() {
     gulp.watch(paths.js.src + "/**/*.js", ["scripts"]);
     gulp.watch(paths.images.src + "/**/*", ["images"]);
     gulp.watch(paths.css.src + "/**/*.scss", ["styles"]);
+    gulp.watch(paths.css.src + "/**/*.scss", ["rtl_styles"]);
     gulp.watch(paths.fonts.src + "/**/*", ["fonts"]);
 });
 
@@ -124,6 +125,21 @@ gulp.task("styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("main.css"))
+        .pipe(gulp.dest(paths.css.dest))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(minifycss())
+        .pipe(gulp.dest(paths.css.dest));
+});
+
+gulp.task("rtl_styles", function() {
+    return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/rtl.scss"])
+        .pipe(sass({
+            includePaths: [
+                "./app/bower_components"
+            ]
+        }))
+        .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
+        .pipe(concat("rtl.css"))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
         .pipe(minifycss())

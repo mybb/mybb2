@@ -2,11 +2,11 @@
 section.form {
 
 	.form__section__container.change-avatar {
-		padding-left: 130px;
+		padding-#{$left}: 130px;
 
 		.avatar-profile-link {
-			float: left;
-			margin: 0 10px 0 -110px;
+			float: $left;
+			margin: side-values(0 10px 0 -110px);
 
 			img.avatar {
 				width: 100px;
@@ -15,8 +15,8 @@ section.form {
 		}
 
 		p {
-			padding: 0 0 0 5px;
-			margin: 0 0 10px 0;
+			padding: side-values(0 0 0 5px);
+			margin: side-values(0 0 10px 0);
 			font-size: 0.9em;
 			color: $alt-font-color-1;
 		}
@@ -43,8 +43,8 @@ ul.notifications {
 	}
 
 	a.avatar-profile-link {
-		float: left;
-		margin: 0 12px 0 0;
+		float: $left;
+		margin: side-values(0 12px 0 0);
 		width: 40px;
 		height: 40px;
 
@@ -61,8 +61,8 @@ ul.notifications {
 
 	a.notification {
 		text-decoration: none;
-		margin-left: 52px;
-		padding-left: 24px;
+		margin-#{$left}: 52px;
+		padding-#{$left}: 24px;
 		display: block;
 	}
 

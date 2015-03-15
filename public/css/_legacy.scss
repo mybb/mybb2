@@ -22,7 +22,7 @@
 .compressed-forum-list .category ul {
 	list-style: none;
 	margin: 0;
-	padding: 0 0 0 15px;
+	padding: side-values(0 0 0 15px);
 	font-size: 0.9em;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .forum-list .forum .forum-title {
-	margin: 0 0 4px 0;
+	margin: side-values(0 0 4px 0);
 	font-size: 1em;
 }
 
@@ -80,7 +80,7 @@
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	padding: 2px 7px 2px 6px;
+	padding: side-values(2px 7px 2px 6px);
 	margin: 0 3px;
 	font-weight: normal;
 	font-size: 0.8em;
@@ -90,14 +90,14 @@
 .forum-list .forum .description {
 	font-size: 0.8em;
 	margin: 0;
-	padding: 2px 0 4px 0;
+	padding: side-values(2px 0 4px 0);
 	color: #444;
 }
 
 .forum-list .forum .subforums i.fa-level-up {
 	margin: 1px 0 0 -16px;
 	color: #aaa;
-	float: left;
+	float: $left;
 	font-size: 14px;
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
@@ -107,14 +107,14 @@
 
 .forum-list .forum .subforums {
 	list-style: none;
-	margin: 2px 0 4px 20px;
+	margin: side-values(2px 0 4px 20px);
 	padding: 0;
 	font-size: 0.8em;
 }
 
 .forum-list .forum .subforums li {
 	display: inline-block;
-	margin: 0 12px 4px 0;
+	margin: side-values(0 12px 4px 0);
 }
 
 .forum-list .forum .subforums .unread-count {
@@ -124,14 +124,14 @@
 
 .forum-list .forum .topic {
 	margin-top: 6px;
-	padding: 8px 0 0 2px;
+	padding: side-values(8px 0 0 2px);
 	border-top: 1px dotted #ddd;
 }
 
 .forum-list .forum .topic.compact .avatar-profile-link {
 	width: 24px;
 	height: 24px;
-	margin: -2px 10px 0 0 ;
+	margin: side-values(-2px 10px 0 0);
 }
 
 .forum-list .forum .topic.compact .avatar {
@@ -142,12 +142,12 @@
 .forum-list .forum .topic.compact i {
 	color: #ff7500;
 	font-size: 14px;
-	margin-right: 3px;
+	margin-#{$right}: 3px;
 }
 
 .forum-list .forum .topic.compact .topic-title {
 	display: inline-block;
-	margin-right: 4px;
+	margin-#{$right}: 4px;
 	font-weight: normal;
 }
 
@@ -177,7 +177,7 @@ section.container .forum-list .forum:last-child {
 
 .forum.topic-list .sort-topics .latest-column {
 	width: 50%;
-	text-align: right;
+	text-align: #{$right};
 }
 
 .forum.topic-list .sort-topics a:link,
@@ -188,7 +188,7 @@ section.container .forum-list .forum:last-child {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	float: left;
+	float: $left;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -208,12 +208,12 @@ section.container .forum-list .forum:last-child {
 .forum.topic-list .sort-topics i {
 	font-size: 14px;
 	color: rgba(255,255,255,0.7);
-	margin-left: 4px;
+	margin-#{$left}: 4px;
 }
 
 .forum.topic-list .topics-container {
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	border-#{$left}: 1px solid #ccc;
+	border-#{$left}: 1px solid #ccc;
 }
 
 .forum.topic-list .important-topics {
@@ -224,7 +224,7 @@ section.container .forum-list .forum:last-child {
 	padding: 8px 12px;
 	border-bottom: 1px solid #ddd;
 	line-height: 1.4;
-	padding-left: 60px;
+	padding-#{$left}: 60px;
 }
 
 .forum.topic-list .topic:before,
@@ -247,8 +247,8 @@ section.container .forum-list .forum:last-child {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	padding: 2px 7px 2px 6px;
-	margin: 0 0 0 6px;
+	padding: side-values(2px 7px 2px 6px);
+	margin: side-values(0 0 0 6px);
 	font-weight: normal;
 	font-size: 0.8em;
 	text-decoration: none;
@@ -259,20 +259,20 @@ section.container .forum-list .forum:last-child {
 }
 
 .forum.topic-list .topic .unread-count i {
-	margin-left: 3px;
+	margin-#{$left}: 3px;
 }
 
 .forum.topic-list .topic .contains-new-posts {
 	color: #eb5257;
 	font-weight: normal;
 	font-size: 0.9em;
-	margin-left: 10px;
+	margin-#{$left}: 10px;
 	text-decoration: none;
 }
 
 .forum.topic-list .topic .contains-new-posts i {
 	font-size: 14px;
-	margin-right: 2px;
+	margin-#{$right}: 2px;
 }
 
 .forum.topic-list .topic .contains-new-posts:hover {
@@ -299,16 +299,16 @@ section.container .forum-list .forum:last-child {
 }
 
 .forum.topic-list .topic .icons {
-	float: right;
+	float: $right;
 	color: #666;
 	font-size: 14px;
 	position: absolute;
 	top: 0;
-	right: 0;
+	#{$right}: 0;
 }
 
 .forum.topic-list .topic .icons i {
-	margin-left: 8px;
+	margin-#{$left}: 8px;
 }
 
 .forum.topic-list .topic .icons i.fa-thumb-tack {
@@ -357,8 +357,8 @@ section.container .forum-list .forum:last-child {
 
 .forum.topic-list .topic .avatar-profile-link {
 	width: 44px;
-	float: left;
-	margin: 0 12px 0 6px;
+	float: $left;
+	margin: side-values(0 12px 0 6px);
 }
 
 .forum.topic-list .topic .avatar-profile-link .avatar {
@@ -394,12 +394,12 @@ aside .latest-discussions .topic:last-child {
 /* Generic Thread List (e.g. following page, latest discussions, etc.) */
 .topic-list .topic .avatar-profile-link {
 	width: 40px;
-	float: left;
-	margin: 3px 12px 3px 0;
+	float: $left;
+	margin: side-values(3px 12px 3px 0);
 }
 
 aside .latest-discussions .topic .avatar-profile-link {
-	margin: 0 12px 0 -8px;
+	margin: side-values(0 12px 0 -8px);
 }
 
 .topic-list .topic .avatar-profile-link .avatar {
@@ -408,15 +408,15 @@ aside .latest-discussions .topic .avatar-profile-link {
 }
 
 .topic-list .topic .topic-info {
-	margin-left: 52px;
+	margin-#{$left}: 52px;
 }
 
 aside .latest-discussions .topic .topic-info {
-	margin-left: 40px;
+	margin-#{$left}: 40px;
 }
 
 .topic-list .topic .topic-title {
-	margin: 1px 0 0 0;
+	margin: side-values(1px 0 0 0);
 	font-size: 1em;
 	font-weight: normal;
 }
@@ -450,7 +450,7 @@ aside .latest-discussions .topic .topic-info {
 
 .topic-list .topic .topic-replies {
 	margin: 0;
-	margin-left: 12px;
+	margin-#{$left}: 12px;
 	font-size: 0.8em;
 	color: #888;
 	display: none;
@@ -458,7 +458,7 @@ aside .latest-discussions .topic .topic-info {
 
 .topic-list .topic .topic-replies i {
 	color: #bbb;
-	margin-right: 4px;
+	margin-#{$right}: 4px;
 }
 
 .topic-list .topic .topic-replies .text {
@@ -467,7 +467,7 @@ aside .latest-discussions .topic .topic-info {
 
 .forum-list .forum .icons,
 .topic-list .topic .icons {
-	margin-left: 16px;
+	margin-#{$left}: 16px;
 }
 
 .forum-list .forum .icons i.fa-envelope,
@@ -477,13 +477,13 @@ aside .latest-discussions .topic .topic-info {
 }
 
 aside .topic-list .topic .latest-post {
-	margin-right: 8px;
+	margin-#{$right}: 8px;
 }
 
 aside .topic-list .topic .topic-replies {
 	float: none;
 	color: #999;
-	margin-left: 0;
+	margin-#{$left}: 0;
 }
 
 /* Post Listing within a topic */
@@ -514,14 +514,14 @@ html.js .inline-moderation {
 
 html.js .inline-moderation.floating {
 	display: block;
-	float: left;
+	float: $left;
 	position: fixed;
 	background: #444;
 	border-color: #444;
 	z-index: 1000;
 	bottom: 0;
-	left: 0;
-	right: 0;
+	#{$left}: 0;
+	#{$right}: 0;
 	border-radius: 0;
 	border-top: 2px solid #222;
 	width: 100%;
@@ -545,7 +545,7 @@ html.js .inline-moderation.floating i {
 	font-weight: normal;
 	font-size: 1em;
 	color: #666;
-	margin: 0 8px 0 0;
+	margin: side-values(0 8px 0 0);
 	padding: 0;
 	border: none;
 	display: inline-block;
@@ -564,18 +564,18 @@ html.js .inline-moderation.floating i {
 }
 
 .inline-moderation i {
-	margin-right: 4px;
+	margin-#{$right}: 4px;
 }
 
 .compact-users-list a {
 	display: inline-block;
-	margin: 0 12px 10px 0;
+	margin: side-values(0 12px 10px 0);
 }
 
 .compact-users-list .avatar {
 	width: 24px;
 	height: 24px;
-	margin: -2px 8px 0 0;
+	margin: side-values(-2px 8px 0 0);
 }
 
 .sort-footer {
@@ -590,7 +590,7 @@ html.js .inline-moderation.floating i {
 
 .sort-footer h3 {
 	display: inline-block;
-	margin: 0 10px 0 0;
+	margin: side-values(0 10px 0 0);
 	padding: 0;
 	font-weight: normal;
 	color: #666;
@@ -610,7 +610,7 @@ dl.stats {
 
 dl.stats dt {
 	float: left;
-	margin: 0 8px 0 0;
+	margin: side-values(0 8px 0 0);
 	color: #999;
 	/*clear: both;*/
 }
@@ -633,7 +633,7 @@ section.form .form-row.secondary-buttons {
 	color: #666;
 	margin-top: 5px;
 	font-size: 0.8em;
-	float: right;
+	float: $right;
 }
 
 section.form .buttons {
@@ -646,8 +646,8 @@ section.form .buttons {
 
 /* Dropdown Menus */
 .dropdown-menu {
-	float: right;
-	text-align: right;
+	float: $right;
+	text-align: $right;
 	margin: 0 0 -4px 0;
 }
 
@@ -673,13 +673,13 @@ section.form .buttons {
 
 .dropdown-menu ul.dropdown {
 	display: none;
-	right: 0;
-	left: auto;
+	#{$right}: 0;
+	#{$left}: auto;
 	margin-top: 2px;
 	border: 1px solid #ccc;
 	background: #fff;
 	border-radius: 4px;
-	text-align: left;
+	text-align: $left;
 	font-size: 0.9em;
 	white-space: nowrap;
 	padding: 4px 0;
@@ -699,16 +699,16 @@ section.form .buttons {
 .dropdown-menu ul.dropdown li a i {
 	width: 16px;
 	text-align: center;
-	margin-right: 8px;
+	margin-#{$right}: 8px;
 }
 
 .checkbox-select {
-	float: right;
-	margin: -4px 7px 0 12px;
+	float: $right;
+	margin: side-values(-4px 7px 0 12px);
 }
 
 .checkbox-select.check-all {
-	margin: 12px 19px 0 0;
+	margin: side-values(12px 19px 0 0);
 }
 
 @media only screen and (max-width: 320px) {
@@ -747,7 +747,7 @@ section.form .buttons {
 	}
 
 	.dropdown-menu {
-		margin: -15px 0 -4px 0;
+		margin: side-values(-15px 0 -4px 0);
 	}
 
 	.dropdown-menu .dropdown-button {
@@ -755,11 +755,11 @@ section.form .buttons {
 	}
 
 	.checkbox-select {
-		margin: 12px 0 0 12px;
+		margin: side-values(12px 0 0 12px);
 	}
 
 	.checkbox-select.check-all {
-		margin: 12px 12px 0 0;
+		margin: side-values(12px 12px 0 0);
 	}
 }
 
@@ -774,12 +774,12 @@ section.form .buttons {
 	
 
 	.page-content--full-width .forum-list .forum .forum-info {
-		float: left;
+		float: $left;
 		width: 60%;
 	}
 
 	.page-content--full-width .forum-list .forum .topic.compact {
-		float: right;
+		float: $right;
 		width: 35%;
 		border: none;
 		margin: 0;
@@ -812,7 +812,7 @@ section.form .buttons {
 	}
 
 	.forum.topic-list .sort-topics a.primary-column-two {
-		text-align: right;
+		text-align: $right;
 		display: inline-block;
 	}
 
@@ -824,7 +824,7 @@ section.form .buttons {
 
 	.forum.topic-list .sort-topics a.latest-column {
 		width: 30%;
-		text-align: left;
+		text-align: $left;
 	}
 
 	.forum.topic-list .topic {
@@ -833,7 +833,7 @@ section.form .buttons {
 
 	.forum.topic-list .topic .primary-column {
 		width: 58%;
-		float: left;
+		float: $left;
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
@@ -855,13 +855,13 @@ section.form .buttons {
 	}
 
 	.forum.topic-list .topic .icons {
-		float: right;
+		float: $right;
 		color: #666;
 		font-size: 14px;
 	}
 
 	.forum.topic-list .topic .icons i {
-		margin-left: 8px;
+		margin-#{$left}: 8px;
 	}
 
 	.forum.topic-list .topic .icons i.fa-thumb-tack {
@@ -896,7 +896,7 @@ section.form .buttons {
 
 	.forum.topic-list .topic .replies-column {
 		width: 12%;
-		float: left;
+		float: $left;
 		text-align: center;
 		color: #666;
 		display: block;
@@ -910,7 +910,7 @@ section.form .buttons {
 
 	.forum.topic-list .topic .latest-column {
 		width: 30%;
-		float: left;
+		float: $left;
 	}
 
 }

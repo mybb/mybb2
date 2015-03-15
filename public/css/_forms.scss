@@ -31,8 +31,8 @@ input.short {
 
 input.small {
 	width: 50px;
-	margin-left: 6px;
-	margin-right: 6px;
+	margin-#{$left}: 6px;
+	margin-#{$right}: 6px;
 }
 
 textarea {
@@ -55,11 +55,11 @@ section.form {
 		border-bottom: 2px solid $border-1;
 
 		h2 {
-			margin: 0 0 12px 0;
-			padding: 0 8px 8px 8px;
-			color: #007fd0;
+			margin: side-values(0 0 12px 0);
+			padding: side-values(0 8px 8px 8px);
+			color: $primary-color;
 			font-size: 1.1em;
-			border-bottom: 1px dotted #ccc;
+			border-bottom: 1px dotted $border-2;
 		}
 
 		&:last-child {
@@ -72,7 +72,7 @@ section.form {
 		padding: 12px 8px;
 
 		h3 {
-			margin: 0 0 5px 0;
+			margin: side-values(0 0 5px 0);
 			padding: 0;
 			font-size: 1em;
 		}
@@ -98,16 +98,16 @@ section.form {
 	p.form__checkbox {
 		font-size: 0.9em;
 		margin: 5px 0;
-		padding: 0 0 0 30px;
+		padding: side-values(0 0 0 30px);
 
 		input[type="checkbox"] {
-			float: left;
-			margin: 6px 0 0 -26px;
+			float: $left;
+			margin: side-values(6px 0 0 -26px);
 		}
 
 		i {
 			color: $alt-font-color-2;
-			padding-right: 5px;
+			padding-#{$right}: 5px;
 			width: 16px;
 			font-size: 14px;
 			text-align: center;
@@ -123,11 +123,11 @@ section.form {
 		font-size: 0.8em;
 		line-height: 1.4;
 		color: $alt-font-color-1;
-		margin: -4px 0 4px 0;
+		margin: side-values(-4px 0 4px 0);
 	}
 
 	p.form__data {
-		margin:  0 0 0;
+		margin: 0;
 		font-size: 0.9em;
 	}
 
@@ -150,13 +150,13 @@ section.form {
 
 		i {
 			font-size: 18px;
-			margin-right: 8px;
+			margin-#{$right}: 8px;
 		}
 	}
 }
 
 .segmented-control {
-	margin: 5px 0 0 0;
+	margin: side-values(5px 0 0 0);
 	border: 1px solid $border-2;
 	font-size: 0.8em;
 	display: inline-block;
@@ -170,8 +170,8 @@ section.form {
 		display: block;
 		padding: 3px 8px;
 		margin: 0;
-		border-left: 1px solid $border-2;
-		border-right: 1px solid transparent;
+		border-#{$left}: 1px solid $border-2;
+		border-#{$right}: 1px solid transparent;
 		position: relative;
 		z-index: 10;
 		cursor: pointer;
@@ -183,12 +183,12 @@ section.form {
 	}
 
 	:first-child .segmented-control__button {
-		border-left: 1px solid transparent;
-		@include border-radius(4px 0 0 4px);
+		border-#{$left}: 1px solid transparent;
+		@include border-radius(corner-values(4px 0 0 4px));
 	}
 
 	:last-child .segmented-control__button {
-		@include border-radius(0 4px 4px 0);
+		@include border-radius(corner-values(0 4px 4px 0));
 	}
 
 	input {
@@ -215,21 +215,21 @@ section.form {
 
 	.select-control__block {
 		display: block;
-		margin: 0 0 5px 0;
+		margin: side-values(0 0 5px 0);
 		padding: 0;
 	}
 
 	.select-control__button {
 		display: block;
 		padding: 3px 8px;
-		margin: 5px 10px 0 0;
+		margin: side-values(5px 10px 0 0);
 		background: $background-1;
 		cursor: pointer;
 		@include border-radius(4px);
 
 		i {
 			@include black-transparency(0.4);
-			margin: 0 4px 0 0;
+			margin: side-values(0 4px 0 0);
 		}
 	}
 
@@ -256,19 +256,19 @@ section.form {
 
 			h2 {
 				border: 0;
-				float: left;
+				float: $left;
 				margin: 0;
 				padding: 0;
 				width: 20%;
-				text-align: right;
+				text-align: $right;
 			}
 		}
 
 		.form__section__container {
-			float: left;
-			margin: 0 0 0 3%;
-			padding: 0 0 0 20px;
-			border-left: 1px dotted #ccc;
+			float: $left;
+			margin: side-values(0 0 0 3%);
+			padding: side-values(0 0 0 20px);
+			border-#{$left}: 1px dotted $border-2;
 			width: 74%;
 			@include box-sizing(border-box);
 		}

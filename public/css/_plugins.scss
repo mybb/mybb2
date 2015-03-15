@@ -36,7 +36,7 @@
 }
 
 .modal .page-content header .page-controls {
-	margin: -50px 8px 0 0;
+	margin: side-values(-50px 8px 0 0);
 }
 
 .modal .page-content header .button,
@@ -66,7 +66,7 @@
     color: #007fd0;
     font-size: 1.1em;
     border-bottom: 1px dotted #ccc;
-    text-align: left;
+    text-align: $left;
     float: none;
     width: auto;
 }
@@ -101,7 +101,7 @@
 .modal a.close-modal {
   position: absolute;
   top: -12.5px;
-  right: -12.5px;
+  #{$right}: -12.5px;
   width: 11px;
   height: 19px;
   display: block;
@@ -136,8 +136,8 @@
   height: 64px;
   position: fixed;
   top: 50%;
-  left: 50%;
-  margin-right: -32px;
+  #{$left}: 50%;
+  margin-#{$right}: -32px;
   margin-top: -32px;
   background: url("../images/spinner.gif") #111 no-repeat center center;
   -webkit-border-radius: 8px;
@@ -215,10 +215,10 @@
 	position: absolute;
 }
 #powerTip.n:before, #powerTip.s:before {
-	border-right: 5px solid transparent;
-	border-left: 5px solid transparent;
-	left: 50%;
-	margin-left: -5px;
+	border-#{$right}: 5px solid transparent;
+	border-#{$left}: 5px solid transparent;
+	#{$left}: 50%;
+	margin-#{$left}: -5px;
 }
 #powerTip.e:before, #powerTip.w:before {
 	border-bottom: 5px solid transparent;
@@ -232,9 +232,9 @@
 	bottom: -5px;
 }
 #powerTip.e:before {
-	border-right: 5px solid #333;
-	border-right: 5px solid rgba(0, 0, 0, 0.8);
-	left: -5px;
+	border-#{$right}: 5px solid #333;
+	border-#{$right}: 5px solid rgba(0, 0, 0, 0.8);
+	#{$left}: -5px;
 }
 #powerTip.s:before {
 	border-bottom: 5px solid #333;
@@ -242,19 +242,19 @@
 	top: -5px;
 }
 #powerTip.w:before {
-	border-left: 5px solid #333;
-	border-left: 5px solid rgba(0, 0, 0, 0.8);
-	right: -5px;
+	border-#{$left}: 5px solid #333;
+	border-#{$left}: 5px solid rgba(0, 0, 0, 0.8);
+	#{$right}: -5px;
 }
 #powerTip.ne:before, #powerTip.se:before {
-	border-right: 5px solid transparent;
-	border-left: 0;
-	left: 10px;
+	border-#{$right}: 5px solid transparent;
+	border-#{$left}: 0;
+	#{$left}: 10px;
 }
 #powerTip.nw:before, #powerTip.sw:before {
-	border-left: 5px solid transparent;
-	border-right: 0;
-	right: 10px;
+	border-#{$left}: 5px solid transparent;
+	border-#{$right}: 0;
+	#{$right}: 10px;
 }
 #powerTip.ne:before, #powerTip.nw:before {
 	border-top: 5px solid #333;
@@ -271,13 +271,13 @@
 	border-top: 5px solid #333;
 	border-top: 5px solid rgba(0, 0, 0, 0.8);
 	bottom: -5px;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	left: 10px;
+	border-#{$left}: 5px solid transparent;
+	border-#{$right}: 5px solid transparent;
+	#{$left}: 10px;
 }
 #powerTip.ne-alt:before {
-	left: auto;
-	right: 10px;
+	#{$left}: auto;
+	#{$right}: 10px;
 }
 #powerTip.sw-alt:before, #powerTip.se-alt:before {
 	border-top: none;
@@ -287,8 +287,8 @@
 	top: -5px;
 }
 #powerTip.se-alt:before {
-	left: auto;
-	right: 10px;
+	#{$left}: auto;
+	#{$right}: 10px;
 }
 
 
@@ -302,7 +302,7 @@
 
 .stepper {
 	border-radius: 3px;
-	margin: 0 0 10px 0;
+	margin: side-values(0 0 10px 0);
 	overflow: hidden;
 	position: relative;
 	width: 130px;
@@ -374,17 +374,17 @@
 }*/
 
 .stepper .stepper-arrow.up {
-	float: right;
+	float: $right;
 	top: 0;
-	right: 0;
-	border-left: 1px solid #ccc;
+	#{$right}: 0;
+	border-#{$left}: 1px solid #ccc;
 }
 
 .stepper .stepper-arrow.down {
-	float: left;
+	float: $left;
 	top: 0;
-	left: 0;
-	border-right: 1px solid #ccc;
+	#{$left}: 0;
+	border-#{$right}: 1px solid #ccc;
 }
 
 .stepper.disabled .stepper-input {
@@ -414,7 +414,7 @@
   cursor: pointer;
   font-size: 0.75em;
   font-weight: bold;
-  margin-right: 2px;
+  margin-#{$right}: 2px;
   padding: 3px 8px;
   text-transform: uppercase;
   -moz-appearance: none;
