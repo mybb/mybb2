@@ -49,7 +49,6 @@ var vendor_scripts = [
     paths.bower + "/PowerTip/src/placementcalculator.js",
     paths.bower + "/PowerTip/src/tooltipcontroller.js",
     paths.bower + "/PowerTip/src/utility.js",
-    paths.bower + "/dropit/dropit.js",
     paths.bower + "/dropzone/dist/dropzone.js"
 ];
 
