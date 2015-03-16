@@ -31,6 +31,18 @@ abstract class Controller extends BaseController
 				                       'last_page' => $request->path()
 			                       ]);
 		}
+
+		$langDir = [
+			'left' => 'left',
+			'right' => 'right'
+		];
+		if(trans('general.direction') == 'rtl')
+		{
+			$langDir['left'] = 'right';
+			$langDir['right'] = 'left';
+		}
+
+		View::share('langDir', $langDir);
 	}
 
 	protected function getRedirectUrl()
