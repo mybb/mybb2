@@ -43,6 +43,12 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "devDependencies": {
-    "gulp-jsvalidate": "^2.0.0"
+    "gulp": "^3.8.11",
+    "gulp-changed": "^1.2.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jsvalidate": "^2.0.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4"
   }
 }

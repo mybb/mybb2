@@ -39,7 +39,6 @@ var paths = {
 var vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
     paths.bower + "/modernizr/modernizr.js",
-    paths.bower + "/jquery-dropdown/jquery.dropdown.js",
     paths.bower + "/jquery-modal/jquery.modal.js",
     paths.bower + "/Stepper/jquery.fs.stepper.js",
     paths.bower + "/hideShowPassword/hideShowPassword.js",
@@ -55,7 +54,15 @@ var vendor_scripts = [
 
 var scripts = [
     paths.js.src + "/modal.js",
+    paths.js.src + "/post.js",
     paths.js.src + "/other.js"
+];
+
+var css = [
+    paths.bower + "/normalize.css/normalize.css",
+    paths.bower + "/fontawesome/scss/font-awesome.scss",
+    paths.bower + "/dropit/dropit.css",
+    paths.css.src + "/main.scss"
 ];
 
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "rtl_styles", "fonts"]);
@@ -117,7 +124,7 @@ gulp.task("scripts", function() {
 });
 
 gulp.task("styles", function() {
-    return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/main.scss"])
+    return gulp.src(css)
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"

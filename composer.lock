@@ -1569,12 +1569,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "74b512a8c39cb5a21f1aef1170e8fb113d5f81a9"
+                "reference": "8a796fe86a96187cd19700b430b2430207bdb505"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/74b512a8c39cb5a21f1aef1170e8fb113d5f81a9",
-                "reference": "74b512a8c39cb5a21f1aef1170e8fb113d5f81a9",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/8a796fe86a96187cd19700b430b2430207bdb505",
+                "reference": "8a796fe86a96187cd19700b430b2430207bdb505",
                 "shasum": ""
             },
             "require": {
@@ -1601,7 +1601,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-02-25 17:23:44"
+            "time": "2015-03-15 14:48:43"
         },
         {
             "name": "mybb/parser",
