@@ -42,7 +42,7 @@
 					</div>
 					<div class="post__foot">
 						<ul class="post__controls">
-								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
+								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
@@ -58,6 +58,12 @@
 							<i class="fa fa-caret-right"></i> <a href="index.php?page=profile">You</a>, <a href="index.php?page=profile">brad-t</a>, <a href="index.php?page=profile">Dennis Tsang</a>, and <a href="index.php?page=post-likes">14 others</a> like this</a>
 						</div>-->
 					</div>
+				</div>
+				<div id="dropdown-{{ post.id }}" class="dropdown dropdown-tip">
+				    <ul class="dropdown-menu">
+				        <li><a href="#notimplemented">Quick Edit</a></li>
+				        <li><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}">Full Edit</a></li>
+				    </ul>
 				</div>
 			{% endfor %}
 			{{ posts.render|raw }}

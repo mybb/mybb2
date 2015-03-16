@@ -39,6 +39,7 @@ var paths = {
 var vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
     paths.bower + "/modernizr/modernizr.js",
+    paths.bower + "/jquery-dropdown/jquery.dropdown.js",
     paths.bower + "/jquery-modal/jquery.modal.js",
     paths.bower + "/Stepper/jquery.fs.stepper.js",
     paths.bower + "/hideShowPassword/hideShowPassword.js",
@@ -62,6 +63,7 @@ var css = [
     paths.bower + "/normalize.css/normalize.css",
     paths.bower + "/fontawesome/scss/font-awesome.scss",
     paths.bower + "/dropit/dropit.css",
+    paths.bower + "/jquery-dropdown/jquery.dropdown.css",
     paths.css.src + "/main.scss"
 ];
 
