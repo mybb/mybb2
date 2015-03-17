@@ -3547,6 +3547,17 @@ section.container .forum-list {
   .user-list.online-now .user-list__user .user-list__user__date {
     float: right; }
 
+.user-list--compact a {
+  display: inline-block;
+  margin: 0 12px 10px 0; }
+  .user-list--compact a img.avatar {
+    width: 24px;
+    height: 24px;
+    margin: -2px 8px 0 0; }
+.user-list--compact .error-no-results {
+  padding: 10px 0;
+  font-size: 1em; }
+
 .team-badge {
   padding: 3px 8px;
   border: 1px solid #dfdfdf;
@@ -4068,15 +4079,6 @@ html.js .inline-moderation.floating i {
 .inline-moderation i {
   margin-right: 4px; }
 
-.compact-users-list a {
-  display: inline-block;
-  margin: 0 12px 10px 0; }
-
-.compact-users-list .avatar {
-  width: 24px;
-  height: 24px;
-  margin: -2px 8px 0 0; }
-
 .sort-footer {
   text-align: center;
   border: 1px solid #ccc;
@@ -4100,9 +4102,6 @@ html.js .inline-moderation.floating i {
   margin-top: 5px;
   font-size: 0.8em;
   float: right; }
-
-.compact-users-list.blocked-users {
-  margin-bottom: 10px; }
 
 /* Dropdown Menus */
 .checkbox-select {

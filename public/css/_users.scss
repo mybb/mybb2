@@ -70,6 +70,25 @@
 	}
 }
 
+.user-list--compact {
+
+	a {
+		display: inline-block;
+		margin: side-values(0 12px 10px 0);
+
+		img.avatar {
+			width: 24px;
+			height: 24px;
+			margin: side-values(-2px 8px 0 0);
+		}
+	}
+
+	.error-no-results {
+		padding: 10px 0;
+		font-size: 1em;
+	}
+}
+
 
 .team-badge {
 	padding: 3px 8px;

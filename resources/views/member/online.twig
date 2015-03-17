@@ -17,7 +17,7 @@
 				<p class="user-list__user__activity">{{ user.last_page|raw }}</p>
 			</div>
 		{% else %}
-			<div class="user user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
+			<div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
 		{% endfor %}
 	</section>
 	{{ users.render|raw }}

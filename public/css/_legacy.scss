@@ -148,17 +148,6 @@ html.js .inline-moderation.floating i {
 	margin-#{$right}: 4px;
 }
 
-.compact-users-list a {
-	display: inline-block;
-	margin: side-values(0 12px 10px 0);
-}
-
-.compact-users-list .avatar {
-	width: 24px;
-	height: 24px;
-	margin: side-values(-2px 8px 0 0);
-}
-
 .sort-footer {
 	text-align: center;
 	border: 1px solid #ccc;
@@ -187,10 +176,6 @@ html.js .inline-moderation.floating i {
 	margin-top: 5px;
 	font-size: 0.8em;
 	float: $right;
-}
-
-.compact-users-list.blocked-users {
-	margin-bottom: 10px;
 }
 
 /* Dropdown Menus */

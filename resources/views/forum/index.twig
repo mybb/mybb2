@@ -52,11 +52,11 @@
 	</section>
 		<section>
 			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
-			<div class="compact-users-list online-users">
+			<div class="user-list user-list--compact">
 				{% for user in users %}
 					<a href="index.php?page=profile"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
 				{% else %}
-					{{ trans('member.noOnline') }}
+					<div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
 				{% endfor %}
 			</div>
 		</section>
