@@ -2,6 +2,11 @@
 {% block title %}
 	{{ trans('member.online') }}
 {% endblock %}
+{% block head %}
+	{% if setting('wio.refresh', 1) > 0 %}
+		<meta http-equiv="refresh" content="{{ setting('wio.refresh', 1)*60 }};URL={{ url_route('members.online', [], false) }}">
+	{% endif %}
+{% endblock %}
 {% block contents %}
 <div class="page-content">
 	<header>

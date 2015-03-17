@@ -13,6 +13,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'general.board_name'],
 			['name' => 'general.board_desc'],
 			['name' => 'wio.minutes'],
+			['name' => 'wio.refresh'],
 			['name' => 'user.date_format'],
 			['name' => 'user.time_format'],
 			['name' => 'user.timezone'],
@@ -62,6 +63,10 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			[
 				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),
 				'value' => '15'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'wio.refresh')->pluck('id'),
+				'value' => '1'
 			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'user.dst')->pluck('id'),
