@@ -1,0 +1,43 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ user.name }}
+{% endblock %}
+{% block contents %}
+    <header>
+        <h1 style="margin-bottom: 0;">{{ user.name }}</h1>
+        <p style="margin-top: 10px; margin-bottom: 7px;">{{ user.usertitle }}</p>
+    </header>
+
+    <section class="container clearfix">
+        <div class="clearfix" style="padding: 10px;">
+            <img src="{{ user.avatar }}" class="avatar" style="width: 100px; height: 100px; float: left; margin-right: 30px;">
+            <p>
+                {{ trans('topic.posts') }}: {{ user.num_posts }}<br />
+                {{ trans('topic.topics') }}: {{ user.num_topics }}<br />
+                {{ trans('member.joinDate') }}: {{ generate_time(user.created_at) }}
+            </p>
+        </div>
+    </section>
+
+    <nav class="section-menu">
+        <ul class="sidebar-navigation clearfix">
+            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-comments fa-fw"></i><span class="text">Message</span></a></li>
+            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-plus fa-fw"></i><span class="text">Follow</span></a></li>
+            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-heart fa-fw"></i><span class="text">Buddy</span></a></li>
+        </ul>
+    </nav>
+
+    <div class="page-content page-content--menu">
+        <section class="container clearfix">
+            <div style="padding: 20px;">
+                <h2 class="heading heading--major">About {{ user.name }}</h2>
+                {% for field in user_profile_fields %}
+                    <div>
+                        <h2>{{ field.getProfileField.name }}</h2>
+                        <p>{{ field.value }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}
