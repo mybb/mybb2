@@ -35,6 +35,10 @@ return [
     'xyearago' => 'a year ago|:count years ago',
 	'username' => 'Username',
 	'time' => 'Time',
-	'location' => 'Location'
+	'location' => 'Location',
+	
+	'sorting' => 'Sorting',
+	'sortby' => 'Sort by:',
+	'order' => 'Order:'
 
 ];

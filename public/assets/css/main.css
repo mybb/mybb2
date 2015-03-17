@@ -2740,6 +2740,35 @@ section {
   section:last-child {
     margin-bottom: 0; }
 
+nav.section-menu ul {
+  margin: 0 0 15px 0;
+  padding: 0;
+  list-style: none; }
+  nav.section-menu ul li {
+    float: left;
+    width: 48%;
+    margin-bottom: 4px; }
+    nav.section-menu ul li:nth-child(odd) {
+      margin-right: 2%; }
+    nav.section-menu ul li:nth-child(even) {
+      margin-left: 2%; }
+    nav.section-menu ul li a {
+      background: #fafafa;
+      display: block;
+      padding: 2px 8px;
+      text-decoration: none;
+      border-radius: 3px; }
+      nav.section-menu ul li a:hover {
+        background-color: #ff7500;
+        border-color: #ff7500;
+        color: #fff; }
+      nav.section-menu ul li a i {
+        padding-right: 5px; }
+    nav.section-menu ul li.active a {
+      background-color: #007fd0;
+      border-color: #007fd0;
+      color: #fff; }
+
 img.avatar {
   border-radius: 4px; }
 
@@ -2790,34 +2819,21 @@ dl.stats {
   font-size: 1.2em;
   color: #666; }
 
-nav.section-menu ul {
-  margin: 0 0 15px 0;
-  padding: 0;
-  list-style: none; }
-  nav.section-menu ul li {
-    float: left;
-    width: 48%;
-    margin-bottom: 4px; }
-    nav.section-menu ul li:nth-child(odd) {
-      margin-right: 2%; }
-    nav.section-menu ul li:nth-child(even) {
-      margin-left: 2%; }
-    nav.section-menu ul li a {
-      background: #fafafa;
-      display: block;
-      padding: 2px 8px;
-      text-decoration: none;
-      border-radius: 3px; }
-      nav.section-menu ul li a:hover {
-        background-color: #ff7500;
-        border-color: #ff7500;
-        color: #fff; }
-      nav.section-menu ul li a i {
-        padding-right: 5px; }
-    nav.section-menu ul li.active a {
-      background-color: #007fd0;
-      border-color: #007fd0;
-      color: #fff; }
+.sort-results {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-top: 2px solid #dfdfdf;
+  padding: 6px 0;
+  border-radius: 0 0 4px 4px; }
+  .sort-results h3 {
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 0;
+    font-weight: normal;
+    color: #666;
+    font-size: 0.9em; }
+    .sort-results h3:after {
+      content: ":"; }
 
 @media only screen and (min-width: 768px) {
   .main .page-content--sidebar {
@@ -4021,8 +4037,6 @@ ul.notifications {
  *  This file contains all the old CSS used in the prototypes.
  *  Everything in this file is to be rewritten and converted to SASS
  */
-/* Main Body */
-/* Post Listing within a topic */
 .inline-moderation {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -4079,31 +4093,12 @@ html.js .inline-moderation.floating i {
 .inline-moderation i {
   margin-right: 4px; }
 
-.sort-footer {
-  text-align: center;
-  border: 1px solid #ccc;
-  border-top: 2px solid #ddd;
-  padding: 4px 0;
-  border-radius: 0 0 4px 4px; }
-
-.sort-footer h3 {
-  display: inline-block;
-  margin: 0 10px 0 0;
-  padding: 0;
-  font-weight: normal;
-  color: #666;
-  font-size: 0.9em; }
-
-.sort-footer .button {
-  padding: 0 8px; }
-
 .post-draft {
   color: #666;
   margin-top: 5px;
   font-size: 0.8em;
   float: right; }
 
-/* Dropdown Menus */
 .checkbox-select {
   float: right;
   margin: -4px 7px 0 12px; }

@@ -98,7 +98,7 @@
 								<h3 class="topic__title">
 									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
 								</h3>
-								<h4>First Post</h4>
+								<h4>{{ trans('topic.firstpost') }}</h4>
 								<p class="topic__post topic__post--first">
 									<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.created_at) }}
@@ -123,6 +123,24 @@
 						<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
 					{% endfor %}
 				</div>
+
+				{{ form_open({'url_route': url_route('forums.show', {0: forum.slug, 1: forum.id }), 'method': 'get'}) }}
+				<div class="sort-results">
+					<h3>{{ trans('general.sorting') }}</h3>
+					{{ form_select('orderBy', {
+						'title': trans('general.sortby')~' '~trans('forum.topictitle'),
+						'startdate': trans('general.sortby')~' '~trans('forum.startdate'),
+						'replies': trans('general.sortby')~' '~trans('forum.replies'),
+						'lastpost': trans('general.sortby')~' '~trans('forum.latestpost')
+					}, orderBy) }}
+					{{ form_select('orderDir', {
+						'asc': trans('general.order')~' Ascending',
+						'desc': trans('general.order')~' Descending'
+					}, orderDir) }}
+					{{ form_button('<span class="text">'~trans('forum.sorttopics')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+				</div>
+				{{ form_close() }}
+				
 			</section>
 			{{ topics.render|raw }}
 			</div>

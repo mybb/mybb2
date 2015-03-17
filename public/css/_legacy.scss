@@ -3,84 +3,6 @@
  *  Everything in this file is to be rewritten and converted to SASS
  */
 
-/* Main Body */
-
-// .compressed-forum-list .unread-count {
-// 	background: #eb5257;
-// 	color: #fff;
-// 	-moz-border-radius: 3px;
-// 	-webkit-border-radius: 3px;
-// 	border-radius: 3px;
-// 	padding: 1px 3px;
-// 	margin: 0 3px;
-// 	font-weight: normal;
-// 	font-size: 0.8em;
-// 	text-decoration: none;
-// }
-
-
-// .forum-list .contains-new-posts {
-// 	font-size: 0.9em;
-// 	font-weight: normal;
-// }
-
-
-// .forum-list .forum .unread-count {
-// 	background: #eb5257;
-// 	color: #fff;
-// 	-moz-border-radius: 3px;
-// 	-webkit-border-radius: 3px;
-// 	border-radius: 3px;
-// 	padding: side-values(2px 7px 2px 6px);
-// 	margin: 0 3px;
-// 	font-weight: normal;
-// 	font-size: 0.8em;
-// 	text-decoration: none;
-// }
-
-// .forum-list .forum .subforums .unread-count {
-// 	padding: 1px 3px;
-// }
-
-// .forum.topic-list .topic .unread-count {
-// 	background: #eb5257;
-// 	color: #fff;
-// 	-moz-border-radius: 3px;
-// 	-webkit-border-radius: 3px;
-// 	border-radius: 3px;
-// 	padding: side-values(2px 7px 2px 6px);
-// 	margin: side-values(0 0 0 6px);
-// 	font-weight: normal;
-// 	font-size: 0.8em;
-// 	text-decoration: none;
-// }
-
-// .forum.topic-list .topic .unread-count:hover {
-// 	background-color: #c8212e;
-// }
-
-// .forum.topic-list .topic .unread-count i {
-// 	margin-#{$left}: 3px;
-// }
-
-// .forum.topic-list .topic .contains-new-posts {
-// 	color: #eb5257;
-// 	font-weight: normal;
-// 	font-size: 0.9em;
-// 	margin-#{$left}: 10px;
-// 	text-decoration: none;
-// }
-
-// .forum.topic-list .topic .contains-new-posts i {
-// 	font-size: 14px;
-// 	margin-#{$right}: 2px;
-// }
-
-// .forum.topic-list .topic .contains-new-posts:hover {
-// 	color: #c8212e;
-// }
-
-/* Post Listing within a topic */
 .inline-moderation {
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -148,93 +70,12 @@ html.js .inline-moderation.floating i {
 	margin-#{$right}: 4px;
 }
 
-.sort-footer {
-	text-align: center;
-	border: 1px solid #ccc;
-	border-top: 2px solid #ddd;
-	padding: 4px 0;
-	-moz-border-radius: 0 0 4px 4px;
-	-webkit-border-radius: 0 0 4px 4px;
-	border-radius: 0 0 4px 4px;
-}
-
-.sort-footer h3 {
-	display: inline-block;
-	margin: side-values(0 10px 0 0);
-	padding: 0;
-	font-weight: normal;
-	color: #666;
-	font-size: 0.9em;
-}
-
-.sort-footer .button {
-	padding: 0 8px;
-}
-
 .post-draft {
 	color: #666;
 	margin-top: 5px;
 	font-size: 0.8em;
 	float: $right;
 }
-
-/* Dropdown Menus */
-// .dropdown-menu {
-// 	float: $right;
-// 	text-align: $right;
-// 	margin: 0 0 -4px 0;
-// }
-
-// .dropdown-menu .dropdown-button {
-// 	font-size: 0.8em;
-// 	color: #666;
-// 	display: inline-block;
-// 	border: 1px solid transparent;
-// 	padding: 1px 8px;
-// 	border-radius: 4px;
-// 	background: #eaeaea;
-// }
-
-// .dropdown-menu .dropdown-button .full {
-// 	display: none;
-// }
-
-// .dropdown-menu .dropdown-button:hover {
-// 	cursor: pointer;
-// 	color: #444;
-// 	background: #ddd;
-// }
-
-// .dropdown-menu ul.dropdown {
-// 	display: none;
-// 	#{$right}: 0;
-// 	#{$left}: auto;
-// 	margin-top: 2px;
-// 	border: 1px solid #ccc;
-// 	background: #fff;
-// 	border-radius: 4px;
-// 	text-align: $left;
-// 	font-size: 0.9em;
-// 	white-space: nowrap;
-// 	padding: 4px 0;
-// }
-
-// .dropdown-menu ul.dropdown li a {
-// 	padding: 3px 10px;
-// 	display: block;
-// }
-
-// .dropdown-menu ul.dropdown li a:hover {
-// 	background: #ff7500;
-// 	color: #fff;
-// 	text-decoration: none;
-// }
-
-// .dropdown-menu ul.dropdown li a i {
-// 	width: 16px;
-// 	text-align: center;
-// 	margin-#{$right}: 8px;
-// }
 
 .checkbox-select {
 	float: $right;
@@ -252,22 +93,6 @@ html.js .inline-moderation.floating i {
 ---- */
 
 @media only screen and (min-width: 480px) {
-
-	// .dropdown-menu .dropdown-button .full {
-	// 	display: inline;
-	// }
-
-	// .dropdown-menu .dropdown-button .condensed {
-	// 	display: none;
-	// }
-
-	// .dropdown-menu {
-	// 	margin: side-values(-15px 0 -4px 0);
-	// }
-
-	// .dropdown-menu .dropdown-button {
-	// 	padding: 3px 8px;
-	// }
 
 	.checkbox-select {
 		margin: side-values(12px 0 0 12px);
