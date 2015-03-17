@@ -9,7 +9,7 @@
 
 	{{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
 	<section class="form">
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.avatar') }}</h2>
 			<div class="form__section__container change-avatar">
 				<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
@@ -20,7 +20,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.details') }}</h2>
 			<div class="form__section__container">
 				<div class="buttons">
@@ -30,14 +30,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.groups') }}</h2>
 			<div class="form__section__container">
 				{{ auth_user().role.role_display_name }}
 			</div>
 		</div>
 		{# this part should be written as profilefields #}
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>Contact Details</h2>
 			<div class="form__section__container">
 				<div class="form__row">
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.about_you') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">

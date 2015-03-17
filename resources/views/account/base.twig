@@ -20,7 +20,7 @@
 			</div>
 		{% endif %}
 		<nav class="section-menu">
-			<ul class="sidebar-navigation clearfix">
+			<ul class="sidebar-navigation">
 				<li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}"><i class="fa fa-dashboard fa-fw"></i><span class="text">{{ trans('account.dashboard') }}</span></a></li>
 				<li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}"><i class="fa fa-user fa-fw"></i><span class="text">{{ trans('account.profile') }}</span></a></li>
 				<li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}"><i class="fa fa-flag fa-fw"></i><span class="text">{{ trans('account.notifications') }}</span></a></li>

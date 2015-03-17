@@ -51,6 +51,7 @@ section.form {
 	@include border-radius(4px);
 
 	.form__section {
+		@extend .clearfix;
 		padding: 16px 12px;
 		border-bottom: 2px solid $border-1;
 

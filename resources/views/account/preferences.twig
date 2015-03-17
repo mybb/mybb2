@@ -9,7 +9,7 @@
 
 	{{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}
 	<section class="form">
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.datetime') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">
@@ -71,7 +71,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.discussions') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">
@@ -90,7 +90,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.styleLanguage') }}</h2>
 			{# TODO: both, styles and languages are dynamic and an array need to be generated in the controller #}
 			<div class="form__section__container">
@@ -107,7 +107,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="form__section clearfix">
+		<div class="form__section">
 			<h2>{{ trans('account.notifications') }}</h2>
 			{# All of the labels below use HTML as their value and therefor we can't use form_label #}
 			<div class="form__section__container">

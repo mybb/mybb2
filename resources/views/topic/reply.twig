@@ -12,9 +12,9 @@
 				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
-		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
+		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
 		<section class="form">
-			<div class="form__section clearfix">
+			<div class="form__section">
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
 					{{ form_textarea('content') }}

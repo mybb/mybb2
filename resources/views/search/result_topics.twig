@@ -9,7 +9,7 @@
 	</header>
 	<section class="forum topic-list">
 		{{ results.render|raw }}
-		<div class="sort-topics clearfix">
+		<div class="sort-topics">
 			<a href="{{ url_route("search.results", {0: search.id, 'orderBy': 'subject', 'orderDir': urlDirs.subject}) }}" class="sort-column primary-column-one">
 				{{ trans('forum.topictitle') }}
 				{% if orderBy == 'subject' %}

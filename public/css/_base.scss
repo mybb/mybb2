@@ -15,6 +15,7 @@ body {
 }
 
 .wrapper {
+	@extend .clearfix;
 	width: 90%;
 	margin: 0 5%;
 }
@@ -270,6 +271,7 @@ section {
 nav.section-menu {
 	
 	ul {
+		@extend .clearfix;
 		margin: side-values(0 0 15px 0);
 		padding: 0;
 		list-style: none;
@@ -442,6 +444,7 @@ dl.stats {
 		}
 
 		.page-controls {
+			@extend .clearfix;
 			margin-top: -20px;
 
 			.page-buttons {

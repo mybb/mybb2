@@ -1,5 +1,5 @@
 			<div class="post post--reply" id="post-reply">
-				{{ form_open({'route': ['topics.reply.post', topic.slug, topic.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
+				{{ form_open({'route': ['topics.reply.post', topic.slug, topic.id], 'method': 'post'}) }}
 					<div class="post__meta">
 						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
 

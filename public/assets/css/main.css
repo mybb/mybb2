@@ -4076,14 +4076,14 @@ html.js .inline-moderation.floating i {
 .dropit .dropit-open .dropit-submenu {
   display: block; }
 
-.clearfix:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
   clear: both; }
 
-.clearfix, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list {
+.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list {
   *zoom: 1; }
 
 .hidden {

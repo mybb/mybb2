@@ -1,5 +1,5 @@
 		<header>
-			<div class="wrapper clearfix">
+			<div class="wrapper">
 				<h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>{{ setting('general.board_name', 'MyBB Community Forums') }}</span></a></h1>
 				<nav class="main-menu menu-bar">
 					<a class="main-menu__button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
@@ -12,7 +12,7 @@
 				</nav>
 			</div>
 			<nav class="user-navigation">
-				<div class="wrapper clearfix">
+				<div class="wrapper">
 					{% if auth_check() %}
 						{% include "header.welcomeblock_member" %}
 					{% else %}

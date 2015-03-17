@@ -11,7 +11,7 @@
 				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
-		{{ form_open({'route': ['topics.edit', topic.slug, topic.id, post.id], 'method': 'post', 'class': 'form-section clearfix'}) }}
+		{{ form_open({'route': ['topics.edit', topic.slug, topic.id, post.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
 				{% if topic.first_post_id == post.id %}
