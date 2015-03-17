@@ -42,6 +42,7 @@ Route::get('topic/{slug}.{id}/post/{postId}', ['as' => 'topics.showPost', 'uses'
 Route::get('topic/{slug}.{id}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
 Route::get('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
+Route::get('topic/{slug}.{id}/reply/{postId}', ['as' => 'topics.quote', 'uses' => 'TopicController@reply']);
 
 Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
 

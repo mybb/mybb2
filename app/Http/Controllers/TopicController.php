@@ -130,18 +130,43 @@ class TopicController extends Controller
 		}
 	}
 
-	public function reply($slug = '', $id = 0)
+	public function reply($slug = '', $id = 0, $postId = 0)
 	{
+		$message = '';
 		$topic = $this->topicRepository->find($id);
 
 		if(!$topic)
 		{
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
+		if($postId)
+		{
+			$post = $this->postRepository->find($postId);
+			if(!$post || $post['topic_id'] != $topic['id'])
+			{
+				throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			}
+
+			if($post->user_id == null) {
+				if($post->username) {
+					$username = $post->username;
+				}
+				else {
+					$username = trans('general.guest');
+				}
+			}
+			else
+			{
+				$username = $post->author['name'];
+			}
+
+			$message = "[quote='".e($username)."' pid='{$post['id']}' dateline='".
+					$post['created_at']->getTimestamp()."']\n{$post['content']}\n[/quote]";
+		}
 
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
-		return view('topic.reply', compact('topic'));
+		return view('topic.reply', compact('topic', 'message', 'post'));
 	}
 
 	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)

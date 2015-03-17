@@ -49,7 +49,7 @@
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
-								<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
+								<li class="quote"><a href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
 							{% endif %}
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
 							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>

@@ -158,6 +158,7 @@ class User extends BasePresenter
 				break;
 			case 'topics.show':
 			case 'topics.reply':
+			case 'topics.quote':
 			case 'topics.reply.post':
 			case 'topics.edit':
 			case 'topics.delete':
