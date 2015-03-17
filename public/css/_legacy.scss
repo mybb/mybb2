@@ -601,30 +601,6 @@ html.js .inline-moderation.floating i {
 	padding: 0 8px;
 }
 
-dl.stats {
-	line-height: 1.6;
-	margin: 0;
-	font-size: 0.7em;
-	display: table-cell;
-}
-
-dl.stats dt {
-	float: left;
-	margin: side-values(0 8px 0 0);
-	color: #999;
-	/*clear: both;*/
-}
-
-dl.stats dt:after {
-	content: ":";
-}
-
-dl.stats dd {
-   padding: 0 0;
-   margin: 0;
-   display: table-cell;
-}
-
 section.form .form-row.secondary-buttons {
 	padding: 6px 4px;
 }

@@ -306,6 +306,29 @@ img.avatar {
 	}
 }
 
+dl.stats {
+	line-height: 1.6;
+	margin: 0;
+	font-size: 0.7em;
+	display: table-cell;
+
+	dt {
+		float: $left;
+		margin: side-values(0 8px 0 0);
+		color: $alt-font-color-2;
+
+		&:after {
+			content: ":";
+		}
+	}
+
+	dd {
+		padding: 0;
+		margin: 0;
+		display: table-cell;
+	}
+}
+
 nav.section-menu {
 	
 	ul {

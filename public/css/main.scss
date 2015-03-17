@@ -1,10 +1,11 @@
-/* 
- *	Base variables
- */
+/*!
+*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*/
 
 // Theme colors
 $primary-color: #007fd0;
 $secondary-color: #ff7500;
+
 
 // Font colors
 $font-color: #222;
@@ -14,10 +15,12 @@ $alt-font-color-2: #999;
 $alt-font-color-3: #ccc;
 $alt-font-color-4: #444;
 
+
 // Border colors
 $border-1: #dfdfdf;
 $border-2: #ccc;
 $dark-border-1: #222;
+
 
 // Background colors
 $background-1: #fafafa;
@@ -28,6 +31,7 @@ $dark-background-1:	#333;
 $dark-background-2: #444;
 $unread-count: #eb5257;
 
+
 // Status background & border colors
 $status-highlight: #ebf4fb;
 $status-highlight-border: #afd9fa;
@@ -36,32 +40,29 @@ $status-deleted-border: #ddcafa;
 $status-pending: #f2dede;
 $status-pending-border: #f2aaab;
 
+
 // Fonts
 $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
 
-/*
- *	Import directional CSS library
- */
 
+// Directional CSS library
+// (see https://github.com/tysonmatanich/directional-scss for how to use)
 @import 'directional';
 
 
-/*
- *	Mixins 
- */
-
+// Our mixins
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
+	 -moz-border-radius: $radius;
+	  -ms-border-radius: $radius;
+		  border-radius: $radius;
 }
 
 @mixin box-sizing($sizing) {
   -webkit-box-sizing: $sizing;
-     -moz-box-sizing: $sizing;
-      -ms-box-sizing: $sizing;
-          box-sizing: $sizing;
+	 -moz-box-sizing: $sizing;
+	  -ms-box-sizing: $sizing;
+		  box-sizing: $sizing;
 }
 
 @mixin black-transparency($transparency) {
@@ -72,10 +73,8 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 	color: rgba(255,255,255,$transparency);
 }
 
-/*
- *	Import our sub files
- */
 
+// Import our sub files
 @import 'header_footer';
 @import 'base';
 @import 'forms';
@@ -84,49 +83,38 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'account';
 
 
-/*
- *	Helper classes
- */
-
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
-.clearfix:after {
-    clear: both;
-}
-
-.clearfix {
-    *zoom: 1;
-}
-
-.hidden {
-    display: none !important;
-    visibility: hidden;
-}
-
-.visuallyhidden {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-}
-
-/*
- *	Import legacy CSS (this is to be rewritten)
- */
-
+// Import the legacy CSS (to be rewritten)
 @import 'plugins';
 @import 'legacy';
 
 
+// A few helper classes
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
 
+.clearfix:after {
+	clear: both;
+}
 
-// RTL Direction
-// @import 'rtl';
+.clearfix {
+	*zoom: 1;
+}
+
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}
+
+.visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}

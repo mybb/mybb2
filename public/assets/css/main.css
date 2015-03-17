@@ -2144,18 +2144,9 @@ td, th {
 .dropdown .delete A {
   background-image: url(icons/cross-script.png); }
 
-/* 
- *	Base variables
- */
-/*
- *	Import directional CSS library
- */
-/*
- *	Mixins 
- */
-/*
- *	Import our sub files
- */
+/*!
+*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*/
 h1.title {
   float: left;
   margin: 10px 2% 5px 0; }
@@ -2777,6 +2768,22 @@ img.avatar {
   .button:hover, .button:active, a.button:hover, a.button:active {
     outline: none; }
 
+dl.stats {
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.7em;
+  display: table-cell; }
+  dl.stats dt {
+    float: left;
+    margin: 0 8px 0 0;
+    color: #999; }
+    dl.stats dt:after {
+      content: ":"; }
+  dl.stats dd {
+    padding: 0;
+    margin: 0;
+    display: table-cell; }
+
 nav.section-menu ul {
   margin: 0 0 15px 0;
   padding: 0;
@@ -3311,36 +3318,6 @@ ul.notifications {
     color: #666;
     display: block; }
 
-/*
- *	Helper classes
- */
-.clearfix:before, .clearfix:after {
-  content: " ";
-  display: table; }
-
-.clearfix:after {
-  clear: both; }
-
-.clearfix {
-  *zoom: 1; }
-
-.hidden {
-  display: none !important;
-  visibility: hidden; }
-
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; }
-
-/*
- *	Import legacy CSS (this is to be rewritten)
- */
 .modal {
   display: none;
   width: 580px;
@@ -4193,26 +4170,6 @@ html.js .inline-moderation.floating i {
 .sort-footer .button {
   padding: 0 8px; }
 
-dl.stats {
-  line-height: 1.6;
-  margin: 0;
-  font-size: 0.7em;
-  display: table-cell; }
-
-dl.stats dt {
-  float: left;
-  margin: 0 8px 0 0;
-  color: #999;
-  /*clear: both;*/ }
-
-dl.stats dt:after {
-  content: ":"; }
-
-dl.stats dd {
-  padding: 0 0;
-  margin: 0;
-  display: table-cell; }
-
 section.form .form-row.secondary-buttons {
   padding: 6px 4px; }
 
@@ -4401,3 +4358,27 @@ section.form .buttons {
   .forum.topic-list .topic .latest-column {
     width: 30%;
     float: left; } }
+
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table; }
+
+.clearfix:after {
+  clear: both; }
+
+.clearfix {
+  *zoom: 1; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
