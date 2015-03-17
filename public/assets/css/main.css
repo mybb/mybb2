@@ -2784,6 +2784,12 @@ dl.stats {
     margin: 0;
     display: table-cell; }
 
+.error-no-results {
+  text-align: center;
+  padding: 30px 0;
+  font-size: 1.2em;
+  color: #666; }
+
 nav.section-menu ul {
   margin: 0 0 15px 0;
   padding: 0;
@@ -3269,11 +3275,6 @@ section.container .forum-list {
   font-size: 1em; }
   .topic-list.topic-list--compact .topic .topic__post--latest .post__author:after {
     content: ""; }
-.topic-list .topic-list__error.error-no-results {
-  text-align: center;
-  padding: 30px 0;
-  font-size: 1.2em;
-  color: #666; }
 
 @media only screen and (min-width: 480px) {
   .topic-list .topic .topic__forum {
@@ -3525,11 +3526,26 @@ section.container .forum-list {
     .user-list .user-list__user h4 {
       font-size: 0.8em;
       font-weight: normal;
-      margin: -4px 0 0 0; }
+      margin: 0; }
+    .user-list .user-list__user p {
+      margin: 0;
+      padding: 0;
+      font-size: 0.8em;
+      color: #999; }
+      .user-list .user-list__user p a {
+        color: #666; }
     .user-list .user-list__user .team-badge {
       float: right;
       position: relative;
       margin: -48px 0 0 0; }
+  .user-list.online-now .user-list__user .avatar-profile-link {
+    width: 50px;
+    height: 50px; }
+    .user-list.online-now .user-list__user .avatar-profile-link img.avatar {
+      width: 50px;
+      height: 50px; }
+  .user-list.online-now .user-list__user .user-list__user__date {
+    float: right; }
 
 .team-badge {
   padding: 3px 8px;
@@ -4089,55 +4105,6 @@ html.js .inline-moderation.floating i {
   margin-bottom: 10px; }
 
 /* Dropdown Menus */
-.dropdown-menu {
-  float: right;
-  text-align: right;
-  margin: 0 0 -4px 0; }
-
-.dropdown-menu .dropdown-button {
-  font-size: 0.8em;
-  color: #666;
-  display: inline-block;
-  border: 1px solid transparent;
-  padding: 1px 8px;
-  border-radius: 4px;
-  background: #eaeaea; }
-
-.dropdown-menu .dropdown-button .full {
-  display: none; }
-
-.dropdown-menu .dropdown-button:hover {
-  cursor: pointer;
-  color: #444;
-  background: #ddd; }
-
-.dropdown-menu ul.dropdown {
-  display: none;
-  right: 0;
-  left: auto;
-  margin-top: 2px;
-  border: 1px solid #ccc;
-  background: #fff;
-  border-radius: 4px;
-  text-align: left;
-  font-size: 0.9em;
-  white-space: nowrap;
-  padding: 4px 0; }
-
-.dropdown-menu ul.dropdown li a {
-  padding: 3px 10px;
-  display: block; }
-
-.dropdown-menu ul.dropdown li a:hover {
-  background: #ff7500;
-  color: #fff;
-  text-decoration: none; }
-
-.dropdown-menu ul.dropdown li a i {
-  width: 16px;
-  text-align: center;
-  margin-right: 8px; }
-
 .checkbox-select {
   float: right;
   margin: -4px 7px 0 12px; }
@@ -4151,27 +4118,19 @@ html.js .inline-moderation.floating i {
 
 ---- */
 @media only screen and (min-width: 480px) {
-  .dropdown-menu .dropdown-button .full {
-    display: inline; }
-  .dropdown-menu .dropdown-button .condensed {
-    display: none; }
-  .dropdown-menu {
-    margin: -15px 0 -4px 0; }
-  .dropdown-menu .dropdown-button {
-    padding: 3px 8px; }
   .checkbox-select {
     margin: 12px 0 0 12px; }
   .checkbox-select.check-all {
     margin: 12px 12px 0 0; } }
 
-.clearfix:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after {
+.clearfix:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after {
+.clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
   clear: both; }
 
-.clearfix, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic {
+.clearfix, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list {
   *zoom: 1; }
 
 .hidden {
