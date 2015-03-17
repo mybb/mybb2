@@ -61,7 +61,6 @@ var scripts = [
 var css = [
     paths.bower + "/normalize.css/normalize.css",
     paths.bower + "/fontawesome/scss/font-awesome.scss",
-    paths.bower + "/dropit/dropit.css",
     paths.bower + "/jquery-dropdown/jquery.dropdown.css",
     paths.css.src + "/main.scss"
 ];

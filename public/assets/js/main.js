@@ -69,7 +69,6 @@
 	{
 		// Show and hide posts
 		$(".postToggle").on("click", this.togglePost).bind(this);
-		$('.editmenu').dropit();
 	};
 
 	// Show and hide posts
