@@ -16,17 +16,17 @@
 			{% if forum.children.count > 0 %}
 				<section class="container">
 					<h2 class="visuallyhidden">{{ trans('forum.childforums') }}</h2>
-					 <div class="forum-list thread-list">
+					 <div class="forum-list">
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">
-								<div class="forum-info">
-									<h3 class="forum-title"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></h3>
-									<p class="description">{{ forum.description }} </p>
+								<div class="forum__info">
+									<h3 class="forum__title"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></h3>
+									<p class="forum__description">{{ forum.description }} </p>
 									{% if forum.children.count > 0 %}
 										{% for subforum in forum.children.toTree %}
-											<ul class="subforums">
+											<ul class="forum__subforums">
 												<i class="fa fa-level-up"></i>
-												<li><a href="{{ url_route("forums.show", [subforum.slug, subforum.id]) }}" class="subforum-title">{{ subforum.title }}</a></li>
+												<li class="subforum"><a href="{{ url_route("forums.show", [subforum.slug, subforum.id]) }}" class="subforum__title">{{ subforum.title }}</a></li>
 											</ul>
 										{% endfor %}
 									{% endif %}
@@ -49,7 +49,7 @@
 			</div>
 			<section class="forum topic-list">
 				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
-				<div class="sort-topics clearfix">
+				<div class="topic-list__sort-topics">
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 						{{ trans('forum.topictitle') }}
 						{% if orderBy == 'title' %}
@@ -91,16 +91,16 @@
 						{% endif %}
 					</a>
 				</div>
-				<div class="topics-container">
+				<div class="topic-list__container">
 					{% for topic in topics %}
 						<div class="topic{{ topic.trashed ? ' soft-deleted' }}">
 							<div class="primary-column">
-								<h3 class="topic-title">
+								<h3 class="topic__title">
 									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
 								</h3>
 								<h4>First Post</h4>
-								<p class="first-post">
-									<span class="post-author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
+								<p class="topic__post topic__post--first">
+									<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.created_at) }}
 								</p>
 							</div>
@@ -113,8 +113,8 @@
 								<h4>{{ trans('topic.latest') }}</h4>
 								<!-- it should be change later -->
 								<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
-								<p class="latest-post">
-									<span class="post-author"><a href="">{{ topic.lastPost.author.name }}</a></span>
+								<p class="topic__post topic__post--latest">
+									<span class="post__author"><a href="">{{ topic.lastPost.author.name }}</a></span>
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
 								</p>
 							</div>

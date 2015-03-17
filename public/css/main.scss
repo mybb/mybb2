@@ -73,11 +73,19 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 	color: rgba(255,255,255,$transparency);
 }
 
+@mixin transform($transform) {
+	-webkit-transform: $transform;
+	-moz-transform: $transform;
+	-ms-transform: $transform;
+	-o-transform: $transform;
+}
+
 
 // Import our sub files
 @import 'header_footer';
 @import 'base';
 @import 'forms';
+@import 'forums';
 @import 'topics';
 @import 'users';
 @import 'account';

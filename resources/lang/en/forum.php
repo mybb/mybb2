@@ -2,7 +2,7 @@
 
 return [
 	'allforums' => 'All Forums',
-	'notfound' => 'No Forums Found!',
+	'notfound' => 'No forums found',
 	'childforums' => 'Child Forums',
 	'topics' => 'Topics',
 	'markread' => 'Mark Read',

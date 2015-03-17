@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'notfound' => 'No Topics Found!',
+	'notfound' => 'No topics found',
 	'topics' => 'Topics',
 	'replies' => 'Replies',
 	'posts' => 'Posts',
