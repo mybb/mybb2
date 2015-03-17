@@ -1,7 +1,4 @@
-/*
- *  This file contains all the old CSS used in the prototypes.
- *  Everything in this file is to be rewritten and converted to SASS
- */
+// STILL NEEDS REWRITE
 
 .inline-moderation {
 	border: 1px solid #ddd;
@@ -70,13 +67,6 @@ html.js .inline-moderation.floating i {
 	margin-#{$right}: 4px;
 }
 
-.post-draft {
-	color: #666;
-	margin-top: 5px;
-	font-size: 0.8em;
-	float: $right;
-}
-
 .checkbox-select {
 	float: $right;
 	margin: side-values(-4px 7px 0 12px);
@@ -85,12 +75,6 @@ html.js .inline-moderation.floating i {
 .checkbox-select.check-all {
 	margin: side-values(12px 19px 0 0);
 }
-
-/* ----
-
-	INTERMEDIATE WIDTH
-
----- */
 
 @media only screen and (min-width: 480px) {
 

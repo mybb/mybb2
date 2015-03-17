@@ -2472,7 +2472,8 @@ html, button, input, select, textarea {
 
 body {
   margin: 0;
-  font: 16px/26px Open Sans, Helvetica Neue, Helvetica, Arial; }
+  font: 16px/26px Open Sans, Helvetica Neue, Helvetica, Arial;
+  background: #fff; }
 
 .wrapper {
   width: 90%;
@@ -3544,114 +3545,157 @@ ul.notifications {
     color: #666;
     display: block; }
 
+.inline-moderation {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-size: 0.9em;
+  text-align: center; }
+
+html.js .inline-moderation {
+  display: none; }
+
+html.js .inline-moderation.floating {
+  display: block;
+  float: right;
+  position: fixed;
+  background: #444;
+  border-color: #444;
+  z-index: 1000;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 0;
+  border-top: 2px solid #222;
+  width: 100%;
+  box-sizing: border-box; }
+
+html.js .inline-moderation.floating h2 {
+  color: #bbb; }
+
+html.js .inline-moderation.floating a:link, html.js .inline-moderation.floating a:visited {
+  color: #ddd; }
+
+html.js .inline-moderation.floating i {
+  color: #bbb; }
+
+.inline-moderation h2 {
+  font-weight: normal;
+  font-size: 1em;
+  color: #666;
+  margin: 0 0 0 8px;
+  padding: 0;
+  border: none;
+  display: inline-block; }
+
+.inline-moderation ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block; }
+
+.inline-moderation ul li {
+  display: inline-block;
+  margin: 0 8px; }
+
+.inline-moderation i {
+  margin-left: 4px; }
+
+.checkbox-select {
+  float: left;
+  margin: -4px 12px 0 7px; }
+
+.checkbox-select.check-all {
+  margin: 12px 0 0 19px; }
+
+@media only screen and (min-width: 480px) {
+  .checkbox-select {
+    margin: 12px 12px 0 0; }
+  .checkbox-select.check-all {
+    margin: 12px 0 0 12px; } }
+
 .modal {
   display: none;
   width: 580px;
   padding: 0;
-  border-radius: 8px;
-  /*
-  -webkit-box-shadow: 0 0 10px #000;
-  -moz-box-shadow: 0 0 10px #000;
-  -o-box-shadow: 0 0 10px #000;
-  -ms-box-shadow: 0 0 10px #000;
-  box-shadow: 0 0 10px #000;*/
-  border: 8px solid rgba(0, 0, 0, 0.5); }
-
-.modal .page-content {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.7);
-  width: 100%;
-  float: none; }
-
-.modal .page-content header {
-  background: #007fd0;
-  border-bottom: 2px solid #0a539b; }
-
-.modal .page-content header h1 {
-  margin: 0;
-  padding: 0;
-  color: #fff;
-  font-size: 1.2em;
-  padding: 16px; }
-
-.modal .page-content header .page-controls {
-  margin: -50px 0 0 8px; }
-
-.modal .page-content header .button, .modal .page-content header .button.secondary {
-  color: #fff;
-  background: #007fd0;
-  border-color: rgba(255, 255, 255, 0.3); }
-
-.modal .page-content header .button:hover, .modal .page-content header .button.secondary:hover {
-  background: #ff7500;
-  border-color: #ff7500; }
-
-.modal .page-content section.form {
-  border: none;
-  /*padding-bottom: 0;*/
-  padding-bottom: 15px;
-  margin: 0;
-  overflow: auto; }
-
-.modal .page-content section.form h2 {
-  margin: 0 0 12px 0;
-  padding: 0 8px 8px 8px;
-  color: #007fd0;
-  font-size: 1.1em;
-  border-bottom: 1px dotted #ccc;
-  text-align: right;
-  float: none;
-  width: auto; }
-
-.modal .page-content section.form .form__section__container {
-  float: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  width: auto; }
-
-.modal .page-content .form__section:last-child {
-  padding-bottom: 0px; }
-
-.modal .page-content .form__submit {
-  margin: 0;
-  padding: 6px 0;
-  background: #f8f8f8;
-  border-top: 1px solid #ddd; }
-
-.modal .section-menu {
-  display: none; }
-
-.modal .page-content--menu header {
-  margin: 0; }
-
-.modal a.close-modal {
-  position: absolute;
-  top: -12.5px;
-  left: -12.5px;
-  width: 11px;
-  height: 19px;
-  display: block;
-  border: 2px solid #fff;
-  padding: 2px 6px 2px 6px;
-  color: #fff;
-  background: #000;
-  border-radius: 15px;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0 1px 4px #000;
-  line-height: 1;
-  /*text-indent: -9999px;
-  background: url("../images/close.png") no-repeat 0 0;*/ }
-
-.modal a.close-modal i {
-  font-size: 14px; }
-
-.modal a.close-modal:hover {
-  background-color: #bb0000; }
-
-.modal a.close-modal span {
-  display: none; }
+  border: 8px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px; }
+  .modal .page-content {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    width: 100%;
+    float: none; }
+    .modal .page-content header {
+      background: #007fd0;
+      border-bottom: 2px solid #0a539b; }
+      .modal .page-content header h1 {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        font-size: 1.2em;
+        padding: 16px; }
+      .modal .page-content header .page-controls {
+        margin: -50px 0 0 8px; }
+      .modal .page-content header .button, .modal .page-content header .button.secondary {
+        color: #fff;
+        background: #007fd0;
+        border-color: rgba(255, 255, 255, 0.3); }
+        .modal .page-content header .button:hover, .modal .page-content header .button.secondary:hover {
+          background: #ff7500;
+          border-color: #ff7500; }
+    .modal .page-content.page-content--menu header {
+      margin: 0; }
+  .modal section.form {
+    border: none;
+    padding-bottom: 15px;
+    margin: 0;
+    overflow: auto; }
+    .modal section.form h2 {
+      margin: 0 0 12px 0;
+      padding: 0 8px 8px 8px;
+      color: #007fd0;
+      font-size: 1.1em;
+      border-bottom: 1px dotted #ccc;
+      text-align: right;
+      float: none;
+      width: auto; }
+    .modal section.form .form__section__container {
+      float: none;
+      margin: 0;
+      padding: 0;
+      border: none;
+      width: auto; }
+    .modal section.form .form_section:last-child {
+      padding-bottom: 0; }
+  .modal .form__submit {
+    margin: 0;
+    padding: 6px 0;
+    background: #f2f2f2;
+    border-top: 1px solid #dfdfdf; }
+  .modal .section-menu {
+    display: none; }
+  .modal a.close-modal {
+    position: absolute;
+    top: -12.5px;
+    left: -12.5px;
+    width: 11px;
+    height: 19px;
+    display: block;
+    border: 2px solid #fff;
+    padding: 2px 6px 2px 6px;
+    color: #fff;
+    background: #333;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 1px 4px #000;
+    line-height: 1;
+    border-radius: 15px; }
+    .modal a.close-modal i {
+      font-size: 14px; }
+    .modal a.close-modal:hover {
+      background: #bb0000; }
+    .modal a.close-modal span {
+      display: none; }
 
 .modal-spinner {
   display: none;
@@ -3686,8 +3730,7 @@ ul.notifications {
 @media screen and (max-height: 458px) {
   .modal .page-content section.form {
     max-height: 150px;
-    overflow: auto;
-    /*background: red;*/ } }
+    overflow: auto; } }
 
 /* PowerTip Plugin */
 #powerTip {
@@ -3928,90 +3971,6 @@ ul.notifications {
 
 .dropit .dropit-open .dropit-submenu {
   display: block; }
-
-/*
- *  This file contains all the old CSS used in the prototypes.
- *  Everything in this file is to be rewritten and converted to SASS
- */
-.inline-moderation {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 10px 12px;
-  font-size: 0.9em;
-  text-align: center; }
-
-html.js .inline-moderation {
-  display: none; }
-
-html.js .inline-moderation.floating {
-  display: block;
-  float: right;
-  position: fixed;
-  background: #444;
-  border-color: #444;
-  z-index: 1000;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  border-radius: 0;
-  border-top: 2px solid #222;
-  width: 100%;
-  box-sizing: border-box; }
-
-html.js .inline-moderation.floating h2 {
-  color: #bbb; }
-
-html.js .inline-moderation.floating a:link, html.js .inline-moderation.floating a:visited {
-  color: #ddd; }
-
-html.js .inline-moderation.floating i {
-  color: #bbb; }
-
-.inline-moderation h2 {
-  font-weight: normal;
-  font-size: 1em;
-  color: #666;
-  margin: 0 0 0 8px;
-  padding: 0;
-  border: none;
-  display: inline-block; }
-
-.inline-moderation ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: inline-block; }
-
-.inline-moderation ul li {
-  display: inline-block;
-  margin: 0 8px; }
-
-.inline-moderation i {
-  margin-left: 4px; }
-
-.post-draft {
-  color: #666;
-  margin-top: 5px;
-  font-size: 0.8em;
-  float: left; }
-
-.checkbox-select {
-  float: left;
-  margin: -4px 12px 0 7px; }
-
-.checkbox-select.check-all {
-  margin: 12px 0 0 19px; }
-
-/* ----
-
-	INTERMEDIATE WIDTH
-
----- */
-@media only screen and (min-width: 480px) {
-  .checkbox-select {
-    margin: 12px 12px 0 0; }
-  .checkbox-select.check-all {
-    margin: 12px 0 0 12px; } }
 
 .clearfix:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
   content: " ";

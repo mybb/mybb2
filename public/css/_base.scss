@@ -11,6 +11,7 @@ html, button, input, select, textarea {
 body {
 	margin: 0;
 	font: 16px/26px $font-stack;
+	background: $background-default;
 }
 
 .wrapper {

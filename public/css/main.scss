@@ -20,9 +20,11 @@ $alt-font-color-4: #444;
 $border-1: #dfdfdf;
 $border-2: #ccc;
 $dark-border-1: #222;
+$primary-color-border: #0a539b;
 
 
 // Background colors
+$background-default: #fff;
 $background-1: #fafafa;
 $background-2: #f2f2f2;
 $background-3: #eee;
@@ -89,11 +91,9 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'topics';
 @import 'users';
 @import 'account';
-
-
-// Import the legacy CSS (to be rewritten)
+@import 'moderation';
+@import 'modals';
 @import 'plugins';
-@import 'legacy';
 
 
 // A few helper classes
