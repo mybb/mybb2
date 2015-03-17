@@ -33,13 +33,13 @@
 	<section>
 		<h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}">{{ trans('forum.allforums') }}</a></h3>
 
-		<div class="compressed-forum-list">
+		<div class="forum-list forum-list--compact">
 		{% for category in forums %}
 			<div class="category">
 				<h4><a href="{{ url_route("forums.show", [category.slug, category.id]) }}">{{ category.title }}</a></h4>
-				<ul class="forum-list">
+				<ul class="category__forums">
 				{% for forum in category.children.toTree %}
-					<li><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></li>
+					<li class="category__forum"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></li>
 				{% else %}
 					{#Do nothing, no subforums for this category#}
 				{% endfor %}
