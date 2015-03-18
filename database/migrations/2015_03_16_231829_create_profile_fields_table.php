@@ -18,7 +18,7 @@ class CreateProfileFieldsTable extends Migration {
 			$table->string('type');
 			$table->string('name');
 			$table->string('description');
-			$table->integer('display_order');
+			$table->integer('display_order')->unsigned();
 			$table->nullableTimestamps();
 		});
 	}
