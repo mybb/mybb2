@@ -20,6 +20,7 @@ use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
+use MyBB\Core\Renderers\Post\Quote as QuoteRenderer;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -33,6 +34,8 @@ class TopicController extends Controller
 	private $forumRepository;
 	/** @var Guard $guard */
 	private $guard;
+	/** @var QuoteRenderer $quoteRenderer */
+	private $quoteRenderer;
 
 	/**
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
@@ -40,13 +43,15 @@ class TopicController extends Controller
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
+	 * @param QuoteRenderer    $quoteRenderer
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IForumRepository $forumRepository,
 		Guard $guard,
-		Request $request
+		Request $request,
+		QuoteRenderer $quoteRenderer
 	) {
 		parent::__construct($guard, $request);
 
@@ -54,6 +59,7 @@ class TopicController extends Controller
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
 		$this->guard = $guard;
+		$this->quoteRenderer = $quoteRenderer;
 	}
 
 	public function show($slug = '', $id = 0)
@@ -130,7 +136,7 @@ class TopicController extends Controller
 		}
 	}
 
-	public function reply($slug = '', $id = 0, $postId = 0)
+	public function reply($slug = '', $id = 0, $postId = null)
 	{
 		$message = '';
 		$topic = $this->topicRepository->find($id);
@@ -142,26 +148,11 @@ class TopicController extends Controller
 		if($postId)
 		{
 			$post = $this->postRepository->find($postId);
-			if(!$post || $post['topic_id'] != $topic['id'])
-			{
+			if(!$post || $post->topic_id != $topic->id) {
 				throw new NotFoundHttpException(trans('errors.topic_not_found'));
 			}
 
-			if($post->user_id == null) {
-				if($post->username) {
-					$username = $post->username;
-				}
-				else {
-					$username = trans('general.guest');
-				}
-			}
-			else
-			{
-				$username = $post->author['name'];
-			}
-
-			$message = "[quote='".e($username)."' pid='{$post['id']}' dateline='".
-					$post['created_at']->getTimestamp()."']\n{$post['content']}\n[/quote]";
+			$message = $this->quoteRenderer->renderFromPost($post);
 		}
 
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
