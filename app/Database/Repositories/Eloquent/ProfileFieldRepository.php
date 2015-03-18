@@ -9,12 +9,25 @@ use Mybb\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 {
     /**
+     * @var ProfileField
+     */
+    protected $profileField;
+
+    /**
+     * @param ProfileField $profileField
+     */
+    public function __construct(ProfileField $profileField)
+    {
+        $this->profileField = $profileField;
+    }
+
+    /**
      * @param array $data
      * @return ProfileField
      */
     public function create(array $data)
     {
-        return ProfileField::create($data);
+        return $this->profileField->create($data);
     }
 
     /**
@@ -22,7 +35,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
      */
     public function getAll()
     {
-        return ProfileField::all();
+        return $this->profileField->all();
     }
 
     /**
@@ -31,6 +44,6 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
      */
     public function find($id)
     {
-        return ProfileField::find($id);
+        return $this->profileField->find($id);
     }
 }
