@@ -13,7 +13,7 @@ class Quote {
 	public function renderFromPost(Post $post)
 	{
 		$post = new PostPresenter($post);
-		return "[quote='".e($post->username)."' pid='{$post->id}' dateline='".
+		return "[quote='".e($post->author->name)."' pid='{$post->id}' dateline='".
 				$post->created_at->getTimestamp()."']\n{$post->content}\n[/quote]";
 	}
 }
