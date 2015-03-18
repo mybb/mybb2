@@ -73,7 +73,7 @@
 				{# everything below should use profilefields #}
 				{% for field in profile_fields %}
 					<div class="form__row">
-						{{ form_render_field(field)|raw }}
+						{{ form_render_field(field) }}
 					</div>
 				{% endfor %}
 			</div>
