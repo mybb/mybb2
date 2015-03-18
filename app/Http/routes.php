@@ -67,6 +67,8 @@ Route::controllers([
 	                   'password' => 'Auth\PasswordController',
                    ]);
 
+Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+
 Route::get('admin',
            ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
 

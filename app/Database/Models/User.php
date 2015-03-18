@@ -10,6 +10,9 @@ use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\PermissionHandler;
 
+/**
+ * @property string id
+ */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter
 {
 
@@ -60,6 +63,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return \MyBB\Core\Presenters\User::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
 	}
 
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return (int) $this->id;
+	}
 
 	public function role()
 	{
