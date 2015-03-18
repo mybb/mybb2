@@ -1,6 +1,6 @@
 <?php
 
-namespace Mybb\Core\Http\Controllers;
+namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
