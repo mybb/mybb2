@@ -11,6 +11,19 @@ use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 {
     /**
+     * @var UserProfileField
+     */
+    protected $userProfileField;
+
+    /**
+     * @param UserProfileField $userProfileField
+     */
+    public function __construct(UserProfileField $userProfileField)
+    {
+        $this->userProfileField = $userProfileField;
+    }
+
+    /**
      * @param User $user
      * @param ProfileField $profileField
      * @param string $value
@@ -18,7 +31,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      */
     public function create(User $user, ProfileField $profileField, $value)
     {
-        return UserProfileField::create([
+        return $this->userProfileField->create([
             'user_id' => $user->getId(),
             'profile_field_id' => $profileField->getId(),
             'value' => $value
@@ -31,7 +44,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      */
     public function find($id)
     {
-        return UserProfileField::find($id);
+        return $this->userProfileField->find($id);
     }
 
     /**
@@ -41,7 +54,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      */
     public function findForProfileField(User $user, ProfileField $profileField)
     {
-        return UserProfileField::where('user_id', $user->getId())
+        return $this->userProfileField->where('user_id', $user->getId())
             ->where('profile_field_id', $profileField->getId())
             ->get()
             ->first();
@@ -72,6 +85,6 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      */
     public function findForUser(User $user)
     {
-        return UserProfileField::where('user_id', $user->getId())->get();
+        return $this->userProfileField->where('user_id', $user->getId())->get();
     }
 }
