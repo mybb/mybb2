@@ -56,7 +56,7 @@ class Post extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return \MyBB\Core\Presenters\Post::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+		return 'MyBB\Core\Presenters\Post';
 	}
 
 	/**
