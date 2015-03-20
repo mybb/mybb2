@@ -1,0 +1,61 @@
+{% if polls.count %}
+	<section class="polls">
+		{% for poll in polls %}
+			<div class="poll" id="poll-{{ poll.id }}">
+				<div class="poll__title">{{ poll.question }}</div>
+				<div class="poll__options">
+					{%  for option in poll.options %}
+						<div class="poll__option">
+							<div class="poll__option__name">
+								{{ option.option }}
+							</div>
+							<div class="poll__option__votes">
+								<div class="poll__option__votes-bar" style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		{% endfor %}
+	</section>
+
+	<style>
+		/* @Justin */
+		.poll {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.poll__title {
+			background: #007fd0;
+			margin: 0;
+			border-radius: 3px 3px 0 0;
+			padding: 6px 8px;
+			color: #fff;
+		}
+
+		.poll__options {
+			padding: 8px;
+		}
+		.poll__option {
+			border-bottom: 1px solid #e0e0e0;
+		}
+		.poll__option:last-child {
+			border-bottom: none;
+		}
+
+		.poll__option__name {
+			width: 300px;
+		}
+
+		.poll__option__votes {
+			float: right;
+			margin-left: 300px;
+			width: auto;
+			border: 1px solid #eee;
+			height: 20px;
+		}
+
+
+	</style>
+{% endif %}

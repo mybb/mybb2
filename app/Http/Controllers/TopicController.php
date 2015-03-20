@@ -18,6 +18,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\IPollRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Settings\Store;
@@ -31,6 +32,8 @@ class TopicController extends Controller
 	private $postRepository;
 	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
+	/** @var IPollRepository $pollRepository */
+	private $pollRepository;
 	/** @var Guard $guard */
 	private $guard;
 
@@ -38,6 +41,7 @@ class TopicController extends Controller
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
+	 * @param IPollRepository $pollRepository Poll repository interface, used to fetch poll details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
 	 */
@@ -45,6 +49,7 @@ class TopicController extends Controller
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IForumRepository $forumRepository,
+		IPollRepository $pollRepository,
 		Guard $guard,
 		Request $request
 	) {
@@ -53,6 +58,7 @@ class TopicController extends Controller
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 		$this->guard = $guard;
 	}
 
@@ -65,13 +71,15 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
+		$polls = $this->pollRepository->allForTopic($topic);
+
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
 
 		$this->topicRepository->incrementViewCount($topic);
 
 		$posts = $this->postRepository->allForTopic($topic, true);
 
-		return view('topic.show', compact('topic', 'posts'));
+		return view('topic.show', compact('topic', 'posts', 'polls'));
 	}
 
 	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)

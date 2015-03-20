@@ -66,6 +66,16 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\IPollRepository',
+			'MyBB\Core\Database\Repositories\Eloquent\PollRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\IPollVoteRepository',
+			'MyBB\Core\Database\Repositories\Eloquent\PollVoteRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
 			function (Application $app)
 			{

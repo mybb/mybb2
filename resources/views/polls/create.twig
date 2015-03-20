@@ -1,0 +1,126 @@
+{% extends "layouts.base" %}
+{% block title %}
+	Add a poll
+{% endblock %}
+{% block head %}
+	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
+	<link rel="canonical" href="{{ url_route("polls.create", [topic.slug, topic.id]) }}" />
+{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>Add a poll to {{ topic.title }}</h1>
+			<div class="page-buttons">
+				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+			</div>
+		</header>
+		{{ form_open({'route': ['polls.postCreate', topic.slug, topic.id ], 'method': 'post'}) }}
+		<section class="form">
+			<div class="form__section">
+				<h2>Question</h2>
+				<div class="form__section__container">
+					<div class="form__row">
+						<h3>{{ form_label('question', 'Question') }}</h3>
+						{{ form_text('question') }}
+					</div>
+				</div>
+			</div>
+			<div class="form__section">
+				<h2>Poll Options</h2>
+				<div class="form__section__container">
+					<div class="form__row poll-option">
+						<a href="#remove-option" class="remove-option" title="Remove"><i class="fa fa-times"></i></a>
+						{{ form_text('option[]') }}
+					</div>
+					<div class="form__row poll-option">
+						<a href="#remove-option" class="remove-option" title="Remove"><i class="fa fa-times"></i></a>
+						{{ form_text('option[]') }}
+					</div>
+					<a href="#newoption" class="button button--secondary" id="new-option"><i class="fa fa-plus"></i><span class="text">New Option</span></a>
+					<div class="form__row hidden" id="option-simple">
+						<a href="#remove-option" class="remove-option" title="Remove"><i class="fa fa-times"></i></a>
+						{{ form_text('option[]') }}
+					</div>
+				</div>
+			</div>
+			<div class="form__section">
+				<h2>Options</h2>
+				<div class="form__section__container">
+					<div class="form__row">
+						<p class="form__checkbox"><label title="Give users the ability to see which user voted on which option(s)">{{ form_checkbox('is_public', 'yes') }} Make votes public?</label></p>
+						<p class="form__checkbox"><label>{{ form_checkbox('is_multiple', 'yes', false,{'id': 'poll-is-multiple'}) }} Allow multiple choice?</label></p>
+					</div>
+					<div class="form__row" id="poll-maximum-options">
+						<h3>Maximum number of options per user (0 for no limit)</h3>
+						{{ form_text('maxoptions') }}
+					</div>
+					<div class="form__row">
+						<h3>Poll Timeout</h3>
+						{{ form_number('timeout', '0', {class: 'short', min: 0}) }} days
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="form__submit">
+			{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+		</div>
+		{{ form_close() }}
+	</div>
+
+
+	<style>
+		/* @Justin */
+		.poll-option {
+			padding-right: 20px!important;
+		}
+
+		.remove-option {
+			float: right;
+			margin: 3px -20px 0 0;
+		}
+	</style>
+	<script>
+		// @Paul
+		window.onload = (function(){
+			var $simpleOption = $('#option-simple').clone().removeClass('hidden').addClass('poll-option').hide();
+			var removeOption = function($elm)
+			{
+				$elm.find('.remove-option').click(function(){
+					if($('.poll-option').length <= 2)
+					{
+						return false;
+					}
+					$(this).parents('.poll-option').slideUp(500);
+					setTimeout($.proxy(function(){
+						$(this).parents('.poll-option').remove();
+					}, this), 500);
+				});
+			}
+
+			removeOption($('.poll-option'));
+			$('#option-simple').remove();
+			$('#new-option').click(function(){
+				var num_options = $('.poll-option').length;
+				if(num_options >= 10) {
+					return false;
+				}
+				var $option = $simpleOption.clone();
+				$('.poll-option').last().after($option);
+				$option.slideDown();
+				removeOption($option);
+				return false;
+			});
+			$('#poll-maximum-options').hide();
+			$('#poll-is-multiple').change(function(){
+				if($(this).is(':checked')) {
+					$('#poll-maximum-options').slideDown();
+				}
+				else {
+					$('#poll-maximum-options').slideUp();
+				}
+			})
+		});
+	</script>
+
+
+{% endblock %}

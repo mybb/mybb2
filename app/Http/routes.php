@@ -55,6 +55,9 @@ Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicC
 
 Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);
 
+Route::get('topic/{slug}.{id}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
+Route::post('topic/{slug}.{id}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
+
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 

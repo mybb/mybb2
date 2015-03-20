@@ -59,13 +59,23 @@ class Topic extends Model implements HasPresenter
 	}
 
 	/**
-	 * A thread has many posts.
+	 * A topic has many posts.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function posts()
 	{
 		return $this->hasMany('MyBB\\Core\\Database\\Models\\Post');
+	}
+
+	/**
+	 * A topic has many polls.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function polls()
+	{
+		return $this->hasMany('MyBB\\Core\\Database\\Models\\Polls');
 	}
 
 	/**
