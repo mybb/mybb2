@@ -14,6 +14,10 @@ Bug reports should be posted in the [official MyBB 2.0 bug reports forum](http:/
 
 Please do not report security issues on GitHub or in the public forums. Instead, please post a topic within the official [Private Inquiries forum](http://community.mybb.com/forum-135.html), where your issue will be discussed in private. THis ensures that security issues are patched in a timely manner without causing harm to existing MyBB installs.
 
+##Submitting Translations
+
+Translations of the core language files are more than welcome. Additional translations ar stored within the [MyBB 2.0 Translations Repository](#TODO) and changes to existing translations or new translations should be submitted against that repository. Translations should not be duplicated - if a translation for your language already exists, please provide contributions to that existing translations et rather than creating your own.
+
 ##Submitting Pull Requests
 
 Pull requests may be submitted against this repository, but we request that users follow the [GitHub flow](https://guides.github.com/introduction/flow/) principal of working, and that all pull requests are linked to an existing issue (be it either a bug report or a feature request). Pull requests for features or fixes not already discussed within an existing forum topic or GitHub issue will be closed.
