@@ -73,7 +73,7 @@ return [
 	'styleLanguage' => 'Style and Language',
 	'style' => 'Forum Style',
 	'language' => 'Forum Language',
-	'threadsForums' => 'Threads and Forums',
+	'topicsForums' => 'Topics and Forums',
 	'notify_me' => 'Notify me when someone:',
 	'notify_on_like' => 'Likes one of my posts',
 	'notify_on_quote' => 'Quotes one of my posts',
