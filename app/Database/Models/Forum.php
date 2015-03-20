@@ -52,7 +52,7 @@ class Forum extends Node implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return \MyBB\Core\Presenters\Forum::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+		return 'MyBB\Core\Presenters\Forum';
 	}
 
 	/**
