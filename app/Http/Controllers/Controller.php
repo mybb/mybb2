@@ -54,4 +54,23 @@ abstract class Controller extends BaseController
 
 		return $this->parentGetRedirectUrl();
 	}
+
+	protected function checkCaptcha($redirect = true)
+	{
+		$valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
+
+		if($valid)
+		{
+			return true;
+		}
+
+		if($redirect)
+		{
+			return redirect($this->getRedirectUrl())->withErrors([
+				'captcha' => trans('errors.invalidCaptcha'),
+			]);
+		}
+
+		return false;
+	}
 }

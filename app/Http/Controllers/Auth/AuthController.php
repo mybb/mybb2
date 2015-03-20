@@ -66,6 +66,12 @@ class AuthController extends Controller
 	{
 		$this->failedValidationRedirect = url('auth/signup');
 
+		$captcha = $this->checkCaptcha();
+		if($captcha !== true)
+		{
+			return $captcha;
+		}
+
 		$validator = $this->registrar->validator($request->all());
 
 		if($validator->fails())
