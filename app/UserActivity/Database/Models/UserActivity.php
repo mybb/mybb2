@@ -13,8 +13,9 @@
 namespace MyBB\Core\UserActivity\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
-class UserActivity extends Model
+class UserActivity extends Model implements HasPresenter
 {
 	/**
 	 * The table associated with the model.
@@ -39,6 +40,13 @@ class UserActivity extends Model
 	 */
 	protected $guarded = [];
 
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = ['user', 'activityHistorable'];
+
 	public function user()
 	{
 		return $this->belongsTo('MyBB\Core\Database\Models\User');
@@ -47,5 +55,15 @@ class UserActivity extends Model
 	public function activityHistorable()
 	{
 		return $this->morphTo(null, 'activity_type', 'activity_id');
+	}
+
+	/**
+	 * Get the presenter class.
+	 *
+	 * @return string
+	 */
+	public function getPresenterClass()
+	{
+		return 'MyBB\Core\UserActivity\Presenters\UserActivityPresenter';
 	}
 }

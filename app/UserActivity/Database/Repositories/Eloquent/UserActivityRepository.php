@@ -10,7 +10,7 @@
  * @link      http://www.mybb.com
  */
 
-namespace UserActivity\Database\Repositories\Eloquent;
+namespace MyBB\Core\UserActivity\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;

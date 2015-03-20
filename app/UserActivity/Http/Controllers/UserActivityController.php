@@ -1,0 +1,61 @@
+<?php
+/**
+ * User activity controller.
+ *
+ * Shows recent user activity.
+ *
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/settings
+ * @copyright Copyright (c) 2014, MyBB Group
+ * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
+ * @link      http://www.mybb.com
+ */
+
+namespace MyBB\Core\UserActivity\Http\Controllers;
+
+use Illuminate\Http\Request;
+use MyBB\Auth\Contracts\Guard;
+use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Settings\Store;
+use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
+
+class UserActivityController extends Controller
+{
+	/**
+	 * @var UserActivityRepositoryInterface $userActivityRepository
+	 */
+	private $userActivityRepository;
+	/**
+	 * @var Store $settings
+	 */
+	private $settings;
+
+	/**
+	 * @param Guard                           $guard
+	 * @param Request                         $request
+	 * @param UserActivityRepositoryInterface $userActivityRepository
+	 * @param Store                           $settings
+	 */
+	public function __construct(Guard $guard, Request $request, UserActivityRepositoryInterface $userActivityRepository, Store $settings)
+	{
+		parent::__construct($guard, $request);
+
+		$this->userActivityRepository = $userActivityRepository;
+		$this->settings = $settings;
+	}
+
+	/**
+	 * Get the index list showing all user activity.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getIndex()
+	{
+		$perPage = $this->settings->get('user_activity.per_page', 20);
+
+		$activity = $this->userActivityRepository->paginateAll($perPage);
+
+		return view('user_activity.index', compact('activity'));
+	}
+}
