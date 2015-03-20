@@ -98,3 +98,5 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::post('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@postPrivacy']);
 	Route::get('/drafts', ['as' => 'account.drafts', 'uses' => 'AccountController@getDrafts']);
 });
+
+Route::get('/activity', ['as' => 'user_activity.index', 'uses' => 'MyBB\Core\UserActivity\Http\Controlelrs\UserActivityController@getIndex']);

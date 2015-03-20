@@ -12,7 +12,7 @@
  * @link      http://www.mybb.com
  */
 
-namespace UserActivity\Database\Repositories;
+namespace MyBB\Core\UserActivity\Database\Repositories;
 
 use MyBB\Core\Database\Models\User;
 
