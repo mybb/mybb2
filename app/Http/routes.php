@@ -99,4 +99,4 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::get('/drafts', ['as' => 'account.drafts', 'uses' => 'AccountController@getDrafts']);
 });
 
-Route::get('/activity', ['as' => 'user_activity.index', 'uses' => 'MyBB\Core\UserActivity\Http\Controlelrs\UserActivityController@getIndex']);
+Route::get('/activity', ['as' => 'user_activity.index', 'uses' => 'MyBB\Core\UserActivity\Http\Controllers\UserActivityController@getIndex']);
