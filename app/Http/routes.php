@@ -42,8 +42,7 @@ Route::get('topic/{slug}.{id}/post/{postId}', ['as' => 'topics.showPost', 'uses'
 Route::get('topic/{slug}.{id}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
 Route::get('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
-
-Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply.post', 'uses' => 'TopicController@postReply']);
+Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@postReply']);
 
 Route::get('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
 Route::post('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
@@ -52,8 +51,7 @@ Route::get('topic/{slug}.{id}/delete/{postId}', ['as' => 'topics.delete', 'uses'
 Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'uses' => 'TopicController@restore']);
 
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
-
-Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => 'TopicController@postCreate']);
+Route::post('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@postCreate']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);

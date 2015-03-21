@@ -1,5 +1,5 @@
 			<div class="post post--reply" id="post-reply">
-				{{ form_open({'route': ['topics.reply.post', topic.slug, topic.id], 'method': 'post'}) }}
+				{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
 					<div class="post__meta">
 						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
 
@@ -15,6 +15,11 @@
 					<div class="post__body">
 						{{ form_textarea('content', '', {'class':'textarea', 'rows': '10'}) }}
 					</div>
+					{% if auth_check() == false %}
+						<div>
+							{{ captcha() }}
+						</div>
+					{% endif %}
 					<div class="post__foot">
 						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
 						<!-- <button type="submit" class="button button--secondary">
