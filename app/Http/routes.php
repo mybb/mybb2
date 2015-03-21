@@ -70,6 +70,8 @@ Route::controllers([
 Route::get('admin',
            ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
 
+Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha']);
+
 Route::any('parser', ['uses' => 'DebugController@parser']);
 
 Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function ()

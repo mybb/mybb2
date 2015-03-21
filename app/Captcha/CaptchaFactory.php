@@ -10,6 +10,7 @@ class CaptchaFactory implements CaptchaInterface {
 	private $app;
 
 	const NONE = 'none';
+	const MYBB = 'mybb';
 	const AYAH = 'ayah';
 	const RECAPTCHA = 'recaptcha';
 	const NOCAPTCHA = 'nocaptcha';
@@ -46,6 +47,12 @@ class CaptchaFactory implements CaptchaInterface {
 		return $captcha->validate();
 	}
 
+	// Not used for the Factory, the function is mainly used when generating the correct captcha
+	public function supported()
+	{
+		return true;
+	}
+
 	private function getCaptchaClass($captchaName)
 	{
 		if($captchaName == false)
@@ -67,9 +74,9 @@ class CaptchaFactory implements CaptchaInterface {
 
 		$captcha = $this->app->make($captchaClass);
 
-		if(!$captcha || !($captcha instanceof CaptchaInterface))
+		if(!$captcha || !($captcha instanceof CaptchaInterface) || !$captcha->supported())
 		{
-			throw new RuntimeException("Failed to load Captcha Class '{$captchaClass}'");
+			throw new \RuntimeException("Failed to load Captcha Class '{$captchaClass}'");
 		}
 
 		return $captcha;

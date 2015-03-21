@@ -44,4 +44,16 @@ class CaptchaRecaptcha implements CaptchaInterface {
 		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.recaptcha_private_key'));
 		return $this->service->check($this->request->get('recaptcha_challenge_field'), $this->request->get('recaptcha_response_field'));
 	}
+
+	public function supported()
+	{
+		// ReCaptcha is supported when we have a public and private key
+
+		if($this->settings->get('captcha.recaptcha_public_key', '') == '' || $this->settings->get('captcha.recaptcha_private_key', '') == '')
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

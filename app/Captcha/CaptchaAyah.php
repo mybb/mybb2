@@ -29,4 +29,16 @@ class CaptchaAyah implements CaptchaInterface {
 	{
 		return $this->ayah->scoreResult();
 	}
+
+	public function supported()
+	{
+		// AYAH is supported when we have a public and private key
+
+		if($this->settings->get('captcha.ayah_public_key', '') != '' || $this->settings->get('captcha.ayah_private_key', '') != '')
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

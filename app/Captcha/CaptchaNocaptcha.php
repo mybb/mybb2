@@ -45,4 +45,16 @@ class CaptchaNocaptcha implements CaptchaInterface {
 		app('config')->set('recaptcha.driver', 'curl');
 		return $this->service->check(null, $this->request->get('g-recaptcha-response'));
 	}
+
+	public function supported()
+	{
+		// NoCaptcha is supported when we have a public and private key
+
+		if($this->settings->get('captcha.nocaptcha_public_key', '') == '' || $this->settings->get('captcha.nocaptcha_private_key', '') == '')
+		{
+			return false;
+		}
+
+		return true;
+	}
 }

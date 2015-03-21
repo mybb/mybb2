@@ -66,7 +66,7 @@ abstract class Controller extends BaseController
 
 		if($redirect)
 		{
-			return redirect($this->getRedirectUrl())->withErrors([
+			return redirect($this->getRedirectUrl())->withInput()->withErrors([
 				'captcha' => trans('errors.invalidCaptcha'),
 			]);
 		}
