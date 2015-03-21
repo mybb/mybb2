@@ -8,3 +8,9 @@
 		{% else %}
 			<link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
 		{% endif %}
+
+		{# ReCaptcha needs to be loaded globally as we also support it on modals #}
+		{# As the Captcha is loaded via JS we need the library first #}
+		{% if setting('captcha.method') == 'recaptcha' %}
+			<script type="text/javascript" src="//www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+		{% endif %}
