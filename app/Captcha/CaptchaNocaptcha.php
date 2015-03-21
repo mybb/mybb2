@@ -18,17 +18,16 @@ class CaptchaNocaptcha implements CaptchaInterface {
 		$this->settings = $settings;
 		$this->request = $request;
 
-		// Register the packages views - need to do it manually as we don't use the service provider
-		app('view')->addNamespace('recaptcha', app()->basePath().'/vendor/greggilbert/recaptcha/src/views');
-
 		// Set up Recaptcha/Nocaptcha - we're not using the service provider as we need to change config options
 		$this->service = new CheckRecaptchaV2();
 		$this->nocaptcha = new Recaptcha($this->service, [
 			'public_key' => $this->settings->get('captcha.nocaptcha_public_key'),
 			'private_key' => $this->settings->get('captcha.nocaptcha_private_key'),
-			'template' => '',
+			'template' => 'captcha.nocaptcha',
 			'options' => [
 				'lang' => $this->settings->get('user.lang', 'en'),
+				// As an id should be unique but we may need more than one captcha per page (modals) we simply generate a random id
+				'id' => str_random()
 			]
 		]);
 	}
