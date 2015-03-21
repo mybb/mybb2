@@ -18,12 +18,15 @@ class CaptchaRecaptcha implements CaptchaInterface {
 		$this->settings = $settings;
 		$this->request = $request;
 
+		// Register the packages views - need to do it manually as we don't use the service provider
+		app('view')->addNamespace('recaptcha', app()->basePath().'/vendor/greggilbert/recaptcha/src/views');
+
 		// Set up Recaptcha - we're not using the service provider as we need to change config options
 		$this->service = new CheckRecaptcha();
 		$this->recaptcha = new Recaptcha($this->service, [
 			'public_key' => $this->settings->get('captcha.recaptcha_public_key'),
 			'private_key' => $this->settings->get('captcha.recaptcha_private_key'),
-			'template' => 'captcha.recaptcha',
+			'template' => '',
 			'options' => [
 				'lang' => $this->settings->get('user.lang', 'en'),
 			]
