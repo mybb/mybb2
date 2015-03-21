@@ -56,7 +56,7 @@ class Post extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return '\MyBB\Core\Presenters\Post';
+		return 'MyBB\Core\Presenters\Post';
 	}
 
 	/**
