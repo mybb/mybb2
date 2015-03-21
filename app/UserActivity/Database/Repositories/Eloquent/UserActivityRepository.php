@@ -4,7 +4,7 @@
  *
  * @author    MyBB Group
  * @version   2.0.0
- * @package   mybb/settings
+ * @package   mybb/core
  * @copyright Copyright (c) 2014, MyBB Group
  * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
  * @link      http://www.mybb.com
@@ -14,7 +14,7 @@ namespace MyBB\Core\UserActivity\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
-use UserActivity\Database\Repositories\UserActivityRepositoryInterface;
+use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 
 class UserActivityRepository implements UserActivityRepositoryInterface
 {
