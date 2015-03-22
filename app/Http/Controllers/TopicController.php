@@ -143,10 +143,10 @@ class TopicController extends Controller
 
 		$content = '';
 		$username = trans('general.guest');
-		if($request->has('content')) {
+		if ($request->has('content')) {
 			$content = $request->get('content');
 		}
-		if($request->has('username')) {
+		if ($request->has('username')) {
 			$username = $request->get('username');
 		}
 
