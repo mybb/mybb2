@@ -39,9 +39,17 @@ class CaptchaRecaptcha implements CaptchaInterface {
 
 	public function validate()
 	{
+		$challenge = $this->request->get('recaptcha_challenge_field');
+		$value = $this->request->get('recaptcha_response_field');
+
+		if(empty($challenge) || empty($value))
+		{
+			return false;
+		}
+
 		// Dirty hack to make use of our key instead of the config one
 		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.recaptcha_private_key'));
-		return $this->service->check($this->request->get('recaptcha_challenge_field'), $this->request->get('recaptcha_response_field'));
+		return $this->service->check($challenge, $value);
 	}
 
 	public function supported()

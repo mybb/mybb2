@@ -39,10 +39,17 @@ class CaptchaNocaptcha implements CaptchaInterface {
 
 	public function validate()
 	{
+		$value = $this->request->get('g-recaptcha-response');
+
+		if(empty($value))
+		{
+			return false;
+		}
+
 		// Dirty hack to make use of our key instead of the config one
 		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.nocaptcha_private_key'));
 		app('config')->set('recaptcha.driver', 'curl');
-		return $this->service->check(null, $this->request->get('g-recaptcha-response'));
+		return $this->service->check(null, $value);
 	}
 
 	public function supported()
