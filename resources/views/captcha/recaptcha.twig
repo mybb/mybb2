@@ -4,12 +4,27 @@
 	</script>
 {% endif %}
 <script type="text/javascript">
-	Recaptcha.create("{{ public_key }}",
-		"recaptcha{{ options.id }}",
-		{
-			lang: "{{ lang }}"
+	// If Recaptcha isn't defined (external script not loaded) we register a function on window.onload to render NoCaptcha
+	if(typeof Recaptcha == "undefined") {
+		window.onload = function() {
+			Recaptcha.create("{{ public_key }}",
+					"recaptcha{{ options.id }}",
+					{
+						lang: "{{ lang }}"
+					}
+			);
 		}
-	);
+	}
+	// Otherwise we render it directly
+	else
+	{
+		Recaptcha.create("{{ public_key }}",
+				"recaptcha{{ options.id }}",
+				{
+					lang: "{{ lang }}"
+				}
+		);
+	}
 </script>
 <div id="recaptcha{{ options.id }}"></div>
 <noscript>

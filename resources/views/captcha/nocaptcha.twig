@@ -5,7 +5,17 @@
 {% endif %}
 <div id="{{ options.id }}"></div>
 <script type="text/javascript">
-	grecaptcha.render('{{ options.id }}', {'sitekey': '{{ public_key }}'});
+	// If grecaptcha isn't defined (external script not loaded) we register a function on window.onload to render NoCaptcha
+	if(typeof grecaptcha == "undefined") {
+		window.onload = function () {
+			grecaptcha.render('{{ options.id }}', {'sitekey': '{{ public_key }}'});
+		}
+	}
+	// Otherwise we render it directly
+	else
+	{
+		grecaptcha.render('{{ options.id }}', {'sitekey': '{{ public_key }}'});
+	}
 </script>
 <noscript>
 	<div style="width: 302px; height: 352px;">
