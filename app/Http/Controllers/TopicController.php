@@ -130,7 +130,7 @@ class TopicController extends Controller
 		}
 	}
 
-	public function reply($slug = '', $id = 0)
+	public function reply($slug = '', $id = 0, Request $request)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -141,7 +141,16 @@ class TopicController extends Controller
 
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
-		return view('topic.reply', compact('topic'));
+		$content = '';
+		$username = trans('general.guest');
+		if($request->has('content')) {
+			$content = $request->get('content');
+		}
+		if($request->has('username')) {
+			$username = $request->get('username');
+		}
+
+		return view('topic.reply', compact('topic', 'content', 'username'));
 	}
 
 	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
