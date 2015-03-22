@@ -15,6 +15,10 @@ use MyBB\Core\Database\Models\Poll as PollModel;
 class Poll extends BasePresenter
 {
 	/** @var PollModel $wrappedObject */
+	protected $wrappedObject;
+
+	/** @var array $cache */
+	protected $cache = [];
 
 	/**
 	 * @param PollModel $resource The poll being wrapped by this presenter.
@@ -26,18 +30,24 @@ class Poll extends BasePresenter
 
 	public function options()
 	{
-		return json_decode($this->wrappedObject->options);
+		if(!isset($this->cache['options'])) {
+			$this->cache['options'] = json_decode($this->wrappedObject->options);
+		}
+		return $this->cache['options'];
 	}
 
 	public function num_votes()
 	{
-		$options = $this->options();
-		$votes = 0;
-		foreach($options as $option)
-		{
-			$votes += $option->votes;
+		if(!isset($this->cache['num_votes'])) {
+			$options = $this->options();
+			$votes = 0;
+			foreach($options as $option)
+			{
+				$votes += $option->votes;
+			}
+			$this->cache['num_votes'] = $votes;
 		}
-		return $votes;
+		return $this->cache['num_votes'];
 	}
 
 	public function author()
@@ -60,5 +70,13 @@ class Poll extends BasePresenter
 		}
 
 		return $this->wrappedObject->author;
+	}
+
+	public function num_options() {
+		if(!isset($this->cache['num_options'])) {
+			$this->cache['num_options'] = count($this->options());
+		}
+
+		return $this->cache['num_options'];
 	}
 }

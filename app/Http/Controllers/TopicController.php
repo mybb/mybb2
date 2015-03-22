@@ -235,6 +235,34 @@ class TopicController extends Controller
 
 	public function postCreate($forumId = 0, CreateRequest $createRequest)
 	{
+		$poll = null;
+		if($createRequest->input('add-poll')) {
+			$pollCreateRequest = app()->make('MyBB\\Core\\Http\\Requests\\Poll\\CreateRequest');
+			$options = [];
+			foreach($pollCreateRequest->input('option') as $option)
+			{
+				if($option && is_scalar($option)) {
+					$options[] = [
+						'option' => $option,
+						'votes' => 0
+					];
+				}
+			}
+			$poll = [
+				'question' => $pollCreateRequest->input('question'),
+				'num_options' => count($options),
+				'options' => json_encode($options),
+				'is_closed' => false,
+				'is_multiple' => (bool)$pollCreateRequest->input('is_multiple'),
+				'is_public' => (bool)$pollCreateRequest->input('is_public'),
+				'end_at' => null,
+				'max_options' => $pollCreateRequest->input('maxoptions')
+			];
+			if($pollCreateRequest->input('timeout')) {
+				$poll['end_at'] = new \DateTime('+'.$pollCreateRequest->input('timeout').' days');
+			}
+
+		}
 		$topic = $this->topicRepository->create([
 			                                        'title' => $createRequest->input('title'),
 			                                        'forum_id' => $createRequest->input('forum_id'),
@@ -248,6 +276,10 @@ class TopicController extends Controller
 
 		if($topic)
 		{
+			if($poll) {
+				$poll['topic_id'] = $topic->id;
+				$this->pollRepository->create($poll);
+			}
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 

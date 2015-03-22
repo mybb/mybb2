@@ -18,6 +18,16 @@ class PollVote extends Model
 	 */
 	public $timestamps = true;
 	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'poll_id',
+		'user_id',
+		'vote'
+	];
+	/**
 	 * The attributes that aren't mass assignable.
 	 *
 	 * @var array

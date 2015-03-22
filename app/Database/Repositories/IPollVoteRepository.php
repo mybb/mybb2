@@ -9,6 +9,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Poll;
+use MyBB\Core\Database\Models\User;
+
 interface IPollVoteRepository
 {
 
@@ -30,4 +33,16 @@ interface IPollVoteRepository
 	 */
 	public function create(array $details = []);
 
+	/**
+	 * @param User $user
+	 * @param Poll $poll
+	 * @return mixed
+	 */
+	public function findForUserPoll(User $user, Poll $poll);
+
+	/**
+	 * @param Poll $poll
+	 * @return mixed
+	 */
+	public function allForPoll(Poll $poll);
 }

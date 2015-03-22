@@ -54,7 +54,8 @@ var vendor_scripts = [
 
 var scripts = [
     paths.js.src + "/modal.js",
-    paths.js.src + "/post.js",
+	paths.js.src + "/post.js",
+	paths.js.src + "/poll.js",
     paths.js.src + "/other.js"
 ];
 

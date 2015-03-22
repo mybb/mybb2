@@ -11,6 +11,8 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\PollVote;
+use MyBB\Core\Database\Models\Poll;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IPollVoteRepository;
 
 class PollVoteRepository implements IPollVoteRepository
@@ -71,5 +73,22 @@ class PollVoteRepository implements IPollVoteRepository
 
 		$vote = $this->voteModel->create($details);
 		return $vote;
+	}
+
+	/**
+	 * @param User $user
+	 * @param Poll $poll
+	 * @return mixed
+	 */
+	public function findForUserPoll(User $user, Poll $poll) {
+		return $this->voteModel->where('user_id', $user->id)->where('poll_id', $poll->id)->first();
+	}
+
+	/**
+	 * @param Poll $poll
+	 * return @mixed
+	 */
+	public function allForPoll(Poll $poll) {
+		return $this->voteModel->where('poll_id', $poll->id)->get();
 	}
 }

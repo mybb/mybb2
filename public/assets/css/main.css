@@ -3489,13 +3489,6 @@ section.container .forum-list {
   .post.post--reply .post__foot {
     margin: 5px 0; }
 
-#add-poll .poll-option {
-  padding-right: 20px; }
-#add-poll .remove-option {
-  float: right;
-  margin: 3px -20px 0 0;
-  color: #f4645f; }
-
 @media only screen and (min-width: 480px) {
   .post {
     margin-left: 80px; }
@@ -3528,6 +3521,72 @@ section.container .forum-list {
       .post .avatar-profile-link img.avatar {
         width: 100px;
         height: 100px; } }
+
+#add-poll .poll-option {
+  padding-right: 20px; }
+#add-poll .remove-option {
+  float: right;
+  margin: 3px -20px 0 0;
+  color: #f4645f; }
+
+.poll {
+  border: 1px solid #ccc;
+  border-radius: 4px; }
+  .poll .poll__title {
+    background: #007fd0;
+    margin: 0;
+    border-radius: 3px 3px 0 0;
+    padding: 6px 8px;
+    color: #fff; }
+  .poll .poll__options {
+    padding: 0; }
+  .poll .poll__option {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 6px 8px; }
+    .poll .poll__option:last-child {
+      border-bottom: none; }
+    .poll .poll__option.poll_option-voted {
+      background: #fbffc0; }
+  .poll .poll__option__name {
+    width: 300px;
+    float: left; }
+  .poll .poll__option__votes {
+    margin-left: 300px;
+    width: auto;
+    border: 1px solid #bbb;
+    background: #fff;
+    height: 20px;
+    border-radius: 10px;
+    position: relative; }
+    .poll .poll__option__votes-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background: #ccc;
+      z-index: 1;
+      border-radius: 9px; }
+    .poll .poll__option__votes-title {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1;
+      padding: 3px 0 0 0;
+      z-index: 4; }
+  .poll .poll__option__votes-result {
+    font-size: 14px; }
+  .poll .poll__end-at {
+    border-top: 1px solid #ccc;
+    padding: 6px 8px; }
+  .poll .poll__vote {
+    border-top: 2px solid #ccc; }
+    .poll .poll__vote .poll__buttons {
+      float: right; }
+    .poll .poll__vote .button {
+      line-height: 1.4; }
 
 .user-list {
   padding: 12px 12px 0 12px; }

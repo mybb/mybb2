@@ -25,48 +25,12 @@
 			{% endfor %}
 		</div>
 		<div class="poll__vote">
+			<div class="poll__buttons">
+				<a class="button button--secondary" href="{{ url_route('polls.undo', [topic.slug, topic.id, poll.id]) }}"><i class="fa fa-undo"></i><span class="text">Undo Your Vote</span></a>
+				<a class="button button--secondary" href="{{ url_route('polls.show', [topic.slug, topic.id, poll.id]) }}"><i class="fa fa-arrow-right"></i><span class="text">Results</span></a>
+			</div>
 			{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">Vote !</span>', {'type': 'submit', 'class': 'button'}) }}
 		</div>
 		{{ form_close() }}
 	</section>
-
-	<style>
-		/* @Justin */
-		.poll {
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		}
-
-		.poll__title {
-			background: #007fd0;
-			margin: 0;
-			border-radius: 3px 3px 0 0;
-			padding: 6px 8px;
-			color: #fff;
-		}
-
-		.poll__options {
-			padding: 8px;
-		}
-		.poll__option {
-			border-bottom: 1px solid #e0e0e0;
-		}
-		.poll__option:last-child {
-			border-bottom: none;
-		}
-
-		.poll__option__name {
-			width: 300px;
-		}
-
-		.poll__option__votes {
-			float: right;
-			margin-left: 300px;
-			width: auto;
-			border: 1px solid #eee;
-			height: 20px;
-		}
-
-
-	</style>
 {% endif %}
