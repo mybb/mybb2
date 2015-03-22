@@ -174,10 +174,14 @@ class PostRepository implements IPostRepository
 		if($post !== false)
 		{
 			$topic->increment('num_posts');
-			$topic->forum->increment('num_posts');
 			$topic->update([
 				               'last_post_id' => $post['id']
 			               ]);
+			$topic->forum->increment('num_posts');
+			$topic->forum->update([
+				'last_post_id' => $post->id,
+				'last_post_user_id' => $post->author->id
+			]);
 		}
 
 		if($post->user_id > 0)
@@ -253,11 +257,19 @@ class PostRepository implements IPostRepository
 		if($post['deleted_at'] == null)
 		{
 			$post->topic->decrement('num_posts');
+			$post->topic->forum->decrement('num_posts');
 			$post->author->decrement('num_posts');
 
 			return $post->delete();
 		} else
 		{
+			// TODO: correctly update the lastpost here
+
+			$post->topic->forum->where('last_post_id', '=', $post->id)->update([
+				'last_post_id' => null,
+				'last_post_user_id' => null
+			]);
+
 			return $post->forceDelete();
 		}
 	}
@@ -273,7 +285,10 @@ class PostRepository implements IPostRepository
 	public function restorePost(Post $post)
 	{
 		$post->topic->increment('num_posts');
+		$post->topic->forum->increment('num_posts');
 		$post->author->increment('num_posts');
+
+		// TODO: check whether this is the new lastpost for topic and/or forum
 
 		return $post->restore();
 	}

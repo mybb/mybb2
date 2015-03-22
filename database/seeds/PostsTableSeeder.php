@@ -25,6 +25,11 @@ class PostsTableSeeder extends Seeder
 		                                                       ]);
 
 		DB::table('forums')->where('slug', 'my-forum')->increment('num_posts');
+		DB::table('forums')->where('slug', 'my-forum')->update([
+			'last_post_id' => $id,
+			'last_post_user_id' => DB::table('users')->where('name', 'Admin')->pluck('id')
+		]);
+
 		DB::table('users')->where('name', 'Admin')->increment('num_posts');
 	}
 

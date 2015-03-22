@@ -228,6 +228,8 @@ class TopicRepository implements ITopicRepository
 			               ]);
 		});
 
+		$topic->forum->increment('num_topics');
+
 		if($topic->user_id > 0)
 		{
 			$topic->author->increment('num_topics');
@@ -287,6 +289,13 @@ class TopicRepository implements ITopicRepository
 			return $topic->delete();
 		} else
 		{
+			// TODO: correctly update the lastpost here
+
+			$topic->forum->where('last_post_id', '=', $topic->last_post_id)->update([
+				'last_post_id' => null,
+				'last_post_user_id' => null
+			]);
+
 			$topic->update([
 				               'first_post_id' => null,
 				               'last_post_id' => null
