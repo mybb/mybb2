@@ -71,7 +71,7 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$polls = $this->pollRepository->allForTopic($topic);
+		$poll = $this->pollRepository->getForTopic($topic);
 
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
 
@@ -79,7 +79,7 @@ class TopicController extends Controller
 
 		$posts = $this->postRepository->allForTopic($topic, true);
 
-		return view('topic.show', compact('topic', 'posts', 'polls'));
+		return view('topic.show', compact('topic', 'posts', 'poll'));
 	}
 
 	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)

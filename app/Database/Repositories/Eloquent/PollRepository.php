@@ -75,14 +75,14 @@ class PollRepository implements IPollRepository
 	}
 
 	/**
-	 * Find all poll of a topic
+	 * Find poll of a topic
 	 *
 	 * @param Topic $topic
 	 *
 	 * @return mixed
 	 */
-	public function allForTopic(Topic $topic)
+	public function getForTopic(Topic $topic)
 	{
-		return $this->pollModel->with(['author'])->where('topic_id', $topic->id)->get();
+		return $this->pollModel->with(['author'])->where('topic_id', $topic->id)->first();
 	}
 }

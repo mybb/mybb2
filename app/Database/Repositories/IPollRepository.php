@@ -33,11 +33,11 @@ interface IPollRepository
 	public function create(array $details = []);
 
 	/**
-	 * Find all poll of a topic
+	 * Find poll of a topic
 	 *
 	 * @param Topic $topic
 	 *
 	 * @return mixed
 	 */
-	public function allForTopic(Topic $topic);
+	public function getForTopic(Topic $topic);
 }

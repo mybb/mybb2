@@ -29,6 +29,53 @@
 					<h3>{{ form_label('content', 'Content') }}</h3>
 					{{ form_textarea('content') }}
 				</div>
+				<div class="form__row">
+					<a href="#add-poll" id="add-poll-button" class="button button--secondary"><i class="fa fa-plus-circle"></i><span class="text">Add Poll</span></a>
+				</div>
+			</div>
+			<div id="add-poll" style="display: none;">
+				{{ form_hidden('add-poll', '0', {'id':'add-poll-input'}) }}
+				<div class="form__section">
+					<h2>Options</h2>
+					<div class="form__section__container">
+						<div class="form__row">
+							<h3>{{ form_label('question', 'Question') }}</h3>
+							{{ form_text('question') }}
+						</div>
+						<div class="form__row">
+							<h3>{{ form_label('timeout', 'Timeout') }}</h3>
+							{{ form_text('timeout', '', {class: 'short'}) }} days
+						</div>
+						<div class="form__row">
+							<h3>Who voted</h3>
+							<p class="form__checkbox"><label>{{ form_checkbox('is_public', '1') }} Allow users to see who voted for each option</label></p>
+						</div>
+						<div class="form__row">
+							<h3>Multiple choice</h3>
+							<p class="form__checkbox"><label>{{ form_checkbox('is_multiple', '1', false, {'id': 'poll-is-multiple'}) }} Allow users to vote for multiple options</label></p>
+						</div>
+						<div class="form__row" id="poll-maximum-options">
+							<h3>Maximum number of options per user (0 for no limit)</h3>
+							{{ form_text('maxoptions') }}
+						</div>
+					</div>
+				</div>
+				<div class="form__section">
+					<h2>Poll Options</h2>
+					<div class="form__section__container">
+						{% for i in range(1, 2) %}
+							<div class="form__row poll-option">
+								<a href="#remove-option" class="remove-option" title="Remove"><i class="fa fa-times"></i></a>
+								{{ form_text('option[]') }}
+							</div>
+						{% endfor %}
+						<a href="#newoption" class="button button--secondary" id="new-option"><i class="fa fa-plus"></i><span class="text">New Option</span></a>
+						<div class="form__row hidden" id="option-simple">
+							<a href="#remove-option" class="remove-option" title="Remove"><i class="fa fa-times"></i></a>
+							{{ form_text('option[]') }}
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 		{{ form_hidden('forum_id', forum.id) }}

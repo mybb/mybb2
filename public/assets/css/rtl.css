@@ -3385,6 +3385,16 @@ section.container .forum-list {
   .post.post--reply .post__foot {
     margin: 5px 0; }
 
+<<<<<<< HEAD
+=======
+#add-poll .poll-option {
+  padding-right: 20px; }
+#add-poll .remove-option {
+  float: right;
+  margin: 3px -20px 0 0;
+  color: #f4645f; }
+
+>>>>>>> Polls
 @media only screen and (min-width: 480px) {
   .post {
     margin-right: 80px; }

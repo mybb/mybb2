@@ -69,13 +69,13 @@ class Topic extends Model implements HasPresenter
 	}
 
 	/**
-	 * A topic has many polls.
+	 * A topic has one poll.
 	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
 	 */
 	public function polls()
 	{
-		return $this->hasMany('MyBB\\Core\\Database\\Models\\Polls');
+		return $this->hasOne('MyBB\\Core\\Database\\Models\\Polls');
 	}
 
 	/**
