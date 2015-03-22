@@ -9,7 +9,7 @@
 {% block contents %}
 	<div class="page-content">
 		<header>
-			<h1>Results of {{ poll.question }}</h1>
+			<h1>{{ trans('poll.resultsOfX', {'name':poll.question}) }}</h1>
 		</header>
 		<section class="poll">
 			<div class="poll__title">{{ poll.question }}</div>
@@ -46,15 +46,15 @@
 				{% endfor %}
 			</div>
 			<div class="poll__end-at">
-				<i class="fa fa-info-circle"></i> This poll will closed at {{ human_date(poll.end_at) }}
+				<i class="fa fa-info-circle"></i> {{ trans('poll.closeAtX', {time:human_date(poll.end_at)}) }}
 			</div>
 			<div class="poll__vote">
 				<div class="poll__buttons">
 				</div>
 				{% if myVote %}
-					<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id, poll.id]) }}"><i class="fa fa-undo"></i><span class="text">Undo Your Vote</span></a>
+					<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id, poll.id]) }}"><i class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
 				{% else %}
-					{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">Vote !</span>', {'type': 'submit', 'class': 'button'}) }}
+					{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">'~trans('poll.vote')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 				{% endif %}
 			</div>
 			{{ form_close() }}

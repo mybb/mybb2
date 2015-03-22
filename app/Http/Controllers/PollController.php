@@ -177,7 +177,7 @@ class PollController extends Controller
 			$myVote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
 			if($myVote) {
 				// Error
-				throw new \Exception(trans('errors.error_poll_already_vote'));
+				throw new \Exception(trans('errors.you_already_vote'));
 			}
 		}
 
@@ -193,11 +193,11 @@ class PollController extends Controller
 
 			if($poll->max_options && count($votes) > $poll->max_options) {
 				// Error
-				throw new \Exception(trans('errors.error_poll_very_votes'));
+				throw new \Exception(trans('errors.poll_very_votes', ['count' => $poll->max_options]));
 			}
 			if(count($votes) == 0) {
 				// Error
-				throw new \Exception(trans('errors.error_poll_no_votes'));
+				throw new \Exception(trans('errors.poll_no_votes'));
 			}
 			$okVotes = [];
 			foreach($votes as $vote) {
@@ -217,7 +217,7 @@ class PollController extends Controller
 
 			if(!is_numeric($votes) || $votes > count($options)) {
 				// Error
-				throw new \Exception(trans('errors.error_poll_invalid_vote'));
+				throw new \Exception(trans('errors.poll_invalid_vote'));
 			}
 			$options[$votes-1]->votes++;
 		}
@@ -248,13 +248,13 @@ class PollController extends Controller
 		}
 
 		if(!$this->guard->check()) {
-			throw new \Exception(trans('errors.error_poll_guest_undo'));
+			throw new \Exception(trans('errors.poll_guest_undo'));
 		}
 
 		$vote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
 		if(!$vote) {
 			// Error
-			throw new \Exception(trans('errors.error_poll_vote_not_found'));
+			throw new \Exception(trans('errors.poll_nothing_to_undo'));
 		}
 
 		$votes = explode(',', $vote->vote);
