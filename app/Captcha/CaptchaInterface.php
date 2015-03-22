@@ -2,8 +2,11 @@
 
 namespace MyBB\Core\Captcha;
 
-interface CaptchaInterface {
+interface CaptchaInterface
+{
 	public function render();
+
 	public function validate();
+
 	public function supported();
 }

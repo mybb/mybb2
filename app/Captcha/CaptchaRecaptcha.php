@@ -2,12 +2,13 @@
 
 namespace MyBB\Core\Captcha;
 
-use Illuminate\Http\Request;
-use MyBB\Settings\Store;
 use Greggilbert\Recaptcha\Recaptcha;
 use Greggilbert\Recaptcha\Service\CheckRecaptcha;
+use Illuminate\Http\Request;
+use MyBB\Settings\Store;
 
-class CaptchaRecaptcha implements CaptchaInterface {
+class CaptchaRecaptcha implements CaptchaInterface
+{
 	private $recaptcha;
 	private $service;
 	private $settings;
@@ -42,13 +43,13 @@ class CaptchaRecaptcha implements CaptchaInterface {
 		$challenge = $this->request->get('recaptcha_challenge_field');
 		$value = $this->request->get('recaptcha_response_field');
 
-		if(empty($challenge) || empty($value))
-		{
+		if (empty($challenge) || empty($value)) {
 			return false;
 		}
 
 		// Dirty hack to make use of our key instead of the config one
 		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.recaptcha_private_key'));
+
 		return $this->service->check($challenge, $value);
 	}
 
@@ -56,8 +57,9 @@ class CaptchaRecaptcha implements CaptchaInterface {
 	{
 		// ReCaptcha is supported when we have a public and private key
 
-		if($this->settings->get('captcha.recaptcha_public_key', '') == '' || $this->settings->get('captcha.recaptcha_private_key', '') == '')
-		{
+		if ($this->settings->get('captcha.recaptcha_public_key', '') == ''
+			|| $this->settings->get('captcha.recaptcha_private_key', '') == ''
+		) {
 			return false;
 		}
 

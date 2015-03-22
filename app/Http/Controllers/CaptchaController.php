@@ -1,18 +1,8 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use Illuminate\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Http\Request;
-use Illuminate\Auth\Guard;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Search;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\ISearchRepository;
-use MyBB\Core\Http\Requests\Search\SearchRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class CaptchaController extends Controller
@@ -38,7 +28,7 @@ class CaptchaController extends Controller
 		$this->database = $database;
 		$this->files = $files;
 	}
-	
+
 	public function captcha($imagehash)
 	{
 		$baseQuery = $this->database->table('captcha')
@@ -46,8 +36,7 @@ class CaptchaController extends Controller
 			->where('used', '=', false);
 
 		// Something is wrong here...
-		if($baseQuery->count() != 1)
-		{
+		if ($baseQuery->count() != 1) {
 			exit;
 		}
 
@@ -60,18 +49,14 @@ class CaptchaController extends Controller
 
 //		$imagestring = 'Debug';
 
-		if($this->getGdVersion() >= 2)
-		{
+		if ($this->getGdVersion() >= 2) {
 			$im = imagecreatetruecolor($this->img_width, $this->img_height);
-		}
-		else
-		{
+		} else {
 			$im = imagecreate($this->img_width, $this->img_height);
 		}
 
 		// Couldn't create the image :(
-		if($im === false)
-		{
+		if ($im === false) {
 			throw new \RuntimeException("Couldn't create an image using GD");
 		}
 
@@ -81,16 +66,11 @@ class CaptchaController extends Controller
 
 		// Now draw random circles, squares or lines
 		$to_draw = mt_rand(0, 2);
-		if($to_draw == 1)
-		{
+		if ($to_draw == 1) {
 			$this->drawCircles($im);
-		}
-		elseif($to_draw == 2)
-		{
+		} elseif ($to_draw == 2) {
 			$this->drawSquares($im);
-		}
-		else
-		{
+		} else {
 			$this->drawLines($im);
 		}
 
@@ -102,7 +82,7 @@ class CaptchaController extends Controller
 
 		// Draw a nice border around the image
 		$border_color = imagecolorallocate($im, 0, 0, 0);
-		imagerectangle($im, 0, 0, $this->img_width-1, $this->img_height-1, $border_color);
+		imagerectangle($im, 0, 0, $this->img_width - 1, $this->img_height - 1, $border_color);
 
 		// And now output the image
 		header('Content-type: image/png');
@@ -112,13 +92,11 @@ class CaptchaController extends Controller
 
 	private function drawLines(&$im)
 	{
-		for($i = 10; $i < $this->img_width; $i += 10)
-		{
+		for ($i = 10; $i < $this->img_width; $i += 10) {
 			$color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
 			imageline($im, $i, 0, $i, $this->img_height, $color);
 		}
-		for($i = 10; $i < $this->img_height; $i += 10)
-		{
+		for ($i = 10; $i < $this->img_height; $i += 10) {
 			$color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
 			imageline($im, 0, $i, $this->img_width, $i, $color);
 		}
@@ -126,13 +104,12 @@ class CaptchaController extends Controller
 
 	private function drawCircles(&$im)
 	{
-		$circles = $this->img_width*$this->img_height / 100;
-		for($i = 0; $i <= $circles; ++$i)
-		{
+		$circles = $this->img_width * $this->img_height / 100;
+		for ($i = 0; $i <= $circles; ++$i) {
 			$color = imagecolorallocate($im, mt_rand(180, 255), mt_rand(180, 255), mt_rand(180, 255));
 			$pos_x = mt_rand(1, $this->img_width);
 			$pos_y = mt_rand(1, $this->img_height);
-			$circ_width = ceil(mt_rand(1, $this->img_width)/2);
+			$circ_width = ceil(mt_rand(1, $this->img_width) / 2);
 			$circ_height = mt_rand(1, $this->img_height);
 			imagearc($im, $pos_x, $pos_y, $circ_width, $circ_height, 0, mt_rand(200, 360), $color);
 		}
@@ -141,8 +118,7 @@ class CaptchaController extends Controller
 	private function drawSquares(&$im)
 	{
 		$square_count = 30;
-		for($i = 0; $i <= $square_count; ++$i)
-		{
+		for ($i = 0; $i <= $square_count; ++$i) {
 			$color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
 			$pos_x = mt_rand(1, $this->img_width);
 			$pos_y = mt_rand(1, $this->img_height);
@@ -155,9 +131,8 @@ class CaptchaController extends Controller
 
 	private function drawDots(&$im)
 	{
-		$dot_count = $this->img_width*$this->img_height/5;
-		for($i = 0; $i <= $dot_count; ++$i)
-		{
+		$dot_count = $this->img_width * $this->img_height / 5;
+		for ($i = 0; $i <= $dot_count; ++$i) {
 			$color = imagecolorallocate($im, mt_rand(200, 255), mt_rand(200, 255), mt_rand(200, 255));
 			imagesetpixel($im, mt_rand(0, $this->img_width), mt_rand(0, $this->img_height), $color);
 		}
@@ -167,13 +142,10 @@ class CaptchaController extends Controller
 	{
 		// Check whether we have true-type fonts and if so use them
 		$ttf_fonts = [];
-		if(function_exists('imagefttext'))
-		{
+		if (function_exists('imagefttext')) {
 			$fonts = $this->files->files(base_path('resources/captcha_fonts'));
-			foreach($fonts as $font)
-			{
-				if($this->files->extension($font) == 'ttf')
-				{
+			foreach ($fonts as $font) {
+				if ($this->files->extension($font) == 'ttf') {
 					$ttf_fonts[] = $font;
 				}
 			}
@@ -181,11 +153,9 @@ class CaptchaController extends Controller
 
 		$spacing = $this->img_width / mb_strlen($string);
 		$string_length = mb_strlen($string);
-		for($i = 0; $i < $string_length; ++$i)
-		{
+		for ($i = 0; $i < $string_length; ++$i) {
 			// Using TTF fonts
-			if(!empty($ttf_fonts))
-			{
+			if (!empty($ttf_fonts)) {
 				// Select a random font size
 				$font_size = mt_rand($this->min_size, $this->max_size);
 				// Select a random font
@@ -205,30 +175,26 @@ class CaptchaController extends Controller
 				// Calculate character offsets
 				//$pos_x = $pos_x + $string_width + ($string_width/4);
 				$pos_x = $spacing / 4 + $i * $spacing;
-				$pos_y = ceil(($this->img_height-$string_height/2));
+				$pos_y = ceil(($this->img_height - $string_height / 2));
 				// Draw a shadow
 				$shadow_x = mt_rand(-3, 3) + $pos_x;
 				$shadow_y = mt_rand(-3, 3) + $pos_y;
-				$shadow_color = imagecolorallocate($im, $r+20, $g+20, $b+20);
-				imagefttext($im, $font_size, $rotation, $shadow_x, $shadow_y, $shadow_color, $font, $string[$i], array());
+				$shadow_color = imagecolorallocate($im, $r + 20, $g + 20, $b + 20);
+				imagefttext($im, $font_size, $rotation, $shadow_x, $shadow_y, $shadow_color, $font, $string[$i],
+					array());
 				// Write the character to the image
 				imagefttext($im, $font_size, $rotation, $pos_x, $pos_y, $color, $font, $string[$i], array());
-			}
-			else
-			{
+			} else {
 				// Get width/height of the character
 				$string_width = imagefontwidth(5);
 				$string_height = imagefontheight(5);
 				// Calculate character offsets
 				$pos_x = $spacing / 4 + $i * $spacing;
-				$pos_y = $this->img_height / 2 - $string_height -10 + mt_rand(-3, 3);
+				$pos_y = $this->img_height / 2 - $string_height - 10 + mt_rand(-3, 3);
 				// Create a temporary image for this character
-				if($this->getGdVersion() >= 2)
-				{
+				if ($this->getGdVersion() >= 2) {
 					$temp_im = imagecreatetruecolor(15, 20);
-				}
-				else
-				{
+				} else {
 					$temp_im = imagecreate(15, 20);
 				}
 				$bg_color = imagecolorallocate($temp_im, 255, 255, 255);
@@ -242,8 +208,8 @@ class CaptchaController extends Controller
 				// Draw a shadow
 				$shadow_x = mt_rand(-1, 1);
 				$shadow_y = mt_rand(-1, 1);
-				$shadow_color = imagecolorallocate($temp_im, $r+50, $g+50, $b+50);
-				imagestring($temp_im, 5, 1+$shadow_x, 1+$shadow_y, $string[$i], $shadow_color);
+				$shadow_color = imagecolorallocate($temp_im, $r + 50, $g + 50, $b + 50);
+				imagestring($temp_im, 5, 1 + $shadow_x, 1 + $shadow_y, $string[$i], $shadow_color);
 				imagestring($temp_im, 5, 1, 1, $string[$i], $color);
 				// Copy to main image
 				imagecopyresized($im, $temp_im, $pos_x, $pos_y, 0, 0, 40, 55, 15, 20);
@@ -254,25 +220,21 @@ class CaptchaController extends Controller
 
 	private function getGdVersion()
 	{
-		if($this->gd_version != null)
-		{
+		if ($this->gd_version != null) {
 			return $this->gd_version;
 		}
 
-		if(!extension_loaded('gd'))
-		{
+		if (!extension_loaded('gd')) {
 			$this->gd_version = 0;
+
 			return 0;
 		}
 
-		if(function_exists("gd_info"))
-		{
+		if (function_exists("gd_info")) {
 			$gd_info = gd_info();
 			preg_match('/\d/', $gd_info['GD Version'], $gd);
 			$this->gd_version = $gd[0];
-		}
-		else
-		{
+		} else {
 			ob_start();
 			phpinfo(8);
 			$info = ob_get_contents();

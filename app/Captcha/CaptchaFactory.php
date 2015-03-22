@@ -2,10 +2,11 @@
 
 namespace MyBB\Core\Captcha;
 
-use MyBB\Settings\Store;
 use Illuminate\Contracts\Foundation\Application;
+use MyBB\Settings\Store;
 
-class CaptchaFactory implements CaptchaInterface {
+class CaptchaFactory implements CaptchaInterface
+{
 	private $settings;
 	private $app;
 
@@ -26,8 +27,7 @@ class CaptchaFactory implements CaptchaInterface {
 		$captcha = $this->getCaptchaClass($captcha);
 
 		// Not supported
-		if($captcha === null)
-		{
+		if ($captcha === null) {
 			return '';
 		}
 
@@ -39,8 +39,7 @@ class CaptchaFactory implements CaptchaInterface {
 		$captcha = $this->getCaptchaClass($captcha);
 
 		// Not supported
-		if($captcha === null)
-		{
+		if ($captcha === null) {
 			return true;
 		}
 
@@ -55,27 +54,23 @@ class CaptchaFactory implements CaptchaInterface {
 
 	private function getCaptchaClass($captchaName)
 	{
-		if($captchaName == false)
-		{
+		if ($captchaName == false) {
 			$captchaName = $this->settings->get('captcha.method', static::NONE);
 		}
 
-		if($captchaName === static::NONE)
-		{
+		if ($captchaName === static::NONE) {
 			return null;
 		}
 
 		$captchaClass = 'MyBB\\Core\\Captcha\\Captcha' . ucfirst($captchaName);
 
-		if(!class_exists($captchaClass))
-		{
+		if (!class_exists($captchaClass)) {
 			return null;
 		}
 
 		$captcha = $this->app->make($captchaClass);
 
-		if(!$captcha || !($captcha instanceof CaptchaInterface) || !$captcha->supported())
-		{
+		if (!$captcha || !($captcha instanceof CaptchaInterface) || !$captcha->supported()) {
 			throw new \RuntimeException("Failed to load Captcha Class '{$captchaClass}'");
 		}
 

@@ -5,7 +5,8 @@ namespace MyBB\Core\Captcha;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Http\Request;
 
-class CaptchaMybb implements CaptchaInterface {
+class CaptchaMybb implements CaptchaInterface
+{
 
 	private $database;
 	private $request;
@@ -35,11 +36,11 @@ class CaptchaMybb implements CaptchaInterface {
 			->where('imagehash', '=', $this->request->get('imagehash'))
 			->where('imagestring', '=', $this->request->get('imagestring'));
 
-		if($check->count() != 1)
-		{
+		if ($check->count() != 1) {
 			$this->database->table('captcha')
 				->where('imagehash', '=', $this->request->get('imagehash'))
 				->delete();
+
 			return false;
 		}
 

@@ -2,10 +2,11 @@
 
 namespace MyBB\Core\Captcha;
 
-use MyBB\Settings\Store;
 use MyBB\Core\Captcha\AYAH\AYAH;
+use MyBB\Settings\Store;
 
-class CaptchaAyah implements CaptchaInterface {
+class CaptchaAyah implements CaptchaInterface
+{
 	private $ayah;
 	private $settings;
 
@@ -34,8 +35,9 @@ class CaptchaAyah implements CaptchaInterface {
 	{
 		// AYAH is supported when we have a public and private key
 
-		if($this->settings->get('captcha.ayah_public_key', '') == '' || $this->settings->get('captcha.ayah_private_key', '') == '')
-		{
+		if ($this->settings->get('captcha.ayah_public_key', '') == ''
+			|| $this->settings->get('captcha.ayah_private_key', '') == ''
+		) {
 			return false;
 		}
 

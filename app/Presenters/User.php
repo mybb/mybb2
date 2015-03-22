@@ -11,9 +11,9 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
+use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
-use Lang;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
@@ -50,8 +50,7 @@ class User extends BasePresenter
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IUserRepository $userRepository
-	)
-	{
+	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
 		$this->forumRepository = $forumRepository;
@@ -62,13 +61,11 @@ class User extends BasePresenter
 
 	public function styled_name()
 	{
-		if($this->wrappedObject->id == -1)
-		{
+		if ($this->wrappedObject->id == -1) {
 			return e(trans('general.guest'));
 		}
 
-		if($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style)
-		{
+		if ($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style) {
 			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
 		}
 
@@ -80,25 +77,20 @@ class User extends BasePresenter
 		$avatar = $this->wrappedObject->avatar;
 
 		// Empty? Default avatar
-		if(empty($avatar))
-		{
+		if (empty($avatar)) {
 			return asset('images/avatar.png');
 		} // Link? Nice!
-		elseif(filter_var($avatar, FILTER_VALIDATE_URL) !== false)
-		{
+		elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {
 			return $avatar;
 		} // Email? Set up Gravatar
-		elseif(filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
-		{
+		elseif (filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false) {
 			// TODO: Replace with euans package
 			return "http://gravatar.com/avatar/" . md5(strtolower(trim($avatar)));
 		} // File?
-		elseif(file_exists(public_path("uploads/avatars/{$avatar}")))
-		{
+		elseif (file_exists(public_path("uploads/avatars/{$avatar}"))) {
 			return asset("uploads/avatars/{$avatar}");
 		} // Nothing?
-		else
-		{
+		else {
 			return asset('images/avatar.png');
 		}
 	}
@@ -108,7 +100,7 @@ class User extends BasePresenter
 		$avatar = $this->wrappedObject->avatar;
 
 		// If we have an email or link we'll return it - otherwise nothing
-		if(filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
+		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
 		{
 			return $avatar;
 		}
@@ -123,25 +115,25 @@ class User extends BasePresenter
 		$collection = $this->router->getRoutes();
 		$route = $collection->match(Request::create($this->wrappedObject->last_page));
 
-		if($route->getName() != null && Lang::has('online.'.$route->getName()))
-		{
+		if ($route->getName() != null && Lang::has('online.' . $route->getName())) {
 			$langOptions = $this->getWioData($route->getName(), $route->parameters());
 
-			if(!isset($langOptions['url']))
+			if (!isset($langOptions['url'])) {
 				$langOptions['url'] = route($route->getName(), $route->parameters());
+			}
 
-			$lang = Lang::get('online.'.$route->getName(), $langOptions);
+			$lang = Lang::get('online.' . $route->getName(), $langOptions);
 
 			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
-			if(is_array($lang))
-				$lang = Lang::get('online.'.$route->getName().'.index', $langOptions);
+			if (is_array($lang)) {
+				$lang = Lang::get('online.' . $route->getName() . '.index', $langOptions);
+			}
 		}
 
-		if($lang == null)
-		{
+		if ($lang == null) {
 //			$lang = Lang::get('online.unknown', ['url' => '']);
 			// Used for debugging, should be left here until we have added all routes
-			$lang = 'online.'.$route->getName();
+			$lang = 'online.' . $route->getName();
 		}
 
 		return $lang;
@@ -151,8 +143,7 @@ class User extends BasePresenter
 	{
 		$data = array();
 
-		switch($route)
-		{
+		switch ($route) {
 			case 'forums.show':
 				$data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
 				break;

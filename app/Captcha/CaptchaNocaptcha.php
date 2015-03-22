@@ -2,12 +2,13 @@
 
 namespace MyBB\Core\Captcha;
 
-use Illuminate\Http\Request;
-use MyBB\Settings\Store;
 use Greggilbert\Recaptcha\Recaptcha;
 use Greggilbert\Recaptcha\Service\CheckRecaptchaV2;
+use Illuminate\Http\Request;
+use MyBB\Settings\Store;
 
-class CaptchaNocaptcha implements CaptchaInterface {
+class CaptchaNocaptcha implements CaptchaInterface
+{
 	private $nocaptcha;
 	private $service;
 	private $settings;
@@ -41,14 +42,14 @@ class CaptchaNocaptcha implements CaptchaInterface {
 	{
 		$value = $this->request->get('g-recaptcha-response');
 
-		if(empty($value))
-		{
+		if (empty($value)) {
 			return false;
 		}
 
 		// Dirty hack to make use of our key instead of the config one
 		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.nocaptcha_private_key'));
 		app('config')->set('recaptcha.driver', 'curl');
+
 		return $this->service->check(null, $value);
 	}
 
@@ -56,8 +57,9 @@ class CaptchaNocaptcha implements CaptchaInterface {
 	{
 		// NoCaptcha is supported when we have a public and private key
 
-		if($this->settings->get('captcha.nocaptcha_public_key', '') == '' || $this->settings->get('captcha.nocaptcha_private_key', '') == '')
-		{
+		if ($this->settings->get('captcha.nocaptcha_public_key', '') == ''
+			|| $this->settings->get('captcha.nocaptcha_private_key', '') == ''
+		) {
 			return false;
 		}
 

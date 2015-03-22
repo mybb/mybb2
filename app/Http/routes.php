@@ -11,8 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'api/v1'], function ()
-{
+Route::group(['prefix' => 'api/v1'], function () {
 	Route::get('topics', ['as' => 'api.v1.topics.all', 'uses' => 'Api\TopicApiController@index']);
 	Route::get('topic/{slug}', ['as' => 'api.v1.topics.show', 'uses' => 'Api\TopicApiController@show']);
 });
@@ -61,19 +60,18 @@ Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSe
 Route::get('search/{id}', ['as' => 'search.results', 'uses' => 'SearchController@results']);
 
 Route::controllers([
-	                   'auth' => 'Auth\AuthController',
-	                   'password' => 'Auth\PasswordController',
-                   ]);
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
 
 Route::get('admin',
-           ['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
+	['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha']);
 
 Route::any('parser', ['uses' => 'DebugController@parser']);
 
-Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function ()
-{
+Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
 	Route::get('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@getProfile']);
 	Route::post('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@postProfile']);
@@ -85,7 +83,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::get('/password', ['as' => 'account.password', 'uses' => 'AccountController@getPassword']);
 	Route::post('/password', ['as' => 'account.password', 'uses' => 'AccountController@postPassword']);
 	Route::get('/password/confirm/{token}',
-	           ['as' => 'account.password.confirm', 'uses' => 'AccountController@confirmPassword']);
+		['as' => 'account.password.confirm', 'uses' => 'AccountController@confirmPassword']);
 	Route::get('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@getAvatar']);
 	Route::post('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@postAvatar']);
 	Route::get('/avatar/remove', ['as' => 'account.avatar.remove', 'uses' => 'AccountController@removeAvatar']);
