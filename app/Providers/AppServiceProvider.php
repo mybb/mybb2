@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Providers;
+<?php
+
+namespace MyBB\Core\Providers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -74,8 +76,12 @@ class AppServiceProvider extends ServiceProvider
             }
         );
 
-        $this->app->bind('MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface',
-            'MyBB\Core\UserActivity\Database\Repositories\Eloquent\UserActivityRepository');
+        $this->app->bind(
+            'MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface',
+            'MyBB\Core\UserActivity\Database\Repositories\Eloquent\UserActivityRepository'
+        );
+
+        $this->app->singleton('MyBB\Core\UserActivity\RendererFactory');
 
         $this->app->bind(
             'MyBB\Parser\Parser\IParser',

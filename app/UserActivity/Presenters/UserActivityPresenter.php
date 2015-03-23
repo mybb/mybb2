@@ -2,7 +2,7 @@
 /**
  * User activity presenter.
  *
- * Formats a user activity instance for output.
+ * Manually instantiated presenter, used to present an activity to the view, using a given renderer.
  *
  * @author    MyBB Group
  * @version   2.0.0
@@ -12,37 +12,57 @@
  * @link      http://www.mybb.com
  */
 
-namespace Mybb\Core\UserActivity\Presenters;
+namespace MyBB\Core\UserActivity\Presenters;
 
-use Illuminate\Translation\Translator;
-use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
+use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
 
-class UserActivityPresenter extends BasePresenter
+class UserActivityPresenter
 {
-	/**
-	 * @var Translator $translator
-	 */
-	private $translator;
+    /**
+     * @var UserActivity $activity
+     */
+    protected $activity;
+    /**
+     * @var AbstractRenderer $renderer
+     */
+    protected $renderer;
 
-	/**
-	 * @param UserActivity $resource
-	 * @param Translator   $lang
-	 */
-	public function __construct(UserActivity $resource, Translator $lang)
-	{
-		$this->wrappedObject = $resource;
-		$this->translator = $lang;
-	}
+    /**
+     * @param UserActivity     $activity
+     * @param AbstractRenderer $renderer
+     */
+    public function __construct(UserActivity $activity, AbstractRenderer $renderer = null)
+    {
+        $this->activity = $activity;
+        $this->renderer = $renderer;
+    }
 
-	/**
-	 * Get the activity string for this user activity item.
-	 *
-	 * @return string
-	 */
-	public function activity()
-	{
-		// TODO: Return string representation of the activity, with links to view the activity.
-		return "";
-	}
+    /**
+     * Render the activity string.
+     *
+     * @return string
+     */
+    public function activity()
+    {
+        if ($this->renderer !== null) {
+            return $this->renderer->render($this->activity);
+        }
+
+        // TODO: Baseline activity string...
+        return '';
+    }
+
+    /**
+     * Magic __call method, delegating all other methods to the UserActivity class.
+     *
+     * @param string      $name      The name of the method to call.
+     * @param array|mixed $arguments The method arguments.
+     *
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        return call_user_func([$this->activity, $name], $arguments);
+    }
 }
