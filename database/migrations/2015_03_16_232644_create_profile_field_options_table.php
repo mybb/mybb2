@@ -14,8 +14,8 @@ class CreateProfileFieldOptionsTable extends Migration {
 	public function up()
 	{
 		Schema::create('profile_field_options', function (Blueprint $table) {
-			$table->increments('id');
-			$table->integer('profile_field_id')->index();
+			$table->increments('id')->unsigned();
+			$table->integer('profile_field_id')->unsigned()->index();
 			$table->string('name');
 			$table->string('value');
 			$table->nullableTimestamps();

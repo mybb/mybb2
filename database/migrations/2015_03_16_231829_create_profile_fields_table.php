@@ -14,7 +14,7 @@ class CreateProfileFieldsTable extends Migration {
 	public function up()
 	{
 		Schema::create('profile_fields', function (Blueprint $table) {
-			$table->increments('id');
+			$table->increments('id')->unsigned();
 			$table->string('type');
 			$table->string('name');
 			$table->string('description');
