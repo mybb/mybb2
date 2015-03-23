@@ -39,7 +39,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'user.notify_on_group_request'],
 			['name' => 'user.notify_on_moderation_post'],
 			['name' => 'user.notify_on_report'],
-			['name' => 'user.notify_on_uername_change'],
+			['name' => 'user.notify_on_username_change'],
 			['name' => 'user.notification_mails'],
 			['name' => 'user.showonline'],
 			['name' => 'user.receive_messages'],
@@ -157,7 +157,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_uername_change')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_username_change')->pluck('id'),
 				'value' => '1'
 			],
 			[
