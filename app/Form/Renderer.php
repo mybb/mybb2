@@ -87,7 +87,8 @@ class Renderer
     {
         return $this->view->make('partials.form.field_select', [
             'name' => $renderable->getName(),
-            'options' => $renderable->getOptions()
+            'options' => $renderable->getOptions(),
+            'selected' => $renderable->getValue()
         ]);
     }
 

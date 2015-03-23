@@ -1,7 +1,7 @@
 <select name="{{ name }}">
 
     {% for value, name in options %}
-        <option value="{{ value }}">{{ name }}</option>
+        <option value="{{ value }}" {{ value == selected ? 'selected="selected"' : '' }}>{{ name }}</option>
     {% endfor %}
 
 </select>
