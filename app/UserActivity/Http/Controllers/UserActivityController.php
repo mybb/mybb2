@@ -70,11 +70,13 @@ class UserActivityController extends Controller
         /** @var \Illuminate\Pagination\Paginator $activities */
         $activities = $this->userActivityRepository->paginateAll($perPage);
 
-        $activities = $activities->getCollection()->map(function (UserActivity $activity) {
-            $renderer = $this->rendererFactory->build($activity);
+        $activities = $activities->getCollection()->map(
+            function (UserActivity $activity) {
+                $renderer = $this->rendererFactory->build($activity);
 
-            return new UserActivityPresenter($activity, $renderer);
-        });
+                return new UserActivityPresenter($activity, $renderer);
+            }
+        );
 
         return view('user_activity.index', compact('activities'));
     }

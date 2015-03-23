@@ -23,14 +23,19 @@ trait UserActivityTrait
      */
     public static function bootUserActivityTrait()
     {
-        static::registerModelEvent('created', function (Model $model) {
-            if (($user = \Auth::user()) !== null && $user->getAuthIdentifier() !== null) {
-                $model->activityHistory()->create([
-                    'user_id' => $user->getAuthIdentifier(),
-                    'extra_details' => static::getActivityDetails($model),
-                ]);
+        static::registerModelEvent(
+            'created',
+            function (Model $model) {
+                if (($user = \Auth::user()) !== null && $user->getAuthIdentifier() !== null) {
+                    $model->activityHistory()->create(
+                        [
+                            'user_id'       => $user->getAuthIdentifier(),
+                            'extra_details' => static::getActivityDetails($model),
+                        ]
+                    );
+                }
             }
-        });
+        );
     }
 
     /**
