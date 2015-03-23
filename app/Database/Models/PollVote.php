@@ -28,12 +28,6 @@ class PollVote extends Model
 		'vote'
 	];
 	/**
-	 * The attributes that aren't mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $guarded = ['user_id'];
-	/**
 	 * The primary key for the model.
 	 *
 	 * @var string

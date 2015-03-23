@@ -61,28 +61,21 @@ class PollController extends Controller
 		$this->guard = $guard;
 	}
 
-	public function show($topicSlug = null, $topicId = 0, $id = 0)
+	public function show($topicSlug = null, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$poll = $this->pollRepository->find($id);
-		$pollPresenter = new PollPresenter($poll);
+		$poll = $topic->poll;
 
-		if (!$poll || $poll->topic_id != $topic->id) {
+		if (!$poll) {
 			throw new NotFoundHttpException(trans('errors.poll_not_found'));
 		}
+		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
-		$myVote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
 		$options = $pollPresenter->options();
-		if ($myVote) {
-			$votes = explode(',', $myVote->vote);
-			foreach ($votes as $vote) {
-				$options[$vote - 1]->voted = true;
-			}
-		}
 
 		if ($poll->is_public) {
 			$allVotes = $this->pollVoteRepository->allForPoll($poll);
@@ -115,7 +108,7 @@ class PollController extends Controller
 		return view('polls.create', compact('topic'));
 	}
 
-	public function postCreate($slug = '', $id = 0, CreateRequest $createRequest)
+	public function postCreate($slug = '', $id, CreateRequest $createRequest)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -157,18 +150,21 @@ class PollController extends Controller
 		return new \Exception(trans('errors.error_creating_poll')); // TODO: Redirect back with error...
 	}
 
-	public function vote($topicSlug = null, $topicId = 0, $id = 0, Request $voteRequest)
+	public function vote($topicSlug = null, $topicId = 0, Request $voteRequest)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$poll = $this->pollRepository->find($id);
-		$pollPresenter = new PollPresenter($poll);
-
+		$poll = $topic->poll;
 		if (!$poll || $poll->topic_id != $topic->id) {
 			throw new NotFoundHttpException(trans('errors.poll_not_found'));
+		}
+		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+
+		if ($pollPresenter->is_closed) {
+			throw new \Exception(trans('errors.poll_is_closed'));
 		}
 
 		if ($this->guard->check()) {
@@ -225,27 +221,31 @@ class PollController extends Controller
 		if ($vote) {
 			$poll->update(['options' => json_encode($options)]);
 
-			return redirect()->route('polls.show', [$topicSlug, $topicId, $id]);
+			return redirect()->route('polls.show', [$topicSlug, $topicId]);
 		}
 	}
 
 
-	public function undo($topicSlug = null, $topicId = 0, $id = 0)
+	public function undo($topicSlug = null, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$poll = $this->pollRepository->find($id);
-		$pollPresenter = new PollPresenter($poll);
+		$poll = $topic->poll;
 
-		if (!$poll || $poll->topic_id != $topic->id) {
+		if (!$poll) {
 			throw new NotFoundHttpException(trans('errors.poll_not_found'));
 		}
+		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
 		if (!$this->guard->check()) {
 			throw new \Exception(trans('errors.poll_guest_undo'));
+		}
+
+		if ($pollPresenter->is_closed) {
+			throw new \Exception(trans('errors.poll_is_closed'));
 		}
 
 		$vote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
@@ -267,6 +267,6 @@ class PollController extends Controller
 		$poll->update(['options' => json_encode($options)]);
 		$vote->delete();
 
-		return redirect()->route('polls.show', [$topicSlug, $topicId, $id]);
+		return redirect()->route('polls.show', [$topicSlug, $topicId]);
 	}
 }

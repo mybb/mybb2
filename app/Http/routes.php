@@ -57,9 +57,9 @@ Route::post('topic/create/{forumId}', ['as' => 'topics.create.post', 'uses' => '
 
 Route::get('topic/{slug}.{id}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
 Route::post('topic/{slug}.{id}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
-Route::post('topic/{topicSlug}.{topicId}/poll/{id}/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
-Route::get('topic/{topicSlug}.{topicId}/poll/{id}', ['as' => 'polls.show', 'uses' => 'PollController@show']);
-Route::get('topic/{topicSlug}.{topicId}/poll/{id}/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
+Route::post('topic/{topicSlug}.{topicId}/poll/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
+Route::get('topic/{topicSlug}.{topicId}/poll/', ['as' => 'polls.show', 'uses' => 'PollController@show']);
+Route::get('topic/{topicSlug}.{topicId}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);

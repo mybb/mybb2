@@ -20,5 +20,6 @@ return [
 	'closeAtX' => 'This poll will close :time',
 	'undo' => 'Undo Your Vote',
 	'vote' => 'Vote',
-	'results' => 'Results'
+	'results' => 'Results',
+	'isClosed' => 'This poll is closed.'
 ];

@@ -73,9 +73,9 @@ class Topic extends Model implements HasPresenter
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
 	 */
-	public function polls()
+	public function poll()
 	{
-		return $this->hasOne('MyBB\\Core\\Database\\Models\\Polls');
+		return $this->hasOne('MyBB\\Core\\Database\\Models\\Poll');
 	}
 
 	/**

@@ -36,12 +36,6 @@ class Poll extends Model implements HasPresenter
 		'end_at'
 	];
 	/**
-	 * The attributes that aren't mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $guarded = ['user_id'];
-	/**
 	 * The primary key for the model.
 	 *
 	 * @var string
@@ -61,7 +55,7 @@ class Poll extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return \MyBB\Core\Presenters\Poll::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+		return 'MyBB\\Core\\Presenters\\Poll';
 	}
 
 	/**

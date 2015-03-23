@@ -3478,7 +3478,8 @@ section.container .forum-list {
     border-top: 1px solid #ccc;
     padding: 6px 8px; }
   .poll .poll__vote {
-    border-top: 2px solid #ccc; }
+    border-top: 2px solid #ccc;
+    height: 40px; }
     .poll .poll__vote .poll__buttons {
       float: left; }
     .poll .poll__vote .button {
