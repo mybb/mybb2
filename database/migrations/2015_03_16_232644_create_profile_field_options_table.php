@@ -19,6 +19,8 @@ class CreateProfileFieldOptionsTable extends Migration {
 			$table->string('name');
 			$table->string('value');
 			$table->nullableTimestamps();
+
+			$table->foreign('profile_field_id')->references('id')->on('profile_fields');
 		});
 	}
 

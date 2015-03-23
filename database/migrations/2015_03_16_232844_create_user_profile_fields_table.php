@@ -19,6 +19,9 @@ class CreateUserProfileFieldsTable extends Migration {
 			$table->integer('profile_field_id');
 			$table->text('value');
 			$table->nullableTimestamps();
+
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->foreign('profile_field_id')->references('id')->on('profile_fields');
 		});
 	}
 
