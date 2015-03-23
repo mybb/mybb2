@@ -163,10 +163,13 @@ class User extends BasePresenter
 			case 'topics.delete':
 			case 'topics.restore':
 				$data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
+				$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
 				break;
 			case 'topics.create':
 			case 'topics.create.post':
-				$data['forum'] = e($this->forumRepository->find($parameters['forumId'])->title);
+				$forum = $this->forumRepository->find($parameters['forumId']);
+				$data['forum'] = e($forum->title);
+				$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
 				break;
 			case 'search.post':
 			case 'search.results':
