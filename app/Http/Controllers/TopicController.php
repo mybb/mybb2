@@ -131,7 +131,7 @@ class TopicController extends Controller
 		}
 	}
 
-	public function reply($slug = '', $id = 0)
+	public function reply($slug = '', $id = 0, Request $request)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -141,7 +141,16 @@ class TopicController extends Controller
 
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
-		return view('topic.reply', compact('topic'));
+		$content = '';
+		$username = trans('general.guest');
+		if ($request->has('content')) {
+			$content = $request->get('content');
+		}
+		if ($request->has('username')) {
+			$username = $request->get('username');
+		}
+
+		return view('topic.reply', compact('topic', 'content', 'username'));
 	}
 
 	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
@@ -286,12 +295,9 @@ class TopicController extends Controller
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
 		} else {
 			$this->postRepository->deletePost($post);
-			$topic = $this->postRepository->updateLastPost($topic);
 
 			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
 		}
-
-		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
 	}
 
 	public function restore($slug = '', $id = 0, $postId = 0)
@@ -307,7 +313,6 @@ class TopicController extends Controller
 			$this->topicRepository->restoreTopic($topic);
 		} else {
 			$this->postRepository->restorePost($post);
-			$topic = $this->postRepository->updateLastPost($topic);
 		}
 		if ($topic) {
 			return redirect()->route('topics.showPost',
