@@ -53,6 +53,7 @@ class Poll extends Model implements HasPresenter
 	 * @var string
 	 */
 	protected $table = 'polls';
+
 	/**
 	 * Get the presenter class.
 	 *

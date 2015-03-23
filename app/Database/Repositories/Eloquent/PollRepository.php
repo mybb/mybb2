@@ -28,14 +28,13 @@ class PollRepository implements IPollRepository
 	protected $guard;
 
 	/**
-	 * @param Poll			  $pollModel    The model to use for polls.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param Poll  $pollModel The model to use for polls.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
 	 */
 	public function __construct(
 		Poll $pollModel,
 		Guard $guard
-	)
-	{
+	) {
 		$this->pollModel = $pollModel;
 		$this->guard = $guard;
 	}
@@ -65,12 +64,12 @@ class PollRepository implements IPollRepository
 			'user_id' => $this->guard->user()->id,
 		], $details);
 
-		if($details['user_id'] <= 0)
-		{
+		if ($details['user_id'] <= 0) {
 			$details['user_id'] = null;
 		}
 
 		$poll = $this->pollModel->create($details);
+
 		return $poll;
 	}
 

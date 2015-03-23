@@ -3,8 +3,8 @@
 	{{ poll.question }}
 {% endblock %}
 {% block head %}
-	<meta name="description" content="{{ poll.question }}" />
-	<link rel="canonical" href="{{ url_route("polls.show", [topic.slug, topic.id, poll.id]) }}" />
+	<meta name="description" content="{{ poll.question }}"/>
+	<link rel="canonical" href="{{ url_route("polls.show", [topic.slug, topic.id, poll.id]) }}"/>
 {% endblock %}
 {% block contents %}
 	<div class="page-content">
@@ -15,7 +15,7 @@
 			<div class="poll__title">{{ poll.question }}</div>
 			{{ form_open({'route': ['polls.vote', topic.slug, topic.id, poll.id ], 'method': 'post'}) }}
 			<div class="poll__options">
-				{%  for option in options %}
+				{% for option in options %}
 					<div class="poll__option{{ (option.voted)?' poll_option-voted' }}">
 						<div class="poll__option__name">
 							<label>
@@ -30,7 +30,8 @@
 							</label>
 						</div>
 						<div class="poll__option__votes">
-							<div class="poll__option__votes-bar" style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
+							<div class="poll__option__votes-bar"
+								 style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
 							<div class="poll__option__votes-title">
 								{{ option.votes }} / {{ poll.num_votes }}
 							</div>
@@ -52,7 +53,8 @@
 				<div class="poll__buttons">
 				</div>
 				{% if myVote %}
-					<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id, poll.id]) }}"><i class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
+					<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id, poll.id]) }}"><i
+								class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
 				{% else %}
 					{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">'~trans('poll.vote')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 				{% endif %}

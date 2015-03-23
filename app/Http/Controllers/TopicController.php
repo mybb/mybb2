@@ -39,11 +39,11 @@ class TopicController extends Controller
 
 	/**
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
+	 * @param IPostRepository  $postRepository Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param IPollRepository $pollRepository Poll repository interface, used to fetch poll details.
-	 * @param Guard            $guard           Guard implementation
-	 * @param Request          $request         Request implementation
+	 * @param IPollRepository  $pollRepository Poll repository interface, used to fetch poll details.
+	 * @param Guard            $guard Guard implementation
+	 * @param Request          $request Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
@@ -66,8 +66,7 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if(!$topic)
-		{
+		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -87,8 +86,7 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
-		{
+		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -96,11 +94,9 @@ class TopicController extends Controller
 
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
-		if(ceil($numPost / $postsPerPage) == 1)
-		{
+		if (ceil($numPost / $postsPerPage) == 1) {
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
-		} else
-		{
+		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
@@ -114,8 +110,7 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if(!$topic)
-		{
+		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -123,12 +118,10 @@ class TopicController extends Controller
 
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
 
-		if(ceil($numPost / $postsPerPage) == 1)
-		{
+		if (ceil($numPost / $postsPerPage) == 1) {
 			return redirect()->route('topics.show',
-			                         ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
-		} else
-		{
+				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
+		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
 				'id' => $topic->id,
@@ -142,8 +135,7 @@ class TopicController extends Controller
 	{
 		$topic = $this->topicRepository->find($id);
 
-		if(!$topic)
-		{
+		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -157,8 +149,7 @@ class TopicController extends Controller
 		/** @var Topic $topic */
 		$topic = $this->topicRepository->find($id);
 
-		if(!$topic)
-		{
+		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
@@ -167,8 +158,7 @@ class TopicController extends Controller
 			'username' => $replyRequest->input('username'),
 		]);
 
-		if($post)
-		{
+		if ($post) {
 			return redirect()->route('topics.last', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
@@ -180,8 +170,7 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
-		{
+		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
@@ -195,25 +184,22 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
-		{
+		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
 		$post = $this->postRepository->editPost($post, [
 			'content' => $replyRequest->input('content'),
 		]);
-		if($post['id'] == $topic['first_post_id'])
-		{
+		if ($post['id'] == $topic['first_post_id']) {
 			$topic = $this->topicRepository->editTopic($topic, [
 				'title' => $replyRequest->input('title'),
 			]);
 		}
 
-		if($post)
-		{
+		if ($post) {
 			return redirect()->route('topics.showPost',
-			                         ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
 		return new \Exception('Error editing post'); // TODO: Redirect back with error...
@@ -223,8 +209,7 @@ class TopicController extends Controller
 	{
 		$forum = $this->forumRepository->find($forumId);
 
-		if(!$forum)
-		{
+		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
 
@@ -236,12 +221,11 @@ class TopicController extends Controller
 	public function postCreate($forumId = 0, CreateRequest $createRequest)
 	{
 		$poll = null;
-		if($createRequest->input('add-poll')) {
+		if ($createRequest->input('add-poll')) {
 			$pollCreateRequest = app()->make('MyBB\\Core\\Http\\Requests\\Poll\\CreateRequest');
 			$options = [];
-			foreach($pollCreateRequest->input('option') as $option)
-			{
-				if($option && is_scalar($option)) {
+			foreach ($pollCreateRequest->input('option') as $option) {
+				if ($option && is_scalar($option)) {
 					$options[] = [
 						'option' => $option,
 						'votes' => 0
@@ -258,28 +242,28 @@ class TopicController extends Controller
 				'end_at' => null,
 				'max_options' => $pollCreateRequest->input('maxoptions')
 			];
-			if($pollCreateRequest->input('timeout')) {
-				$poll['end_at'] = new \DateTime('+'.$pollCreateRequest->input('timeout').' days');
+			if ($pollCreateRequest->input('timeout')) {
+				$poll['end_at'] = new \DateTime('+' . $pollCreateRequest->input('timeout') . ' days');
 			}
 
 		}
 		$topic = $this->topicRepository->create([
-			                                        'title' => $createRequest->input('title'),
-			                                        'forum_id' => $createRequest->input('forum_id'),
-			                                        'first_post_id' => 0,
-			                                        'last_post_id' => 0,
-			                                        'views' => 0,
-			                                        'num_posts' => 0,
-			                                        'content' => $createRequest->input('content'),
-			                                        'username' => $createRequest->input('username'),
-		                                        ]);
+			'title' => $createRequest->input('title'),
+			'forum_id' => $createRequest->input('forum_id'),
+			'first_post_id' => 0,
+			'last_post_id' => 0,
+			'views' => 0,
+			'num_posts' => 0,
+			'content' => $createRequest->input('content'),
+			'username' => $createRequest->input('username'),
+		]);
 
-		if($topic)
-		{
-			if($poll) {
+		if ($topic) {
+			if ($poll) {
 				$poll['topic_id'] = $topic->id;
 				$this->pollRepository->create($poll);
 			}
+
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
@@ -291,19 +275,16 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if(!$post || !$topic || $post['topic_id'] != $topic['id'])
-		{
+		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
 
-		if($post['id'] == $topic['first_post_id'])
-		{
+		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->deleteTopic($topic);
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
-		} else
-		{
+		} else {
 			$this->postRepository->deletePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 
@@ -318,23 +299,19 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
-		if(!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at'] && !$topic['deleted_at'])
-		{
+		if (!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at'] && !$topic['deleted_at']) {
 			throw new NotFoundHttpException(trans('errors.post_not_found'));
 		}
 
-		if($post['id'] == $topic['first_post_id'])
-		{
+		if ($post['id'] == $topic['first_post_id']) {
 			$this->topicRepository->restoreTopic($topic);
-		} else
-		{
+		} else {
 			$this->postRepository->restorePost($post);
 			$topic = $this->postRepository->updateLastPost($topic);
 		}
-		if($topic)
-		{
+		if ($topic) {
 			return redirect()->route('topics.showPost',
-			                         ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
 		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...

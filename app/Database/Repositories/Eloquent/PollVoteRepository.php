@@ -29,14 +29,13 @@ class PollVoteRepository implements IPollVoteRepository
 	protected $guard;
 
 	/**
-	 * @param PollVote		  $voteModel    The model to use for poll votes.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param PollVote $voteModel The model to use for poll votes.
+	 * @param Guard    $guard Laravel guard instance, used to get user ID.
 	 */
 	public function __construct(
 		PollVote $voteModel,
 		Guard $guard
-	)
-	{
+	) {
 		$this->voteModel = $voteModel;
 		$this->guard = $guard;
 	}
@@ -66,12 +65,12 @@ class PollVoteRepository implements IPollVoteRepository
 			'user_id' => $this->guard->user()->id,
 		], $details);
 
-		if($details['user_id'] < 0)
-		{
+		if ($details['user_id'] < 0) {
 			$details['user_id'] = null;
 		}
 
 		$vote = $this->voteModel->create($details);
+
 		return $vote;
 	}
 
@@ -80,15 +79,17 @@ class PollVoteRepository implements IPollVoteRepository
 	 * @param Poll $poll
 	 * @return mixed
 	 */
-	public function findForUserPoll(User $user, Poll $poll) {
+	public function findForUserPoll(User $user, Poll $poll)
+	{
 		return $this->voteModel->where('user_id', $user->id)->where('poll_id', $poll->id)->first();
 	}
 
 	/**
 	 * @param Poll $poll
-	 * return @mixed
+	 * @return mixed
 	 */
-	public function allForPoll(Poll $poll) {
+	public function allForPoll(Poll $poll)
+	{
 		return $this->voteModel->where('poll_id', $poll->id)->get();
 	}
 }
