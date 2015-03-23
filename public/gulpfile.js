@@ -49,6 +49,7 @@ var vendor_scripts = [
     paths.bower + "/PowerTip/src/placementcalculator.js",
     paths.bower + "/PowerTip/src/tooltipcontroller.js",
     paths.bower + "/PowerTip/src/utility.js",
+    paths.bower + "/dropit/dropit.js",
     paths.bower + "/dropzone/dist/dropzone.js"
 ];
 
@@ -62,6 +63,7 @@ var scripts = [
 var css = [
     paths.bower + "/normalize.css/normalize.css",
     paths.bower + "/fontawesome/scss/font-awesome.scss",
+    paths.bower + "/dropit/dropit.css",
     paths.bower + "/jquery-dropdown/jquery.dropdown.css",
     paths.css.src + "/main.scss"
 ];
