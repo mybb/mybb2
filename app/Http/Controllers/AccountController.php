@@ -71,12 +71,14 @@ class AccountController extends Controller
 		$input['dob'] = $request->get('date_of_birth_day') . '-' . $request->get('date_of_birth_month') . '-' . $request->get('date_of_birth_year');
 		$this->guard->user()->update($input);
 
-		// handle profile fields updates
+		// handle profile field updates
 		$profileFieldData = $request->get('profile_fields');
 
 		foreach ($profileFieldData as $profileFieldId => $value) {
-			$profileField = $profileFields->find($profileFieldId);
-			$userProfileFields->updateOrCreate($this->guard->user(), $profileField, $value);
+			if ($value !== '') {
+				$profileField = $profileFields->find($profileFieldId);
+				$userProfileFields->updateOrCreate($this->guard->user(), $profileField, $value);
+			}
 		}
 
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
