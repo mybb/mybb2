@@ -2,8 +2,17 @@
 
 namespace MyBB\Core\Form;
 
+use Illuminate\Contracts\View\Factory;
+
 class Renderer
 {
+    protected $view;
+
+    public function __construct(Factory $factory)
+    {
+        $this->view = $factory;
+    }
+
     /**
      * @param RenderableInterface $renderable
      * @return string
@@ -12,12 +21,16 @@ class Renderer
     {
         $html = '';
 
-        $label = '<h3><label for="%s">%s</label></h3>';
-        $html .= sprintf($label, $this->slugify($renderable->getLabel()), $renderable->getLabel());
+        // label
+        $html .= $this->view->make('partials.form.field_label', [
+            'for' => $this->slugify($renderable->getLabel()),
+            'label' => $renderable->getLabel()
+        ]);
 
-
-        $description = '<p class="form__description">%s</p>';
-        $html .= sprintf($description, $renderable->getDescription());
+        // description
+        $html .= $this->view->make('partials.form.field_description', [
+            'description' => $renderable->getDescription()
+        ]);
 
         switch ($renderable->getType()) {
             case 'text':
@@ -44,8 +57,12 @@ class Renderer
      */
     protected function renderTextarea(RenderableInterface $renderable)
     {
-        $textarea = '<textarea name="%s" rows="6" cols="40">%s</textarea>';
-        return sprintf($textarea, $renderable->getName(), $renderable->getValue() ? $renderable->getValue() : '');
+        return $this->view->make('partials.form.field_textarea', [
+            'name' => $renderable->getName(),
+            'rows' => 6,
+            'cols' => 40,
+            'value' => $renderable->getValue() ? $renderable->getValue() : ''
+        ]);
     }
 
     /**
@@ -54,14 +71,12 @@ class Renderer
      */
     protected function renderInput(RenderableInterface $renderable)
     {
-        $input = '<input type="%s" name="%s" id="%s" value="%s">';
-        return sprintf(
-            $input,
-            $renderable->getType(),
-            $renderable->getName(),
-            $this->slugify($renderable->getLabel()),
-            $renderable->getValue() ? $renderable->getValue() : ''
-        );
+        return $this->view->make('partials.form.field_input', [
+            'type' => $renderable->getType(),
+            'name' => $renderable->getName(),
+            'id' => $this->slugify($renderable->getName()),
+            'value' => $renderable->getValue() ? $renderable->getValue() : ''
+        ]);
     }
 
     /**
@@ -70,16 +85,10 @@ class Renderer
      */
     protected function renderSelect(RenderableInterface $renderable)
     {
-        $select = '<select name="%s">%s</select>';
-        $option = '<option value="%s">%s</option>';
-
-        $optionsHtml = '';
-
-        foreach ($renderable->getOptions() as $value => $name) {
-            $optionsHtml .= sprintf($option, $value, $name);
-        }
-
-        return sprintf($select, $renderable->getName(), $optionsHtml);
+        return $this->view->make('partials.form.field_select', [
+            'name' => $renderable->getName(),
+            'options' => $renderable->getOptions()
+        ]);
     }
 
     /**
