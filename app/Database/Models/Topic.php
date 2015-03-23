@@ -55,7 +55,7 @@ class Topic extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return \MyBB\Core\Presenters\Topic::class; // TODO: Are we using PHP 5.5 as minimum? If so, this is fine...
+		return 'MyBB\Core\Presenters\Topic';
 	}
 
 	/**
