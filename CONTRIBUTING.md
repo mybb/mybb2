@@ -28,7 +28,47 @@ We also ask that pull requests follow our coding standards, as defined below.
 
 ####PHP
 
-PHP code must follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) coding style guide. [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) will be ran against all contributions to ensure that code follows this standard. Should your pull request not follow this standard, you will be requested to reformat your code to suit.
+PHP code must follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) coding style guide. [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) will be ran against all contributions to ensure that code follows this standard. 
+
+In addition to the PSR-2 standard, we have other standards and best practices that must be ahered to:
+
+- All interface names MUST be suffixed with `Interface`. (e.g. `ForumInterface`).
+- All abstract class names MUST be prefied with `Abstract` (e.g. `AbstractForum`).
+- Getters MUST be used when retrieving the property of an object.
+- Setters MUST be used when manipulating the property of an object.
+- Properties on an object SHOULD have `protected` or `private` visibility.
+
+```php
+class Foo
+{
+    /**
+     * @var string
+     */
+    protected $bar;
+    
+    /**
+     * @return string;
+     */
+    public function getBar()
+    {
+        return $this->bar;
+    }
+    
+    /**
+     * @param string $bar
+     */
+    public function setBar($bar)
+    {
+        $this->bar = $bar;
+    }
+}
+```
+
+- Methods with a return value and/or arguments MUST have a document block.
+- Object properties MUST have a document block with `@var` tag denoting their type.
+- Method arguments that are required MUST NOT have a default value.
+
+Should your pull request not follow these standards, you will be requested to reformat your code to suit.
 
 The MyBB team utilise both [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) and [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) in order to analyse and correct code style for all contributors. These tools are run as [Git pre-commit hooks](http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks).
 
