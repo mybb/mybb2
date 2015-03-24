@@ -1,5 +1,5 @@
 			<div class="post post--reply" id="post-reply">
-				{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
+				{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'id': 'quickreply'}) }}
 					<div class="post__meta">
 						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
 
@@ -10,7 +10,11 @@
 						{% endif %}
 						<span class="post__date">Now</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
-						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"><i class="fa fa-external-link"></i><span class="text">Full Editor</a>
+						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"
+								onclick="openFullEditor(); return false;">
+							<i class="fa fa-external-link"></i>
+							<span class="text">Full Editor</span>
+						</a>
 					</div>
 					<div class="post__body">
 						{{ form_textarea('content', '', {'class':'textarea', 'rows': '10'}) }}
@@ -28,3 +32,11 @@
 					</div>
 				{{ form_close() }}
 			</div>
+
+			<script type="text/javascript">
+				function openFullEditor() {
+					var form = $('#quickreply');
+					form.find("input[name=_token]").val('');
+					form.attr('method', 'get').submit();
+				}
+			</script>

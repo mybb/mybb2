@@ -27,9 +27,15 @@
 		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
+				{% if auth_check() == false %}
+					<div class="form__row">
+						<h3>{{ form_label('username', trans('general.username')) }}</h3>
+						{{ form_text('username', username) }}
+					</div>
+				{% endif %}
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
-					{{ form_textarea('content') }}
+					{{ form_textarea('content', content) }}
 				</div>
 				{% if auth_check() == false %}
 					<div class="form__row">
