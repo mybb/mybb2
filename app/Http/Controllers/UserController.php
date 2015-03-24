@@ -4,7 +4,6 @@ namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Database\Models\ProfileFieldGroup;
 use MyBB\Core\Database\Repositories\IUserRepository;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
@@ -48,13 +47,11 @@ class UserController extends Controller
     public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups)
     {
         $user = $this->users->find($id);
-        $aboutFields = $this->userProfileFields->findForProfileFieldGroup($user, $profileFieldGroups->getBySlug(ProfileFieldGroup::ABOUT_YOU));
-        $contactFields = $this->userProfileFields->findForProfileFieldGroup($user, $profileFieldGroups->getBySlug(ProfileFieldGroup::CONTACT_DETAILS));
+        $groups = $profileFieldGroups->getAll();
 
         return view('user.profile', [
             'user' => $user,
-            'about_fields' => $aboutFields,
-            'contact_fields' => $contactFields
+            'profile_field_groups' => $groups
         ]);
     }
 }

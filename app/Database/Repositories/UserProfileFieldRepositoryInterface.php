@@ -51,4 +51,11 @@ interface UserProfileFieldRepositoryInterface
      * @return Collection
      */
     public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group);
+
+    /**
+     * @param User $user
+     * @param ProfileField $profileField
+     * @return bool
+     */
+    public function hasForProfileField(User $user, ProfileField $profileField);
 }

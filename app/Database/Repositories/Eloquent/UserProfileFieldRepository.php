@@ -104,4 +104,16 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 
         return $userFields;
     }
+
+    /**
+     * @param User $user
+     * @param ProfileField $profileField
+     * @return bool
+     */
+    public function hasForProfileField(User $user, ProfileField $profileField)
+    {
+        return $this->userProfileField->where('user_id', $user->getId())
+            ->where('profile_field_id', $profileField->getId())
+            ->count() > 0;
+    }
 }

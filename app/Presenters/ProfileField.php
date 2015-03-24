@@ -93,4 +93,12 @@ class ProfileField extends BasePresenter implements RenderableInterface
             return $userProfileField->getValue();
         }
     }
+
+    /**
+     * @return bool
+     */
+    public function has_value()
+    {
+        return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
+    }
 }

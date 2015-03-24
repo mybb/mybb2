@@ -36,17 +36,19 @@
 				{{ auth_user().role.role_display_name }}
 			</div>
 		</div>
-		<div class="form__section clearfix">
-			<h2>Contact Details</h2>
-			<div class="form__section__container">
-				{% for field in contact_fields %}
-					<div class="form__row">
-						{{ form_render_field(field) }}
-					</div>
-				{% endfor %}
+		{% for group in profile_field_groups %}
+			<div class="form__section clearfix">
+				<h2>{{ group.name }}</h2>
+				<div class="form__section__container">
+					{% for field in group.fields %}
+						<div class="form__row">
+							{{ form_render_field(field) }}
+						</div>
+					{% endfor %}
+				</div>
 			</div>
-		</div>
-		<div class="form__section">
+		{% endfor %}
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.about_you') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">
@@ -62,11 +64,6 @@
 					<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
 					{{ form_text('usertitle', auth_user().usertitle) }}
 				</div>
-				{% for field in about_you_fields %}
-					<div class="form__row">
-						{{ form_render_field(field) }}
-					</div>
-				{% endfor %}
 			</div>
 		</div>
 	</section>

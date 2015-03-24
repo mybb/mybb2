@@ -2,6 +2,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\ProfileFieldGroup;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 
@@ -27,5 +28,13 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
     public function getBySlug($slug)
     {
         return $this->profileFieldGroup->where('slug', $slug)->get()->first();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAll()
+    {
+        return $this->profileFieldGroup->all();
     }
 }
