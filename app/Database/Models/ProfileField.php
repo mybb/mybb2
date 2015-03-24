@@ -7,6 +7,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
  * @property string id
+ * @property string profile_field_group_id
  */
 class ProfileField extends Model implements HasPresenter
 {
@@ -20,6 +21,14 @@ class ProfileField extends Model implements HasPresenter
     public function getId()
     {
         return (int) $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProfileFieldGroupId()
+    {
+        return (int) $this->profile_field_group_id;
     }
 
     /**

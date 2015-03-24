@@ -5,6 +5,8 @@ use Illuminate\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
+use MyBB\Core\Database\Models\ProfileFieldGroup;
+use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Services\ConfirmationManager;
@@ -34,7 +36,7 @@ class AccountController extends Controller
 		return view('account.dashboard')->withActive('dashboard');
 	}
 
-	public function getProfile(ProfileFieldRepositoryInterface $profileFields)
+	public function getProfile(ProfileFieldRepositoryInterface $profileFields, ProfileFieldGroupRepositoryInterface $profileFieldGroups)
 	{
 		$dob = explode('-', $this->guard->user()->dob);
 
@@ -44,9 +46,13 @@ class AccountController extends Controller
 			'year' => $dob[2],
 		];
 
+		$aboutYouFields = $profileFields->getForGroup($profileFieldGroups->getBySlug(ProfileFieldGroup::ABOUT_YOU));
+		$contactFields = $profileFields->getForGroup($profileFieldGroups->getBySlug(ProfileFieldGroup::CONTACT_DETAILS));
+
 		return view('account.profile', [
 			'dob' => $dob,
-			'profile_fields' => $profileFields->getAll()
+			'about_you_fields' => $aboutYouFields,
+			'contact_fields' => $contactFields
 		])->withActive('profile');
 	}
 

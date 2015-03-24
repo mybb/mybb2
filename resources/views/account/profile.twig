@@ -36,22 +36,14 @@
 				{{ auth_user().role.role_display_name }}
 			</div>
 		</div>
-		{# this part should be written as profilefields #}
-		<div class="form__section">
+		<div class="form__section clearfix">
 			<h2>Contact Details</h2>
 			<div class="form__section__container">
-				<div class="form__row">
-					<h3><label for="profile_website">Website</label></h3>
-					<input type="text" name="profile_website" id="profile_website" value="http://jsoltesz.com" />
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_twitter">Twitter</label></h3>
-					<input type="text" name="profile_twitter" id="profile_twitter" value="justinsoltesz" />
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_skype">Skype</label></h3>
-					<input type="text" name="profile_skype" id="profile_skype" value="" />
-				</div>
+				{% for field in contact_fields %}
+					<div class="form__row">
+						{{ form_render_field(field) }}
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 		<div class="form__section">
@@ -70,8 +62,7 @@
 					<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
 					{{ form_text('usertitle', auth_user().usertitle) }}
 				</div>
-				{# everything below should use profilefields #}
-				{% for field in profile_fields %}
+				{% for field in about_you_fields %}
 					<div class="form__row">
 						{{ form_render_field(field) }}
 					</div>

@@ -4,6 +4,7 @@ namespace MyBB\Core\Database\Repositories;
 
 use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\ProfileField;
+use MyBB\Core\Database\Models\ProfileFieldGroup;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\UserProfileField;
 
@@ -43,4 +44,11 @@ interface UserProfileFieldRepositoryInterface
      * @return UserProfileField
      */
     public function findForProfileField(User $user, ProfileField $profileField);
+
+    /**
+     * @param User $user
+     * @param ProfileFieldGroup $group
+     * @return Collection
+     */
+    public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group);
 }

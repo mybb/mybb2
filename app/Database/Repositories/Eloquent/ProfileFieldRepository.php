@@ -4,6 +4,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\ProfileField;
+use MyBB\Core\Database\Models\ProfileFieldGroup;
 use Mybb\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 
 class ProfileFieldRepository implements ProfileFieldRepositoryInterface
@@ -45,5 +46,14 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
     public function find($id)
     {
         return $this->profileField->find($id);
+    }
+
+    /**
+     * @param ProfileFieldGroup $group
+     * @return Collection
+     */
+    public function getForGroup(ProfileFieldGroup $group)
+    {
+        return $this->profileField->where('profile_field_group_id', $group->getId())->get();
     }
 }

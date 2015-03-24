@@ -31,7 +31,14 @@
         <section class="container clearfix">
             <div style="padding: 20px;">
                 <h2 class="heading heading--major">About {{ user.name }}</h2>
-                {% for field in user_profile_fields %}
+                {% for field in about_fields %}
+                    <div>
+                        <h2>{{ field.getProfileField.name }}</h2>
+                        <p>{{ field.value }}</p>
+                    </div>
+                {% endfor %}
+                <h2 class="heading heading--major">Contact {{ user.name }}</h2>
+                {% for field in contact_fields %}
                     <div>
                         <h2>{{ field.getProfileField.name }}</h2>
                         <p>{{ field.value }}</p>

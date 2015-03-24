@@ -28,9 +28,11 @@ class Renderer
         ]);
 
         // description
-        $html .= $this->view->make('partials.form.field_description', [
-            'description' => $renderable->getDescription()
-        ]);
+        if ($renderable->getDescription()) {
+            $html .= $this->view->make('partials.form.field_description', [
+                'description' => $renderable->getDescription()
+            ]);
+        }
 
         switch ($renderable->getType()) {
             case 'text':
