@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9f876b79b5e1ce3acfd0d95ed3b1a5df",
+    "hash": "25105791c7a10b8f80199ed30b395aa8",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1058,16 +1058,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.17",
+            "version": "v5.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b4abcbc98885e1b339acc7e993d2758d47f01ecc"
+                "reference": "8dcf3fe5232ac13502e335465e6ac64367bbbbe7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b4abcbc98885e1b339acc7e993d2758d47f01ecc",
-                "reference": "b4abcbc98885e1b339acc7e993d2758d47f01ecc",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8dcf3fe5232ac13502e335465e6ac64367bbbbe7",
+                "reference": "8dcf3fe5232ac13502e335465e6ac64367bbbbe7",
                 "shasum": ""
             },
             "require": {
@@ -1180,7 +1180,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-17 21:45:31"
+            "time": "2015-03-24 13:05:26"
         },
         {
             "name": "laravelcollective/html",
@@ -1702,12 +1702,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "63bdc1061882107010ce32a88cfc8b98f5b50d6b"
+                "reference": "479d2244a865a2b365af8e1615e992ac0530bb77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/63bdc1061882107010ce32a88cfc8b98f5b50d6b",
-                "reference": "63bdc1061882107010ce32a88cfc8b98f5b50d6b",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/479d2244a865a2b365af8e1615e992ac0530bb77",
+                "reference": "479d2244a865a2b365af8e1615e992ac0530bb77",
                 "shasum": ""
             },
             "require": {
@@ -1742,7 +1742,7 @@
                 "source": "https://github.com/mybb/Settings/tree/master",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-15 14:40:56"
+            "time": "2015-03-22 12:25:48"
         },
         {
             "name": "nesbot/carbon",
@@ -1792,16 +1792,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528"
+                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ac05ef6f95bf8361549604b6031c115f92f39528",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/edbf162e4cf116102d95eb635608b7d310cc01c6",
+                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6",
                 "shasum": ""
             },
             "require": {
@@ -1811,7 +1811,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1833,7 +1833,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-01-18 11:29:59"
+            "time": "2015-03-22 16:17:25"
         },
         {
             "name": "psr/log",
@@ -2996,12 +2996,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "3ef6f22efc6977d53bf65b90b988d425e8a42839"
+                "reference": "7898f3e50eab97c316925252a8fada33b2026264"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/3ef6f22efc6977d53bf65b90b988d425e8a42839",
-                "reference": "3ef6f22efc6977d53bf65b90b988d425e8a42839",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/7898f3e50eab97c316925252a8fada33b2026264",
+                "reference": "7898f3e50eab97c316925252a8fada33b2026264",
                 "shasum": ""
             },
             "require": {
@@ -3046,7 +3046,7 @@
                 }
             ],
             "description": "A script to automatically fix Symfony Coding Standard",
-            "time": "2015-03-15 22:02:23"
+            "time": "2015-03-22 17:02:57"
         },
         {
             "name": "league/climate",
