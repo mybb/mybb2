@@ -10,6 +10,7 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
 
 class ForumRepository implements IForumRepository
@@ -113,6 +114,28 @@ class ForumRepository implements IForumRepository
 		if ($forum) {
 			$forum->increment('num_topics');
 		}
+
+		return $forum;
+	}
+
+	/**
+	 * Update the last post for this forum
+	 *
+	 * @param Forum $forum The forum to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Forum $forum, Post $post = null)
+	{
+		if ($post === null) {
+			$post = $forum->topics->sortByDesc('last_post_id')->first()->lastPost;
+		}
+
+		$forum->update([
+			'last_post_id' => $post->id,
+			'last_post_user_id' => $post->user_id
+		]);
 
 		return $forum;
 	}

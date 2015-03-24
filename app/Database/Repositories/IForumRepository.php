@@ -9,6 +9,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
+
 interface IForumRepository
 {
 	/**
@@ -60,4 +63,14 @@ interface IForumRepository
 	 * @return mixed
 	 */
 	public function incrementTopicCount($id = 0);
+
+	/**
+	 * Update the last post for this forum
+	 *
+	 * @param Forum $forum The forum to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Forum $forum, Post $post = null);
 }

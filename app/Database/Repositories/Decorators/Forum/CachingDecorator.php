@@ -10,6 +10,8 @@
 namespace MyBB\Core\Database\Repositories\Decorators\Forum;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\IForumRepository;
 
 class CachingDecorator implements IForumRepository
@@ -32,8 +34,7 @@ class CachingDecorator implements IForumRepository
 	 */
 	public function all()
 	{
-		if(($forums = $this->cache->get('forums.all')) == null)
-		{
+		if (($forums = $this->cache->get('forums.all')) == null) {
 			$forums = $this->decoratedRepository->all();
 			$this->cache->forever('forums.all', $forums);
 		}
@@ -72,8 +73,7 @@ class CachingDecorator implements IForumRepository
 	 */
 	public function getIndexTree()
 	{
-		if(($forums = $this->cache->get('forums.index_tree')) == null)
-		{
+		if (($forums = $this->cache->get('forums.index_tree')) == null) {
 			$forums = $this->decoratedRepository->getIndexTree();
 			$this->cache->forever('forums.index_tree', $forums);
 		}
@@ -103,5 +103,18 @@ class CachingDecorator implements IForumRepository
 	public function incrementTopicCount($id = 0)
 	{
 		return $this->decoratedRepository->incrementTopicCount($id);
+	}
+
+	/**
+	 * Update the last post for this forum
+	 *
+	 * @param Forum $forum The forum to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Forum $forum, Post $post = null)
+	{
+		$this->decoratedRepository->updateLastPost($forum, $post);
 	}
 }

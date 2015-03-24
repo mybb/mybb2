@@ -18,12 +18,12 @@
 				{% if auth_check() == false %}
 					<div class="form__row">
 						<h3>{{ form_label('username', trans('general.username')) }}</h3>
-						{{ form_text('username', trans('general.guest')) }}
+						{{ form_text('username', username) }}
 					</div>
 				{% endif %}
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
-					{{ form_textarea('content') }}
+					{{ form_textarea('content', content) }}
 				</div>
 			</div>
 		</section>
