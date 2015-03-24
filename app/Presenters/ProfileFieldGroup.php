@@ -10,6 +10,7 @@ class ProfileFieldGroup extends BasePresenter
     public function fields()
     {
         $profileFields = $this->getWrappedObject()->getProfileFields()->get();
+        $profileFields = $profileFields->sortBy('display_order');
         $decorated = [];
 
         $decorator = App::make('autopresenter');
