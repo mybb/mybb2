@@ -73,12 +73,12 @@ class ForumRepository implements IForumRepository
 	 */
 	public function getIndexTree()
 	{
-		// TODO: doesn't load relations for children, probably need to add children.lastPost etc? (@euan)
+		// TODO: The caching decorator would also cache the relations here
 		return $this->forumModel->where('parent_id', '=', null)->with([
 			'children',
-			'lastPost',
-			'lastPost.topic',
-			'lastPostAuthor'
+			'children.lastPost',
+			'children.lastPost.topic',
+			'children.lastPostAuthor'
 		])->get();
 	}
 
