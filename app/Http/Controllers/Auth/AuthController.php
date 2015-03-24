@@ -66,10 +66,14 @@ class AuthController extends Controller
 	{
 		$this->failedValidationRedirect = url('auth/signup');
 
+		$captcha = $this->checkCaptcha();
+		if ($captcha !== true) {
+			return $captcha;
+		}
+
 		$validator = $this->registrar->validator($request->all());
 
-		if($validator->fails())
-		{
+		if ($validator->fails()) {
 			$this->throwValidationException(
 				$request, $validator
 			);
@@ -110,18 +114,17 @@ class AuthController extends Controller
 
 		$credentials = $request->only('username', 'password');
 
-		if($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
-		                        $request->input('remember_me'))
-		)
-		{
+		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
+			$request->input('remember_me'))
+		) {
 			return redirect()->intended($this->redirectPath());
 		}
 
 		return redirect('/auth/login')
 			->withInput($request->only('username'))
 			->withErrors([
-				             'username' => trans('member.invalidCredentials'),
-			             ]);
+				'username' => trans('member.invalidCredentials'),
+			]);
 	}
 
 	/**

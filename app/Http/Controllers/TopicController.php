@@ -147,11 +147,20 @@ class TopicController extends Controller
 
 	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
 	{
+		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
+
 		/** @var Topic $topic */
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+		}
+
+		if (!$this->guard->check()) {
+			$captcha = $this->checkCaptcha();
+			if ($captcha !== true) {
+				return $captcha;
+			}
 		}
 
 		$post = $this->postRepository->addPostToTopic($topic, [
@@ -163,7 +172,9 @@ class TopicController extends Controller
 			return redirect()->route('topics.last', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return new \Exception(trans('errors.error_creating_post')); // TODO: Redirect back with error...
+		return redirect()->route('topic.reply', ['slug' => $topic->slug, 'id' => $topic->id])->withInput()->withErrors([
+			'content' => trans('errors.error_creating_post')
+		]);
 	}
 
 	public function edit($slug = '', $id = 0, $postId = 0)
@@ -221,6 +232,13 @@ class TopicController extends Controller
 
 	public function postCreate($forumId = 0, CreateRequest $createRequest)
 	{
+		if (!$this->guard->check()) {
+			$captcha = $this->checkCaptcha();
+			if ($captcha !== true) {
+				return $captcha;
+			}
+		}
+
 		$topic = $this->topicRepository->create([
 			'title' => $createRequest->input('title'),
 			'forum_id' => $createRequest->input('forum_id'),
@@ -236,7 +254,9 @@ class TopicController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return new \Exception(trans('errors.error_creating_topic')); // TODO: Redirect back with error...
+		return redirect()->route('topic.create', ['forumId' => $forumId])->withInput()->withErrors([
+			'content' => trans('errors.error_creating_topic')
+		]);
 	}
 
 	public function delete($slug = '', $id = 0, $postId = 0)

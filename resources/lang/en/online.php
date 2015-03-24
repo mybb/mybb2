@@ -38,16 +38,10 @@ return [
 	],
 	'topics' => [
 		'show' => 'Viewing Topic <a href=":url">:topic</a>',
-		'reply' => [
-			'index' => 'Replying to Topic <a href=":url">:topic</a>',
-			'post' => 'Posting a reply to <a href=":url">:topic</a>',
-		],
+		'reply' => 'Replying to Topic <a href=":url">:topic</a>',
 		'edit' => 'Editing a post in <a href=":url">:topic</a>',
 		'delete' => 'Deleting a post in <a href=":url">:topic</a>',
 		'restore' => 'Restoring a post in <a href=":url">:topic</a>',
-		'create' => [
-			'index' => 'Writing a new topic in <a href=":url">:forum</a>',
-			'post' => 'Posting a new topic in <a href=":url">:forum</a>',
-		]
+		'create' => 'Posting a new topic in <a href=":url">:forum</a>',
 	],
 ];
