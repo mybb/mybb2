@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "25105791c7a10b8f80199ed30b395aa8",
+    "hash": "71f4ccaf26e29991ebb7f8aeb251b9db",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1058,16 +1058,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.19",
+            "version": "v5.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "8dcf3fe5232ac13502e335465e6ac64367bbbbe7"
+                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/8dcf3fe5232ac13502e335465e6ac64367bbbbe7",
-                "reference": "8dcf3fe5232ac13502e335465e6ac64367bbbbe7",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/419d3f485ce7946cace4325ef19a30e1d5543951",
+                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951",
                 "shasum": ""
             },
             "require": {
@@ -1180,7 +1180,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-24 13:05:26"
+            "time": "2015-03-24 13:36:37"
         },
         {
             "name": "laravelcollective/html",
@@ -1616,6 +1616,34 @@
             "time": "2015-01-11 23:07:46"
         },
         {
+            "name": "mybb/are-you-a-human",
+            "version": "v1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mybb/are-you-a-human.git",
+                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/are-you-a-human/zipball/9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
+                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyBB\\AreYouAHuman\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "The Are You A Human PHP Library for composer",
+            "keywords": [
+                "are-you-a-human",
+                "captcha"
+            ],
+            "time": "2015-03-24 14:51:27"
+        },
+        {
             "name": "mybb/auth",
             "version": "dev-master",
             "source": {
@@ -1792,16 +1820,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6"
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/edbf162e4cf116102d95eb635608b7d310cc01c6",
-                "reference": "edbf162e4cf116102d95eb635608b7d310cc01c6",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dba7524b3724f25b947cd26a580787c55c8a6f9b",
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b",
                 "shasum": ""
             },
             "require": {
@@ -1833,7 +1861,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-03-22 16:17:25"
+            "time": "2015-03-24 19:10:28"
         },
         {
             "name": "psr/log",

@@ -2,7 +2,7 @@
 
 namespace MyBB\Core\Captcha;
 
-use MyBB\Core\Captcha\AYAH\AYAH;
+use MyBB\AreYouAHuman\AYAH;
 use MyBB\Settings\Store;
 
 class CaptchaAyah implements CaptchaInterface

@@ -17,7 +17,8 @@
 		"doctrine/dbal": "~2.5",
 		"league/fractal": "0.12.*@dev",
 		"jenssegers/date": "~2.0",
-		"greggilbert/recaptcha": "~2.0"
+		"greggilbert/recaptcha": "~2.0",
+		"mybb/are-you-a-human": "1.1.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

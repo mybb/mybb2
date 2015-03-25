@@ -13,7 +13,7 @@ class AddMybbCaptcha extends Migration
 	 */
 	public function up()
 	{
-		Schema::table('captcha', function (Blueprint $table) {
+		Schema::create('captcha', function (Blueprint $table) {
 			$table->string('imagehash', 32)->unique();
 			$table->string('imagestring', 8);
 			$table->timestamp('created_at')->nullable();
