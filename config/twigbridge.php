@@ -102,6 +102,7 @@ return [
 			'TwigBridge\Extension\Laravel\Html',
 			'MyBB\Core\Twig\Extensions\Settings',
 			'MyBB\Core\Twig\Extensions\Date',
+			'MyBB\Core\Twig\Extensions\Captcha',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*

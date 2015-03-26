@@ -11,8 +11,7 @@ use View;
 abstract class Controller extends BaseController
 {
 
-	use DispatchesCommands, ValidatesRequests
-	{
+	use DispatchesCommands, ValidatesRequests {
 		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
 	}
 
@@ -24,20 +23,18 @@ abstract class Controller extends BaseController
 
 		View::share('auth_user', $guard->user());
 
-		if($guard->check())
-		{
+		if ($guard->check()) {
 			$guard->user()->update([
-				                       'last_visit' => new \DateTime(),
-				                       'last_page' => $request->path()
-			                       ]);
+				'last_visit' => new \DateTime(),
+				'last_page' => $request->path()
+			]);
 		}
 
 		$langDir = [
 			'left' => 'left',
 			'right' => 'right'
 		];
-		if(trans('general.direction') == 'rtl')
-		{
+		if (trans('general.direction') == 'rtl') {
 			$langDir['left'] = 'right';
 			$langDir['right'] = 'left';
 		}
@@ -47,11 +44,27 @@ abstract class Controller extends BaseController
 
 	protected function getRedirectUrl()
 	{
-		if(!empty($this->failedValidationRedirect))
-		{
+		if (!empty($this->failedValidationRedirect)) {
 			return $this->failedValidationRedirect;
 		}
 
 		return $this->parentGetRedirectUrl();
+	}
+
+	protected function checkCaptcha($redirect = true)
+	{
+		$valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
+
+		if ($valid) {
+			return true;
+		}
+
+		if ($redirect) {
+			return redirect($this->getRedirectUrl())->withInput()->withErrors([
+				'captcha' => trans('errors.invalidCaptcha'),
+			]);
+		}
+
+		return false;
 	}
 }

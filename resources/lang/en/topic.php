@@ -18,6 +18,7 @@ return [
 	'edit' => 'Edit',
 	'editpost' => 'Edit Post',
 	'delete' => 'Delete',
+	'confirmDelete' => 'Do you really want to delete this Post?\nYou are not able to recover it later!',
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted'
 ];

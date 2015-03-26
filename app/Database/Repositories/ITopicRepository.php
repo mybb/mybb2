@@ -10,6 +10,7 @@
 namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 
 interface ITopicRepository
@@ -82,4 +83,14 @@ interface ITopicRepository
 	 * @return mixed
 	 */
 	public function create(array $details = []);
+
+	/**
+	 * Update the last post of the topic
+	 *
+	 * @param Topic $topic The topic to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Topic $topic, Post $post = null);
 }
