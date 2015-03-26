@@ -252,8 +252,8 @@ class TopicController extends Controller
 				'end_at' => null,
 				'max_options' => $pollCreateRequest->input('maxoptions')
 			];
-			if ($pollCreateRequest->input('timeout')) {
-				$poll['end_at'] = new \DateTime('+' . $pollCreateRequest->input('timeout') . ' days');
+			if ($createRequest->input('endAt')) {
+				$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
 			}
 
 		}

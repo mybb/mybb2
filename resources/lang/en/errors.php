@@ -18,5 +18,6 @@ return [
 	'poll_invalid_vote' => 'Sorry, the option you selected for vote is invalid.',
 	'poll_guest_undo' => 'Sorry, guests can not undo their votes.',
 	'poll_nothing_to_undo' => 'You haven\'t any vote to undo',
-	'poll_is_closed' => 'Sorry, this poll is closed'
+	'poll_is_closed' => 'Sorry, this poll is closed',
+	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid'
 ];

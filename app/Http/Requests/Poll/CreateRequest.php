@@ -31,7 +31,7 @@ class CreateRequest extends Request
 			'is_multiple' => 'boolean',
 			'is_public' => 'boolean',
 			'maxoptions' => 'integer|min:0',
-			'timeout' => 'integer|min:0'
+			'endAt' => 'date'
 		];
 	}
 

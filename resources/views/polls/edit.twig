@@ -38,10 +38,8 @@
 						{{ form_text('question', poll.question) }}
 					</div>
 					<div class="form__row">
-						<h3>{{ form_label('timeout', trans('poll.timeout')) }}</h3>
-						{% set days = date(poll.end_at).diff(date()).d %}
-						{{ form_text('timeout', ((days > 0)? days + 1 : 0), {class: 'short'}) }}
-						days
+						<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+						{{ form_text('endAt', poll.end_at, {id: 'poll-end-at'}) }}
 					</div>
 					<div class="form__row">
 						<h3>{{ trans('poll.whoVoted') }}</h3>

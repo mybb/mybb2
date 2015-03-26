@@ -6,7 +6,7 @@ return [
 	'addPollToX' => 'Add a poll to :name',
 	'editPoll' => 'Edit the poll',
 	'question' => 'Question',
-	'timeout' => 'Timeout',
+	'endAt' => 'End At',
 	'whoVoted' => 'Who voted',
 	'whoVoted.desc' => 'Allow users to see who voted for each option',
 	'multipleChoice' => 'Multiple choice',

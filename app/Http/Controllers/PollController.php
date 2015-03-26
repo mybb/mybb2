@@ -138,8 +138,8 @@ class PollController extends Controller
 			'end_at' => null,
 			'max_options' => $createRequest->input('maxoptions')
 		];
-		if ($createRequest->input('timeout')) {
-			$poll['end_at'] = new \DateTime('+' . $createRequest->input('timeout') . ' days');
+		if ($createRequest->input('endAt')) {
+			$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
 		}
 		$poll = $this->pollRepository->create($poll);
 
@@ -344,9 +344,10 @@ class PollController extends Controller
 			'is_public' => (bool)$createRequest->input('is_public'),
 			'max_options' => $createRequest->input('maxoptions')
 		];
-		if ($createRequest->input('timeout')) {
-			$poll['end_at'] = new \DateTime('+' . $createRequest->input('timeout') . ' days');
+		if ($createRequest->input('endAt')) {
+			$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
 		}
+
 		$poll->update($pollDetails);
 
 		if ($poll) {

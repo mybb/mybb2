@@ -118,9 +118,19 @@
 				$('#add-poll').slideDown();
 			}
 		}
+
+		this.timePicker();
 	};
 
-	window.MyBB.Polls.prototype.toggleAddPoll = function toggleAddPoll() {;
+	window.MyBB.Polls.prototype.timePicker = function timePicker() {
+		$('#poll-end-at').datetimepicker({
+			format: 'Y-m-d H:i:s',
+			lang: $('html').attr('lang'),
+			minDate: 0
+		});
+	};
+
+	window.MyBB.Polls.prototype.toggleAddPoll = function toggleAddPoll() {
 		if($('#add-poll-input').val() === '1') {
 			$('#add-poll-input').val(0);
 			$('#add-poll').slideUp();
@@ -129,7 +139,8 @@
 			$('#add-poll').slideDown();
 		}
 		return false;
-	}
+	};
+
 	window.MyBB.Polls.prototype.addOption = function addOption(event) {
 		var num_options = $('#add-poll .poll-option').length;
 		if(num_options >= 10) { // TODO: settings
@@ -179,7 +190,7 @@
 		else {
 			$('#poll-maximum-options').slideUp();
 		}
-	}
+	};
 
 	var polls = new window.MyBB.Polls();
 
