@@ -50,12 +50,14 @@ var vendor_scripts = [
     paths.bower + "/PowerTip/src/tooltipcontroller.js",
     paths.bower + "/PowerTip/src/utility.js",
     paths.bower + "/dropit/dropit.js",
-    paths.bower + "/dropzone/dist/dropzone.js"
+	paths.bower + "/dropzone/dist/dropzone.js",
+	paths.bower + "/datetimepicker/jquery.datetimepicker.js"
 ];
 
 var scripts = [
     paths.js.src + "/modal.js",
-    paths.js.src + "/post.js",
+	paths.js.src + "/post.js",
+	paths.js.src + "/poll.js",
     paths.js.src + "/other.js"
 ];
 
@@ -64,6 +66,7 @@ var css = [
     paths.bower + "/fontawesome/scss/font-awesome.scss",
     paths.bower + "/dropit/dropit.css",
     paths.bower + "/jquery-dropdown/jquery.dropdown.css",
+	paths.bower + "/datetimepicker/jquery.datetimepicker.css",
     paths.css.src + "/main.scss"
 ];
 

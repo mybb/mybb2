@@ -52,6 +52,15 @@ Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'use
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 Route::post('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@postCreate']);
 
+Route::get('topic/{slug}.{id}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
+Route::post('topic/{slug}.{id}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
+Route::post('topic/{topicSlug}.{topicId}/poll/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
+Route::get('topic/{topicSlug}.{topicId}/poll/', ['as' => 'polls.show', 'uses' => 'PollController@show']);
+Route::get('topic/{topicSlug}.{topicId}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
+Route::get('topic/{topicSlug}.{topicId}/poll/remove', ['as' => 'polls.remove', 'uses' => 'PollController@remove']);
+Route::get('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
+Route::post('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']);
+
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 
