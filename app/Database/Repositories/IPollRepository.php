@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Poll;
 use MyBB\Core\Database\Models\Topic;
 
 interface IPollRepository
@@ -40,4 +41,12 @@ interface IPollRepository
 	 * @return mixed
 	 */
 	public function getForTopic(Topic $topic);
+
+	/**
+	 * Remove the poll
+	 * @param Poll $poll
+	 *
+	 * @return mixed
+	 */
+	public function remove(Poll $poll);
 }

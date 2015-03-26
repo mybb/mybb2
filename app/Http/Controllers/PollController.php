@@ -95,7 +95,7 @@ class PollController extends Controller
 		return view('polls.show', compact('topic', 'options', 'poll', 'myVote'));
 	}
 
-	public function create($slug = '', $id = 0)
+	public function create($slug = '', $id)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -268,5 +268,90 @@ class PollController extends Controller
 		$vote->delete();
 
 		return redirect()->route('polls.show', [$topicSlug, $topicId]);
+	}
+
+	public function remove($topicSlug = null, $topicId = 0) {
+		$topic = $this->topicRepository->find($topicId);
+		if (!$topic) {
+			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+		}
+
+		$poll = $topic->poll;
+
+		if (!$poll) {
+			throw new NotFoundHttpException(trans('errors.poll_not_found'));
+		}
+
+		$this->pollRepository->remove($poll);
+
+		return redirect()->route('topics.show', [$topicSlug, $topicId]);
+	}
+
+	public function edit($topicSlug = null, $topicId)
+	{
+		$topic = $this->topicRepository->find($topicId);
+		if (!$topic) {
+			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+		}
+
+		$poll = $topic->poll;
+
+		if (!$poll) {
+			throw new NotFoundHttpException(trans('errors.poll_not_found'));
+		}
+		return view('polls.edit', compact('topic', 'poll'));
+	}
+
+	public function postEdit($topicSlug = null, $topicId, CreateRequest $createRequest)
+	{
+		$topic = $this->topicRepository->find($topicId);
+		if (!$topic) {
+			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+		}
+
+		$poll = $topic->poll;
+
+		if (!$poll) {
+			throw new NotFoundHttpException(trans('errors.poll_not_found'));
+		}
+
+		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+
+
+		$options = [];
+		$i = 0;
+		foreach ($createRequest->input('option') as $option) {
+			if ($option && is_scalar($option)) {
+				$options[] = [
+					'option' => $option,
+					'votes' => 0
+				];
+				if(isset($pollPresenter->options[$i]->votes))
+				{
+					$options[$i]['votes'] = $pollPresenter->options[$i]->votes;
+				}
+				++$i;
+			}
+		}
+
+		$pollDetails = [
+			'question' => $createRequest->input('question'),
+			'num_options' => count($options),
+			'options' => json_encode($options),
+			'is_closed' => (bool)$createRequest->input('is_closed'),
+			'is_multiple' => (bool)$createRequest->input('is_multiple'),
+			'is_public' => (bool)$createRequest->input('is_public'),
+			'max_options' => $createRequest->input('maxoptions')
+		];
+		if ($createRequest->input('timeout')) {
+			$poll['end_at'] = new \DateTime('+' . $createRequest->input('timeout') . ' days');
+		}
+		$poll->update($pollDetails);
+
+		if ($poll) {
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
+		}
+
+		return new \Exception(trans('errors.error_editing_poll')); // TODO: Redirect back with error...
 	}
 }

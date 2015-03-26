@@ -100,7 +100,7 @@
     
 	window.MyBB.Polls = function Polls()
 	{
-		this.optionElement = $('#option-simple').clone().removeClass('hidden').addClass('poll-option').hide();
+		this.optionElement = $('#option-simple').clone().attr('id', '').removeClass('hidden').addClass('poll-option').hide();
 		$('#option-simple').remove();
 
 		this.removeOption($('#add-poll .poll-option'));
@@ -110,8 +110,14 @@
 		$('#poll-maximum-options').hide();
 
 		$('#poll-is-multiple').change($.proxy(this.toggleMaxOptionsInput, this));
+		$('#poll-is-multiple').change();
 
 		$("#add-poll-button").click($.proxy(this.toggleAddPoll, this));
+		if($("#add-poll-button").length) {
+			if($('#add-poll-input').val() === '1') {
+				$('#add-poll').slideDown();
+			}
+		}
 	};
 
 	window.MyBB.Polls.prototype.toggleAddPoll = function toggleAddPoll() {;
@@ -130,6 +136,7 @@
 			return false;
 		}
 		var $option = this.optionElement.clone();
+		$option.find('input').attr('name', 'option['+(num_options+1)+']')
 		$('#add-poll .poll-option').last().after($option);
 		$option.slideDown();
 		this.removeOption($option);
@@ -137,21 +144,31 @@
 	};
 
 	window.MyBB.Polls.prototype.removeOption = function bindRemoveOption($parent) {
-		$parent.find('.remove-option').click(function() {
+		$parent.find('.remove-option').click($.proxy(function(event) {
+			var me = event.target;
 			if($('.poll-option').length <= 2)
 			{
 				return false;
 			}
 
-			$(this).parents('.poll-option').slideUp(500);
+			$(me).parents('.poll-option').slideUp(500);
 
 			setTimeout($.proxy(function() {
-				$(this).parents('.poll-option').remove();
+				$(me).parents('.poll-option').remove();
+				this.fixOptionsName();
 			}, this), 500);
-		});
+		}, this));
 		if(!Modernizr.touch) {
 			$parent.find('.remove-option').powerTip({ placement: 's', smartPlacement: true });
 		}
+	};
+
+	window.MyBB.Polls.prototype.fixOptionsName = function() {
+		var i = 0;
+		$('#add-poll .poll-option').each(function() {
+			i++;
+			$(this).find('input').attr('name', 'option['+i+']');
+		});
 	};
 
 	window.MyBB.Polls.prototype.toggleMaxOptionsInput = function toggleMaxOptionsInput(event) {

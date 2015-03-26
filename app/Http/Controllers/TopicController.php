@@ -24,6 +24,7 @@ use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+
 class TopicController extends Controller
 {
 	/** @var ITopicRepository $topicRepository */
@@ -70,7 +71,7 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$poll = $this->pollRepository->getForTopic($topic);
+		$poll = $topic->poll;
 
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
 

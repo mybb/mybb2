@@ -15,12 +15,6 @@ use MyBB\Core\Http\Requests\Request;
 
 class CreateRequest extends Request
 {
-	/**
-	 * The route to redirect to if validation fails.
-	 *
-	 * @var string
-	 */
-	protected $redirectRoute = 'poll.create';
 	/** @var Guard $guard */
 	private $guard;
 
@@ -36,7 +30,7 @@ class CreateRequest extends Request
 			'option' => 'required|array',
 			'is_multiple' => 'boolean',
 			'is_public' => 'boolean',
-			'maxoptions' => 'integer|min:1',
+			'maxoptions' => 'integer|min:0',
 			'timeout' => 'integer|min:0'
 		];
 	}

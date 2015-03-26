@@ -92,4 +92,13 @@ class PollVoteRepository implements IPollVoteRepository
 	{
 		return $this->voteModel->where('poll_id', $poll->id)->get();
 	}
+
+	/**
+	 * @param Poll $poll
+	 * @return mixed
+	 */
+	public function removeAllByPoll(Poll $poll)
+	{
+		return $this->voteModel->where('poll_id', $poll->id)->delete();
+	}
 }

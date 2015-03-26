@@ -5,6 +5,7 @@ return [
 	'error_creating_topic' => 'Sorry, there was an error creating the topic.',
 	'error_deleting_post' => 'Sorry, there was an error deleting the post.',
 	'error_creating_poll' => 'Sorry, there was an error creating the poll',
+	'error_editing_poll' => 'Sorry, there was an error editing the poll',
 	'forum_not_found' => 'Sorry, the specified forum could not be found.',
 	'post_not_found' => 'Sorry, the specified post could not be found.',
 	'no_permission' => 'No Permission',

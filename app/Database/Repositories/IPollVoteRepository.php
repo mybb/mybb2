@@ -45,4 +45,10 @@ interface IPollVoteRepository
 	 * @return mixed
 	 */
 	public function allForPoll(Poll $poll);
+
+	/**
+	 * @param Poll $poll
+	 * @return mixed
+	 */
+	public function removeAllByPoll(Poll $poll);
 }

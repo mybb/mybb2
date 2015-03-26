@@ -10,9 +10,11 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Database\DatabaseManager;
 use MyBB\Core\Database\Models\Poll;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IPollRepository;
+use MyBB\Core\Database\Repositories\IPollVoteRepository;
 
 class PollRepository implements IPollRepository
 {
@@ -21,6 +23,13 @@ class PollRepository implements IPollRepository
 	 * @access protected
 	 */
 	protected $pollModel;
+
+	/**
+	 * @var IPollVoteRepository $pollVoteRepository
+	 * @access protected
+	 */
+	protected $pollVoteRepository;
+
 	/**
 	 * @var Guard $guard ;
 	 * @access protected
@@ -28,15 +37,27 @@ class PollRepository implements IPollRepository
 	protected $guard;
 
 	/**
-	 * @param Poll  $pollModel The model to use for polls.
-	 * @param Guard $guard Laravel guard instance, used to get user ID.
+	 * @var DatabaseManager $dbManager
+	 * @access private
+	 */
+	private $dbManager;
+
+	/**
+	 * @param Poll                $pollModel The model to use for polls.
+	 * @param Guard               $guard Laravel guard instance, used to get user ID.
+	 * @param DatabaseManager     $dbManager Database manager, needed to do transactions.
+	 * @param IPollVoteRepository $pollVoteRepository The poll vote repository for poll votes
 	 */
 	public function __construct(
 		Poll $pollModel,
-		Guard $guard
+		Guard $guard,
+		DatabaseManager $dbManager,
+		IPollVoteRepository $pollVoteRepository
 	) {
 		$this->pollModel = $pollModel;
 		$this->guard = $guard;
+		$this->dbManager = $dbManager;
+		$this->pollVoteRepository = $pollVoteRepository;
 	}
 
 	/**
@@ -83,5 +104,20 @@ class PollRepository implements IPollRepository
 	public function getForTopic(Topic $topic)
 	{
 		return $this->pollModel->with(['author'])->where('topic_id', $topic->id)->first();
+	}
+
+	/**
+	 * Remove the poll
+	 * @param Poll $poll
+	 *
+	 * @return mixed
+	 */
+	public function remove(Poll $poll)
+	{
+		$this->dbManager->transaction(function () use (&$poll) {
+			$this->pollVoteRepository->removeAllByPoll($poll);
+			$poll->delete();
+		});
+		return $poll;
 	}
 }

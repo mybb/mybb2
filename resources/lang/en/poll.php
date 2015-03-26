@@ -4,6 +4,7 @@ return [
 	'poll' => 'Poll',
 	'addPoll' => 'Add a poll',
 	'addPollToX' => 'Add a poll to :name',
+	'editPoll' => 'Edit the poll',
 	'question' => 'Question',
 	'timeout' => 'Timeout',
 	'whoVoted' => 'Who voted',
@@ -21,5 +22,9 @@ return [
 	'undo' => 'Undo Your Vote',
 	'vote' => 'Vote',
 	'results' => 'Results',
-	'isClosed' => 'This poll is closed.'
+	'remove' => 'Remove',
+	'edit' => 'Edit',
+	'isClosed' => 'This poll is closed.',
+	'closePoll' => 'Close Poll',
+	'closePoll.desc' => 'Don\'t allow users to vote in this poll'
 ];

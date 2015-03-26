@@ -87,14 +87,14 @@ class Poll extends BasePresenter
 	public function is_closed()
 	{
 		return ($this->wrappedObject->is_closed ||
-			($this->wrappedObject->end_at && $this->wrappedObject->end_at < new \DateTime)
+			($this->wrappedObject->end_at && new \DateTime($this->wrappedObject->end_at) < new \DateTime)
 		);
 	}
 
 	public function end_at()
 	{
-		if ($this->wrappedObject->end_at) {
-			return new \DateTime($this->wrappedObject->end_at);
+		if ($this->wrappedObject->end_at && new \DateTime($this->wrappedObject->end_at) >= new \DateTime) {
+			return $this->wrappedObject->end_at;
 		}
 
 		return null;
