@@ -18,10 +18,12 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\IForumRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\IPollRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class TopicController extends Controller
 {
@@ -31,20 +33,24 @@ class TopicController extends Controller
 	private $postRepository;
 	/** @var IForumRepository $forumRepository */
 	private $forumRepository;
+	/** @var IPollRepository $pollRepository */
+	private $pollRepository;
 	/** @var Guard $guard */
 	private $guard;
 
 	/**
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
+	 * @param IPostRepository  $postRepository Post repository instance, used to fetch post details.
 	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param Guard            $guard           Guard implementation
-	 * @param Request          $request         Request implementation
+	 * @param IPollRepository  $pollRepository Poll repository interface, used to fetch poll details.
+	 * @param Guard            $guard Guard implementation
+	 * @param Request          $request Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IForumRepository $forumRepository,
+		IPollRepository $pollRepository,
 		Guard $guard,
 		Request $request
 	) {
@@ -53,6 +59,7 @@ class TopicController extends Controller
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 		$this->guard = $guard;
 	}
 
@@ -64,13 +71,15 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
+		$poll = $topic->poll;
+
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
 
 		$this->topicRepository->incrementViewCount($topic);
 
 		$posts = $this->postRepository->allForTopic($topic, true);
 
-		return view('topic.show', compact('topic', 'posts'));
+		return view('topic.show', compact('topic', 'posts', 'poll'));
 	}
 
 	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)
@@ -239,6 +248,33 @@ class TopicController extends Controller
 			}
 		}
 
+		$poll = null;
+		if ($createRequest->input('add-poll')) {
+			$pollCreateRequest = app()->make('MyBB\\Core\\Http\\Requests\\Poll\\CreateRequest');
+			$options = [];
+			foreach ($pollCreateRequest->input('option') as $option) {
+				if ($option && is_scalar($option)) {
+					$options[] = [
+						'option' => $option,
+						'votes' => 0
+					];
+				}
+			}
+			$poll = [
+				'question' => $pollCreateRequest->input('question'),
+				'num_options' => count($options),
+				'options' => json_encode($options),
+				'is_closed' => false,
+				'is_multiple' => (bool)$pollCreateRequest->input('is_multiple'),
+				'is_public' => (bool)$pollCreateRequest->input('is_public'),
+				'end_at' => null,
+				'max_options' => $pollCreateRequest->input('maxoptions')
+			];
+			if ($createRequest->input('endAt')) {
+				$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
+			}
+
+		}
 		$topic = $this->topicRepository->create([
 			'title' => $createRequest->input('title'),
 			'forum_id' => $createRequest->input('forum_id'),
@@ -251,6 +287,11 @@ class TopicController extends Controller
 		]);
 
 		if ($topic) {
+			if ($poll) {
+				$poll['topic_id'] = $topic->id;
+				$this->pollRepository->create($poll);
+			}
+
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 

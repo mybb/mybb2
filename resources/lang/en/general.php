@@ -3,6 +3,7 @@
 return [
 
 	'language' => 'English',
+	'languageCode' => 'en',
 	'dateformat' => 'M d, Y',
 	'timeformat' => '12',
 	'timezone' => 'Europe/London',
