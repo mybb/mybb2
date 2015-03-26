@@ -9,5 +9,5 @@ return [
 	'no_permission' => 'No Permission',
 	'no_permission_desc' => 'Unfortunately you don\'t have permission to access this page.',
 	'topic_not_found' => 'Sorry, the specified topic could not be found.',
-	'invalidCaptcha' => 'Sorry, there was an error validating the Captcha. Please make sure you fill the Captcha correctly',
+	'invalidCaptcha' => 'Sorry, there was an error validating the captcha. Please make sure you fill out the captcha correctly.',
 ];
