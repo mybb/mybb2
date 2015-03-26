@@ -11,6 +11,7 @@ return [
 	'no_permission' => 'No Permission',
 	'no_permission_desc' => 'Unfortunately you don\'t have permission to access this page.',
 	'topic_not_found' => 'Sorry, the specified topic could not be found.',
+	'invalidCaptcha' => 'Sorry, there was an error validating the Captcha. Please make sure you fill the Captcha correctly',
 	'poll_not_found' => 'Sorry, the specified poll could not be found.',
 	'you_already_vote' => 'Sorry, you voted in the specified poll before.',
 	'poll_very_votes' => 'Sorry, you selected a lot of options to vote, you can select at most :count options to vote.',
@@ -19,5 +20,5 @@ return [
 	'poll_guest_undo' => 'Sorry, guests can not undo their votes.',
 	'poll_nothing_to_undo' => 'You haven\'t any vote to undo',
 	'poll_is_closed' => 'Sorry, this poll is closed',
-	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid'
+	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid',
 ];

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c05ece009f441879623c5e686308bd5f",
+    "hash": "71f4ccaf26e29991ebb7f8aeb251b9db",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -725,6 +725,58 @@
             "time": "2013-11-30 08:25:19"
         },
         {
+            "name": "greggilbert/recaptcha",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/greggilbert/recaptcha.git",
+                "reference": "cf51501c36bc66a5832346f732a126f125899217"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/greggilbert/recaptcha/zipball/cf51501c36bc66a5832346f732a126f125899217",
+                "reference": "cf51501c36bc66a5832346f732a126f125899217",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-4": {
+                    "Greggilbert\\Recaptcha\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Greg Gilbert",
+                    "email": "greg@greg-gilbert.com"
+                }
+            ],
+            "description": "reCAPTCHA Validator for Laravel 5",
+            "homepage": "http://github.com/greggilbert/recaptcha",
+            "keywords": [
+                "captcha",
+                "laravel",
+                "laravel5",
+                "recaptcha"
+            ],
+            "time": "2015-02-11 22:31:48"
+        },
+        {
             "name": "ircmaxell/password-compat",
             "version": "v1.0.4",
             "source": {
@@ -1006,16 +1058,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.0.17",
+            "version": "v5.0.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "b4abcbc98885e1b339acc7e993d2758d47f01ecc"
+                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/b4abcbc98885e1b339acc7e993d2758d47f01ecc",
-                "reference": "b4abcbc98885e1b339acc7e993d2758d47f01ecc",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/419d3f485ce7946cace4325ef19a30e1d5543951",
+                "reference": "419d3f485ce7946cace4325ef19a30e1d5543951",
                 "shasum": ""
             },
             "require": {
@@ -1128,7 +1180,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-03-17 21:45:31"
+            "time": "2015-03-24 13:36:37"
         },
         {
             "name": "laravelcollective/html",
@@ -1564,6 +1616,34 @@
             "time": "2015-01-11 23:07:46"
         },
         {
+            "name": "mybb/are-you-a-human",
+            "version": "v1.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mybb/are-you-a-human.git",
+                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/are-you-a-human/zipball/9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
+                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyBB\\AreYouAHuman\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "The Are You A Human PHP Library for composer",
+            "keywords": [
+                "are-you-a-human",
+                "captcha"
+            ],
+            "time": "2015-03-24 14:51:27"
+        },
+        {
             "name": "mybb/auth",
             "version": "dev-master",
             "source": {
@@ -1650,12 +1730,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "63bdc1061882107010ce32a88cfc8b98f5b50d6b"
+                "reference": "479d2244a865a2b365af8e1615e992ac0530bb77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/63bdc1061882107010ce32a88cfc8b98f5b50d6b",
-                "reference": "63bdc1061882107010ce32a88cfc8b98f5b50d6b",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/479d2244a865a2b365af8e1615e992ac0530bb77",
+                "reference": "479d2244a865a2b365af8e1615e992ac0530bb77",
                 "shasum": ""
             },
             "require": {
@@ -1690,7 +1770,7 @@
                 "source": "https://github.com/mybb/Settings/tree/master",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-03-15 14:40:56"
+            "time": "2015-03-22 12:25:48"
         },
         {
             "name": "nesbot/carbon",
@@ -1740,16 +1820,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v1.1.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528"
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/ac05ef6f95bf8361549604b6031c115f92f39528",
-                "reference": "ac05ef6f95bf8361549604b6031c115f92f39528",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/dba7524b3724f25b947cd26a580787c55c8a6f9b",
+                "reference": "dba7524b3724f25b947cd26a580787c55c8a6f9b",
                 "shasum": ""
             },
             "require": {
@@ -1759,7 +1839,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.2-dev"
                 }
             },
             "autoload": {
@@ -1781,7 +1861,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2015-01-18 11:29:59"
+            "time": "2015-03-24 19:10:28"
         },
         {
             "name": "psr/log",
@@ -2944,12 +3024,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "3ef6f22efc6977d53bf65b90b988d425e8a42839"
+                "reference": "7898f3e50eab97c316925252a8fada33b2026264"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/3ef6f22efc6977d53bf65b90b988d425e8a42839",
-                "reference": "3ef6f22efc6977d53bf65b90b988d425e8a42839",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/7898f3e50eab97c316925252a8fada33b2026264",
+                "reference": "7898f3e50eab97c316925252a8fada33b2026264",
                 "shasum": ""
             },
             "require": {
@@ -2994,7 +3074,7 @@
                 }
             ],
             "description": "A script to automatically fix Symfony Coding Standard",
-            "time": "2015-03-15 22:02:23"
+            "time": "2015-03-22 17:02:57"
         },
         {
             "name": "league/climate",

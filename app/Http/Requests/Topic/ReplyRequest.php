@@ -41,4 +41,9 @@ class ReplyRequest extends Request
 		//return $this->guard->check();
 		return true; // TODO: In dev return, needs replacing for later...
 	}
+
+	protected function getRedirectUrl()
+	{
+		return $this->redirector->getUrlGenerator()->route($this->redirectRoute, $this->route()->parameters());
+	}
 }

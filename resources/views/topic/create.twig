@@ -22,6 +22,7 @@
 				</ul>
 			</div>
 		{% endif %}
+
 		{{ form_open({'route': ['topics.create', forum.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
@@ -39,6 +40,11 @@
 					<h3>{{ form_label('content', 'Content') }}</h3>
 					{{ form_textarea('content') }}
 				</div>
+				{% if auth_check() == false %}
+					<div class="form__row">
+						{{ captcha() }}
+					</div>
+				{% endif %}
 				<div class="form__row">
 					<a href="#add-poll" id="add-poll-button" class="button button--secondary"><i class="fa fa-plus-circle"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
 				</div>
