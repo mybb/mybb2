@@ -147,7 +147,7 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return new \Exception(trans('errors.error_creating_poll')); // TODO: Redirect back with error...
+		return redirect()->route('polls.create')->withInput()->withError(['error' => trans('error.error_creating_poll')]);
 	}
 
 	public function vote($topicSlug = null, $topicId = 0, Request $voteRequest)
@@ -270,7 +270,8 @@ class PollController extends Controller
 		return redirect()->route('polls.show', [$topicSlug, $topicId]);
 	}
 
-	public function remove($topicSlug = null, $topicId = 0) {
+	public function remove($topicSlug = null, $topicId = 0)
+	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
@@ -299,6 +300,7 @@ class PollController extends Controller
 		if (!$poll) {
 			throw new NotFoundHttpException(trans('errors.poll_not_found'));
 		}
+
 		return view('polls.edit', compact('topic', 'poll'));
 	}
 
@@ -326,8 +328,7 @@ class PollController extends Controller
 					'option' => $option,
 					'votes' => 0
 				];
-				if(isset($pollPresenter->options[$i]->votes))
-				{
+				if (isset($pollPresenter->options[$i]->votes)) {
 					$options[$i]['votes'] = $pollPresenter->options[$i]->votes;
 				}
 				++$i;
@@ -352,6 +353,6 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return new \Exception(trans('errors.error_editing_poll')); // TODO: Redirect back with error...
+		return redirect()->route('polls.edit')->withInput()->withError(['error' => trans('error.error_editing_poll')]);
 	}
 }
