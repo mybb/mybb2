@@ -11,5 +11,5 @@ return [
 
 	'email_subject' => 'Email change at MyBB 2.0',
 	'email_message' => 'Your email has been changed to :email. You can confirm this change by visiting this link: :link
-If you haven\'t requested this change you should contact the administrator and change your password',
+If you haven\'t requested this change, you should contact the administrator and change your password.',
 ];

@@ -11,14 +11,14 @@ return [
 	'firstpost' => 'First Post',
 	'latest' => 'Latest',
 	'create.title' => 'Create New Topic',
-	'create.description' => "Create a new topic in the forum '{0}'.",
+	'create.description' => "Create a new topic in the '{0}' forum.",
 	'reply' => 'Reply',
 	'postreply' => 'Post Reply',
 	'postreplytotopic' => 'Post reply to :title',
 	'edit' => 'Edit',
 	'editpost' => 'Edit Post',
 	'delete' => 'Delete',
-	'confirmDelete' => 'Do you really want to delete this Post?\nYou are not able to recover it later!',
+	'confirmDelete' => 'Do you really want to delete this post?\nYou will not be able to recover it afterwards!',
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted'
 ];
