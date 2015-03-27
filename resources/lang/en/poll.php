@@ -18,6 +18,7 @@ return [
 	'newOption' => 'New Option',
 	'postPoll' => 'Post Poll',
 	'resultsOfX' => 'Results of :name',
+	'pollResults' => 'Poll Results',
 	'closeAtX' => 'This poll will close :time',
 	'undo' => 'Undo Your Vote',
 	'vote' => 'Vote',

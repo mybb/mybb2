@@ -75,6 +75,8 @@ class PollController extends Controller
 		}
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
+		Breadcrumbs::setCurrentRoute('polls.show', $topic);
+
 		$options = $pollPresenter->options();
 
 		if ($poll->is_public) {
@@ -103,7 +105,7 @@ class PollController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		Breadcrumbs::setCurrentRoute('polls.create', $topic);// TODO
+		Breadcrumbs::setCurrentRoute('polls.create', $topic);
 
 		return view('polls.create', compact('topic'));
 	}
@@ -115,7 +117,7 @@ class PollController extends Controller
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
-		Breadcrumbs::setCurrentRoute('polls.create', $topic);// TODO
+		Breadcrumbs::setCurrentRoute('polls.create', $topic);
 
 		$options = [];
 		foreach ($createRequest->input('option') as $option) {
@@ -300,6 +302,8 @@ class PollController extends Controller
 		if (!$poll) {
 			throw new NotFoundHttpException(trans('errors.poll_not_found'));
 		}
+
+		Breadcrumbs::setCurrentRoute('polls.edit', $topic);
 
 		return view('polls.edit', compact('topic', 'poll'));
 	}
