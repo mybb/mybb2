@@ -35,7 +35,9 @@
 			// Assume using a local, existing HTML element.
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
-			modal.appendTo("body").modal();
+			modal.appendTo("body").modal({
+				zIndex: 1000
+			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
 			$(".password-toggle").hideShowPassword(false, true);
@@ -52,7 +54,9 @@
 
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
-				modal.appendTo("body").modal();
+				modal.appendTo("body").modal({
+					zIndex: 1000
+				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);

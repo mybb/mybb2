@@ -82,7 +82,7 @@ class PollRepository implements IPollRepository
 	public function create(array $details = [])
 	{
 		$details = array_merge([
-			'user_id' => $this->guard->user()->id,
+			'user_id' => $this->guard->user()->getAuthIdentifier(),
 		], $details);
 
 		if ($details['user_id'] <= 0) {

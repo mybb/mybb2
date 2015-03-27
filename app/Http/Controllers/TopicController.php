@@ -71,7 +71,11 @@ class TopicController extends Controller
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
-		$poll = $topic->poll;
+		$poll = null;
+
+		if ($topic->has_poll) {
+			$poll = $topic->poll;
+		}
 
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
 

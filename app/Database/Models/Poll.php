@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Database\Models;
+<?php
+
+namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
@@ -34,6 +36,18 @@ class Poll extends Model implements HasPresenter
 		'is_multiple',
 		'max_options',
 		'end_at'
+	];
+
+	/**
+	 * The attributes that should be casted to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'is_closed' => 'boolean',
+		'is_public' => 'boolean',
+		'is_multiple' => 'boolean',
+		'options' => 'array'
 	];
 	/**
 	 * The primary key for the model.

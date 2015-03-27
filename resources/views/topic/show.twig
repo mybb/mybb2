@@ -15,13 +15,15 @@
 			{{ posts.render|raw }}
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				{% if poll is null %}
+				{% if not topic.has_poll %}
 					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
 				{% endif %}
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</div>
-		{% include "topic.polls" with [poll, topic] %}
+		{% if topic.has_poll %}
+			{% include "topic.polls" with [poll, topic] %}
+		{% endif %}
 		<section class="topic">
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">

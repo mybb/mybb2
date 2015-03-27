@@ -46,14 +46,14 @@ class Poll extends BasePresenter
 	public function options()
 	{
 		if (!isset($this->cache['options'])) {
-			$this->cache['options'] = json_decode($this->wrappedObject->options);
+			$this->cache['options'] = $this->wrappedObject->options;
 			for ($i = 0; $i < count($this->cache['options']); $i++) {
-				$this->cache['options'][$i]->voted = false;
+				$this->cache['options'][$i]['voted'] = false;
 			}
 			if ($this->myVote()) {
 				$votes = explode(',', $this->myVote->vote);
 				foreach ($votes as $vote) {
-					$this->cache['options'][$vote - 1]->voted = true;
+					$this->cache['options'][$vote - 1]['voted'] = true;
 				}
 			}
 		}
@@ -67,7 +67,7 @@ class Poll extends BasePresenter
 			$options = $this->options();
 			$votes = 0;
 			foreach ($options as $option) {
-				$votes += $option->votes;
+				$votes += $option['votes'];
 			}
 			$this->cache['num_votes'] = $votes;
 		}

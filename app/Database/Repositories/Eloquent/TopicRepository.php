@@ -17,6 +17,7 @@ use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\IPollRepository;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Settings\Store;
@@ -52,6 +53,9 @@ class TopicRepository implements ITopicRepository
 	/** @var IForumRepository */
 	private $forumRepository;
 
+	/** @var IPollRepository */
+	private $pollRepository;
+
 	/**
 	 * @param Topic           $topicModel     The model to use for threads.
 	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
@@ -67,7 +71,8 @@ class TopicRepository implements ITopicRepository
 		Str $stringUtils,
 		DatabaseManager $dbManager,
 		Store $settings,
-		IForumRepository $forumRepository
+		IForumRepository $forumRepository,
+		IPollRepository $pollRepository
 	) // TODO: Inject permissions container? So we can check thread permissions before querying?
 	{
 		$this->topicModel = $topicModel;
@@ -77,6 +82,7 @@ class TopicRepository implements ITopicRepository
 		$this->dbManager = $dbManager;
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 	}
 
 	/**
@@ -118,7 +124,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->topicModel->withTrashed()->with(['author', 'poll'])->find($id);
+		return $this->topicModel->withTrashed()->with(['author'])->find($id);
 	}
 
 	/**
@@ -296,6 +302,10 @@ class TopicRepository implements ITopicRepository
 
 			return $success;
 		} else {
+			if ($topic->poll) {
+				$this->pollRepository->remove($topic->poll);
+			}
+
 			$topic->posts->forceDelete();
 
 			return $topic->forceDelete();

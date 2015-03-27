@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Database\Models;
+<?php
+
+namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -29,6 +29,10 @@ class CreatePollsTable extends Migration {
 			$table->foreign('topic_id')->references('id')->on('topics');
 			$table->foreign('user_id')->references('id')->on('users');
 		});
+
+		Schema::table('topics', function (Blueprint $table) {
+			$table->boolean('has_poll')->default(false);
+		});
 	}
 
 	/**
@@ -39,6 +43,10 @@ class CreatePollsTable extends Migration {
 	public function down()
 	{
 		Schema::drop('polls');
+
+		Schema::table('topics', function (Blueprint $table) {
+			$table->dropColumn('has_poll');
+		});
 	}
 
 }

@@ -35,7 +35,9 @@
 			// Assume using a local, existing HTML element.
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
-			modal.appendTo("body").modal();
+			modal.appendTo("body").modal({
+				zIndex: 1000
+			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
 			$(".password-toggle").hideShowPassword(false, true);
@@ -52,7 +54,9 @@
 
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
-				modal.appendTo("body").modal();
+				modal.appendTo("body").modal({
+					zIndex: 1000
+				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
@@ -109,11 +113,11 @@
 
 		$('#poll-maximum-options').hide();
 
-		$('#poll-is-multiple').change($.proxy(this.toggleMaxOptionsInput, this));
-		$('#poll-is-multiple').change();
+		$('#poll-is-multiple').change($.proxy(this.toggleMaxOptionsInput, this)).change();
 
-		$("#add-poll-button").click($.proxy(this.toggleAddPoll, this));
-		if($("#add-poll-button").length) {
+		var $addPollButton = $("#add-poll-button");
+		$addPollButton.click($.proxy(this.toggleAddPoll, this));
+		if($addPollButton.length) {
 			if($('#add-poll-input').val() === '1') {
 				$('#add-poll').slideDown();
 			}
@@ -125,7 +129,7 @@
 	window.MyBB.Polls.prototype.timePicker = function timePicker() {
 		$('#poll-end-at').datetimepicker({
 			format: 'Y-m-d H:i:s',
-			lang: $('html').attr('lang'),
+			lang: $('html').attr('lang'),// TODO: use our i18n
 			minDate: 0
 		});
 	};
@@ -156,16 +160,17 @@
 
 	window.MyBB.Polls.prototype.removeOption = function bindRemoveOption($parent) {
 		$parent.find('.remove-option').click($.proxy(function(event) {
-			var me = event.target;
+			var $me = $(event.target),
+				$myParent = $me.parents('.poll-option');
 			if($('.poll-option').length <= 2)
 			{
 				return false;
 			}
 
-			$(me).parents('.poll-option').slideUp(500);
+			$myParent.slideUp(500);
 
 			setTimeout($.proxy(function() {
-				$(me).parents('.poll-option').remove();
+				$myParent.remove();
 				this.fixOptionsName();
 			}, this), 500);
 		}, this));
