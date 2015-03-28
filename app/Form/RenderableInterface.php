@@ -33,4 +33,9 @@ interface RenderableInterface
      * @return mixed
      */
     public function getValue();
+
+    /**
+     * @return array
+     */
+    public function getValidationRules();
 }

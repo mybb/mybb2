@@ -1,1 +1,5 @@
-<input type="{{ type }}" name="{{ name }}" id="{{ id }}" value="{{ value }}">
+<input type="{{ type }}" name="{{ name }}" id="{{ id }}" value="{{ value }}"
+        {{ is_required ? 'required' }}
+        {{ min_length is defined and min_length ? 'minlength=' ~ min_length }}
+        {{ max_length is defined and max_length ? 'maxlength=' ~ max_length }}
+        {{ pattern is defined and pattern ? 'pattern=' ~ pattern }}>

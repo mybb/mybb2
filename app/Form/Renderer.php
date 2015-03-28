@@ -2,15 +2,29 @@
 
 namespace MyBB\Core\Form;
 
-use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Validation\Factory as ValidationFactory;
 
 class Renderer
 {
+    /**
+     * @var ViewFactory
+     */
     protected $view;
 
-    public function __construct(Factory $factory)
+    /**
+     * @var ValidationFactory
+     */
+    protected $validator;
+
+    /**
+     * @param ViewFactory $viewFactory
+     * @param ValidationFactory $validationFactory
+     */
+    public function __construct(ViewFactory $viewFactory, ValidationFactory $validationFactory)
     {
-        $this->view = $factory;
+        $this->view = $viewFactory;
+        $this->validator = $validationFactory;
     }
 
     /**
@@ -24,20 +38,23 @@ class Renderer
         // label
         $html .= $this->view->make('partials.form.field_label', [
             'for' => $this->slugify($renderable->getLabel()),
-            'label' => $renderable->getLabel()
-        ]);
+            'label' => $renderable->getLabel(),
+            'is_required' => $this->isRequired($renderable)
+        ])->render();
 
         // description
         if ($renderable->getDescription()) {
             $html .= $this->view->make('partials.form.field_description', [
                 'description' => $renderable->getDescription()
-            ]);
+            ])->render();
         }
 
         switch ($renderable->getType()) {
             case 'text':
             case 'email':
             case 'password':
+            case 'url':
+            case 'number':
                 $html .= $this->renderInput($renderable);
                 break;
 
@@ -63,8 +80,11 @@ class Renderer
             'name' => $renderable->getName(),
             'rows' => 6,
             'cols' => 40,
-            'value' => $renderable->getValue() ? $renderable->getValue() : ''
-        ]);
+            'value' => $renderable->getValue() ? $renderable->getValue() : '',
+            'is_required' => $this->isRequired($renderable),
+            'min_length' => $this->getMinLength($renderable),
+            'max_length' => $this->getMaxLength($renderable)
+        ])->render();
     }
 
     /**
@@ -77,8 +97,11 @@ class Renderer
             'type' => $renderable->getType(),
             'name' => $renderable->getName(),
             'id' => $this->slugify($renderable->getName()),
-            'value' => $renderable->getValue() ? $renderable->getValue() : ''
-        ]);
+            'value' => $renderable->getValue() ? $renderable->getValue() : '',
+            'is_required' => $this->isRequired($renderable),
+            'min_length' => $this->getMinLength($renderable),
+            'max_length' => $this->getMaxLength($renderable)
+        ])->render();
     }
 
     /**
@@ -91,7 +114,7 @@ class Renderer
             'name' => $renderable->getName(),
             'options' => $renderable->getOptions(),
             'selected' => $renderable->getValue()
-        ]);
+        ])->render();
     }
 
     /**
@@ -103,5 +126,81 @@ class Renderer
         $string = strtolower($string);
         $stringBits = explode(' ', $string);
         return implode('_', $stringBits);
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return string
+     */
+    protected function getPattern(RenderableInterface $renderable)
+    {
+        $rules = $this->getRules($renderable);
+
+        foreach ($rules as $rule) {
+            if (strpos($rule, 'regex:') !== false) {
+                $ruleBits = explode(':', $rule);
+                return end($ruleBits);
+            }
+        }
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return int
+     */
+    protected function getMinLength(RenderableInterface $renderable)
+    {
+        $rules = $this->getRules($renderable);
+
+        foreach ($rules as $rule) {
+            if (strpos($rule, 'min:') !== false) {
+                $ruleBits = explode(':', $rule);
+                return (int) end($ruleBits);
+            }
+        }
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return int
+     */
+    protected function getMaxLength(RenderableInterface $renderable)
+    {
+        $rules = $this->getRules($renderable);
+
+        foreach ($rules as $rule) {
+            if (strpos($rule, 'max:') !== false) {
+                $ruleBits = explode(':', $rule);
+                return (int) end($ruleBits);
+            }
+        }
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return bool
+     */
+    protected function isRequired(RenderableInterface $renderable)
+    {
+        return in_array('required', $this->getRules($renderable));
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return array
+     */
+    protected function getRules(RenderableInterface $renderable)
+    {
+        $rules = $this->getValidator($renderable)->getRules();
+        return $rules[$renderable->getName()] ? $rules[$renderable->getName()] : [];
+    }
+
+    /**
+     * @param RenderableInterface $renderable
+     * @return \Illuminate\Validation\Validator
+     */
+    protected function getValidator(RenderableInterface $renderable)
+    {
+        return $this->validator->make([], [$renderable->getName() => $renderable->getValidationRules()]);
     }
 }

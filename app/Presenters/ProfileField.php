@@ -101,4 +101,12 @@ class ProfileField extends BasePresenter implements RenderableInterface
     {
         return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
     }
+
+    /**
+     * @return array
+     */
+    public function getValidationRules()
+    {
+        return $this->validation_rules;
+    }
 }

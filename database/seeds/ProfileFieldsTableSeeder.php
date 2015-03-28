@@ -54,9 +54,9 @@ class ProfileFieldsTableSeeder extends Seeder
                 'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'about-you')->pluck('id')
             ],
             [
-                'type' => 'text',
+                'type' => 'url',
                 'name' => 'Website',
-                'description' => '',
+                'description' => 'Must be a valid URL.',
                 'display_order' => 1,
                 'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'contact-details')->pluck('id'),
                 'validation_rules' => 'required|url'
@@ -71,9 +71,10 @@ class ProfileFieldsTableSeeder extends Seeder
             [
                 'type' => 'text',
                 'name' => 'Twitter',
-                'description' => '',
+                'description' => 'Must be in the format @username.',
                 'display_order' => 1,
-                'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'contact-details')->pluck('id')
+                'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'contact-details')->pluck('id'),
+                'validation_rules' => 'regex:/^@\w+$/'
             ],
         ];
 
