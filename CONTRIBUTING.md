@@ -33,7 +33,10 @@ PHP code must follow the [PSR-2](http://www.php-fig.org/psr/psr-2/) coding style
 In addition to the PSR-2 standard, we have other standards and best practices that must be ahered to:
 
 - All interface names MUST be suffixed with `Interface`. (e.g. `ForumInterface`).
-- All abstract class names MUST be prefied with `Abstract` (e.g. `AbstractForum`).
+- All abstract class names MUST be prefixed with `Abstract` (e.g. `AbstractForum`).
+- All repository class names MUST be suffixed with `Repository` (e.g. `ForumRepository`).
+- All factory class names MUST be suffixed with `Factory` (e.g. `ForumFactory`).
+- The `Interface` suffix MUST take priority over other suffixes. (e.g. `ForumRepositoryInterface`, `ForumFactoryInterface`.
 - Getters MUST be used when retrieving the property of a non-Eloquent object.
 - Setters MUST be used when manipulating the property of a non-Eloquent object.
 - Properties on an object SHOULD have `protected` or `private` visibility.
