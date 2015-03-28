@@ -296,8 +296,16 @@ class TopicRepository implements ITopicRepository
 
 			return $success;
 		} else {
-			$topic->posts->forceDelete();
+			// First we need to remove old foreign keys - otherwise we can't delete posts
+			$topic->update([
+				'first_post_id' => null,
+				'last_post_id' => null
+			]);
 
+			// Now delete the posts for this topic
+			Post::where('topic_id', '=', $topic->id)->forceDelete();
+
+			// And finally delete the topic
 			return $topic->forceDelete();
 		}
 	}
