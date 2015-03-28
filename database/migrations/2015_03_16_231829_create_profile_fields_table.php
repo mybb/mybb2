@@ -23,6 +23,7 @@ class CreateProfileFieldsTable extends Migration {
 			$table->string('type');
 			$table->string('name');
 			$table->string('description');
+			$table->string('validation_rules')->nullable();
 			$table->integer('display_order')->unsigned();
 			$table->nullableTimestamps();
 

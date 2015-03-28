@@ -8,6 +8,8 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 /**
  * @property string id
  * @property string profile_field_group_id
+ * @property string validation_rules
+ * @property string name
  */
 class ProfileField extends Model implements HasPresenter
 {

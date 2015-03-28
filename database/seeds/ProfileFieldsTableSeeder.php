@@ -7,6 +7,8 @@ class ProfileFieldsTableSeeder extends Seeder
 {
     public function run()
     {
+        DB::table('profile_field_options')->delete();
+        DB::table('profile_fields')->delete();
         DB::table('profile_field_groups')->delete();
 
         $profileFieldGroups = [
@@ -21,8 +23,6 @@ class ProfileFieldsTableSeeder extends Seeder
         ];
 
         DB::table('profile_field_groups')->insert($profileFieldGroups);
-
-        DB::table('profile_fields')->delete();
 
         $profileFields = [
             [
@@ -58,7 +58,8 @@ class ProfileFieldsTableSeeder extends Seeder
                 'name' => 'Website',
                 'description' => '',
                 'display_order' => 1,
-                'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'contact-details')->pluck('id')
+                'profile_field_group_id' => DB::table('profile_field_groups')->where('slug', 'contact-details')->pluck('id'),
+                'validation_rules' => 'required|url'
             ],
             [
                 'type' => 'text',
@@ -76,9 +77,9 @@ class ProfileFieldsTableSeeder extends Seeder
             ],
         ];
 
-        DB::table('profile_fields')->insert($profileFields);
-
-        DB::table('profile_field_options')->delete();
+        foreach ($profileFields as $profileField) {
+            \MyBB\Core\Database\Models\ProfileField::create($profileField);
+        }
 
         $options = [
             [
