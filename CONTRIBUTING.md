@@ -34,8 +34,8 @@ In addition to the PSR-2 standard, we have other standards and best practices th
 
 - All interface names MUST be suffixed with `Interface`. (e.g. `ForumInterface`).
 - All abstract class names MUST be prefied with `Abstract` (e.g. `AbstractForum`).
-- Getters MUST be used when retrieving the property of an object.
-- Setters MUST be used when manipulating the property of an object.
+- Getters MUST be used when retrieving the property of a non-Eloquent object.
+- Setters MUST be used when manipulating the property of a non-Eloquent object.
 - Properties on an object SHOULD have `protected` or `private` visibility.
 
 ```php
