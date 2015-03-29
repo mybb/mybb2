@@ -38,7 +38,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
      */
     public function all()
     {
-        return $this->userActivityModel->all();
+        return $this->userActivityModel->with(['user'])->all();
     }
 
     /**
@@ -52,7 +52,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     {
         $user = $this->getUserIdFromUser($user);
 
-        return $this->userActivityModel->where('user_id', '=', $user)->get();
+        return $this->userActivityModel->with(['user'])->where('user_id', '=', $user)->get();
     }
 
     /**
@@ -129,7 +129,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
      */
     public function paginateAll($perPage = 20)
     {
-        return $this->userActivityModel->paginate($perPage);
+        return $this->userActivityModel->with(['user'])->paginate($perPage);
     }
 
     /**
@@ -144,6 +144,6 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     {
         $user = $this->getUserIdFromUser($user);
 
-        return $this->userActivityModel->where('user_id', '=', $user)->paginate($perPage);
+        return $this->userActivityModel->with(['user'])->where('user_id', '=', $user)->paginate($perPage);
     }
 }

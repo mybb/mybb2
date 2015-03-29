@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Http\Controllers\Auth;
+<?php
+
+namespace MyBB\Core\Http\Controllers\Auth;
 
 use Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
@@ -10,140 +12,149 @@ use MyBB\Core\Http\Controllers\Controller;
 class AuthController extends Controller
 {
 
-	/*
-	|--------------------------------------------------------------------------
-	| MyBB Authentication Manager
-	|--------------------------------------------------------------------------
-	|
-	| This controller handles the registration of new users, as well as the
-	| authentication of existing users. Trait methods have been changes to accomodate
-	| MyBB Templates
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | MyBB Authentication Manager
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users, as well as the
+    | authentication of existing users. Trait methods have been changes to accomodate
+    | MyBB Templates
+    |
+    */
 
-	use AuthenticatesAndRegistersUsers;
+    use AuthenticatesAndRegistersUsers;
 
-	/**
-	 * Create a new authentication controller instance.
-	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard     $auth
-	 * @param  \Illuminate\Http\Request             $request
-	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
-	 *
-	 * @return void
-	 */
-	public function __construct(Guard $auth, Request $request, Registrar $registrar)
-	{
-		parent::__construct($auth, $request);
+    /**
+     * Create a new authentication controller instance.
+     *
+     * @param  \Illuminate\Contracts\Auth\Guard     $auth
+     * @param  \Illuminate\Http\Request             $request
+     * @param  \Illuminate\Contracts\Auth\Registrar $registrar
+     *
+     */
+    public function __construct(Guard $auth, Request $request, Registrar $registrar)
+    {
+        parent::__construct($auth, $request);
 
-		$this->auth = $auth;
-		$this->registrar = $registrar;
+        $this->auth = $auth;
+        $this->registrar = $registrar;
 
-		$this->middleware('guest', ['except' => 'getLogout']);
-	}
+        $this->middleware('guest', ['except' => 'getLogout']);
+    }
 
 
-	/**
-	 * Show the application registration form.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function getSignup()
-	{
-		Breadcrumbs::setCurrentRoute('auth.signup');
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSignup()
+    {
+        Breadcrumbs::setCurrentRoute('auth.signup');
 
-		return view('member.signup');
-	}
+        return view('member.signup');
+    }
 
-	/**
-	 * Handle a registration request for the application.
-	 *
-	 * @param  \Illuminate\Foundation\Http\FormRequest $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function postSignup(Request $request)
-	{
-		$this->failedValidationRedirect = url('auth/signup');
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param \Illuminate\Foundation\Http\FormRequest|Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postSignup(Request $request)
+    {
+        $this->failedValidationRedirect = url('auth/signup');
 
-		$validator = $this->registrar->validator($request->all());
+        $captcha = $this->checkCaptcha();
+        if ($captcha !== true) {
+            return $captcha;
+        }
 
-		if($validator->fails())
-		{
-			$this->throwValidationException(
-				$request, $validator
-			);
-		}
+        $validator = $this->registrar->validator($request->all());
 
-		$this->auth->login($this->registrar->create($request->all()));
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request,
+                $validator
+            );
+        }
 
-		return redirect($this->redirectPath());
-	}
+        $this->auth->login($this->registrar->create($request->all()));
 
-	/**
-	 * Show the application login form.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function getLogin()
-	{
-		Breadcrumbs::setCurrentRoute('auth.login');
+        return redirect($this->redirectPath());
+    }
 
-		return view('member.login');
-	}
+    /**
+     * Show the application login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogin()
+    {
+        Breadcrumbs::setCurrentRoute('auth.login');
 
-	/**
-	 * Handle a login request to the application.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function postLogin(Request $request)
-	{
-		$this->failedValidationRedirect = url('auth/login');
+        return view('member.login');
+    }
 
-		$this->validate($request, [
-			'username' => 'required',
-			'password' => 'required',
-		]);
+    /**
+     * Handle a login request to the application.
+     *
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function postLogin(Request $request)
+    {
+        $this->failedValidationRedirect = url('auth/login');
 
-		$credentials = $request->only('username', 'password');
+        $this->validate(
+            $request,
+            [
+                'username' => 'required',
+                'password' => 'required',
+            ]
+        );
 
-		if($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
-		                        $request->input('remember_me'))
-		)
-		{
-			return redirect()->intended($this->redirectPath());
-		}
+        $credentials = $request->only('username', 'password');
 
-		return redirect('/auth/login')
-			->withInput($request->only('username'))
-			->withErrors([
-				             'username' => trans('member.invalidCredentials'),
-			             ]);
-	}
+        if ($this->auth->attempt(
+            ['name' => $credentials['username'], 'password' => $credentials['password']],
+            $request->input('remember_me')
+        )
+        ) {
+            return redirect()->intended($this->redirectPath());
+        }
 
-	/**
-	 * Log the user out of the application.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function getLogout()
-	{
-		$this->auth->logout();
+        return redirect('/auth/login')
+            ->withInput($request->only('username'))
+            ->withErrors(
+                [
+                    'username' => trans('member.invalidCredentials'),
+                ]
+            );
+    }
 
-		return redirect('/');
-	}
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout()
+    {
+        $this->auth->logout();
 
-	/**
-	 * Get the post register / login redirect path.
-	 *
-	 * @return string
-	 */
-	public function redirectPath()
-	{
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
-	}
+        return redirect('/');
+    }
 
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+    }
 }

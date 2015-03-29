@@ -29,6 +29,10 @@ class RendererFactory
      */
     protected $lang;
     /**
+     * @var Application $app
+     */
+    protected $app;
+    /**
      * Activity types and associated renderers.
      *
      * @var AbstractRenderer[]
@@ -36,11 +40,13 @@ class RendererFactory
     protected $types = [];
 
     /**
-     * @param Translator $lang
+     * @param Translator  $lang
+     * @param Application $app
      */
-    public function __construct(Translator $lang)
+    public function __construct(Translator $lang, Application $app)
     {
         $this->lang = $lang;
+        $this->app = $app;
     }
 
     /**
@@ -54,27 +60,30 @@ class RendererFactory
     {
         $renderer = null;
 
-        switch ($activity->getActivityType()) {
+        switch ($activity->activity_type) {
             case PostRenderer::ACTIVITY_NAME:
-                $renderer = new PostRenderer($this->lang);
+                $renderer = '\MyBB\Core\UserActivity\Renderers\PostRenderer';
                 break;
             default:
-                if (isset($this->types[$activity->getActivityType()])) {
-                    $renderer = $this->types[$activity->getActivityType()];
+                if (isset($this->types[$activity->activity_type])) {
+                    $renderer = $this->types[$activity->activity_type];
                 }
                 break;
         }
 
-        return $renderer;
+        return $this->app->make($renderer);
     }
 
     /**
      * Add a renderer instance.
      *
-     * @param AbstractRenderer $renderer The renderer to add.
+     * @param string $activityTypeName The name of the activity type the renderer applies to.
+     * @param string $renderer The renderer to add.
      */
-    public function addRenderer(AbstractRenderer $renderer)
+    public function addRenderer($activityTypeName = '', $renderer = '')
     {
-        $this->types[$renderer->getActivityTypeName()] = $renderer;
+        if (class_exists((string) $renderer)) {
+            $this->types[(string) $activityTypeName] = (string) $renderer;
+        }
     }
 }

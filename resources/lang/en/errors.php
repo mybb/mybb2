@@ -8,5 +8,6 @@ return [
 	'post_not_found' => 'Sorry, the specified post could not be found.',
 	'no_permission' => 'No Permission',
 	'no_permission_desc' => 'Unfortunately you don\'t have permission to access this page.',
-	'topic_not_found' => 'Sorry, the specified topic could not be found.'
+	'topic_not_found' => 'Sorry, the specified topic could not be found.',
+	'invalidCaptcha' => 'Sorry, there was an error validating the captcha. Please make sure you fill out the captcha correctly.',
 ];

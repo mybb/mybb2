@@ -93,6 +93,7 @@ class Post extends Model implements HasPresenter
         return [
             'topic_id' => $model->topic_id,
             'topic_slug' => $model->topic->slug,
+            'topic_title' => $model->topic->title,
             'content' => $model->content_parsed,
         ];
     }

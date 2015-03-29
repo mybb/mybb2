@@ -56,7 +56,7 @@ trait UserActivityTrait
     public function activityHistory()
     {
         return $this->morphMany(
-            'MyBB\Core\Database\Models\UserActivity',
+            'MyBB\Core\UserActivity\Database\Models\UserActivity',
             'activityHistorable',
             'activity_type',
             'activity_id'

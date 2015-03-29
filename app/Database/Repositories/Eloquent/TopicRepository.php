@@ -23,343 +23,355 @@ use MyBB\Settings\Store;
 
 class TopicRepository implements ITopicRepository
 {
-	/**
-	 * @var Topic $topicModel
-	 * @access protected
-	 */
-	protected $topicModel;
-	/**
-	 * @var Guard $guard ;
-	 * @access protected
-	 */
-	protected $guard;
-	/**
-	 * @var IPostRepository $postRepository
-	 * @access protected
-	 */
-	protected $postRepository;
+    /**
+     * @var Topic $topicModel
+     * @access protected
+     */
+    protected $topicModel;
+    /**
+     * @var Guard $guard ;
+     * @access protected
+     */
+    protected $guard;
+    /**
+     * @var IPostRepository $postRepository
+     * @access protected
+     */
+    protected $postRepository;
+    /**
+     * @var Str $stringUtils
+     * @access protected
+     */
+    protected $stringUtils;
+    private $dbManager;
+    /** @var Store $settings */
+    private $settings;
 
-	private $dbManager;
-	/**
-	 * @var Str $stringUtils
-	 * @access protected
-	 */
-	protected $stringUtils;
+    /** @var IForumRepository */
+    private $forumRepository;
 
-	/** @var Store $settings */
-	private $settings;
+    /**
+     * @param Topic           $topicModel     The model to use for threads.
+     * @param Guard           $guard          Laravel guard instance, used to get user ID.
+     * @param IPostRepository $postRepository Used to manage posts for topics.
+     * @param Str             $stringUtils    String utilities, used for creating slugs.
+     * @param DatabaseManager $dbManager      Database manager, needed to do transactions.
+     * @param Store           $settings       The settings container
+     */
+    public function __construct(
+        Topic $topicModel,
+        Guard $guard,
+        IPostRepository $postRepository,
+        Str $stringUtils,
+        DatabaseManager $dbManager,
+        Store $settings,
+        IForumRepository $forumRepository
+    ) {
+        $this->topicModel = $topicModel;
+        $this->guard = $guard;
+        $this->postRepository = $postRepository;
+        $this->stringUtils = $stringUtils;
+        $this->dbManager = $dbManager;
+        $this->settings = $settings;
+        $this->forumRepository = $forumRepository;
+    }
 
-	/** @var IForumRepository */
-	private $forumRepository;
+    /**
+     * Get all threads.
+     *
+     * @return mixed
+     */
+    public function all()
+    {
+        return $this->topicModel->all();
+    }
 
-	/**
-	 * @param Topic           $topicModel     The model to use for threads.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
-	 * @param IPostRepository $postRepository Used to manage posts for topics.
-	 * @param Str             $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager $dbManager      Database manager, needed to do transactions.
-	 * @param Store           $settings       The settings container
-	 */
-	public function __construct(
-		Topic $topicModel,
-		Guard $guard,
-		IPostRepository $postRepository,
-		Str $stringUtils,
-		DatabaseManager $dbManager,
-		Store $settings,
-		IForumRepository $forumRepository
-	) // TODO: Inject permissions container? So we can check thread permissions before querying?
-	{
-		$this->topicModel = $topicModel;
-		$this->guard = $guard;
-		$this->postRepository = $postRepository;
-		$this->stringUtils = $stringUtils;
-		$this->dbManager = $dbManager;
-		$this->settings = $settings;
-		$this->forumRepository = $forumRepository;
-	}
+    /**
+     * Increment view count for topic
+     */
+    public function incrementViewCount(Topic $topic)
+    {
+        $topic->increment('views');
+    }
 
-	/**
-	 * Get all threads.
-	 *
-	 * @return mixed
-	 */
-	public function all()
-	{
-		return $this->topicModel->all();
-	}
+    /**
+     * Get all threads created by a user.
+     *
+     * @param int $userId The ID of the user.
+     *
+     * @return mixed
+     */
+    public function allForUser($userId = 0)
+    {
+        return $this->topicModel->where('user_id', '=', $userId)->get();
+    }
 
-	/**
-	 * Increment view count for topic
-	 */
-	public function incrementViewCount(Topic $topic)
-	{
-		$topic->increment('views');
-	}
+    /**
+     * Find a single topic by ID.
+     *
+     * @param int $id The ID of the thread to find.
+     *
+     * @return mixed
+     */
+    public function find($id = 0)
+    {
+        return $this->topicModel->withTrashed()->with(['author'])->find($id);
+    }
 
-	/**
-	 * Get all threads created by a user.
-	 *
-	 * @param int $userId The ID of the user.
-	 *
-	 * @return mixed
-	 */
-	public function allForUser($userId = 0)
-	{
-		return $this->topicModel->where('user_id', '=', $userId)->get();
-	}
+    /**
+     * Find a single topic by its slug.
+     *
+     * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
+     *
+     * @return mixed
+     */
+    public function findBySlug($slug = '')
+    {
+        return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->first();
+    }
 
-	/**
-	 * Find a single topic by ID.
-	 *
-	 * @param int $id The ID of the thread to find.
-	 *
-	 * @return mixed
-	 */
-	public function find($id = 0)
-	{
-		return $this->topicModel->withTrashed()->with(['author'])->find($id);
-	}
+    /**
+     * Get all threads within a forum.
+     *
+     * @param Forum  $forum    The forum the threads belong to.
+     * @param string $orderBy  The order by column
+     * @param string $orderDir asc|desc
+     *
+     * @return mixed
+     */
+    public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
+    {
+        // Build the correct order_by column - nice versions may be submitted
+        switch ($orderBy) {
+            case 'replies':
+                $orderBy = 'num_posts';
+                break;
+            case 'startdate':
+                $orderBy = 'topics.created_at';
+                break;
+            case 'lastpost':
+            default:
+                $orderBy = 'posts.created_at';
+                break;
+        }
 
-	/**
-	 * Find a single topic by its slug.
-	 *
-	 * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
-	 *
-	 * @return mixed
-	 */
-	public function findBySlug($slug = '')
-	{
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->first();
-	}
+        $topicsPerPage = $this->settings->get('user.topics_per_page', 20);
 
+        return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
+                                ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
+                                ->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
+    }
 
-	public function getNewest($num = 20)
-	{
-		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
-			'lastPost',
-			'forum',
-			'lastPost.author'
-		])->take($num)->get();
-	}
+    /**
+     * Create a new topic
+     *
+     * @param array $details Details about the topic.
+     *
+     * @return mixed
+     */
+    public function create(array $details = [])
+    {
+        $details = array_merge(
+            [
+                'title'         => '',
+                'forum_id'      => 0,
+                'user_id'       => $this->guard->user()->id,
+                'username'      => null,
+                'first_post_id' => 0,
+                'last_post_id'  => 0,
+                'views'         => 0,
+                'num_posts'     => 0,
+                'content'       => '',
+            ],
+            $details
+        );
 
-	/**
-	 * Get all threads within a forum.
-	 *
-	 * @param Forum  $forum    The forum the threads belong to.
-	 * @param string $orderBy  The order by column
-	 * @param string $orderDir asc|desc
-	 *
-	 * @return mixed
-	 */
-	public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
-	{
-		// Build the correct order_by column - nice versions may be submitted
-		switch ($orderBy) {
-			case 'replies':
-				$orderBy = 'num_posts';
-				break;
-			case 'startdate':
-				$orderBy = 'topics.created_at';
-				break;
-			case 'lastpost':
-			default:
-				$orderBy = 'posts.created_at';
-				break;
-		}
+        $details['slug'] = $this->createSlugForTitle($details['title']);
 
-		$topicsPerPage = $this->settings->get('user.topics_per_page', 20);
+        if ($details['user_id'] > 0) {
+            $details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
+        } else {
+            $details['user_id'] = null;
+            if ($details['username'] == trans('general.guest')) {
+                $details['username'] = null;
+            }
+        }
 
-		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
-			->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-			->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
-	}
+        $topic = null;
 
-	/**
-	 * Create a new topic
-	 *
-	 * @param array $details Details about the topic.
-	 *
-	 * @return mixed
-	 */
-	public function create(array $details = [])
-	{
-		$details = array_merge([
-			'title' => '',
-			'forum_id' => 0,
-			'user_id' => $this->guard->user()->id,
-			'username' => null,
-			'first_post_id' => 0,
-			'last_post_id' => 0,
-			'views' => 0,
-			'num_posts' => 0,
-			'content' => '',
-		], $details);
+        $this->dbManager->transaction(
+            function () use ($details, &$topic) {
+                $topic = $this->topicModel->create(
+                    [
+                        'title'    => $details['title'],
+                        'slug'     => $details['slug'],
+                        'forum_id' => $details['forum_id'],
+                        'user_id'  => $details['user_id'],
+                        'username' => $details['username'],
+                    ]
+                );
 
-		$details['slug'] = $this->createSlugForTitle($details['title']);
+                $firstPost = $this->postRepository->addPostToTopic(
+                    $topic,
+                    [
+                        'content'  => $details['content'],
+                        'username' => $details['username'],
+                    ]
+                );
 
-		if ($details['user_id'] > 0) {
-			$details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
-		} else {
-			$details['user_id'] = null;
-			if ($details['username'] == trans('general.guest')) {
-				$details['username'] = null;
-			}
-		}
+                $topic->update(
+                    [
+                        'first_post_id' => $firstPost->id,
+                        'last_post_id'  => $firstPost->id,
+                        'num_posts'     => 1,
+                    ]
+                );
+            }
+        );
 
-		$topic = null;
+        $topic->forum->increment('num_topics');
 
-		$this->dbManager->transaction(function () use ($details, &$topic) {
-			$topic = $this->topicModel->create([
-				'title' => $details['title'],
-				'slug' => $details['slug'],
-				'forum_id' => $details['forum_id'],
-				'user_id' => $details['user_id'],
-				'username' => $details['username'],
-			]);
+        if ($topic->user_id > 0) {
+            $topic->author->increment('num_topics');
+        }
 
-			$firstPost = $this->postRepository->addPostToTopic($topic, [
-				'content' => $details['content'],
-				'username' => $details['username'],
-			]);
+        return $topic;
+    }
 
-			$topic->update([
-				'first_post_id' => $firstPost->id,
-				'last_post_id' => $firstPost->id,
-				'num_posts' => 1,
-			]);
-		});
+    /**
+     * Find a single topic with a specific slug and ID.
+     *
+     * @param string $slug The slug for the topic.
+     * @param int    $id   The ID of the topic to find.
+     *
+     * @return mixed
+     */
+    public function findBySlugAndId($slug = '', $id = 0)
+    {
+        return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)
+                                ->first();
+    }
 
-		$topic->forum->increment('num_topics');
+    /**
+     * Update the last post of the topic
+     *
+     * @param Topic $topic The topic to update
+     *
+     * @return mixed
+     */
 
-		if ($topic->user_id > 0) {
-			$topic->author->increment('num_topics');
-		}
+    public function updateLastPost(Topic $topic, Post $post = null)
+    {
+        if ($post === null) {
+            $post = $topic->posts->sortByDesc('id')->first();
+        }
 
-		return $topic;
-	}
+        $topic->update(
+            [
+                'last_post_id' => $post->id
+            ]
+        );
 
-	/**
-	 * Create a unique slug for a topic title.
-	 *
-	 * @param string $title The title of the topic.
-	 *
-	 * @return string The slugged title.
-	 */
-	private function createSlugForTitle($title = '')
-	{
-		$title = (string)$title;
-		$sluggedTitle = $this->stringUtils->slug($title, '-');
+        return $topic;
+    }
 
-		return $sluggedTitle;
-	}
+    /**
+     * Create a unique slug for a topic title.
+     *
+     * @param string $title The title of the topic.
+     *
+     * @return string The slugged title.
+     */
+    private function createSlugForTitle($title = '')
+    {
+        $title = (string) $title;
+        $sluggedTitle = $this->stringUtils->slug($title, '-');
 
-	/**
-	 * Edit a topic
-	 *
-	 * @param Topic $topic        The topic to edit
-	 * @param array $topicDetails The details of the post to add.
-	 *
-	 * @return mixed
-	 */
-	public function editTopic(Topic $topic, array $topicDetails)
-	{
+        return $sluggedTitle;
+    }
 
-		$topic->update($topicDetails);
+    public function getNewest($num = 20)
+    {
+        return $this->topicModel->orderBy('last_post_id', 'desc')->with(
+            [
+                'lastPost',
+                'forum',
+                'lastPost.author'
+            ]
+        )->take($num)->get();
+    }
 
-		return $topic;
-	}
+    /**
+     * Edit a topic
+     *
+     * @param Topic $topic        The topic to edit
+     * @param array $topicDetails The details of the post to add.
+     *
+     * @return mixed
+     */
+    public function editTopic(Topic $topic, array $topicDetails)
+    {
 
-	/**
-	 * Delete a topic
-	 *
-	 * @param Topic $topic The topic to delete
-	 *
-	 * @return mixed
-	 */
+        $topic->update($topicDetails);
 
-	public function deleteTopic(Topic $topic)
-	{
-		if ($topic['deleted_at'] == null) {
-			$topic->forum->decrement('num_topics');
-			$topic->forum->decrement('num_posts', $topic->num_posts);
+        return $topic;
+    }
 
-			$topic->author->decrement('num_topics');
+    /**
+     * Delete a topic
+     *
+     * @param Topic $topic The topic to delete
+     *
+     * @return mixed
+     */
 
-			$success = $topic->delete();
+    public function deleteTopic(Topic $topic)
+    {
+        if ($topic['deleted_at'] == null) {
+            $topic->forum->decrement('num_topics');
+            $topic->forum->decrement('num_posts', $topic->num_posts);
 
-			if ($success) {
-				if ($topic->last_post_id == $topic->forum->last_post_id) {
-					$this->forumRepository->updateLastPost($topic->forum);
-				}
-			}
+            $topic->author->decrement('num_topics');
 
-			return $success;
-		} else {
-			$topic->posts->forceDelete();
+            $success = $topic->delete();
 
-			return $topic->forceDelete();
-		}
-	}
+            if ($success) {
+                if ($topic->last_post_id == $topic->forum->last_post_id) {
+                    $this->forumRepository->updateLastPost($topic->forum);
+                }
+            }
 
-	/**
-	 * Restore a topic
-	 *
-	 * @param Topic $topic The topic to restore
-	 *
-	 * @return mixed
-	 */
+            return $success;
+        } else {
+            $topic->posts->forceDelete();
 
-	public function restoreTopic(Topic $topic)
-	{
-		$topic->forum->increment('num_topics');
-		$topic->forum->increment('num_posts', $topic->num_posts);
+            return $topic->forceDelete();
+        }
+    }
 
-		$topic->author->increment('num_topics');
+    /**
+     * Restore a topic
+     *
+     * @param Topic $topic The topic to restore
+     *
+     * @return mixed
+     */
 
-		$success = $topic->restore();
+    public function restoreTopic(Topic $topic)
+    {
+        $topic->forum->increment('num_topics');
+        $topic->forum->increment('num_posts', $topic->num_posts);
 
-		if ($success) {
-			if ($topic->last_post_id > $topic->forum->last_post_id) {
-				$this->forumRepository->updateLastPost($topic->forum, $topic->lastPost);
-			}
-		}
+        $topic->author->increment('num_topics');
 
-		return $success;
-	}
+        $success = $topic->restore();
 
-	/**
-	 * Find a single topic with a specific slug and ID.
-	 *
-	 * @param string $slug The slug for the topic.
-	 * @param int    $id   The ID of the topic to find.
-	 *
-	 * @return mixed
-	 */
-	public function findBySlugAndId($slug = '', $id = 0)
-	{
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)
-			->first();
-	}
+        if ($success) {
+            if ($topic->last_post_id > $topic->forum->last_post_id) {
+                $this->forumRepository->updateLastPost($topic->forum, $topic->lastPost);
+            }
+        }
 
-	/**
-	 * Update the last post of the topic
-	 *
-	 * @param Topic $topic The topic to update
-	 *
-	 * @return mixed
-	 */
-
-	public function updateLastPost(Topic $topic, Post $post = null)
-	{
-		if ($post === null) {
-			$post = $topic->posts->sortByDesc('id')->first();
-		}
-
-		$topic->update([
-			'last_post_id' => $post->id
-		]);
-
-		return $topic;
-	}
+        return $success;
+    }
 }

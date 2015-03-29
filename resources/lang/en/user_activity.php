@@ -13,5 +13,5 @@
 return [
     'index' => 'Recent User Activity',
     'meta_desc' => '',
-    'activity_post' => 'Posted a reply to :topic',
+    'activity_post' => 'Posted a reply to <a href=":topic_link" data-topic-id=":topic_id">:topic_title</a>',
 ];

@@ -16,12 +16,12 @@
         </div>
         <ul class="activities">
             {% for entry in activities %}
-                <li class="activity" id="activity-{{ entry.getId }}" data-activity-id="{{ entry.getId }}">
-                    <div class="activity__user user" data-user-id="{{ entry.getUser.id }}">
+                <li class="activity" id="activity-{{ entry.id }}" data-activity-id="{{ entry.id }}">
+                    <div class="activity__user user" data-user-id="{{ entry.user.id }}">
                         <!-- TODO: Avatar? -->
-                        {{ entry.getUser.name }}
+                        {{ entry.user.name }}
                     </div>
-                    {{ entry.activity }}
+                    {{ entry.activity|raw }}
                 </li>
             {% endfor %}
             {{ activities.render|raw }}
