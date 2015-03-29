@@ -16,6 +16,8 @@
             <div class="wrapper">
 				{{ Breadcrumbs.renderIfExists() }}
                 <div id="content">
+					{% include "partials.messages" %}
+
     				{% block contents %}{% endblock %}
                 </div>
             </div>
