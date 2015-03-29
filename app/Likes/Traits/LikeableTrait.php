@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int num_likes
  */
-class LikeableTrait
+trait LikeableTrait
 {
     /**
      * The name of the column caching the number of likes this content has received.
