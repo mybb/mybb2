@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration {
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('content_id');
             $table->string('content_type');
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->index(['content_id', 'content_type']);
