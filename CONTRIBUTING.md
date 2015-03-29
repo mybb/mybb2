@@ -42,6 +42,9 @@ In addition to the PSR-2 standard, we have other standards and best practices th
 - Properties on an object SHOULD have `protected` or `private` visibility.
 
 ```php
+/**
+ * @property string magic
+ */
 class Foo
 {
     /**
@@ -64,11 +67,20 @@ class Foo
     {
         $this->bar = $bar;
     }
+    
+    /**
+     * @param string $name
+     */
+    public function __get($name)
+    {
+        return 'magic';
+    }
 }
 ```
 
 - Methods with a return value and/or arguments MUST have a document block.
 - Object properties MUST have a document block with `@var` tag denoting their type.
+- Magic properties on an object MUST be declared in a doc block at the top of the class using the `@property` tag.
 - Method arguments that are required MUST NOT have a default value.
 
 Should your pull request not follow these standards, you will be requested to reformat your code to suit.
