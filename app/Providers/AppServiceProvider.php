@@ -88,6 +88,11 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\MyCode'
 		);
 
+        $this->app->bind(
+            'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
+            'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
+        );
+
 		$this->initDefaultUser();
 
 		// Temporary fix for Form...
