@@ -56,6 +56,6 @@ trait LikeableTrait
 
     public function decrementNumLikes()
     {
-        $this->increment($this->numLikesColumn);
+        $this->decrement($this->numLikesColumn);
     }
 }
