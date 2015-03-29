@@ -12,6 +12,7 @@
 
 namespace MyBB\Core\Likes\Database\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\Model;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Likes\Database\Models\Like As LikeModel;
@@ -59,7 +60,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllLikesForContent(LikeableTrait $content)
+    public function getAllLikesForContent(Model $content)
     {
         return $this->likesModel->where('content_id', '=', $content->id)->where('content_type', '=', get_class($content))->get();
     }
@@ -71,7 +72,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return null|LikeModel Null if a like was removed,a  like model instance if one was created.
      */
-    public function toggleLikeForContent(LikeableTrait $content)
+    public function toggleLikeForContent(Model $content)
     {
         if (($user = $this->guard->user()) !== null) {
             $existingLike = $this->likesModel->where('user_id', '=', $user->getAuthIdentifier())
@@ -80,12 +81,18 @@ class LikesRepository implements LikesRepositoryInterface
 
             if ($existingLike !== null) {
                 $existingLike->delete();
+
+                $user->decrement('num_likes_made');
+                $content->decrementNumLikes();
             } else {
                 $newLike = $content->likes()->create(
                     [
                         'user_id' => $user->getAuthIdentifier(),
                     ]
                 );
+
+                $user->increment('num_likes_made');
+                $content->incrementNumLikes();
 
                 return $newLike;
             }

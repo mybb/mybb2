@@ -48,4 +48,14 @@ trait LikeableTrait
     {
         return (int) $this->{$this->numLikesColumn};
     }
+
+    public function incrementNumLikes()
+    {
+        $this->increment($this->numLikesColumn);
+    }
+
+    public function decrementNumLikes()
+    {
+        $this->increment($this->numLikesColumn);
+    }
 }

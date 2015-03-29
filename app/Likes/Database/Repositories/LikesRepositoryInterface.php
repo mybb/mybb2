@@ -12,6 +12,7 @@
 
 namespace MyBB\Core\Likes\Database\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
 interface LikesRepositoryInterface
@@ -33,7 +34,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function getAllLikesForContent(LikeableTrait $content);
+    function getAllLikesForContent(Model $content);
 
     /**
      * Toggle a like on or off for a given piece of content for the current user.
@@ -42,5 +43,5 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function toggleLikeForContent(LikeableTrait $content);
+    function toggleLikeForContent(Model $content);
 }

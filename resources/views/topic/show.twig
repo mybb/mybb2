@@ -48,7 +48,12 @@
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-								<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
+
+                                {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
+                                    {{ form_hidden('post_id', post.id) }}
+                                    {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': 'button'}) }}
+                                {{ form_close() }}
+
 								<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
 							{% endif %}
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>

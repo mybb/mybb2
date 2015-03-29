@@ -52,6 +52,8 @@ Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'use
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 Route::post('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@postCreate']);
 
+Route::post('like/post/{post_id}', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
+
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 
