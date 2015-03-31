@@ -5,6 +5,10 @@ use Illuminate\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
+use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 use Session;
@@ -32,7 +36,10 @@ class AccountController extends Controller
 		return view('account.dashboard')->withActive('dashboard');
 	}
 
-	public function getProfile()
+	/**
+	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
+	 */
+	public function getProfile(ProfileFieldGroupRepositoryInterface $profileFieldGroups)
 	{
 		$dob = explode('-', $this->guard->user()->dob);
 
@@ -42,28 +49,29 @@ class AccountController extends Controller
 			'year' => $dob[2],
 		];
 
-		return view('account.profile', compact('dob'))->withActive('profile');
+		return view('account.profile', [
+			'dob' => $dob,
+			'profile_field_groups' => $profileFieldGroups->getAll()
+		])->withActive('profile');
 	}
 
 	/**
-	 * @param Request $request
-	 *
+	 * @param UpdateProfileRequest $request
+	 * @param UserProfileFieldRepositoryInterface $userProfileFields
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postProfile(Request $request)
+	public function postProfile(UpdateProfileRequest $request, UserProfileFieldRepositoryInterface $userProfileFields)
 	{
-		$this->validate($request, [
-			'date_of_birth_day' => 'integer|min:1|max:31',
-			'date_of_birth_month' => 'integer|min:1|max:12',
-			'date_of_birth_year' => 'integer',
-			'usertitle' => 'string',
-		]);
-
+		// handle updates to the user model
 		$input = $request->only(['usertitle']);
-
 		$input['dob'] = $request->get('date_of_birth_day') . '-' . $request->get('date_of_birth_month') . '-' . $request->get('date_of_birth_year');
-
 		$this->guard->user()->update($input);
+
+		// handle profile field updates
+		$profileFieldData = $request->get('profile_fields');
+		foreach ($request->getProfileFields() as $profileField) {
+			$userProfileFields->updateOrCreate($this->guard->user(), $profileField, $profileFieldData[$profileField->id]);
+		}
 
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
 	}
