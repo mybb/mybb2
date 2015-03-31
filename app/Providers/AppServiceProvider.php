@@ -74,6 +74,21 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
 			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');

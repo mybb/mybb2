@@ -104,6 +104,7 @@ return [
 			'MyBB\Core\Twig\Extensions\Date',
 			'MyBB\Core\Twig\Extensions\Captcha',
             'MyBB\Core\Likes\Twig\Extensions\RenderLikes',
+			'MyBB\Core\Twig\Extensions\Form',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*
