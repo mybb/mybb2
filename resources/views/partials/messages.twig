@@ -1,6 +1,7 @@
 {% if errors.any %}
 	<div class="alert alert--danger">
-		{{ trans('errors.inline_error') }}<br />
+		<i class="fa fa-warning"></i>
+		<p>{{ trans('errors.inline_error') }}</p>
 		<ul>
 			{% for error in errors.all %}
 				<li>{{ error }}</li>
@@ -11,6 +12,7 @@
 
 {% if session_has('success') %}
 	<div class="alert alert--success">
-		{{ session_get('success') }}
+		<i class="fa fa-check-circle"></i>
+		<p>{{ session_get('success') }}</p>
 	</div>
 {% endif %}

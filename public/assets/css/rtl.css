@@ -2710,6 +2710,26 @@ dl.stats {
     margin: 0;
     display: table-cell; }
 
+.alert {
+  background-color: #fafafa;
+  padding: 10px 40px 10px 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  border-radius: 4px; }
+  .alert i {
+    float: right;
+    margin: 6px -25px 0 0; }
+  .alert p {
+    margin: 0;
+    padding: 0; }
+  .alert.alert--danger {
+    background-color: #c00;
+    color: #fff; }
+  .alert.alert--success {
+    background-color: #018303;
+    color: #fff; }
+
 .error-no-results {
   text-align: center;
   padding: 30px 0;
