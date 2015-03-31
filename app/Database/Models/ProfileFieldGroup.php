@@ -19,6 +19,9 @@ class ProfileFieldGroup extends Model implements HasPresenter
     protected $casts = [
         'id' => 'int'
     ];
+    protected $with = [
+        'getProfileFields'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
