@@ -3,6 +3,7 @@
 namespace MyBB\Core\Form;
 
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Factory as ValidationFactory;
 
 class Renderer
@@ -123,9 +124,7 @@ class Renderer
      */
     protected function slugify($string)
     {
-        $string = strtolower($string);
-        $stringBits = explode(' ', $string);
-        return implode('_', $stringBits);
+        return Str::slug($string);
     }
 
     /**
