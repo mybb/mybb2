@@ -103,6 +103,7 @@ return [
 			'MyBB\Core\Twig\Extensions\Settings',
 			'MyBB\Core\Twig\Extensions\Date',
 			'MyBB\Core\Twig\Extensions\Captcha',
+            'MyBB\Core\Likes\Twig\Extensions\RenderLikes',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*

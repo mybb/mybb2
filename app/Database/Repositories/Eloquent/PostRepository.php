@@ -72,7 +72,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function allForUser($userId = 0)
 	{
-		return $this->postModel->where('user_id', '=', $userId)->get();
+		return $this->postModel->with(['likes'])->where('user_id', '=', $userId)->get();
 	}
 
 	public function getNewest($num = 20)
@@ -80,7 +80,7 @@ class PostRepository implements IPostRepository
 		return $this->postModel->orderBy('created_at', 'desc')->with([
 			'topic',
 			'topic.forum',
-			'author'
+			'author',
 		])->take($num)->get();
 	}
 
@@ -93,7 +93,7 @@ class PostRepository implements IPostRepository
 	 */
 	public function find($id = 0)
 	{
-		return $this->postModel->withTrashed()->find($id);
+		return $this->postModel->with(['likes', 'author'])->withTrashed()->find($id);
 	}
 
 	/**
@@ -108,7 +108,7 @@ class PostRepository implements IPostRepository
 	{
 		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
-		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
+		$baseQuery = $this->postModel->with(['author', 'likes'])->where('topic_id', '=', $topic->id);
 
 		if ($withTrashed) {
 			$baseQuery = $baseQuery->withTrashed();

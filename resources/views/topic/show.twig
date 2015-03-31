@@ -59,9 +59,12 @@
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
 							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
 						</ul>
-						<!--<div class="post__likes">
-							<i class="fa fa-caret-right"></i> <a href="index.php?page=profile">You</a>, <a href="index.php?page=profile">brad-t</a>, <a href="index.php?page=profile">Dennis Tsang</a>, and <a href="index.php?page=post-likes">14 others</a> like this</a>
-						</div>-->
+                        {% if post.num_likes > 0 %}
+                            <div class="post__likes">
+                                {{ render_likes(post.likes, '...') }}
+                            </div>
+                        {% endif %}
+
 					</div>
 				</div>
 				<div id="dropdown-{{ post.id }}" class="dropdown dropdown-tip">

@@ -1,0 +1,24 @@
+<div class="likes">
+    <span class="likes__prefix">
+        <i class="fa fa-caret-right"></i>
+    </span>
+    {% for key, like in likes %}
+        <span class="likes__like" data-like-id="{{ like.id }}" data-like-user-id="{{ like.user.id }}">
+            {{ like.user.name }}
+        </span>
+        {% if key != likes|length - 1 %}
+            <span class="likes__separator likes__separator--comma">
+                {{ trans('likes.sep_comma') }}
+            </span>
+        {% endif %}
+    {% endfor %}
+    {% if numOtherLikes > 0 %}
+        <span class="likes__separator likes__separator--comma">
+                {{ trans('likes.sep_and') }}
+        </span>
+        <span class="likes__others">
+            <a href="{{ viewAllLikesLink }}">{{ trans('likes.others', {'numOthers': numOtherLikes}) }}</a>
+        </span>
+    {% endif %}
+    {{ trans('likes.like_this') }}
+</div>

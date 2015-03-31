@@ -37,6 +37,16 @@ interface LikesRepositoryInterface
     function getAllLikesForContent(Model $content);
 
     /**
+     * Get all of the likes for a set of entries of a specific content type.
+     *
+     * @param Model $contentType The type of the content to get all of the likes for.
+     * @param array $ids An array of IDs of the entries to get the likes for.
+     *
+     * @return mixed
+     */
+    function getAllLikesForContents(Model $contentType, array $ids);
+
+    /**
      * Toggle a like on or off for a given piece of content for the current user.
      *
      * @param \Illuminate\Database\Eloquent\Model|LikeableTrait $content The content to toggle the like for.
