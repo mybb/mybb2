@@ -10,12 +10,14 @@ interface ProfileFieldRepositoryInterface
 {
     /**
      * @param array $data
+     *
      * @return ProfileField
      */
     public function create(array $data);
 
     /**
      * @param int $id
+     *
      * @return ProfileField
      */
     public function find($id);
@@ -27,6 +29,7 @@ interface ProfileFieldRepositoryInterface
 
     /**
      * @param ProfileFieldGroup $group
+     *
      * @return Collection
      */
     public function getForGroup(ProfileFieldGroup $group);

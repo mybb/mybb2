@@ -33,6 +33,7 @@ class ProfileFieldOption extends Model
 
     /**
      * @param ProfileField $profileField
+     *
      * @return Collection
      */
     public static function getForProfileField(ProfileField $profileField)

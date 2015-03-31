@@ -24,6 +24,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 
     /**
      * @param array $data
+     *
      * @return ProfileField
      */
     public function create(array $data)
@@ -41,6 +42,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 
     /**
      * @param int $id
+     *
      * @return ProfileField
      */
     public function find($id)
@@ -50,6 +52,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 
     /**
      * @param ProfileFieldGroup $group
+     *
      * @return Collection
      */
     public function getForGroup(ProfileFieldGroup $group)

@@ -28,6 +28,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      * @param User $user
      * @param ProfileField $profileField
      * @param string $value
+     *
      * @return UserProfileField
      */
     public function create(User $user, ProfileField $profileField, $value)
@@ -41,6 +42,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 
     /**
      * @param int $id
+     *
      * @return UserProfileField
      */
     public function find($id)
@@ -51,6 +53,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     /**
      * @param User $user
      * @param ProfileField $profileField
+     *
      * @return UserProfileField
      */
     public function findForProfileField(User $user, ProfileField $profileField)
@@ -65,6 +68,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      * @param User $user
      * @param ProfileField $profileField
      * @param string $value
+     *
      * @return UserProfileField
      */
     public function updateOrCreate(User $user, ProfileField $profileField, $value)
@@ -82,6 +86,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 
     /**
      * @param User $user
+     *
      * @return Collection
      */
     public function findForUser(User $user)
@@ -92,6 +97,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     /**
      * @param User $user
      * @param ProfileFieldGroup $group
+     *
      * @return Collection
      */
     public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group)
@@ -108,6 +114,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     /**
      * @param User $user
      * @param ProfileField $profileField
+     *
      * @return bool
      */
     public function hasForProfileField(User $user, ProfileField $profileField)

@@ -14,6 +14,7 @@ interface ProfileFieldGroupRepositoryInterface
 
     /**
      * @param string $slug
+     *
      * @return ProfileFieldGroup
      */
     public function getBySlug($slug);

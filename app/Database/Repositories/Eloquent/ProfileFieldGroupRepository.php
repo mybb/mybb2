@@ -23,6 +23,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
 
     /**
      * @param string $slug
+     *
      * @return ProfileFieldGroup
      */
     public function getBySlug($slug)
