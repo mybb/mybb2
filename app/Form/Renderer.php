@@ -129,34 +129,11 @@ class Renderer
 
     /**
      * @param RenderableInterface $renderable
-     * @return string
-     */
-    protected function getPattern(RenderableInterface $renderable)
-    {
-        $rules = $this->getRules($renderable);
-
-        foreach ($rules as $rule) {
-            if (strpos($rule, 'regex:') !== false) {
-                $ruleBits = explode(':', $rule);
-                return end($ruleBits);
-            }
-        }
-    }
-
-    /**
-     * @param RenderableInterface $renderable
      * @return int
      */
     protected function getMinLength(RenderableInterface $renderable)
     {
-        $rules = $this->getRules($renderable);
-
-        foreach ($rules as $rule) {
-            if (strpos($rule, 'min:') !== false) {
-                $ruleBits = explode(':', $rule);
-                return (int) end($ruleBits);
-            }
-        }
+        return (int) $this->extractValueByKeyFromRules('min', $renderable);
     }
 
     /**
@@ -165,12 +142,23 @@ class Renderer
      */
     protected function getMaxLength(RenderableInterface $renderable)
     {
+        return (int) $this->extractValueByKeyFromRules('max', $renderable);
+    }
+
+    /**
+     * @param string $key
+     * @param RenderableInterface $renderable
+     *
+     * @return string
+     */
+    protected function extractValueByKeyFromRules($key, RenderableInterface $renderable)
+    {
         $rules = $this->getRules($renderable);
 
         foreach ($rules as $rule) {
-            if (strpos($rule, 'max:') !== false) {
+            if (strpos($rule, $key . ':') !== false) {
                 $ruleBits = explode(':', $rule);
-                return (int) end($ruleBits);
+                return end($ruleBits);
             }
         }
     }
