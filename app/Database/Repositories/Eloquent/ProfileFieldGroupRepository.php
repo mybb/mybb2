@@ -27,7 +27,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
      */
     public function getBySlug($slug)
     {
-        return $this->profileFieldGroup->where('slug', $slug)->get()->first();
+        return $this->profileFieldGroup->where('slug', $slug)->first();
     }
 
     /**
