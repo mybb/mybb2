@@ -2,6 +2,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\ProfileField;
 use MyBB\Core\Database\Models\ProfileFieldGroup;
@@ -103,7 +104,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group)
     {
         $userFields = $this->userProfileField->where('user_id', $user->getId())
-            ->whereHas('getProfileField', function ($q) use ($group) {
+            ->whereHas('getProfileField', function (Builder $q) use ($group) {
                 $q->where('profile_field_group_id', $group->id);
             })
             ->get();
