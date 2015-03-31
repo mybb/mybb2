@@ -32,12 +32,14 @@ return [
 	'usertitle' => 'User Title',
 	'usertitle_desc' => 'Leave blank to revert to the group default user title',
 	'update_profile' => 'Update Profile Details',
+	'saved_profile' => 'Your Profile Details were saved successfully',
 
 	'username' => 'Username',
 	'new_username' => 'New Username',
 	'new_username_desc' => 'You can only change your username once every 6 months. (Not really, but we need to implement this)',
 	'current_password' => 'Current Password',
 	'current_password_name' => 'To change your username, please enter your current password.',
+	'saved_username' => 'Your username change has been saved',
 	'email' => 'Email',
 	'new_email' => 'New Email Address',
 	'new_email_desc' => 'A confirmation email will be sent to this address to finish the change.',
@@ -55,6 +57,8 @@ return [
 	'avatar_file' => 'Upload a new avatar',
 	'avatar_file_desc' => 'Choose an avatar on your local computer to upload.',
 	'avatar_link' => 'Avatar URL or Gravatar Email',
+	'saved_avatar' => 'Your new avatar was saved successfully',
+	'removed_avatar' => 'Your avatar was removed successfully',
 
 	'datetime' => 'Date and Time',
 	'dateformat' => 'Date Format',
@@ -95,6 +99,7 @@ return [
 	'notification_mails' => 'Notification Summary Emails',
 	'notification_mails_desc' => 'You can choose to receive daily or weekly summary emails of any <a href=":noti">forum notifications</a> you receive. This does not affect any instant notifications you have opted to receive for threads or forums you are <a href=":following">following</a>.',
 	'update_preferences' => 'Update Preferences',
+	'saved_preferences' => 'Your Preferences were updated successfully',
 
 	'blocked_users' => 'Blocked Users',
 	'manage_blocked' => 'Manage Blocked Users',
@@ -108,4 +113,5 @@ return [
 	'dob_privacy_desc' => 'Select what you would like to be shown on your profile for your date of birth.',
 	'dob_visibility' => 'Show your date of birth or age to:',
 	'update_privacy' => 'Update Privacy Settings',
+	'saved_privacy' => 'Your Privacy Settings were saved successfully',
 ];

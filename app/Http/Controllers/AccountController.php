@@ -65,7 +65,7 @@ class AccountController extends Controller
 
 		$this->guard->user()->update($input);
 
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
 	}
 
 	public function getUsername()
@@ -92,7 +92,7 @@ class AccountController extends Controller
 			// Valid password so update
 			$this->guard->user()->update($request->only('name'));
 
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.saved_username'));
 		}
 
 		return redirect()
@@ -128,10 +128,7 @@ class AccountController extends Controller
 			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'),
 			                          $request->only('email'));
 
-			// We need show some sort of feedback to the user
-			Session::flash('success', trans('account.confirmEmail'));
-
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.confirmEmail'));
 		}
 
 		return redirect()
@@ -157,10 +154,7 @@ class AccountController extends Controller
 
 		$this->guard->user()->update(['email' => $email]);
 
-		// We need show some sort of feedback to the user
-		Session::flash('success', trans('account.updatedEmail'));
-
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess(trans('account.updatedEmail'));
 	}
 
 	public function getPassword()
@@ -189,10 +183,7 @@ class AccountController extends Controller
 			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
 			                          Hash::make($request->get('password1')));
 
-			// We need show some sort of feedback to the user
-			Session::flash('success', trans('account.confirm'));
-
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
 		}
 
 		return redirect()
@@ -219,10 +210,7 @@ class AccountController extends Controller
 		// Valid password so update
 		$this->guard->user()->update(['password' => $password]);
 
-		// We need show some sort of feedback to the user
-		Session::flash('success', trans('account.updatedPassword'));
-
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess(trans('account.updatedPassword'));
 	}
 
 	public function getAvatar()
@@ -270,7 +258,7 @@ class AccountController extends Controller
 			$this->guard->user()->update(['avatar' => '']);
 		}
 
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess('account.saved_avatar');
 	}
 
 	public function removeAvatar()
@@ -278,7 +266,7 @@ class AccountController extends Controller
 		// TODO: Delete the old file if an uploaded was used
 		$this->guard->user()->update(['avatar' => '']);
 
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess('account.removed_avatar');
 	}
 
 	public function getNotifications()
@@ -423,7 +411,7 @@ class AccountController extends Controller
 
 		$settings->set($modifiedSettings, null, true);
 
-		return redirect()->route('account.preferences');
+		return redirect()->route('account.preferences')->withSuccess(trans('account.saved_preferences'));
 	}
 
 	public function getPrivacy()
@@ -467,7 +455,7 @@ class AccountController extends Controller
 
 		$settings->set($modifiedSettings, null, true);
 
-		return redirect()->route('account.privacy');
+		return redirect()->route('account.privacy')->withSuccess(trans('account.saved_privacy'));
 	}
 
 	public function getDrafts()
