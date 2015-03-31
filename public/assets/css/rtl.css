@@ -3278,6 +3278,10 @@ section.container .forum-list {
   .post.pending-approval {
     background-color: #f2dede;
     border-color: #f2aaab; }
+  .post.post--hidden .post__meta {
+    padding-bottom: 2px; }
+  .post.post--hidden .post__body, .post.post--hidden .post__controls {
+    display: none; }
   .post .post__meta {
     padding: 4px 6px 12px 6px; }
     .post .post__meta a:link, .post .post__meta a:visited {
@@ -3308,13 +3312,21 @@ section.container .forum-list {
   .post .post__inline-mod {
     float: left;
     margin: -20px 7px 0 0; }
+  .post .post__toggle {
+    float: left;
+    font-size: 14px;
+    margin: 1px 0 0 1px; }
+    .post .post__toggle i {
+      color: rgba(0, 0, 0, 0.2); }
+    .post .post__toggle:hover i {
+      color: rgba(0, 0, 0, 0.4); }
   .post .team-badge {
     display: none; }
   .post .avatar-profile-link {
     float: right;
     width: 40px;
     height: 40px;
-    margin: 7px 0 0 10px; }
+    margin: 5px 0 0 10px; }
     .post .avatar-profile-link img.avatar {
       width: 40px;
       height: 40px; }
@@ -3388,6 +3400,13 @@ section.container .forum-list {
 @media only screen and (min-width: 480px) {
   .post {
     margin-right: 80px; }
+    .post.post--hidden .avatar-profile-link {
+      width: 50px;
+      height: 50px;
+      margin-right: -80px; }
+      .post.post--hidden .avatar-profile-link img.avatar {
+        width: 50px;
+        height: 50px; }
     .post .post__meta {
       padding: 4px 6px 8px 6px; }
       .post .post__meta h3 {
@@ -3416,7 +3435,9 @@ section.container .forum-list {
       margin-right: -130px; }
       .post .avatar-profile-link img.avatar {
         width: 100px;
-        height: 100px; } }
+        height: 100px; }
+    .post .post__toggle {
+      margin-left: 5px; } }
 
 .user-list {
   padding: 12px 12px 0 12px; }
