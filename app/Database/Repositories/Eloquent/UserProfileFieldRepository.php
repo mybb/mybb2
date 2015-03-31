@@ -34,7 +34,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     {
         return $this->userProfileField->create([
             'user_id' => $user->getId(),
-            'profile_field_id' => $profileField->getId(),
+            'profile_field_id' => $profileField->id,
             'value' => $value
         ]);
     }
@@ -56,7 +56,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     public function findForProfileField(User $user, ProfileField $profileField)
     {
         return $this->userProfileField->where('user_id', $user->getId())
-            ->where('profile_field_id', $profileField->getId())
+            ->where('profile_field_id', $profileField->id)
             ->get()
             ->first();
     }
@@ -98,7 +98,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     {
         $userFields = $this->userProfileField->where('user_id', $user->getId())
             ->whereHas('getProfileField', function ($q) use ($group) {
-                $q->where('profile_field_group_id', $group->getId());
+                $q->where('profile_field_group_id', $group->id);
             })
             ->get();
 
@@ -113,7 +113,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
     public function hasForProfileField(User $user, ProfileField $profileField)
     {
         return $this->userProfileField->where('user_id', $user->getId())
-            ->where('profile_field_id', $profileField->getId())
+            ->where('profile_field_id', $profileField->id)
             ->count() > 0;
     }
 }

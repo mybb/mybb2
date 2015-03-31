@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * @property string id
+ * @property int id
  */
 class ProfileFieldGroup extends Model implements HasPresenter
 {
@@ -16,6 +16,9 @@ class ProfileFieldGroup extends Model implements HasPresenter
     protected $table = 'profile_field_groups';
     protected $dates = ['created_at', 'updated_at'];
     protected $guarded = ['id'];
+    protected $casts = [
+        'id' => 'int'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -23,14 +26,6 @@ class ProfileFieldGroup extends Model implements HasPresenter
     public function getProfileFields()
     {
         return $this->hasMany('MyBB\Core\Database\Models\ProfileField', 'profile_field_group_id');
-    }
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return (int) $this->id;
     }
 
     /**

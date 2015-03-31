@@ -37,6 +37,6 @@ class ProfileFieldOption extends Model
      */
     public static function getForProfileField(ProfileField $profileField)
     {
-        return static::where('profile_field_id', $profileField->getId())->get();
+        return static::where('profile_field_id', $profileField->id)->get();
     }
 }
