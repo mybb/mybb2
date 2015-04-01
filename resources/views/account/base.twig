@@ -3,22 +3,6 @@
 	{% block inner_title %}{% endblock %}{% if block('inner_title') != '' %} &bull; {% endif %} {{ trans('account.account') }}
 {% endblock %}
 {% block contents %}
-		{% if errors.any %}
-			<div class="alert alert-danger">
-				<strong>Whoops!</strong> There were some problems with your input.<br><br>
-				<ul>
-					{% for error in errors.all %}
-						<li>{{ error }}</li>
-					{% endfor %}
-				</ul>
-			</div>
-		{% endif %}
-
-		{% if session_has('success') %}
-			<div class="success">
-				{{ session_get('success') }}
-			</div>
-		{% endif %}
 		<nav class="section-menu">
 			<ul class="sidebar-navigation">
 				<li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}"><i class="fa fa-dashboard fa-fw"></i><span class="text">{{ trans('account.dashboard') }}</span></a></li>

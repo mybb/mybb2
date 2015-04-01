@@ -21,4 +21,5 @@ return [
 	'poll_nothing_to_undo' => 'You haven\'t any vote to undo',
 	'poll_is_closed' => 'Sorry, this poll is closed',
 	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid',
+	'inline_error' => 'Whoops! There were some problems with your input.',
 ];

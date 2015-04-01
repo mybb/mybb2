@@ -43,6 +43,11 @@ $status-pending: #f2dede;
 $status-pending-border: #f2aaab;
 
 
+// Success / danger colors
+$success-color: #018303;
+$danger-color: #c00;
+
+
 // Fonts
 $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
 

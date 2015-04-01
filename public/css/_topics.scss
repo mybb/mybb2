@@ -19,6 +19,17 @@
 		border-color: $status-pending-border;
 	}
 
+	&.post--hidden {
+
+		.post__meta {
+			padding-bottom: 2px;
+		}
+
+		.post__body, .post__controls {
+			display: none;
+		}
+	}
+
 	.post__meta {
 		padding: side-values(4px 6px 12px 6px);
 
@@ -75,6 +86,20 @@
 		margin: side-values(-20px 0 0 7px);
 	}
 
+	.post__toggle {
+		float: $right;
+		font-size: 14px;
+		margin: side-values(1px 1px 0 0);
+
+		i {
+			@include black-transparency(0.2);
+		}
+
+		&:hover i {
+			@include black-transparency(0.4);
+		}
+	}
+
 	.team-badge {
 		display: none;
 	}
@@ -83,7 +108,7 @@
 		float: $left;
 		width: 40px;
 		height: 40px;
-		margin: side-values(7px 10px 0 0);
+		margin: side-values(5px 10px 0 0);
 
 		img.avatar {
 			width: 40px;
@@ -216,6 +241,20 @@
 	.post {
 		margin-#{$left}: 80px;
 
+		&.post--hidden {
+
+			.avatar-profile-link {
+				width: 50px;
+				height: 50px;
+				margin-#{$left}: -80px;
+
+				img.avatar {
+					width: 50px;
+					height: 50px;
+				}
+			}
+		}
+
 		.post__meta {
 			padding: side-values(4px 6px 8px 6px);
 
@@ -267,6 +306,10 @@
 				width: 100px;
 				height: 100px;
 			}
+		}
+
+		.post__toggle {
+			margin-#{$right}: 5px;
 		}
 	}
 }

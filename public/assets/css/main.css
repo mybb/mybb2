@@ -3244,6 +3244,26 @@ dl.stats {
     margin: 0;
     display: table-cell; }
 
+.alert {
+  background-color: #fafafa;
+  padding: 10px 12px 10px 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  border-radius: 4px; }
+  .alert i {
+    float: left;
+    margin: 6px 0 0 -25px; }
+  .alert p {
+    margin: 0;
+    padding: 0; }
+  .alert.alert--danger {
+    background-color: #c00;
+    color: #fff; }
+  .alert.alert--success {
+    background-color: #018303;
+    color: #fff; }
+
 .error-no-results {
   text-align: center;
   padding: 30px 0;
@@ -3318,7 +3338,7 @@ dl.stats {
     max-width: 1250px;
     margin: 0 auto; } }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="url"], input[type="number"], input[type="email"], input[type="password"] {
   border: 1px solid #ccc;
   padding: 6px;
   width: 100%;
@@ -3812,6 +3832,10 @@ section.container .forum-list {
   .post.pending-approval {
     background-color: #f2dede;
     border-color: #f2aaab; }
+  .post.post--hidden .post__meta {
+    padding-bottom: 2px; }
+  .post.post--hidden .post__body, .post.post--hidden .post__controls {
+    display: none; }
   .post .post__meta {
     padding: 4px 6px 12px 6px; }
     .post .post__meta a:link, .post .post__meta a:visited {
@@ -3842,13 +3866,21 @@ section.container .forum-list {
   .post .post__inline-mod {
     float: right;
     margin: -20px 0 0 7px; }
+  .post .post__toggle {
+    float: right;
+    font-size: 14px;
+    margin: 1px 1px 0 0; }
+    .post .post__toggle i {
+      color: rgba(0, 0, 0, 0.2); }
+    .post .post__toggle:hover i {
+      color: rgba(0, 0, 0, 0.4); }
   .post .team-badge {
     display: none; }
   .post .avatar-profile-link {
     float: left;
     width: 40px;
     height: 40px;
-    margin: 7px 10px 0 0; }
+    margin: 5px 10px 0 0; }
     .post .avatar-profile-link img.avatar {
       width: 40px;
       height: 40px; }
@@ -3922,6 +3954,13 @@ section.container .forum-list {
 @media only screen and (min-width: 480px) {
   .post {
     margin-left: 80px; }
+    .post.post--hidden .avatar-profile-link {
+      width: 50px;
+      height: 50px;
+      margin-left: -80px; }
+      .post.post--hidden .avatar-profile-link img.avatar {
+        width: 50px;
+        height: 50px; }
     .post .post__meta {
       padding: 4px 6px 8px 6px; }
       .post .post__meta h3 {
@@ -3950,7 +3989,9 @@ section.container .forum-list {
       margin-left: -130px; }
       .post .avatar-profile-link img.avatar {
         width: 100px;
-        height: 100px; } }
+        height: 100px; }
+    .post .post__toggle {
+      margin-right: 5px; } }
 
 #add-poll .poll-option {
   padding-right: 20px; }
