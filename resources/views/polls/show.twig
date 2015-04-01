@@ -39,7 +39,7 @@
 						{% if poll.is_public %}
 							<div class="poll__option__votes-result">
 								{% for user in option.users %}
-									<a href="#TODO">{{ user.name }}</a>
+									<a href="{{ url_route('user.profile', {name: user.name, id: user.id}) }}">{{ user.name }}</a>
 								{% endfor %}
 							</div>
 						{% endif %}
