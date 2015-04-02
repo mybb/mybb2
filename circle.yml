@@ -1,4 +1,5 @@
 machine:
-timezone: Europe/London
+  timezone:
+    Europe/London
   php:
     version: 5.4.4
