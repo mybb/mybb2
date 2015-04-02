@@ -16,7 +16,7 @@ use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Settings\Store;
@@ -49,16 +49,17 @@ class TopicRepository implements ITopicRepository
 	/** @var Store $settings */
 	private $settings;
 
-	/** @var IForumRepository */
+	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
 	/**
-	 * @param Topic           $topicModel     The model to use for threads.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param Topic $topicModel The model to use for threads.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
 	 * @param IPostRepository $postRepository Used to manage posts for topics.
-	 * @param Str             $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager $dbManager      Database manager, needed to do transactions.
-	 * @param Store           $settings       The settings container
+	 * @param Str $stringUtils String utilities, used for creating slugs.
+	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
+	 * @param Store $settings The settings container
+	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
 		Topic $topicModel,
@@ -67,7 +68,7 @@ class TopicRepository implements ITopicRepository
 		Str $stringUtils,
 		DatabaseManager $dbManager,
 		Store $settings,
-		IForumRepository $forumRepository
+		ForumRepositoryInterface $forumRepository
 	) // TODO: Inject permissions container? So we can check thread permissions before querying?
 	{
 		$this->topicModel = $topicModel;

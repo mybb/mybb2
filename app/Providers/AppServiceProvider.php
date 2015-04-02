@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 		/*
 		 * Disabled at the moment as it still needs some tweaks
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			function (Application $app)
 			{
 				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
 		*/
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\ForumRepository'
 		);
 
@@ -71,6 +71,21 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(
 			'MyBB\Core\Database\Repositories\ISearchRepository',
 			'MyBB\Core\Database\Repositories\Eloquent\SearchRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
 		);
 
 		$this->app->bind(

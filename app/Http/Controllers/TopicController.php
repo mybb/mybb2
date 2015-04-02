@@ -15,7 +15,7 @@ use Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
@@ -29,7 +29,7 @@ class TopicController extends Controller
 	private $topicRepository;
 	/** @var IPostRepository $postRepository */
 	private $postRepository;
-	/** @var IForumRepository $forumRepository */
+	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var Guard $guard */
 	private $guard;
@@ -37,14 +37,14 @@ class TopicController extends Controller
 	/**
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
-	 * @param IForumRepository $forumRepository Forum repository interface, used to fetch forum details.
+	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
-		IForumRepository $forumRepository,
+		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
 		Request $request
 	) {

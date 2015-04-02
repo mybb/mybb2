@@ -12,16 +12,16 @@ namespace MyBB\Core\Database\Repositories\Decorators\Forum;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 
-class CachingDecorator implements IForumRepository
+class CachingDecorator implements ForumRepositoryInterface
 {
-	/** @var IForumRepository $decoratedRepository */
+	/** @var ForumRepositoryInterface $decoratedRepository */
 	private $decoratedRepository;
 	/** @var CacheRepository $cache */
 	private $cache;
 
-	public function __construct(IForumRepository $decorated, CacheRepository $cache)
+	public function __construct(ForumRepositoryInterface $decorated, CacheRepository $cache)
 	{
 		$this->decoratedRepository = $decorated;
 		$this->cache = $cache;
