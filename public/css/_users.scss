@@ -47,6 +47,10 @@
 			position: relative;
 			margin: side-values(-48px 0 0 0);
 		}
+
+		.stats {
+			font-size: 0.7em;
+		}
 	}
 
 	&.online-now {
@@ -101,6 +105,58 @@
 
 	i {
 		margin-#{$right}: 5px;
+	}
+}
+
+.profile {
+
+	.profile__header {
+		@extend .clearfix;
+		position: relative;
+
+		.avatar {
+			float: $left;
+			width: 100px;
+			height: 100px;
+			margin-#{$right}: 16px;
+		}
+
+		.page-buttons {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+		}
+	}
+
+	.profile__username,
+	.profile__usertitle {
+		margin: 5px 0;
+	}
+
+	.profile__field-group h2 {
+		margin-bottom: 0;
+	}
+
+	.profile__field {
+		padding: 8px;
+		border-bottom: 1px solid $border-1;
+		font-size: 0.9em;
+
+		h3 {
+			margin: 0;
+			padding: 0;
+			font-weight: 600;
+		}
+
+		p {
+			margin: 0;
+			padding: 0;
+		}
+
+		&:last-child {
+			border-bottom: none;
+		}
 	}
 }
 
