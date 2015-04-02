@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Request;
 use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Database\Repositories\IUserRepository;
@@ -25,7 +25,7 @@ class User extends BasePresenter
 
 	/** @var Router $router */
 	private $router;
-	/** @var IForumRepository $forumRepository */
+	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
@@ -38,7 +38,7 @@ class User extends BasePresenter
 	/**
 	 * @param UserModel $resource The user being wrapped by this presenter.
 	 * @param Router $router
-	 * @param IForumRepository $forumRepository
+	 * @param ForumRepositoryInterface $forumRepository
 	 * @param ITopicRepository $topicRepository
 	 * @param IPostRepository $postRepository
 	 * @param IUserRepository $userRepository
@@ -46,7 +46,7 @@ class User extends BasePresenter
 	public function __construct(
 		UserModel $resource,
 		Router $router,
-		IForumRepository $forumRepository,
+		ForumRepositoryInterface $forumRepository,
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IUserRepository $userRepository

@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 		/*
 		 * Disabled at the moment as it still needs some tweaks
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			function (Application $app)
 			{
 				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
 		*/
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\ForumRepository'
 		);
 
