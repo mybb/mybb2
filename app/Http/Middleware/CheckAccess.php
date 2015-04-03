@@ -45,24 +45,18 @@ class CheckAccess
 		// Check for additional permissions required
 		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
-		// Weed out the Guests first
-		if(!$this->auth->user() || !$this->auth->user()->role)
+		return $this->auth->user()->hasPermission($requiredPermisions);
+
+		// TODO: The except setting doesn't work atm. First I need to look at guests and how we handle this
+
+		// First check whether guest are not allowed to access this page
+		if(!$this->auth->check())
 		{
 			// Guests are set to except
 			if(isset($action['except']) && $action['except'] == 'guest')
 			{
 				return false;
 			}
-
-			// Don't require permissions? Good to go
-			if(!$requiredPermisions)
-			{
-				return true;
-			}
-
-			// TODO: How can we easily check permissions for guests?
-			// As all of the things below would throw an error for guests atm we simply let them die
-			return false;
 		}
 
 		// Check if route is protected

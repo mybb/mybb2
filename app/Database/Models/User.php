@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
+use MyBB\Core\Services\PermissionChecker;
 use MyBB\Core\Traits\PermissionHandler;
 
 /**
@@ -17,8 +18,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
 
 	use Authenticatable, CanResetPassword;
-
-	use PermissionHandler;
 
 	/**
 	 * The database table used by the model.
@@ -71,13 +70,55 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return (int) $this->id;
 	}
 
-	public function role()
+	public function roles()
 	{
-		return $this->hasOne('MyBB\Core\Database\Models\Role', 'id', 'role_id');
+		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
+	}
+
+	public function displayRole()
+	{
+		// TODO: Cache this?
+		return $this->roles->where('pivot.is_display', 1)->first();
 	}
 
 	public function activity()
 	{
 		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');
+	}
+
+	public function hasPermission($permission)
+	{
+		if(is_array($permission))
+		{
+			foreach($permission as $perm)
+			{
+				$hasPermission = $this->hasPermission($perm);
+
+				if($hasPermission != PermissionChecker::YES)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		// TODO: Cache this foreach?
+		$isAllowed = false;
+		foreach($this->roles as $role)
+		{
+			$hasPermission = PermissionChecker::hasPermission($role, $permission);
+
+			if($hasPermission == PermissionChecker::NEVER)
+			{
+				return false;
+			}
+			elseif($hasPermission == PermissionChecker::YES)
+			{
+				$isAllowed = true;
+			}
+		}
+
+		return $isAllowed;
 	}
 }

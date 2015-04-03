@@ -65,8 +65,8 @@ class User extends BasePresenter
 			return e(trans('general.guest'));
 		}
 
-		if ($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style) {
-			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
+		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
+			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->displayRole()->role_username_style);
 		}
 
 		return e($this->wrappedObject->name);

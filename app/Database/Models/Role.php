@@ -13,6 +13,10 @@ class Role extends Model
 	 */
 	protected $table = 'roles';
 
+	public function users()
+	{
+		return $this->belongsToMany('MyBB\Core\Database\Models\User');
+	}
 
 	public function permissions()
 	{
