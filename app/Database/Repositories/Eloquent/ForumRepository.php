@@ -51,7 +51,9 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		return $this->forumModel->with(['children', 'parent'])->find($id);
+		$unviewable = $this->forumModel->getUnviewableIds();
+
+		return $this->forumModel->with(['children', 'parent'])->whereNotIn('id', $unviewable)->find($id);
 	}
 
 	/**
@@ -73,8 +75,10 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function getIndexTree()
 	{
+		$unviewable = $this->forumModel->getUnviewableIds();
+
 		// TODO: The caching decorator would also cache the relations here
-		return $this->forumModel->where('parent_id', '=', null)->with([
+		return $this->forumModel->where('parent_id', '=', null)->whereNotIn('id', $unviewable)->with([
 			'children',
 			'children.lastPost',
 			'children.lastPost.topic',

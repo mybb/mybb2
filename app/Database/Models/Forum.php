@@ -9,11 +9,14 @@
 
 namespace MyBB\Core\Database\Models;
 
+use MyBB\Core\Traits\Permissionable;
 use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Forum extends Node implements HasPresenter
 {
+	use Permissionable;
+
 	/**
 	 * Nested set column IDs.
 	 */
@@ -44,6 +47,11 @@ class Forum extends Node implements HasPresenter
 	 * @var array
 	 */
 	protected $guarded = ['left_id', 'right_id', 'parent_id'];
+
+	private static function getContentName()
+	{
+		return 'forum';
+	}
 
 	/**
 	 * Get the presenter class.
