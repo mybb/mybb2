@@ -67,7 +67,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function getId()
 	{
-		return (int) $this->id;
+		return (int)$this->id;
 	}
 
 	public function roles()
@@ -88,14 +88,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function hasPermission($permission)
 	{
-		if(is_array($permission))
-		{
-			foreach($permission as $perm)
-			{
+		if (is_array($permission)) {
+			foreach ($permission as $perm) {
 				$hasPermission = $this->hasPermission($perm);
 
-				if($hasPermission != PermissionChecker::YES)
-				{
+				if ($hasPermission != PermissionChecker::YES) {
 					return false;
 				}
 			}
@@ -103,18 +100,29 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			return true;
 		}
 
+		// Handle special cases where no role has been set
+		$roles = $this->roles;
+		if ($roles->count() == 0) {
+			if ($this->exists) {
+				// User saved? Something is wrong, attach the registered role
+				$registeredRole = Role::where('role_slug', '=', 'user')->first();
+				$this->roles()->attach($registeredRole->id, ['is_display' => 1]);
+				$roles = [$registeredRole];
+			} else {
+				// Guest
+				$guestRole = Role::where('role_slug', '=', 'guest')->first();
+				$roles = [$guestRole];
+			}
+		}
+
 		// TODO: Cache this foreach?
 		$isAllowed = false;
-		foreach($this->roles as $role)
-		{
+		foreach ($roles as $role) {
 			$hasPermission = PermissionChecker::hasPermission($role, $permission);
 
-			if($hasPermission == PermissionChecker::NEVER)
-			{
+			if ($hasPermission == PermissionChecker::NEVER) {
 				return false;
-			}
-			elseif($hasPermission == PermissionChecker::YES)
-			{
+			} elseif ($hasPermission == PermissionChecker::YES) {
 				$isAllowed = true;
 			}
 		}
