@@ -32,7 +32,7 @@ class PermissionChecker
 
 		$permission = $baseQuery->first(['value', 'default_value']);
 
-		if ($permission->value != null) {
+		if ($permission->value !== null) {
 			return $permission->value;
 		}
 

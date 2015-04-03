@@ -18,7 +18,7 @@ class ModifyPermissionRoleTable extends Migration {
 		Schema::create('permission_role', function (Blueprint $table) {
 			$table->unsignedInteger('permission_id');
 			$table->unsignedInteger('role_id');
-			$table->unsignedInteger('value');
+			$table->integer('value');
 			$table->unsignedInteger('content_id')->nullable();
 
 			$table->foreign('permission_id')->references('id')->on('permissions');
