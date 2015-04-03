@@ -26,8 +26,6 @@ class CreateProfileFieldsTable extends Migration {
 			$table->string('validation_rules')->nullable();
 			$table->integer('display_order')->unsigned();
 			$table->nullableTimestamps();
-
-			$table->foreign('profile_field_group_id')->references('id')->on('profile_field_groups');
 		});
 	}
 

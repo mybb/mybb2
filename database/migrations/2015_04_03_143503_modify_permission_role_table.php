@@ -19,7 +19,7 @@ class ModifyPermissionRoleTable extends Migration {
 			$table->unsignedInteger('permission_id');
 			$table->unsignedInteger('role_id');
 			$table->unsignedInteger('value');
-			$table->unsignedInteger('content_id');
+			$table->unsignedInteger('content_id')->nullable();
 
 			$table->foreign('permission_id')->references('id')->on('permissions');
 			$table->foreign('role_id')->references('id')->on('roles');

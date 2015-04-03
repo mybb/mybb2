@@ -19,6 +19,10 @@ class CreateProfileFieldGroupTable extends Migration {
 			$table->string('description')->nullable();
 			$table->nullableTimestamps();
 		});
+
+		Schema::table('profile_fields', function (Blueprint $table) {
+			$table->foreign('profile_field_group_id')->references('id')->on('profile_field_groups');
+		});
 	}
 
 	/**
