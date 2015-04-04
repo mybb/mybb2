@@ -10,7 +10,7 @@ trait Permissionable
 
 	private static function getContentName()
 	{
-		return null;
+		return strtolower(class_basename(__CLASS__));
 	}
 
 	private function getContentId()

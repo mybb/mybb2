@@ -48,11 +48,6 @@ class Forum extends Node implements HasPresenter
 	 */
 	protected $guarded = ['left_id', 'right_id', 'parent_id'];
 
-	private static function getContentName()
-	{
-		return 'forum';
-	}
-
 	/**
 	 * Get the presenter class.
 	 *
