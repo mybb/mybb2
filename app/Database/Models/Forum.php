@@ -9,13 +9,16 @@
 
 namespace MyBB\Core\Database\Models;
 
-use MyBB\Core\Traits\Permissionable;
+use MyBB\Core\Traits\InheritPermissionable;
 use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Forum extends Node implements HasPresenter
 {
-	use Permissionable;
+	// We need to make getParentId public as Node overrides it and is already public
+	use InheritPermissionable {
+		getParentId as public;
+	}
 
 	/**
 	 * Nested set column IDs.

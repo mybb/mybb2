@@ -4,43 +4,33 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Services\PermissionChecker;
 
-trait Permissionable
+trait InheritPermissionable
 {
-	private $permissions;
-	private static $unviewableIds;
+	use Permissionable;
 
-	private static function getContentName()
+	private function getParentId()
 	{
-		return strtolower(class_basename(__CLASS__));
+		return $this->parent_id;
 	}
 
-	private function getContentId()
+	private function getParent()
 	{
-		return $this->getKey();
+		return $this->parent;
 	}
 
-	private static function getViewablePermission()
+	// An array of permissions where a positive permission in one of the parents overrides negative permissions in its child
+	private static function checkForParentPositive()
 	{
-		return 'canView' . ucfirst(static::getContentName());
+		return [];
 	}
 
-	public static function getUnviewableIds(User $user = null)
+	// An array of permissions where a negative permission in one of the parents overrides positive permissions in its child
+	// By default the viewable permission is returned
+	private static function checkForParentNegative()
 	{
-		if(static::$unviewableIds != null) {
-			return static::$unviewableIds;
-		}
-		
-		$models = static::all();
-
-		$unviewable = [];
-		foreach ($models as $model) {
-			if (!$model->hasPermission(static::getViewablePermission(), $user)) {
-				$unviewable[] = $model->getKey();
-			}
-		}
-
-		static::$unviewableIds = $unviewable;
-		return $unviewable;
+		return [
+			static::getViewablePermission()
+		];
 	}
 
 	public function hasPermission($permission, User $user = null)
@@ -94,14 +84,26 @@ trait Permissionable
 			$hasPermission = $permissionChecker->hasPermission($role, $permission, static::getContentName(),
 				$this->getContentId());
 
-			// If we never want to grant the permission we can skip all other roles. But don't forget to cache it
+			// If we never want to grant the permission we can skip all other roles
+			// We can't directly return false as we still need to check for parent positives just in case
 			if ($hasPermission == PermissionChecker::NEVER) {
-				$this->permissions[$user->getKey()][$permission] = false;
-
-				return false;
+				$isAllowed = false;
+				break;
 			} // Override our "No" assumption - but don't return yet, we may have a "Never" permission later
 			elseif ($hasPermission == PermissionChecker::YES) {
 				$isAllowed = true;
+			}
+		}
+
+		if ($this->getParentId() != null) {
+			// If we have a positive permission but need to check parents for negative values do so here
+			if ($isAllowed && in_array($permission, static::checkForParentNegative())) {
+				$isAllowed = $this->getParent()->hasPermission($permission, $user);
+			}
+
+			// Do the same for negative permissions with parent positives
+			if (!$isAllowed && in_array($permission, static::checkForParentPositive())) {
+				$isAllowed = $this->getParent()->hasPermission($permission, $user);
 			}
 		}
 
