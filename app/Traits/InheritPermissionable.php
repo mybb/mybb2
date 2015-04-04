@@ -30,7 +30,7 @@ trait InheritPermissionable
 	 *
 	 * @return array
 	 */
-	private static function checkForParentPositive()
+	private static function getPositiveParentOverrides()
 	{
 		return [];
 	}
@@ -41,7 +41,7 @@ trait InheritPermissionable
 	 *
 	 * @return array
 	 */
-	private static function checkForParentNegative()
+	private static function getNegativeParentOverrides()
 	{
 		return [
 			static::getViewablePermission()
@@ -117,12 +117,12 @@ trait InheritPermissionable
 		// No parent? No need to do anything else here
 		if ($this->getParentId() != null) {
 			// If we have a positive permission but need to check parents for negative values do so here
-			if ($isAllowed && in_array($permission, static::checkForParentNegative())) {
+			if ($isAllowed && in_array($permission, static::getNegativeParentOverrides())) {
 				$isAllowed = $this->getParent()->hasPermission($permission, $user);
 			}
 
 			// Do the same for negative permissions with parent positives
-			if (!$isAllowed && in_array($permission, static::checkForParentPositive())) {
+			if (!$isAllowed && in_array($permission, static::getPositiveParentOverrides())) {
 				$isAllowed = $this->getParent()->hasPermission($permission, $user);
 			}
 		}
