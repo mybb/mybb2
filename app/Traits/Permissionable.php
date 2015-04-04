@@ -6,30 +6,49 @@ use MyBB\Core\Services\PermissionChecker;
 
 trait Permissionable
 {
+	/** @var array $permissions */
 	private $permissions;
+
+	/** @var array $unviewableIds */
 	private static $unviewableIds;
 
+	/**
+	 * @return string The content name which is stored in the database
+	 */
 	private static function getContentName()
 	{
 		return strtolower(class_basename(__CLASS__));
 	}
 
+	/**
+	 * @return int
+	 */
 	private function getContentId()
 	{
 		return $this->getKey();
 	}
 
+	/**
+	 * @return string
+	 */
 	private static function getViewablePermission()
 	{
 		return 'canView' . ucfirst(static::getContentName());
 	}
 
+	/**
+	 * Get a list of IDs that the specified user can't view
+	 *
+	 * @param User|null $user If null the authenticated user is used
+	 *
+	 * @return array
+	 */
 	public static function getUnviewableIds(User $user = null)
 	{
-		if(static::$unviewableIds != null) {
+		if (static::$unviewableIds != null) {
 			return static::$unviewableIds;
 		}
-		
+
 		$models = static::all();
 
 		$unviewable = [];
@@ -40,9 +59,18 @@ trait Permissionable
 		}
 
 		static::$unviewableIds = $unviewable;
+
 		return $unviewable;
 	}
 
+	/**
+	 * Checks whether the specified user has the specified permission
+	 *
+	 * @param array|string $permission
+	 * @param User         $user
+	 *
+	 * @return bool
+	 */
 	public function hasPermission($permission, User $user = null)
 	{
 		// Special case. Don't allow calling $user->hasPermission('xy', $anotherUser);
@@ -54,11 +82,13 @@ trait Permissionable
 			$user = app('auth.driver')->user();
 		}
 
+		// Handle the array case
 		if (is_array($permission)) {
 			foreach ($permission as $perm) {
 				$hasPermission = $this->hasPermission($perm);
 
-				if ($hasPermission != PermissionChecker::YES) {
+				// No need to check more permissions
+				if (!$hasPermission) {
 					return false;
 				}
 			}
@@ -86,6 +116,7 @@ trait Permissionable
 			}
 		}
 
+		// Get our real checker class
 		$permissionChecker = app()->make('MyBB\\Core\\Services\\PermissionChecker');
 
 		// Assume "No" by default

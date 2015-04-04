@@ -8,24 +8,39 @@ trait InheritPermissionable
 {
 	use Permissionable;
 
+	/**
+	 * @return int|null
+	 */
 	private function getParentId()
 	{
 		return $this->parent_id;
 	}
 
+	/**
+	 * @return InheritPermissionable
+	 */
 	private function getParent()
 	{
 		return $this->parent;
 	}
 
-	// An array of permissions where a positive permission in one of the parents overrides negative permissions in its child
+	/**
+	 * Returns an array of permissions where a positive permission in one of the parents overrides negative permissions
+	 * in its child
+	 *
+	 * @return array
+	 */
 	private static function checkForParentPositive()
 	{
 		return [];
 	}
 
-	// An array of permissions where a negative permission in one of the parents overrides positive permissions in its child
-	// By default the viewable permission is returned
+	/**
+	 * Returns an array of permissions where a negative permission in one of the parents overrides positive permissions
+	 * in its child By default the viewable permission is returned
+	 *
+	 * @return array
+	 */
 	private static function checkForParentNegative()
 	{
 		return [
@@ -33,6 +48,9 @@ trait InheritPermissionable
 		];
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function hasPermission($permission, User $user = null)
 	{
 		// Special case. Don't allow calling $user->hasPermission('xy', $anotherUser);
@@ -44,11 +62,12 @@ trait InheritPermissionable
 			$user = app('auth.driver')->user();
 		}
 
+		// Handle array case
 		if (is_array($permission)) {
 			foreach ($permission as $perm) {
 				$hasPermission = $this->hasPermission($perm);
 
-				if ($hasPermission != PermissionChecker::YES) {
+				if (!$hasPermission) {
 					return false;
 				}
 			}
@@ -95,6 +114,7 @@ trait InheritPermissionable
 			}
 		}
 
+		// No parent? No need to do anything else here
 		if ($this->getParentId() != null) {
 			// If we have a positive permission but need to check parents for negative values do so here
 			if ($isAllowed && in_array($permission, static::checkForParentNegative())) {

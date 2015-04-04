@@ -75,6 +75,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
 	}
 
+	/**
+	 * @return Role
+	 */
 	public function displayRole()
 	{
 		if($this->displayRole == null) {
