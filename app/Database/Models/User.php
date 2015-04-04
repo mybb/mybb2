@@ -8,16 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
-use MyBB\Core\Services\PermissionChecker;
-use MyBB\Core\Traits\PermissionHandler;
+use MyBB\Core\Traits\Permissionable;
 
 /**
  * @property string id
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter
 {
-
-	use Authenticatable, CanResetPassword;
+	use Authenticatable, CanResetPassword, Permissionable;
 
 	/**
 	 * The database table used by the model.
@@ -52,6 +50,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	private $displayRole;
+
 	/**
 	 * Get the presenter class.
 	 *
@@ -77,56 +77,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function displayRole()
 	{
-		// TODO: Cache this?
-		return $this->roles->where('pivot.is_display', 1)->first();
+		if($this->displayRole == null) {
+			$this->displayRole = $this->roles->where('pivot.is_display', 1)->first();
+		}
+		return $this->displayRole;
 	}
 
 	public function activity()
 	{
 		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');
-	}
-
-	public function hasPermission($permission)
-	{
-		if (is_array($permission)) {
-			foreach ($permission as $perm) {
-				$hasPermission = $this->hasPermission($perm);
-
-				if ($hasPermission != PermissionChecker::YES) {
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		// Handle special cases where no role has been set
-		$roles = $this->roles;
-		if ($roles->count() == 0) {
-			if ($this->exists) {
-				// User saved? Something is wrong, attach the registered role
-				$registeredRole = Role::where('role_slug', '=', 'user')->first();
-				$this->roles()->attach($registeredRole->id, ['is_display' => 1]);
-				$roles = [$registeredRole];
-			} else {
-				// Guest
-				$guestRole = Role::where('role_slug', '=', 'guest')->first();
-				$roles = [$guestRole];
-			}
-		}
-
-		// TODO: Cache this foreach?
-		$isAllowed = false;
-		foreach ($roles as $role) {
-			$hasPermission = PermissionChecker::hasPermission($role, $permission);
-
-			if ($hasPermission == PermissionChecker::NEVER) {
-				return false;
-			} elseif ($hasPermission == PermissionChecker::YES) {
-				$isAllowed = true;
-			}
-		}
-
-		return $isAllowed;
 	}
 }
