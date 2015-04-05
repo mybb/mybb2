@@ -99,6 +99,11 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Renderers\Post\Quote\QuoteInterface',
+			'MyBB\Core\Renderers\Post\Quote\MyCode'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\IParser',
 			'MyBB\Parser\Parser\MyCode'
 		);

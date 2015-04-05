@@ -1,11 +1,12 @@
 <?php
 
-namespace MyBB\Core\Renderers\Post;
+namespace MyBB\Core\Renderers\Post\Quote;
 
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Presenters\Post as PostPresenter;
 
-class Quote {
+class MyCode implements QuoteInterface
+{
 	/**
 	 * @param Post $post
 	 * @return string
@@ -24,7 +25,7 @@ class Quote {
 			$message);
 		$message = preg_replace("#\[attachment=([0-9]+?)\]#i", '', $message);
 
-		return "[quote='".e($post->author->name)."' pid='{$post->id}' dateline='".
-				$post->created_at->getTimestamp()."']\n{$message}\n[/quote]";
+		return "[quote='" . e($post->author->name) . "' pid='{$post->id}' dateline='" .
+		$post->created_at->getTimestamp() . "']\n{$message}\n[/quote]";
 	}
 }
