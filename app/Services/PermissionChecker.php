@@ -3,6 +3,7 @@
 namespace MyBB\Core\Services;
 
 use Illuminate\Database\DatabaseManager;
+use MyBB\Core\Database\Models\ContentClass;
 use MyBB\Core\Database\Models\Role;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
@@ -18,14 +19,37 @@ class PermissionChecker
 	/** @var DatabaseManager $db */
 	private $db;
 
+	/** @var ContentClass $classModel */
+	private $classModel;
+
 	/**
 	 * @param CacheRepository $cache
 	 * @param DatabaseManager $db
+	 * @param ContentClass    $classModel
 	 */
-	public function __construct(CacheRepository $cache, DatabaseManager $db)
+	public function __construct(CacheRepository $cache, DatabaseManager $db, ContentClass $classModel)
 	{
 		$this->cache = $cache;
 		$this->db = $db;
+		$this->classModel = $classModel;
+	}
+
+	/**
+	 * Get an array of unviewable ids for the registered content type
+	 *
+	 * @param string $content
+	 *
+	 * @return array
+	 */
+	public function getUnviewableIdsForContent($content)
+	{
+		$concreteClass = $this->classModel->getClass($content);
+
+		if ($concreteClass == null) {
+			throw new \RuntimeException("No class is registered for content type '{$content}'");
+		}
+
+		return $concreteClass->getUnviewableIds();
 	}
 
 	/**

@@ -55,6 +55,7 @@ class ForumController extends Controller
 	 */
 	public function all()
 	{
+		// Forum permissions are checked in "getIndexTree"
 		$forums = $this->forumRepository->getIndexTree();
 
 		return view('forum.all', compact('forums'));
@@ -67,6 +68,7 @@ class ForumController extends Controller
 	 */
 	public function index(Store $settings)
 	{
+		// Forum permissions are checked in "getIndexTree" and "getNewest"
 		$forums = $this->forumRepository->getIndexTree();
 		$topics = $this->topicRepository->getNewest();
 		$users = $this->userRepository->online($settings->get('wio.minutes', 15), 'name', 'asc', 0);
@@ -86,6 +88,7 @@ class ForumController extends Controller
 	 */
 	public function show(Request $request, $slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($id);
 
 		if(!$forum)

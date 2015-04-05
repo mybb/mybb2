@@ -13,6 +13,7 @@ namespace MyBB\Core\Http\Requests\Topic;
 
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Services\PermissionChecker;
 
 class CreateRequest extends Request
 {
@@ -25,17 +26,23 @@ class CreateRequest extends Request
 	/** @var Guard $guard */
 	private $guard;
 
-	public function __construct(Guard $guard)
+	/** @var PermissionChecker $permissionChecker */
+	private $permissionChecker;
+
+	public function __construct(Guard $guard, PermissionChecker $permissionChecker)
 	{
 		$this->guard = $guard;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	public function rules()
 	{
+		$unviewableForums = implode(',', $this->permissionChecker->getUnviewableIdsForContent('forum'));
+
 		return [
 			'content' => 'required',
 			'title' => 'required',
-			'forum_id' => 'required|exists:forums,id',
+			'forum_id' => "required|exists:forums,id|not_in:{$unviewableForums}",
 		];
 	}
 

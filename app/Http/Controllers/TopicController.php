@@ -58,6 +58,7 @@ class TopicController extends Controller
 
 	public function show($slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -75,6 +76,7 @@ class TopicController extends Controller
 
 	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -100,6 +102,7 @@ class TopicController extends Controller
 
 	public function last(Store $settings, $slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -125,6 +128,7 @@ class TopicController extends Controller
 
 	public function reply($slug = '', $id = 0, Request $request)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -149,6 +153,7 @@ class TopicController extends Controller
 	{
 		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
 
+		// Forum permissions are checked in "find"
 		/** @var Topic $topic */
 		$topic = $this->topicRepository->find($id);
 
@@ -179,6 +184,7 @@ class TopicController extends Controller
 
 	public function edit($slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -193,6 +199,7 @@ class TopicController extends Controller
 
 	public function postEdit($slug = '', $id = 0, $postId = 0, ReplyRequest $replyRequest)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -219,6 +226,7 @@ class TopicController extends Controller
 
 	public function create($forumId)
 	{
+		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($forumId);
 
 		if (!$forum) {
@@ -232,6 +240,8 @@ class TopicController extends Controller
 
 	public function postCreate($forumId = 0, CreateRequest $createRequest)
 	{
+		// Forum permissions are checked in "CreateRequest"
+
 		if (!$this->guard->check()) {
 			$captcha = $this->checkCaptcha();
 			if ($captcha !== true) {
@@ -261,6 +271,7 @@ class TopicController extends Controller
 
 	public function delete($slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -282,6 +293,7 @@ class TopicController extends Controller
 
 	public function restore($slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 

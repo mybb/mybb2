@@ -10,6 +10,7 @@ use MyBB\Core\Database\Models\Search;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\ISearchRepository;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
+use MyBB\Core\Services\PermissionChecker;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
@@ -34,25 +35,24 @@ class SearchController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param Guard $guard
-	 * @param ISearchRepository $searchRepository
+	 * @param Guard                    $guard
+	 * @param ISearchRepository        $searchRepository
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param Request $request
+	 * @param Request                  $request
 	 */
 	public function __construct(
 		Guard $guard,
 		ISearchRepository $searchRepository,
 		ForumRepositoryInterface $forumRepository,
 		Request $request
-	)
-	{
+	) {
 		parent::__construct($guard, $request);
 
 		$this->searchRepository = $searchRepository;
 		$this->forumRepository = $forumRepository;
 	}
-	
-	public 	$sorts = [
+
+	public $sorts = [
 		'postdate' => [
 			'name' => 'created_at',
 			'desc' => 'asc',
@@ -82,18 +82,16 @@ class SearchController extends Controller
 
 	public function index()
 	{
+		// Forum permissions are checked in "getIndexTree"
 		$forumsList = $this->forumRepository->getIndexTree();
 
 		$forums = [];
 
-		$makeLists = function(&$forums, &$list, $tab = '') use (&$makeLists)
-		{
-			foreach($list as $forum)
-			{
-				$forums[$forum->id] = $tab.$forum->title;
-				if(!empty($forum->children))
-				{
-					$makeLists($forums, $forum->children, $tab.'&nbsp;&nbsp;&nbsp;&nbsp;');
+		$makeLists = function (&$forums, &$list, $tab = '') use (&$makeLists) {
+			foreach ($list as $forum) {
+				$forums[$forum->id] = $tab . $forum->title;
+				if (!empty($forum->children)) {
+					$makeLists($forums, $forum->children, $tab . '&nbsp;&nbsp;&nbsp;&nbsp;');
 				}
 			}
 		};
@@ -104,55 +102,42 @@ class SearchController extends Controller
 		return view('search.index', compact('forums'));
 	}
 
-	public function makeSearch(SearchRequest $searchRequest)
+	public function makeSearch(PermissionChecker $permissionChecker, SearchRequest $searchRequest)
 	{
-		if($searchRequest->result != 'posts')
-		{
+		if ($searchRequest->result != 'posts') {
 			$searchRequest->result = 'topics';
 		}
 
-		if($searchRequest->result == 'topics')
-		{
+		if ($searchRequest->result == 'topics') {
 			$query = Topic::with(['firstPost']);
 			$query->leftJoin('posts', 'topics.first_post_id', '=', 'posts.id');
-			$query->where(function($query) use(&$searchRequest)
-			{
-				$query->where(function($query) use(&$searchRequest)
-				{
-					$query->where('topics.title', 'like', '%'.$searchRequest->keyword.'%');
-					$query->orWhere('posts.content', 'like', '%'.$searchRequest->keyword.'%');
+			$query->where(function ($query) use (&$searchRequest) {
+				$query->where(function ($query) use (&$searchRequest) {
+					$query->where('topics.title', 'like', '%' . $searchRequest->keyword . '%');
+					$query->orWhere('posts.content', 'like', '%' . $searchRequest->keyword . '%');
 				});
 			});
-		}
-		else
-		{
+		} else {
 			$query = Post::with(['topic']);
 			$query->leftJoin('topics', 'posts.topic_id', '=', 'topics.id');
-			$query->where('posts.content', 'like', '%'.$searchRequest->keyword.'%');
+			$query->where('posts.content', 'like', '%' . $searchRequest->keyword . '%');
 		}
 
-		if($searchRequest->author)
-		{
+		if ($searchRequest->author) {
 			$query->leftJoin('users', 'posts.user_id', '=', 'users.id');
-			$query->where(function($query) use(&$searchRequest)
-			{
-				if($searchRequest->matchusername)
-				{
+			$query->where(function ($query) use (&$searchRequest) {
+				if ($searchRequest->matchusername) {
 					$query->where('users.name', $searchRequest->author);
 					$query->orWhere('posts.username', $searchRequest->author);
-				}
-				else
-				{
-					$query->where('users.name', 'like', '%'.$searchRequest->author.'%');
-					$query->orWhere('posts.username', 'like', '%'.$searchRequest->author.'%');
+				} else {
+					$query->where('users.name', 'like', '%' . $searchRequest->author . '%');
+					$query->orWhere('posts.username', 'like', '%' . $searchRequest->author . '%');
 				}
 			});
 		}
 
-		if($searchRequest->topic_replies_type)
-		{
-			switch ($searchRequest->topic_replies_type)
-			{
+		if ($searchRequest->topic_replies_type) {
+			switch ($searchRequest->topic_replies_type) {
 				case 'atmost':
 					$query->where('topics.num_posts', '<=', $searchRequest->topic_replies);
 					break;
@@ -166,15 +151,12 @@ class SearchController extends Controller
 			}
 		}
 
-		if($searchRequest->post_date)
-		{
+		if ($searchRequest->post_date) {
 			$postDateType = '>=';
-			if ($searchRequest->post_date_type == 'older')
-			{
+			if ($searchRequest->post_date_type == 'older') {
 				$postDateType = '<=';
 			}
-			switch ($searchRequest->post_date)
-			{
+			switch ($searchRequest->post_date) {
 				case 'yesterday':
 					$postDate = '-1 day';
 					break;
@@ -201,22 +183,29 @@ class SearchController extends Controller
 					break;
 			}
 			if ($postDate) {
-				$query->where($searchRequest->result.'.created_at', $postDateType, new \DateTime('today ' . $postDate));
+				$query->where($searchRequest->result . '.created_at', $postDateType,
+					new \DateTime('today ' . $postDate));
 			}
 		}
 
-		if(is_array($searchRequest->forums) && (!empty($searchRequest->forums) || !in_array('-1', $searchRequest->forums)))
-		{
+		if (is_array($searchRequest->forums) && (!empty($searchRequest->forums) || !in_array('-1',
+					$searchRequest->forums))
+		) {
 			$query->whereIn('topics.forum_id', $searchRequest->forums);
 		}
-		
-		if(!$searchRequest->sortby)
-		{
+
+		// Forum permissions need to be checked
+		$unviewableForums = $permissionChecker->getUnviewableIdsForContent('forum');
+		if (!empty($unviewableForums)) {
+			$query->whereNotIn('topics.forum_id', $unviewableForums);
+		}
+
+
+		if (!$searchRequest->sortby) {
 			$searchRequest->sortby = 'postdate';
 			$searchRequest->sorttype = 'asc';
 		}
-		if(!$searchRequest->sorttype)
-		{
+		if (!$searchRequest->sorttype) {
 			$searchRequest->sorttype = 'asc';
 		}
 
@@ -224,18 +213,13 @@ class SearchController extends Controller
 		$posts = [];
 		$results = $query->get();
 
-		if($searchRequest->result == 'topics')
-		{
-			foreach($results as $result)
-			{
+		if ($searchRequest->result == 'topics') {
+			foreach ($results as $result) {
 				$topics[] = $result->id;
 				$posts[] = $result->firstPost->id;
 			}
-		}
-		else
-		{
-			foreach($results as $result)
-			{
+		} else {
+			foreach ($results as $result) {
 				$topics[] = $result->topic->id;
 				$posts[] = $result->id;
 			}
@@ -246,6 +230,7 @@ class SearchController extends Controller
 			'keywords' => $searchRequest->keyword,
 			'as_topics' => ($searchRequest->result == 'topics')
 		]);
+
 		return redirect()->route('search.results', [
 			'id' => $searchlog->id,
 			'orderBy' => $searchRequest->sortby,
@@ -257,8 +242,7 @@ class SearchController extends Controller
 	{
 		// TODO: sorts
 		$search = $this->searchRepository->find($id);
-		if(!$search)
-		{
+		if (!$search) {
 			throw new NotFoundHttpException();
 		}
 
@@ -268,47 +252,41 @@ class SearchController extends Controller
 		$orderBy = $request->get('orderBy');
 		$orderDir = $request->get('orderDir');
 
-		if(!isset($this->sorts[$orderBy]))
-		{
+		if (!isset($this->sorts[$orderBy])) {
 			$orderBy = 'postdate';
 		}
-		if($orderDir != 'asc')
-		{
+		if ($orderDir != 'asc') {
 			$orderDir = 'desc';
 		}
 		$urlDirs = [];
-		foreach($this->sorts as $sortName => $sort)
-		{
+		foreach ($this->sorts as $sortName => $sort) {
 			$urlDirs[$sortName] = $sort['asc'];
 		}
-		if($orderDir == $urlDirs[$orderBy])
-		{
-			if($urlDirs[$orderBy] == 'desc')
-			{
+		if ($orderDir == $urlDirs[$orderBy]) {
+			if ($urlDirs[$orderBy] == 'desc') {
 				$urlDirs[$orderBy] = 'asc';
-			}
-			else
-			{
+			} else {
 				$urlDirs[$orderBy] = 'desc';
 			}
 		}
 
-		if($search->as_topics)
-		{
-			$results = Topic::whereIn('id', explode(',', $search->topics))->with(['lastPost', 'author', 'lastPost.author'])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
-		}
-		else
-		{
-			$results = Post::whereIn('id', explode(',', $search->posts))->with(['topic', 'author'])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
+		if ($search->as_topics) {
+			$results = Topic::whereIn('id', explode(',', $search->topics))->with([
+				'lastPost',
+				'author',
+				'lastPost.author'
+			])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
+		} else {
+			$results = Post::whereIn('id', explode(',', $search->posts))->with([
+				'topic',
+				'author'
+			])->orderBy($this->sorts[$orderBy]['name'], $this->sorts[$orderBy][$orderDir])->paginate(10);
 		}
 
 
-		if($search->as_topics)
-		{
+		if ($search->as_topics) {
 			return view('search.result_topics', compact('results', 'search', 'orderDir', 'orderBy', 'urlDirs'));
-		}
-		else
-		{
+		} else {
 			return view('search.result_posts', compact('results', 'search'));
 		}
 	}
