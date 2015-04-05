@@ -21,7 +21,7 @@ class CreateRequest extends Request
 	 *
 	 * @var string
 	 */
-	protected $redirectRoute = 'topics.show';
+	protected $redirectRoute = 'topics.create';
 	/** @var Guard $guard */
 	private $guard;
 
@@ -43,5 +43,10 @@ class CreateRequest extends Request
 	{
 		//return $this->guard->check();
 		return true; // TODO: In dev return, needs replacing for later...
+	}
+
+	protected function getRedirectUrl()
+	{
+		return $this->redirector->getUrlGenerator()->route($this->redirectRoute, $this->route()->parameters());
 	}
 }

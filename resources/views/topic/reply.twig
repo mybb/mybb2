@@ -12,13 +12,25 @@
 				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
+
 		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
+				{% if auth_check() == false %}
+					<div class="form__row">
+						<h3>{{ form_label('username', trans('general.username')) }}</h3>
+						{{ form_text('username', username) }}
+					</div>
+				{% endif %}
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
-					{{ form_textarea('content', message) }}
+					{{ form_textarea('content', content) }}
 				</div>
+				{% if auth_check() == false %}
+					<div class="form__row">
+						{{ captcha() }}
+					</div>
+				{% endif %}
 			</div>
 		</section>
 		<div class="form__submit">

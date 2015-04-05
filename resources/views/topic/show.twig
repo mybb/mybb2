@@ -33,7 +33,7 @@
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
 						<input type="checkbox" class="post__inline-mod" />
-						<a href="#"><i class="fa fa-minus postToggle"></i></a>
+						<a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i></a>
 					</div>
 					<div class="post__body">
 						<p>
@@ -45,7 +45,7 @@
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>

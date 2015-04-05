@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
@@ -38,23 +39,29 @@ class PostRepository implements IPostRepository
 	/** @var  Store $settings */
 	private $settings;
 
+	/** @var ForumRepositoryInterface */
+	private $forumRepository;
+
 	/**
-	 * @param Post             $postModel The model to use for posts.
-	 * @param Guard            $guard     Laravel guard instance, used to get user ID.
+	 * @param Post $postModel The model to use for posts.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
 	 * @param MessageFormatter $formatter Post formatter instance.
-	 * @param Store            $settings  The settings container
+	 * @param Store $settings The settings container
+	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
 		Post $postModel,
 		Guard $guard,
 		MessageFormatter $formatter,
-		Store $settings
+		Store $settings,
+		ForumRepositoryInterface $forumRepository
 	) // TODO: Inject permissions container? So we can check post permissions before querying?
 	{
 		$this->postModel = $postModel;
 		$this->guard = $guard;
 		$this->formatter = $formatter;
 		$this->settings = $settings;
+		$this->forumRepository = $forumRepository;
 	}
 
 	/**
@@ -72,10 +79,10 @@ class PostRepository implements IPostRepository
 	public function getNewest($num = 20)
 	{
 		return $this->postModel->orderBy('created_at', 'desc')->with([
-			                                                             'topic',
-			                                                             'topic.forum',
-			                                                             'author'
-		                                                             ])->take($num)->get();
+			'topic',
+			'topic.forum',
+			'author'
+		])->take($num)->get();
 	}
 
 	/**
@@ -104,8 +111,7 @@ class PostRepository implements IPostRepository
 
 		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
 
-		if($withTrashed)
-		{
+		if ($withTrashed) {
 			$baseQuery = $baseQuery->withTrashed();
 		}
 
@@ -124,10 +130,9 @@ class PostRepository implements IPostRepository
 	{
 		// Get all posts in this thread created before this one...
 		$baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)
-		                             ->where('created_at', '<', $post->created_at);
+			->where('created_at', '<', $post->created_at);
 
-		if($withTrashed)
-		{
+		if ($withTrashed) {
 			$baseQuery = $baseQuery->withTrashed();
 		}
 
@@ -147,41 +152,40 @@ class PostRepository implements IPostRepository
 	{
 
 		$postDetails = array_merge([
-			                           'user_id' => $this->guard->user()->id,
-			                           'username' => null,
-			                           'content' => '',
-			                           'content_parsed' => '',
-		                           ], $postDetails);
+			'user_id' => $this->guard->user()->id,
+			'username' => null,
+			'content' => '',
+			'content_parsed' => '',
+		], $postDetails);
 
 		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
 			MessageFormatter::ME_USERNAME => $this->guard->user()->name,
 		]); // TODO: Parser options...
 
-		if($postDetails['user_id'] > 0)
-		{
+		if ($postDetails['user_id'] > 0) {
 			$postDetails['username'] = User::find($postDetails['user_id'])->name;
-		} else
-		{
+		} else {
 			$postDetails['user_id'] = null;
-			if($postDetails['username'] == trans('general.guest'))
-			{
+			if ($postDetails['username'] == trans('general.guest')) {
 				$postDetails['username'] = null;
 			}
 		}
 
 		$post = $topic->posts()->create($postDetails);
 
-		if($post !== false)
-		{
+		if ($post !== false) {
 			$topic->increment('num_posts');
-			$topic->forum->increment('num_posts');
 			$topic->update([
-				               'last_post_id' => $post['id']
-			               ]);
+				'last_post_id' => $post['id']
+			]);
+			$topic->forum->increment('num_posts');
+			$topic->forum->update([
+				'last_post_id' => $post->id,
+				'last_post_user_id' => $post->author->id
+			]);
 		}
 
-		if($post->user_id > 0)
-		{
+		if ($post->user_id > 0) {
 			$post->author->increment('num_posts');
 		}
 
@@ -198,46 +202,21 @@ class PostRepository implements IPostRepository
 	 */
 	public function editPost(Post $post, array $postDetails)
 	{
-		if($postDetails['content'])
-		{
+		if ($postDetails['content']) {
 			$options = [];
-			if($post->user_id > 0)
-			{
+			if ($post->user_id > 0) {
 				$options[MessageFormatter::ME_USERNAME] = $post->author->name;
-			} else
-			{
+			} else {
 				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
 			}
 
 			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'],
-			                                                         $options); // TODO: Parser options...
+				$options); // TODO: Parser options...
 		}
 
 		$post->update($postDetails);
 
 		return $post;
-	}
-
-	/**
-	 * Delete posts of topic
-	 *
-	 * @param Topic $topic The topic that you want to delete its posts
-	 * @param bool  $force Whether to force a hard delete of the post.
-	 *
-	 * @return mixed
-	 */
-
-	public function deletePostsForTopic(Topic $topic, $force = false)
-	{
-		$baseQuery = $this->postModel->where('topic_id', '=', $topic->id);
-
-		if($force)
-		{
-			return $baseQuery->forceDelete();
-		} else
-		{
-			return $baseQuery->delete();
-		}
 	}
 
 	/**
@@ -250,14 +229,29 @@ class PostRepository implements IPostRepository
 
 	public function deletePost(Post $post)
 	{
-		if($post['deleted_at'] == null)
-		{
+		if ($post['deleted_at'] == null) {
+			// Update counters
 			$post->topic->decrement('num_posts');
+			$post->topic->forum->decrement('num_posts');
 			$post->author->decrement('num_posts');
 
-			return $post->delete();
-		} else
-		{
+			// Delete the post
+			$success = $post->delete();
+
+			if ($success) {
+				if ($post->topic->last_post_id == $post->id) {
+					$post->topic->update([
+						'last_post_id' => $post->topic->posts->sortByDesc('id')->first()->id
+					]);
+				}
+
+				if ($post->topic->forum->last_post_id == $post->id) {
+					$this->forumRepository->updateLastPost($post->topic->forum);
+				}
+			}
+
+			return $success;
+		} else {
 			return $post->forceDelete();
 		}
 	}
@@ -273,26 +267,23 @@ class PostRepository implements IPostRepository
 	public function restorePost(Post $post)
 	{
 		$post->topic->increment('num_posts');
+		$post->topic->forum->increment('num_posts');
 		$post->author->increment('num_posts');
 
-		return $post->restore();
-	}
+		$success = $post->restore();
 
-	/**
-	 * Update the last post of the topic
-	 *
-	 * @param Topic $topic The topic to update
-	 *
-	 * @return mixed
-	 */
+		if ($success) {
+			if ($post->id > $post->topic->last_post_id) {
+				$post->topic->update([
+					'last_post_id' => $post->id
+				]);
+			}
 
-	public function updateLastPost(Topic $topic)
-	{
-		$topic->update([
-			               'last_post_id' => $this->postModel->where('topic_id', '=', $topic->id)->orderBy('id', 'desc')
-			                                                 ->first()->id
-		               ]);
+			if ($post->id > $post->topic->forum->last_post_id) {
+				$this->forumRepository->updateLastPost($post->topic->forum, $post);
+			}
+		}
 
-		return $topic;
+		return $success;
 	}
 }

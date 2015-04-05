@@ -1,0 +1,34 @@
+{% if options.count > 0 %}
+	<script type="text/javascript">
+		var RecaptchaOptions = {{ options|json_encode() }};
+	</script>
+{% endif %}
+<script type="text/javascript">
+	// If Recaptcha isn't defined (external script not loaded) we register a function on window.onload to render NoCaptcha
+	if(typeof Recaptcha == "undefined") {
+		window.onload = function() {
+			Recaptcha.create("{{ public_key }}",
+					"recaptcha{{ options.id }}",
+					{
+						lang: "{{ lang }}"
+					}
+			);
+		}
+	}
+	// Otherwise we render it directly
+	else
+	{
+		Recaptcha.create("{{ public_key }}",
+				"recaptcha{{ options.id }}",
+				{
+					lang: "{{ lang }}"
+				}
+		);
+	}
+</script>
+<div id="recaptcha{{ options.id }}"></div>
+<noscript>
+	<iframe src="//www.google.com/recaptcha/api/noscript?k={{ public_key }}&amp;hl={{ lang }}" height="300" width="500" frameborder="0"></iframe><br>
+	<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+	<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+</noscript>

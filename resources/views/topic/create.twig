@@ -12,6 +12,7 @@
 				<a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
+
 		{{ form_open({'route': ['topics.create', forum.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
@@ -29,6 +30,11 @@
 					<h3>{{ form_label('content', 'Content') }}</h3>
 					{{ form_textarea('content') }}
 				</div>
+				{% if auth_check() == false %}
+					<div class="form__row">
+						{{ captcha() }}
+					</div>
+				{% endif %}
 			</div>
 		</section>
 		{{ form_hidden('forum_id', forum.id) }}

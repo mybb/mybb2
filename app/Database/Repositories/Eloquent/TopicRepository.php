@@ -13,8 +13,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Str;
 use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Settings\Store;
@@ -47,13 +49,17 @@ class TopicRepository implements ITopicRepository
 	/** @var Store $settings */
 	private $settings;
 
+	/** @var ForumRepositoryInterface */
+	private $forumRepository;
+
 	/**
-	 * @param Topic           $topicModel     The model to use for threads.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param Topic $topicModel The model to use for threads.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
 	 * @param IPostRepository $postRepository Used to manage posts for topics.
-	 * @param Str             $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager $dbManager      Database manager, needed to do transactions.
-	 * @param Store           $settings       The settings container
+	 * @param Str $stringUtils String utilities, used for creating slugs.
+	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
+	 * @param Store $settings The settings container
+	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
 		Topic $topicModel,
@@ -61,7 +67,8 @@ class TopicRepository implements ITopicRepository
 		IPostRepository $postRepository,
 		Str $stringUtils,
 		DatabaseManager $dbManager,
-		Store $settings
+		Store $settings,
+		ForumRepositoryInterface $forumRepository
 	) // TODO: Inject permissions container? So we can check thread permissions before querying?
 	{
 		$this->topicModel = $topicModel;
@@ -70,6 +77,7 @@ class TopicRepository implements ITopicRepository
 		$this->stringUtils = $stringUtils;
 		$this->dbManager = $dbManager;
 		$this->settings = $settings;
+		$this->forumRepository = $forumRepository;
 	}
 
 	/**
@@ -130,10 +138,10 @@ class TopicRepository implements ITopicRepository
 	public function getNewest($num = 20)
 	{
 		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
-			                                                                'lastPost',
-			                                                                'forum',
-			                                                                'lastPost.author'
-		                                                                ])->take($num)->get();
+			'lastPost',
+			'forum',
+			'lastPost.author'
+		])->take($num)->get();
 	}
 
 	/**
@@ -148,8 +156,7 @@ class TopicRepository implements ITopicRepository
 	public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
 	{
 		// Build the correct order_by column - nice versions may be submitted
-		switch($orderBy)
-		{
+		switch ($orderBy) {
 			case 'replies':
 				$orderBy = 'num_posts';
 				break;
@@ -165,8 +172,8 @@ class TopicRepository implements ITopicRepository
 		$topicsPerPage = $this->settings->get('user.topics_per_page', 20);
 
 		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
-		                        ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-		                        ->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
+			->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
+			->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
 	}
 
 	/**
@@ -179,42 +186,38 @@ class TopicRepository implements ITopicRepository
 	public function create(array $details = [])
 	{
 		$details = array_merge([
-			                       'title' => '',
-			                       'forum_id' => 0,
-			                       'user_id' => $this->guard->user()->id,
-			                       'username' => null,
-			                       'first_post_id' => 0,
-			                       'last_post_id' => 0,
-			                       'views' => 0,
-			                       'num_posts' => 0,
-			                       'content' => '',
-		                       ], $details);
+			'title' => '',
+			'forum_id' => 0,
+			'user_id' => $this->guard->user()->id,
+			'username' => null,
+			'first_post_id' => 0,
+			'last_post_id' => 0,
+			'views' => 0,
+			'num_posts' => 0,
+			'content' => '',
+		], $details);
 
 		$details['slug'] = $this->createSlugForTitle($details['title']);
 
-		if($details['user_id'] > 0)
-		{
+		if ($details['user_id'] > 0) {
 			$details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
-		} else
-		{
+		} else {
 			$details['user_id'] = null;
-			if($details['username'] == trans('general.guest'))
-			{
+			if ($details['username'] == trans('general.guest')) {
 				$details['username'] = null;
 			}
 		}
 
 		$topic = null;
 
-		$this->dbManager->transaction(function () use ($details, &$topic)
-		{
+		$this->dbManager->transaction(function () use ($details, &$topic) {
 			$topic = $this->topicModel->create([
-				                                   'title' => $details['title'],
-				                                   'slug' => $details['slug'],
-				                                   'forum_id' => $details['forum_id'],
-				                                   'user_id' => $details['user_id'],
-				                                   'username' => $details['username'],
-			                                   ]);
+				'title' => $details['title'],
+				'slug' => $details['slug'],
+				'forum_id' => $details['forum_id'],
+				'user_id' => $details['user_id'],
+				'username' => $details['username'],
+			]);
 
 			$firstPost = $this->postRepository->addPostToTopic($topic, [
 				'content' => $details['content'],
@@ -222,14 +225,15 @@ class TopicRepository implements ITopicRepository
 			]);
 
 			$topic->update([
-				               'first_post_id' => $firstPost->id,
-				               'last_post_id' => $firstPost->id,
-				               'num_posts' => 1,
-			               ]);
+				'first_post_id' => $firstPost->id,
+				'last_post_id' => $firstPost->id,
+				'num_posts' => 1,
+			]);
 		});
 
-		if($topic->user_id > 0)
-		{
+		$topic->forum->increment('num_topics');
+
+		if ($topic->user_id > 0) {
 			$topic->author->increment('num_topics');
 		}
 
@@ -245,7 +249,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	private function createSlugForTitle($title = '')
 	{
-		$title = (string) $title;
+		$title = (string)$title;
 		$sluggedTitle = $this->stringUtils->slug($title, '-');
 
 		return $sluggedTitle;
@@ -277,21 +281,23 @@ class TopicRepository implements ITopicRepository
 
 	public function deleteTopic(Topic $topic)
 	{
-		if($topic['deleted_at'] == null)
-		{
+		if ($topic['deleted_at'] == null) {
 			$topic->forum->decrement('num_topics');
 			$topic->forum->decrement('num_posts', $topic->num_posts);
 
 			$topic->author->decrement('num_topics');
 
-			return $topic->delete();
-		} else
-		{
-			$topic->update([
-				               'first_post_id' => null,
-				               'last_post_id' => null
-			               ]);
-			$this->postRepository->deletePostsForTopic($topic, true);
+			$success = $topic->delete();
+
+			if ($success) {
+				if ($topic->last_post_id == $topic->forum->last_post_id) {
+					$this->forumRepository->updateLastPost($topic->forum);
+				}
+			}
+
+			return $success;
+		} else {
+			$topic->posts->forceDelete();
 
 			return $topic->forceDelete();
 		}
@@ -312,7 +318,15 @@ class TopicRepository implements ITopicRepository
 
 		$topic->author->increment('num_topics');
 
-		return $topic->restore();
+		$success = $topic->restore();
+
+		if ($success) {
+			if ($topic->last_post_id > $topic->forum->last_post_id) {
+				$this->forumRepository->updateLastPost($topic->forum, $topic->lastPost);
+			}
+		}
+
+		return $success;
 	}
 
 	/**
@@ -326,6 +340,27 @@ class TopicRepository implements ITopicRepository
 	public function findBySlugAndId($slug = '', $id = 0)
 	{
 		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)
-		                        ->first();
+			->first();
+	}
+
+	/**
+	 * Update the last post of the topic
+	 *
+	 * @param Topic $topic The topic to update
+	 *
+	 * @return mixed
+	 */
+
+	public function updateLastPost(Topic $topic, Post $post = null)
+	{
+		if ($post === null) {
+			$post = $topic->posts->sortByDesc('id')->first();
+		}
+
+		$topic->update([
+			'last_post_id' => $post->id
+		]);
+
+		return $topic;
 	}
 }

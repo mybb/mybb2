@@ -25,8 +25,8 @@ return [
     'topics' => 'Topics',
     'posts' => 'Posts',
 
-	'results' => 'Results',
-	'resultsforx' => 'Results for :keyword',
+    'results' => 'Results',
+    'resultsforx' => 'Results for :keyword',
 
 	'filters' => 'Filters',
 	'allforums' => 'Find topics in all forums',

@@ -5,6 +5,10 @@ use Illuminate\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
+use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 use Session;
@@ -32,7 +36,10 @@ class AccountController extends Controller
 		return view('account.dashboard')->withActive('dashboard');
 	}
 
-	public function getProfile()
+	/**
+	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
+	 */
+	public function getProfile(ProfileFieldGroupRepositoryInterface $profileFieldGroups)
 	{
 		$dob = explode('-', $this->guard->user()->dob);
 
@@ -42,30 +49,31 @@ class AccountController extends Controller
 			'year' => $dob[2],
 		];
 
-		return view('account.profile', compact('dob'))->withActive('profile');
+		return view('account.profile', [
+			'dob' => $dob,
+			'profile_field_groups' => $profileFieldGroups->getAll()
+		])->withActive('profile');
 	}
 
 	/**
-	 * @param Request $request
-	 *
+	 * @param UpdateProfileRequest $request
+	 * @param UserProfileFieldRepositoryInterface $userProfileFields
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postProfile(Request $request)
+	public function postProfile(UpdateProfileRequest $request, UserProfileFieldRepositoryInterface $userProfileFields)
 	{
-		$this->validate($request, [
-			'date_of_birth_day' => 'integer|min:1|max:31',
-			'date_of_birth_month' => 'integer|min:1|max:12',
-			'date_of_birth_year' => 'integer',
-			'usertitle' => 'string',
-		]);
-
+		// handle updates to the user model
 		$input = $request->only(['usertitle']);
-
 		$input['dob'] = $request->get('date_of_birth_day') . '-' . $request->get('date_of_birth_month') . '-' . $request->get('date_of_birth_year');
-
 		$this->guard->user()->update($input);
 
-		return redirect()->route('account.profile');
+		// handle profile field updates
+		$profileFieldData = $request->get('profile_fields');
+		foreach ($request->getProfileFields() as $profileField) {
+			$userProfileFields->updateOrCreate($this->guard->user(), $profileField, $profileFieldData[$profileField->id]);
+		}
+
+		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
 	}
 
 	public function getUsername()
@@ -92,7 +100,7 @@ class AccountController extends Controller
 			// Valid password so update
 			$this->guard->user()->update($request->only('name'));
 
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.saved_username'));
 		}
 
 		return redirect()
@@ -128,10 +136,7 @@ class AccountController extends Controller
 			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'),
 			                          $request->only('email'));
 
-			// We need show some sort of feedback to the user
-			Session::flash('success', trans('account.confirmEmail'));
-
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.confirmEmail'));
 		}
 
 		return redirect()
@@ -157,10 +162,7 @@ class AccountController extends Controller
 
 		$this->guard->user()->update(['email' => $email]);
 
-		// We need show some sort of feedback to the user
-		Session::flash('success', trans('account.updatedEmail'));
-
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess(trans('account.updatedEmail'));
 	}
 
 	public function getPassword()
@@ -189,10 +191,7 @@ class AccountController extends Controller
 			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
 			                          Hash::make($request->get('password1')));
 
-			// We need show some sort of feedback to the user
-			Session::flash('success', trans('account.confirm'));
-
-			return redirect()->route('account.profile');
+			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
 		}
 
 		return redirect()
@@ -219,10 +218,7 @@ class AccountController extends Controller
 		// Valid password so update
 		$this->guard->user()->update(['password' => $password]);
 
-		// We need show some sort of feedback to the user
-		Session::flash('success', trans('account.updatedPassword'));
-
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess(trans('account.updatedPassword'));
 	}
 
 	public function getAvatar()
@@ -270,7 +266,7 @@ class AccountController extends Controller
 			$this->guard->user()->update(['avatar' => '']);
 		}
 
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess('account.saved_avatar');
 	}
 
 	public function removeAvatar()
@@ -278,7 +274,7 @@ class AccountController extends Controller
 		// TODO: Delete the old file if an uploaded was used
 		$this->guard->user()->update(['avatar' => '']);
 
-		return redirect()->route('account.profile');
+		return redirect()->route('account.profile')->withSuccess('account.removed_avatar');
 	}
 
 	public function getNotifications()
@@ -423,7 +419,7 @@ class AccountController extends Controller
 
 		$settings->set($modifiedSettings, null, true);
 
-		return redirect()->route('account.preferences');
+		return redirect()->route('account.preferences')->withSuccess(trans('account.saved_preferences'));
 	}
 
 	public function getPrivacy()
@@ -467,7 +463,7 @@ class AccountController extends Controller
 
 		$settings->set($modifiedSettings, null, true);
 
-		return redirect()->route('account.privacy');
+		return redirect()->route('account.privacy')->withSuccess(trans('account.saved_privacy'));
 	}
 
 	public function getDrafts()

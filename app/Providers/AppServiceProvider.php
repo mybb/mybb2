@@ -33,8 +33,10 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Core\Services\Registrar'
 		);
 
+		/*
+		 * Disabled at the moment as it still needs some tweaks
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			function (Application $app)
 			{
 				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
@@ -43,6 +45,12 @@ class AppServiceProvider extends ServiceProvider
 
 				return new CachingDecorator($repository, $cache);
 			}
+		);
+		*/
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ForumRepository'
 		);
 
 		$this->app->bind(
@@ -66,9 +74,23 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
-			function (Application $app)
-			{
+			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
 
@@ -84,8 +106,7 @@ class AppServiceProvider extends ServiceProvider
 		$this->initDefaultUser();
 
 		// Temporary fix for Form...
-		$this->app->bind('Collective\Html\FormBuilder', function ($app)
-		{
+		$this->app->bind('Collective\Html\FormBuilder', function ($app) {
 			$form = new \Collective\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
 
 			return $form->setSessionStore($app['session.store']);

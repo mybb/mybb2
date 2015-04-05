@@ -19,7 +19,7 @@ class TopicsTableSeeder extends Seeder
 			'views' => 0,
 			'created_at' => new \DateTime(),
 			'updated_at' => new \DateTime(),
-			'num_posts' => 1,
+			'num_posts' => 0,
 		];
 
 		DB::table('topics')->insert($topic);
