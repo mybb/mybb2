@@ -36,12 +36,12 @@ class User extends BasePresenter
 
 
 	/**
-	 * @param UserModel $resource The user being wrapped by this presenter.
-	 * @param Router $router
+	 * @param UserModel                $resource The user being wrapped by this presenter.
+	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param ITopicRepository $topicRepository
-	 * @param IPostRepository $postRepository
-	 * @param IUserRepository $userRepository
+	 * @param ITopicRepository         $topicRepository
+	 * @param IPostRepository          $postRepository
+	 * @param IUserRepository          $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -66,7 +66,8 @@ class User extends BasePresenter
 		}
 
 		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
-			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->displayRole()->role_username_style);
+			return str_replace(':user', e($this->wrappedObject->name),
+				$this->wrappedObject->displayRole()->role_username_style);
 		}
 
 		return e($this->wrappedObject->name);
@@ -100,8 +101,8 @@ class User extends BasePresenter
 		$avatar = $this->wrappedObject->avatar;
 
 		// If we have an email or link we'll return it - otherwise nothing
-		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
-		{
+		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false
+		) {
 			return $avatar;
 		}
 
@@ -122,11 +123,18 @@ class User extends BasePresenter
 				$langOptions['url'] = route($route->getName(), $route->parameters());
 			}
 
-			$lang = Lang::get('online.' . $route->getName(), $langOptions);
+			if (!isset($langOptions['langString'])) {
+				$langString = 'online.' . $route->getName();;
+			} else {
+				$langString = 'online.' . $langOptions['langString'];
+				unset($langOptions['langString']);
+			}
+
+			$lang = Lang::get($langString, $langOptions);
 
 			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
 			if (is_array($lang)) {
-				$lang = Lang::get('online.' . $route->getName() . '.index', $langOptions);
+				$lang = Lang::get($langString . '.index', $langOptions);
 			}
 		}
 
@@ -145,20 +153,37 @@ class User extends BasePresenter
 
 		switch ($route) {
 			case 'forums.show':
-				$data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
+				$forum = $this->forumRepository->find($parameters['id']);
+				// Either the forum has been deleted or this user doesn't have permission to view it
+				if ($forum != null) {
+					$data['forum'] = e($forum->title);
+				} else {
+					$data['langString'] = 'forums.invalid';
+				}
 				break;
 			case 'topics.show':
 			case 'topics.reply':
 			case 'topics.edit':
 			case 'topics.delete':
 			case 'topics.restore':
-				$data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
-				$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
+				$topic = $this->topicRepository->find($parameters['id']);
+				// Either the topic has been deleted or this user doesn't have permission to view it
+				if ($topic != null) {
+					$data['topic'] = e($topic->title);
+					$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
+				} else {
+					$data['langString'] = 'topics.invalid';
+				}
 				break;
 			case 'topics.create':
 				$forum = $this->forumRepository->find($parameters['forumId']);
-				$data['forum'] = e($forum->title);
-				$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
+				// Either the forum has been deleted or this user doesn't have permission to view it
+				if ($forum != null) {
+					$data['forum'] = e($forum->title);
+					$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
+				} else {
+					$data['langString'] = 'forums.invalid';
+				}
 				break;
 			case 'search.post':
 			case 'search.results':

@@ -2,7 +2,6 @@
 
 return [
 	'unknown' => 'Unknown location',
-
 	'members' => [
 		'index' => 'Viewing <a href=":url">memberlist</a>',
 		'online' => 'Viewing <a href=":url">online users list</a>',
@@ -13,6 +12,7 @@ return [
 	'forums' => [
 		'all' => 'Viewing <a href=":url">all forums</a>',
 		'show' => 'Viewing the <a href=":url">:forum</a> forum',
+		'invalid' => 'Viewing a forum',
 	],
 	'account' => [
 		'index' => 'Viewing their <a href=":url">dashboard</a>',
@@ -43,5 +43,6 @@ return [
 		'delete' => 'Deleting a post in <a href=":url">:topic</a>',
 		'restore' => 'Restoring a post in <a href=":url">:topic</a>',
 		'create' => 'Posting a new topic in <a href=":url">:forum</a>',
+		'invalid' => 'Reading a topic',
 	],
 ];
