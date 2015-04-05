@@ -67,7 +67,7 @@ textarea {
 .main {
 	padding: side-values(15px 0 30px 0);
 
-	.page-content header {
+	header {
 
 		margin-bottom: 20px;
 
@@ -359,7 +359,7 @@ img.avatar {
 dl.stats {
 	line-height: 1.6;
 	margin: 0;
-	font-size: 0.7em;
+	font-size: 0.9em;
 	display: table-cell;
 
 	dt {
@@ -376,6 +376,35 @@ dl.stats {
 		padding: 0;
 		margin: 0;
 		display: table-cell;
+	}
+}
+
+.alert {
+	background-color: $background-1;
+	padding: side-values(10px 12px 10px 40px);
+	margin-top: 10px;
+	margin-bottom: 20px;
+	font-size: 0.9em;
+	@include border-radius(4px);
+
+	i {
+		float: $left;
+		margin: side-values(6px 0 0 -25px);
+	}
+
+	p {
+		margin: 0;
+		padding: 0;
+	}
+
+	&.alert--danger {
+		background-color: $danger-color;
+		color: $invert-font-color;
+	}
+
+	&.alert--success {
+		background-color: $success-color;
+		color: $invert-font-color;
 	}
 }
 

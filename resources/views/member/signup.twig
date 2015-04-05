@@ -3,16 +3,6 @@
 	{{ trans('member.signup') }}
 {% endblock %}
 {% block contents %}
-		{% if errors.any %}
-			<div class="alert alert-danger">
-				<strong>Whoops!</strong> There were some problems with your input.<br><br>
-				<ul>
-					{% for error in errors.all %}
-						<li>{{ error }}</li>
-					{% endfor %}
-				</ul>
-			</div>
-		{% endif %}
     {{ form_open({'url': ['auth/signup'], 'method': 'post'}) }}
 		<div class="page-content page-content--centered">
 			<header>
@@ -38,7 +28,7 @@
                         {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
                     </div>
                     <div class="form__row">
-                        <h3>Captcha goes here!</h3>
+                        <h3>{{ captcha() }}</h3>
                     </div>
 				</div>
 			</section>

@@ -50,10 +50,15 @@ class UserRepository implements IUserRepository
 	public function online($minutes = 15, $orderBy = 'last_visit', $orderDir = 'desc', $num = 20)
 	{
 		// If the user visited the logout page as last he's not online anymore
-		return $this->userModel->where('last_visit', '>=', new \DateTime("{$minutes} minutes ago"))
+		$baseQuery = $this->userModel->where('last_visit', '>=', new \DateTime("{$minutes} minutes ago"))
 			->where('last_page', '!=', 'auth/logout')
-			->orderBy($orderBy, $orderDir)
-			->paginate($num);
+			->orderBy($orderBy, $orderDir);
+
+		if ($num > 0) {
+			return $baseQuery->paginate($num);
+		}
+
+		return $baseQuery->get();
 	}
 
 	/**

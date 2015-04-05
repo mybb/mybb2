@@ -5,7 +5,7 @@ namespace MyBB\Core\Http\Controllers;
 use Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Database\Repositories\IUserRepository;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ForumController extends Controller
 {
-	/** @var IForumRepository $forumRepository */
+	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
@@ -26,14 +26,14 @@ class ForumController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param IForumRepository $forumRepository Forum repository instance to use in order to load forum information.
+	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum information.
 	 * @param ITopicRepository $topicRepository Thread repository instance to use in order to load threads within a
 	 *                                          forum.
 	 * @param IPostRepository  $postRepository  Post repository instance to use in order to load posts for the latest
 	 *                                          discussion table.
 	 */
 	public function __construct(
-		IForumRepository $forumRepository,
+		ForumRepositoryInterface $forumRepository,
 		ITopicRepository $topicRepository,
 		IPostRepository $postRepository,
 		IUserRepository $userRepository,

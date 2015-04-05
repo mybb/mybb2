@@ -14,6 +14,13 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'general.board_desc'],
 			['name' => 'wio.minutes'],
 			['name' => 'wio.refresh'],
+			['name' => 'captcha.method'],
+			['name' => 'captcha.ayah_public_key'],
+			['name' => 'captcha.ayah_private_key'],
+			['name' => 'captcha.recaptcha_public_key'],
+			['name' => 'captcha.recaptcha_private_key'],
+			['name' => 'captcha.nocaptcha_public_key'],
+			['name' => 'captcha.nocaptcha_private_key'],
 			['name' => 'user.date_format'],
 			['name' => 'user.time_format'],
 			['name' => 'user.timezone'],
@@ -39,7 +46,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'user.notify_on_group_request'],
 			['name' => 'user.notify_on_moderation_post'],
 			['name' => 'user.notify_on_report'],
-			['name' => 'user.notify_on_uername_change'],
+			['name' => 'user.notify_on_username_change'],
 			['name' => 'user.notification_mails'],
 			['name' => 'user.showonline'],
 			['name' => 'user.receive_messages'],
@@ -157,7 +164,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_uername_change')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_username_change')->pluck('id'),
 				'value' => '1'
 			],
 			[
