@@ -16,7 +16,7 @@ use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
@@ -27,7 +27,7 @@ class TopicController extends Controller
 {
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
-	/** @var IPostRepository $postRepository */
+	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
@@ -36,14 +36,14 @@ class TopicController extends Controller
 
 	/**
 	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
+	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
 		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
 		Request $request

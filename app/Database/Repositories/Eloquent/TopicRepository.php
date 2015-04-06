@@ -17,7 +17,7 @@ use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Settings\Store;
 
@@ -34,7 +34,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	protected $guard;
 	/**
-	 * @var IPostRepository $postRepository
+	 * @var PostRepositoryInterface $postRepository
 	 * @access protected
 	 */
 	protected $postRepository;
@@ -55,7 +55,7 @@ class TopicRepository implements ITopicRepository
 	/**
 	 * @param Topic $topicModel The model to use for threads.
 	 * @param Guard $guard Laravel guard instance, used to get user ID.
-	 * @param IPostRepository $postRepository Used to manage posts for topics.
+	 * @param PostRepositoryInterface $postRepository Used to manage posts for topics.
 	 * @param Str $stringUtils String utilities, used for creating slugs.
 	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
 	 * @param Store $settings The settings container
@@ -64,7 +64,7 @@ class TopicRepository implements ITopicRepository
 	public function __construct(
 		Topic $topicModel,
 		Guard $guard,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
 		Str $stringUtils,
 		DatabaseManager $dbManager,
 		Store $settings,
