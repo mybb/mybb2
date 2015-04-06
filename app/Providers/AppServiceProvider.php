@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ISearchRepository',
+			'MyBB\Core\Database\Repositories\SearchRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\SearchRepository'
 		);
 
