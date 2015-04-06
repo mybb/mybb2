@@ -9,9 +9,9 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Str;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
@@ -29,7 +29,7 @@ class TopicRepository implements ITopicRepository
 	 */
 	protected $topicModel;
 	/**
-	 * @var Guard $guard ;
+	 * @var Guard $guard
 	 * @access protected
 	 */
 	protected $guard;

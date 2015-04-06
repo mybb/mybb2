@@ -1,10 +1,10 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
 use Breadcrumbs;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Controllers\Controller;
 
 class PasswordController extends Controller
@@ -31,11 +31,9 @@ class PasswordController extends Controller
 	/**
 	 * Create a new password controller instance.
 	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard          $auth
-	 * @param  \Illuminate\Http\Request                  $request
-	 * @param  \Illuminate\Contracts\Auth\PasswordBroker $passwords
-	 *
-	 * @return void
+	 * @param Guard $auth
+	 * @param \Illuminate\Http\Request $request
+	 * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
 	 */
 	public function __construct(Guard $auth, Request $request, PasswordBroker $passwords)
 	{

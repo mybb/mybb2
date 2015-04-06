@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
