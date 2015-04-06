@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IUserRepository',
+			'MyBB\Core\Database\Repositories\UserRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\UserRepository'
 		);
 

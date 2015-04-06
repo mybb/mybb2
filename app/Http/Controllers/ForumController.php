@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -20,7 +20,7 @@ class ForumController extends Controller
 	private $topicRepository;
 	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
-	/** @var  IUserRepository $userRepository */
+	/** @var  UserRepositoryInterface $userRepository */
 	private $userRepository;
 
 	/**
@@ -36,7 +36,7 @@ class ForumController extends Controller
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		IUserRepository $userRepository,
+		UserRepositoryInterface $userRepository,
 		Guard $guard,
 		Request $request
 	) {

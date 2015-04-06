@@ -4,14 +4,14 @@ namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 
 class UserController extends Controller
 {
     /**
-     * @var IUserRepository
+     * @var UserRepositoryInterface
      */
     protected $users;
 
@@ -23,13 +23,13 @@ class UserController extends Controller
     /**
      * @param Guard $guard
      * @param Request $request
-     * @param IUserRepository $users
+     * @param UserRepositoryInterface $users
      * @param UserProfileFieldRepositoryInterface $userProfileFields
      */
     public function __construct(
         Guard $guard,
         Request $request,
-        IUserRepository $users,
+        UserRepositoryInterface $users,
         UserProfileFieldRepositoryInterface $userProfileFields
     ) {
         parent::__construct($guard, $request);
