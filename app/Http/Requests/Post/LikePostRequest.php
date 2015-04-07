@@ -36,6 +36,13 @@ class LikePostRequest extends Request
         return $this->rules;
     }
 
+    /**
+     * Check whether the current user has permission to perform this request.
+     *
+     * @param Guard $guard
+     *
+     * @return bool
+     */
     public function authorize(Guard $guard)
     {
         if (!$guard->check()) {
