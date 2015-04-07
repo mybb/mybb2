@@ -18,11 +18,17 @@ class CreateRequest extends Request
 	/** @var Guard $guard */
 	private $guard;
 
+	/**
+	 * @param Guard $guard
+	 */
 	public function __construct(Guard $guard)
 	{
 		$this->guard = $guard;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -35,9 +41,11 @@ class CreateRequest extends Request
 		];
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function authorize()
 	{
-		//return $this->guard->check();
-		return true; // TODO: In dev return, needs replacing for later...
+		return true;
 	}
 }

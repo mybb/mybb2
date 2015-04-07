@@ -45,7 +45,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 	 *
 	 * @param string $id The ID of the vote to find.
 	 *
-	 * @return mixed
+	 * @return PollVote
 	 */
 	public function find($id)
 	{

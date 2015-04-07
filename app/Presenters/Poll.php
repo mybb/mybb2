@@ -43,6 +43,11 @@ class Poll extends BasePresenter
 		$this->guard = $guard;
 	}
 
+	/**
+	 * get the options of the poll
+	 *
+	 * @return array
+	 */
 	public function options()
 	{
 		if (!isset($this->cache['options'])) {
@@ -61,6 +66,9 @@ class Poll extends BasePresenter
 		return $this->cache['options'];
 	}
 
+	/**
+	 * @return integer
+	 */
 	public function num_votes()
 	{
 		if (!isset($this->cache['num_votes'])) {
@@ -75,6 +83,9 @@ class Poll extends BasePresenter
 		return $this->cache['num_votes'];
 	}
 
+	/**
+	 * @return integer
+	 */
 	public function num_options()
 	{
 		if (!isset($this->cache['num_options'])) {
@@ -84,6 +95,9 @@ class Poll extends BasePresenter
 		return $this->cache['num_options'];
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function is_closed()
 	{
 		return ($this->wrappedObject->is_closed ||
@@ -91,6 +105,9 @@ class Poll extends BasePresenter
 		);
 	}
 
+	/**
+	 * @return \DateTime|null
+	 */
 	public function end_at()
 	{
 		if ($this->wrappedObject->end_at && new \DateTime($this->wrappedObject->end_at) >= new \DateTime) {
@@ -100,6 +117,9 @@ class Poll extends BasePresenter
 		return null;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function myVote()
 	{
 		if (!isset($this->cache['myVote'])) {

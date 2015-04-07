@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Presenters\Poll as PollPresenter;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 use MyBB\Settings\Store;
@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PollController extends Controller
 {
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
 	/** @var PollRepositoryInterface $postRepository */
 	private $pollRepository;
@@ -37,7 +37,7 @@ class PollController extends Controller
 	private $guard;
 
 	/**
-	 * @param ITopicRepository    $topicRepository Topic repository instance, used to fetch topic details.
+	 * @param TopicRepositoryInterface    $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param PollRepositoryInterface     $pollRepository Poll repository instance, used to fetch poll details.
 	 * @param PollVoteRepositoryInterface $pollVoteRepository PollVote repository instance, used to fetch poll vote details.
 	 * @param ForumRepositoryInterface    $forumRepository Forum repository interface, used to fetch forum details.
@@ -45,7 +45,7 @@ class PollController extends Controller
 	 * @param Request             $request Request implementation
 	 */
 	public function __construct(
-		ITopicRepository $topicRepository,
+		TopicRepositoryInterface $topicRepository,
 		PollRepositoryInterface $pollRepository,
 		PollVoteRepositoryInterface $pollVoteRepository,
 		ForumRepositoryInterface $forumRepository,
@@ -173,6 +173,8 @@ class PollController extends Controller
 			throw new \Exception(trans('errors.poll_is_closed'));
 		}
 
+
+		// Is the user already voted?
 		if ($this->guard->check()) {
 			$myVote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
 			if ($myVote) {
@@ -182,23 +184,32 @@ class PollController extends Controller
 		}
 
 		$votes = $voteRequest->input('option');
-
 		$options = $pollPresenter->options();
 
+
+
 		if ($poll->is_multiple) {
+
+			// $votes should be array
 			if (!is_array($votes)) {
 				$votes = [$votes];
 			}
 			$votes = array_unique($votes, SORT_NUMERIC);
 
+			// check the vote is valid
 			if ($poll->max_options && count($votes) > $poll->max_options) {
 				// Error
 				throw new \Exception(trans('errors.poll_very_votes', ['count' => $poll->max_options]));
 			}
+
+			// is user selected any options?
 			if (count($votes) == 0) {
 				// Error
 				throw new \Exception(trans('errors.poll_no_votes'));
 			}
+
+
+			// Increment num votes of options that the user voted
 			$okVotes = [];
 			foreach ($votes as $vote) {
 				if (is_numeric($vote) && 0 < $vote && $vote <= $pollPresenter->num_options()) {
@@ -206,23 +217,31 @@ class PollController extends Controller
 					$okVotes[] = $vote;
 				}
 			}
-
 			$votes = implode(',', $okVotes);
+
 		} else {
+
+			// if the user votes in several options we get first one.
 			if (is_array($votes)) {
 				$votes = $votes[0];
 			}
 
+			// check the vote is valid
 			if (!is_numeric($votes) || $votes > count($options)) {
 				// Error
 				throw new \Exception(trans('errors.poll_invalid_vote'));
 			}
+
+			// Increment num votes of the option that the user voted
 			$options[$votes - 1]['votes']++;
 		}
+
+
 		$vote = $this->pollVoteRepository->create([
 			'poll_id' => $poll->id,
 			'vote' => $votes
 		]);
+
 
 		if ($vote) {
 			$poll->update(['options' => $options]);
