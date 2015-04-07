@@ -61,7 +61,7 @@
 						</ul>
                         {% if post.num_likes > 0 %}
                             <div class="post__likes">
-                                {{ render_likes(post.likes, '...') }}
+                                {{ render_likes(post.likes, url_route('post.likes', {'post_id': post.id})) }}
                             </div>
                         {% endif %}
 

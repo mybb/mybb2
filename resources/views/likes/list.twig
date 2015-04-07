@@ -20,5 +20,5 @@
             <a href="{{ viewAllLikesLink }}">{{ trans('likes.others', {'numOthers': numOtherLikes}) }}</a>
         </span>
     {% endif %}
-    {{ trans('likes.like_this') }}
+    <a href="{{ viewAllLikesLink }}">{{ trans('likes.like_this') }}</a>
 </div>

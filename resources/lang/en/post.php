@@ -13,4 +13,6 @@
 return [
     'like_added' => 'Post liked',
     'like_removed' => 'Post un-liked',
+    'likes_for_post' => 'Likes for post #:post_id in topic :topic_title',
+    'show_topic' => 'View Topic',
 ];

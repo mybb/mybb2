@@ -32,9 +32,11 @@ interface LikesRepositoryInterface
      *
      * @param \Illuminate\Database\Eloquent\Model|LikeableTrait $content The content to retrieve the likes for.
      *
+     * @param int                                               $perPage The number of likes to show per page.
+     *
      * @return mixed
      */
-    function getAllLikesForContent(Model $content);
+    function getAllLikesForContentPaginated(Model $content, $perPage = 10);
 
     /**
      * Get all of the likes for a set of entries of a specific content type.

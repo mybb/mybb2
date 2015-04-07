@@ -15,34 +15,50 @@ namespace MyBB\Core\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
+use MyBB\Settings\Store;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
 {
     /**
-     * @var IPostRepository $postsRepository
+     * @var PostRepositoryInterface $postsRepository
      */
     private $postsRepository;
     /**
      * @var LikesRepositoryInterface $likesRepository
      */
     private $likesRepository;
+    /**
+     * @var Store $settings
+     */
+    private $settings;
 
     /**
      * @param Guard                    $guard
      * @param Request                  $request
-     * @param IPostRepository          $postRepository
+     * @param PostRepositoryInterface  $postRepository
      * @param LikesRepositoryInterface $likesRepository
+     * @param Store                    $settings
      */
-    public function __construct(Guard $guard, Request $request, IPostRepository $postRepository, LikesRepositoryInterface $likesRepository)
+    public function __construct(Guard $guard, Request $request, PostRepositoryInterface $postRepository, LikesRepositoryInterface $likesRepository, Store $settings)
     {
         parent::__construct($guard, $request);
         $this->postsRepository = $postRepository;
         $this->likesRepository = $likesRepository;
+        $this->settings = $settings;
     }
 
+    /**
+     * Handler for POST requests to add a like for a post.
+     *
+     * @param LikePostRequest $request
+     * @param Redirector      $redirector
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function postToggleLike(LikePostRequest $request, Redirector $redirector)
     {
         $post = $this->postsRepository->find($request->get('post_id'));
@@ -64,5 +80,26 @@ class PostController extends Controller
         }
 
         return $redirect;
+    }
+
+    /**
+     * SHow all of the likes a post has received.
+     *
+     * @param int $postId The ID of the post to show the likes for.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getPostLikes($postId)
+    {
+        $post = $this->postsRepository->find($postId);
+        $post->load('topic');
+
+        if (!$post) {
+            throw new NotFoundHttpException();
+        }
+
+        $likes = $this->likesRepository->getAllLikesForContentPaginated($post, $this->settings->get('likes.per_page', 10));
+
+        return view('post.likes', compact('post', 'likes'));
     }
 }

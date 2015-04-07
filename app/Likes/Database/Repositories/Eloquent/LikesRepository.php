@@ -58,11 +58,13 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @param \Illuminate\Database\Eloquent\Model|LikeableTrait $content The content to retrieve the likes for.
      *
+     * @param int                                               $perPage The number of likes to show per page.
+     *
      * @return mixed
      */
-    public function getAllLikesForContent(Model $content)
+    public function getAllLikesForContentPaginated(Model $content, $perPage = 10)
     {
-        return $this->likesModel->where('content_id', '=', $content->id)->where('content_type', '=', get_class($content))->get();
+        return $this->likesModel->where('content_id', '=', $content->id)->where('content_type', '=', get_class($content))->paginate($perPage);
     }
 
     /**

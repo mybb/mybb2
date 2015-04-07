@@ -84,7 +84,7 @@ class RenderLikes extends \Twig_Extension
      */
     public function render(Collection $likesCollection, $viewAllLikesLink)
     {
-        $numLikesToList = $this->settings->get('posts.likes_to_show', 2);
+        $numLikesToList = $this->settings->get('posts.likes_to_show', 3);
         $numOtherLikes = $likesCollection->count() - $numLikesToList;
 
         $userId = $this->guard->user()->getAuthIdentifier();
