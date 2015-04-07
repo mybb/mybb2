@@ -12,14 +12,14 @@ namespace MyBB\Core\Presenters;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Poll as PollModel;
-use MyBB\Core\Database\Repositories\IPollVoteRepository;
+use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 
 class Poll extends BasePresenter
 {
 	/** @var PollModel $wrappedObject */
 	protected $wrappedObject;
 
-	/** @var  IPollVoteRepository $pollVoteRepository */
+	/** @var  PollVoteRepositoryInterface $pollVoteRepository */
 	protected $pollVoteRepository;
 
 	/** @var Guard $guard */
@@ -30,12 +30,12 @@ class Poll extends BasePresenter
 
 	/**
 	 * @param PollModel           $resource
-	 * @param IPollVoteRepository $pollVoteRepository
+	 * @param PollVoteRepositoryInterface $pollVoteRepository
 	 * @param Guard               $guard
 	 */
 	public function __construct(
 		PollModel $resource,
-		IPollVoteRepository $pollVoteRepository,
+		PollVoteRepositoryInterface $pollVoteRepository,
 		Guard $guard
 	) {
 		$this->wrappedObject = $resource;

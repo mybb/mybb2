@@ -13,10 +13,10 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use MyBB\Core\Database\Models\Poll;
 use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\IPollRepository;
-use MyBB\Core\Database\Repositories\IPollVoteRepository;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 
-class PollRepository implements IPollRepository
+class PollRepository implements PollRepositoryInterface
 {
 	/**
 	 * @var Poll $pollModel
@@ -25,7 +25,7 @@ class PollRepository implements IPollRepository
 	protected $pollModel;
 
 	/**
-	 * @var IPollVoteRepository $pollVoteRepository
+	 * @var PollVoteRepositoryInterface $pollVoteRepository
 	 * @access protected
 	 */
 	protected $pollVoteRepository;
@@ -46,13 +46,13 @@ class PollRepository implements IPollRepository
 	 * @param Poll                $pollModel The model to use for polls.
 	 * @param Guard               $guard Laravel guard instance, used to get user ID.
 	 * @param DatabaseManager     $dbManager Database manager, needed to do transactions.
-	 * @param IPollVoteRepository $pollVoteRepository The poll vote repository for poll votes
+	 * @param PollVoteRepositoryInterface $pollVoteRepository The poll vote repository for poll votes
 	 */
 	public function __construct(
 		Poll $pollModel,
 		Guard $guard,
 		DatabaseManager $dbManager,
-		IPollVoteRepository $pollVoteRepository
+		PollVoteRepositoryInterface $pollVoteRepository
 	) {
 		$this->pollModel = $pollModel;
 		$this->guard = $guard;

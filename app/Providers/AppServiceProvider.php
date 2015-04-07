@@ -74,12 +74,12 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IPollRepository',
+			'MyBB\Core\Database\Repositories\PollRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\PollRepository'
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IPollVoteRepository',
+			'MyBB\Core\Database\Repositories\PollVoteRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\PollVoteRepository'
 		);
 
