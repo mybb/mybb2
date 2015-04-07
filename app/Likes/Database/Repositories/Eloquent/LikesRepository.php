@@ -25,6 +25,7 @@ class LikesRepository implements LikesRepositoryInterface
      * @var LikeModel $likesModel
      */
     protected $likesModel;
+
     /**
      * @var Guard $guard
      */
@@ -127,7 +128,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return mixed
      */
-    function getAllLikesForContents(Model $contentType, array $ids)
+    public function getAllLikesForContents(Model $contentType, array $ids)
     {
         return $this->likesModel->where('content_type', '=', get_class($contentType))->whereIn('content_id', $ids);
     }

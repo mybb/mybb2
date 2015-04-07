@@ -25,7 +25,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function getAllLikesByUserPaginated($user, $perPage = 20);
+    public function getAllLikesByUserPaginated($user, $perPage = 20);
 
     /**
      * Retrieve all of the likes a piece of content has received.
@@ -36,7 +36,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function getAllLikesForContentPaginated(Model $content, $perPage = 10);
+    public function getAllLikesForContentPaginated(Model $content, $perPage = 10);
 
     /**
      * Get all of the likes for a set of entries of a specific content type.
@@ -46,7 +46,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function getAllLikesForContents(Model $contentType, array $ids);
+    public function getAllLikesForContents(Model $contentType, array $ids);
 
     /**
      * Toggle a like on or off for a given piece of content for the current user.
@@ -55,5 +55,5 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    function toggleLikeForContent(Model $content);
+    public function toggleLikeForContent(Model $content);
 }

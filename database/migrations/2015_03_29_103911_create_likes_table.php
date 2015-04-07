@@ -3,8 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikesTable extends Migration {
-
+class CreateLikesTable extends Migration
+{
 	/**
 	 * Run the migrations.
 	 *
@@ -34,5 +34,4 @@ class CreateLikesTable extends Migration {
 	{
 		Schema::drop('likes');
 	}
-
 }

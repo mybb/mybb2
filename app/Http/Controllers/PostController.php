@@ -43,8 +43,13 @@ class PostController extends Controller
      * @param LikesRepositoryInterface $likesRepository
      * @param Store                    $settings
      */
-    public function __construct(Guard $guard, Request $request, PostRepositoryInterface $postRepository, LikesRepositoryInterface $likesRepository, Store $settings)
-    {
+    public function __construct(
+        Guard $guard,
+        Request $request,
+        PostRepositoryInterface $postRepository,
+        LikesRepositoryInterface $likesRepository,
+        Store $settings
+    ) {
         parent::__construct($guard, $request);
         $this->postsRepository = $postRepository;
         $this->likesRepository = $likesRepository;
@@ -55,22 +60,28 @@ class PostController extends Controller
      * Handler for POST requests to add a like for a post.
      *
      * @param LikePostRequest $request
-     * @param Redirector      $redirector
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postToggleLike(LikePostRequest $request, Redirector $redirector)
+    public function postToggleLike(LikePostRequest $request)
     {
         $post = $this->postsRepository->find($request->get('post_id'));
 
+        if (!$post) {
+            throw new NotFoundHttpException();
+        }
+
         $like = $this->likesRepository->toggleLikeForContent($post);
 
-        $redirect = $redirector->route('topics.showPost',
-            [
-                'slug' => $post->topic->slug,
-                'id' => $post->topic_id,
-                'postId' => $post->id,
-            ]
+        $redirect = redirect(
+            route(
+                'topics.showPost',
+                [
+                    'slug'   => $post->topic->slug,
+                    'id'     => $post->topic_id,
+                    'postId' => $post->id,
+                ]
+            )
         );
 
         if ($like === null) {
@@ -92,13 +103,17 @@ class PostController extends Controller
     public function getPostLikes($postId)
     {
         $post = $this->postsRepository->find($postId);
-        $post->load('topic');
 
         if (!$post) {
             throw new NotFoundHttpException();
         }
 
-        $likes = $this->likesRepository->getAllLikesForContentPaginated($post, $this->settings->get('likes.per_page', 10));
+        $post->load('topic');
+
+        $likes = $this->likesRepository->getAllLikesForContentPaginated(
+            $post,
+            $this->settings->get('likes.per_page', 10)
+        );
 
         return view('post.likes', compact('post', 'likes'));
     }
