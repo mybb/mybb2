@@ -1,3 +1,6 @@
 <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link">
-    {{ user.styled_name }}
+    {% if includeAvatar %}
+        <img src="{{ user.avatar }}" class="profile-link__avatar" />
+    {% endif %}
+    {{ user.styled_name|raw }}
 </a>
