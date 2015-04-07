@@ -9,8 +9,7 @@
 
 namespace MyBB\Core\Http\Requests\Topic;
 
-
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Requests\Request;
 
 class ReplyRequest extends Request

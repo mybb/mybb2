@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Request;
 use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Database\Repositories\IUserRepository;
 
@@ -25,11 +25,11 @@ class User extends BasePresenter
 
 	/** @var Router $router */
 	private $router;
-	/** @var IForumRepository $forumRepository */
+	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
-	/** @var IPostRepository $postRepository */
+	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
 	/** @var IUserRepository $userRepository */
 	private $userRepository;
@@ -38,17 +38,17 @@ class User extends BasePresenter
 	/**
 	 * @param UserModel $resource The user being wrapped by this presenter.
 	 * @param Router $router
-	 * @param IForumRepository $forumRepository
+	 * @param ForumRepositoryInterface $forumRepository
 	 * @param ITopicRepository $topicRepository
-	 * @param IPostRepository $postRepository
+	 * @param PostRepositoryInterface $postRepository
 	 * @param IUserRepository $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
 		Router $router,
-		IForumRepository $forumRepository,
+		ForumRepositoryInterface $forumRepository,
 		ITopicRepository $topicRepository,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
 		IUserRepository $userRepository
 	) {
 		$this->wrappedObject = $resource;
@@ -149,6 +149,8 @@ class User extends BasePresenter
 				break;
 			case 'topics.show':
 			case 'topics.reply':
+			case 'topics.quote':
+			case 'topics.reply.post':
 			case 'topics.edit':
 			case 'topics.delete':
 			case 'topics.restore':

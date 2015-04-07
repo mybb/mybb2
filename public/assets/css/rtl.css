@@ -2514,13 +2514,13 @@ textarea {
 
 .main {
   padding: 15px 0 30px 0; }
-  .main .page-content header {
+  .main header {
     margin-bottom: 20px; }
-    .main .page-content header h1 {
+    .main header h1 {
       font-size: 1.5em;
       margin: 0 0 10px 0;
       padding: 0; }
-    .main .page-content header p {
+    .main header p {
       color: #666;
       font-size: 0.9em;
       margin: 0 0 10px 0; }
@@ -2697,7 +2697,7 @@ img.avatar {
 dl.stats {
   line-height: 1.6;
   margin: 0;
-  font-size: 0.7em;
+  font-size: 0.9em;
   display: table-cell; }
   dl.stats dt {
     float: right;
@@ -3559,6 +3559,8 @@ section.container .forum-list {
       float: right;
       position: relative;
       margin: -48px 0 0 0; }
+    .user-list .user-list__user .stats {
+      font-size: 0.7em; }
   .user-list.online-now .user-list__user .avatar-profile-link {
     width: 50px;
     height: 50px; }
@@ -3589,6 +3591,36 @@ section.container .forum-list {
   border-radius: 4px; }
   .team-badge i {
     margin-left: 5px; }
+
+.profile .profile__header {
+  position: relative; }
+  .profile .profile__header .avatar {
+    float: right;
+    width: 100px;
+    height: 100px;
+    margin-left: 16px; }
+  .profile .profile__header .page-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0; }
+.profile .profile__username, .profile .profile__usertitle {
+  margin: 5px 0; }
+.profile .profile__field-group h2 {
+  margin-bottom: 0; }
+.profile .profile__field {
+  padding: 8px;
+  border-bottom: 1px solid #dfdfdf;
+  font-size: 0.9em; }
+  .profile .profile__field h3 {
+    margin: 0;
+    padding: 0;
+    font-weight: 600; }
+  .profile .profile__field p {
+    margin: 0;
+    padding: 0; }
+  .profile .profile__field:last-child {
+    border-bottom: none; }
 
 @media only screen and (min-width: 768px) {
   .user-list .user-list__user {
@@ -4080,14 +4112,14 @@ html.js .inline-moderation.floating i {
 .dropit .dropit-open .dropit-submenu {
   display: block; }
 
-.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   clear: both; }
 
-.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list {
+.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list, .profile .profile__header {
   *zoom: 1; }
 
 .hidden {

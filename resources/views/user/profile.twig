@@ -1,47 +1,21 @@
 {% extends "layouts.base" %}
 {% block title %}
-    {{ user.name }}
+	{{ user.name }}
 {% endblock %}
 {% block contents %}
-    <header>
-        <h1 style="margin-bottom: 0;">{{ user.name }}</h1>
-        <p style="margin-top: 10px; margin-bottom: 7px;">{{ user.usertitle }}</p>
-    </header>
+	<div class="profile">
+		<header class="profile__header">
+			<img src="{{ user.avatar }}" class="avatar">
+			<h1 class="profile__username">{{ user.styled_name|raw }}</h1>
+			<p class="profile__usertitle">{{ user.usertitle }}</p>
+			<span class="team-badge"><span class="text">{{ user.role.role_display_name }}</span></span>
+			<div class="page-buttons">
+				<a href="{{ url_route('account.index') }}" class="button"><i class="fa fa-comments"></i><span class="text">Message</span></a>
+				<a href="{{ url_route('account.index') }}" class="button"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+			</div>
+		</header>
 
-    <section class="container clearfix">
-        <div class="clearfix" style="padding: 10px;">
-            <img src="{{ user.avatar }}" class="avatar" style="width: 100px; height: 100px; float: left; margin-right: 30px;">
-            <p>
-                {{ trans('topic.posts') }}: {{ user.num_posts }}<br />
-                {{ trans('topic.topics') }}: {{ user.num_topics }}<br />
-                {{ trans('member.joinDate') }}: {{ generate_time(user.created_at) }}
-            </p>
-        </div>
-    </section>
+		{% include "user.profile_basic" %}
 
-    <nav class="section-menu">
-        <ul class="sidebar-navigation clearfix">
-            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-comments fa-fw"></i><span class="text">Message</span></a></li>
-            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-plus fa-fw"></i><span class="text">Follow</span></a></li>
-            <li><a href="{{ url_route('account.index') }}"><i class="fa fa-heart fa-fw"></i><span class="text">Buddy</span></a></li>
-        </ul>
-    </nav>
-
-    <div class="page-content page-content--menu">
-        <section class="container clearfix">
-            <div style="padding: 20px;">
-                {% for group in profile_field_groups %}
-                    <h2 class="heading heading--major">{{ group.name }}</h2>
-                    {% for field in group.fields %}
-                        {% if field.has_value %}
-                            <div>
-                                <h2>{{ field.name }}</h2>
-                                <p>{{ field.value }}</p>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% endfor %}
-            </div>
-        </section>
-    </div>
+	</div>
 {% endblock %}

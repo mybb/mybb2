@@ -11,9 +11,9 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Repositories\IForumRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 
-class ForumRepository implements IForumRepository
+class ForumRepository implements ForumRepositoryInterface
 {
 	/**
 	 * @var Forum $forumModel

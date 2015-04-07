@@ -9,16 +9,16 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 
-class PostRepository implements IPostRepository
+class PostRepository implements PostRepositoryInterface
 {
 	/**
 	 * @var Post $postModel
@@ -39,21 +39,22 @@ class PostRepository implements IPostRepository
 	/** @var  Store $settings */
 	private $settings;
 
-	/** @var IForumRepository */
+	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
 	/**
-	 * @param Post             $postModel The model to use for posts.
-	 * @param Guard            $guard     Laravel guard instance, used to get user ID.
+	 * @param Post $postModel The model to use for posts.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
 	 * @param MessageFormatter $formatter Post formatter instance.
-	 * @param Store            $settings  The settings container
+	 * @param Store $settings The settings container
+	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
 		Post $postModel,
 		Guard $guard,
 		MessageFormatter $formatter,
 		Store $settings,
-		IForumRepository $forumRepository
+		ForumRepositoryInterface $forumRepository
 	) // TODO: Inject permissions container? So we can check post permissions before querying?
 	{
 		$this->postModel = $postModel;

@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
 		/*
 		 * Disabled at the moment as it still needs some tweaks
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			function (Application $app)
 			{
 				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
@@ -49,12 +49,12 @@ class AppServiceProvider extends ServiceProvider
 		*/
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IForumRepository',
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\ForumRepository'
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IPostRepository',
+			'MyBB\Core\Database\Repositories\PostRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\PostRepository'
 		);
 
@@ -69,7 +69,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ISearchRepository',
+			'MyBB\Core\Database\Repositories\SearchRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\SearchRepository'
 		);
 
@@ -106,6 +106,11 @@ class AppServiceProvider extends ServiceProvider
 
 				return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
 			}
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Renderers\Post\Quote\QuoteInterface',
+			'MyBB\Core\Renderers\Post\Quote\MyCode'
 		);
 
 		$this->app->bind(
