@@ -11,9 +11,9 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Search;
-use MyBB\Core\Database\Repositories\ISearchRepository;
+use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 
-class SearchRepository implements ISearchRepository
+class SearchRepository implements SearchRepositoryInterface
 {
 	/**
 	 * @var Search $searchModel
