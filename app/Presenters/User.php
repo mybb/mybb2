@@ -15,7 +15,7 @@ use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Database\Repositories\IUserRepository;
 
@@ -29,7 +29,7 @@ class User extends BasePresenter
 	private $forumRepository;
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
-	/** @var IPostRepository $postRepository */
+	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
 	/** @var IUserRepository $userRepository */
 	private $userRepository;
@@ -40,7 +40,7 @@ class User extends BasePresenter
 	 * @param Router $router
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param ITopicRepository $topicRepository
-	 * @param IPostRepository $postRepository
+	 * @param PostRepositoryInterface $postRepository
 	 * @param IUserRepository $userRepository
 	 */
 	public function __construct(
@@ -48,7 +48,7 @@ class User extends BasePresenter
 		Router $router,
 		ForumRepositoryInterface $forumRepository,
 		ITopicRepository $topicRepository,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
 		IUserRepository $userRepository
 	) {
 		$this->wrappedObject = $resource;

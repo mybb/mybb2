@@ -1,10 +1,10 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
 use Breadcrumbs;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Controllers\Controller;
 
 class AuthController extends Controller
@@ -26,11 +26,9 @@ class AuthController extends Controller
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param  \Illuminate\Contracts\Auth\Guard     $auth
-	 * @param  \Illuminate\Http\Request             $request
-	 * @param  \Illuminate\Contracts\Auth\Registrar $registrar
-	 *
-	 * @return void
+	 * @param Guard $auth
+	 * @param \Illuminate\Http\Request $request
+	 * @param \Illuminate\Contracts\Auth\Registrar $registrar
 	 */
 	public function __construct(Guard $auth, Request $request, Registrar $registrar)
 	{
