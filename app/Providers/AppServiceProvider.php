@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ITopicRepository',
+			'MyBB\Core\Database\Repositories\TopicRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
 		);
 
