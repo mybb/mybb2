@@ -20,7 +20,7 @@
         <section class="post-likes">
             <ol class="likes">
                 {% for like in likes %}
-                    <li class="likes__like like" data-like-id="{{ like.id }}">
+                    <li class="likes__like like" data-like-id="{{ like.id }}" data-post-id="{{ like.content_id }}">
                         {{ like.user.name }}
                         <span class="like__date">
                             {{ human_date(like.created_at) }}

@@ -51,7 +51,11 @@
 
                                 {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
                                     {{ form_hidden('post_id', post.id) }}
-                                    {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': 'button'}) }}
+                                    {% if post.hasLikedPost %}
+                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">UnLike</span>', {'type': 'submit', 'class': 'button button--unlike'}) }}
+                                    {% else %}
+                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': 'button button--like'}) }}
+                                    {% endif %}
                                 {{ form_close() }}
 
 								<li class="quote"><a href="index.php?page=quote-post"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
