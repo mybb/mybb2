@@ -12,7 +12,7 @@ namespace MyBB\Core\Database\Repositories;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 
-interface IForumRepository
+interface ForumRepositoryInterface
 {
     /**
      * Get all forums.

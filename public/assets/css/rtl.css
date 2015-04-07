@@ -2514,13 +2514,13 @@ textarea {
 
 .main {
   padding: 15px 0 30px 0; }
-  .main .page-content header {
+  .main header {
     margin-bottom: 20px; }
-    .main .page-content header h1 {
+    .main header h1 {
       font-size: 1.5em;
       margin: 0 0 10px 0;
       padding: 0; }
-    .main .page-content header p {
+    .main header p {
       color: #666;
       font-size: 0.9em;
       margin: 0 0 10px 0; }
@@ -2697,7 +2697,7 @@ img.avatar {
 dl.stats {
   line-height: 1.6;
   margin: 0;
-  font-size: 0.7em;
+  font-size: 0.9em;
   display: table-cell; }
   dl.stats dt {
     float: right;
@@ -2709,6 +2709,26 @@ dl.stats {
     padding: 0;
     margin: 0;
     display: table-cell; }
+
+.alert {
+  background-color: #fafafa;
+  padding: 10px 40px 10px 12px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  border-radius: 4px; }
+  .alert i {
+    float: right;
+    margin: 6px -25px 0 0; }
+  .alert p {
+    margin: 0;
+    padding: 0; }
+  .alert.alert--danger {
+    background-color: #c00;
+    color: #fff; }
+  .alert.alert--success {
+    background-color: #018303;
+    color: #fff; }
 
 .error-no-results {
   text-align: center;
@@ -2784,7 +2804,7 @@ dl.stats {
     max-width: 1250px;
     margin: 0 auto; } }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="url"], input[type="number"], input[type="email"], input[type="password"] {
   border: 1px solid #ccc;
   padding: 6px;
   width: 100%;
@@ -3278,6 +3298,10 @@ section.container .forum-list {
   .post.pending-approval {
     background-color: #f2dede;
     border-color: #f2aaab; }
+  .post.post--hidden .post__meta {
+    padding-bottom: 2px; }
+  .post.post--hidden .post__body, .post.post--hidden .post__controls {
+    display: none; }
   .post .post__meta {
     padding: 4px 6px 12px 6px; }
     .post .post__meta a:link, .post .post__meta a:visited {
@@ -3308,13 +3332,21 @@ section.container .forum-list {
   .post .post__inline-mod {
     float: left;
     margin: -20px 7px 0 0; }
+  .post .post__toggle {
+    float: left;
+    font-size: 14px;
+    margin: 1px 0 0 1px; }
+    .post .post__toggle i {
+      color: rgba(0, 0, 0, 0.2); }
+    .post .post__toggle:hover i {
+      color: rgba(0, 0, 0, 0.4); }
   .post .team-badge {
     display: none; }
   .post .avatar-profile-link {
     float: right;
     width: 40px;
     height: 40px;
-    margin: 7px 0 0 10px; }
+    margin: 5px 0 0 10px; }
     .post .avatar-profile-link img.avatar {
       width: 40px;
       height: 40px; }
@@ -3388,6 +3420,13 @@ section.container .forum-list {
 @media only screen and (min-width: 480px) {
   .post {
     margin-right: 80px; }
+    .post.post--hidden .avatar-profile-link {
+      width: 50px;
+      height: 50px;
+      margin-right: -80px; }
+      .post.post--hidden .avatar-profile-link img.avatar {
+        width: 50px;
+        height: 50px; }
     .post .post__meta {
       padding: 4px 6px 8px 6px; }
       .post .post__meta h3 {
@@ -3416,7 +3455,9 @@ section.container .forum-list {
       margin-right: -130px; }
       .post .avatar-profile-link img.avatar {
         width: 100px;
-        height: 100px; } }
+        height: 100px; }
+    .post .post__toggle {
+      margin-left: 5px; } }
 
 .user-list {
   padding: 12px 12px 0 12px; }
@@ -3451,6 +3492,8 @@ section.container .forum-list {
       float: right;
       position: relative;
       margin: -48px 0 0 0; }
+    .user-list .user-list__user .stats {
+      font-size: 0.7em; }
   .user-list.online-now .user-list__user .avatar-profile-link {
     width: 50px;
     height: 50px; }
@@ -3481,6 +3524,36 @@ section.container .forum-list {
   border-radius: 4px; }
   .team-badge i {
     margin-left: 5px; }
+
+.profile .profile__header {
+  position: relative; }
+  .profile .profile__header .avatar {
+    float: right;
+    width: 100px;
+    height: 100px;
+    margin-left: 16px; }
+  .profile .profile__header .page-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0; }
+.profile .profile__username, .profile .profile__usertitle {
+  margin: 5px 0; }
+.profile .profile__field-group h2 {
+  margin-bottom: 0; }
+.profile .profile__field {
+  padding: 8px;
+  border-bottom: 1px solid #dfdfdf;
+  font-size: 0.9em; }
+  .profile .profile__field h3 {
+    margin: 0;
+    padding: 0;
+    font-weight: 600; }
+  .profile .profile__field p {
+    margin: 0;
+    padding: 0; }
+  .profile .profile__field:last-child {
+    border-bottom: none; }
 
 @media only screen and (min-width: 768px) {
   .user-list .user-list__user {
@@ -3972,14 +4045,14 @@ html.js .inline-moderation.floating i {
 .dropit .dropit-open .dropit-submenu {
   display: block; }
 
-.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after {
+.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   clear: both; }
 
-.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list {
+.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list, .profile .profile__header {
   *zoom: 1; }
 
 .hidden {

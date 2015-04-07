@@ -9,297 +9,281 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 
-class PostRepository implements IPostRepository
+class PostRepository implements PostRepositoryInterface
 {
-    /**
-     * @var Post $postModel
-     * @access protected
-     */
-    protected $postModel;
-    /**
-     * @var Guard $guard
-     * @access protected
-     */
-    protected $guard;
-    /**
-     * @var MessageFormatter $formatter
-     * @access protected
-     */
-    protected $formatter;
+	/**
+	 * @var Post $postModel
+	 * @access protected
+	 */
+	protected $postModel;
+	/**
+	 * @var Guard $guard
+	 * @access protected
+	 */
+	protected $guard;
+	/**
+	 * @var MessageFormatter $formatter
+	 * @access protected
+	 */
+	protected $formatter;
 
-    /** @var  Store $settings */
-    private $settings;
+	/** @var  Store $settings */
+	private $settings;
 
-    /** @var IForumRepository */
-    private $forumRepository;
+	/** @var ForumRepositoryInterface */
+	private $forumRepository;
 
-    /**
-     * @param Post             $postModel The model to use for posts.
-     * @param Guard            $guard     Laravel guard instance, used to get user ID.
-     * @param MessageFormatter $formatter Post formatter instance.
-     * @param Store            $settings  The settings container
-     */
-    public function __construct(
-        Post $postModel,
-        Guard $guard,
-        MessageFormatter $formatter,
-        Store $settings,
-        IForumRepository $forumRepository
-    ) {
-        $this->postModel = $postModel;
-        $this->guard = $guard;
-        $this->formatter = $formatter;
-        $this->settings = $settings;
-        $this->forumRepository = $forumRepository;
-    }
+	/**
+	 * @param Post $postModel The model to use for posts.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
+	 * @param MessageFormatter $formatter Post formatter instance.
+	 * @param Store $settings The settings container
+	 * @param ForumRepositoryInterface $forumRepository
+	 */
+	public function __construct(
+		Post $postModel,
+		Guard $guard,
+		MessageFormatter $formatter,
+		Store $settings,
+		ForumRepositoryInterface $forumRepository
+	) // TODO: Inject permissions container? So we can check post permissions before querying?
+	{
+		$this->postModel = $postModel;
+		$this->guard = $guard;
+		$this->formatter = $formatter;
+		$this->settings = $settings;
+		$this->forumRepository = $forumRepository;
+	}
 
-    /**
-     * Find all posts created by a user.
-     *
-     * @param int $userId The ID of the user to get the posts for.
-     *
-     * @return mixed
-     */
-    public function allForUser($userId = 0)
-    {
-        return $this->postModel->where('user_id', '=', $userId)->get();
-    }
+	/**
+	 * Find all posts created by a user.
+	 *
+	 * @param int $userId The ID of the user to get the posts for.
+	 *
+	 * @return mixed
+	 */
+	public function allForUser($userId = 0)
+	{
+		return $this->postModel->where('user_id', '=', $userId)->get();
+	}
 
-    public function getNewest($num = 20)
-    {
-        return $this->postModel->orderBy('created_at', 'desc')->with(
-            [
-                'topic',
-                'topic.forum',
-                'author'
-            ]
-        )->take($num)->get();
-    }
+	public function getNewest($num = 20)
+	{
+		return $this->postModel->orderBy('created_at', 'desc')->with([
+			'topic',
+			'topic.forum',
+			'author'
+		])->take($num)->get();
+	}
 
-    /**
-     * Find a single post by its ID.
-     *
-     * @param int $id The ID of the post to find.
-     *
-     * @return mixed
-     */
-    public function find($id = 0)
-    {
-        return $this->postModel->withTrashed()->find($id);
-    }
+	/**
+	 * Find a single post by its ID.
+	 *
+	 * @param int $id The ID of the post to find.
+	 *
+	 * @return mixed
+	 */
+	public function find($id = 0)
+	{
+		return $this->postModel->withTrashed()->find($id);
+	}
 
-    /**
-     * Get all posts for a thread.
-     *
-     * @param Topic $topic       The thread to fetch the posts for.
-     * @param bool  $withTrashed Find trashed posts?
-     *
-     * @return mixed
-     */
-    public function allForTopic(Topic $topic, $withTrashed = false)
-    {
-        $postsPerPage = $this->settings->get('user.posts_per_page', 10);
+	/**
+	 * Get all posts for a thread.
+	 *
+	 * @param Topic $topic       The thread to fetch the posts for.
+	 * @param bool  $withTrashed Find trashed posts?
+	 *
+	 * @return mixed
+	 */
+	public function allForTopic(Topic $topic, $withTrashed = false)
+	{
+		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
-        $baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
+		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
 
-        if ($withTrashed) {
-            $baseQuery = $baseQuery->withTrashed();
-        }
+		if ($withTrashed) {
+			$baseQuery = $baseQuery->withTrashed();
+		}
 
-        return $baseQuery->paginate($postsPerPage);
-    }
+		return $baseQuery->paginate($postsPerPage);
+	}
 
-    /**
-     * Add a post to a topic.
-     *
-     * @param Topic $topic       The topic to add a post to.
-     * @param array $postDetails The details of the post to add.
-     *
-     * @return mixed
-     */
-    public function addPostToTopic(Topic $topic, array $postDetails)
-    {
+	/**
+	 * Get's the number of this post in the thread. Eg '1' for the first, '2' for the second etc
+	 *
+	 * @param Post $post        The post we want the number for
+	 * @param bool $withTrashed Count trashed posts?
+	 *
+	 * @return int
+	 */
+	public function getNumForPost(Post $post, $withTrashed = false)
+	{
+		// Get all posts in this thread created before this one...
+		$baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)
+			->where('created_at', '<', $post->created_at);
 
-        $postDetails = array_merge(
-            [
-                'user_id'        => $this->guard->user()->id,
-                'username'       => null,
-                'content'        => '',
-                'content_parsed' => '',
-            ],
-            $postDetails
-        );
+		if ($withTrashed) {
+			$baseQuery = $baseQuery->withTrashed();
+		}
 
-        $postDetails['content_parsed'] = $this->formatter->parse(
-            $postDetails['content'],
-            [
-                MessageFormatter::ME_USERNAME => $this->guard->user()->name,
-            ]
-        ); // TODO: Parser options...
+		// ... and add 1 (the first post doesn't have one created before it etc)
+		return $baseQuery->count() + 1;
+	}
 
-        if ($postDetails['user_id'] > 0) {
-            $postDetails['username'] = User::find($postDetails['user_id'])->name;
-        } else {
-            $postDetails['user_id'] = null;
-            if ($postDetails['username'] == trans('general.guest')) {
-                $postDetails['username'] = null;
-            }
-        }
+	/**
+	 * Add a post to a topic.
+	 *
+	 * @param Topic $topic       The topic to add a post to.
+	 * @param array $postDetails The details of the post to add.
+	 *
+	 * @return mixed
+	 */
+	public function addPostToTopic(Topic $topic, array $postDetails)
+	{
 
-        $post = $topic->posts()->create($postDetails);
+		$postDetails = array_merge([
+			'user_id' => $this->guard->user()->id,
+			'username' => null,
+			'content' => '',
+			'content_parsed' => '',
+		], $postDetails);
 
-        if ($post !== false) {
-            $topic->increment('num_posts');
-            $topic->update(
-                [
-                    'last_post_id' => $post['id']
-                ]
-            );
-            $topic->forum->increment('num_posts');
-            $topic->forum->update(
-                [
-                    'last_post_id'      => $post->id,
-                    'last_post_user_id' => $post->author->id
-                ]
-            );
-        }
+		$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
+			MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+		]); // TODO: Parser options...
 
-        if ($post->user_id > 0) {
-            $post->author->increment('num_posts');
-        }
+		if ($postDetails['user_id'] > 0) {
+			$postDetails['username'] = User::find($postDetails['user_id'])->name;
+		} else {
+			$postDetails['user_id'] = null;
+			if ($postDetails['username'] == trans('general.guest')) {
+				$postDetails['username'] = null;
+			}
+		}
 
-        return $post;
-    }
+		$post = $topic->posts()->create($postDetails);
 
-    /**
-     * Get's the number of this post in the thread. Eg '1' for the first, '2' for the second etc
-     *
-     * @param Post $post        The post we want the number for
-     * @param bool $withTrashed Count trashed posts?
-     *
-     * @return int
-     */
-    public function getNumForPost(Post $post, $withTrashed = false)
-    {
-        // Get all posts in this thread created before this one...
-        $baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)
-                                     ->where('created_at', '<', $post->created_at);
+		if ($post !== false) {
+			$topic->increment('num_posts');
+			$topic->update([
+				'last_post_id' => $post['id']
+			]);
+			$topic->forum->increment('num_posts');
+			$topic->forum->update([
+				'last_post_id' => $post->id,
+				'last_post_user_id' => $post->author->id
+			]);
+		}
 
-        if ($withTrashed) {
-            $baseQuery = $baseQuery->withTrashed();
-        }
+		if ($post->user_id > 0) {
+			$post->author->increment('num_posts');
+		}
 
-        // ... and add 1 (the first post doesn't have one created before it etc)
-        return $baseQuery->count() + 1;
-    }
+		return $post;
+	}
 
-    /**
-     * Edit a post
-     *
-     * @param Post  $post        The post to edit
-     * @param array $postDetails The details of the post to add.
-     *
-     * @return mixed
-     */
-    public function editPost(Post $post, array $postDetails)
-    {
-        if ($postDetails['content']) {
-            $options = [];
-            if ($post->user_id > 0) {
-                $options[MessageFormatter::ME_USERNAME] = $post->author->name;
-            } else {
-                $options[MessageFormatter::ME_USERNAME] = trans('general.guest');
-            }
+	/**
+	 * Edit a post
+	 *
+	 * @param Post  $post        The post to edit
+	 * @param array $postDetails The details of the post to add.
+	 *
+	 * @return mixed
+	 */
+	public function editPost(Post $post, array $postDetails)
+	{
+		if ($postDetails['content']) {
+			$options = [];
+			if ($post->user_id > 0) {
+				$options[MessageFormatter::ME_USERNAME] = $post->author->name;
+			} else {
+				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
+			}
 
-            $postDetails['content_parsed'] = $this->formatter->parse(
-                $postDetails['content'],
-                $options
-            ); // TODO: Parser options...
-        }
+			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'],
+				$options); // TODO: Parser options...
+		}
 
-        $post->update($postDetails);
+		$post->update($postDetails);
 
-        return $post;
-    }
+		return $post;
+	}
 
-    /**
-     * Delete a post
-     *
-     * @param Post $post The post to delete
-     *
-     * @return mixed
-     */
+	/**
+	 * Delete a post
+	 *
+	 * @param Post $post The post to delete
+	 *
+	 * @return mixed
+	 */
 
-    public function deletePost(Post $post)
-    {
-        if ($post['deleted_at'] == null) {
-            // Update counters
-            $post->topic->decrement('num_posts');
-            $post->topic->forum->decrement('num_posts');
-            $post->author->decrement('num_posts');
+	public function deletePost(Post $post)
+	{
+		if ($post['deleted_at'] == null) {
+			// Update counters
+			$post->topic->decrement('num_posts');
+			$post->topic->forum->decrement('num_posts');
+			$post->author->decrement('num_posts');
 
-            // Delete the post
-            $success = $post->delete();
+			// Delete the post
+			$success = $post->delete();
 
-            if ($success) {
-                if ($post->topic->last_post_id == $post->id) {
-                    $post->topic->update(
-                        [
-                            'last_post_id' => $post->topic->posts->sortByDesc('id')->first()->id
-                        ]
-                    );
-                }
+			if ($success) {
+				if ($post->topic->last_post_id == $post->id) {
+					$post->topic->update([
+						'last_post_id' => $post->topic->posts->sortByDesc('id')->first()->id
+					]);
+				}
 
-                if ($post->topic->forum->last_post_id == $post->id) {
-                    $this->forumRepository->updateLastPost($post->topic->forum);
-                }
-            }
+				if ($post->topic->forum->last_post_id == $post->id) {
+					$this->forumRepository->updateLastPost($post->topic->forum);
+				}
+			}
 
-            return $success;
-        } else {
-            return $post->forceDelete();
-        }
-    }
+			return $success;
+		} else {
+			return $post->forceDelete();
+		}
+	}
 
-    /**
-     * Restore a post
-     *
-     * @param Post $post The post to restore
-     *
-     * @return mixed
-     */
+	/**
+	 * Restore a post
+	 *
+	 * @param Post $post The post to restore
+	 *
+	 * @return mixed
+	 */
 
-    public function restorePost(Post $post)
-    {
-        $post->topic->increment('num_posts');
-        $post->topic->forum->increment('num_posts');
-        $post->author->increment('num_posts');
+	public function restorePost(Post $post)
+	{
+		$post->topic->increment('num_posts');
+		$post->topic->forum->increment('num_posts');
+		$post->author->increment('num_posts');
 
-        $success = $post->restore();
+		$success = $post->restore();
 
-        if ($success) {
-            if ($post->id > $post->topic->last_post_id) {
-                $post->topic->update(
-                    [
-                        'last_post_id' => $post->id
-                    ]
-                );
-            }
+		if ($success) {
+			if ($post->id > $post->topic->last_post_id) {
+				$post->topic->update([
+					'last_post_id' => $post->id
+				]);
+			}
 
-            if ($post->id > $post->topic->forum->last_post_id) {
-                $this->forumRepository->updateLastPost($post->topic->forum, $post);
-            }
-        }
+			if ($post->id > $post->topic->forum->last_post_id) {
+				$this->forumRepository->updateLastPost($post->topic->forum, $post);
+			}
+		}
 
-        return $success;
-    }
+		return $success;
+	}
 }

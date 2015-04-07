@@ -36,25 +36,19 @@
 				{{ auth_user().role.role_display_name }}
 			</div>
 		</div>
-		{# this part should be written as profilefields #}
-		<div class="form__section">
-			<h2>Contact Details</h2>
-			<div class="form__section__container">
-				<div class="form__row">
-					<h3><label for="profile_website">Website</label></h3>
-					<input type="text" name="profile_website" id="profile_website" value="http://jsoltesz.com" />
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_twitter">Twitter</label></h3>
-					<input type="text" name="profile_twitter" id="profile_twitter" value="justinsoltesz" />
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_skype">Skype</label></h3>
-					<input type="text" name="profile_skype" id="profile_skype" value="" />
+		{% for group in profile_field_groups %}
+			<div class="form__section clearfix">
+				<h2>{{ group.name }}</h2>
+				<div class="form__section__container">
+					{% for field in group.fields %}
+						<div class="form__row">
+							{{ form_render_field(field) }}
+						</div>
+					{% endfor %}
 				</div>
 			</div>
-		</div>
-		<div class="form__section">
+		{% endfor %}
+		<div class="form__section clearfix">
 			<h2>{{ trans('account.about_you') }}</h2>
 			<div class="form__section__container">
 				<div class="form__row">
@@ -69,26 +63,6 @@
 					<h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
 					<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
 					{{ form_text('usertitle', auth_user().usertitle) }}
-				</div>
-				{# everything below should use profilefields #}
-				<div class="form__row">
-					<h3><label for="profile_sex">Sex</label></h3>
-					<select name="profile_sex" id="profile_sex">
-						<option>Undisclosed</option>
-						<option selected="selected">Male</option>
-						<option>Female</option>
-						<option>Other</option>
-					</select>
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_location">Location</label></h3>
-					<p class="form__description">Where in the world do you live?</p>
-					<input type="text" name="profile_location" id="profile_location" value="Columbus, Ohio" />
-				</div>
-				<div class="form__row">
-					<h3><label for="profile_bio">Bio</label></h3>
-					<p class="description">Enter a few short details about yourself, your life story etc.</p>
-					<textarea rows="6" cols="40" id="profile_bio" name="profile_bio">I build things.</textarea>
 				</div>
 			</div>
 		</div>

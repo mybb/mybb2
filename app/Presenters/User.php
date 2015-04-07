@@ -14,163 +14,160 @@ use Illuminate\Support\Facades\Request;
 use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Database\Repositories\IUserRepository;
 
 class User extends BasePresenter
 {
-    /** @var UserModel $wrappedObject */
+	/** @var UserModel $wrappedObject */
 
-    /** @var Router $router */
-    private $router;
-    /** @var IForumRepository $forumRepository */
-    private $forumRepository;
-    /** @var ITopicRepository $topicRepository */
-    private $topicRepository;
-    /** @var IPostRepository $postRepository */
-    private $postRepository;
-    /** @var IUserRepository $userRepository */
-    private $userRepository;
+	/** @var Router $router */
+	private $router;
+	/** @var ForumRepositoryInterface $forumRepository */
+	private $forumRepository;
+	/** @var ITopicRepository $topicRepository */
+	private $topicRepository;
+	/** @var PostRepositoryInterface $postRepository */
+	private $postRepository;
+	/** @var IUserRepository $userRepository */
+	private $userRepository;
 
 
-    /**
-     * @param UserModel $resource The user being wrapped by this presenter.
-     * @param Router $router
-     * @param IForumRepository $forumRepository
-     * @param ITopicRepository $topicRepository
-     * @param IPostRepository $postRepository
-     * @param IUserRepository $userRepository
-     */
-    public function __construct(
-        UserModel $resource,
-        Router $router,
-        IForumRepository $forumRepository,
-        ITopicRepository $topicRepository,
-        IPostRepository $postRepository,
-        IUserRepository $userRepository
-    ) {
-        $this->wrappedObject = $resource;
-        $this->router = $router;
-        $this->forumRepository = $forumRepository;
-        $this->topicRepository = $topicRepository;
-        $this->postRepository = $postRepository;
-        $this->userRepository = $userRepository;
-    }
+	/**
+	 * @param UserModel $resource The user being wrapped by this presenter.
+	 * @param Router $router
+	 * @param ForumRepositoryInterface $forumRepository
+	 * @param ITopicRepository $topicRepository
+	 * @param PostRepositoryInterface $postRepository
+	 * @param IUserRepository $userRepository
+	 */
+	public function __construct(
+		UserModel $resource,
+		Router $router,
+		ForumRepositoryInterface $forumRepository,
+		ITopicRepository $topicRepository,
+		PostRepositoryInterface $postRepository,
+		IUserRepository $userRepository
+	) {
+		$this->wrappedObject = $resource;
+		$this->router = $router;
+		$this->forumRepository = $forumRepository;
+		$this->topicRepository = $topicRepository;
+		$this->postRepository = $postRepository;
+		$this->userRepository = $userRepository;
+	}
 
-    public function styled_name()
-    {
-        if ($this->wrappedObject->id == -1) {
-            return e(trans('general.guest'));
-        }
+	public function styled_name()
+	{
+		if ($this->wrappedObject->id == -1) {
+			return e(trans('general.guest'));
+		}
 
-        if ($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style) {
-            return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
-        }
+		if ($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style) {
+			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
+		}
 
-        return e($this->wrappedObject->name);
-    }
+		return e($this->wrappedObject->name);
+	}
 
-    public function avatar()
-    {
-        $avatar = $this->wrappedObject->avatar;
+	public function avatar()
+	{
+		$avatar = $this->wrappedObject->avatar;
 
-        // Empty? Default avatar
-        if (empty($avatar)) {
-            return asset('images/avatar.png');
-        } // Link? Nice!
-        elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {
-            return $avatar;
-        } // Email? Set up Gravatar
-        elseif (filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false) {
-            // TODO: Replace with euans package
-            return "http://gravatar.com/avatar/" . md5(strtolower(trim($avatar)));
-        } // File?
-        elseif (file_exists(public_path("uploads/avatars/{$avatar}"))) {
-            return asset("uploads/avatars/{$avatar}");
-        } // Nothing?
-        else {
-            return asset('images/avatar.png');
-        }
-    }
+		// Empty? Default avatar
+		if (empty($avatar)) {
+			return asset('images/avatar.png');
+		} // Link? Nice!
+		elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {
+			return $avatar;
+		} // Email? Set up Gravatar
+		elseif (filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false) {
+			// TODO: Replace with euans package
+			return "http://gravatar.com/avatar/" . md5(strtolower(trim($avatar)));
+		} // File?
+		elseif (file_exists(public_path("uploads/avatars/{$avatar}"))) {
+			return asset("uploads/avatars/{$avatar}");
+		} // Nothing?
+		else {
+			return asset('images/avatar.png');
+		}
+	}
 
-    public function avatar_link()
-    {
-        $avatar = $this->wrappedObject->avatar;
+	public function avatar_link()
+	{
+		$avatar = $this->wrappedObject->avatar;
 
-        // If we have an email or link we'll return it - otherwise nothing
-        if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var(
-            $avatar,
-            FILTER_VALIDATE_EMAIL
-            ) !== false
-        ) {
-            return $avatar;
-        }
+		// If we have an email or link we'll return it - otherwise nothing
+		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
+		{
+			return $avatar;
+		}
 
-        return '';
-    }
+		return '';
+	}
 
-    public function last_page()
-    {
-        $lang = null;
+	public function last_page()
+	{
+		$lang = null;
 
-        $collection = $this->router->getRoutes();
-        $route = $collection->match(Request::create($this->wrappedObject->last_page));
+		$collection = $this->router->getRoutes();
+		$route = $collection->match(Request::create($this->wrappedObject->last_page));
 
-        if ($route->getName() != null && Lang::has('online.' . $route->getName())) {
-            $langOptions = $this->getWioData($route->getName(), $route->parameters());
+		if ($route->getName() != null && Lang::has('online.' . $route->getName())) {
+			$langOptions = $this->getWioData($route->getName(), $route->parameters());
 
-            if (!isset($langOptions['url'])) {
-                $langOptions['url'] = route($route->getName(), $route->parameters());
-            }
+			if (!isset($langOptions['url'])) {
+				$langOptions['url'] = route($route->getName(), $route->parameters());
+			}
 
-            $lang = Lang::get('online.' . $route->getName(), $langOptions);
+			$lang = Lang::get('online.' . $route->getName(), $langOptions);
 
-            // May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
-            if (is_array($lang)) {
-                $lang = Lang::get('online.' . $route->getName() . '.index', $langOptions);
-            }
-        }
+			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
+			if (is_array($lang)) {
+				$lang = Lang::get('online.' . $route->getName() . '.index', $langOptions);
+			}
+		}
 
-        if ($lang == null) {
+		if ($lang == null) {
 //			$lang = Lang::get('online.unknown', ['url' => '']);
-            // Used for debugging, should be left here until we have added all routes
-            $lang = 'online.' . $route->getName();
-        }
+			// Used for debugging, should be left here until we have added all routes
+			$lang = 'online.' . $route->getName();
+		}
 
-        return $lang;
-    }
+		return $lang;
+	}
 
-    private function getWioData($route, $parameters)
-    {
-        $data = array();
+	private function getWioData($route, $parameters)
+	{
+		$data = array();
 
-        switch ($route) {
-            case 'forums.show':
-                $data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
-                break;
-            case 'topics.show':
-            case 'topics.reply':
-            case 'topics.edit':
-            case 'topics.delete':
-            case 'topics.restore':
-                $data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
-                $data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
-                break;
-            case 'topics.create':
-                $forum = $this->forumRepository->find($parameters['forumId']);
-                $data['forum'] = e($forum->title);
-                $data['url'] = route('forums.show', [$forum->slug, $forum->id]);
-                break;
-            case 'search.post':
-            case 'search.results':
-                $data['url'] = route('search');
-                break;
-        }
+		switch ($route) {
+			case 'forums.show':
+				$data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
+				break;
+			case 'topics.show':
+			case 'topics.reply':
+			case 'topics.edit':
+			case 'topics.delete':
+			case 'topics.restore':
+				$data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
+				$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
+				break;
+			case 'topics.create':
+				$forum = $this->forumRepository->find($parameters['forumId']);
+				$data['forum'] = e($forum->title);
+				$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
+				break;
+			case 'search.post':
+			case 'search.results':
+				$data['url'] = route('search');
+				break;
+		}
 
-        // TODO: Here's a nice place for a plugin hook
+		// TODO: Here's a nice place for a plugin hook
 
-        return $data;
+		return $data;
 	}
 }
