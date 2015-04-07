@@ -19,10 +19,10 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Settings\Store;
 
-class TopicRepository implements ITopicRepository
+class TopicRepository implements TopicRepositoryInterface
 {
 	/**
 	 * @var Topic $topicModel
