@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ITopicRepository',
+			'MyBB\Core\Database\Repositories\TopicRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
 		);
 
@@ -96,6 +96,11 @@ class AppServiceProvider extends ServiceProvider
 
 				return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
 			}
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Renderers\Post\Quote\QuoteInterface',
+			'MyBB\Core\Renderers\Post\Quote\MyCode'
 		);
 
 		$this->app->bind(
