@@ -1,7 +1,7 @@
 <?php namespace MyBB\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use Illuminate\Http\RedirectResponse;
 
 class RedirectIfAuthenticated
@@ -18,8 +18,6 @@ class RedirectIfAuthenticated
 	 * Create a new filter instance.
 	 *
 	 * @param  Guard $auth
-	 *
-	 * @return void
 	 */
 	public function __construct(Guard $auth)
 	{

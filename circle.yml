@@ -1,0 +1,5 @@
+machine:
+  timezone:
+    Europe/London
+  php:
+    version: 5.5.0

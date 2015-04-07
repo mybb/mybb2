@@ -14,9 +14,9 @@ namespace MyBB\Core\Http\Controllers;
 use Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Repositories\IForumRepository;
-use MyBB\Core\Database\Repositories\IPollRepository;
-use MyBB\Core\Database\Repositories\IPollVoteRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 use MyBB\Core\Database\Repositories\ITopicRepository;
 use MyBB\Core\Presenters\Poll as PollPresenter;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
@@ -27,28 +27,28 @@ class PollController extends Controller
 {
 	/** @var ITopicRepository $topicRepository */
 	private $topicRepository;
-	/** @var IPollRepository $postRepository */
+	/** @var PollRepositoryInterface $postRepository */
 	private $pollRepository;
-	/** @var IPollVoteRepository $postRepository */
+	/** @var PollVoteRepositoryInterface $postRepository */
 	private $pollVoteRepository;
-	/** @var IForumRepository $forumRepository */
+	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var Guard $guard */
 	private $guard;
 
 	/**
 	 * @param ITopicRepository    $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param IPollRepository     $pollRepository Poll repository instance, used to fetch poll details.
-	 * @param IPollVoteRepository $pollVoteRepository PollVote repository instance, used to fetch poll vote details.
-	 * @param IForumRepository    $forumRepository Forum repository interface, used to fetch forum details.
+	 * @param PollRepositoryInterface     $pollRepository Poll repository instance, used to fetch poll details.
+	 * @param PollVoteRepositoryInterface $pollVoteRepository PollVote repository instance, used to fetch poll vote details.
+	 * @param ForumRepositoryInterface    $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard               $guard Guard implementation
 	 * @param Request             $request Request implementation
 	 */
 	public function __construct(
 		ITopicRepository $topicRepository,
-		IPollRepository $pollRepository,
-		IPollVoteRepository $pollVoteRepository,
-		IForumRepository $forumRepository,
+		PollRepositoryInterface $pollRepository,
+		PollVoteRepositoryInterface $pollVoteRepository,
+		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
 		Request $request
 	) {
