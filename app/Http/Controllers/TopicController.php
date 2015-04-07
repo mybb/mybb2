@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
@@ -26,7 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends Controller
 {
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
 	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
@@ -38,16 +38,16 @@ class TopicController extends Controller
 	private $quoteRenderer;
 
 	/**
-	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
+	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
 	 * @param QuoteRenderer    $quoteRenderer
 	 */
 	public function __construct(
-		ITopicRepository $topicRepository,
 		PostRepositoryInterface $postRepository,
+		TopicRepositoryInterface $topicRepository,
 		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
 		Request $request,

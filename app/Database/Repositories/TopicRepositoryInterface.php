@@ -13,7 +13,7 @@ use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 
-interface ITopicRepository
+interface TopicRepositoryInterface
 {
 	/**
 	 * Get all topics.
