@@ -9,8 +9,7 @@
 
 namespace MyBB\Core\Http\Requests\Search;
 
-
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Requests\Request;
 
 class SearchRequest extends Request

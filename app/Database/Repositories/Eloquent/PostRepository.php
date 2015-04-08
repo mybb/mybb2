@@ -9,17 +9,17 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 
-class PostRepository implements IPostRepository
+class PostRepository implements PostRepositoryInterface
 {
 	/**
 	 * @var Post $postModel

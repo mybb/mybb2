@@ -9,20 +9,20 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Str;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
 
-class TopicRepository implements ITopicRepository
+class TopicRepository implements TopicRepositoryInterface
 {
 	/**
 	 * @var Topic $topicModel
@@ -30,12 +30,12 @@ class TopicRepository implements ITopicRepository
 	 */
 	protected $topicModel;
 	/**
-	 * @var Guard $guard ;
+	 * @var Guard $guard
 	 * @access protected
 	 */
 	protected $guard;
 	/**
-	 * @var IPostRepository $postRepository
+	 * @var PostRepositoryInterface $postRepository
 	 * @access protected
 	 */
 	protected $postRepository;
@@ -57,19 +57,19 @@ class TopicRepository implements ITopicRepository
 	private $permissionChecker;
 
 	/**
-	 * @param Topic                    $topicModel     The model to use for threads.
-	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
-	 * @param IPostRepository          $postRepository Used to manage posts for topics.
-	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
-	 * @param Store                    $settings       The settings container
+	 * @param Topic $topicModel The model to use for threads.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
+	 * @param PostRepositoryInterface $postRepository Used to manage posts for topics.
+	 * @param Str $stringUtils String utilities, used for creating slugs.
+	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
+	 * @param Store $settings The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
 		Topic $topicModel,
 		Guard $guard,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
 		Str $stringUtils,
 		DatabaseManager $dbManager,
 		Store $settings,

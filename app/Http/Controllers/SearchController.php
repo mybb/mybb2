@@ -8,7 +8,7 @@ use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Search;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\ISearchRepository;
+use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
 use MyBB\Core\Permissions\PermissionChecker;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class SearchController extends Controller
 {
 	/**
-	 * @var ISearchRepository $searchRepository
+	 * @var SearchRepositoryInterface $searchRepository
 	 * @access protected
 	 */
 	protected $searchRepository;
@@ -36,13 +36,13 @@ class SearchController extends Controller
 	 * Create a new controller instance.
 	 *
 	 * @param Guard                    $guard
-	 * @param ISearchRepository        $searchRepository
+	 * @param SearchRepositoryInterface $searchRepository
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param Request                  $request
 	 */
 	public function __construct(
 		Guard $guard,
-		ISearchRepository $searchRepository,
+		SearchRepositoryInterface $searchRepository,
 		ForumRepositoryInterface $forumRepository,
 		Request $request
 	) {
