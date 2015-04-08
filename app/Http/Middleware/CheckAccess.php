@@ -2,15 +2,19 @@
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class CheckAccess
 {
 
 	protected $auth;
 
-	public function __construct(Guard $auth)
+    private $permissionChecker;
+
+	public function __construct(Guard $auth, PermissionChecker $permissionChecker)
 	{
 		$this->auth = $auth;
+        $this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -45,6 +49,6 @@ class CheckAccess
 		// Check for additional permissions required
 		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
-		return $this->auth->user()->hasPermission($requiredPermisions);
+		return $this->permissionChecker->hasPermission('user', null, $requiredPermisions);
 	}
 }

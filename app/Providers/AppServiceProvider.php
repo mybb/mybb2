@@ -103,7 +103,7 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\MyCode'
 		);
 
-		$this->app->singleton('MyBB\Core\Services\PermissionChecker');
+		$this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
 
 		$this->initDefaultUser();
 

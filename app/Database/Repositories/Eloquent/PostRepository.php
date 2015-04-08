@@ -15,7 +15,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\IPostRepository;
-use MyBB\Core\Services\PermissionChecker;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 

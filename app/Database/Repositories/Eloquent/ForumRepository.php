@@ -12,6 +12,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class ForumRepository implements ForumRepositoryInterface
 {
@@ -21,14 +22,18 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	protected $forumModel;
 
+    private $permissionChecker;
+
 	/**
 	 * @param Forum $forumModel The model to use for forums.
 	 */
 	public function __construct(
-		Forum $forumModel
+		Forum $forumModel,
+        PermissionChecker $permissionChecker
 	) // TODO: Inject permissions container? So we can check thread permissions before querying?
 	{
 		$this->forumModel = $forumModel;
+        $this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -51,7 +56,7 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		$unviewable = $this->forumModel->getUnviewableIds();
+		$unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
 		return $this->forumModel->with(['children', 'parent'])->whereNotIn('id', $unviewable)->find($id);
 	}
@@ -75,7 +80,7 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function getIndexTree()
 	{
-		$unviewable = $this->forumModel->getUnviewableIds();
+        $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
 		// TODO: The caching decorator would also cache the relations here
 		return $this->forumModel->where('parent_id', '=', null)->whereNotIn('id', $unviewable)->with([

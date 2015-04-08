@@ -13,7 +13,7 @@ namespace MyBB\Core\Http\Requests\Topic;
 
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\Request;
-use MyBB\Core\Services\PermissionChecker;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class CreateRequest extends Request
 {

@@ -10,7 +10,7 @@ use MyBB\Core\Database\Models\Search;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\ISearchRepository;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
-use MyBB\Core\Services\PermissionChecker;
+use MyBB\Core\Permissions\PermissionChecker;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
