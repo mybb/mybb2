@@ -6,8 +6,8 @@ use Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\IUserRepository;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -16,9 +16,9 @@ class ForumController extends Controller
 {
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
-	/** @var IPostRepository $postRepository */
+	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
 	/** @var  IUserRepository $userRepository */
 	private $userRepository;
@@ -27,15 +27,15 @@ class ForumController extends Controller
 	 * Create a new controller instance.
 	 *
 	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum information.
-	 * @param ITopicRepository $topicRepository Thread repository instance to use in order to load threads within a
+	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads within a
 	 *                                          forum.
-	 * @param IPostRepository  $postRepository  Post repository instance to use in order to load posts for the latest
+	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the latest
 	 *                                          discussion table.
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
-		ITopicRepository $topicRepository,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
+		TopicRepositoryInterface $topicRepository,
 		IUserRepository $userRepository,
 		Guard $guard,
 		Request $request

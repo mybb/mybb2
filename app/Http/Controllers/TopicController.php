@@ -16,37 +16,42 @@ use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\IPostRepository;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
+use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends Controller
 {
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
-	/** @var IPostRepository $postRepository */
+	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 	/** @var Guard $guard */
 	private $guard;
+	/** @var QuoteRenderer $quoteRenderer */
+	private $quoteRenderer;
 
 	/**
-	 * @param ITopicRepository $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param IPostRepository  $postRepository  Post repository instance, used to fetch post details.
+	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
+	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard            $guard           Guard implementation
 	 * @param Request          $request         Request implementation
+	 * @param QuoteRenderer    $quoteRenderer
 	 */
 	public function __construct(
-		ITopicRepository $topicRepository,
-		IPostRepository $postRepository,
+		PostRepositoryInterface $postRepository,
+		TopicRepositoryInterface $topicRepository,
 		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
-		Request $request
+		Request $request,
+		QuoteRenderer $quoteRenderer
 	) {
 		parent::__construct($guard, $request);
 
@@ -54,6 +59,7 @@ class TopicController extends Controller
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
 		$this->guard = $guard;
+		$this->quoteRenderer = $quoteRenderer;
 	}
 
 	public function show($slug = '', $id = 0)
@@ -123,17 +129,28 @@ class TopicController extends Controller
 		}
 	}
 
-	public function reply($slug = '', $id = 0, Request $request)
+	public function reply($slug = '', $id = 0, $postId = null, Request $request)
 	{
+		$message = '';
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
 			throw new NotFoundHttpException(trans('errors.topic_not_found'));
 		}
 
+		$content = '';
+		if($postId)
+		{
+			$post = $this->postRepository->find($postId);
+			if(!$post || $post->topic_id != $topic->id) {
+				throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			}
+
+			$content = $this->quoteRenderer->renderFromPost($post);
+		}
+
 		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
 
-		$content = '';
 		$username = trans('general.guest');
 		if ($request->has('content')) {
 			$content = $request->get('content');

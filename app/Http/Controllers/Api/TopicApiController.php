@@ -3,7 +3,7 @@
 namespace MyBB\Core\Http\Controllers\Api;
 
 use League\Fractal\Manager;
-use MyBB\Core\Database\Repositories\ITopicRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests;
 use MyBB\Core\Transformers\TopicTransformer;
 
@@ -12,7 +12,7 @@ class TopicApiController extends ApiController
 {
 	public $topicRepository;
 
-	public function __construct(ITopicRepository $topicRepository, Manager $fractal)
+	public function __construct(TopicRepositoryInterface $topicRepository, Manager $fractal)
 	{
 		parent::__construct($fractal);
 		$this->topicRepository = $topicRepository;

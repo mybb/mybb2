@@ -11,7 +11,7 @@ namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Topic;
 
-interface IPostRepository
+interface PostRepositoryInterface
 {
 	/**
 	 * Find all posts created by a user.

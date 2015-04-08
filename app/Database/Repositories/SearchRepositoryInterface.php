@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-interface ISearchRepository
+interface SearchRepositoryInterface
 {
 
 	/**
