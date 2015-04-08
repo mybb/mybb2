@@ -13,11 +13,17 @@ class Role extends Model
 	 */
 	protected $table = 'roles';
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function users()
 	{
 		return $this->belongsToMany('MyBB\Core\Database\Models\User');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function permissions()
 	{
 		return $this->belongsToMany('MyBB\Core\Database\Models\Permission');

@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Permissions\Traits;
+<?php
+
+namespace MyBB\Core\Permissions\Traits;
 
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;

@@ -39,9 +39,9 @@ class User extends BasePresenter
 	 * @param UserModel                $resource The user being wrapped by this presenter.
 	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PostRepositoryInterface $postRepository
+	 * @param PostRepositoryInterface  $postRepository
 	 * @param TopicRepositoryInterface $topicRepository
-	 * @param IUserRepository $userRepository
+	 * @param IUserRepository          $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -59,6 +59,9 @@ class User extends BasePresenter
 		$this->userRepository = $userRepository;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function styled_name()
 	{
 		if ($this->wrappedObject->id == -1) {
@@ -73,6 +76,9 @@ class User extends BasePresenter
 		return e($this->wrappedObject->name);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function avatar()
 	{
 		$avatar = $this->wrappedObject->avatar;
@@ -96,6 +102,9 @@ class User extends BasePresenter
 		}
 	}
 
+	/**
+	 * @return string
+	 */
 	public function avatar_link()
 	{
 		$avatar = $this->wrappedObject->avatar;
@@ -109,6 +118,9 @@ class User extends BasePresenter
 		return '';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function last_page()
 	{
 		$lang = null;
@@ -147,6 +159,12 @@ class User extends BasePresenter
 		return $lang;
 	}
 
+	/**
+	 * @param $route
+	 * @param $parameters
+	 *
+	 * @return array
+	 */
 	private function getWioData($route, $parameters)
 	{
 		$data = array();

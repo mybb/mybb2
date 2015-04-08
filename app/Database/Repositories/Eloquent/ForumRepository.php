@@ -22,18 +22,21 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	protected $forumModel;
 
-    private $permissionChecker;
+	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
 
 	/**
-	 * @param Forum $forumModel The model to use for forums.
+	 * @param Forum             $forumModel        The model to use for forums.
+	 * @param PermissionChecker $permissionChecker The permission class
 	 */
 	public function __construct(
 		Forum $forumModel,
-        PermissionChecker $permissionChecker
-	) // TODO: Inject permissions container? So we can check thread permissions before querying?
-	{
+		PermissionChecker $permissionChecker
+	) {
 		$this->forumModel = $forumModel;
-        $this->permissionChecker = $permissionChecker;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -80,7 +83,7 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function getIndexTree()
 	{
-        $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
+		$unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
 		// TODO: The caching decorator would also cache the relations here
 		return $this->forumModel->where('parent_id', '=', null)->whereNotIn('id', $unviewable)->with([

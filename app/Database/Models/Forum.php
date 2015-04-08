@@ -21,8 +21,8 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	/**
 	 * Nested set column IDs.
 	 */
-	const LFT       = 'left_id';
-	const RGT       = 'right_id';
+	const LFT = 'left_id';
+	const RGT = 'right_id';
 	const PARENT_ID = 'parent_id';
 	/**
 	 * Indicates if the model should be timestamped.

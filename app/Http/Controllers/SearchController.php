@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Search;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
@@ -35,10 +33,10 @@ class SearchController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param Guard                    $guard
+	 * @param Guard                     $guard
 	 * @param SearchRepositoryInterface $searchRepository
-	 * @param ForumRepositoryInterface $forumRepository
-	 * @param Request                  $request
+	 * @param ForumRepositoryInterface  $forumRepository
+	 * @param Request                   $request
 	 */
 	public function __construct(
 		Guard $guard,
@@ -80,6 +78,9 @@ class SearchController extends Controller
 		]
 	];
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function index()
 	{
 		// Forum permissions are checked in "getIndexTree"
@@ -102,6 +103,12 @@ class SearchController extends Controller
 		return view('search.index', compact('forums'));
 	}
 
+	/**
+	 * @param PermissionChecker $permissionChecker
+	 * @param SearchRequest     $searchRequest
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function makeSearch(PermissionChecker $permissionChecker, SearchRequest $searchRequest)
 	{
 		if ($searchRequest->result != 'posts') {
@@ -238,6 +245,12 @@ class SearchController extends Controller
 		]);
 	}
 
+	/**
+	 * @param Request $request
+	 * @param int     $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function results(Request $request, $id = 0)
 	{
 		// TODO: sorts

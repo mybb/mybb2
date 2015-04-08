@@ -27,12 +27,19 @@ class CreateRequest extends Request
 	/** @var PermissionChecker $permissionChecker */
 	private $permissionChecker;
 
+	/**
+	 * @param Guard             $guard
+	 * @param PermissionChecker $permissionChecker
+	 */
 	public function __construct(Guard $guard, PermissionChecker $permissionChecker)
 	{
 		$this->guard = $guard;
 		$this->permissionChecker = $permissionChecker;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		$unviewableForums = implode(',', $this->permissionChecker->getUnviewableIdsForContent('forum'));
@@ -44,12 +51,18 @@ class CreateRequest extends Request
 		];
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function authorize()
 	{
 		//return $this->guard->check();
 		return true; // TODO: In dev return, needs replacing for later...
 	}
 
+	/**
+	 * @return string
+	 */
 	protected function getRedirectUrl()
 	{
 		return $this->redirector->getUrlGenerator()->route($this->redirectRoute, $this->route()->parameters());

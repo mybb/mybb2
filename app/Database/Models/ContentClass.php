@@ -10,6 +10,10 @@ use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\Permissionable;
 
+/**
+ * @property string class
+ * @property string content
+ */
 class ContentClass extends Model
 {
 	/**

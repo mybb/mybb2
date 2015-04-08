@@ -6,15 +6,20 @@ use MyBB\Core\Permissions\PermissionChecker;
 
 class CheckAccess
 {
-
+	/** @var Guard */
 	protected $auth;
 
-    private $permissionChecker;
+	/** @var  PermissionChecker */
+	private $permissionChecker;
 
+	/**
+	 * @param Guard             $auth
+	 * @param PermissionChecker $permissionChecker
+	 */
 	public function __construct(Guard $auth, PermissionChecker $permissionChecker)
 	{
 		$this->auth = $auth;
-        $this->permissionChecker = $permissionChecker;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -27,8 +32,7 @@ class CheckAccess
 	 */
 	public function handle($request, Closure $next)
 	{
-		if($this->checkPermissions($request))
-		{
+		if ($this->checkPermissions($request)) {
 			return $next($request);
 		}
 

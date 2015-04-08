@@ -12,6 +12,7 @@ use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 
 class PermissionChecker
 {
+	// Constants used as permission value
 	const NEVER = -1;
 	const NO = 0;
 	const YES = 1;
@@ -25,11 +26,11 @@ class PermissionChecker
 	/** @var ContentClass $classModel */
 	private $classModel;
 
-    /** @var array $permissions */
-    private $permissions;
+	/** @var array $permissions */
+	private $permissions;
 
-    /** @var array $unviewableIds */
-    private $unviewableIds;
+	/** @var array $unviewableIds */
+	private $unviewableIds;
 
 	/**
 	 * @param CacheRepository $cache
@@ -47,7 +48,7 @@ class PermissionChecker
 	 * Get an array of unviewable ids for the registered content type
 	 *
 	 * @param string $content
-     * @param User $user
+	 * @param User   $user
 	 *
 	 * @return array
 	 */
@@ -55,126 +56,129 @@ class PermissionChecker
 	{
 		$concreteClass = $this->classModel->getClass($content);
 
-        if ($concreteClass == null) {
-            throw new \RuntimeException("No class is registered for content type '{$content}'");
-        }
+		if ($concreteClass == null) {
+			throw new \RuntimeException("No class is registered for content type '{$content}'");
+		}
 
-        if(!($concreteClass instanceof PermissionInterface)) {
-            throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
-        }
+		if (!($concreteClass instanceof PermissionInterface)) {
+			throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
+		}
 
-        if ($this->unviewableIds[$content] != null) {
-            return $this->unviewableIds[$content];
-        }
+		if ($this->unviewableIds[$content] != null) {
+			return $this->unviewableIds[$content];
+		}
 
-        $models = $concreteClass::all();
+		$models = $concreteClass::all();
 
-        $unviewable = [];
-        foreach ($models as $model) {
-            if (!$this->hasPermission($content, $model->getContentId(), $concreteClass::getViewablePermission(), $user)) {
-                $unviewable[] = $model->getContentId();
-            }
-        }
+		$unviewable = [];
+		foreach ($models as $model) {
+			if (!$this->hasPermission($content, $model->getContentId(), $concreteClass::getViewablePermission(), $user)
+			) {
+				$unviewable[] = $model->getContentId();
+			}
+		}
 
-        $this->unviewableIds[$content] = $unviewable;
+		$this->unviewableIds[$content] = $unviewable;
 
-        return $unviewable;
+		return $unviewable;
 	}
 
 
-    /**
-     * Checks whether the specified user has the specified permission
-     *
-     * @param string $content
-     * @param int $contentID
-     * @param array|string $permission
-     * @param User         $user
-     *
-     * @return bool
-     */
-    public function hasPermission($content, $contentID, $permission, User $user = null)
-    {
-        $concreteClass = $this->classModel->getClass($content);
+	/**
+	 * Checks whether the specified user has the specified permission
+	 *
+	 * @param string       $content
+	 * @param int          $contentID
+	 * @param array|string $permission
+	 * @param User         $user
+	 *
+	 * @return bool
+	 */
+	public function hasPermission($content, $contentID, $permission, User $user = null)
+	{
+		$concreteClass = $this->classModel->getClass($content);
 
-        if ($concreteClass == null) {
-            throw new \RuntimeException("No class is registered for content type '{$content}'");
-        }
+		if ($concreteClass == null) {
+			throw new \RuntimeException("No class is registered for content type '{$content}'");
+		}
 
-        if(!($concreteClass instanceof PermissionInterface)) {
-            throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
-        }
+		if (!($concreteClass instanceof PermissionInterface)) {
+			throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
+		}
 
-        if ($user == null) {
-            $user = app('auth.driver')->user();
-        }
+		if ($user == null) {
+			$user = app('auth.driver')->user();
+		}
 
-        // Handle the array case
-        if (is_array($permission)) {
-            foreach ($permission as $perm) {
-                $hasPermission = $this->hasPermission($content, $contentID, $perm, $user);
+		// Handle the array case
+		if (is_array($permission)) {
+			foreach ($permission as $perm) {
+				$hasPermission = $this->hasPermission($content, $contentID, $perm, $user);
 
-                // No need to check more permissions
-                if (!$hasPermission) {
-                    return false;
-                }
-            }
+				// No need to check more permissions
+				if (!$hasPermission) {
+					return false;
+				}
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        // We already calculated the permissions for this user, no need to recheck all roles
-        if (isset($this->permissions[$content][$contentID][$user->getKey()][$permission])) {
-            return $this->permissions[$content][$contentID][$user->getKey()][$permission];
-        }
+		// We already calculated the permissions for this user, no need to recheck all roles
+		if (isset($this->permissions[$content][$contentID][$user->getKey()][$permission])) {
+			return $this->permissions[$content][$contentID][$user->getKey()][$permission];
+		}
 
-        // Handle special cases where no role has been set
-        $roles = $user->roles;
-        if ($roles->count() == 0) {
-            if ($user->exists) {
-                // User saved? Something is wrong, attach the registered role
-                $registeredRole = Role::where('role_slug', '=', 'user')->first();
-                $user->roles()->attach($registeredRole->id, ['is_display' => 1]);
-                $roles = [$registeredRole];
-            } else {
-                // Guest
-                $guestRole = Role::where('role_slug', '=', 'guest')->first();
-                $roles = [$guestRole];
-            }
-        }
+		// Handle special cases where no role has been set
+		$roles = $user->roles;
+		if ($roles->count() == 0) {
+			if ($user->exists) {
+				// User saved? Something is wrong, attach the registered role
+				$registeredRole = Role::where('role_slug', '=', 'user')->first();
+				$user->roles()->attach($registeredRole->id, ['is_display' => 1]);
+				$roles = [$registeredRole];
+			} else {
+				// Guest
+				$guestRole = Role::where('role_slug', '=', 'guest')->first();
+				$roles = [$guestRole];
+			}
+		}
 
-        // Assume "No" by default
-        $isAllowed = false;
-        foreach ($roles as $role) {
-            $hasPermission = $this->getPermissionForRole($role, $permission, $content, $contentID);
+		// Assume "No" by default
+		$isAllowed = false;
+		foreach ($roles as $role) {
+			$hasPermission = $this->getPermissionForRole($role, $permission, $content, $contentID);
 
-            // If we never want to grant the permission we can skip all other roles. But don't forget to cache it
-            if ($hasPermission == PermissionChecker::NEVER) {
-                $isAllowed = false;
-                break;
-            } // Override our "No" assumption - but don't return yet, we may have a "Never" permission later
-            elseif ($hasPermission == PermissionChecker::YES) {
-                $isAllowed = true;
-            }
-        }
+			// If we never want to grant the permission we can skip all other roles. But don't forget to cache it
+			if ($hasPermission == PermissionChecker::NEVER) {
+				$isAllowed = false;
+				break;
+			} // Override our "No" assumption - but don't return yet, we may have a "Never" permission later
+			elseif ($hasPermission == PermissionChecker::YES) {
+				$isAllowed = true;
+			}
+		}
 
-        // No parent? No need to do anything else here
-        if (($concreteClass instanceof InheritPermissionInterface) && $concreteClass::find($contentID)->getParent() != null) {
-            // If we have a positive permission but need to check parents for negative values do so here
-            if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
-                $isAllowed = $this->hasPermission($content, $concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
-            }
+		// No parent? No need to do anything else here
+		if (($concreteClass instanceof InheritPermissionInterface) && $concreteClass::find($contentID)->getParent() != null) {
+			// If we have a positive permission but need to check parents for negative values do so here
+			if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
+				$isAllowed = $this->hasPermission($content,
+					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+			}
 
-            // Do the same for negative permissions with parent positives
-            if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
-                $isAllowed = $this->hasPermission($content, $concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
-            }
-        }
+			// Do the same for negative permissions with parent positives
+			if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
+				$isAllowed = $this->hasPermission($content,
+					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+			}
+		}
 
-        // Don't forget to cache the permission for this call
-        $this->permissions[$content][$contentID][$user->getKey()][$permission] = $isAllowed;
+		// Don't forget to cache the permission for this call
+		$this->permissions[$content][$contentID][$user->getKey()][$permission] = $isAllowed;
 
-        return $isAllowed;
-    }
+		return $isAllowed;
+	}
 
 	/**
 	 * Check whether a specific Role has the specified permission
@@ -192,7 +196,7 @@ class PermissionChecker
 		// Permissions associated with user/groups are saved without content (all permissions are associated with groups anyways)
 		if ($content == 'user' || $content == 'usergroup') {
 			$content = null;
-            $contentID = null;
+			$contentID = null;
 		}
 
 		//if ($this->hasCache($role, $permission, $content, $contentID)) {

@@ -51,6 +51,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	/**
+	 * Cache variable for the display role
+	 *
+	 * @var Role
+	 */
 	private $displayRole;
 
 	/**
@@ -71,6 +76,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return (int)$this->id;
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function roles()
 	{
 		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
@@ -81,12 +89,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function displayRole()
 	{
-		if($this->displayRole == null) {
+		if ($this->displayRole == null) {
 			$this->displayRole = $this->roles->where('pivot.is_display', 1)->first();
 		}
+
 		return $this->displayRole;
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function activity()
 	{
 		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');

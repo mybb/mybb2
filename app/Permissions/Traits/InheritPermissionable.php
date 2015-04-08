@@ -1,4 +1,6 @@
-<?php namespace MyBB\Core\Permissions\Traits;
+<?php
+
+namespace MyBB\Core\Permissions\Traits;
 
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;
@@ -11,7 +13,7 @@ trait InheritPermissionable
 	/**
 	 * @return InheritPermissionable
 	 */
-    public function getParent()
+	public function getParent()
 	{
 		return $this->parent;
 	}
@@ -22,7 +24,7 @@ trait InheritPermissionable
 	 *
 	 * @return array
 	 */
-    public static function getPositiveParentOverrides()
+	public static function getPositiveParentOverrides()
 	{
 		return [];
 	}

@@ -84,10 +84,14 @@ class PostRepository implements PostRepositoryInterface
 		return $this->postModel->where('user_id', '=', $userId)->whereNotIn('topic.forum_id', $unviewableForums)->get();
 	}
 
+	/**
+	 * @param int $num
+	 *
+	 * @return mixed
+	 */
 	public function getNewest($num = 20)
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
-		dd($unviewableForums);
 
 		return $this->postModel->orderBy('created_at', 'desc')->with([
 			'topic',
@@ -274,7 +278,6 @@ class PostRepository implements PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restorePost(Post $post)
 	{
 		$post->topic->increment('num_posts');
