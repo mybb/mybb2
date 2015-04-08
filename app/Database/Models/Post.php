@@ -14,8 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Likes\Traits\LikeableTrait;
+use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
-class Post extends Model implements HasPresenter
+class Post extends Model implements HasPresenter, ApprovableInterface
 {
 	use SoftDeletes;
 	use LikeableTrait;
@@ -85,5 +86,21 @@ class Post extends Model implements HasPresenter
 	public function author()
 	{
 		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function approve()
+	{
+		return $this->update(['approved' => 1]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function unapprove()
+	{
+		return $this->update(['approved' => 0]);
 	}
 }
