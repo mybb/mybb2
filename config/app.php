@@ -147,6 +147,7 @@ return [
 		'MyBB\Core\Providers\RouteServiceProvider',
 		'MyBB\Parser\ParserServiceProvider',
 	    'MyBB\Settings\ServiceProvider',
+		'MyBB\Core\Moderation\ModerationServiceProvider'
 	],
 	/*
 	|--------------------------------------------------------------------------

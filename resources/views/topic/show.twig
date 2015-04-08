@@ -88,5 +88,6 @@
 			{{ posts.render|raw }}
 			{% include 'topic.quickreply' with {'topic': topic} %}
 		</section>
+		{{ topic.moderations|raw }}
 	</div>
 {% endblock %}

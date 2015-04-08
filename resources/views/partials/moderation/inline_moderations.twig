@@ -1,0 +1,21 @@
+<div class="inline-moderation">
+    <h2>With selected posts<span class="selection-count"> (1)</span>:</h2>
+    <ul class="moderation-controls">
+        {% for moderation in moderations %}
+            <li class="{{ moderation.name }}"><a href="#"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.description }}</span></a></li>
+
+            {% if moderation.reverse is defined %}
+                <li class="{{ moderation.name }}"><a href="#"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseDescription }}</span></a></li>
+            {% endif %}
+        {% endfor %}
+        {#<li class="soft-delete"><a href="#"><i class="fa fa-trash-o"></i><span class="text">Soft Delete</span></a></li>#}
+        {#<!--<li class="soft-delete"><a href="#"><i class="fa fa-circle"></i><span class="text">Restore</span></a></li>#}
+        {#<li class="hard-delete"><a href="#"><i class="fa fa-trash-o"></i><span class="text">Permanently Delete</span></a></li>-->#}
+        {#<li class="merge"><a href="#"><i class="fa fa-files-o"></i><span class="text">Merge</span></a></li>#}
+        {#<li class="split"><a href="#"><i class="fa fa-code-fork"></i><span class="text">Split</span></a></li>#}
+        {#<!--<li class="move"><a href="#"><i class="fa fa-arrow-right"></i><span class="text">Move</span></a></li>-->#}
+        {#<li class="approve"><a href="#"><i class="fa fa-check"></i><span class="text">Approve</span></a></li>#}
+        {#<li class="more"><a href="index.php?page=post-moderation" onclick="modal('post-moderation'); return false;"><i class="fa fa-asterisk"></i><span class="text">More</span></a></li>#}
+        <li class="clear-selection-posts"><a href="#"><i class="fa fa-square-o"></i><span class="text">Clear Selection</span></a></li>
+    </ul>
+</div>
