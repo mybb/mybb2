@@ -76,6 +76,13 @@ interface TopicRepositoryInterface
 	public function findBySlugAndId($slug = '', $id = 0);
 
 	/**
+	 * @param int $num
+	 *
+	 * @return mixed
+	 */
+	public function getNewest($num = 20);
+
+	/**
 	 * Create a new topic
 	 *
 	 * @param array $details Details about the topic.
@@ -85,12 +92,39 @@ interface TopicRepositoryInterface
 	public function create(array $details = []);
 
 	/**
+	 * Edit a topic
+	 *
+	 * @param Topic $topic        The topic to edit
+	 * @param array $topicDetails The details of the post to add.
+	 *
+	 * @return mixed
+	 */
+	public function editTopic(Topic $topic, array $topicDetails);
+
+	/**
+	 * Delete a topic
+	 *
+	 * @param Topic $topic The topic to delete
+	 *
+	 * @return mixed
+	 */
+	public function deleteTopic(Topic $topic);
+
+	/**
+	 * Restore a topic
+	 *
+	 * @param Topic $topic The topic to restore
+	 *
+	 * @return mixed
+	 */
+	public function restoreTopic(Topic $topic);
+
+	/**
 	 * Update the last post of the topic
 	 *
 	 * @param Topic $topic The topic to update
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Topic $topic, Post $post = null);
 }

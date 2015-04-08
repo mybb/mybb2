@@ -53,12 +53,12 @@ class TopicRepository implements TopicRepositoryInterface
 	private $forumRepository;
 
 	/**
-	 * @param Topic $topicModel The model to use for threads.
-	 * @param Guard $guard Laravel guard instance, used to get user ID.
-	 * @param PostRepositoryInterface $postRepository Used to manage posts for topics.
-	 * @param Str $stringUtils String utilities, used for creating slugs.
-	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
-	 * @param Store $settings The settings container
+	 * @param Topic                    $topicModel     The model to use for threads.
+	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
+	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
+	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
+	 * @param Store                    $settings       The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
@@ -278,7 +278,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function deleteTopic(Topic $topic)
 	{
 		if ($topic['deleted_at'] == null) {
@@ -310,7 +309,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restoreTopic(Topic $topic)
 	{
 		$topic->forum->increment('num_topics');
@@ -350,7 +348,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Topic $topic, Post $post = null)
 	{
 		if ($post === null) {
