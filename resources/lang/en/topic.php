@@ -57,4 +57,5 @@ return [
 		'selectQuotes' => 'Select All Quotes'
 	],
 
+	'closed' => 'This topic has now been closed.'
 ];

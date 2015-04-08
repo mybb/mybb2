@@ -12,6 +12,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 
@@ -168,5 +169,21 @@ class ForumRepository implements ForumRepositoryInterface
 		}
 
 		return $forum;
+	}
+
+	/**
+	 * @param Topic $topic
+	 * @param Forum $forum
+	 */
+	public function moveTopicToForum(Topic $topic, Forum $forum)
+	{
+		$topic->forum->decrement('num_posts');
+
+		$topic->forum_id = $forum->id;
+		$topic->save();
+
+		$topic->forum->increment('num_posts');
+
+		$this->updateLastPost($forum);
 	}
 }

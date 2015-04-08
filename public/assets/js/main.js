@@ -86,6 +86,7 @@
 	window.MyBB.Modals = function Modals()
 	{
 		$("*[data-modal]").on("click", this.toggleModal).bind(this);
+		$.modal.defaults.closeText = 'x';
 	};
 
 	window.MyBB.Modals.prototype.toggleModal = function toggleModal(event) {
@@ -137,7 +138,15 @@
 
 			MyBB.Spinner.add();
 
-			$.get('/'+modalSelector, function(response) {
+			var modalParams = $(event.currentTarget).attr('data-modal-params');
+			if (modalParams) {
+				modalParams = JSON.parse(modalParams);
+				console.log(modalParams);
+			} else {
+				modalParams = {};
+			}
+
+			$.get('/'+modalSelector, modalParams, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
@@ -161,9 +170,10 @@
 		}
 
 	};
-    
+
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
 })(jQuery, window);
+
 (function($, window) {
     window.MyBB = window.MyBB || {};
 
@@ -871,103 +881,9 @@ $(function () {
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);
 
-	$('.clear-selection-posts a').click(function(event) {
-		event.preventDefault();
-		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-threads a').click(function(event) {
-		event.preventDefault();
-		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-forums a').click(function(event) {
-		event.preventDefault();
-		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
 	$("#search .search-button").click(function(event) {
 		event.preventDefault();
 		$("#search .search-container").slideDown();
-	});
-
-	$(".post :checkbox").change(function() {
-		$(this).closest(".post").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".forum .checkbox-select :checkbox").change(function() {
-		$(this).closest(".forum").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
-	});
-
-	$(".checkbox-select.check-all :checkbox").click(function() {
-		$(this).closest('section').find('input[type=checkbox]').prop('checked', this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.thread').toggleClass("highlight", this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.forum').toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes >= 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
 	autosize($('.post textarea'));
@@ -1074,3 +990,123 @@ function closeMenu(e) {
 	$(".sidebar-menu").animate({marginLeft: "-225px"}, 200, function() { });
 	$(".page-body").animate({marginLeft: "0", marginRight: "0"}, 200, function() { });
 }
+
+(function($, window) {
+    window.MyBB = window.MyBB || {};
+
+    window.MyBB.Moderation = function Moderation()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // inline moderation click handling
+        $('a[data-moderate]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            $.post('/moderate', {
+                moderation_name: $(e.currentTarget).attr('data-moderate'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        // inline reverse moderation click handling
+        $('a[data-moderate-reverse]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            $.post('/moderate/reverse', {
+                moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        // moderation bar clear selection handling
+        $('.clear-selection a').click(function(e) {
+            $('[data-moderation-content] input[type=checkbox]:checked').removeAttr('checked');
+            $('[data-moderation-content] .highlight').removeClass('highlight');
+            $('.inline-moderation').removeClass('floating');
+        });
+
+        // post level inline moderation checkbox handling
+        $(".post :checkbox").change(function() {
+            $(this).closest(".post").toggleClass("highlight", this.checked);
+
+            var checked_boxes = $('.highlight').length;
+
+            if(checked_boxes == 1)
+            {
+                $('.inline-moderation').addClass('floating');
+            }
+
+            if (checked_boxes > 1)
+            {
+                $('li[data-moderation-multi]').show();
+            } else {
+                $('li[data-moderation-multi]').hide();
+            }
+
+            if(checked_boxes == 0)
+            {
+                $('.inline-moderation').removeClass('floating');
+            }
+
+            $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+        });
+
+        // topic level inline moderation checkbox handling
+        $(".topic-list .topic :checkbox").change(function() {
+            $(this).closest(".topic").toggleClass("highlight", this.checked);
+
+            var checked_boxes = $('.highlight').length;
+
+            if(checked_boxes == 1)
+            {
+                $('.inline-moderation').addClass('floating');
+            }
+
+            if (checked_boxes > 1)
+            {
+                $('li[data-moderation-multi]').show();
+            } else {
+                $('li[data-moderation-multi]').hide();
+            }
+
+            if(checked_boxes == 0)
+            {
+                $('.inline-moderation').removeClass('floating');
+            }
+
+            $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+        });
+
+        $('li[data-moderation-multi]').hide();
+    };
+
+    // get the IDs of elements currently selected
+    window.MyBB.Moderation.getSelectedIds = function getSelectedIds()
+    {
+        return $('input[type=checkbox][data-moderation-id]:checked').map(function () {
+            return $(this).attr('data-moderation-id');
+        }).get();
+    };
+
+    // grab the current selection and inject it into the modal so we can submit through a normal form
+    window.MyBB.Moderation.injectModalParams = function injectFormData(element)
+    {
+        $(element).attr('data-modal-params', JSON.stringify({
+            moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+            moderation_ids: window.MyBB.Moderation.getSelectedIds()
+        }));
+    };
+
+    var moderation = new window.MyBB.Moderation();
+
+})(jQuery, window);

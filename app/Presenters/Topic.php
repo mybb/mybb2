@@ -12,8 +12,10 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Moderation\ModerationRegistry;
 
 class Topic extends BasePresenter
 {
@@ -25,12 +27,19 @@ class Topic extends BasePresenter
 	private $app;
 
 	/**
-	 * @param TopicModel  $resource The thread being wrapped by this presenter.
-	 * @param Application $app
+	 * @var ModerationRegistry
 	 */
-	public function __construct(TopicModel $resource, Application $app)
+	protected $moderations;
+
+	/**
+	 * @param TopicModel         $resource    The thread being wrapped by this presenter.
+	 * @param ModerationRegistry $moderations
+	 * @param Application        $app
+	 */
+	public function __construct(TopicModel $resource, ModerationRegistry $moderations, Application $app)
 	{
 		$this->wrappedObject = $resource;
+		$this->moderations = $moderations;
 		$this->app = $app;
 	}
 
@@ -61,5 +70,21 @@ class Topic extends BasePresenter
 		}
 
 		return $this->wrappedObject->author;
+	}
+
+	/**
+	 * @return \MyBB\Core\Moderation\ModerationInterface[]
+	 */
+	public function moderations()
+	{
+		$moderations = $this->moderations->getForContent(new Post());
+		$decorated = [];
+		$presenter = $this->app->make('autopresenter');
+
+		foreach ($moderations as $moderation) {
+			$decorated[] = $presenter->decorate($moderation);
+		}
+
+		return $decorated;
 	}
 }
