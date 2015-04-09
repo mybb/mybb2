@@ -15,7 +15,7 @@ class AddNumLikesToUsersTable extends Migration
         Schema::table(
             'users',
             function (Blueprint $table) {
-                $table->unsignedInteger('num_likes_made');
+                $table->unsignedInteger('num_likes_made')->default(0);
             }
         );
     }
