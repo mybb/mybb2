@@ -22,8 +22,9 @@
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post__meta">
+
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
-						<h3 class="post__author"><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
+						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
 						{{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
@@ -48,15 +49,27 @@
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-								<li class="like"><a href="#like"><i class="fa fa-thumbs-o-up"></i><span class="text">Like</span></a></li>
-								<li class="quote"><a href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
+
+                                {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
+                                    {{ form_hidden('post_id', post.id) }}
+                                    {% if post.hasLikedPost %}
+                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">UnLike</span>', {'type': 'submit', 'class': 'button button--unlike'}) }}
+                                    {% else %}
+                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': 'button button--like'}) }}
+                                    {% endif %}
+                                {{ form_close() }}
+
+                                <li class="quote"><a href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
 							{% endif %}
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
 							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
 						</ul>
-						<!--<div class="post__likes">
-							<i class="fa fa-caret-right"></i> <a href="index.php?page=profile">You</a>, <a href="index.php?page=profile">brad-t</a>, <a href="index.php?page=profile">Dennis Tsang</a>, and <a href="index.php?page=post-likes">14 others</a> like this</a>
-						</div>-->
+                        {% if post.num_likes > 0 %}
+                            <div class="post__likes">
+                                {{ render_likes(post.likes, url_route('post.likes', {'post_id': post.id})) }}
+                            </div>
+                        {% endif %}
+
 					</div>
 				</div>
 				<div id="dropdown-{{ post.id }}" class="dropdown dropdown-tip">

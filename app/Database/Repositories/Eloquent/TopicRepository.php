@@ -19,6 +19,7 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
 
 class TopicRepository implements TopicRepositoryInterface
@@ -52,6 +53,9 @@ class TopicRepository implements TopicRepositoryInterface
 	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
+	/** @var PermissionChecker */
+	private $permissionChecker;
+
 	/**
 	 * @param Topic                    $topicModel     The model to use for threads.
 	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
@@ -60,6 +64,7 @@ class TopicRepository implements TopicRepositoryInterface
 	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
 	 * @param Store                    $settings       The settings container
 	 * @param ForumRepositoryInterface $forumRepository
+	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
 		Topic $topicModel,
@@ -68,9 +73,9 @@ class TopicRepository implements TopicRepositoryInterface
 		Str $stringUtils,
 		DatabaseManager $dbManager,
 		Store $settings,
-		ForumRepositoryInterface $forumRepository
-	) // TODO: Inject permissions container? So we can check thread permissions before querying?
-	{
+		ForumRepositoryInterface $forumRepository,
+		PermissionChecker $permissionChecker
+	) {
 		$this->topicModel = $topicModel;
 		$this->guard = $guard;
 		$this->postRepository = $postRepository;
@@ -78,6 +83,7 @@ class TopicRepository implements TopicRepositoryInterface
 		$this->dbManager = $dbManager;
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -92,6 +98,8 @@ class TopicRepository implements TopicRepositoryInterface
 
 	/**
 	 * Increment view count for topic
+	 *
+	 * @param Topic $topic
 	 */
 	public function incrementViewCount(Topic $topic)
 	{
@@ -107,7 +115,9 @@ class TopicRepository implements TopicRepositoryInterface
 	 */
 	public function allForUser($userId = 0)
 	{
-		return $this->topicModel->where('user_id', '=', $userId)->get();
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+		return $this->topicModel->where('user_id', '=', $userId)->whereNotIn('forum_id', $unviewableForums)->get();
 	}
 
 	/**
@@ -119,7 +129,9 @@ class TopicRepository implements TopicRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		return $this->topicModel->withTrashed()->with(['author'])->find($id);
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+		return $this->topicModel->withTrashed()->with(['author'])->whereNotIn('forum_id', $unviewableForums)->find($id);
 	}
 
 	/**
@@ -131,17 +143,26 @@ class TopicRepository implements TopicRepositoryInterface
 	 */
 	public function findBySlug($slug = '')
 	{
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->first();
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->whereNotIn('forum_id',
+			$unviewableForums)->first();
 	}
 
-
+	/**
+	 * @param int $num
+	 *
+	 * @return mixed
+	 */
 	public function getNewest($num = 20)
 	{
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
 		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
 			'lastPost',
 			'forum',
 			'lastPost.author'
-		])->take($num)->get();
+		])->whereNotIn('forum_id', $unviewableForums)->take($num)->get();
 	}
 
 	/**
@@ -278,7 +299,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restoreTopic(Topic $topic)
 	{
 		$topic->forum->increment('num_topics');
@@ -318,7 +338,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Topic $topic, Post $post = null)
 	{
 		if ($post === null) {

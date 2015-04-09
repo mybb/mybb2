@@ -14,11 +14,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 use MyBB\Core\UserActivity\Traits\UserActivityTrait;
+use MyBB\Core\Likes\Traits\LikeableTrait;
 
 class Post extends Model implements HasPresenter, ActivityStoreableInterface
 {
     use SoftDeletes;
     use UserActivityTrait;
+    use LikeableTrait;
 
     /**
      * Indicates if the model should be timestamped.

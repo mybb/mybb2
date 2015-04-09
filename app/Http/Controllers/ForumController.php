@@ -26,11 +26,12 @@ class ForumController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum information.
-	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads within a
-	 *                                          forum.
-	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the latest
-	 *                                          discussion table.
+	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum
+	 *                                                  information.
+	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
+	 *                                                  within a forum.
+	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the
+	 *                                                  latest discussion table.
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
@@ -55,6 +56,7 @@ class ForumController extends Controller
 	 */
 	public function all()
 	{
+		// Forum permissions are checked in "getIndexTree"
 		$forums = $this->forumRepository->getIndexTree();
 
 		return view('forum.all', compact('forums'));
@@ -67,6 +69,7 @@ class ForumController extends Controller
 	 */
 	public function index(Store $settings)
 	{
+		// Forum permissions are checked in "getIndexTree" and "getNewest"
 		$forums = $this->forumRepository->getIndexTree();
 		$topics = $this->topicRepository->getNewest();
 		$users = $this->userRepository->online($settings->get('wio.minutes', 15), 'name', 'asc', 0);
@@ -86,10 +89,10 @@ class ForumController extends Controller
 	 */
 	public function show(Request $request, $slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($id);
 
-		if(!$forum)
-		{
+		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}
 
@@ -99,14 +102,12 @@ class ForumController extends Controller
 		$allowed = ['lastpost', 'replies', 'startdate', 'title'];
 
 		$orderBy = $request->get('orderBy', 'lastpost');
-		if(!in_array($orderBy, $allowed))
-		{
+		if (!in_array($orderBy, $allowed)) {
 			$orderBy = 'lastpost';
 		}
 
 		$orderDir = $request->get('orderDir', 'desc');
-		if($orderDir != 'asc' && $orderDir != 'desc')
-		{
+		if ($orderDir != 'asc' && $orderDir != 'desc') {
 			$orderDir = 'desc';
 		}
 
@@ -117,11 +118,9 @@ class ForumController extends Controller
 			'startdate' => 'desc',
 			'title' => 'asc',
 		];
-		if($orderDir == 'desc' && $urlDirs[$orderBy] == 'desc')
-		{
+		if ($orderDir == 'desc' && $urlDirs[$orderBy] == 'desc') {
 			$urlDirs[$orderBy] = 'asc';
-		} elseif($orderDir == 'asc' && $urlDirs[$orderBy] == 'asc')
-		{
+		} elseif ($orderDir == 'asc' && $urlDirs[$orderBy] == 'asc') {
 			$urlDirs[$orderBy] = 'desc';
 		}
 

@@ -27,12 +27,8 @@ Route::group(['prefix' => 'api/v1'], function () {
 |
 */
 
-Route::get('/', [
-	'as' => 'forum.index',
-	'middleware' => 'checkaccess',
-	'except' => 'banned',
-	'uses' => 'ForumController@index'
-]);
+Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
+
 Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
 Route::get('forum/{slug}.{id}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
@@ -53,6 +49,9 @@ Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'use
 
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 Route::post('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@postCreate']);
+
+Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
+Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
@@ -75,7 +74,7 @@ Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaControll
 
 Route::any('parser', ['uses' => 'DebugController@parser']);
 
-Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function () {
+Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
 	Route::get('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@getProfile']);
 	Route::post('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@postProfile']);

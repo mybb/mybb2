@@ -114,7 +114,9 @@
 								<!-- it should be change later -->
 								<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
 								<p class="topic__post topic__post--latest">
-									<span class="post__author"><a href="">{{ topic.lastPost.author.name }}</a></span>
+									<span class="post__author">
+                                        {{ render_profile_link(topic.lastPost.author) }}
+                                    </span>
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
 								</p>
 							</div>

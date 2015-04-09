@@ -31,9 +31,11 @@
 			</div>
 		</div>
 		<div class="form__section">
-			<h2>{{ trans('account.groups') }}</h2>
+			<h2>{{ trans('account.roles') }}</h2>
 			<div class="form__section__container">
-				{{ auth_user().role.role_display_name }}
+				{% for role in auth_user().roles %}
+					{{ role.role_display_name }}
+				{% endfor %}
 			</div>
 		</div>
 		{% for group in profile_field_groups %}

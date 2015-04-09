@@ -116,6 +116,11 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton('MyBB\Core\UserActivity\RendererFactory');
+            'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
+            'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
+        );
+
+		$this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
 
 		$this->initDefaultUser();
 
