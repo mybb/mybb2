@@ -51,6 +51,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'num_likes_made' => 'int',
+    ];
+
 	/**
 	 * Cache variable for the display role
 	 *

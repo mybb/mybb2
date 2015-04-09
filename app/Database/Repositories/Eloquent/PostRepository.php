@@ -109,7 +109,7 @@ class PostRepository implements PostRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		return $this->postModel->withTrashed()->find($id);
+		return $this->postModel->with(['likes', 'author'])->withTrashed()->find($id);
 	}
 
 	/**
@@ -124,7 +124,7 @@ class PostRepository implements PostRepositoryInterface
 	{
 		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
-		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
+		$baseQuery = $this->postModel->with(['author', 'likes'])->where('topic_id', '=', $topic->id);
 
 		if ($withTrashed) {
 			$baseQuery = $baseQuery->withTrashed();

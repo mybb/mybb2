@@ -108,6 +108,11 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\MyCode'
 		);
 
+        $this->app->bind(
+            'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
+            'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
+        );
+
 		$this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
 
 		$this->initDefaultUser();

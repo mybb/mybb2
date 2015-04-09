@@ -12,10 +12,12 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Likes\Traits\LikeableTrait;
 
 class Post extends Model implements HasPresenter
 {
 	use SoftDeletes;
+    use LikeableTrait;
 
 	/**
 	 * Indicates if the model should be timestamped.
