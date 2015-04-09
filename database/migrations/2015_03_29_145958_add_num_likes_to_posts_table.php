@@ -13,7 +13,7 @@ class AddNumLikesToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function(Blueprint $table) {
-            $table->unsignedInteger('num_likes');
+            $table->unsignedInteger('num_likes')->default(0);
         });
     }
 
