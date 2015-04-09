@@ -11,16 +11,24 @@ class PermissionsTableSeeder extends Seeder
 
 		$permissions = [
 			[
-				'permission_display' => 'AdmiCP Access',
-				'permission_slug' => 'admin_access',
+				'permission_name' => 'canEnterACP',
+				'content_name' => null,
+				'default_value' => 0
 			],
 			[
-				'permission_display' => 'Site Access',
-				'permission_slug' => 'site_access',
+				'permission_name' => 'canEnterMCP',
+				'content_name' => null,
+				'default_value' => 0
 			],
 			[
-				'permission_display' => 'Account Access',
-				'permission_slug' => 'account_access',
+				'permission_name' => 'canEnterUCP',
+				'content_name' => null,
+				'default_value' => 1
+			],
+			[
+				'permission_name' => 'canViewForum',
+				'content_name' => 'forum',
+				'default_value' => 1
 			],
 		];
 

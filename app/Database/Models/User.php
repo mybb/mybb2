@@ -8,17 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
-use MyBB\Core\Traits\PermissionHandler;
+use MyBB\Core\Permissions\Interfaces\PermissionInterface;
+use MyBB\Core\Permissions\Traits\Permissionable;
 
 /**
  * @property string id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
 {
-
-	use Authenticatable, CanResetPassword;
-
-	use PermissionHandler;
+	use Authenticatable, CanResetPassword, Permissionable;
 
 	/**
 	 * The database table used by the model.
@@ -63,6 +61,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     ];
 
 	/**
+	 * Cache variable for the display role
+	 *
+	 * @var Role
+	 */
+	private $displayRole;
+
+	/**
 	 * Get the presenter class.
 	 *
 	 * @return string
@@ -77,14 +82,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function getId()
 	{
-		return (int) $this->id;
+		return (int)$this->id;
 	}
 
-	public function role()
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function roles()
 	{
-		return $this->hasOne('MyBB\Core\Database\Models\Role', 'id', 'role_id');
+		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
 	}
 
+	/**
+	 * @return Role
+	 */
+	public function displayRole()
+	{
+		if ($this->displayRole == null) {
+			$this->displayRole = $this->roles->where('pivot.is_display', 1)->first();
+		}
+
+		return $this->displayRole;
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function activity()
 	{
 		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');

@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\IUserRepository',
+			'MyBB\Core\Database\Repositories\UserRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\UserRepository'
 		);
 
@@ -112,6 +112,8 @@ class AppServiceProvider extends ServiceProvider
             'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
             'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
         );
+
+		$this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
 
 		$this->initDefaultUser();
 
