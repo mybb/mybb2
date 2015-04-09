@@ -11,7 +11,9 @@
 		{% for user in users %}
 			<div class="user-list__user">
 				<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
-				<h3 class="user-list__user__username"><a href="index.php?page=profile">{{ user.styled_name|raw }}</a></h3>
+				<h3 class="user-list__user__username">
+                    {{ render_profile_link(user) }}
+                </h3>
 				<h4 class="user-list__user__usertitle">{{ user.usertitle?:user.role.role_display_name }}</h4>
 				<span class="team-badge"><span class="text">{{ user.role.role_display_name }}</span></span>
 				<dl class="user-list__user__user-statistics stats">
