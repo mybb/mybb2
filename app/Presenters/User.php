@@ -17,7 +17,7 @@ use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 
 class User extends BasePresenter
 {
@@ -31,7 +31,7 @@ class User extends BasePresenter
 	private $topicRepository;
 	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
-	/** @var IUserRepository $userRepository */
+	/** @var UserRepositoryInterface $userRepository */
 	private $userRepository;
 
 
@@ -41,7 +41,7 @@ class User extends BasePresenter
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PostRepositoryInterface  $postRepository
 	 * @param TopicRepositoryInterface $topicRepository
-	 * @param IUserRepository          $userRepository
+	 * @param UserRepositoryInterface  $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -49,7 +49,7 @@ class User extends BasePresenter
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		IUserRepository $userRepository
+		UserRepositoryInterface $userRepository
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;

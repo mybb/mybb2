@@ -299,7 +299,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restoreTopic(Topic $topic)
 	{
 		$topic->forum->increment('num_topics');
@@ -339,7 +338,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Topic $topic, Post $post = null)
 	{
 		if ($post === null) {
