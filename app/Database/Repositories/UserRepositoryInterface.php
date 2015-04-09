@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-interface IUserRepository
+interface UserRepositoryInterface
 {
     /**
      * Get all users.

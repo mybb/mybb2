@@ -10,9 +10,9 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 
-class UserRepository implements IUserRepository
+class UserRepository implements UserRepositoryInterface
 {
     /**
      * @var User $userModel
