@@ -15,6 +15,7 @@
 namespace MyBB\Core\UserActivity\Database\Repositories;
 
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 
 interface UserActivityRepositoryInterface
 {
@@ -71,4 +72,14 @@ interface UserActivityRepositoryInterface
      * @return int The number of deleted user activity entries.
      */
     public function deleteAllForUser($user);
+
+    /**
+     * Create an activity entry for the given content and user.
+     *
+     * @param ActivityStoreableInterface $content The content to store
+     * @param int                        $userId  The ID of the current user.
+     *
+     * @return mixed
+     */
+    public function createForContentAndUser(ActivityStoreableInterface $content, $userId);
 }

@@ -39,11 +39,19 @@ class UserActivityPresenter
     }
 
     /**
+     * @return UserActivity
+     */
+    public function getActivity()
+    {
+        return $this->activity;
+    }
+
+    /**
      * Render the activity string.
      *
      * @return string
      */
-    public function activity()
+    public function activityString()
     {
         if ($this->renderer !== null) {
             return $this->renderer->render($this->activity);
@@ -64,5 +72,19 @@ class UserActivityPresenter
     public function __call($name, $arguments)
     {
         return call_user_func([$this->activity, $name], $arguments);
+    }
+
+    /**
+     * Magic __get method, delegating all property accessors to the underlying activity.
+     *
+     * @param string $name The name of the property to get.
+     *
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        var_dump($name);
+
+        return $this->activity->{$name};
     }
 }

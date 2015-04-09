@@ -42,6 +42,7 @@ class UserActivityController extends Controller
      * @param Guard                           $guard
      * @param Request                         $request
      * @param UserActivityRepositoryInterface $userActivityRepository
+     * @param RendererFactory                 $rendererFactory
      * @param Store                           $settings
      */
     public function __construct(

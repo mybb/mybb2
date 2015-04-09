@@ -12,9 +12,10 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 use MyBB\Core\UserActivity\Traits\UserActivityTrait;
 
-class Post extends Model implements HasPresenter
+class Post extends Model implements HasPresenter, ActivityStoreableInterface
 {
     use SoftDeletes;
     use UserActivityTrait;
@@ -82,19 +83,27 @@ class Post extends Model implements HasPresenter
     }
 
     /**
-     * Get extra details about a model.
+     * Get the ID of the model.
      *
-     * @param Post $model The model being created and stored as activity.
+     * @return int
+     */
+    public function getContentId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get extra details about a model.
      *
      * @return array The extra details to store.
      */
-    public static function getActivityDetails(Post $model)
+    public function getExtraDetails()
     {
         return [
-            'topic_id' => $model->topic_id,
-            'topic_slug' => $model->topic->slug,
-            'topic_title' => $model->topic->title,
-            'content' => $model->content_parsed,
+            'topic_id' => $this->topic_id,
+            'topic_slug' => $this->topic->slug,
+            'topic_title' => $this->topic->title,
+            'content' => $this->content_parsed,
         ];
     }
 }

@@ -13,6 +13,7 @@
 namespace MyBB\Core\UserActivity\Database\Repositories\Eloquent;
 
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 
@@ -38,7 +39,7 @@ class UserActivityRepository implements UserActivityRepositoryInterface
      */
     public function all()
     {
-        return $this->userActivityModel->with(['user'])->all();
+        return $this->userActivityModel->with(['user'])->orderBy('created_at', 'desc')->all();
     }
 
     /**
@@ -52,7 +53,10 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     {
         $user = $this->getUserIdFromUser($user);
 
-        return $this->userActivityModel->with(['user'])->where('user_id', '=', $user)->get();
+        return $this->userActivityModel->with(['user'])
+                                       ->where('user_id', '=', $user)
+                                       ->orderBy('created_at', 'desc')
+                                       ->get();
     }
 
     /**
@@ -91,6 +95,56 @@ class UserActivityRepository implements UserActivityRepositoryInterface
     }
 
     /**
+     * Get a paginated list of all user activity entries.
+     *
+     * @param int $perPage The number of activity entries per page.
+     *
+     * @return mixed
+     */
+    public function paginateAll($perPage = 20)
+    {
+        return $this->userActivityModel->with(['user'])->orderBy('created_at', 'desc')->paginate($perPage);
+    }
+
+    /**
+     * Get a paginated list of activity entries for a specific user.
+     *
+     * @param int|User $user    The user to retrieve activity entries for.
+     * @param int      $perPage The number of activity entries per page.
+     *
+     * @return mixed
+     */
+    public function paginateForUser($user, $perPage = 20)
+    {
+        $user = $this->getUserIdFromUser($user);
+
+        return $this->userActivityModel->with(['user'])
+                                       ->where('user_id', '=', $user)
+                                       ->orderBy('created_at', 'desc')
+                                       ->paginate($perPage);
+    }
+
+    /**
+     * Create an activity entry for the given content and user.
+     *
+     * @param ActivityStoreableInterface $content The content to store
+     * @param int                        $userId  The ID of the current user.
+     *
+     * @return UserActivity
+     */
+    public function createForContentAndUser(ActivityStoreableInterface $content, $userId)
+    {
+        return $this->userActivityModel->create(
+            [
+                'user_id'       => (int) $userId,
+                'activity_id'   => $content->getContentId(),
+                'activity_type' => get_class($content),
+                'extra_details' => $content->getExtraDetails(),
+            ]
+        );
+    }
+
+    /**
      * Get the ID of a user from either an integer or User model.
      *
      * @param int|User $user The user to retrieve the User ID for.
@@ -118,32 +172,5 @@ class UserActivityRepository implements UserActivityRepositoryInterface
         $now = new \DateTime();
 
         return $now->sub($interval);
-    }
-
-    /**
-     * Get a paginated list of all user activity entries.
-     *
-     * @param int $perPage The number of activity entries per page.
-     *
-     * @return mixed
-     */
-    public function paginateAll($perPage = 20)
-    {
-        return $this->userActivityModel->with(['user'])->paginate($perPage);
-    }
-
-    /**
-     * Get a paginated list of activity entries for a specific user.
-     *
-     * @param int|User $user    The user to retrieve activity entries for.
-     * @param int      $perPage The number of activity entries per page.
-     *
-     * @return mixed
-     */
-    public function paginateForUser($user, $perPage = 20)
-    {
-        $user = $this->getUserIdFromUser($user);
-
-        return $this->userActivityModel->with(['user'])->where('user_id', '=', $user)->paginate($perPage);
     }
 }

@@ -23,31 +23,7 @@ trait UserActivityTrait
      */
     public static function bootUserActivityTrait()
     {
-        static::registerModelEvent(
-            'created',
-            function (Model $model) {
-                if (($user = \Auth::user()) !== null && $user->getAuthIdentifier() !== null) {
-                    $model->activityHistory()->create(
-                        [
-                            'user_id'       => $user->getAuthIdentifier(),
-                            'extra_details' => static::getActivityDetails($model),
-                        ]
-                    );
-                }
-            }
-        );
-    }
-
-    /**
-     * Get extra details about a model.
-     *
-     * @param Model $model The model being created and stored as activity.
-     *
-     * @return array The extra details to store.
-     */
-    public static function getActivityDetails(Model $model)
-    {
-        return [];
+        static::observe('MyBB\Core\UserActivity\Observers\EloquentObserver');
     }
 
     /**

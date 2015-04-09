@@ -16,12 +16,11 @@
         </div>
         <ul class="activities">
             {% for entry in activities %}
-                <li class="activity" id="activity-{{ entry.id }}" data-activity-id="{{ entry.id }}">
-                    <div class="activity__user user" data-user-id="{{ entry.user.id }}">
-                        <!-- TODO: Avatar? -->
-                        {{ entry.user.name }}
+                <li class="activity" id="activity-{{ entry.getActivity.id }}" data-activity-id="{{ entry.getActivity.id }}">
+                    <div class="activity__user user" data-user-id="{{ entry.getActivity.user.id }}">
+                        {{ render_profile_link(entry.getActivity.user, true) }}
                     </div>
-                    {{ entry.activity|raw }}
+                    {{ entry.activityString|raw }}
                 </li>
             {% endfor %}
             {{ activities.render|raw }}
