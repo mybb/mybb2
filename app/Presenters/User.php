@@ -16,8 +16,8 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\ITopicRepository;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 
 class User extends BasePresenter
 {
@@ -27,11 +27,11 @@ class User extends BasePresenter
 	private $router;
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
 	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
-	/** @var IUserRepository $userRepository */
+	/** @var UserRepositoryInterface $userRepository */
 	private $userRepository;
 
 
@@ -39,17 +39,17 @@ class User extends BasePresenter
 	 * @param UserModel $resource The user being wrapped by this presenter.
 	 * @param Router $router
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param ITopicRepository $topicRepository
 	 * @param PostRepositoryInterface $postRepository
-	 * @param IUserRepository $userRepository
+	 * @param TopicRepositoryInterface $topicRepository
+	 * @param UserRepositoryInterface $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
 		Router $router,
 		ForumRepositoryInterface $forumRepository,
-		ITopicRepository $topicRepository,
 		PostRepositoryInterface $postRepository,
-		IUserRepository $userRepository
+		TopicRepositoryInterface $topicRepository,
+		UserRepositoryInterface $userRepository
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -149,6 +149,8 @@ class User extends BasePresenter
 				break;
 			case 'topics.show':
 			case 'topics.reply':
+			case 'topics.quote':
+			case 'topics.reply.post':
 			case 'topics.edit':
 			case 'topics.delete':
 			case 'topics.restore':

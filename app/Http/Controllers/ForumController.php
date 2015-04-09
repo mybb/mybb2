@@ -7,8 +7,8 @@ use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\ITopicRepository;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -16,27 +16,27 @@ class ForumController extends Controller
 {
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
-	/** @var ITopicRepository $topicRepository */
+	/** @var TopicRepositoryInterface $topicRepository */
 	private $topicRepository;
 	/** @var PostRepositoryInterface $postRepository */
 	private $postRepository;
-	/** @var  IUserRepository $userRepository */
+	/** @var  UserRepositoryInterface $userRepository */
 	private $userRepository;
 
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum information.
-	 * @param ITopicRepository $topicRepository Thread repository instance to use in order to load threads within a
+	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads within a
 	 *                                          forum.
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the latest
 	 *                                          discussion table.
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
-		ITopicRepository $topicRepository,
 		PostRepositoryInterface $postRepository,
-		IUserRepository $userRepository,
+		TopicRepositoryInterface $topicRepository,
+		UserRepositoryInterface $userRepository,
 		Guard $guard,
 		Request $request
 	) {
