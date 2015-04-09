@@ -2,15 +2,24 @@
 
 use Closure;
 use MyBB\Auth\Contracts\Guard;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class CheckAccess
 {
-
+	/** @var Guard */
 	protected $auth;
 
-	public function __construct(Guard $auth)
+	/** @var  PermissionChecker */
+	private $permissionChecker;
+
+	/**
+	 * @param Guard             $auth
+	 * @param PermissionChecker $permissionChecker
+	 */
+	public function __construct(Guard $auth, PermissionChecker $permissionChecker)
 	{
 		$this->auth = $auth;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -23,8 +32,7 @@ class CheckAccess
 	 */
 	public function handle($request, Closure $next)
 	{
-		if($this->checkPermissions($request))
-		{
+		if ($this->checkPermissions($request)) {
 			return $next($request);
 		}
 
@@ -45,41 +53,6 @@ class CheckAccess
 		// Check for additional permissions required
 		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
-		// Weed out the Guests first
-		if(!$this->auth->user() || !$this->auth->user()->role)
-		{
-			// Guests are set to except
-			if(isset($action['except']) && $action['except'] == 'guest')
-			{
-				return false;
-			}
-
-			// Don't require permissions? Good to go
-			if(!$requiredPermisions)
-			{
-				return true;
-			}
-
-			// TODO: How can we easily check permissions for guests?
-			// As all of the things below would throw an error for guests atm we simply let them die
-			return false;
-		}
-
-		// Check if route is protected
-		if(isset($action['except']))
-		{
-			// Check if our role is allowed
-			$notAllowed = explode('|', $action['except']);
-
-
-			if(in_array($this->auth->user()->role->role_slug, $notAllowed))
-			{
-				return false;
-			}
-		}
-
-		// Did we get this far without a false. This is the final check.
-
-		return $this->auth->user()->canAccess($requiredPermisions);
+		return $this->permissionChecker->hasPermission('user', null, $requiredPermisions);
 	}
 }

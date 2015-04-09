@@ -15,6 +15,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 
@@ -42,26 +43,31 @@ class PostRepository implements PostRepositoryInterface
 	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
+	/** @var PermissionChecker */
+	private $permissionChecker;
+
 	/**
-	 * @param Post $postModel The model to use for posts.
-	 * @param Guard $guard Laravel guard instance, used to get user ID.
-	 * @param MessageFormatter $formatter Post formatter instance.
-	 * @param Store $settings The settings container
+	 * @param Post                     $postModel The model to use for posts.
+	 * @param Guard                    $guard     Laravel guard instance, used to get user ID.
+	 * @param MessageFormatter         $formatter Post formatter instance.
+	 * @param Store                    $settings  The settings container
 	 * @param ForumRepositoryInterface $forumRepository
+	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
 		Post $postModel,
 		Guard $guard,
 		MessageFormatter $formatter,
 		Store $settings,
-		ForumRepositoryInterface $forumRepository
-	) // TODO: Inject permissions container? So we can check post permissions before querying?
-	{
+		ForumRepositoryInterface $forumRepository,
+		PermissionChecker $permissionChecker
+	) {
 		$this->postModel = $postModel;
 		$this->guard = $guard;
 		$this->formatter = $formatter;
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -73,16 +79,25 @@ class PostRepository implements PostRepositoryInterface
 	 */
 	public function allForUser($userId = 0)
 	{
-		return $this->postModel->where('user_id', '=', $userId)->get();
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+		return $this->postModel->where('user_id', '=', $userId)->whereNotIn('topic.forum_id', $unviewableForums)->get();
 	}
 
+	/**
+	 * @param int $num
+	 *
+	 * @return mixed
+	 */
 	public function getNewest($num = 20)
 	{
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
 		return $this->postModel->orderBy('created_at', 'desc')->with([
 			'topic',
 			'topic.forum',
 			'author'
-		])->take($num)->get();
+		])->whereNotIn('topic.forum_id', $unviewableForums)->take($num)->get();
 	}
 
 	/**
@@ -94,7 +109,7 @@ class PostRepository implements PostRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		return $this->postModel->withTrashed()->find($id);
+		return $this->postModel->with(['likes', 'author'])->withTrashed()->find($id);
 	}
 
 	/**
@@ -109,7 +124,7 @@ class PostRepository implements PostRepositoryInterface
 	{
 		$postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
-		$baseQuery = $this->postModel->with(['author'])->where('topic_id', '=', $topic->id);
+		$baseQuery = $this->postModel->with(['author', 'likes'])->where('topic_id', '=', $topic->id);
 
 		if ($withTrashed) {
 			$baseQuery = $baseQuery->withTrashed();
@@ -220,6 +235,18 @@ class PostRepository implements PostRepositoryInterface
 	}
 
 	/**
+	 * Deletes all posts for a specific topic
+	 *
+	 * @param Topic $topic
+	 *
+	 * @return mixed
+	 */
+	public function deletePostsForTopic(Topic $topic)
+	{
+		return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
+	}
+
+	/**
 	 * Delete a post
 	 *
 	 * @param Post $post The post to delete
@@ -263,7 +290,6 @@ class PostRepository implements PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restorePost(Post $post)
 	{
 		$post->topic->increment('num_posts');

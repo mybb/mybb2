@@ -34,7 +34,14 @@ class RolesTableSeeder extends Seeder
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime
 			],
-
+			[
+				'role_display_name' => 'Guest',
+				'role_description' => 'The guest group',
+				'role_slug' => 'guest',
+				'role_username_style' => ':user',
+				'created_at' => new DateTime,
+				'updated_at' => new DateTime
+			],
 		];
 
 		DB::table('roles')->insert($roles);

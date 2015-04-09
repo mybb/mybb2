@@ -2,14 +2,14 @@
 
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Repositories\IUserRepository;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 
 
 class MemberController extends Controller
 {
 	/**
-	 * @var IUserRepository $userRepository
+	 * @var UserRepositoryInterface $userRepository
 	 * @access protected
 	 */
 	protected $userRepository;
@@ -22,7 +22,7 @@ class MemberController extends Controller
 	public function __construct(
 		Guard $guard,
 		Request $request,
-		IUserRepository $userRepository
+		UserRepositoryInterface $userRepository
 	) {
 		parent::__construct($guard, $request);
 

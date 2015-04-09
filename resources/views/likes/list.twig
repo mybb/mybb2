@@ -1,0 +1,32 @@
+<div class="likes">
+    <span class="likes__prefix">
+        <i class="fa fa-caret-right"></i>
+    </span>
+    {% for key, like in likes %}
+        <span class="likes__like" data-like-id="{{ like.id }}">
+            {% if like.user.name != trans('likes.current_user') %}
+                <a href="{{ url_route('user.profile', {'slug': like.user.name, 'id': like.user.id}) }}">{{ like.user.name }}</a>
+            {% else %}
+                {{ like.user.name }}
+            {% endif %}
+        </span>
+        {% if key < likes|length - 2 or (key == likes|length - 2 and numOtherLikes > 0) %} {# don't show a comma at the end of the list. Key is zero-based, so minus 1. #}
+            <span class="likes__separator likes__separator--comma">
+                {{ trans('likes.sep_comma') }}
+            </span>
+        {% elseif key == likes|length - 2 %}
+            <span class="likes__separator likes__separator--and">
+                {{ trans('likes.sep_and') }}
+            </span>
+        {% endif %}
+    {% endfor %}
+    {% if numOtherLikes > 0 %}
+        <span class="likes__separator likes__separator--comma">
+                {{ trans('likes.sep_and') }}
+        </span>
+        <span class="likes__others">
+            <a href="{{ viewAllLikesLink }}">{{ trans('likes.others', {'numOthers': numOtherLikes}) }}</a>
+        </span>
+    {% endif %}
+    {{ trans('likes.like_this') }}
+</div>

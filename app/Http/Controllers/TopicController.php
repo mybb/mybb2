@@ -22,6 +22,7 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
+use MyBB\Core\Services\TopicDeleter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -46,8 +47,8 @@ class TopicController extends Controller
 	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param PollRepositoryInterface  $pollRepository Poll repository interface, used to fetch poll details.
-	 * @param Guard                    $guard Guard implementation
-	 * @param Request                  $request Request implementation
+	 * @param Guard                    $guard           Guard implementation
+	 * @param Request                  $request         Request implementation
 	 * @param QuoteRenderer            $quoteRenderer
 	 */
 	public function __construct(
@@ -69,8 +70,15 @@ class TopicController extends Controller
 		$this->quoteRenderer = $quoteRenderer;
 	}
 
+	/**
+	 * @param string $slug
+	 * @param int    $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function show($slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -92,8 +100,17 @@ class TopicController extends Controller
 		return view('topic.show', compact('topic', 'posts', 'poll'));
 	}
 
+	/**
+	 * @param Store  $settings
+	 * @param string $slug
+	 * @param int    $id
+	 * @param int    $postId
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -117,8 +134,16 @@ class TopicController extends Controller
 		}
 	}
 
+	/**
+	 * @param Store  $settings
+	 * @param string $slug
+	 * @param int    $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function last(Store $settings, $slug = '', $id = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -142,9 +167,17 @@ class TopicController extends Controller
 		}
 	}
 
+	/**
+	 * @param string  $slug
+	 * @param int     $id
+	 * @param null    $postId
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function reply($slug = '', $id = 0, $postId = null, Request $request)
 	{
-		$message = '';
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
@@ -152,10 +185,9 @@ class TopicController extends Controller
 		}
 
 		$content = '';
-		if($postId)
-		{
+		if ($postId) {
 			$post = $this->postRepository->find($postId);
-			if(!$post || $post->topic_id != $topic->id) {
+			if (!$post || $post->topic_id != $topic->id) {
 				throw new NotFoundHttpException(trans('errors.topic_not_found'));
 			}
 
@@ -175,10 +207,18 @@ class TopicController extends Controller
 		return view('topic.reply', compact('topic', 'content', 'username'));
 	}
 
+	/**
+	 * @param string       $slug
+	 * @param int          $id
+	 * @param ReplyRequest $replyRequest
+	 *
+	 * @return $this|bool|\Illuminate\Http\RedirectResponse
+	 */
 	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
 	{
 		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
 
+		// Forum permissions are checked in "find"
 		/** @var Topic $topic */
 		$topic = $this->topicRepository->find($id);
 
@@ -207,8 +247,16 @@ class TopicController extends Controller
 		]);
 	}
 
+	/**
+	 * @param string $slug
+	 * @param int    $id
+	 * @param int    $postId
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function edit($slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -221,8 +269,17 @@ class TopicController extends Controller
 		return view('topic.edit', compact('post', 'topic'));
 	}
 
+	/**
+	 * @param string       $slug
+	 * @param int          $id
+	 * @param int          $postId
+	 * @param ReplyRequest $replyRequest
+	 *
+	 * @return \Exception|\Illuminate\Http\RedirectResponse
+	 */
 	public function postEdit($slug = '', $id = 0, $postId = 0, ReplyRequest $replyRequest)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -247,8 +304,14 @@ class TopicController extends Controller
 		return new \Exception('Error editing post'); // TODO: Redirect back with error...
 	}
 
+	/**
+	 * @param $forumId
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function create($forumId)
 	{
+		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($forumId);
 
 		if (!$forum) {
@@ -260,8 +323,16 @@ class TopicController extends Controller
 		return view('topic.create', compact('forum'));
 	}
 
+	/**
+	 * @param int           $forumId
+	 * @param CreateRequest $createRequest
+	 *
+	 * @return $this|bool|\Illuminate\Http\RedirectResponse
+	 */
 	public function postCreate($forumId = 0, CreateRequest $createRequest)
 	{
+		// Forum permissions are checked in "CreateRequest"
+
 		if (!$this->guard->check()) {
 			$captcha = $this->checkCaptcha();
 			if ($captcha !== true) {
@@ -321,8 +392,17 @@ class TopicController extends Controller
 		]);
 	}
 
-	public function delete($slug = '', $id = 0, $postId = 0)
+	/**
+	 * @param string       $slug
+	 * @param int          $id
+	 * @param int          $postId
+	 * @param TopicDeleter $topicDeleter
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function delete($slug = '', $id = 0, $postId = 0, TopicDeleter $topicDeleter)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
@@ -332,7 +412,7 @@ class TopicController extends Controller
 
 
 		if ($post['id'] == $topic['first_post_id']) {
-			$this->topicRepository->deleteTopic($topic);
+			$topicDeleter->deleteTopic($topic);
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
 		} else {
@@ -342,8 +422,16 @@ class TopicController extends Controller
 		}
 	}
 
+	/**
+	 * @param string $slug
+	 * @param int    $id
+	 * @param int    $postId
+	 *
+	 * @return \Exception|\Illuminate\Http\RedirectResponse
+	 */
 	public function restore($slug = '', $id = 0, $postId = 0)
 	{
+		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
 		$post = $this->postRepository->find($postId);
 
