@@ -58,17 +58,18 @@ class RenderUserProfileLink extends \Twig_Extension
     /**
      * Render the profile link for a given user.
      *
-     * @param User $user The user to render the profile link for, or null to render the link for the current user.
+     * @param User $user          The user to render the profile link for, or null to render the link for the current user.
      * @param bool $includeAvatar Whether to include the user's avatar in the link.
+     * @param bool $useStyledName Whether to apply the usergroup styling to the username.
      *
      * @return string The rendered profile link.
      */
-    public function renderProfileLink(User $user = null, $includeAvatar = false)
+    public function renderProfileLink(User $user = null, $includeAvatar = false, $useStyledName = true)
     {
         if (is_null($user)) {
             $user = $this->guard->user();
         }
 
-        return view('user.profile_link', compact('user', 'includeAvatar'))->render();
+        return view('user.profile_link', compact('user', 'includeAvatar', 'useStyledName'))->render();
     }
 }

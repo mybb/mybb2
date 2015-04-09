@@ -2,5 +2,9 @@
     {% if includeAvatar %}
         <img src="{{ user.avatar }}" class="profile-link__avatar" />
     {% endif %}
-    {{ user.styled_name|raw }}
+    {% if useStyledName %}
+        {{ user.styled_name|raw }}
+    {% else %}
+        {{ user.name }}
+    {% endif %}
 </a>
