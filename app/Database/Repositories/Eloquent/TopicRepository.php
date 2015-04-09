@@ -293,38 +293,6 @@ class TopicRepository implements TopicRepositoryInterface
 	}
 
 	/**
-	 * Delete a topic
-	 *
-	 * @param Topic $topic The topic to delete
-	 *
-	 * @return mixed
-	 */
-
-	public function deleteTopic(Topic $topic)
-	{
-		if ($topic['deleted_at'] == null) {
-			$topic->forum->decrement('num_topics');
-			$topic->forum->decrement('num_posts', $topic->num_posts);
-
-			$topic->author->decrement('num_topics');
-
-			$success = $topic->delete();
-
-			if ($success) {
-				if ($topic->last_post_id == $topic->forum->last_post_id) {
-					$this->forumRepository->updateLastPost($topic->forum);
-				}
-			}
-
-			return $success;
-		} else {
-			$topic->posts->forceDelete();
-
-			return $topic->forceDelete();
-		}
-	}
-
-	/**
 	 * Restore a topic
 	 *
 	 * @param Topic $topic The topic to restore

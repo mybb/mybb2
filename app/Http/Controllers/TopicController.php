@@ -21,6 +21,7 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
+use MyBB\Core\Services\TopicDeleter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -347,13 +348,14 @@ class TopicController extends Controller
 	}
 
 	/**
-	 * @param string $slug
-	 * @param int    $id
-	 * @param int    $postId
+	 * @param string       $slug
+	 * @param int          $id
+	 * @param int          $postId
+	 * @param TopicDeleter $topicDeleter
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($slug = '', $id = 0, $postId = 0)
+	public function delete($slug = '', $id = 0, $postId = 0, TopicDeleter $topicDeleter)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -365,7 +367,7 @@ class TopicController extends Controller
 
 
 		if ($post['id'] == $topic['first_post_id']) {
-			$this->topicRepository->deleteTopic($topic);
+			$topicDeleter->deleteTopic($topic);
 
 			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
 		} else {
