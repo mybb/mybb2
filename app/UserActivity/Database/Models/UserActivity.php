@@ -13,6 +13,7 @@
 namespace MyBB\Core\UserActivity\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
  * @property int id
@@ -23,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon created_at
  * @property \Carbon\Carbon updated_at
  */
-class UserActivity extends Model
+class UserActivity extends Model implements HasPresenter
 {
     /**
      * The table associated with the model.
@@ -63,5 +64,15 @@ class UserActivity extends Model
     public function activityHistorable()
     {
         return $this->morphTo(null, 'activity_type', 'activity_id');
+    }
+
+    /**
+     * Get the presenter class.
+     *
+     * @return string
+     */
+    public function getPresenterClass()
+    {
+        return 'MyBB\Core\UserActivity\Presenters\UserActivityPresenter';
     }
 }

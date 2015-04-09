@@ -14,36 +14,32 @@
 
 namespace MyBB\Core\UserActivity\Presenters;
 
+use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
+use MyBB\Core\UserActivity\RendererFactory;
 use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
 
-class UserActivityPresenter
+class UserActivityPresenter extends BasePresenter
 {
     /**
-     * @var UserActivity $activity
+     * @var UserActivity $wrappedObject
      */
-    protected $activity;
-    /**
-     * @var AbstractRenderer $renderer
-     */
-    protected $renderer;
 
     /**
-     * @param UserActivity     $activity
-     * @param AbstractRenderer $renderer
+     * @var RendererFactory $renderer
      */
-    public function __construct(UserActivity $activity, AbstractRenderer $renderer = null)
-    {
-        $this->activity = $activity;
-        $this->renderer = $renderer;
-    }
+    protected $rendererFactory;
 
     /**
-     * @return UserActivity
+     * @param UserActivity    $resource
+     * @param RendererFactory $rendererFactory
+     *
+     * @internal param AbstractRenderer $renderer
      */
-    public function getActivity()
+    public function __construct(UserActivity $resource, RendererFactory $rendererFactory)
     {
-        return $this->activity;
+        parent::__construct($resource);
+        $this->rendererFactory = $rendererFactory;
     }
 
     /**
@@ -53,38 +49,13 @@ class UserActivityPresenter
      */
     public function activityString()
     {
-        if ($this->renderer !== null) {
-            return $this->renderer->render($this->activity);
+        $renderer = $this->rendererFactory->build($this->getWrappedObject());
+
+        if ($renderer !== null) {
+            return $renderer->render($this->getWrappedObject());
         }
 
         // TODO: Baseline activity string...
         return '';
-    }
-
-    /**
-     * Magic __call method, delegating all other methods to the UserActivity class.
-     *
-     * @param string      $name      The name of the method to call.
-     * @param array|mixed $arguments The method arguments.
-     *
-     * @return mixed
-     */
-    public function __call($name, $arguments)
-    {
-        return call_user_func([$this->activity, $name], $arguments);
-    }
-
-    /**
-     * Magic __get method, delegating all property accessors to the underlying activity.
-     *
-     * @param string $name The name of the property to get.
-     *
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        var_dump($name);
-
-        return $this->activity->{$name};
     }
 }
