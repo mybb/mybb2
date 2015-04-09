@@ -196,7 +196,6 @@ class PollController extends Controller
 			throw new \Exception(trans('errors.poll_is_closed'));
 		}
 
-
 		// Is the user already voted?
 		if ($this->guard->check()) {
 			$myVote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
@@ -208,7 +207,6 @@ class PollController extends Controller
 
 		$votes = $voteRequest->input('option');
 		$options = $pollPresenter->options();
-
 
 		if ($poll->is_multiple) {
 
@@ -230,7 +228,6 @@ class PollController extends Controller
 				throw new \Exception(trans('errors.poll_no_votes'));
 			}
 
-
 			// Increment num votes of options that the user voted
 			$okVotes = [];
 			foreach ($votes as $vote) {
@@ -240,9 +237,7 @@ class PollController extends Controller
 				}
 			}
 			$votes = implode(',', $okVotes);
-
 		} else {
-
 			// if the user votes in several options we get first one.
 			if (is_array($votes)) {
 				$votes = $votes[0];
@@ -258,18 +253,16 @@ class PollController extends Controller
 			$options[$votes - 1]['votes']++;
 		}
 
-
 		$vote = $this->pollVoteRepository->create([
 			'poll_id' => $poll->id,
 			'vote' => $votes
 		]);
 
-
 		if ($vote) {
 			$poll->update(['options' => $options]);
-
-			return redirect()->route('polls.show', [$topicSlug, $topicId]);
 		}
+
+		return redirect()->route('polls.show', [$topicSlug, $topicId]);
 	}
 
 

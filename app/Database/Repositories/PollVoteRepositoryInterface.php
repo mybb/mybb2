@@ -48,7 +48,7 @@ interface PollVoteRepositoryInterface
 
 	/**
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function removeAllByPoll(Poll $poll);
 }

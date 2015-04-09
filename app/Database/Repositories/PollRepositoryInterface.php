@@ -46,7 +46,7 @@ interface PollRepositoryInterface
 	 * Remove the poll
 	 * @param Poll $poll
 	 *
-	 * @return \MyBB\Core\Database\Models\Poll
+	 * @return bool
 	 */
 	public function remove(Poll $poll);
 }

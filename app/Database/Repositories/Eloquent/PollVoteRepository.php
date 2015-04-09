@@ -57,7 +57,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 	 *
 	 * @param array $details Details about the poll.
 	 *
-	 * @return mixed
+	 * @return PollVote
 	 */
 	public function create(array $details = [])
 	{
@@ -95,7 +95,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 
 	/**
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function removeAllByPoll(Poll $poll)
 	{

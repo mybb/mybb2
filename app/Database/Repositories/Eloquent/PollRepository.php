@@ -110,7 +110,7 @@ class PollRepository implements PollRepositoryInterface
 	 * Remove the poll
 	 * @param Poll $poll
 	 *
-	 * @return Poll
+	 * @return bool
 	 */
 	public function remove(Poll $poll)
 	{
@@ -118,6 +118,10 @@ class PollRepository implements PollRepositoryInterface
 			$this->pollVoteRepository->removeAllByPoll($poll);
 			$poll->delete();
 		});
-		return $poll;
+		if($poll) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
