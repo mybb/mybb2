@@ -98,4 +98,13 @@ interface PostRepositoryInterface
 	 * @return mixed
 	 */
 	public function restorePost(Post $post);
+
+	/**
+	 * Deletes all posts for a specific topic
+	 *
+	 * @param Topic $topic
+	 *
+	 * @return mixed
+	 */
+	public function deletePostsForTopic(Topic $topic);
 }

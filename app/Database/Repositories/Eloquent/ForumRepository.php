@@ -129,13 +129,23 @@ class ForumRepository implements ForumRepositoryInterface
 	public function updateLastPost(Forum $forum, Post $post = null)
 	{
 		if ($post === null) {
-			$post = $forum->topics->sortByDesc('last_post_id')->first()->lastPost;
+			$topic = $forum->topics->sortByDesc('last_post_id')->first();
+			if ($topic != null) {
+				$post = $post->lastPost;
+			}
 		}
 
-		$forum->update([
-			'last_post_id' => $post->id,
-			'last_post_user_id' => $post->user_id
-		]);
+		if ($post != null) {
+			$forum->update([
+				'last_post_id' => $post->id,
+				'last_post_user_id' => $post->user_id
+			]);
+		} else {
+			$forum->update([
+				'last_post_id' => null,
+				'last_post_user_id' => null
+			]);
+		}
 
 		return $forum;
 	}
