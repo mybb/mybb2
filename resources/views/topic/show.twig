@@ -22,8 +22,9 @@
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post__meta">
+
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>
-						<h3 class="post__author"><a href="index.php?page=profile">{{ post.author.styled_name|raw }}</a></h3>
+						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
 						{{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>

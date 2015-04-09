@@ -15,7 +15,7 @@
                     <div class="topic__info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
                         <h3 class="topic__title topic__title--unread"><a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a></h3>
-                        <p class="topic__post topic__post--latest">{{ post_date_link(url_route("topics.last", [topic.slug, topic.id]), topic.lastPost.created_at) }} {{ trans('general.by') }} <a href="" class="post__author">{{ topic.lastPost.author.name }}</a></p>
+                        <p class="topic__post topic__post--latest">{{ post_date_link(url_route("topics.last", [topic.slug, topic.id]), topic.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(topic.lastPost.author) }}</p>
                         <p class="topic__forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [topic.forum.slug, topic.forum.id]) }}">{{ topic.forum.title }}</a></p>
                         <p class="topic__replies caption" title="{{ trans_choice('topic.numreplies', topic.replies) }} &middot; {{ trans_choice('topic.numviews', topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
                     </div>
