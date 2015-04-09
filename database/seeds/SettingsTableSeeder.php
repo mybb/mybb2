@@ -58,6 +58,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'user.dob_visibility'],
             ['name' => 'post.likes_to_show'],
             ['name' => 'likes.per_page'],
+            ['name' => 'user_activity.per_page'],
 		]);
 
 		DB::table('setting_values')->insert([
@@ -211,6 +212,10 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->pluck('id'),
+                'value' => 10,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'user_activity.per_page')->pluck('id'),
                 'value' => 10,
             ],
 		]);
