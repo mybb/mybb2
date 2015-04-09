@@ -58,4 +58,13 @@ interface PostRepositoryInterface
 	 * @return mixed
 	 */
 	public function addPostToTopic(Topic $topic, array $postDetails);
+
+	/**
+	 * Deletes all posts for a specific topic
+	 *
+	 * @param Topic $topic
+	 *
+	 * @return mixed
+	 */
+	public function deletePostsForTopic(Topic $topic);
 }

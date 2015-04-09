@@ -220,6 +220,18 @@ class PostRepository implements PostRepositoryInterface
 	}
 
 	/**
+	 * Deletes all posts for a specific topic
+	 *
+	 * @param Topic $topic
+	 *
+	 * @return mixed
+	 */
+	public function deletePostsForTopic(Topic $topic)
+	{
+		return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
+	}
+
+	/**
 	 * Delete a post
 	 *
 	 * @param Post $post The post to delete

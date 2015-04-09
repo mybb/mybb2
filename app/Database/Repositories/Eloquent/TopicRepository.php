@@ -53,12 +53,12 @@ class TopicRepository implements TopicRepositoryInterface
 	private $forumRepository;
 
 	/**
-	 * @param Topic $topicModel The model to use for threads.
-	 * @param Guard $guard Laravel guard instance, used to get user ID.
-	 * @param PostRepositoryInterface $postRepository Used to manage posts for topics.
-	 * @param Str $stringUtils String utilities, used for creating slugs.
-	 * @param DatabaseManager $dbManager Database manager, needed to do transactions.
-	 * @param Store $settings The settings container
+	 * @param Topic                    $topicModel     The model to use for threads.
+	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
+	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
+	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
+	 * @param Store                    $settings       The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(
@@ -269,38 +269,6 @@ class TopicRepository implements TopicRepositoryInterface
 		$topic->update($topicDetails);
 
 		return $topic;
-	}
-
-	/**
-	 * Delete a topic
-	 *
-	 * @param Topic $topic The topic to delete
-	 *
-	 * @return mixed
-	 */
-
-	public function deleteTopic(Topic $topic)
-	{
-		if ($topic['deleted_at'] == null) {
-			$topic->forum->decrement('num_topics');
-			$topic->forum->decrement('num_posts', $topic->num_posts);
-
-			$topic->author->decrement('num_topics');
-
-			$success = $topic->delete();
-
-			if ($success) {
-				if ($topic->last_post_id == $topic->forum->last_post_id) {
-					$this->forumRepository->updateLastPost($topic->forum);
-				}
-			}
-
-			return $success;
-		} else {
-			$topic->posts->forceDelete();
-
-			return $topic->forceDelete();
-		}
 	}
 
 	/**
