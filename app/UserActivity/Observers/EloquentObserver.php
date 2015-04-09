@@ -32,7 +32,7 @@ class EloquentObserver
     /**
      * Create the event handler.
      *
-     * @param Guard $guard
+     * @param Guard                           $guard
      * @param UserActivityRepositoryInterface $activityRepository
      */
     public function __construct(Guard $guard, UserActivityRepositoryInterface $activityRepository)

@@ -48,12 +48,15 @@ class PostRenderer extends AbstractRenderer
             'user_activity.activity_post',
             [
                 'topic_title' => isset($activity->extra_details['topic_title']) ? $activity->extra_details['topic_title'] : '',
-                'topic_id' => isset($activity->extra_details['topic_id']) ? $activity->extra_details['topic_id'] : 0,
-                'topic_link' => $this->urlGenerator->route('topics.showPost', [
-                   'slug' => isset($activity->extra_details['topic_slug']) ? $activity->extra_details['topic_slug'] : '',
-                   'id' => $activity->activity_historable->topic_id,
-                   'postId' => $activity->activity_id,
-                ]),
+                'topic_id'    => isset($activity->extra_details['topic_id']) ? $activity->extra_details['topic_id'] : 0,
+                'topic_link'  => $this->urlGenerator->route(
+                    'topics.showPost',
+                    [
+                        'slug'   => isset($activity->extra_details['topic_slug']) ? $activity->extra_details['topic_slug'] : '',
+                        'id'     => $activity->activity_historable->topic_id,
+                        'postId' => $activity->activity_id,
+                    ]
+                ),
             ]
         );
     }

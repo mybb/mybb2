@@ -17,10 +17,7 @@ namespace MyBB\Core\UserActivity\Http\Controllers;
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Controllers\Controller;
-use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
-use MyBB\Core\UserActivity\Presenters\UserActivityPresenter;
-use MyBB\Core\UserActivity\RendererFactory;
 use MyBB\Settings\Store;
 
 class UserActivityController extends Controller
@@ -30,10 +27,6 @@ class UserActivityController extends Controller
      */
     private $userActivityRepository;
     /**
-     * @var RendererFactory $rendererFactory
-     */
-    private $rendererFactory;
-    /**
      * @var Store $settings
      */
     private $settings;
@@ -42,20 +35,17 @@ class UserActivityController extends Controller
      * @param Guard                           $guard
      * @param Request                         $request
      * @param UserActivityRepositoryInterface $userActivityRepository
-     * @param RendererFactory                 $rendererFactory
      * @param Store                           $settings
      */
     public function __construct(
         Guard $guard,
         Request $request,
         UserActivityRepositoryInterface $userActivityRepository,
-        RendererFactory $rendererFactory,
         Store $settings
     ) {
         parent::__construct($guard, $request);
 
         $this->userActivityRepository = $userActivityRepository;
-        $this->rendererFactory = $rendererFactory;
         $this->settings = $settings;
     }
 

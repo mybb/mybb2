@@ -12,8 +12,6 @@
 
 namespace MyBB\Core\UserActivity\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-
 trait UserActivityTrait
 {
     /**

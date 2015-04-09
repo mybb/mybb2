@@ -15,8 +15,6 @@
 namespace MyBB\Core\UserActivity;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Manager;
-use Illuminate\Support\Str;
 use Illuminate\Translation\Translator;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
@@ -78,7 +76,7 @@ class RendererFactory
      * Add a renderer instance.
      *
      * @param string $activityTypeName The name of the activity type the renderer applies to.
-     * @param string $renderer The renderer to add.
+     * @param string $renderer         The renderer to add.
      */
     public function addRenderer($activityTypeName = '', $renderer = '')
     {

@@ -16,11 +16,11 @@ use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * @property int id
- * @property int user_id
- * @property string activity_type
- * @property int activity_id
- * @property array extra_details
+ * @property int            id
+ * @property int            user_id
+ * @property string         activity_type
+ * @property int            activity_id
+ * @property array          extra_details
  * @property \Carbon\Carbon created_at
  * @property \Carbon\Carbon updated_at
  */

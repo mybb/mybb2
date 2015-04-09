@@ -17,7 +17,6 @@ namespace MyBB\Core\UserActivity\Presenters;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use MyBB\Core\UserActivity\RendererFactory;
-use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
 
 class UserActivityPresenter extends BasePresenter
 {
