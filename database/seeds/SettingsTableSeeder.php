@@ -56,6 +56,8 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'user.receive_email'],
 			['name' => 'user.dob_privacy'],
 			['name' => 'user.dob_visibility'],
+            ['name' => 'post.likes_to_show'],
+            ['name' => 'likes.per_page'],
 		]);
 
 		DB::table('setting_values')->insert([
@@ -203,6 +205,14 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->pluck('id'),
 				'value' => '1'
 			],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->pluck('id'),
+                'value' => 3,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->pluck('id'),
+                'value' => 10,
+            ],
 		]);
 	}
 }

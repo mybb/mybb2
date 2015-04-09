@@ -12,6 +12,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class ForumRepository implements ForumRepositoryInterface
 {
@@ -22,13 +23,20 @@ class ForumRepository implements ForumRepositoryInterface
 	protected $forumModel;
 
 	/**
-	 * @param Forum $forumModel The model to use for forums.
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @param Forum             $forumModel        The model to use for forums.
+	 * @param PermissionChecker $permissionChecker The permission class
 	 */
 	public function __construct(
-		Forum $forumModel
-	) // TODO: Inject permissions container? So we can check thread permissions before querying?
-	{
+		Forum $forumModel,
+		PermissionChecker $permissionChecker
+	) {
 		$this->forumModel = $forumModel;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -51,7 +59,9 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function find($id = 0)
 	{
-		return $this->forumModel->with(['children', 'parent'])->find($id);
+		$unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+		return $this->forumModel->with(['children', 'parent'])->whereNotIn('id', $unviewable)->find($id);
 	}
 
 	/**
@@ -73,8 +83,10 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function getIndexTree()
 	{
+		$unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
 		// TODO: The caching decorator would also cache the relations here
-		return $this->forumModel->where('parent_id', '=', null)->with([
+		return $this->forumModel->where('parent_id', '=', null)->whereNotIn('id', $unviewable)->with([
 			'children',
 			'children.lastPost',
 			'children.lastPost.topic',
@@ -129,13 +141,23 @@ class ForumRepository implements ForumRepositoryInterface
 	public function updateLastPost(Forum $forum, Post $post = null)
 	{
 		if ($post === null) {
-			$post = $forum->topics->sortByDesc('last_post_id')->first()->lastPost;
+			$topic = $forum->topics->sortByDesc('last_post_id')->first();
+			if ($topic != null) {
+				$post = $post->lastPost;
+			}
 		}
 
-		$forum->update([
-			'last_post_id' => $post->id,
-			'last_post_user_id' => $post->user_id
-		]);
+		if ($post != null) {
+			$forum->update([
+				'last_post_id' => $post->id,
+				'last_post_user_id' => $post->user_id
+			]);
+		} else {
+			$forum->update([
+				'last_post_id' => null,
+				'last_post_user_id' => null
+			]);
+		}
 
 		return $forum;
 	}

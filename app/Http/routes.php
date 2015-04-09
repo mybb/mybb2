@@ -27,12 +27,8 @@ Route::group(['prefix' => 'api/v1'], function () {
 |
 */
 
-Route::get('/', [
-	'as' => 'forum.index',
-	'middleware' => 'checkaccess',
-	'except' => 'banned',
-	'uses' => 'ForumController@index'
-]);
+Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
+
 Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
 Route::get('forum/{slug}.{id}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
@@ -63,6 +59,9 @@ Route::get('topic/{topicSlug}.{topicId}/poll/remove', ['as' => 'polls.remove', '
 Route::get('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
 Route::post('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']);
 
+Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
+Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
+
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 
@@ -84,7 +83,7 @@ Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaControll
 
 Route::any('parser', ['uses' => 'DebugController@parser']);
 
-Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'account_access'], function () {
+Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
 	Route::get('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@getProfile']);
 	Route::post('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@postProfile']);
