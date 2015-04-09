@@ -36,12 +36,12 @@ class User extends BasePresenter
 
 
 	/**
-	 * @param UserModel $resource The user being wrapped by this presenter.
-	 * @param Router $router
+	 * @param UserModel                $resource The user being wrapped by this presenter.
+	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PostRepositoryInterface $postRepository
+	 * @param PostRepositoryInterface  $postRepository
 	 * @param TopicRepositoryInterface $topicRepository
-	 * @param UserRepositoryInterface $userRepository
+	 * @param UserRepositoryInterface  $userRepository
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -59,19 +59,26 @@ class User extends BasePresenter
 		$this->userRepository = $userRepository;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function styled_name()
 	{
 		if ($this->wrappedObject->id == -1) {
 			return e(trans('general.guest'));
 		}
 
-		if ($this->wrappedObject->role != null && $this->wrappedObject->role->role_username_style) {
-			return str_replace(':user', e($this->wrappedObject->name), $this->wrappedObject->role->role_username_style);
+		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
+			return str_replace(':user', e($this->wrappedObject->name),
+				$this->wrappedObject->displayRole()->role_username_style);
 		}
 
 		return e($this->wrappedObject->name);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function avatar()
 	{
 		$avatar = $this->wrappedObject->avatar;
@@ -95,19 +102,25 @@ class User extends BasePresenter
 		}
 	}
 
+	/**
+	 * @return string
+	 */
 	public function avatar_link()
 	{
 		$avatar = $this->wrappedObject->avatar;
 
 		// If we have an email or link we'll return it - otherwise nothing
-		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false)
-		{
+		if (filter_var($avatar, FILTER_VALIDATE_URL) !== false || filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false
+		) {
 			return $avatar;
 		}
 
 		return '';
 	}
 
+	/**
+	 * @return string
+	 */
 	public function last_page()
 	{
 		$lang = null;
@@ -122,11 +135,18 @@ class User extends BasePresenter
 				$langOptions['url'] = route($route->getName(), $route->parameters());
 			}
 
-			$lang = Lang::get('online.' . $route->getName(), $langOptions);
+			if (!isset($langOptions['langString'])) {
+				$langString = 'online.' . $route->getName();;
+			} else {
+				$langString = 'online.' . $langOptions['langString'];
+				unset($langOptions['langString']);
+			}
+
+			$lang = Lang::get($langString, $langOptions);
 
 			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
 			if (is_array($lang)) {
-				$lang = Lang::get('online.' . $route->getName() . '.index', $langOptions);
+				$lang = Lang::get($langString . '.index', $langOptions);
 			}
 		}
 
@@ -139,13 +159,25 @@ class User extends BasePresenter
 		return $lang;
 	}
 
+	/**
+	 * @param $route
+	 * @param $parameters
+	 *
+	 * @return array
+	 */
 	private function getWioData($route, $parameters)
 	{
 		$data = array();
 
 		switch ($route) {
 			case 'forums.show':
-				$data['forum'] = e($this->forumRepository->find($parameters['id'])->title);
+				$forum = $this->forumRepository->find($parameters['id']);
+				// Either the forum has been deleted or this user doesn't have permission to view it
+				if ($forum != null) {
+					$data['forum'] = e($forum->title);
+				} else {
+					$data['langString'] = 'forums.invalid';
+				}
 				break;
 			case 'topics.show':
 			case 'topics.reply':
@@ -154,13 +186,24 @@ class User extends BasePresenter
 			case 'topics.edit':
 			case 'topics.delete':
 			case 'topics.restore':
-				$data['topic'] = e($this->topicRepository->find($parameters['id'])->title);
-				$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
+				$topic = $this->topicRepository->find($parameters['id']);
+				// Either the topic has been deleted or this user doesn't have permission to view it
+				if ($topic != null) {
+					$data['topic'] = e($topic->title);
+					$data['url'] = route('topics.show', [$parameters['slug'], $parameters['id']]);
+				} else {
+					$data['langString'] = 'topics.invalid';
+				}
 				break;
 			case 'topics.create':
 				$forum = $this->forumRepository->find($parameters['forumId']);
-				$data['forum'] = e($forum->title);
-				$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
+				// Either the forum has been deleted or this user doesn't have permission to view it
+				if ($forum != null) {
+					$data['forum'] = e($forum->title);
+					$data['url'] = route('forums.show', [$forum->slug, $forum->id]);
+				} else {
+					$data['langString'] = 'forums.invalid';
+				}
 				break;
 			case 'search.post':
 			case 'search.results':

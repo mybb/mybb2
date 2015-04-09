@@ -26,7 +26,7 @@ return [
 	'change_username' => 'Change Username',
 	'change_email' => 'Change Email Address',
 	'change_password' => 'Change Password',
-	'groups' => 'Groups',
+	'roles' => 'Roles',
 	'about_you' => 'About You',
 	'dob_desc' => 'You can control who can see your date of birth under <a href=":link">Privacy</a>.',
 	'usertitle' => 'User Title',
