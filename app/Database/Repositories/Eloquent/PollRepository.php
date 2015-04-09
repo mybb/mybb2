@@ -65,7 +65,7 @@ class PollRepository implements PollRepositoryInterface
 	 *
 	 * @param string $id The ID of the poll to find.
 	 *
-	 * @return mixed
+	 * @return Poll
 	 */
 	public function find($id)
 	{
@@ -77,7 +77,7 @@ class PollRepository implements PollRepositoryInterface
 	 *
 	 * @param array $details Details about the poll.
 	 *
-	 * @return mixed
+	 * @return Poll
 	 */
 	public function create(array $details = [])
 	{
@@ -99,7 +99,7 @@ class PollRepository implements PollRepositoryInterface
 	 *
 	 * @param Topic $topic
 	 *
-	 * @return mixed
+	 * @return Poll
 	 */
 	public function getForTopic(Topic $topic)
 	{
@@ -110,7 +110,7 @@ class PollRepository implements PollRepositoryInterface
 	 * Remove the poll
 	 * @param Poll $poll
 	 *
-	 * @return mixed
+	 * @return Poll
 	 */
 	public function remove(Poll $poll)
 	{

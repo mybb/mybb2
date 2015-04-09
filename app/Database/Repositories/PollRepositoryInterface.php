@@ -20,7 +20,7 @@ interface PollRepositoryInterface
 	 *
 	 * @param string $id The ID of the poll to find.
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\Poll
 	 */
 	public function find($id);
 
@@ -29,7 +29,7 @@ interface PollRepositoryInterface
 	 *
 	 * @param array $details Details about the poll.
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\Poll
 	 */
 	public function create(array $details = []);
 
@@ -38,7 +38,7 @@ interface PollRepositoryInterface
 	 *
 	 * @param Topic $topic
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\Poll
 	 */
 	public function getForTopic(Topic $topic);
 
@@ -46,7 +46,7 @@ interface PollRepositoryInterface
 	 * Remove the poll
 	 * @param Poll $poll
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\Poll
 	 */
 	public function remove(Poll $poll);
 }

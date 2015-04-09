@@ -20,7 +20,7 @@ interface PollVoteRepositoryInterface
 	 *
 	 * @param string $id The ID of the vote to find.
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\PollVote
 	 */
 	public function find($id);
 
@@ -29,20 +29,20 @@ interface PollVoteRepositoryInterface
 	 *
 	 * @param array $details Details about the vote.
 	 *
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\PollVote
 	 */
 	public function create(array $details = []);
 
 	/**
 	 * @param User $user
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return \MyBB\Core\Database\Models\PollVote
 	 */
 	public function findForUserPoll(User $user, Poll $poll);
 
 	/**
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function allForPoll(Poll $poll);
 

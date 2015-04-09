@@ -77,7 +77,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 	/**
 	 * @param User $user
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return PollVote
 	 */
 	public function findForUserPoll(User $user, Poll $poll)
 	{
@@ -86,7 +86,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 
 	/**
 	 * @param Poll $poll
-	 * @return mixed
+	 * @return \Illuminate\Support\Collection
 	 */
 	public function allForPoll(Poll $poll)
 	{

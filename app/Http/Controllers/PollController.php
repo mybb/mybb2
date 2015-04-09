@@ -41,8 +41,8 @@ class PollController extends Controller
 	 * @param PollRepositoryInterface     $pollRepository Poll repository instance, used to fetch poll details.
 	 * @param PollVoteRepositoryInterface $pollVoteRepository PollVote repository instance, used to fetch poll vote details.
 	 * @param ForumRepositoryInterface    $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param Guard               $guard Guard implementation
-	 * @param Request             $request Request implementation
+	 * @param Guard                       $guard Guard implementation
+	 * @param Request                     $request Request implementation
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,
@@ -61,7 +61,12 @@ class PollController extends Controller
 		$this->guard = $guard;
 	}
 
-	public function show($topicSlug = null, $topicId)
+	/**
+	 * @param  string $topicSlug
+	 * @param  int    $topicId
+	 * @return \Illuminate\View\View
+	 */
+	public function show($topicSlug, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -97,7 +102,12 @@ class PollController extends Controller
 		return view('polls.show', compact('topic', 'options', 'poll', 'myVote'));
 	}
 
-	public function create($slug = '', $id)
+	/**
+	 * @param string $slug
+	 * @param int    $id
+	 * @return \Illuminate\View\View
+	 */
+	public function create($slug, $id)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -110,7 +120,13 @@ class PollController extends Controller
 		return view('polls.create', compact('topic'));
 	}
 
-	public function postCreate($slug = '', $id, CreateRequest $createRequest)
+	/**
+	 * @param  string       $slug
+	 * @param  int          $id
+	 * @param CreateRequest $createRequest
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postCreate($slug, $id, CreateRequest $createRequest)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -155,7 +171,14 @@ class PollController extends Controller
 		return redirect()->route('polls.create')->withInput()->withError(['error' => trans('error.error_creating_poll')]);
 	}
 
-	public function vote($topicSlug = null, $topicId = 0, Request $voteRequest)
+	/**
+	 * @param string  $topicSlug
+	 * @param int     $topicId
+	 * @param Request $voteRequest
+	 * @return \Illuminate\Http\RedirectResponse
+	 * @throws \Exception
+	 */
+	public function vote($topicSlug, $topicId, Request $voteRequest)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -185,7 +208,6 @@ class PollController extends Controller
 
 		$votes = $voteRequest->input('option');
 		$options = $pollPresenter->options();
-
 
 
 		if ($poll->is_multiple) {
@@ -251,7 +273,13 @@ class PollController extends Controller
 	}
 
 
-	public function undo($topicSlug = null, $topicId)
+	/**
+	 * @param string $topicSlug
+	 * @param int    $topicId
+	 * @return \Illuminate\Http\RedirectResponse
+	 * @throws \Exception
+	 */
+	public function undo($topicSlug, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -295,7 +323,12 @@ class PollController extends Controller
 		return redirect()->route('polls.show', [$topicSlug, $topicId]);
 	}
 
-	public function remove($topicSlug = null, $topicId = 0)
+	/**
+	 * @param string $topicSlug
+	 * @param int    $topicId
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function remove($topicSlug, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -316,7 +349,12 @@ class PollController extends Controller
 		return redirect()->route('topics.show', [$topicSlug, $topicId]);
 	}
 
-	public function edit($topicSlug = null, $topicId)
+	/**
+	 * @param string $topicSlug
+	 * @param int    $topicId
+	 * @return \Illuminate\View\View
+	 */
+	public function edit($topicSlug, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -334,7 +372,13 @@ class PollController extends Controller
 		return view('polls.edit', compact('topic', 'poll'));
 	}
 
-	public function postEdit($topicSlug = null, $topicId, CreateRequest $createRequest)
+	/**
+	 * @param string        $topicSlug
+	 * @param int           $topicId
+	 * @param CreateRequest $createRequest
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postEdit($topicSlug, $topicId, CreateRequest $createRequest)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
