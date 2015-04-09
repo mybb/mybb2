@@ -275,7 +275,6 @@ class PostRepository implements PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function restorePost(Post $post)
 	{
 		$post->topic->increment('num_posts');
