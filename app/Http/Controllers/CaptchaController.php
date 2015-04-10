@@ -23,8 +23,6 @@ class CaptchaController extends Controller
 
 	public function __construct(DatabaseManager $database, Filesystem $files)
 	{
-		// Don't call parent, this is a simple image, no need to save it as last page, last visit or whatever else we do there
-
 		$this->database = $database;
 		$this->files = $files;
 	}

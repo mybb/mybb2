@@ -2,7 +2,6 @@
 
 use Breadcrumbs;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
@@ -33,19 +32,13 @@ class SearchController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param Guard                     $guard
 	 * @param SearchRepositoryInterface $searchRepository
 	 * @param ForumRepositoryInterface  $forumRepository
-	 * @param Request                   $request
 	 */
 	public function __construct(
-		Guard $guard,
 		SearchRepositoryInterface $searchRepository,
-		ForumRepositoryInterface $forumRepository,
-		Request $request
+		ForumRepositoryInterface $forumRepository
 	) {
-		parent::__construct($guard, $request);
-
 		$this->searchRepository = $searchRepository;
 		$this->forumRepository = $forumRepository;
 	}
