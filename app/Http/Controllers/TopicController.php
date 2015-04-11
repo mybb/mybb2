@@ -18,6 +18,9 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Exceptions\ForumNotFoundException;
+use MyBB\Core\Exceptions\PostNotFoundException;
+use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
@@ -75,7 +78,7 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
-			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			throw new TopicNotFoundException;
 		}
 
 		Breadcrumbs::setCurrentRoute('topics.show', $topic);
@@ -102,7 +105,7 @@ class TopicController extends Controller
 		$post = $this->postRepository->find($postId);
 
 		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
-			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			throw new TopicNotFoundException;
 		}
 
 		$postsPerPage = $settings->get('user.posts_per_page', 10);
@@ -134,7 +137,7 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
-			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			throw new TopicNotFoundException;
 		}
 
 		$postsPerPage = $settings->get('user.posts_per_page', 10);
@@ -168,14 +171,14 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
-			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			throw new TopicNotFoundException;
 		}
 
 		$content = '';
 		if ($postId) {
 			$post = $this->postRepository->find($postId);
 			if (!$post || $post->topic_id != $topic->id) {
-				throw new NotFoundHttpException(trans('errors.topic_not_found'));
+				throw new TopicNotFoundException;
 			}
 
 			$content = $this->quoteRenderer->renderFromPost($post);
@@ -210,7 +213,7 @@ class TopicController extends Controller
 		$topic = $this->topicRepository->find($id);
 
 		if (!$topic) {
-			throw new NotFoundHttpException(trans('errors.topic_not_found'));
+			throw new TopicNotFoundException;
 		}
 
 		if (!$this->guard->check()) {
@@ -248,7 +251,7 @@ class TopicController extends Controller
 		$post = $this->postRepository->find($postId);
 
 		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
-			throw new NotFoundHttpException(trans('errors.post_not_found'));
+			throw new PostNotFoundException;
 		}
 
 		Breadcrumbs::setCurrentRoute('topics.edit', $topic);
@@ -271,7 +274,7 @@ class TopicController extends Controller
 		$post = $this->postRepository->find($postId);
 
 		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
-			throw new NotFoundHttpException(trans('errors.post_not_found'));
+			throw new PostNotFoundException;
 		}
 
 		$post = $this->postRepository->editPost($post, [
@@ -288,7 +291,8 @@ class TopicController extends Controller
 				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
-		return new \Exception('Error editing post'); // TODO: Redirect back with error...
+		return redirect()->route('topic.edit',
+			['slug' => $slug, 'id' => $id, 'postId' => $postId])->withInput()->withErrors(['Error editing post']);
 	}
 
 	/**
@@ -302,7 +306,7 @@ class TopicController extends Controller
 		$forum = $this->forumRepository->find($forumId);
 
 		if (!$forum) {
-			throw new NotFoundHttpException(trans('errors.forum_not_found'));
+			throw new ForumNotFoundException;
 		}
 
 		Breadcrumbs::setCurrentRoute('topics.create', $forum);
@@ -362,7 +366,7 @@ class TopicController extends Controller
 		$post = $this->postRepository->find($postId);
 
 		if (!$post || !$topic || $post['topic_id'] != $topic['id']) {
-			throw new NotFoundHttpException(trans('errors.post_not_found'));
+			throw new PostNotFoundException;
 		}
 
 
@@ -391,7 +395,7 @@ class TopicController extends Controller
 		$post = $this->postRepository->find($postId);
 
 		if (!$post || !$topic || $post['topic_id'] != $topic['id'] || !$post['deleted_at'] && !$topic['deleted_at']) {
-			throw new NotFoundHttpException(trans('errors.post_not_found'));
+			throw new PostNotFoundException;
 		}
 
 		if ($post['id'] == $topic['first_post_id']) {
@@ -404,6 +408,7 @@ class TopicController extends Controller
 				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
 		}
 
-		return new \Exception(trans('errors.error_deleting_topic')); // TODO: Redirect back with error...
+		return redirect()->route('topics.showPost', ['slug' => $slug, 'id' => $id, 'postId' => $postId])
+			->withErrors([trans('errors.error_deleting_topic')]);
 	}
 }
