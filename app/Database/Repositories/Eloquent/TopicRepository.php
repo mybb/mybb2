@@ -54,7 +54,7 @@ class TopicRepository implements TopicRepositoryInterface
 	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
-	/** @var IPollRepository */
+	/** @var PollRepositoryInterface */
 	private $pollRepository;
 
 	/** @var PermissionChecker */
