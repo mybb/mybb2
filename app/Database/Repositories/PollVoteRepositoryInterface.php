@@ -14,7 +14,6 @@ use MyBB\Core\Database\Models\User;
 
 interface PollVoteRepositoryInterface
 {
-
 	/**
 	 * Find a single vote by ID.
 	 *

@@ -18,6 +18,7 @@ use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Http\Requests\Poll\VoteRequest;
 use MyBB\Core\Presenters\Poll as PollPresenter;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 use MyBB\Settings\Store;
@@ -135,21 +136,11 @@ class PollController extends Controller
 		}
 		Breadcrumbs::setCurrentRoute('polls.create', $topic);
 
-		$options = [];
-		foreach ($createRequest->input('option') as $option) {
-			if ($option && is_scalar($option)) {
-				$options[] = [
-					'option' => $option,
-					'votes' => 0
-				];
-			}
-		}
-
 		$poll = [
 			'topic_id' => $id,
 			'question' => $createRequest->input('question'),
-			'num_options' => count($options),
-			'options' => $options,
+			'num_options' => count($createRequest->options()),
+			'options' => $createRequest->options(),
 			'is_closed' => false,
 			'is_multiple' => (bool)$createRequest->input('is_multiple'),
 			'is_public' => (bool)$createRequest->input('is_public'),
@@ -162,8 +153,7 @@ class PollController extends Controller
 		$poll = $this->pollRepository->create($poll);
 
 		if ($poll) {
-			$topic->has_poll = true;
-			$topic->save();
+			$this->topicRepository->setHasPoll($topic, true);
 
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
@@ -174,11 +164,10 @@ class PollController extends Controller
 	/**
 	 * @param string  $topicSlug
 	 * @param int     $topicId
-	 * @param Request $voteRequest
 	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \Exception
 	 */
-	public function vote($topicSlug, $topicId, Request $voteRequest)
+	public function vote($topicSlug, $topicId)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -191,6 +180,8 @@ class PollController extends Controller
 
 		$poll = $topic->poll;
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+
+        $voteRequest = app()->make('MyBB\Core\Http\Requests\Poll\VoteRequest', [$pollPresenter]);
 
 		if ($pollPresenter->is_closed) {
 			throw new \Exception(trans('errors.poll_is_closed'));
@@ -209,46 +200,14 @@ class PollController extends Controller
 		$options = $pollPresenter->options();
 
 		if ($poll->is_multiple) {
-
-			// $votes should be array
-			if (!is_array($votes)) {
-				$votes = [$votes];
-			}
 			$votes = array_unique($votes, SORT_NUMERIC);
 
-			// check the vote is valid
-			if ($poll->max_options && count($votes) > $poll->max_options) {
-				// Error
-				throw new \Exception(trans('errors.poll_very_votes', ['count' => $poll->max_options]));
-			}
-
-			// is user selected any options?
-			if (count($votes) == 0) {
-				// Error
-				throw new \Exception(trans('errors.poll_no_votes'));
-			}
-
 			// Increment num votes of options that the user voted
-			$okVotes = [];
 			foreach ($votes as $vote) {
-				if (is_numeric($vote) && 0 < $vote && $vote <= $pollPresenter->num_options()) {
-					$options[$vote - 1]['votes']++;
-					$okVotes[] = $vote;
-				}
+				$options[$vote - 1]['votes']++;
 			}
-			$votes = implode(',', $okVotes);
+			$votes = implode(',', $votes);
 		} else {
-			// if the user votes in several options we get first one.
-			if (is_array($votes)) {
-				$votes = $votes[0];
-			}
-
-			// check the vote is valid
-			if (!is_numeric($votes) || $votes > count($options)) {
-				// Error
-				throw new \Exception(trans('errors.poll_invalid_vote'));
-			}
-
 			// Increment num votes of the option that the user voted
 			$options[$votes - 1]['votes']++;
 		}
@@ -259,7 +218,7 @@ class PollController extends Controller
 		]);
 
 		if ($vote) {
-			$poll->update(['options' => $options]);
+            $this->pollRepository->editPoll($poll, ['options' => $options]);
 		}
 
 		return redirect()->route('polls.show', [$topicSlug, $topicId]);

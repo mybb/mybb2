@@ -43,7 +43,7 @@ class PollVote extends Model
 	protected $table = 'poll_votes';
 
 	/**
-	 * A poll belongs to a topic.
+	 * A vote belongs to a poll.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
@@ -53,7 +53,7 @@ class PollVote extends Model
 	}
 
 	/**
-	 * A poll is created by (and belongs to) a user/author.
+	 * A vote is created by (and belongs to) a user/author.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */

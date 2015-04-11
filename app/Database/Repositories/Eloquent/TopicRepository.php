@@ -299,6 +299,22 @@ class TopicRepository implements TopicRepositoryInterface
 		return $topic;
 	}
 
+    /**
+     * Edit the hasPoll of the Topic
+     *
+     * @param Topic $topic The topic to edit
+     * @param bool $hasPoll
+     *
+     * @return mixed
+     */
+
+    public function setHasPoll(Topic $topic, $hasPoll)
+    {
+        return $this->editTopic($topic, [
+            'has_poll' => $hasPoll
+        ]);
+    }
+
 	/**
 	 * Restore a topic
 	 *

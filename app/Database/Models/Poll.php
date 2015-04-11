@@ -93,7 +93,7 @@ class Poll extends Model implements HasPresenter
 	}
 
 	/**
-	 * A thread has many votes.
+	 * A poll has many votes.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */

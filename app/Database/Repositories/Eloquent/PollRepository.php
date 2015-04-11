@@ -28,7 +28,7 @@ class PollRepository implements PollRepositoryInterface
 	 * @var PollVoteRepositoryInterface $pollVoteRepository
 	 * @access protected
 	 */
-	protected $pollVoteRepository;
+	protected $pollVoteRepository; // TODO: https://github.com/mybb/mybb2/pull/32#discussion_r28090844
 
 	/**
 	 * @var Guard $guard ;
@@ -124,4 +124,18 @@ class PollRepository implements PollRepositoryInterface
 			return true;
 		}
 	}
+
+    /**
+     * Edit a poll
+     *
+     * @param Poll $poll        The poll to edit
+     * @param array $pollDetails The details of the poll.
+     *
+     * @return Poll
+     */
+    public function editPoll(Poll $poll, array $pollDetails)
+    {
+        $poll->update($pollDetails);
+        return $poll;
+    }
 }
