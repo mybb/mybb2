@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileFieldGroupTable extends Migration {
+class CreateProfileFieldGroupTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -33,7 +34,7 @@ class CreateProfileFieldGroupTable extends Migration {
 	public function down()
 	{
 		Schema::table('profile_fields', function (Blueprint $table) {
-//			$table->dropForeign(['profile_field_group_id']);
+			$table->dropForeign(['profile_field_group_id']);
 		});
 		Schema::drop('profile_field_groups');
 	}

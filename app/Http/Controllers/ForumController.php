@@ -92,6 +92,9 @@ class ForumController extends Controller
 		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($id);
 
+		// Load last post information for child forums
+		$forum->load(['children.lastPost', 'children.lastPost.topic', 'children.lastPostAuthor']);
+
 		if (!$forum) {
 			throw new NotFoundHttpException(trans('errors.forum_not_found'));
 		}

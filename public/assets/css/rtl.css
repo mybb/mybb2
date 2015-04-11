@@ -3285,6 +3285,7 @@ section.container .forum-list {
     margin: 0 0 0 12px; } }
 
 .post {
+  background-color: #fff;
   border: 1px solid #ccc;
   padding: 8px 12px;
   margin-bottom: 25px;
@@ -3384,12 +3385,14 @@ section.container .forum-list {
     text-align: left; }
     .post .post__controls li {
       display: inline-block; }
-      .post .post__controls li a:link, .post .post__controls li a:visited {
+      .post .post__controls li a, .post .post__controls li button {
         color: #666;
-        padding: 0 5px; }
-      .post .post__controls li a:hover, .post .post__controls li a:active {
-        color: #ff7500;
-        text-decoration: none; }
+        padding: 0 5px;
+        background-color: #fff;
+        border: none; }
+        .post .post__controls li a:hover, .post .post__controls li a:active, .post .post__controls li button:hover, .post .post__controls li button:active {
+          color: #ff7500;
+          text-decoration: none; }
       .post .post__controls li.like, .post .post__controls li.quote, .post .post__controls li.approve, .post .post__controls li.restore {
         float: right; }
         .post .post__controls li.like .text, .post .post__controls li.quote .text, .post .post__controls li.approve .text, .post .post__controls li.restore .text {
