@@ -35,11 +35,12 @@ class Registrar implements RegistrarContract
 	public function create(array $data)
 	{
 		$user = User::create([
-			                     'name' => $data['name'],
-			                     'email' => $data['email'],
-			                     'password' => bcrypt($data['password']),
-			                     'role_id' => Role::where('role_slug', '=', 'user')->pluck('id')
-		                     ]);
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+		]);
+
+		$user->roles()->attach(Role::where('role_slug', '=', 'user')->pluck('id'), ['is_display' => true]);
 
 		return $user;
 	}

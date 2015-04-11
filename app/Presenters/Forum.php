@@ -23,4 +23,16 @@ class Forum extends BasePresenter
 	{
 		$this->wrappedObject = $resource;
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function hasLastPost()
+	{
+		if ($this->wrappedObject->lastPost == null || $this->wrappedObject->lastPostAuthor == null) {
+			return false;
+		}
+
+		return true;
+	}
 }
