@@ -54,6 +54,25 @@ class ContentClass extends Model
 		'class'
 	];
 
+	/** @var array */
+	private static $models;
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function find($id, $columns = array('*'))
+	{
+		if ($columns != array('*')) {
+			return parent::find($id, $columns);
+		}
+
+		if (!isset(static::$models[$id])) {
+			static::$models[$id] = parent::find($id);
+		}
+
+		return static::$models[$id];
+	}
+
 	/**
 	 * Shortcut for "ContentClass::find($content)->getConcreteClass();"
 	 *

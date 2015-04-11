@@ -199,12 +199,12 @@ class PermissionChecker
 			$contentID = null;
 		}
 
-		//if ($this->hasCache($role, $permission, $content, $contentID)) {
-		//	return $this->getCache($role, $permission, $content, $contentID);
-		//}
+		if ($this->hasCache($role, $permission, $content, $contentID)) {
+			return $this->getCache($role, $permission, $content, $contentID);
+		}
 
 		// Get the value if we have one otherwise the devault value
-		$permission = $this->db->table('permissions')
+		$permission_values = $this->db->table('permissions')
 			->where('permission_name', '=', $permission)
 			->where('content_name', '=', $content)
 			->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
@@ -217,15 +217,15 @@ class PermissionChecker
 			})
 			->first(['value', 'default_value']);
 
-		if ($permission->value !== null) {
-			//$this->putCache($role, $permission, $content, $contentID, $permission->value);
+		if ($permission_values->value !== null) {
+			$this->putCache($role, $permission, $content, $contentID, $permission_values->value);
 
-			return $permission->value;
+			return $permission_values->value;
 		}
 
-		//$this->putCache($role, $permission, $content, $contentID, $permission->default_value);
+		$this->putCache($role, $permission, $content, $contentID, $permission_values->default_value);
 
-		return $permission->default_value;
+		return $permission_values->default_value;
 	}
 
 	/**
