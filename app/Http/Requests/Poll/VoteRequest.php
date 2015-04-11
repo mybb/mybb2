@@ -30,7 +30,7 @@ class VoteRequest extends Request
     protected function getValidatorInstance()
     {
         $validator = parent::getValidatorInstance();
-        $validator->addImplicitExtension('votes', function($attribute, $value, $parameters) {
+        $validator->addImplicitExtension('votes', function ($attribute, $value, $parameters) {
             if ($this->poll->is_multiple) {
 
                 if (!is_array($value)) {
@@ -42,8 +42,7 @@ class VoteRequest extends Request
                         return false;
                     }
                 }
-            }
-            else {
+            } else {
                 if (is_array($value)) {
                     return false;
                 }
@@ -52,21 +51,24 @@ class VoteRequest extends Request
                     return false;
                 }
             }
+
             return true;
         });
 
-        $validator->addImplicitExtension('votes_maxOptions', function($attribute, $value, $parameters) {
+        $validator->addImplicitExtension('votes_maxOptions', function ($attribute, $value, $parameters) {
             if ($this->poll->max_options) {
                 if (count($value) > $this->poll->max_options) {
-                   return false;
+                    return false;
                 }
             }
+
             return true;
         });
 
 
         return $validator;
     }
+
     /**
      * @param PollPresenter $poll
      * @param Guard $guard

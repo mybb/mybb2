@@ -27,7 +27,7 @@ class CreateRequest extends Request
     {
         $validator = parent::getValidatorInstance();
 
-        $validator->addImplicitExtension('option', function($attribute, $value, $parameters) {
+        $validator->addImplicitExtension('option', function ($attribute, $value, $parameters) {
             foreach ($value as $option) {
                 if (!is_scalar($option)) {
                     return false;
@@ -72,7 +72,8 @@ class CreateRequest extends Request
      *
      * @return array
      */
-    public function options() {
+    public function options()
+    {
         $input = $this->input('option');
         $options = [];
         foreach ($input as $option) {
