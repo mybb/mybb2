@@ -166,12 +166,12 @@ class TopicController extends Controller
 	/**
 	 * @param string  $slug
 	 * @param int     $id
-	 * @param null    $postId
 	 * @param Request $request
+	 * @param null    $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function reply($slug = '', $id = 0, $postId = null, Request $request)
+	public function reply($slug, $id, Request $request, $postId = null)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);

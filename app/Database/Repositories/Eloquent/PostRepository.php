@@ -196,7 +196,7 @@ class PostRepository implements PostRepositoryInterface
 			$topic->forum->increment('num_posts');
 			$topic->forum->update([
 				'last_post_id' => $post->id,
-				'last_post_user_id' => $post->author->id
+				'last_post_user_id' => $postDetails['user_id']
 			]);
 		}
 
@@ -260,7 +260,10 @@ class PostRepository implements PostRepositoryInterface
 			// Update counters
 			$post->topic->decrement('num_posts');
 			$post->topic->forum->decrement('num_posts');
-			$post->author->decrement('num_posts');
+
+			if($post->user_id > 0) {
+				$post->author->decrement('num_posts');
+			}
 
 			// Delete the post
 			$success = $post->delete();
@@ -294,7 +297,10 @@ class PostRepository implements PostRepositoryInterface
 	{
 		$post->topic->increment('num_posts');
 		$post->topic->forum->increment('num_posts');
-		$post->author->increment('num_posts');
+
+		if($post->user_id > 0) {
+			$post->author->increment('num_posts');
+		}
 
 		$success = $post->restore();
 

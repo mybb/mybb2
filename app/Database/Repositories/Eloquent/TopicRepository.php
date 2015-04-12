@@ -327,7 +327,9 @@ class TopicRepository implements TopicRepositoryInterface
 		$topic->forum->increment('num_topics');
 		$topic->forum->increment('num_posts', $topic->num_posts);
 
-		$topic->author->increment('num_topics');
+		if($topic->user_id > 0) {
+			$topic->author->increment('num_topics');
+		}
 
 		$success = $topic->restore();
 

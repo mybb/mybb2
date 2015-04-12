@@ -143,7 +143,7 @@ class ForumRepository implements ForumRepositoryInterface
 		if ($post === null) {
 			$topic = $forum->topics->sortByDesc('last_post_id')->first();
 			if ($topic != null) {
-				$post = $post->lastPost;
+				$post = $topic->lastPost;
 			}
 		}
 

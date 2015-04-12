@@ -39,6 +39,7 @@ class Post extends BasePresenter
 		if($this->wrappedObject->user_id == null)
 		{
 			$user = new UserModel();
+			$user->id = 0;
 			if($this->wrappedObject->username != null)
 			{
 				$user->name = $this->wrappedObject->username;
