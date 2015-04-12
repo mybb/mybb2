@@ -166,12 +166,12 @@ class TopicController extends Controller
 	/**
 	 * @param string  $slug
 	 * @param int     $id
-	 * @param null    $postId
 	 * @param Request $request
+     * @param int    $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function reply($slug = '', $id = 0, $postId = null, Request $request)
+	public function reply($slug = '', $id = 0, Request $request, $postId = 0)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -202,6 +202,19 @@ class TopicController extends Controller
 
 		return view('topic.reply', compact('topic', 'content', 'username'));
 	}
+
+    /**
+     * @param string  $slug
+     * @param int     $id
+     * @param int    $postId
+     * @param Request $request
+     *
+     * @return \Illuminate\View\View
+     */
+    public function replyWithQuote($slug = '', $id = 0, $postId = 0, Request $request)
+    {
+        return $this->reply($slug, $id, $request, $postId);
+    }
 
 	/**
 	 * @param string       $slug
