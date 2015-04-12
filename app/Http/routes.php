@@ -36,8 +36,8 @@ Route::get('topic/{slug}.{id}', ['as' => 'topics.show', 'uses' => 'TopicControll
 Route::get('topic/{slug}.{id}/post/{postId}', ['as' => 'topics.showPost', 'uses' => 'TopicController@showPost']);
 Route::get('topic/{slug}.{id}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
-Route::get('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
-Route::get('topic/{slug}.{id}/reply/{postId}', ['as' => 'topics.quote', 'uses' => 'TopicController@reply']);
+Route::get('topic/{slug}.{id}/reply/', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
+Route::get('topic/{slug}.{id}/reply/{postId}', ['as' => 'topics.quote', 'uses' => 'TopicController@replyWithQuote']);
 
 Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@postReply']);
 
