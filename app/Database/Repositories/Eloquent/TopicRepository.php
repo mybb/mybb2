@@ -18,6 +18,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
@@ -53,17 +54,21 @@ class TopicRepository implements TopicRepositoryInterface
 	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
+	/** @var PollRepositoryInterface */
+	private $pollRepository;
+
 	/** @var PermissionChecker */
 	private $permissionChecker;
 
 	/**
-	 * @param Topic                    $topicModel     The model to use for threads.
-	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
+	 * @param Topic                    $topicModel The model to use for threads.
+	 * @param Guard                    $guard Laravel guard instance, used to get user ID.
 	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
-	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
-	 * @param Store                    $settings       The settings container
+	 * @param Str                      $stringUtils String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager Database manager, needed to do transactions.
+	 * @param Store                    $settings The settings container
 	 * @param ForumRepositoryInterface $forumRepository
+	 * @param PollRepositoryInterface  $pollRepository
 	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
@@ -74,6 +79,7 @@ class TopicRepository implements TopicRepositoryInterface
 		DatabaseManager $dbManager,
 		Store $settings,
 		ForumRepositoryInterface $forumRepository,
+		PollRepositoryInterface $pollRepository,
 		PermissionChecker $permissionChecker
 	) {
 		$this->topicModel = $topicModel;
@@ -83,6 +89,7 @@ class TopicRepository implements TopicRepositoryInterface
 		$this->dbManager = $dbManager;
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 		$this->permissionChecker = $permissionChecker;
 	}
 
@@ -291,6 +298,22 @@ class TopicRepository implements TopicRepositoryInterface
 
 		return $topic;
 	}
+
+    /**
+     * Edit the hasPoll of the Topic
+     *
+     * @param Topic $topic The topic to edit
+     * @param bool $hasPoll
+     *
+     * @return mixed
+     */
+
+    public function setHasPoll(Topic $topic, $hasPoll)
+    {
+        return $this->editTopic($topic, [
+            'has_poll' => $hasPoll
+        ]);
+    }
 
 	/**
 	 * Restore a topic

@@ -3,7 +3,6 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Breadcrumbs;
-use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
@@ -37,12 +36,8 @@ class ForumController extends Controller
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		UserRepositoryInterface $userRepository,
-		Guard $guard,
-		Request $request
+		UserRepositoryInterface $userRepository
 	) {
-		parent::__construct($guard, $request);
-
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;

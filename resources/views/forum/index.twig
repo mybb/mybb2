@@ -11,7 +11,7 @@
 		<div class="topic-list topic-list--compact">
             {% for topic in topics %}
                 <div class="topic">
-                    <a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }} avatar" class="avatar" /></a>
+                    <a href="{{ url_route('user.profile', {'slug': topic.lastPost.author.name, 'id': topic.lastPost.author.id}) }}" data-user-id="{{ topic.lastPost.author.id }}" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }} avatar" class="avatar" /></a>
                     <div class="topic__info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
                         <h3 class="topic__title topic__title--unread"><a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a></h3>
@@ -54,7 +54,7 @@
 			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
 			<div class="user-list user-list--compact">
 				{% for user in users %}
-					<a href="index.php?page=profile"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
+					<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
 				{% else %}
 					<div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
 				{% endfor %}

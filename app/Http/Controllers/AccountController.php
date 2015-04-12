@@ -6,7 +6,6 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
-use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
 use MyBB\Core\Services\ConfirmationManager;
@@ -22,12 +21,9 @@ class AccountController extends Controller
 	 * Create a new controller instance.
 	 *
 	 * @param Guard $guard
-	 * @param Request $request
 	 */
-	public function __construct(Guard $guard, Request $request)
+	public function __construct(Guard $guard)
 	{
-		parent::__construct($guard, $request);
-
 		$this->guard = $guard;
 	}
 
@@ -56,8 +52,9 @@ class AccountController extends Controller
 	}
 
 	/**
-	 * @param UpdateProfileRequest $request
+	 * @param UpdateProfileRequest                $request
 	 * @param UserProfileFieldRepositoryInterface $userProfileFields
+	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postProfile(UpdateProfileRequest $request, UserProfileFieldRepositoryInterface $userProfileFields)
@@ -70,7 +67,8 @@ class AccountController extends Controller
 		// handle profile field updates
 		$profileFieldData = $request->get('profile_fields');
 		foreach ($request->getProfileFields() as $profileField) {
-			$userProfileFields->updateOrCreate($this->guard->user(), $profileField, $profileFieldData[$profileField->id]);
+			$userProfileFields->updateOrCreate($this->guard->user(), $profileField,
+				$profileFieldData[$profileField->id]);
 		}
 
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
@@ -95,8 +93,7 @@ class AccountController extends Controller
 			'password' => 'required',
 		]);
 
-		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
-		{
+		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
 			// Valid password so update
 			$this->guard->user()->update($request->only('name'));
 
@@ -107,14 +104,14 @@ class AccountController extends Controller
 			->route('account.username')
 			->withInput($request->only('name'))
 			->withErrors([
-				             'name' => trans('member.invalidCredentials'),
-			             ]);
+				'name' => trans('member.invalidCredentials'),
+			]);
 	}
 
 	public function getEmail()
 	{
 		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('email',
-		                                                                                                  $this->guard->user()));
+			$this->guard->user()));
 	}
 
 	/**
@@ -131,10 +128,9 @@ class AccountController extends Controller
 			'password' => 'required',
 		]);
 
-		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
-		{
+		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
 			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'),
-			                          $request->only('email'));
+				$request->only('email'));
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirmEmail'));
 		}
@@ -143,21 +139,20 @@ class AccountController extends Controller
 			->route('account.email')
 			->withInput($request->only('email'))
 			->withErrors([
-				             'email' => trans('member.invalidCredentials'),
-			             ]);
+				'email' => trans('member.invalidCredentials'),
+			]);
 	}
 
 	public function confirmEmail($token)
 	{
 		$email = ConfirmationManager::get('email', $token);
 
-		if($email === false)
-		{
+		if ($email === false) {
 			return redirect()
 				->route('account.profile')
 				->withErrors([
-					             'token' => trans('confirmation.invalidToken'),
-				             ]);
+					'token' => trans('confirmation.invalidToken'),
+				]);
 		}
 
 		$this->guard->user()->update(['email' => $email]);
@@ -168,7 +163,7 @@ class AccountController extends Controller
 	public function getPassword()
 	{
 		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('password',
-		                                                                                                     $this->guard->user()));
+			$this->guard->user()));
 	}
 
 	/**
@@ -185,11 +180,10 @@ class AccountController extends Controller
 			'password' => 'required',
 		]);
 
-		if($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password')))
-		{
+		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
 			// Don't save the password in plaintext!
 			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
-			                          Hash::make($request->get('password1')));
+				Hash::make($request->get('password1')));
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
 		}
@@ -198,21 +192,20 @@ class AccountController extends Controller
 			->route('account.password')
 			->withInput($request->only('password1'))
 			->withErrors([
-				             'password1' => trans('member.invalidCredentials'),
-			             ]);
+				'password1' => trans('member.invalidCredentials'),
+			]);
 	}
 
 	public function confirmPassword($token)
 	{
 		$password = ConfirmationManager::get('password', $token);
 
-		if($password === false)
-		{
+		if ($password === false) {
 			return redirect()
 				->route('account.profile')
 				->withErrors([
-					             'token' => trans('confirmation.invalidToken'),
-				             ]);
+					'token' => trans('confirmation.invalidToken'),
+				]);
 		}
 
 		// Valid password so update
@@ -243,25 +236,22 @@ class AccountController extends Controller
 		// TODO: Delete the old file if an uploaded was used
 
 		// File?
-		if($request->hasFile('avatar_file'))
-		{
+		if ($request->hasFile('avatar_file')) {
 			$file = $request->file('avatar_file');
 
 			$name = "avatar_{$this->guard->user()->id}_" . time() . "." . $file->getClientOriginalExtension();
 			$file->move(public_path('uploads/avatars'), $name);
 			$this->guard->user()->update(['avatar' => $name]);
 		} // URL? Email?
-		elseif(filter_var($request->get('avatar_link'),
-		                  FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'),
-		                                                               FILTER_VALIDATE_EMAIL) !== false
-		)
-		{
+		elseif (filter_var($request->get('avatar_link'),
+				FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'),
+				FILTER_VALIDATE_EMAIL) !== false
+		) {
 			//$url = str_replace(array('http://', 'https://', 'ftp://'), '', strtolower($value));
 			//return checkdnsrr($url, 'A');
 
 			$this->guard->user()->update(['avatar' => $request->get('avatar_link')]);
-		} else
-		{
+		} else {
 			// Nothing we want here, empty it!
 			$this->guard->user()->update(['avatar' => '']);
 		}
@@ -297,39 +287,35 @@ class AccountController extends Controller
 		// Build the language array used by the select box
 		$defaultLocale = $settings->get('user.language', 'en', false);
 
-		$languages['default'] = trans('account.usedefault')." - ".trans('general.language', [], '', $defaultLocale);
+		$languages['default'] = trans('account.usedefault') . " - " . trans('general.language', [], '', $defaultLocale);
 
 		$dirs = $files->directories(base_path('resources/lang/'));
-		foreach($dirs as $dir)
-		{
-			$lang = substr($dir, strrpos($dir, DIRECTORY_SEPARATOR)+1);
-			if($trans->has('general.language', $lang))
-			{
+		foreach ($dirs as $dir) {
+			$lang = substr($dir, strrpos($dir, DIRECTORY_SEPARATOR) + 1);
+			if ($trans->has('general.language', $lang)) {
 				$languages[$lang] = trans('general.language', [], '', $lang);
 			}
 		}
 
 		$selectedLanguage = $settings->get('user.language', 'en');
-		if($selectedLanguage == $defaultLocale)
-		{
+		if ($selectedLanguage == $defaultLocale) {
 			$selectedLanguage = 'default';
 		}
 
 		// Build the timezone array
 		$timezones = \DateTimeZone::listIdentifiers();
 		$selectTimezones = [];
-		foreach($timezones as $tz)
-		{
+		foreach ($timezones as $tz) {
 			$selectTimezones[$tz] = $tz;
 		}
 
 		$timezone = $settings->get('user.timezone', 'default');
-		if($timezone == 'default')
-		{
+		if ($timezone == 'default') {
 			$timezone = trans('general.timezone');
 		}
 
-		return view('account.preferences', compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone'))->withActive('preferences');
+		return view('account.preferences',
+			compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone'))->withActive('preferences');
 	}
 
 	/**
@@ -389,31 +375,26 @@ class AccountController extends Controller
 		$input['notify_on_username_change'] = isset($input['notify_on_username_change']);
 
 		// Unset non existant language and default (don't override the board default)
-		if($input['language'] == 'default' || !$trans->has('general.language', $input['language']))
-		{
+		if ($input['language'] == 'default' || !$trans->has('general.language', $input['language'])) {
 			$input['language'] = null;
 		}
 
-		if($input['date_format'] == 'default')
-		{
+		if ($input['date_format'] == 'default') {
 			$input['date_format'] = null;
 		}
 
 		$timezones = \DateTimeZone::listIdentifiers();
-		if($input['timezone'] == trans('general.timezone') || !in_array($input['timezone'], $timezones))
-		{
+		if ($input['timezone'] == trans('general.timezone') || !in_array($input['timezone'], $timezones)) {
 			$input['timezone'] = null;
 		}
 
-		if($input['time_format'] == trans('general.timeformat'))
-		{
+		if ($input['time_format'] == trans('general.timeformat')) {
 			$input['time_format'] = null;
 		}
 
 		// Prefix all settings with "user."
 		$modifiedSettings = [];
-		foreach($input as $key => $value)
-		{
+		foreach ($input as $key => $value) {
 			$modifiedSettings["user.{$key}"] = $value;
 		}
 
@@ -456,8 +437,7 @@ class AccountController extends Controller
 
 		// Prefix all settings with "user."
 		$modifiedSettings = [];
-		foreach($input as $key => $value)
-		{
+		foreach ($input as $key => $value) {
 			$modifiedSettings["user.{$key}"] = $value;
 		}
 
