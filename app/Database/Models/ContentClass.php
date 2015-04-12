@@ -14,7 +14,7 @@ use MyBB\Core\Traits\Permissionable;
  * @property string class
  * @property string content
  */
-class ContentClass extends Model
+class ContentClass extends AbstractCachingModel
 {
 	/**
 	 * The database table used by the model.
@@ -53,25 +53,6 @@ class ContentClass extends Model
 		'content',
 		'class'
 	];
-
-	/** @var array */
-	private static $models;
-
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function find($id, $columns = array('*'))
-	{
-		if ($columns != array('*')) {
-			return parent::find($id, $columns);
-		}
-
-		if (!isset(static::$models[$id])) {
-			static::$models[$id] = parent::find($id);
-		}
-
-		return static::$models[$id];
-	}
 
 	/**
 	 * Shortcut for "ContentClass::find($content)->getConcreteClass();"
