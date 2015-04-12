@@ -74,6 +74,16 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\PollRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\PollRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\PollVoteRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\PollVoteRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository'
 		);
