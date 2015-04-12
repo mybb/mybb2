@@ -29,7 +29,7 @@ class Approve implements ReversibleModerationInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getKey()
     {
         return 'approve';
     }
@@ -37,17 +37,18 @@ class Approve implements ReversibleModerationInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getName()
     {
         return 'Approve';
     }
 
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return mixed
      */
-    public function apply($content)
+    public function apply($content, array $options = [])
     {
         if ($this->supports($content)) {
             return $this->approve($content);
@@ -56,20 +57,22 @@ class Approve implements ReversibleModerationInterface
 
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return bool
      */
-    public function supports($content)
+    public function supports($content, array $options = [])
     {
         return $content instanceof ApprovableInterface;
     }
 
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return mixed
      */
-    public function reverse($content)
+    public function reverse($content, array $options = [])
     {
         if ($this->supports($content)) {
             return $this->unapprove($content);
@@ -79,7 +82,7 @@ class Approve implements ReversibleModerationInterface
     /**
      * @return string
      */
-    public function getReverseDescription()
+    public function getReverseName()
     {
         return 'Unapprove';
     }

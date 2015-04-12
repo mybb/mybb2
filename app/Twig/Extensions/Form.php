@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Twig\Extensions;
 
+use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Form\Renderer;
 
 class Form extends \Twig_Extension
@@ -35,13 +36,24 @@ class Form extends \Twig_Extension
 		return 'MyBB_Twig_Extensions_Form';
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new \Twig_SimpleFunction('form_render_field', [$this->renderer, 'render'], ['is_safe' => ['html']]),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('form_render_field', [$this->renderer, 'render'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('is_renderable', [$this, 'isRenderable']),
+        ];
+    }
+
+    /**
+     * @param object $content
+     *
+     * @return bool
+     */
+    public function isRenderable($content)
+    {
+        return $content instanceof RenderableInterface;
+    }
 }

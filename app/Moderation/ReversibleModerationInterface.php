@@ -6,15 +6,16 @@ interface ReversibleModerationInterface extends ModerationInterface
 {
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return mixed
      */
-    public function reverse($content);
+    public function reverse($content, array $options = []);
 
     /**
      * @return string
      */
-    public function getReverseDescription();
+    public function getReverseName();
 
     /**
      * @return string

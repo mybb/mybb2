@@ -26,7 +26,7 @@ class ModerationRegistry implements RegistryInterface
      */
     public function addModeration(ModerationInterface $moderation)
     {
-        $this->moderations[$moderation->getName()] = $moderation;
+        $this->moderations[$moderation->getKey()] = $moderation;
     }
 
     /**
@@ -58,7 +58,7 @@ class ModerationRegistry implements RegistryInterface
 
         foreach ($this->moderations as $moderation) {
             if ($moderation->supports($content)) {
-                $supportedModerations[$moderation->getName()] = $moderation;
+                $supportedModerations[$moderation->getKey()] = $moderation;
             }
         }
 

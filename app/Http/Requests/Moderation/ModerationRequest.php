@@ -61,6 +61,16 @@ class ModerationRequest extends Request
     }
 
     /**
+     * @param string $name
+     *
+     * @return \MyBB\Core\Moderation\ModerationInterface
+     */
+    public function getModerationByName($name)
+    {
+        return $this->moderationRegistry->get($name);
+    }
+
+    /**
      * @return array
      */
     public function getModeratableContent()
@@ -72,5 +82,13 @@ class ModerationRequest extends Request
         }
 
         return $content;
+    }
+
+    /**
+     * @return array
+     */
+    public function getModerationOptions()
+    {
+        return $this->except(['moderation_content', 'moderation_name', 'moderation_ids', '_token']);
     }
 }
