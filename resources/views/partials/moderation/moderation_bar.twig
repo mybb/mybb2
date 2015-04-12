@@ -2,10 +2,10 @@
     <h2>With selected posts<span class="selection-count"> (1)</span>:</h2>
     <ul class="moderation-controls">
         {% for moderation in moderations %}
-            <li class="{{ moderation.name }}"><a href="#"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.description }}</span></a></li>
+            <li class="{{ moderation.name }}"><a href="#" data-moderate="{{ moderation.name }}"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.description }}</span></a></li>
 
             {% if moderation.reverse is defined %}
-                <li class="{{ moderation.name }}"><a href="#"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseDescription }}</span></a></li>
+                <li class="{{ moderation.name }}"><a href="#" data-moderate-reverse="{{ moderation.name }}"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseDescription }}</span></a></li>
             {% endif %}
         {% endfor %}
         {#<li class="soft-delete"><a href="#"><i class="fa fa-trash-o"></i><span class="text">Soft Delete</span></a></li>#}

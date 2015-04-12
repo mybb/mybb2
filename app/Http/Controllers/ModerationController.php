@@ -4,20 +4,37 @@ namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Moderation\ReversableModerationInterface;
 
 class ModerationController extends Controller
 {
     public function moderate(Request $request)
     {
-        $contentType = $request->get('content_type');
-        $contentId = $request->get('content_id');
+        $moderationContent = $request->get('moderation_content');
+        $moderationIds = $request->get('moderation_ids');
         $moderationName = $request->get('moderation_name');
 
         $moderation = app()->make('MyBB\Core\Moderation\ModerationRegistry')->get($moderationName);
-        $post = Post::find($contentId);
 
-        $moderation->apply($post);
+        foreach ($moderationIds as $id) {
+            $post = Post::find($id);
+            $moderation->apply($post);
+        }
+    }
 
-        return redirect()->back();
+    public function reverse(Request $request)
+    {
+        $moderationContent = $request->get('moderation_content');
+        $moderationIds = $request->get('moderation_ids');
+        $moderationName = $request->get('moderation_name');
+
+        $moderation = app()->make('MyBB\Core\Moderation\ModerationRegistry')->get($moderationName);
+
+        if ($moderation instanceof ReversableModerationInterface) {
+            foreach ($moderationIds as $id) {
+                $post = Post::find($id);
+                $moderation->reverse($post);
+            }
+        }
     }
 }
