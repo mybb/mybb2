@@ -1,0 +1,31 @@
+{% extends "layouts.base" %}
+{% block title %}Conversations{% endblock %}
+{% block contents %}
+		<div class="page-content">
+			<header>
+				<h1>Conversations</h1>
+				<p class="description">
+					Well, conversations
+				</p>
+			</header>
+
+			<a href="{{ url_route('conversations.compose') }}" class="conversations-compose-link"><span class="text">Compose</span></a>
+
+			<section>
+				<div class="header">
+					<span class="title">Title</span>
+					<span class="last-message">Last Message</span>
+				</div>
+				{% for conversation in auth_user.conversations %}
+					<div class="list">
+						<div class="title"><a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a></div>
+						<div class="last-message">by {{ conversation.lastMessage.author.name }} {{ human_date(conversation.lastMessage.created_at) }}</div>
+					</div>
+				{% else %}
+					<div class="no-message">
+						No Message :(
+					</div>
+				{% endfor %}
+			</section>
+		</div>
+{% endblock %}
