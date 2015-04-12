@@ -5,11 +5,11 @@ namespace MyBB\Core\Registry;
 interface RegistryInterface
 {
     /**
-     * @param string $name
+     * @param string $key
      *
      * @return mixed
      */
-    public function get($name);
+    public function get($key);
 
     /**
      * @return mixed

@@ -30,13 +30,13 @@ class ModerationRegistry implements RegistryInterface
     }
 
     /**
-     * @param string $name
+     * @param string $key
      *
      * @return mixed
      */
-    public function get($name)
+    public function get($key)
     {
-        return $this->moderations[$name];
+        return $this->moderations[$key];
     }
 
     /**
