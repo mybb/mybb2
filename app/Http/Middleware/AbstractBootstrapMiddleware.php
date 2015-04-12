@@ -26,7 +26,7 @@ abstract class AbstractBootstrapMiddleware implements Middleware
 	protected function getOptions(Router $router, Request $request)
 	{
 		$collection = $router->getRoutes();
-		$route = $collection->match($request->create($request->path()));
+		$route = $collection->match($request->create($request->path(), $request->method()));
 
 		return $route->getAction();
 	}
