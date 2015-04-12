@@ -17,31 +17,6 @@ abstract class Controller extends BaseController
 
 	protected $failedValidationRedirect = '';
 
-	public function __construct(Guard $guard, Request $request)
-	{
-		app()->setLocale(Settings::get('user.language', 'en'));
-
-		View::share('auth_user', $guard->user());
-
-		if ($guard->check()) {
-			$guard->user()->update([
-				'last_visit' => new \DateTime(),
-				'last_page' => $request->path()
-			]);
-		}
-
-		$langDir = [
-			'left' => 'left',
-			'right' => 'right'
-		];
-		if (trans('general.direction') == 'rtl') {
-			$langDir['left'] = 'right';
-			$langDir['right'] = 'left';
-		}
-
-		View::share('langDir', $langDir);
-	}
-
 	protected function getRedirectUrl()
 	{
 		if (!empty($this->failedValidationRedirect)) {

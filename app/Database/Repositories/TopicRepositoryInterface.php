@@ -101,6 +101,17 @@ interface TopicRepositoryInterface
 	 */
 	public function editTopic(Topic $topic, array $topicDetails);
 
+    /**
+     * Edit the hasPoll of the Topic
+     *
+     * @param Topic $topic The topic to edit
+     * @param bool $hasPoll
+     *
+     * @return mixed
+     */
+
+    public function setHasPoll(Topic $topic, $hasPoll);
+
 	/**
 	 * Restore a topic
 	 *

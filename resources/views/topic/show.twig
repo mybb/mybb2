@@ -15,9 +15,15 @@
 			{{ posts.render|raw }}
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
+				{% if not topic.has_poll %}
+					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
+				{% endif %}
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</div>
+		{% if topic.has_poll %}
+			{% include "topic.polls" with [poll, topic] %}
+		{% endif %}
 		<section class="topic">
 			{% for post in posts %}
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
@@ -49,16 +55,16 @@
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-
+								<li class="like">
                                 {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
                                     {{ form_hidden('post_id', post.id) }}
                                     {% if post.hasLikedPost %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">UnLike</span>', {'type': 'submit', 'class': 'button button--unlike'}) }}
+                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">Unlike</span>', {'type': 'submit', 'class': ''}) }}
                                     {% else %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': 'button button--like'}) }}
+                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">Like</span>', {'type': 'submit', 'class': ''}) }}
                                     {% endif %}
                                 {{ form_close() }}
-
+                            	</li>
                                 <li class="quote"><a href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}"><i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">Quote</span></a></li>
 							{% endif %}
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>

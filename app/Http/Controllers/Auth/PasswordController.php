@@ -21,8 +21,7 @@ class PasswordController extends Controller
 	|
 	*/
 
-	use ResetsPasswords
-	{
+	use ResetsPasswords {
 		postEmail as parentPostEmail;
 	}
 
@@ -31,14 +30,11 @@ class PasswordController extends Controller
 	/**
 	 * Create a new password controller instance.
 	 *
-	 * @param Guard $auth
-	 * @param \Illuminate\Http\Request $request
+	 * @param Guard                                     $auth
 	 * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
 	 */
-	public function __construct(Guard $auth, Request $request, PasswordBroker $passwords)
+	public function __construct(Guard $auth, PasswordBroker $passwords)
 	{
-		parent::__construct($auth, $request);
-
 		$this->auth = $auth;
 		$this->passwords = $passwords;
 
