@@ -67,40 +67,44 @@
 									</div>
 								</div>
 							</li>
-							<li class="user-navigation__messages dropit-link">
-								<a href="index.php?page=messages" class="multi-link">
-									<i class="fa fa-comments"></i>
-									<span class="text">Messages</span>
-									<span class="unread-count">2</span>
-									<i class="fa fa-caret-down"></i>
-									<i class="fa fa-caret-up"></i>
-								</a>
-								 <div class="user-navigation__dropdown dropdown">
-									<div class="messages-container">
-										<h2>
-											<a href="index.php?page=messages/index">
-												<span class="text">Unread Messages</span>
-											</a>
-											<a href="index.php?page=messages/compose" title="Compose New Message" class="option"><i class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
-										</h2>
-										<ul class="messages">
-											<li>
-												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Ryan Loos's profile"><img src="http://ih2.redbubble.net/avatar.116723.100x100.jpg?dateline=1365291398" alt="Ryan Loos's avatar" class="avatar" /></a>
-												<a href="index.php?page=messages/message" class="conversation-title">MyBB 2.0 testing</a>
-												from <a href="index.php?page=profile" class="message-author">Ryan Loos</a>
-												<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
-											</li>
-											<li>
-												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Tim B.'s profile"><img src="http://i50.tinypic.com/2v8nvc4_th.jpg?dateline=1346633969" alt="Tim B.'s avatar" class="avatar" /></a>
-												<a href="index.php?page=messages/message" class="conversation-title">New website rollout</a>
-												from <a href="index.php?page=profile" class="message-author">Tim B.</a>
-												<time datetime="2013-03-22T11:34" title="Mar 22, 2013, 11:34 AM">1 hour ago</time>
-											</li>
-											<li class="view-all">
-												<a href="index.php?page=messages/index"><span class="text">View All Messages</span></a>
-											</li>
-										</ul>
+							{% if setting('conversations.enabled') and auth_user.hasPermission('canUseConversations') %}
+								<li class="user-navigation__messages dropit-link">
+									<a href="index.php?page=messages" class="multi-link">
+										<i class="fa fa-comments"></i>
+										<span class="text">Messages</span>
+										{% if user.conversations.count > 0 %}
+											<span class="unread-count">user.conversations.count</span>
+										{% endif %}
+										<i class="fa fa-caret-down"></i>
+										<i class="fa fa-caret-up"></i>
+									</a>
+									 <div class="user-navigation__dropdown dropdown">
+										<div class="messages-container">
+											<h2>
+												<a href="index.php?page=messages/index">
+													<span class="text">Unread Messages</span>
+												</a>
+												<a href="index.php?page=messages/compose" title="Compose New Message" class="option"><i class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
+											</h2>
+											<ul class="messages">
+												<li>
+													<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Ryan Loos's profile"><img src="http://ih2.redbubble.net/avatar.116723.100x100.jpg?dateline=1365291398" alt="Ryan Loos's avatar" class="avatar" /></a>
+													<a href="index.php?page=messages/message" class="conversation-title">MyBB 2.0 testing</a>
+													from <a href="index.php?page=profile" class="message-author">Ryan Loos</a>
+													<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
+												</li>
+												<li>
+													<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Tim B.'s profile"><img src="http://i50.tinypic.com/2v8nvc4_th.jpg?dateline=1346633969" alt="Tim B.'s avatar" class="avatar" /></a>
+													<a href="index.php?page=messages/message" class="conversation-title">New website rollout</a>
+													from <a href="index.php?page=profile" class="message-author">Tim B.</a>
+													<time datetime="2013-03-22T11:34" title="Mar 22, 2013, 11:34 AM">1 hour ago</time>
+												</li>
+												<li class="view-all">
+													<a href="index.php?page=messages/index"><span class="text">View All Messages</span></a>
+												</li>
+											</ul>
+										</div>
 									</div>
-								</div>
-							</li>
+								</li>
+							{% endif %}
 						</ul>

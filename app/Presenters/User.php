@@ -13,11 +13,13 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
 use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class User extends BasePresenter
 {
@@ -33,7 +35,7 @@ class User extends BasePresenter
 	private $postRepository;
 	/** @var UserRepositoryInterface $userRepository */
 	private $userRepository;
-
+	private $permissionChecker;
 
 	/**
 	 * @param UserModel                $resource The user being wrapped by this presenter.
@@ -49,7 +51,8 @@ class User extends BasePresenter
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		UserRepositoryInterface $userRepository
+		UserRepositoryInterface $userRepository,
+		PermissionChecker $permissionChecker
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -57,6 +60,7 @@ class User extends BasePresenter
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -116,6 +120,11 @@ class User extends BasePresenter
 		}
 
 		return '';
+	}
+
+	public function hasPermission($permission)
+	{
+		return $this->permissionChecker->hasPermission('user', null, $permission);
 	}
 
 	/**
