@@ -2,7 +2,7 @@
 
 namespace MyBB\Core\Moderation;
 
-interface ReversableModerationInterface extends ModerationInterface
+interface ReversibleModerationInterface extends ModerationInterface
 {
     /**
      * @param mixed $content

@@ -32,7 +32,7 @@ class ModerationRegistry implements RegistryInterface
     /**
      * @param string $key
      *
-     * @return mixed
+     * @return ModerationInterface
      */
     public function get($key)
     {
