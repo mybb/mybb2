@@ -46,7 +46,7 @@ class TopicController extends Controller
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
 	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param PollRepositoryInterface  $pollRepository Poll repository interface, used to fetch poll details.
+	 * @param PollRepositoryInterface  $pollRepository  Poll repository interface, used to fetch poll details.
 	 * @param Guard                    $guard           Guard implementation
 	 * @param QuoteRenderer            $quoteRenderer
 	 */
@@ -370,7 +370,7 @@ class TopicController extends Controller
 			if ($poll) {
 				$poll['topic_id'] = $topic->id;
 				$this->pollRepository->create($poll);
-                $this->topicRepository->setHasPoll($topic, true);
+				$this->topicRepository->setHasPoll($topic, true);
 			}
 
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);

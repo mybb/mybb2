@@ -61,12 +61,12 @@ class TopicRepository implements TopicRepositoryInterface
 	private $permissionChecker;
 
 	/**
-	 * @param Topic                    $topicModel The model to use for threads.
-	 * @param Guard                    $guard Laravel guard instance, used to get user ID.
+	 * @param Topic                    $topicModel     The model to use for threads.
+	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
 	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
-	 * @param Str                      $stringUtils String utilities, used for creating slugs.
-	 * @param DatabaseManager          $dbManager Database manager, needed to do transactions.
-	 * @param Store                    $settings The settings container
+	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
+	 * @param Store                    $settings       The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PollRepositoryInterface  $pollRepository
 	 * @param PermissionChecker        $permissionChecker
@@ -299,21 +299,21 @@ class TopicRepository implements TopicRepositoryInterface
 		return $topic;
 	}
 
-    /**
-     * Edit the hasPoll of the Topic
-     *
-     * @param Topic $topic The topic to edit
-     * @param bool $hasPoll
-     *
-     * @return mixed
-     */
+	/**
+	 * Edit the hasPoll of the Topic
+	 *
+	 * @param Topic $topic The topic to edit
+	 * @param bool  $hasPoll
+	 *
+	 * @return mixed
+	 */
 
-    public function setHasPoll(Topic $topic, $hasPoll)
-    {
-        return $this->editTopic($topic, [
-            'has_poll' => $hasPoll
-        ]);
-    }
+	public function setHasPoll(Topic $topic, $hasPoll)
+	{
+		return $this->editTopic($topic, [
+			'has_poll' => $hasPoll
+		]);
+	}
 
 	/**
 	 * Restore a topic
@@ -327,7 +327,7 @@ class TopicRepository implements TopicRepositoryInterface
 		$topic->forum->increment('num_topics');
 		$topic->forum->increment('num_posts', $topic->num_posts);
 
-		if($topic->user_id > 0) {
+		if ($topic->user_id > 0) {
 			$topic->author->increment('num_topics');
 		}
 

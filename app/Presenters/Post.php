@@ -19,32 +19,29 @@ class Post extends BasePresenter
 {
 	/** @var PostModel $wrappedObject */
 
-    /**
-     * @var Guard $guard
-     */
-    private $guard;
+	/**
+	 * @var Guard $guard
+	 */
+	private $guard;
 
-    /**
-     * @param PostModel $resource The post being wrapped by this presenter.
-     * @param Guard     $guard
-     */
+	/**
+	 * @param PostModel $resource The post being wrapped by this presenter.
+	 * @param Guard     $guard
+	 */
 	public function __construct(PostModel $resource, Guard $guard)
 	{
 		$this->wrappedObject = $resource;
-        $this->guard = $guard;
+		$this->guard = $guard;
 	}
 
 	public function author()
 	{
-		if($this->wrappedObject->user_id == null)
-		{
+		if ($this->wrappedObject->user_id == null) {
 			$user = new UserModel();
 			$user->id = 0;
-			if($this->wrappedObject->username != null)
-			{
+			if ($this->wrappedObject->username != null) {
 				$user->name = $this->wrappedObject->username;
-			} else
-			{
+			} else {
 				$user->name = trans('general.guest');
 			}
 
@@ -56,27 +53,31 @@ class Post extends BasePresenter
 		return $this->wrappedObject->author;
 	}
 
-    /**
-     * Check whether the current user has liked the post.
-     *
-     * @return bool Whether the post has been liked by the current user.
-     */
-    public function hasLikedPost()
-    {
-        if ($this->guard->check()) {
-            $user = $this->guard->user();
+	/**
+	 * Check whether the current user has liked the post.
+	 *
+	 * @return bool Whether the post has been liked by the current user.
+	 */
+	public function hasLikedPost()
+	{
+		if ($this->guard->check()) {
+			$user = $this->guard->user();
 
-            $containsLike = $this->wrappedObject->likes->contains(function($key, Like $like) use (&$likes, &$numLikesToList, $user) {
-                if ($like->user->id === $user->getAuthIdentifier()) {
-                    return true;
-                }
+			$containsLike = $this->wrappedObject->likes->contains(function ($key, Like $like) use (
+				&$likes,
+				&$numLikesToList,
+				$user
+			) {
+				if ($like->user->id === $user->getAuthIdentifier()) {
+					return true;
+				}
 
-                return false;
-            });
+				return false;
+			});
 
-            return ($containsLike !== false);
-        }
+			return ($containsLike !== false);
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

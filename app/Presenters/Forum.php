@@ -27,15 +27,12 @@ class Forum extends BasePresenter
 
 	public function lastPostAuthor()
 	{
-		if($this->wrappedObject->last_post_user_id == null)
-		{
+		if ($this->wrappedObject->last_post_user_id == null) {
 			$user = new UserModel();
 			$user->id = 0;
-			if($this->wrappedObject->lastPost->username != null)
-			{
+			if ($this->wrappedObject->lastPost->username != null) {
 				$user->name = $this->wrappedObject->lastPost->username;
-			} else
-			{
+			} else {
 				$user->name = trans('general.guest');
 			}
 

@@ -261,7 +261,7 @@ class PostRepository implements PostRepositoryInterface
 			$post->topic->decrement('num_posts');
 			$post->topic->forum->decrement('num_posts');
 
-			if($post->user_id > 0) {
+			if ($post->user_id > 0) {
 				$post->author->decrement('num_posts');
 			}
 
@@ -298,7 +298,7 @@ class PostRepository implements PostRepositoryInterface
 		$post->topic->increment('num_posts');
 		$post->topic->forum->increment('num_posts');
 
-		if($post->user_id > 0) {
+		if ($post->user_id > 0) {
 			$post->author->increment('num_posts');
 		}
 

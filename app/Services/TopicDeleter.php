@@ -35,7 +35,7 @@ class TopicDeleter
 			$topic->forum->decrement('num_topics');
 			$topic->forum->decrement('num_posts', $topic->num_posts);
 
-			if($topic->user_id > 0) {
+			if ($topic->user_id > 0) {
 				$topic->author->decrement('num_topics');
 			}
 
