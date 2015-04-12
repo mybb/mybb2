@@ -9,7 +9,6 @@
 
 namespace MyBB\Core\Presenters;
 
-use Illuminate\View\Factory as ViewFactory;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic as TopicModel;
@@ -26,20 +25,13 @@ class Topic extends BasePresenter
 	protected $moderations;
 
 	/**
-	 * @var ViewFactory
-	 */
-	protected $viewFactory;
-
-	/**
 	 * @param TopicModel $resource The thread being wrapped by this presenter.
 	 * @param ModerationRegistry $moderations
-	 * @param ViewFactory $viewFactory
 	 */
-	public function __construct(TopicModel $resource, ModerationRegistry $moderations, ViewFactory $viewFactory)
+	public function __construct(TopicModel $resource, ModerationRegistry $moderations)
 	{
 		$this->wrappedObject = $resource;
 		$this->moderations = $moderations;
-		$this->viewFactory = $viewFactory;
 	}
 
 	public function replies()
@@ -74,8 +66,6 @@ class Topic extends BasePresenter
 	 */
 	public function moderations()
 	{
-		return $this->viewFactory->make('partials.moderation.inline_moderations', [
-			'moderations' => $this->moderations->getForContent(new Post()),
-		]);
+		return $this->moderations->getForContent(new Post());
 	}
 }
