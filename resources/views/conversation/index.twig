@@ -18,7 +18,12 @@
 				</div>
 				{% for conversation in auth_user.conversations %}
 					<div class="list">
-						<div class="title"><a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a></div>
+						<div class="title">
+							{% if conversation.isUnread %}
+								(New)
+							{% endif %}
+							<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
+						</div>
 						<div class="last-message">by {{ conversation.lastMessage.author.name }} {{ human_date(conversation.lastMessage.created_at) }}</div>
 					</div>
 				{% else %}

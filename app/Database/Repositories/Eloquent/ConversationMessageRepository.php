@@ -46,4 +46,17 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	{
 		return $this->conversationMessageModel->where('conversation_id', $conversation->id)->get();
 	}
+
+	public function addMessageToConversation(Conversation $conversation, $details)
+	{
+		$message = $conversation->messages()->create($details);
+
+		if($message) {
+			$conversation->update([
+				'last_message_id' => $message->id
+			]);
+		}
+
+		return $message;
+	}
 }

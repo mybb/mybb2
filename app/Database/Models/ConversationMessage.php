@@ -30,6 +30,7 @@ class ConversationMessage extends Model implements HasPresenter
 	 */
 	protected $fillable = [
 		'message',
+		'author_id'
 	];
 
 	protected $with = [

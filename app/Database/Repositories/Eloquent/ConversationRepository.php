@@ -9,10 +9,12 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Database\DatabaseManager;
+use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 
 class ConversationRepository implements ConversationRepositoryInterface
@@ -24,12 +26,24 @@ class ConversationRepository implements ConversationRepositoryInterface
 	 */
 	private $permissionChecker;
 
+	private $dbManager;
+
+	private $conversationMessageRepository;
+
+	private $guard;
+
 	public function __construct(
 		Conversation $conversationModel,
-		PermissionChecker $permissionChecker
+		PermissionChecker $permissionChecker,
+		DatabaseManager $dbManager,
+		ConversationMessageRepositoryInterface $conversationMessageRepository,
+		Guard $guard
 	) {
 		$this->conversationModel = $conversationModel;
 		$this->permissionChecker = $permissionChecker;
+		$this->dbManager = $dbManager;
+		$this->conversationMessageRepository = $conversationMessageRepository;
+		$this->guard = $guard;
 	}
 
 
@@ -47,7 +61,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	{
 		// TODO: this is a big query, should probably be cached (at least for the request)
 		return $this->conversationModel
-			->join('conversation_user', function($join) use ($user) {
+			->join('conversation_user', function ($join) use ($user) {
 				$join->on('conversation_user.conversation_id', '=', 'conversations.id');
 				$join->where('conversation_user.user_id', '=', $user->id);
 			})
@@ -55,5 +69,33 @@ class ConversationRepository implements ConversationRepositoryInterface
 			->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
 			->orWhere('conversation_user.last_read', null)
 			->get();
+	}
+
+	public function create($details)
+	{
+		$conversation = null;
+
+		$this->dbManager->transaction(function () use ($details, &$conversation) {
+			$conversation = $this->conversationModel->create([
+				'title' => $details['title']
+			]);
+
+			$message = $this->conversationMessageRepository->addMessageToConversation($conversation, [
+				'author_id' => $this->guard->user()->id,
+				'message' => $details['message']
+			]);
+
+			// First add the author of this message - if he answered it he also read the conversation
+			$conversation->participants()->attach($this->guard->user()->id, ['last_read' => new \DateTime()]);
+
+			// And now add all other participants
+			$conversation->participants()->attach($details['participants']);
+
+			$conversation->update([
+				'last_message_id' => $message->id
+			]);
+		});
+
+		return $conversation;
 	}
 }

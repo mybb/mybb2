@@ -30,4 +30,6 @@ interface ConversationMessageRepositoryInterface
 	public function find($id = 0);
 
 	public function getAllForConversation(Conversation $conversation);
+
+	public function addMessageToConversation(Conversation $conversation, $details);
 }

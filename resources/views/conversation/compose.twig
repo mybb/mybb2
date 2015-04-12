@@ -1,0 +1,37 @@
+{% extends "layouts.base" %}
+{% block title %}Conversations{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>Conversations</h1>
+
+			<p class="description">
+				Well, conversations
+			</p>
+		</header>
+
+		{{ form_open({'route': ['conversations.compose'], 'method': 'post'}) }}
+		<section class="form">
+			<div class="form__section">
+				<div class="form__row">
+					<h3>{{ form_label('participants', 'Participants') }}</h3>
+					(Comma seperated list of usernames)
+					{# TODO: some sort of autocomplete #}
+					{{ form_text('participants') }}
+				</div>
+				<div class="form__row">
+					<h3>{{ form_label('title', 'Title') }}</h3>
+					{{ form_text('title') }}
+				</div>
+				<div class="form__row">
+					<h3>{{ form_label('message', 'Message') }}</h3>
+					{{ form_textarea('message') }}
+				</div>
+			</div>
+		</section>
+		<div class="form__submit">
+			{{ form_button('<i class="fa fa-edit"></i><span class="text">Create Conversation</span>', {'type': 'submit', 'class': 'button'}) }}
+		</div>
+		{{ form_close() }}
+	</div>
+{% endblock %}

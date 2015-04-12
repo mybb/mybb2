@@ -30,4 +30,6 @@ interface ConversationRepositoryInterface
 	public function find($id = 0);
 
 	public function getUnreadForUser(User $user);
+
+	public function create($conversation);
 }

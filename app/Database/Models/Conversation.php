@@ -30,12 +30,15 @@ class Conversation extends Model implements HasPresenter
 	 */
 	protected $fillable = [
 		'title',
+		'last_message_id'
 	];
 
 	protected $with = [
 		'messages',
 		'lastMessage'
 	];
+
+	public $timestamps = false;
 
 	/**
 	 * Get the presenter class.
