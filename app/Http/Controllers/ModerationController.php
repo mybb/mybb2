@@ -2,68 +2,28 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use MyBB\Core\Moderation\ModerationRegistry;
-use MyBB\Core\Moderation\ReversableModerationInterface;
-use MyBB\Core\Repository\RepositoryFactory;
+use MyBB\Core\Http\Requests\Moderation\ModerationRequest;
+use MyBB\Core\Http\Requests\Moderation\ReversibleModerationRequest;
 
 class ModerationController extends Controller
 {
     /**
-     * @var ModerationRegistry
+     * @param ModerationRequest $request
      */
-    protected $moderationRegistry;
-
-    /**
-     * @var RepositoryFactory
-     */
-    protected $repositoryFactory;
-
-    /**
-     * @param ModerationRegistry $moderationRegistry
-     * @param RepositoryFactory $repositoryFactory
-     */
-    public function __construct(ModerationRegistry $moderationRegistry, RepositoryFactory $repositoryFactory)
+    public function moderate(ModerationRequest $request)
     {
-        $this->moderationRegistry = $moderationRegistry;
-        $this->repositoryFactory = $repositoryFactory;
-    }
-
-    /**
-     * @param Request $request
-     */
-    public function moderate(Request $request)
-    {
-        $moderationContent = $request->get('moderation_content');
-        $moderationIds = $request->get('moderation_ids');
-        $moderationName = $request->get('moderation_name');
-
-        $moderation = $this->moderationRegistry->get($moderationName);
-        $repository = $this->repositoryFactory->build($moderationContent);
-
-        foreach ($moderationIds as $id) {
-            $post = $repository->find($id);
-            $moderation->apply($post);
+        foreach ($request->getModeratableContent() as $content) {
+            $request->getModeration()->apply($content);
         }
     }
 
     /**
-     * @param Request $request
+     * @param ReversibleModerationRequest $request
      */
-    public function reverse(Request $request)
+    public function reverse(ReversibleModerationRequest $request)
     {
-        $moderationContent = $request->get('moderation_content');
-        $moderationIds = $request->get('moderation_ids');
-        $moderationName = $request->get('moderation_name');
-
-        $moderation = $this->moderationRegistry->get($moderationName);
-
-        if ($moderation instanceof ReversableModerationInterface) {
-            $repository = $this->repositoryFactory->build($moderationContent);
-            foreach ($moderationIds as $id) {
-                $post = $repository->find($id);
-                $moderation->reverse($post);
-            }
+        foreach ($request->getModeratableContent() as $content) {
+            $request->getModeration()->reverse($content);
         }
     }
 }

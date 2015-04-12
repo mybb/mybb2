@@ -2,9 +2,9 @@
 
 namespace MyBB\Core\Moderation\Moderations;
 
-use MyBB\Core\Moderation\ReversableModerationInterface;
+use MyBB\Core\Moderation\ReversibleModerationInterface;
 
-class Approve implements ReversableModerationInterface
+class Approve implements ReversibleModerationInterface
 {
     /**
      * @param ApprovableInterface $approvable
