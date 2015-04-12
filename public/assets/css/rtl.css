@@ -3419,6 +3419,11 @@ section.container .forum-list {
       display: none; }
   .post.post--reply .post__foot {
     margin: 5px 0; }
+  .post #quoteBar {
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 4px; }
 
 @media only screen and (min-width: 480px) {
   .post {

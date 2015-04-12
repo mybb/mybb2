@@ -15,6 +15,8 @@ namespace MyBB\Core\Http\Controllers;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
+use MyBB\Core\Http\Requests\Post\QuotePostRequest;
+use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -35,18 +37,26 @@ class PostController extends AbstractController
 	private $settings;
 
 	/**
+	 * @var QuoteRenderer $quoteRenderer
+	 */
+	private $quoteRenderer;
+
+	/**
 	 * @param PostRepositoryInterface  $postRepository
 	 * @param LikesRepositoryInterface $likesRepository
 	 * @param Store                    $settings
+	 * @param QuoteRenderer            $quoteRenderer
 	 */
 	public function __construct(
 		PostRepositoryInterface $postRepository,
 		LikesRepositoryInterface $likesRepository,
-		Store $settings
+		Store $settings,
+		QuoteRenderer $quoteRenderer
 	) {
 		$this->postsRepository = $postRepository;
 		$this->likesRepository = $likesRepository;
 		$this->settings = $settings;
+		$this->quoteRenderer = $quoteRenderer;
 	}
 
 	/**
@@ -110,4 +120,24 @@ class PostController extends AbstractController
 
 		return view('post.likes', compact('post', 'likes'));
 	}
+
+	/**
+	 * @param QuotePostRequest $quoteRequest
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function postQuotes(QuotePostRequest $quoteRequest)
+    {
+        $posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
+
+        $content = '';
+
+        foreach ($posts as $post) {
+            $content .= $this->quoteRenderer->renderFromPost($post);
+        }
+
+        return response()->json([
+            'message' => $content
+        ]);
+    }
 }

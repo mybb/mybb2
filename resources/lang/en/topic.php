@@ -38,5 +38,10 @@ return [
 		'content' => 'Content',
 		'postTopic' => 'Post Topic'
 	],
+	'multiQuote' => [
+		'desc' => 'You have selected one or more posts to quote.',
+		'select' => 'Quote these posts now',
+		'deselect' => 'deselect them.',
+	],
 
 ];

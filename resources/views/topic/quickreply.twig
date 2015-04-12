@@ -17,7 +17,8 @@
 						</a>
 					</div>
 					<div class="post__body">
-						{{ form_textarea('content', '', {'class':'textarea', 'rows': '10'}) }}
+						{{ form_textarea('content', '', {'class':'textarea', 'rows': '10', 'id': 'message'}) }}
+                        {% include 'topic.quotebar' %}
 					</div>
 					{% if auth_check() == false %}
 						<div>

@@ -340,4 +340,20 @@ class PostRepository implements PostRepositoryInterface
 
 		return $success;
 	}
+
+    /**
+     * @param array $postIds
+     *
+     * @return mixed
+     */
+    public function getPostsByIds(array $postIds)
+    {
+        $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+        return $this->postModel->with([
+            'topic',
+            'topic.forum',
+            'author'
+        ])->whereIn('id', $postIds)->whereNotIn('topic.forum_id', $unviewableForums)->get();
+    }
 }
