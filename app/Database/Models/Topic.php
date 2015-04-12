@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
+/**
+ * @property int id
+ */
 class Topic extends Model implements HasPresenter, ApprovableInterface
 {
 	use SoftDeletes;
@@ -48,6 +51,13 @@ class Topic extends Model implements HasPresenter, ApprovableInterface
 	 * @var array
 	 */
 	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.

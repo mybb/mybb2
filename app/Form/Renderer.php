@@ -78,7 +78,7 @@ class Renderer
     protected function renderTextarea(RenderableInterface $renderable)
     {
         return $this->view->make('partials.form.field_textarea', [
-            'name' => $renderable->getName(),
+            'name' => $renderable->getElementName(),
             'rows' => 6,
             'cols' => 40,
             'value' => $renderable->getValue() ? $renderable->getValue() : '',
@@ -96,8 +96,8 @@ class Renderer
     {
         return $this->view->make('partials.form.field_input', [
             'type' => $renderable->getType(),
-            'name' => $renderable->getName(),
-            'id' => $this->slugify($renderable->getName()),
+            'name' => $renderable->getElementName(),
+            'id' => $this->slugify($renderable->getElementName()),
             'value' => $renderable->getValue() ? $renderable->getValue() : '',
             'is_required' => $this->isRequired($renderable),
             'min_length' => $this->getMinLength($renderable),
@@ -112,7 +112,7 @@ class Renderer
     protected function renderSelect(RenderableInterface $renderable)
     {
         return $this->view->make('partials.form.field_select', [
-            'name' => $renderable->getName(),
+            'name' => $renderable->getElementName(),
             'options' => $renderable->getOptions(),
             'selected' => $renderable->getValue()
         ])->render();
@@ -179,7 +179,7 @@ class Renderer
     protected function getRules(RenderableInterface $renderable)
     {
         $rules = $this->getValidator($renderable)->getRules();
-        return $rules[$renderable->getName()] ? $rules[$renderable->getName()] : [];
+        return $rules[$renderable->getElementName()] ? $rules[$renderable->getElementName()] : [];
     }
 
     /**
@@ -188,6 +188,6 @@ class Renderer
      */
     protected function getValidator(RenderableInterface $renderable)
     {
-        return $this->validator->make([], [$renderable->getName() => $renderable->getValidationRules()]);
+        return $this->validator->make([], [$renderable->getElementName() => $renderable->getValidationRules()]);
     }
 }

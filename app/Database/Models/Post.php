@@ -15,6 +15,9 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
+/**
+ * @property int topic_id
+ */
 class Post extends Model implements HasPresenter, ApprovableInterface
 {
 	use SoftDeletes;
@@ -51,6 +54,13 @@ class Post extends Model implements HasPresenter, ApprovableInterface
 	 * @var array
 	 */
 	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'topic_id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.

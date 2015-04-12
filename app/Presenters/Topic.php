@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic as TopicModel;
@@ -62,10 +63,18 @@ class Topic extends BasePresenter
 	}
 
 	/**
-	 * @return \Illuminate\View\View
+	 * @return \MyBB\Core\Moderation\ModerationInterface[]
 	 */
 	public function moderations()
 	{
-		return $this->moderations->getForContent(new Post());
+		$moderations = $this->moderations->getForContent(new Post());
+		$decorated = [];
+		$presenter = app()->make('autopresenter');
+
+		foreach ($moderations as $moderation) {
+			$decorated[] = $presenter->decorate($moderation);
+		}
+
+		return $decorated;
 	}
 }

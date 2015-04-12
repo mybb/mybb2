@@ -2,10 +2,14 @@
     <h2>With selected posts<span class="selection-count"> (1)</span>:</h2>
     <ul class="moderation-controls">
         {% for moderation in moderations %}
-            <li class="{{ moderation.name }}"><a href="#" data-moderate="{{ moderation.name }}"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.description }}</span></a></li>
+            {% if is_renderable(moderation) %}
+                <li class="{{ moderation.key }}"><a href="#" data-modal="moderate/form/{{ moderation.key }}" onclick="window.MyBB.Moderation.injectModalParams(this);"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
+            {% else %}
+                <li class="{{ moderation.key }}"><a href="#" data-moderate="{{ moderation.key }}"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
+            {% endif %}
 
-            {% if moderation.reverse is defined %}
-                <li class="{{ moderation.name }}"><a href="#" data-moderate-reverse="{{ moderation.name }}"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseDescription }}</span></a></li>
+            {% if is_reversible_moderation(moderation) %}
+                <li class="{{ moderation.key }}"><a href="#" data-moderate-reverse="{{ moderation.key }}"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseName }}</span></a></li>
             {% endif %}
         {% endfor %}
         {#<li class="soft-delete"><a href="#"><i class="fa fa-trash-o"></i><span class="text">Soft Delete</span></a></li>#}

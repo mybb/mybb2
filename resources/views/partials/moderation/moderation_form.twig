@@ -1,0 +1,26 @@
+{% extends "layouts.base" %}
+{% block contents %}
+    <div class="page-content page-content--menu">
+        <header>
+            <h1>{{ moderation.name|capitalize }}</h1>
+        </header>
+
+        {{ form_open({'route': ['moderate'], 'method': 'post'}) }}
+        {{ form_hidden('moderation_name', moderation.key) }}
+        {{ form_hidden('moderation_content', moderation_content) }}
+        {% for id in moderation_ids %}
+            {{ form_hidden('moderation_ids[]', id) }}
+        {% endfor %}
+        <section class="form">
+            <div class="form__section">
+                <div class="form__row">
+                    {{ form_render_field(moderation) }}
+                </div>
+            </div>
+        </section>
+        <div class="form__submit">
+            {{ form_button('<i class="fa '~moderation.icon~'"></i>'~moderation.name|capitalize, {'type': 'submit', 'class': 'button'}) }}
+        </div>
+        {{ form_close() }}
+    </div>
+{% endblock %}

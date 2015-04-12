@@ -7,12 +7,12 @@ interface ModerationInterface
     /**
      * @return string
      */
-    public function getName();
+    public function getKey();
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getName();
 
     /**
      * @return string
@@ -21,15 +21,17 @@ interface ModerationInterface
 
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return mixed
      */
-    public function apply($content);
+    public function apply($content, array $options = []);
 
     /**
      * @param mixed $content
+     * @param array $options
      *
      * @return bool
      */
-    public function supports($content);
+    public function supports($content, array $options = []);
 }
