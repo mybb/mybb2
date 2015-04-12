@@ -26,14 +26,11 @@ class AuthController extends Controller
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param Guard $auth
-	 * @param \Illuminate\Http\Request $request
+	 * @param Guard                                $auth
 	 * @param \Illuminate\Contracts\Auth\Registrar $registrar
 	 */
-	public function __construct(Guard $auth, Request $request, Registrar $registrar)
+	public function __construct(Guard $auth, Registrar $registrar)
 	{
-		parent::__construct($auth, $request);
-
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 

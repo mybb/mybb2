@@ -70,7 +70,7 @@ Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserControll
 Route::get('admin',
 	['middleware' => 'checkaccess', 'permissions' => 'admin_access', 'uses' => 'AdminController@index']);
 
-Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha']);
+Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
 
 Route::any('parser', ['uses' => 'DebugController@parser']);
 

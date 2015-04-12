@@ -43,7 +43,6 @@ class TopicController extends Controller
 	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
 	 * @param Guard                    $guard           Guard implementation
-	 * @param Request                  $request         Request implementation
 	 * @param QuoteRenderer            $quoteRenderer
 	 */
 	public function __construct(
@@ -51,11 +50,8 @@ class TopicController extends Controller
 		TopicRepositoryInterface $topicRepository,
 		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
-		Request $request,
 		QuoteRenderer $quoteRenderer
 	) {
-		parent::__construct($guard, $request);
-
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
