@@ -2,6 +2,7 @@
 
 namespace MyBB\Core\Twig\Extensions;
 
+use MyBB\Core\Moderation\ArrayModerationInterface;
 use MyBB\Core\Moderation\ReversibleModerationInterface;
 
 class Moderation extends \Twig_Extension
@@ -23,6 +24,7 @@ class Moderation extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('is_reversible_moderation', [$this, 'isReversibleModeration']),
+            new \Twig_SimpleFunction('is_array_moderation', [$this, 'isArrayModeration']),
         ];
     }
 
@@ -34,5 +36,15 @@ class Moderation extends \Twig_Extension
     public function isReversibleModeration($moderation)
     {
         return $moderation instanceof ReversibleModerationInterface;
+    }
+
+    /**
+     * @param $moderation
+     *
+     * @return bool
+     */
+    public function isArrayModeration($moderation)
+    {
+        return $moderation instanceof ArrayModerationInterface;
     }
 }
