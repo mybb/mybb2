@@ -155,7 +155,7 @@
 				
 			</section>
 			{{ topics.render|raw }}
-			{% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations} %}
+			{% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations, 'moderation_content': 'topics'} %}
 			</div>
 		</div>
 {% endblock %}

@@ -1,5 +1,5 @@
 <div class="inline-moderation">
-    <h2>With selected posts<span class="selection-count"> (1)</span>:</h2>
+    <h2>With selected {{ moderation_content }}<span class="selection-count"> (1)</span>:</h2>
     <ul class="moderation-controls">
         {% for moderation in moderations %}
             {% if is_renderable(moderation) %}

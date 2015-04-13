@@ -90,6 +90,6 @@
 			{{ posts.render|raw }}
 			{% include 'topic.quickreply' with {'topic': topic} %}
 		</section>
-		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations} %}
+		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
 	</div>
 {% endblock %}
