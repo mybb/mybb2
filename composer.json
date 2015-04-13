@@ -48,7 +48,10 @@
 		],
 		"psr-4": {
 			"MyBB\\Core\\": "app/"
-		}
+		},
+	  	"files": [
+		  	"bootstrap/helpers.php"
+		]
 	},
 	"autoload-dev": {
 		"classmap": [

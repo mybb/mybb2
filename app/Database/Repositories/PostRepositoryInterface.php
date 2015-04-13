@@ -107,4 +107,11 @@ interface PostRepositoryInterface
 	 * @return mixed
 	 */
 	public function deletePostsForTopic(Topic $topic);
+
+	/**
+	 * @param Post[] $posts
+	 *
+	 * @return Post
+	 */
+	public function mergePosts(array $posts);
 }

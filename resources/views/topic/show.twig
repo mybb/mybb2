@@ -26,7 +26,7 @@
 		{% endif %}
 		<section class="topic" data-moderation-content="post">
 			{% for post in posts %}
-				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
+				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post__meta">
 
 						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ post.author.name }}'s profile"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ post.author.name }}'s avatar" /></a>

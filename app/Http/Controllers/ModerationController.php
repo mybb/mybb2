@@ -4,6 +4,7 @@ namespace MyBB\Core\Http\Controllers;
 
 use MyBB\Core\Http\Requests\Moderation\ModerationRequest;
 use MyBB\Core\Http\Requests\Moderation\ReversibleModerationRequest;
+use MyBB\Core\Moderation\ArrayModerationInterface;
 
 class ModerationController extends Controller
 {
@@ -15,8 +16,14 @@ class ModerationController extends Controller
     public function moderate(ModerationRequest $request)
     {
         $options = $request->getModerationOptions();
-        foreach ($request->getModeratableContent() as $content) {
-            $request->getModeration()->apply($content, $options);
+        $moderation = $request->getModeration();
+
+        if ($moderation instanceof ArrayModerationInterface) {
+            $moderation->apply($request->getModeratableContent(), $options);
+        } else {
+            foreach ($request->getModeratableContent() as $content) {
+                $moderation->apply($content, $options);
+            }
         }
 
         return redirect()->back();
@@ -24,6 +31,8 @@ class ModerationController extends Controller
 
     /**
      * @param ReversibleModerationRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function reverse(ReversibleModerationRequest $request)
     {
@@ -31,6 +40,8 @@ class ModerationController extends Controller
         foreach ($request->getModeratableContent() as $content) {
             $request->getModeration()->reverse($content, $options);
         }
+
+        return redirect()->back();
     }
 
     /**
