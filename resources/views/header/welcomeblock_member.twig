@@ -72,8 +72,8 @@
 									<a href="index.php?page=messages" class="multi-link">
 										<i class="fa fa-comments"></i>
 										<span class="text">Messages</span>
-										{% if user.conversations.count > 0 %}
-											<span class="unread-count">user.conversations.count</span>
+										{% if auth_user.unreadConversations.count > 0 %}
+											<span class="unread-count">{{ auth_user.unreadConversations.count }}</span>
 										{% endif %}
 										<i class="fa fa-caret-down"></i>
 										<i class="fa fa-caret-up"></i>

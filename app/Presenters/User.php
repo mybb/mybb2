@@ -15,6 +15,7 @@ use Lang;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
@@ -36,6 +37,7 @@ class User extends BasePresenter
 	/** @var UserRepositoryInterface $userRepository */
 	private $userRepository;
 	private $permissionChecker;
+	private $conversationRepository;
 
 	/**
 	 * @param UserModel                $resource The user being wrapped by this presenter.
@@ -52,7 +54,8 @@ class User extends BasePresenter
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
 		UserRepositoryInterface $userRepository,
-		PermissionChecker $permissionChecker
+		PermissionChecker $permissionChecker,
+		ConversationRepositoryInterface $conversationRepository
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -61,6 +64,7 @@ class User extends BasePresenter
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
 		$this->permissionChecker = $permissionChecker;
+		$this->conversationRepository = $conversationRepository;
 	}
 
 	/**
@@ -125,6 +129,11 @@ class User extends BasePresenter
 	public function hasPermission($permission)
 	{
 		return $this->permissionChecker->hasPermission('user', null, $permission);
+	}
+
+	public function unreadConversations()
+	{
+		return $this->conversationRepository->getUnreadForUser($this->wrappedObject);
 	}
 
 	/**

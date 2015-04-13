@@ -45,6 +45,15 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 	public function getUnreadForUser(User $user)
 	{
-		return $this->conversationModel->where('participants.user_id', $user->id)->get();
+		// TODO: this is a big query, should probably be cached (at least for the request)
+		return $this->conversationModel
+			->join('conversation_user', function($join) use ($user) {
+				$join->on('conversation_user.conversation_id', '=', 'conversations.id');
+				$join->where('conversation_user.user_id', '=', $user->id);
+			})
+			->join('conversations_messages', 'conversations_messages.id', '=', 'conversations.last_message_id')
+			->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
+			->orWhere('conversation_user.last_read', null)
+			->get();
 	}
 }

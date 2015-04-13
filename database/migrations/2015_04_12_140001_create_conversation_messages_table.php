@@ -22,6 +22,10 @@ class CreateConversationMessagesTable extends Migration {
 			$table->foreign('conversation_id')->references('id')->on('conversations');
 			$table->foreign('author_id')->references('id')->on('users');
 		});
+
+		Schema::table('conversations', function (Blueprint $table) {
+			$table->foreign('last_message_id')->references('id')->on('conversations_messages');
+		});
 	}
 
 	/**
@@ -31,6 +35,10 @@ class CreateConversationMessagesTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('conversations', function (Blueprint $table) {
+			$table->dropForeign('conversations_last_message_id_foreign');
+		});
+
 		Schema::drop('conversations_messages');
 	}
 

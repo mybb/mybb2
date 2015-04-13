@@ -44,6 +44,6 @@ class ConversationMessage extends Model implements HasPresenter
 
 	public function conversation()
 	{
-		return $this->hasOne('MyBB\Core\Database\Models\Conversation');
+		return $this->belongsTo('MyBB\Core\Database\Models\Conversation');
 	}
 }
