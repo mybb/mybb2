@@ -32,6 +32,8 @@
                 document.location.reload();
             });
         }, this));
+
+        $('li[data-moderation-multi]').hide();
     };
 
     window.MyBB.Moderation.getSelectedIds = function getSelectedIds()
