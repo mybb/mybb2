@@ -20,6 +20,7 @@ class ModerationServiceProvider extends ServiceProvider
                 new Approve(),
                 $app->make('MyBB\Core\Moderation\Moderations\MovePost'),
                 $app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
+                $app->make('MyBB\Core\Moderation\Moderations\DeletePost'),
             ]);
         });
     }
