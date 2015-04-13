@@ -34,4 +34,11 @@ interface ModerationInterface
      * @return bool
      */
     public function supports($content, array $options = []);
+
+    /**
+     * @param mixed $content
+     *
+     * @return bool
+     */
+    public function visible($content);
 }
