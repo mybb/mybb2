@@ -53,7 +53,7 @@ class ModerationRequest extends Request
     }
 
     /**
-     * @return \MyBB\Core\Moderation\ModerationInterface
+     * @return \MyBB\Core\Moderation\ModerationInterface|\MyBB\Core\Moderation\ArrayModerationInterface
      */
     public function getModeration()
     {

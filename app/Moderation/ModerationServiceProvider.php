@@ -18,7 +18,8 @@ class ModerationServiceProvider extends ServiceProvider
         $this->app->singleton('MyBB\Core\Moderation\ModerationRegistry', function (Application $app) {
             return new ModerationRegistry([
                 new Approve(),
-                $app->make('MyBB\Core\Moderation\Moderations\MovePost')
+                $app->make('MyBB\Core\Moderation\Moderations\MovePost'),
+                $app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
             ]);
         });
     }

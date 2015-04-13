@@ -15,7 +15,7 @@
             $.post('/moderate', {
                 moderation_name: $(e.currentTarget).attr('data-moderate'),
                 moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
-                moderation_ids: this.getSelectedIds()
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
             }, function (response) {
                 document.location.reload();
             });
@@ -27,7 +27,7 @@
             $.post('/moderate/reverse', {
                 moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
                 moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
-                moderation_ids: this.getSelectedIds()
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
             }, function (response) {
                 document.location.reload();
             });
