@@ -102,4 +102,14 @@ class Approve implements ReversibleModerationInterface
     {
         return 'fa-minus';
     }
+
+    /**
+     * @param mixed $content
+     *
+     * @return bool
+     */
+    public function visible($content)
+    {
+        return $content instanceof ApprovableInterface;
+    }
 }

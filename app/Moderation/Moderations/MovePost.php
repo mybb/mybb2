@@ -76,7 +76,7 @@ class MovePost implements ModerationInterface, HasPresenter
      */
     public function supports($content, array $options = [])
     {
-        return $content instanceof Post;
+        return $content instanceof Post && array_key_exists('topic_id', $options);
     }
 
     /**
@@ -87,5 +87,15 @@ class MovePost implements ModerationInterface, HasPresenter
     public function getPresenterClass()
     {
         return 'MyBB\Core\Presenters\Moderations\MovePostPresenter';
+    }
+
+    /**
+     * @param mixed $content
+     *
+     * @return bool
+     */
+    public function visible($content)
+    {
+        return $content instanceof Post;
     }
 }

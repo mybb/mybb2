@@ -57,7 +57,7 @@ class ModerationRegistry implements RegistryInterface
         $supportedModerations = [];
 
         foreach ($this->moderations as $moderation) {
-            if ($moderation->supports($content)) {
+            if ($moderation->visible($content)) {
                 $supportedModerations[$moderation->getKey()] = $moderation;
             }
         }
