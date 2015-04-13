@@ -32,6 +32,10 @@ class ConversationMessage extends Model implements HasPresenter
 		'message',
 	];
 
+	protected $with = [
+		'author'
+	];
+
 	/**
 	 * Get the presenter class.
 	 *
@@ -45,5 +49,10 @@ class ConversationMessage extends Model implements HasPresenter
 	public function conversation()
 	{
 		return $this->belongsTo('MyBB\Core\Database\Models\Conversation');
+	}
+
+	public function author()
+	{
+		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'author_id');
 	}
 }

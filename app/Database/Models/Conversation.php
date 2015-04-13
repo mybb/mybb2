@@ -32,6 +32,11 @@ class Conversation extends Model implements HasPresenter
 		'title',
 	];
 
+	protected $with = [
+		'messages',
+		'lastMessage'
+	];
+
 	/**
 	 * Get the presenter class.
 	 *
@@ -49,7 +54,7 @@ class Conversation extends Model implements HasPresenter
 
 	public function lastMessage()
 	{
-		return $this->hasOne('MyBB\Core\Database\Models\ConversationMessage', 'last_message_id');
+		return $this->hasOne('MyBB\Core\Database\Models\ConversationMessage', 'id', 'last_message_id');
 	}
 
 	public function participants()

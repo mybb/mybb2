@@ -40,7 +40,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 	public function find($id = 0)
 	{
-		return $this->conversationModel->with(['messages'])->find($id);
+		return $this->conversationModel->find($id);
 	}
 
 	public function getUnreadForUser(User $user)
