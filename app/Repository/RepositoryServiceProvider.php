@@ -16,7 +16,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton('MyBB\Core\Repository\RepositoryRegistry', function ($app) {
             return new RepositoryRegistry([
                 'post' => 'MyBB\Core\Database\Repositories\PostRepositoryInterface',
-                'topic' => 'MyBB\Core\Database\Repositories\PostRepositoryInterface',
+                'topic' => 'MyBB\Core\Database\Repositories\TopicRepositoryInterface',
             ]);
         });
     }

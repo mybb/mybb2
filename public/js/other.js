@@ -71,14 +71,21 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
+	$(".topic :checkbox").change(function() {
+		$(this).closest(".topic").toggleClass("highlight", this.checked);
 
 		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
 		{
 			$('.inline-moderation').addClass('floating');
+		}
+
+		if (checked_boxes > 1)
+		{
+			$('li[data-moderation-multi]').show();
+		} else {
+			$('li[data-moderation-multi]').hide();
 		}
 
 		if(checked_boxes == 0)

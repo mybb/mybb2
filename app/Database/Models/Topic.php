@@ -154,7 +154,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface
 	 */
 	public function approve()
 	{
-		return $this->update(['approved' => 0]);
+		return $this->update(['approved' => 1]);
 	}
 
 	/**
@@ -162,6 +162,6 @@ class Topic extends Model implements HasPresenter, ApprovableInterface
 	 */
 	public function unapprove()
 	{
-		return $this->update(['approved' => 1]);
+		return $this->update(['approved' => 0]);
 	}
 }
