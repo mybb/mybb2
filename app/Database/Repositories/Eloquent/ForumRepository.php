@@ -79,14 +79,22 @@ class ForumRepository implements ForumRepositoryInterface
 	/**
 	 * Get the forum tree for the index, consisting of root forums (categories), and one level of descendants.
 	 *
+	 * @param bool $checkPermissions
+	 *
 	 * @return mixed
 	 */
-	public function getIndexTree()
+	public function getIndexTree($checkPermissions = true)
 	{
 		$unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
 		// TODO: The caching decorator would also cache the relations here
-		return $this->forumModel->where('parent_id', '=', null)->whereNotIn('id', $unviewable)->with([
+		$baseQuery = $this->forumModel->where('parent_id', '=', null);
+
+		if ($checkPermissions) {
+			$baseQuery = $baseQuery->whereNotIn('id', $unviewable);
+		}
+
+		return $baseQuery->with([
 			'children',
 			'children.lastPost',
 			'children.lastPost.topic',

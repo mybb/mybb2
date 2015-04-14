@@ -33,26 +33,6 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Core\Services\Registrar'
 		);
 
-		/*
-		 * Disabled at the moment as it still needs some tweaks
-		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
-			function (Application $app)
-			{
-				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
-
-				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
-
-				return new CachingDecorator($repository, $cache);
-			}
-		);
-		*/
-
-		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
-			'MyBB\Core\Database\Repositories\Eloquent\ForumRepository'
-		);
-
 		$this->app->bind(
 			'MyBB\Core\Database\Repositories\PostRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\PostRepository'
@@ -118,12 +98,27 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\MyCode'
 		);
 
-        $this->app->bind(
-            'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
-            'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
-        );
+		$this->app->bind(
+			'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
+			'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
+		);
 
 		$this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
+			function (Application $app) {
+				$repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
+
+				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
+
+				$permissionChecker = $app->make('MyBB\Core\Permissions\PermissionChecker');
+
+				$guard = $app->make('Illuminate\Auth\Guard');
+
+				return new CachingDecorator($repository, $cache, $permissionChecker, $guard);
+			}
+		);
 
 		$this->initDefaultUser();
 
