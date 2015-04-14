@@ -16,7 +16,7 @@
 				<li><a href="{{ url_route('account.following') }}" class="multi-link"><i
 								class="fa fa-plus fa-fw"></i><span class="text">{{ trans('account.following') }}</span></a>
 				</li>
-				<li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments fa-fw"></i><span
+				<li><a href="{{ url_route('conversations.index') }}" class="multi-link"><i class="fa fa-comments fa-fw"></i><span
 								class="text">{{ trans('account.messages') }}</span></a></li>
 				<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out fa-fw"></i><span
 								class="text">{{ trans('member.logout') }}</span></a></li>
@@ -110,7 +110,7 @@
 								<a href="{{ url_route('conversations.read', [conversation.id]) }}"
 								   class="conversation-title">{{ conversation.title }}</a>
 								from <a href="index.php?page=profile"
-										class="message-author">{{ conversation.lastMessage.author.styled_name }}</a>
+										class="message-author">{{ conversation.lastMessage.author.styled_name|raw }}</a>
 								{{ generate_time(conversation.lastMessage.created_at) }}
 							</li>
 						{% endfor %}

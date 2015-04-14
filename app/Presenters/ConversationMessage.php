@@ -24,5 +24,12 @@ class ConversationMessage extends BasePresenter
 		$this->wrappedObject = $resource;
 	}
 
+	public function author()
+	{
+		if($this->wrappedObject->author instanceof User) {
+			return $this->wrappedObject->author;
+		}
 
+		return app()->make('MyBB\Core\Presenters\User', [$this->wrappedObject->author]);
+	}
 }

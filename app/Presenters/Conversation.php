@@ -31,6 +31,15 @@ class Conversation extends BasePresenter
 		$this->dbManager = $dbManager;
 	}
 
+	public function lastMessage()
+	{
+		if($this->wrappedObject->lastMessage instanceof ConversationMessage) {
+			return $this->wrappedObject->lastMessage;
+		}
+
+		return app()->make('MyBB\Core\Presenters\ConversationMessage', [$this->wrappedObject->lastMessage]);
+	}
+
 	public function isUnread(User $user = null)
 	{
 		if ($user == null) {

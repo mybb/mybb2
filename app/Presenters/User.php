@@ -133,7 +133,13 @@ class User extends BasePresenter
 
 	public function unreadConversations()
 	{
-		return $this->conversationRepository->getUnreadForUser($this->wrappedObject);
+		$conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);
+
+		foreach($conversations as $key => $conversation) {
+			$conversations[$key] = app()->make('MyBB\Core\Presenters\Conversation', [$conversation]);
+		}
+
+		return $conversations;
 	}
 
 	/**
