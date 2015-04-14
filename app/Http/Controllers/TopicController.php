@@ -46,7 +46,7 @@ class TopicController extends Controller
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
 	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
 	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param PollRepositoryInterface  $pollRepository Poll repository interface, used to fetch poll details.
+	 * @param PollRepositoryInterface  $pollRepository  Poll repository interface, used to fetch poll details.
 	 * @param Guard                    $guard           Guard implementation
 	 * @param QuoteRenderer            $quoteRenderer
 	 */
@@ -166,12 +166,12 @@ class TopicController extends Controller
 	/**
 	 * @param string  $slug
 	 * @param int     $id
-	 * @param null    $postId
 	 * @param Request $request
+	 * @param null    $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function reply($slug = '', $id = 0, $postId = null, Request $request)
+	public function reply($slug, $id, Request $request, $postId = null)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -370,7 +370,7 @@ class TopicController extends Controller
 			if ($poll) {
 				$poll['topic_id'] = $topic->id;
 				$this->pollRepository->create($poll);
-                $this->topicRepository->setHasPoll($topic, true);
+				$this->topicRepository->setHasPoll($topic, true);
 			}
 
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
