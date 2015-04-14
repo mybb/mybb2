@@ -24,9 +24,11 @@ interface ForumRepositoryInterface
 	/**
 	 * Get the forum tree for the index, consisting of root forums (categories), and one level of descendants.
 	 *
+	 * @param bool $checkPermissions
+	 *
 	 * @return mixed
 	 */
-	public function getIndexTree();
+	public function getIndexTree($checkPermissions = true);
 
 	/**
 	 * Get a single forum by ID.

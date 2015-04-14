@@ -32,6 +32,9 @@ class PermissionChecker
 	/** @var array $unviewableIds */
 	private $unviewableIds;
 
+	/** @var Role $guestRole */
+	private $guestRole;
+
 	/**
 	 * @param CacheRepository $cache
 	 * @param DatabaseManager $db
@@ -139,8 +142,10 @@ class PermissionChecker
 				$roles = [$registeredRole];
 			} else {
 				// Guest
-				$guestRole = Role::where('role_slug', '=', 'guest')->first();
-				$roles = [$guestRole];
+				if($this->guestRole == null) {
+					$this->guestRole = Role::where('role_slug', '=', 'guest')->first();
+				}
+				$roles = [$this->guestRole];
 			}
 		}
 
