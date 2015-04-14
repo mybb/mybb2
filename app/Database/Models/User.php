@@ -113,6 +113,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function conversations()
 	{
 		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation')->withPivot('last_read', 'has_left', 'ignores')

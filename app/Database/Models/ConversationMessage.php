@@ -2,17 +2,21 @@
 
 namespace MyBB\Core\Database\Models;
 
+use Carbon\Carbon;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use MyBB\Auth\Authenticatable;
-use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
-use MyBB\Core\Permissions\Interfaces\PermissionInterface;
-use MyBB\Core\Permissions\Traits\Permissionable;
 
 /**
- * @property string id
+ * @property int          id
+ * @property int          conversation_id
+ * @property int          author_id
+ * @property string       message
+ * @property Carbon       created_at
+ * @property Carbon       updated_at
+ * @property Conversation conversation
+ * @property User         author
  */
 class ConversationMessage extends Model implements HasPresenter
 {
@@ -33,6 +37,11 @@ class ConversationMessage extends Model implements HasPresenter
 		'author_id'
 	];
 
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
 	protected $with = [
 		'author'
 	];
@@ -47,11 +56,17 @@ class ConversationMessage extends Model implements HasPresenter
 		return 'MyBB\Core\Presenters\ConversationMessage';
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function conversation()
 	{
 		return $this->belongsTo('MyBB\Core\Database\Models\Conversation');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function author()
 	{
 		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'author_id');

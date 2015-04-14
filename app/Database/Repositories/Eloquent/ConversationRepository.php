@@ -20,19 +20,28 @@ use MyBB\Core\Permissions\PermissionChecker;
 
 class ConversationRepository implements ConversationRepositoryInterface
 {
+	/** @var Conversation */
 	protected $conversationModel;
 
-	/**
-	 * @var PermissionChecker
-	 */
+	/** @var PermissionChecker */
 	private $permissionChecker;
 
+	/** @var DatabaseManager */
 	private $dbManager;
 
+	/** @var ConversationMessageRepositoryInterface */
 	private $conversationMessageRepository;
 
+	/** @var Guard */
 	private $guard;
 
+	/**
+	 * @param Conversation                           $conversationModel
+	 * @param PermissionChecker                      $permissionChecker
+	 * @param DatabaseManager                        $dbManager
+	 * @param ConversationMessageRepositoryInterface $conversationMessageRepository
+	 * @param Guard                                  $guard
+	 */
 	public function __construct(
 		Conversation $conversationModel,
 		PermissionChecker $permissionChecker,
@@ -47,17 +56,25 @@ class ConversationRepository implements ConversationRepositoryInterface
 		$this->guard = $guard;
 	}
 
-
+	/**
+	 * {@inheritdoc}
+	 */
 	public function all()
 	{
 		return $this->conversationModel->all();
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function find($id = 0)
 	{
 		return $this->conversationModel->find($id);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function getUnreadForUser(User $user)
 	{
 		// TODO: this is a big query, should probably be cached (at least for the request)
@@ -72,11 +89,17 @@ class ConversationRepository implements ConversationRepositoryInterface
 			->get();
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function updateLastRead(Conversation $conversation, User $user)
 	{
 		$conversation->participants()->updateExistingPivot($user->id, ['last_read' => new \DateTime()]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function leaveConversation(Conversation $conversation, User $user)
 	{
 		$conversation->participants()->updateExistingPivot($user->id, ['has_left' => true]);
@@ -84,6 +107,9 @@ class ConversationRepository implements ConversationRepositoryInterface
 		$this->checkForDeletion($conversation);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function ignoreConversation(Conversation $conversation, User $user)
 	{
 		$conversation->participants()->updateExistingPivot($user->id, ['ignores' => true]);
@@ -91,6 +117,9 @@ class ConversationRepository implements ConversationRepositoryInterface
 		$this->checkForDeletion($conversation);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function create($details)
 	{
 		$conversation = null;
@@ -119,6 +148,9 @@ class ConversationRepository implements ConversationRepositoryInterface
 		return $conversation;
 	}
 
+	/**
+	 * @param Conversation $conversation
+	 */
 	private function checkForDeletion(Conversation $conversation)
 	{
 		$participants = $conversation->participants;

@@ -18,10 +18,14 @@ class Conversation extends BasePresenter
 {
 	/** @var ConversationModel $wrappedObject */
 
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
-	 * @param ConversationModel $resource The conversation being wrapped by this presenter.
+	 * @param ConversationModel $resource
+	 * @param Guard             $guard
 	 */
 	public function __construct(ConversationModel $resource, Guard $guard)
 	{
@@ -29,15 +33,23 @@ class Conversation extends BasePresenter
 		$this->guard = $guard;
 	}
 
+	/**
+	 * @return ConversationMessage
+	 */
 	public function lastMessage()
 	{
-		if($this->wrappedObject->lastMessage instanceof ConversationMessage) {
+		if ($this->wrappedObject->lastMessage instanceof ConversationMessage) {
 			return $this->wrappedObject->lastMessage;
 		}
 
 		return app()->make('MyBB\Core\Presenters\ConversationMessage', [$this->wrappedObject->lastMessage]);
 	}
 
+	/**
+	 * @param User $user
+	 *
+	 * @return bool
+	 */
 	public function isUnread(User $user = null)
 	{
 		if ($user == null) {

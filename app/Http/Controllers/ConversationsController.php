@@ -24,18 +24,25 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConversationsController extends Controller
 {
+	/** @var ConversationRepositoryInterface */
 	private $conversationRepository;
 
+	/** @var ConversationMessageRepositoryInterface */
 	private $conversationMessageRepository;
 
+	/** @var Guard */
 	private $guard;
 
 	/**
-	 * @param ConversationRepositoryInterface $conversationRepository
-	 * @param Guard                           $guard
+	 * @param ConversationRepositoryInterface        $conversationRepository
+	 * @param ConversationMessageRepositoryInterface $conversationMessageRepository
+	 * @param Guard                                  $guard
 	 */
-	public function __construct(ConversationRepositoryInterface $conversationRepository, ConversationMessageRepositoryInterface $conversationMessageRepository, Guard $guard)
-	{
+	public function __construct(
+		ConversationRepositoryInterface $conversationRepository,
+		ConversationMessageRepositoryInterface $conversationMessageRepository,
+		Guard $guard
+	) {
 		$this->conversationRepository = $conversationRepository;
 		$this->conversationMessageRepository = $conversationMessageRepository;
 		$this->guard = $guard;
@@ -43,16 +50,27 @@ class ConversationsController extends Controller
 		$guard->user()->load('conversations');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function index()
 	{
 		return view('conversation.index');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function getCompose()
 	{
 		return view('conversation.compose');
 	}
 
+	/**
+	 * @param CreateRequest $request
+	 *
+	 * @return $this|\Illuminate\Http\RedirectResponse
+	 */
 	public function postCompose(CreateRequest $request)
 	{
 		// TODO: Move this to CreateRequest?
@@ -60,10 +78,10 @@ class ConversationsController extends Controller
 		$participants = array_map('trim', $participants);
 
 		$participants_id = array();
-		foreach($participants as $participant) {
+		foreach ($participants as $participant) {
 			$user = User::where('name', $participant)->first();
 
-			if(!$user) {
+			if (!$user) {
 				throw new \RuntimeException('Invalid User');
 			}
 
@@ -85,6 +103,11 @@ class ConversationsController extends Controller
 		]);
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getRead($id)
 	{
 		$conversation = $this->conversationRepository->find($id);
@@ -103,6 +126,12 @@ class ConversationsController extends Controller
 		return view('conversation.show', compact('conversation', 'messages'));
 	}
 
+	/**
+	 * @param              $id
+	 * @param ReplyRequest $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function postReply($id, ReplyRequest $request)
 	{
 		$this->failedValidationRedirect = route('conversations.read', ['id' => $id]);

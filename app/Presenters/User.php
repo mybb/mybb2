@@ -36,16 +36,20 @@ class User extends BasePresenter
 	private $postRepository;
 	/** @var UserRepositoryInterface $userRepository */
 	private $userRepository;
+	/** @var PermissionChecker */
 	private $permissionChecker;
+	/** @var ConversationRepositoryInterface */
 	private $conversationRepository;
 
 	/**
-	 * @param UserModel                $resource The user being wrapped by this presenter.
-	 * @param Router                   $router
-	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PostRepositoryInterface  $postRepository
-	 * @param TopicRepositoryInterface $topicRepository
-	 * @param UserRepositoryInterface  $userRepository
+	 * @param UserModel                       $resource
+	 * @param Router                          $router
+	 * @param ForumRepositoryInterface        $forumRepository
+	 * @param PostRepositoryInterface         $postRepository
+	 * @param TopicRepositoryInterface        $topicRepository
+	 * @param UserRepositoryInterface         $userRepository
+	 * @param PermissionChecker               $permissionChecker
+	 * @param ConversationRepositoryInterface $conversationRepository
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -126,11 +130,19 @@ class User extends BasePresenter
 		return '';
 	}
 
+	/**
+	 * @param $permission
+	 *
+	 * @return bool
+	 */
 	public function hasPermission($permission)
 	{
 		return $this->permissionChecker->hasPermission('user', null, $permission);
 	}
 
+	/**
+	 * @return \Illuminate\Support\Collection
+	 */
 	public function unreadConversations()
 	{
 		$conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);

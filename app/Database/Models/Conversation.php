@@ -4,15 +4,17 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use MyBB\Auth\Authenticatable;
-use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
-use MyBB\Core\Permissions\Interfaces\PermissionInterface;
-use MyBB\Core\Permissions\Traits\Permissionable;
 
 /**
- * @property string id
+ * @property int                 id
+ * @property string              title
+ * @property int|null            last_message_id
+ * @property Collection          messages
+ * @property ConversationMessage lastMessage
+ * @property Collection          participants
  */
 class Conversation extends Model implements HasPresenter
 {
@@ -33,11 +35,21 @@ class Conversation extends Model implements HasPresenter
 		'last_message_id'
 	];
 
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
 	protected $with = [
 		'messages',
 		'lastMessage'
 	];
 
+	/**
+	 * Indicates if the model should be timestamped.
+	 *
+	 * @var bool
+	 */
 	public $timestamps = false;
 
 	/**

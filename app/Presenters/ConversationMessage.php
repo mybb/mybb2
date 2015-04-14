@@ -24,9 +24,12 @@ class ConversationMessage extends BasePresenter
 		$this->wrappedObject = $resource;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function author()
 	{
-		if($this->wrappedObject->author instanceof User) {
+		if ($this->wrappedObject->author instanceof User) {
 			return $this->wrappedObject->author;
 		}
 
