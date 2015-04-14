@@ -13,6 +13,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
@@ -60,7 +61,7 @@ class PostController extends Controller
 		$post = $this->postsRepository->find($request->get('post_id'));
 
 		if (!$post) {
-			throw new NotFoundHttpException();
+			throw new PostNotFoundException;
 		}
 
 		$like = $this->likesRepository->toggleLikeForContent($post);
@@ -97,7 +98,7 @@ class PostController extends Controller
 		$post = $this->postsRepository->find($postId);
 
 		if (!$post) {
-			throw new NotFoundHttpException();
+			throw new PostNotFoundException;
 		}
 
 		$post->load('topic');
