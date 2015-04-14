@@ -32,4 +32,6 @@ interface ConversationMessageRepositoryInterface
 	public function getAllForConversation(Conversation $conversation);
 
 	public function addMessageToConversation(Conversation $conversation, $details);
+
+	public function deleteMessagesFromConversation(Conversation $conversation);
 }

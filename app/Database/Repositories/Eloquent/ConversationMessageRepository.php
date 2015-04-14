@@ -59,4 +59,9 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 
 		return $message;
 	}
+
+	public function deleteMessagesFromConversation(Conversation $conversation)
+	{
+		$this->conversationMessageModel->where('conversation_id', '=', $conversation->id)->delete();
+	}
 }

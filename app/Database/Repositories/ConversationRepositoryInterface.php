@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 
 interface ConversationRepositoryInterface
@@ -32,4 +33,10 @@ interface ConversationRepositoryInterface
 	public function getUnreadForUser(User $user);
 
 	public function create($conversation);
+
+	public function updateLastRead(Conversation $conversation, User $user);
+
+	public function leaveConversation(Conversation $conversation, User $user);
+
+	public function ignoreConversation(Conversation $conversation, User $user);
 }

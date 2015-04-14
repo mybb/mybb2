@@ -11,6 +11,7 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Auth\Guard;
+use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
@@ -73,7 +74,21 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 	public function updateLastRead(Conversation $conversation, User $user)
 	{
-		return $conversation->participants()->updateExistingPivot($user->id, ['last_read' => new \DateTime()]);
+		$conversation->participants()->updateExistingPivot($user->id, ['last_read' => new \DateTime()]);
+	}
+
+	public function leaveConversation(Conversation $conversation, User $user)
+	{
+		$conversation->participants()->updateExistingPivot($user->id, ['has_left' => true]);
+
+		$this->checkForDeletion($conversation);
+	}
+
+	public function ignoreConversation(Conversation $conversation, User $user)
+	{
+		$conversation->participants()->updateExistingPivot($user->id, ['ignores' => true]);
+
+		$this->checkForDeletion($conversation);
 	}
 
 	public function create($details)
@@ -102,5 +117,28 @@ class ConversationRepository implements ConversationRepositoryInterface
 		});
 
 		return $conversation;
+	}
+
+	private function checkForDeletion(Conversation $conversation)
+	{
+		$participants = $conversation->participants;
+
+		/** @var Collection $activeParticipants */
+		$activeParticipants = $participants->whereLoose('pivot.has_left', false)->whereLoose('pivot.ignores', false);
+
+		if ($activeParticipants->count() == 0) {
+			// All participants either ignore or left this conversation so delete everything related to it
+
+			$conversation->update([
+				'last_message_id' => null
+			]);
+
+			// Calling sync with an empty array will delete all records
+			$conversation->participants()->sync([]);
+
+			$this->conversationMessageRepository->deleteMessagesFromConversation($conversation);
+
+			$conversation->delete();
+		}
 	}
 }
