@@ -19,16 +19,14 @@ class Conversation extends BasePresenter
 	/** @var ConversationModel $wrappedObject */
 
 	private $guard;
-	private $dbManager;
 
 	/**
 	 * @param ConversationModel $resource The conversation being wrapped by this presenter.
 	 */
-	public function __construct(ConversationModel $resource, Guard $guard, DatabaseManager $dbManager)
+	public function __construct(ConversationModel $resource, Guard $guard)
 	{
 		$this->wrappedObject = $resource;
 		$this->guard = $guard;
-		$this->dbManager = $dbManager;
 	}
 
 	public function lastMessage()
@@ -46,11 +44,7 @@ class Conversation extends BasePresenter
 			$user = $this->guard->user();
 		}
 
-		// TODO: Check whether it's possible to get one pivot data via the model instead of all (avoid this query which shouldn't be here)
-		$participantData = $this->dbManager->table('conversation_user')
-			->where('conversation_id', $this->wrappedObject->id)
-			->where('user_id', $user->id)
-			->first();
+		$participantData = $this->wrappedObject->participants()->find($user->id);
 
 		if ($participantData->last_read == null) {
 			return true;

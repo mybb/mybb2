@@ -1,0 +1,38 @@
+{% extends "layouts.base" %}
+{% block title %}Conversations{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>{{ conversation.title }}</h1>
+			<p class="description">
+				{% for participant in conversation.participants %}
+					<span class="participant">{{ participant.name }} (Last read: {{ (participant.pivot.last_read is null) ? 'Never' : generate_time(participant.pivot.last_read) }})</span>
+				{% endfor %}
+			</p>
+		</header>
+		<div class="page-controls">
+			<div class="page-buttons">
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
+			</div>
+		</div>
+		<section class="topic">
+			{% for message in messages %}
+				<div class="post">
+					<div class="post__meta">
+
+						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img src="{{ message.author.avatar }}" class="avatar" alt="{{ message.author.name }}'s avatar" /></a>
+						<h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
+						{{ generate_time(message.created_at) }}
+
+					</div>
+					<div class="post__body">
+						<p>
+							{{  message.message }}
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+			{% include 'conversation.quickreply' with {'conversation': conversation} %}
+		</section>
+	</div>
+{% endblock %}

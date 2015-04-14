@@ -50,16 +50,25 @@ class Conversation extends Model implements HasPresenter
 		return 'MyBB\Core\Presenters\Conversation';
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
 	public function messages()
 	{
 		return $this->hasMany('MyBB\Core\Database\Models\ConversationMessage');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
 	public function lastMessage()
 	{
 		return $this->hasOne('MyBB\Core\Database\Models\ConversationMessage', 'id', 'last_message_id');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function participants()
 	{
 		return $this->belongsToMany('MyBB\Core\Database\Models\User')->withPivot('last_read', 'has_left', 'ignores');

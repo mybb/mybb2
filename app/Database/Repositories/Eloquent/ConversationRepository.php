@@ -71,6 +71,11 @@ class ConversationRepository implements ConversationRepositoryInterface
 			->get();
 	}
 
+	public function updateLastRead(Conversation $conversation, User $user)
+	{
+		return $conversation->participants()->updateExistingPivot($user->id, ['last_read' => new \DateTime()]);
+	}
+
 	public function create($details)
 	{
 		$conversation = null;
