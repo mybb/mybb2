@@ -8,6 +8,7 @@ use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -91,7 +92,7 @@ class ForumController extends Controller
 		$forum->load(['children.lastPost', 'children.lastPost.topic', 'children.lastPostAuthor']);
 
 		if (!$forum) {
-			throw new NotFoundHttpException(trans('errors.forum_not_found'));
+			throw new ForumNotFoundException;
 		}
 
 		Breadcrumbs::setCurrentRoute('forums.show', $forum);

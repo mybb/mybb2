@@ -1,10 +1,14 @@
-<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link">
-    {% if includeAvatar %}
-        <img src="{{ user.avatar }}" class="profile-link__avatar" />
-    {% endif %}
-    {% if useStyledName %}
-        {{ user.styled_name|raw }}
-    {% else %}
-        {{ user.name }}
-    {% endif %}
-</a>
+{% if user.id > 0 %}
+	<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link">
+{% endif %}
+	{% if includeAvatar %}
+		<img src="{{ user.avatar }}" class="profile-link__avatar"/>
+	{% endif %}
+	{% if useStyledName %}
+		{{ user.styled_name|raw }}
+	{% else %}
+		{{ user.name }}
+	{% endif %}
+{% if user.id > 0 %}
+	</a>
+{% endif %}
