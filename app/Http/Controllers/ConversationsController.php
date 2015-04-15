@@ -89,6 +89,7 @@ class ConversationsController extends Controller
 			$participants_id[] = $user->id;
 		}
 
+		// TODO: handle exception
 		$conversation = $this->conversationRepository->create([
 			'title' => $request->input('title'),
 			'message' => $request->input('message'),

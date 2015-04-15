@@ -16,6 +16,7 @@ use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
+use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
 use MyBB\Core\Permissions\PermissionChecker;
 
 class ConversationRepository implements ConversationRepositoryInterface
@@ -78,16 +79,28 @@ class ConversationRepository implements ConversationRepositoryInterface
 	public function getUnreadForUser(User $user)
 	{
 		// TODO: this is a big query, should probably be cached (at least for the request)
-		return $this->conversationModel
+		/** @var Collection $conversations */
+		$conversations = $this->conversationModel
 			->join('conversation_user', function ($join) use ($user) {
 				$join->on('conversation_user.conversation_id', '=', 'conversations.id');
 				$join->where('conversation_user.user_id', '=', $user->id);
 			})
 			->join('conversations_messages', 'conversations_messages.id', '=', 'conversations.last_message_id')
-			->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
-			->orWhere('conversation_user.last_read', null)
+//			->where(function ($query) {
+//				$query->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
+//					->orWhere('conversation_user.last_read', null);
+//			})
+			->where('conversation_user.ignores', false)
 			->orderBy('conversations_messages.created_at', 'desc')
-			->get();
+			->get(['conversations.*', 'conversations_messages.created_at', 'conversation_user.last_read']);
+
+		return $conversations->filter(function($conversation) {
+			if($conversation->last_read == null) {
+				return true;
+			}
+
+			return $conversation->created_at > $conversation->last_read;
+		});
 	}
 
 	/**
@@ -124,6 +137,13 @@ class ConversationRepository implements ConversationRepositoryInterface
 	public function create($details)
 	{
 		$conversation = null;
+
+		// Filter bad participants - doing this here so plugins don't throw SQL errors
+		$details['participants'] = array_unique($details['participants']);
+
+		if(in_array($this->guard->user()->id, $details['participants'])) {
+			throw new ConversationCantSendToSelfException;
+		}
 
 		$this->dbManager->transaction(function () use ($details, &$conversation) {
 			$conversation = $this->conversationModel->create([
