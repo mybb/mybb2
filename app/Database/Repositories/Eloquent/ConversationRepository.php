@@ -86,6 +86,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 			->join('conversations_messages', 'conversations_messages.id', '=', 'conversations.last_message_id')
 			->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
 			->orWhere('conversation_user.last_read', null)
+			->orderBy('conversations_messages.created_at', 'desc')
 			->get();
 	}
 
@@ -132,7 +133,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 			$message = $this->conversationMessageRepository->addMessageToConversation($conversation, [
 				'author_id' => $this->guard->user()->id,
 				'message' => $details['message']
-			]);
+			], false);
 
 			// First add the author of this message - if he answered it he also read the conversation
 			$conversation->participants()->attach($this->guard->user()->id, ['last_read' => new \DateTime()]);

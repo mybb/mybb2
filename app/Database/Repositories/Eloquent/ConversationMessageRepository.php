@@ -61,7 +61,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	/**
 	 * {@inheritdoc}
 	 */
-	public function addMessageToConversation(Conversation $conversation, $details)
+	public function addMessageToConversation(Conversation $conversation, $details, $checkParticipants = true)
 	{
 		$message = $conversation->messages()->create($details);
 
@@ -69,6 +69,10 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 			$conversation->update([
 				'last_message_id' => $message->id
 			]);
+
+			if($checkParticipants) {
+				$conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
+			}
 		}
 
 		return $message;

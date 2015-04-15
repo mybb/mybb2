@@ -6,12 +6,14 @@
 			<h1>{{ conversation.title }}</h1>
 			<p class="description">
 				{% for participant in conversation.participants %}
-					<span class="participant">{{ participant.name }} (Last read: {{ (participant.pivot.last_read is null) ? 'Never' : generate_time(participant.pivot.last_read) }})</span>
+					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ participant.name }} (Last read: {{ (participant.pivot.last_read is null) ? 'Never' : generate_time(participant.pivot.last_read) }})</span>
 				{% endfor %}
 			</p>
 		</header>
 		<div class="page-controls">
 			<div class="page-buttons">
+                <a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Add Participant</span></a>
+                <a href="{{ url_route('conversations.leave', [conversation.id]) }}" class="button button--secondary" data-modal="conversations/read/{{ conversation.id }}/leave"><i class="fa fa-sign-out"></i><span class="text">Leave</span></a>
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</div>

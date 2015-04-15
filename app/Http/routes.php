@@ -120,5 +120,7 @@ Route::group([
 	Route::post('/compose', ['as' => 'conversations.compose', 'uses' => 'ConversationsController@postCompose']);
 	Route::get('/read/{id}', ['as' => 'conversations.read', 'uses' => 'ConversationsController@getRead']);
 	Route::post('/read/{id}/reply', ['as' => 'conversations.reply', 'uses' => 'ConversationsController@postReply']);
+	Route::get('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@getLeave']);
+	Route::post('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@postLeave']);
 	Route::post('/read/{id}/newRecipient', ['as' => 'conversations.newRecipient', 'uses' => 'ConversationsController@postNewRecipient']);
 });

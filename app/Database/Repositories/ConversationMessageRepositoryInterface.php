@@ -44,7 +44,7 @@ interface ConversationMessageRepositoryInterface
 	 *
 	 * @return ConversationMessage
 	 */
-	public function addMessageToConversation(Conversation $conversation, $details);
+	public function addMessageToConversation(Conversation $conversation, $details, $checkParticipants = true);
 
 	/**
 	 * @param Conversation $conversation

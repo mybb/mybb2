@@ -51,14 +51,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'num_likes_made' => 'int',
-    ];
+	/**
+	 * The attributes that should be casted to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'num_likes_made' => 'int',
+	];
 
 	/**
 	 * Cache variable for the display role
@@ -118,7 +118,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function conversations()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation')->withPivot('last_read', 'has_left', 'ignores')
-			->orderBy('last_message_id', 'desc');
+		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation')->withPivot('last_read', 'has_left',
+			'ignores')
+			->orderBy('last_message_id', 'desc')
+			->where('conversation_user.has_left', false)
+			->where('conversation_user.ignores', false);
 	}
 }

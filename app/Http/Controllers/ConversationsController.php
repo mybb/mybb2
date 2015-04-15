@@ -13,6 +13,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
@@ -136,7 +137,7 @@ class ConversationsController extends Controller
 	{
 		$this->failedValidationRedirect = route('conversations.read', ['id' => $id]);
 
-		/** @var Conversation $topic */
+		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
 		if (!$conversation) {
@@ -155,6 +156,36 @@ class ConversationsController extends Controller
 		return redirect()->route('conversations.read', ['id' => $conversation->id])->withInput()->withErrors([
 			'content' => 'Error'
 		]);
+	}
+
+	public function getLeave($id)
+	{
+		/** @var Conversation $conversation */
+		$conversation = $this->conversationRepository->find($id);
+
+		if (!$conversation) {
+			throw new ConversationNotFoundException;
+		}
+
+		return view('conversation.leave', compact('conversation'));
+	}
+
+	public function postLeave($id, Request $request)
+	{
+		/** @var Conversation $conversation */
+		$conversation = $this->conversationRepository->find($id);
+
+		if (!$conversation) {
+			throw new ConversationNotFoundException;
+		}
+
+		if ($request->input('leave') == 'leave') {
+			$this->conversationRepository->leaveConversation($conversation, $this->guard->user());
+		} else {
+			$this->conversationRepository->ignoreConversation($conversation, $this->guard->user());
+		}
+
+		return redirect()->route('conversations.index')->withSuccess('Conversation left');
 	}
 
 	public function postNewRecipient($id)
