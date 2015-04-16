@@ -3922,7 +3922,7 @@ section.container .forum-list {
       .post .post__controls li a, .post .post__controls li button {
         color: #666;
         padding: 0 5px;
-        background-color: #fff;
+        background-color: transparent;
         border: none; }
         .post .post__controls li a:hover, .post .post__controls li a:active, .post .post__controls li button:hover, .post .post__controls li button:active {
           color: #ff7500;
