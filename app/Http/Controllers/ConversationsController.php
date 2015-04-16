@@ -189,8 +189,25 @@ class ConversationsController extends Controller
 		return redirect()->route('conversations.index')->withSuccess('Conversation left');
 	}
 
-	public function postNewRecipient($id)
+	public function getNewParticipant($id)
 	{
+		/** @var Conversation $conversation */
+		$conversation = $this->conversationRepository->find($id);
 
+		if (!$conversation) {
+			throw new ConversationNotFoundException;
+		}
+
+		return view('conversation.new_participant', compact('conversation'));
+	}
+
+	public function postNewParticipant($id)
+	{
+		/** @var Conversation $conversation */
+		$conversation = $this->conversationRepository->find($id);
+
+		if (!$conversation) {
+			throw new ConversationNotFoundException;
+		}
 	}
 }

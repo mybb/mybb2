@@ -12,6 +12,8 @@ namespace MyBB\Core\Database\Repositories;
 use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
+use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
 
 interface ConversationRepositoryInterface
 {
@@ -44,6 +46,17 @@ interface ConversationRepositoryInterface
 	 * @return Conversation
 	 */
 	public function create($conversation);
+
+	/**
+	 * @param Conversation $conversation
+	 * @param array|int $participants
+	 *
+	 * @return void
+	 *
+	 * @throws ConversationCantSendToSelfException
+	 * @throws ConversationAlreadyParticipantException
+	 */
+	public function addParticipants(Conversation $conversation, $participants);
 
 	/**
 	 * @param Conversation $conversation

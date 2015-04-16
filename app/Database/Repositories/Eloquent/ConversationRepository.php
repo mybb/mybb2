@@ -16,6 +16,7 @@ use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
+use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
 use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
 use MyBB\Core\Permissions\PermissionChecker;
 
@@ -94,8 +95,8 @@ class ConversationRepository implements ConversationRepositoryInterface
 			->orderBy('conversations_messages.created_at', 'desc')
 			->get(['conversations.*', 'conversations_messages.created_at', 'conversation_user.last_read']);
 
-		return $conversations->filter(function($conversation) {
-			if($conversation->last_read == null) {
+		return $conversations->filter(function ($conversation) {
+			if ($conversation->last_read == null) {
 				return true;
 			}
 
@@ -138,19 +139,12 @@ class ConversationRepository implements ConversationRepositoryInterface
 	{
 		$conversation = null;
 
-		// Filter bad participants - doing this here so plugins don't throw SQL errors
-		$details['participants'] = array_unique($details['participants']);
-
-		if(in_array($this->guard->user()->id, $details['participants'])) {
-			throw new ConversationCantSendToSelfException;
-		}
-
 		$this->dbManager->transaction(function () use ($details, &$conversation) {
 			$conversation = $this->conversationModel->create([
 				'title' => $details['title']
 			]);
 
-			$message = $this->conversationMessageRepository->addMessageToConversation($conversation, [
+			$this->conversationMessageRepository->addMessageToConversation($conversation, [
 				'author_id' => $this->guard->user()->id,
 				'message' => $details['message']
 			], false);
@@ -159,10 +153,33 @@ class ConversationRepository implements ConversationRepositoryInterface
 			$conversation->participants()->attach($this->guard->user()->id, ['last_read' => new \DateTime()]);
 
 			// And now add all other participants
-			$conversation->participants()->attach($details['participants']);
+			$this->addParticipants($conversation, $details['participants']);
 		});
 
 		return $conversation;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function addParticipants(Conversation $conversation, $participants)
+	{
+		if (!is_array($participants)) {
+			$participants = array((int)$participants);
+		}
+
+		// Filter bad participants - doing this here so plugins don't throw SQL errors
+		$participants = array_unique($participants);
+
+		if (in_array($this->guard->user()->id, $participants)) {
+			throw new ConversationCantSendToSelfException;
+		}
+
+		if(!$conversation->participants->diff($participants)->isEmpty()) {
+			throw new ConversationAlreadyParticipantException;
+		}
+
+		$conversation->participants()->attach($participants);
 	}
 
 	/**
