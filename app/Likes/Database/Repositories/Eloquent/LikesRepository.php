@@ -15,7 +15,7 @@ namespace MyBB\Core\Likes\Database\Repositories\Eloquent;
 use Illuminate\Database\Eloquent\Model;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Likes\Database\Models\Like As LikeModel;
+use MyBB\Core\Likes\Database\Models\Like as LikeModel;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
@@ -65,7 +65,11 @@ class LikesRepository implements LikesRepositoryInterface
      */
     public function getAllLikesForContentPaginated(Model $content, $perPage = 10)
     {
-        return $this->likesModel->where('content_id', '=', $content->id)->where('content_type', '=', get_class($content))->paginate($perPage);
+        return $this->likesModel->where('content_id', '=', $content->id)->where(
+            'content_type',
+            '=',
+            get_class($content)
+        )->paginate($perPage);
     }
 
     /**
@@ -79,8 +83,8 @@ class LikesRepository implements LikesRepositoryInterface
     {
         if (($user = $this->guard->user()) !== null) {
             $existingLike = $this->likesModel->where('user_id', '=', $user->getAuthIdentifier())
-                ->where('content_id', '=', $content->id)
-                ->where('content_type', '=', get_class($content))->first();
+                                             ->where('content_id', '=', $content->id)
+                                             ->where('content_type', '=', get_class($content))->first();
 
             if ($existingLike !== null) {
                 $existingLike->delete();
@@ -88,9 +92,11 @@ class LikesRepository implements LikesRepositoryInterface
                 $user->decrement('num_likes_made');
                 $content->decrementNumLikes();
             } else {
-                $newLike = $content->likes()->create(
+                $newLike = $this->likesModel->create(
                     [
-                        'user_id' => $user->getAuthIdentifier(),
+                        'user_id'      => $user->getAuthIdentifier(),
+                        'content_type' => get_class($content),
+                        'content_id'   => $content->getKey(),
                     ]
                 );
 
@@ -102,6 +108,19 @@ class LikesRepository implements LikesRepositoryInterface
         }
 
         return null;
+    }
+
+    /**
+     * Get all of the likes for a set of entries of a specific content type.
+     *
+     * @param Model $contentType The type of the content to get all of the likes for.
+     * @param array $ids         An array of IDs of the entries to get the likes for.
+     *
+     * @return mixed
+     */
+    public function getAllLikesForContents(Model $contentType, array $ids)
+    {
+        return $this->likesModel->where('content_type', '=', get_class($contentType))->whereIn('content_id', $ids);
     }
 
     /**
@@ -118,18 +137,5 @@ class LikesRepository implements LikesRepositoryInterface
         }
 
         return (int) $user;
-    }
-
-    /**
-     * Get all of the likes for a set of entries of a specific content type.
-     *
-     * @param Model $contentType The type of the content to get all of the likes for.
-     * @param array $ids         An array of IDs of the entries to get the likes for.
-     *
-     * @return mixed
-     */
-    public function getAllLikesForContents(Model $contentType, array $ids)
-    {
-        return $this->likesModel->where('content_type', '=', get_class($contentType))->whereIn('content_id', $ids);
     }
 }
