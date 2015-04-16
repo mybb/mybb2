@@ -12,8 +12,8 @@
 		</header>
 		<div class="page-controls">
 			<div class="page-buttons">
-                <a href="{{ url_route('conversations.newParticipant') }}" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Add Participant</span></a>
-                <a href="{{ url_route('conversations.leave', [conversation.id]) }}" data-modal="conversations/read/{{ conversation.id }}/leave" class="button button--secondary"><i class="fa fa-sign-out"></i><span class="text">Leave</span></a>
+                <a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }} class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Add Participant</span></a>
+                <a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary"><i class="fa fa-sign-out"></i><span class="text">Leave</span></a>
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">Post Reply</span></a>
 			</div>
 		</div>

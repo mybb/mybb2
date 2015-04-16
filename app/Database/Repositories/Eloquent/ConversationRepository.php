@@ -175,7 +175,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 			throw new ConversationCantSendToSelfException;
 		}
 
-		if(!$conversation->participants->diff($participants)->isEmpty()) {
+		if(count(array_intersect($conversation->participants->modelKeys(), $participants)) > 0) {
 			throw new ConversationAlreadyParticipantException;
 		}
 

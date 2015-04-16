@@ -18,8 +18,11 @@ use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
+use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
+use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
 use MyBB\Core\Exceptions\ConversationNotFoundException;
 use MyBB\Core\Http\Requests\Conversations\CreateRequest;
+use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -89,12 +92,17 @@ class ConversationsController extends Controller
 			$participants_id[] = $user->id;
 		}
 
-		// TODO: handle exception
-		$conversation = $this->conversationRepository->create([
-			'title' => $request->input('title'),
-			'message' => $request->input('message'),
-			'participants' => $participants_id
-		]);
+		try {
+			$conversation = $this->conversationRepository->create([
+				'title' => $request->input('title'),
+				'message' => $request->input('message'),
+				'participants' => $participants_id
+			]);
+		} catch (ConversationCantSendToSelfException $exception) {
+			return redirect()->route('conversations.compose')->withInput()->withErrors([
+				'participants' => $exception->getMessage()
+			]);
+		}
 
 		if ($conversation) {
 			return redirect()->route('conversations.read', ['id' => $conversation->id]);
@@ -159,6 +167,11 @@ class ConversationsController extends Controller
 		]);
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getLeave($id)
 	{
 		/** @var Conversation $conversation */
@@ -171,6 +184,12 @@ class ConversationsController extends Controller
 		return view('conversation.leave', compact('conversation'));
 	}
 
+	/**
+	 * @param         $id
+	 * @param Request $request
+	 *
+	 * @return mixed
+	 */
 	public function postLeave($id, Request $request)
 	{
 		/** @var Conversation $conversation */
@@ -189,6 +208,11 @@ class ConversationsController extends Controller
 		return redirect()->route('conversations.index')->withSuccess('Conversation left');
 	}
 
+	/**
+	 * @param $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function getNewParticipant($id)
 	{
 		/** @var Conversation $conversation */
@@ -201,7 +225,13 @@ class ConversationsController extends Controller
 		return view('conversation.new_participant', compact('conversation'));
 	}
 
-	public function postNewParticipant($id)
+	/**
+	 * @param                    $id
+	 * @param ParticipantRequest $request
+	 *
+	 * @return mixed
+	 */
+	public function postNewParticipant($id, ParticipantRequest $request)
 	{
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
@@ -209,5 +239,34 @@ class ConversationsController extends Controller
 		if (!$conversation) {
 			throw new ConversationNotFoundException;
 		}
+
+		// TODO: Move this to a ParticipantRequest?
+		$participants = explode(',', $request->input('participants'));
+		$participants = array_map('trim', $participants);
+
+		$participants_id = array();
+		foreach ($participants as $participant) {
+			$user = User::where('name', $participant)->first();
+
+			if (!$user) {
+				throw new \RuntimeException('Invalid User');
+			}
+
+			$participants_id[] = $user->id;
+		}
+
+		try {
+			$this->conversationRepository->addParticipants($conversation, $participants_id);
+		} catch (ConversationCantSendToSelfException $exception) {
+			return redirect()->route('conversations.newParticipant', ['id' => $conversation->id])->withInput()->withErrors([
+				'participants' => $exception->getMessage()
+			]);
+		} catch (ConversationAlreadyParticipantException $exception) {
+			return redirect()->route('conversations.newParticipant', ['id' => $conversation->id])->withInput()->withErrors([
+				'participants' => $exception->getMessage()
+			]);
+		}
+
+		return redirect()->route('conversations.read', ['id' => $conversation->id])->withSuccess('Added participants');
 	}
 }
