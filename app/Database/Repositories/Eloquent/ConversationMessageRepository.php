@@ -12,15 +12,23 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Parser\MessageFormatter;
 
 class ConversationMessageRepository implements ConversationMessageRepositoryInterface
 {
 	/** @var ConversationMessage */
 	protected $conversationMessageModel;
 
+	/** @var UserRepositoryInterface */
+	private $userRepository;
+
 	/** @var PermissionChecker */
 	private $permissionChecker;
+
+	/** @var MessageFormatter */
+	private $messageFormatter;
 
 	/**
 	 * @param ConversationMessage $conversationMessageModel
@@ -28,10 +36,14 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	 */
 	public function __construct(
 		ConversationMessage $conversationMessageModel,
-		PermissionChecker $permissionChecker
+		PermissionChecker $permissionChecker,
+		UserRepositoryInterface $userRepository,
+		MessageFormatter $messageFormatter
 	) {
 		$this->conversationMessageModel = $conversationMessageModel;
 		$this->permissionChecker = $permissionChecker;
+		$this->userRepository = $userRepository;
+		$this->messageFormatter = $messageFormatter;
 	}
 
 	/**
@@ -63,6 +75,10 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	 */
 	public function addMessageToConversation(Conversation $conversation, $details, $checkParticipants = true)
 	{
+		$details['message_parsed'] = $this->messageFormatter->parse($details['message'], [
+			MessageFormatter::ME_USERNAME => $this->userRepository->find($details['author_id'])->name,
+		]); // TODO: Parser options...
+
 		$message = $conversation->messages()->create($details);
 
 		if ($message) {

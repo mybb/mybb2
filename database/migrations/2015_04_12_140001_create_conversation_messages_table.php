@@ -17,6 +17,7 @@ class CreateConversationMessagesTable extends Migration {
 			$table->unsignedInteger('conversation_id');
 			$table->unsignedInteger('author_id');
 			$table->text('message');
+			$table->text('message_parsed');
 			$table->nullableTimestamps();
 
 			$table->foreign('conversation_id')->references('id')->on('conversations');
