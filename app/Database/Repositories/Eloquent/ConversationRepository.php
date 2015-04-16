@@ -160,10 +160,6 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 			// And now add all other participants
 			$conversation->participants()->attach($details['participants']);
-
-			$conversation->update([
-				'last_message_id' => $message->id
-			]);
 		});
 
 		return $conversation;
