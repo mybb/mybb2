@@ -80,9 +80,9 @@
 	</li>
 	{% if setting('conversations.enabled') and auth_user.hasPermission('canUseConversations') %}
 		<li class="user-navigation__messages dropit-link">
-			<a href="index.php?page=messages" class="multi-link">
+			<a href="{{ url_route('conversations.index') }}" class="multi-link">
 				<i class="fa fa-comments"></i>
-				<span class="text">Messages</span>
+				<span class="text">{{ trans('conversations.messages') }}</span>
 				{% if auth_user.unreadConversations.count > 0 %}
 					<span class="unread-count">{{ auth_user.unreadConversations.count }}</span>
 				{% endif %}
@@ -94,10 +94,10 @@
 				<div class="messages-container">
 					<h2>
 						<a href="{{ url_route('conversations.index') }}">
-							<span class="text">Unread Messages</span>
+							<span class="text">{{ trans('conversations.unread') }}</span>
 						</a>
-						<a href="{{ url_route('conversations.compose') }}" title="Compose New Message" class="option"><i
-									class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
+						<a href="{{ url_route('conversations.compose') }}" title="{{ trans('conversations.compose') }}" class="option"><i
+									class="fa fa-pencil-square-o"></i><span class="text">{{ trans('general.new') }}</span></a>
 					</h2>
 					<ul class="messages">
 						{% for conversation in auth_user.unreadConversations %}
@@ -108,17 +108,17 @@
 											class="avatar"/></a>
 								<a href="{{ url_route('conversations.read', [conversation.id]) }}"
 								   class="conversation-title">{{ conversation.title }}</a>
-								from <a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
+								{{ trans('general.from') }} <a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
 										class="message-author">{{ conversation.lastMessage.author.styled_name|raw }}</a>
 								{{ generate_time(conversation.lastMessage.created_at) }}
 							</li>
 						{% else %}
 							<li>
-								No unread messages
+								{{ trans('conversations.no_unread') }}
 							</li>
 						{% endfor %}
 						<li class="view-all">
-							<a href="{{ url_route('conversations.index') }}"><span class="text">View All Messages</span></a>
+							<a href="{{ url_route('conversations.index') }}"><span class="text">{{ trans('conversations.view_all') }}</span></a>
 						</li>
 					</ul>
 				</div>

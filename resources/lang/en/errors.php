@@ -24,4 +24,7 @@ return [
 	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid',
 	'inline_error' => 'Whoops! There were some problems with your input.',
 	'captcha_invalid_class' => "Failed to load Captcha Class ':class'",
+	'conversation_already_participant' => 'One or more participants already participate in this conversations',
+	'conversation_cant_send_to_self' => 'You can\'t add yourself as participant',
+	'conversation_not_found' => 'Sorry, the specified conversation could not be found.'
 ];
