@@ -12,8 +12,12 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
-class Topic extends Model implements HasPresenter
+/**
+ * @property int id
+ */
+class Topic extends Model implements HasPresenter, ApprovableInterface
 {
 	use SoftDeletes;
 	/**
@@ -47,6 +51,13 @@ class Topic extends Model implements HasPresenter
 	 * @var array
 	 */
 	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.
@@ -128,5 +139,21 @@ class Topic extends Model implements HasPresenter
 	public function lastPost()
 	{
 		return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function approve()
+	{
+		return $this->update(['approved' => 0]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function unapprove()
+	{
+		return $this->update(['approved' => 1]);
 	}
 }

@@ -9,20 +9,30 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Support\Collection;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Moderation\ModerationRegistry;
 
 class Topic extends BasePresenter
 {
 	/** @var TopicModel $wrappedObject */
 
 	/**
-	 * @param TopicModel $resource The thread being wrapped by this presenter.
+	 * @var ModerationRegistry
 	 */
-	public function __construct(TopicModel $resource)
+	protected $moderations;
+
+	/**
+	 * @param TopicModel $resource The thread being wrapped by this presenter.
+	 * @param ModerationRegistry $moderations
+	 */
+	public function __construct(TopicModel $resource, ModerationRegistry $moderations)
 	{
 		$this->wrappedObject = $resource;
+		$this->moderations = $moderations;
 	}
 
 	public function replies()
@@ -50,5 +60,21 @@ class Topic extends BasePresenter
 		}
 
 		return $this->wrappedObject->author;
+	}
+
+	/**
+	 * @return \MyBB\Core\Moderation\ModerationInterface[]
+	 */
+	public function moderations()
+	{
+		$moderations = $this->moderations->getForContent(new Post());
+		$decorated = [];
+		$presenter = app()->make('autopresenter');
+
+		foreach ($moderations as $moderation) {
+			$decorated[] = $presenter->decorate($moderation);
+		}
+
+		return $decorated;
 	}
 }
