@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
@@ -20,7 +20,7 @@ interface ConversationRepositoryInterface
 	/**
 	 * Get all conversations.
 	 *
-	 * @return mixed
+	 * @return Collection
 	 */
 	public function all();
 

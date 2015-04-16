@@ -18,17 +18,12 @@ class ParticipantRequest extends Request
 	/** @var Guard $guard */
 	private $guard;
 
-	/** @var PermissionChecker $permissionChecker */
-	private $permissionChecker;
-
 	/**
-	 * @param Guard             $guard
-	 * @param PermissionChecker $permissionChecker
+	 * @param Guard $guard
 	 */
-	public function __construct(Guard $guard, PermissionChecker $permissionChecker)
+	public function __construct(Guard $guard)
 	{
 		$this->guard = $guard;
-		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**

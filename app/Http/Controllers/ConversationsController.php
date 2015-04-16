@@ -74,7 +74,7 @@ class ConversationsController extends Controller
 	/**
 	 * @param CreateRequest $request
 	 *
-	 * @return $this|\Illuminate\Http\RedirectResponse
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postCompose(CreateRequest $request)
 	{
@@ -193,7 +193,7 @@ class ConversationsController extends Controller
 	 * @param         $id
 	 * @param Request $request
 	 *
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postLeave($id, Request $request)
 	{
@@ -236,7 +236,7 @@ class ConversationsController extends Controller
 	 * @param                    $id
 	 * @param ParticipantRequest $request
 	 *
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function postNewParticipant($id, ParticipantRequest $request)
 	{

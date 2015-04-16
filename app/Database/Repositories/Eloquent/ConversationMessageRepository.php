@@ -9,11 +9,10 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Models\Conversation;
+use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
-use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Parser\MessageFormatter;
 
 class ConversationMessageRepository implements ConversationMessageRepositoryInterface
@@ -24,24 +23,20 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	/** @var UserRepositoryInterface */
 	private $userRepository;
 
-	/** @var PermissionChecker */
-	private $permissionChecker;
-
 	/** @var MessageFormatter */
 	private $messageFormatter;
 
 	/**
-	 * @param ConversationMessage $conversationMessageModel
-	 * @param PermissionChecker   $permissionChecker
+	 * @param ConversationMessage     $conversationMessageModel
+	 * @param UserRepositoryInterface $userRepository
+	 * @param MessageFormatter        $messageFormatter
 	 */
 	public function __construct(
 		ConversationMessage $conversationMessageModel,
-		PermissionChecker $permissionChecker,
 		UserRepositoryInterface $userRepository,
 		MessageFormatter $messageFormatter
 	) {
 		$this->conversationMessageModel = $conversationMessageModel;
-		$this->permissionChecker = $permissionChecker;
 		$this->userRepository = $userRepository;
 		$this->messageFormatter = $messageFormatter;
 	}
@@ -86,7 +81,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 				'last_message_id' => $message->id
 			]);
 
-			if($checkParticipants) {
+			if ($checkParticipants) {
 				$conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
 			}
 		}

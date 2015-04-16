@@ -18,15 +18,11 @@ use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
 use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
-use MyBB\Core\Permissions\PermissionChecker;
 
 class ConversationRepository implements ConversationRepositoryInterface
 {
 	/** @var Conversation */
 	protected $conversationModel;
-
-	/** @var PermissionChecker */
-	private $permissionChecker;
 
 	/** @var DatabaseManager */
 	private $dbManager;
@@ -39,20 +35,17 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 	/**
 	 * @param Conversation                           $conversationModel
-	 * @param PermissionChecker                      $permissionChecker
 	 * @param DatabaseManager                        $dbManager
 	 * @param ConversationMessageRepositoryInterface $conversationMessageRepository
 	 * @param Guard                                  $guard
 	 */
 	public function __construct(
 		Conversation $conversationModel,
-		PermissionChecker $permissionChecker,
 		DatabaseManager $dbManager,
 		ConversationMessageRepositoryInterface $conversationMessageRepository,
 		Guard $guard
 	) {
 		$this->conversationModel = $conversationModel;
-		$this->permissionChecker = $permissionChecker;
 		$this->dbManager = $dbManager;
 		$this->conversationMessageRepository = $conversationMessageRepository;
 		$this->guard = $guard;
@@ -175,7 +168,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 			throw new ConversationCantSendToSelfException;
 		}
 
-		if(count(array_intersect($conversation->participants->modelKeys(), $participants)) > 0) {
+		if (count(array_intersect($conversation->participants->modelKeys(), $participants)) > 0) {
 			throw new ConversationAlreadyParticipantException;
 		}
 

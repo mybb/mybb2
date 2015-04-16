@@ -3,8 +3,6 @@
 namespace MyBB\Core\Database\Models;
 
 use Carbon\Carbon;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 

@@ -20,6 +20,7 @@ class ReplyRequest extends Request
 	 * @var string
 	 */
 	protected $redirectRoute = 'conversations.read';
+
 	/** @var Guard $guard */
 	private $guard;
 

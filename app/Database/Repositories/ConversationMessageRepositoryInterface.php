@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
 
