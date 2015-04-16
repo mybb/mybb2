@@ -185,3 +185,33 @@ Breadcrumbs::register('search.results', function ($breadcrumbs, $searchlog)
 	$breadcrumbs->parent('search');
 	$breadcrumbs->push(trans('search.resultsforx', ['keyword' => $searchlog->keywords]), route('search.results', ['id' => $searchlog->id]));
 });
+
+Breadcrumbs::register('conversations.index', function ($breadcrumbs)
+{
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push('Conversations', route('conversations.index'));
+});
+
+Breadcrumbs::register('conversations.compose', function ($breadcrumbs)
+{
+	$breadcrumbs->parent('conversations.index');
+	$breadcrumbs->push('Compose new Conversation', route('conversations.compose'));
+});
+
+Breadcrumbs::register('conversations.read', function ($breadcrumbs, $conversation)
+{
+	$breadcrumbs->parent('conversations.index');
+	$breadcrumbs->push($conversation->title, route('conversations.read', ['id' => $conversation->id]));
+});
+
+Breadcrumbs::register('conversations.leave', function ($breadcrumbs, $conversation)
+{
+	$breadcrumbs->parent('conversations.read', $conversation);
+	$breadcrumbs->push('Leaving', route('conversations.leave', ['id' => $conversation->id]));
+});
+
+Breadcrumbs::register('conversations.newParticipant', function ($breadcrumbs, $conversation)
+{
+	$breadcrumbs->parent('conversations.read', $conversation);
+	$breadcrumbs->push('Add Participant', route('conversations.newParticipant', ['id' => $conversation->id]));
+});

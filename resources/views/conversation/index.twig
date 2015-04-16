@@ -9,7 +9,11 @@
 				</p>
 			</header>
 
-			<a href="{{ url_route('conversations.compose') }}" class="conversations-compose-link"><span class="text">Compose</span></a>
+			<div class="page-controls">
+				<div class="page-buttons">
+					<a href="{{ url_route('conversations.compose') }}" class="button button--secondary"><i class="fa fa-pencil-square-o"></i><span class="text">Compose</span></a>
+				</div>
+			</div>
 
 			<section>
 				<div class="header">
@@ -24,7 +28,7 @@
 							{% endif %}
 							<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
 						</div>
-						<div class="last-message">by {{ conversation.lastMessage.author.name }} {{ human_date(conversation.lastMessage.created_at) }}</div>
+						<div class="last-message">by {{ render_profile_link(conversation.lastMessage.author) }} {{ generate_time(conversation.lastMessage.created_at) }}</div>
 					</div>
 				{% else %}
 					<div class="no-message">

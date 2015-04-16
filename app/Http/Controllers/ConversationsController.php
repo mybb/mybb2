@@ -12,6 +12,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
@@ -126,6 +127,8 @@ class ConversationsController extends Controller
 			throw new ConversationNotFoundException;
 		}
 
+		Breadcrumbs::setCurrentRoute('conversations.read', $conversation);
+
 		$this->conversationRepository->updateLastRead($conversation, $this->guard->user());
 
 		// Load the participants here as we're changing them above and we want to avoid caching issues
@@ -181,6 +184,8 @@ class ConversationsController extends Controller
 			throw new ConversationNotFoundException;
 		}
 
+		Breadcrumbs::setCurrentRoute('conversations.leave', $conversation);
+
 		return view('conversation.leave', compact('conversation'));
 	}
 
@@ -222,6 +227,8 @@ class ConversationsController extends Controller
 			throw new ConversationNotFoundException;
 		}
 
+		Breadcrumbs::setCurrentRoute('conversations.newParticipant', $conversation);
+
 		return view('conversation.new_participant', compact('conversation'));
 	}
 
@@ -258,11 +265,13 @@ class ConversationsController extends Controller
 		try {
 			$this->conversationRepository->addParticipants($conversation, $participants_id);
 		} catch (ConversationCantSendToSelfException $exception) {
-			return redirect()->route('conversations.newParticipant', ['id' => $conversation->id])->withInput()->withErrors([
+			return redirect()->route('conversations.newParticipant',
+				['id' => $conversation->id])->withInput()->withErrors([
 				'participants' => $exception->getMessage()
 			]);
 		} catch (ConversationAlreadyParticipantException $exception) {
-			return redirect()->route('conversations.newParticipant', ['id' => $conversation->id])->withInput()->withErrors([
+			return redirect()->route('conversations.newParticipant',
+				['id' => $conversation->id])->withInput()->withErrors([
 				'participants' => $exception->getMessage()
 			]);
 		}

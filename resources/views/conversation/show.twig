@@ -6,7 +6,7 @@
 			<h1>{{ conversation.title }}</h1>
 			<p class="description">
 				{% for participant in conversation.participants %}
-					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ participant.name }} (Last read: {{ (participant.pivot.last_read is null) ? 'Never' : generate_time(participant.pivot.last_read) }})</span>
+					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ render_profile_link(participant, false, false) }} (Last read: {{ (participant.pivot.last_read is null) ? 'Never' : generate_time(participant.pivot.last_read) }})</span>
 				{% endfor %}
 			</p>
 		</header>
@@ -22,7 +22,7 @@
 				<div class="post">
 					<div class="post__meta">
 
-						<a href="index.php?page=profile" class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img src="{{ message.author.avatar }}" class="avatar" alt="{{ message.author.name }}'s avatar" /></a>
+						<a href="{{ url_route('user.profile', {'slug': message.author.name, 'id': message.author.id}) }}" class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img src="{{ message.author.avatar }}" class="avatar" alt="{{ message.author.name }}'s avatar" /></a>
 						<h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
 						{{ generate_time(message.created_at) }}
 

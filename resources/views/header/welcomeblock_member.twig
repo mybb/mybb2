@@ -101,17 +101,20 @@
 					</h2>
 					<ul class="messages">
 						{% for conversation in auth_user.unreadConversations %}
-							{# TODO: conversation.lastMessage.author isn't decorated for some reason #}
 							<li>
-								<a href="index.php?page=profile" class="avatar-profile-link"
-								   title="Go to Ryan Loos's profile"><img
-											src="{{ conversation.lastMessage.author.avatar }}" alt="Ryan Loos's avatar"
+								<a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}" class="avatar-profile-link"
+								   title="Go to {{ conversation.lastMessage.author.name }}'s profile"><img
+											src="{{ conversation.lastMessage.author.avatar }}" alt="{{ conversation.lastMessage.author.name }}'s avatar"
 											class="avatar"/></a>
 								<a href="{{ url_route('conversations.read', [conversation.id]) }}"
 								   class="conversation-title">{{ conversation.title }}</a>
-								from <a href="index.php?page=profile"
+								from <a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
 										class="message-author">{{ conversation.lastMessage.author.styled_name|raw }}</a>
 								{{ generate_time(conversation.lastMessage.created_at) }}
+							</li>
+						{% else %}
+							<li>
+								No unread messages
 							</li>
 						{% endfor %}
 						<li class="view-all">
