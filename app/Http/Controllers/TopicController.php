@@ -11,7 +11,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
@@ -44,6 +44,8 @@ class TopicController extends Controller
 	private $guard;
 	/** @var QuoteRenderer $quoteRenderer */
 	private $quoteRenderer;
+	/** @var Breadcrumbs $breadcrumbs */
+	private $breadcrumbs;
 
 	/**
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
@@ -52,6 +54,7 @@ class TopicController extends Controller
 	 * @param PollRepositoryInterface  $pollRepository  Poll repository interface, used to fetch poll details.
 	 * @param Guard                    $guard           Guard implementation
 	 * @param QuoteRenderer            $quoteRenderer
+	 * @param Breadcrumbs              $breadcrumbs
 	 */
 	public function __construct(
 		PostRepositoryInterface $postRepository,
@@ -59,7 +62,8 @@ class TopicController extends Controller
 		ForumRepositoryInterface $forumRepository,
 		PollRepositoryInterface $pollRepository,
 		Guard $guard,
-		QuoteRenderer $quoteRenderer
+		QuoteRenderer $quoteRenderer,
+		Breadcrumbs $breadcrumbs
 	) {
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
@@ -67,6 +71,7 @@ class TopicController extends Controller
 		$this->pollRepository = $pollRepository;
 		$this->guard = $guard;
 		$this->quoteRenderer = $quoteRenderer;
+		$this->breadcrumbs = $breadcrumbs;
 	}
 
 	/**
@@ -90,7 +95,7 @@ class TopicController extends Controller
 			$poll = $topic->poll;
 		}
 
-		Breadcrumbs::setCurrentRoute('topics.show', $topic);
+		$this->breadcrumbs->setCurrentRoute('topics.show', $topic);
 
 		$this->topicRepository->incrementViewCount($topic);
 
@@ -193,7 +198,7 @@ class TopicController extends Controller
 			$content = $this->quoteRenderer->renderFromPost($post);
 		}
 
-		Breadcrumbs::setCurrentRoute('topics.reply', $topic);
+		$this->breadcrumbs->setCurrentRoute('topics.reply', $topic);
 
 		$username = trans('general.guest');
 		if ($request->has('content')) {
@@ -263,7 +268,7 @@ class TopicController extends Controller
 			throw new PostNotFoundException;
 		}
 
-		Breadcrumbs::setCurrentRoute('topics.edit', $topic);
+		$this->breadcrumbs->setCurrentRoute('topics.edit', $topic);
 
 		return view('topic.edit', compact('post', 'topic'));
 	}
@@ -318,7 +323,7 @@ class TopicController extends Controller
 			throw new ForumNotFoundException;
 		}
 
-		Breadcrumbs::setCurrentRoute('topics.create', $forum);
+		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
 		return view('topic.create', compact('forum'));
 	}

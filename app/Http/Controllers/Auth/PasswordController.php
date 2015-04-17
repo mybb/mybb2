@@ -1,6 +1,6 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
@@ -32,15 +32,16 @@ class PasswordController extends Controller
 	 *
 	 * @param Guard                                     $auth
 	 * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
+	 * @param Breadcrumbs                               $breadcrumbs
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords)
+	public function __construct(Guard $auth, PasswordBroker $passwords, Breadcrumbs $breadcrumbs)
 	{
 		$this->auth = $auth;
 		$this->passwords = $passwords;
 
 		$this->middleware('guest');
 
-		Breadcrumbs::setCurrentRoute('auth.login');
+		$breadcrumbs->setCurrentRoute('auth.login');
 	}
 
 	public function postEmail(Request $request)

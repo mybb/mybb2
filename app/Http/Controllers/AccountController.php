@@ -1,8 +1,8 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-use Hash;
 use Illuminate\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
@@ -10,7 +10,6 @@ use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
-use Session;
 
 class AccountController extends Controller
 {
@@ -167,11 +166,12 @@ class AccountController extends Controller
 	}
 
 	/**
-	 * @param Request $request
+	 * @param Request      $request
+	 * @param BcryptHasher $hasher
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPassword(Request $request)
+	public function postPassword(Request $request, BcryptHasher $hasher)
 	{
 		$this->failedValidationRedirect = route('account.password');
 
@@ -183,7 +183,7 @@ class AccountController extends Controller
 		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
 			// Don't save the password in plaintext!
 			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
-				Hash::make($request->get('password1')));
+				$hasher->make($request->get('password1')));
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
 		}
