@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
@@ -17,12 +18,17 @@ class Forum extends BasePresenter
 {
 	/** @var ForumModel $wrappedObject */
 
+	/** @var Application */
+	private $app;
+
 	/**
-	 * @param ForumModel $resource The forum being wrapped by this presenter.
+	 * @param ForumModel  $resource The forum being wrapped by this presenter.
+	 * @param Application $app
 	 */
-	public function __construct(ForumModel $resource)
+	public function __construct(ForumModel $resource, Application $app)
 	{
 		$this->wrappedObject = $resource;
+		$this->app = $app;
 	}
 
 	public function lastPostAuthor()
@@ -36,7 +42,7 @@ class Forum extends BasePresenter
 				$user->name = trans('general.guest');
 			}
 
-			$decoratedUser = app()->make('MyBB\Core\Presenters\User', [$user]);
+			$decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
 
 			return $decoratedUser;
 		}
