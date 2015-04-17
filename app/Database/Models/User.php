@@ -51,14 +51,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'num_likes_made' => 'int',
-    ];
+	/**
+	 * The attributes that should be casted to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'num_likes_made' => 'int',
+	];
 
 	/**
 	 * Cache variable for the display role
@@ -99,7 +99,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function displayRole()
 	{
 		if ($this->displayRole == null) {
-			$this->displayRole = $this->roles->where('pivot.is_display', 1)->first();
+			$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
 		}
 
 		return $this->displayRole;
