@@ -1,13 +1,22 @@
 <?php namespace MyBB\Core\Services;
 
-use DB;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
+use Illuminate\Validation\Factory;
 use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Database\Models\User;
-use Validator;
 
 class Registrar implements RegistrarContract
 {
+	/** @var Factory */
+	private $validator;
+
+	/**
+	 * @param Factory $validator
+	 */
+	public function __construct(Factory $validator)
+	{
+		$this->validator = $validator;
+	}
 
 	/**
 	 * Get a validator for an incoming registration request.
@@ -18,7 +27,7 @@ class Registrar implements RegistrarContract
 	 */
 	public function validator(array $data)
 	{
-		return Validator::make($data, [
+		return $this->validator->make($data, [
 			'name' => 'required|max:255|unique:users',
 			'email' => 'required|email|max:255|unique:users',
 			'password' => 'required|confirmed|min:6',
