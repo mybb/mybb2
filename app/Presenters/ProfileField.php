@@ -11,102 +11,106 @@ use MyBB\Core\Form\RenderableInterface;
 
 class ProfileField extends BasePresenter implements RenderableInterface
 {
-    /**
-     * @var Guard
-     */
-    protected $guard;
+	/**
+	 * @var Guard
+	 */
+	protected $guard;
 
-    /**
-     * @var UserProfileFieldRepositoryInterface
-     */
-    protected $userProfileFields;
+	/**
+	 * @var UserProfileFieldRepositoryInterface
+	 */
+	protected $userProfileFields;
 
-    /**
-     * @param ProfileFieldModel $resource
-     * @param Guard $guard
-     * @param UserProfileFieldRepositoryInterface $userProfileFields
-     */
-    public function __construct(ProfileFieldModel $resource, Guard $guard, UserProfileFieldRepositoryInterface $userProfileFields)
-    {
-        parent::__construct($resource);
+	/**
+	 * @param ProfileFieldModel $resource
+	 * @param Guard $guard
+	 * @param UserProfileFieldRepositoryInterface $userProfileFields
+	 */
+	public function __construct(
+		ProfileFieldModel $resource,
+		Guard $guard,
+		UserProfileFieldRepositoryInterface $userProfileFields
+	) {
+		parent::__construct($resource);
 
-        $this->guard = $guard;
-        $this->userProfileFields = $userProfileFields;
-    }
+		$this->guard = $guard;
+		$this->userProfileFields = $userProfileFields;
+	}
 
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return $this->type;
+	}
 
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        $options = ProfileFieldOption::getForProfileField($this->getWrappedObject());
+	/**
+	 * @return array
+	 */
+	public function getOptions()
+	{
+		$options = ProfileFieldOption::getForProfileField($this->getWrappedObject());
 
-        $formattedOptions = [];
+		$formattedOptions = [];
 
-        foreach ($options as $option) {
-            $formattedOptions[$option->getValue()] = $option->getName();
-        }
+		foreach ($options as $option) {
+			$formattedOptions[$option->getValue()] = $option->getName();
+		}
 
-        return $formattedOptions;
-    }
+		return $formattedOptions;
+	}
 
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'profile_fields[' . $this->id . ']';
-    }
+	/**
+	 * @return string
+	 */
+	public function getName()
+	{
+		return 'profile_fields[' . $this->id . ']';
+	}
 
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
+	/**
+	 * @return string
+	 */
+	public function getDescription()
+	{
+		return $this->description;
+	}
 
-    /**
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->name;
-    }
+	/**
+	 * @return string
+	 */
+	public function getLabel()
+	{
+		return $this->name;
+	}
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        $userProfileField = $this->userProfileFields->findForProfileField($this->guard->user(), $this->getWrappedObject());
+	/**
+	 * @return mixed
+	 */
+	public function getValue()
+	{
+		$userProfileField = $this->userProfileFields->findForProfileField($this->guard->user(),
+			$this->getWrappedObject());
 
-        if ($userProfileField) {
-            return $userProfileField->getValue();
-        }
-    }
+		if ($userProfileField) {
+			return $userProfileField->getValue();
+		}
+	}
 
-    /**
-     * @return bool
-     */
-    public function has_value()
-    {
-        return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
-    }
+	/**
+	 * @return bool
+	 */
+	public function has_value()
+	{
+		return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
+	}
 
-    /**
-     * @return array
-     */
-    public function getValidationRules()
-    {
-        return $this->validation_rules;
-    }
+	/**
+	 * @return array
+	 */
+	public function getValidationRules()
+	{
+		return $this->validation_rules;
+	}
 }
