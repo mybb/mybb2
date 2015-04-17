@@ -19,11 +19,15 @@ class Renderer
 	 */
 	protected $validator;
 
+	/**
+	 * @var Request
+	 */
 	protected $request;
 
 	/**
 	 * @param ViewFactory       $viewFactory
 	 * @param ValidationFactory $validationFactory
+	 * @param Request           $request
 	 */
 	public function __construct(ViewFactory $viewFactory, ValidationFactory $validationFactory, Request $request)
 	{
@@ -133,13 +137,14 @@ class Renderer
 	 */
 	protected function getValue(RenderableInterface $renderable)
 	{
-		if(!is_null($this->request->old($renderable->getName()))) {
-			return $this->request->old($renderable->getName());
+		$dottedNotation = str_replace(['[', ']'], ['.', ''], $renderable->getName());
+		if (!is_null($this->request->old($dottedNotation))) {
+			return $this->request->old($dottedNotation);
 		}
 
 		$value = $renderable->getValue();
 
-		if(!is_null($value)) {
+		if (!is_null($value)) {
 			return $value;
 		}
 
