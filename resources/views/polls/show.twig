@@ -19,7 +19,7 @@
 					<div class="poll__option{{ (option.voted)?' poll_option-voted' }}">
 						<div class="poll__option__name">
 							<label>
-								{% if myVote is null %}
+								{% if poll.myVote is null %}
 									{% if poll.is_multiple %}
 										{{ form_checkbox('option[]', loop.index) }}
 									{% else %}
@@ -65,7 +65,7 @@
 								class="fa fa-pencil"></i><span class="text">{{ trans('poll.edit') }}</span></a>
 				</div>
 				{% if not poll.is_closed %}
-					{% if myVote %}
+					{% if poll.myVote %}
 						<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id]) }}"><i
 									class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
 					{% else %}

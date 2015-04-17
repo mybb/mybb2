@@ -346,16 +346,16 @@ class TopicController extends Controller
 
 			$poll = [
 				'question' => $pollCreateRequest->input('question'),
-				'num_options' => count($createRequest->options()),
+				'num_options' => count($pollCreateRequest->options()),
 				'options' => $pollCreateRequest->options(),
 				'is_closed' => false,
 				'is_multiple' => (bool)$pollCreateRequest->input('is_multiple'),
 				'is_public' => (bool)$pollCreateRequest->input('is_public'),
 				'end_at' => null,
-				'max_options' => $pollCreateRequest->input('maxoptions')
+				'max_options' => (int)$pollCreateRequest->input('maxoptions')
 			];
-			if ($createRequest->input('endAt')) {
-				$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
+			if ($pollCreateRequest->input('endAt')) {
+				$poll['end_at'] = new \DateTime($pollCreateRequest->input('endAt'));
 			}
 
 		}
