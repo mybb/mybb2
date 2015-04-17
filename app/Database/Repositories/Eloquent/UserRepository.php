@@ -9,8 +9,12 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Auth\Guard;
+use Illuminate\Database\Query\Builder;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Settings\Models\Setting;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -20,13 +24,25 @@ class UserRepository implements UserRepositoryInterface
 	 */
 	protected $userModel;
 
+	/** @var PermissionChecker */
+	private $permissionChecker;
+
+	/** @var Guard */
+	private $guard;
+
 	/**
-	 * @param User $userModel The model to use for users.
+	 * @param User              $userModel         The model to use for users.
+	 * @param PermissionChecker $permissionChecker 
+	 * @param Guard             $guard
 	 */
 	public function __construct(
-		User $userModel
+		User $userModel,
+		PermissionChecker $permissionChecker,
+		Guard $guard
 	) {
 		$this->userModel = $userModel;
+		$this->permissionChecker = $permissionChecker;
+		$this->guard = $guard;
 	}
 
 	/**
@@ -52,15 +68,38 @@ class UserRepository implements UserRepositoryInterface
 	public function online($minutes = 15, $orderBy = 'last_visit', $orderDir = 'desc', $num = 20)
 	{
 		// If the user visited the logout page as last he's not online anymore
+		/** @var Builder $baseQuery */
 		$baseQuery = $this->userModel->where('last_visit', '>=', new \DateTime("{$minutes} minutes ago"))
 			->where('last_page', '!=', 'auth/logout')
-			->orderBy($orderBy, $orderDir);
+			->orderBy('users.' . $orderBy, $orderDir);
 
-		if ($num > 0) {
-			return $baseQuery->paginate($num);
+		// No need to add anymore if the user has permission to view anyone
+		if (!$this->permissionChecker->hasPermission('user', null, 'canViewAllOnline')) {
+			// First get the id of our setting
+			$settingId = Setting::where('name', 'user.showonline')->first()->id;
+
+			// Now join the correct setting_values row
+			$baseQuery->leftJoin('setting_values', function ($join) use ($settingId) {
+				$join->on('setting_values.user_id', '=', 'users.id')->where('setting_values.setting_id', '=',
+					$settingId);
+			});
+
+			// Either the setting is true or not set...
+			$baseQuery->where(function ($query) {
+				$query->where('setting_values.value', true)->orWhereNull('setting_values.value');
+
+				// ... or we're querying our row at the moment
+				if ($this->guard->check()) {
+					$query->orWhere('users.id', '=', $this->guard->user()->id);
+				}
+			});
 		}
 
-		return $baseQuery->get();
+		if ($num > 0) {
+			return $baseQuery->paginate($num, ['users.*']);
+		}
+
+		return $baseQuery->get(['users.*']);
 	}
 
 	/**
