@@ -7,16 +7,24 @@ use Illuminate\Http\Request;
 
 class CaptchaMybb implements CaptchaInterface
 {
-
+	/** @var DatabaseManager */
 	private $database;
+	/** @var Request */
 	private $request;
 
+	/**
+	 * @param DatabaseManager $database
+	 * @param Request         $request
+	 */
 	public function __construct(DatabaseManager $database, Request $request)
 	{
 		$this->database = $database;
 		$this->request = $request;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function render()
 	{
 		$imagehash = md5(str_random(12));
@@ -30,6 +38,9 @@ class CaptchaMybb implements CaptchaInterface
 		return view('captcha.mybb', compact('imagehash'));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function validate()
 	{
 		$check = $this->database->table('captcha')
@@ -47,6 +58,9 @@ class CaptchaMybb implements CaptchaInterface
 		return true;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function supported()
 	{
 		// We need to be able to create images

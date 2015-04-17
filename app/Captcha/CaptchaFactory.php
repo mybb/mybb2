@@ -8,7 +8,9 @@ use MyBB\Settings\Store;
 
 class CaptchaFactory implements CaptchaInterface
 {
+	/** @var Store */
 	private $settings;
+	/** @var Application */
 	private $app;
 
 	const NONE = 'none';
@@ -17,12 +19,19 @@ class CaptchaFactory implements CaptchaInterface
 	const RECAPTCHA = 'recaptcha';
 	const NOCAPTCHA = 'nocaptcha';
 
+	/**
+	 * @param Store       $settings
+	 * @param Application $app
+	 */
 	public function __construct(Store $settings, Application $app)
 	{
 		$this->settings = $settings;
 		$this->app = $app;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function render($captcha = false)
 	{
 		$captcha = $this->getCaptchaClass($captcha);
@@ -35,6 +44,9 @@ class CaptchaFactory implements CaptchaInterface
 		return $captcha->render();
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function validate($captcha = false)
 	{
 		$captcha = $this->getCaptchaClass($captcha);
@@ -47,12 +59,22 @@ class CaptchaFactory implements CaptchaInterface
 		return $captcha->validate();
 	}
 
-	// Not used for the Factory, the function is mainly used when generating the correct captcha
+	/**
+	 * Not used for the Factory, the function is mainly used when generating the correct captcha
+	 * {@inheritdoc}
+	 */
 	public function supported()
 	{
 		return true;
 	}
 
+	/**
+	 * @param $captchaName
+	 *
+	 * @return CaptchaInterface|null
+	 *
+	 * @throws CaptchaInvalidClassException
+	 */
 	private function getCaptchaClass($captchaName)
 	{
 		if ($captchaName == false) {
