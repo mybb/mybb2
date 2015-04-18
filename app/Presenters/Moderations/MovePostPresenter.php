@@ -47,7 +47,12 @@ class MovePostPresenter extends BasePresenter implements ModerationPresenterInte
 	public function fields()
 	{
 		return [
-			(new Field('text', 'topic_id', 'Topic ID', 'The topic ID to move these posts to.'))->setValidationRules('integer|exists:topics,id'),
+			(new Field(
+				'text',
+				'topic_id',
+				'Topic ID',
+				'The topic ID to move these posts to.'
+			))->setValidationRules('integer|exists:topics,id'),
 		];
 	}
 }

@@ -22,7 +22,8 @@ class ModerationServiceProvider extends ServiceProvider
                 $app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
                 $app->make('MyBB\Core\Moderation\Moderations\DeletePost'),
                 $app->make('MyBB\Core\Moderation\Moderations\DeleteTopic'),
-                $app->make('MyBB\Core\Moderation\Moderations\Close')
+                $app->make('MyBB\Core\Moderation\Moderations\Close'),
+                $app->make('MyBB\Core\Moderation\Moderations\MoveTopic')
             ]);
         });
     }

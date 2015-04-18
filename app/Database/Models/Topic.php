@@ -18,6 +18,8 @@ use MyBB\Core\Moderation\Moderations\CloseableInterface;
 
 /**
  * @property int id
+ * @property Forum forum
+ * @property int forum_id
  */
 class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface
 {
@@ -64,7 +66,8 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
 	 * @var array
 	 */
 	protected $casts = [
-		'id' => 'int'
+		'id' => 'int',
+		'forum_id' => 'int'
 	];
 
 	/**

@@ -16,6 +16,9 @@ use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
+/**
+ * @property int id
+ */
 class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface
 {
 	use InheritPermissionableTrait;
@@ -55,6 +58,13 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	 * @var array
 	 */
 	protected $guarded = ['left_id', 'right_id', 'parent_id'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.

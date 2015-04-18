@@ -10,4 +10,9 @@ interface ModerationPresenterInterface
 	 * @return RenderableInterface[]
 	 */
 	public function fields();
+
+	/**
+	 * @return string
+	 */
+	public function icon();
 }
