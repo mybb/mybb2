@@ -3,10 +3,11 @@
 namespace MyBB\Core\Presenters\Moderations;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Form\Field;
 use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\MovePost;
 
-class MovePostPresenter extends BasePresenter implements RenderableInterface
+class MovePostPresenter extends BasePresenter implements ModerationPresenterInterface
 {
     /**
      * @return MovePost
@@ -32,67 +33,21 @@ class MovePostPresenter extends BasePresenter implements RenderableInterface
         return $this->getWrappedObject()->getIcon();
     }
 
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return 'text';
-    }
+	/**
+	 * @return string
+	 */
+	public function name()
+	{
+		return $this->getWrappedObject()->getName();
+	}
 
-    /**
-     * @return array
-     */
-    public function getOptions()
-    {
-        return [];
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return 'The topic ID to move these posts to.';
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'Move';
-    }
-
-    /**
-     * @return string
-     */
-    public function getLabel()
-    {
-        return 'Topic ID';
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return null;
-    }
-
-    /**
-     * @return array
-     */
-    public function getValidationRules()
-    {
-        return 'integer|exists:topics,id';
-    }
-
-    /**
-     * @return string
-     */
-    public function getElementName()
-    {
-        return 'topic_id';
-    }
+	/**
+	 * @return RenderableInterface[]
+	 */
+	public function fields()
+	{
+		return [
+			(new Field('text', 'topic_id', 'Topic ID', 'The topic ID to move these posts to.'))->setValidationRules('integer|exists:topics,id'),
+		];
+	}
 }

@@ -13,9 +13,11 @@
         {% endfor %}
         <section class="form">
             <div class="form__section">
+                {% for field in moderation.fields %}
                 <div class="form__row">
-                    {{ form_render_field(moderation) }}
+                    {{ form_render_field(field) }}
                 </div>
+                {% endfor %}
             </div>
         </section>
         <div class="form__submit">
