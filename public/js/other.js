@@ -71,7 +71,7 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
-	$(".topic :checkbox").change(function() {
+	$(".topic-list .topic :checkbox").change(function() {
 		$(this).closest(".topic").toggleClass("highlight", this.checked);
 
 		var checked_boxes = $('.highlight').length;
