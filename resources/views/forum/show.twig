@@ -103,7 +103,7 @@
 						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
 							<div class="primary-column">
 								<h3 class="topic__title">
-									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+                                    {{ topic.closed ? '<i class="fa fa-lock"></i>' }} <a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
 								</h3>
 								<h4>{{ trans('topic.firstpost') }}</h4>
 								<p class="topic__post topic__post--first">

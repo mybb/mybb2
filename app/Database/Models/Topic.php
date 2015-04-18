@@ -14,11 +14,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
+use MyBB\Core\Moderation\Moderations\CloseableInterface;
 
 /**
  * @property int id
  */
-class Topic extends Model implements HasPresenter, ApprovableInterface
+class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface
 {
 	use SoftDeletes;
 
@@ -165,5 +166,21 @@ class Topic extends Model implements HasPresenter, ApprovableInterface
 	{
 		$this->firstPost->unapprove();
 		return $this->update(['approved' => 0]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function close()
+	{
+		return $this->update(['closed' => 1]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function open()
+	{
+		return $this->update(['closed' => 0]);
 	}
 }
