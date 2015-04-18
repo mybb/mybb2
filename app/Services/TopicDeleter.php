@@ -3,6 +3,7 @@
 namespace MyBB\Core\Services;
 
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Models\Topic;
 
@@ -14,14 +15,22 @@ class TopicDeleter
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
 
+	/** @var PollRepositoryInterface $pollRepository */
+	private $pollRepository;
+
 	/**
-	 * @param PostRepositoryInterface  $postRepository
+	 * @param PostRepositoryInterface $postRepository
 	 * @param ForumRepositoryInterface $forumRepository
+	 * @param PollRepositoryInterface $pollRepository
 	 */
-	public function __construct(PostRepositoryInterface $postRepository, ForumRepositoryInterface $forumRepository)
-	{
+	public function __construct(
+		PostRepositoryInterface $postRepository,
+		ForumRepositoryInterface $forumRepository,
+		PollRepositoryInterface $pollRepository
+	) {
 		$this->postRepository = $postRepository;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 	}
 
 	/**
@@ -57,6 +66,11 @@ class TopicDeleter
 
 			// Now delete the posts for this topic
 			$this->postRepository->deletePostsForTopic($topic);
+
+			// Don't forget the polls
+			if ($topic->has_poll) {
+				$this->pollRepository->remove($topic->poll);
+			}
 
 			// And finally delete the topic
 			$topic->forceDelete();

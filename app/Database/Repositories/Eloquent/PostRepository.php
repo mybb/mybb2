@@ -15,6 +15,8 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository;
+use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
@@ -46,6 +48,9 @@ class PostRepository implements PostRepositoryInterface
 	/** @var PermissionChecker */
 	private $permissionChecker;
 
+	/** @var LikesRepositoryInterface */
+	private $likesRepository;
+
 	/**
 	 * @param Post                     $postModel The model to use for posts.
 	 * @param Guard                    $guard     Laravel guard instance, used to get user ID.
@@ -53,6 +58,7 @@ class PostRepository implements PostRepositoryInterface
 	 * @param Store                    $settings  The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PermissionChecker        $permissionChecker
+	 * @param LikesRepositoryInterface $likesRepository
 	 */
 	public function __construct(
 		Post $postModel,
@@ -60,7 +66,8 @@ class PostRepository implements PostRepositoryInterface
 		MessageFormatter $formatter,
 		Store $settings,
 		ForumRepositoryInterface $forumRepository,
-		PermissionChecker $permissionChecker
+		PermissionChecker $permissionChecker,
+		LikesRepositoryInterface $likesRepository
 	) {
 		$this->postModel = $postModel;
 		$this->guard = $guard;
@@ -68,6 +75,7 @@ class PostRepository implements PostRepositoryInterface
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
 		$this->permissionChecker = $permissionChecker;
+		$this->likesRepository = $likesRepository;
 	}
 
 	/**
@@ -243,7 +251,14 @@ class PostRepository implements PostRepositoryInterface
 	 */
 	public function deletePostsForTopic(Topic $topic)
 	{
-		return $this->postModel->where('topic_id', '=', $topic->id)->forceDelete();
+		$baseQuery = $this->postModel->where('topic_id', '=', $topic->id);
+
+		$posts = $baseQuery->get();
+		foreach ($posts as $post) {
+			$this->likesRepository->removeLikesForContent($post);
+		}
+
+		return $baseQuery->forceDelete();
 	}
 
 	/**
@@ -282,6 +297,7 @@ class PostRepository implements PostRepositoryInterface
 
 			return $success;
 		} else {
+			$this->likesRepository->removeLikesForContent($post);
 			return $post->forceDelete();
 		}
 	}
