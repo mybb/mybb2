@@ -12,6 +12,7 @@ return [
 	'latest' => 'Latest',
 	'create.title' => 'Create New Topic',
 	'create.description' => "Create a new topic in the '{0}' forum.",
+	'fullEditor' => 'Full Editor',
 	'reply' => 'Reply',
 	'postreply' => 'Post Reply',
 	'postreplytotopic' => 'Post reply to :title',
@@ -20,5 +21,22 @@ return [
 	'delete' => 'Delete',
 	'confirmDelete' => 'Do you really want to delete this post?\nYou will not be able to recover it afterwards!',
 	'restore' => 'Restore',
-	'softDeleted' => 'Soft Deleted'
+	'softDeleted' => 'Soft Deleted',
+	'goToXProfile' => 'Go to :name\'s profile',
+	'XAvarar' => ':name\'s avatar',
+	'like' => 'Like',
+	'unlike' => 'Unlike',
+	'quote' => 'Quote',
+
+	'quickEdit' => 'Quick Edit',
+	'fullEdit' => 'Full Edit',
+
+	'create' => [
+		'username' => 'Username',
+		'title' => 'Title',
+		'enterTitle' => 'Enter a meaningful title...',
+		'content' => 'Content',
+		'postTopic' => 'Post Topic'
+	],
+
 ];
