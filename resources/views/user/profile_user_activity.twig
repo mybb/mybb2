@@ -1,5 +1,5 @@
 <section class="profile__activity activity">
-	<h2 class="heading heading--major">{{ trans('profile.user_activity_title') }}</h2>
+	<h2 class="heading heading--major">{{ trans('member.profile.recentActivity') }}</h2>
 
 	<ol class="activity">
 		{% for entry in activity %}
@@ -14,7 +14,7 @@
 			</li>
 		{% else %}
 			<li class="activity__entry activity__entry--no-activity">
-				{{ trans('profile.user_activity_none') }}
+				{{ trans('member.profile.user_activity_none') }}
 			</li>
 		{% endfor %}
 	</ol>

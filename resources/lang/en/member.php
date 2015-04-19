@@ -19,5 +19,10 @@ return [
 	'joinDate' => 'Join Date',
 	'lastVisit' => 'Last Visit',
 	'online' => 'Online Now',
-	'noOnline' => 'Nobody is online'
+	'noOnline' => 'Nobody is online',
+
+	'profile' => [
+		'recentActivity' => 'Recent Activity',
+		'user_activity_none' => 'No recent activity found',
+	]
 ];

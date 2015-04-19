@@ -2,6 +2,8 @@
 
 return [
     'search' => 'Search',
+	'advanced' => 'Advanced',
+	'advancedSearch' => 'Advanced Search',
     'searchforum' => 'Search Forum',
     'basicsearch' => 'Basic Search',
     'keyword' => 'Keyword',

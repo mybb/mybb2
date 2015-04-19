@@ -16,12 +16,12 @@
 			<div class="form__section">
 				{% if topic.first_post_id == post.id %}
 					<div class="form__row">
-						<h3>{{ form_label('title', 'Title') }}</h3>
-						{{ form_text('title', topic.title, {'placeholder': 'Enter a meaningful title...', 'title': 'Enter a meaningful title...'}) }}
+						<h3>{{ form_label('title', trans('topic.create.title')) }}</h3>
+						{{ form_text('title', topic.title, {'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
 					</div>
 				{% endif %}
 				<div class="form__row">
-					<h3>{{ form_label('content', 'Content') }}</h3>
+					<h3>{{ form_label('content', trans('topic.create.content')) }}</h3>
 					{{ form_textarea('content', post.content) }}
 				</div>
 			</div>
