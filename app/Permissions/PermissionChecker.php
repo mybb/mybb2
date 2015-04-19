@@ -142,7 +142,7 @@ class PermissionChecker
 				$roles = [$registeredRole];
 			} else {
 				// Guest
-				if($this->guestRole == null) {
+				if ($this->guestRole == null) {
 					$this->guestRole = Role::where('role_slug', '=', 'guest')->first();
 				}
 				$roles = [$this->guestRole];
@@ -256,7 +256,7 @@ class PermissionChecker
 	 */
 	private function getCache(Role $role, $permission, $content, $contentID)
 	{
-		return $this->cache->get("permission.{$role->slug}.{$permission}.{$content}.{$contentID}");
+		return $this->cache->get("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}");
 	}
 
 	/**
@@ -268,6 +268,6 @@ class PermissionChecker
 	 */
 	private function putCache(Role $role, $permission, $content, $contentID, $value)
 	{
-		$this->cache->forever("permission.{$role->slug}.{$permission}.{$content}.{$contentID}", $value);
+		$this->cache->forever("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}", $value);
 	}
 }

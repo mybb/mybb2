@@ -23,7 +23,7 @@
 				{% if field.has_value %}
 					<div class="profile__field">
 						<h3>{{ field.name }}</h3>
-						<p>{{ field.value }}</p>
+						<p>{{ field.getValue(user) }}</p>
 					</div>
 				{% endif %}
 			{% endfor %}
