@@ -12,7 +12,6 @@
 				<a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
-
 		{{ form_open({'route': ['topics.create', forum.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
@@ -35,6 +34,65 @@
 						{{ captcha() }}
 					</div>
 				{% endif %}
+				<div class="form__row">
+					<a href="#add-poll" id="add-poll-button" class="button button--secondary"><i class="fa fa-plus-circle"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
+				</div>
+			</div>
+			<div id="add-poll" style="display: none;">
+				{{ form_hidden('add-poll', '0', {'id':'add-poll-input'}) }}
+				<div class="form__section">
+					<h2>{{ trans('poll.options') }}</h2>
+
+					<div class="form__section__container">
+						<div class="form__row">
+							<h3>{{ form_label('question', trans('poll.question')) }}</h3>
+							{{ form_text('question') }}
+						</div>
+						<div class="form__row">
+							<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+							{{ form_text('endAt', '', {id: 'poll-end-at'}) }}
+						</div>
+						<div class="form__row">
+							<h3>{{ trans('poll.whoVoted') }}</h3>
+
+							<p class="form__checkbox">
+								<label>{{ form_checkbox('is_public', '1') }} {{ trans('poll.whoVoted.desc') }}</label>
+							</p>
+						</div>
+						<div class="form__row">
+							<h3>{{ trans('poll.multipleChoice') }}</h3>
+
+							<p class="form__checkbox">
+								<label>{{ form_checkbox('is_multiple', '1', false, {'id': 'poll-is-multiple'}) }} {{ trans('poll.multipleChoice.desc') }}</label>
+							</p>
+						</div>
+						<div class="form__row" id="poll-maximum-options">
+							<h3>{{ trans('poll.maxOptions') }}</h3>
+							{{ form_text('maxoptions') }}
+						</div>
+					</div>
+				</div>
+				<div class="form__section">
+					<h2>{{ trans('poll.pollOptions') }}</h2>
+
+					<div class="form__section__container">
+						{% for i in range(1, max(2, input_old('option')|length)) %}
+							<div class="form__row poll-option">
+								<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
+											class="fa fa-times"></i></a>
+								{{ form_text('option['~loop.index~']') }}
+							</div>
+						{% endfor %}
+						<a href="#newoption" class="button button--secondary" id="new-option"><i
+									class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
+
+						<div class="form__row hidden" id="option-simple">
+							<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
+										class="fa fa-times"></i></a>
+							{{ form_text('option[-1]') }}
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 		{{ form_hidden('forum_id', forum.id) }}

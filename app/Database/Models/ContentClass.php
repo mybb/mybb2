@@ -14,7 +14,7 @@ use MyBB\Core\Traits\Permissionable;
  * @property string class
  * @property string content
  */
-class ContentClass extends Model
+class ContentClass extends AbstractCachingModel
 {
 	/**
 	 * The database table used by the model.

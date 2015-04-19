@@ -18,6 +18,7 @@ use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
@@ -53,6 +54,9 @@ class TopicRepository implements TopicRepositoryInterface
 	/** @var ForumRepositoryInterface */
 	private $forumRepository;
 
+	/** @var PollRepositoryInterface */
+	private $pollRepository;
+
 	/** @var PermissionChecker */
 	private $permissionChecker;
 
@@ -64,6 +68,7 @@ class TopicRepository implements TopicRepositoryInterface
 	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
 	 * @param Store                    $settings       The settings container
 	 * @param ForumRepositoryInterface $forumRepository
+	 * @param PollRepositoryInterface  $pollRepository
 	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
@@ -74,6 +79,7 @@ class TopicRepository implements TopicRepositoryInterface
 		DatabaseManager $dbManager,
 		Store $settings,
 		ForumRepositoryInterface $forumRepository,
+		PollRepositoryInterface $pollRepository,
 		PermissionChecker $permissionChecker
 	) {
 		$this->topicModel = $topicModel;
@@ -83,6 +89,7 @@ class TopicRepository implements TopicRepositoryInterface
 		$this->dbManager = $dbManager;
 		$this->settings = $settings;
 		$this->forumRepository = $forumRepository;
+		$this->pollRepository = $pollRepository;
 		$this->permissionChecker = $permissionChecker;
 	}
 
@@ -293,6 +300,22 @@ class TopicRepository implements TopicRepositoryInterface
 	}
 
 	/**
+	 * Edit the hasPoll of the Topic
+	 *
+	 * @param Topic $topic The topic to edit
+	 * @param bool  $hasPoll
+	 *
+	 * @return mixed
+	 */
+
+	public function setHasPoll(Topic $topic, $hasPoll)
+	{
+		return $this->editTopic($topic, [
+			'has_poll' => $hasPoll
+		]);
+	}
+
+	/**
 	 * Restore a topic
 	 *
 	 * @param Topic $topic The topic to restore
@@ -304,7 +327,9 @@ class TopicRepository implements TopicRepositoryInterface
 		$topic->forum->increment('num_topics');
 		$topic->forum->increment('num_posts', $topic->num_posts);
 
-		$topic->author->increment('num_topics');
+		if ($topic->user_id > 0) {
+			$topic->author->increment('num_topics');
+		}
 
 		$success = $topic->restore();
 

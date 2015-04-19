@@ -1,0 +1,33 @@
+<?php namespace MyBB\Core\Http\Middleware;
+
+use Closure;
+use Illuminate\Contracts\Routing\Middleware;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
+
+abstract class AbstractBootstrapMiddleware implements Middleware
+{
+	/**
+	 * Handle an incoming request.
+	 *
+	 * @param  Request  $request
+	 * @param  \Closure $next
+	 *
+	 * @return mixed
+	 */
+	abstract public function handle($request, Closure $next);
+
+	/**
+	 * @param Router  $router
+	 * @param Request $request
+	 *
+	 * @return array
+	 */
+	protected function getOptions(Router $router, Request $request)
+	{
+		$collection = $router->getRoutes();
+		$route = $collection->match($request->create($request->path(), $request->method()));
+
+		return $route->getAction();
+	}
+}

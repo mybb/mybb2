@@ -25,11 +25,13 @@
 								</ul>
 							{% endif %}
 						</div>
-						<div class="forum__topic forum__topic--latest">
-							<a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
-							<h4 class="forum__topic__title"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug, forum.lastPost.topic.id]) }}">{{ forum.lastPost.topic.title }}</a></h4>
-							<p class="forum__topic__post">{{ post_date_link(url_route("topics.last", [forum.lastPost.topic.slug, forum.lastPost.topic.id]), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ generate_profile_link(forum.lastPostAuthor) }}</p>
-						</div>
+						{% if forum.hasLastPost %}
+							<div class="forum__topic forum__topic--latest">
+								<a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
+								<h4 class="forum__topic__title"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug, forum.lastPost.topic.id]) }}">{{ forum.lastPost.topic.title }}</a></h4>
+								<p class="forum__topic__post">{{ post_date_link(url_route("topics.last", [forum.lastPost.topic.slug, forum.lastPost.topic.id]), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
+							</div>
+						{% endif %}
 					</div>
 				{% endfor %}
 			</div>

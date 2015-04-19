@@ -1,12 +1,12 @@
 						<ul class="user-navigation__links">
 							 <li class="user-navigation__sign-up">
-								<a href="{{ url('auth/signup') }}" class="multi-link" data-modal="auth/signup">
+								<a {{ modal_attributes('auth/signup', [], false) }} class="multi-link">
 									<i class="fa fa-user"></i>
 									<span class="text">{{ trans('member.signup') }}</span>
 								</a>
 							</li>
 							<li class="user-navigation__log-in">
-								<a href="{{ url('auth/login') }}" class="multi-link" data-modal="auth/login">
+								<a {{ modal_attributes('auth/login', [], false) }} class="multi-link">
 									<i class="fa fa-sign-in"></i>
 									<span class="text">{{ trans('member.login') }}</span>
 								</a>

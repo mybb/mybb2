@@ -3,12 +3,12 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Breadcrumbs;
-use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -37,12 +37,8 @@ class ForumController extends Controller
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		UserRepositoryInterface $userRepository,
-		Guard $guard,
-		Request $request
+		UserRepositoryInterface $userRepository
 	) {
-		parent::__construct($guard, $request);
-
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
@@ -92,8 +88,11 @@ class ForumController extends Controller
 		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($id);
 
+		// Load last post information for child forums
+		$forum->load(['children.lastPost', 'children.lastPost.topic', 'children.lastPostAuthor']);
+
 		if (!$forum) {
-			throw new NotFoundHttpException(trans('errors.forum_not_found'));
+			throw new ForumNotFoundException;
 		}
 
 		Breadcrumbs::setCurrentRoute('forums.show', $forum);

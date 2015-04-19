@@ -3,6 +3,7 @@
 namespace MyBB\Core\Captcha;
 
 use Illuminate\Contracts\Foundation\Application;
+use MyBB\Core\Exceptions\CaptchaInvalidClassException;
 use MyBB\Settings\Store;
 
 class CaptchaFactory implements CaptchaInterface
@@ -71,7 +72,7 @@ class CaptchaFactory implements CaptchaInterface
 		$captcha = $this->app->make($captchaClass);
 
 		if (!$captcha || !($captcha instanceof CaptchaInterface) || !$captcha->supported()) {
-			throw new \RuntimeException("Failed to load Captcha Class '{$captchaClass}'");
+			throw new CaptchaInvalidClassException($captchaClass);
 		}
 
 		return $captcha;

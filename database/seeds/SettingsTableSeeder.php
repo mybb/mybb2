@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Settings table seeder, creates settings required for an install to function.
  */
-
 class SettingsTableSeeder extends \Illuminate\Database\Seeder
 {
 	public function run()
@@ -68,7 +68,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
-				 'value' => 'MyBB 2.0 Test Install'
+				'value' => 'MyBB 2.0 Test Install'
 			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),
@@ -77,6 +77,18 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			[
 				'setting_id' => DB::table('settings')->where('name', 'wio.refresh')->pluck('id'),
 				'value' => '1'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'user.date_format')->pluck('id'),
+				'value' => 'default'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'user.time_format')->pluck('id'),
+				'value' => 'default'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'user.timezone')->pluck('id'),
+				'value' => 'default'
 			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'user.dst')->pluck('id'),
@@ -218,6 +230,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
                 'setting_id' => DB::table('settings')->where('name', 'user_activity.per_page')->pluck('id'),
                 'value' => 10,
             ],
+
 		]);
 	}
 }

@@ -1,7 +1,5 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Auth\Guard;
-use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 
@@ -17,15 +15,10 @@ class MemberController extends Controller
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param Guard $guard
+	 * @param UserRepositoryInterface $userRepository
 	 */
-	public function __construct(
-		Guard $guard,
-		Request $request,
-		UserRepositoryInterface $userRepository
-	) {
-		parent::__construct($guard, $request);
-
+	public function __construct(UserRepositoryInterface $userRepository)
+	{
 		$this->userRepository = $userRepository;
 	}
 
@@ -39,6 +32,7 @@ class MemberController extends Controller
 	public function online(Store $settings)
 	{
 		$users = $this->userRepository->online($settings->get('wio.minutes', 15));
+
 		return view('member.online', compact('users'));
 	}
 }

@@ -12,10 +12,8 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Redirector;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
@@ -23,98 +21,93 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
 {
-    /**
-     * @var PostRepositoryInterface $postsRepository
-     */
-    private $postsRepository;
-    /**
-     * @var LikesRepositoryInterface $likesRepository
-     */
-    private $likesRepository;
-    /**
-     * @var Store $settings
-     */
-    private $settings;
+	/**
+	 * @var PostRepositoryInterface $postsRepository
+	 */
+	private $postsRepository;
+	/**
+	 * @var LikesRepositoryInterface $likesRepository
+	 */
+	private $likesRepository;
+	/**
+	 * @var Store $settings
+	 */
+	private $settings;
 
-    /**
-     * @param Guard                    $guard
-     * @param Request                  $request
-     * @param PostRepositoryInterface  $postRepository
-     * @param LikesRepositoryInterface $likesRepository
-     * @param Store                    $settings
-     */
-    public function __construct(
-        Guard $guard,
-        Request $request,
-        PostRepositoryInterface $postRepository,
-        LikesRepositoryInterface $likesRepository,
-        Store $settings
-    ) {
-        parent::__construct($guard, $request);
-        $this->postsRepository = $postRepository;
-        $this->likesRepository = $likesRepository;
-        $this->settings = $settings;
-    }
+	/**
+	 * @param PostRepositoryInterface  $postRepository
+	 * @param LikesRepositoryInterface $likesRepository
+	 * @param Store                    $settings
+	 */
+	public function __construct(
+		PostRepositoryInterface $postRepository,
+		LikesRepositoryInterface $likesRepository,
+		Store $settings
+	) {
+		$this->postsRepository = $postRepository;
+		$this->likesRepository = $likesRepository;
+		$this->settings = $settings;
+	}
 
-    /**
-     * Handler for POST requests to add a like for a post.
-     *
-     * @param LikePostRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function postToggleLike(LikePostRequest $request)
-    {
-        $post = $this->postsRepository->find($request->get('post_id'));
+	/**
+	 * Handler for POST requests to add a like for a post.
+	 *
+	 * @param LikePostRequest $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function postToggleLike(LikePostRequest $request)
+	{
+		$post = $this->postsRepository->find($request->get('post_id'));
 
-        if (!$post) {
-            throw new NotFoundHttpException();
-        }
+		if (!$post) {
+			throw new PostNotFoundException;
+		}
 
-        $like = $this->likesRepository->toggleLikeForContent($post);
+		$like = $this->likesRepository->toggleLikeForContent($post);
 
-        $redirect = redirect(
-            route(
-                'topics.showPost',
-                [
-                    'slug'   => $post->topic->slug,
-                    'id'     => $post->topic_id,
-                    'postId' => $post->id,
-                ]
-            )
-        );
+		$redirect = redirect(
+			route(
+				'topics.showPost',
+				[
+					'slug' => $post->topic->slug,
+					'id' => $post->topic_id,
+					'postId' => $post->id,
+				]
+			)
+		);
 
-        if ($like === null) {
-            $redirect = $redirect->withSuccess(trans('post.like_removed'));
-        } else {
-            $redirect = $redirect->withSuccess(trans('post.like_added'));
-        }
+		if ($like === null) {
+			$redirect = $redirect->withSuccess(trans('post.like_removed'));
+		} else {
+			$redirect = $redirect->withSuccess(trans('post.like_added'));
+		}
 
-        return $redirect;
-    }
+		return $redirect;
+	}
 
-    /**
-     * SHow all of the likes a post has received.
-     *
-     * @param int $postId The ID of the post to show the likes for.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function getPostLikes($postId)
-    {
-        $post = $this->postsRepository->find($postId);
+	/**
+	 * SHow all of the likes a post has received.
+	 *
+	 * @param int $postId The ID of the post to show the likes for.
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getPostLikes($postId)
+	{
+		$post = $this->postsRepository->find($postId);
 
-        if (!$post) {
-            throw new NotFoundHttpException();
-        }
+		if (!$post) {
+			throw new PostNotFoundException;
+		}
 
-        $post->load('topic');
+		$post->load('topic');
 
-        $likes = $this->likesRepository->getAllLikesForContentPaginated(
-            $post,
-            $this->settings->get('likes.per_page', 10)
-        );
+		$likes = $this->likesRepository->getAllLikesForContentPaginated(
+			$post,
+			$this->settings->get('likes.per_page', 10)
+		);
 
-        return view('post.likes', compact('post', 'likes'));
-    }
+		return view('post.likes', compact('post', 'likes'));
+	}
 }

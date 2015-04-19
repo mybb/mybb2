@@ -50,6 +50,24 @@ Breadcrumbs::register('topics.create', function ($breadcrumbs, $forum)
 	$breadcrumbs->push(trans('topic.create.title'), route('topics.create', [$forum->slug, $forum->id]));
 });
 
+Breadcrumbs::register('polls.create', function ($breadcrumbs, $topic)
+{
+	$breadcrumbs->parent('topics.show', $topic);
+	$breadcrumbs->push(trans('poll.addPoll'), route('polls.create', [$topic->slug, $topic->id]));
+});
+
+Breadcrumbs::register('polls.show', function ($breadcrumbs, $topic)
+{
+	$breadcrumbs->parent('topics.show', $topic);
+	$breadcrumbs->push(trans('poll.pollResults'), route('polls.show', [$topic->slug, $topic->id]));
+});
+
+Breadcrumbs::register('polls.edit', function ($breadcrumbs, $topic)
+{
+	$breadcrumbs->parent('topics.show', $topic);
+	$breadcrumbs->push(trans('poll.editPoll'), route('polls.edit', [$topic->slug, $topic->id]));
+});
+
 Breadcrumbs::register('members', function ($breadcrumbs)
 {
 	$breadcrumbs->parent('forum.index');

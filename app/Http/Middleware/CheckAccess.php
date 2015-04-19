@@ -3,6 +3,7 @@
 use Closure;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Permissions\PermissionChecker;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class CheckAccess
 {
@@ -36,8 +37,7 @@ class CheckAccess
 			return $next($request);
 		}
 
-		// TODO: The acp should probably create another view
-		return view('errors.no_permission');
+		throw new AccessDeniedHttpException;
 	}
 
 	/**
