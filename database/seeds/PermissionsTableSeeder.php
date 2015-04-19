@@ -30,6 +30,11 @@ class PermissionsTableSeeder extends Seeder
 				'content_name' => 'forum',
 				'default_value' => 1
 			],
+			[
+				'permission_name' => 'canViewAllOnline',
+				'content_name' => null,
+				'default_value' => 0
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);
