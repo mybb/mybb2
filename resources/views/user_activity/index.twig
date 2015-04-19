@@ -1,32 +1,32 @@
 {% extends "layouts.base" %}
 {% block title %}
-    {{ trans('user_activity.index') }}
+	{{ trans('user_activity.index') }}
 {% endblock %}
 {% block head %}
-    <meta name="description" content="{{ trans('user_activity.meta_desc') }}" />
-    <link rel="canonical" href="{{ url_route("user_activity.index") }}" />
+	<meta name="description" content="{{ trans('user_activity.meta_desc') }}"/>
+	<link rel="canonical" href="{{ url_route("user_activity.index") }}"/>
 {% endblock %}
 {% block contents %}
-    <div class="page-content">
-        <header>
-            <h1>{{ trans('user_activity.index') }}</h1>
-        </header>
-        <div class="page-controls">
-            {{ activities.render|raw }}
-        </div>
-        <ul class="activities">
-            {% for entry in activities %}
-                <li class="activity" id="activity-{{ entry.id }}" data-activity-id="{{ entry.id }}">
-                    <div class="activity__user user" data-user-id="{{ entry.user.id }}">
-                        {{ render_profile_link(entry.user, true) }}
-                    </div>
-                    {{ entry.activityString|raw }}
-                    <div class="activity__date">
-                        {{ human_date(entry.created_at) }}
-                    </div>
-                </li>
-            {% endfor %}
-            {{ activities.render|raw }}
-        </ul>
-    </div>
+	<div class="page-content">
+		<header>
+			<h1>{{ trans('user_activity.index') }}</h1>
+		</header>
+		<div class="page-controls">
+			{{ activities.render|raw }}
+		</div>
+		<ul class="activities">
+			{% for entry in activities %}
+				<li class="activity" id="activity-{{ entry.id }}" data-activity-id="{{ entry.id }}">
+					<div class="activity__user user" data-user-id="{{ entry.user.id }}">
+						{{ render_profile_link(entry.user, true) }}
+					</div>
+					{{ entry.activityString|raw }}
+					<div class="activity__date">
+						{{ human_date(entry.created_at) }}
+					</div>
+				</li>
+			{% endfor %}
+			{{ activities.render|raw }}
+		</ul>
+	</div>
 {% endblock %}
