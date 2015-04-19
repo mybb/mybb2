@@ -16,7 +16,7 @@ class Kernel extends HttpKernel
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken',
+	//	'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken',
 	    'MyBB\Settings\Middleware\SaveSettingsOnTerminate',
 		'MyBB\Core\Http\Middleware\SetupLanguage',
 		'MyBB\Core\Http\Middleware\ShareViewVariables',
