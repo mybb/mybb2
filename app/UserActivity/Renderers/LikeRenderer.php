@@ -65,8 +65,8 @@ class LikeRenderer extends AbstractRenderer
                 'content_title' => isset($activity->extra_details['liked_content_title']) ? $activity->extra_details['liked_content_title'] : '',
                 'content_link'    => $contentLink,
                 'user_link' => $this->urlGenerator->route('user.profile', [
-                    'slug' => isset($activity->extra_details['liked_content_user_id']) ? $activity->extra_details['liked_content_user_id'] : 0,
-                    'id' => isset($activity->extra_details['liked_content_user_name']) ? $activity->extra_details['liked_content_user_name'] : '',
+                    'id' => isset($activity->extra_details['liked_content_user_id']) ? $activity->extra_details['liked_content_user_id'] : 0,
+                    'slug' => isset($activity->extra_details['liked_content_user_name']) ? $activity->extra_details['liked_content_user_name'] : '',
                 ]),
                 'user_name' => isset($activity->extra_details['liked_content_user_name']) ? $activity->extra_details['liked_content_user_name'] : '',
             ]
