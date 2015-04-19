@@ -37,9 +37,12 @@ return [
 	'username' => 'Username',
 	'time' => 'Time',
 	'location' => 'Location',
+	'menu' => 'Menu',
 	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
-	'order' => 'Order:'
+	'order' => 'Order:',
 
+	'poweredBy' => 'Powered By',
+	'mybbDesc' => 'The best free and open source forum software'
 ];

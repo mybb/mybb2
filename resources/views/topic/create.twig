@@ -17,13 +17,13 @@
 			<div class="form__section">
 				{% if auth_check() == false %}
 					<div class="form__row">
-						<h3>{{ form_label('username', 'Username') }}</h3>
+						<h3>{{ form_label('username', trans('topic.create.username')) }}</h3>
 						{{ form_text('username', trans('general.guest')) }}
 					</div>
 				{% endif %}
 				<div class="form__row">
-					<h3>{{ form_label('title', 'Title') }}</h3>
-					{{ form_text('title', '', {'placeholder': 'Enter a meaningful title...', 'title': 'Enter a meaningful title...'}) }}
+					<h3>{{ form_label('title', trans('topic.create.title')) }}</h3>
+					{{ form_text('title', '', {'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('content', 'Content') }}</h3>
@@ -97,7 +97,7 @@
 		</section>
 		{{ form_hidden('forum_id', forum.id) }}
 		<div class="form__submit">
-			{{ form_button('<i class="fa fa-edit"></i><span class="text">Post Topic</span>', {'type': 'submit', 'class': 'button'}) }}
+			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('topic.create.postTopic')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 		</div>
 		{{ form_close() }}
 	</div>

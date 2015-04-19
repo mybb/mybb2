@@ -54,11 +54,8 @@ class PollController extends Controller
 		PollRepositoryInterface $pollRepository,
 		PollVoteRepositoryInterface $pollVoteRepository,
 		ForumRepositoryInterface $forumRepository,
-		Guard $guard,
-		Request $request
+		Guard $guard
 	) {
-		parent::__construct($guard, $request);
-
 		$this->topicRepository = $topicRepository;
 		$this->pollRepository = $pollRepository;
 		$this->pollVoteRepository = $pollVoteRepository;
@@ -105,7 +102,7 @@ class PollController extends Controller
 			}
 		}
 
-		return view('polls.show', compact('topic', 'options', 'poll', 'myVote'));
+		return view('polls.show', compact('topic', 'options', 'poll'));
 	}
 
 	/**
@@ -152,7 +149,7 @@ class PollController extends Controller
 			'is_multiple' => (bool)$createRequest->input('is_multiple'),
 			'is_public' => (bool)$createRequest->input('is_public'),
 			'end_at' => null,
-			'max_options' => $createRequest->input('maxoptions')
+			'max_options' => (int)$createRequest->input('maxoptions')
 		];
 		if ($createRequest->input('endAt')) {
 			$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
@@ -379,7 +376,7 @@ class PollController extends Controller
 			'is_closed' => (bool)$createRequest->input('is_closed'),
 			'is_multiple' => (bool)$createRequest->input('is_multiple'),
 			'is_public' => (bool)$createRequest->input('is_public'),
-			'max_options' => $createRequest->input('maxoptions')
+			'max_options' => (int)$createRequest->input('maxoptions')
 		];
 		if ($createRequest->input('endAt')) {
 			$poll['end_at'] = new \DateTime($createRequest->input('endAt'));
