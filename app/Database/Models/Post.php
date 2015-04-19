@@ -131,11 +131,7 @@ class Post extends Model implements HasPresenter, LikeableInterface, ActivitySto
      */
     public function getContentAuthor()
     {
-        if (!isset($this->topic) || !isset($this->topic->author)) {
-            $this->load(['topic', 'topic.author']);
-        }
-
-        return $this->topic->author;
+        return $this->author;
     }
 
     /**

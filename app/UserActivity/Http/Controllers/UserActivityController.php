@@ -22,10 +22,6 @@ use MyBB\Settings\Store;
 
 class UserActivityController extends Controller
 {
-	/** @var Guard $guard */
-	private $guard;
-	/** @var Request $request */
-	private $request;
 	/**
 	 * @var UserActivityRepositoryInterface $userActivityRepository
 	 */
@@ -36,19 +32,13 @@ class UserActivityController extends Controller
 	private $settings;
 
 	/**
-	 * @param Guard                           $guard
-	 * @param Request                         $request
 	 * @param UserActivityRepositoryInterface $userActivityRepository
 	 * @param Store                           $settings
 	 */
 	public function __construct(
-		Guard $guard,
-		Request $request,
 		UserActivityRepositoryInterface $userActivityRepository,
 		Store $settings
 	) {
-		$this->guard = $guard;
-		$this->request = $request;
 		$this->userActivityRepository = $userActivityRepository;
 		$this->settings = $settings;
 	}
