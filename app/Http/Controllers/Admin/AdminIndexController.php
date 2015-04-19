@@ -13,7 +13,6 @@ use MyBB\Core\Http\Controllers\AdminController;
 use MyBB\Auth\Guard;
 use MyBB\Settings\Store;
 
-
 class AdminIndexController extends AdminController
 {
 
@@ -33,38 +32,38 @@ class AdminIndexController extends AdminController
 	private $postRepository;
 	/** @var ForumRepositoryInterface $forumRepository */
 	private $forumRepository;
-    /** @var UserRepositoryInterface $userRepository */
-    private $userRepository;
+	/** @var UserRepositoryInterface $userRepository */
+	private $userRepository;
 	/** @var Guard $guard */
 	private $guard;
-    /** @var Store $settings */
-    private $settings;
+	/** @var Store $settings */
+	private $settings;
 
 	/**
 	 * Create a new controller instance.
 	 *
-     * @param TopicRepositoryInterface  $topicRepository    Topic repository to fetch topic information
-     * @param PostRepositoryInterface   $postRepository     Post repository to fetch post information
-     * @param ForumRepositoryInterface  $forumRepository    Forum repository to fetch forum information
-     * @param UserRepositoryInterface   $userRepository     User repository to fetch user information
-     * @param Guard                     $guard              Guard implementation
-     * @param Store                     $settings
+	 * @param TopicRepositoryInterface  $topicRepository    Topic repository to fetch topic information
+	 * @param PostRepositoryInterface   $postRepository     Post repository to fetch post information
+	 * @param ForumRepositoryInterface  $forumRepository    Forum repository to fetch forum information
+	 * @param UserRepositoryInterface   $userRepository     User repository to fetch user information
+	 * @param Guard                     $guard              Guard implementation
+	 * @param Store                     $settings
 	 */
 	public function __construct(
-        TopicRepositoryInterface $topicRepository,
-        PostRepositoryInterface $postRepository,
-        ForumRepositoryInterface $forumRepository,
-        UserRepositoryInterface $userRepository,
-        Guard $guard,
-        Store $settings
-    )
+		TopicRepositoryInterface $topicRepository,
+		PostRepositoryInterface $postRepository,
+		ForumRepositoryInterface $forumRepository,
+		UserRepositoryInterface $userRepository,
+		Guard $guard,
+		Store $settings
+	)
 	{
-        parent::__construct($guard);
+		parent::__construct($guard);
 
-        $this->topicRepository = $topicRepository;
-        $this->postRepository = $postRepository;
-        $this->forumRepository = $forumRepository;
-        $this->guard = $guard;
+		$this->topicRepository = $topicRepository;
+		$this->postRepository = $postRepository;
+		$this->forumRepository = $forumRepository;
+		$this->guard = $guard;
 	}
 
 	/**
