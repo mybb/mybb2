@@ -12,6 +12,8 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 		DB::table('settings')->insert([
 			['name' => 'general.board_name'],
 			['name' => 'general.board_desc'],
+			['name' => 'general.site_name'],
+			['name' => 'general.site_url'],
 			['name' => 'wio.minutes'],
 			['name' => 'wio.refresh'],
 			['name' => 'captcha.method'],
@@ -69,6 +71,14 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			[
 				'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
 				'value' => 'MyBB 2.0 Test Install'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'general.site_name')->pluck('id'),
+				'value' => 'MyBB Home'
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'general.site_url')->pluck('id'),
+				'value' => 'http://www.mybb.com'
 			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),

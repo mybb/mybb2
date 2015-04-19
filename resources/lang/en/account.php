@@ -84,6 +84,7 @@ return [
 	'notify_on_reply' => 'Replies to a thread I\'m following',
 	'notify_on_new_post' => 'Posts a new thread to a forum I\'m following',
 	'profiles' => 'Profiles',
+	'notify_preferences' => 'Notification Preferences',
 	'notify_on_new_comment' => 'Posts a comment on my profile',
 	'notify_on_comment_like' => 'Likes a comment on my profile',
 	'notify_on_my_comment_like' => 'Likes one of my comments',
@@ -114,4 +115,6 @@ return [
 	'dob_visibility' => 'Show your date of birth or age to:',
 	'update_privacy' => 'Update Privacy Settings',
 	'saved_privacy' => 'Your Privacy Settings were saved successfully',
+
+	'goToYourProfile' => 'Go to your profile',
 ];

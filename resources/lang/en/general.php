@@ -39,8 +39,12 @@ return [
 	'new' => 'New',
 	'from' => 'from',
 	'never' => 'Never',
+	'menu' => 'Menu',
+	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
-	'order' => 'Order:'
+	'order' => 'Order:',
 
+	'poweredBy' => 'Powered By',
+	'mybbDesc' => 'The best free and open source forum software'
 ];
