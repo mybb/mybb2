@@ -22,8 +22,8 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	protected $userProfileFields;
 
 	/**
-	 * @param ProfileFieldModel $resource
-	 * @param Guard $guard
+	 * @param ProfileFieldModel                   $resource
+	 * @param Guard                               $guard
 	 * @param UserProfileFieldRepositoryInterface $userProfileFields
 	 */
 	public function __construct(
@@ -86,12 +86,19 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	}
 
 	/**
+	 * @param User $user
+	 *
 	 * @return mixed
 	 */
-	public function getValue()
+	public function getValue(User $user = null)
 	{
-		$userProfileField = $this->userProfileFields->findForProfileField($this->guard->user(),
-			$this->getWrappedObject());
+		if ($user == null) {
+			$user = $this->guard->user();
+		} else {
+			$user = $user->getWrappedObject();
+		}
+
+		$userProfileField = $this->userProfileFields->findForProfileField($user, $this->getWrappedObject());
 
 		if ($userProfileField) {
 			return $userProfileField->getValue();

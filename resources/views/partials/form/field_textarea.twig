@@ -1,1 +1,1 @@
-<textarea name="{{ name }}" rows="{{ rows }}" cols="{{ cols }}" {{ is_required ? 'required' }} {{ min_length is defined ? 'minlength=' ~ min_length }} {{ max_length is defined ? 'maxlength=' ~ max_length }}>{{ value }}</textarea>
+<textarea name="{{ name }}" rows="{{ rows }}" cols="{{ cols }}" {{ is_required ? 'required' }} {{ min_length is defined and min_length > 0 ? 'minlength=' ~ min_length }} {{ max_length is defined and max_length > min_length ? 'maxlength=' ~ max_length }}>{{ value }}</textarea>
