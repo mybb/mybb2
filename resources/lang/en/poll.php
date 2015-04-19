@@ -27,5 +27,5 @@ return [
 	'edit' => 'Edit',
 	'isClosed' => 'This poll is closed.',
 	'closePoll' => 'Close Poll',
-	'closePoll.desc' => 'Don\'t allow users to vote in this poll'
+	'closePoll.desc' => "Don't allow users to vote in this poll"
 ];
