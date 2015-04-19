@@ -2,7 +2,7 @@
 			<div class="wrapper">
 				<h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>{{ setting('general.board_name', 'MyBB Community Forums') }}</span></a></h1>
 				<nav class="main-menu menu-bar">
-					<a class="main-menu__button"><i class="fa fa-bars"></i><span class="text">Menu</span></a>
+					<a class="main-menu__button"><i class="fa fa-bars"></i><span class="text">{{ trans('general.menu') }}</span></a>
 					<div class="main-menu__container">
 						<ul>
 							<li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
@@ -24,9 +24,9 @@
 							<input type="search" name="keyword" placeholder="" value="" class="search__field" />
 							<span class="search__controls">
 								<button type="submit" class="search__submit">
-									<i class="fa fa-search"></i><span class="text">Search</span>
+									<i class="fa fa-search"></i><span class="text">{{ trans('search.search') }}</span>
 								</button>
-								<a href="{{ url_route('search') }}" class="search__advanced" title="Advanced Search"><i class="fa fa-cog"></i><span class="text">Advanced</span></a>
+								<a href="{{ url_route('search') }}" class="search__advanced" title="{{ trans('search.advancedSearch') }}"><i class="fa fa-cog"></i><span class="text">{{ trans('search.advanced') }}</span></a>
 							</span>
 						</div>
 					{{ form_close() }}

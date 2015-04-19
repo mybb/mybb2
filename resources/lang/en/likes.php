@@ -14,6 +14,6 @@ return [
     'current_user' => 'You',
     'sep_comma' => ',',
     'sep_and' => ' and ',
-    'others' => ':numOthers others',
+    'others' => 'another|:numOthers others',
     'like_this' => ' like this.',
 ];
