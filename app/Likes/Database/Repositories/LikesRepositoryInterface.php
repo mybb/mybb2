@@ -13,6 +13,7 @@
 namespace MyBB\Core\Likes\Database\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
+use MyBB\Core\Likes\Contracts\LikeableInterface;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
 interface LikesRepositoryInterface
@@ -30,7 +31,7 @@ interface LikesRepositoryInterface
     /**
      * Retrieve all of the likes a piece of content has received.
      *
-     * @param \Illuminate\Database\Eloquent\Model|LikeableTrait $content The content to retrieve the likes for.
+     * @param \Illuminate\Database\Eloquent\Model|LikeableTrait|LikeableInterface $content The content to retrieve the likes for.
      *
      * @param int                                               $perPage The number of likes to show per page.
      *
@@ -41,7 +42,7 @@ interface LikesRepositoryInterface
     /**
      * Get all of the likes for a set of entries of a specific content type.
      *
-     * @param Model $contentType The type of the content to get all of the likes for.
+     * @param Model|LikeableTrait|LikeableInterface $contentType The type of the content to get all of the likes for.
      * @param array $ids An array of IDs of the entries to get the likes for.
      *
      * @return mixed
@@ -51,7 +52,7 @@ interface LikesRepositoryInterface
     /**
      * Toggle a like on or off for a given piece of content for the current user.
      *
-     * @param \Illuminate\Database\Eloquent\Model|LikeableTrait $content The content to toggle the like for.
+     * @param \Illuminate\Database\Eloquent\Model|LikeableTrait|LikeableInterface $content The content to toggle the like for.
      *
      * @return mixed
      */

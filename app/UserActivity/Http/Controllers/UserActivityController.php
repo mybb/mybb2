@@ -22,6 +22,10 @@ use MyBB\Settings\Store;
 
 class UserActivityController extends Controller
 {
+    /** @var Guard $guard */
+    private $guard;
+    /** @var Request $request */
+    private $request;
     /**
      * @var UserActivityRepositoryInterface $userActivityRepository
      */
@@ -43,8 +47,8 @@ class UserActivityController extends Controller
         UserActivityRepositoryInterface $userActivityRepository,
         Store $settings
     ) {
-        parent::__construct($guard, $request);
-
+        $this->guard = $guard;
+        $this->request = $request;
         $this->userActivityRepository = $userActivityRepository;
         $this->settings = $settings;
     }

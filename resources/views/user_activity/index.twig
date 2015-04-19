@@ -21,6 +21,9 @@
                         {{ render_profile_link(entry.user, true) }}
                     </div>
                     {{ entry.activityString|raw }}
+                    <div class="activity__date">
+                        {{ human_date(entry.created_at) }}
+                    </div>
                 </li>
             {% endfor %}
             {{ activities.render|raw }}

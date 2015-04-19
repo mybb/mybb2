@@ -18,6 +18,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Translation\Translator;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
+use MyBB\Core\UserActivity\Renderers\LikeRenderer;
 use MyBB\Core\UserActivity\Renderers\PostRenderer;
 
 class RendererFactory
@@ -61,6 +62,9 @@ class RendererFactory
         switch ($activity->activity_type) {
             case PostRenderer::ACTIVITY_NAME:
                 $renderer = '\MyBB\Core\UserActivity\Renderers\PostRenderer';
+                break;
+            case LikeRenderer::ACTIVITY_NAME:
+                $renderer = '\MyBB\Core\UserActivity\Renderers\LikeRenderer';
                 break;
             default:
                 if (isset($this->types[$activity->activity_type])) {

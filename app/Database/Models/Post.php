@@ -12,11 +12,12 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Likes\Contracts\LikeableInterface;
 use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 use MyBB\Core\UserActivity\Traits\UserActivityTrait;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
-class Post extends Model implements HasPresenter, ActivityStoreableInterface
+class Post extends Model implements HasPresenter, LikeableInterface, ActivityStoreableInterface
 {
     use SoftDeletes;
     use UserActivityTrait;
@@ -107,5 +108,59 @@ class Post extends Model implements HasPresenter, ActivityStoreableInterface
             'topic_title' => $this->topic->title,
             'content' => $this->content_parsed,
         ];
+    }
+
+    /**
+     * Get the title of the content being liked.
+     *
+     * @return string
+     */
+    public function getContentTitle()
+    {
+        if (!isset($this->topic)) {
+            $this->load(['topic', 'topic.author']);
+        }
+
+        return $this->topic->title;
+    }
+
+    /**
+     * Get the author of the content being liked.
+     *
+     * @return \MyBB\Core\Database\Models\User
+     */
+    public function getContentAuthor()
+    {
+        if (!isset($this->topic) || !isset($this->topic->author)) {
+            $this->load(['topic', 'topic.author']);
+        }
+
+        return $this->topic->author;
+    }
+
+    /**
+     * Get the short name of the content being liked.
+     *
+     * For example: "post".
+     *
+     * @return string
+     */
+    public function getContentTypeShortName()
+    {
+        return "post";
+    }
+
+    /**
+     * Get the URL to view this content.
+     *
+     * @return string
+     */
+    public function getViewUrl()
+    {
+        return route('topics.showPost', [
+           'slug' => $this->topic->slug,
+           'id' => $this->topic_id,
+           'postId' => $this->id,
+        ]);
     }
 }
