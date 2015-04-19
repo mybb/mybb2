@@ -46,7 +46,7 @@ class Like extends Model implements ActivityStoreableInterface
      *
      * @var array
      */
-    protected $with = ['user'];
+    protected $with = ['user', 'likeable'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
