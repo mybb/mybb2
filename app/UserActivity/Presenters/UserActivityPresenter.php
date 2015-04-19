@@ -20,41 +20,41 @@ use MyBB\Core\UserActivity\RendererFactory;
 
 class UserActivityPresenter extends BasePresenter
 {
-    /**
-     * @var UserActivity $wrappedObject
-     */
+	/**
+	 * @var UserActivity $wrappedObject
+	 */
 
-    /**
-     * @var RendererFactory $renderer
-     */
-    protected $rendererFactory;
+	/**
+	 * @var RendererFactory $renderer
+	 */
+	protected $rendererFactory;
 
-    /**
-     * @param UserActivity    $resource
-     * @param RendererFactory $rendererFactory
-     *
-     * @internal param AbstractRenderer $renderer
-     */
-    public function __construct(UserActivity $resource, RendererFactory $rendererFactory)
-    {
-        parent::__construct($resource);
-        $this->rendererFactory = $rendererFactory;
-    }
+	/**
+	 * @param UserActivity    $resource
+	 * @param RendererFactory $rendererFactory
+	 *
+	 * @internal param AbstractRenderer $renderer
+	 */
+	public function __construct(UserActivity $resource, RendererFactory $rendererFactory)
+	{
+		parent::__construct($resource);
+		$this->rendererFactory = $rendererFactory;
+	}
 
-    /**
-     * Render the activity string.
-     *
-     * @return string
-     */
-    public function activityString()
-    {
-        $renderer = $this->rendererFactory->build($this->getWrappedObject());
+	/**
+	 * Render the activity string.
+	 *
+	 * @return string
+	 */
+	public function activityString()
+	{
+		$renderer = $this->rendererFactory->build($this->getWrappedObject());
 
-        if ($renderer !== null) {
-            return $renderer->render($this->getWrappedObject());
-        }
+		if ($renderer !== null) {
+			return $renderer->render($this->getWrappedObject());
+		}
 
-        // TODO: Baseline activity string...
-        return '';
-    }
+		// TODO: Baseline activity string...
+		return '';
+	}
 }

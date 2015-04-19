@@ -14,17 +14,17 @@ namespace MyBB\Core\UserActivity\Contracts;
 
 interface ActivityStoreableInterface
 {
-    /**
-     * Get the ID of the model.
-     *
-     * @return int
-     */
-    public function getContentId();
+	/**
+	 * Get the ID of the model.
+	 *
+	 * @return int
+	 */
+	public function getContentId();
 
-    /**
-     * Get extra details about a model.
-     *
-     * @return array The extra details to store.
-     */
-    public function getExtraDetails();
+	/**
+	 * Get extra details about a model.
+	 *
+	 * @return array The extra details to store.
+	 */
+	public function getExtraDetails();
 }

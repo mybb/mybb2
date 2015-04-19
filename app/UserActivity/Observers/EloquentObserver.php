@@ -19,42 +19,42 @@ use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface
 
 class EloquentObserver
 {
-    /**
-     * @var Guard $guard
-     */
-    private $guard;
+	/**
+	 * @var Guard $guard
+	 */
+	private $guard;
 
-    /**
-     * @var UserActivityRepositoryInterface $activityRepository
-     */
-    private $activityRepository;
+	/**
+	 * @var UserActivityRepositoryInterface $activityRepository
+	 */
+	private $activityRepository;
 
-    /**
-     * Create the event handler.
-     *
-     * @param Guard                           $guard
-     * @param UserActivityRepositoryInterface $activityRepository
-     */
-    public function __construct(Guard $guard, UserActivityRepositoryInterface $activityRepository)
-    {
-        $this->guard = $guard;
-        $this->activityRepository = $activityRepository;
-    }
+	/**
+	 * Create the event handler.
+	 *
+	 * @param Guard                           $guard
+	 * @param UserActivityRepositoryInterface $activityRepository
+	 */
+	public function __construct(Guard $guard, UserActivityRepositoryInterface $activityRepository)
+	{
+		$this->guard = $guard;
+		$this->activityRepository = $activityRepository;
+	}
 
-    /**
-     * Handle a model being created.
-     *
-     * @param Model $model The created model.
-     */
-    public function created(ActivityStoreableInterface $model)
-    {
-        if ($this->guard->check()) {
-            $userId = $this->guard->user()->getAuthIdentifier();
+	/**
+	 * Handle a model being created.
+	 *
+	 * @param Model $model The created model.
+	 */
+	public function created(ActivityStoreableInterface $model)
+	{
+		if ($this->guard->check()) {
+			$userId = $this->guard->user()->getAuthIdentifier();
 
-            $this->activityRepository->createForContentAndUser(
-                $model,
-                $userId
-            );
-        }
-    }
+			$this->activityRepository->createForContentAndUser(
+				$model,
+				$userId
+			);
+		}
+	}
 }

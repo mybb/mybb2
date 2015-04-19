@@ -14,26 +14,26 @@ namespace MyBB\Core\UserActivity\Traits;
 
 trait UserActivityTrait
 {
-    /**
-     * Boot the user activity trait for a model.
-     *
-     * @return void
-     */
-    public static function bootUserActivityTrait()
-    {
-        static::observe('MyBB\Core\UserActivity\Observers\EloquentObserver');
-    }
+	/**
+	 * Boot the user activity trait for a model.
+	 *
+	 * @return void
+	 */
+	public static function bootUserActivityTrait()
+	{
+		static::observe('MyBB\Core\UserActivity\Observers\EloquentObserver');
+	}
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-     */
-    public function activityHistory()
-    {
-        return $this->morphMany(
-            'MyBB\Core\UserActivity\Database\Models\UserActivity',
-            'activityHistorable',
-            'activity_type',
-            'activity_id'
-        );
-    }
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function activityHistory()
+	{
+		return $this->morphMany(
+			'MyBB\Core\UserActivity\Database\Models\UserActivity',
+			'activityHistorable',
+			'activity_type',
+			'activity_id'
+		);
+	}
 }

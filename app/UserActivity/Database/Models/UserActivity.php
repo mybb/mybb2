@@ -26,53 +26,53 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class UserActivity extends Model implements HasPresenter
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'user_activity';
+	/**
+	 * The table associated with the model.
+	 *
+	 * @var string
+	 */
+	protected $table = 'user_activity';
 
-    /**
-     * The attributes that should be casted to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'extra_details' => 'array',
-    ];
+	/**
+	 * The attributes that should be casted to native types.
+	 *
+	 * @var array
+	 */
+	protected $casts = [
+		'extra_details' => 'array',
+	];
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = [];
+	/**
+	 * The attributes that aren't mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $guarded = [];
 
-    /**
-     * The relations to eager load on every query.
-     *
-     * @var array
-     */
-    protected $with = ['user', 'activityHistorable'];
+	/**
+	 * The relations to eager load on every query.
+	 *
+	 * @var array
+	 */
+	protected $with = ['user', 'activityHistorable'];
 
-    public function user()
-    {
-        return $this->belongsTo('MyBB\Core\Database\Models\User');
-    }
+	public function user()
+	{
+		return $this->belongsTo('MyBB\Core\Database\Models\User');
+	}
 
-    public function activityHistorable()
-    {
-        return $this->morphTo(null, 'activity_type', 'activity_id');
-    }
+	public function activityHistorable()
+	{
+		return $this->morphTo(null, 'activity_type', 'activity_id');
+	}
 
-    /**
-     * Get the presenter class.
-     *
-     * @return string
-     */
-    public function getPresenterClass()
-    {
-        return 'MyBB\Core\UserActivity\Presenters\UserActivityPresenter';
-    }
+	/**
+	 * Get the presenter class.
+	 *
+	 * @return string
+	 */
+	public function getPresenterClass()
+	{
+		return 'MyBB\Core\UserActivity\Presenters\UserActivityPresenter';
+	}
 }

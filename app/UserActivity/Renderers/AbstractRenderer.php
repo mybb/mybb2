@@ -19,35 +19,35 @@ use MyBB\Core\UserActivity\Database\Models\UserActivity;
 
 abstract class AbstractRenderer
 {
-    /**
-     * @var Translator $lang
-     */
-    protected $lang;
+	/**
+	 * @var Translator $lang
+	 */
+	protected $lang;
 
-    /**
-     * @param Translator $lang
-     */
-    public function __construct(Translator $lang)
-    {
-        $this->lang = $lang;
-    }
+	/**
+	 * @param Translator $lang
+	 */
+	public function __construct(Translator $lang)
+	{
+		$this->lang = $lang;
+	}
 
-    /**
-     * Get the full activity type name.
-     *
-     * EG: "MyBB\Core\Database\Models\Post".
-     *
-     * @return string
-     */
-    abstract public function getActivityTypeName();
+	/**
+	 * Get the full activity type name.
+	 *
+	 * EG: "MyBB\Core\Database\Models\Post".
+	 *
+	 * @return string
+	 */
+	abstract public function getActivityTypeName();
 
-    /**
-     * Render a given activity entry into a readable string.
-     *
-     * @param UserActivity $activity The activity to render.
-     *
-     * @return string The activity string. This string is not escaped on output, so should be properly cleaned before
-     *                return.
-     */
-    abstract public function render(UserActivity $activity);
+	/**
+	 * Render a given activity entry into a readable string.
+	 *
+	 * @param UserActivity $activity The activity to render.
+	 *
+	 * @return string The activity string. This string is not escaped on output, so should be properly cleaned before
+	 *                return.
+	 */
+	abstract public function render(UserActivity $activity);
 }

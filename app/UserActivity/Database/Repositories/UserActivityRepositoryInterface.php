@@ -19,67 +19,67 @@ use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 
 interface UserActivityRepositoryInterface
 {
-    /**
-     * Get all user activity entries.
-     *
-     * @return mixed
-     */
-    public function all();
+	/**
+	 * Get all user activity entries.
+	 *
+	 * @return mixed
+	 */
+	public function all();
 
-    /**
-     * Get a paginated list of all user activity entries.
-     *
-     * @param int $perPage The number of activity entries per page.
-     *
-     * @return mixed
-     */
-    public function paginateAll($perPage = 20);
+	/**
+	 * Get a paginated list of all user activity entries.
+	 *
+	 * @param int $perPage The number of activity entries per page.
+	 *
+	 * @return mixed
+	 */
+	public function paginateAll($perPage = 20);
 
-    /**
-     * Get all user activity entries for a specific user.
-     *
-     * @param int|User $user The user to retrieve activity entries for.
-     *
-     * @return mixed
-     */
-    public function allForUser($user);
+	/**
+	 * Get all user activity entries for a specific user.
+	 *
+	 * @param int|User $user The user to retrieve activity entries for.
+	 *
+	 * @return mixed
+	 */
+	public function allForUser($user);
 
-    /**
-     * Get a paginated list of activity entries for a specific user.
-     *
-     * @param int|User $user    The user to retrieve activity entries for.
-     * @param int      $perPage The number of activity entries per page.
-     *
-     * @return mixed
-     */
-    public function paginateForUser($user, $perPage = 20);
+	/**
+	 * Get a paginated list of activity entries for a specific user.
+	 *
+	 * @param int|User $user    The user to retrieve activity entries for.
+	 * @param int      $perPage The number of activity entries per page.
+	 *
+	 * @return mixed
+	 */
+	public function paginateForUser($user, $perPage = 20);
 
-    /**
-     * Delete all activity entries for a user where the creation date is older than a given time-span.
-     *
-     * @param int|User      $user     The user to delete activity entries for.
-     * @param \DateInterval $timeSpan The maximum age of user activity entries to keep.
-     *
-     * @return int The number of deleted user activity entries.
-     */
-    public function deleteForUserOlderThan($user, \DateInterval $timeSpan);
+	/**
+	 * Delete all activity entries for a user where the creation date is older than a given time-span.
+	 *
+	 * @param int|User      $user     The user to delete activity entries for.
+	 * @param \DateInterval $timeSpan The maximum age of user activity entries to keep.
+	 *
+	 * @return int The number of deleted user activity entries.
+	 */
+	public function deleteForUserOlderThan($user, \DateInterval $timeSpan);
 
-    /**
-     * Delete all activity entries for a user.
-     *
-     * @param int|User $user The user to delete activity entries for.
-     *
-     * @return int The number of deleted user activity entries.
-     */
-    public function deleteAllForUser($user);
+	/**
+	 * Delete all activity entries for a user.
+	 *
+	 * @param int|User $user The user to delete activity entries for.
+	 *
+	 * @return int The number of deleted user activity entries.
+	 */
+	public function deleteAllForUser($user);
 
-    /**
-     * Create an activity entry for the given content and user.
-     *
-     * @param ActivityStoreableInterface $content The content to store
-     * @param int                        $userId  The ID of the current user.
-     *
-     * @return mixed
-     */
-    public function createForContentAndUser(ActivityStoreableInterface $content, $userId);
+	/**
+	 * Create an activity entry for the given content and user.
+	 *
+	 * @param ActivityStoreableInterface $content The content to store
+	 * @param int                        $userId  The ID of the current user.
+	 *
+	 * @return mixed
+	 */
+	public function createForContentAndUser(ActivityStoreableInterface $content, $userId);
 }
