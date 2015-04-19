@@ -9,7 +9,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use Illuminate\Database\Query\Builder;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
@@ -31,8 +31,8 @@ class UserRepository implements UserRepositoryInterface
 	private $guard;
 
 	/**
-	 * @param User              $userModel         The model to use for users.
-	 * @param PermissionChecker $permissionChecker 
+	 * @param User              $userModel The model to use for users.
+	 * @param PermissionChecker $permissionChecker
 	 * @param Guard             $guard
 	 */
 	public function __construct(
