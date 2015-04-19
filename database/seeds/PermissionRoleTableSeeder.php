@@ -12,18 +12,18 @@ class PermissionRoleTableSeeder extends Seeder
 		$permissions_role = [
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterACP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
-				'value' => 1
+				'role_id'       => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value'         => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
-				'value' => 0
+				'role_id'       => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
+				'value'         => 0
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
-				'value' => -1
+				'role_id'       => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
+				'value'         => -1
 			],
 		];
 
