@@ -14,8 +14,6 @@
 
 namespace MyBB\Core\UserActivity\Http\Controllers;
 
-use Illuminate\Http\Request;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Controllers\Controller;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 use MyBB\Settings\Store;
