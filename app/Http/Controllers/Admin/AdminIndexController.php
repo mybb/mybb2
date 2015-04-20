@@ -9,8 +9,7 @@ use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Http\Controllers\AdminController;
-use MyBB\Auth\Guard;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Settings\Store;
 
 class AdminIndexController extends AdminController
