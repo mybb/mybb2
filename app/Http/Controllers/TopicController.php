@@ -214,7 +214,7 @@ class TopicController extends Controller
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
-	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
+	public function postReply($slug, $id, ReplyRequest $replyRequest)
 	{
 		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
 
@@ -277,7 +277,7 @@ class TopicController extends Controller
 	 *
 	 * @return \Exception|\Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit($slug = '', $id = 0, $postId = 0, ReplyRequest $replyRequest)
+	public function postEdit($slug, $id, $postId, ReplyRequest $replyRequest)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -334,7 +334,7 @@ class TopicController extends Controller
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate($forumId = 0, CreateRequest $createRequest)
+	public function postCreate($forumId, CreateRequest $createRequest)
 	{
 		// Forum permissions are checked in "CreateRequest"
 
@@ -398,7 +398,7 @@ class TopicController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($slug = '', $id = 0, $postId = 0, TopicDeleter $topicDeleter)
+	public function delete($slug, $id, $postId, TopicDeleter $topicDeleter)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
