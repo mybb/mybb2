@@ -14,6 +14,7 @@ use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Parser\MessageFormatter;
+use MyBB\Settings\Store;
 
 class ConversationMessageRepository implements ConversationMessageRepositoryInterface
 {
@@ -26,19 +27,25 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	/** @var MessageFormatter */
 	private $messageFormatter;
 
+	/** @var Store */
+	private $settings;
+
 	/**
 	 * @param ConversationMessage     $conversationMessageModel
 	 * @param UserRepositoryInterface $userRepository
 	 * @param MessageFormatter        $messageFormatter
+	 * @param Store                   $settings
 	 */
 	public function __construct(
 		ConversationMessage $conversationMessageModel,
 		UserRepositoryInterface $userRepository,
-		MessageFormatter $messageFormatter
+		MessageFormatter $messageFormatter,
+		Store $settings
 	) {
 		$this->conversationMessageModel = $conversationMessageModel;
 		$this->userRepository = $userRepository;
 		$this->messageFormatter = $messageFormatter;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -62,7 +69,9 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	 */
 	public function getAllForConversation(Conversation $conversation)
 	{
-		return $this->conversationMessageModel->where('conversation_id', $conversation->id)->get();
+		return $this->conversationMessageModel->where('conversation_id', $conversation->id)
+			->orderBy('created_at', $this->settings->get('conversations.message_order', 'desc'))
+			->get();
 	}
 
 	/**

@@ -44,6 +44,8 @@ return [
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
 	'order' => 'Order:',
+	'ascending' => 'Ascending',
+	'descending' => 'Descending',
 
 	'poweredBy' => 'Powered By',
 	'mybbDesc' => 'The best free and open source forum software'

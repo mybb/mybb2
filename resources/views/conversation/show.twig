@@ -10,7 +10,8 @@
 					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ render_profile_link(participant, false, false) }}
 						({{ trans('conversations.last_read') }}:
 						{# both values need to be "raw" as twig either escapes both or none #}
-						{{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }})
+						{{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}
+						)
 					</span>
 				{% endfor %}
 			</p>
@@ -27,6 +28,11 @@
 			</div>
 		</div>
 		<section class="topic">
+			{% if setting('conversations.message_order', 'desc') == 'desc' %}
+				{% include 'conversation.quickreply' with {'conversation': conversation} %}
+			{% endif %}
+
+
 			{% for message in messages %}
 				<div class="post">
 					<div class="post__meta">
@@ -47,7 +53,10 @@
 					</div>
 				</div>
 			{% endfor %}
-			{% include 'conversation.quickreply' with {'conversation': conversation} %}
+
+			{% if setting('conversations.message_order', 'desc') == 'asc' %}
+				{% include 'conversation.quickreply' with {'conversation': conversation} %}
+			{% endif %}
 		</section>
 	</div>
 {% endblock %}
