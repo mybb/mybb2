@@ -128,7 +128,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function create($details)
+	public function create(array $details)
 	{
 		$conversation = null;
 

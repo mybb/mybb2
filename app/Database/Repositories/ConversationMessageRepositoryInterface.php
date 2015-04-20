@@ -41,10 +41,12 @@ interface ConversationMessageRepositoryInterface
 	/**
 	 * @param Conversation $conversation
 	 * @param array        $details
+	 * @param bool         $checkParticipants Whether or not participants who left the conversation but don't ignore it
+	 *                                        should be readded
 	 *
 	 * @return ConversationMessage
 	 */
-	public function addMessageToConversation(Conversation $conversation, $details, $checkParticipants = true);
+	public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true);
 
 	/**
 	 * @param Conversation $conversation

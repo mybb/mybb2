@@ -45,7 +45,7 @@ interface ConversationRepositoryInterface
 	 *
 	 * @return Conversation
 	 */
-	public function create($conversation);
+	public function create(array $conversation);
 
 	/**
 	 * @param Conversation $conversation

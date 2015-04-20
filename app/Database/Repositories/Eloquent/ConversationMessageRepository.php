@@ -68,7 +68,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	/**
 	 * {@inheritdoc}
 	 */
-	public function addMessageToConversation(Conversation $conversation, $details, $checkParticipants = true)
+	public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true)
 	{
 		$details['message_parsed'] = $this->messageFormatter->parse($details['message'], [
 			MessageFormatter::ME_USERNAME => $this->userRepository->find($details['author_id'])->name,
