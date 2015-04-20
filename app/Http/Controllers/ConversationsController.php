@@ -109,7 +109,7 @@ class ConversationsController extends Controller
 			return redirect()->route('conversations.read', ['id' => $conversation->id]);
 		}
 
-		return redirect()->route('conversations-compose')->withInput()->withErrors([
+		return redirect()->route('conversations.compose')->withInput()->withErrors([
 			'content' => 'error'
 		]);
 	}

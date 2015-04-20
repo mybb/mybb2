@@ -81,6 +81,7 @@ class Conversation extends Model implements HasPresenter
 	 */
 	public function participants()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\User')->withPivot('last_read', 'has_left', 'ignores');
+		return $this->belongsToMany('MyBB\Core\Database\Models\User', 'conversation_users')->withPivot('last_read',
+			'has_left', 'ignores');
 	}
 }

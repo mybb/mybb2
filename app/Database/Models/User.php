@@ -118,10 +118,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function conversations()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation')->withPivot('last_read', 'has_left',
+		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation', 'conversation_users')->withPivot('last_read', 'has_left',
 			'ignores')
 			->orderBy('last_message_id', 'desc')
-			->where('conversation_user.has_left', false)
-			->where('conversation_user.ignores', false);
+			->where('conversation_users.has_left', false)
+			->where('conversation_users.ignores', false);
 	}
 }

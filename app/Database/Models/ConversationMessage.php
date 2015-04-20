@@ -23,7 +23,7 @@ class ConversationMessage extends Model implements HasPresenter
 	 *
 	 * @var string
 	 */
-	protected $table = 'conversations_messages';
+	protected $table = 'conversation_messages';
 
 	/**
 	 * The attributes that are mass assignable.

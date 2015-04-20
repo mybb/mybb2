@@ -13,7 +13,7 @@ class CreateConversationUserTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('conversation_user', function (Blueprint $table) {
+		Schema::create('conversation_users', function (Blueprint $table) {
 			$table->unsignedInteger('conversation_id');
 			$table->unsignedInteger('user_id');
 			$table->timestamp('last_read')->nullable();
@@ -34,7 +34,7 @@ class CreateConversationUserTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('conversation_user');
+		Schema::drop('conversation_users');
 	}
 
 }

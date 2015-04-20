@@ -12,7 +12,7 @@ class CreateConversationMessagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('conversations_messages', function (Blueprint $table) {
+		Schema::create('conversation_messages', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('conversation_id');
 			$table->unsignedInteger('author_id');
@@ -40,7 +40,7 @@ class CreateConversationMessagesTable extends Migration {
 			$table->dropForeign('conversations_last_message_id_foreign');
 		});
 
-		Schema::drop('conversations_messages');
+		Schema::drop('conversation_messages');
 	}
 
 }

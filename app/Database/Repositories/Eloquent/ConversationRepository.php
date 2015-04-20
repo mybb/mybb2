@@ -75,18 +75,18 @@ class ConversationRepository implements ConversationRepositoryInterface
 		// TODO: this is a big query, should probably be cached (at least for the request)
 		/** @var Collection $conversations */
 		$conversations = $this->conversationModel
-			->join('conversation_user', function ($join) use ($user) {
-				$join->on('conversation_user.conversation_id', '=', 'conversations.id');
-				$join->where('conversation_user.user_id', '=', $user->id);
+			->join('conversation_users', function ($join) use ($user) {
+				$join->on('conversation_users.conversation_id', '=', 'conversations.id');
+				$join->where('conversation_users.user_id', '=', $user->id);
 			})
-			->join('conversations_messages', 'conversations_messages.id', '=', 'conversations.last_message_id')
+			->join('conversation_messages', 'conversation_messages.id', '=', 'conversations.last_message_id')
 //			->where(function ($query) {
-//				$query->where('conversations_messages.created_at', '>', 'conversation_user.last_read')
-//					->orWhere('conversation_user.last_read', null);
+//				$query->where('conversation_messages.created_at', '>', 'conversation_users.last_read')
+//					->orWhere('conversation_users.last_read', null);
 //			})
-			->where('conversation_user.ignores', false)
-			->orderBy('conversations_messages.created_at', 'desc')
-			->get(['conversations.*', 'conversations_messages.created_at', 'conversation_user.last_read']);
+			->where('conversation_users.ignores', false)
+			->orderBy('conversation_messages.created_at', 'desc')
+			->get(['conversations.*', 'conversation_messages.created_at', 'conversation_users.last_read']);
 
 		return $conversations->filter(function ($conversation) {
 			if ($conversation->last_read == null) {
