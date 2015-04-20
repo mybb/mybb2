@@ -65,7 +65,7 @@ class Conversation extends Model implements HasPresenter
 	 */
 	public function messages()
 	{
-		return $this->hasMany('MyBB\Core\Database\Models\ConversationMessage');
+		return $this->hasMany('MyBB\\Core\\Database\\Models\\ConversationMessage');
 	}
 
 	/**
@@ -73,7 +73,7 @@ class Conversation extends Model implements HasPresenter
 	 */
 	public function lastMessage()
 	{
-		return $this->hasOne('MyBB\Core\Database\Models\ConversationMessage', 'id', 'last_message_id');
+		return $this->hasOne('MyBB\\Core\\Database\\Models\\ConversationMessage', 'id', 'last_message_id');
 	}
 
 	/**
@@ -81,7 +81,7 @@ class Conversation extends Model implements HasPresenter
 	 */
 	public function participants()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\User', 'conversation_users')->withPivot('last_read',
-			'has_left', 'ignores');
+		return $this->belongsToMany('MyBB\\Core\\Database\\Models\\User', 'conversation_users')
+			->withPivot('last_read', 'has_left', 'ignores');
 	}
 }

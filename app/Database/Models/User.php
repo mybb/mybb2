@@ -90,7 +90,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function roles()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
+		return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Role')->withPivot('is_display');
 	}
 
 	/**
@@ -110,7 +110,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function activity()
 	{
-		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');
+		return $this->hasMany('MyBB\\Core\\Database\\Models\\UserActivity');
 	}
 
 	/**
@@ -118,7 +118,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function conversations()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\Conversation', 'conversation_users')->withPivot('last_read', 'has_left',
+		return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Conversation', 'conversation_users')->withPivot('last_read', 'has_left',
 			'ignores')
 			->orderBy('last_message_id', 'desc')
 			->where('conversation_users.has_left', false)
