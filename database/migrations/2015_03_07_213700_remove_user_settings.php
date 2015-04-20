@@ -24,8 +24,8 @@ class RemoveUserSettings extends Migration
 	 */
 	public function down()
 	{
-		Schema::create('user_settings', function (Blueprint $table)
-		{
+		Schema::create('user_settings', function (Blueprint $table) {
+		
 			$table->integer('user_id')->unique()->unsigned()
 				->nullable(); // Not really nullable but otherwise we would throw errors
 			$table->integer('date_format')->nullable(); // TODO: Still use hardcoded versions? Or allow custom ones?
@@ -67,5 +67,4 @@ class RemoveUserSettings extends Migration
 			$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
-
 }

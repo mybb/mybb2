@@ -34,5 +34,4 @@ class PermissionRoleTableSeeder extends Seeder
 
 		DB::table('permission_role')->insert($permissions_role);
 	}
-
 }

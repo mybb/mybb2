@@ -67,8 +67,11 @@ class AccountController extends Controller
 		// handle profile field updates
 		$profileFieldData = $request->get('profile_fields');
 		foreach ($request->getProfileFields() as $profileField) {
-			$userProfileFields->updateOrCreate($this->guard->user(), $profileField,
-				$profileFieldData[$profileField->id]);
+			$userProfileFields->updateOrCreate(
+				$this->guard->user(),
+				$profileField,
+				$profileFieldData[$profileField->id]
+			);
 		}
 
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
@@ -110,8 +113,10 @@ class AccountController extends Controller
 
 	public function getEmail()
 	{
-		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('email',
-			$this->guard->user()));
+		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has(
+			'email',
+			$this->guard->user()
+		));
 	}
 
 	/**
@@ -129,8 +134,13 @@ class AccountController extends Controller
 		]);
 
 		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
-			ConfirmationManager::send('email', $this->guard->user(), 'account.email.confirm', $request->get('email'),
-				$request->only('email'));
+			ConfirmationManager::send(
+				'email',
+				$this->guard->user(),
+				'account.email.confirm',
+				$request->get('email'),
+				$request->only('email')
+			);
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirmEmail'));
 		}
@@ -162,8 +172,10 @@ class AccountController extends Controller
 
 	public function getPassword()
 	{
-		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has('password',
-			$this->guard->user()));
+		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has(
+			'password',
+			$this->guard->user()
+		));
 	}
 
 	/**
@@ -182,8 +194,12 @@ class AccountController extends Controller
 
 		if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
 			// Don't save the password in plaintext!
-			ConfirmationManager::send('password', $this->guard->user(), 'account.password.confirm',
-				Hash::make($request->get('password1')));
+			ConfirmationManager::send(
+				'password',
+				$this->guard->user(),
+				'account.password.confirm',
+				Hash::make($request->get('password1'))
+			);
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
 		}
@@ -243,9 +259,13 @@ class AccountController extends Controller
 			$file->move(public_path('uploads/avatars'), $name);
 			$this->guard->user()->update(['avatar' => $name]);
 		} // URL? Email?
-		elseif (filter_var($request->get('avatar_link'),
-				FILTER_VALIDATE_URL) !== false || filter_var($request->get('avatar_link'),
-				FILTER_VALIDATE_EMAIL) !== false
+		elseif (filter_var(
+			$request->get('avatar_link'),
+			FILTER_VALIDATE_URL
+		) !== false || filter_var(
+			$request->get('avatar_link'),
+			FILTER_VALIDATE_EMAIL
+		) !== false
 		) {
 			//$url = str_replace(array('http://', 'https://', 'ftp://'), '', strtolower($value));
 			//return checkdnsrr($url, 'A');
@@ -314,8 +334,10 @@ class AccountController extends Controller
 			$timezone = trans('general.timezone');
 		}
 
-		return view('account.preferences',
-			compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone'))->withActive('preferences');
+		return view(
+			'account.preferences',
+			compact('languages', 'selectedLanguage', 'selectTimezones', 'timezone')
+		)->withActive('preferences');
 	}
 
 	/**

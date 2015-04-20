@@ -47,5 +47,4 @@ abstract class AbstractCachingModel extends Model
 
 		return static::$models[$id];
 	}
-
 }

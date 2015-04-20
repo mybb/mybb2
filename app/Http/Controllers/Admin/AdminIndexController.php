@@ -56,8 +56,7 @@ class AdminIndexController extends AdminController
 		UserRepositoryInterface $userRepository,
 		Guard $guard,
 		Store $settings
-	)
-	{
+	) {
 		parent::__construct($guard);
 
 		$this->topicRepository = $topicRepository;
@@ -75,5 +74,4 @@ class AdminIndexController extends AdminController
 	{
 		return view();
 	}
-
 }

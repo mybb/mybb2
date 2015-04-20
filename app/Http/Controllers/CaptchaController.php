@@ -4,7 +4,6 @@ use Illuminate\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 
-
 class CaptchaController extends Controller
 {
 	private $database;
@@ -178,8 +177,17 @@ class CaptchaController extends Controller
 				$shadow_x = mt_rand(-3, 3) + $pos_x;
 				$shadow_y = mt_rand(-3, 3) + $pos_y;
 				$shadow_color = imagecolorallocate($im, $r + 20, $g + 20, $b + 20);
-				imagefttext($im, $font_size, $rotation, $shadow_x, $shadow_y, $shadow_color, $font, $string[$i],
-					array());
+				imagefttext(
+					$im,
+					$font_size,
+					$rotation,
+					$shadow_x,
+					$shadow_y,
+					$shadow_color,
+					$font,
+					$string[$i],
+					array()
+				);
 				// Write the character to the image
 				imagefttext($im, $font_size, $rotation, $pos_x, $pos_y, $color, $font, $string[$i], array());
 			} else {

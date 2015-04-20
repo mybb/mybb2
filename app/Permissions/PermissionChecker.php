@@ -168,14 +168,22 @@ class PermissionChecker
 		if (($concreteClass instanceof InheritPermissionInterface) && $concreteClass::find($contentID)->getParent() != null) {
 			// If we have a positive permission but need to check parents for negative values do so here
 			if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
-				$isAllowed = $this->hasPermission($content,
-					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+				$isAllowed = $this->hasPermission(
+					$content,
+					$concreteClass::find($contentID)->getParent()->getContentId(),
+					$permission,
+					$user
+				);
 			}
 
 			// Do the same for negative permissions with parent positives
 			if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
-				$isAllowed = $this->hasPermission($content,
-					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+				$isAllowed = $this->hasPermission(
+					$content,
+					$concreteClass::find($contentID)->getParent()->getContentId(),
+					$permission,
+					$user
+				);
 			}
 		}
 

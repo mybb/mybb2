@@ -225,8 +225,10 @@ class PostRepository implements PostRepositoryInterface
 				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
 			}
 
-			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'],
-				$options); // TODO: Parser options...
+			$postDetails['content_parsed'] = $this->formatter->parse(
+				$postDetails['content'],
+				$options
+			); // TODO: Parser options...
 		}
 
 		$post->update($postDetails);

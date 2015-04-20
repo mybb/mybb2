@@ -17,88 +17,88 @@ use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 
 class PollVoteRepository implements PollVoteRepositoryInterface
 {
-    /**
-     * @var PollVote $voteModel
-     * @access protected
-     */
-    protected $voteModel;
-    /**
-     * @var Guard $guard ;
-     * @access protected
-     */
-    protected $guard;
+	/**
+	 * @var PollVote $voteModel
+	 * @access protected
+	 */
+	protected $voteModel;
+	/**
+	 * @var Guard $guard ;
+	 * @access protected
+	 */
+	protected $guard;
 
-    /**
-     * @param PollVote $voteModel The model to use for poll votes.
-     * @param Guard $guard Laravel guard instance, used to get user ID.
-     */
-    public function __construct(
-        PollVote $voteModel,
-        Guard $guard
-    ) {
-        $this->voteModel = $voteModel;
-        $this->guard = $guard;
-    }
+	/**
+	 * @param PollVote $voteModel The model to use for poll votes.
+	 * @param Guard $guard Laravel guard instance, used to get user ID.
+	 */
+	public function __construct(
+		PollVote $voteModel,
+		Guard $guard
+	) {
+		$this->voteModel = $voteModel;
+		$this->guard = $guard;
+	}
 
-    /**
-     * Find a single poll vote by ID.
-     *
-     * @param string $id The ID of the vote to find.
-     *
-     * @return PollVote
-     */
-    public function find($id)
-    {
-        return $this->voteModel->with(['author', 'poll'])->find($id);
-    }
+	/**
+	 * Find a single poll vote by ID.
+	 *
+	 * @param string $id The ID of the vote to find.
+	 *
+	 * @return PollVote
+	 */
+	public function find($id)
+	{
+		return $this->voteModel->with(['author', 'poll'])->find($id);
+	}
 
-    /**
-     * Create a new poll vote
-     *
-     * @param array $details Details about the poll.
-     *
-     * @return PollVote
-     */
-    public function create(array $details = [])
-    {
-        $details = array_merge([
-            'user_id' => $this->guard->user()->getAuthIdentifier(),
-        ], $details);
+	/**
+	 * Create a new poll vote
+	 *
+	 * @param array $details Details about the poll.
+	 *
+	 * @return PollVote
+	 */
+	public function create(array $details = [])
+	{
+		$details = array_merge([
+			'user_id' => $this->guard->user()->getAuthIdentifier(),
+		], $details);
 
-        if ($details['user_id'] < 0) {
-            $details['user_id'] = null;
-        }
+		if ($details['user_id'] < 0) {
+			$details['user_id'] = null;
+		}
 
-        $vote = $this->voteModel->create($details);
+		$vote = $this->voteModel->create($details);
 
-        return $vote;
-    }
+		return $vote;
+	}
 
-    /**
-     * @param User $user
-     * @param Poll $poll
-     * @return PollVote
-     */
-    public function findForUserPoll(User $user, Poll $poll)
-    {
-        return $this->voteModel->where('user_id', $user->id)->where('poll_id', $poll->id)->first();
-    }
+	/**
+	 * @param User $user
+	 * @param Poll $poll
+	 * @return PollVote
+	 */
+	public function findForUserPoll(User $user, Poll $poll)
+	{
+		return $this->voteModel->where('user_id', $user->id)->where('poll_id', $poll->id)->first();
+	}
 
-    /**
-     * @param Poll $poll
-     * @return \Illuminate\Support\Collection
-     */
-    public function allForPoll(Poll $poll)
-    {
-        return $this->voteModel->where('poll_id', $poll->id)->get();
-    }
+	/**
+	 * @param Poll $poll
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function allForPoll(Poll $poll)
+	{
+		return $this->voteModel->where('poll_id', $poll->id)->get();
+	}
 
-    /**
-     * @param Poll $poll
-     * @return \Illuminate\Support\Collection
-     */
-    public function removeAllByPoll(Poll $poll)
-    {
-        return $this->voteModel->where('poll_id', $poll->id)->delete();
-    }
+	/**
+	 * @param Poll $poll
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function removeAllByPoll(Poll $poll)
+	{
+		return $this->voteModel->where('poll_id', $poll->id)->delete();
+	}
 }

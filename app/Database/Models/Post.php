@@ -17,7 +17,7 @@ use MyBB\Core\Likes\Traits\LikeableTrait;
 class Post extends Model implements HasPresenter
 {
 	use SoftDeletes;
-    use LikeableTrait;
+	use LikeableTrait;
 
 	/**
 	 * Indicates if the model should be timestamped.

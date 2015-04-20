@@ -3,7 +3,6 @@
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 
-
 class MemberController extends Controller
 {
 	/**

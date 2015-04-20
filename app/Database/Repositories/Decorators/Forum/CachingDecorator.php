@@ -166,8 +166,12 @@ class CachingDecorator implements ForumRepositoryInterface
 	private function filterUnviewableForums(Collection $forums)
 	{
 		return $forums->filter(function (Forum $forum) {
-			return $this->permissionChecker->hasPermission('forum', $forum->getContentId(),
-				$forum::getViewablePermission(), $this->guard->user());
+			return $this->permissionChecker->hasPermission(
+				'forum',
+				$forum->getContentId(),
+				$forum::getViewablePermission(),
+				$this->guard->user()
+			);
 		});
 	}
 }

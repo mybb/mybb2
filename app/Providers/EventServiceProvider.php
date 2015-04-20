@@ -15,5 +15,4 @@ class EventServiceProvider extends ServiceProvider
 			'EventListener',
 		],
 	];
-
 }

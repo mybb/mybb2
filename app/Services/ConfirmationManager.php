@@ -25,8 +25,7 @@ class ConfirmationManager
 		$token = str_random();
 
 		// Do we need to delete old confirmations for this user/type combination?
-		if($delete)
-		{
+		if ($delete) {
 			DB::table('confirmations')->where('type', $type)->where('user_id', $user->id)->delete();
 		}
 
@@ -42,25 +41,22 @@ class ConfirmationManager
 		$link = URL::route($route, $token);
 		$langData['link'] = $link;
 
-		if(Lang::has("confirmation.{$type}_subject"))
-		{
+		if (Lang::has("confirmation.{$type}_subject")) {
 			$subject = Lang::get("confirmation.{$type}_subject", $langData);
-		} else
-		{
+		} else {
 			$subject = Lang::get('confirmation.subject', array_merge($langData, ['type' => $type]));
 		}
 
-		if(Lang::has("confirmation.{$type}_message"))
-		{
+		if (Lang::has("confirmation.{$type}_message")) {
 			$message = Lang::get("confirmation.{$type}_message", $langData);
-		} else
-		{
+		} else {
 			$message = Lang::get('confirmation.message', array_merge($langData, ['type' => $type]));
 		}
 
 		// Finally send it
-		Mail::raw($message, function ($mail) use ($user, $subject)
-		{
+		Mail::raw($message, function ($mail) {
+			use ($user, $subject)
+		
 			// TODO: board email
 			$mail->from('admin@mybb.com');
 			$mail->to($user->email);
@@ -80,15 +76,13 @@ class ConfirmationManager
 		$baseQuery = DB::table('confirmations')->where('type', $type)->where('token', $token);
 
 		// Something is wrong - either we don't have a valid token here or the same token multiple times
-		if($baseQuery->count() != 1)
-		{
+		if ($baseQuery->count() != 1) {
 			return false;
 		}
 
 		$newData = $baseQuery->pluck('newData');
 
-		if($delete)
-		{
+		if ($delete) {
 			$baseQuery->delete();
 		}
 

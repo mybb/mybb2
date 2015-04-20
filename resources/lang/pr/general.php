@@ -6,7 +6,7 @@ return [
 	'direction' => 'ltr',
 
 	'by' => 'by',
-    'in' => 'in',
-    'reset' => 'Reset',
+	'in' => 'in',
+	'reset' => 'Reset',
 
 ];

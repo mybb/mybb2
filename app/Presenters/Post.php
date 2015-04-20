@@ -63,7 +63,10 @@ class Post extends BasePresenter
 		if ($this->guard->check()) {
 			$user = $this->guard->user();
 
-			$containsLike = $this->wrappedObject->likes->contains(function ($key, Like $like) use (
+			$containsLike = $this->wrappedObject->likes->contains(function (
+				$key,
+				Like $like
+			) use (
 				&$likes,
 				&$numLikesToList,
 				$user

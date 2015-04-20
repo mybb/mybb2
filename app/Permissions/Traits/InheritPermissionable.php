@@ -41,6 +41,4 @@ trait InheritPermissionable
 			static::getViewablePermission()
 		];
 	}
-
-
 }

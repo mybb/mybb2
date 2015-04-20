@@ -69,8 +69,11 @@ class User extends BasePresenter
 		}
 
 		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
-			return str_replace(':user', e($this->wrappedObject->name),
-				$this->wrappedObject->displayRole()->role_username_style);
+			return str_replace(
+				':user',
+				e($this->wrappedObject->name),
+				$this->wrappedObject->displayRole()->role_username_style
+			);
 		}
 
 		return e($this->wrappedObject->name);
@@ -136,7 +139,8 @@ class User extends BasePresenter
 			}
 
 			if (!isset($langOptions['langString'])) {
-				$langString = 'online.' . $route->getName();;
+				$langString = 'online.' . $route->getName();
+				;
 			} else {
 				$langString = 'online.' . $langOptions['langString'];
 				unset($langOptions['langString']);

@@ -35,5 +35,4 @@ class SoftDeleteToPostsTable extends Migration
 			$table->dropSoftDeletes();
 		});
 	}
-
 }

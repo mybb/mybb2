@@ -152,8 +152,10 @@ class TopicRepository implements TopicRepositoryInterface
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->whereNotIn('forum_id',
-			$unviewableForums)->first();
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->whereNotIn(
+			'forum_id',
+			$unviewableForums
+		)->first();
 	}
 
 	/**

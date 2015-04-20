@@ -7,7 +7,6 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests;
 use MyBB\Core\Transformers\TopicTransformer;
 
-
 class TopicApiController extends ApiController
 {
 	public $topicRepository;
@@ -27,9 +26,8 @@ class TopicApiController extends ApiController
 	{
 		$topics = $this->topicRepository->all();
 
-		if(!$topics)
-		{
-			// TODO: respond with error
+		if (!$topics) {
+		// TODO: respond with error
 		}
 
 		return $this->respondWithCollection($topics, new TopicTransformer);
@@ -102,5 +100,4 @@ class TopicApiController extends ApiController
 	{
 		//
 	}
-
 }

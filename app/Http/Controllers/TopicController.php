@@ -29,7 +29,6 @@ use MyBB\Core\Services\TopicDeleter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
 class TopicController extends Controller
 {
 	/** @var TopicRepositoryInterface $topicRepository */
@@ -154,8 +153,10 @@ class TopicController extends Controller
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
 
 		if (ceil($numPost / $postsPerPage) == 1) {
-			return redirect()->route('topics.show',
-				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
+			return redirect()->route(
+				'topics.show',
+				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]
+			);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
@@ -296,12 +297,16 @@ class TopicController extends Controller
 		}
 
 		if ($post) {
-			return redirect()->route('topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+			return redirect()->route(
+				'topics.showPost',
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+			);
 		}
 
-		return redirect()->route('topic.edit',
-			['slug' => $slug, 'id' => $id, 'postId' => $postId])->withInput()->withErrors(['Error editing post']);
+		return redirect()->route(
+			'topic.edit',
+			['slug' => $slug, 'id' => $id, 'postId' => $postId]
+		)->withInput()->withErrors(['Error editing post']);
 	}
 
 	/**
@@ -438,8 +443,10 @@ class TopicController extends Controller
 			$this->postRepository->restorePost($post);
 		}
 		if ($topic) {
-			return redirect()->route('topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+			return redirect()->route(
+				'topics.showPost',
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+			);
 		}
 
 		return redirect()->route('topics.showPost', ['slug' => $slug, 'id' => $id, 'postId' => $postId])

@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Search extends Model
 {
 	/**
@@ -48,6 +47,4 @@ class Search extends Model
 	 * @var string
 	 */
 	protected $table = 'searchlog';
-
-
 }

@@ -80,8 +80,11 @@ class UserRepository implements UserRepositoryInterface
 
 			// Now join the correct setting_values row
 			$baseQuery->leftJoin('setting_values', function ($join) use ($settingId) {
-				$join->on('setting_values.user_id', '=', 'users.id')->where('setting_values.setting_id', '=',
-					$settingId);
+				$join->on('setting_values.user_id', '=', 'users.id')->where(
+					'setting_values.setting_id',
+					'=',
+					$settingId
+				);
 			});
 
 			// Either the setting is true or not set...
@@ -125,5 +128,4 @@ class UserRepository implements UserRepositoryInterface
 	{
 		return $this->userModel->whereNname($username)->first();
 	}
-
 }
