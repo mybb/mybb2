@@ -26,28 +26,45 @@ class AdminIndexController extends AdminController
 	|
 	*/
 
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
-	/** @var Store $settings */
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param TopicRepositoryInterface  $topicRepository    Topic repository to fetch topic information
-	 * @param PostRepositoryInterface   $postRepository     Post repository to fetch post information
-	 * @param ForumRepositoryInterface  $forumRepository    Forum repository to fetch forum information
-	 * @param UserRepositoryInterface   $userRepository     User repository to fetch user information
-	 * @param Guard                     $guard              Guard implementation
-	 * @param Store                     $settings
+	 * @param TopicRepositoryInterface $topicRepository Topic repository to fetch topic information
+	 * @param PostRepositoryInterface  $postRepository  Post repository to fetch post information
+	 * @param ForumRepositoryInterface $forumRepository Forum repository to fetch forum information
+	 * @param UserRepositoryInterface  $userRepository  User repository to fetch user information
+	 * @param Guard                    $guard           Guard implementation
+	 * @param Store                    $settings
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,
@@ -56,8 +73,7 @@ class AdminIndexController extends AdminController
 		UserRepositoryInterface $userRepository,
 		Guard $guard,
 		Store $settings
-	)
-	{
+	) {
 		parent::__construct($guard);
 
 		$this->topicRepository = $topicRepository;
@@ -75,5 +91,4 @@ class AdminIndexController extends AdminController
 	{
 		return view();
 	}
-
 }

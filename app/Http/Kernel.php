@@ -35,5 +35,4 @@ class Kernel extends HttpKernel
 		'checkaccess' => 'MyBB\Core\Http\Middleware\CheckAccess',
 		'checksetting' => 'MyBB\Core\Http\Middleware\CheckSetting',
 	];
-
 }

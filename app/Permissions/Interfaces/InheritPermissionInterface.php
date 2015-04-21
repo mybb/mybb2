@@ -7,7 +7,7 @@ interface InheritPermissionInterface extends PermissionInterface
 	/**
 	 * @return InheritPermissionInterface|null
 	 */
-	function getParent();
+	public function getParent();
 
 	/**
 	 * Returns an array of permissions where a positive permission in one of the parents overrides negative permissions
@@ -15,7 +15,7 @@ interface InheritPermissionInterface extends PermissionInterface
 	 *
 	 * @return array
 	 */
-	static function getPositiveParentOverrides();
+	public static function getPositiveParentOverrides();
 
 	/**
 	 * Returns an array of permissions where a negative permission in one of the parents overrides positive permissions
@@ -23,5 +23,5 @@ interface InheritPermissionInterface extends PermissionInterface
 	 *
 	 * @return array
 	 */
-	static function getNegativeParentOverrides();
+	public static function getNegativeParentOverrides();
 }

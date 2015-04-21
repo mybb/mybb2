@@ -10,10 +10,10 @@
 namespace MyBB\Core\Http\Requests\Topic;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 use MyBB\Core\Permissions\PermissionChecker;
 
-class CreateRequest extends Request
+class CreateRequest extends AbstractRequest
 {
 	/**
 	 * The route to redirect to if validation fails.
@@ -21,10 +21,14 @@ class CreateRequest extends Request
 	 * @var string
 	 */
 	protected $redirectRoute = 'topics.create';
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
-	/** @var PermissionChecker $permissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**

@@ -13,7 +13,7 @@ return [
 	'topic_not_found' => 'Sorry, the specified topic could not be found.',
 	'invalidCaptcha' => 'Sorry, there was an error validating the captcha. Please make sure you fill out the captcha correctly.',
 	'poll_not_found' => 'Sorry, the specified poll could not be found.',
-    'poll_invalid_options' => 'Sorry, the options you entered is invalid.',
+	'poll_invalid_options' => 'Sorry, the options you entered is invalid.',
 	'you_already_vote' => 'Sorry, you voted in the specified poll before.',
 	'poll_very_votes' => 'Sorry, you selected a lot of options to vote, you can select at most :count options to vote.',
 	'poll_no_votes' => 'Please select a valid option to vote.',

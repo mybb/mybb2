@@ -39,5 +39,4 @@ class AddGuestPosting extends Migration
 			$table->dropColumn('username');
 		});
 	}
-
 }

@@ -9,14 +9,16 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
-use MyBB\Core\Permissions\Traits\Permissionable;
+use MyBB\Core\Permissions\Traits\PermissionableTrait;
 
 /**
  * @property string id
  */
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
 {
-	use Authenticatable, CanResetPassword, Permissionable;
+	use Authenticatable;
+	use CanResetPassword;
+	use PermissionableTrait;
 
 	/**
 	 * The database table used by the model.

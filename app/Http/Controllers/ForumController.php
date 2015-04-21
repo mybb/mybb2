@@ -12,15 +12,26 @@ use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ForumController extends Controller
+class ForumController extends AbstractController
 {
-	/** @var ForumRepositoryInterface $forumRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var TopicRepositoryInterface $topicRepository */
+
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var  UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
 
 	/**
@@ -28,10 +39,11 @@ class ForumController extends Controller
 	 *
 	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum
 	 *                                                  information.
-	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
-	 *                                                  within a forum.
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the
 	 *                                                  latest discussion table.
+	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
+	 *                                                  within a forum.
+	 * @param UserRepositoryInterface  $userRepository
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
@@ -61,6 +73,8 @@ class ForumController extends Controller
 	/**
 	 * Shows the Index Page
 	 *
+	 * @param Store $settings
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function index(Store $settings)
@@ -77,9 +91,9 @@ class ForumController extends Controller
 	 * Shows a specific forum.
 	 *
 	 * @param Request $request
-	 * @param string  $slug The slug of the forum to show.
+	 * @param string  $slug    The slug of the forum to show.
 	 *
-	 * @param int     $id   The ID of the forum to show.
+	 * @param int     $id      The ID of the forum to show.
 	 *
 	 * @return \Illuminate\View\View
 	 */

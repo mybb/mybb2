@@ -46,5 +46,4 @@ class RolesTableSeeder extends Seeder
 
 		DB::table('roles')->insert($roles);
 	}
-
 }

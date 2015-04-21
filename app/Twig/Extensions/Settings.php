@@ -19,9 +19,9 @@ use Twig_SimpleFunction;
 class Settings extends Twig_Extension
 {
 	/**
-	 * @var Store $_settings ;
+	 * @var Store $settings ;
 	 */
-	protected $_settings;
+	protected $settings;
 
 	/**
 	 * Create a new settings extension.
@@ -30,7 +30,7 @@ class Settings extends Twig_Extension
 	 */
 	public function __construct(Store $settings)
 	{
-		$this->_settings = $settings;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Settings extends Twig_Extension
 	public function getFunctions()
 	{
 		return [
-			new Twig_SimpleFunction('setting', [$this->_settings, 'get']),
+			new Twig_SimpleFunction('setting', [$this->settings, 'get']),
 		];
 	}
 }

@@ -7,15 +7,15 @@ use MyBB\Core\Database\Models\ProfileFieldGroup;
 
 interface ProfileFieldGroupRepositoryInterface
 {
-    /**
-     * @return Collection
-     */
-    public function getAll();
+	/**
+	 * @return Collection
+	 */
+	public function getAll();
 
-    /**
-     * @param string $slug
-     *
-     * @return ProfileFieldGroup
-     */
-    public function getBySlug($slug);
+	/**
+	 * @param string $slug
+	 *
+	 * @return ProfileFieldGroup
+	 */
+	public function getBySlug($slug);
 }

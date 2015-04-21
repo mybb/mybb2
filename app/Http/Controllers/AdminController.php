@@ -1,6 +1,6 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-class AdminController extends Controller
+class AdminController extends AbstractController
 {
 
 	/*

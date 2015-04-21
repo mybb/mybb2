@@ -29,5 +29,4 @@ interface SearchRepositoryInterface
 	 * @return mixed
 	 */
 	public function create(array $details = []);
-
 }

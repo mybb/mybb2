@@ -6,7 +6,7 @@ use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 
-class UserController extends Controller
+class UserController extends AbstractController
 {
 	/**
 	 * @var UserRepositoryInterface

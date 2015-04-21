@@ -29,5 +29,4 @@ class AddLastVisitToUsersTable extends Migration
 			$table->dropColumn('last_visit');
 		});
 	}
-
 }

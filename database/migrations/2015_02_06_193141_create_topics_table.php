@@ -49,5 +49,4 @@ class CreateTopicsTable extends Migration
 
 		Schema::drop('topics');
 	}
-
 }
