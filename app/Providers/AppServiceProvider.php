@@ -79,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
+			'MyBB\Parser\Parser\CustomCodes\CustomCodeRepositoryInterface',
 			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
@@ -94,7 +94,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Parser\Parser\IParser',
+			'MyBB\Parser\Parser\ParserInterface',
 			'MyBB\Parser\Parser\MyCode'
 		);
 
