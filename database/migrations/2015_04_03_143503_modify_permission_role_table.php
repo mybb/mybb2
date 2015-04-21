@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyPermissionRoleTable extends Migration {
+class ModifyPermissionRoleTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -41,5 +42,4 @@ class ModifyPermissionRoleTable extends Migration {
 			$table->integer('role_id');
 		});
 	}
-
 }

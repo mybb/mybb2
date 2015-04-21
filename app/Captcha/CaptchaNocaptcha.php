@@ -10,15 +10,28 @@ use MyBB\Settings\Store;
 
 class CaptchaNocaptcha implements CaptchaInterface
 {
-	/** @var Recaptcha */
+	/**
+	 * @var Recaptcha
+	 */
 	private $nocaptcha;
-	/** @var CheckRecaptchaV2 */
+
+	/**
+	 * @var CheckRecaptchaV2
+	 */
 	private $service;
-	/** @var Store */
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
-	/** @var Request */
+
+	/**
+	 * @var Request
+	 */
 	private $request;
-	/** @var Repository */
+	/**
+	 * @var Repository
+	 */
 	private $config;
 
 	/**
@@ -40,7 +53,8 @@ class CaptchaNocaptcha implements CaptchaInterface
 			'template' => 'captcha.nocaptcha',
 			'options' => [
 				'lang' => $this->settings->get('user.lang', 'en'),
-				// As an id should be unique but we may need more than one captcha per page (modals) we simply generate a random id
+				// As an id should be unique but we may need more than one captcha per page (modals)
+				// we simply generate a random id
 				'id' => str_random()
 			]
 		]);

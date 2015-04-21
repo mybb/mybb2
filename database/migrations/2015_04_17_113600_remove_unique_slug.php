@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveUniqueSlug extends Migration {
+class RemoveUniqueSlug extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -28,5 +29,4 @@ class RemoveUniqueSlug extends Migration {
 			$table->unique('slug');
 		});
 	}
-
 }

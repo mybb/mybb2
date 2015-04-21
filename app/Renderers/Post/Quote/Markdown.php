@@ -7,7 +7,9 @@ use MyBB\Core\Database\Models\Post;
 
 class Markdown implements QuoteInterface
 {
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**

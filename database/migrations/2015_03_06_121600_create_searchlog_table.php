@@ -37,5 +37,4 @@ class CreateSearchlogTable extends Migration
 	{
 		Schema::drop('searchlog');
 	}
-
 }

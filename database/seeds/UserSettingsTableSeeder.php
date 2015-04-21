@@ -9,5 +9,4 @@ class UserSettingsTableSeeder extends Seeder
 	{
 		// TODO: add a basic example of user settings
 	}
-
 }

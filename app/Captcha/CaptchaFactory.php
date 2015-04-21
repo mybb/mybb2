@@ -8,9 +8,14 @@ use MyBB\Settings\Store;
 
 class CaptchaFactory implements CaptchaInterface
 {
-	/** @var Store */
+	/**
+	 * @var Store
+	 */
 	private $settings;
-	/** @var Application */
+
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	const NONE = 'none';
@@ -60,7 +65,6 @@ class CaptchaFactory implements CaptchaInterface
 	}
 
 	/**
-	 * Not used for the Factory, the function is mainly used when generating the correct captcha
 	 * {@inheritdoc}
 	 */
 	public function supported()
@@ -69,7 +73,7 @@ class CaptchaFactory implements CaptchaInterface
 	}
 
 	/**
-	 * @param $captchaName
+	 * @param string $captchaName
 	 *
 	 * @return CaptchaInterface|null
 	 *

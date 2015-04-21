@@ -31,6 +31,9 @@ class Forum extends BasePresenter
 		$this->app = $app;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function lastPostAuthor()
 	{
 		if ($this->wrappedObject->last_post_user_id == null) {

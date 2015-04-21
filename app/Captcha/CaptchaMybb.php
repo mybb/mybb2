@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class CaptchaMybb implements CaptchaInterface
 {
-	/** @var DatabaseManager */
+	/**
+	 * @var DatabaseManager
+	 */
 	private $database;
-	/** @var Request */
+
+	/**
+	 * @var Request
+	 */
 	private $request;
 
 	/**

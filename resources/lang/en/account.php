@@ -36,7 +36,7 @@ return [
 
 	'username' => 'Username',
 	'new_username' => 'New Username',
-	'new_username_desc' => 'You can only change your username once every 6 months. (Not really, but we need to implement this)',
+	'new_username_desc' => 'You can only change your username once every 6 months',
 	'current_password' => 'Current Password',
 	'current_password_name' => 'To change your username, please enter your current password.',
 	'saved_username' => 'Your username change has been saved',
@@ -84,6 +84,7 @@ return [
 	'notify_on_reply' => 'Replies to a thread I\'m following',
 	'notify_on_new_post' => 'Posts a new thread to a forum I\'m following',
 	'profiles' => 'Profiles',
+	'notify_preferences' => 'Notification Preferences',
 	'notify_on_new_comment' => 'Posts a comment on my profile',
 	'notify_on_comment_like' => 'Likes a comment on my profile',
 	'notify_on_my_comment_like' => 'Likes one of my comments',
@@ -114,4 +115,6 @@ return [
 	'dob_visibility' => 'Show your date of birth or age to:',
 	'update_privacy' => 'Update Privacy Settings',
 	'saved_privacy' => 'Your Privacy Settings were saved successfully',
+
+	'goToYourProfile' => 'Go to your profile',
 ];

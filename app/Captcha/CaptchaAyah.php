@@ -7,9 +7,14 @@ use MyBB\Settings\Store;
 
 class CaptchaAyah implements CaptchaInterface
 {
-	/** @var AYAH */
+	/**
+	 * @var AYAH
+	 */
 	private $ayah;
-	/** @var Store */
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
 	/**

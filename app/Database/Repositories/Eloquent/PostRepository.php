@@ -23,34 +23,37 @@ class PostRepository implements PostRepositoryInterface
 {
 	/**
 	 * @var Post $postModel
-	 * @access protected
 	 */
 	protected $postModel;
 	/**
 	 * @var Guard $guard
-	 * @access protected
 	 */
 	protected $guard;
 	/**
 	 * @var MessageFormatter $formatter
-	 * @access protected
 	 */
 	protected $formatter;
 
-	/** @var  Store $settings */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
-	/** @var ForumRepositoryInterface */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**
-	 * @param Post                     $postModel The model to use for posts.
-	 * @param Guard                    $guard     Laravel guard instance, used to get user ID.
-	 * @param MessageFormatter         $formatter Post formatter instance.
-	 * @param Store                    $settings  The settings container
+	 * @param Post                     $postModel         The model to use for posts.
+	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
+	 * @param MessageFormatter         $formatter         Post formatter instance.
+	 * @param Store                    $settings          The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PermissionChecker        $permissionChecker
 	 */
@@ -225,8 +228,10 @@ class PostRepository implements PostRepositoryInterface
 				$options[MessageFormatter::ME_USERNAME] = trans('general.guest');
 			}
 
-			$postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'],
-				$options); // TODO: Parser options...
+			$postDetails['content_parsed'] = $this->formatter->parse(
+				$postDetails['content'],
+				$options
+			); // TODO: Parser options...
 		}
 
 		$post->update($postDetails);
@@ -253,7 +258,6 @@ class PostRepository implements PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function deletePost(Post $post)
 	{
 		if ($post['deleted_at'] == null) {

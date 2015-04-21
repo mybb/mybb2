@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class AuthController extends Controller
 {
@@ -75,7 +75,8 @@ class AuthController extends Controller
 
 		if ($validator->fails()) {
 			$this->throwValidationException(
-				$request, $validator
+				$request,
+				$validator
 			);
 		}
 
@@ -114,8 +115,10 @@ class AuthController extends Controller
 
 		$credentials = $request->only('username', 'password');
 
-		if ($this->auth->attempt(['name' => $credentials['username'], 'password' => $credentials['password']],
-			$request->input('remember_me'))
+		if ($this->auth->attempt(
+			['name' => $credentials['username'], 'password' => $credentials['password']],
+			$request->input('remember_me')
+		)
 		) {
 			return redirect()->intended($this->redirectPath());
 		}
@@ -148,5 +151,4 @@ class AuthController extends Controller
 	{
 		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
 	}
-
 }

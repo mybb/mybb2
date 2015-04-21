@@ -12,15 +12,26 @@ use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ForumController extends Controller
+class ForumController extends AbstractController
 {
-	/** @var ForumRepositoryInterface $forumRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var TopicRepositoryInterface $topicRepository */
+
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var  UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
 	/** @var Breadcrumbs $breadcrumbs */
 	private $breadcrumbs;
@@ -67,6 +78,8 @@ class ForumController extends Controller
 	/**
 	 * Shows the Index Page
 	 *
+	 * @param Store $settings
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function index(Store $settings)
@@ -83,9 +96,9 @@ class ForumController extends Controller
 	 * Shows a specific forum.
 	 *
 	 * @param Request $request
-	 * @param string  $slug The slug of the forum to show.
+	 * @param string  $slug    The slug of the forum to show.
 	 *
-	 * @param int     $id   The ID of the forum to show.
+	 * @param int     $id      The ID of the forum to show.
 	 *
 	 * @return \Illuminate\View\View
 	 */

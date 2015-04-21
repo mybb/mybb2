@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class PasswordController extends Controller
 {
@@ -25,6 +25,9 @@ class PasswordController extends Controller
 		postEmail as parentPostEmail;
 	}
 
+	/**
+	 * @var string
+	 */
 	private $redirectTo = '';
 
 	/**
@@ -44,6 +47,11 @@ class PasswordController extends Controller
 		$breadcrumbs->setCurrentRoute('auth.login');
 	}
 
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Foundation\Auth\Response
+	 */
 	public function postEmail(Request $request)
 	{
 		$this->failedValidationRedirect = url('password/email');
@@ -51,6 +59,9 @@ class PasswordController extends Controller
 		return $this->parentPostEmail($request);
 	}
 
+	/**
+	 * @return string
+	 */
 	protected function getEmailSubject()
 	{
 		return trans('passwords.email_subject');

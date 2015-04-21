@@ -10,7 +10,9 @@ class ProfileFieldGroup extends BasePresenter
 {
 	/** @var ProfileFieldGroupModel $wrappedObject */
 
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**
@@ -30,6 +32,7 @@ class ProfileFieldGroup extends BasePresenter
 		$decorated = [];
 
 		$decorator = $this->app->make('autopresenter');
+
 		foreach ($profileFields as $profileField) {
 			$decorated[] = $decorator->decorate($profileField);
 		}

@@ -29,20 +29,36 @@ use MyBB\Core\Services\TopicDeleter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-
-class TopicController extends Controller
+class TopicController extends AbstractController
 {
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var PollRepositoryInterface $pollRepository */
+
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
-	/** @var QuoteRenderer $quoteRenderer */
+
+	/**
+	 * @var QuoteRenderer
+	 */
 	private $quoteRenderer;
 	/** @var Breadcrumbs $breadcrumbs */
 	private $breadcrumbs;
@@ -159,8 +175,10 @@ class TopicController extends Controller
 		$numPost = $this->postRepository->getNumForPost($topic->lastPost, true);
 
 		if (ceil($numPost / $postsPerPage) == 1) {
-			return redirect()->route('topics.show',
-				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]);
+			return redirect()->route(
+				'topics.show',
+				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]
+			);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,
@@ -218,7 +236,7 @@ class TopicController extends Controller
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
-	public function postReply($slug = '', $id = 0, ReplyRequest $replyRequest)
+	public function postReply($slug, $id, ReplyRequest $replyRequest)
 	{
 		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
 
@@ -281,7 +299,7 @@ class TopicController extends Controller
 	 *
 	 * @return \Exception|\Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit($slug = '', $id = 0, $postId = 0, ReplyRequest $replyRequest)
+	public function postEdit($slug, $id, $postId, ReplyRequest $replyRequest)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -301,16 +319,20 @@ class TopicController extends Controller
 		}
 
 		if ($post) {
-			return redirect()->route('topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+			return redirect()->route(
+				'topics.showPost',
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+			);
 		}
 
-		return redirect()->route('topic.edit',
-			['slug' => $slug, 'id' => $id, 'postId' => $postId])->withInput()->withErrors(['Error editing post']);
+		return redirect()->route(
+			'topic.edit',
+			['slug' => $slug, 'id' => $id, 'postId' => $postId]
+		)->withInput()->withErrors(['Error editing post']);
 	}
 
 	/**
-	 * @param $forumId
+	 * @param int $forumId
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -334,7 +356,7 @@ class TopicController extends Controller
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate($forumId = 0, CreateRequest $createRequest)
+	public function postCreate($forumId, CreateRequest $createRequest)
 	{
 		// Forum permissions are checked in "CreateRequest"
 
@@ -398,7 +420,7 @@ class TopicController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($slug = '', $id = 0, $postId = 0, TopicDeleter $topicDeleter)
+	public function delete($slug, $id, $postId, TopicDeleter $topicDeleter)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -443,8 +465,10 @@ class TopicController extends Controller
 			$this->postRepository->restorePost($post);
 		}
 		if ($topic) {
-			return redirect()->route('topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]);
+			return redirect()->route(
+				'topics.showPost',
+				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+			);
 		}
 
 		return redirect()->route('topics.showPost', ['slug' => $slug, 'id' => $id, 'postId' => $postId])

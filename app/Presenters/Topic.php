@@ -31,11 +31,17 @@ class Topic extends BasePresenter
 		$this->app = $app;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function replies()
 	{
 		return $this->wrappedObject->num_posts - 1;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function author()
 	{
 		if ($this->wrappedObject->user_id == null) {

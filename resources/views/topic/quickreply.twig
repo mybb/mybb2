@@ -8,12 +8,12 @@
 						{% else %}
 							{{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
 						{% endif %}
-						<span class="post__date">Now</span>
+						<span class="post__date">{{ trans('general.now') }}</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
 						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"
 								onclick="openFullEditor(); return false;">
 							<i class="fa fa-external-link"></i>
-							<span class="text">Full Editor</span>
+							<span class="text">{{ trans('topic.fullEditor') }}</span>
 						</a>
 					</div>
 					<div class="post__body">
@@ -25,7 +25,7 @@
 						</div>
 					{% endif %}
 					<div class="post__foot">
-						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
+						{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->

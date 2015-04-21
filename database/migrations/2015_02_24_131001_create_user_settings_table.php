@@ -66,5 +66,4 @@ class CreateUserSettingsTable extends Migration
 	{
 		Schema::drop('user_settings');
 	}
-
 }

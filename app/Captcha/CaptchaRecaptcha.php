@@ -10,17 +10,35 @@ use MyBB\Settings\Store;
 
 class CaptchaRecaptcha implements CaptchaInterface
 {
-	/** @var Recaptcha */
+	/**
+	 * @var Recaptcha
+	 */
 	private $recaptcha;
-	/** @var CheckRecaptcha */
+
+	/**
+	 * @var CheckRecaptcha
+	 */
 	private $service;
-	/** @var Store */
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
-	/** @var Request */
+
+	/**
+	 * @var Request
+	 */
 	private $request;
-	/** @var Repository */
+	/**
+	 * @var Repository
+	 */
 	private $config;
 
+	/**
+	 * @param Store   $settings
+	 * @param Request $request
+	 * @param Repository $config
+	 */
 	public function __construct(Store $settings, Request $request, Repository $config)
 	{
 		$this->settings = $settings;
@@ -35,7 +53,8 @@ class CaptchaRecaptcha implements CaptchaInterface
 			'template' => 'captcha.recaptcha',
 			'options' => [
 				'lang' => $this->settings->get('user.lang', 'en'),
-				// As an id should be unique but we may need more than one captcha per page (modals) we simply generate a random id
+				// As an id should be unique but we may need more than one captcha per page (modals)
+				// we simply generate a random id
 				'id' => str_random()
 			]
 		]);

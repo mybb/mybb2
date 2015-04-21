@@ -27,17 +27,31 @@ use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PollController extends Controller
+class PollController extends AbstractController
 {
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PollRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
-	/** @var PollVoteRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollVoteRepositoryInterface
+	 */
 	private $pollVoteRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 	/** @var Breadcrumbs $breadcrumbs */
 	private $breadcrumbs;
@@ -129,8 +143,8 @@ class PollController extends Controller
 	}
 
 	/**
-	 * @param  string       $slug
-	 * @param  int          $id
+	 * @param  string        $slug
+	 * @param  int           $id
 	 * @param CreateRequest $createRequest
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -167,7 +181,9 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return redirect()->route('polls.create')->withInput()->withErrors(['error' => trans('error.error_creating_poll')]);
+		return redirect()->route('polls.create')->withInput()->withError([
+			'error' => trans('error.error_creating_poll')
+		]);
 	}
 
 	/**
@@ -175,6 +191,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function vote($topicSlug, $topicId)
@@ -240,6 +257,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function undo($topicSlug, $topicId)
