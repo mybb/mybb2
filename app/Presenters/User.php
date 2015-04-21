@@ -75,7 +75,7 @@ class User extends BasePresenter
 	 * @param UserRepositoryInterface         $userRepository
 	 * @param PermissionChecker               $permissionChecker
 	 * @param ConversationRepositoryInterface $conversationRepository
-	 * @param Translator               $translator
+	 * @param Translator                      $translator
 	 */
 	public function __construct(
 		UserModel $resource,
