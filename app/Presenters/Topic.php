@@ -18,7 +18,9 @@ class Topic extends BasePresenter
 {
 	/** @var TopicModel $wrappedObject */
 
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**

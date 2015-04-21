@@ -53,7 +53,10 @@ class PollController extends AbstractController
 	 * @var Guard
 	 */
 	private $guard;
-	/** @var Breadcrumbs $breadcrumbs */
+
+	/**
+	 * @var Breadcrumbs
+	 */
 	private $breadcrumbs;
 
 	/**

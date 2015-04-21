@@ -35,8 +35,8 @@ class CaptchaRecaptcha implements CaptchaInterface
 	private $config;
 
 	/**
-	 * @param Store   $settings
-	 * @param Request $request
+	 * @param Store      $settings
+	 * @param Request    $request
 	 * @param Repository $config
 	 */
 	public function __construct(Store $settings, Request $request, Repository $config)

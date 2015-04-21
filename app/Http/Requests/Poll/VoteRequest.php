@@ -35,7 +35,6 @@ class VoteRequest extends AbstractRequest
 		$validator = parent::getValidatorInstance();
 		$validator->addImplicitExtension('votes', function ($attribute, $value, $parameters) {
 			if ($this->poll->is_multiple) {
-
 				if (!is_array($value)) {
 					return false;
 				}

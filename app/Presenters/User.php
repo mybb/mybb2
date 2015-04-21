@@ -47,7 +47,10 @@ class User extends BasePresenter
 	 * @var UserRepositoryInterface
 	 */
 	private $userRepository;
-	/** @var Translator $lang */
+
+	/**
+	 * @var Translator
+	 */
 	private $translator;
 
 	/**
@@ -57,7 +60,7 @@ class User extends BasePresenter
 	 * @param PostRepositoryInterface  $postRepository
 	 * @param TopicRepositoryInterface $topicRepository
 	 * @param UserRepositoryInterface  $userRepository
-	 * @param Translator               $lang
+	 * @param Translator               $translator
 	 */
 	public function __construct(
 		UserModel $resource,

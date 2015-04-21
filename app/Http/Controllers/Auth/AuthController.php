@@ -23,7 +23,9 @@ class AuthController extends Controller
 
 	use AuthenticatesAndRegistersUsers;
 
-	/** @var Breadcrumbs */
+	/**
+	 * @var Breadcrumbs
+	 */
 	private $breadcrumbs;
 
 	/**

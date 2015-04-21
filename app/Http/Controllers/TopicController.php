@@ -60,7 +60,10 @@ class TopicController extends AbstractController
 	 * @var QuoteRenderer
 	 */
 	private $quoteRenderer;
-	/** @var Breadcrumbs $breadcrumbs */
+
+	/**
+	 * @var Breadcrumbs
+	 */
 	private $breadcrumbs;
 
 	/**

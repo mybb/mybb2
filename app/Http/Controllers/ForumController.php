@@ -33,7 +33,10 @@ class ForumController extends AbstractController
 	 * @var UserRepositoryInterface
 	 */
 	private $userRepository;
-	/** @var Breadcrumbs $breadcrumbs */
+
+	/**
+	 * @var Breadcrumbs
+	 */
 	private $breadcrumbs;
 
 	/**

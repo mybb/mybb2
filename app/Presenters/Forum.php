@@ -18,7 +18,9 @@ class Forum extends BasePresenter
 {
 	/** @var ForumModel $wrappedObject */
 
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**

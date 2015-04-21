@@ -7,7 +7,9 @@ use MyBB\Core\Database\Models\User;
 
 class Registrar implements RegistrarContract
 {
-	/** @var Factory */
+	/**
+	 * @var Factory
+	 */
 	private $validator;
 
 	/**

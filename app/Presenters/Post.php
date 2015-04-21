@@ -25,7 +25,9 @@ class Post extends BasePresenter
 	 */
 	private $guard;
 
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**
