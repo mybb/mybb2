@@ -184,7 +184,7 @@ class PollController extends AbstractController
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return redirect()->route('polls.create')->withInput()->withError([
+		return redirect()->route('polls.create')->withInput()->withErrors([
 			'error' => trans('error.error_creating_poll')
 		]);
 	}
