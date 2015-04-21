@@ -27,8 +27,8 @@ class SearchRepository implements SearchRepositoryInterface
 	protected $guard;
 
 	/**
-	 * @param Search		  $searchModel    The model to use for search logs.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param Search $searchModel The model to use for search logs.
+	 * @param Guard  $guard       Laravel guard instance, used to get user ID.
 	 */
 	public function __construct(
 		Search $searchModel,

@@ -69,7 +69,7 @@ interface TopicRepositoryInterface
 	 * Find a single topic with a specific slug and ID.
 	 *
 	 * @param string $slug The slug for the topic.
-	 * @param int $id The ID of the topic to find.
+	 * @param int    $id   The ID of the topic to find.
 	 *
 	 * @return mixed
 	 */
@@ -94,7 +94,7 @@ interface TopicRepositoryInterface
 	/**
 	 * Edit a topic
 	 *
-	 * @param Topic $topic The topic to edit
+	 * @param Topic $topic        The topic to edit
 	 * @param array $topicDetails The details of the post to add.
 	 *
 	 * @return mixed
@@ -104,8 +104,8 @@ interface TopicRepositoryInterface
 	/**
 	 * Edit the hasPoll of the Topic
 	 *
-	 * @param Topic $topic The topic to edit
-	 * @param bool $hasPoll
+	 * @param Topic $topic   The topic to edit
+	 * @param bool  $hasPoll
 	 *
 	 * @return mixed
 	 */

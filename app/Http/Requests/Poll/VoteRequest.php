@@ -69,7 +69,7 @@ class VoteRequest extends Request
 
 	/**
 	 * @param PollPresenter $poll
-	 * @param Guard $guard
+	 * @param Guard         $guard
 	 */
 	public function __construct(PollPresenter $poll, Guard $guard)
 	{

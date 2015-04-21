@@ -29,9 +29,9 @@ class Poll extends BasePresenter
 	protected $cache = [];
 
 	/**
-	 * @param PollModel $resource
+	 * @param PollModel                   $resource
 	 * @param PollVoteRepositoryInterface $pollVoteRepository
-	 * @param Guard $guard
+	 * @param Guard                       $guard
 	 */
 	public function __construct(
 		PollModel $resource,

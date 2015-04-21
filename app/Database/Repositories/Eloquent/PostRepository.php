@@ -47,10 +47,10 @@ class PostRepository implements PostRepositoryInterface
 	private $permissionChecker;
 
 	/**
-	 * @param Post                     $postModel The model to use for posts.
-	 * @param Guard                    $guard     Laravel guard instance, used to get user ID.
-	 * @param MessageFormatter         $formatter Post formatter instance.
-	 * @param Store                    $settings  The settings container
+	 * @param Post                     $postModel         The model to use for posts.
+	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
+	 * @param MessageFormatter         $formatter         Post formatter instance.
+	 * @param Store                    $settings          The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PermissionChecker        $permissionChecker
 	 */

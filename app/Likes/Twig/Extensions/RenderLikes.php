@@ -76,9 +76,9 @@ class RenderLikes extends \Twig_Extension
 	/**
 	 * Render the likes into a string.
 	 *
-	 * @param Collection $likesCollection The likes to render.
+	 * @param Collection $likesCollection  The likes to render.
 	 *
-	 * @param string           $viewAllLikesLink The link to view all of the likes for the content.
+	 * @param string     $viewAllLikesLink The link to view all of the likes for the content.
 	 *
 	 * @return string
 	 */

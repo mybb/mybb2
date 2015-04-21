@@ -11,18 +11,18 @@ use MyBB\Core\Database\Models\UserProfileField;
 interface UserProfileFieldRepositoryInterface
 {
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
-	 * @param string $value
+	 * @param string       $value
 	 *
 	 * @return UserProfileField
 	 */
 	public function create(User $user, ProfileField $profileField, $value);
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
-	 * @param string $value
+	 * @param string       $value
 	 *
 	 * @return UserProfileField
 	 */
@@ -43,7 +43,7 @@ interface UserProfileFieldRepositoryInterface
 	public function findForUser(User $user);
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
 	 *
 	 * @return UserProfileField
@@ -51,7 +51,7 @@ interface UserProfileFieldRepositoryInterface
 	public function findForProfileField(User $user, ProfileField $profileField);
 
 	/**
-	 * @param User $user
+	 * @param User              $user
 	 * @param ProfileFieldGroup $group
 	 *
 	 * @return Collection
@@ -59,7 +59,7 @@ interface UserProfileFieldRepositoryInterface
 	public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group);
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
 	 *
 	 * @return bool

@@ -36,7 +36,7 @@ class User extends BasePresenter
 
 
 	/**
-	 * @param UserModel                $resource The user being wrapped by this presenter.
+	 * @param UserModel                $resource        The user being wrapped by this presenter.
 	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PostRepositoryInterface  $postRepository

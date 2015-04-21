@@ -20,8 +20,8 @@ interface LikesRepositoryInterface
 	/**
 	 * Get all of the likes created by a user, paginated.
 	 *
-	 * @param int|\MyBB\Core\Database\Models\User    $user The user to retrieve the likes for.
-	 * @param int $perPage The number of likes per page.
+	 * @param int|\MyBB\Core\Database\Models\User $user    The user to retrieve the likes for.
+	 * @param int                                 $perPage The number of likes per page.
 	 *
 	 * @return mixed
 	 */
@@ -42,7 +42,7 @@ interface LikesRepositoryInterface
 	 * Get all of the likes for a set of entries of a specific content type.
 	 *
 	 * @param Model $contentType The type of the content to get all of the likes for.
-	 * @param array $ids An array of IDs of the entries to get the likes for.
+	 * @param array $ids         An array of IDs of the entries to get the likes for.
 	 *
 	 * @return mixed
 	 */

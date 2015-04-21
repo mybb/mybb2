@@ -42,12 +42,12 @@ class AdminIndexController extends AdminController
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param TopicRepositoryInterface  $topicRepository    Topic repository to fetch topic information
-	 * @param PostRepositoryInterface   $postRepository     Post repository to fetch post information
-	 * @param ForumRepositoryInterface  $forumRepository    Forum repository to fetch forum information
-	 * @param UserRepositoryInterface   $userRepository     User repository to fetch user information
-	 * @param Guard                     $guard              Guard implementation
-	 * @param Store                     $settings
+	 * @param TopicRepositoryInterface $topicRepository Topic repository to fetch topic information
+	 * @param PostRepositoryInterface  $postRepository  Post repository to fetch post information
+	 * @param ForumRepositoryInterface $forumRepository Forum repository to fetch forum information
+	 * @param UserRepositoryInterface  $userRepository  User repository to fetch user information
+	 * @param Guard                    $guard           Guard implementation
+	 * @param Store                    $settings
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,

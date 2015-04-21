@@ -52,7 +52,7 @@ interface PollRepositoryInterface
 	/**
 	 * Edit a poll
 	 *
-	 * @param Poll $poll The poll to edit
+	 * @param Poll  $poll        The poll to edit
 	 * @param array $pollDetails The details of the poll.
 	 *
 	 * @return Poll

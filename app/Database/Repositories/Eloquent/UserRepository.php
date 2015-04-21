@@ -31,7 +31,7 @@ class UserRepository implements UserRepositoryInterface
 	private $guard;
 
 	/**
-	 * @param User              $userModel The model to use for users.
+	 * @param User              $userModel         The model to use for users.
 	 * @param PermissionChecker $permissionChecker
 	 * @param Guard             $guard
 	 */
@@ -58,10 +58,10 @@ class UserRepository implements UserRepositoryInterface
 	/**
 	 * Get all users active in the last x minutes
 	 *
-	 * @param int    $minutes The number of minutes which are considered as "online time"
+	 * @param int    $minutes  The number of minutes which are considered as "online time"
 	 * @param string $orderBy
 	 * @param string $orderDir
-	 * @param int    $num     The number of users to return. Set to 0 to get all users
+	 * @param int    $num      The number of users to return. Set to 0 to get all users
 	 *
 	 * @return mixed
 	 */

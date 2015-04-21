@@ -30,7 +30,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 
 	/**
 	 * @param PollVote $voteModel The model to use for poll votes.
-	 * @param Guard $guard Laravel guard instance, used to get user ID.
+	 * @param Guard    $guard     Laravel guard instance, used to get user ID.
 	 */
 	public function __construct(
 		PollVote $voteModel,

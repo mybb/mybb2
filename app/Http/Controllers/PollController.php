@@ -125,8 +125,8 @@ class PollController extends Controller
 	}
 
 	/**
-	 * @param  string       $slug
-	 * @param  int          $id
+	 * @param  string        $slug
+	 * @param  int           $id
 	 * @param CreateRequest $createRequest
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

@@ -26,9 +26,9 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 	}
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
-	 * @param string $value
+	 * @param string       $value
 	 *
 	 * @return UserProfileField
 	 */
@@ -52,7 +52,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 	}
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
 	 *
 	 * @return UserProfileField
@@ -66,9 +66,9 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 	}
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
-	 * @param string $value
+	 * @param string       $value
 	 *
 	 * @return UserProfileField
 	 */
@@ -96,7 +96,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 	}
 
 	/**
-	 * @param User $user
+	 * @param User              $user
 	 * @param ProfileFieldGroup $group
 	 *
 	 * @return Collection
@@ -113,7 +113,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
 	}
 
 	/**
-	 * @param User $user
+	 * @param User         $user
 	 * @param ProfileField $profileField
 	 *
 	 * @return bool

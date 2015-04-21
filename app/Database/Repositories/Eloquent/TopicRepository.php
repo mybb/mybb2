@@ -61,12 +61,12 @@ class TopicRepository implements TopicRepositoryInterface
 	private $permissionChecker;
 
 	/**
-	 * @param Topic                    $topicModel     The model to use for threads.
-	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
-	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
-	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
-	 * @param Store                    $settings       The settings container
+	 * @param Topic                    $topicModel        The model to use for threads.
+	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
+	 * @param PostRepositoryInterface  $postRepository    Used to manage posts for topics.
+	 * @param Str                      $stringUtils       String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager         Database manager, needed to do transactions.
+	 * @param Store                    $settings          The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PollRepositoryInterface  $pollRepository
 	 * @param PermissionChecker        $permissionChecker
@@ -304,7 +304,7 @@ class TopicRepository implements TopicRepositoryInterface
 	/**
 	 * Edit the hasPoll of the Topic
 	 *
-	 * @param Topic $topic The topic to edit
+	 * @param Topic $topic   The topic to edit
 	 * @param bool  $hasPoll
 	 *
 	 * @return mixed
