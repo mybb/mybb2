@@ -19,15 +19,24 @@ use MyBB\Core\Permissions\PermissionChecker;
 
 class CachingDecorator implements ForumRepositoryInterface
 {
-	/** @var ForumRepositoryInterface $decoratedRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $decoratedRepository;
-	/** @var CacheRepository $cache */
+
+	/**
+	 * @var CacheRepository
+	 */
 	private $cache;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
@@ -144,10 +153,10 @@ class CachingDecorator implements ForumRepositoryInterface
 	 * Update the last post for this forum
 	 *
 	 * @param Forum $forum The forum to update
+	 * @param Post  $post
 	 *
-	 * @return mixed
+	 * @return void
 	 */
-
 	public function updateLastPost(Forum $forum, Post $post = null)
 	{
 		// TODO: It'd be better to update the cache instead of forgetting it

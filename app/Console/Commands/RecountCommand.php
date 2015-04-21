@@ -24,8 +24,14 @@ class RecountCommand extends Command
 	 */
 	protected $description = 'Recounts some of MyBB\'s counters. If called without options all recounts are run';
 
+	/**
+	 * @var CacheRepository
+	 */
 	private $cache;
 
+	/**
+	 * @param CacheRepository $cache
+	 */
 	public function __construct(CacheRepository $cache)
 	{
 		parent::__construct();
@@ -44,7 +50,8 @@ class RecountCommand extends Command
 
 		$runAll = !$options['forums'] && !$options['topics'] && !$options['users'];
 
-		// If we want to recount topics and forums we should recount topics first, otherwise the forum counter will go crazy
+		// If we want to recount topics and forums we should recount topics first
+		// otherwise the forum counter will go crazy
 		if ($runAll || $options['topics']) {
 			$this->recountTopics();
 		}
@@ -79,7 +86,7 @@ class RecountCommand extends Command
 		// We're calling the model directly to avoid caching issues
 		$forums = Forum::all();
 		foreach ($forums as $forum) {
-		// We need the topics later to calculate the post number and the last post
+			// We need the topics later to calculate the post number and the last post
 			$topics = Topic::where('forum_id', '=', $forum->id)->orderBy('created_at', 'desc');
 			$forum->num_topics = $topics->count();
 			$numPosts = 0;
@@ -88,7 +95,8 @@ class RecountCommand extends Command
 
 			foreach ($topics->get() as $topic) {
 				$numPosts += $topic->num_posts;
-				// We can simply override this variable all the time. The topics are sorted so the last time we override this we have our last post
+				// We can simply override this variable all the time.
+				// The topics are sorted so the last time we override this we have our last post
 				$lastPost = $topic->last_post_id;
 				$lastPostUser = $topic->lastPost->user_id;
 			}
@@ -102,7 +110,8 @@ class RecountCommand extends Command
 
 		// Override our old cache to populate our new numbers
 		$this->cache->forever('forums.all', $forums);
-		// We could also recache this cache but the recount tool is already busy so probably better to leave it to the first user
+		// We could also recache this cache but the recount tool is already busy
+		// so probably better to leave it to the first user
 		$this->cache->forget('forums.index_tree');
 
 		$this->info('Done' . PHP_EOL);
@@ -116,7 +125,8 @@ class RecountCommand extends Command
 		foreach ($topics as $topic) {
 			$posts = Post::where('topic_id', '=', $topic->id)->orderBy('created_at', 'desc');
 			$topic->num_posts = $posts->count();
-			// We could also update the first_post_id easily with the above query but if that column is wrong everything is wrong
+			// We could also update the first_post_id easily with the above query
+			// but if that column is wrong everything is wrong
 			$topic->last_post_id = $posts->first()->id;
 
 			$topic->save();

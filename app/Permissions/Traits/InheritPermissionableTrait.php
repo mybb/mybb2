@@ -6,12 +6,12 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Services\PermissionChecker;
 
-trait InheritPermissionable
+trait InheritPermissionableTrait
 {
-	use Permissionable;
+	use PermissionableTrait;
 
 	/**
-	 * @return InheritPermissionable
+	 * @return InheritPermissionableTrait
 	 */
 	public function getParent()
 	{

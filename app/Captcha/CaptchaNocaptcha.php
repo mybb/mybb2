@@ -9,11 +9,30 @@ use MyBB\Settings\Store;
 
 class CaptchaNocaptcha implements CaptchaInterface
 {
+	/**
+	 * @var Recaptcha
+	 */
 	private $nocaptcha;
+
+	/**
+	 * @var CheckRecaptchaV2
+	 */
 	private $service;
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
+
+	/**
+	 * @var Request
+	 */
 	private $request;
 
+	/**
+	 * @param Store   $settings
+	 * @param Request $request
+	 */
 	public function __construct(Store $settings, Request $request)
 	{
 		$this->settings = $settings;
@@ -27,17 +46,24 @@ class CaptchaNocaptcha implements CaptchaInterface
 			'template' => 'captcha.nocaptcha',
 			'options' => [
 				'lang' => $this->settings->get('user.lang', 'en'),
-				// As an id should be unique but we may need more than one captcha per page (modals) we simply generate a random id
+				// As an id should be unique but we may need more than one captcha per page (modals)
+				// we simply generate a random id
 				'id' => str_random()
 			]
 		]);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function render()
 	{
 		return $this->nocaptcha->render();
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function validate()
 	{
 		$value = $this->request->get('g-recaptcha-response');
@@ -53,6 +79,9 @@ class CaptchaNocaptcha implements CaptchaInterface
 		return $this->service->check(null, $value);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function supported()
 	{
 		// NoCaptcha is supported when we have a public and private key

@@ -3,11 +3,12 @@
 	<description>Configuration for MyBB 2.0</description>
 
 	<file>app</file>
-	<file>bootstrap</file>
 	<file>config</file>
 	<file>database</file>
 	<file>resources</file>
 	<file>tests</file>
+
+	<exclude-pattern>*/*.blade.php</exclude-pattern>
 
 	<rule ref="MyBB2"/>
 
@@ -18,6 +19,11 @@
 
 	<rule ref="PSR1.Methods.CamelCapsMethodName">
 		<exclude-pattern>*/Presenters/*</exclude-pattern>
+	</rule>
+
+	<rule ref="Generic.Files.LineLength">
+		<exclude-pattern>*/database/*</exclude-pattern>
+		<exclude-pattern>*/resources/*</exclude-pattern>
 	</rule>
 
 </ruleset>

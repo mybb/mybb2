@@ -12,7 +12,7 @@ namespace MyBB\Core\Http\Requests\Search;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Http\Requests\Request;
 
-class SearchRequest extends Request
+class SearchRequest extends AbstractRequest
 {
 	/**
 	 * The route to redirect to if validation fails.
@@ -20,14 +20,22 @@ class SearchRequest extends Request
 	 * @var string
 	 */
 	protected $redirectRoute = 'search';
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
+	/**
+	 * @param Guard $guard
+	 */
 	public function __construct(Guard $guard)
 	{
 		$this->guard = $guard;
 	}
 
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -45,6 +53,9 @@ class SearchRequest extends Request
 		];
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function authorize()
 	{
 		//return $this->guard->check();

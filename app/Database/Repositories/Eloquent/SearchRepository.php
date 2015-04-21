@@ -17,12 +17,10 @@ class SearchRepository implements SearchRepositoryInterface
 {
 	/**
 	 * @var Search $searchModel
-	 * @access protected
 	 */
 	protected $searchModel;
 	/**
 	 * @var Guard $guard ;
-	 * @access protected
 	 */
 	protected $guard;
 
@@ -51,6 +49,7 @@ class SearchRepository implements SearchRepositoryInterface
 		if ($userId <= 0) {
 			$userId = null;
 		}
+
 		return $this->searchModel->where('user_id', $userId)->find($id);
 	}
 
@@ -77,6 +76,7 @@ class SearchRepository implements SearchRepositoryInterface
 		}
 
 		$searchlog = $this->searchModel->create($details);
+
 		return $searchlog;
 	}
 }

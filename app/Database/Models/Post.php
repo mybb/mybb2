@@ -19,12 +19,17 @@ class Post extends Model implements HasPresenter
 	use SoftDeletes;
 	use LikeableTrait;
 
+	// @codingStandardsIgnoreStart
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = true;
+
+	// @codingStandardsIgnoreEnd
+
 	/**
 	 * The table associated with the model.
 	 *

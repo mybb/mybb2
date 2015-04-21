@@ -12,9 +12,11 @@ namespace MyBB\Core\Http\Requests\Poll;
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\Request;
 
-class CreateRequest extends Request
+class CreateRequest extends AbstractRequest
 {
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
@@ -66,11 +68,11 @@ class CreateRequest extends Request
 		return $rules;
 	}
 
-	/*
-     * get the options of the poll
-     *
-     * @return array
-     */
+	/**
+	 * get the options of the poll
+	 *
+	 * @return array
+	 */
 	public function options()
 	{
 		$input = $this->input('option');

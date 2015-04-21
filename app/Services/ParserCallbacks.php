@@ -6,6 +6,11 @@ use MyBB\Core\Database\Models\Post;
 
 class ParserCallbacks
 {
+	/**
+	 * @param int $pid
+	 *
+	 * @return string
+	 */
 	public static function getPostLink($pid)
 	{
 		$post = Post::find($pid);

@@ -29,19 +29,36 @@ use MyBB\Core\Services\TopicDeleter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class TopicController extends Controller
+class TopicController extends AbstractController
 {
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var PollRepositoryInterface $pollRepository */
+
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
-	/** @var QuoteRenderer $quoteRenderer */
+
+	/**
+	 * @var QuoteRenderer
+	 */
 	private $quoteRenderer;
 
 	/**
@@ -310,7 +327,7 @@ class TopicController extends Controller
 	}
 
 	/**
-	 * @param $forumId
+	 * @param int $forumId
 	 *
 	 * @return \Illuminate\View\View
 	 */

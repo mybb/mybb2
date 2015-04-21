@@ -6,10 +6,14 @@ use MyBB\Auth\Contracts\Guard;
 
 class UpdateLastVisit extends AbstractBootstrapMiddleware
 {
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	protected $guard;
 
-	/** @var Router */
+	/**
+	 * @var Router
+	 */
 	private $router;
 
 	/**

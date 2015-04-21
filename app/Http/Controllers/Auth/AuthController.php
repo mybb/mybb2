@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class AuthController extends Controller
 {

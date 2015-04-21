@@ -27,37 +27,44 @@ class TopicRepository implements TopicRepositoryInterface
 {
 	/**
 	 * @var Topic $topicModel
-	 * @access protected
 	 */
 	protected $topicModel;
 	/**
 	 * @var Guard $guard
-	 * @access protected
 	 */
 	protected $guard;
 	/**
 	 * @var PostRepositoryInterface $postRepository
-	 * @access protected
 	 */
 	protected $postRepository;
 
+	/**
+	 * @var DatabaseManager
+	 */
 	private $dbManager;
 	/**
 	 * @var Str $stringUtils
-	 * @access protected
 	 */
 	protected $stringUtils;
 
-	/** @var Store $settings */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
-	/** @var ForumRepositoryInterface */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
-	/** @var PollRepositoryInterface */
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**
@@ -309,7 +316,6 @@ class TopicRepository implements TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function setHasPoll(Topic $topic, $hasPoll)
 	{
 		return $this->editTopic($topic, [
@@ -362,6 +368,7 @@ class TopicRepository implements TopicRepositoryInterface
 	 * Update the last post of the topic
 	 *
 	 * @param Topic $topic The topic to update
+	 * @param Post  $post
 	 *
 	 * @return mixed
 	 */

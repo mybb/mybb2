@@ -34,6 +34,9 @@ class Post extends BasePresenter
 		$this->guard = $guard;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function author()
 	{
 		if ($this->wrappedObject->user_id == null) {

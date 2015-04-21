@@ -180,5 +180,8 @@ Breadcrumbs::register('search', function ($breadcrumbs) {
 Breadcrumbs::register('search.results', function ($breadcrumbs, $searchlog) {
 
 	$breadcrumbs->parent('search');
-	$breadcrumbs->push(trans('search.resultsforx', ['keyword' => $searchlog->keywords]), route('search.results', ['id' => $searchlog->id]));
+	$breadcrumbs->push(
+		trans('search.resultsforx', ['keyword' => $searchlog->keywords]),
+		route('search.results', ['id' => $searchlog->id])
+	);
 });

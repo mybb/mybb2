@@ -13,12 +13,27 @@ class ProfileFieldGroup extends Model implements HasPresenter
 	const ABOUT_YOU = 'about-you';
 	const CONTACT_DETAILS = 'contact-details';
 
+	/**
+	 * @var string
+	 */
 	protected $table = 'profile_field_groups';
+	/**
+	 * @var array
+	 */
 	protected $dates = ['created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
 	protected $guarded = ['id'];
+	/**
+	 * @var array
+	 */
 	protected $casts = [
 		'id' => 'int'
 	];
+	/**
+	 * @var array
+	 */
 	protected $with = [
 		'getProfileFields'
 	];

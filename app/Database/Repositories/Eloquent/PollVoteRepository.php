@@ -19,12 +19,10 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 {
 	/**
 	 * @var PollVote $voteModel
-	 * @access protected
 	 */
 	protected $voteModel;
 	/**
 	 * @var Guard $guard ;
-	 * @access protected
 	 */
 	protected $guard;
 
@@ -77,6 +75,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 	/**
 	 * @param User $user
 	 * @param Poll $poll
+	 *
 	 * @return PollVote
 	 */
 	public function findForUserPoll(User $user, Poll $poll)
@@ -86,6 +85,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 
 	/**
 	 * @param Poll $poll
+	 *
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function allForPoll(Poll $poll)
@@ -95,6 +95,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
 
 	/**
 	 * @param Poll $poll
+	 *
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function removeAllByPoll(Poll $poll)

@@ -11,8 +11,17 @@ use Illuminate\Support\Collection;
  */
 class ProfileFieldOption extends Model
 {
+	/**
+	 * @var string
+	 */
 	protected $table = 'profile_field_options';
+	/**
+	 * @var array
+	 */
 	protected $dates = ['created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
 	protected $guarded = ['id'];
 
 	/**

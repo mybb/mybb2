@@ -27,17 +27,31 @@ use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PollController extends Controller
+class PollController extends AbstractController
 {
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PollRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
-	/** @var PollVoteRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollVoteRepositoryInterface
+	 */
 	private $pollVoteRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
@@ -47,7 +61,6 @@ class PollController extends Controller
 	 *                                                        details.
 	 * @param ForumRepositoryInterface    $forumRepository    Forum repository interface, used to fetch forum details.
 	 * @param Guard                       $guard              Guard implementation
-	 * @param Request                     $request            Request implementation
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,
@@ -162,7 +175,9 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return redirect()->route('polls.create')->withInput()->withError(['error' => trans('error.error_creating_poll')]);
+		return redirect()->route('polls.create')->withInput()->withError([
+			'error' => trans('error.error_creating_poll')
+		]);
 	}
 
 	/**
@@ -170,6 +185,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function vote($topicSlug, $topicId)
@@ -235,6 +251,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function undo($topicSlug, $topicId)

@@ -13,12 +13,16 @@ use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\Request;
 use MyBB\Core\Presenters\Poll as PollPresenter;
 
-class VoteRequest extends Request
+class VoteRequest extends AbstractRequest
 {
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
-	/** @var PollPresenter $poll */
+	/**
+	 * @var PollPresenter
+	 */
 	private $poll;
 
 	/**

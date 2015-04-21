@@ -10,21 +10,21 @@ use MyBB\Core\Http\Requests\Search\SearchRequest;
 use MyBB\Core\Permissions\PermissionChecker;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class SearchController extends Controller
+class SearchController extends AbstractController
 {
 	/**
 	 * @var SearchRepositoryInterface $searchRepository
-	 * @access protected
 	 */
 	protected $searchRepository;
 
-	/** @var ForumRepositoryInterface $forumRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
 
 	/**
 	 * @var SearchRequest $searchRequest
-	 * @access protected
 	 */
 	protected $searchRequest;
 
@@ -42,7 +42,10 @@ class SearchController extends Controller
 		$this->forumRepository = $forumRepository;
 	}
 
-	public $sorts = [
+	/**
+	 * @var array
+	 */
+	protected $sorts = [
 		'postdate' => [
 			'name' => 'created_at',
 			'desc' => 'asc',

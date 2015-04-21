@@ -7,18 +7,23 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Poll extends Model implements HasPresenter
 {
+	// @codingStandardsIgnoreStart
+
 	/**
 	 * Indicates if the IDs are auto-incrementing.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $incrementing = true;
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = true;
+
+	// @codingStandardsIgnoreEnd
+
 	/**
 	 * The attributes that are mass assignable.
 	 *

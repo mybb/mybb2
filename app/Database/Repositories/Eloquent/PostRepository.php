@@ -23,27 +23,30 @@ class PostRepository implements PostRepositoryInterface
 {
 	/**
 	 * @var Post $postModel
-	 * @access protected
 	 */
 	protected $postModel;
 	/**
 	 * @var Guard $guard
-	 * @access protected
 	 */
 	protected $guard;
 	/**
 	 * @var MessageFormatter $formatter
-	 * @access protected
 	 */
 	protected $formatter;
 
-	/** @var  Store $settings */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
-	/** @var ForumRepositoryInterface */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**
@@ -255,7 +258,6 @@ class PostRepository implements PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function deletePost(Post $post)
 	{
 		if ($post['deleted_at'] == null) {

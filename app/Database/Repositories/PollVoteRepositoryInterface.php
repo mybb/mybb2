@@ -35,18 +35,21 @@ interface PollVoteRepositoryInterface
 	/**
 	 * @param User $user
 	 * @param Poll $poll
+	 *
 	 * @return \MyBB\Core\Database\Models\PollVote
 	 */
 	public function findForUserPoll(User $user, Poll $poll);
 
 	/**
 	 * @param Poll $poll
+	 *
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function allForPoll(Poll $poll);
 
 	/**
 	 * @param Poll $poll
+	 *
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function removeAllByPoll(Poll $poll);

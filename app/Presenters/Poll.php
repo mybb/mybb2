@@ -17,15 +17,20 @@ use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 class Poll extends BasePresenter
 {
 	/** @var PollModel $wrappedObject */
-	protected $wrappedObject;
 
-	/** @var  PollVoteRepositoryInterface $pollVoteRepository */
+	/**
+	 * @var PollVoteRepositoryInterface
+	 */
 	protected $pollVoteRepository;
 
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
-	/** @var array $cache */
+	/**
+	 * @var array
+	 */
 	protected $cache = [];
 
 	/**

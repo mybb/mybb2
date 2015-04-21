@@ -20,14 +20,17 @@ class UserRepository implements UserRepositoryInterface
 {
 	/**
 	 * @var User $userModel
-	 * @access protected
 	 */
 	protected $userModel;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**

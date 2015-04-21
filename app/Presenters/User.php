@@ -23,15 +23,29 @@ class User extends BasePresenter
 {
 	/** @var UserModel $wrappedObject */
 
-	/** @var Router $router */
+	/**
+	 * @var Router
+	 */
 	private $router;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var TopicRepositoryInterface $topicRepository */
+
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
 
 
@@ -164,12 +178,12 @@ class User extends BasePresenter
 	}
 
 	/**
-	 * @param $route
-	 * @param $parameters
+	 * @param string $route
+	 * @param array  $parameters
 	 *
 	 * @return array
 	 */
-	private function getWioData($route, $parameters)
+	private function getWioData($route, array $parameters)
 	{
 		$data = array();
 

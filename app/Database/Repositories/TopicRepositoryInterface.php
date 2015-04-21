@@ -109,7 +109,6 @@ interface TopicRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function setHasPoll(Topic $topic, $hasPoll);
 
 	/**
@@ -125,6 +124,7 @@ interface TopicRepositoryInterface
 	 * Update the last post of the topic
 	 *
 	 * @param Topic $topic The topic to update
+	 * @param Post  $post
 	 *
 	 * @return mixed
 	 */

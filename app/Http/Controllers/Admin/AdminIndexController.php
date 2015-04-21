@@ -26,17 +26,34 @@ class AdminIndexController extends AdminController
 	|
 	*/
 
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
-	/** @var Store $settings */
+
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
 	/**

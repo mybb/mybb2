@@ -9,8 +9,17 @@ use Illuminate\Database\Eloquent\Model;
  */
 class UserProfileField extends Model
 {
+	/**
+	 * @var string
+	 */
 	protected $table = 'user_profile_fields';
+	/**
+	 * @var array
+	 */
 	protected $dates = ['created_at', 'updated_at'];
+	/**
+	 * @var array
+	 */
 	protected $guarded = ['id'];
 
 	/**

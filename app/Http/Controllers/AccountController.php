@@ -12,9 +12,11 @@ use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 use Session;
 
-class AccountController extends Controller
+class AccountController extends AbstractController
 {
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
@@ -27,6 +29,9 @@ class AccountController extends Controller
 		$this->guard = $guard;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function index()
 	{
 		return view('account.dashboard')->withActive('dashboard');
@@ -34,6 +39,8 @@ class AccountController extends Controller
 
 	/**
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
+	 *
+	 * @return mixed
 	 */
 	public function getProfile(ProfileFieldGroupRepositoryInterface $profileFieldGroups)
 	{
@@ -61,7 +68,9 @@ class AccountController extends Controller
 	{
 		// handle updates to the user model
 		$input = $request->only(['usertitle']);
-		$input['dob'] = $request->get('date_of_birth_day') . '-' . $request->get('date_of_birth_month') . '-' . $request->get('date_of_birth_year');
+		$input['dob'] = $request->get('date_of_birth_day') .
+			'-' . $request->get('date_of_birth_month') .
+			'-' . $request->get('date_of_birth_year');
 		$this->guard->user()->update($input);
 
 		// handle profile field updates
@@ -77,6 +86,9 @@ class AccountController extends Controller
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_profile'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getUsername()
 	{
 		return view('account.username')->withActive('profile');
@@ -111,6 +123,9 @@ class AccountController extends Controller
 			]);
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getEmail()
 	{
 		return view('account.email')->withActive('profile')->withHasConfirmation(ConfirmationManager::has(
@@ -153,6 +168,11 @@ class AccountController extends Controller
 			]);
 	}
 
+	/**
+	 * @param string $token
+	 *
+	 * @return $this
+	 */
 	public function confirmEmail($token)
 	{
 		$email = ConfirmationManager::get('email', $token);
@@ -170,6 +190,9 @@ class AccountController extends Controller
 		return redirect()->route('account.profile')->withSuccess(trans('account.updatedEmail'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getPassword()
 	{
 		return view('account.password')->withActive('profile')->withHasConfirmation(ConfirmationManager::has(
@@ -212,6 +235,11 @@ class AccountController extends Controller
 			]);
 	}
 
+	/**
+	 * @param string $token
+	 *
+	 * @return $this
+	 */
 	public function confirmPassword($token)
 	{
 		$password = ConfirmationManager::get('password', $token);
@@ -230,6 +258,9 @@ class AccountController extends Controller
 		return redirect()->route('account.profile')->withSuccess(trans('account.updatedPassword'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getAvatar()
 	{
 		return view('account.avatar')->withActive('profile');
@@ -279,6 +310,9 @@ class AccountController extends Controller
 		return redirect()->route('account.profile')->withSuccess('account.saved_avatar');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function removeAvatar()
 	{
 		// TODO: Delete the old file if an uploaded was used
@@ -287,21 +321,37 @@ class AccountController extends Controller
 		return redirect()->route('account.profile')->withSuccess('account.removed_avatar');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getNotifications()
 	{
 		return view('account.notifications')->withActive('notifications');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getFollowing()
 	{
 		return view('account.following')->withActive('following');
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getBuddies()
 	{
 		return view('account.buddies')->withActive('buddies');
 	}
 
+	/**
+	 * @param Store      $settings
+	 * @param Filesystem $files
+	 * @param Translator $trans
+	 *
+	 * @return mixed
+	 */
 	public function getPreferences(Store $settings, Filesystem $files, Translator $trans)
 	{
 		// Build the language array used by the select box
@@ -341,7 +391,9 @@ class AccountController extends Controller
 	}
 
 	/**
-	 * @param Request $request
+	 * @param Request    $request
+	 * @param Store      $settings
+	 * @param Translator $trans
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -425,6 +477,9 @@ class AccountController extends Controller
 		return redirect()->route('account.preferences')->withSuccess(trans('account.saved_preferences'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getPrivacy()
 	{
 		return view('account.privacy')->withActive('privacy');
@@ -432,6 +487,7 @@ class AccountController extends Controller
 
 	/**
 	 * @param Request $request
+	 * @param Store   $settings
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -468,6 +524,9 @@ class AccountController extends Controller
 		return redirect()->route('account.privacy')->withSuccess(trans('account.saved_privacy'));
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getDrafts()
 	{
 		return view('account.drafts')->withActive('drafts');

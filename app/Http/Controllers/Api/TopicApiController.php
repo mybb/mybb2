@@ -7,10 +7,17 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Http\Requests;
 use MyBB\Core\Transformers\TopicTransformer;
 
-class TopicApiController extends ApiController
+class TopicApiController extends AbstractApiController
 {
-	public $topicRepository;
+	/**
+	 * @var TopicRepositoryInterface
+	 */
+	protected $topicRepository;
 
+	/**
+	 * @param TopicRepositoryInterface $topicRepository
+	 * @param Manager                  $fractal
+	 */
 	public function __construct(TopicRepositoryInterface $topicRepository, Manager $fractal)
 	{
 		parent::__construct($fractal);

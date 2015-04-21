@@ -7,7 +7,7 @@ use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\Request;
 
-class UpdateProfileRequest extends Request
+class UpdateProfileRequest extends AbstractRequest
 {
 	/**
 	 * @var ProfileFieldRepositoryInterface

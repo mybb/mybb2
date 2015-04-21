@@ -43,6 +43,7 @@ interface PollRepositoryInterface
 
 	/**
 	 * Remove the poll
+	 *
 	 * @param Poll $poll
 	 *
 	 * @return bool
