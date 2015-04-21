@@ -2,23 +2,22 @@
 
 namespace MyBB\Core\Renderers\Post\Quote;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Foundation\Application;
 use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Presenters\Post as PostPresenter;
 
 class MyCode implements QuoteInterface
 {
 	/**
-	 * @var Guard $guard
+	 * @var Application
 	 */
-	private $guard;
+	private $app;
 
 	/**
-	 * @param Guard $guard
+	 * @param Application $app
 	 */
-	public function __construct(Guard $guard)
+	public function __construct(Application $app)
 	{
-		$this->guard = $guard;
+		$this->app = $app;
 	}
 
 	/**
@@ -28,7 +27,7 @@ class MyCode implements QuoteInterface
 	 */
 	public function renderFromPost(Post $post)
 	{
-		$post = new PostPresenter($post, $this->guard);
+		$post = $this->app->make('MyBB\Core\Presenters\Post', [$post]);
 		$message = $post->content;
 		$slapUsername = $post->author->name;
 		$message = preg_replace(

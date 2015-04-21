@@ -76,6 +76,8 @@ class CaptchaFactory implements CaptchaInterface
 	 * @param string $captchaName
 	 *
 	 * @return CaptchaInterface|null
+	 *
+	 * @throws CaptchaInvalidClassException
 	 */
 	private function getCaptchaClass($captchaName)
 	{

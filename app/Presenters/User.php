@@ -11,7 +11,7 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
-use Lang;
+use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
@@ -62,6 +62,11 @@ class User extends BasePresenter
 	private $conversationRepository;
 
 	/**
+	 * @var Translator
+	 */
+	private $translator;
+
+	/**
 	 * @param UserModel                       $resource
 	 * @param Router                          $router
 	 * @param ForumRepositoryInterface        $forumRepository
@@ -70,6 +75,7 @@ class User extends BasePresenter
 	 * @param UserRepositoryInterface         $userRepository
 	 * @param PermissionChecker               $permissionChecker
 	 * @param ConversationRepositoryInterface $conversationRepository
+	 * @param Translator               $translator
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -79,7 +85,8 @@ class User extends BasePresenter
 		TopicRepositoryInterface $topicRepository,
 		UserRepositoryInterface $userRepository,
 		PermissionChecker $permissionChecker,
-		ConversationRepositoryInterface $conversationRepository
+		ConversationRepositoryInterface $conversationRepository,
+		Translator $translator
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -89,6 +96,7 @@ class User extends BasePresenter
 		$this->userRepository = $userRepository;
 		$this->permissionChecker = $permissionChecker;
 		$this->conversationRepository = $conversationRepository;
+		$this->translator = $translator;
 	}
 
 	/**
@@ -187,7 +195,7 @@ class User extends BasePresenter
 		$collection = $this->router->getRoutes();
 		$route = $collection->match(Request::create($this->wrappedObject->last_page));
 
-		if ($route->getName() != null && Lang::has('online.' . $route->getName())) {
+		if ($route->getName() != null && $this->translator->has('online.' . $route->getName())) {
 			$langOptions = $this->getWioData($route->getName(), $route->parameters());
 
 			if (!isset($langOptions['url'])) {
@@ -202,11 +210,11 @@ class User extends BasePresenter
 				unset($langOptions['langString']);
 			}
 
-			$lang = Lang::get($langString, $langOptions);
+			$lang = $this->translator->get($langString, $langOptions);
 
 			// May happen if we have two routes 'xy.yx.zz' and 'xy.yx'
 			if (is_array($lang)) {
-				$lang = Lang::get($langString . '.index', $langOptions);
+				$lang = $this->translator->get($langString . '.index', $langOptions);
 			}
 		}
 
