@@ -29,5 +29,4 @@ class CreatePasswordResetsTable extends Migration
 	{
 		Schema::drop('password_resets');
 	}
-
 }

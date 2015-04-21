@@ -7,13 +7,19 @@ use MyBB\Settings\Store;
 
 class SetupLanguage extends AbstractBootstrapMiddleware
 {
-	/** @var Factory */
+	/**
+	 * @var Factory
+	 */
 	private $viewFactory;
 
-	/** @var Store */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
-	/** @var Application */
+	/**
+	 * @var Application
+	 */
 	private $app;
 
 	/**

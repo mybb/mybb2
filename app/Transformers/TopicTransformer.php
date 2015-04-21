@@ -7,6 +7,11 @@ use MyBB\Core\Database\Models\Topic;
 
 class TopicTransformer extends TransformerAbstract
 {
+	/**
+	 * @param Topic $topic
+	 *
+	 * @return array
+	 */
 	public function transform(Topic $topic)
 	{
 		return [

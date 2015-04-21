@@ -20,7 +20,7 @@ class Date extends Twig_Extension
 	/**
 	 * @var ParseDateHelper $_dateParser ;
 	 */
-	protected $_dateParser;
+	protected $dateParser;
 
 	/**
 	 * Create a new settings extension.
@@ -29,7 +29,7 @@ class Date extends Twig_Extension
 	 */
 	public function __construct(ParseDateHelper $dateParser)
 	{
-		$this->_dateParser = $dateParser;
+		$this->dateParser = $dateParser;
 	}
 
 	/**
@@ -46,10 +46,10 @@ class Date extends Twig_Extension
 	public function getFunctions()
 	{
 		return [
-			new Twig_SimpleFunction('format_date', [$this->_dateParser, 'formatDate']),
-			new Twig_SimpleFunction('generate_time', [$this->_dateParser, 'generateTime'], ['is_safe' => ['html']]),
-			new Twig_SimpleFunction('human_date', [$this->_dateParser, 'humanDate']),
-			new Twig_SimpleFunction('post_date_link', [$this->_dateParser, 'postDateLink'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('format_date', [$this->dateParser, 'formatDate']),
+			new Twig_SimpleFunction('generate_time', [$this->dateParser, 'generateTime'], ['is_safe' => ['html']]),
+			new Twig_SimpleFunction('human_date', [$this->dateParser, 'humanDate']),
+			new Twig_SimpleFunction('post_date_link', [$this->dateParser, 'postDateLink'], ['is_safe' => ['html']]),
 		];
 	}
 }

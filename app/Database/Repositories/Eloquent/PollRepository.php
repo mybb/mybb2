@@ -20,25 +20,21 @@ class PollRepository implements PollRepositoryInterface
 {
 	/**
 	 * @var Poll $pollModel
-	 * @access protected
 	 */
 	protected $pollModel;
 
 	/**
 	 * @var PollVoteRepositoryInterface $pollVoteRepository
-	 * @access protected
 	 */
 	protected $pollVoteRepository; // TODO: https://github.com/mybb/mybb2/pull/32#discussion_r28090844
 
 	/**
 	 * @var Guard $guard ;
-	 * @access protected
 	 */
 	protected $guard;
 
 	/**
 	 * @var DatabaseManager $dbManager
-	 * @access private
 	 */
 	private $dbManager;
 

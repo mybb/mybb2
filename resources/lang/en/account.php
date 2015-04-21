@@ -36,7 +36,7 @@ return [
 
 	'username' => 'Username',
 	'new_username' => 'New Username',
-	'new_username_desc' => 'You can only change your username once every 6 months. (Not really, but we need to implement this)',
+	'new_username_desc' => 'You can only change your username once every 6 months',
 	'current_password' => 'Current Password',
 	'current_password_name' => 'To change your username, please enter your current password.',
 	'saved_username' => 'Your username change has been saved',

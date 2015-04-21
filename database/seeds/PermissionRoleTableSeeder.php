@@ -26,7 +26,8 @@ class PermissionRoleTableSeeder extends Seeder
 				'value' => -1
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canViewAllOnline')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canViewAllOnline')
+					->pluck('id'),
 				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
 				'value' => 1
 			],
@@ -34,5 +35,4 @@ class PermissionRoleTableSeeder extends Seeder
 
 		DB::table('permission_role')->insert($permissions_role);
 	}
-
 }

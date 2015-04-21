@@ -4,7 +4,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProfileFieldsTable extends Migration {
+class CreateProfileFieldsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -50,5 +51,4 @@ class CreateProfileFieldsTable extends Migration {
 
 		Schema::drop('profile_fields');
 	}
-
 }

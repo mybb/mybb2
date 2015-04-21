@@ -14,12 +14,11 @@ class DebugController extends Controller
 		$type = Input::get("parser");
 		$parsed = "";
 
-		if(!empty($type) && !empty($orig))
-		{
+		if (!empty($type) && !empty($orig)) {
 			$parser = ParserFactory::make($type);
 			$parser->setPostURL(":pid");
 
-//			$formatter = new MessageFormatter($parser);
+//          $formatter = new MessageFormatter($parser);
 			$app = app();
 			$formatter = $app->make('MyBB\Parser\MessageFormatter', [$parser]);
 			$parsed = $formatter->parse($orig, [

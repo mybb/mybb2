@@ -17,22 +17,34 @@ class PermissionChecker
 	const NO = 0;
 	const YES = 1;
 
-	/** @var CacheRepository $cache */
+	/**
+	 * @var CacheRepository
+	 */
 	private $cache;
 
-	/** @var DatabaseManager $db */
+	/**
+	 * @var DatabaseManager
+	 */
 	private $db;
 
-	/** @var ContentClass $classModel */
+	/**
+	 * @var ContentClass
+	 */
 	private $classModel;
 
-	/** @var array $permissions */
+	/**
+	 * @var array
+	 */
 	private $permissions;
 
-	/** @var array $unviewableIds */
+	/**
+	 * @var array
+	 */
 	private $unviewableIds;
 
-	/** @var Role $guestRole */
+	/**
+	 * @var Role
+	 */
 	private $guestRole;
 
 	/**
@@ -165,17 +177,27 @@ class PermissionChecker
 		}
 
 		// No parent? No need to do anything else here
-		if (($concreteClass instanceof InheritPermissionInterface) && $concreteClass::find($contentID)->getParent() != null) {
+		if (($concreteClass instanceof InheritPermissionInterface)
+			&& $concreteClass::find($contentID)->getParent() != null
+		) {
 			// If we have a positive permission but need to check parents for negative values do so here
 			if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
-				$isAllowed = $this->hasPermission($content,
-					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+				$isAllowed = $this->hasPermission(
+					$content,
+					$concreteClass::find($contentID)->getParent()->getContentId(),
+					$permission,
+					$user
+				);
 			}
 
 			// Do the same for negative permissions with parent positives
 			if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
-				$isAllowed = $this->hasPermission($content,
-					$concreteClass::find($contentID)->getParent()->getContentId(), $permission, $user);
+				$isAllowed = $this->hasPermission(
+					$content,
+					$concreteClass::find($contentID)->getParent()->getContentId(),
+					$permission,
+					$user
+				);
 			}
 		}
 
@@ -198,7 +220,8 @@ class PermissionChecker
 	 */
 	public function getPermissionForRole(Role $role, $permission, $content = null, $contentID = null)
 	{
-		// Permissions associated with user/groups are saved without content (all permissions are associated with groups anyways)
+		// Permissions associated with user/groups are saved without content
+		// (all permissions are associated with groups anyways)
 		if ($content == 'user' || $content == 'usergroup') {
 			$content = null;
 			$contentID = null;

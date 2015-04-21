@@ -22,5 +22,4 @@ class ContentClassTableSeeder extends Seeder
 
 		DB::table('content_class')->insert($classes);
 	}
-
 }

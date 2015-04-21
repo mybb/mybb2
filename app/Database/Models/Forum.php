@@ -10,13 +10,13 @@
 namespace MyBB\Core\Database\Models;
 
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
-use MyBB\Core\Permissions\Traits\InheritPermissionable;
+use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 class Forum extends Node implements HasPresenter, InheritPermissionInterface
 {
-	use InheritPermissionable;
+	use InheritPermissionableTrait;
 
 	/**
 	 * Nested set column IDs.
@@ -24,12 +24,17 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	const LFT = 'left_id';
 	const RGT = 'right_id';
 	const PARENT_ID = 'parent_id';
+
+	// @codingStandardsIgnoreStart
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = false;
+
+	// @codingStandardsIgnoreEnd
+
 	/**
 	 * The table associated with the model.
 	 *

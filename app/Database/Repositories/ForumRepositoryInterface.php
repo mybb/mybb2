@@ -70,9 +70,9 @@ interface ForumRepositoryInterface
 	 * Update the last post for this forum
 	 *
 	 * @param Forum $forum The forum to update
+	 * @param Post  $post
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Forum $forum, Post $post = null);
 }

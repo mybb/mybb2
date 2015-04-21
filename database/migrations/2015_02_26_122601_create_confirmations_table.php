@@ -32,5 +32,4 @@ class CreateConfirmationsTable extends Migration
 	{
 		Schema::drop('confirmations');
 	}
-
 }

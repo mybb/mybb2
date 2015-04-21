@@ -18,7 +18,6 @@ class ForumRepository implements ForumRepositoryInterface
 {
 	/**
 	 * @var Forum $forumModel
-	 * @access protected
 	 */
 	protected $forumModel;
 
@@ -142,10 +141,10 @@ class ForumRepository implements ForumRepositoryInterface
 	 * Update the last post for this forum
 	 *
 	 * @param Forum $forum The forum to update
+	 * @param Post  $post
 	 *
 	 * @return mixed
 	 */
-
 	public function updateLastPost(Forum $forum, Post $post = null)
 	{
 		if ($post === null) {

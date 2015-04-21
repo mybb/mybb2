@@ -15,13 +15,14 @@ class BusServiceProvider extends ServiceProvider
 	 */
 	public function boot(Dispatcher $dispatcher)
 	{
-		$dispatcher->mapUsing(function ($command)
-		{
+		$dispatcher->mapUsing(function ($command) {
+		
 			return Dispatcher::simpleMapping(
-				$command, 'MyBB\Core\Commands', 'MyBB\Core\Handlers\Commands'
+				$command,
+				'MyBB\Core\Commands',
+				'MyBB\Core\Handlers\Commands'
 			);
-		}
-		);
+		});
 	}
 
 	/**
@@ -33,5 +34,4 @@ class BusServiceProvider extends ServiceProvider
 	{
 		//
 	}
-
 }

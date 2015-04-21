@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContentClassTable extends Migration {
+class CreateContentClassTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -19,7 +20,7 @@ class CreateContentClassTable extends Migration {
 			$table->unique('content');
 		});
 
-		Schema::table('permissions', function(Blueprint $table) {
+		Schema::table('permissions', function (Blueprint $table) {
 			$table->foreign('content_name')->references('content')->on('content_class');
 		});
 	}
@@ -31,11 +32,10 @@ class CreateContentClassTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('permissions', function(Blueprint $table) {
+		Schema::table('permissions', function (Blueprint $table) {
 			$table->dropForeign('permissions_content_name_foreign');
 		});
 
 		Schema::drop('content_class');
 	}
-
 }
