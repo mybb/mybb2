@@ -10,7 +10,7 @@
 namespace MyBB\Core\Http\Requests\Topic;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
 class ReplyRequest extends AbstractRequest
 {

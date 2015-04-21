@@ -10,7 +10,7 @@
 namespace MyBB\Core\Http\Requests\Search;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
 class SearchRequest extends AbstractRequest
 {

@@ -13,7 +13,7 @@
 namespace MyBB\Core\Http\Requests\Post;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
 class LikePostRequest extends AbstractRequest
 {

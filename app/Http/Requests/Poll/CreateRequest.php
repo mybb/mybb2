@@ -10,7 +10,7 @@
 namespace MyBB\Core\Http\Requests\Poll;
 
 use Illuminate\Contracts\Auth\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
 class CreateRequest extends AbstractRequest
 {
