@@ -2,7 +2,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
@@ -35,6 +35,11 @@ class ForumController extends AbstractController
 	private $userRepository;
 
 	/**
+	 * @var Breadcrumbs
+	 */
+	private $breadcrumbs;
+
+	/**
 	 * Create a new controller instance.
 	 *
 	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum
@@ -44,17 +49,20 @@ class ForumController extends AbstractController
 	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
 	 *                                                  within a forum.
 	 * @param UserRepositoryInterface  $userRepository
+	 * @param Breadcrumbs              $breadcrumbs
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		UserRepositoryInterface $userRepository
+		UserRepositoryInterface $userRepository,
+		Breadcrumbs $breadcrumbs
 	) {
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
+		$this->breadcrumbs = $breadcrumbs;
 	}
 
 	/**
@@ -109,7 +117,7 @@ class ForumController extends AbstractController
 			throw new ForumNotFoundException;
 		}
 
-		Breadcrumbs::setCurrentRoute('forums.show', $forum);
+		$this->breadcrumbs->setCurrentRoute('forums.show', $forum);
 
 		// Build the order by/dir parts
 		$allowed = ['lastpost', 'replies', 'startdate', 'title'];

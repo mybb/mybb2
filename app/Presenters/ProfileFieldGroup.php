@@ -2,18 +2,37 @@
 
 namespace MyBB\Core\Presenters;
 
-use Illuminate\Support\Facades\App;
+use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\ProfileFieldGroup as ProfileFieldGroupModel;
 
 class ProfileFieldGroup extends BasePresenter
 {
+	/** @var ProfileFieldGroupModel $wrappedObject */
+
+	/**
+	 * @var Application
+	 */
+	private $app;
+
+	/**
+	 * @param ProfileFieldGroupModel $resource The profile field group being wrapped by this presenter.
+	 * @param Application            $app
+	 */
+	public function __construct(ProfileFieldGroupModel $resource, Application $app)
+	{
+		$this->wrappedObject = $resource;
+		$this->app = $app;
+	}
+
 	public function fields()
 	{
 		$profileFields = $this->getWrappedObject()->getProfileFields()->get();
 		$profileFields = $profileFields->sortBy('display_order');
 		$decorated = [];
 
-		$decorator = App::make('autopresenter');
+		$decorator = $this->app->make('autopresenter');
+
 		foreach ($profileFields as $profileField) {
 			$decorated[] = $decorator->decorate($profileField);
 		}

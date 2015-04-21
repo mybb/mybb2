@@ -1,6 +1,6 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
@@ -246,12 +246,13 @@ class SearchController extends AbstractController
 	}
 
 	/**
-	 * @param Request $request
-	 * @param int     $id
+	 * @param int         $id
+	 * @param Request     $request
+	 * @param Breadcrumbs $breadcrumbs
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function results(Request $request, $id = 0)
+	public function results($id, Request $request, Breadcrumbs $breadcrumbs)
 	{
 		// TODO: sorts
 		$search = $this->searchRepository->find($id);
@@ -260,7 +261,7 @@ class SearchController extends AbstractController
 		}
 
 
-		Breadcrumbs::setCurrentRoute('search.results', $search);
+		$breadcrumbs->setCurrentRoute('search.results', $search);
 
 		$orderBy = $request->get('orderBy');
 		$orderDir = $request->get('orderDir');
