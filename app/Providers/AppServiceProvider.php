@@ -128,6 +128,8 @@ class AppServiceProvider extends ServiceProvider
 
 			return $form->setSessionStore($app['session.store']);
 		});
+
+		$this->app->instance('DaveJamesMiller\Breadcrumbs\Manager', $this->app['breadcrumbs']);
 	}
 
 	/**

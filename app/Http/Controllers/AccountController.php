@@ -1,8 +1,8 @@
 <?php namespace MyBB\Core\Http\Controllers;
 
-use Hash;
 use Illuminate\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
@@ -10,7 +10,6 @@ use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
-use Session;
 
 class AccountController extends AbstractController
 {
@@ -202,11 +201,12 @@ class AccountController extends AbstractController
 	}
 
 	/**
-	 * @param Request $request
+	 * @param Request      $request
+	 * @param BcryptHasher $hasher
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postPassword(Request $request)
+	public function postPassword(Request $request, BcryptHasher $hasher)
 	{
 		$this->failedValidationRedirect = route('account.password');
 
@@ -221,7 +221,7 @@ class AccountController extends AbstractController
 				'password',
 				$this->guard->user(),
 				'account.password.confirm',
-				Hash::make($request->get('password1'))
+				$hasher->make($request->get('password1'))
 			);
 
 			return redirect()->route('account.profile')->withSuccess(trans('account.confirm'));
