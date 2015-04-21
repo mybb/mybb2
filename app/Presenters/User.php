@@ -23,20 +23,34 @@ class User extends BasePresenter
 {
 	/** @var UserModel $wrappedObject */
 
-	/** @var Router $router */
+	/**
+	 * @var Router
+	 */
 	private $router;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var TopicRepositoryInterface $topicRepository */
+
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
 
 
 	/**
-	 * @param UserModel                $resource The user being wrapped by this presenter.
+	 * @param UserModel                $resource        The user being wrapped by this presenter.
 	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PostRepositoryInterface  $postRepository
@@ -69,8 +83,11 @@ class User extends BasePresenter
 		}
 
 		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
-			return str_replace(':user', e($this->wrappedObject->name),
-				$this->wrappedObject->displayRole()->role_username_style);
+			return str_replace(
+				':user',
+				e($this->wrappedObject->name),
+				$this->wrappedObject->displayRole()->role_username_style
+			);
 		}
 
 		return e($this->wrappedObject->name);
@@ -136,7 +153,8 @@ class User extends BasePresenter
 			}
 
 			if (!isset($langOptions['langString'])) {
-				$langString = 'online.' . $route->getName();;
+				$langString = 'online.' . $route->getName();
+				;
 			} else {
 				$langString = 'online.' . $langOptions['langString'];
 				unset($langOptions['langString']);
@@ -160,12 +178,12 @@ class User extends BasePresenter
 	}
 
 	/**
-	 * @param $route
-	 * @param $parameters
+	 * @param string $route
+	 * @param array  $parameters
 	 *
 	 * @return array
 	 */
-	private function getWioData($route, $parameters)
+	private function getWioData($route, array $parameters)
 	{
 		$data = array();
 

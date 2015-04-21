@@ -7,10 +7,14 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class CheckAccess
 {
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	protected $auth;
 
-	/** @var  PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**

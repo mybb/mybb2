@@ -4,29 +4,63 @@ use Illuminate\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 
-
-class CaptchaController extends Controller
+class CaptchaController extends AbstractController
 {
+	/**
+	 * @var DatabaseManager
+	 */
 	private $database;
+
+	/**
+	 * @var Filesystem
+	 */
 	private $files;
 
+	/**
+	 * @var integer|string
+	 */
 	private $gd_version = null;
 
+	/**
+	 * @var integer
+	 */
 	private $img_width = 200;
+	/**
+	 * @var integer
+	 */
 	private $img_height = 60;
 
 	// Used for TTF fonts
+	/**
+	 * @var integer
+	 */
 	private $min_size = 20;
+	/**
+	 * @var integer
+	 */
 	private $max_size = 32;
+	/**
+	 * @var integer
+	 */
 	private $min_angle = -30;
+	/**
+	 * @var integer
+	 */
 	private $max_angle = 30;
 
+	/**
+	 * @param DatabaseManager $database
+	 * @param Filesystem      $files
+	 */
 	public function __construct(DatabaseManager $database, Filesystem $files)
 	{
 		$this->database = $database;
 		$this->files = $files;
 	}
 
+	/**
+	 * @param string $imagehash
+	 */
 	public function captcha($imagehash)
 	{
 		$baseQuery = $this->database->table('captcha')
@@ -88,6 +122,9 @@ class CaptchaController extends Controller
 		imagedestroy($im);
 	}
 
+	/**
+	 * @param resource $im
+	 */
 	private function drawLines(&$im)
 	{
 		for ($i = 10; $i < $this->img_width; $i += 10) {
@@ -100,6 +137,9 @@ class CaptchaController extends Controller
 		}
 	}
 
+	/**
+	 * @param resource $im
+	 */
 	private function drawCircles(&$im)
 	{
 		$circles = $this->img_width * $this->img_height / 100;
@@ -113,6 +153,9 @@ class CaptchaController extends Controller
 		}
 	}
 
+	/**
+	 * @param resource $im
+	 */
 	private function drawSquares(&$im)
 	{
 		$square_count = 30;
@@ -127,6 +170,9 @@ class CaptchaController extends Controller
 		}
 	}
 
+	/**
+	 * @param resource $im
+	 */
 	private function drawDots(&$im)
 	{
 		$dot_count = $this->img_width * $this->img_height / 5;
@@ -136,6 +182,10 @@ class CaptchaController extends Controller
 		}
 	}
 
+	/**
+	 * @param resource $im
+	 * @param string   $string
+	 */
 	private function drawString(&$im, $string)
 	{
 		// Check whether we have true-type fonts and if so use them
@@ -178,8 +228,17 @@ class CaptchaController extends Controller
 				$shadow_x = mt_rand(-3, 3) + $pos_x;
 				$shadow_y = mt_rand(-3, 3) + $pos_y;
 				$shadow_color = imagecolorallocate($im, $r + 20, $g + 20, $b + 20);
-				imagefttext($im, $font_size, $rotation, $shadow_x, $shadow_y, $shadow_color, $font, $string[$i],
-					array());
+				imagefttext(
+					$im,
+					$font_size,
+					$rotation,
+					$shadow_x,
+					$shadow_y,
+					$shadow_color,
+					$font,
+					$string[$i],
+					array()
+				);
 				// Write the character to the image
 				imagefttext($im, $font_size, $rotation, $pos_x, $pos_y, $color, $font, $string[$i], array());
 			} else {
@@ -216,6 +275,9 @@ class CaptchaController extends Controller
 		}
 	}
 
+	/**
+	 * @return int|string
+	 */
 	private function getGdVersion()
 	{
 		if ($this->gd_version != null) {

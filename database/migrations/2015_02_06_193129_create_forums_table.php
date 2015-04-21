@@ -49,5 +49,4 @@ class CreateForumsTable extends Migration
 	{
 		Schema::drop('forums');
 	}
-
 }

@@ -30,5 +30,4 @@ class FixGuestSearching extends Migration
 			$table->integer('user_id')->unsigned()->change();
 		});
 	}
-
 }

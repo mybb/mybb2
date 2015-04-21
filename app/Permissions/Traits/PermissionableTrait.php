@@ -6,7 +6,7 @@ use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Services\PermissionChecker;
 
-trait Permissionable
+trait PermissionableTrait
 {
 	/**
 	 * @return int

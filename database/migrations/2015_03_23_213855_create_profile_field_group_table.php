@@ -38,5 +38,4 @@ class CreateProfileFieldGroupTable extends Migration
 		});
 		Schema::drop('profile_field_groups');
 	}
-
 }

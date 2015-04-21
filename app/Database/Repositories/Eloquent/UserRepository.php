@@ -20,18 +20,21 @@ class UserRepository implements UserRepositoryInterface
 {
 	/**
 	 * @var User $userModel
-	 * @access protected
 	 */
 	protected $userModel;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
-	 * @param User              $userModel The model to use for users.
+	 * @param User              $userModel         The model to use for users.
 	 * @param PermissionChecker $permissionChecker
 	 * @param Guard             $guard
 	 */
@@ -58,10 +61,10 @@ class UserRepository implements UserRepositoryInterface
 	/**
 	 * Get all users active in the last x minutes
 	 *
-	 * @param int    $minutes The number of minutes which are considered as "online time"
+	 * @param int    $minutes  The number of minutes which are considered as "online time"
 	 * @param string $orderBy
 	 * @param string $orderDir
-	 * @param int    $num     The number of users to return. Set to 0 to get all users
+	 * @param int    $num      The number of users to return. Set to 0 to get all users
 	 *
 	 * @return mixed
 	 */
@@ -80,8 +83,11 @@ class UserRepository implements UserRepositoryInterface
 
 			// Now join the correct setting_values row
 			$baseQuery->leftJoin('setting_values', function ($join) use ($settingId) {
-				$join->on('setting_values.user_id', '=', 'users.id')->where('setting_values.setting_id', '=',
-					$settingId);
+				$join->on('setting_values.user_id', '=', 'users.id')->where(
+					'setting_values.setting_id',
+					'=',
+					$settingId
+				);
 			});
 
 			// Either the setting is true or not set...
@@ -125,5 +131,4 @@ class UserRepository implements UserRepositoryInterface
 	{
 		return $this->userModel->whereNname($username)->first();
 	}
-
 }

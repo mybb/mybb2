@@ -25,22 +25,24 @@ class Topic extends BasePresenter
 		$this->wrappedObject = $resource;
 	}
 
+	/**
+	 * @return int
+	 */
 	public function replies()
 	{
 		return $this->wrappedObject->num_posts - 1;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function author()
 	{
-		if($this->wrappedObject->user_id == null)
-		{
+		if ($this->wrappedObject->user_id == null) {
 			$user = new UserModel();
-			if($this->wrappedObject->username != null)
-			{
+			if ($this->wrappedObject->username != null) {
 				$user->name = $this->wrappedObject->username;
-			}
-			else
-			{
+			} else {
 				$user->name = trans('general.guest');
 			}
 

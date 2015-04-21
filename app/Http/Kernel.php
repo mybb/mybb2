@@ -34,5 +34,4 @@ class Kernel extends HttpKernel
 		'guest' => 'MyBB\Core\Http\Middleware\RedirectIfAuthenticated',
 		'checkaccess' => 'MyBB\Core\Http\Middleware\CheckAccess',
 	];
-
 }

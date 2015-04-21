@@ -25,6 +25,9 @@ class Forum extends BasePresenter
 		$this->wrappedObject = $resource;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function lastPostAuthor()
 	{
 		if ($this->wrappedObject->last_post_user_id == null) {
