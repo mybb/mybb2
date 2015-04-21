@@ -10,12 +10,13 @@
 namespace MyBB\Core\Http\Requests\Conversations;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
-use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
-class ParticipantRequest extends Request
+class ParticipantRequest extends AbstractRequest
 {
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**

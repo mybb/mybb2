@@ -43,12 +43,16 @@ class Conversation extends Model implements HasPresenter
 		'lastMessage'
 	];
 
+	// @codingStandardsIgnoreStart
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = false;
+
+	// @codingStandardsIgnoreEnd
 
 	/**
 	 * Get the presenter class.

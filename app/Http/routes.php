@@ -126,6 +126,12 @@ Route::group([
 	Route::post('/read/{id}/reply', ['as' => 'conversations.reply', 'uses' => 'ConversationsController@postReply']);
 	Route::get('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@getLeave']);
 	Route::post('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@postLeave']);
-	Route::get('/read/{id}/newParticipant', ['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@getNewParticipant']);
-	Route::post('/read/{id}/newParticipant', ['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@postNewParticipant']);
+	Route::get(
+		'/read/{id}/newParticipant',
+		['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@getNewParticipant']
+	);
+	Route::post(
+		'/read/{id}/newParticipant',
+		['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@postNewParticipant']
+	);
 });

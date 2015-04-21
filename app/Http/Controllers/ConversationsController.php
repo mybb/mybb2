@@ -27,15 +27,21 @@ use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ConversationsController extends Controller
+class ConversationsController extends AbstractController
 {
-	/** @var ConversationRepositoryInterface */
+	/**
+	 * @var ConversationRepositoryInterface
+	 */
 	private $conversationRepository;
 
-	/** @var ConversationMessageRepositoryInterface */
+	/**
+	 * @var ConversationMessageRepositoryInterface
+	 */
 	private $conversationMessageRepository;
 
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**
@@ -115,7 +121,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -140,7 +146,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param              $id
+	 * @param int          $id
 	 * @param ReplyRequest $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -171,7 +177,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -190,7 +196,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param         $id
+	 * @param int     $id
 	 * @param Request $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -214,7 +220,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -233,7 +239,7 @@ class ConversationsController extends Controller
 	}
 
 	/**
-	 * @param                    $id
+	 * @param int                $id
 	 * @param ParticipantRequest $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -265,13 +271,17 @@ class ConversationsController extends Controller
 		try {
 			$this->conversationRepository->addParticipants($conversation, $participants_id);
 		} catch (ConversationCantSendToSelfException $exception) {
-			return redirect()->route('conversations.newParticipant',
-				['id' => $conversation->id])->withInput()->withErrors([
+			return redirect()->route(
+				'conversations.newParticipant',
+				['id' => $conversation->id]
+			)->withInput()->withErrors([
 				'participants' => $exception->getMessage()
 			]);
 		} catch (ConversationAlreadyParticipantException $exception) {
-			return redirect()->route('conversations.newParticipant',
-				['id' => $conversation->id])->withInput()->withErrors([
+			return redirect()->route(
+				'conversations.newParticipant',
+				['id' => $conversation->id]
+			)->withInput()->withErrors([
 				'participants' => $exception->getMessage()
 			]);
 		}

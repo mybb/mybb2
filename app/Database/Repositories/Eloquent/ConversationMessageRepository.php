@@ -18,16 +18,24 @@ use MyBB\Settings\Store;
 
 class ConversationMessageRepository implements ConversationMessageRepositoryInterface
 {
-	/** @var ConversationMessage */
+	/**
+	 * @var ConversationMessage
+	 */
 	protected $conversationMessageModel;
 
-	/** @var UserRepositoryInterface */
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
 
-	/** @var MessageFormatter */
+	/**
+	 * @var MessageFormatter
+	 */
 	private $messageFormatter;
 
-	/** @var Store */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
 	/**

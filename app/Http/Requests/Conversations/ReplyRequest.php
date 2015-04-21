@@ -10,9 +10,9 @@
 namespace MyBB\Core\Http\Requests\Conversations;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
-class ReplyRequest extends Request
+class ReplyRequest extends AbstractRequest
 {
 	/**
 	 * The route to redirect to if validation fails.
@@ -21,7 +21,9 @@ class ReplyRequest extends Request
 	 */
 	protected $redirectRoute = 'conversations.read';
 
-	/** @var Guard $guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**

@@ -8,7 +8,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CheckSetting
 {
-	/** @var Store */
+	/**
+	 * @var Store
+	 */
 	protected $settings;
 
 	/**

@@ -68,5 +68,4 @@ class Conversation extends BasePresenter
 
 		return false;
 	}
-
 }

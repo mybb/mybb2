@@ -50,9 +50,15 @@ class User extends BasePresenter
 	 * @var UserRepositoryInterface
 	 */
 	private $userRepository;
-	/** @var PermissionChecker */
+
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
-	/** @var ConversationRepositoryInterface */
+
+	/**
+	 * @var ConversationRepositoryInterface
+	 */
 	private $conversationRepository;
 
 	/**
@@ -148,7 +154,7 @@ class User extends BasePresenter
 	}
 
 	/**
-	 * @param $permission
+	 * @param string $permission
 	 *
 	 * @return bool
 	 */
@@ -164,7 +170,7 @@ class User extends BasePresenter
 	{
 		$conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);
 
-		foreach($conversations as $key => $conversation) {
+		foreach ($conversations as $key => $conversation) {
 			$conversations[$key] = app()->make('MyBB\Core\Presenters\Conversation', [$conversation]);
 		}
 

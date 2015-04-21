@@ -229,22 +229,22 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->pluck('id'),
 				'value' => '1'
 			],
-  			[
+				[
 				'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->pluck('id'),
 				'value' => 3,
-			],
-			[
+				],
+				[
 				'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->pluck('id'),
 				'value' => 10,
-			],
-			[
+				],
+				[
 				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
 				'value' => 1,
-			],
-			[
+				],
+				[
 				'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->pluck('id'),
 				'value' => 'desc',
-			],
+				],
 		]);
 	}
 }

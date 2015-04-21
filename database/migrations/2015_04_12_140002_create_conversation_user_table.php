@@ -36,5 +36,4 @@ class CreateConversationUserTable extends Migration
 	{
 		Schema::drop('conversation_users');
 	}
-
 }

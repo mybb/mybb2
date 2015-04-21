@@ -21,16 +21,24 @@ use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
 
 class ConversationRepository implements ConversationRepositoryInterface
 {
-	/** @var Conversation */
+	/**
+	 * @var Conversation
+	 */
 	protected $conversationModel;
 
-	/** @var DatabaseManager */
+	/**
+	 * @var DatabaseManager
+	 */
 	private $dbManager;
 
-	/** @var ConversationMessageRepositoryInterface */
+	/**
+	 * @var ConversationMessageRepositoryInterface
+	 */
 	private $conversationMessageRepository;
 
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	private $guard;
 
 	/**

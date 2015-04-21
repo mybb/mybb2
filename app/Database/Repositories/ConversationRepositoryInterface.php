@@ -49,7 +49,7 @@ interface ConversationRepositoryInterface
 
 	/**
 	 * @param Conversation $conversation
-	 * @param array|int $participants
+	 * @param array|int    $participants
 	 *
 	 * @return void
 	 *
