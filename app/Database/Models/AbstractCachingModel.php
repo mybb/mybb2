@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractCachingModel extends Model
 {
-	/** @var array */
+	/**
+	 * @var array
+	 */
 	protected static $models;
 
 	/**
@@ -47,5 +49,4 @@ abstract class AbstractCachingModel extends Model
 
 		return static::$models[$id];
 	}
-
 }

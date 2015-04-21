@@ -33,5 +33,4 @@ class DatabaseSeeder extends Seeder
 		$this->call('SettingsTableSeeder');
 		$this->call('ProfileFieldsTableSeeder');
 	}
-
 }

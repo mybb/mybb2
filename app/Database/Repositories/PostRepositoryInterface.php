@@ -87,7 +87,6 @@ interface PostRepositoryInterface
 	 *
 	 * @return mixed
 	 */
-
 	public function deletePost(Post $post);
 
 	/**

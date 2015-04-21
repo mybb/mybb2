@@ -83,8 +83,8 @@ class LikesRepository implements LikesRepositoryInterface
 	{
 		if (($user = $this->guard->user()) !== null) {
 			$existingLike = $this->likesModel->where('user_id', '=', $user->getAuthIdentifier())
-				->where('content_id', '=', $content->id)
-				->where('content_type', '=', get_class($content))->first();
+											 ->where('content_id', '=', $content->id)
+											 ->where('content_type', '=', get_class($content))->first();
 
 			if ($existingLike !== null) {
 				$existingLike->delete();
@@ -94,9 +94,9 @@ class LikesRepository implements LikesRepositoryInterface
 			} else {
 				$newLike = $this->likesModel->create(
 					[
-						'user_id' => $user->getAuthIdentifier(),
+						'user_id'      => $user->getAuthIdentifier(),
 						'content_type' => get_class($content),
-						'content_id' => $content->getKey(),
+						'content_id'   => $content->getKey(),
 					]
 				);
 
@@ -154,6 +154,6 @@ class LikesRepository implements LikesRepositoryInterface
 			$user = $user->getAuthIdentifier();
 		}
 
-		return (int)$user;
+		return (int) $user;
 	}
 }

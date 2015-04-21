@@ -18,7 +18,7 @@ return [
 	"token" => "This password reset token is invalid.",
 	"sent" => "A parrot with a note for resettin\' yer code has been flown.",
 	"reset" => "Ye secret code has been reset!",
-    "resetpw" => "Reset ye secret code",
-    "email_subject" => "Ye secret code reset link",
+	"resetpw" => "Reset ye secret code",
+	"email_subject" => "Ye secret code reset link",
 
 ];

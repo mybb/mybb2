@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveRoleIdFromUsers extends Migration {
+class RemoveRoleIdFromUsers extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -28,5 +29,4 @@ class RemoveRoleIdFromUsers extends Migration {
 			$table->integer('role_id');
 		});
 	}
-
 }

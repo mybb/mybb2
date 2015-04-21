@@ -5,9 +5,9 @@ namespace MyBB\Core\Http\Requests\Account;
 use MyBB\Core\Database\Models\ProfileField;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 
-class UpdateProfileRequest extends Request
+class UpdateProfileRequest extends AbstractRequest
 {
 	/**
 	 * @var ProfileFieldRepositoryInterface

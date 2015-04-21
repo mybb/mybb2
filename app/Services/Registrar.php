@@ -44,5 +44,4 @@ class Registrar implements RegistrarContract
 
 		return $user;
 	}
-
 }

@@ -9,10 +9,14 @@ use MyBB\Core\Database\Models\Topic;
 
 class TopicDeleter
 {
-	/** @var PostRepositoryInterface $postRepository */
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
 
-	/** @var ForumRepositoryInterface $forumRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
 	/** @var PollRepositoryInterface $pollRepository */

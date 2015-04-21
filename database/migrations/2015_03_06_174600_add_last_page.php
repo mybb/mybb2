@@ -29,5 +29,4 @@ class AddLastPage extends Migration
 			$table->dropColumn('last_page');
 		});
 	}
-
 }

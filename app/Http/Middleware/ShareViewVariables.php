@@ -6,10 +6,14 @@ use MyBB\Auth\Contracts\Guard;
 
 class ShareViewVariables extends AbstractBootstrapMiddleware
 {
-	/** @var Guard */
+	/**
+	 * @var Guard
+	 */
 	protected $guard;
 
-	/** @var Factory */
+	/**
+	 * @var Factory
+	 */
 	private $viewFactory;
 
 	/**

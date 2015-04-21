@@ -17,24 +17,21 @@ class SearchRepository implements SearchRepositoryInterface
 {
 	/**
 	 * @var Search $searchModel
-	 * @access protected
 	 */
 	protected $searchModel;
 	/**
 	 * @var Guard $guard ;
-	 * @access protected
 	 */
 	protected $guard;
 
 	/**
-	 * @param Search		  $searchModel    The model to use for search logs.
-	 * @param Guard           $guard          Laravel guard instance, used to get user ID.
+	 * @param Search $searchModel The model to use for search logs.
+	 * @param Guard  $guard       Laravel guard instance, used to get user ID.
 	 */
 	public function __construct(
 		Search $searchModel,
 		Guard $guard
-	)
-	{
+	) {
 		$this->searchModel = $searchModel;
 		$this->guard = $guard;
 	}
@@ -49,10 +46,10 @@ class SearchRepository implements SearchRepositoryInterface
 	public function find($id)
 	{
 		$userId = $this->guard->user()->id;
-		if($userId <= 0)
-		{
+		if ($userId <= 0) {
 			$userId = null;
 		}
+
 		return $this->searchModel->where('user_id', $userId)->find($id);
 	}
 
@@ -74,12 +71,12 @@ class SearchRepository implements SearchRepositoryInterface
 			'posts' => ''
 		], $details);
 
-		if($details['user_id'] < 0)
-		{
+		if ($details['user_id'] < 0) {
 			$details['user_id'] = null;
 		}
 
 		$searchlog = $this->searchModel->create($details);
+
 		return $searchlog;
 	}
 }

@@ -8,15 +8,22 @@ use MyBB\Auth\Contracts\Guard;
 use Settings;
 use View;
 
-abstract class Controller extends BaseController
+abstract class AbstractController extends BaseController
 {
 
-	use DispatchesCommands, ValidatesRequests {
+	use DispatchesCommands;
+	use ValidatesRequests {
 		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
 	}
 
+	/**
+	 * @var string
+	 */
 	protected $failedValidationRedirect = '';
 
+	/**
+	 * @return string
+	 */
 	protected function getRedirectUrl()
 	{
 		if (!empty($this->failedValidationRedirect)) {
@@ -26,6 +33,11 @@ abstract class Controller extends BaseController
 		return $this->parentGetRedirectUrl();
 	}
 
+	/**
+	 * @param bool $redirect
+	 *
+	 * @return $this|bool
+	 */
 	protected function checkCaptcha($redirect = true)
 	{
 		$valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();

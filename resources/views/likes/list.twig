@@ -1,6 +1,6 @@
 <div class="likes">
     <span class="likes__prefix">
-        <i class="fa fa-caret-right"></i>
+        <i class="fa fa-caret-{{ langDir.right }}"></i>
     </span>
     {% for key, like in likes %}
         <span class="likes__like" data-like-id="{{ like.id }}">
@@ -25,7 +25,7 @@
                 {{ trans('likes.sep_and') }}
         </span>
         <span class="likes__others">
-            <a href="{{ viewAllLikesLink }}">{{ trans('likes.others', {'numOthers': numOtherLikes}) }}</a>
+            <a href="{{ viewAllLikesLink }}">{{ trans_choice('likes.others', numOtherLikes, {'numOthers': numOtherLikes}) }}</a>
         </span>
     {% endif %}
     {{ trans('likes.like_this') }}

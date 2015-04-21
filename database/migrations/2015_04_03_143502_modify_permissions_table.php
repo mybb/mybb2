@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyPermissionsTable extends Migration {
+class ModifyPermissionsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -39,5 +40,4 @@ class ModifyPermissionsTable extends Migration {
 			$table->nullableTimestamps();
 		});
 	}
-
 }

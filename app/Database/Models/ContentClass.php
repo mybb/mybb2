@@ -30,19 +30,23 @@ class ContentClass extends AbstractCachingModel
 	 */
 	protected $primaryKey = 'content';
 
+	// @codingStandardsIgnoreStart
+
 	/**
 	 * Indicates if the IDs are auto-incrementing.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $incrementing = false;
 
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = false;
+
+	// @codingStandardsIgnoreEnd
 
 	/**
 	 * The attributes that are mass assignable.
@@ -57,7 +61,7 @@ class ContentClass extends AbstractCachingModel
 	/**
 	 * Shortcut for "ContentClass::find($content)->getConcreteClass();"
 	 *
-	 * @param $content
+	 * @param string $content
 	 *
 	 * @return mixed|null Return null if no class is found, otherwise a represantion of the registered class
 	 */

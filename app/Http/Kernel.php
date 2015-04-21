@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
 		'Illuminate\Foundation\Http\Middleware\VerifyCsrfToken',
-	    'MyBB\Settings\Middleware\SaveSettingsOnTerminate',
+		'MyBB\Settings\Middleware\SaveSettingsOnTerminate',
 		'MyBB\Core\Http\Middleware\SetupLanguage',
 		'MyBB\Core\Http\Middleware\ShareViewVariables',
 		'MyBB\Core\Http\Middleware\UpdateLastVisit',
@@ -34,5 +34,4 @@ class Kernel extends HttpKernel
 		'guest' => 'MyBB\Core\Http\Middleware\RedirectIfAuthenticated',
 		'checkaccess' => 'MyBB\Core\Http\Middleware\CheckAccess',
 	];
-
 }

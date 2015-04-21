@@ -16,12 +16,18 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 class Topic extends Model implements HasPresenter
 {
 	use SoftDeletes;
+
+	// @codingStandardsIgnoreStart
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
-	 * @var bool
+	 * @var boolean
 	 */
 	public $timestamps = true;
+
+	// @codingStandardsIgnoreEnd
+
 	/**
 	 * The table associated with the model.
 	 *
@@ -108,7 +114,8 @@ class Topic extends Model implements HasPresenter
 		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
 	}
 
-	// TODO: Other relations? Are the below necessary? Will probably be quicker to store last post and first post ID than alternatives...
+	// TODO: Other relations? Are the below necessary?
+	// TODO: Will probably be quicker to store last post and first post ID than alternatives...
 
 	/**
 	 * A thread has a single first post.

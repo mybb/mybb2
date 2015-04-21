@@ -29,5 +29,4 @@ class AddNumPostsToTopicsTable extends Migration
 			$table->dropColumn('num_posts');
 		});
 	}
-
 }

@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 interface PermissionInterface
 {
 	/**
-	 * @param $key
+	 * @param mixed $key
 	 *
 	 * @return $this
 	 */
