@@ -1,6 +1,6 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -24,15 +24,22 @@ class AuthController extends Controller
 	use AuthenticatesAndRegistersUsers;
 
 	/**
+	 * @var Breadcrumbs
+	 */
+	private $breadcrumbs;
+
+	/**
 	 * Create a new authentication controller instance.
 	 *
 	 * @param Guard                                $auth
 	 * @param \Illuminate\Contracts\Auth\Registrar $registrar
+	 * @param Breadcrumbs                          $breadcrumbs
 	 */
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct(Guard $auth, Registrar $registrar, Breadcrumbs $breadcrumbs)
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
+		$this->breadcrumbs = $breadcrumbs;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -45,7 +52,7 @@ class AuthController extends Controller
 	 */
 	public function getSignup()
 	{
-		Breadcrumbs::setCurrentRoute('auth.signup');
+		$this->breadcrumbs->setCurrentRoute('auth.signup');
 
 		return view('member.signup');
 	}
@@ -87,7 +94,7 @@ class AuthController extends Controller
 	 */
 	public function getLogin()
 	{
-		Breadcrumbs::setCurrentRoute('auth.login');
+		$this->breadcrumbs->setCurrentRoute('auth.login');
 
 		return view('member.login');
 	}

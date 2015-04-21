@@ -4,6 +4,7 @@ namespace MyBB\Core\Captcha;
 
 use Greggilbert\Recaptcha\Recaptcha;
 use Greggilbert\Recaptcha\Service\CheckRecaptchaV2;
+use Illuminate\Config\Repository;
 use Illuminate\Http\Request;
 use MyBB\Settings\Store;
 
@@ -28,15 +29,21 @@ class CaptchaNocaptcha implements CaptchaInterface
 	 * @var Request
 	 */
 	private $request;
+	/**
+	 * @var Repository
+	 */
+	private $config;
 
 	/**
-	 * @param Store   $settings
-	 * @param Request $request
+	 * @param Store      $settings
+	 * @param Request    $request
+	 * @param Repository $config
 	 */
-	public function __construct(Store $settings, Request $request)
+	public function __construct(Store $settings, Request $request, Repository $config)
 	{
 		$this->settings = $settings;
 		$this->request = $request;
+		$this->config = $config;
 
 		// Set up Recaptcha/Nocaptcha - we're not using the service provider as we need to change config options
 		$this->service = new CheckRecaptchaV2();
@@ -73,8 +80,8 @@ class CaptchaNocaptcha implements CaptchaInterface
 		}
 
 		// Dirty hack to make use of our key instead of the config one
-		app('config')->set('recaptcha.private_key', $this->settings->get('captcha.nocaptcha_private_key'));
-		app('config')->set('recaptcha.driver', 'curl');
+		$this->config->set('recaptcha.private_key', $this->settings->get('captcha.nocaptcha_private_key'));
+		$this->config->set('recaptcha.driver', 'curl');
 
 		return $this->service->check(null, $value);
 	}
