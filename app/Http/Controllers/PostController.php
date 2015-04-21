@@ -127,17 +127,17 @@ class PostController extends AbstractController
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
 	public function postQuotes(QuotePostRequest $quoteRequest)
-    {
-        $posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
+	{
+		$posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
 
-        $content = '';
+		$content = '';
 
-        foreach ($posts as $post) {
-            $content .= $this->quoteRenderer->renderFromPost($post);
-        }
+		foreach ($posts as $post) {
+			$content .= $this->quoteRenderer->renderFromPost($post);
+		}
 
-        return response()->json([
-            'message' => $content
-        ]);
-    }
+		return response()->json([
+			'message' => $content
+		]);
+	}
 }

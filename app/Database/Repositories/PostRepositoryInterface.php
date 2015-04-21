@@ -107,10 +107,10 @@ interface PostRepositoryInterface
 	 */
 	public function deletePostsForTopic(Topic $topic);
 
-    /**
-     * @param array $postIds
-     *
-     * @return mixed
-     */
-    public function getPostsByIds(array $postIds);
+	/**
+	 * @param array $postIds
+	 *
+	 * @return mixed
+	 */
+	public function getPostsByIds(array $postIds);
 }

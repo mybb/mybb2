@@ -52,15 +52,10 @@ class PostRepository implements PostRepositoryInterface
 	private $permissionChecker;
 
 	/**
-	 * @var LikesRepositoryInterface
-	 */
-	private $likesRepository;
-
-	/**
-	 * @param Post                     $postModel         The model to use for posts.
-	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
-	 * @param MessageFormatter         $formatter         Post formatter instance.
-	 * @param Store                    $settings          The settings container
+	 * @param Post                     $postModel The model to use for posts.
+	 * @param Guard                    $guard     Laravel guard instance, used to get user ID.
+	 * @param MessageFormatter         $formatter Post formatter instance.
+	 * @param Store                    $settings  The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PermissionChecker        $permissionChecker
 	 * @param LikesRepositoryInterface $likesRepository
@@ -341,19 +336,19 @@ class PostRepository implements PostRepositoryInterface
 		return $success;
 	}
 
-    /**
-     * @param array $postIds
-     *
-     * @return mixed
-     */
-    public function getPostsByIds(array $postIds)
-    {
-        $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+	/**
+	 * @param array $postIds
+	 *
+	 * @return mixed
+	 */
+	public function getPostsByIds(array $postIds)
+	{
+		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
-        return $this->postModel->with([
-            'topic',
-            'topic.forum',
-            'author'
-        ])->whereIn('id', $postIds)->whereNotIn('topic.forum_id', $unviewableForums)->get();
-    }
+		return $this->postModel->with([
+			'topic',
+			'topic.forum',
+			'author'
+		])->whereIn('id', $postIds)->whereNotIn('topic.forum_id', $unviewableForums)->get();
+	}
 }
