@@ -19,13 +19,15 @@ class TopicDeleter
 	 */
 	private $forumRepository;
 
-	/** @var PollRepositoryInterface $pollRepository */
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
 
 	/**
-	 * @param PostRepositoryInterface $postRepository
+	 * @param PostRepositoryInterface  $postRepository
 	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PollRepositoryInterface $pollRepository
+	 * @param PollRepositoryInterface  $pollRepository
 	 */
 	public function __construct(
 		PostRepositoryInterface $postRepository,

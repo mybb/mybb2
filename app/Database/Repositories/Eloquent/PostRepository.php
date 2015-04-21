@@ -51,7 +51,9 @@ class PostRepository implements PostRepositoryInterface
 	 */
 	private $permissionChecker;
 
-	/** @var LikesRepositoryInterface */
+	/**
+	 * @var LikesRepositoryInterface
+	 */
 	private $likesRepository;
 
 	/**

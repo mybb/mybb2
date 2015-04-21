@@ -130,8 +130,11 @@ class LikesRepository implements LikesRepositoryInterface
 	 */
 	public function removeLikesForContent(Model $content)
 	{
-		$baseQuery = $this->likesModel->where('content_type', '=', get_class($content))->where('content_id', '=',
-			$content->id);
+		$baseQuery = $this->likesModel->where('content_type', '=', get_class($content))->where(
+			'content_id',
+			'=',
+			$content->id
+		);
 
 		$likes = $baseQuery->get();
 		foreach ($likes as $like) {
