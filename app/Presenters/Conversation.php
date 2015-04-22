@@ -56,7 +56,7 @@ class Conversation extends BasePresenter
 			$user = $this->guard->user();
 		}
 
-		$participantData = $this->wrappedObject->participants()->find($user->id);
+		$participantData = $this->wrappedObject->participants->find($user->id)->pivot;
 
 		if ($participantData->last_read == null) {
 			return true;
