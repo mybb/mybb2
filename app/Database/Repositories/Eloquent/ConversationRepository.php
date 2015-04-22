@@ -42,6 +42,9 @@ class ConversationRepository implements ConversationRepositoryInterface
 	 */
 	private $guard;
 
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
 	/**
@@ -49,6 +52,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	 * @param DatabaseManager                        $dbManager
 	 * @param ConversationMessageRepositoryInterface $conversationMessageRepository
 	 * @param Guard                                  $guard
+	 * @param Store                                  $settings
 	 */
 	public function __construct(
 		Conversation $conversationModel,

@@ -106,7 +106,7 @@
 									class="text">{{ trans('general.new') }}</span></a>
 					</h2>
 					<ul class="messages">
-						{% for conversation in auth_user.unreadConversations %}
+						{% for conversation in auth_user.unreadConversations|slice(0, 5) %}
 							<li>
 								<a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
 								   class="avatar-profile-link"
@@ -126,6 +126,7 @@
 								{{ trans('conversations.no_unread') }}
 							</li>
 						{% endfor %}
+
 						<li class="view-all">
 							<a href="{{ url_route('conversations.index') }}"><span
 										class="text">{{ trans('conversations.view_all') }}</span></a>
