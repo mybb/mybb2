@@ -79,7 +79,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 	{
 		return $this->conversationMessageModel->where('conversation_id', $conversation->id)
 			->orderBy('created_at', $this->settings->get('conversations.message_order', 'desc'))
-			->get();
+			->paginate($this->settings->get('user.posts_per_page', 10));
 	}
 
 	/**

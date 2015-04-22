@@ -16,6 +16,7 @@
 				{% endfor %}
 			</p>
 		</header>
+		{{ messages.render|raw }}
 		<div class="page-controls">
 			<div class="page-buttons">
 				<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }}
@@ -58,5 +59,6 @@
 				{% include 'conversation.quickreply' with {'conversation': conversation} %}
 			{% endif %}
 		</section>
+		{{ messages.render|raw }}
 	</div>
 {% endblock %}
