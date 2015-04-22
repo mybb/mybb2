@@ -38,6 +38,13 @@ interface ConversationRepositoryInterface
 	 *
 	 * @return Collection
 	 */
+	public function getForUser(User $user);
+
+	/**
+	 * @param User $user
+	 *
+	 * @return Collection
+	 */
 	public function getUnreadForUser(User $user);
 
 	/**

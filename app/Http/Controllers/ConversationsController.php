@@ -66,7 +66,9 @@ class ConversationsController extends AbstractController
 	 */
 	public function index()
 	{
-		return view('conversation.index');
+		$conversations = $this->conversationRepository->getForUser($this->guard->user());
+
+		return view('conversation.index', compact('conversations'));
 	}
 
 	/**

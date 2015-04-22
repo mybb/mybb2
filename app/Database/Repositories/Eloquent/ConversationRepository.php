@@ -18,6 +18,7 @@ use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
 use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
+use MyBB\Settings\Store;
 
 class ConversationRepository implements ConversationRepositoryInterface
 {
@@ -41,6 +42,8 @@ class ConversationRepository implements ConversationRepositoryInterface
 	 */
 	private $guard;
 
+	private $settings;
+
 	/**
 	 * @param Conversation                           $conversationModel
 	 * @param DatabaseManager                        $dbManager
@@ -51,12 +54,14 @@ class ConversationRepository implements ConversationRepositoryInterface
 		Conversation $conversationModel,
 		DatabaseManager $dbManager,
 		ConversationMessageRepositoryInterface $conversationMessageRepository,
-		Guard $guard
+		Guard $guard,
+		Store $settings
 	) {
 		$this->conversationModel = $conversationModel;
 		$this->dbManager = $dbManager;
 		$this->conversationMessageRepository = $conversationMessageRepository;
 		$this->guard = $guard;
+		$this->settings = $settings;
 	}
 
 	/**
@@ -73,6 +78,22 @@ class ConversationRepository implements ConversationRepositoryInterface
 	public function find($id = 0)
 	{
 		return $this->conversationModel->find($id);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getForUser(User $user)
+	{
+		return $this->conversationModel
+			->join('conversation_users', function ($join) use ($user) {
+				$join->on('conversation_users.conversation_id', '=', 'conversations.id');
+				$join->where('conversation_users.user_id', '=', $user->id);
+			})
+			->where('conversation_users.has_left', false)
+			->where('conversation_users.ignores', false)
+			->orderBy('last_message_id', 'desc')
+			->paginate($this->settings->get('user.topics_per_page', 20));
 	}
 
 	/**
