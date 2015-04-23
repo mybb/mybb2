@@ -5,6 +5,7 @@ namespace MyBB\Core\Http\Controllers;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Exceptions\UserNotFoundException;
 
 class UserController extends AbstractController
 {
@@ -40,6 +41,11 @@ class UserController extends AbstractController
 	public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups)
 	{
 		$user = $this->users->find($id);
+
+		if (!$user) {
+			throw new UserNotFoundException;
+		}
+
 		$groups = $profileFieldGroups->getAll();
 
 		return view('user.profile', [
