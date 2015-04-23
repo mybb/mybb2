@@ -234,6 +234,14 @@ class User extends BasePresenter
 			case 'search.results':
 				$data['url'] = route('search');
 				break;
+			case 'user.profile':
+				$user = $this->userRepository->find($parameters['id']);
+				if ($user != null) {
+					$data['user'] = e($user->name);
+					$data['url'] = route('user.profile', [$user->name, $user->id]);
+				} else {
+					$data['langString'] = 'user.invalid';
+				}
 		}
 
 		// TODO: Here's a nice place for a plugin hook

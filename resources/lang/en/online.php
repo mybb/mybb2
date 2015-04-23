@@ -45,4 +45,8 @@ return [
 		'create' => 'Posting a new topic in <a href=":url">:forum</a>',
 		'invalid' => 'Reading a topic',
 	],
+	'user' => [
+		'profile' => 'Viewing profile of <a href=":url">:user</a>',
+		'invalid' => 'Viewing a profile',
+	],
 ];
