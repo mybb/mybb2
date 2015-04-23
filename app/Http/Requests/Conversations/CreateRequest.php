@@ -10,9 +10,8 @@
 namespace MyBB\Core\Http\Requests\Conversations;
 
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Requests\AbstractRequest;
 
-class CreateRequest extends AbstractRequest
+class CreateRequest extends ParticipantRequest
 {
 	/**
 	 * @var Guard
@@ -33,7 +32,7 @@ class CreateRequest extends AbstractRequest
 	public function rules()
 	{
 		return [
-			'participants' => 'required', // TODO: validate the names
+			'participants' => 'required|usernameArray',
 			'message' => 'required',
 			'title' => 'required',
 		];

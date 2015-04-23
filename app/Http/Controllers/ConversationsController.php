@@ -86,26 +86,11 @@ class ConversationsController extends AbstractController
 	 */
 	public function postCompose(CreateRequest $request)
 	{
-		// TODO: Move this to CreateRequest?
-		$participants = explode(',', $request->input('participants'));
-		$participants = array_map('trim', $participants);
-
-		$participants_id = array();
-		foreach ($participants as $participant) {
-			$user = User::where('name', $participant)->first();
-
-			if (!$user) {
-				throw new \RuntimeException('Invalid User');
-			}
-
-			$participants_id[] = $user->id;
-		}
-
 		try {
 			$conversation = $this->conversationRepository->create([
 				'title' => $request->input('title'),
 				'message' => $request->input('message'),
-				'participants' => $participants_id
+				'participants' => $request->getUseridArray('participants')
 			]);
 		} catch (ConversationCantSendToSelfException $exception) {
 			return redirect()->route('conversations.compose')->withInput()->withErrors([
@@ -255,23 +240,8 @@ class ConversationsController extends AbstractController
 			throw new ConversationNotFoundException;
 		}
 
-		// TODO: Move this to a ParticipantRequest?
-		$participants = explode(',', $request->input('participants'));
-		$participants = array_map('trim', $participants);
-
-		$participants_id = array();
-		foreach ($participants as $participant) {
-			$user = User::where('name', $participant)->first();
-
-			if (!$user) {
-				throw new \RuntimeException('Invalid User');
-			}
-
-			$participants_id[] = $user->id;
-		}
-
 		try {
-			$this->conversationRepository->addParticipants($conversation, $participants_id);
+			$this->conversationRepository->addParticipants($conversation, $request->getUseridArray('participants'));
 		} catch (ConversationCantSendToSelfException $exception) {
 			return redirect()->route(
 				'conversations.newParticipant',
