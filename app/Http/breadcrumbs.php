@@ -185,3 +185,11 @@ Breadcrumbs::register('search.results', function ($breadcrumbs, $searchlog) {
 		route('search.results', ['id' => $searchlog->id])
 	);
 });
+
+Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(
+		trans('member.profileOf', ['name' => $user->name]),
+		route('user.profile', ['slug' => $user->name, 'id' => $user->id])
+	);
+});
