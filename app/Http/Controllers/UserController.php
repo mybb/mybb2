@@ -35,11 +35,16 @@ class UserController extends AbstractController
 	 * @param string                               $slug
 	 * @param int                                  $id
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
+	 * @param Breadcrumbs                          $breadcrumbs
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups, Breadcrumbs $breadcrumbs)
-	{
+	public function profile(
+		$slug,
+		$id,
+		ProfileFieldGroupRepositoryInterface $profileFieldGroups,
+		Breadcrumbs $breadcrumbs
+	) {
 		$user = $this->users->find($id);
 		$groups = $profileFieldGroups->getAll();
 
