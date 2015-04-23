@@ -17,36 +17,36 @@ use MyBB\Core\Http\Requests\Request;
 
 class QuotePostRequest extends Request
 {
-    /**
-     * Validation rules for the request.
-     *
-     * @var array
-     */
-    protected $rules = [
-        'posts' => 'required|array',
-    ];
+	/**
+	 * Validation rules for the request.
+	 *
+	 * @var array
+	 */
+	protected $rules = [
+		'posts' => 'required|array',
+	];
 
-    /**
-     * Get the validation rules.
-     *
-     * @return array
-     */
-    public function rules()
-    {
-        return $this->rules;
-    }
+	/**
+	 * Get the validation rules.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		return $this->rules;
+	}
 
-    /**
-     * Check whether the current user has permission to perform this request.
-     *
-     * @param Guard $guard
-     *
-     * @return bool
-     */
-    public function authorize(Guard $guard)
-    {
-        // TODO: Check user permissions here...
+	/**
+	 * Check whether the current user has permission to perform this request.
+	 *
+	 * @param Guard $guard
+	 *
+	 * @return bool
+	 */
+	public function authorize(Guard $guard)
+	{
+		// TODO: Check user permissions here...
 
-        return true;
-    }
+		return true;
+	}
 }
