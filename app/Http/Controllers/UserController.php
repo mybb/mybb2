@@ -2,6 +2,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
@@ -37,10 +38,12 @@ class UserController extends AbstractController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups)
+	public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups, Breadcrumbs $breadcrumbs)
 	{
 		$user = $this->users->find($id);
 		$groups = $profileFieldGroups->getAll();
+
+		$breadcrumbs->setCurrentRoute('user.profile', $user);
 
 		return view('user.profile', [
 			'user' => $user,
