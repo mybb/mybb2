@@ -259,6 +259,7 @@ class TopicRepository implements TopicRepositoryInterface
 			$firstPost = $this->postRepository->addPostToTopic($topic, [
 				'content' => $details['content'],
 				'username' => $details['username'],
+			    'is_topic_starter' => true,
 			]);
 
 			$topic->update([
