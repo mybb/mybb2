@@ -347,6 +347,8 @@ class PostRepository implements PostRepositoryInterface
 
 		return $this->postModel
 			->whereIn('id', $postIds)
-			->whereNotIn('forum_id', $unviewableForums)->get();
+			->with(['topic' => function ($query) use ($unviewableForums) {
+				$query->whereNotIn('forum_id', $unviewableForums);
+			}])->get();
 	}
 }
