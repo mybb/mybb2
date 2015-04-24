@@ -124,6 +124,27 @@ class LikesRepository implements LikesRepositoryInterface
 	}
 
 	/**
+	 * @param Model $content
+	 *
+	 * @return mixed
+	 */
+	public function removeLikesForContent(Model $content)
+	{
+		$baseQuery = $this->likesModel->where('content_type', '=', get_class($content))->where(
+			'content_id',
+			'=',
+			$content->id
+		);
+
+		$likes = $baseQuery->get();
+		foreach ($likes as $like) {
+			User::find($like->user_id)->decrement('num_likes_made');
+		}
+
+		return $baseQuery->delete();
+	}
+
+	/**
 	 * Get the user ID for a given user.
 	 *
 	 * @param int|User $user The user to retrieve the ID for.
