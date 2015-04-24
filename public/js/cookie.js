@@ -46,7 +46,7 @@
 			return $.cookie(name, value, options);
 		},
 
-		unSet: function (name) {
+		unset: function (name) {
 			this.init();
 
 			name = this.cookiePrefix + name;
