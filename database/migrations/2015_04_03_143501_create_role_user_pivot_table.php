@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoleUserPivotTable extends Migration {
+class CreateRoleUserPivotTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -31,5 +32,4 @@ class CreateRoleUserPivotTable extends Migration {
 	{
 		Schema::drop('role_user');
 	}
-
 }

@@ -3,7 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePollVotesTable extends Migration {
+class CreatePollVotesTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -12,7 +13,7 @@ class CreatePollVotesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('poll_votes', function(Blueprint $table) {
+		Schema::create('poll_votes', function (Blueprint $table) {
 			$table->increments('id');
 			$table->unsignedInteger('poll_id');
 			$table->unsignedInteger('user_id')->nullable();
@@ -32,5 +33,4 @@ class CreatePollVotesTable extends Migration {
 	{
 		Schema::drop('poll_votes');
 	}
-
 }

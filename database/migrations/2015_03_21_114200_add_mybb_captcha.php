@@ -30,5 +30,4 @@ class AddMybbCaptcha extends Migration
 	{
 		Schema::drop('captcha');
 	}
-
 }

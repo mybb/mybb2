@@ -2,7 +2,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
@@ -12,37 +12,57 @@ use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ForumController extends Controller
+class ForumController extends AbstractController
 {
-	/** @var ForumRepositoryInterface $forumRepository */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var TopicRepositoryInterface $topicRepository */
+
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PostRepositoryInterface $postRepository */
+
+	/**
+	 * @var PostRepositoryInterface
+	 */
 	private $postRepository;
-	/** @var  UserRepositoryInterface $userRepository */
+
+	/**
+	 * @var UserRepositoryInterface
+	 */
 	private $userRepository;
+
+	/**
+	 * @var Breadcrumbs
+	 */
+	private $breadcrumbs;
 
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @param ForumRepositoryInterface $forumRepository Forum repository instance to use in order to load forum
 	 *                                                  information.
-	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
-	 *                                                  within a forum.
 	 * @param PostRepositoryInterface  $postRepository  Post repository instance to use in order to load posts for the
 	 *                                                  latest discussion table.
+	 * @param TopicRepositoryInterface $topicRepository Thread repository instance to use in order to load threads
+	 *                                                  within a forum.
+	 * @param UserRepositoryInterface  $userRepository
+	 * @param Breadcrumbs              $breadcrumbs
 	 */
 	public function __construct(
 		ForumRepositoryInterface $forumRepository,
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
-		UserRepositoryInterface $userRepository
+		UserRepositoryInterface $userRepository,
+		Breadcrumbs $breadcrumbs
 	) {
 		$this->forumRepository = $forumRepository;
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
+		$this->breadcrumbs = $breadcrumbs;
 	}
 
 	/**
@@ -61,6 +81,8 @@ class ForumController extends Controller
 	/**
 	 * Shows the Index Page
 	 *
+	 * @param Store $settings
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function index(Store $settings)
@@ -77,9 +99,9 @@ class ForumController extends Controller
 	 * Shows a specific forum.
 	 *
 	 * @param Request $request
-	 * @param string  $slug The slug of the forum to show.
+	 * @param string  $slug    The slug of the forum to show.
 	 *
-	 * @param int     $id   The ID of the forum to show.
+	 * @param int     $id      The ID of the forum to show.
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -95,7 +117,7 @@ class ForumController extends Controller
 			throw new ForumNotFoundException;
 		}
 
-		Breadcrumbs::setCurrentRoute('forums.show', $forum);
+		$this->breadcrumbs->setCurrentRoute('forums.show', $forum);
 
 		// Build the order by/dir parts
 		$allowed = ['lastpost', 'replies', 'startdate', 'title'];

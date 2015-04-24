@@ -81,7 +81,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Parser\Parser\CustomCodes\ICustomCodeRepository',
+			'MyBB\Parser\Parser\CustomCodes\CustomCodeRepositoryInterface',
 			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
@@ -96,7 +96,7 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
-			'MyBB\Parser\Parser\IParser',
+			'MyBB\Parser\Parser\ParserInterface',
 			'MyBB\Parser\Parser\MyCode'
 		);
 
@@ -137,6 +137,8 @@ class AppServiceProvider extends ServiceProvider
 
 			return $form->setSessionStore($app['session.store']);
 		});
+
+		$this->app->instance('DaveJamesMiller\Breadcrumbs\Manager', $this->app['breadcrumbs']);
 	}
 
 	/**

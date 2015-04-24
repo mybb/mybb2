@@ -9,6 +9,7 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post as PostModel;
@@ -25,15 +26,25 @@ class Post extends BasePresenter
 	private $guard;
 
 	/**
-	 * @param PostModel $resource The post being wrapped by this presenter.
-	 * @param Guard     $guard
+	 * @var Application
 	 */
-	public function __construct(PostModel $resource, Guard $guard)
+	private $app;
+
+	/**
+	 * @param PostModel   $resource The post being wrapped by this presenter.
+	 * @param Guard       $guard
+	 * @param Application $app
+	 */
+	public function __construct(PostModel $resource, Guard $guard, Application $app)
 	{
 		$this->wrappedObject = $resource;
 		$this->guard = $guard;
+		$this->app = $app;
 	}
 
+	/**
+	 * @return User
+	 */
 	public function author()
 	{
 		if ($this->wrappedObject->user_id == null) {
@@ -45,7 +56,7 @@ class Post extends BasePresenter
 				$user->name = trans('general.guest');
 			}
 
-			$decoratedUser = app()->make('MyBB\Core\Presenters\User', [$user]);
+			$decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
 
 			return $decoratedUser;
 		}
@@ -63,7 +74,10 @@ class Post extends BasePresenter
 		if ($this->guard->check()) {
 			$user = $this->guard->user();
 
-			$containsLike = $this->wrappedObject->likes->contains(function ($key, Like $like) use (
+			$containsLike = $this->wrappedObject->likes->contains(function (
+				$key,
+				Like $like
+			) use (
 				&$likes,
 				&$numLikesToList,
 				$user

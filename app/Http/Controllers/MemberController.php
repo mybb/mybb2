@@ -3,12 +3,10 @@
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 
-
-class MemberController extends Controller
+class MemberController extends AbstractController
 {
 	/**
 	 * @var UserRepositoryInterface $userRepository
-	 * @access protected
 	 */
 	protected $userRepository;
 
@@ -22,6 +20,9 @@ class MemberController extends Controller
 		$this->userRepository = $userRepository;
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function memberlist()
 	{
 		$users = $this->userRepository->all();
@@ -29,6 +30,11 @@ class MemberController extends Controller
 		return view('member.list', compact('users'));
 	}
 
+	/**
+	 * @param Store $settings
+	 *
+	 * @return \Illuminate\View\View
+	 */
 	public function online(Store $settings)
 	{
 		$users = $this->userRepository->online($settings->get('wio.minutes', 15));

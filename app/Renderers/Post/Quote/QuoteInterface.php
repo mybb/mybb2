@@ -8,6 +8,7 @@ interface QuoteInterface
 {
 	/**
 	 * @param Post $post
+	 *
 	 * @return string
 	 */
 	public function renderFromPost(Post $post);

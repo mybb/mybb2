@@ -4,5 +4,4 @@ abstract class AbstractCommand
 {
 
 	//
-
 }

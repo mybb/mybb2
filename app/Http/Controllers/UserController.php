@@ -2,13 +2,14 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 use MyBB\Settings\Store;
 
-class UserController extends Controller
+class UserController extends AbstractController
 {
 	/**
 	 * @var UserRepositoryInterface
@@ -47,11 +48,16 @@ class UserController extends Controller
 	 * @param string                               $slug
 	 * @param int                                  $id
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
+	 * @param Breadcrumbs                          $breadcrumbs
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function profile($slug, $id, ProfileFieldGroupRepositoryInterface $profileFieldGroups)
-	{
+	public function profile(
+		$slug,
+		$id,
+		ProfileFieldGroupRepositoryInterface $profileFieldGroups,
+		Breadcrumbs $breadcrumbs
+	) {
 		$user = $this->users->find($id);
 		$groups = $profileFieldGroups->getAll();
 		$activity = $this->activityRepository->paginateForUser(
@@ -61,6 +67,8 @@ class UserController extends Controller
 				20
 			)
 		);
+
+		$breadcrumbs->setCurrentRoute('user.profile', $user);
 
 		return view(
 			'user.profile',

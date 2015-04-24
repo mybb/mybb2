@@ -23,24 +23,31 @@ class Post extends Model implements HasPresenter, LikeableInterface, ActivitySto
     use UserActivityTrait;
     use LikeableTrait;
 
+    // @codingStandardsIgnoreStart
+
     /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
      */
     public $timestamps = true;
+
+	// @codingStandardsIgnoreEnd
+
     /**
      * The table associated with the model.
      *
      * @var string
      */
     protected $table = 'posts';
+
     /**
      * The relations to eager load on every query.
      *
      * @var array
      */
     protected $with = array();
+
     /**
      * The attributes that aren't mass assignable.
      *

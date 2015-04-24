@@ -19,7 +19,7 @@ use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PostController extends Controller
+class PostController extends AbstractController
 {
 	/**
 	 * @var PostRepositoryInterface $postsRepository

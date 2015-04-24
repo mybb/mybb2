@@ -36,5 +36,4 @@ class PostsTableSeeder extends Seeder
 
 		DB::table('users')->where('name', 'Admin')->increment('num_posts');
 	}
-
 }

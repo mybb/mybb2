@@ -2,41 +2,46 @@
 
 namespace MyBB\Core\Renderers\Post\Quote;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Foundation\Application;
 use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Presenters\Post as PostPresenter;
 
 class MyCode implements QuoteInterface
 {
-    /**
-     * @var Guard $guard
-     */
-    private $guard;
+	/**
+	 * @var Application
+	 */
+	private $app;
 
-    /**
-     * @param Guard $guard
-     */
-    public function __construct(Guard $guard)
-    {
-        $this->guard = $guard;
-    }
+	/**
+	 * @param Application $app
+	 */
+	public function __construct(Application $app)
+	{
+		$this->app = $app;
+	}
 
 	/**
 	 * @param Post $post
+	 *
 	 * @return string
 	 */
 	public function renderFromPost(Post $post)
 	{
-		$post = new PostPresenter($post, $this->guard);
+		$post = $this->app->make('MyBB\Core\Presenters\Post', [$post]);
 		$message = $post->content;
 		$slapUsername = $post->author->name;
-		$message = preg_replace('#(>|^|\r|\n)/me ([^\r\n<]*)#i',
-			"\\1* {$slapUsername} \\2", $message);
+		$message = preg_replace(
+			'#(>|^|\r|\n)/me ([^\r\n<]*)#i',
+			"\\1* {$slapUsername} \\2",
+			$message
+		);
 		$slap = trans('parser::parser.slap');
 		$withTrout = trans('parser::parser.withTrout');
-		$message = preg_replace('#(>|^|\r|\n)/slap ([^\r\n<]*)#i',
+		$message = preg_replace(
+			'#(>|^|\r|\n)/slap ([^\r\n<]*)#i',
 			"\\1* {$slapUsername} {$slap} \\2 {$withTrout}",
-			$message);
+			$message
+		);
 		$message = preg_replace("#\[attachment=([0-9]+?)\]#i", '', $message);
 
 		return "[quote='" . e($post->author->name) . "' pid='{$post->id}' dateline='" .

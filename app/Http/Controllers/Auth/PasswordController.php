@@ -1,11 +1,11 @@
 <?php namespace MyBB\Core\Http\Controllers\Auth;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class PasswordController extends Controller
 {
@@ -25,6 +25,9 @@ class PasswordController extends Controller
 		postEmail as parentPostEmail;
 	}
 
+	/**
+	 * @var string
+	 */
 	private $redirectTo = '';
 
 	/**
@@ -32,17 +35,23 @@ class PasswordController extends Controller
 	 *
 	 * @param Guard                                     $auth
 	 * @param \Illuminate\Contracts\Auth\PasswordBroker $passwords
+	 * @param Breadcrumbs                               $breadcrumbs
 	 */
-	public function __construct(Guard $auth, PasswordBroker $passwords)
+	public function __construct(Guard $auth, PasswordBroker $passwords, Breadcrumbs $breadcrumbs)
 	{
 		$this->auth = $auth;
 		$this->passwords = $passwords;
 
 		$this->middleware('guest');
 
-		Breadcrumbs::setCurrentRoute('auth.login');
+		$breadcrumbs->setCurrentRoute('auth.login');
 	}
 
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Foundation\Auth\Response
+	 */
 	public function postEmail(Request $request)
 	{
 		$this->failedValidationRedirect = url('password/email');
@@ -50,6 +59,9 @@ class PasswordController extends Controller
 		return $this->parentPostEmail($request);
 	}
 
+	/**
+	 * @return string
+	 */
 	protected function getEmailSubject()
 	{
 		return trans('passwords.email_subject');

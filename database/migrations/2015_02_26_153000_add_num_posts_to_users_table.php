@@ -37,5 +37,4 @@ class AddNumPostsToUsersTable extends Migration
 			$table->dropColumn('usertitle');
 		});
 	}
-
 }

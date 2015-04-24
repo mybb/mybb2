@@ -8,34 +8,34 @@ use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 
 class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterface
 {
-    /**
-     * @var ProfileFieldGroup
-     */
-    protected $profileFieldGroup;
+	/**
+	 * @var ProfileFieldGroup
+	 */
+	protected $profileFieldGroup;
 
-    /**
-     * @param ProfileFieldGroup $profileFieldGroup
-     */
-    public function __construct(ProfileFieldGroup $profileFieldGroup)
-    {
-        $this->profileFieldGroup = $profileFieldGroup;
-    }
+	/**
+	 * @param ProfileFieldGroup $profileFieldGroup
+	 */
+	public function __construct(ProfileFieldGroup $profileFieldGroup)
+	{
+		$this->profileFieldGroup = $profileFieldGroup;
+	}
 
-    /**
-     * @param string $slug
-     *
-     * @return ProfileFieldGroup
-     */
-    public function getBySlug($slug)
-    {
-        return $this->profileFieldGroup->where('slug', $slug)->first();
-    }
+	/**
+	 * @param string $slug
+	 *
+	 * @return ProfileFieldGroup
+	 */
+	public function getBySlug($slug)
+	{
+		return $this->profileFieldGroup->where('slug', $slug)->first();
+	}
 
-    /**
-     * @return Collection
-     */
-    public function getAll()
-    {
-        return $this->profileFieldGroup->all();
-    }
+	/**
+	 * @return Collection
+	 */
+	public function getAll()
+	{
+		return $this->profileFieldGroup->all();
+	}
 }

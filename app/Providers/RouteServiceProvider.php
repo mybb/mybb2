@@ -38,5 +38,4 @@ class RouteServiceProvider extends ServiceProvider
 	{
 		$this->loadRoutesFrom(app_path('Http/routes.php'));
 	}
-
 }

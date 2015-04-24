@@ -1,6 +1,10 @@
-<?php namespace MyBB\Core\Http\Controllers;
+<?php
 
-class AdminController extends Controller
+namespace MyBB\Core\Http\Controllers\Admin;
+
+use Illuminate\Routing\Controller as BaseController;
+
+class AdminController extends BaseController
 {
 
 	/*
@@ -21,10 +25,5 @@ class AdminController extends Controller
 	public function __construct()
 	{
 		// Eventually Something will go here
-	}
-
-	public function index()
-	{
-		return "<h1>Welcome to the Admin CP";
 	}
 }

@@ -11,7 +11,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Breadcrumbs;
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
@@ -27,18 +27,37 @@ use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PollController extends Controller
+class PollController extends AbstractController
 {
-	/** @var TopicRepositoryInterface $topicRepository */
+	/**
+	 * @var TopicRepositoryInterface
+	 */
 	private $topicRepository;
-	/** @var PollRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
-	/** @var PollVoteRepositoryInterface $postRepository */
+
+	/**
+	 * @var PollVoteRepositoryInterface
+	 */
 	private $pollVoteRepository;
-	/** @var ForumRepositoryInterface $forumRepository */
+
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
-	/** @var Guard $guard */
+
+	/**
+	 * @var Guard
+	 */
 	private $guard;
+
+	/**
+	 * @var Breadcrumbs
+	 */
+	private $breadcrumbs;
 
 	/**
 	 * @param TopicRepositoryInterface    $topicRepository    Topic repository instance, used to fetch topic details.
@@ -47,20 +66,22 @@ class PollController extends Controller
 	 *                                                        details.
 	 * @param ForumRepositoryInterface    $forumRepository    Forum repository interface, used to fetch forum details.
 	 * @param Guard                       $guard              Guard implementation
-	 * @param Request                     $request            Request implementation
+	 * @param Breadcrumbs                 $breadcrumbs
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,
 		PollRepositoryInterface $pollRepository,
 		PollVoteRepositoryInterface $pollVoteRepository,
 		ForumRepositoryInterface $forumRepository,
-		Guard $guard
+		Guard $guard,
+		Breadcrumbs $breadcrumbs
 	) {
 		$this->topicRepository = $topicRepository;
 		$this->pollRepository = $pollRepository;
 		$this->pollVoteRepository = $pollVoteRepository;
 		$this->forumRepository = $forumRepository;
 		$this->guard = $guard;
+		$this->breadcrumbs = $breadcrumbs;
 	}
 
 	/**
@@ -83,7 +104,7 @@ class PollController extends Controller
 		$poll = $topic->poll;
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
-		Breadcrumbs::setCurrentRoute('polls.show', $topic);
+		$this->breadcrumbs->setCurrentRoute('polls.show', $topic);
 
 		$options = $pollPresenter->options();
 
@@ -119,14 +140,14 @@ class PollController extends Controller
 			throw new TopicNotFoundException;
 		}
 
-		Breadcrumbs::setCurrentRoute('polls.create', $topic);
+		$this->breadcrumbs->setCurrentRoute('polls.create', $topic);
 
 		return view('polls.create', compact('topic'));
 	}
 
 	/**
-	 * @param  string       $slug
-	 * @param  int          $id
+	 * @param  string        $slug
+	 * @param  int           $id
 	 * @param CreateRequest $createRequest
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -138,7 +159,8 @@ class PollController extends Controller
 		if (!$topic) {
 			throw new TopicNotFoundException;
 		}
-		Breadcrumbs::setCurrentRoute('polls.create', $topic);
+
+		$this->breadcrumbs->setCurrentRoute('polls.create', $topic);
 
 		$poll = [
 			'topic_id' => $id,
@@ -162,7 +184,9 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return redirect()->route('polls.create')->withInput()->withError(['error' => trans('error.error_creating_poll')]);
+		return redirect()->route('polls.create')->withInput()->withErrors([
+			'error' => trans('error.error_creating_poll')
+		]);
 	}
 
 	/**
@@ -170,6 +194,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function vote($topicSlug, $topicId)
@@ -192,7 +217,7 @@ class PollController extends Controller
 			throw new PollClosedException;
 		}
 
-		// Is the user already voted?
+		// Has the user already voted?
 		if ($this->guard->check()) {
 			$myVote = $this->pollVoteRepository->findForUserPoll($this->guard->user(), $poll);
 			if ($myVote) {
@@ -235,6 +260,7 @@ class PollController extends Controller
 	 * @param int    $topicId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
+	 *
 	 * @throws \Exception
 	 */
 	public function undo($topicSlug, $topicId)
@@ -327,7 +353,7 @@ class PollController extends Controller
 
 		$poll = $topic->poll;
 
-		Breadcrumbs::setCurrentRoute('polls.edit', $topic);
+		$this->breadcrumbs->setCurrentRoute('polls.edit', $topic);
 
 		return view('polls.edit', compact('topic', 'poll'));
 	}
@@ -388,6 +414,6 @@ class PollController extends Controller
 			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
 		}
 
-		return redirect()->route('polls.edit')->withInput()->withError(['error' => trans('error.error_editing_poll')]);
+		return redirect()->route('polls.edit')->withInput()->withErrors(['error' => trans('error.error_editing_poll')]);
 	}
 }

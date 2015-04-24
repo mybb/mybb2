@@ -27,46 +27,53 @@ class TopicRepository implements TopicRepositoryInterface
 {
 	/**
 	 * @var Topic $topicModel
-	 * @access protected
 	 */
 	protected $topicModel;
 	/**
 	 * @var Guard $guard
-	 * @access protected
 	 */
 	protected $guard;
 	/**
 	 * @var PostRepositoryInterface $postRepository
-	 * @access protected
 	 */
 	protected $postRepository;
 
+	/**
+	 * @var DatabaseManager
+	 */
 	private $dbManager;
 	/**
 	 * @var Str $stringUtils
-	 * @access protected
 	 */
 	protected $stringUtils;
 
-	/** @var Store $settings */
+	/**
+	 * @var Store
+	 */
 	private $settings;
 
-	/** @var ForumRepositoryInterface */
+	/**
+	 * @var ForumRepositoryInterface
+	 */
 	private $forumRepository;
 
-	/** @var PollRepositoryInterface */
+	/**
+	 * @var PollRepositoryInterface
+	 */
 	private $pollRepository;
 
-	/** @var PermissionChecker */
+	/**
+	 * @var PermissionChecker
+	 */
 	private $permissionChecker;
 
 	/**
-	 * @param Topic                    $topicModel     The model to use for threads.
-	 * @param Guard                    $guard          Laravel guard instance, used to get user ID.
-	 * @param PostRepositoryInterface  $postRepository Used to manage posts for topics.
-	 * @param Str                      $stringUtils    String utilities, used for creating slugs.
-	 * @param DatabaseManager          $dbManager      Database manager, needed to do transactions.
-	 * @param Store                    $settings       The settings container
+	 * @param Topic                    $topicModel        The model to use for threads.
+	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
+	 * @param PostRepositoryInterface  $postRepository    Used to manage posts for topics.
+	 * @param Str                      $stringUtils       String utilities, used for creating slugs.
+	 * @param DatabaseManager          $dbManager         Database manager, needed to do transactions.
+	 * @param Store                    $settings          The settings container
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PollRepositoryInterface  $pollRepository
 	 * @param PermissionChecker        $permissionChecker
@@ -152,8 +159,10 @@ class TopicRepository implements TopicRepositoryInterface
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
-		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->whereNotIn('forum_id',
-			$unviewableForums)->first();
+		return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->whereNotIn(
+			'forum_id',
+			$unviewableForums
+		)->first();
 	}
 
 	/**
@@ -302,12 +311,11 @@ class TopicRepository implements TopicRepositoryInterface
 	/**
 	 * Edit the hasPoll of the Topic
 	 *
-	 * @param Topic $topic The topic to edit
+	 * @param Topic $topic   The topic to edit
 	 * @param bool  $hasPoll
 	 *
 	 * @return mixed
 	 */
-
 	public function setHasPoll(Topic $topic, $hasPoll)
 	{
 		return $this->editTopic($topic, [
@@ -360,6 +368,7 @@ class TopicRepository implements TopicRepositoryInterface
 	 * Update the last post of the topic
 	 *
 	 * @param Topic $topic The topic to update
+	 * @param Post  $post
 	 *
 	 * @return mixed
 	 */

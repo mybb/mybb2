@@ -41,5 +41,4 @@ class ForumsTableSeeder extends Seeder
 
 		DB::table('forums')->insert($forums);
 	}
-
 }
