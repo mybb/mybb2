@@ -143,8 +143,9 @@ class AuthController extends Controller
 	public function getLogout()
 	{
 		$this->auth->logout();
+		$cookie = cookie()->forget('quotes'); // Remove cookies
 
-		return redirect('/');
+		return redirect('/')->withCookie($cookie);
 	}
 
 	/**

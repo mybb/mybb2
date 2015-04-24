@@ -7,6 +7,8 @@ use MyBB\Core\Database\Models\ContentClass;
 use MyBB\Core\Database\Models\Role;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use MyBB\Core\Database\Models\User;
+use MyBB\Core\Exceptions\PermissionImplementInterfaceException;
+use MyBB\Core\Exceptions\PermissionInvalidContentException;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 
@@ -66,17 +68,20 @@ class PermissionChecker
 	 * @param User   $user
 	 *
 	 * @return array
+	 *
+	 * @throws PermissionInvalidContentException
+	 * @throws PermissionImplementInterfaceException
 	 */
 	public function getUnviewableIdsForContent($content, User $user = null)
 	{
 		$concreteClass = $this->classModel->getClass($content);
 
 		if ($concreteClass == null) {
-			throw new \RuntimeException("No class is registered for content type '{$content}'");
+			throw new PermissionInvalidContentException($content);
 		}
 
 		if (!($concreteClass instanceof PermissionInterface)) {
-			throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
+			throw new PermissionImplementInterfaceException($content);
 		}
 
 		if ($this->unviewableIds[$content] != null) {
@@ -108,17 +113,20 @@ class PermissionChecker
 	 * @param User         $user
 	 *
 	 * @return bool
+	 *
+	 * @throws PermissionInvalidContentException
+	 * @throws PermissionImplementInterfaceException
 	 */
 	public function hasPermission($content, $contentID, $permission, User $user = null)
 	{
 		$concreteClass = $this->classModel->getClass($content);
 
 		if ($concreteClass == null) {
-			throw new \RuntimeException("No class is registered for content type '{$content}'");
+			throw new PermissionInvalidContentException($content);
 		}
 
 		if (!($concreteClass instanceof PermissionInterface)) {
-			throw new \RuntimeException("The registered class for '{$content}' needs to implement PermissionInterface");
+			throw new PermissionImplementInterfaceException($content);
 		}
 
 		if ($user == null) {

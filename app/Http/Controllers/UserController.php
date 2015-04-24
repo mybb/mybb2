@@ -6,6 +6,7 @@ use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Exceptions\UserNotFoundException;
 
 class UserController extends AbstractController
 {
@@ -46,6 +47,11 @@ class UserController extends AbstractController
 		Breadcrumbs $breadcrumbs
 	) {
 		$user = $this->users->find($id);
+
+		if (!$user) {
+			throw new UserNotFoundException;
+		}
+
 		$groups = $profileFieldGroups->getAll();
 
 		$breadcrumbs->setCurrentRoute('user.profile', $user);

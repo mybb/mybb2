@@ -196,7 +196,7 @@ class TopicController extends AbstractController
 	 * @param string  $slug
 	 * @param int     $id
 	 * @param Request $request
-	 * @param null    $postId
+	 * @param int     $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
