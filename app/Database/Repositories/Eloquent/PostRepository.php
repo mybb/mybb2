@@ -52,6 +52,11 @@ class PostRepository implements PostRepositoryInterface
 	private $permissionChecker;
 
 	/**
+	 * @var LikesRepositoryInterface
+	 */
+	private $likesRepository;
+
+	/**
 	 * @param Post                     $postModel         The model to use for posts.
 	 * @param Guard                    $guard             Laravel guard instance, used to get user ID.
 	 * @param MessageFormatter         $formatter         Post formatter instance.
