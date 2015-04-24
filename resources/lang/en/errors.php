@@ -26,6 +26,9 @@ return [
 	'captcha_invalid_class' => "Failed to load Captcha Class ':class'",
 	'conversation_already_participant' => 'One or more participants already participate in this conversations',
 	'conversation_cant_send_to_self' => 'You can\'t add yourself as participant',
-	'conversation_not_found' => 'Sorry, the specified conversation could not be found.'
+	'conversation_not_found' => 'Sorry, the specified conversation could not be found.',
+	'permission_invalid_class' => "No class is registered for content type ':class'",
+	'permission_implement_interface' => "The registered class for ':class' needs to implement PermissionInterface",
+	'invalid_date_object' => '$date needs to be either an integer (timestamp) or an instance of either DateTime or Date',
 	'user_not_found' => 'Sorry, the specified user could not be found.',
 ];
