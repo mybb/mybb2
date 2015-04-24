@@ -15,4 +15,5 @@ return [
     'meta_desc' => '',
     'activity_post' => 'Posted a reply to <a href=":topic_link" data-topic-id=":topic_id">:topic_title</a>',
     'activity_like.post' => 'Liked a post by <a href=":user_link">:user_name</a> in the topic <a href=":content_link" data-topic-id=":topic_id">:content_title</a>',
+    'activity_topic' => 'Created the topic <a href=":topic_link" data-topic-id=":topic_id">:topic_title</a>',
 ];

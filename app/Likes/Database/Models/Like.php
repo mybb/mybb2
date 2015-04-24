@@ -94,4 +94,14 @@ class Like extends Model implements ActivityStoreableInterface
             'liked_content_type' => $this->likeable->getContentTypeShortName(),
         ];
     }
+
+	/**
+	 * Check whether this activity entry should be saved.
+	 *
+	 * @return bool
+	 */
+	public function checkStoreable()
+	{
+		return true;
+	}
 }

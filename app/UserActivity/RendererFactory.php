@@ -20,6 +20,7 @@ use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
 use MyBB\Core\UserActivity\Renderers\LikeRenderer;
 use MyBB\Core\UserActivity\Renderers\PostRenderer;
+use MyBB\Core\UserActivity\Renderers\TopicRenderer;
 
 class RendererFactory
 {
@@ -62,6 +63,9 @@ class RendererFactory
 		switch ($activity->activity_type) {
 			case PostRenderer::ACTIVITY_NAME:
 				$renderer = '\MyBB\Core\UserActivity\Renderers\PostRenderer';
+				break;
+			case TopicRenderer::ACTIVITY_NAME:
+				$renderer = '\MyBB\Core\UserActivity\Renderers\TopicRenderer';
 				break;
 			case LikeRenderer::ACTIVITY_NAME:
 				$renderer = '\MyBB\Core\UserActivity\Renderers\LikeRenderer';

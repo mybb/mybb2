@@ -166,4 +166,14 @@ class Post extends Model implements HasPresenter, LikeableInterface, ActivitySto
            'postId' => $this->id,
         ]);
     }
+
+	/**
+	 * Check whether this activity entry should be saved.
+	 *
+	 * @return bool
+	 */
+	public function checkStoreable()
+	{
+		return (!$this->is_topic_starter);
+	}
 }

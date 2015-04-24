@@ -14,11 +14,11 @@
 
 namespace MyBB\Core\UserActivity\Http\Controllers;
 
-use MyBB\Core\Http\Controllers\Controller;
+use MyBB\Core\Http\Controllers\AbstractController;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 use MyBB\Settings\Store;
 
-class UserActivityController extends Controller
+class UserActivityController extends AbstractController
 {
 	/**
 	 * @var UserActivityRepositoryInterface $userActivityRepository

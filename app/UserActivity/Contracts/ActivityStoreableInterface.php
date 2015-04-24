@@ -15,6 +15,13 @@ namespace MyBB\Core\UserActivity\Contracts;
 interface ActivityStoreableInterface
 {
 	/**
+	 * Check whether this activity entry should be saved.
+	 *
+	 * @return bool
+	 */
+	public function checkStoreable();
+
+	/**
 	 * Get the ID of the model.
 	 *
 	 * @return int

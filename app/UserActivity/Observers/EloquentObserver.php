@@ -44,11 +44,11 @@ class EloquentObserver
 	/**
 	 * Handle a model being created.
 	 *
-	 * @param Model $model The created model.
+	 * @param ActivityStoreableInterface $model The created model.
 	 */
 	public function created(ActivityStoreableInterface $model)
 	{
-		if ($this->guard->check()) {
+		if ($this->guard->check() && $model->checkStoreable()) {
 			$userId = $this->guard->user()->getAuthIdentifier();
 
 			$this->activityRepository->createForContentAndUser(

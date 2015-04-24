@@ -12,10 +12,13 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
+use MyBB\Core\UserActivity\Traits\UserActivityTrait;
 
-class Topic extends Model implements HasPresenter
+class Topic extends Model implements HasPresenter, ActivityStoreableInterface
 {
 	use SoftDeletes;
+	use UserActivityTrait;
 
 	// @codingStandardsIgnoreStart
 
@@ -135,5 +138,38 @@ class Topic extends Model implements HasPresenter
 	public function lastPost()
 	{
 		return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+	}
+
+	/**
+	 * Check whether this activity entry should be saved.
+	 *
+	 * @return bool
+	 */
+	public function checkStoreable()
+	{
+		return true;
+	}
+
+	/**
+	 * Get the ID of the model.
+	 *
+	 * @return int
+	 */
+	public function getContentId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Get extra details about a model.
+	 *
+	 * @return array The extra details to store.
+	 */
+	public function getExtraDetails()
+	{
+		return [
+			'topic_slug' => $this->slug,
+			'topic_title' => $this->title,
+		];
 	}
 }
