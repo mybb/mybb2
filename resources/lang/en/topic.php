@@ -27,6 +27,7 @@ return [
 	'like' => 'Like',
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
+	'removeQuote' => 'Remove Quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -37,6 +38,11 @@ return [
 		'enterTitle' => 'Enter a meaningful title...',
 		'content' => 'Content',
 		'postTopic' => 'Post Topic'
+	],
+	'multiQuote' => [
+		'desc' => 'You have selected one or more posts to quote.',
+		'select' => 'Quote these posts now',
+		'deselect' => 'deselect them.',
 	],
 
 ];

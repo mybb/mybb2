@@ -24,4 +24,8 @@ return [
 	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid',
 	'inline_error' => 'Whoops! There were some problems with your input.',
 	'captcha_invalid_class' => "Failed to load Captcha Class ':class'",
+	'permission_invalid_class' => "No class is registered for content type ':class'",
+	'permission_implement_interface' => "The registered class for ':class' needs to implement PermissionInterface",
+	'invalid_date_object' => '$date needs to be either an integer (timestamp) or an instance of either DateTime or Date',
+	'user_not_found' => 'Sorry, the specified user could not be found.',
 ];

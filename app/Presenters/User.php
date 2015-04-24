@@ -18,6 +18,7 @@ use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Gravatar\Generator;
 
 class User extends BasePresenter
 {
@@ -54,13 +55,19 @@ class User extends BasePresenter
 	private $translator;
 
 	/**
-	 * @param UserModel                $resource        The user being wrapped by this presenter.
+	 * @var Generator
+	 */
+	private $gravatarGenerator;
+
+	/**
+	 * @param UserModel                $resource          The user being wrapped by this presenter.
 	 * @param Router                   $router
 	 * @param ForumRepositoryInterface $forumRepository
 	 * @param PostRepositoryInterface  $postRepository
 	 * @param TopicRepositoryInterface $topicRepository
 	 * @param UserRepositoryInterface  $userRepository
 	 * @param Translator               $translator
+	 * @param Generator                $gravatarGenerator
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -69,7 +76,8 @@ class User extends BasePresenter
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
 		UserRepositoryInterface $userRepository,
-		Translator $translator
+		Translator $translator,
+		Generator $gravatarGenerator
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -78,6 +86,7 @@ class User extends BasePresenter
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
 		$this->translator = $translator;
+		$this->gravatarGenerator = $gravatarGenerator;
 	}
 
 	/**
@@ -85,8 +94,8 @@ class User extends BasePresenter
 	 */
 	public function styled_name()
 	{
-		if ($this->wrappedObject->id == -1) {
-			return e(trans('general.guest'));
+		if (empty($this->wrappedObject->name)) {
+			$this->wrappedObject->name = trans('general.guest');
 		}
 
 		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
@@ -115,8 +124,7 @@ class User extends BasePresenter
 			return $avatar;
 		} // Email? Set up Gravatar
 		elseif (filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false) {
-			// TODO: Replace with euans package
-			return "http://gravatar.com/avatar/" . md5(strtolower(trim($avatar)));
+				return $this->gravatarGenerator->setDefault(asset('images/avatar.png'))->getGravatar($avatar);
 		} // File?
 		elseif (file_exists(public_path("uploads/avatars/{$avatar}"))) {
 			return asset("uploads/avatars/{$avatar}");
@@ -234,6 +242,14 @@ class User extends BasePresenter
 			case 'search.results':
 				$data['url'] = route('search');
 				break;
+			case 'user.profile':
+				$user = $this->userRepository->find($parameters['id']);
+				if ($user != null) {
+					$data['user'] = e($user->name);
+					$data['url'] = route('user.profile', [$user->name, $user->id]);
+				} else {
+					$data['langString'] = 'user.invalid';
+				}
 		}
 
 		// TODO: Here's a nice place for a plugin hook

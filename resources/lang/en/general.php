@@ -38,6 +38,7 @@ return [
 	'time' => 'Time',
 	'location' => 'Location',
 	'menu' => 'Menu',
+	'loading' => 'Loading...',
 	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',

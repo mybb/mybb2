@@ -101,7 +101,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function displayRole()
 	{
 		if ($this->displayRole == null) {
-			$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
+			// Do we have a guest?
+			if ($this->id <= 0) {
+				$this->displayRole = Role::where('role_slug', 'guest')->first();
+			} else {
+				$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
+			}
 		}
 
 		return $this->displayRole;

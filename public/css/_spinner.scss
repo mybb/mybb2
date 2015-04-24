@@ -1,0 +1,17 @@
+#spinner {
+	background: $alt-font-color-4;
+	color: $invert-font-color;
+	position: fixed;
+	top: 0;
+	#{$left}: 0;
+	z-index: 1001;
+	padding: 3px 15px;
+	@include border-radius(0 0 4px 0);
+	font-size: 12px;
+	display: none;
+
+	.fa {
+		font-size: 16px;
+		padding: 0 2px;
+	}
+}
