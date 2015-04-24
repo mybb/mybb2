@@ -85,8 +85,8 @@ class User extends BasePresenter
 	 */
 	public function styled_name()
 	{
-		if ($this->wrappedObject->id == -1) {
-			return e(trans('general.guest'));
+		if (empty($this->wrappedObject->name)) {
+			$this->wrappedObject->name = trans('general.guest');
 		}
 
 		if ($this->wrappedObject->displayRole() != null && $this->wrappedObject->displayRole()->role_username_style) {
