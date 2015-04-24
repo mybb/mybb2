@@ -41,6 +41,7 @@ var vendor_scripts = [
     paths.bower + "/modernizr/modernizr.js",
     paths.bower + "/jquery-dropdown/jquery.dropdown.js",
     paths.bower + "/jquery-modal/jquery.modal.js",
+    paths.bower + "/jquery-cookie/jquery.cookie.js",
     paths.bower + "/Stepper/jquery.fs.stepper.js",
     paths.bower + "/hideShowPassword/hideShowPassword.js",
     paths.bower + "/PowerTip/src/core.js",
@@ -55,9 +56,12 @@ var vendor_scripts = [
 ];
 
 var scripts = [
-    paths.js.src + "/modal.js",
+	paths.js.src + "/cookie.js",
+	paths.js.src + "/spinner.js",
+	paths.js.src + "/modal.js",
 	paths.js.src + "/post.js",
 	paths.js.src + "/poll.js",
+	paths.js.src + "/quote.js",
     paths.js.src + "/other.js"
 ];
 

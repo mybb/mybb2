@@ -27,7 +27,8 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('content', 'Content') }}</h3>
-					{{ form_textarea('content') }}
+					{{ form_textarea('content', '', {id: 'message'}) }}
+					{% include 'topic.quotebar' %}
 				</div>
 				{% if auth_check() == false %}
 					<div class="form__row">

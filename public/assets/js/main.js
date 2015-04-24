@@ -1,3 +1,85 @@
+(function ($, window) {
+	window.MyBB = window.MyBB || {};
+
+	window.MyBB.Cookie = {
+		cookiePrefix: '',
+		cookiePath: '/',
+		cookieDomain: '',
+
+		init: function () {
+			MyBB.Settings = MyBB.Settings || {};
+			if (typeof MyBB.Settings.cookiePrefix != 'undefined') {
+				this.cookiePrefix = MyBB.Settings.cookiePrefix;
+			}
+			if (typeof MyBB.Settings.cookiePath != 'undefined') {
+				this.cookiePath = MyBB.Settings.cookiePath;
+			}
+			if (typeof MyBB.Settings.cookieDomain != 'undefined') {
+				this.cookieDomain = MyBB.Settings.cookieDomain;
+			}
+		},
+
+		get: function (name) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+			return $.cookie(name);
+		},
+
+		set: function (name, value, expires) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+			if (!expires) {
+				expires = 157680000; // 5*365*24*60*60 => 5 years
+			}
+
+			expire = new Date();
+			expire.setTime(expire.getTime() + (expires * 1000));
+
+			options = {
+				expires: expire,
+				path: this.cookiePath,
+				domain: this.cookieDomain
+			};
+
+			return $.cookie(name, value, options);
+		},
+
+		unset: function (name) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+
+			options = {
+				path: this.cookiePath,
+				domain: this.cookieDomain
+			};
+			return $.removeCookie(name, options);
+		}
+	}
+})
+(jQuery, window);
+(function ($, window) {
+	window.MyBB = window.MyBB || {};
+
+	window.MyBB.Spinner = {
+		inProgresses: 0,
+		add: function () {
+			this.inProgresses++;
+			if (this.inProgresses == 1) {
+				$("#spinner").show();
+			}
+		},
+		remove: function () {
+			this.inProgresses--;
+			if (this.inProgresses == 0) {
+				$("#spinner").hide();
+			}
+		}
+	}
+})
+(jQuery, window);
 (function($, window) {
     window.MyBB = window.MyBB || {};
     
@@ -68,7 +150,7 @@
 })(jQuery, window);
 (function($, window) {
     window.MyBB = window.MyBB || {};
-    
+
 	window.MyBB.Posts = function Posts()
 	{
 		// Show and hide posts
@@ -92,9 +174,10 @@
 			$(event.target).parent().parent().parent().removeClass("post--hidden");
 			// Just in case we change our mind again, show the hide button
 			$(event.target).addClass("fa-minus");
-			$(event.target).removeClass("fa-show");	
+			$(event.target).removeClass("fa-show");
 		}
 	};
+
 
 	var posts = new window.MyBB.Posts();
 
@@ -200,6 +283,145 @@
 	var polls = new window.MyBB.Polls();
 
 })(jQuery, window);
+(function ($, window) {
+	window.MyBB = window.MyBB || {};
+
+	window.MyBB.Quotes = function Quotes() {
+
+		// MultiQuote
+		$(".quoteButton").on("click", this.multiQuoteButton.bind(this));
+
+		this.showQuoteBar();
+
+		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
+		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
+
+		this.quoteButtons();
+	};
+
+	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
+		var quotes = MyBB.Cookie.get('quotes');
+		if (!quotes) {
+			quotes = [];
+		}
+		else {
+			quotes = quotes.split('-');
+		}
+		$.each(quotes, function (key, quote) {
+			quotes[key] = parseInt(quote);
+			if (!quotes[key]) {
+				delete quotes[key];
+			}
+		});
+		return quotes;
+
+
+	};
+
+	// MultiQuote
+	window.MyBB.Quotes.prototype.multiQuoteButton = function multiQuoteButton(event) {
+		event.preventDefault();
+		var $me = $(event.target);
+		if (!$me.hasClass('quoteButton')) {
+			$me = $me.parents('.quoteButton');
+		}
+		var postId = parseInt($me.data('postid')),
+			quotes = this.getQuotes();
+
+		if (postId) {
+			if (quotes.indexOf(postId) == -1) {
+				quotes.push(postId);
+				$me.find('.quoteButton__add').hide();
+				$me.find('.quoteButton__remove').show();
+			}
+			else {
+				delete quotes[quotes.indexOf(postId)];
+				$me.find('.quoteButton__add').show();
+				$me.find('.quoteButton__remove').hide();
+			}
+
+			MyBB.Cookie.set('quotes', quotes.join('-'));
+
+			this.showQuoteBar();
+			return false;
+		}
+
+	};
+
+	window.MyBB.Quotes.prototype.showQuoteBar = function showQuoteBar() {
+		var quotes = this.getQuotes();
+
+		if (quotes.length) {
+			$("#quoteBar").show();
+		}
+		else {
+			$("#quoteBar").hide();
+		}
+	};
+
+	window.MyBB.Quotes.prototype.addQuotes = function addQuotes() {
+		var quotes = this.getQuotes(),
+			$quoteBar = $("#quoteBar"),
+			$textarea = $($quoteBar.data('textarea'));
+
+		MyBB.Spinner.add();
+
+		$.ajax({
+			url: '/post/quotes',
+			data: {
+				'posts': quotes,
+				'_token': $quoteBar.parents('form').find('input[name=_token]').val()
+			},
+			method: 'POST'
+		}).done(function (json) {
+			if (json.error) {
+				alert(json.error);// TODO: js error
+			}
+			else {
+				var value = $textarea.val();
+				if (value && value.substr(-2) != "\n\n") {
+					if(value.substr(-1) != "\n") {
+						value += "\n";
+					}
+					value += "\n";
+				}
+				$textarea.val(value + json.message);
+			}
+		}).always(function () {
+			MyBB.Spinner.remove();
+		});
+
+		$quoteBar.hide();
+		MyBB.Cookie.unset('quotes');
+		this.quoteButtons();
+		return false;
+	};
+
+	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
+		$quoteBar = $("#quoteBar");
+		$quoteBar.hide();
+		MyBB.Cookie.unset('quotes');
+		this.quoteButtons();
+		return false;
+	};
+
+	window.MyBB.Quotes.prototype.quoteButtons = function quoteButtons() {
+		var quotes = this.getQuotes();
+
+		$('.quoteButton__add').show();
+		$('.quoteButton__remove').hide();
+
+		$.each(quotes, function (key, postId) {
+			var $quoteButton = $("#post-" + postId).find('.quoteButton');
+			$quoteButton.find('.quoteButton__add').hide();
+			$quoteButton.find('.quoteButton__remove').show();
+		})
+	}
+
+	var quotes = new window.MyBB.Quotes();
+
+})
+(jQuery, window);
 $('html').addClass('js');
 
 $(function () {

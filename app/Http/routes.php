@@ -62,6 +62,8 @@ Route::post('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit.post',
 Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
 Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
 
+Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
+
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
 

@@ -40,6 +40,7 @@ return [
 	'from' => 'from',
 	'never' => 'Never',
 	'menu' => 'Menu',
+	'loading' => 'Loading...',
 	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
