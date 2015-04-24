@@ -13069,7 +13069,7 @@ function countFlags(value) {
                     .find(settings.submenuEl).addClass('dropit-submenu').hide();
 
                     // Open on click
-                    $el.off(settings.action).on(settings.action, settings.triggerParentEl +':has('+ settings.submenuEl +') > '+ settings.triggerEl +'', function(){
+                    $el.on(settings.action, settings.triggerParentEl +':has('+ settings.submenuEl +') > '+ settings.triggerEl +'', function(){
                         // Close click menu's if clicked again
                         if(settings.action == 'click' && $(this).parents(settings.triggerParentEl).hasClass('dropit-open')){
                             settings.beforeHide.call(this);
@@ -13100,7 +13100,7 @@ function countFlags(value) {
 
                     // If hover
                     if(settings.action == 'mouseenter'){
-                        $el.on('mouseleave', '.dropit-open', function(){
+                        $el.on('mouseleave', function(){
                             settings.beforeHide.call(this);
                             $(this).removeClass('dropit-open').find(settings.submenuEl).hide();
                             settings.afterHide.call(this);

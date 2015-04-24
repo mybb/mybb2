@@ -27,6 +27,7 @@ return [
 	'like' => 'Like',
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
+	'removeQuote' => 'Remove Quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',

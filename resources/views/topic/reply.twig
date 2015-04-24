@@ -24,7 +24,8 @@
 				{% endif %}
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
-					{{ form_textarea('content', content) }}
+					{{ form_textarea('content', content, {'id':'message'}) }}
+					{% include 'topic.quotebar' %}
 				</div>
 				{% if auth_check() == false %}
 					<div class="form__row">

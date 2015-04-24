@@ -11,6 +11,9 @@
 		{% block head %}{% endblock %}
 	</head>
 	<body>
+		<div id="spinner">
+			<i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
+		</div>
 		{% include "header.header" %}
         <div class="main">
             <div class="wrapper">
