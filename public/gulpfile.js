@@ -56,6 +56,7 @@ var vendor_scripts = [
 ];
 
 var scripts = [
+	paths.js.src + "/cookie.js",
 	paths.js.src + "/spinner.js",
 	paths.js.src + "/modal.js",
 	paths.js.src + "/post.js",

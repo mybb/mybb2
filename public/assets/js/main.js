@@ -1,6 +1,68 @@
 (function ($, window) {
 	window.MyBB = window.MyBB || {};
 
+	window.MyBB.Cookie = {
+		cookiePrefix: '',
+		cookiePath: '/',
+		cookieDomain: '',
+
+		init: function () {
+			MyBB.Settings = MyBB.Settings || {};
+			if (typeof MyBB.Settings.cookiePrefix != 'undefined') {
+				this.cookiePrefix = MyBB.Settings.cookiePrefix;
+			}
+			if (typeof MyBB.Settings.cookiePath != 'undefined') {
+				this.cookiePath = MyBB.Settings.cookiePath;
+			}
+			if (typeof MyBB.Settings.cookieDomain != 'undefined') {
+				this.cookieDomain = MyBB.Settings.cookieDomain;
+			}
+		},
+
+		get: function (name) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+			return $.cookie(name);
+		},
+
+		set: function (name, value, expires) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+			if (!expires) {
+				expires = 157680000; // 5*365*24*60*60 => 5 years
+			}
+
+			expire = new Date();
+			expire.setTime(expire.getTime() + (expires * 1000));
+
+			options = {
+				expires: expire,
+				path: this.cookiePath,
+				domain: this.cookieDomain
+			};
+
+			return $.cookie(name, value, options);
+		},
+
+		unSet: function (name) {
+			this.init();
+
+			name = this.cookiePrefix + name;
+
+			options = {
+				path: this.cookiePath,
+				domain: this.cookieDomain
+			};
+			return $.removeCookie(name, options);
+		}
+	}
+})
+(jQuery, window);
+(function ($, window) {
+	window.MyBB = window.MyBB || {};
+
 	window.MyBB.Spinner = {
 		inProgresses: 0,
 		add: function () {
@@ -234,22 +296,16 @@
 		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
 		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
-		var quotes = this.getQuotes();
-
-		$.each(quotes, function (postId, quote) {
-			var $quoteButton = $("#post-"+postId).find('.quoteButton');
-			$quoteButton.find('.quoteButton__add').hide();
-			$quoteButton.find('.quoteButton__remove').show();
-		})
+		this.quoteButtons();
 	};
 
 	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
-		var quotes = $.cookie('quotes');
+		var quotes = MyBB.Cookie.get('quotes');
 		if (!quotes) {
 			quotes = [];
 		}
 		else {
-			quotes = quotes.split(',');
+			quotes = quotes.split('-');
 		}
 		$.each(quotes, function (key, quote) {
 			quotes[key] = parseInt(quote);
@@ -284,7 +340,7 @@
 				$me.find('.quoteButton__remove').hide();
 			}
 
-			$.cookie('quotes', quotes.join(','));
+			MyBB.Cookie.set('quotes', quotes.join('-'));
 
 			this.showQuoteBar();
 			return false;
@@ -318,26 +374,42 @@
 			},
 			method: 'POST'
 		}).done(function (json) {
-			MyBB.Spinner.remove();
 			if (json.error) {
 				alert(json.error);// TODO: js error
 			}
 			else {
 				$textarea.val($textarea.val() + json.message);
 			}
+		}).always(function () {
+			MyBB.Spinner.remove();
 		});
 
 		$quoteBar.hide();
-		$.cookie('quotes', '');
+		MyBB.Cookie.unSet('quotes');
+		this.quoteButtons();
 		return false;
 	};
 
 	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
 		$quoteBar = $("#quoteBar");
 		$quoteBar.hide();
-		$.cookie('quotes', '');
+		MyBB.Cookie.unSet('quotes');
+		this.quoteButtons();
 		return false;
 	};
+
+	window.MyBB.Quotes.prototype.quoteButtons = function quoteButtons() {
+		var quotes = this.getQuotes();
+
+		$('.quoteButton__add').show();
+		$('.quoteButton__remove').hide();
+
+		$.each(quotes, function (key, postId) {
+			var $quoteButton = $("#post-" + postId).find('.quoteButton');
+			$quoteButton.find('.quoteButton__add').hide();
+			$quoteButton.find('.quoteButton__remove').show();
+		})
+	}
 
 	var quotes = new window.MyBB.Quotes();
 

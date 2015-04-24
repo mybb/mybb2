@@ -31,6 +31,6 @@ class Markdown implements QuoteInterface
 		$message = $post->content;
 
 		// TODO: MarkdownQuoteRenderer
-		return "> {$message}";
+		return "> {$message}\n\n";
 	}
 }

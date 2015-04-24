@@ -11,22 +11,16 @@
 		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
 		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
-		var quotes = this.getQuotes();
-
-		$.each(quotes, function (postId, quote) {
-			var $quoteButton = $("#post-"+postId).find('.quoteButton');
-			$quoteButton.find('.quoteButton__add').hide();
-			$quoteButton.find('.quoteButton__remove').show();
-		})
+		this.quoteButtons();
 	};
 
 	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
-		var quotes = $.cookie('quotes');
+		var quotes = MyBB.Cookie.get('quotes');
 		if (!quotes) {
 			quotes = [];
 		}
 		else {
-			quotes = quotes.split(',');
+			quotes = quotes.split('-');
 		}
 		$.each(quotes, function (key, quote) {
 			quotes[key] = parseInt(quote);
@@ -61,7 +55,7 @@
 				$me.find('.quoteButton__remove').hide();
 			}
 
-			$.cookie('quotes', quotes.join(','));
+			MyBB.Cookie.set('quotes', quotes.join('-'));
 
 			this.showQuoteBar();
 			return false;
@@ -95,26 +89,42 @@
 			},
 			method: 'POST'
 		}).done(function (json) {
-			MyBB.Spinner.remove();
 			if (json.error) {
 				alert(json.error);// TODO: js error
 			}
 			else {
 				$textarea.val($textarea.val() + json.message);
 			}
+		}).always(function () {
+			MyBB.Spinner.remove();
 		});
 
 		$quoteBar.hide();
-		$.cookie('quotes', '');
+		MyBB.Cookie.unSet('quotes');
+		this.quoteButtons();
 		return false;
 	};
 
 	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
 		$quoteBar = $("#quoteBar");
 		$quoteBar.hide();
-		$.cookie('quotes', '');
+		MyBB.Cookie.unSet('quotes');
+		this.quoteButtons();
 		return false;
 	};
+
+	window.MyBB.Quotes.prototype.quoteButtons = function quoteButtons() {
+		var quotes = this.getQuotes();
+
+		$('.quoteButton__add').show();
+		$('.quoteButton__remove').hide();
+
+		$.each(quotes, function (key, postId) {
+			var $quoteButton = $("#post-" + postId).find('.quoteButton');
+			$quoteButton.find('.quoteButton__add').hide();
+			$quoteButton.find('.quoteButton__remove').show();
+		})
+	}
 
 	var quotes = new window.MyBB.Quotes();
 
