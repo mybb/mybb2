@@ -22,7 +22,8 @@
 				{% endif %}
 				<div class="form__row">
 					<h3>{{ form_label('content', trans('topic.create.content')) }}</h3>
-					{{ form_textarea('content', post.content) }}
+					{{ form_textarea('content', post.content, {'id': 'message'}) }}
+					{% include 'topic.quotebar' %}
 				</div>
 			</div>
 		</section>

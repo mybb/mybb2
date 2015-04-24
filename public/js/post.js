@@ -1,6 +1,6 @@
 (function($, window) {
     window.MyBB = window.MyBB || {};
-    
+
 	window.MyBB.Posts = function Posts()
 	{
 		// Show and hide posts
@@ -24,9 +24,10 @@
 			$(event.target).parent().parent().parent().removeClass("post--hidden");
 			// Just in case we change our mind again, show the hide button
 			$(event.target).addClass("fa-minus");
-			$(event.target).removeClass("fa-show");	
+			$(event.target).removeClass("fa-show");
 		}
 	};
+
 
 	var posts = new window.MyBB.Posts();
 

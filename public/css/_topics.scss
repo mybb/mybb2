@@ -192,6 +192,12 @@
 				.text {
 					display: inline;
 				}
+
+				.quoteButton {
+					.quoteButton__remove {
+						display: none;
+					}
+				}
 			}
 		}
 
@@ -223,7 +229,7 @@
 	}
 
 	&.post--reply {
-		
+
 		.full-reply {
 			float: $right;
 
@@ -238,6 +244,12 @@
 	}
 }
 
+#quoteBar {
+	border: 1px solid #ccc;
+	padding: 0 10px;
+	font-size: 12px;
+	border-radius: 4px;
+}
 
 @media only screen and (min-width: 480px) {
 

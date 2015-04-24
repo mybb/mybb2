@@ -45,6 +45,6 @@ class MyCode implements QuoteInterface
 		$message = preg_replace("#\[attachment=([0-9]+?)\]#i", '', $message);
 
 		return "[quote='" . e($post->author->name) . "' pid='{$post->id}' dateline='" .
-		$post->created_at->getTimestamp() . "']\n{$message}\n[/quote]";
+		$post->created_at->getTimestamp() . "']\n{$message}\n[/quote]\n\n";
 	}
 }
