@@ -130,7 +130,7 @@ class PostController extends AbstractController
 	{
 		$posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
 
-		$content = "\n\n";
+		$content = "";
 
 		foreach ($posts as $post) {
 			$content .= $this->quoteRenderer->renderFromPost($post);

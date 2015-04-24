@@ -345,10 +345,8 @@ class PostRepository implements PostRepositoryInterface
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
-		return $this->postModel->with([
-			'topic',
-			'topic.forum',
-			'author'
-		])->whereIn('id', $postIds)->whereNotIn('topic.forum_id', $unviewableForums)->get();
+		return $this->postModel
+			->whereIn('id', $postIds)
+			->whereNotIn('forum_id', $unviewableForums)->get();
 	}
 }

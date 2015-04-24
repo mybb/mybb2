@@ -378,7 +378,14 @@
 				alert(json.error);// TODO: js error
 			}
 			else {
-				$textarea.val($textarea.val() + json.message);
+				var value = $textarea.val();
+				if (value && value.substr(-2) != "\n\n") {
+					if(value.substr(-1) != "\n") {
+						value += "\n";
+					}
+					value += "\n";
+				}
+				$textarea.val(value + json.message);
 			}
 		}).always(function () {
 			MyBB.Spinner.remove();
