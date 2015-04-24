@@ -218,3 +218,11 @@ Breadcrumbs::register('conversations.newParticipant', function ($breadcrumbs, $c
 		route('conversations.newParticipant', ['id' => $conversation->id])
 	);
 });
+
+Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(
+		trans('member.profileOf', ['name' => $user->name]),
+		route('user.profile', ['slug' => $user->name, 'id' => $user->id])
+	);
+});

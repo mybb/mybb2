@@ -27,4 +27,5 @@ return [
 	'conversation_already_participant' => 'One or more participants already participate in this conversations',
 	'conversation_cant_send_to_self' => 'You can\'t add yourself as participant',
 	'conversation_not_found' => 'Sorry, the specified conversation could not be found.'
+	'user_not_found' => 'Sorry, the specified user could not be found.',
 ];

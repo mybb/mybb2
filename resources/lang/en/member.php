@@ -20,6 +20,7 @@ return [
 	'lastVisit' => 'Last Visit',
 	'online' => 'Online Now',
 	'noOnline' => 'Nobody is online',
+	'profileOf' => 'Profile of :name',
 
 	'profile' => [
 		'recentActivity' => 'Recent Activity',
