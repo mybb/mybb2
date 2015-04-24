@@ -56,4 +56,11 @@ interface LikesRepositoryInterface
 	 * @return mixed
 	 */
 	public function toggleLikeForContent(Model $content);
+
+	/**
+	 * @param Model $content
+	 *
+	 * @return mixed
+	 */
+	public function removeLikesForContent(Model $content);
 }
