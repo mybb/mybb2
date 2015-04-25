@@ -26,7 +26,7 @@ class CreateConversationMessagesTable extends Migration
 		});
 
 		Schema::table('conversations', function (Blueprint $table) {
-			$table->foreign('last_message_id')->references('id')->on('conversations_messages');
+			$table->foreign('last_message_id')->references('id')->on('conversation_messages');
 		});
 	}
 
