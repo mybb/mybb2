@@ -28,6 +28,24 @@
 				</dl>
 			</div>
 		{% endfor %}
+
+		{{ form_open({'url_route': url_route('members'), 'method': 'get'}) }}
+		<div class="sort-results">
+			<h3>{{ trans('general.sorting') }}</h3>
+			{{ form_select('sortBy', {
+				'name': trans('general.sortby')~' '~trans('general.username'),
+				'created_at': trans('general.sortby')~' '~trans('member.joinDate'),
+				'last_visit': trans('general.sortby')~' '~trans('member.lastVisit'),
+				'num_posts': trans('general.sortby')~' '~trans('member.posts'),
+				'num_topics': trans('general.sortby')~' '~trans('member.topics')
+			}, sortBy) }}
+			{{ form_select('sortDir', {
+				'asc': trans('general.order')~' Ascending',
+				'desc': trans('general.order')~' Descending'
+			}, sortDir) }}
+			{{ form_button('<span class="text">'~trans('member.sortMembers')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+		</div>
+		{{ form_close() }}
 	</section>
 	{{ users.render|raw }}
 </div>
