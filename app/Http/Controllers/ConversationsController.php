@@ -116,7 +116,7 @@ class ConversationsController extends AbstractController
 	{
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
@@ -145,7 +145,7 @@ class ConversationsController extends AbstractController
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
@@ -173,7 +173,7 @@ class ConversationsController extends AbstractController
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
@@ -193,7 +193,7 @@ class ConversationsController extends AbstractController
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
@@ -216,7 +216,7 @@ class ConversationsController extends AbstractController
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
@@ -236,7 +236,7 @@ class ConversationsController extends AbstractController
 		/** @var Conversation $conversation */
 		$conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation) {
+		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
 			throw new ConversationNotFoundException;
 		}
 
