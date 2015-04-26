@@ -79,6 +79,16 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ConversationRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ConversationRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ConversationMessageRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Parser\Parser\CustomCodes\CustomCodeRepositoryInterface',
 			function (Application $app) {
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');

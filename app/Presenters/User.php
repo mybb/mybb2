@@ -13,11 +13,14 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Gravatar\Generator;
 
 class User extends BasePresenter
@@ -50,6 +53,16 @@ class User extends BasePresenter
 	private $userRepository;
 
 	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @var ConversationRepositoryInterface
+	 */
+	private $conversationRepository;
+
+	/**
 	 * @var Translator
 	 */
 	private $translator;
@@ -60,14 +73,16 @@ class User extends BasePresenter
 	private $gravatarGenerator;
 
 	/**
-	 * @param UserModel                $resource          The user being wrapped by this presenter.
-	 * @param Router                   $router
-	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PostRepositoryInterface  $postRepository
-	 * @param TopicRepositoryInterface $topicRepository
-	 * @param UserRepositoryInterface  $userRepository
-	 * @param Translator               $translator
-	 * @param Generator                $gravatarGenerator
+	 * @param UserModel                       $resource
+	 * @param Router                          $router
+	 * @param ForumRepositoryInterface        $forumRepository
+	 * @param PostRepositoryInterface         $postRepository
+	 * @param TopicRepositoryInterface        $topicRepository
+	 * @param UserRepositoryInterface         $userRepository
+	 * @param PermissionChecker               $permissionChecker
+	 * @param ConversationRepositoryInterface $conversationRepository
+	 * @param Translator                      $translator
+	 * @param Generator                       $gravatarGenerator
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -76,6 +91,8 @@ class User extends BasePresenter
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
 		UserRepositoryInterface $userRepository,
+		PermissionChecker $permissionChecker,
+		ConversationRepositoryInterface $conversationRepository,
 		Translator $translator,
 		Generator $gravatarGenerator
 	) {
@@ -85,6 +102,8 @@ class User extends BasePresenter
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
+		$this->permissionChecker = $permissionChecker;
+		$this->conversationRepository = $conversationRepository;
 		$this->translator = $translator;
 		$this->gravatarGenerator = $gravatarGenerator;
 	}
@@ -148,6 +167,30 @@ class User extends BasePresenter
 		}
 
 		return '';
+	}
+
+	/**
+	 * @param string $permission
+	 *
+	 * @return bool
+	 */
+	public function hasPermission($permission)
+	{
+		return $this->permissionChecker->hasPermission('user', null, $permission);
+	}
+
+	/**
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function unreadConversations()
+	{
+		$conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);
+
+		foreach ($conversations as $key => $conversation) {
+			$conversations[$key] = app()->make('MyBB\Core\Presenters\Conversation', [$conversation]);
+		}
+
+		return $conversations;
 	}
 
 	/**

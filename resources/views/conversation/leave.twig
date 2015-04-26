@@ -1,0 +1,32 @@
+{% extends "layouts.base" %}
+{% block title %}{{ conversation.title }} - {{ trans('conversations.leave') }}{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>{{ conversation.title }} - {{ trans('conversations.leave') }}</h1>
+		</header>
+
+		{{ form_open({'route': ['conversations.leave', conversation.id], 'method': 'post'}) }}
+		<section class="form">
+			<div class="form__section">
+				<div class="form__row">
+					<h3>{{ trans('conversations.leave_conversation') }}</h3>
+
+					{{ form_radio('leave', 'leave', true, {'id': 'leave'}) }}
+					{{ form_label('leave', trans('conversations.leave_conversation_desc')) }}
+				</div>
+				<div class="form__row">
+					<h3>{{ trans('conversations.ignore_conversation') }}</h3>
+
+					{{ form_radio('leave', 'ignore', false, {'id': 'ignore'}) }}
+					{{ form_label('ignore', trans('conversations.ignore_conversation_desc')) }}
+				</div>
+			</div>
+		</section>
+		<div class="form__submit">
+			{{ form_button('<i class="fa fa-sign-out"></i><span class="text">'~trans('conversations.leave')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+		</div>
+		{{ form_close() }}
+
+	</div>
+{% endblock %}

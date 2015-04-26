@@ -1,106 +1,139 @@
-						<ul class="user-navigation__links">
-							<li class="user-navigation__active-user dropit-link">
-								<a href="{{ url_route('account.index') }}" class="multi-link base-link">
-									<span class="text">{{ auth_user().name }}</span>
-									<i class="fa fa-caret-down"></i>
-									<i class="fa fa-caret-up"></i>
-								</a>
-								<div class="user-navigation__dropdown dropdown">
-									<a href="{{ url_route('user.profile', [auth_user.name, auth_user.id]) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
-									<ul class="account-links">
-										<li><a href="{{ url_route('account.index') }}" class="multi-link"><i class="fa fa-dashboard fa-fw"></i><span class="text">{{ trans('account.youraccount') }}</span></a></li>
-										<li><a href="{{ url_route('account.following') }}" class="multi-link"><i class="fa fa-plus fa-fw"></i><span class="text">{{ trans('account.following') }}</span></a></li>
-										<li><a href="index.php?page=messages/index" class="multi-link"><i class="fa fa-comments fa-fw"></i><span class="text">{{ trans('account.messages') }}</span></a></li>
-										<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out fa-fw"></i><span class="text">{{ trans('member.logout') }}</span></a></li>
-									</ul>
-								</div>
+<ul class="user-navigation__links">
+	<li class="user-navigation__active-user dropit-link">
+		<a href="{{ url_route('account.index') }}" class="multi-link base-link">
+			<span class="text">{{ auth_user().name }}</span>
+			<i class="fa fa-caret-down"></i>
+			<i class="fa fa-caret-up"></i>
+		</a>
+
+		<div class="user-navigation__dropdown dropdown">
+			<a href="{{ url_route('user.profile', [auth_user.name, auth_user.id]) }}" class="avatar-profile-link"
+			   title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}"
+																   alt="{{ trans('account.your_avatar') }}"
+																   class="avatar"/></a>
+			<ul class="account-links">
+				<li><a href="{{ url_route('account.index') }}" class="multi-link"><i
+								class="fa fa-dashboard fa-fw"></i><span
+								class="text">{{ trans('account.youraccount') }}</span></a></li>
+				<li><a href="{{ url_route('account.following') }}" class="multi-link"><i
+								class="fa fa-plus fa-fw"></i><span class="text">{{ trans('account.following') }}</span></a>
+				</li>
+				<li><a href="{{ url_route('conversations.index') }}" class="multi-link"><i
+								class="fa fa-comments fa-fw"></i><span
+								class="text">{{ trans('account.messages') }}</span></a></li>
+				<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out fa-fw"></i><span
+								class="text">{{ trans('member.logout') }}</span></a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="user-navigation__notifications dropit-link">
+		<a href="index.php?page=account/notifications" class="multi-link">
+			<i class="fa fa-globe"></i>
+			<span class="text">Notifications</span>
+			<span class="unread-count">4</span>
+			<i class="fa fa-caret-down"></i>
+			<i class="fa fa-caret-up"></i>
+		</a>
+
+		<div class="user-navigation__dropdown dropdown">
+			<div class="notifications-container">
+				<h2>
+					<a href="index.php?page=account/notifications">
+						<span class="text">Notifications</span>
+					</a>
+					<a href="index.php?page=account/preferences" title="{{ trans('account.notify_preferences') }}"
+					   class="option"><i class="fa fa-cog"></i><span
+								class="text">{{ trans('account.preferences') }}</span></a>
+				</h2>
+				<ul class="notifications">
+					<li class="quote">
+						<a href="index.php?page=thread#post">
+							<i class="fa fa-comment fa-fw"></i>
+							<span class="text"><span class="username">Ryan Loos</span> quoted your post in Layout mock-ups</span>
+							<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
+						</a>
+					</li>
+					<li class="like">
+						<a href="index.php?page=thread#post">
+							<i class="fa fa-thumbs-up fa-fw"></i>
+							<span class="text"><span class="username">Tim B.</span> liked your post in Responsive theme</span>
+							<time datetime="2013-03-22T10:42" title="Mar 22, 2013, 10:42 AM">2 hours ago</time>
+						</a>
+					</li>
+					<li class="groupJoinRequest">
+						<a href="index.php?page=account/groups-join-requests">
+							<i class="fa fa-group fa-fw"></i>
+							<span class="text"><span class="username">MattRogowski</span> requested to join Awesome Group</span>
+							<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 10:40 AM">2 hours ago</time>
+						</a>
+					</li>
+					<li>
+						<a href="index.php?page=thread">
+							<i class="fa fa-thumb-tack fa-fw"></i>
+							<span class="text"><span class="username">User A</span> posted a thread requiring moderation</span>
+							<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 9:40 AM">3 hours ago</time>
+						</a>
+					</li>
+					<li class="view-all">
+						<a href="index.php?page=account/notifications"><span
+									class="text">View All Recent Notifications</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</li>
+	{% if setting('conversations.enabled') and auth_user.hasPermission('canUseConversations') %}
+		<li class="user-navigation__messages dropit-link">
+			<a href="{{ url_route('conversations.index') }}" class="multi-link">
+				<i class="fa fa-comments"></i>
+				<span class="text">{{ trans('conversations.messages') }}</span>
+				{% if auth_user.unreadConversations.count > 0 %}
+					<span class="unread-count">{{ auth_user.unreadConversations.count }}</span>
+				{% endif %}
+				<i class="fa fa-caret-down"></i>
+				<i class="fa fa-caret-up"></i>
+			</a>
+
+			<div class="user-navigation__dropdown dropdown">
+				<div class="messages-container">
+					<h2>
+						<a href="{{ url_route('conversations.index') }}">
+							<span class="text">{{ trans('conversations.unread') }}</span>
+						</a>
+						<a href="{{ url_route('conversations.compose') }}" title="{{ trans('conversations.compose') }}"
+						   class="option"><i
+									class="fa fa-pencil-square-o"></i><span
+									class="text">{{ trans('general.new') }}</span></a>
+					</h2>
+					<ul class="messages">
+						{% for conversation in auth_user.unreadConversations|slice(0, 5) %}
+							<li>
+								<a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
+								   class="avatar-profile-link"
+								   title="Go to {{ conversation.lastMessage.author.name }}'s profile"><img
+											src="{{ conversation.lastMessage.author.avatar }}"
+											alt="{{ conversation.lastMessage.author.name }}'s avatar"
+											class="avatar"/></a>
+								<a href="{{ url_route('conversations.read', [conversation.id]) }}"
+								   class="conversation-title">{{ conversation.title }}</a>
+								{{ trans('general.from') }} <a
+										href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"
+										class="message-author">{{ conversation.lastMessage.author.styled_name|raw }}</a>
+								{{ generate_time(conversation.lastMessage.created_at) }}
 							</li>
-							<li class="user-navigation__notifications dropit-link">
-								<a href="index.php?page=account/notifications" class="multi-link">
-									<i class="fa fa-globe"></i>
-									<span class="text">Notifications</span>
-									<span class="unread-count">4</span>
-									<i class="fa fa-caret-down"></i>
-									<i class="fa fa-caret-up"></i>
-								</a>
-								<div class="user-navigation__dropdown dropdown">
-									<div class="notifications-container">
-										<h2>
-											<a href="index.php?page=account/notifications">
-												<span class="text">Notifications</span>
-											</a>
-											<a href="index.php?page=account/preferences" title="{{ trans('account.notify_preferences') }}" class="option"><i class="fa fa-cog"></i><span class="text">{{ trans('account.preferences') }}</span></a>
-										</h2>
-										<ul class="notifications">
-											<li class="quote">
-												<a href="index.php?page=thread#post">
-													<i class="fa fa-comment fa-fw"></i>
-													<span class="text"><span class="username">Ryan Loos</span> quoted your post in Layout mock-ups</span>
-													<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
-												</a>
-											</li>
-											<li class="like">
-												<a href="index.php?page=thread#post">
-													<i class="fa fa-thumbs-up fa-fw"></i>
-													<span class="text"><span class="username">Tim B.</span> liked your post in Responsive theme</span>
-													<time datetime="2013-03-22T10:42" title="Mar 22, 2013, 10:42 AM">2 hours ago</time>
-												</a>
-											</li>
-											<li class="groupJoinRequest">
-												<a href="index.php?page=account/groups-join-requests">
-													<i class="fa fa-group fa-fw"></i>
-													<span class="text"><span class="username">MattRogowski</span> requested to join Awesome Group</span>
-													<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 10:40 AM">2 hours ago</time>
-												</a>
-											</li>
-											<li>
-												<a href="index.php?page=thread">
-													<i class="fa fa-thumb-tack fa-fw"></i>
-													<span class="text"><span class="username">User A</span> posted a thread requiring moderation</span>
-													<time datetime="2013-03-22T10:40" title="Mar 22, 2013, 9:40 AM">3 hours ago</time>
-												</a>
-											</li>
-											<li class="view-all">
-												<a href="index.php?page=account/notifications"><span class="text">View All Recent Notifications</span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
+						{% else %}
+							<li>
+								{{ trans('conversations.no_unread') }}
 							</li>
-							<li class="user-navigation__messages dropit-link">
-								<a href="index.php?page=messages" class="multi-link">
-									<i class="fa fa-comments"></i>
-									<span class="text">Messages</span>
-									<span class="unread-count">2</span>
-									<i class="fa fa-caret-down"></i>
-									<i class="fa fa-caret-up"></i>
-								</a>
-								 <div class="user-navigation__dropdown dropdown">
-									<div class="messages-container">
-										<h2>
-											<a href="index.php?page=messages/index">
-												<span class="text">Unread Messages</span>
-											</a>
-											<a href="index.php?page=messages/compose" title="Compose New Message" class="option"><i class="fa fa-pencil-square-o"></i><span class="text">New</span></a>
-										</h2>
-										<ul class="messages">
-											<li>
-												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Ryan Loos's profile"><img src="http://ih2.redbubble.net/avatar.116723.100x100.jpg?dateline=1365291398" alt="Ryan Loos's avatar" class="avatar" /></a>
-												<a href="index.php?page=messages/message" class="conversation-title">MyBB 2.0 testing</a>
-												from <a href="index.php?page=profile" class="message-author">Ryan Loos</a>
-												<time datetime="2013-03-22T12:34" title="Mar 22, 2013, 12:34 PM">10 minutes ago</time>
-											</li>
-											<li>
-												<a href="index.php?page=profile" class="avatar-profile-link" title="Go to Tim B.'s profile"><img src="http://i50.tinypic.com/2v8nvc4_th.jpg?dateline=1346633969" alt="Tim B.'s avatar" class="avatar" /></a>
-												<a href="index.php?page=messages/message" class="conversation-title">New website rollout</a>
-												from <a href="index.php?page=profile" class="message-author">Tim B.</a>
-												<time datetime="2013-03-22T11:34" title="Mar 22, 2013, 11:34 AM">1 hour ago</time>
-											</li>
-											<li class="view-all">
-												<a href="index.php?page=messages/index"><span class="text">View All Messages</span></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</li>
-						</ul>
+						{% endfor %}
+
+						<li class="view-all">
+							<a href="{{ url_route('conversations.index') }}"><span
+										class="text">{{ trans('conversations.view_all') }}</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</li>
+	{% endif %}
+</ul>
