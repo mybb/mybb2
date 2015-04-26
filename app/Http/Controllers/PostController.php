@@ -12,6 +12,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
@@ -138,6 +139,21 @@ class PostController extends AbstractController
 
 		return response()->json([
 			'message' => $content
+		]);
+	}
+	/**
+	 * @param QuotePostRequest $quoteRequest
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function postQuote(Request $quoteRequest)
+	{
+		$post = $this->postsRepository->find($quoteRequest->input('postid'));
+
+		$post->content = $post->content_parsed = e($quoteRequest->input('content'));
+
+		return response()->json([
+			'message' => $this->quoteRenderer->renderFromPost($post)
 		]);
 	}
 }

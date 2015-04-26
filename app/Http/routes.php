@@ -63,6 +63,7 @@ Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostControl
 Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
 
 Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
+Route::post('post/quote', ['as' => 'post.quote', 'uses' => 'PostController@postQuote']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
 Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
