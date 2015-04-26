@@ -3955,6 +3955,14 @@ section.container .forum-list {
       display: none; }
   .post.post--reply .post__foot {
     margin: 5px 0; }
+  .post .quickQuote {
+    display: none;
+    float: right;
+    border: 1px solid #dfdfdf;
+    border-radius: 4px;
+    font: 12px Open Sans, Helvetica Neue, Helvetica, Arial;
+    padding: 2px 6px;
+    cursor: pointer; }
 
 #quoteBar {
   border: 1px solid #ccc;

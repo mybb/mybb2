@@ -12,11 +12,11 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
 use MyBB\Core\Http\Requests\Post\QuotePostRequest;
+use MyBB\Core\Http\Requests\Post\QuotePostWithContentRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
@@ -141,12 +141,13 @@ class PostController extends AbstractController
 			'message' => $content
 		]);
 	}
+
 	/**
-	 * @param QuotePostRequest $quoteRequest
+	 * @param QuotePostWithContentRequest $quoteRequest
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function postQuote(Request $quoteRequest)
+	public function postQuote(QuotePostWithContentRequest $quoteRequest)
 	{
 		$post = $this->postsRepository->find($quoteRequest->input('postid'));
 

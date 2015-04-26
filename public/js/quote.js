@@ -17,7 +17,7 @@
 		this.quoteButtons();
 	};
 
-	window.MyBB.Quotes.prototype.quickQuote = function (event) {
+	window.MyBB.Quotes.prototype.quickQuote = function quickQuote(event) {
 		var $me = $(event.target);
 		if (!$me.hasClass('quickQuote')) {
 			$me = $me.parents('.quickQuote');
@@ -25,14 +25,14 @@
 
 		var $post = $me.parents('.post');
 
-		if($me.data('content')) {
+		if ($me.data('content')) {
 			$content = $('<div/>')
 			$content.html($me.data('content'));
 			this.addQuote($post.data('postid'), $content.text());
 		}
 	}
 
-	window.MyBB.Quotes.prototype.checkQuickQuote = function (event) {
+	window.MyBB.Quotes.prototype.checkQuickQuote = function checkQuickQuote(event) {
 		var $me = $(event.target);
 		if ($me.hasClass('quickQuote')) {
 			return false;
@@ -41,7 +41,7 @@
 			$me = $me.parents('.post');
 		}
 
-		if($me && $me.length) {
+		if ($me && $me.length) {
 			var pid = $me.data('postid');
 
 			if ($.trim(window.getSelection().toString())) {
@@ -56,17 +56,16 @@
 				this.hideQuickQuote();
 			}
 		}
-		else
-		{
+		else {
 			this.hideQuickQuote();
 		}
 	}
 
-	window.MyBB.Quotes.prototype.showQuickQuote = function(pid) {
-		$("#post-"+pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
+	window.MyBB.Quotes.prototype.showQuickQuote = function showQuckQuote(pid) {
+		$("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
 	}
 
-	window.MyBB.Quotes.prototype.hideQuickQuote = function() {
+	window.MyBB.Quotes.prototype.hideQuickQuote = function () {
 		$('.post .quickQuote').hide().data('content', '');
 	}
 

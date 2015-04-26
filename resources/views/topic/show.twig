@@ -44,7 +44,7 @@
 					</div>
 					<div class="post__body">
 						<p>
-							<div class="quickQuote" style="float:right">QUICK QUOTE</div>
+							<div class="quickQuote">{{ trans('topic.quoteSelection') }}</div>
 							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
 						</p>
 					</div>
