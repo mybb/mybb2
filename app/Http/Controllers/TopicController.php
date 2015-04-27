@@ -195,10 +195,11 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string  $slug
-	 * @param int     $id
-	 * @param Request $request
-	 * @param int     $postId
+	 * @param string           $slug
+	 * @param int              $id
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
+	 * @param int              $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -233,7 +234,7 @@ class TopicController extends AbstractController
 
 		$preview = null;
 		if ($request->has('content')) {
-			if(!$this->guard->check()) {
+			if (!$this->guard->check()) {
 				$userId = null;
 			} else {
 				$userId = $this->guard->user()->id;
@@ -376,7 +377,7 @@ class TopicController extends AbstractController
 		$username = trans('general.guest');
 		$preview = null;
 		if ($request->has('content')) {
-			if(!$this->guard->check()) {
+			if (!$this->guard->check()) {
 				$userId = null;
 				$username = $request->get('username');
 			} else {
