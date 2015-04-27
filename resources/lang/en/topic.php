@@ -28,8 +28,8 @@ return [
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
 	'removeQuote' => 'Remove Quote',
-	'quoteSelectionNow' => 'Quote the selection for now',
-	'quoteSelectionLater' => 'Quote the selection for later',
+	'quoteSelectionNow' => 'Quote now',
+	'quoteSelectionLater' => 'Save quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
