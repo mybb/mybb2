@@ -27,7 +27,7 @@
 		var $post = $me.parents('.post');
 
 		if ($me.data('content')) {
-			$content = $('<div/>')
+			$content = $('<div/>');
 			$content.html($me.data('content'));
 			this.addQuote($post.data('postid'), $post.data('type'), $content.text());
 		}
@@ -101,7 +101,8 @@
 	}
 
 	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
-		var quotes = MyBB.Cookie.get('quotes');
+		var quotes = MyBB.Cookie.get('quotes'),
+			myQuotes = [];
 		if (!quotes) {
 			quotes = [];
 		}
@@ -109,11 +110,14 @@
 			quotes = JSON.parse(quotes);
 		}
 		$.each(quotes, function (key, quote) {
-			if (!quotes[key]) {
-				delete quotes[key];
+			if (quotes[key] != null) {
+				myQuotes[key] = quotes[key];
 			}
 		});
-		return quotes;
+
+		MyBB.Cookie.set('quotes', JSON.stringify(myQuotes));
+
+		return myQuotes;
 
 
 	};
@@ -138,7 +142,7 @@
 				$me.find('.quoteButton__remove').show();
 			}
 			else {
-				delete quotes[quotes.indexOf(postId)];
+				delete quotes[quotes.indexOf(type + '_' + postId)];
 				$me.find('.quoteButton__add').show();
 				$me.find('.quoteButton__remove').hide();
 			}
