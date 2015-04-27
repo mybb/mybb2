@@ -74,6 +74,9 @@ class ConversationsController extends AbstractController
 	}
 
 	/**
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
+	 *
 	 * @return \Illuminate\View\View
 	 */
 	public function getCompose(Request $request, MessageFormatter $formatter)
@@ -122,7 +125,9 @@ class ConversationsController extends AbstractController
 	}
 
 	/**
-	 * @param int $id
+	 * @param int              $id
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
 	 *
 	 * @return \Illuminate\View\View
 	 */
