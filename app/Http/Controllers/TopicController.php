@@ -202,7 +202,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function reply($slug, $id, Request $request, $postId = null)
+	public function reply($slug, $id, Request $request, MessageFormatter $formatter, $postId = null)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -231,7 +231,20 @@ class TopicController extends AbstractController
 			$username = $request->get('username');
 		}
 
-		return view('topic.reply', compact('topic', 'content', 'username'));
+		$preview = null;
+		if ($request->has('content')) {
+			$preview = new Post([
+				'user_id' => $this->guard->user()->id,
+				'username' => $this->guard->user()->name,
+				'content' => $request->get('content'),
+				'content_parsed' => $formatter->parse($request->get('content'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('topic.reply', compact('topic', 'content', 'username', 'preview'));
 	}
 
 	/**

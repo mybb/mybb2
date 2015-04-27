@@ -30,12 +30,22 @@
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->
+						<a href="{{ url_route('topics.reply', [topic.slug, topic.id]) }}" class="button button--secondary"
+						   onclick="preview(); return false;">
+							<i class="fa fa-edit"></i>
+							<span class="text">{{ trans('general.preview') }}</span>
+						</a>
 					</div>
 				{{ form_close() }}
 			</div>
 
 			<script type="text/javascript">
 				function openFullEditor() {
+					var form = $('#quickreply');
+					form.find("input[name=_token]").val('');
+					form.attr('method', 'get').submit();
+				}
+				function preview() {
 					var form = $('#quickreply');
 					form.find("input[name=_token]").val('');
 					form.attr('method', 'get').submit();
