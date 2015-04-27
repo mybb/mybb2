@@ -129,7 +129,7 @@ class PostController extends AbstractController
 	public function postQuotes(QuotePostRequest $quoteRequest)
 	{
 		$contents = $quoteRequest->input('posts');
-		$data = $posts = $conversions = []; //TODO: conversations
+		$data = $posts = $conversations = []; //TODO: conversations
 		foreach ($contents as $content) {
 			if (is_array($content)) {
 				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
@@ -143,8 +143,8 @@ class PostController extends AbstractController
 				case 'post':
 					$posts[] = (int)$content[1];
 					break;
-				case 'conversion':
-					$conversions[] = (int)$content[1];
+				case 'conversation':
+					$conversations[] = (int)$content[1];
 					break;
 			}
 		}
@@ -165,12 +165,15 @@ class PostController extends AbstractController
 				case 'post':
 					$post = $posts[$id];
 					if ($value) {
+						$oldContent = $post->content;
+						$oldContentParsed = $post->content_parsed;
 						$post->content = $post->content_parsed = $value;
 					}
 					$content .= $this->quoteRenderer->renderFromPost($post);
-
+					$post->content = $oldContent;
+					$post->content_parsed = $oldContentParsed;
 					break;
-				case 'conversion':
+				case 'conversation':
 					// TODO
 					break;
 			}
