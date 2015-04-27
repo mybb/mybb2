@@ -31,6 +31,7 @@
 		<section class="topic">
 			{% if setting('conversations.message_order', 'desc') == 'desc' %}
 				{% include 'conversation.quickreply' with {'conversation': conversation} %}
+				{% include 'conversation.preview' with {'preview': preview} %}
 			{% endif %}
 
 
@@ -56,6 +57,7 @@
 			{% endfor %}
 
 			{% if setting('conversations.message_order', 'desc') == 'asc' %}
+				{% include 'conversation.preview' with {'preview': preview} %}
 				{% include 'conversation.quickreply' with {'conversation': conversation} %}
 			{% endif %}
 		</section>

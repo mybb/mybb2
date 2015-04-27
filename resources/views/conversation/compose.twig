@@ -6,28 +6,43 @@
 			<h1>{{ trans('conversations.conversations') }} - {{ trans('conversations.compose') }}</h1>
 		</header>
 
-		{{ form_open({'route': ['conversations.compose'], 'method': 'post'}) }}
+		{% include 'conversation.preview' with {'preview': preview} %}
+		{{ form_open({'route': ['conversations.compose'], 'method': 'post', 'id': 'compose'}) }}
 		<section class="form">
 			<div class="form__section">
 				<div class="form__row">
 					<h3>{{ form_label('participants', trans('conversations.participants')) }}</h3>
 					{{ trans('conversations.participants_list') }}
 					{# TODO: some sort of autocomplete #}
-					{{ form_text('participants') }}
+					{{ form_text('participants', input_get('participants')) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('title', trans('conversations.title')) }}</h3>
-					{{ form_text('title') }}
+					{{ form_text('title', input_get('title')) }}
 				</div>
 				<div class="form__row">
 					<h3>{{ form_label('message', trans('conversations.message')) }}</h3>
-					{{ form_textarea('message') }}
+					{{ form_textarea('message', input_get('message')) }}
 				</div>
 			</div>
 		</section>
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('conversations.create')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			<a href="{{ url_route("conversations.compose") }}" class="button button--secondary"
+			   onclick="preview(); return false;">
+				<i class="fa fa-edit"></i>
+				<span class="text">{{ trans('general.preview') }}</span>
+			</a>
 		</div>
 		{{ form_close() }}
 	</div>
+
+	<script type="text/javascript">
+		function preview() {
+			var form = $('#compose');
+			form.find("input[name=_token]").val('');
+			form.attr('method', 'get').submit();
+		}
+	</script>
+
 {% endblock %}

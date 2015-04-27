@@ -33,7 +33,8 @@ class ConversationMessage extends Model implements HasPresenter
 	protected $fillable = [
 		'message',
 		'message_parsed',
-		'author_id'
+		'author_id',
+		'created_at'
 	];
 
 	/**
