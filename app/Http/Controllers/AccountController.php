@@ -408,6 +408,7 @@ class AccountController extends AbstractController
 			'posts_per_page' => 'integer|min:5|max:50',
 			'style' => '', // exists:styles
 			'language' => 'required', // test whether exists?
+			'message_order' => 'in:asc,desc',
 			'notify_on_like' => 'boolean',
 			'notify_on_quote' => 'boolean',
 			'notify_on_reply' => 'boolean',
@@ -466,8 +467,12 @@ class AccountController extends AbstractController
 			$input['time_format'] = null;
 		}
 
-		// Prefix all settings with "user."
 		$modifiedSettings = [];
+
+		$modifiedSettings['conversations.message_order'] = $input['message_order'];
+		unset($input['message_order']);
+
+		// Prefix all settings with "user."
 		foreach ($input as $key => $value) {
 			$modifiedSettings["user.{$key}"] = $value;
 		}

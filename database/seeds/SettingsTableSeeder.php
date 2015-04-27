@@ -63,6 +63,8 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'memberlist.sort_by'],
 			['name' => 'memberlist.sort_dir'],
 			['name' => 'memberlist.per_page'],
+			['name' => 'conversations.enabled'],
+			['name' => 'conversations.message_order'],
 		]);
 
 		DB::table('setting_values')->insert([
@@ -249,6 +251,15 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			[
 				'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->pluck('id'),
 				'value' => 10,
+			],
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
+				'value' => 1,
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->pluck('id'),
+				'value' => 'desc',
 			],
 		]);
 	}

@@ -33,5 +33,6 @@ class Kernel extends HttpKernel
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'MyBB\Core\Http\Middleware\RedirectIfAuthenticated',
 		'checkaccess' => 'MyBB\Core\Http\Middleware\CheckAccess',
+		'checksetting' => 'MyBB\Core\Http\Middleware\CheckSetting',
 	];
 }

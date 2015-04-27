@@ -102,4 +102,5 @@ return [
 
 	'attributes' => [],
 
+	'username_array' => 'One or more of the specified users can\'t be found',
 ];

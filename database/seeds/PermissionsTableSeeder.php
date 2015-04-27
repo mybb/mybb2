@@ -31,10 +31,15 @@ class PermissionsTableSeeder extends Seeder
 				'default_value' => 1
 			],
 			[
+				'permission_name' => 'canUseConversations',
+				'content_name' => null,
+				'default_value' => 1
+			],
+			[
 				'permission_name' => 'canViewAllOnline',
 				'content_name' => null,
 				'default_value' => 0
-			],
+			]
 		];
 
 		DB::table('permissions')->insert($permissions);
