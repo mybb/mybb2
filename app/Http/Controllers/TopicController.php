@@ -14,6 +14,7 @@ namespace MyBB\Core\Http\Controllers;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
@@ -26,6 +27,7 @@ use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
+use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -335,11 +337,13 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param int $forumId
+	 * @param int              $forumId
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function create($forumId)
+	public function create($forumId, Request $request, MessageFormatter $formatter)
 	{
 		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($forumId);
@@ -350,7 +354,20 @@ class TopicController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
-		return view('topic.create', compact('forum'));
+		$preview = null;
+		if ($request->has('content')) {
+			$preview = new Post([
+				'user_id' => $this->guard->user()->id,
+				'username' => $this->guard->user()->name,
+				'content' => $request->get('content'),
+				'content_parsed' => $formatter->parse($request->get('content'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('topic.create', compact('forum', 'preview'));
 	}
 
 	/**
