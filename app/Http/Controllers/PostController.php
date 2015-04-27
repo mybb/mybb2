@@ -16,7 +16,6 @@ use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Http\Requests\Post\LikePostRequest;
 use MyBB\Core\Http\Requests\Post\QuotePostRequest;
-use MyBB\Core\Http\Requests\Post\QuotePostWithContentRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Settings\Store;
@@ -129,11 +128,31 @@ class PostController extends AbstractController
 	 */
 	public function postQuotes(QuotePostRequest $quoteRequest)
 	{
-		$posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
+		$contents = $quoteRequest->input('posts');
+		$data = $posts = $conversions = []; //TODO: conversations
+		foreach ($contents as $content) {
+			if (is_array($content)) {
+				$data[(string)$content['id']] = $content['data']; // It isn't XSS, we parsed it with JS.
+				$content = $content['id'];
+			}
+			$content = explode('_', $content);
+			switch ($content[0]) {
+				case 'post':
+					$posts[] = (int) $content[1];
+					break;
+				case 'conversion':
+					$conversions[] = (int) $content[1];
+					break;
+			}
+		}
+		$posts = $this->postsRepository->getPostsByIds($posts);
 
 		$content = "";
 
 		foreach ($posts as $post) {
+			if(array_key_exists('post_'.$post->id, $data)) {
+				$post->content = $post->content_parsed = $data['post_'.$post->id];
+			}
 			$content .= $this->quoteRenderer->renderFromPost($post);
 		}
 
@@ -142,19 +161,4 @@ class PostController extends AbstractController
 		]);
 	}
 
-	/**
-	 * @param QuotePostWithContentRequest $quoteRequest
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
-	public function postQuote(QuotePostWithContentRequest $quoteRequest)
-	{
-		$post = $this->postsRepository->find($quoteRequest->input('postid'));
-
-		$post->content = $post->content_parsed = e($quoteRequest->input('content'));
-
-		return response()->json([
-			'message' => $this->quoteRenderer->renderFromPost($post)
-		]);
-	}
 }

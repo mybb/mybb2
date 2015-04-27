@@ -296,7 +296,8 @@
 		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
 		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
-		$('.quickQuote').on('click', $.proxy(this.quickQuote, this));
+		$('.quickQuote .fast').on('click', $.proxy(this.quickQuote, this));
+		$('.quickQuote .add').on('click', $.proxy(this.quickAddQuote, this));
 		$("body").on("mouseup", $.proxy(this.checkQuickQuote, this));
 
 		this.quoteButtons();
@@ -313,13 +314,36 @@
 		if ($me.data('content')) {
 			$content = $('<div/>')
 			$content.html($me.data('content'));
-			this.addQuote($post.data('postid'), $content.text());
+			this.addQuote($post.data('postid'), $post.data('type'), $content.text());
 		}
+		this.hideQuickQuote();
+	}
+
+	window.MyBB.Quotes.prototype.quickAddQuote = function quickAddQuote(event) {
+		var $me = $(event.target),
+			quotes = this.getQuotes();
+		if (!$me.hasClass('quickQuote')) {
+			$me = $me.parents('.quickQuote');
+		}
+
+		var $post = $me.parents('.post');
+
+		if ($me.data('content')) {
+			$content = $('<div/>');
+			$content.html($me.data('content'));
+			quotes.push({
+				'id': $post.data('type') + '_' + $post.data('postid'),
+				'data': $content.text()
+			});
+			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
+			this.showQuoteBar();
+		}
+		this.hideQuickQuote();
 	}
 
 	window.MyBB.Quotes.prototype.checkQuickQuote = function checkQuickQuote(event) {
 		var $me = $(event.target);
-		if ($me.hasClass('quickQuote')) {
+		if ($me.hasClass('quickQuote') || $me.parents('.quickQuote').length) {
 			return false;
 		}
 		if (!$me.hasClass('post')) {
@@ -347,7 +371,14 @@
 	}
 
 	window.MyBB.Quotes.prototype.showQuickQuote = function showQuckQuote(pid) {
-		$("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
+		var selection = window.getSelection(),      // get the selection then
+			range = selection.getRangeAt(0),        // the range at first selection group
+			rect = range.getBoundingClientRect(); // and convert this to useful data
+		$elm = $("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
+		$elm.css({
+				'top': (window.scrollY + rect.top - rect.height - 4) + 'px',
+				'left': (window.scrollX + rect.left - (($elm.outerWidth() - rect.width) / 2)) + 'px'
+			});
 	}
 
 	window.MyBB.Quotes.prototype.hideQuickQuote = function () {
@@ -360,10 +391,9 @@
 			quotes = [];
 		}
 		else {
-			quotes = quotes.split('-');
+			quotes = JSON.parse(quotes);
 		}
 		$.each(quotes, function (key, quote) {
-			quotes[key] = parseInt(quote);
 			if (!quotes[key]) {
 				delete quotes[key];
 			}
@@ -380,12 +410,15 @@
 		if (!$me.hasClass('quoteButton')) {
 			$me = $me.parents('.quoteButton');
 		}
-		var postId = parseInt($me.data('postid')),
+		var $post = $me.parents('.post');
+
+		var postId = parseInt($post.data('postid')),
+			type = $post.data('type'),
 			quotes = this.getQuotes();
 
 		if (postId) {
-			if (quotes.indexOf(postId) == -1) {
-				quotes.push(postId);
+			if (quotes.indexOf(type + '_' + postId) == -1) {
+				quotes.push(type + '_' + postId);
 				$me.find('.quoteButton__add').hide();
 				$me.find('.quoteButton__remove').show();
 			}
@@ -395,7 +428,7 @@
 				$me.find('.quoteButton__remove').hide();
 			}
 
-			MyBB.Cookie.set('quotes', quotes.join('-'));
+			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
 
 			this.showQuoteBar();
 			return false;
@@ -440,7 +473,7 @@
 					}
 					value += "\n";
 				}
-				$textarea.val(value + json.message);
+				$textarea.val(value + json.message).focus();
 			}
 		}).always(function () {
 			MyBB.Spinner.remove();
@@ -452,16 +485,20 @@
 		return false;
 	};
 
-	window.MyBB.Quotes.prototype.addQuote = function addQuote(postid, content) {
+	window.MyBB.Quotes.prototype.addQuote = function addQuote(postid, type, content) {
 		var $textarea = $("#message");
 
 		MyBB.Spinner.add();
 
 		$.ajax({
-			url: '/post/quote',
+			url: '/post/quotes',
 			data: {
-				'postid': postid,
-				'content': content,
+				'posts': [
+					{
+						'id': type + '_' + postid,
+						'data': content
+					}
+				],
 				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
 			},
 			method: 'POST'
@@ -502,8 +539,14 @@
 		$('.quoteButton__add').show();
 		$('.quoteButton__remove').hide();
 
-		$.each(quotes, function (key, postId) {
-			var $quoteButton = $("#post-" + postId).find('.quoteButton');
+		$.each(quotes, function (key, quote) {
+			if (typeof quote != 'string') {
+				return;
+			}
+			quote = quote.split('_');
+			type = quote[0];
+			postId = parseInt(quote[1]);
+			var $quoteButton = $("#post-" + postId + "[data-type='" + type + "']").find('.quoteButton');
 			$quoteButton.find('.quoteButton__add').hide();
 			$quoteButton.find('.quoteButton__remove').show();
 		})

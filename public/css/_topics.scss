@@ -245,12 +245,27 @@
 
 	.quickQuote {
 		display: none;
-		float: #{$right};
-		border: 1px solid $border-1;
+		background: $alt-font-color-4;
+		color: $invert-font-color;
 		@include border-radius(4px);
 		font: 12px $font-stack;
 		padding: 2px 6px;
-		cursor: pointer;
+		position: absolute;
+		z-index: 1001;
+		span {
+			cursor: pointer;
+		}
+
+		&:before {
+			content: ' ';
+			position: absolute;
+			bottom: -6px;
+			left: 50%;
+			margin-left: -6px;
+			border-top: 6px solid $alt-font-color-4;
+			border-left: 6px solid transparent;
+			border-right: 6px solid transparent;
+		}
 	}
 }
 
