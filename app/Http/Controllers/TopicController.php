@@ -233,9 +233,15 @@ class TopicController extends AbstractController
 
 		$preview = null;
 		if ($request->has('content')) {
+			if(!$this->guard->check()) {
+				$userId = null;
+			} else {
+				$userId = $this->guard->user()->id;
+				$username = $this->guard->user()->name;
+			}
 			$preview = new Post([
-				'user_id' => $this->guard->user()->id,
-				'username' => $this->guard->user()->name,
+				'user_id' => $userId,
+				'username' => $username,
 				'content' => $request->get('content'),
 				'content_parsed' => $formatter->parse($request->get('content'), [
 					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
@@ -367,11 +373,19 @@ class TopicController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
+		$username = trans('general.guest');
 		$preview = null;
 		if ($request->has('content')) {
+			if(!$this->guard->check()) {
+				$userId = null;
+				$username = $request->get('username');
+			} else {
+				$userId = $this->guard->user()->id;
+				$username = $this->guard->user()->name;
+			}
 			$preview = new Post([
-				'user_id' => $this->guard->user()->id,
-				'username' => $this->guard->user()->name,
+				'user_id' => $userId,
+				'username' => $username,
 				'content' => $request->get('content'),
 				'content_parsed' => $formatter->parse($request->get('content'), [
 					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
@@ -380,7 +394,7 @@ class TopicController extends AbstractController
 			]);
 		}
 
-		return view('topic.create', compact('forum', 'preview'));
+		return view('topic.create', compact('forum', 'preview', 'username'));
 	}
 
 	/**
