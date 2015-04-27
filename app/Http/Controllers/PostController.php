@@ -170,8 +170,10 @@ class PostController extends AbstractController
 						$post->content = $post->content_parsed = $value;
 					}
 					$content .= $this->quoteRenderer->renderFromPost($post);
-					$post->content = $oldContent;
-					$post->content_parsed = $oldContentParsed;
+					if ($value) {
+						$post->content = $oldContent;
+						$post->content_parsed = $oldContentParsed;
+					}
 					break;
 				case 'conversation':
 					// TODO
