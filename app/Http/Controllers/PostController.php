@@ -138,10 +138,10 @@ class PostController extends AbstractController
 			$content = explode('_', $content);
 			switch ($content[0]) {
 				case 'post':
-					$posts[] = (int) $content[1];
+					$posts[] = (int)$content[1];
 					break;
 				case 'conversion':
-					$conversions[] = (int) $content[1];
+					$conversions[] = (int)$content[1];
 					break;
 			}
 		}
@@ -150,8 +150,8 @@ class PostController extends AbstractController
 		$content = "";
 
 		foreach ($posts as $post) {
-			if(array_key_exists('post_'.$post->id, $data)) {
-				$post->content = $post->content_parsed = $data['post_'.$post->id];
+			if (array_key_exists('post_' . $post->id, $data)) {
+				$post->content = $post->content_parsed = $data['post_' . $post->id];
 			}
 			$content .= $this->quoteRenderer->renderFromPost($post);
 		}
@@ -160,5 +160,4 @@ class PostController extends AbstractController
 			'message' => $content
 		]);
 	}
-
 }
