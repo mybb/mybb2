@@ -86,14 +86,14 @@
 	}
 
 	window.MyBB.Quotes.prototype.showQuickQuote = function showQuckQuote(pid) {
-		var selection = window.getSelection(),      // get the selection then
-			range = selection.getRangeAt(0),        // the range at first selection group
-			rect = range.getBoundingClientRect(); // and convert this to useful data
+		var selection = window.getSelection(),
+			range = selection.getRangeAt(0),
+			rect = range.getBoundingClientRect();
 		$elm = $("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
 		$elm.css({
-				'top': (window.scrollY + rect.top - rect.height - 4) + 'px',
-				'left': (window.scrollX + rect.left - (($elm.outerWidth() - rect.width) / 2)) + 'px'
-			});
+			'top': (window.scrollY + rect.top - $elm.outerHeight() - 4) + 'px',
+			'left': (window.scrollX + rect.left - (($elm.outerWidth() - rect.width) / 2)) + 'px'
+		});
 	}
 
 	window.MyBB.Quotes.prototype.hideQuickQuote = function () {

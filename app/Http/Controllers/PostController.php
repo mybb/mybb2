@@ -132,8 +132,11 @@ class PostController extends AbstractController
 		$data = $posts = $conversions = []; //TODO: conversations
 		foreach ($contents as $content) {
 			if (is_array($content)) {
-				$data[(string)$content['id']] = $content['data']; // It isn't XSS, we parsed it with JS.
+				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
 				$content = $content['id'];
+			} else {
+				$content = (string)$content;
+				$data[] = [$content, ''];
 			}
 			$content = explode('_', $content);
 			switch ($content[0]) {
@@ -145,15 +148,32 @@ class PostController extends AbstractController
 					break;
 			}
 		}
-		$posts = $this->postsRepository->getPostsByIds($posts);
+		$myPosts = $this->postsRepository->getPostsByIds($posts);
+		$posts = [];
 
 		$content = "";
 
-		foreach ($posts as $post) {
-			if (array_key_exists('post_' . $post->id, $data)) {
-				$post->content = $post->content_parsed = $data['post_' . $post->id];
+		foreach ($myPosts as $post) {
+			$posts[$post->id] = $post;
+		}
+
+		foreach ($data as $value) {
+			list($type, $id) = explode('_', $value[0]);
+			$value = $value[1];
+
+			switch ($type) {
+				case 'post':
+					$post = $posts[$id];
+					if ($value) {
+						$post->content = $post->content_parsed = $value;
+					}
+					$content .= $this->quoteRenderer->renderFromPost($post);
+
+					break;
+				case 'conversion':
+					// TODO
+					break;
 			}
-			$content .= $this->quoteRenderer->renderFromPost($post);
 		}
 
 		return response()->json([
