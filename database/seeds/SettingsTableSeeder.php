@@ -252,7 +252,6 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->pluck('id'),
 				'value' => 10,
 			],
-			],
 			[
 				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
 				'value' => 1,
