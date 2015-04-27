@@ -40,8 +40,8 @@
 				'num_topics': trans('general.sortby')~' '~trans('member.topics')
 			}, sortBy) }}
 			{{ form_select('sortDir', {
-				'asc': trans('general.order')~' Ascending',
-				'desc': trans('general.order')~' Descending'
+				'asc': trans('general.order')~' '~trans('general.ascending'),
+				'desc': trans('general.order')~' '~trans('general.descending')
 			}, sortDir) }}
 			{{ form_button('<span class="text">'~trans('member.sortMembers')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 		</div>
