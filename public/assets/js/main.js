@@ -395,16 +395,13 @@
 			quotes = JSON.parse(quotes);
 		}
 		$.each(quotes, function (key, quote) {
-			if (quotes[key] != null) {
-				myQuotes[key] = quotes[key];
+			if (quote != null) {
+				myQuotes.push(quote);
 			}
 		});
 
 		MyBB.Cookie.set('quotes', JSON.stringify(myQuotes));
-
 		return myQuotes;
-
-
 	};
 
 	// MultiQuote
