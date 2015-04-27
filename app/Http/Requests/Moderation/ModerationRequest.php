@@ -2,11 +2,11 @@
 
 namespace MyBB\Core\Http\Requests\Moderation;
 
-use MyBB\Core\Http\Requests\Request;
+use MyBB\Core\Http\Requests\AbstractRequest;
 use MyBB\Core\Moderation\ModerationRegistry;
 use MyBB\Core\Repository\RepositoryFactory;
 
-class ModerationRequest extends Request
+class ModerationRequest extends AbstractRequest
 {
     /**
      * @var ModerationRegistry

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 
@@ -183,5 +184,14 @@ class CachingDecorator implements ForumRepositoryInterface
 				$this->guard->user()
 			);
 		});
+	}
+
+	/**
+	 * @param Topic $topic
+	 * @param Forum $forum
+	 */
+	public function moveTopicToForum(Topic $topic, Forum $forum)
+	{
+		return $this->decoratedRepository->moveTopicToForum($topic, $forum);
 	}
 }

@@ -86,6 +86,7 @@
 	window.MyBB.Modals = function Modals()
 	{
 		$("*[data-modal]").on("click", this.toggleModal).bind(this);
+		$.modal.defaults.closeText = 'x';
 	};
 
 	window.MyBB.Modals.prototype.toggleModal = function toggleModal(event) {
@@ -131,7 +132,15 @@
 				modalFind = "#content";
 			}
 
-			$.get('/'+modalSelector, function(response) {
+			var modalParams = $(event.currentTarget).attr('data-modal-params');
+			if (modalParams) {
+				modalParams = JSON.parse(modalParams);
+				console.log(modalParams);
+			} else {
+				modalParams = {};
+			}
+
+			$.get('/'+modalSelector, modalParams, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
@@ -145,9 +154,10 @@
 			});
 		}
 	};
-    
+
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
 })(jQuery, window);
+
 (function($, window) {
     window.MyBB = window.MyBB || {};
 
@@ -422,6 +432,63 @@
 
 })
 (jQuery, window);
+(function($, window) {
+    window.MyBB = window.MyBB || {};
+
+    window.MyBB.Moderation = function Moderation()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('a[data-moderate]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            $.post('/moderate', {
+                moderation_name: $(e.currentTarget).attr('data-moderate'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        $('a[data-moderate-reverse]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            $.post('/moderate/reverse', {
+                moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        $('li[data-moderation-multi]').hide();
+    };
+
+    window.MyBB.Moderation.getSelectedIds = function getSelectedIds()
+    {
+        return $('input[type=checkbox][data-moderation-id]:checked').map(function () {
+            return $(this).attr('data-moderation-id');
+        }).get();
+    };
+
+    window.MyBB.Moderation.injectModalParams = function injectFormData(element)
+    {
+        $(element).attr('data-modal-params', JSON.stringify({
+            moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+            moderation_ids: window.MyBB.Moderation.getSelectedIds()
+        }));
+    };
+
+    var moderation = new window.MyBB.Moderation();
+
+})(jQuery, window);
+
 $('html').addClass('js');
 
 $(function () {
@@ -480,6 +547,13 @@ $(function () {
 			$('.inline-moderation').addClass('floating');
 		}
 
+		if (checked_boxes > 1)
+		{
+			$('li[data-moderation-multi]').show();
+		} else {
+			$('li[data-moderation-multi]').hide();
+		}
+
 		if(checked_boxes == 0)
 		{
 			$('.inline-moderation').removeClass('floating');
@@ -488,14 +562,21 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
+	$(".topic-list .topic :checkbox").change(function() {
+		$(this).closest(".topic").toggleClass("highlight", this.checked);
 
 		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
 		{
 			$('.inline-moderation').addClass('floating');
+		}
+
+		if (checked_boxes > 1)
+		{
+			$('li[data-moderation-multi]').show();
+		} else {
+			$('li[data-moderation-multi]').hide();
 		}
 
 		if(checked_boxes == 0)

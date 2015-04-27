@@ -6,7 +6,7 @@ use MyBB\Core\Http\Requests\Moderation\ModerationRequest;
 use MyBB\Core\Http\Requests\Moderation\ReversibleModerationRequest;
 use MyBB\Core\Moderation\ArrayModerationInterface;
 
-class ModerationController extends Controller
+class ModerationController extends AbstractController
 {
     /**
      * @param ModerationRequest $request
