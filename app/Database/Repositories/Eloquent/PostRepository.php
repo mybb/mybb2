@@ -381,7 +381,7 @@ class PostRepository implements PostRepositoryInterface
 				throw new \InvalidArgumentException("All posts being merged must have the same author");
 			}
 
-			$firstPostContent .= '[hr]'. $post->content;
+			$firstPostContent .= "\n[hr]\n". $post->content;
 			$this->deletePost($post);
 		}
 
