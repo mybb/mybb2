@@ -3,12 +3,28 @@
 namespace MyBB\Core\Presenters\Moderations;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Form\Field;
 use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\MoveTopic;
 
 class MoveTopicPresenter extends BasePresenter implements ModerationPresenterInterface
 {
+	/**
+	 * @var ForumRepositoryInterface
+	 */
+	protected $forumRepository;
+
+	/**
+	 * @param MoveTopic $resource
+	 * @param ForumRepositoryInterface $forumRepository
+	 */
+	public function __construct(MoveTopic $resource, ForumRepositoryInterface $forumRepository)
+	{
+		parent::__construct($resource);
+		$this->forumRepository = $forumRepository;
+	}
+
 	/**
 	 * @return MoveTopic
 	 */
@@ -46,7 +62,7 @@ class MoveTopicPresenter extends BasePresenter implements ModerationPresenterInt
 	 */
 	public function fields()
 	{
-		$forums = app()->make('MyBB\Core\Database\Repositories\ForumRepositoryInterface')->all();
+		$forums = $this->forumRepository->all();
 		$options = [];
 
 		foreach ($forums as $forum) {
