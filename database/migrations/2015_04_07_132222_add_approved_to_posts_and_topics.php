@@ -13,11 +13,11 @@ class AddApprovedToPostsAndTopics extends Migration
 	public function up()
 	{
 		Schema::table('topics', function (Blueprint $table) {
-			$table->tinyInteger('approved')->unsigned()->index();
+			$table->tinyInteger('approved')->unsigned()->default(1)->index();
 		});
 
 		Schema::table('posts', function (Blueprint $table) {
-			$table->tinyInteger('approved')->unsigned()->index();
+			$table->tinyInteger('approved')->unsigned()->default(1)->index();
 		});
 	}
 
