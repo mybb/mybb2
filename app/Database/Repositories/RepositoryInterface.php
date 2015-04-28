@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 interface RepositoryInterface
 {
-    /**
-     * @param int $id
-     *
-     * @return Model
-     */
-    public function find($id);
+	/**
+	 * @param int $id
+	 *
+	 * @return Model
+	 */
+	public function find($id);
 }

@@ -32,9 +32,9 @@ class Topic extends BasePresenter
 	protected $moderations;
 
 	/**
-	 * @param TopicModel $resource The thread being wrapped by this presenter.
+	 * @param TopicModel         $resource    The thread being wrapped by this presenter.
 	 * @param ModerationRegistry $moderations
-	 * @param Application $app
+	 * @param Application        $app
 	 */
 	public function __construct(TopicModel $resource, ModerationRegistry $moderations, Application $app)
 	{

@@ -30,8 +30,8 @@ class Forum extends BasePresenter
 	private $app;
 
 	/**
-	 * @param ForumModel $resource The forum being wrapped by this presenter.
-	 * @param Application $app
+	 * @param ForumModel         $resource    The forum being wrapped by this presenter.
+	 * @param Application        $app
 	 * @param ModerationRegistry $moderations
 	 */
 	public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)

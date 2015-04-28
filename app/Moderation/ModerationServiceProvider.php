@@ -8,23 +8,23 @@ use MyBB\Core\Moderation\Moderations\Approve;
 
 class ModerationServiceProvider extends ServiceProvider
 {
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->app->singleton('MyBB\Core\Moderation\ModerationRegistry', function (Application $app) {
-            return new ModerationRegistry([
-                new Approve(),
-                $app->make('MyBB\Core\Moderation\Moderations\MovePost'),
-                $app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
-                $app->make('MyBB\Core\Moderation\Moderations\DeletePost'),
-                $app->make('MyBB\Core\Moderation\Moderations\DeleteTopic'),
-                $app->make('MyBB\Core\Moderation\Moderations\Close'),
-                $app->make('MyBB\Core\Moderation\Moderations\MoveTopic')
-            ]);
-        });
-    }
+	/**
+	 * Register the service provider.
+	 *
+	 * @return void
+	 */
+	public function register()
+	{
+		$this->app->singleton('MyBB\Core\Moderation\ModerationRegistry', function (Application $app) {
+			return new ModerationRegistry([
+				new Approve(),
+				$app->make('MyBB\Core\Moderation\Moderations\MovePost'),
+				$app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
+				$app->make('MyBB\Core\Moderation\Moderations\DeletePost'),
+				$app->make('MyBB\Core\Moderation\Moderations\DeleteTopic'),
+				$app->make('MyBB\Core\Moderation\Moderations\Close'),
+				$app->make('MyBB\Core\Moderation\Moderations\MoveTopic')
+			]);
+		});
+	}
 }

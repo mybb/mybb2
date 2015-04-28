@@ -132,7 +132,7 @@ interface TopicRepositoryInterface
 	public function updateLastPost(Topic $topic, Post $post = null);
 
 	/**
-	 * @param Post $post
+	 * @param Post  $post
 	 * @param Topic $topic
 	 */
 	public function movePostToTopic(Post $post, Topic $topic);

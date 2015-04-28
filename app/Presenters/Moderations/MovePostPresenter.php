@@ -9,29 +9,29 @@ use MyBB\Core\Moderation\Moderations\MovePost;
 
 class MovePostPresenter extends BasePresenter implements ModerationPresenterInterface
 {
-    /**
-     * @return MovePost
-     */
-    public function getWrappedObject()
-    {
-        return parent::getWrappedObject();
-    }
+	/**
+	 * @return MovePost
+	 */
+	public function getWrappedObject()
+	{
+		return parent::getWrappedObject();
+	}
 
-    /**
-     * @return string
-     */
-    public function key()
-    {
-        return $this->getWrappedObject()->getKey();
-    }
+	/**
+	 * @return string
+	 */
+	public function key()
+	{
+		return $this->getWrappedObject()->getKey();
+	}
 
-    /**
-     * @return string
-     */
-    public function icon()
-    {
-        return $this->getWrappedObject()->getIcon();
-    }
+	/**
+	 * @return string
+	 */
+	public function icon()
+	{
+		return $this->getWrappedObject()->getIcon();
+	}
 
 	/**
 	 * @return string

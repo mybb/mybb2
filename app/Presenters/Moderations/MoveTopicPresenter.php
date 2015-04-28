@@ -16,7 +16,7 @@ class MoveTopicPresenter extends BasePresenter implements ModerationPresenterInt
 	protected $forumRepository;
 
 	/**
-	 * @param MoveTopic $resource
+	 * @param MoveTopic                $resource
 	 * @param ForumRepositoryInterface $forumRepository
 	 */
 	public function __construct(MoveTopic $resource, ForumRepositoryInterface $forumRepository)

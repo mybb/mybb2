@@ -387,7 +387,7 @@ class TopicRepository implements TopicRepositoryInterface
 	}
 
 	/**
-	 * @param Post $post
+	 * @param Post  $post
 	 * @param Topic $topic
 	 */
 	public function movePostToTopic(Post $post, Topic $topic)

@@ -4,15 +4,15 @@ namespace MyBB\Core\Registry;
 
 interface RegistryInterface
 {
-    /**
-     * @param string $key
-     *
-     * @return mixed
-     */
-    public function get($key);
+	/**
+	 * @param string $key
+	 *
+	 * @return mixed
+	 */
+	public function get($key);
 
-    /**
-     * @return mixed
-     */
-    public function getAll();
+	/**
+	 * @return mixed
+	 */
+	public function getAll();
 }
