@@ -192,6 +192,8 @@ class CachingDecorator implements ForumRepositoryInterface
 	 */
 	public function moveTopicToForum(Topic $topic, Forum $forum)
 	{
+		$this->cache->forget('forums.index_tree');
+		$this->cache->forget('forums.all');
 		return $this->decoratedRepository->moveTopicToForum($topic, $forum);
 	}
 }
