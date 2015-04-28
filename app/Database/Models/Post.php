@@ -103,7 +103,13 @@ class Post extends Model implements HasPresenter, ApprovableInterface
 	 */
 	public function approve()
 	{
-		return $this->update(['approved' => 1]);
+		$result = $this->update(['approved' => 1]);
+
+		if ($result && ! $this->topic->approved) {
+			$this->topic->approve();
+		}
+
+		return $result;
 	}
 
 	/**
@@ -111,6 +117,12 @@ class Post extends Model implements HasPresenter, ApprovableInterface
 	 */
 	public function unapprove()
 	{
-		return $this->update(['approved' => 0]);
+		$result = $this->update(['approved' => 0]);
+
+		if ($result && $this->topic->approved) {
+			$this->topic->unapprove();
+		}
+
+		return $result;
 	}
 }

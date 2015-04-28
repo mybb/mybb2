@@ -158,8 +158,13 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
 	 */
 	public function approve()
 	{
-		$this->firstPost->approve();
-		return $this->update(['approved' => 1]);
+		$result = $this->update(['approved' => 1]);
+
+		if ($result && ! $this->firstPost->approved) {
+			$this->firstPost->approve();
+		}
+
+		return $result;
 	}
 
 	/**
@@ -167,8 +172,13 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
 	 */
 	public function unapprove()
 	{
-		$this->firstPost->unapprove();
-		return $this->update(['approved' => 0]);
+		$result = $this->update(['approved' => 0]);
+
+		if ($result && $this->firstPost->approved) {
+			$this->firstPost->unapprove();
+		}
+
+		return $result;
 	}
 
 	/**
