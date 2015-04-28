@@ -194,12 +194,13 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string  $slug
-	 * @param int     $id
+	 * @param string $slug
+	 * @param int $id
 	 * @param Request $request
-	 * @param int     $postId
+	 * @param int $postId
 	 *
 	 * @return \Illuminate\View\View
+	 * @throws \Exception
 	 */
 	public function reply($slug, $id, Request $request, $postId = null)
 	{
@@ -208,6 +209,10 @@ class TopicController extends AbstractController
 
 		if (!$topic) {
 			throw new TopicNotFoundException;
+		}
+
+		if ($topic->closed) {
+			throw new \Exception("This topic has been closed");
 		}
 
 		$content = '';
