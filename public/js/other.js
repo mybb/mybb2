@@ -21,25 +21,11 @@ $(function () {
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);
 
-	$('.clear-selection-posts a').click(function(event) {
-		event.preventDefault();
-		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-threads a').click(function(event) {
-		event.preventDefault();
-		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-forums a').click(function(event) {
-		event.preventDefault();
-		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
+    $('.clear-selection a').click(function(e) {
+        $('[data-moderation-content] input[type=checkbox]:checked').removeAttr('checked');
+        $('[data-moderation-content] .highlight').removeClass('highlight');
+        $('.inline-moderation').removeClass('floating');
+    });
 
 	$("#search .search-button").click(function(event) {
 		event.preventDefault();
