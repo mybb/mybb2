@@ -76,7 +76,9 @@
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
-		]
+		],
+        "sniff": "vendor/bin/phpcs -n --standard=vendor/mybb/standards/MyBB2",
+        "sniff-fix": "vendor/bin/phpcbf -n --standard=vendor/mybb/standards/MyBB2"
 	},
 	"config": {
 		"preferred-install": "dist"
