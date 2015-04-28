@@ -183,5 +183,7 @@ class ForumRepository implements ForumRepositoryInterface
 		$topic->save();
 
 		$topic->forum->increment('num_posts');
+
+		$this->updateLastPost($forum);
 	}
 }
