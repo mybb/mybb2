@@ -27,7 +27,8 @@
 		"barryvdh/laravel-debugbar": "~2.0@dev",
 		"sjparkinson/static-review": "dev-master",
 		"fabpot/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev"
+		"squizlabs/php_codesniffer": "~2.0@dev",
+		"mybb/standards": "dev-master"
 	},
 	"repositories": [
 		{
@@ -39,9 +40,13 @@
 			"url":  "git@github.com:mybb/parser.git"
 		},
 		{
-		  "type": "vcs",
-		  "url":  "git@github.com:mybb/Settings.git"
-		}
+		    "type": "vcs",
+		    "url":  "git@github.com:mybb/Settings.git"
+		},
+        {
+          "type": "vcs",
+          "url": "git@github.com:mybb/standards.git"
+        }
 	],
 	"autoload": {
 		"classmap": [

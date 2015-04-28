@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "324a0f4214a2ab862dd23d767d4760e7",
+    "hash": "692bda53eec83dc360a07aa3ad47b1a3",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -3213,6 +3213,33 @@
             "time": "2015-02-05 07:51:20"
         },
         {
+            "name": "mybb/standards",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mybb/standards.git",
+                "reference": "0180c487a10a7d1da38a93953d4a15e5dbebbb6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/standards/zipball/0180c487a10a7d1da38a93953d4a15e5dbebbb6f",
+                "reference": "0180c487a10a7d1da38a93953d4a15e5dbebbb6f",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "MyBB2/"
+                ]
+            },
+            "description": "MyBB 2.0 Coding Standard",
+            "support": {
+                "source": "https://github.com/mybb/standards/tree/master",
+                "issues": "https://github.com/mybb/standards/issues"
+            },
+            "time": "2015-04-28 21:40:53"
+        },
+        {
             "name": "phpdocumentor/reflection-docblock",
             "version": "2.0.4",
             "source": {
@@ -4417,7 +4444,8 @@
         "barryvdh/laravel-debugbar": 20,
         "sjparkinson/static-review": 20,
         "fabpot/php-cs-fixer": 20,
-        "squizlabs/php_codesniffer": 20
+        "squizlabs/php_codesniffer": 20,
+        "mybb/standards": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
