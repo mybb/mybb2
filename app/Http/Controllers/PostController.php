@@ -185,4 +185,80 @@ class PostController extends AbstractController
 			'message' => $content
 		]);
 	}
+
+
+	/**
+	 *
+	 * @param QuotePostRequest $quoteRequest
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function viewQuotes(QuotePostRequest $quoteRequest)
+	{
+		$contents = $quoteRequest->input('posts');
+		$data = $posts = $conversations = []; //TODO: conversations
+		foreach ($contents as $content) {
+			if (is_array($content)) {
+				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
+				$content = $content['id'];
+			} else {
+				$content = (string)$content;
+				$data[] = [$content, ''];
+			}
+			$content = explode('_', $content);
+			switch ($content[0]) {
+				case 'post':
+					$posts[] = (int)$content[1];
+					break;
+				case 'conversation':
+					$conversations[] = (int)$content[1];
+					break;
+			}
+		}
+		$myPosts = $this->postsRepository->getPostsByIds($posts);
+		$posts = [];
+
+		$content = [];
+
+		foreach ($myPosts as $post) {
+			$posts[$post->id] = $post;
+		}
+
+		$i = 0;
+		foreach ($data as $value) {
+			list($type, $id) = explode('_', $value[0]);
+			$value = $value[1];
+
+			switch ($type) {
+				case 'post':
+					$post = $posts[$id];
+					if ($value) {
+						$oldContent = $post->content;
+						$oldContentParsed = $post->content_parsed;
+						$post->content = $value;
+						$post->content_parsed = e($value);
+					}
+
+					$content[] = [
+						'id' => $i++,
+						'quote' => $this->quoteRenderer->renderFromPost($post),
+						'content_parsed' => $post->content_parsed,
+						'post' => $post
+					];
+
+					if ($value) {
+						$post->content = $oldContent;
+						$post->content_parsed = $oldContentParsed;
+					}
+					break;
+				case 'conversation':
+					// TODO
+					break;
+			}
+		}
+
+		return view('post.quotes', [
+			'contents' => $content
+		]);
+	}
 }

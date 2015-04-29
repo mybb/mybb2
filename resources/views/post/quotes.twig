@@ -1,0 +1,27 @@
+{% extends "layouts.base" %}
+{% block title %}
+    Quotes
+{% endblock %}
+{% block contents %}
+    <div class="page-content">
+        <header>
+            <h1>Quotes</h1>
+        </header>
+        <section class="post-quotes" style="overflow:auto;">
+			{% for content in contents %}
+				<div class="quote" data-id="{{ content.id }}" data-quote="{{ content.quote }}">
+					<div style="float: right">
+						<span class="quote__select">Select</span>
+						 |
+						<span class="quote__remove">Remove</span>
+					</div>
+					{{ content.post.author.name }} Wrote: <br>
+					<blockquote>
+						{{ content.content_parsed|raw }}
+					</blockquote>
+					<hr>
+				</div>
+			{% endfor %}
+        </section>
+    </div>
+{% endblock %}

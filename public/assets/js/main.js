@@ -294,10 +294,14 @@
 		this.showQuoteBar();
 
 		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
+		$("#quoteBar__view").on("click", $.proxy(this.viewQuotes, this));
 		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
 		$('.quickQuote .fast').on('click', $.proxy(this.quickQuote, this));
 		$('.quickQuote .add').on('click', $.proxy(this.quickAddQuote, this));
+
+		$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
+		$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
 		$("body").on("mouseup", $.proxy(this.checkQuickQuote, this));
 
 		this.quoteButtons();
@@ -336,6 +340,10 @@
 				'data': $content.text()
 			});
 			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
+
+			$post.find('.quoteButton__add').hide();
+			$post.find('.quoteButton__remove').show();
+
 			this.showQuoteBar();
 		}
 		this.hideQuickQuote();
@@ -418,13 +426,22 @@
 			quotes = this.getQuotes();
 
 		if (postId) {
-			if (quotes.indexOf(type + '_' + postId) == -1) {
+			var removed = false;
+			$.each(quotes, function(key, quote) {
+				if(typeof quote != 'string') {
+					quote = quote['id'];
+				}
+				if(quote == type + '_' + postId) {
+					delete quotes[key];
+					removed = true;
+				}
+			});
+			if (!removed) {
 				quotes.push(type + '_' + postId);
 				$me.find('.quoteButton__add').hide();
 				$me.find('.quoteButton__remove').show();
 			}
 			else {
-				delete quotes[quotes.indexOf(type + '_' + postId)];
 				$me.find('.quoteButton__add').show();
 				$me.find('.quoteButton__remove').hide();
 			}
@@ -526,6 +543,42 @@
 		return false;
 	};
 
+	window.MyBB.Quotes.prototype.viewQuotes = function viewQuotes() {
+		MyBB.Spinner.add();
+
+		$.ajax({
+			url: '/post/quotes/all',
+			data: {
+				'posts': this.getQuotes(),
+				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
+			},
+			method: 'POST'
+		}).done($.proxy(function (data) {
+			var modalContent = $("#content", $(data)),
+				modal = $('<div/>', {
+					"class": "modal-dialog"
+				});
+			modalContent.find('.post-quotes').css({
+				'overflow': 'auto',
+				'max-height': ($(window).height()-100)+'px'
+			});
+			modal.html(modalContent.html());
+			modal.appendTo("body").modal({
+				zIndex: 1000
+			});
+
+			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
+			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
+			$('.modalHide').hide();
+		}, this)).always(function () {
+			MyBB.Spinner.remove();
+		});
+
+		this.hideQuickQuote();
+
+		return false;
+	};
+
 	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
 		$quoteBar = $("#quoteBar");
 		$quoteBar.hide();
@@ -542,7 +595,7 @@
 
 		$.each(quotes, function (key, quote) {
 			if (typeof quote != 'string') {
-				return;
+				quote = quote['id'];
 			}
 			quote = quote.split('_');
 			type = quote[0];
@@ -551,6 +604,43 @@
 			$quoteButton.find('.quoteButton__add').hide();
 			$quoteButton.find('.quoteButton__remove').show();
 		})
+	}
+
+	window.MyBB.Quotes.prototype.quoteAdd = function quoteAdd(event) {
+		var $me = $(event.target),
+			$post = $me.parents('.quote'),
+			$textarea = $("#message"),
+			quotes = this.getQuotes();
+
+		var value = $textarea.val();
+		if (value && value.substr(-2) != "\n\n") {
+			if (value.substr(-1) != "\n") {
+				value += "\n";
+			}
+			value += "\n";
+		}
+		$textarea.val(value + $post.data('quote')).focus();
+
+		delete quotes[$post.data('id')];
+		MyBB.Cookie.set('quotes', JSON.stringify(quotes));
+		$post.slideUp();
+
+		this.quoteButtons();
+		this.showQuoteBar();
+	}
+
+	window.MyBB.Quotes.prototype.quoteRemove = function quoteRemove(event) {
+		var $me = $(event.target),
+			$post = $me.parents('.quote'),
+			quotes = this.getQuotes();
+
+		delete quotes[$post.data('id')];
+		MyBB.Cookie.set('quotes', JSON.stringify(quotes));
+		$post.slideUp();
+
+		this.quoteButtons();
+		this.showQuoteBar();
+		return false;
 	}
 
 	var quotes = new window.MyBB.Quotes();
