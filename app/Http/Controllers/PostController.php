@@ -232,6 +232,7 @@ class PostController extends AbstractController
 			switch ($type) {
 				case 'post':
 					$post = $posts[$id];
+
 					if ($value) {
 						$oldContent = $post->content;
 						$oldContentParsed = $post->content_parsed;
@@ -239,12 +240,19 @@ class PostController extends AbstractController
 						$post->content_parsed = e($value);
 					}
 
+					$author = $post->author;
+					if($post->author) {
+						$author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
+					}
+
 					$content[] = [
 						'id' => $i++,
 						'quote' => $this->quoteRenderer->renderFromPost($post),
 						'content_parsed' => $post->content_parsed,
-						'post' => $post
+						'post' => app()->make('MyBB\Core\Presenters\Post', [$post]),
+						'author' => $author
 					];
+
 
 					if ($value) {
 						$post->content = $oldContent;

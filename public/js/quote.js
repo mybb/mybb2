@@ -271,16 +271,26 @@
 		}).done($.proxy(function (data) {
 			var modalContent = $("#content", $(data)),
 				modal = $('<div/>', {
-					"class": "modal-dialog"
+					"class": "modal-dialog viewQuotes"
 				});
 			modalContent.find('.post-quotes').css({
-				'overflow': 'auto',
 				'max-height': ($(window).height()-100)+'px'
 			});
 			modal.html(modalContent.html());
 			modal.appendTo("body").modal({
 				zIndex: 1000
 			});
+
+			if(Modernizr.touch)
+			{
+				$('.radio-buttons .radio-button, .checkbox-buttons .checkbox-button').click(function() {
+
+				});
+			}
+			else
+			{
+				$('span.icons i, a, .caption, time').powerTip({ placement: 's', smartPlacement: true });
+			}
 
 			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
@@ -323,7 +333,7 @@
 
 	window.MyBB.Quotes.prototype.quoteAdd = function quoteAdd(event) {
 		var $me = $(event.target),
-			$post = $me.parents('.quote'),
+			$post = $me.parents('.content-quote'),
 			$textarea = $("#message"),
 			quotes = this.getQuotes();
 
@@ -338,7 +348,16 @@
 
 		delete quotes[$post.data('id')];
 		MyBB.Cookie.set('quotes', JSON.stringify(quotes));
-		$post.slideUp();
+		$post.slideUp('fast');
+
+		if(this.getQuotes().length == 0) {
+			$.modal.close();
+		}
+
+		while($post.next().length) {
+			$post = $post.next();
+			$post.data('id', $post.data('id')-1);
+		}
 
 		this.quoteButtons();
 		this.showQuoteBar();
@@ -346,12 +365,21 @@
 
 	window.MyBB.Quotes.prototype.quoteRemove = function quoteRemove(event) {
 		var $me = $(event.target),
-			$post = $me.parents('.quote'),
+			$post = $me.parents('.content-quote'),
 			quotes = this.getQuotes();
 
 		delete quotes[$post.data('id')];
 		MyBB.Cookie.set('quotes', JSON.stringify(quotes));
-		$post.slideUp();
+		$post.slideUp('fast');
+
+		if(this.getQuotes().length == 0) {
+			$.modal.close();
+		}
+
+		while($post.next().length) {
+			$post = $post.next();
+			$post.data('id', $post.data('id')-1);
+		}
 
 		this.quoteButtons();
 		this.showQuoteBar();

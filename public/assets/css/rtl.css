@@ -3448,6 +3448,14 @@ section.container .forum-list {
   font-size: 12px;
   border-radius: 4px; }
 
+.viewQuotes {
+  left: 10% !important;
+  width: 80% !important;
+  margin-left: 0 !important; }
+  .viewQuotes .post-quotes {
+    overflow: auto;
+    padding: 5px; }
+
 @media only screen and (min-width: 480px) {
   .post {
     margin-right: 80px; }
