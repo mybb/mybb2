@@ -49,4 +49,5 @@ return [
 		'profile' => 'Viewing profile of <a href=":url">:user</a>',
 		'invalid' => 'Viewing a profile',
 	],
+	'conversations' => 'Managing his <a href=":url">conversations</a>',
 ];
