@@ -17,6 +17,7 @@ return [
 	'posts' => 'Posts',
 	'topics' => 'Topics',
 	'joinDate' => 'Join Date',
+	'lastPage' => 'Last Page',
 	'lastVisit' => 'Last Visit',
 	'online' => 'Online Now',
 	'noOnline' => 'Nobody is online',
