@@ -425,7 +425,7 @@
 $('html').addClass('js');
 
 $(function () {
-	
+
 	$('.nojs').hide();
 
 	if(Modernizr.touch)
@@ -434,7 +434,6 @@ $(function () {
 
 		});
 	}
-
 	else
 	{
 		$('span.icons i, a, .caption, time').powerTip({ placement: 's', smartPlacement: true });
@@ -554,3 +553,51 @@ $(function () {
 		autofocusEnd: false
 	});*/
 });
+
+// Overwrite the powertip helper function - it's nearly the same
+function getTooltipContent(element) {
+	var tipText = element.data(DATA_POWERTIP),
+		tipObject = element.data(DATA_POWERTIPJQ),
+		tipTarget = element.data(DATA_POWERTIPTARGET),
+		targetElement,
+		content;
+
+	if (tipText) {
+		if ($.isFunction(tipText)) {
+			tipText = tipText.call(element[0]);
+		}
+		content = tipText;
+	} else if (tipObject) {
+		if ($.isFunction(tipObject)) {
+			tipObject = tipObject.call(element[0]);
+		}
+		if (tipObject.length > 0) {
+			content = tipObject.clone(true, true);
+		}
+	} else if (tipTarget) {
+		targetElement = $('#' + tipTarget);
+		if (targetElement.length > 0) {
+			content = targetElement.html();
+		}
+	}
+
+	// Except we're escaping html
+	return escapeHTML(content);
+}
+
+// Source: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
+
+var entityMap = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': '&quot;',
+	"'": '&#39;',
+	"/": '&#x2F;'
+};
+
+function escapeHTML(string) {
+	return String(string).replace(/[&<>"'\/]/g, function (s) {
+		return entityMap[s];
+	});
+}
