@@ -6,7 +6,7 @@ machine:
 dependencies:
     post:
         - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-        - git clone https://github.com/mybb/standards.git MyBB2
+        - git clone https://github.com/mybb/standards.git
 test:
     pre:
         - php phpcs.phar
