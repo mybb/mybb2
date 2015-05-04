@@ -254,7 +254,7 @@ class PermissionChecker
 			->first(['value', 'default_value']);
 
 		// If the permission doesn't exist return "Never" to break all loops but don't cache it as it may be added later
-		if($permissionValues == null) {
+		if ($permissionValues == null) {
 			return static::NEVER;
 		}
 
