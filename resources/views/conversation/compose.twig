@@ -29,20 +29,12 @@
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('conversations.create')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			<a href="{{ url_route("conversations.compose") }}" class="button button--secondary"
-			   onclick="preview(); return false;">
+			   onclick="return submitFormAsGet('compose');">
 				<i class="fa fa-edit"></i>
 				<span class="text">{{ trans('general.preview') }}</span>
 			</a>
 		</div>
 		{{ form_close() }}
 	</div>
-
-	<script type="text/javascript">
-		function preview() {
-			var form = $('#compose');
-			form.find("input[name=_token]").val('');
-			form.attr('method', 'get').submit();
-		}
-	</script>
 
 {% endblock %}

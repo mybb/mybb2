@@ -21,19 +21,10 @@
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->
 						<a href="{{ url_route('conversations.read', [conversation.id]) }}" class="button button--secondary"
-						   onclick="preview(); return false;">
+						   onclick="return submitFormAsGet('quickreply', '{{ url_route('conversations.read', [conversation.id]) }}');">
 							<i class="fa fa-edit"></i>
 							<span class="text">{{ trans('general.preview') }}</span>
 						</a>
 					</div>
 				{{ form_close() }}
 			</div>
-
-			<script type="text/javascript">
-				function preview() {
-					var form = $('#quickreply');
-					form.find("input[name=_token]").val('');
-					form.attr('action', '{{ url_route('conversations.read', [conversation.id]) }}');
-					form.attr('method', 'get').submit();
-				}
-			</script>

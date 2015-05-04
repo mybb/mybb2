@@ -105,20 +105,12 @@
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('topic.create.postTopic')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 			<a href="{{ url_route("topics.create", [forum.id]) }}" class="button button--secondary"
-			   onclick="preview(); return false;">
+			   onclick="return submitFormAsGet('topiccreate');">
 				<i class="fa fa-edit"></i>
 				<span class="text">{{ trans('general.preview') }}</span>
 			</a>
 		</div>
 		{{ form_close() }}
 	</div>
-
-	<script type="text/javascript">
-		function preview() {
-			var form = $('#topiccreate');
-			form.find("input[name=_token]").val('');
-			form.attr('method', 'get').submit();
-		}
-	</script>
 
 {% endblock %}
