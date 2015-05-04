@@ -187,7 +187,6 @@ class PostController extends AbstractController
 	}
 
 	/**
-	 *
 	 * @param QuotePostRequest $quoteRequest
 	 *
 	 * @return \Illuminate\View\View
