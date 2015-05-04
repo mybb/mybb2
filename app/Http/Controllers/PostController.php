@@ -186,7 +186,6 @@ class PostController extends AbstractController
 		]);
 	}
 
-
 	/**
 	 *
 	 * @param QuotePostRequest $quoteRequest
@@ -241,7 +240,7 @@ class PostController extends AbstractController
 					}
 
 					$author = $post->author;
-					if($post->author) {
+					if ($post->author) {
 						$author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
 					}
 
