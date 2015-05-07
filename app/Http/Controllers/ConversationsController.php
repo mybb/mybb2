@@ -27,6 +27,7 @@ use MyBB\Core\Http\Requests\Conversations\CreateRequest;
 use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
 use MyBB\Parser\MessageFormatter;
+use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConversationsController extends AbstractController
@@ -166,10 +167,11 @@ class ConversationsController extends AbstractController
 	/**
 	 * @param int          $id
 	 * @param ReplyRequest $request
+	 * @param Store        $settings
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postReply($id, ReplyRequest $request)
+	public function postReply($id, ReplyRequest $request, Store $settings)
 	{
 		$this->failedValidationRedirect = route('conversations.read', ['id' => $id]);
 
@@ -186,7 +188,13 @@ class ConversationsController extends AbstractController
 		]);
 
 		if ($message) {
-			return redirect()->route('conversations.read', ['id' => $conversation->id]);
+			$page = 1;
+
+			if ($settings->get('conversations.message_order', 'desc') == 'asc') {
+				$page = (int) ($conversation->messages->count() / $settings->get('user.posts_per_page', 10)) + 1;
+			}
+
+			return redirect()->route('conversations.read', ['id' => $conversation->id, 'page' => $page]);
 		}
 
 		return redirect()->route('conversations.read', ['id' => $conversation->id])->withInput()->withErrors([

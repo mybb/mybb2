@@ -203,7 +203,7 @@ class User extends BasePresenter
 		$collection = $this->router->getRoutes();
 		$route = $collection->match(Request::create($this->wrappedObject->last_page));
 
-		if ($route->getName() != null && $this->translator->has('online.' . $route->getName())) {
+		if ($route->getName() != null) {
 			$langOptions = $this->getWioData($route->getName(), $route->parameters());
 
 			if (!isset($langOptions['url'])) {
@@ -293,6 +293,15 @@ class User extends BasePresenter
 				} else {
 					$data['langString'] = 'user.invalid';
 				}
+				break;
+			case 'conversations.index':
+			case 'conversations.compose':
+			case 'conversations.read':
+			case 'conversations.reply':
+			case 'conversations.leave':
+			case 'conversations.newParticipant':
+				$data['langString'] = 'conversations';
+				break;
 		}
 
 		// TODO: Here's a nice place for a plugin hook
