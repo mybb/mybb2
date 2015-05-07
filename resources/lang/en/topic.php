@@ -11,7 +11,7 @@ return [
 	'firstpost' => 'First Post',
 	'latest' => 'Latest',
 	'create.title' => 'Create New Topic',
-	'create.description' => "Create a new topic in the '{0}' forum.",
+	'create.description' => "Create a new topic in forum: {0}.",
 	'fullEditor' => 'Full Editor',
 	'reply' => 'Reply',
 	'postreply' => 'Post Reply',

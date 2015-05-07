@@ -11,7 +11,7 @@ return [
 	],
 	'forums' => [
 		'all' => 'Viewing <a href=":url">all forums</a>',
-		'show' => 'Viewing the <a href=":url">:forum</a> forum',
+		'show' => 'Viewing forum: <a href=":url">:forum</a>',
 		'invalid' => 'Viewing a forum',
 	],
 	'account' => [
@@ -37,8 +37,8 @@ return [
 		'results' => 'Viewing <a href=":url">search results</a>',
 	],
 	'topics' => [
-		'show' => 'Viewing the <a href=":url">:topic</a> topic',
-		'reply' => 'Replying to the <a href=":url">:topic</a> topic',
+		'show' => 'Viewing topic: <a href=":url">:topic</a>',
+		'reply' => 'Replying to topic: <a href=":url">:topic</a>',
 		'edit' => 'Editing a post in <a href=":url">:topic</a>',
 		'delete' => 'Deleting a post in <a href=":url">:topic</a>',
 		'restore' => 'Restoring a post in <a href=":url">:topic</a>',
