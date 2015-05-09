@@ -2,7 +2,7 @@
 	"name": "mybb/core",
 	"description": "MyBB 2.0 Core.",
 	"keywords": ["mybb", "forum", "laravel"],
-	"license": "LGPL-3.0",
+	"license": "BSD-3",
 	"type": "project",
 	"require": {
 		"laravel/framework": "~5.0",

@@ -1,8 +1,13 @@
 <?php
-
 /**
  * Settings table seeder, creates settings required for an install to function.
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
+
 class SettingsTableSeeder extends \Illuminate\Database\Seeder
 {
 	public function run()
