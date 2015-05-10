@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 	'error_creating_post' => 'Sorry, there was an error creating the post.',
@@ -24,6 +30,9 @@ return [
 	'poll_invalid_endAt' => 'Sorry, the time you entered is invalid',
 	'inline_error' => 'Whoops! There were some problems with your input.',
 	'captcha_invalid_class' => "Failed to load Captcha Class ':class'",
+	'conversation_already_participant' => 'One or more participants already participate in this conversations',
+	'conversation_cant_send_to_self' => 'You can\'t add yourself as participant',
+	'conversation_not_found' => 'Sorry, the specified conversation could not be found.',
 	'permission_invalid_class' => "No class is registered for content type ':class'",
 	'permission_implement_interface' => "The registered class for ':class' needs to implement PermissionInterface",
 	'invalid_date_object' => '$date needs to be either an integer (timestamp) or an instance of either DateTime or Date',

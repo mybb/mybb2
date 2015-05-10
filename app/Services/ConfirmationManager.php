@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Core\Services;
 
@@ -54,9 +60,8 @@ class ConfirmationManager
 		}
 
 		// Finally send it
-		Mail::raw($message, function ($mail) {
-			use ($user, $subject)
-		
+		Mail::raw($message, function ($mail) use ($user, $subject) {
+
 			// TODO: board email
 			$mail->from('admin@mybb.com');
 			$mail->to($user->email);

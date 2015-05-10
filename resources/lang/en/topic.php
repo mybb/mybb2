@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 	'notfound' => 'No topics found',
@@ -11,7 +17,7 @@ return [
 	'firstpost' => 'First Post',
 	'latest' => 'Latest',
 	'create.title' => 'Create New Topic',
-	'create.description' => "Create a new topic in the '{0}' forum.",
+	'create.description' => "Create a new topic in forum: {0}.",
 	'fullEditor' => 'Full Editor',
 	'reply' => 'Reply',
 	'postreply' => 'Post Reply',

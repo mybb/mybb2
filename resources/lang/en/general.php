@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 
@@ -8,7 +14,6 @@ return [
 	'timeformat' => '12',
 	'timezone' => 'Europe/London',
 	'direction' => 'ltr',
-
 	'by' => 'by',
 	'in' => 'in',
 	'at' => 'at',
@@ -37,12 +42,17 @@ return [
 	'username' => 'Username',
 	'time' => 'Time',
 	'location' => 'Location',
+	'new' => 'New',
+	'from' => 'from',
+	'never' => 'Never',
 	'menu' => 'Menu',
 	'loading' => 'Loading...',
 	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
 	'order' => 'Order:',
+	'ascending' => 'Ascending',
+	'descending' => 'Descending',
 
 	'poweredBy' => 'Powered By',
 	'mybbDesc' => 'The best free and open source forum software'

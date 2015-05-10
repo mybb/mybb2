@@ -1,4 +1,12 @@
-<?php namespace MyBB\Core\Providers;
+<?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
+
+namespace MyBB\Core\Providers;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -76,6 +84,16 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(
 			'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ConversationRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ConversationRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ConversationMessageRepository'
 		);
 
 		$this->app->bind(

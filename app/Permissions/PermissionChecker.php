@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Core\Permissions;
 
@@ -252,6 +258,11 @@ class PermissionChecker
 				}
 			})
 			->first(['value', 'default_value']);
+
+		// If the permission doesn't exist return "Never" to break all loops but don't cache it as it may be added later
+		if ($permissionValues == null) {
+			return static::NEVER;
+		}
 
 		if ($permissionValues->value !== null) {
 			$this->putCache($role, $permission, $content, $contentID, $permissionValues->value);

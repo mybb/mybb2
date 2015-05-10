@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 	'youraccount' => 'Your Account',
@@ -72,6 +78,7 @@ return [
 	'follow_started_topics' => 'Automatically <a href=":link">follow topics</a> you start',
 	'follow_replied_topics' => 'Automatically <a href=":link">follow topics</a> you to which you reply',
 	'show_editor' => 'Show formatting options when writing posts',
+	'message_order' => 'How should messages in conversations be ordered?',
 	'topics_per_page' => 'Topics Per Page',
 	'posts_per_page' => 'Posts Per Page',
 	'styleLanguage' => 'Style and Language',
