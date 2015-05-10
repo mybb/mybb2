@@ -13,6 +13,14 @@
 			<dd class="stats__topics">{{ user.num_topics }}</dd>
 			<dt class="stats__join-date">{{ trans('member.joinDate') }}</dt>
 			<dd class="stats__join-date">{{ generate_time(user.created_at) }}</dd>
+
+			{% if user.isOnline %}
+				<dt class="stats__last-page">{{ trans('member.lastPage') }}</dt>
+				<dd class="stats__last-page">{{ user.last_page|raw }} ({{ generate_time(user.last_visit) }})</dd>
+			{% else %}
+				<dt class="stats__last-visit">{{ trans('member.lastVisit') }}</dt>
+				<dd class="stats__last-visit">{{ generate_time(user.last_visit) }}</dd>
+			{% endif %}
 		</dl>
 	</section>
 

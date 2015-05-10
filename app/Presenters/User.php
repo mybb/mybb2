@@ -14,6 +14,7 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
@@ -23,6 +24,9 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Gravatar\Generator;
+use MyBB\Settings\Models\Setting;
+use MyBB\Settings\Models\SettingValue;
+use MyBB\Settings\Store;
 
 class User extends BasePresenter
 {
@@ -74,6 +78,16 @@ class User extends BasePresenter
 	private $gravatarGenerator;
 
 	/**
+	 * @var Store
+	 */
+	private $settings;
+
+	/**
+	 * @var Guard
+	 */
+	private $guard;
+
+	/**
 	 * @param UserModel                       $resource
 	 * @param Router                          $router
 	 * @param ForumRepositoryInterface        $forumRepository
@@ -84,6 +98,8 @@ class User extends BasePresenter
 	 * @param ConversationRepositoryInterface $conversationRepository
 	 * @param Translator                      $translator
 	 * @param Generator                       $gravatarGenerator
+	 * @param Store                           $settings
+	 * @param Guard                           $guard
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -95,7 +111,9 @@ class User extends BasePresenter
 		PermissionChecker $permissionChecker,
 		ConversationRepositoryInterface $conversationRepository,
 		Translator $translator,
-		Generator $gravatarGenerator
+		Generator $gravatarGenerator,
+		Store $settings,
+		Guard $guard
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -107,6 +125,8 @@ class User extends BasePresenter
 		$this->conversationRepository = $conversationRepository;
 		$this->translator = $translator;
 		$this->gravatarGenerator = $gravatarGenerator;
+		$this->settings = $settings;
+		$this->guard = $guard;
 	}
 
 	/**
@@ -192,6 +212,49 @@ class User extends BasePresenter
 		}
 
 		return $conversations;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isOnline()
+	{
+		$minutes = $this->settings->get('wio.minutes', 15);
+
+		// This user was logging out at last
+		if ($this->wrappedObject->last_page == 'auth/logout') {
+			return false;
+		}
+
+		// This user isn't online
+		if (new \DateTime($this->wrappedObject->last_visit) < new \DateTime("{$minutes} minutes ago")) {
+			return false;
+		}
+
+		// The user is online, now permissions
+
+		// We're either testing our own account or have permissions to view everyone
+		if ($this->permissionChecker->hasPermission('user', null, 'canViewAllOnline')
+			|| $this->guard->user()->id == $this->wrappedObject->id) {
+			return true;
+		}
+
+		// Next we need to get the setting for this user
+
+		// First get the id of our setting
+		$settingId = Setting::where('name', 'user.showonline')->first()->id;
+
+		// Now the value
+		$settingValue = SettingValue::where('user_id', '=', $this->wrappedObject->id)
+			->where('setting_id', '=', $settingId)->first();
+
+		// Either the value isn't set (good) or true (better), let's show this user as online
+		if ($settingValue == null || $settingValue->value == true) {
+			return true;
+		}
+
+		// Still here? Then the viewing user doesn't have the permissions and we show him as offline
+		return false;
 	}
 
 	/**
