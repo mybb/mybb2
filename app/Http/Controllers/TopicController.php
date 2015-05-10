@@ -200,6 +200,7 @@ class TopicController extends AbstractController
 	 * @param int     $postId
 	 *
 	 * @return \Illuminate\View\View
+	 *
 	 * @throws \Exception
 	 */
 	public function reply($slug, $id, Request $request, $postId = null)

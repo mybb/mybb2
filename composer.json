@@ -73,8 +73,8 @@
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
 		],
-        "sniff": "vendor/bin/phpcs -n",
-        "sniff-fix": "vendor/bin/phpcbf -n"
+        "sniff": "vendor/bin/phpcs",
+        "sniff-fix": "vendor/bin/phpcbf"
 	},
 	"config": {
 		"preferred-install": "dist"

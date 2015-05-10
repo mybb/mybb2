@@ -29,7 +29,7 @@ class Moderation extends \Twig_Extension
 	}
 
 	/**
-	 * @param $moderation
+	 * @param object $moderation
 	 *
 	 * @return bool
 	 */
@@ -39,7 +39,7 @@ class Moderation extends \Twig_Extension
 	}
 
 	/**
-	 * @param $moderation
+	 * @param object $moderation
 	 *
 	 * @return bool
 	 */

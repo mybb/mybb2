@@ -10,7 +10,7 @@
 
 	<exclude-pattern>*/*.blade.php</exclude-pattern>
 
-	<rule ref="standards/MyBB2"/>
+	<rule ref="vendor/mybb/standards/MyBB2"/>
 
 	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
 		<exclude-pattern>*/database/*</exclude-pattern>
