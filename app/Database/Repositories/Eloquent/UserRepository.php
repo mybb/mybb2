@@ -52,11 +52,15 @@ class UserRepository implements UserRepositoryInterface
 	/**
 	 * Get all users.
 	 *
+	 * @param string $sortBy
+	 * @param string $sortDir
+	 * @param int    $perPage
+	 *
 	 * @return mixed
 	 */
-	public function all()
+	public function all($sortBy = 'created_at', $sortDir = 'asc', $perPage = 10)
 	{
-		return $this->userModel->paginate(10);
+		return $this->userModel->orderBy($sortBy, $sortDir)->paginate($perPage);
 	}
 
 	/**

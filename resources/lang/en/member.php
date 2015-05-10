@@ -28,9 +28,9 @@ return [
 	'online' => 'Online Now',
 	'noOnline' => 'Nobody is online',
 	'profileOf' => 'Profile of :name',
+	'sortMembers' => 'Sort members',
 
 	'profile' => [
 		'recentActivity' => 'Recent Activity',
-
 	]
 ];

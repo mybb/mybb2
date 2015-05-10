@@ -65,6 +65,9 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'user.dob_visibility'],
 			['name' => 'post.likes_to_show'],
 			['name' => 'likes.per_page'],
+			['name' => 'memberlist.sort_by'],
+			['name' => 'memberlist.sort_dir'],
+			['name' => 'memberlist.per_page'],
 			['name' => 'conversations.enabled'],
 			['name' => 'conversations.message_order'],
 		]);
@@ -234,22 +237,34 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->pluck('id'),
 				'value' => '1'
 			],
-				[
+			[
 				'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->pluck('id'),
 				'value' => 3,
-				],
-				[
+			],
+			[
 				'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->pluck('id'),
 				'value' => 10,
-				],
-				[
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_by')->pluck('id'),
+				'value' => 'created_at',
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_dir')->pluck('id'),
+				'value' => 'asc',
+			],
+			[
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->pluck('id'),
+				'value' => 10,
+			],
+			[
 				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
 				'value' => 1,
-				],
-				[
+			],
+			[
 				'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->pluck('id'),
 				'value' => 'desc',
-				],
+			],
 		]);
 	}
 }

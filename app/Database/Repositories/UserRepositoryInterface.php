@@ -15,9 +15,13 @@ interface UserRepositoryInterface
 	/**
 	 * Get all users.
 	 *
+	 * @param string $sortBy
+	 * @param string $sortDir
+	 * @param int    $perPage
+	 *
 	 * @return mixed
 	 */
-	public function all();
+	public function all($sortBy = 'created_at', $sortDir = 'desc', $perPage = 10);
 
 	/**
 	 * Get all users active in the last x minutes

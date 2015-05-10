@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Settings\Store;
 
@@ -29,13 +30,32 @@ class MemberController extends AbstractController
 	}
 
 	/**
+	 * @param Store   $settings
+	 * @param Request $request
+	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function memberlist()
+	public function memberlist(Store $settings, Request $request)
 	{
-		$users = $this->userRepository->all();
+		$sortBy = $settings->get('memberlist.sort_by', 'created_at', false);
+		$sortDir = $settings->get('memberlist.sort_dir', 'asc', false);
+		$perPage = $settings->get('memberlist.per_page', 10, false);
 
-		return view('member.list', compact('users'));
+		if ($request->has('sortBy')) {
+			$sortBy = $request->get('sortBy');
+		}
+
+		if ($request->has('sortDir')) {
+			$sortDir = $request->get('sortDir');
+		}
+
+		if ($request->has('perPage')) {
+			$perPage = $request->get('perPage');
+		}
+
+		$users = $this->userRepository->all($sortBy, $sortDir, $perPage);
+
+		return view('member.list', compact('users', 'sortBy', 'sortDir'));
 	}
 
 	/**
