@@ -47,7 +47,7 @@ class UpdateLastVisit extends AbstractBootstrapMiddleware
 		// The route settings aren't loaded at this point so we need to get it manually
 		$options = $this->getOptions($this->router, $request);
 
-		if ($this->inDebugbar($request)) {
+		if ($this->isDebugBarRequest($request)) {
 			return $next($request);
 		}
 
@@ -68,7 +68,7 @@ class UpdateLastVisit extends AbstractBootstrapMiddleware
 	 *
 	 * @return bool
 	 */
-	private function inDebugbar($request)
+	private function isDebugBarRequest($request)
 	{
 		$enabled = $this->config->get('debugbar.enabled');
 
