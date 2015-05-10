@@ -46,7 +46,8 @@ return [
 		'select' => 'Quote these posts now',
 		'deselect' => 'deselect them',
 		'viewAll' => 'View all quotes',
-		'selectThisPost' => 'Select'
+		'selectThisPost' => 'Select',
+		'selectQuotes' => 'Select all quotes'
 	],
 
 ];

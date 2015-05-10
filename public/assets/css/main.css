@@ -3850,7 +3850,7 @@ section.container .forum-list {
         color: #007fd0; }
       .post .post__meta h3 a:hover, .post .post__meta h3 a:active {
         color: #ff7500; }
-    .post .post__meta .post__date {
+    .post .post__meta .post__date, .post .post__meta .post__topic {
       font-size: 0.8em;
       color: #666; }
     .post .post__meta .post__edit-log {
@@ -4004,7 +4004,7 @@ section.container .forum-list {
       padding: 4px 6px 8px 6px; }
       .post .post__meta h3 {
         display: inline-block; }
-      .post .post__meta .post__date {
+      .post .post__meta .post__date, .post .post__meta .post__topic {
         margin: 0 0 0 10px; }
     .post .avatar-profile-link {
       float: left;

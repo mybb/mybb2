@@ -493,6 +493,7 @@
 				}
 				$textarea.val(value + json.message).focus();
 			}
+			$.modal.close();
 		}).always(function () {
 			MyBB.Spinner.remove();
 		});
@@ -579,6 +580,7 @@
 
 			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
+			$("#selectAllQuotes").on("click", $.proxy(this.addQuotes, this));
 			$('.modalHide').hide();
 		}, this)).always(function () {
 			MyBB.Spinner.remove();
