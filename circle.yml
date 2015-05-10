@@ -10,3 +10,5 @@ dependencies:
 test:
     pre:
         - php phpcs.phar
+    override:
+        - composer test-unit
