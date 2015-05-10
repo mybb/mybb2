@@ -3780,8 +3780,12 @@ section.container .forum-list {
     text-align: center;
     display: inline-block; }
   .topic-list .topic-list__sort-topics a.latest-column {
-    width: 30%;
+    width: 20%;
     text-align: left; }
+  .topic-list .topic-list__sort-topics a.moderation-column {
+    width: 9%;
+    float: left;
+    text-align: right; }
   .topic-list .topic {
     padding: 10px 12px; }
     .topic-list .topic .primary-column {
@@ -3801,8 +3805,12 @@ section.container .forum-list {
         margin: 10px 0;
         float: none; }
     .topic-list .topic .latest-column {
-      width: 30%;
+      width: 20%;
       float: left; }
+    .topic-list .topic .moderation-column {
+      width: 9%;
+      float: left;
+      text-align: right; }
     .topic-list .topic .topic__post--first {
       display: inline-block; }
     .topic-list .topic .topic__post--latest .post__author {

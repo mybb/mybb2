@@ -27,7 +27,8 @@
 		"barryvdh/laravel-debugbar": "~2.0@dev",
 		"sjparkinson/static-review": "dev-master",
 		"fabpot/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev"
+		"squizlabs/php_codesniffer": "~2.0@dev",
+		"mybb/standards": "dev-master"
 	},
 	"repositories": [
 		{
@@ -39,8 +40,8 @@
 			"url":  "git@github.com:mybb/parser.git"
 		},
 		{
-		  "type": "vcs",
-		  "url":  "git@github.com:mybb/Settings.git"
+		    "type": "vcs",
+		    "url":  "git@github.com:mybb/Settings.git"
 		}
 	],
 	"autoload": {
@@ -49,7 +50,10 @@
 		],
 		"psr-4": {
 			"MyBB\\Core\\": "app/"
-		}
+		},
+	  	"files": [
+		  	"bootstrap/helpers.php"
+		]
 	},
 	"autoload-dev": {
 		"classmap": [
@@ -68,7 +72,9 @@
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
-		]
+		],
+        "sniff": "vendor/bin/phpcs",
+        "sniff-fix": "vendor/bin/phpcbf"
 	},
 	"config": {
 		"preferred-install": "dist"

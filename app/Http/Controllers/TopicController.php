@@ -200,6 +200,8 @@ class TopicController extends AbstractController
 	 * @param int     $postId
 	 *
 	 * @return \Illuminate\View\View
+	 *
+	 * @throws \Exception
 	 */
 	public function reply($slug, $id, Request $request, $postId = null)
 	{
@@ -208,6 +210,10 @@ class TopicController extends AbstractController
 
 		if (!$topic) {
 			throw new TopicNotFoundException;
+		}
+
+		if ($topic->closed) {
+			throw new \Exception("This topic has been closed");
 		}
 
 		$content = '';

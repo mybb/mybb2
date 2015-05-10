@@ -91,6 +91,10 @@ Route::get(
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
 
+Route::post('/moderate', ['as' => 'moderate', 'uses' => 'ModerationController@moderate']);
+Route::post('/moderate/reverse', ['as' => 'moderate.reverse', 'uses' => 'ModerationController@reverse']);
+Route::get('/moderate/form/{moderationName}', ['as' => 'moderate.form', 'uses' => 'ModerationController@form']);
+
 Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);
 	Route::get('/profile', ['as' => 'account.profile', 'uses' => 'AccountController@getProfile']);

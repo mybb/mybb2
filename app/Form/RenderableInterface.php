@@ -28,7 +28,7 @@ interface RenderableInterface
 	/**
 	 * @return string
 	 */
-	public function getName();
+	public function getElementName();
 
 	/**
 	 * @return string

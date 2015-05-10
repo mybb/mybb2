@@ -10,12 +10,16 @@
 
 namespace MyBB\Core\Database\Models;
 
+use MyBB\Core\Moderation\Moderations\CloseableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Forum extends Node implements HasPresenter, InheritPermissionInterface
+/**
+ * @property int id
+ */
+class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface
 {
 	use InheritPermissionableTrait;
 
@@ -54,6 +58,13 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	 * @var array
 	 */
 	protected $guarded = ['left_id', 'right_id', 'parent_id'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.
@@ -103,5 +114,21 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	public function lastPostAuthor()
 	{
 		return $this->hasOne('MyBB\\Core\\Database\\Models\\User', 'id', 'last_post_user_id');
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function close()
+	{
+		return $this->update(['closed' => 1]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function open()
+	{
+		return $this->update(['closed' => 0]);
 	}
 }

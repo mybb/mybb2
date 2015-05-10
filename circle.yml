@@ -3,10 +3,7 @@ machine:
     Europe/London
   php:
     version: 5.5.21
-dependencies:
-    post:
-        - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-        - git clone https://github.com/mybb/standards.git
+
 test:
     pre:
-        - php phpcs.phar
+        - composer sniff

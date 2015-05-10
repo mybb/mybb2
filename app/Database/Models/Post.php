@@ -14,8 +14,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Likes\Traits\LikeableTrait;
+use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
-class Post extends Model implements HasPresenter
+/**
+ * @property int topic_id
+ */
+class Post extends Model implements HasPresenter, ApprovableInterface
 {
 	use SoftDeletes;
 	use LikeableTrait;
@@ -58,6 +62,13 @@ class Post extends Model implements HasPresenter
 	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
 
 	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'topic_id' => 'int'
+	];
+
+	/**
 	 * Get the presenter class.
 	 *
 	 * @return string
@@ -85,5 +96,33 @@ class Post extends Model implements HasPresenter
 	public function author()
 	{
 		return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function approve()
+	{
+		$result = $this->update(['approved' => 1]);
+
+		if ($result && ! $this->topic->approved) {
+			$this->topic->approve();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function unapprove()
+	{
+		$result = $this->update(['approved' => 0]);
+
+		if ($result && $this->topic->approved) {
+			$this->topic->unapprove();
+		}
+
+		return $result;
 	}
 }

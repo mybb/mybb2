@@ -21,25 +21,11 @@ $(function () {
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);
 
-	$('.clear-selection-posts a').click(function(event) {
-		event.preventDefault();
-		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-threads a').click(function(event) {
-		event.preventDefault();
-		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-forums a').click(function(event) {
-		event.preventDefault();
-		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
+    $('.clear-selection a').click(function(e) {
+        $('[data-moderation-content] input[type=checkbox]:checked').removeAttr('checked');
+        $('[data-moderation-content] .highlight').removeClass('highlight');
+        $('.inline-moderation').removeClass('floating');
+    });
 
 	$("#search .search-button").click(function(event) {
 		event.preventDefault();
@@ -56,6 +42,13 @@ $(function () {
 			$('.inline-moderation').addClass('floating');
 		}
 
+		if (checked_boxes > 1)
+		{
+			$('li[data-moderation-multi]').show();
+		} else {
+			$('li[data-moderation-multi]').hide();
+		}
+
 		if(checked_boxes == 0)
 		{
 			$('.inline-moderation').removeClass('floating');
@@ -64,14 +57,21 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
 	});
 
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
+	$(".topic-list .topic :checkbox").change(function() {
+		$(this).closest(".topic").toggleClass("highlight", this.checked);
 
 		var checked_boxes = $('.highlight').length;
 
 		if(checked_boxes == 1)
 		{
 			$('.inline-moderation').addClass('floating');
+		}
+
+		if (checked_boxes > 1)
+		{
+			$('li[data-moderation-multi]').show();
+		} else {
+			$('li[data-moderation-multi]').hide();
 		}
 
 		if(checked_boxes == 0)

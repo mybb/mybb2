@@ -385,4 +385,27 @@ class TopicRepository implements TopicRepositoryInterface
 
 		return $topic;
 	}
+
+	/**
+	 * @param Post  $post
+	 * @param Topic $topic
+	 */
+	public function movePostToTopic(Post $post, Topic $topic)
+	{
+		$post->topic->decrement('num_posts');
+		$post->topic->forum->decrement('num_posts');
+
+		$post->topic_id = $topic->id;
+		$post->save();
+
+		$topic->increment('num_posts');
+		$topic->forum->increment('num_posts');
+//		$topic->update([
+//			'last_post_id' => $post->id
+//		]);
+//		$topic->forum->update([
+//			'last_post_id' => $post->id,
+//			'last_post_user_id' => $post->author->id
+//		]);
+	}
 }

@@ -18,15 +18,17 @@
 				{% if not topic.has_poll %}
 					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
 				{% endif %}
+                {% if not topic.closed %}
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+                {% endif %}
 			</div>
 		</div>
 		{% if topic.has_poll %}
 			{% include "topic.polls" with [poll, topic] %}
 		{% endif %}
-		<section class="topic">
+		<section class="topic" data-moderation-content="post">
 			{% for post in posts %}
-				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
+				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
 					<div class="post__meta">
 
 						<a href="{{ url_route('user.profile', [post.author.id, post.author.name]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', { 'name':post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', { 'name':post.author.name}) }}" /></a>
@@ -39,7 +41,7 @@
 							<a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
-						<input type="checkbox" class="post__inline-mod" />
+						<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ post.id }}">
 						<a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i></a>
 					</div>
 					<div class="post__body">
@@ -88,7 +90,12 @@
 				</div>
 			{% endfor %}
 			{{ posts.render|raw }}
-			{% include 'topic.quickreply' with {'topic': topic} %}
+            {% if not topic.closed %}
+                {% include 'topic.quickreply' with {'topic': topic} %}
+            {% else %}
+                <p style="text-align:center"><i class="fa fa-lock"></i> This topic has now been closed.</p>
+            {% endif %}
 		</section>
+		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
 	</div>
 {% endblock %}
