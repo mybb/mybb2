@@ -42,11 +42,7 @@
 		{
 		    "type": "vcs",
 		    "url":  "git@github.com:mybb/Settings.git"
-		},
-        {
-          "type": "vcs",
-          "url": "git@github.com:mybb/standards.git"
-        }
+		}
 	],
 	"autoload": {
 		"classmap": [
@@ -77,8 +73,8 @@
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
 		],
-        "sniff": "vendor/bin/phpcs -n --standard=vendor/mybb/standards/MyBB2",
-        "sniff-fix": "vendor/bin/phpcbf -n --standard=vendor/mybb/standards/MyBB2"
+        "sniff": "vendor/bin/phpcs -n",
+        "sniff-fix": "vendor/bin/phpcbf -n"
 	},
 	"config": {
 		"preferred-install": "dist"
