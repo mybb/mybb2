@@ -13,11 +13,11 @@ class AddClosedToTopicsAndForumsTables extends Migration
 	public function up()
 	{
 		Schema::table('topics', function (Blueprint $table) {
-			$table->tinyInteger('closed')->unsigned()->index();
+			$table->tinyInteger('closed')->unsigned()->default(0)->index();
 		});
 
 		Schema::table('forums', function (Blueprint $table) {
-			$table->tinyInteger('closed')->unsigned()->index();
+			$table->tinyInteger('closed')->unsigned()->default(0)->index();
 		});
 	}
 
