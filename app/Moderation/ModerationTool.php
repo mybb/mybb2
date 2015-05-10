@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Core\Moderation;
 
@@ -61,9 +67,11 @@ class ModerationTool implements ModerationInterface
 	/**
 	 * @param mixed $content
 	 *
+	 * @param array $options
+	 *
 	 * @return mixed
 	 */
-	public function apply($content)
+	public function apply($content, array $options = [])
 	{
 		foreach ($this->moderations as $moderation) {
 			$moderation->apply($content);
@@ -73,10 +81,38 @@ class ModerationTool implements ModerationInterface
 	/**
 	 * @param mixed $content
 	 *
+	 * @param array $options
+	 *
 	 * @return bool
 	 */
-	public function supports($content)
+	public function supports($content, array $options = [])
 	{
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getKey()
+	{
+		// TODO: Implement getKey() method.
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getIcon()
+	{
+		// TODO: Implement getIcon() method.
+	}
+
+	/**
+	 * @param mixed $content
+	 *
+	 * @return bool
+	 */
+	public function visible($content)
+	{
+		// TODO: Implement visible() method.
 	}
 }
