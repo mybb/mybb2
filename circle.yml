@@ -11,4 +11,8 @@ test:
     pre:
         - php phpcs.phar
     override:
-        - composer test-unit
+        - composer test-unit-coverage
+
+general:
+    artifacts:
+        - "tests/report"
