@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "14ae2dc890cb80193666d643f304c110",
+    "hash": "4a8eaafd753f3c3ba61064a84245837b",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -770,13 +770,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/JN-Jones/recaptcha.git",
-                "reference": "2e4f6dc15451899454d2d3cf5a987d847d411135"
+                "url": "https://github.com/greggilbert/recaptcha.git",
+                "reference": "828b9fdeee3c3b15ea1ce148d2871adaaeca26d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JN-Jones/recaptcha/zipball/2e4f6dc15451899454d2d3cf5a987d847d411135",
-                "reference": "2e4f6dc15451899454d2d3cf5a987d847d411135",
+                "url": "https://api.github.com/repos/greggilbert/recaptcha/zipball/828b9fdeee3c3b15ea1ce148d2871adaaeca26d3",
+                "reference": "828b9fdeee3c3b15ea1ce148d2871adaaeca26d3",
                 "shasum": ""
             },
             "require": {
@@ -797,6 +797,7 @@
                     "Greggilbert\\Recaptcha\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -814,10 +815,7 @@
                 "laravel5",
                 "recaptcha"
             ],
-            "support": {
-                "source": "https://github.com/JN-Jones/recaptcha/tree/master"
-            },
-            "time": "2015-05-11 07:12:39"
+            "time": "2015-05-11 14:16:01"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1107,12 +1105,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "fdaa825740810370ebd86778142224a4d15d69b2"
+                "reference": "d695b0e9aadb61eaee5d16c278e0fa898bd79f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/fdaa825740810370ebd86778142224a4d15d69b2",
-                "reference": "fdaa825740810370ebd86778142224a4d15d69b2",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/d695b0e9aadb61eaee5d16c278e0fa898bd79f8f",
+                "reference": "d695b0e9aadb61eaee5d16c278e0fa898bd79f8f",
                 "shasum": ""
             },
             "require": {
@@ -1193,7 +1191,8 @@
                 "league/flysystem-aws-s3-v2": "Required to use the Flysystem S3 driver (~1.0).",
                 "league/flysystem-rackspace": "Required to use the Flysystem Rackspace driver (~1.0).",
                 "pda/pheanstalk": "Required to use the beanstalk queue driver (~3.0).",
-                "predis/predis": "Required to use the redis cache and queue drivers (~1.0)."
+                "predis/predis": "Required to use the redis cache and queue drivers (~1.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (~2.0)."
             },
             "type": "library",
             "extra": {
@@ -1229,7 +1228,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-05-11 01:55:35"
+            "time": "2015-05-11 17:15:31"
         },
         {
             "name": "laravelcollective/html",

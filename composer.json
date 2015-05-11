@@ -44,10 +44,6 @@
 		},
       {
         "type": "vcs",
-        "url":  "git@github.com:JN-Jones/recaptcha.git"
-      },
-      {
-        "type": "vcs",
         "url":  "git@github.com:JN-Jones/laravel-nestedset.git"
       },
       {
