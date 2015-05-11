@@ -9,10 +9,12 @@
 namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Factory;
 use MyBB\Auth\Contracts\Guard;
+use MyBB\Core\Database\Models\Role;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class AuthController extends Controller
@@ -37,17 +39,22 @@ class AuthController extends Controller
 	private $breadcrumbs;
 
 	/**
+	 * @var Factory
+	 */
+	private $validator;
+
+	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param Guard                                $auth
-	 * @param \Illuminate\Contracts\Auth\Registrar $registrar
-	 * @param Breadcrumbs                          $breadcrumbs
+	 * @param Guard       $auth
+	 * @param Breadcrumbs $breadcrumbs
+	 * @param Factory     $validator
 	 */
-	public function __construct(Guard $auth, Registrar $registrar, Breadcrumbs $breadcrumbs)
+	public function __construct(Guard $auth, Breadcrumbs $breadcrumbs, Factory $validator)
 	{
 		$this->auth = $auth;
-		$this->registrar = $registrar;
 		$this->breadcrumbs = $breadcrumbs;
+		$this->validator = $validator;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -81,7 +88,7 @@ class AuthController extends Controller
 			return $captcha;
 		}
 
-		$validator = $this->registrar->validator($request->all());
+		$validator = $this->validator($request->all());
 
 		if ($validator->fails()) {
 			$this->throwValidationException(
@@ -90,7 +97,7 @@ class AuthController extends Controller
 			);
 		}
 
-		$this->auth->login($this->registrar->create($request->all()));
+		$this->auth->login($this->create($request->all()));
 
 		return redirect($this->redirectPath());
 	}
@@ -134,7 +141,7 @@ class AuthController extends Controller
 		}
 
 		return redirect('/auth/login')
-			->withInput($request->only('username'))
+			->withInput($request->only('username', 'remember_me'))
 			->withErrors([
 				'username' => trans('member.invalidCredentials'),
 			]);
@@ -161,5 +168,42 @@ class AuthController extends Controller
 	public function redirectPath()
 	{
 		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+	}
+
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array $data
+	 *
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	protected function validator(array $data)
+	{
+		return $this->validator->make($data, [
+			'name' => 'required|max:255|unique:users',
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|confirmed|min:6',
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array $data
+	 *
+	 * @return User
+	 */
+	protected function create(array $data)
+	{
+		$user = User::create([
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+		]);
+
+		$user->roles()->attach(Role::where('role_slug', '=', 'user')->pluck('id'), ['is_display' => true]);
+
+		return $user;
 	}
 }
