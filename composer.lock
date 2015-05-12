@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1a0397d2be808521183380a8577c6d0e",
+    "hash": "4510b3e65365893585d196b067c0a6db",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -2060,13 +2060,13 @@
             "version": "0.7.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/JN-Jones/TwigBridge.git",
-                "reference": "4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a"
+                "url": "https://github.com/rcrowe/TwigBridge.git",
+                "reference": "0db719da309ebd0800b09ce3b814c81b0f6ab692"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JN-Jones/TwigBridge/zipball/4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a",
-                "reference": "4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a",
+                "url": "https://api.github.com/repos/rcrowe/TwigBridge/zipball/0db719da309ebd0800b09ce3b814c81b0f6ab692",
+                "reference": "0db719da309ebd0800b09ce3b814c81b0f6ab692",
                 "shasum": ""
             },
             "require": {
@@ -2098,17 +2098,18 @@
                     "TwigBridge\\Tests\\": "tests"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Rob Crowe",
-                    "email": "hello@vivalacrowe.com"
-                },
-                {
                     "name": "Barry vd. Heuvel",
                     "email": "barryvdh@gmail.com"
+                },
+                {
+                    "name": "Rob Crowe",
+                    "email": "hello@vivalacrowe.com"
                 }
             ],
             "description": "Adds the power of Twig to Laravel",
@@ -2116,10 +2117,7 @@
                 "laravel",
                 "twig"
             ],
-            "support": {
-                "source": "https://github.com/JN-Jones/TwigBridge/tree/0.7"
-            },
-            "time": "2015-05-11 17:58:19"
+            "time": "2015-05-12 13:33:57"
         },
         {
             "name": "swiftmailer/swiftmailer",

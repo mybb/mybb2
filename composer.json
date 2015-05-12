@@ -41,11 +41,7 @@
 		{
 		  "type": "vcs",
 		  "url":  "git@github.com:mybb/Settings.git"
-		},
-      {
-        "type": "vcs",
-        "url":  "git@github.com:JN-Jones/twigbridge.git"
-      }
+		}
     ],
 	"autoload": {
 		"classmap": [
