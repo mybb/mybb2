@@ -53,7 +53,7 @@
 		}
 	},
 	"autoload-dev": {
-        "MyBB\\Core\\Test\\Unit": "tests/src"
+        "MyBB\\Core\\Test": "tests/src"
 	},
 	"scripts": {
 		"post-install-cmd": [

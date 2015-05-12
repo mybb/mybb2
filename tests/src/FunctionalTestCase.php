@@ -1,12 +1,11 @@
 <?php
 
-namespace MyBB\Core\Test\Unit;
+namespace MyBB\Core\Test;
 
 use Illuminate\Foundation\Testing\TestCase;
 
 class FunctionalTestCase extends TestCase
 {
-
 	/**
 	 * Creates the application.
 	 *
