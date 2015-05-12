@@ -1695,18 +1695,18 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "ef4f67eb49598a00f21c5be3c2303ab0641de12d"
+                "reference": "f446d175db8fbbef689fd9af9a189b116e047759"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/ef4f67eb49598a00f21c5be3c2303ab0641de12d",
-                "reference": "ef4f67eb49598a00f21c5be3c2303ab0641de12d",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/f446d175db8fbbef689fd9af9a189b116e047759",
+                "reference": "f446d175db8fbbef689fd9af9a189b116e047759",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "~5.0",
-                "illuminate/hashing": "~5.0",
-                "illuminate/support": "~5.0"
+                "illuminate/auth": "5.0.*|5.1.*",
+                "illuminate/hashing": "5.0.*|5.1.*",
+                "illuminate/support": "5.0.*|5.1.*"
             },
             "type": "library",
             "autoload": {
@@ -1727,7 +1727,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-05-09 18:19:11"
+            "time": "2015-05-12 13:27:55"
         },
         {
             "name": "mybb/gravatar",
@@ -1735,16 +1735,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/gravatar.git",
-                "reference": "ec0cfdd902a13329b27652431eb35059c0d28b25"
+                "reference": "f69e7552137f07585d113dc6113729ab50de2944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/gravatar/zipball/ec0cfdd902a13329b27652431eb35059c0d28b25",
-                "reference": "ec0cfdd902a13329b27652431eb35059c0d28b25",
+                "url": "https://api.github.com/repos/mybb/gravatar/zipball/f69e7552137f07585d113dc6113729ab50de2944",
+                "reference": "f69e7552137f07585d113dc6113729ab50de2944",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0",
+                "illuminate/support": "5.0.*|5.1.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -1768,7 +1768,7 @@
                 }
             ],
             "description": "Easy Gravatar generation for Laravel 5.0.",
-            "time": "2015-05-11 07:05:40"
+            "time": "2015-05-12 13:29:47"
         },
         {
             "name": "mybb/parser",
@@ -1776,18 +1776,18 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Parser.git",
-                "reference": "989bc4a3217587edfab95f04ccff4f38a505e4c2"
+                "reference": "d64364a9bd19da37824f6c9766b044d142ac4974"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Parser/zipball/989bc4a3217587edfab95f04ccff4f38a505e4c2",
-                "reference": "989bc4a3217587edfab95f04ccff4f38a505e4c2",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/d64364a9bd19da37824f6c9766b044d142ac4974",
+                "reference": "d64364a9bd19da37824f6c9766b044d142ac4974",
                 "shasum": ""
             },
             "require": {
                 "ezyang/htmlpurifier": "~4.6",
-                "illuminate/database": "~5.0",
-                "illuminate/support": "~5.0",
+                "illuminate/database": "5.0.*|5.1.*",
+                "illuminate/support": "5.0.*|5.1.*",
                 "league/commonmark": "0.6.*@dev"
             },
             "type": "library",
@@ -1809,7 +1809,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-05-09 18:36:18"
+            "time": "2015-05-12 13:30:28"
         },
         {
             "name": "mybb/settings",
@@ -1817,20 +1817,20 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "41a7225c149315236f7e7646c832949f081a7e99"
+                "reference": "6fb2970fae628ee2435d8ed5611ed3f18bdc8b4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/41a7225c149315236f7e7646c832949f081a7e99",
-                "reference": "41a7225c149315236f7e7646c832949f081a7e99",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/6fb2970fae628ee2435d8ed5611ed3f18bdc8b4d",
+                "reference": "6fb2970fae628ee2435d8ed5611ed3f18bdc8b4d",
                 "shasum": ""
             },
             "require": {
-                "illuminate/auth": "~5.0",
-                "illuminate/cache": "~5.0",
-                "illuminate/config": "~5.0",
-                "illuminate/database": "~5.0",
-                "illuminate/support": "~5.0",
+                "illuminate/auth": "5.0.*|5.1.*",
+                "illuminate/cache": "5.0.*|5.1.*",
+                "illuminate/config": "5.0.*|5.1.*",
+                "illuminate/database": "5.0.*|5.1.*",
+                "illuminate/support": "5.0.*|5.1.*",
                 "php": ">=5.4.0"
             },
             "type": "library",
@@ -1853,7 +1853,7 @@
                 "source": "https://github.com/mybb/Settings/tree/master",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-05-09 18:33:13"
+            "time": "2015-05-12 13:30:55"
         },
         {
             "name": "nesbot/carbon",
