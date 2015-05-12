@@ -18,8 +18,8 @@
         <testsuite name="functional">
             <directory>./tests/functional</directory>
         </testsuite>
-        <testsuite name="behavioural">
-            <directory>./tests/behavioural</directory>
+        <testsuite name="behavioral">
+            <directory>./tests/behavioral</directory>
         </testsuite>
     </testsuites>
 
