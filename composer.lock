@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a8eaafd753f3c3ba61064a84245837b",
+    "hash": "1a0397d2be808521183380a8577c6d0e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1053,16 +1053,16 @@
         },
         {
             "name": "kalnoy/nestedset",
-            "version": "dev-master",
+            "version": "v2.4.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/JN-Jones/laravel-nestedset.git",
-                "reference": "56a1eab6e5c12867e151b2ad7806bb636fe63988"
+                "url": "https://github.com/lazychaser/laravel-nestedset.git",
+                "reference": "fb0ccd37a21156e719a4967048836e8db4e9eef6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JN-Jones/laravel-nestedset/zipball/56a1eab6e5c12867e151b2ad7806bb636fe63988",
-                "reference": "56a1eab6e5c12867e151b2ad7806bb636fe63988",
+                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/fb0ccd37a21156e719a4967048836e8db4e9eef6",
+                "reference": "fb0ccd37a21156e719a4967048836e8db4e9eef6",
                 "shasum": ""
             },
             "require": {
@@ -1077,6 +1077,7 @@
                     "Kalnoy\\Nestedset\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1094,10 +1095,7 @@
                 "nested sets",
                 "nsm"
             ],
-            "support": {
-                "source": "https://github.com/JN-Jones/laravel-nestedset/tree/master"
-            },
-            "time": "2015-05-11 07:34:40"
+            "time": "2015-05-12 05:41:12"
         },
         {
             "name": "laravel/framework",
@@ -1105,12 +1103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "d695b0e9aadb61eaee5d16c278e0fa898bd79f8f"
+                "reference": "7b15fa135c40530f7528fccbfc380948a39b79f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/d695b0e9aadb61eaee5d16c278e0fa898bd79f8f",
-                "reference": "d695b0e9aadb61eaee5d16c278e0fa898bd79f8f",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/7b15fa135c40530f7528fccbfc380948a39b79f2",
+                "reference": "7b15fa135c40530f7528fccbfc380948a39b79f2",
                 "shasum": ""
             },
             "require": {
@@ -1228,7 +1226,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-05-11 17:15:31"
+            "time": "2015-05-12 10:28:08"
         },
         {
             "name": "laravelcollective/html",
@@ -2063,17 +2061,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/JN-Jones/TwigBridge.git",
-                "reference": "87cb53d8d73ef58444cc9cca08266f5b6249e508"
+                "reference": "4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JN-Jones/TwigBridge/zipball/87cb53d8d73ef58444cc9cca08266f5b6249e508",
-                "reference": "87cb53d8d73ef58444cc9cca08266f5b6249e508",
+                "url": "https://api.github.com/repos/JN-Jones/TwigBridge/zipball/4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a",
+                "reference": "4cdc32c4d46cb11100c6e3afeffe8d40d3ca311a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~5.0",
-                "illuminate/view": "~5.0",
+                "illuminate/support": "5.0.*|5.1.*",
+                "illuminate/view": "5.0.*|5.1.*",
                 "php": ">=5.4.0",
                 "twig/twig": "~1.15"
             },
@@ -2121,7 +2119,7 @@
             "support": {
                 "source": "https://github.com/JN-Jones/TwigBridge/tree/0.7"
             },
-            "time": "2015-05-11 07:21:58"
+            "time": "2015-05-11 17:58:19"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4584,7 +4582,6 @@
     "stability-flags": {
         "rcrowe/twigbridge": 20,
         "mccool/laravel-auto-presenter": 10,
-        "kalnoy/nestedset": 20,
         "mybb/auth": 20,
         "mybb/parser": 20,
         "mybb/settings": 20,

@@ -5,10 +5,10 @@
 	"license": "BSD-3",
 	"type": "project",
 	"require": {
-		"laravel/framework": "~5.1",
+		"laravel/framework": "5.1.*",
 		"rcrowe/twigbridge": "~0.7@dev",
 		"mccool/laravel-auto-presenter": "~3.0@beta",
-		"kalnoy/nestedset": "dev-master",
+		"kalnoy/nestedset": "^2.4.3",
 		"laravelcollective/html": "~5.0",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
@@ -42,10 +42,6 @@
 		  "type": "vcs",
 		  "url":  "git@github.com:mybb/Settings.git"
 		},
-      {
-        "type": "vcs",
-        "url":  "git@github.com:JN-Jones/laravel-nestedset.git"
-      },
       {
         "type": "vcs",
         "url":  "git@github.com:JN-Jones/twigbridge.git"
