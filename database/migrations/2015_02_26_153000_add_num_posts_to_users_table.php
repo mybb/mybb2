@@ -36,11 +36,13 @@ class AddNumPostsToUsersTable extends Migration
 	public function down()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->dropColumn('num_posts');
-			$table->dropColumn('num_topics');
-			$table->dropColumn('avatar');
-			$table->dropColumn('dob');
-			$table->dropColumn('usertitle');
+			$table->dropColumn([
+				'num_posts',
+				'num_topics',
+				'avatar',
+				'dob',
+				'usertitle'
+			]);
 		});
 	}
 }

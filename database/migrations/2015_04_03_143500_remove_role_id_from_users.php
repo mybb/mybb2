@@ -32,7 +32,8 @@ class RemoveRoleIdFromUsers extends Migration
 	public function down()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->integer('role_id');
+			// The original column wasn't nullable but to avoid issues with existing users we need to make it nullable
+			$table->integer('role_id')->nullable();
 		});
 	}
 }

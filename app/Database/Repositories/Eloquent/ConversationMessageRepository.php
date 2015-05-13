@@ -100,7 +100,12 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 			]);
 
 			if ($checkParticipants) {
-				$conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
+				$users = $conversation->participants()->wherePivot('has_left', true)->get(['user_id'])->lists('user_id');
+				$conversation->participants()->newPivotStatement()->where('conversation_id', $conversation->id)
+					->whereIn('user_id', $users)->update(['has_left' => false]);
+
+				// This would be the better query but only MySQL wants to run it, PgSQL and SQLite don't like it
+				// $conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
 			}
 		}
 

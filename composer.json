@@ -27,7 +27,8 @@
 		"barryvdh/laravel-debugbar": "dev-master",
 		"sjparkinson/static-review": "dev-master",
 		"fabpot/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev"
+		"squizlabs/php_codesniffer": "~2.0@dev",
+		"mockery/mockery": "0.9.*@dev"
 	},
 	"repositories": [
 		{
@@ -52,9 +53,7 @@
 		}
 	},
 	"autoload-dev": {
-		"classmap": [
-			"tests/TestCase.php"
-		]
+        "MyBB\\Core\\Test": "tests/src"
 	},
 	"scripts": {
 		"post-install-cmd": [
@@ -68,7 +67,9 @@
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
-		]
+		],
+        "test-unit": "vendor/bin/phpunit --testsuite unit",
+        "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report"
 	},
 	"config": {
 		"preferred-install": "dist"
