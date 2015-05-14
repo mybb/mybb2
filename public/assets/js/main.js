@@ -341,9 +341,6 @@
 			});
 			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
 
-			$post.find('.quoteButton__add').hide();
-			$post.find('.quoteButton__remove').show();
-
 			this.showQuoteBar();
 		}
 		this.hideQuickQuote();
@@ -580,7 +577,7 @@
 
 			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
-			$("#selectAllQuotes").on("click", $.proxy(this.addQuotes, this));
+			$(".selectAllQuotes").on("click", $.proxy(this.addQuotes, this));
 			$('.modalHide').hide();
 		}, this)).always(function () {
 			MyBB.Spinner.remove();
@@ -607,7 +604,7 @@
 
 		$.each(quotes, function (key, quote) {
 			if (typeof quote != 'string') {
-				quote = quote['id'];
+				return;
 			}
 			quote = quote.split('_');
 			type = quote[0];
