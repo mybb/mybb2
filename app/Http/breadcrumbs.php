@@ -232,3 +232,8 @@ Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 		route('user.profile', ['slug' => $user->name, 'id' => $user->id])
 	);
 });
+
+Breadcrumbs::register('admin.index', function($breadcrumbs) {
+	$breadcrumbs->push('Control Panel');
+	$breadcrumbs->push('Home');
+});

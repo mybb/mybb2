@@ -1,0 +1,62 @@
+.admin-header {
+  background: #eee;
+  overflow: hidden;
+  border-bottom: 2px solid #ddd;
+
+  .breadcrumb {
+    font-size: 1em;
+    margin: 19px 19px 0 0;
+
+    a {
+      color: #007fd0;
+    }
+  }
+}
+
+.admin-main-nav {
+  width: 13%;
+  float: left;
+  margin-left: 15px;
+
+  .fa {
+    color: #777;
+  }
+
+  & > ul > li {
+    background: white;
+    margin: 5px;
+    padding: 5px;
+    width: 94%;
+  }
+
+  li {
+    background: #f9f9f9;
+    margin: 5px 5px 5px 23px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 4px;
+    width: 81%;
+  }
+
+  ul {
+    list-style: none;
+    text-indent: 0;
+    padding: 0;
+
+    h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 2px;
+      display: inline-block;
+      width: 85%;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      margin-top: 0;
+    }
+  }
+}
+
+.content {
+  h1 {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+}

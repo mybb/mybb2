@@ -8,10 +8,26 @@
 
 namespace MyBB\Core\Http\Controllers\Admin;
 
+use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
+
 class AdminIndexController extends AdminController
 {
+	/**
+	 * @var Breadcrumbs
+	 */
+	protected $breadcrumbs;
+
+	/**
+	 * @param Breadcrumbs $breadcrumbs
+	 */
+	public function __construct(Breadcrumbs $breadcrumbs)
+	{
+		$this->breadcrumbs = $breadcrumbs;
+	}
+
 	public function index()
 	{
-		return 'Welcome to the MyBB ACP';
+		$this->breadcrumbs->setCurrentRoute('admin.index');
+		return view('admin.index');
 	}
 }
