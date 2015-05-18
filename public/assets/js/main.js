@@ -426,7 +426,7 @@
 			var removed = false;
 			$.each(quotes, function(key, quote) {
 				if(typeof quote != 'string') {
-					quote = quote['id'];
+					return;
 				}
 				if(quote == type + '_' + postId) {
 					delete quotes[key];
