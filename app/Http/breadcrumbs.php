@@ -232,3 +232,12 @@ Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 		route('user.profile', ['slug' => $user->name, 'id' => $user->id])
 	);
 });
+
+Breadcrumbs::register('admin', function ($breadcrumbs) {
+	$breadcrumbs->push('Control Panel');
+});
+
+Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin');
+	$breadcrumbs->push('Home');
+});
