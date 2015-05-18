@@ -233,7 +233,11 @@ Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 	);
 });
 
-Breadcrumbs::register('admin.index', function ($breadcrumbs) {
+Breadcrumbs::register('admin', function ($breadcrumbs) {
 	$breadcrumbs->push('Control Panel');
+});
+
+Breadcrumbs::register('admin.index', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin');
 	$breadcrumbs->push('Home');
 });
