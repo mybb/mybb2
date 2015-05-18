@@ -85,12 +85,9 @@ Route::controllers([
 
 Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
 
-Route::get('admin', [
-	'middleware' => 'checkaccess',
-	'permissions' => 'canEnterACP',
-	'as' => 'admin.index',
-	'uses' => 'Admin\AdminIndexController@index'
-]);
+Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
+	Route::get('/', ['as' => 'admin.index', 'uses' => 'Admin\AdminIndexController@index']);
+});
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
 
