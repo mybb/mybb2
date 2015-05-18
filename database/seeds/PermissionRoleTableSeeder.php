@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 use Illuminate\Database\Seeder;
 
@@ -26,9 +32,16 @@ class PermissionRoleTableSeeder extends Seeder
 				'value' => -1
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
+					->pluck('id'),
 				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
 				'value' => 0
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
+				'value' => -1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canViewAllOnline')

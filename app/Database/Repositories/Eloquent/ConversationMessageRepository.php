@@ -1,10 +1,11 @@
 <?php
 /**
- * Forum repository implementation, using Eloquent ORM.
+ * Conversation message repository implementation, using Eloquent ORM.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
@@ -99,7 +100,12 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
 			]);
 
 			if ($checkParticipants) {
-				$conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
+				$users = $conversation->participants()->wherePivot('has_left', true)->get(['user_id'])->lists('user_id');
+				$conversation->participants()->newPivotStatement()->where('conversation_id', $conversation->id)
+					->whereIn('user_id', $users)->update(['has_left' => false]);
+
+				// This would be the better query but only MySQL wants to run it, PgSQL and SQLite don't like it
+				// $conversation->participants()->wherePivot('has_left', true)->update(['has_left' => false]);
 			}
 		}
 

@@ -2,9 +2,10 @@
 /**
  * User repository implementation, using Eloquent ORM.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
@@ -51,11 +52,15 @@ class UserRepository implements UserRepositoryInterface
 	/**
 	 * Get all users.
 	 *
+	 * @param string $sortBy
+	 * @param string $sortDir
+	 * @param int    $perPage
+	 *
 	 * @return mixed
 	 */
-	public function all()
+	public function all($sortBy = 'created_at', $sortDir = 'asc', $perPage = 10)
 	{
-		return $this->userModel->paginate(10);
+		return $this->userModel->orderBy($sortBy, $sortDir)->paginate($perPage);
 	}
 
 	/**

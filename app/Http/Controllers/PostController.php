@@ -5,8 +5,8 @@
  * @author    MyBB Group
  * @version   2.0.0
  * @package   mybb/core
- * @copyright Copyright (c) 2014, MyBB Group
- * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
+ * @copyright Copyright (c) 2015, MyBB Group
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  * @link      http://www.mybb.com
  */
 
@@ -128,16 +128,143 @@ class PostController extends AbstractController
 	 */
 	public function postQuotes(QuotePostRequest $quoteRequest)
 	{
-		$posts = $this->postsRepository->getPostsByIds($quoteRequest->input('posts'));
+		$contents = $quoteRequest->input('posts');
+		$data = $posts = $conversations = []; //TODO: conversations
+		foreach ($contents as $content) {
+			if (is_array($content)) {
+				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
+				$content = $content['id'];
+			} else {
+				$content = (string)$content;
+				$data[] = [$content, ''];
+			}
+			$content = explode('_', $content);
+			switch ($content[0]) {
+				case 'post':
+					$posts[] = (int)$content[1];
+					break;
+				case 'conversation':
+					$conversations[] = (int)$content[1];
+					break;
+			}
+		}
+		$myPosts = $this->postsRepository->getPostsByIds($posts);
+		$posts = [];
 
 		$content = "";
 
-		foreach ($posts as $post) {
-			$content .= $this->quoteRenderer->renderFromPost($post);
+		foreach ($myPosts as $post) {
+			$posts[$post->id] = $post;
+		}
+
+		foreach ($data as $value) {
+			list($type, $id) = explode('_', $value[0]);
+			$value = $value[1];
+
+			switch ($type) {
+				case 'post':
+					$post = $posts[$id];
+					if ($value) {
+						$oldContent = $post->content;
+						$oldContentParsed = $post->content_parsed;
+						$post->content = $post->content_parsed = $value;
+					}
+					$content .= $this->quoteRenderer->renderFromPost($post);
+					if ($value) {
+						$post->content = $oldContent;
+						$post->content_parsed = $oldContentParsed;
+					}
+					break;
+				case 'conversation':
+					// TODO
+					break;
+			}
 		}
 
 		return response()->json([
 			'message' => $content
+		]);
+	}
+
+	/**
+	 * @param QuotePostRequest $quoteRequest
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function viewQuotes(QuotePostRequest $quoteRequest)
+	{
+		$contents = $quoteRequest->input('posts');
+		$data = $posts = $conversations = []; //TODO: conversations
+		foreach ($contents as $content) {
+			if (is_array($content)) {
+				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
+				$content = $content['id'];
+			} else {
+				$content = (string)$content;
+				$data[] = [$content, ''];
+			}
+			$content = explode('_', $content);
+			switch ($content[0]) {
+				case 'post':
+					$posts[] = (int)$content[1];
+					break;
+				case 'conversation':
+					$conversations[] = (int)$content[1];
+					break;
+			}
+		}
+		$myPosts = $this->postsRepository->getPostsByIds($posts);
+		$posts = [];
+
+		$content = [];
+
+		foreach ($myPosts as $post) {
+			$posts[$post->id] = $post;
+		}
+
+		$i = 0;
+		foreach ($data as $value) {
+			list($type, $id) = explode('_', $value[0]);
+			$value = $value[1];
+
+			switch ($type) {
+				case 'post':
+					$post = $posts[$id];
+
+					if ($value) {
+						$oldContent = $post->content;
+						$oldContentParsed = $post->content_parsed;
+						$post->content = $value;
+						$post->content_parsed = e($value);
+					}
+
+					$author = $post->author;
+					if ($post->author) {
+						$author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
+					}
+
+					$content[] = [
+						'id' => $i++,
+						'quote' => $this->quoteRenderer->renderFromPost($post),
+						'content_parsed' => $post->content_parsed,
+						'post' => app()->make('MyBB\Core\Presenters\Post', [$post]),
+						'author' => $author
+					];
+
+
+					if ($value) {
+						$post->content = $oldContent;
+						$post->content_parsed = $oldContentParsed;
+					}
+					break;
+				case 'conversation':
+					// TODO
+					break;
+			}
+		}
+
+		return view('post.quotes', [
+			'contents' => $content
 		]);
 	}
 }

@@ -1,10 +1,11 @@
 <?php
 /**
- * Forum repository implementation, using Eloquent ORM.
+ * Conversation repository implementation, using Eloquent ORM.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
@@ -145,7 +146,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	{
 		$conversation->participants()->updateExistingPivot($user->id, ['has_left' => true]);
 
-		$this->checkForDeletion($conversation);
+		$this->checkForDeletion($conversation, $user);
 	}
 
 	/**
@@ -155,7 +156,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	{
 		$conversation->participants()->updateExistingPivot($user->id, ['ignores' => true]);
 
-		$this->checkForDeletion($conversation);
+		$this->checkForDeletion($conversation, $user);
 	}
 
 	/**
@@ -210,13 +211,20 @@ class ConversationRepository implements ConversationRepositoryInterface
 
 	/**
 	 * @param Conversation $conversation
+	 * @param User         $exceptUser
 	 */
-	private function checkForDeletion(Conversation $conversation)
+	private function checkForDeletion(Conversation $conversation, User $exceptUser = null)
 	{
 		$participants = $conversation->participants;
 
 		/** @var Collection $activeParticipants */
 		$activeParticipants = $participants->whereLoose('pivot.has_left', false)->whereLoose('pivot.ignores', false);
+
+		if ($exceptUser != null) {
+			$activeParticipants = $activeParticipants->filter(function ($item) use ($exceptUser) {
+				return $item->id != $exceptUser->id;
+			});
+		}
 
 		if ($activeParticipants->count() == 0) {
 			// All participants either ignore or left this conversation so delete everything related to it

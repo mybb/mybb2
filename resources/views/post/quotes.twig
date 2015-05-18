@@ -1,0 +1,42 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('topic.multiQuote.viewAll') }}
+{% endblock %}
+{% block contents %}
+    <div class="page-content">
+        <header>
+            <h1>{{ trans('topic.multiQuote.viewAll') }}</h1>
+        </header>
+        <section class="post-quotes">
+			{% for content in contents %}
+				<div class="content-quote" data-id="{{ content.id }}" data-quote="{{ content.quote }}">
+					<div class="post">
+						<div class="post__meta">
+							<a href="{{ url_route('user.profile', [content.author.id, content.author.name]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', { 'name':content.author.name}) }}"><img src="{{ content.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', { 'name':content.author.name}) }}" /></a>
+							<h3 class="post__author">{{ render_profile_link(content.author) }}</h3>
+							<span class="post__topic">
+								{{ trans('general.in') }}
+								<a href="{{ url_route('topics.show', [content.post.topic.slug, content.post.topic.id]) }}" title="{{ content.post.topic.title }}">{{ content.post.topic.title }}</a>
+							</span>
+							{{ post_date_link(url_route('topics.showPost', [content.post.topic.slug, content.post.topic.id, content.post.id]), content.post.created_at) }}
+						</div>
+						<div class="post__body">
+							{{ content.content_parsed|raw }}
+						</div>
+						<div class="post__foot">
+							<ul class="post__controls">
+									<li class="delete quote__remove"><a href="#remove" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+									<li class="quote quote__select"><a href="#select">
+										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">{{ trans('topic.multiQuote.selectThisPost') }}</span></a>
+									</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			<a href="#select-quotes" class="button selectAllQuotes">
+				<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">{{ trans('topic.multiQuote.selectQuotes') }}</span>
+			</a>
+        </section>
+    </div>
+{% endblock %}

@@ -26,7 +26,7 @@
 		{% endif %}
 		<section class="topic">
 			{% for post in posts %}
-				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}">
+				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
 						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', {'name': post.author.name}) }}" /></a>
@@ -44,6 +44,7 @@
 					</div>
 					<div class="post__body">
 						<p>
+							<div class="quickQuote"><span class="fast">{{ trans('topic.quoteSelectionNow') }}</span> | <span class="add">{{ trans('topic.quoteSelectionLater') }}</span></div>
 							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
 						</p>
 					</div>
@@ -65,7 +66,7 @@
                                     {% endif %}
                                 {{ form_close() }}
                             	</li>
-                                <li class="quote"><a class="quoteButton" data-postid="{{ post.id }}" href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}">
+                                <li class="quote"><a class="quoteButton" href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}">
 										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quoteButton__add">{{ trans('topic.quote') }}</span><span class="text quoteButton__remove">{{ trans('topic.removeQuote') }}</span></a>
 								</li>
 							{% endif %}
