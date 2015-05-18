@@ -16,6 +16,7 @@ use Breadcrumbs;
 use MyBB\Auth\Contracts\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
+use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
@@ -25,6 +26,7 @@ use MyBB\Core\Exceptions\ConversationNotFoundException;
 use MyBB\Core\Http\Requests\Conversations\CreateRequest;
 use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
+use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -73,11 +75,26 @@ class ConversationsController extends AbstractController
 	}
 
 	/**
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
+	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getCompose()
+	public function getCompose(Request $request, MessageFormatter $formatter)
 	{
-		return view('conversation.compose');
+		$preview = null;
+		if ($request->has('message')) {
+			$preview = new ConversationMessage([
+				'author_id' => $this->guard->user()->id,
+				'message' => $request->get('message'),
+				'message_parsed' => $formatter->parse($request->get('message'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('conversation.compose', compact('preview'));
 	}
 
 	/**
@@ -109,11 +126,13 @@ class ConversationsController extends AbstractController
 	}
 
 	/**
-	 * @param int $id
+	 * @param int              $id
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function getRead($id)
+	public function getRead($id, Request $request, MessageFormatter $formatter)
 	{
 		$conversation = $this->conversationRepository->find($id);
 
@@ -130,7 +149,19 @@ class ConversationsController extends AbstractController
 
 		$messages = $this->conversationMessageRepository->getAllForConversation($conversation);
 
-		return view('conversation.show', compact('conversation', 'messages'));
+		$preview = null;
+		if ($request->has('message')) {
+			$preview = new ConversationMessage([
+				'author_id' => $this->guard->user()->id,
+				'message' => $request->get('message'),
+				'message_parsed' => $formatter->parse($request->get('message'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('conversation.show', compact('conversation', 'messages', 'preview'));
 	}
 
 	/**

@@ -62,6 +62,13 @@ class Post extends BasePresenter
 			return $decoratedUser;
 		}
 
+		if ($this->wrappedObject->author instanceof UserModel) {
+			$this->wrappedObject->author = $this->app->make(
+				'MyBB\Core\Presenters\User',
+				[$this->wrappedObject->author]
+			);
+		}
+
 		return $this->wrappedObject->author;
 	}
 
