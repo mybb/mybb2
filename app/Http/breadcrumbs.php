@@ -237,7 +237,7 @@ Breadcrumbs::register('admin', function ($breadcrumbs) {
 	$breadcrumbs->push('Control Panel');
 });
 
-Breadcrumbs::register('admin.index', function ($breadcrumbs) {
+Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin');
 	$breadcrumbs->push('Home');
 });

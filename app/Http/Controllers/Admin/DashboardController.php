@@ -10,7 +10,7 @@ namespace MyBB\Core\Http\Controllers\Admin;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 
-class AdminIndexController extends AdminController
+class DashboardController extends AdminController
 {
 	/**
 	 * @var Breadcrumbs
@@ -27,7 +27,7 @@ class AdminIndexController extends AdminController
 
 	public function index()
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.index');
-		return view('admin.index');
+		$this->breadcrumbs->setCurrentRoute('admin.dashboard');
+		return view('admin.dashboard');
 	}
 }
