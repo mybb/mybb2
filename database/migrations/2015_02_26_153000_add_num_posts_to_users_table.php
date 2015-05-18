@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -30,11 +36,13 @@ class AddNumPostsToUsersTable extends Migration
 	public function down()
 	{
 		Schema::table('users', function (Blueprint $table) {
-			$table->dropColumn('num_posts');
-			$table->dropColumn('num_topics');
-			$table->dropColumn('avatar');
-			$table->dropColumn('dob');
-			$table->dropColumn('usertitle');
+			$table->dropColumn([
+				'num_posts',
+				'num_topics',
+				'avatar',
+				'dob',
+				'usertitle'
+			]);
 		});
 	}
 }

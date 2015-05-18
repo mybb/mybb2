@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 	'notfound' => 'No topics found',
@@ -11,7 +17,7 @@ return [
 	'firstpost' => 'First Post',
 	'latest' => 'Latest',
 	'create.title' => 'Create New Topic',
-	'create.description' => "Create a new topic in the '{0}' forum.",
+	'create.description' => "Create a new topic in forum: {0}.",
 	'fullEditor' => 'Full Editor',
 	'reply' => 'Reply',
 	'postreply' => 'Post Reply',
@@ -28,6 +34,8 @@ return [
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
 	'removeQuote' => 'Remove Quote',
+	'quoteSelectionNow' => 'Quote now',
+	'quoteSelectionLater' => 'Save quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -42,7 +50,10 @@ return [
 	'multiQuote' => [
 		'desc' => 'You have selected one or more posts to quote.',
 		'select' => 'Quote these posts now',
-		'deselect' => 'deselect them.',
+		'deselect' => 'deselect them',
+		'viewAll' => 'View all quotes',
+		'selectThisPost' => 'Select',
+		'selectQuotes' => 'Select all quotes'
 	],
 
 ];

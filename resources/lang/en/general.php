@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 
@@ -28,6 +34,7 @@ return [
 	'guest' => 'Guest',
 	'and' => 'and',
 	'or' => 'or',
+	'comma' => ',',
 	'yesterday' => 'yesterday',
 	'xdayago' => 'a day ago|:count days ago',
 	'xweekago' => 'a week ago|:count weeks ago',
