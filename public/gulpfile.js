@@ -33,7 +33,14 @@ var paths = {
     fonts: {
         src: "./fonts",
         dest: "./assets/fonts"
-    }
+    },
+	editor: {
+		src: {
+			bower: "./bower_components/ckeditor",
+			mybb: "./js/ckeditor"
+		},
+		dest: "./assets/js/ckeditor"
+	}
 };
 
 var vendor_scripts = [
@@ -73,6 +80,19 @@ var css = [
 	paths.bower + "/datetimepicker/jquery.datetimepicker.css",
     paths.css.src + "/main.scss"
 ];
+
+var editor = {
+	bower: [
+		paths.bower + "/ckeditor/**/*.js",
+		paths.bower + "/ckeditor/**/*.css",
+		paths.bower + "/ckeditor/**/*.png"
+	],
+	mybb: [
+		"./js/ckeditor/**/*.js",
+		"./js/ckeditor/**/*.css",
+		"./js/ckeditor/**/*.png"
+	]
+};
 
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "rtl_styles", "fonts"]);
 
@@ -117,7 +137,14 @@ gulp.task("vendor_scripts", function() {
         .pipe(gulp.dest(paths.js.dest + "/"));
 });
 
-gulp.task("scripts", function() {
+gulp.task("copyEditorFiles", function () {
+	gulp.src(editor.bower, { base: paths.editor.src.bower })
+		.pipe(gulp.dest(paths.editor.dest));
+	return gulp.src(editor.mybb, { base: paths.editor.src.mybb })
+		.pipe(gulp.dest(paths.editor.dest));
+});
+
+gulp.task("scripts", ["copyEditorFiles"], function() {
 	console.log(paths.js.dest);
     return gulp.src(scripts)
         .pipe(sourcemaps.init({loadMaps: true}))

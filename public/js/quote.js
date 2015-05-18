@@ -197,6 +197,9 @@
 			}
 			else {
 				var value = $textarea.val();
+				if(typeof Editor != 'undefined') {
+					value = Editor.getData();
+				}
 				if (value && value.substr(-2) != "\n\n") {
 					if (value.substr(-1) != "\n") {
 						value += "\n";
@@ -204,6 +207,10 @@
 					value += "\n";
 				}
 				$textarea.val(value + json.message).focus();
+				if(typeof Editor != 'undefined') {
+					Editor.setData(value + json.message);
+					Editor.focus();
+				}
 			}
 			$.modal.close();
 		}).always(function () {
@@ -239,6 +246,9 @@
 			}
 			else {
 				var value = $textarea.val();
+				if(typeof Editor != 'undefined') {
+					value = Editor.getData();
+				}
 				if (value && value.substr(-2) != "\n\n") {
 					if (value.substr(-1) != "\n") {
 						value += "\n";
@@ -246,6 +256,10 @@
 					value += "\n";
 				}
 				$textarea.val(value + json.message).focus();
+				if(typeof Editor != 'undefined') {
+					Editor.setData(value + json.message);
+					Editor.focus();
+				}
 			}
 		}).always(function () {
 			MyBB.Spinner.remove();
@@ -337,6 +351,9 @@
 			quotes = this.getQuotes();
 
 		var value = $textarea.val();
+		if(typeof Editor != 'undefined') {
+			value = Editor.getData();
+		}
 		if (value && value.substr(-2) != "\n\n") {
 			if (value.substr(-1) != "\n") {
 				value += "\n";
@@ -344,6 +361,10 @@
 			value += "\n";
 		}
 		$textarea.val(value + $post.data('quote')).focus();
+		if(typeof Editor != 'undefined') {
+			Editor.setData(value + $post.data('quote'));
+			Editor.focus();
+		}
 
 		delete quotes[$post.data('id')];
 		MyBB.Cookie.set('quotes', JSON.stringify(quotes));

@@ -1,0 +1,20 @@
+<script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
+<script>
+	//TODO: smilies
+	var SmilieCodes = [
+		':)',
+		':-\\',
+		'(:',
+		':|'
+	];
+	var Smilies = {
+		':)': '1.png',
+		':-\\': '2.png',
+		'(:': '3.png',
+		':|': '4.png'
+	};
+
+	var Editor = CKEDITOR.replace('message', {
+		customConfig: 'mybbconfig.js'
+	});
+</script>
