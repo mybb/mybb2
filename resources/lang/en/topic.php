@@ -34,6 +34,8 @@ return [
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
 	'removeQuote' => 'Remove Quote',
+	'quoteSelectionNow' => 'Quote now',
+	'quoteSelectionLater' => 'Save quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -48,7 +50,10 @@ return [
 	'multiQuote' => [
 		'desc' => 'You have selected one or more posts to quote.',
 		'select' => 'Quote these posts now',
-		'deselect' => 'deselect them.',
+		'deselect' => 'deselect them',
+		'viewAll' => 'View all quotes',
+		'selectThisPost' => 'Select',
+		'selectQuotes' => 'Select all quotes'
 	],
 
 ];

@@ -34,6 +34,7 @@ return [
 	'guest' => 'Guest',
 	'and' => 'and',
 	'or' => 'or',
+	'comma' => ',',
 	'yesterday' => 'yesterday',
 	'xdayago' => 'a day ago|:count days ago',
 	'xweekago' => 'a week ago|:count weeks ago',
