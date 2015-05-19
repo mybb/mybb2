@@ -884,3 +884,15 @@ function escapeHTML(string) {
 		return entityMap[s];
 	});
 }
+
+function submitFormAsGet(id, newRoute) {
+	var form = $('#' + id);
+	form.find("input[name=_token]").val('');
+
+	if(newRoute != null) {
+		form.attr('action', newRoute);
+	}
+
+	form.attr('method', 'get').submit();
+	return false;
+}

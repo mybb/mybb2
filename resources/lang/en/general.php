@@ -48,6 +48,7 @@ return [
 	'never' => 'Never',
 	'menu' => 'Menu',
 	'loading' => 'Loading...',
+	'preview' => 'Preview',
 	
 	'sorting' => 'Sorting',
 	'sortby' => 'Sort by:',
