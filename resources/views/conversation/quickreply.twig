@@ -13,13 +13,18 @@
 						</a>#}
 					</div>
 					<div class="post__body">
-						{{ form_textarea('message', '', {'class':'textarea', 'rows': '10'}) }}
+						{{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '10'}) }}
 					</div>
 					<div class="post__foot">
 						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->
+						<a href="{{ url_route('conversations.read', [conversation.id]) }}" class="button button--secondary"
+						   onclick="return submitFormAsGet('quickreply', '{{ url_route('conversations.read', [conversation.id]) }}');">
+							<i class="fa fa-edit"></i>
+							<span class="text">{{ trans('general.preview') }}</span>
+						</a>
 					</div>
 				{{ form_close() }}
 			</div>

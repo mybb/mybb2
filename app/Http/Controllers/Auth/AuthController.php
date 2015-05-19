@@ -43,18 +43,25 @@ class AuthController extends Controller
 	 */
 	private $validator;
 
+	/*
+	 * @var Request
+	 */
+	private $request;
+
 	/**
 	 * Create a new authentication controller instance.
 	 *
 	 * @param Guard       $auth
 	 * @param Breadcrumbs $breadcrumbs
 	 * @param Factory     $validator
+	 * @param Request     $request
 	 */
-	public function __construct(Guard $auth, Breadcrumbs $breadcrumbs, Factory $validator)
+	public function __construct(Guard $auth, Breadcrumbs $breadcrumbs, Factory $validator, Request $request)
 	{
 		$this->auth = $auth;
 		$this->breadcrumbs = $breadcrumbs;
 		$this->validator = $validator;
+		$this->request = $request;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}
@@ -75,11 +82,9 @@ class AuthController extends Controller
 	/**
 	 * Handle a registration request for the application.
 	 *
-	 * @param  \Illuminate\Foundation\Http\FormRequest $request
-	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postSignup(Request $request)
+	public function postSignup()
 	{
 		$this->failedValidationRedirect = url('auth/signup');
 
@@ -88,16 +93,16 @@ class AuthController extends Controller
 			return $captcha;
 		}
 
-		$validator = $this->validator($request->all());
+		$validator = $this->validator($this->request->all());
 
 		if ($validator->fails()) {
 			$this->throwValidationException(
-				$request,
+				$this->request,
 				$validator
 			);
 		}
 
-		$this->auth->login($this->create($request->all()));
+		$this->auth->login($this->create($this->request->all()));
 
 		return redirect($this->redirectPath());
 	}
@@ -117,31 +122,29 @@ class AuthController extends Controller
 	/**
 	 * Handle a login request to the application.
 	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function postLogin(Request $request)
+	public function postLogin()
 	{
 		$this->failedValidationRedirect = url('auth/login');
 
-		$this->validate($request, [
+		$this->validate($this->request, [
 			'username' => 'required',
 			'password' => 'required',
 		]);
 
-		$credentials = $request->only('username', 'password');
+		$credentials = $this->request->only('username', 'password');
 
 		if ($this->auth->attempt(
 			['name' => $credentials['username'], 'password' => $credentials['password']],
-			$request->input('remember_me')
+			$this->request->input('remember_me')
 		)
 		) {
 			return redirect()->intended($this->redirectPath());
 		}
 
 		return redirect('/auth/login')
-			->withInput($request->only('username', 'remember_me'))
+			->withInput($this->request->only('username', 'remember_me'))
 			->withErrors([
 				'username' => trans('member.invalidCredentials'),
 			]);
@@ -167,7 +170,13 @@ class AuthController extends Controller
 	 */
 	public function redirectPath()
 	{
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';
+		$redirectUrl = $this->request->input('url');
+
+		if (!empty($redirectUrl)) {
+			return $redirectUrl;
+		}
+
+		return '/';
 	}
 
 
