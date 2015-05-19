@@ -35,5 +35,4 @@ class AddIsFirstPostToPostsTable extends Migration
 			}
 		);
 	}
-
 }

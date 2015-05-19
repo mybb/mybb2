@@ -48,7 +48,7 @@ class LikeRenderer extends AbstractRenderer
 	{
 		$langName = 'user_activity.activity_like';
 
-		$likedContentType =  '';
+		$likedContentType = '';
 		if (isset($activity->extra_details['liked_content_type'])) {
 			$likedContentType = $activity->extra_details['liked_content_type'];
 		}
@@ -65,19 +65,34 @@ class LikeRenderer extends AbstractRenderer
 			$contentLink = $activity->activity_historable->likeable->getViewUrl();
 		}
 
+		$contentTitle = '';
+		if (isset($activity->extra_details['liked_content_title'])) {
+			$contentTitle = $activity->extra_details['liked_content_title'];
+		}
+
+		$userId = 0;
+		if (isset($activity->extra_details['liked_content_user_id'])) {
+			$userId = (int) $activity->extra_details['liked_content_user_id'];
+		}
+
+		$userName = '';
+		if (isset($activity->extra_details['liked_content_user_name'])) {
+			$userName = $activity->extra_details['liked_content_user_name'];
+		}
+
 		return trans(
 			$langName,
 			[
-				'content_title' => isset($activity->extra_details['liked_content_title']) ? $activity->extra_details['liked_content_title'] : '',
+				'content_title' => $contentTitle,
 				'content_link'  => $contentLink,
 				'user_link'     => $this->urlGenerator->route(
 					'user.profile',
 					[
-						'id'   => isset($activity->extra_details['liked_content_user_id']) ? $activity->extra_details['liked_content_user_id'] : 0,
-						'slug' => isset($activity->extra_details['liked_content_user_name']) ? $activity->extra_details['liked_content_user_name'] : '',
+						'id'   => $userId,
+						'slug' => $userName,
 					]
 				),
-				'user_name'     => isset($activity->extra_details['liked_content_user_name']) ? $activity->extra_details['liked_content_user_name'] : '',
+				'user_name'     => $userName,
 			]
 		);
 	}

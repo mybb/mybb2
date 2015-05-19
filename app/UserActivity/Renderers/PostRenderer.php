@@ -44,15 +44,30 @@ class PostRenderer extends AbstractRenderer
 	 */
 	public function render(UserActivity $activity)
 	{
+		$topicTitle = '';
+		if (isset($activity->extra_details['topic_title'])) {
+			$topicTitle = $activity->extra_details['topic_title'];
+		}
+
+		$topicId = 0;
+		if (isset($activity->extra_details['topic_id'])) {
+			$topicId = (int) $activity->extra_details['topic_id'];
+		}
+
+		$topicSlug = '';
+		if (isset($activity->extra_details['topic_slug'])) {
+			$topicSlug = $activity->extra_details['topic_slug'];
+		}
+
 		return trans(
 			'user_activity.activity_post',
 			[
-				'topic_title' => isset($activity->extra_details['topic_title']) ? $activity->extra_details['topic_title'] : '',
-				'topic_id'    => isset($activity->extra_details['topic_id']) ? $activity->extra_details['topic_id'] : 0,
+				'topic_title' => $topicTitle,
+				'topic_id'    => $topicId,
 				'topic_link'  => $this->urlGenerator->route(
 					'topics.showPost',
 					[
-						'slug'   => isset($activity->extra_details['topic_slug']) ? $activity->extra_details['topic_slug'] : '',
+						'slug'   => $topicSlug,
 						'id'     => $activity->activity_historable->topic_id,
 						'postId' => $activity->activity_id,
 					]
