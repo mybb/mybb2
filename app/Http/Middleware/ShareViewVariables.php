@@ -47,13 +47,6 @@ class ShareViewVariables extends AbstractBootstrapMiddleware
 		// Share the authenticated user to make sure we have a decorated version of it
 		$this->viewFactory->share('auth_user', $this->guard->user());
 
-		$path = $request->path();
-		if ($path == '/') {
-			$path = '';
-		}
-
-		$this->viewFactory->share('current_path', $path);
-
 		return $next($request);
 	}
 }
