@@ -43,7 +43,7 @@ class AuthController extends Controller
 	 */
 	private $validator;
 
-	/*
+	/**
 	 * @var Request
 	 */
 	private $request;
