@@ -8,7 +8,7 @@
  * @version   2.0.0
  * @package   mybb/core
  * @copyright Copyright (c) 2015, MyBB Group
- * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  * @link      http://www.mybb.com
  */
 
@@ -20,6 +20,7 @@ use MyBB\Core\UserActivity\Database\Models\UserActivity;
 use Mybb\Core\UserActivity\Renderers\AbstractRenderer;
 use MyBB\Core\UserActivity\Renderers\LikeRenderer;
 use MyBB\Core\UserActivity\Renderers\PostRenderer;
+use MyBB\Core\UserActivity\Renderers\RegistrationRenderer;
 use MyBB\Core\UserActivity\Renderers\TopicRenderer;
 
 class RendererFactory
@@ -69,6 +70,9 @@ class RendererFactory
 				break;
 			case LikeRenderer::ACTIVITY_NAME:
 				$renderer = '\MyBB\Core\UserActivity\Renderers\LikeRenderer';
+				break;
+			case RegistrationRenderer::ACTIVITY_NAME:
+				$renderer = '\MyBB\Core\UserActivity\Renderers\RegistrationRenderer';
 				break;
 			default:
 				if (isset($this->types[$activity->activity_type])) {

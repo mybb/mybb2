@@ -6,7 +6,7 @@
  * @version   2.0.0
  * @package   mybb/core
  * @copyright Copyright (c) 2015, MyBB Group
- * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  * @link      http://www.mybb.com
  */
 
@@ -47,8 +47,12 @@ class EloquentObserver
 	 */
 	public function created(ActivityStoreableInterface $model)
 	{
-		if ($this->guard->check() && $model->checkStoreable()) {
-			$userId = $this->guard->user()->getAuthIdentifier();
+		if ($model->checkStoreable()) {
+			$userId = 0;
+
+			if ($this->guard->check()) {
+				$userId = $this->guard->user()->getAuthIdentifier();
+			}
 
 			$this->activityRepository->createForContentAndUser(
 				$model,

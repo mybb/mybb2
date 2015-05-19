@@ -6,7 +6,7 @@
  * @version   2.0.0
  * @package   mybb/core
  * @copyright Copyright (c) 2015, MyBB Group
- * @license   http://www.mybb.com/about/license GNU LESSER GENERAL PUBLIC LICENSE
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  * @link      http://www.mybb.com
  */
 

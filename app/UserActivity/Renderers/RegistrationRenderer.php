@@ -1,6 +1,6 @@
 <?php
 /**
- * Post activity renderer.
+ * Registration activity renderer.
  *
  * @author    MyBB Group
  * @version   2.0.0
@@ -14,11 +14,13 @@ namespace MyBB\Core\UserActivity\Renderers;
 
 use Illuminate\Contracts\Routing\UrlGenerator;
 use Illuminate\Translation\Translator;
+use MyBB\Core\Presenters\User As UserPresenter;
 use MyBB\Core\UserActivity\Database\Models\UserActivity;
 
-class PostRenderer extends AbstractRenderer
+class RegistrationRenderer extends AbstractRenderer
 {
-	const ACTIVITY_NAME = 'MyBB\Core\Database\Models\Post';
+	const ACTIVITY_NAME = 'MyBB\Core\Database\Models\User';
+
 	/**
 	 * @var UrlGenerator $urlGenerator
 	 */
@@ -45,16 +47,15 @@ class PostRenderer extends AbstractRenderer
 	public function render(UserActivity $activity)
 	{
 		return trans(
-			'user_activity.activity_post',
+			'user_activity.activity_registration',
 			[
-				'topic_title' => isset($activity->extra_details['topic_title']) ? $activity->extra_details['topic_title'] : '',
-				'topic_id'    => isset($activity->extra_details['topic_id']) ? $activity->extra_details['topic_id'] : 0,
-				'topic_link'  => $this->urlGenerator->route(
-					'topics.showPost',
+				'user_name' => $activity->activity_historable->styled_name(),
+				'user_id' => $activity->activity_id,
+				'profile_link'  => $this->urlGenerator->route(
+					'user.profile',
 					[
-						'slug'   => isset($activity->extra_details['topic_slug']) ? $activity->extra_details['topic_slug'] : '',
-						'id'     => $activity->activity_historable->topic_id,
-						'postId' => $activity->activity_id,
+						'slug' => $activity->activity_historable->name,
+						'id'   => $activity->activity_id,
 					]
 				),
 			]

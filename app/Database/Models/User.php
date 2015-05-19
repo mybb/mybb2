@@ -16,15 +16,18 @@ use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 use MyBB\Core\Permissions\Traits\PermissionableTrait;
+use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
+use MyBB\Core\UserActivity\Traits\UserActivityTrait;
 
 /**
  * @property string id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface, ActivityStoreableInterface
 {
 	use Authenticatable;
 	use CanResetPassword;
 	use PermissionableTrait;
+	use UserActivityTrait;
 
 	/**
 	 * The database table used by the model.
@@ -140,4 +143,133 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			->where('conversation_users.has_left', false)
 			->where('conversation_users.ignores', false);
 	}
-}
+
+	/**
+	 * Check whether this activity entry should be saved.
+	 *
+	 * @return bool
+	 */
+	public function checkStoreable()
+	{
+		return true;
+	}
+
+	/**
+	 * Get the ID of the model.
+	 *
+	 * @return int
+	 */
+	public function getContentId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * Get extra details about a model.
+	 *
+	 * @return array The extra details to store.
+	 */
+	public function getExtraDetails()
+	{
+		return [];
+	}
+
+	/**
+	 * Get the unique identifier for the user.
+	 *
+	 * @return mixed
+	 */
+	public function getAuthIdentifier()
+	{
+		// TODO: Implement getAuthIdentifier() method.
+	}
+
+	/**
+	 * Get the password for the user.
+	 *
+	 * @return string
+	 */
+	public function getAuthPassword()
+	{
+		// TODO: Implement getAuthPassword() method.
+	}
+
+	/**
+	 * Get the token value for the "remember me" session.
+	 *
+	 * @return string
+	 */
+	public function getRememberToken()
+	{
+		// TODO: Implement getRememberToken() method.
+	}
+
+	/**
+	 * Set the token value for the "remember me" session.
+	 *
+	 * @param  string $value
+	 *
+	 * @return void
+	 */
+	public function setRememberToken($value)
+	{
+		// TODO: Implement setRememberToken() method.
+	}
+
+	/**
+	 * Get the column name for the "remember me" token.
+	 *
+	 * @return string
+	 */
+	public function getRememberTokenName()
+	{
+		// TODO: Implement getRememberTokenName() method.
+	}
+
+	/**
+	 * Get the e-mail address where password reset links are sent.
+	 *
+	 * @return string
+	 */
+	public function getEmailForPasswordReset()
+	{
+		// TODO: Implement getEmailForPasswordReset() method.
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function getViewablePermission()
+	{
+		// TODO: Implement getViewablePermission() method.
+	}
+
+	/**
+	 * Get the username for the user
+	 *
+	 * @return string
+	 */
+	public function getUsername()
+	{
+		// TODO: Implement getUsername() method.
+	}
+
+	/**
+	 * Get the salt for the user
+	 *
+	 * @return string
+	 */
+	public function getSalt()
+	{
+		// TODO: Implement getSalt() method.
+	}
+
+	/**
+	 * Get the hasher type for the user
+	 *
+	 * @return string
+	 */
+	public function getHasher()
+	{
+		// TODO: Implement getHasher() method.
+	}}
