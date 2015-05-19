@@ -14,33 +14,33 @@ namespace MyBB\Core\Likes\Contracts;
 
 interface LikeableInterface
 {
-    /**
-     * Get the short name of the content being liked.
-     *
-     * For example: "post".
-     *
-     * @return string
-     */
-    public function getContentTypeShortName();
+	/**
+	 * Get the short name of the content being liked.
+	 *
+	 * For example: "post".
+	 *
+	 * @return string
+	 */
+	public function getContentTypeShortName();
 
-    /**
-     * Get the title of the content being liked.
-     *
-     * @return string
-     */
-    public function getContentTitle();
+	/**
+	 * Get the title of the content being liked.
+	 *
+	 * @return string
+	 */
+	public function getContentTitle();
 
-    /**
-     * Get the author of the content being liked.
-     *
-     * @return \MyBB\Core\Database\Models\User
-     */
-    public function getContentAuthor();
+	/**
+	 * Get the author of the content being liked.
+	 *
+	 * @return \MyBB\Core\Database\Models\User
+	 */
+	public function getContentAuthor();
 
-    /**
-     * Get the URL to view this content.
-     *
-     * @return string
-     */
-    public function getViewUrl();
+	/**
+	 * Get the URL to view this content.
+	 *
+	 * @return string
+	 */
+	public function getViewUrl();
 }

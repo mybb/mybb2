@@ -28,16 +28,21 @@ class UserController extends AbstractController
 	 */
 	protected $userProfileFields;
 
-	/** @var UserActivityRepositoryInterface $activityRepository */
+	/**
+	 * @var UserActivityRepositoryInterface $activityRepository
+	 */
 	protected $activityRepository;
 
-	/** @var Store $settings */
+	/**
+	 * @var Store $settings
+	 */
 	protected $settings;
 
 	/**
 	 * @param UserRepositoryInterface             $users
 	 * @param UserProfileFieldRepositoryInterface $userProfileFields
 	 * @param UserActivityRepositoryInterface     $activityRepository
+	 * @param Store                               $settings
 	 */
 	public function __construct(
 		UserRepositoryInterface $users,

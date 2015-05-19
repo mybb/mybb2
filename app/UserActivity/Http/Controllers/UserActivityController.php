@@ -69,7 +69,7 @@ class UserActivityController extends AbstractController
 	 * Get the user activity for a single user.
 	 *
 	 * @param string $slug
-	 * @param int $id
+	 * @param int    $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -81,7 +81,10 @@ class UserActivityController extends AbstractController
 			throw new UserNotFoundException();
 		}
 
-		$activity = $this->userActivityRepository->paginateForUser($user, $this->settings->get('user_activity.per_page', 20));
+		$activity = $this->userActivityRepository->paginateForUser(
+			$user,
+			$this->settings->get('user_activity.per_page', 20)
+		);
 
 		return view('user_activity.for_user', compact('user', 'activity'));
 	}

@@ -91,16 +91,19 @@ class RenderLikes extends \Twig_Extension
 
 		$likes = [];
 
-		$likesCollection = $likesCollection->filter(function (Like $like) use (&$likes, &$numLikesToList, $userId) {
-			if ($like->user->id === $userId) {
-				$like->user->name = $this->lang->get('likes.current_user');
-				$likes[] = $like;
-				$numLikesToList--;
-				return false;
-			}
+		$likesCollection = $likesCollection->filter(
+			function (Like $like) use (&$likes, &$numLikesToList, $userId) {
+				if ($like->user->id === $userId) {
+					$like->user->name = $this->lang->get('likes.current_user');
+					$likes[] = $like;
+					$numLikesToList--;
 
-			return true;
-		});
+					return false;
+				}
+
+				return true;
+			}
+		);
 
 		$numLikesInCollection = $likesCollection->count();
 

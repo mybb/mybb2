@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddIsFirstPostToPostsTable extends Migration {
+class AddIsFirstPostToPostsTable extends Migration
+{
 
 	/**
 	 * Run the migrations.
@@ -12,9 +13,12 @@ class AddIsFirstPostToPostsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('posts', function(Blueprint $table) {
-			$table->boolean('is_topic_starter')->default(false);
-		});
+		Schema::table(
+			'posts',
+			function (Blueprint $table) {
+				$table->boolean('is_topic_starter')->default(false);
+			}
+		);
 	}
 
 	/**
@@ -24,9 +28,12 @@ class AddIsFirstPostToPostsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('posts', function(Blueprint $table) {
-			$table->dropColumn('is_topic_starter');
-		});
+		Schema::table(
+			'posts',
+			function (Blueprint $table) {
+				$table->dropColumn('is_topic_starter');
+			}
+		);
 	}
 
 }

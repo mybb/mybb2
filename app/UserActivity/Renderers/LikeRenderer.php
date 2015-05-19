@@ -47,7 +47,12 @@ class LikeRenderer extends AbstractRenderer
 	public function render(UserActivity $activity)
 	{
 		$langName = 'user_activity.activity_like';
-		$likedContentType = isset($activity->extra_details['liked_content_type']) ? $activity->extra_details['liked_content_type'] : '';
+
+		$likedContentType =  '';
+		if (isset($activity->extra_details['liked_content_type'])) {
+			$likedContentType = $activity->extra_details['liked_content_type'];
+		}
+
 
 		if (!empty($likedContentType)) {
 			$langName .= ".{$likedContentType}";
@@ -55,7 +60,8 @@ class LikeRenderer extends AbstractRenderer
 
 		$contentLink = '#';
 
-		if ($activity->activity_historable instanceof Like && $activity->activity_historable->likeable instanceof LikeableInterface) {
+		$isHistorableLike = $activity->activity_historable instanceof Like;
+		if ($isHistorableLike && $activity->activity_historable->likeable instanceof LikeableInterface) {
 			$contentLink = $activity->activity_historable->likeable->getViewUrl();
 		}
 

@@ -12,6 +12,11 @@ use MyBB\Core\Database\Models\User;
 
 class Tests extends \Twig_Extension
 {
+	/**
+	 * Returns a list of tests to add to the existing list.
+	 *
+	 * @return array An array of tests
+	 */
 	public function getTests()
 	{
 		return [

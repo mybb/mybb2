@@ -56,11 +56,17 @@ class UserActivity extends Model implements HasPresenter
 	 */
 	protected $with = ['user', 'activityHistorable'];
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
 	public function user()
 	{
 		return $this->belongsTo('MyBB\Core\Database\Models\User');
 	}
 
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+	 */
 	public function activityHistorable()
 	{
 		return $this->morphTo(null, 'activity_type', 'activity_id');
