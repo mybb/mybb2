@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 return [
 
@@ -17,13 +23,14 @@ return [
 	'posts' => 'Posts',
 	'topics' => 'Topics',
 	'joinDate' => 'Join Date',
+	'lastPage' => 'Last Page',
 	'lastVisit' => 'Last Visit',
 	'online' => 'Online Now',
 	'noOnline' => 'Nobody is online',
 	'profileOf' => 'Profile of :name',
+	'sortMembers' => 'Sort members',
 
 	'profile' => [
 		'recentActivity' => 'Recent Activity',
-
 	]
 ];

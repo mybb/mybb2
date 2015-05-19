@@ -13,7 +13,8 @@
 			</div>
 		</header>
 
-		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post'}) }}
+		{% include 'topic.preview' with {'preview': preview} %}
+		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'id': 'topicreply'}) }}
 		<section class="form">
 			<div class="form__section">
 				{% if auth_check() == false %}
@@ -36,7 +37,13 @@
 		</section>
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			<a href="{{ url_route('topics.reply', [topic.slug, topic.id]) }}" class="button button--secondary"
+			   onclick="return submitFormAsGet('topicreply');">
+				<i class="fa fa-edit"></i>
+				<span class="text">{{ trans('general.preview') }}</span>
+			</a>
 		</div>
 		{{ form_close() }}
 	</div>
+
 {% endblock %}

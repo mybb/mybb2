@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +68,7 @@ Route::post('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit.post',
 Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
 Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
 
+Route::post('post/quotes/all', ['as' => 'post.viewQuotes', 'uses' => 'PostController@viewQuotes']);
 Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
@@ -78,10 +85,9 @@ Route::controllers([
 
 Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
 
-Route::get(
-	'admin',
-	['middleware' => 'checkaccess', 'permissions' => 'canEnterACP', 'uses' => 'Admin\AdminIndexController@index']
-);
+Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
+	Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
+});
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
 
@@ -111,4 +117,27 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	Route::get('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@getPrivacy']);
 	Route::post('/privacy', ['as' => 'account.privacy', 'uses' => 'AccountController@postPrivacy']);
 	Route::get('/drafts', ['as' => 'account.drafts', 'uses' => 'AccountController@getDrafts']);
+});
+
+Route::group([
+	'prefix' => 'conversations',
+	'middleware' => ['checkaccess','checksetting'],
+	'permissions' => 'canUseConversations',
+	'setting' => 'conversations.enabled'
+], function () {
+	Route::get('/', ['as' => 'conversations.index', 'uses' => 'ConversationsController@index']);
+	Route::get('/compose', ['as' => 'conversations.compose', 'uses' => 'ConversationsController@getCompose']);
+	Route::post('/compose', ['as' => 'conversations.compose', 'uses' => 'ConversationsController@postCompose']);
+	Route::get('/read/{id}', ['as' => 'conversations.read', 'uses' => 'ConversationsController@getRead']);
+	Route::post('/read/{id}/reply', ['as' => 'conversations.reply', 'uses' => 'ConversationsController@postReply']);
+	Route::get('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@getLeave']);
+	Route::post('read/{id}/leave', ['as' => 'conversations.leave', 'uses' => 'ConversationsController@postLeave']);
+	Route::get(
+		'/read/{id}/newParticipant',
+		['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@getNewParticipant']
+	);
+	Route::post(
+		'/read/{id}/newParticipant',
+		['as' => 'conversations.newParticipant', 'uses' => 'ConversationsController@postNewParticipant']
+	);
 });

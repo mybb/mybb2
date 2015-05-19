@@ -143,8 +143,8 @@
 						'lastpost': trans('general.sortby')~' '~trans('forum.latestpost')
 					}, orderBy) }}
 					{{ form_select('orderDir', {
-						'asc': trans('general.order')~' Ascending',
-						'desc': trans('general.order')~' Descending'
+						'asc': trans('general.order')~' '~trans('general.ascending'),
+						'desc': trans('general.order')~' '~trans('general.descending')
 					}, orderDir) }}
 					{{ form_button('<span class="text">'~trans('forum.sorttopics')~'</span>', {'type': 'submit', 'class': 'button'}) }}
 				</div>

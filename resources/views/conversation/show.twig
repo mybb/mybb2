@@ -1,0 +1,66 @@
+{% extends "layouts.base" %}
+{% block title %}{{ conversation.title }}{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>{{ conversation.title }}</h1>
+
+			<p class="description">
+				{% for participant in conversation.participants %}
+					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ render_profile_link(participant, false, false) }}
+						({{ trans('conversations.last_read') }}:
+						{# both values need to be "raw" as twig either escapes both or none #}
+						{{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}
+						)
+					</span>
+				{% endfor %}
+			</p>
+		</header>
+		{{ messages.render|raw }}
+		<div class="page-controls">
+			<div class="page-buttons">
+				<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }}
+						class="button button--secondary"><i class="fa fa-plus"></i><span
+							class="text">{{ trans('conversations.add_participants') }}</span></a>
+				<a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary"><i
+							class="fa fa-sign-out"></i><span class="text">{{ trans('conversations.leave') }}</span></a>
+				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span
+							class="text">{{ trans('conversations.reply') }}</span></a>
+			</div>
+		</div>
+		<section class="topic">
+			{% if setting('conversations.message_order', 'desc') == 'desc' %}
+				{% include 'conversation.quickreply' with {'conversation': conversation} %}
+				{% include 'conversation.preview' with {'preview': preview} %}
+			{% endif %}
+
+
+			{% for message in messages %}
+				<div class="post">
+					<div class="post__meta">
+
+						<a href="{{ url_route('user.profile', {'slug': message.author.name, 'id': message.author.id}) }}"
+						   class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img
+									src="{{ message.author.avatar }}" class="avatar"
+									alt="{{ message.author.name }}'s avatar"/></a>
+
+						<h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
+						{{ generate_time(message.created_at) }}
+
+					</div>
+					<div class="post__body">
+						<p>
+							{{ message.message_parsed|raw }}
+						</p>
+					</div>
+				</div>
+			{% endfor %}
+
+			{% if setting('conversations.message_order', 'desc') == 'asc' %}
+				{% include 'conversation.preview' with {'preview': preview} %}
+				{% include 'conversation.quickreply' with {'conversation': conversation} %}
+			{% endif %}
+		</section>
+		{{ messages.render|raw }}
+	</div>
+{% endblock %}

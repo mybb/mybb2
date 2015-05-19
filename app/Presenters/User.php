@@ -2,9 +2,10 @@
 /**
  * User presenter class.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Presenters;
@@ -13,12 +14,19 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Auth\Contracts\Guard;
+use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Gravatar\Generator;
+use MyBB\Settings\Models\Setting;
+use MyBB\Settings\Models\SettingValue;
+use MyBB\Settings\Store;
 
 class User extends BasePresenter
 {
@@ -50,6 +58,16 @@ class User extends BasePresenter
 	private $userRepository;
 
 	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @var ConversationRepositoryInterface
+	 */
+	private $conversationRepository;
+
+	/**
 	 * @var Translator
 	 */
 	private $translator;
@@ -60,14 +78,28 @@ class User extends BasePresenter
 	private $gravatarGenerator;
 
 	/**
-	 * @param UserModel                $resource          The user being wrapped by this presenter.
-	 * @param Router                   $router
-	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PostRepositoryInterface  $postRepository
-	 * @param TopicRepositoryInterface $topicRepository
-	 * @param UserRepositoryInterface  $userRepository
-	 * @param Translator               $translator
-	 * @param Generator                $gravatarGenerator
+	 * @var Store
+	 */
+	private $settings;
+
+	/**
+	 * @var Guard
+	 */
+	private $guard;
+
+	/**
+	 * @param UserModel                       $resource
+	 * @param Router                          $router
+	 * @param ForumRepositoryInterface        $forumRepository
+	 * @param PostRepositoryInterface         $postRepository
+	 * @param TopicRepositoryInterface        $topicRepository
+	 * @param UserRepositoryInterface         $userRepository
+	 * @param PermissionChecker               $permissionChecker
+	 * @param ConversationRepositoryInterface $conversationRepository
+	 * @param Translator                      $translator
+	 * @param Generator                       $gravatarGenerator
+	 * @param Store                           $settings
+	 * @param Guard                           $guard
 	 */
 	public function __construct(
 		UserModel $resource,
@@ -76,8 +108,12 @@ class User extends BasePresenter
 		PostRepositoryInterface $postRepository,
 		TopicRepositoryInterface $topicRepository,
 		UserRepositoryInterface $userRepository,
+		PermissionChecker $permissionChecker,
+		ConversationRepositoryInterface $conversationRepository,
 		Translator $translator,
-		Generator $gravatarGenerator
+		Generator $gravatarGenerator,
+		Store $settings,
+		Guard $guard
 	) {
 		$this->wrappedObject = $resource;
 		$this->router = $router;
@@ -85,8 +121,12 @@ class User extends BasePresenter
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
 		$this->userRepository = $userRepository;
+		$this->permissionChecker = $permissionChecker;
+		$this->conversationRepository = $conversationRepository;
 		$this->translator = $translator;
 		$this->gravatarGenerator = $gravatarGenerator;
+		$this->settings = $settings;
+		$this->guard = $guard;
 	}
 
 	/**
@@ -151,6 +191,73 @@ class User extends BasePresenter
 	}
 
 	/**
+	 * @param string $permission
+	 *
+	 * @return bool
+	 */
+	public function hasPermission($permission)
+	{
+		return $this->permissionChecker->hasPermission('user', null, $permission);
+	}
+
+	/**
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function unreadConversations()
+	{
+		$conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);
+
+		foreach ($conversations as $key => $conversation) {
+			$conversations[$key] = app()->make('MyBB\Core\Presenters\Conversation', [$conversation]);
+		}
+
+		return $conversations;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isOnline()
+	{
+		$minutes = $this->settings->get('wio.minutes', 15);
+
+		// This user was logging out at last
+		if ($this->wrappedObject->last_page == 'auth/logout') {
+			return false;
+		}
+
+		// This user isn't online
+		if (new \DateTime($this->wrappedObject->last_visit) < new \DateTime("{$minutes} minutes ago")) {
+			return false;
+		}
+
+		// The user is online, now permissions
+
+		// We're either testing our own account or have permissions to view everyone
+		if ($this->permissionChecker->hasPermission('user', null, 'canViewAllOnline')
+			|| $this->guard->user()->id == $this->wrappedObject->id) {
+			return true;
+		}
+
+		// Next we need to get the setting for this user
+
+		// First get the id of our setting
+		$settingId = Setting::where('name', 'user.showonline')->first()->id;
+
+		// Now the value
+		$settingValue = SettingValue::where('user_id', '=', $this->wrappedObject->id)
+			->where('setting_id', '=', $settingId)->first();
+
+		// Either the value isn't set (good) or true (better), let's show this user as online
+		if ($settingValue == null || $settingValue->value == true) {
+			return true;
+		}
+
+		// Still here? Then the viewing user doesn't have the permissions and we show him as offline
+		return false;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function last_page()
@@ -160,7 +267,7 @@ class User extends BasePresenter
 		$collection = $this->router->getRoutes();
 		$route = $collection->match(Request::create($this->wrappedObject->last_page));
 
-		if ($route->getName() != null && $this->translator->has('online.' . $route->getName())) {
+		if ($route->getName() != null) {
 			$langOptions = $this->getWioData($route->getName(), $route->parameters());
 
 			if (!isset($langOptions['url'])) {
@@ -250,6 +357,15 @@ class User extends BasePresenter
 				} else {
 					$data['langString'] = 'user.invalid';
 				}
+				break;
+			case 'conversations.index':
+			case 'conversations.compose':
+			case 'conversations.read':
+			case 'conversations.reply':
+			case 'conversations.leave':
+			case 'conversations.newParticipant':
+				$data['langString'] = 'conversations';
+				break;
 		}
 
 		// TODO: Here's a nice place for a plugin hook

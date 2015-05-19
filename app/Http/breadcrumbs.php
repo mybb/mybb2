@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 Breadcrumbs::register('forum.index', function ($breadcrumbs) {
 
@@ -186,10 +192,52 @@ Breadcrumbs::register('search.results', function ($breadcrumbs, $searchlog) {
 	);
 });
 
+Breadcrumbs::register('conversations.index', function ($breadcrumbs) {
+
+	$breadcrumbs->parent('forum.index');
+	$breadcrumbs->push(trans('conversations.conversations'), route('conversations.index'));
+});
+
+Breadcrumbs::register('conversations.compose', function ($breadcrumbs) {
+
+	$breadcrumbs->parent('conversations.index');
+	$breadcrumbs->push(trans('conversations.compose'), route('conversations.compose'));
+});
+
+Breadcrumbs::register('conversations.read', function ($breadcrumbs, $conversation) {
+
+	$breadcrumbs->parent('conversations.index');
+	$breadcrumbs->push($conversation->title, route('conversations.read', ['id' => $conversation->id]));
+});
+
+Breadcrumbs::register('conversations.leave', function ($breadcrumbs, $conversation) {
+
+	$breadcrumbs->parent('conversations.read', $conversation);
+	$breadcrumbs->push(trans('conversations.leave'), route('conversations.leave', ['id' => $conversation->id]));
+});
+
+Breadcrumbs::register('conversations.newParticipant', function ($breadcrumbs, $conversation) {
+
+	$breadcrumbs->parent('conversations.read', $conversation);
+	$breadcrumbs->push(
+		trans('conversations.add_participants'),
+		route('conversations.newParticipant', ['id' => $conversation->id])
+	);
+});
+
 Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 	$breadcrumbs->parent('forum.index');
 	$breadcrumbs->push(
 		trans('member.profileOf', ['name' => $user->name]),
 		route('user.profile', ['slug' => $user->name, 'id' => $user->id])
 	);
+});
+
+Breadcrumbs::register('admin', function ($breadcrumbs) {
+	$breadcrumbs->push('Control Panel');
+});
+
+Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin');
+	$breadcrumbs->push('Home');
 });
