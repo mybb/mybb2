@@ -17,9 +17,13 @@
 		<ul class="activities">
 			{% for entry in activities %}
 				<li class="activity" id="activity-{{ entry.id }}" data-activity-id="{{ entry.id }}">
-					<div class="activity__user user" data-user-id="{{ entry.user.id }}">
-						{{ render_profile_link(entry.user, true) }}
-					</div>
+					{% if entry.user is user %}
+						<div class="activity__user user" data-user-id="{{ entry.user.id }}">
+							{{ render_profile_link(entry.user, true) }}
+						</div>
+					{% else %}
+						<div class="activity__user"></div>
+					{% endif %}
 					{{ entry.activityString|raw }}
 					<div class="activity__date">
 						{{ human_date(entry.created_at) }}

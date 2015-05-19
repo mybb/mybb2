@@ -48,7 +48,7 @@ class EloquentObserver
 	public function created(ActivityStoreableInterface $model)
 	{
 		if ($model->checkStoreable()) {
-			$userId = 0;
+			$userId = null;
 
 			if ($this->guard->check()) {
 				$userId = $this->guard->user()->getAuthIdentifier();

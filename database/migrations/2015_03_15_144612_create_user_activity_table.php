@@ -21,13 +21,15 @@ class CreateUserActivityTable extends Migration
 	{
 		Schema::create('user_activity', function (Blueprint $table) {
 			$table->increments('id');
-			$table->unsignedInteger('user_id');
+			$table->unsignedInteger('user_id')->nullable();;
 			$table->string('activity_type');
 			$table->unsignedInteger('activity_id');
 			$table->json('extra_details')->nullable();
 			$table->nullableTimestamps();
 
-			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+			$table->index('user_id');
+
+			// No foreign key, as then activity from unregistered users (eg: people registering) won't work!
 		});
 	}
 
