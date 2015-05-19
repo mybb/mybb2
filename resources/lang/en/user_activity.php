@@ -16,5 +16,7 @@ return [
     'activity_post' => 'Posted a reply to <a href=":topic_link" data-topic-id=":topic_id">:topic_title</a>',
     'activity_like.post' => 'Liked a post by <a href=":user_link">:user_name</a> in the topic <a href=":content_link" data-topic-id=":topic_id">:content_title</a>',
     'activity_topic' => 'Created the topic <a href=":topic_link" data-topic-id=":topic_id">:topic_title</a>',
-    'activity_registration' => '<a href=":profile_link" data-user-id=":user_id">:user_name</a> registered',
+    'for_user_title' => 'Recent activity for :username',
+    'for_user_desc' => "All recent activity for the user ':username'.",
+    'back_to_profile' => 'Profile',
 ];

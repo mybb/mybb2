@@ -16,18 +16,15 @@ use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 use MyBB\Core\Permissions\Traits\PermissionableTrait;
-use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
-use MyBB\Core\UserActivity\Traits\UserActivityTrait;
 
 /**
  * @property string id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface, ActivityStoreableInterface
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
 {
 	use Authenticatable;
 	use CanResetPassword;
 	use PermissionableTrait;
-	use UserActivityTrait;
 
 	/**
 	 * The database table used by the model.
@@ -142,35 +139,5 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			->orderBy('last_message_id', 'desc')
 			->where('conversation_users.has_left', false)
 			->where('conversation_users.ignores', false);
-	}
-
-	/**
-	 * Check whether this activity entry should be saved.
-	 *
-	 * @return bool
-	 */
-	public function checkStoreable()
-	{
-		return true;
-	}
-
-	/**
-	 * Get the ID of the model.
-	 *
-	 * @return int
-	 */
-	public function getContentId()
-	{
-		return $this->id;
-	}
-
-	/**
-	 * Get extra details about a model.
-	 *
-	 * @return array The extra details to store.
-	 */
-	public function getExtraDetails()
-	{
-		return [];
 	}
 }

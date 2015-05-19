@@ -14,6 +14,8 @@
 
 namespace MyBB\Core\UserActivity\Http\Controllers;
 
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Exceptions\UserNotFoundException;
 use MyBB\Core\Http\Controllers\AbstractController;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 use MyBB\Settings\Store;
@@ -25,19 +27,26 @@ class UserActivityController extends AbstractController
 	 */
 	private $userActivityRepository;
 	/**
+	 * @var UserRepositoryInterface $userRepository
+	 */
+	private $userRepository;
+	/**
 	 * @var Store $settings
 	 */
 	private $settings;
 
 	/**
 	 * @param UserActivityRepositoryInterface $userActivityRepository
+	 * @param UserRepositoryInterface         $userRepository
 	 * @param Store                           $settings
 	 */
 	public function __construct(
 		UserActivityRepositoryInterface $userActivityRepository,
+		UserRepositoryInterface $userRepository,
 		Store $settings
 	) {
 		$this->userActivityRepository = $userActivityRepository;
+		$this->userRepository = $userRepository;
 		$this->settings = $settings;
 	}
 
@@ -54,5 +63,26 @@ class UserActivityController extends AbstractController
 		$activities = $this->userActivityRepository->paginateAll($perPage);
 
 		return view('user_activity.index', compact('activities'));
+	}
+
+	/**
+	 * Get the user activity for a single user.
+	 *
+	 * @param string $slug
+	 * @param int $id
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function getForUser($slug, $id)
+	{
+		$user = $this->userRepository->find($id);
+
+		if (!$user) {
+			throw new UserNotFoundException();
+		}
+
+		$activity = $this->userActivityRepository->paginateForUser($user, $this->settings->get('user_activity.per_page', 20));
+
+		return view('user_activity.for_user', compact('user', 'activity'));
 	}
 }

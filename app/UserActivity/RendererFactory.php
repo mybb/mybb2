@@ -71,9 +71,6 @@ class RendererFactory
 			case LikeRenderer::ACTIVITY_NAME:
 				$renderer = '\MyBB\Core\UserActivity\Renderers\LikeRenderer';
 				break;
-			case RegistrationRenderer::ACTIVITY_NAME:
-				$renderer = '\MyBB\Core\UserActivity\Renderers\RegistrationRenderer';
-				break;
 			default:
 				if (isset($this->types[$activity->activity_type])) {
 					$renderer = $this->types[$activity->activity_type];

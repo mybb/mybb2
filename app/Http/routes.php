@@ -126,6 +126,13 @@ Route::get('/activity',
     ]
 );
 
+Route::get('/user/{slug}.{id}/activity',
+           [
+	           'as' => 'user_activity.for_user',
+	           'uses' => '\MyBB\Core\UserActivity\Http\Controllers\UserActivityController@getForUser'
+           ]
+);
+
 Route::group([
 	'prefix' => 'conversations',
 	'middleware' => ['checkaccess','checksetting'],
