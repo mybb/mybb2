@@ -29,7 +29,7 @@ return [
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted',
 	'goToXProfile' => "Go to :name's profile",
-	'XAvarar' => ":name's avatar",
+	'XAvatar' => ":name's avatar",
 	'like' => 'Like',
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',

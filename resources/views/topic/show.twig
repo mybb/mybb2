@@ -29,7 +29,7 @@
 				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
-						<a href="{{ url_route('user.profile', [post.author.id, post.author.name]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', { 'name':post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', { 'name':post.author.name}) }}" /></a>
+						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', {'name': post.author.name}) }}" /></a>
 						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
 						{{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
 						{% if post.trashed or (topic.trashed and loop.first) %}
