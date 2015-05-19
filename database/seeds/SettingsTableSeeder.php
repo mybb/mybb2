@@ -13,7 +13,7 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 	public function run()
 	{
 		DB::table('settings')->delete();
-		
+
 		DB::table('settings')->insert(
 			[
 				['name' => 'general.board_name'],
