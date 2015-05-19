@@ -1103,12 +1103,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "93dc29827979229162a0b20d90bc1dff1516eb13"
+                "reference": "e66b8a17ff263c94d3a870b1329dbf26d2c4c743"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/93dc29827979229162a0b20d90bc1dff1516eb13",
-                "reference": "93dc29827979229162a0b20d90bc1dff1516eb13",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e66b8a17ff263c94d3a870b1329dbf26d2c4c743",
+                "reference": "e66b8a17ff263c94d3a870b1329dbf26d2c4c743",
                 "shasum": ""
             },
             "require": {
@@ -1226,7 +1226,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-05-17 23:33:00"
+            "time": "2015-05-19 12:11:32"
         },
         {
             "name": "laravelcollective/html",
@@ -1488,12 +1488,12 @@
             "version": "3.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ShawnMcCool/laravel-auto-presenter.git",
+                "url": "https://github.com/laravel-auto-presenter/laravel-auto-presenter.git",
                 "reference": "fbde239dd9b3c9145e5f281fd585623181013b80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ShawnMcCool/laravel-auto-presenter/zipball/fbde239dd9b3c9145e5f281fd585623181013b80",
+                "url": "https://api.github.com/repos/laravel-auto-presenter/laravel-auto-presenter/zipball/fbde239dd9b3c9145e5f281fd585623181013b80",
                 "reference": "fbde239dd9b3c9145e5f281fd585623181013b80",
                 "shasum": ""
             },
@@ -2057,7 +2057,7 @@
         },
         {
             "name": "rcrowe/twigbridge",
-            "version": "dev-master",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rcrowe/TwigBridge.git",
@@ -3212,12 +3212,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "9d569045e558abd000af27ac22c676f996f5b6a0"
+                "reference": "3640cf6a43976edd3e508e00588b19680e9c50bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9d569045e558abd000af27ac22c676f996f5b6a0",
-                "reference": "9d569045e558abd000af27ac22c676f996f5b6a0",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/3640cf6a43976edd3e508e00588b19680e9c50bd",
+                "reference": "3640cf6a43976edd3e508e00588b19680e9c50bd",
                 "shasum": ""
             },
             "require": {
@@ -3263,7 +3263,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-05-17 21:36:54"
+            "time": "2015-05-19 06:43:29"
         },
         {
             "name": "hamcrest/hamcrest-php",
