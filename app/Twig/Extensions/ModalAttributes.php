@@ -52,6 +52,15 @@ class ModalAttributes extends \Twig_Extension
 			$href = route($name, $parameters);
 			$modal = ltrim(route($name, $parameters, false), '/');
 		} else {
+			$query = array();
+			foreach ($parameters as $key => $value) {
+				$query[] = "{$key}=".urlencode($value);
+			}
+
+			if (!empty($query)) {
+				$name .= '?'.implode('&', $query);
+			}
+
 			$href = url($name);
 			$modal = ltrim($name, '/');
 		}
