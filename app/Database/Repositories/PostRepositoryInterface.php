@@ -2,9 +2,10 @@
 /**
  * Post repository contract.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Database\Repositories;
@@ -106,4 +107,11 @@ interface PostRepositoryInterface
 	 * @return mixed
 	 */
 	public function deletePostsForTopic(Topic $topic);
+
+	/**
+	 * @param array $postIds
+	 *
+	 * @return mixed
+	 */
+	public function getPostsByIds(array $postIds);
 }

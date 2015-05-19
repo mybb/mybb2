@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Core\Http\Controllers;
 
@@ -8,6 +14,7 @@ use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;
 use MyBB\Settings\Store;
+use MyBB\Core\Exceptions\UserNotFoundException;
 
 class UserController extends AbstractController
 {
@@ -59,6 +66,11 @@ class UserController extends AbstractController
 		Breadcrumbs $breadcrumbs
 	) {
 		$user = $this->users->find($id);
+
+		if (!$user) {
+			throw new UserNotFoundException;
+		}
+
 		$groups = $profileFieldGroups->getAll();
 		$activity = $this->activityRepository->paginateForUser(
 			$user,

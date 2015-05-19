@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <!--<![endif]-->
+<head>
+    <title>
+        {% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %} MyBB Admin Control Panel
+    </title>
+    {% include "admin.partials.headerinclude" %}
+    {% block head %}{% endblock %}
+</head>
+<body>
+<div id="spinner">
+    <i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
+</div>
+{% include "admin.header" %}
+<nav class="admin-main-nav">
+    <ul>
+        <li>
+            <i class="fa fa-home" style="color: #007fd0"></i>
+            <h3>Home</h3>
+            <ul>
+                <li><a href="">Dashboard</a></li>
+                <li><a href="">Settings</a></li>
+                <li><a href="">Extensions</a></li>
+                <li><a href="">Languages</a></li>
+            </ul>
+        </li>
+        <li>
+            <i class="fa fa-comments"></i>
+            <h3>Forums & Posts</h3>
+        </li>
+        <li>
+            <i class="fa fa-users"></i>
+            <h3>Users & Roles</h3>
+        </li>
+        <li>
+            <i class="fa fa-eye"></i>
+            <h3>Templates & Style</h3>
+        </li>
+        <li>
+            <i class="fa fa-gear"></i>
+            <h3>Tools & Maintenance</h3>
+        </li>
+    </ul>
+</nav>
+<div class="main" style="float: left; width: 86%;">
+    <div id="content">
+        {% include "partials.messages" %}
+
+        {% block contents %}{% endblock %}
+    </div>
+</div>
+{% include "admin.footer" %}
+</body>
+</html>

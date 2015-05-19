@@ -2,17 +2,24 @@
 
 /**
  * Settings table seeder, creates settings required for an install to function.
+ *
+ * @author  MyBB Group
+ * @version 2.0.0
+ * @package mybb/core
+ * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 class SettingsTableSeeder extends \Illuminate\Database\Seeder
 {
 	public function run()
 	{
 		DB::table('settings')->delete();
-
+		
 		DB::table('settings')->insert(
 			[
 				['name' => 'general.board_name'],
 				['name' => 'general.board_desc'],
+				['name' => 'general.site_name'],
+				['name' => 'general.site_url'],
 				['name' => 'wio.minutes'],
 				['name' => 'wio.refresh'],
 				['name' => 'captcha.method'],
@@ -59,6 +66,11 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				['name' => 'user.dob_visibility'],
 				['name' => 'post.likes_to_show'],
 				['name' => 'likes.per_page'],
+				['name' => 'memberlist.sort_by'],
+				['name' => 'memberlist.sort_dir'],
+				['name' => 'memberlist.per_page'],
+				['name' => 'conversations.enabled'],
+				['name' => 'conversations.message_order'],
 				['name' => 'user_activity.per_page'],
 				['name' => 'user_profile.activity_per_page'],
 			]
@@ -73,6 +85,14 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 				[
 					'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
 					'value'      => 'MyBB 2.0 Test Install'
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'general.site_name')->pluck('id'),
+					'value'      => 'MyBB Home'
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'general.site_url')->pluck('id'),
+					'value'      => 'http://www.mybb.com'
 				],
 				[
 					'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),
@@ -233,14 +253,33 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 					'value'      => 10,
 				],
 				[
+					'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_by')->pluck('id'),
+					'value'      => 'created_at',
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_dir')->pluck('id'),
+					'value'      => 'asc',
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->pluck('id'),
+					'value'      => 10,
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
+					'value'      => 1,
+				],
+				[
+					'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->pluck('id'),
+					'value'      => 'desc',
+				],
+				[
 					'setting_id' => DB::table('settings')->where('name', 'user_activity.per_page')->pluck('id'),
 					'value'      => 10,
 				],
 				[
 					'setting_id' => DB::table('settings')->where('name', 'user_profile.activity_per_page')->pluck('id'),
 					'value'      => 20,
-				]
-
+				],
 			]
 		);
 	}

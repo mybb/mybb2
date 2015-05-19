@@ -2,7 +2,7 @@
 	"name": "mybb/core",
 	"description": "MyBB 2.0 Core.",
 	"keywords": ["mybb", "forum", "laravel"],
-	"license": "LGPL-3.0",
+	"license": "BSD-3",
 	"type": "project",
 	"require": {
 		"laravel/framework": "~5.0",
@@ -18,7 +18,8 @@
 		"league/fractal": "0.12.*@dev",
 		"jenssegers/date": "~2.0",
 		"greggilbert/recaptcha": "~2.0",
-		"mybb/are-you-a-human": "1.1.*"
+		"mybb/are-you-a-human": "1.1.*",
+		"mybb/gravatar": "~2.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -26,7 +27,8 @@
 		"barryvdh/laravel-debugbar": "~2.0@dev",
 		"sjparkinson/static-review": "dev-master",
 		"fabpot/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev"
+		"squizlabs/php_codesniffer": "~2.0@dev",
+		"mockery/mockery": "0.9.*@dev"
 	},
 	"repositories": [
 		{
@@ -51,9 +53,7 @@
 		}
 	},
 	"autoload-dev": {
-		"classmap": [
-			"tests/TestCase.php"
-		]
+        "MyBB\\Core\\Test": "tests/src"
 	},
 	"scripts": {
 		"post-install-cmd": [
@@ -67,7 +67,9 @@
 		"post-create-project-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
 			"php artisan key:generate"
-		]
+		],
+        "test-unit": "vendor/bin/phpunit --testsuite unit",
+        "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report"
 	},
 	"config": {
 		"preferred-install": "dist"

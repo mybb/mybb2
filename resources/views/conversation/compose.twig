@@ -1,0 +1,40 @@
+{% extends "layouts.base" %}
+{% block title %}{{ trans('conversations.conversations') }} - {{ trans('conversations.compose') }}{% endblock %}
+{% block contents %}
+	<div class="page-content">
+		<header>
+			<h1>{{ trans('conversations.conversations') }} - {{ trans('conversations.compose') }}</h1>
+		</header>
+
+		{% include 'conversation.preview' with {'preview': preview} %}
+		{{ form_open({'route': ['conversations.compose'], 'method': 'post', 'id': 'compose'}) }}
+		<section class="form">
+			<div class="form__section">
+				<div class="form__row">
+					<h3>{{ form_label('participants', trans('conversations.participants')) }}</h3>
+					{{ trans('conversations.participants_list') }}
+					{# TODO: some sort of autocomplete #}
+					{{ form_text('participants', input_get('participants')) }}
+				</div>
+				<div class="form__row">
+					<h3>{{ form_label('title', trans('conversations.title')) }}</h3>
+					{{ form_text('title', input_get('title')) }}
+				</div>
+				<div class="form__row">
+					<h3>{{ form_label('message', trans('conversations.message')) }}</h3>
+					{{ form_textarea('message', input_get('message')) }}
+				</div>
+			</div>
+		</section>
+		<div class="form__submit">
+			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('conversations.create')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			<a href="{{ url_route("conversations.compose") }}" class="button button--secondary"
+			   onclick="return submitFormAsGet('compose');">
+				<i class="fa fa-edit"></i>
+				<span class="text">{{ trans('general.preview') }}</span>
+			</a>
+		</div>
+		{{ form_close() }}
+	</div>
+
+{% endblock %}

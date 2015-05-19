@@ -1,7 +1,17 @@
 <?php
+/**
+ * Date functions for twig
+ *
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
+
 namespace MyBB\Core\Twig\Extensions;
 
 use Jenssegers\Date\Date as TransDate;
+use MyBB\Core\Exceptions\DateInvalidObjectException;
 use MyBB\Settings\Store;
 
 class ParseDateHelper
@@ -25,8 +35,6 @@ class ParseDateHelper
 	 * @param string                         $format
 	 *
 	 * @return string
-	 *
-	 * @throws \Exception
 	 */
 	public function formatDate($date = null, $showTime = true, $format = null)
 	{
@@ -74,8 +82,6 @@ class ParseDateHelper
 	 * @param int|string|\DateTime|TransDate $date
 	 *
 	 * @return string
-	 *
-	 * @throws \Exception
 	 */
 	public function humanDate($date = null)
 	{
@@ -100,8 +106,6 @@ class ParseDateHelper
 	 * @param string                         $attributeFormat
 	 *
 	 * @return string
-	 *
-	 * @throws \Exception
 	 */
 	public function generateTime($date = null, $showFormat = null, $attributeFormat = null)
 	{
@@ -125,8 +129,6 @@ class ParseDateHelper
 	 * @param string                         $attributeFormat
 	 *
 	 * @return string
-	 *
-	 * @throws \Exception
 	 */
 	public function postDateLink($url, $date = null, $showFormat = null, $attributeFormat = null)
 	{
@@ -147,7 +149,7 @@ class ParseDateHelper
 	 *
 	 * @return TransDate
 	 *
-	 * @throws \Exception
+	 * @throws DateInvalidObjectException
 	 */
 	private function getDateObject($date)
 	{
@@ -160,9 +162,7 @@ class ParseDateHelper
 		if (is_int($date) || @strtotime($date) !== false || $date == null || $date instanceof \DateTime) {
 			$date = new TransDate($date);
 		} else {
-			throw new \Exception(
-				'$date needs to be either an integer (timestamp) or an instance of either DateTime or Date'
-			);
+			throw new DateInvalidObjectException;
 		}
 
 		// Figure out our timezone

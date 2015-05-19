@@ -1,0 +1,39 @@
+{% extends "layouts.base" %}
+{% block title %}{{ trans('conversations.conversations') }}{% endblock %}
+{% block contents %}
+		<div class="page-content">
+			<header>
+				<h1>{{ trans('conversations.conversations') }}</h1>
+			</header>
+
+			<div class="page-controls">
+				<div class="page-buttons">
+					<a href="{{ url_route('conversations.compose') }}" class="button button--secondary"><i class="fa fa-pencil-square-o"></i><span class="text">{{ trans('conversations.compose') }}</span></a>
+				</div>
+			</div>
+
+			<section>
+				<div class="header">
+					<span class="title">{{ trans('conversations.title') }}</span>
+					<span class="last-message">{{ trans('conversations.last_message') }}</span>
+				</div>
+				{{ conversations.render|raw }}
+				{% for conversation in conversations %}
+					<div class="list">
+						<div class="title">
+							{% if conversation.isUnread %}
+								<span class="unread">{{ trans('conversations.new') }}</span>
+							{% endif %}
+							<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
+						</div>
+						<div class="last-message">{{ trans('general.by') }} {{ render_profile_link(conversation.lastMessage.author) }} {{ generate_time(conversation.lastMessage.created_at) }}</div>
+					</div>
+				{% else %}
+					<div class="no-message">
+						{{ trans('conversations.no_messages') }}
+					</div>
+				{% endfor %}
+				{{ conversations.render|raw }}
+			</section>
+		</div>
+{% endblock %}

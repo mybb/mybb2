@@ -1,4 +1,10 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
 namespace MyBB\Core\Database\Models;
 
@@ -92,7 +98,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function roles()
 	{
-		return $this->belongsToMany('MyBB\Core\Database\Models\Role')->withPivot('is_display');
+		return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Role')->withPivot('is_display');
 	}
 
 	/**
@@ -101,7 +107,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function displayRole()
 	{
 		if ($this->displayRole == null) {
-			$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
+			// Do we have a guest?
+			if ($this->id <= 0) {
+				$this->displayRole = Role::where('role_slug', 'guest')->first();
+			} else {
+				$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
+			}
 		}
 
 		return $this->displayRole;
@@ -112,6 +123,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function activity()
 	{
-		return $this->hasMany('MyBB\Core\Database\Models\UserActivity');
+		return $this->hasMany('MyBB\\Core\\Database\\Models\\UserActivity');
+	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function conversations()
+	{
+		return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Conversation', 'conversation_users')->withPivot(
+			'last_read',
+			'has_left',
+			'ignores'
+		)
+			->orderBy('last_message_id', 'desc')
+			->where('conversation_users.has_left', false)
+			->where('conversation_users.ignores', false);
 	}
 }

@@ -81,6 +81,23 @@
 					<p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, setting('user.show_editor', true)) }} {{ trans('account.show_editor') }}</label></p>
 				</div>
 				<div class="form__row">
+					<h3>{{ trans('account.message_order') }}</h3>
+					<div class="segmented-control">
+						{# we can't use form_label here as laravel escapes the value and we need html in it #}
+						<span class="segmented-control__block">
+								{{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc'}) }}
+							<label class="segmented-control__button" for="asc">
+								<span class="text">{{ trans('general.ascending') }}</span>
+							</label>
+							</span><span class="segmented-control__block">
+								{{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc'}) }}
+							<label class="segmented-control__button" for="desc">
+								<span class="text">{{ trans('general.descending') }}</span>
+							</label>
+							</span>
+					</div>
+				</div>
+				<div class="form__row">
 					<h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
 					{{ form_input('number', 'topics_per_page', setting('user.topics_per_page', 20), {'min': 5, 'max': 50, 'step': 5}) }}
 				</div>

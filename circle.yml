@@ -4,9 +4,17 @@ machine:
   php:
     version: 5.5.21
 dependencies:
+    pre:
+        - sed -i 's/^;//' ~/.phpenv/versions/$(phpenv global)/etc/conf.d/xdebug.ini
     post:
         - curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-        - git clone https://github.com/mybb/standards.git MyBB2
+        - git clone https://github.com/mybb/standards.git
 test:
     pre:
         - php phpcs.phar
+    override:
+        - composer test-unit-coverage
+
+general:
+    artifacts:
+        - "tests/report"

@@ -34,3 +34,5 @@ resources/lang/en/parser.php
 database/migrations/2015_03_06_110928_create_settings_table.php
 database/migrations/2015_03_06_110933_create_setting_values_table.php
 database/migrations/2015_03_07_220139_remove_is_user_setting_from_settings_table.php
+
+/tests/report

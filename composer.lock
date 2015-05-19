@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bf2ab54d1b3d7bf992f54534ad649f8b",
+    "hash": "27dcab108e50a317c5f04a1e8a7df189",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1642,12 +1642,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "5aa5a6d58d405067fc61068e7b487f44d8948c28"
+                "reference": "7e58dca92aacf51c189d0fcdd738ff825dbee1b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/5aa5a6d58d405067fc61068e7b487f44d8948c28",
-                "reference": "5aa5a6d58d405067fc61068e7b487f44d8948c28",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/7e58dca92aacf51c189d0fcdd738ff825dbee1b1",
+                "reference": "7e58dca92aacf51c189d0fcdd738ff825dbee1b1",
                 "shasum": ""
             },
             "require": {
@@ -1674,7 +1674,48 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-04-21 20:42:34"
+            "time": "2015-04-22 10:35:06"
+        },
+        {
+            "name": "mybb/gravatar",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mybb/gravatar.git",
+                "reference": "ea6ad356a1e6a41ddf26feae76d57b115ec75e4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mybb/gravatar/zipball/ea6ad356a1e6a41ddf26feae76d57b115ec75e4e",
+                "reference": "ea6ad356a1e6a41ddf26feae76d57b115ec75e4e",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.6.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyBB\\Gravatar\\": "src/",
+                    "MyBB\\Gravatar\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Euan T",
+                    "email": "euantor@mybb.com"
+                }
+            ],
+            "description": "Easy Gravatar generation for Laravel 5.0.",
+            "time": "2015-04-24 14:50:31"
         },
         {
             "name": "mybb/parser",
@@ -1682,12 +1723,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Parser.git",
-                "reference": "3f733d4779577631858936066aa7bbeaa8105eed"
+                "reference": "4cbff9a1f0da1e282015d13aaca07c25a7f199b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Parser/zipball/3f733d4779577631858936066aa7bbeaa8105eed",
-                "reference": "3f733d4779577631858936066aa7bbeaa8105eed",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/4cbff9a1f0da1e282015d13aaca07c25a7f199b7",
+                "reference": "4cbff9a1f0da1e282015d13aaca07c25a7f199b7",
                 "shasum": ""
             },
             "require": {
@@ -1715,7 +1756,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-04-21 20:14:26"
+            "time": "2015-04-22 10:38:44"
         },
         {
             "name": "mybb/settings",
@@ -1723,12 +1764,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "28db06b1dd7f50fcaf275284d0c1b051902b6af8"
+                "reference": "bde7a8f6b59ef07787f7dd6845e7cca698c1db9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Settings/zipball/28db06b1dd7f50fcaf275284d0c1b051902b6af8",
-                "reference": "28db06b1dd7f50fcaf275284d0c1b051902b6af8",
+                "url": "https://api.github.com/repos/mybb/Settings/zipball/bde7a8f6b59ef07787f7dd6845e7cca698c1db9d",
+                "reference": "bde7a8f6b59ef07787f7dd6845e7cca698c1db9d",
                 "shasum": ""
             },
             "require": {
@@ -1738,10 +1779,6 @@
                 "illuminate/database": "~5.0",
                 "illuminate/support": "~5.0",
                 "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9",
-                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "autoload": {
@@ -1763,7 +1800,7 @@
                 "source": "https://github.com/mybb/Settings/tree/master",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-04-21 20:51:26"
+            "time": "2015-04-22 10:41:23"
         },
         {
             "name": "nesbot/carbon",
@@ -3017,12 +3054,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "df8e38bed29bc98bafa22ed1d4f02a10a1e9f997"
+                "reference": "9e212ed7f598929d491563d01d221155e358a2a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/df8e38bed29bc98bafa22ed1d4f02a10a1e9f997",
-                "reference": "df8e38bed29bc98bafa22ed1d4f02a10a1e9f997",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9e212ed7f598929d491563d01d221155e358a2a3",
+                "reference": "9e212ed7f598929d491563d01d221155e358a2a3",
                 "shasum": ""
             },
             "require": {
@@ -3068,7 +3105,52 @@
                 }
             ],
             "description": "A script to automatically fix Symfony Coding Standard",
-            "time": "2015-04-20 20:19:27"
+            "time": "2015-04-22 08:14:17"
+        },
+        {
+            "name": "hamcrest/hamcrest-php",
+            "version": "v1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hamcrest/hamcrest-php.git",
+                "reference": "ac50c470531243944f977b8de75be0b684a9cb51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/ac50c470531243944f977b8de75be0b684a9cb51",
+                "reference": "ac50c470531243944f977b8de75be0b684a9cb51",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "replace": {
+                "cordoval/hamcrest-php": "*",
+                "davedevelopment/hamcrest-php": "*",
+                "kodova/hamcrest-php": "*"
+            },
+            "require-dev": {
+                "phpunit/php-file-iterator": "1.3.3",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "hamcrest"
+                ],
+                "files": [
+                    "hamcrest/Hamcrest.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "description": "This is the PHP port of Hamcrest Matchers",
+            "keywords": [
+                "test"
+            ],
+            "time": "2015-01-20 19:34:09"
         },
         {
             "name": "league/climate",
@@ -3174,6 +3256,71 @@
                 "debug"
             ],
             "time": "2015-02-05 07:51:20"
+        },
+        {
+            "name": "mockery/mockery",
+            "version": "0.9.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/padraic/mockery.git",
+                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/70bba85e4aabc9449626651f48b9018ede04f86b",
+                "reference": "70bba85e4aabc9449626651f48b9018ede04f86b",
+                "shasum": ""
+            },
+            "require": {
+                "hamcrest/hamcrest-php": "~1.1",
+                "lib-pcre": ">=7.0",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.9.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Mockery": "library/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Pádraic Brady",
+                    "email": "padraic.brady@gmail.com",
+                    "homepage": "http://blog.astrumfutura.com"
+                },
+                {
+                    "name": "Dave Marshall",
+                    "email": "dave.marshall@atstsolutions.co.uk",
+                    "homepage": "http://davedevelopment.co.uk"
+                }
+            ],
+            "description": "Mockery is a simple yet flexible PHP mock object framework for use in unit testing with PHPUnit, PHPSpec or any other testing framework. Its core goal is to offer a test double framework with a succinct API capable of clearly defining all possible object operations and interactions using a human readable Domain Specific Language (DSL). Designed as a drop in alternative to PHPUnit's phpunit-mock-objects library, Mockery is easy to integrate with PHPUnit and can operate alongside phpunit-mock-objects without the World ending.",
+            "homepage": "http://github.com/padraic/mockery",
+            "keywords": [
+                "BDD",
+                "TDD",
+                "library",
+                "mock",
+                "mock objects",
+                "mockery",
+                "stub",
+                "test",
+                "test double",
+                "testing"
+            ],
+            "time": "2015-04-02 19:54:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -4195,16 +4342,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "5046b0e01c416fc2b06df961d0673c85bcdc896c"
+                "reference": "f3100143e94bbeeaa4f1cd7c6389c3733d3d1ce1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/5046b0e01c416fc2b06df961d0673c85bcdc896c",
-                "reference": "5046b0e01c416fc2b06df961d0673c85bcdc896c",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/f3100143e94bbeeaa4f1cd7c6389c3733d3d1ce1",
+                "reference": "f3100143e94bbeeaa4f1cd7c6389c3733d3d1ce1",
                 "shasum": ""
             },
             "require": {
@@ -4265,7 +4412,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2015-03-04 02:07:03"
+            "time": "2015-04-23 03:40:59"
         },
         {
             "name": "symfony/stopwatch",
@@ -4380,7 +4527,8 @@
         "barryvdh/laravel-debugbar": 20,
         "sjparkinson/static-review": 20,
         "fabpot/php-cs-fixer": 20,
-        "squizlabs/php_codesniffer": 20
+        "squizlabs/php_codesniffer": 20,
+        "mockery/mockery": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

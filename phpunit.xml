@@ -9,11 +9,39 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false">
+
+    <!-- Test Suites -->
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./tests/</directory>
+        <testsuite name="unit">
+            <directory>./tests/unit</directory>
+        </testsuite>
+        <testsuite name="functional">
+            <directory>./tests/functional</directory>
+        </testsuite>
+        <testsuite name="behavioral">
+            <directory>./tests/behavioral</directory>
         </testsuite>
     </testsuites>
+
+    <!-- Listeners -->
+    <listeners>
+        <listener class="Mockery\Adapter\Phpunit\TestListener"/>
+    </listeners>
+
+    <!-- Filters -->
+    <filter>
+        <!-- Using whitelist includes even files with no lines executed during testing -->
+        <whitelist processUncoveredFilesFromWhitelist="false">
+            <directory suffix=".php">./app</directory>
+            <exclude>
+                <directory suffix=".php">./app/Http/Controllers</directory>
+                <file>./app/Http/Kernel.php</file>
+                <file>./app/Http/breadcrumbs.php</file>
+                <file>./app/Http/routes.php</file>
+            </exclude>
+        </whitelist>
+    </filter>
+
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>

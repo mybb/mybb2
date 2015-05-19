@@ -1,0 +1,30 @@
+			<div class="post post--reply" id="post-reply">
+				{{ form_open({'route': ['conversations.reply', conversation.id], 'method': 'post', 'id': 'quickreply'}) }}
+					<div class="post__meta">
+						<a href="index.php?page=profile" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>
+
+						<h3><a href="index.php?page=profile">{{ auth_user.styled_name|raw }}</a></h3>
+
+						<span class="post__date">Now</span>
+{#						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"
+								onclick="openFullEditor(); return false;">
+							<i class="fa fa-external-link"></i>
+							<span class="text">Full Editor</span>
+						</a>#}
+					</div>
+					<div class="post__body">
+						{{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '10'}) }}
+					</div>
+					<div class="post__foot">
+						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}
+						<!-- <button type="submit" class="button button--secondary">
+							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
+						</button>-->
+						<a href="{{ url_route('conversations.read', [conversation.id]) }}" class="button button--secondary"
+						   onclick="return submitFormAsGet('quickreply', '{{ url_route('conversations.read', [conversation.id]) }}');">
+							<i class="fa fa-edit"></i>
+							<span class="text">{{ trans('general.preview') }}</span>
+						</a>
+					</div>
+				{{ form_close() }}
+			</div>

@@ -2,9 +2,10 @@
 /**
  * Post presenter class.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Presenters;
@@ -59,6 +60,13 @@ class Post extends BasePresenter
 			$decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
 
 			return $decoratedUser;
+		}
+
+		if ($this->wrappedObject->author instanceof UserModel) {
+			$this->wrappedObject->author = $this->app->make(
+				'MyBB\Core\Presenters\User',
+				[$this->wrappedObject->author]
+			);
 		}
 
 		return $this->wrappedObject->author;

@@ -1,4 +1,12 @@
-<?php namespace MyBB\Core\Http\Controllers\Auth;
+<?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
+
+namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\Registrar;
@@ -140,8 +148,9 @@ class AuthController extends Controller
 	public function getLogout()
 	{
 		$this->auth->logout();
+		$cookie = cookie()->forget('quotes'); // Remove cookies
 
-		return redirect('/');
+		return redirect('/')->withCookie($cookie);
 	}
 
 	/**

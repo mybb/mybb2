@@ -1,8 +1,8 @@
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS and IE text size adjust after device orientation change,
- *    without disabling user zoom.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
  */
 html {
   font-family: sans-serif;
@@ -49,7 +49,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
 [hidden], template {
   display: none; }
@@ -63,8 +63,7 @@ a {
   background-color: transparent; }
 
 /**
- * Improve readability of focused elements when they are also in an
- * active/hover state.
+ * Improve readability when focused and also mouse hovered in all browsers.
  */
 a:active, a:hover {
   outline: 0; }
@@ -258,13 +257,14 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
  */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  box-sizing: content-box;
-  /* 2 */ }
+  /* 2 */
+  box-sizing: content-box; }
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -3316,7 +3316,7 @@ section.container .forum-list {
         color: #007fd0; }
       .post .post__meta h3 a:hover, .post .post__meta h3 a:active {
         color: #ff7500; }
-    .post .post__meta .post__date {
+    .post .post__meta .post__date, .post .post__meta .post__topic {
       font-size: 0.8em;
       color: #666; }
     .post .post__meta .post__edit-log {
@@ -3397,6 +3397,8 @@ section.container .forum-list {
         float: right; }
         .post .post__controls li.like .text, .post .post__controls li.quote .text, .post .post__controls li.approve .text, .post .post__controls li.restore .text {
           display: inline; }
+        .post .post__controls li.like .quoteButton .quoteButton__remove, .post .post__controls li.quote .quoteButton .quoteButton__remove, .post .post__controls li.approve .quoteButton .quoteButton__remove, .post .post__controls li.restore .quoteButton .quoteButton__remove {
+          display: none; }
     .post .post__controls i {
       font-size: 14px; }
     .post .post__controls .text {
@@ -3419,6 +3421,40 @@ section.container .forum-list {
       display: none; }
   .post.post--reply .post__foot {
     margin: 5px 0; }
+  .post .quickQuote {
+    display: none;
+    background: #444;
+    color: #fff;
+    border-radius: 4px;
+    font: 12px Open Sans, Helvetica Neue, Helvetica, Arial;
+    padding: 2px 6px;
+    position: absolute;
+    z-index: 1001; }
+    .post .quickQuote span {
+      cursor: pointer; }
+    .post .quickQuote:before {
+      content: ' ';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      margin-left: -6px;
+      border-top: 6px solid #444;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent; }
+
+#quoteBar {
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  font-size: 12px;
+  border-radius: 4px; }
+
+.viewQuotes {
+  left: 10% !important;
+  width: 80% !important;
+  margin-left: 0 !important; }
+  .viewQuotes .post-quotes {
+    overflow: auto;
+    padding: 5px; }
 
 @media only screen and (min-width: 480px) {
   .post {
@@ -3434,7 +3470,7 @@ section.container .forum-list {
       padding: 4px 6px 8px 6px; }
       .post .post__meta h3 {
         display: inline-block; }
-      .post .post__meta .post__date {
+      .post .post__meta .post__date, .post .post__meta .post__topic {
         margin: 0 10px 0 0; }
     .post .avatar-profile-link {
       float: right;
@@ -3875,6 +3911,21 @@ html.js .inline-moderation.floating i {
     max-height: 150px;
     overflow: auto; } }
 
+#spinner {
+  background: #444;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1001;
+  padding: 3px 15px;
+  border-radius: 0 0 4px 0;
+  font-size: 12px;
+  display: none; }
+  #spinner .fa {
+    font-size: 16px;
+    padding: 0 2px; }
+
 /* PowerTip Plugin */
 #powerTip {
   cursor: default;
@@ -4114,6 +4165,50 @@ html.js .inline-moderation.floating i {
 
 .dropit .dropit-open .dropit-submenu {
   display: block; }
+
+.admin-header {
+  background: #eee;
+  overflow: hidden;
+  border-bottom: 2px solid #ddd; }
+  .admin-header .breadcrumb {
+    font-size: 1em;
+    margin: 19px 19px 0 0; }
+    .admin-header .breadcrumb a {
+      color: #007fd0; }
+
+.admin-main-nav {
+  width: 13%;
+  float: left;
+  margin-left: 15px; }
+  .admin-main-nav .fa {
+    color: #777; }
+  .admin-main-nav > ul > li {
+    background: white;
+    margin: 5px;
+    padding: 5px;
+    width: 94%; }
+  .admin-main-nav li {
+    background: #f9f9f9;
+    margin: 5px 5px 5px 23px;
+    padding: 5px 5px 5px 10px;
+    border-radius: 4px;
+    width: 81%; }
+  .admin-main-nav ul {
+    list-style: none;
+    text-indent: 0;
+    padding: 0; }
+    .admin-main-nav ul h3 {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 2px;
+      display: inline-block;
+      width: 85%;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      margin-top: 0; }
+
+.content h1 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 10px; }
 
 .clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   content: " ";

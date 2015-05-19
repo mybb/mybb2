@@ -4,9 +4,10 @@
  *
  * Used to view, create, delete and update topics.
  *
- * @version 2.0.0
- * @author  MyBB Group
- * @license LGPL v3
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Http\Controllers;
@@ -14,6 +15,7 @@ namespace MyBB\Core\Http\Controllers;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
@@ -26,6 +28,7 @@ use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
+use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -193,14 +196,15 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string  $slug
-	 * @param int     $id
-	 * @param Request $request
-	 * @param null    $postId
+	 * @param string           $slug
+	 * @param int              $id
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
+	 * @param int              $postId
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function reply($slug, $id, Request $request, $postId = null)
+	public function reply($slug, $id, Request $request, MessageFormatter $formatter, $postId = null)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -229,7 +233,26 @@ class TopicController extends AbstractController
 			$username = $request->get('username');
 		}
 
-		return view('topic.reply', compact('topic', 'content', 'username'));
+		$preview = null;
+		if ($request->has('content')) {
+			if (!$this->guard->check()) {
+				$userId = null;
+			} else {
+				$userId = $this->guard->user()->id;
+				$username = $this->guard->user()->name;
+			}
+			$preview = new Post([
+				'user_id' => $userId,
+				'username' => $username,
+				'content' => $request->get('content'),
+				'content_parsed' => $formatter->parse($request->get('content'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('topic.reply', compact('topic', 'content', 'username', 'preview'));
 	}
 
 	/**
@@ -335,11 +358,13 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param int $forumId
+	 * @param int              $forumId
+	 * @param Request          $request
+	 * @param MessageFormatter $formatter
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function create($forumId)
+	public function create($forumId, Request $request, MessageFormatter $formatter)
 	{
 		// Forum permissions are checked in "find"
 		$forum = $this->forumRepository->find($forumId);
@@ -350,7 +375,28 @@ class TopicController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
-		return view('topic.create', compact('forum'));
+		$username = trans('general.guest');
+		$preview = null;
+		if ($request->has('content')) {
+			if (!$this->guard->check()) {
+				$userId = null;
+				$username = $request->get('username');
+			} else {
+				$userId = $this->guard->user()->id;
+				$username = $this->guard->user()->name;
+			}
+			$preview = new Post([
+				'user_id' => $userId,
+				'username' => $username,
+				'content' => $request->get('content'),
+				'content_parsed' => $formatter->parse($request->get('content'), [
+					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+				]),
+				'created_at' => new \DateTime()
+			]);
+		}
+
+		return view('topic.create', compact('forum', 'preview', 'username'));
 	}
 
 	/**
