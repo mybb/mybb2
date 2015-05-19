@@ -12,7 +12,6 @@
 
 namespace MyBB\Core\UserActivity\Observers;
 
-use Illuminate\Database\Eloquent\Model;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\UserActivity\Contracts\ActivityStoreableInterface;
 use MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface;

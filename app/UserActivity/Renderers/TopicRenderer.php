@@ -52,8 +52,8 @@ class TopicRenderer extends AbstractRenderer
 				'topic_link'  => $this->urlGenerator->route(
 					'topics.show',
 					[
-						'slug'   => $activity->activity_historable->slug,
-						'id'     => $activity->activity_id,
+						'slug' => $activity->activity_historable->slug,
+						'id'   => $activity->activity_id,
 					]
 				),
 			]

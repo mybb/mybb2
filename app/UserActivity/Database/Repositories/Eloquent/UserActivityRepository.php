@@ -54,9 +54,9 @@ class UserActivityRepository implements UserActivityRepositoryInterface
 		$user = $this->getUserIdFromUser($user);
 
 		return $this->userActivityModel->with(['user'])
-		                               ->where('user_id', '=', $user)
-		                               ->orderBy('created_at', 'desc')
-		                               ->get();
+									   ->where('user_id', '=', $user)
+									   ->orderBy('created_at', 'desc')
+									   ->get();
 	}
 
 	/**
@@ -119,9 +119,9 @@ class UserActivityRepository implements UserActivityRepositoryInterface
 		$user = $this->getUserIdFromUser($user);
 
 		return $this->userActivityModel->with(['user'])
-		                               ->where('user_id', '=', $user)
-		                               ->orderBy('created_at', 'desc')
-		                               ->paginate($perPage);
+									   ->where('user_id', '=', $user)
+									   ->orderBy('created_at', 'desc')
+									   ->paginate($perPage);
 	}
 
 	/**
