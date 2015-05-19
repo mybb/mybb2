@@ -1,0 +1,25 @@
+<section class="profile__activity activity">
+	<h2 class="heading heading--major">
+		<a href="{{ url_route("user_activity.for_user", [user.name, user.id]) }}">
+			{{ trans('member.profile.recentActivity') }}
+		</a>
+	</h2>
+
+	<ol class="activity">
+		{% for entry in activity %}
+			<li class="activity__entry" data-activity-id="{{ entry.id }}">
+				<div class="activity__user user" data-user-id="{{ entry.user.id }}">
+					{{ render_profile_link(entry.user, true) }}
+				</div>
+				{{ entry.activityString|raw }}
+				<div class="activity__date">
+					{{ human_date(entry.created_at) }}
+				</div>
+			</li>
+		{% else %}
+			<li class="activity__entry activity__entry--no-activity">
+				{{ trans('member.profile.user_activity_none') }}
+			</li>
+		{% endfor %}
+	</ol>
+</section>

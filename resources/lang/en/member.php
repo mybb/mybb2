@@ -32,5 +32,6 @@ return [
 
 	'profile' => [
 		'recentActivity' => 'Recent Activity',
-	]
+		'user_activity_none' => 'No recent activity found',
+	],
 ];

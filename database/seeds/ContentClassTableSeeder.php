@@ -18,11 +18,11 @@ class ContentClassTableSeeder extends Seeder
 		$classes = [
 			[
 				'content' => 'user',
-				'class' => 'MyBB\\Core\\Database\\Models\\User'
+				'class'   => 'MyBB\\Core\\Database\\Models\\User'
 			],
 			[
 				'content' => 'forum',
-				'class' => 'MyBB\\Core\\Database\\Models\\Forum'
+				'class'   => 'MyBB\\Core\\Database\\Models\\Forum'
 			],
 		];
 

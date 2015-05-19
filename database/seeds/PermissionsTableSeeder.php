@@ -18,23 +18,23 @@ class PermissionsTableSeeder extends Seeder
 		$permissions = [
 			[
 				'permission_name' => 'canEnterACP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => 0
 			],
 			[
 				'permission_name' => 'canEnterMCP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => 0
 			],
 			[
 				'permission_name' => 'canEnterUCP',
-				'content_name' => null,
-				'default_value' => 1
+				'content_name'    => null,
+				'default_value'   => 1
 			],
 			[
 				'permission_name' => 'canViewForum',
-				'content_name' => 'forum',
-				'default_value' => 1
+				'content_name'    => 'forum',
+				'default_value'   => 1
 			],
 			[
 				'permission_name' => 'canUseConversations',

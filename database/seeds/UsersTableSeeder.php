@@ -17,25 +17,25 @@ class UsersTableSeeder extends Seeder
 
 		$users = [
 			[
-				'name' => 'Admin',
-				'email' => 'admin@mybb.com',
-				'password' => Hash::make('password'),
+				'name'       => 'Admin',
+				'email'      => 'admin@mybb.com',
+				'password'   => Hash::make('password'),
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime,
 				'last_visit' => new DateTime
 			],
 			[
-				'name' => 'Registered',
-				'email' => 'user@mybb.com',
-				'password' => Hash::make('password'),
+				'name'       => 'Registered',
+				'email'      => 'user@mybb.com',
+				'password'   => Hash::make('password'),
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime,
 				'last_visit' => new DateTime
 			],
 			[
-				'name' => 'Banned',
-				'email' => 'fake@mybb.com',
-				'password' => Hash::make('password'),
+				'name'       => 'Banned',
+				'email'      => 'fake@mybb.com',
+				'password'   => Hash::make('password'),
 				'created_at' => new DateTime,
 				'updated_at' => new DateTime,
 				'last_visit' => new DateTime

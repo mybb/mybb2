@@ -6,16 +6,21 @@
 	<div class="profile">
 		<header class="profile__header">
 			<img src="{{ user.avatar }}" class="avatar">
+
 			<h1 class="profile__username">{{ user.styled_name|raw }}</h1>
+
 			<p class="profile__usertitle">{{ user.usertitle }}</p>
 			<span class="team-badge"><span class="text">{{ user.displayRole.role_display_name }}</span></span>
+
 			<div class="page-buttons">
-				<a href="{{ url_route('account.index') }}" class="button"><i class="fa fa-comments"></i><span class="text">Message</span></a>
+				<a href="{{ url_route('account.index') }}" class="button"><i class="fa fa-comments"></i><span
+							class="text">Message</span></a>
 				<a href="{{ url_route('account.index') }}" class="button"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
 			</div>
 		</header>
 
 		{% include "user.profile_basic" %}
-
+		<br style="clear: both;"/> {#TODO: Fix this please Justin!#}
+		{% include "user.profile_user_activity" %}
 	</div>
 {% endblock %}

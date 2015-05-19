@@ -1,10 +1,4 @@
 <?php
-/**
- * @author    MyBB Group
- * @version   2.0.0
- * @package   mybb/core
- * @license   http://www.mybb.com/licenses/bsd3 BSD-3
- */
 
 namespace MyBB\Core\Providers;
 
@@ -115,6 +109,13 @@ class AppServiceProvider extends ServiceProvider
 			'MyBB\Parser\Parser\ParserInterface',
 			'MyBB\Parser\Parser\MyCode'
 		);
+
+		$this->app->bind(
+			'MyBB\Core\UserActivity\Database\Repositories\UserActivityRepositoryInterface',
+			'MyBB\Core\UserActivity\Database\Repositories\Eloquent\UserActivityRepository'
+		);
+
+		$this->app->singleton('MyBB\Core\UserActivity\RendererFactory');
 
 		$this->app->bind(
 			'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',

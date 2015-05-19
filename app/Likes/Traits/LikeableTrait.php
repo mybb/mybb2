@@ -12,8 +12,6 @@
 
 namespace MyBB\Core\Likes\Traits;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * @property int num_likes
  */

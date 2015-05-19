@@ -107,6 +107,7 @@ return [
 			'MyBB\Core\Twig\Extensions\Form',
 			'MyBB\Core\Twig\Extensions\RenderUserProfileLink',
 			'MyBB\Core\Twig\Extensions\ModalAttributes',
+			'MyBB\Core\Twig\Extensions\Tests',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*
