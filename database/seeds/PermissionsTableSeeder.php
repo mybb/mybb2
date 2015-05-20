@@ -62,6 +62,11 @@ class PermissionsTableSeeder extends Seeder
 				'content_name'    => 'forum',
 				'default_value'   => PermissionChecker::YES
 			],
+			[
+				'permission_name' => 'canVoteInPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);

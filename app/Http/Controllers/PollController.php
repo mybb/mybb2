@@ -227,6 +227,10 @@ class PollController extends AbstractController
 			throw new PollNotFoundException;
 		}
 
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canVoteInPolls')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$poll = $topic->poll;
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
@@ -291,6 +295,10 @@ class PollController extends AbstractController
 
 		if (!$topic->has_poll) {
 			throw new PollNotFoundException;
+		}
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canVoteInPolls')) {
+			throw new AccessDeniedHttpException;
 		}
 
 		$poll = $topic->poll;
