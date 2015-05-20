@@ -18,7 +18,9 @@
 				{% if not topic.has_poll %}
 					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
 				{% endif %}
-				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+				{% if topic.forum.hasPermission('canReply') %}
+					<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+				{% endif %}
 			</div>
 		</div>
 		{% if topic.has_poll %}
@@ -89,7 +91,9 @@
 				</div>
 			{% endfor %}
 			{{ posts.render|raw }}
-			{% include 'topic.quickreply' with {'topic': topic} %}
+			{% if topic.forum.hasPermission('canReply') %}
+				{% include 'topic.quickreply' with {'topic': topic} %}
+			{% endif %}
 		</section>
 	</div>
 {% endblock %}

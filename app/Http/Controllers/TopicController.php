@@ -223,6 +223,12 @@ class TopicController extends AbstractController
 			throw new TopicNotFoundException;
 		}
 
+		$this->breadcrumbs->setCurrentRoute('topics.reply', $topic);
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canReply')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$content = '';
 		if ($postId) {
 			$post = $this->postRepository->find($postId);
@@ -232,8 +238,6 @@ class TopicController extends AbstractController
 
 			$content = $this->quoteRenderer->renderFromPost($post);
 		}
-
-		$this->breadcrumbs->setCurrentRoute('topics.reply', $topic);
 
 		$username = trans('general.guest');
 		if ($request->has('content')) {
@@ -282,6 +286,10 @@ class TopicController extends AbstractController
 
 		if (!$topic) {
 			throw new TopicNotFoundException;
+		}
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canReply')) {
+			throw new AccessDeniedHttpException;
 		}
 
 		if (!$this->guard->check()) {

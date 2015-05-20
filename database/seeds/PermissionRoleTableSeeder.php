@@ -50,20 +50,32 @@ class PermissionRoleTableSeeder extends Seeder
 			[
 				'permission_id' => $this->perm('canViewAllOnline'),
 				'role_id'       => $this->role('admin'),
-				'content_id'    => null,
-				'value'         => PermissionChecker::YES
+				'value'         => PermissionChecker::YES,
+				'content_id'    => null
 			],
 			[
 				'permission_id' => $this->perm('canPostTopic'),
 				'role_id'       => $this->role('guest'),
 				'value'         => PermissionChecker::NO,
-				'content_id'    => null
+				'content_id'    => 0
 			],
 			[
 				'permission_id' => $this->perm('canPostTopic'),
 				'role_id'       => $this->role('banned'),
 				'value'         => PermissionChecker::NO,
-				'content_id'    => null
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canReply'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canReply'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
 			],
 		];
 
