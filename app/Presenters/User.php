@@ -197,7 +197,7 @@ class User extends BasePresenter
 	 */
 	public function hasPermission($permission)
 	{
-		return $this->permissionChecker->hasPermission('user', null, $permission);
+		return $this->permissionChecker->hasPermission('user', null, $permission, $this->wrappedObject);
 	}
 
 	/**

@@ -12,8 +12,10 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class Forum extends BasePresenter
 {
@@ -25,13 +27,31 @@ class Forum extends BasePresenter
 	private $app;
 
 	/**
-	 * @param ForumModel  $resource The forum being wrapped by this presenter.
-	 * @param Application $app
+	 * @var PermissionChecker
 	 */
-	public function __construct(ForumModel $resource, Application $app)
-	{
+	private $permissionChecker;
+
+	/**
+	 * @var Guard
+	 */
+	private $guard;
+
+	/**
+	 * @param ForumModel        $resource          The forum being wrapped by this presenter.
+	 * @param Application       $app
+	 * @param PermissionChecker $permissionChecker
+	 * @param Guard             $guard
+	 */
+	public function __construct(
+		ForumModel $resource,
+		Application $app,
+		PermissionChecker $permissionChecker,
+		Guard $guard
+	) {
 		$this->wrappedObject = $resource;
 		$this->app = $app;
+		$this->permissionChecker = $permissionChecker;
+		$this->guard = $guard;
 	}
 
 	/**
@@ -66,5 +86,16 @@ class Forum extends BasePresenter
 		}
 
 		return true;
+	}
+
+	/**
+	 * @param string $permission
+	 * @param User   $user
+	 *
+	 * @return bool
+	 */
+	public function hasPermission($permission, $user = null)
+	{
+		return $this->permissionChecker->hasPermission('forum', $this->wrappedObject->id, $permission, $user);
 	}
 }

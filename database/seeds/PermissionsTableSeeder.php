@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Database\Seeder;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -18,33 +19,38 @@ class PermissionsTableSeeder extends Seeder
 		$permissions = [
 			[
 				'permission_name' => 'canEnterACP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
 			],
 			[
 				'permission_name' => 'canEnterMCP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
 			],
 			[
 				'permission_name' => 'canEnterUCP',
-				'content_name' => null,
-				'default_value' => 1
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canViewForum',
-				'content_name' => 'forum',
-				'default_value' => 1
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canUseConversations',
-				'content_name' => null,
-				'default_value' => 1
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canViewAllOnline',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
+			],
+			[
+				'permission_name' => 'canPostTopic',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
 			]
 		];
 
