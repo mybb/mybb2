@@ -67,6 +67,11 @@ class PermissionsTableSeeder extends Seeder
 				'content_name'    => 'forum',
 				'default_value'   => PermissionChecker::YES
 			],
+			[
+				'permission_name' => 'canOnlyViewOwnTopics',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::NO
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);

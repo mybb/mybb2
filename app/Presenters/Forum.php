@@ -81,11 +81,27 @@ class Forum extends BasePresenter
 	 */
 	public function hasLastPost()
 	{
-		if ($this->wrappedObject->lastPost == null) {
+		if ($this->lastPost() == null) {
 			return false;
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return Post|null
+	 */
+	public function lastPost()
+	{
+		if (!$this->permissionChecker->hasPermission('forum', $this->wrappedObject->id, 'canOnlyViewOwnTopics')) {
+			return $this->wrappedObject->lastPost;
+		}
+
+		if ($this->wrappedObject->lastPost->topic->user_id == $this->guard->user()->id) {
+			return $this->wrappedObject->lastPost;
+		}
+
+		return null;
 	}
 
 	/**

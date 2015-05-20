@@ -48,7 +48,7 @@ class PermissionChecker
 	/**
 	 * @var array
 	 */
-	private $unviewableIds;
+	private $negativeIds;
 
 	/**
 	 * @var Role
@@ -65,6 +65,48 @@ class PermissionChecker
 		$this->cache = $cache;
 		$this->db = $db;
 		$this->classModel = $classModel;
+	}
+
+	/**
+	 * Gets an array of ids for the registered content type where the permission is false
+	 *
+	 * @param string $content
+	 * @param string $permission
+	 * @param User   $user
+	 *
+	 * @return array
+	 *
+	 * @throws PermissionInvalidContentException
+	 * @throws PermissionImplementInterfaceException
+	 */
+	public function getNegativeIdsForContent($content, $permission, User $user = null)
+	{
+		$concreteClass = $this->classModel->getClass($content);
+
+		if ($concreteClass == null) {
+			throw new PermissionInvalidContentException($content);
+		}
+
+		if (!($concreteClass instanceof PermissionInterface)) {
+			throw new PermissionImplementInterfaceException($content);
+		}
+
+		if (isset($this->negativeIds[$content][$permission]) && $this->negativeIds[$content][$permission] != null) {
+			return $this->negativeIds[$content][$permission];
+		}
+
+		$models = $concreteClass::all();
+
+		$negative = [];
+		foreach ($models as $model) {
+			if (!$this->hasPermission($content, $model->getContentId(), $permission, $user)) {
+				$negative[] = $model->getContentId();
+			}
+		}
+
+		$this->negativeIds[$content][$permission] = $negative;
+
+		return $negative;
 	}
 
 	/**
@@ -90,23 +132,7 @@ class PermissionChecker
 			throw new PermissionImplementInterfaceException($content);
 		}
 
-		if ($this->unviewableIds[$content] != null) {
-			return $this->unviewableIds[$content];
-		}
-
-		$models = $concreteClass::all();
-
-		$unviewable = [];
-		foreach ($models as $model) {
-			if (!$this->hasPermission($content, $model->getContentId(), $concreteClass::getViewablePermission(), $user)
-			) {
-				$unviewable[] = $model->getContentId();
-			}
-		}
-
-		$this->unviewableIds[$content] = $unviewable;
-
-		return $unviewable;
+		return $this->getNegativeIdsForContent($content, $concreteClass::getViewablePermission(), $user);
 	}
 
 
