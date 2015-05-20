@@ -15,7 +15,7 @@
 			{{ posts.render|raw }}
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				{% if not topic.has_poll %}
+				{% if not topic.has_poll and topic.forum.hasPermission('canAddPolls') %}
 					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
 				{% endif %}
 				{% if topic.forum.hasPermission('canReply') %}
