@@ -48,7 +48,7 @@ class PermissionsTableSeeder extends Seeder
 				'default_value'   => PermissionChecker::NO
 			],
 			[
-				'permission_name' => 'canPostTopic',
+				'permission_name' => 'canPostTopics',
 				'content_name'    => 'forum',
 				'default_value'   => PermissionChecker::YES
 			],

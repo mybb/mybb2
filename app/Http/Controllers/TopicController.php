@@ -393,7 +393,7 @@ class TopicController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
-		if (!$this->permissionChecker->hasPermission('forum', $forum->id, 'canPostTopic')) {
+		if (!$this->permissionChecker->hasPermission('forum', $forum->id, 'canPostTopics')) {
 			throw new AccessDeniedHttpException;
 		}
 
@@ -431,7 +431,7 @@ class TopicController extends AbstractController
 	{
 		// Forum permissions are checked in "CreateRequest"
 
-		if (!$this->permissionChecker->hasPermission('forum', $forumId, 'canPostTopic')) {
+		if (!$this->permissionChecker->hasPermission('forum', $forumId, 'canPostTopics')) {
 			throw new AccessDeniedHttpException;
 		}
 
