@@ -353,6 +353,13 @@ class PollController extends AbstractController
 
 		$poll = $topic->poll;
 
+		/** @var \MyBB\Core\Presenters\Poll $decoratedPoll */
+		$decoratedPoll = app()->make('MyBB\\Core\\Presenters\\Poll', [$poll]);
+
+		if (!$decoratedPoll->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$this->pollRepository->remove($poll);
 
 		$topic->has_poll = false;
@@ -382,6 +389,13 @@ class PollController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('polls.edit', $topic);
 
+		/** @var \MyBB\Core\Presenters\Poll $decoratedPoll */
+		$decoratedPoll = app()->make('MyBB\\Core\\Presenters\\Poll', [$poll]);
+
+		if (!$decoratedPoll->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
+
 		return view('polls.edit', compact('topic', 'poll'));
 	}
 
@@ -404,8 +418,12 @@ class PollController extends AbstractController
 		}
 
 		$poll = $topic->poll;
+		/** @var \MyBB\Core\Presenters\Poll $pollPresenter */
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
+		if (!$pollPresenter->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
 
 		$options = [];
 		$i = 0;

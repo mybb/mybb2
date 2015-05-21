@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
+/**
+ * @property Topic topic
+ */
 class Post extends Model implements HasPresenter
 {
 	use SoftDeletes;

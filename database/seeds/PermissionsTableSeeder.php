@@ -63,6 +63,16 @@ class PermissionsTableSeeder extends Seeder
 				'default_value'   => PermissionChecker::YES
 			],
 			[
+				'permission_name' => 'canEditPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::NO
+			],
+			[
+				'permission_name' => 'canEditOwnPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
 				'permission_name' => 'canVoteInPolls',
 				'content_name'    => 'forum',
 				'default_value'   => PermissionChecker::YES

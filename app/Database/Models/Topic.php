@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
+/**
+ * @property int forum_id
+ * @property Forum forum
+ */
 class Topic extends Model implements HasPresenter
 {
 	use SoftDeletes;

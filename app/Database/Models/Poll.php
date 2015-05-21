@@ -11,6 +11,9 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
+/**
+ * @property Topic topic
+ */
 class Poll extends Model implements HasPresenter
 {
 	// @codingStandardsIgnoreStart

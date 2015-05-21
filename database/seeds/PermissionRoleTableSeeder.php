@@ -90,6 +90,24 @@ class PermissionRoleTableSeeder extends Seeder
 				'content_id'    => 0
 			],
 			[
+				'permission_id' => $this->perm('canEditPolls'),
+				'role_id'       => $this->role('admin'),
+				'value'         => PermissionChecker::YES,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canEditOwnPolls'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canEditOwnPolls'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
 				'permission_id' => $this->perm('canVoteInPolls'),
 				'role_id'       => $this->role('guest'),
 				'value'         => PermissionChecker::NO,
