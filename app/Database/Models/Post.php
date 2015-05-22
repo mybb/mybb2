@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 
-class Post extends Model implements HasPresenter
+class Post extends AbstractCachingModel implements HasPresenter
 {
 	use SoftDeletes;
 	use LikeableTrait;

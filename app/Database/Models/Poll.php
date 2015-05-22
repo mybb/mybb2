@@ -11,7 +11,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Poll extends Model implements HasPresenter
+class Poll extends AbstractCachingModel implements HasPresenter
 {
 	// @codingStandardsIgnoreStart
 

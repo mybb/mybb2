@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string value
  */
-class UserProfileField extends Model
+class UserProfileField extends AbstractCachingModel
 {
 	/**
 	 * @var string

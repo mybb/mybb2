@@ -226,8 +226,13 @@ class User extends BasePresenter
 			return false;
 		}
 
+		$lastVisit = $this->wrappedObject->last_visit;
+		if(is_string($lastVisit)) {
+			$lastVisit = new \DateTime($lastVisit);
+		}
+
 		// This user isn't online
-		if (new \DateTime($this->wrappedObject->last_visit) < new \DateTime("{$minutes} minutes ago")) {
+		if ($lastVisit < new \DateTime("{$minutes} minutes ago")) {
 			return false;
 		}
 

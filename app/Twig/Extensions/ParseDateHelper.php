@@ -158,8 +158,12 @@ class ParseDateHelper
 			return $date;
 		}
 
+		if($date instanceof \DateTime) {
+			$date = $date->format('d.m.Y H:i:s');
+		}
+
 		// If it's a valid date format or a DateTime object we can simply call the constructor
-		if (is_int($date) || @strtotime($date) !== false || $date == null || $date instanceof \DateTime) {
+		if (is_int($date) || @strtotime($date) !== false || $date == null) {
 			$date = new TransDate($date);
 		} else {
 			throw new DateInvalidObjectException;

@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
-class Topic extends Model implements HasPresenter
+class Topic extends AbstractCachingModel implements HasPresenter
 {
 	use SoftDeletes;
 

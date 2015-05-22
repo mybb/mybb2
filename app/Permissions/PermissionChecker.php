@@ -163,13 +163,13 @@ class PermissionChecker
 		if ($roles->count() == 0) {
 			if ($user->exists) {
 				// User saved? Something is wrong, attach the registered role
-				$registeredRole = Role::where('role_slug', '=', 'user')->first();
+				$registeredRole = Role::whereSlug('user');
 				$user->roles()->attach($registeredRole->id, ['is_display' => 1]);
 				$roles = [$registeredRole];
 			} else {
 				// Guest
 				if ($this->guestRole == null) {
-					$this->guestRole = Role::where('role_slug', '=', 'guest')->first();
+					$this->guestRole = Role::whereSlug('guest');
 				}
 				$roles = [$this->guestRole];
 			}
@@ -285,7 +285,7 @@ class PermissionChecker
 	 */
 	private function hasCache(Role $role, $permission, $content, $contentID)
 	{
-		return $this->getCache($role, $permission, $content, $contentID) != null;
+		return $this->getCache($role, $permission, $content, $contentID) !== null;
 	}
 
 	/**

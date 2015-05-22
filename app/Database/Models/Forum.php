@@ -12,19 +12,12 @@ namespace MyBB\Core\Database\Models;
 
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
-use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Database\Collections\TreeCollection;
 
-class Forum extends Node implements HasPresenter, InheritPermissionInterface
+class Forum extends AbstractCachingModel implements HasPresenter, InheritPermissionInterface
 {
 	use InheritPermissionableTrait;
-
-	/**
-	 * Nested set column IDs.
-	 */
-	const LFT = 'left_id';
-	const RGT = 'right_id';
-	const PARENT_ID = 'parent_id';
 
 	// @codingStandardsIgnoreStart
 	/**
@@ -66,6 +59,18 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	}
 
 	/**
+	 * @return InheritPermissionableTrait
+	 */
+	public function getParent()
+	{
+		if ($this->parent_id === null) {
+			return null;
+		}
+
+		return $this->find($this->parent_id);
+	}
+
+	/**
 	 * A forum contains many threads.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -103,5 +108,32 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	public function lastPostAuthor()
 	{
 		return $this->hasOne('MyBB\\Core\\Database\\Models\\User', 'id', 'last_post_user_id');
+	}
+
+	/**
+	 * Relation to the parent.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function parent()
+	{
+		return $this->belongsTo(get_class($this), 'parent_id');
+	}
+	/**
+	 * Relation to children.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function children()
+	{
+		return $this->hasMany(get_class($this), 'parent_id');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function newCollection(array $models = array())
+	{
+		return new TreeCollection($models);
 	}
 }

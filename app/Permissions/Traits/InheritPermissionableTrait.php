@@ -21,6 +21,10 @@ trait InheritPermissionableTrait
 	 */
 	public function getParent()
 	{
+		if ($this->parent_id === null) {
+			return null;
+		}
+
 		return $this->parent;
 	}
 

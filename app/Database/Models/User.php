@@ -20,7 +20,7 @@ use MyBB\Core\Permissions\Traits\PermissionableTrait;
 /**
  * @property string id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
+class User extends AbstractCachingModel implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
 {
 	use Authenticatable;
 	use CanResetPassword;
@@ -109,7 +109,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		if ($this->displayRole == null) {
 			// Do we have a guest?
 			if ($this->id <= 0) {
-				$this->displayRole = Role::where('role_slug', 'guest')->first();
+				$this->displayRole = Role::whereSlug('guest');
 			} else {
 				$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
 			}

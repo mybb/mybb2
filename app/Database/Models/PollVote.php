@@ -10,7 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PollVote extends Model
+class PollVote extends AbstractCachingModel
 {
 	// @codingStandardsIgnoreStart
 
