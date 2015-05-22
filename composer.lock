@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a37267d47ec40669893d5bdf806bb303",
+    "hash": "027d5752d2e2b0b3b3e098075fa24a0a",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1111,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ff9b64b6d7d6c231187c3e024f743c57a17a3921"
+                "reference": "3d6727e1764c37e1219b0a1fc7e003ef61615434"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ff9b64b6d7d6c231187c3e024f743c57a17a3921",
-                "reference": "ff9b64b6d7d6c231187c3e024f743c57a17a3921",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/3d6727e1764c37e1219b0a1fc7e003ef61615434",
+                "reference": "3d6727e1764c37e1219b0a1fc7e003ef61615434",
                 "shasum": ""
             },
             "require": {
@@ -1234,27 +1234,27 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-05-19 16:18:08"
+            "time": "2015-05-21 18:01:45"
         },
         {
             "name": "laravelcollective/html",
-            "version": "v5.0.4",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "c55fda58b1a9a1b58bd04f97e0fb9ebc238a0a94"
+                "reference": "f1eddc7a7834854a3cb147a7601547394d345213"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/c55fda58b1a9a1b58bd04f97e0fb9ebc238a0a94",
-                "reference": "c55fda58b1a9a1b58bd04f97e0fb9ebc238a0a94",
+                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/f1eddc7a7834854a3cb147a7601547394d345213",
+                "reference": "f1eddc7a7834854a3cb147a7601547394d345213",
                 "shasum": ""
             },
             "require": {
-                "illuminate/http": "~5.0",
-                "illuminate/routing": "~5.0",
-                "illuminate/session": "~5.0",
-                "illuminate/support": "~5.0",
+                "illuminate/http": "~5.1",
+                "illuminate/routing": "~5.1",
+                "illuminate/session": "~5.1",
+                "illuminate/support": "~5.1",
                 "php": ">=5.4.0"
             },
             "require-dev": {
@@ -1262,6 +1262,11 @@
                 "phpunit/phpunit": "~4.0"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Collective\\Html\\": "src/"
@@ -1284,7 +1289,7 @@
                     "email": "adam@laravelcollective.com"
                 }
             ],
-            "time": "2015-05-06 14:23:37"
+            "time": "2015-05-21 16:45:14"
         },
         {
             "name": "league/commonmark",

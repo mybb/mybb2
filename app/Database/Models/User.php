@@ -94,6 +94,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	}
 
 	/**
+	 * Find a model by its primary key.
+	 *
+	 * @param  mixed $id
+	 * @param  array $columns
+	 *
+	 * @return \Illuminate\Support\Collection|static|null
+	 */
+	public static function find($id, $columns = array('*'))
+	{
+		return static::query()->find($id, $columns);
+	}
+
+	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
 	public function roles()

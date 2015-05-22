@@ -9,7 +9,7 @@
 		"rcrowe/twigbridge": "~0.7@dev",
 		"mccool/laravel-auto-presenter": "~3.0@beta",
 		"kalnoy/nestedset": "^2.4.3",
-		"laravelcollective/html": "~5.0",
+		"laravelcollective/html": "~5.1",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
 		"mybb/settings": "dev-master",

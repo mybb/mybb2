@@ -66,6 +66,19 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface
 	}
 
 	/**
+	 * Find a model by its primary key.
+	 *
+	 * @param  mixed $id
+	 * @param  array $columns
+	 *
+	 * @return \Illuminate\Support\Collection|static|null
+	 */
+	public static function find($id, $columns = array('*'))
+	{
+		return static::query()->find($id, $columns);
+	}
+
+	/**
 	 * A forum contains many threads.
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
