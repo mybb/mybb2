@@ -111,7 +111,7 @@ class ConversationRepository implements ConversationRepositoryInterface
 	 */
 	public function getUnreadForUser(User $user)
 	{
-		if(!isset($this->unreadCache[$user->id])) {
+		if (!isset($this->unreadCache[$user->id])) {
 			/** @var Collection $conversations */
 			$this->unreadCache[$user->id] = $this->conversationModel
 				->join('conversation_users', function ($join) use ($user) {

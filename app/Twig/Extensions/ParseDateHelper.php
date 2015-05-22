@@ -158,7 +158,7 @@ class ParseDateHelper
 			return $date;
 		}
 
-		if($date instanceof \DateTime) {
+		if ($date instanceof \DateTime) {
 			$date = $date->format('d.m.Y H:i:s');
 		}
 

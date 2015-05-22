@@ -227,7 +227,7 @@ class User extends BasePresenter
 		}
 
 		$lastVisit = $this->wrappedObject->last_visit;
-		if(is_string($lastVisit)) {
+		if (is_string($lastVisit)) {
 			$lastVisit = new \DateTime($lastVisit);
 		}
 

@@ -48,7 +48,7 @@ class Role extends AbstractCachingModel
 		if (!isset(static::$slugCache[$slug])) {
 			static::$slugCache[$slug] = static::where('role_slug', '=', $slug)->first();
 		}
-//dd(static::$slugCache);
+
 		return static::$slugCache[$slug];
 	}
 
