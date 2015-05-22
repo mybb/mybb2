@@ -134,8 +134,10 @@ class Poll extends BasePresenter
 					$this->guard->user(),
 					$this->wrappedObject
 				);
-			} else {
-				$this->cache['myVote'] = null;
+			}
+
+			if ($this->cache['myVote'] === null) {
+				$this->cache['myVote'] = false;
 			}
 		}
 
