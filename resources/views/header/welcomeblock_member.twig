@@ -12,15 +12,19 @@
 																   alt="{{ trans('account.your_avatar') }}"
 																   class="avatar"/></a>
 			<ul class="account-links">
-				<li><a href="{{ url_route('account.index') }}" class="multi-link"><i
-								class="fa fa-dashboard fa-fw"></i><span
-								class="text">{{ trans('account.youraccount') }}</span></a></li>
+				{% if auth_user.hasPermission('canEnterUCP') %}
+					<li><a href="{{ url_route('account.index') }}" class="multi-link"><i
+									class="fa fa-dashboard fa-fw"></i><span
+									class="text">{{ trans('account.youraccount') }}</span></a></li>
+				{% endif %}
 				<li><a href="{{ url_route('account.following') }}" class="multi-link"><i
 								class="fa fa-plus fa-fw"></i><span class="text">{{ trans('account.following') }}</span></a>
 				</li>
-				<li><a href="{{ url_route('conversations.index') }}" class="multi-link"><i
-								class="fa fa-comments fa-fw"></i><span
-								class="text">{{ trans('account.messages') }}</span></a></li>
+				{% if auth_user.hasPermission('canUseConversations') %}
+					<li><a href="{{ url_route('conversations.index') }}" class="multi-link"><i
+									class="fa fa-comments fa-fw"></i><span
+									class="text">{{ trans('account.messages') }}</span></a></li>
+				{% endif %}
 				<li><a href="{{ url('auth/logout') }}"><i class="fa fa-sign-out fa-fw"></i><span
 								class="text">{{ trans('member.logout') }}</span></a></li>
 			</ul>
