@@ -50,6 +50,7 @@
 		{% endfor %}
 			</div>
 	</section>
+	{% if auth_user.hasPermission('canViewWhosOnline') %}
 		<section>
 			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
 			<div class="user-list user-list--compact">
@@ -60,5 +61,6 @@
 				{% endfor %}
 			</div>
 		</section>
+	{% endif %}
 	</aside>
 {% endblock %}

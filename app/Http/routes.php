@@ -72,7 +72,12 @@ Route::post('post/quotes/all', ['as' => 'post.viewQuotes', 'uses' => 'PostContro
 Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
 
 Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
-Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
+Route::get('members/online', [
+	'as' => 'members.online',
+	'uses' => 'MemberController@online',
+	'middleware' => 'checkaccess',
+	'permissions' => 'canViewWhosOnline'
+]);
 
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
 Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);
