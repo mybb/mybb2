@@ -1111,12 +1111,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "3d6727e1764c37e1219b0a1fc7e003ef61615434"
+                "reference": "4063a08a713d57be062fa4381d52e565bfc0dc28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/3d6727e1764c37e1219b0a1fc7e003ef61615434",
-                "reference": "3d6727e1764c37e1219b0a1fc7e003ef61615434",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/4063a08a713d57be062fa4381d52e565bfc0dc28",
+                "reference": "4063a08a713d57be062fa4381d52e565bfc0dc28",
                 "shasum": ""
             },
             "require": {
@@ -1234,7 +1234,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-05-21 18:01:45"
+            "time": "2015-05-24 18:22:16"
         },
         {
             "name": "laravelcollective/html",
