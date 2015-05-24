@@ -71,7 +71,12 @@ Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostControl
 Route::post('post/quotes/all', ['as' => 'post.viewQuotes', 'uses' => 'PostController@viewQuotes']);
 Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
 
-Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
+Route::get('members', [
+	'as' => 'members',
+	'uses' => 'MemberController@memberlist',
+	'middleware' => 'checkaccess',
+	'permissions' => 'canViewMemberlist'
+]);
 Route::get('members/online', [
 	'as' => 'members.online',
 	'uses' => 'MemberController@online',

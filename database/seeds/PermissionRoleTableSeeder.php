@@ -149,6 +149,12 @@ class PermissionRoleTableSeeder extends Seeder
 				'value'         => PermissionChecker::NO,
 				'content_id'    => null
 			],
+			[
+				'permission_id' => $this->perm('canViewMemberlist'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
+			],
 		];
 
 		DB::table('permission_role')->insert($permissions_role);
