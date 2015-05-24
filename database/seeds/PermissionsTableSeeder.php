@@ -82,6 +82,11 @@ class PermissionsTableSeeder extends Seeder
 				'content_name'    => 'forum',
 				'default_value'   => PermissionChecker::NO
 			],
+			[
+				'permission_name' => 'canViewProfiles',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);
