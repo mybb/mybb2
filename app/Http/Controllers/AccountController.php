@@ -35,7 +35,7 @@ class AccountController extends AbstractController
 	/**
 	 * Create a new controller instance.
 	 *
-	 * @param Guard $guard
+	 * @param Guard             $guard
 	 * @param PermissionChecker $permissionChecker
 	 */
 	public function __construct(Guard $guard, PermissionChecker $permissionChecker)
@@ -84,7 +84,7 @@ class AccountController extends AbstractController
 		// handle updates to the user model
 		$update = array();
 
-		if($this->permissionChecker->hasPermission('user', null, 'canUseCustomTitle')) {
+		if ($this->permissionChecker->hasPermission('user', null, 'canUseCustomTitle')) {
 			$update['usertitle'] = $request->get('usertitle');
 		}
 
@@ -328,7 +328,7 @@ class AccountController extends AbstractController
 			$this->guard->user()->update(['avatar' => '']);
 		}
 
-		return redirect()->route('account.profile')->withSuccess('account.saved_avatar');
+		return redirect()->route('account.profile')->withSuccess(trans('account.saved_avatar'));
 	}
 
 	/**
@@ -339,7 +339,7 @@ class AccountController extends AbstractController
 		// TODO: Delete the old file if an uploaded was used
 		$this->guard->user()->update(['avatar' => '']);
 
-		return redirect()->route('account.profile')->withSuccess('account.removed_avatar');
+		return redirect()->route('account.profile')->withSuccess(trans('account.removed_avatar'));
 	}
 
 	/**

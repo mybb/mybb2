@@ -169,7 +169,7 @@ class User extends BasePresenter
 		$avatar = $this->wrappedObject->avatar;
 
 		// Empty? Default avatar
-		if (empty($avatar)) {
+		if (empty($avatar) || !$this->hasPermission('canUploadAvatar')) {
 			return asset('images/avatar.png');
 		} // Link? Nice!
 		elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {

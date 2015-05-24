@@ -28,6 +28,8 @@ return [
 	'avatar_desc' => 'This photo is your identity on the forum and appears with all your posts.',
 	'avatar_change' => 'Change Avatar',
 	'avatar_remove' => 'Remove Avatar',
+	'saved_avatar' => 'Your avatar was successfully updated',
+	'removed_avatar' => 'Your avatar was successfully removed',
 	'details' => 'Account Details',
 	'change_username' => 'Change Username',
 	'change_email' => 'Change Email Address',
