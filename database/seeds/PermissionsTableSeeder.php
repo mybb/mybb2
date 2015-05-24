@@ -87,6 +87,11 @@ class PermissionsTableSeeder extends Seeder
 				'content_name'    => null,
 				'default_value'   => PermissionChecker::YES
 			],
+			[
+				'permission_name' => 'canUseCustomTitle',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);

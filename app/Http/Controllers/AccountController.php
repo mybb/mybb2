@@ -16,6 +16,7 @@ use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 
@@ -27,13 +28,20 @@ class AccountController extends AbstractController
 	private $guard;
 
 	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * Create a new controller instance.
 	 *
 	 * @param Guard $guard
+	 * @param PermissionChecker $permissionChecker
 	 */
-	public function __construct(Guard $guard)
+	public function __construct(Guard $guard, PermissionChecker $permissionChecker)
 	{
 		$this->guard = $guard;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -74,11 +82,16 @@ class AccountController extends AbstractController
 	public function postProfile(UpdateProfileRequest $request, UserProfileFieldRepositoryInterface $userProfileFields)
 	{
 		// handle updates to the user model
-		$input = $request->only(['usertitle']);
-		$input['dob'] = $request->get('date_of_birth_day') .
+		$update = array();
+
+		if($this->permissionChecker->hasPermission('user', null, 'canUseCustomTitle')) {
+			$update['usertitle'] = $request->get('usertitle');
+		}
+
+		$update['dob'] = $request->get('date_of_birth_day') .
 			'-' . $request->get('date_of_birth_month') .
 			'-' . $request->get('date_of_birth_year');
-		$this->guard->user()->update($input);
+		$this->guard->user()->update($update);
 
 		// handle profile field updates
 		$profileFieldData = $request->get('profile_fields');

@@ -61,11 +61,13 @@
 					{{ form_selectMonth('date_of_birth_month', dob.month) }}
 					{{ form_text('date_of_birth_year', dob.year, {'maxlength': 4, 'class': 'short'}) }}
 				</div>
-				<div class="form__row">
-					<h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
-					<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
-					{{ form_text('usertitle', auth_user().usertitle) }}
-				</div>
+				{% if auth_user.hasPermission('canUseCustomTitle') %}
+					<div class="form__row">
+						<h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
+						<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
+						{{ form_text('usertitle', auth_user().usertitle) }}
+					</div>
+				{% endif %}
 			</div>
 		</div>
 	</section>

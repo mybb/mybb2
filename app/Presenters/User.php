@@ -152,6 +152,18 @@ class User extends BasePresenter
 	/**
 	 * @return string
 	 */
+	public function usertitle()
+	{
+		if (!$this->hasPermission('canUseCustomTitle')) {
+			return '';
+		}
+
+		return $this->wrappedObject->usertitle;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function avatar()
 	{
 		$avatar = $this->wrappedObject->avatar;
