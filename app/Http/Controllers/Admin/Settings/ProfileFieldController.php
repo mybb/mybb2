@@ -8,6 +8,8 @@ use MyBB\Core\Database\Models\ProfileFieldOption;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
+use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequest;
+use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
 
 class ProfileFieldController extends AdminController
 {
@@ -174,5 +176,15 @@ class ProfileFieldController extends AdminController
 		$data = $request->only(['name', 'slug', 'description']);
 		$this->profileFieldGroupRepository->create($data);
 		return redirect()->route('admin.settings.profile_fields')->withSuccess('Saved!');
+	}
+
+	/**
+	 * @param TestSubmitRequest $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function testSubmit(TestSubmitRequest $request)
+	{
+		return redirect()->back()->withSuccess('Profile field submitted sucessfully!');
 	}
 }
