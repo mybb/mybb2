@@ -261,3 +261,8 @@ Breadcrumbs::register('admin.settings.profile_fields.edit', function ($breadcrum
 	$breadcrumbs->parent('admin.settings.profile_fields');
 	$breadcrumbs->push('Edit Profile Field', route('admin.settings.profile_fields.edit'));
 });
+
+Breadcrumbs::register('admin.settings.profile_fields.edit_options', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.settings.profile_fields');
+	$breadcrumbs->push('Edit Profile Field Options', route('admin.settings.profile_fields.edit_options'));
+});
