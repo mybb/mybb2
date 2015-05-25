@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ option.name }}</td>
                 <td>
-                    {{ form_open({'route': ['admin.settings.delete_profile_field_option'], 'method': 'post', 'style': 'display: inline;'}) }}
+                    {{ form_open({'route': ['admin.settings.profile_fields.delete_option'], 'method': 'post', 'style': 'display: inline;'}) }}
                     {{ form_hidden('profile_field_option_id', option.id) }}
                     <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> Delete</button>
                     {{ form_close() }}
@@ -32,7 +32,7 @@
     <hr>
 
     <div style="margin-top: 20px">
-        {{ form_open({'route': ['admin.settings.add_profile_field_option'], 'method': 'post'}) }}
+        {{ form_open({'route': ['admin.settings.profile_fields.add_option'], 'method': 'post'}) }}
         {{ form_hidden('profile_field_id', field.id) }}
         <section class="form">
             <div class="form__section">

@@ -89,14 +89,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' 
 	Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
 	Route::get('/settings', ['as' => 'admin.settings', 'uses' => 'Admin\SettingsController@index']);
 	Route::get('/settings/profile-fields', ['as' => 'admin.settings.profile_fields', 'uses' => 'Admin\Settings\ProfileFieldController@profileFields']);
-	Route::get('/settings/add-profile-field', ['as' => 'admin.settings.add_profile_field', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileField']);
-	Route::post('/settings/add-profile-field', ['as' => 'admin.settings.add_profile_field', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileField']);
-	Route::post('/settings/delete-profile-field', ['as' => 'admin.settings.delete_profile_field', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileField']);
-	Route::get('/settings/edit-profile-field/{id}', ['as' => 'admin.settings.edit_profile_field', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileField']);
-	Route::post('/settings/edit-profile-field/{id}', ['as' => 'admin.settings.edit_profile_field', 'uses' => 'Admin\Settings\ProfileFieldController@saveProfileField']);
-	Route::get('/settings/edit-profile-field-options/{id}', ['as' => 'admin.settings.edit_profile_field_options', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileFieldOptions']);
-	Route::post('/settings/delete-profile-field-option', ['as' => 'admin.settings.delete_profile_field_option', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileFieldOption']);
-	Route::post('/settings/add-profile-field-option', ['as' => 'admin.settings.add_profile_field_option', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldOption']);
+	Route::get('/settings/profile-fields/add', ['as' => 'admin.settings.profile_fields.add', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileField']);
+	Route::post('/settings/profile-fields/add', ['as' => 'admin.settings.profile_fields.add', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileField']);
+	Route::post('/settings/profile-fields/delete', ['as' => 'admin.settings.profile_fields.delete', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileField']);
+	Route::get('/settings/profile-fields/edit/{id}', ['as' => 'admin.settings.profile_fields.edit', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileField']);
+	Route::post('/settings/profile-fields/edit/{id}', ['as' => 'admin.settings.profile_fields.edit', 'uses' => 'Admin\Settings\ProfileFieldController@saveProfileField']);
+	Route::get('/settings/profile-fields/edit-options/{id}', ['as' => 'admin.settings.profile_fields.edit_options', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileFieldOptions']);
+	Route::post('/settings/profile-fields/delete-option', ['as' => 'admin.settings.profile_fields.delete_option', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileFieldOption']);
+	Route::post('/settings/profile-fields/add-option', ['as' => 'admin.settings.profile_fields.add_option', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldOption']);
 });
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);

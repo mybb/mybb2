@@ -46,8 +46,8 @@ class ProfileFieldController extends AdminController
 
 	public function addProfileField()
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.add_profile_field');
-		return view('admin.settings.add_profile_field')->withActive('settings');
+		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.add');
+		return view('admin.settings.profile_fields.add')->withActive('settings');
 	}
 
 	/**
@@ -59,7 +59,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->except(['_token']);
 		$this->profileFieldRepository->create($data);
-		return redirect('/admin/settings/profile-fields');
+		return redirect('/admin/settings/profile-fields')->withSuccess('Saved!');
 	}
 
 	/**
@@ -69,9 +69,9 @@ class ProfileFieldController extends AdminController
 	 */
 	public function editProfileField($id)
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.edit_profile_field');
+		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.edit');
 		$field = $this->profileFieldRepository->find($id);
-		return view('admin.settings.edit_profile_field', ['field' => $field])->withActive('settings');
+		return view('admin.settings.profile_fields.edit', ['field' => $field])->withActive('settings');
 	}
 
 	/**
@@ -106,7 +106,7 @@ class ProfileFieldController extends AdminController
 	{
 		$field = $this->profileFieldRepository->find($id);
 		$options = ProfileFieldOption::getForProfileField($field);
-		return view('admin.settings.edit_profile_field_options', [
+		return view('admin.settings.profile_fields.edit_options', [
 			'options' => $options,
 			'field' => $field
 		])->withActive('settings');

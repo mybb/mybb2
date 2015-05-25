@@ -252,12 +252,12 @@ Breadcrumbs::register('admin.settings.profile_fields', function ($breadcrumbs) {
 	$breadcrumbs->push('Profile Fields', route('admin.settings.profile_fields'));
 });
 
-Breadcrumbs::register('admin.settings.add_profile_field', function ($breadcrumbs) {
+Breadcrumbs::register('admin.settings.profile_fields.add', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Add Profile Field', route('admin.settings.add_profile_field'));
+	$breadcrumbs->push('Add Profile Field', route('admin.settings.profile_fields.add'));
 });
 
-Breadcrumbs::register('admin.settings.edit_profile_field', function ($breadcrumbs) {
+Breadcrumbs::register('admin.settings.profile_fields.edit', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Edit Profile Field', route('admin.settings.edit_profile_field'));
+	$breadcrumbs->push('Edit Profile Field', route('admin.settings.profile_fields.edit'));
 });
