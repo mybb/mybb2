@@ -8,7 +8,7 @@
     </div>
 
     <div>
-        {{ form_open({'route': ['admin.settings.add_profile_field'], 'method': 'post'}) }}
+        {{ form_open({'route': ['admin.settings.profile_fields.add'], 'method': 'post'}) }}
         {% include "admin.partials.settings.profile_field_form" %}
         {{ form_close() }}
     </div>
