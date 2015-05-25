@@ -5,6 +5,7 @@ namespace MyBB\Core\Http\Controllers\Admin\Settings;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\ProfileFieldOption;
+use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 
@@ -30,11 +31,16 @@ class ProfileFieldController extends AdminController
 		$this->profileFieldRepository = $profileFieldRepository;
 	}
 
-	public function profileFields()
+	/**
+	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function profileFields(ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository)
 	{
 		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields');
 		return view('admin.settings.profile_fields', [
-			'profile_fields' => $this->profileFieldRepository->getAll()
+			'profile_field_groups' => $profileFieldGroupRepository->getAll()
 		])->withActive('settings');
 	}
 
