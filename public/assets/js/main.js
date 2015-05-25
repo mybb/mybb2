@@ -844,7 +844,7 @@
 				});
 			}
 		});
-	};
+	}
 
 	var avatar = new window.MyBB.Avatar();
 

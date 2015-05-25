@@ -68,6 +68,14 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	}
 
 	/**
+	 * @return array
+	 */
+	public function options()
+	{
+		return $this->getOptions();
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getName()
@@ -125,5 +133,13 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	public function getValidationRules()
 	{
 		return $this->validation_rules;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function has_validation_rules()
+	{
+		return (bool) $this->getValidationRules();
 	}
 }

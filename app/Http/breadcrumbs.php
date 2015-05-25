@@ -234,10 +234,30 @@ Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 });
 
 Breadcrumbs::register('admin', function ($breadcrumbs) {
-	$breadcrumbs->push('Control Panel');
+	$breadcrumbs->push('Control Panel', route('admin.dashboard'));
 });
 
 Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin');
-	$breadcrumbs->push('Home');
+	$breadcrumbs->push('Dashboard', route('admin.dashboard'));
+});
+
+Breadcrumbs::register('admin.settings', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin');
+	$breadcrumbs->push('Settings', route('admin.settings'));
+});
+
+Breadcrumbs::register('admin.settings.profile_fields', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.settings');
+	$breadcrumbs->push('Profile Fields', route('admin.settings.profile_fields'));
+});
+
+Breadcrumbs::register('admin.settings.add_profile_field', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.settings.profile_fields');
+	$breadcrumbs->push('Add Profile Field', route('admin.settings.add_profile_field'));
+});
+
+Breadcrumbs::register('admin.settings.edit_profile_field', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.settings.profile_fields');
+	$breadcrumbs->push('Edit Profile Field', route('admin.settings.edit_profile_field'));
 });
