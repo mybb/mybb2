@@ -71,7 +71,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->except(['_token']);
 		$this->profileFieldRepository->create($data);
-		return redirect('/admin/settings/profile-fields')->withSuccess('Saved!');
+		return redirect()->route('admin.settings.profile_fields')->withSuccess('Saved!');
 	}
 
 	/**
@@ -153,5 +153,26 @@ class ProfileFieldController extends AdminController
 		ProfileFieldOption::create($data);
 
 		return redirect()->back()->withSuccess('Created!');
+	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function addProfileFieldGroup()
+	{
+		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.add_group');
+		return view('admin.settings.profile_fields.add_group')->withActive('settings');
+	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function saveNewProfileFieldGroup(Request $request)
+	{
+		$data = $request->only(['name', 'slug', 'description']);
+		$this->profileFieldGroupRepository->create($data);
+		return redirect()->route('admin.settings.profile_fields')->withSuccess('Saved!');
 	}
 }

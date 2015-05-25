@@ -29,4 +29,11 @@ interface ProfileFieldGroupRepositoryInterface
 	 * @return array
 	 */
 	public function getAllForSelectElement();
+
+	/**
+	 * @param array $data
+	 *
+	 * @return ProfileFieldGroup
+	 */
+	public function create(array $data);
 }
