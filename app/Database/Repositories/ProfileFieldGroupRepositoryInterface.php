@@ -24,4 +24,9 @@ interface ProfileFieldGroupRepositoryInterface
 	 * @return ProfileFieldGroup
 	 */
 	public function getBySlug($slug);
+
+	/**
+	 * @return array
+	 */
+	public function getAllForSelectElement();
 }
