@@ -99,6 +99,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' 
 	Route::post('/settings/profile-fields/add-option', ['as' => 'admin.settings.profile_fields.add_option', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldOption']);
 	Route::get('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileFieldGroup']);
 	Route::post('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldGroup']);
+	Route::post('/settings/profile-fields/test', ['as' => 'admin.settings.profile_fields.test', 'uses' => 'Admin\Settings\ProfileFieldController@testSubmit']);
 });
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);

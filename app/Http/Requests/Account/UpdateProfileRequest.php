@@ -12,9 +12,14 @@ use MyBB\Core\Database\Models\ProfileField;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\AbstractRequest;
+use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequestTrait;
 
 class UpdateProfileRequest extends AbstractRequest
 {
+	use ProfileFieldRequestTrait {
+		rules as traitRules;
+	}
+
 	/**
 	 * @var ProfileFieldRepositoryInterface
 	 */
@@ -60,34 +65,16 @@ class UpdateProfileRequest extends AbstractRequest
 	 */
 	public function rules()
 	{
-		$rules = [
+		$rules = $this->traitRules();
+
+		$rules = array_merge($rules, [
 			'date_of_birth_day' => 'integer|min:1|max:31',
 			'date_of_birth_month' => 'integer|min:1|max:12',
 			'date_of_birth_year' => 'integer',
 			'usertitle' => 'string',
-		];
-
-		foreach ($this->getAllProfileFields() as $profileField) {
-			if ($profileField->validation_rules) {
-				$rules['profile_fields.' . $profileField->id] = $profileField->validation_rules;
-			}
-		}
+		]);
 
 		return $rules;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function attributes()
-	{
-		$attributes = [];
-
-		foreach ($this->getAllProfileFields() as $profileField) {
-			$attributes['profile_fields.' . $profileField->id] = $profileField->name;
-		}
-
-		return $attributes;
 	}
 
 	/**
