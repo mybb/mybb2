@@ -59,4 +59,14 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
 
 		return $select;
 	}
+
+	/**
+	 * @param array $data
+	 *
+	 * @return ProfileFieldGroup
+	 */
+	public function create(array $data)
+	{
+		return $this->profileFieldGroup->create($data);
+	}
 }

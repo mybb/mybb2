@@ -97,6 +97,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' 
 	Route::get('/settings/profile-fields/edit-options/{id}', ['as' => 'admin.settings.profile_fields.edit_options', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileFieldOptions']);
 	Route::post('/settings/profile-fields/delete-option', ['as' => 'admin.settings.profile_fields.delete_option', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileFieldOption']);
 	Route::post('/settings/profile-fields/add-option', ['as' => 'admin.settings.profile_fields.add_option', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldOption']);
+	Route::get('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileFieldGroup']);
+	Route::post('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldGroup']);
 });
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
