@@ -4,6 +4,10 @@
             {{ form_hidden('profile_field_id', field.id) }}
         {% endif %}
         <div class="form__row">
+            <h3>{{ form_label('profile_field_group_id', 'Group') }}</h3>
+            {{ form_select('profile_field_group_id', groups, field ? field.profile_field_group_id) }}
+        </div>
+        <div class="form__row">
             <h3>{{ form_label('type', 'Type') }}</h3>
             {{ form_select('type', {
                 'text': 'Text',

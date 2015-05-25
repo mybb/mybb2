@@ -22,32 +22,44 @@ class ProfileFieldController extends AdminController
 	private $profileFieldRepository;
 
 	/**
+	 * @var ProfileFieldGroupRepositoryInterface
+	 */
+	private $profileFieldGroupRepository;
+
+	/**
 	 * @param Breadcrumbs $breadcrumbs
 	 * @param ProfileFieldRepositoryInterface $profileFieldRepository
+	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
 	 */
-	public function __construct(Breadcrumbs $breadcrumbs, ProfileFieldRepositoryInterface $profileFieldRepository)
-	{
+	public function __construct(
+		Breadcrumbs $breadcrumbs,
+		ProfileFieldRepositoryInterface $profileFieldRepository,
+		ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+	) {
 		$this->breadcrumbs = $breadcrumbs;
 		$this->profileFieldRepository = $profileFieldRepository;
+		$this->profileFieldGroupRepository = $profileFieldGroupRepository;
 	}
 
 	/**
-	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
-	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function profileFields(ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository)
+	public function profileFields()
 	{
 		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields');
 		return view('admin.settings.profile_fields', [
-			'profile_field_groups' => $profileFieldGroupRepository->getAll()
+			'profile_field_groups' => $this->profileFieldGroupRepository->getAll()
 		])->withActive('settings');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function addProfileField()
 	{
 		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.add');
-		return view('admin.settings.profile_fields.add')->withActive('settings');
+		$groups = $this->profileFieldGroupRepository->getAllForSelectElement();
+		return view('admin.settings.profile_fields.add', ['groups' => $groups])->withActive('settings');
 	}
 
 	/**
@@ -71,7 +83,8 @@ class ProfileFieldController extends AdminController
 	{
 		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.edit');
 		$field = $this->profileFieldRepository->find($id);
-		return view('admin.settings.profile_fields.edit', ['field' => $field])->withActive('settings');
+		$groups = $this->profileFieldGroupRepository->getAllForSelectElement();
+		return view('admin.settings.profile_fields.edit', ['field' => $field, 'groups' => $groups])->withActive('settings');
 	}
 
 	/**
