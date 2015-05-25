@@ -1,0 +1,41 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <h1>Profile Fields</h1>
+
+    <div>
+        <a href="{{ url_route('admin.settings.add_profile_field') }}" class="button"><i class="fa fa-plus"></i> Add Profile Field</a>
+    </div>
+
+    <table class="admin-table admin-table--bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for field in profile_fields %}
+            <tr>
+                <td>{{ field.name }}</td>
+                <td>{{ field.description }}</td>
+                <td>{{ field.type|capitalize }}</td>
+                <td>
+                    <a href="{{ url_route('admin.settings.edit_profile_field', [field.id]) }}" class="button button--secondary"><i class="fa fa-pencil"></i> Edit</a>
+
+                    {{ form_open({'route': ['admin.settings.delete_profile_field'], 'method': 'post', 'style': 'display: inline;'}) }}
+                    <input type="hidden" name="profile_field_id" value="{{ field.id }}">
+                    <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> Delete</button>
+                    {{ form_close() }}
+
+                    {% if field.type == 'select' %}
+                        <a href="{{ url_route('admin.settings.edit_profile_field_options', [field.id]) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> Edit Options</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -65,4 +65,13 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 	{
 		return $this->profileField->where('profile_field_group_id', $group->getId())->get();
 	}
+
+	/**
+	 * @param int $id
+	 */
+	public function delete($id)
+	{
+		$field = $this->find($id);
+		$field->delete();
+	}
 }
