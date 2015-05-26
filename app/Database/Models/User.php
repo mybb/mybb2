@@ -109,7 +109,7 @@ class User extends AbstractCachingModel implements AuthenticatableContract, CanR
 		if ($this->displayRole == null) {
 			// Do we have a guest?
 			if ($this->id <= 0) {
-				$this->displayRole = Role::whereSlug('guest');
+				$this->displayRole = Role::getBySlug('guest');
 			} else {
 				$this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
 			}

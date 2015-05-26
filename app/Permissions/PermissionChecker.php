@@ -163,13 +163,13 @@ class PermissionChecker
 		if ($roles->count() == 0) {
 			if ($user->exists) {
 				// User saved? Something is wrong, attach the registered role
-				$registeredRole = Role::whereSlug('user');
+				$registeredRole = Role::getBySlug('user');
 				$user->roles()->attach($registeredRole->id, ['is_display' => 1]);
 				$roles = [$registeredRole];
 			} else {
 				// Guest
 				if ($this->guestRole == null) {
-					$this->guestRole = Role::whereSlug('guest');
+					$this->guestRole = Role::getBySlug('guest');
 				}
 				$roles = [$this->guestRole];
 			}

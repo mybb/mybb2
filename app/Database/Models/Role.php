@@ -43,7 +43,7 @@ class Role extends AbstractCachingModel
 	 *
 	 * @return Role
 	 */
-	public static function whereSlug($slug)
+	public static function getBySlug($slug)
 	{
 		if (!isset(static::$slugCache[$slug])) {
 			static::$slugCache[$slug] = static::where('role_slug', '=', $slug)->first();

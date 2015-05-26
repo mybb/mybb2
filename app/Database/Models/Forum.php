@@ -59,7 +59,7 @@ class Forum extends AbstractCachingModel implements HasPresenter, InheritPermiss
 	}
 
 	/**
-	 * @return InheritPermissionableTrait
+	 * @return Forum
 	 */
 	public function getParent()
 	{

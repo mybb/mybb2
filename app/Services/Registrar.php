@@ -59,7 +59,7 @@ class Registrar implements RegistrarContract
 			'password' => bcrypt($data['password']),
 		]);
 
-		$user->roles()->attach(Role::whereSlug('user')->id, ['is_display' => true]);
+		$user->roles()->attach(Role::getBySlug('user')->id, ['is_display' => true]);
 
 		return $user;
 	}
