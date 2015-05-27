@@ -28,8 +28,6 @@ return [
 	'confirmDelete' => 'Do you really want to delete this post?\nYou will not be able to recover it afterwards!',
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted',
-	'goToXProfile' => "Go to :name's profile",
-	'XAvatar' => ":name's avatar",
 	'like' => 'Like',
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',

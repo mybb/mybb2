@@ -1,0 +1,39 @@
+.conversation-list {
+
+	.conversation {
+		padding: side-values(10px 12px 10px 64px);
+		border-bottom: 1px solid $border-1;
+		line-height: 1.4;
+		position: relative;
+
+		.avatar-profile-link {
+			width: 44px;
+			height: 44px;
+			float: $left;
+			margin: side-values(10px 12px 0 10px);
+			position: absolute;
+			top: 0;
+			#{$left}: 0;
+
+			img.avatar {
+				width: 44px;
+				height: 44px;
+			}
+		}
+
+		.conversation__latest {
+			font-size: 0.8em;
+			color: $alt-font-color-2;
+			margin: 0;
+			display: inline-block;
+
+			time {
+				color: $alt-font-color-1;
+			}
+		}
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}

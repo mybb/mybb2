@@ -57,5 +57,8 @@ return [
 	'descending' => 'Descending',
 
 	'poweredBy' => 'Powered By',
-	'mybbDesc' => 'The best free and open source forum software'
+	'mybbDesc' => 'The best free and open source forum software',
+
+	'goToXProfile' => "Go to :name's profile",
+	'XAvatar' => ":name's avatar"
 ];
