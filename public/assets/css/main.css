@@ -4239,6 +4239,8 @@ ul.notifications {
     .conversation-list .conversation .avatar-profile-link img.avatar {
       width: 44px;
       height: 44px; }
+  .conversation-list .conversation .conversation__title--unread {
+    font-weight: bold; }
   .conversation-list .conversation .conversation__latest {
     font-size: 0.8em;
     color: #999;
@@ -4246,6 +4248,15 @@ ul.notifications {
     display: inline-block; }
     .conversation-list .conversation .conversation__latest time {
       color: #666; }
+  .conversation-list .conversation .conversation__unread {
+    background: #eb5257;
+    color: #fff;
+    padding: 2px 5px 1px 4px;
+    margin: 0 0 0 4px;
+    font-weight: normal;
+    font-size: 0.8em;
+    text-decoration: none;
+    border-radius: 2px; }
   .conversation-list .conversation:last-child {
     border-bottom: 0; }
 

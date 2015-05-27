@@ -21,6 +21,10 @@
 			}
 		}
 
+		.conversation__title--unread {
+			font-weight: bold;
+		}
+
 		.conversation__latest {
 			font-size: 0.8em;
 			color: $alt-font-color-2;
@@ -30,6 +34,17 @@
 			time {
 				color: $alt-font-color-1;
 			}
+		}
+
+		.conversation__unread {
+			background: $unread-count;
+			color: $invert-font-color;
+			padding: side-values(2px 5px 1px 4px);
+			margin: side-values(0 0 0 4px);
+			font-weight: normal;
+			font-size: 0.8em;
+			text-decoration: none;
+			@include border-radius(2px);
 		}
 
 		&:last-child {
