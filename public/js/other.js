@@ -158,7 +158,11 @@ function getTooltipContent(element) {
 	}
 
 	// Except we're escaping html
-	return escapeHTML(content);
+	if (typeof content != 'undefined') {
+		content = escapeHTML(content);
+	}
+
+	return content;
 }
 
 // Source: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
