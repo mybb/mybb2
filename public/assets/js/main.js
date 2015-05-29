@@ -865,11 +865,7 @@ function getTooltipContent(element) {
 	}
 
 	// Except we're escaping html
-	if (typeof content != 'undefined') {
-		content = escapeHTML(content);
-	}
-
-	return content;
+	return escapeHTML(content);
 }
 
 // Source: http://stackoverflow.com/questions/24816/escaping-html-strings-with-jquery
@@ -884,9 +880,13 @@ var entityMap = {
 };
 
 function escapeHTML(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entityMap[s];
-	});
+	if(typeof string == 'string') {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+
+	return null;
 }
 
 function submitFormAsGet(id, newRoute) {
