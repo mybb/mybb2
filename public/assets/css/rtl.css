@@ -2343,8 +2343,6 @@ h1.title {
   .breadcrumb i {
     color: #666;
     margin: 0 6px 0 4px; }
-  .breadcrumb :last-child {
-    display: none; }
 
 footer {
   border-top: 1px solid #dfdfdf;
