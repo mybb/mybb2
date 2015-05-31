@@ -87,19 +87,21 @@ Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserControll
 
 Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
 	Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
-	Route::get('/settings', ['as' => 'admin.settings', 'uses' => 'Admin\SettingsController@index']);
-	Route::get('/settings/profile-fields', ['as' => 'admin.settings.profile_fields', 'uses' => 'Admin\Settings\ProfileFieldController@profileFields']);
-	Route::get('/settings/profile-fields/add', ['as' => 'admin.settings.profile_fields.add', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileField']);
-	Route::post('/settings/profile-fields/add', ['as' => 'admin.settings.profile_fields.add', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileField']);
-	Route::post('/settings/profile-fields/delete', ['as' => 'admin.settings.profile_fields.delete', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileField']);
-	Route::get('/settings/profile-fields/edit/{id}', ['as' => 'admin.settings.profile_fields.edit', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileField']);
-	Route::post('/settings/profile-fields/edit/{id}', ['as' => 'admin.settings.profile_fields.edit', 'uses' => 'Admin\Settings\ProfileFieldController@saveProfileField']);
-	Route::get('/settings/profile-fields/edit-options/{id}', ['as' => 'admin.settings.profile_fields.edit_options', 'uses' => 'Admin\Settings\ProfileFieldController@editProfileFieldOptions']);
-	Route::post('/settings/profile-fields/delete-option', ['as' => 'admin.settings.profile_fields.delete_option', 'uses' => 'Admin\Settings\ProfileFieldController@deleteProfileFieldOption']);
-	Route::post('/settings/profile-fields/add-option', ['as' => 'admin.settings.profile_fields.add_option', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldOption']);
-	Route::get('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@addProfileFieldGroup']);
-	Route::post('/settings/profile-fields/add-group', ['as' => 'admin.settings.profile_fields.add_group', 'uses' => 'Admin\Settings\ProfileFieldController@saveNewProfileFieldGroup']);
-	Route::post('/settings/profile-fields/test', ['as' => 'admin.settings.profile_fields.test', 'uses' => 'Admin\Settings\ProfileFieldController@testSubmit']);
+
+	Route::group(['prefix' => 'users'], function () {
+		Route::get('/profile-fields', ['as' => 'admin.users.profile_fields', 'uses' => 'Admin\Users\ProfileFieldController@profileFields']);
+		Route::get('/profile-fields/add', ['as' => 'admin.users.profile_fields.add', 'uses' => 'Admin\Users\ProfileFieldController@addProfileField']);
+		Route::post('/profile-fields/add', ['as' => 'admin.users.profile_fields.add', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileField']);
+		Route::post('/profile-fields/delete', ['as' => 'admin.users.profile_fields.delete', 'uses' => 'Admin\Users\ProfileFieldController@deleteProfileField']);
+		Route::get('/profile-fields/edit/{id}', ['as' => 'admin.users.profile_fields.edit', 'uses' => 'Admin\Users\ProfileFieldController@editProfileField']);
+		Route::post('/profile-fields/edit/{id}', ['as' => 'admin.users.profile_fields.edit', 'uses' => 'Admin\Users\ProfileFieldController@saveProfileField']);
+		Route::get('/profile-fields/edit-options/{id}', ['as' => 'admin.users.profile_fields.edit_options', 'uses' => 'Admin\Users\ProfileFieldController@editProfileFieldOptions']);
+		Route::post('/profile-fields/delete-option', ['as' => 'admin.users.profile_fields.delete_option', 'uses' => 'Admin\Users\ProfileFieldController@deleteProfileFieldOption']);
+		Route::post('/profile-fields/add-option', ['as' => 'admin.users.profile_fields.add_option', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldOption']);
+		Route::get('/profile-fields/add-group', ['as' => 'admin.users.profile_fields.add_group', 'uses' => 'Admin\Users\ProfileFieldController@addProfileFieldGroup']);
+		Route::post('/profile-fields/add-group', ['as' => 'admin.users.profile_fields.add_group', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldGroup']);
+		Route::post('/profile-fields/test', ['as' => 'admin.users.profile_fields.test', 'uses' => 'Admin\Users\ProfileFieldController@testSubmit']);
+	});
 });
 
 Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);

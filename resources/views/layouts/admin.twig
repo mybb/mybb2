@@ -22,7 +22,7 @@
             <h3>Home</h3>
             <ul>
                 <li {{ active == 'dashboard' ? 'class="active"' }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
-                <li {{ active == 'settings' ? 'class="active"' }}><a href="{{ url_route('admin.settings') }}">Settings</a></li>
+                <li><a href="">Settings</a></li>
                 <li><a href="">Extensions</a></li>
                 <li><a href="">Languages</a></li>
             </ul>
@@ -34,6 +34,9 @@
         <li>
             <i class="fa fa-users"></i>
             <h3>Users & Roles</h3>
+            <ul>
+                <li {{ active == 'profile-fields' ? 'class="active"' }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
+            </ul>
         </li>
         <li>
             <i class="fa fa-eye"></i>
