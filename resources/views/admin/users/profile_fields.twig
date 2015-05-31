@@ -4,8 +4,8 @@
     <h1>Profile Fields</h1>
 
     <div>
-        <a href="{{ url_route('admin.settings.profile_fields.add_group') }}" class="button"><i class="fa fa-plus"></i> Add Profile Field Group</a>
-        <a href="{{ url_route('admin.settings.profile_fields.add') }}" class="button"><i class="fa fa-plus"></i> Add Profile Field</a>
+        <a href="{{ url_route('admin.users.profile_fields.add_group') }}" class="button"><i class="fa fa-plus"></i> Add Profile Field Group</a>
+        <a href="{{ url_route('admin.users.profile_fields.add') }}" class="button"><i class="fa fa-plus"></i> Add Profile Field</a>
     </div>
 
     {% for group in profile_field_groups %}
@@ -26,15 +26,15 @@
                     <td>{{ field.description }}</td>
                     <td>{{ field.type|capitalize }}</td>
                     <td>
-                        <a href="{{ url_route('admin.settings.profile_fields.edit', [field.id]) }}" class="button button--secondary"><i class="fa fa-pencil"></i> Edit</a>
+                        <a href="{{ url_route('admin.users.profile_fields.edit', [field.id]) }}" class="button button--secondary"><i class="fa fa-pencil"></i> Edit</a>
 
-                        {{ form_open({'route': ['admin.settings.profile_fields.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
+                        {{ form_open({'route': ['admin.users.profile_fields.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
                         <input type="hidden" name="profile_field_id" value="{{ field.id }}">
                         <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> Delete</button>
                         {{ form_close() }}
 
                         {% if field.type == 'select' %}
-                            <a href="{{ url_route('admin.settings.profile_fields.edit_options', [field.id]) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> Edit Options</a>
+                            <a href="{{ url_route('admin.users.profile_fields.edit_options', [field.id]) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> Edit Options</a>
                         {% endif %}
                     </td>
                 </tr>

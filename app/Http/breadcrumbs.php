@@ -242,32 +242,31 @@ Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
 	$breadcrumbs->push('Dashboard', route('admin.dashboard'));
 });
 
-Breadcrumbs::register('admin.settings', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin');
-	$breadcrumbs->push('Settings', route('admin.settings'));
+Breadcrumbs::register('admin.users', function ($breadcrumbs) {
+	$breadcrumbs->push('Users & Roles');
 });
 
-Breadcrumbs::register('admin.settings.profile_fields', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin.settings');
-	$breadcrumbs->push('Profile Fields', route('admin.settings.profile_fields'));
+Breadcrumbs::register('admin.users.profile_fields', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.users');
+	$breadcrumbs->push('Profile Fields', route('admin.users.profile_fields'));
 });
 
-Breadcrumbs::register('admin.settings.profile_fields.add', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Add Profile Field', route('admin.settings.profile_fields.add'));
+Breadcrumbs::register('admin.users.profile_fields.add', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.users.profile_fields');
+	$breadcrumbs->push('Add Profile Field', route('admin.users.profile_fields.add'));
 });
 
-Breadcrumbs::register('admin.settings.profile_fields.edit', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Edit Profile Field', route('admin.settings.profile_fields.edit'));
+Breadcrumbs::register('admin.users.profile_fields.edit', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.users.profile_fields');
+	$breadcrumbs->push('Edit Profile Field', route('admin.users.profile_fields.edit'));
 });
 
-Breadcrumbs::register('admin.settings.profile_fields.edit_options', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Edit Profile Field Options', route('admin.settings.profile_fields.edit_options'));
+Breadcrumbs::register('admin.users.profile_fields.edit_options', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.users.profile_fields');
+	$breadcrumbs->push('Edit Profile Field Options', route('admin.users.profile_fields.edit_options'));
 });
 
-Breadcrumbs::register('admin.settings.profile_fields.add_group', function ($breadcrumbs) {
-	$breadcrumbs->parent('admin.settings.profile_fields');
-	$breadcrumbs->push('Add Profile Field Group', route('admin.settings.profile_fields.add_group'));
+Breadcrumbs::register('admin.users.profile_fields.add_group', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin.users.profile_fields');
+	$breadcrumbs->push('Add Profile Field Group', route('admin.users.profile_fields.add_group'));
 });

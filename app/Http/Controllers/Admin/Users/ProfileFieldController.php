@@ -1,6 +1,12 @@
 <?php
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
 
-namespace MyBB\Core\Http\Controllers\Admin\Settings;
+namespace MyBB\Core\Http\Controllers\Admin\Users;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
@@ -8,7 +14,6 @@ use MyBB\Core\Database\Models\ProfileFieldOption;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
-use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequest;
 use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
 
 class ProfileFieldController extends AdminController
@@ -48,10 +53,10 @@ class ProfileFieldController extends AdminController
 	 */
 	public function profileFields()
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields');
-		return view('admin.settings.profile_fields', [
+		$this->breadcrumbs->setCurrentRoute('admin.users.profile_fields');
+		return view('admin.users.profile_fields', [
 			'profile_field_groups' => $this->profileFieldGroupRepository->getAll()
-		])->withActive('settings');
+		])->withActive('profile-fields');
 	}
 
 	/**
@@ -59,9 +64,9 @@ class ProfileFieldController extends AdminController
 	 */
 	public function addProfileField()
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.add');
+		$this->breadcrumbs->setCurrentRoute('admin.users.profile_fields.add');
 		$groups = $this->profileFieldGroupRepository->getAllForSelectElement();
-		return view('admin.settings.profile_fields.add', ['groups' => $groups])->withActive('settings');
+		return view('admin.users.profile_fields.add', ['groups' => $groups])->withActive('profile-fields');
 	}
 
 	/**
@@ -73,7 +78,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->except(['_token']);
 		$this->profileFieldRepository->create($data);
-		return redirect()->route('admin.settings.profile_fields')->withSuccess('Saved!');
+		return redirect()->route('admin.users.profile_fields')->withSuccess('Saved!');
 	}
 
 	/**
@@ -83,10 +88,10 @@ class ProfileFieldController extends AdminController
 	 */
 	public function editProfileField($id)
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.edit');
+		$this->breadcrumbs->setCurrentRoute('admin.users.profile_fields.edit');
 		$field = $this->profileFieldRepository->find($id);
 		$groups = $this->profileFieldGroupRepository->getAllForSelectElement();
-		return view('admin.settings.profile_fields.edit', ['field' => $field, 'groups' => $groups])->withActive('settings');
+		return view('admin.users.profile_fields.edit', ['field' => $field, 'groups' => $groups])->withActive('profile-fields');
 	}
 
 	/**
@@ -121,10 +126,10 @@ class ProfileFieldController extends AdminController
 	{
 		$field = $this->profileFieldRepository->find($id);
 		$options = ProfileFieldOption::getForProfileField($field);
-		return view('admin.settings.profile_fields.edit_options', [
+		return view('admin.users.profile_fields.edit_options', [
 			'options' => $options,
 			'field' => $field
-		])->withActive('settings');
+		])->withActive('profile-fields');
 	}
 
 	/**
@@ -162,8 +167,8 @@ class ProfileFieldController extends AdminController
 	 */
 	public function addProfileFieldGroup()
 	{
-		$this->breadcrumbs->setCurrentRoute('admin.settings.profile_fields.add_group');
-		return view('admin.settings.profile_fields.add_group')->withActive('settings');
+		$this->breadcrumbs->setCurrentRoute('admin.users.profile_fields.add_group');
+		return view('admin.users.profile_fields.add_group')->withActive('profile-fields');
 	}
 
 	/**
@@ -175,7 +180,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->only(['name', 'slug', 'description']);
 		$this->profileFieldGroupRepository->create($data);
-		return redirect()->route('admin.settings.profile_fields')->withSuccess('Saved!');
+		return redirect()->route('admin.users.profile_fields')->withSuccess('Saved!');
 	}
 
 	/**
