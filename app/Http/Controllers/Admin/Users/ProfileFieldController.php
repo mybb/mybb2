@@ -98,7 +98,7 @@ class ProfileFieldController extends AdminController
 	/**
 	 * @param Request $request
 	 *
-	 * @param int $id
+	 * @param int     $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
