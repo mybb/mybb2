@@ -89,18 +89,54 @@ Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' 
 	Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
 
 	Route::group(['prefix' => 'users'], function () {
-		Route::get('/profile-fields', ['as' => 'admin.users.profile_fields', 'uses' => 'Admin\Users\ProfileFieldController@profileFields']);
-		Route::get('/profile-fields/add', ['as' => 'admin.users.profile_fields.add', 'uses' => 'Admin\Users\ProfileFieldController@addProfileField']);
-		Route::post('/profile-fields/add', ['as' => 'admin.users.profile_fields.add', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileField']);
-		Route::post('/profile-fields/delete', ['as' => 'admin.users.profile_fields.delete', 'uses' => 'Admin\Users\ProfileFieldController@deleteProfileField']);
-		Route::get('/profile-fields/edit/{id}', ['as' => 'admin.users.profile_fields.edit', 'uses' => 'Admin\Users\ProfileFieldController@editProfileField']);
-		Route::post('/profile-fields/edit/{id}', ['as' => 'admin.users.profile_fields.edit', 'uses' => 'Admin\Users\ProfileFieldController@saveProfileField']);
-		Route::get('/profile-fields/edit-options/{id}', ['as' => 'admin.users.profile_fields.edit_options', 'uses' => 'Admin\Users\ProfileFieldController@editProfileFieldOptions']);
-		Route::post('/profile-fields/delete-option', ['as' => 'admin.users.profile_fields.delete_option', 'uses' => 'Admin\Users\ProfileFieldController@deleteProfileFieldOption']);
-		Route::post('/profile-fields/add-option', ['as' => 'admin.users.profile_fields.add_option', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldOption']);
-		Route::get('/profile-fields/add-group', ['as' => 'admin.users.profile_fields.add_group', 'uses' => 'Admin\Users\ProfileFieldController@addProfileFieldGroup']);
-		Route::post('/profile-fields/add-group', ['as' => 'admin.users.profile_fields.add_group', 'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldGroup']);
-		Route::post('/profile-fields/test', ['as' => 'admin.users.profile_fields.test', 'uses' => 'Admin\Users\ProfileFieldController@testSubmit']);
+		Route::get('/profile-fields', [
+			'as' => 'admin.users.profile_fields',
+			'uses' => 'Admin\Users\ProfileFieldController@profileFields'
+		]);
+		Route::get('/profile-fields/add', [
+			'as' => 'admin.users.profile_fields.add',
+			'uses' => 'Admin\Users\ProfileFieldController@addProfileField'
+		]);
+		Route::post('/profile-fields/add', [
+			'as' => 'admin.users.profile_fields.add',
+			'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileField'
+		]);
+		Route::post('/profile-fields/delete', [
+			'as' => 'admin.users.profile_fields.delete',
+			'uses' => 'Admin\Users\ProfileFieldController@deleteProfileField'
+		]);
+		Route::get('/profile-fields/edit/{id}', [
+			'as' => 'admin.users.profile_fields.edit',
+			'uses' => 'Admin\Users\ProfileFieldController@editProfileField'
+		]);
+		Route::post('/profile-fields/edit/{id}', [
+			'as' => 'admin.users.profile_fields.edit',
+			'uses' => 'Admin\Users\ProfileFieldController@saveProfileField'
+		]);
+		Route::get('/profile-fields/edit-options/{id}', [
+			'as' => 'admin.users.profile_fields.edit_options',
+			'uses' => 'Admin\Users\ProfileFieldController@editProfileFieldOptions'
+		]);
+		Route::post('/profile-fields/delete-option', [
+			'as' => 'admin.users.profile_fields.delete_option',
+			'uses' => 'Admin\Users\ProfileFieldController@deleteProfileFieldOption'
+		]);
+		Route::post('/profile-fields/add-option', [
+			'as' => 'admin.users.profile_fields.add_option',
+			'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldOption'
+		]);
+		Route::get('/profile-fields/add-group', [
+			'as' => 'admin.users.profile_fields.add_group',
+			'uses' => 'Admin\Users\ProfileFieldController@addProfileFieldGroup'
+		]);
+		Route::post('/profile-fields/add-group', [
+			'as' => 'admin.users.profile_fields.add_group',
+			'uses' => 'Admin\Users\ProfileFieldController@saveNewProfileFieldGroup'
+		]);
+		Route::post('/profile-fields/test', [
+			'as' => 'admin.users.profile_fields.test',
+			'uses' => 'Admin\Users\ProfileFieldController@testSubmit'
+		]);
 	});
 });
 
