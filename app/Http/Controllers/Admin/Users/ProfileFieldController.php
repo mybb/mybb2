@@ -34,8 +34,8 @@ class ProfileFieldController extends AdminController
 	private $profileFieldGroupRepository;
 
 	/**
-	 * @param Breadcrumbs $breadcrumbs
-	 * @param ProfileFieldRepositoryInterface $profileFieldRepository
+	 * @param Breadcrumbs                          $breadcrumbs
+	 * @param ProfileFieldRepositoryInterface      $profileFieldRepository
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
 	 */
 	public function __construct(
@@ -91,11 +91,14 @@ class ProfileFieldController extends AdminController
 		$this->breadcrumbs->setCurrentRoute('admin.users.profile_fields.edit');
 		$field = $this->profileFieldRepository->find($id);
 		$groups = $this->profileFieldGroupRepository->getAllForSelectElement();
-		return view('admin.users.profile_fields.edit', ['field' => $field, 'groups' => $groups])->withActive('profile-fields');
+		return view('admin.users.profile_fields.edit', ['field' => $field, 'groups' => $groups])
+			->withActive('profile-fields');
 	}
 
 	/**
 	 * @param Request $request
+	 *
+	 * @param int $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
