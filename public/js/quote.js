@@ -269,14 +269,16 @@
 		}).done($.proxy(function (data) {
 			var modalContent = $("#content", $(data)),
 				modal = $('<div/>', {
-					"class": "modal-dialog view-quotes"
+					"class": "modal-dialog view-quotes",
+					closeText: ''
 				});
 			modalContent.find('.view-quotes__quotes').css({
 				'max-height': ($(window).height()-250)+'px'
 			});
 			modal.html(modalContent.html());
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 
 			if(Modernizr.touch)

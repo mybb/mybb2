@@ -102,9 +102,17 @@
 		box-shadow: 0 1px 4px #000;
 		line-height: 1;
 		@include border-radius(15px);
+		font: normal normal normal 14px/1 FontAwesome;
+		font-size: inherit;
+		text-rendering: auto;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-transform: translate(0, 0);
+		-ms-transform: translate(0, 0);
+		transform: translate(0, 0);
 
-		i {
-			font-size: 14px;
+		&:before {
+			content: "\f00d";
 		}
 
 		&:hover {

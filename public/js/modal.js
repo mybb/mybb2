@@ -18,6 +18,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		} else {
@@ -27,6 +28,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		}
@@ -36,7 +38,8 @@
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
@@ -57,7 +60,8 @@
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
 				modal.appendTo("body").modal({
-					zIndex: 1000
+					zIndex: 1000,
+					closeText: ''
 				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();

@@ -4440,9 +4440,17 @@ html.js .inline-moderation.floating i {
     text-decoration: none;
     box-shadow: 0 1px 4px #000;
     line-height: 1;
-    border-radius: 15px; }
-    .modal a.close-modal i {
-      font-size: 14px; }
+    border-radius: 15px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0); }
+    .modal a.close-modal:before {
+      content: "\f00d"; }
     .modal a.close-modal:hover {
       background: #bb0000; }
     .modal a.close-modal span {
