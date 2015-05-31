@@ -44,4 +44,29 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
 	{
 		return $this->profileFieldGroup->all();
 	}
+
+	/**
+	 * @return array
+	 */
+	public function getAllForSelectElement()
+	{
+		$groups = $this->getAll();
+		$select = [];
+
+		foreach ($groups as $group) {
+			$select[$group->id] = $group->name;
+		}
+
+		return $select;
+	}
+
+	/**
+	 * @param array $data
+	 *
+	 * @return ProfileFieldGroup
+	 */
+	public function create(array $data)
+	{
+		return $this->profileFieldGroup->create($data);
+	}
 }

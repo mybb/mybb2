@@ -29,6 +29,11 @@ interface ProfileFieldRepositoryInterface
 	public function find($id);
 
 	/**
+	 * @param int $id
+	 */
+	public function delete($id);
+
+	/**
 	 * @return Collection
 	 */
 	public function getAll();

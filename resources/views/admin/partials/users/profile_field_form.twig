@@ -1,0 +1,38 @@
+<section class="form">
+    <div class="form__section">
+        {% if field is defined and field.id is defined %}
+            {{ form_hidden('profile_field_id', field.id) }}
+        {% endif %}
+        <div class="form__row">
+            <h3>{{ form_label('profile_field_group_id', 'Group') }}</h3>
+            {{ form_select('profile_field_group_id', groups, field ? field.profile_field_group_id) }}
+        </div>
+        <div class="form__row">
+            <h3>{{ form_label('type', 'Type') }}</h3>
+            {{ form_select('type', {
+                'text': 'Text',
+                'email': 'Email',
+                'url': 'URL',
+                'number': 'Number',
+                'textarea': 'Text Area',
+                'select': 'Select'
+            }, field ? field.type) }}
+        </div>
+        <div class="form__row">
+            <h3>{{ form_label('name', 'Name') }}</h3>
+            {{ form_text('name', field ? field.name) }}
+        </div>
+        <div class="form__row">
+            <h3>{{ form_label('description', 'Description') }}</h3>
+            {{ form_text('description', field ? field.description) }}
+        </div>
+        <div class="form__row">
+            <h3>{{ form_label('validation_rules', 'Validation Rules') }}</h3>
+            <p class="form__description">See <a href="http://laravel.com/docs/5.0/validation#available-validation-rules">Laravel Validation Rules</a></p>
+            {{ form_text('validation_rules', field is defined and field.has_validation_rules ? field.validation_rules) }}
+        </div>
+        <div class="form__submit">
+            {{ form_button('Save', {'type': 'submit', 'class': 'button'}) }}
+        </div>
+    </div>
+</section>
