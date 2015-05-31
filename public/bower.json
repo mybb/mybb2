@@ -38,7 +38,8 @@
     "dropit": "https://github.com/gilbitron/Dropit.git#~1.1.0",
     "PowerTip": "https://github.com/stevenbenner/jquery-powertip.git#~1.2.0",
     "jquery-cookie": "~1.4.1",
-    "autosize": "~3.0.6"
+    "autosize": "~3.0.6",
+    "lang-js": "https://github.com/ATofighi/Lang.js.git#~1.0.0"
   },
   "resolutions": {
     "jquery": "2"
