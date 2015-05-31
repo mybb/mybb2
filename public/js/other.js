@@ -179,7 +179,7 @@ function escapeHTML(string) {
 		});
 	}
 
-	return null;
+	return string;
 }
 
 function submitFormAsGet(id, newRoute) {
