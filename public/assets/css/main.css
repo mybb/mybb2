@@ -3129,9 +3129,28 @@ section {
         font-weight: bold;
         background: #007fd0;
         text-decoration: none; }
+  section .sort-results {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-top: 2px solid #dfdfdf;
+    padding: 6px 0;
+    clear: both;
+    border-radius: 0 0 4px 4px; }
+    section .sort-results h3 {
+      display: inline-block;
+      margin: 0 10px 0 0;
+      padding: 0;
+      font-weight: normal;
+      color: #666;
+      font-size: 0.9em; }
+      section .sort-results h3:after {
+        content: ":"; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
+    section.container .sort-results {
+      border-width: 0;
+      border-top-width: 2px; }
   section:last-child {
     margin-bottom: 0; }
 
@@ -3233,22 +3252,6 @@ dl.stats {
   padding: 30px 0;
   font-size: 1.2em;
   color: #666; }
-
-.sort-results {
-  text-align: center;
-  border: 1px solid #ccc;
-  border-top: 2px solid #dfdfdf;
-  padding: 6px 0;
-  border-radius: 0 0 4px 4px; }
-  .sort-results h3 {
-    display: inline-block;
-    margin: 0 10px 0 0;
-    padding: 0;
-    font-weight: normal;
-    color: #666;
-    font-size: 0.9em; }
-    .sort-results h3:after {
-      content: ":"; }
 
 @media only screen and (min-width: 768px) {
   .main .page-content--sidebar {
@@ -4106,6 +4109,8 @@ section.container .forum-list {
       height: 50px; }
   .user-list.online-now .user-list__user .user-list__user__date {
     float: right; }
+  .user-list .sort-results {
+    margin: 0 -12px 0 -12px; }
 
 .user-list--compact a {
   display: inline-block;
