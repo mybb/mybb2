@@ -2108,7 +2108,8 @@ h1.title {
     padding: 0; }
 
 .user-navigation__links {
-  margin: 0 -8px;
+  margin: 0;
+  padding: 0;
   list-style: none; }
   .user-navigation__links > li {
     float: right;
