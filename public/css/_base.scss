@@ -1,5 +1,6 @@
 html, button, input, select, textarea {
 	color: $font-color;
+	word-wrap: break-word;
 }
 
 ::selection {
