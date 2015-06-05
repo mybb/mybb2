@@ -5,7 +5,7 @@
 	"license": "BSD-3",
 	"type": "project",
 	"require": {
-		"laravel/framework": "~5.0",
+		"laravel/framework": "5.0.*",
 		"rcrowe/twigbridge": "~0.7",
 		"mccool/laravel-auto-presenter": "~3.0@beta",
 		"kalnoy/nestedset": "~2.0",
@@ -16,7 +16,7 @@
 		"davejamesmiller/laravel-breadcrumbs": "dev-master",
 		"doctrine/dbal": "~2.5",
 		"league/fractal": "0.12.*@dev",
-		"jenssegers/date": "~2.0",
+		"jenssegers/date": "~3.0",
 		"greggilbert/recaptcha": "~2.0",
 		"mybb/are-you-a-human": "1.1.*",
 		"mybb/gravatar": "~2.0"
