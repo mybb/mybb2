@@ -4429,11 +4429,11 @@ html.js .inline-moderation.floating i {
     position: absolute;
     top: -12.5px;
     right: -12.5px;
-    width: 11px;
-    height: 19px;
+    width: 26px;
+    height: 26px;
     display: block;
     border: 2px solid #fff;
-    padding: 2px 6px 2px 6px;
+    padding: 2px;
     color: #fff;
     background: #333;
     text-align: center;
@@ -4441,14 +4441,17 @@ html.js .inline-moderation.floating i {
     box-shadow: 0 1px 4px #000;
     line-height: 1;
     border-radius: 15px;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0); }
+    -moz-osx-font-smoothing: grayscale; }
     .modal a.close-modal:before {
       content: "\f00d"; }
     .modal a.close-modal:hover {
