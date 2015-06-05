@@ -47,10 +47,11 @@
 	window.MyBB.Polls.prototype.addOption = function addOption(event) {
 		var num_options = $('#add-poll .poll-option').length;
 		if(num_options >= 10) { // TODO: settings
+			alert(Lang.choice('poll.errorManyOptions', 10)); // TODO: JS Error
 			return false;
 		}
 		var $option = this.optionElement.clone();
-		$option.find('input').attr('name', 'option['+(num_options+1)+']')
+		$option.find('input').attr('name', 'option['+(num_options+1)+']');
 		$('#add-poll .poll-option').last().after($option);
 		$option.slideDown();
 		this.removeOption($option);
@@ -61,8 +62,9 @@
 		$parent.find('.remove-option').click($.proxy(function(event) {
 			var $me = $(event.target),
 				$myParent = $me.parents('.poll-option');
-			if($('.poll-option').length <= 2)
+			if($('.poll-option').length <= 2) // TODO: settings
 			{
+				alert(Lang.choice('poll.errorFewOptions', 2)); // TODO: JS Error
 				return false;
 			}
 
