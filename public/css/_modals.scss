@@ -103,10 +103,8 @@
 		line-height: 1;
 		@include border-radius(15px);
 		@include box-sizing(border-box);
-		@include transform(translate(0, 0));
-		font: normal normal normal 14px/1 FontAwesome;
-		font-size: inherit;
-		text-rendering: auto;
+		font-size: 14px/1;
+		font-family: FontAwesome;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 

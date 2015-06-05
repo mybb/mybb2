@@ -3946,13 +3946,8 @@ html.js .inline-moderation.floating i {
     border-radius: 15px;
     -ms-box-sizing: border-box;
     box-sizing: border-box;
-    -webkit-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -o-transform: translate(0, 0);
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
+    font-size: 14px/1;
+    font-family: FontAwesome;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
     .modal a.close-modal:before {
