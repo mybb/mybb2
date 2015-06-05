@@ -32,8 +32,8 @@ return [
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
 	'removeQuote' => 'Remove Quote',
-	'quoteSelectionNow' => 'Quote now',
-	'quoteSelectionLater' => 'Save quote',
+	'quoteSelectionNow' => 'Quote Now',
+	'quoteSelectionLater' => 'Save Quote',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -49,9 +49,10 @@ return [
 		'desc' => 'You have selected one or more posts to quote.',
 		'select' => 'Quote these posts now',
 		'deselect' => 'deselect them',
-		'viewAll' => 'View all quotes',
+		'viewAll' => 'view all quotes',
+		'quotes' => 'Quotes',
 		'selectThisPost' => 'Select',
-		'selectQuotes' => 'Select all quotes'
+		'selectQuotes' => 'Select All Quotes'
 	],
 
 ];
