@@ -60,5 +60,37 @@ return [
 	'mybbDesc' => 'The best free and open source forum software',
 
 	'goToXProfile' => "Go to :name's profile",
-	'XAvatar' => ":name's avatar"
+	'XAvatar' => ":name's avatar",
+
+	'months' => [
+		'january' => 'January',
+		'february' => 'February',
+		'march' => 'March',
+		'april' => 'April',
+		'may' => 'May',
+		'june' => 'June',
+		'july' => 'July',
+		'august' => 'August',
+		'september' => 'September',
+		'october' => 'October',
+		'november' => 'November',
+		'december' => 'December'
+	],
+
+	'dayOfWeek' => [
+		'sun' => 'Sun',
+		'sunday' => 'Sunday',
+		'mon' => 'Mon',
+		'monday' => 'Monday',
+		'tue' => 'Tue',
+		'tuesday' => 'Tuesday',
+		'wed' => 'Wed',
+		'wednesday' => 'Wednesday',
+		'thu' => 'Thu',
+		'thursday' => 'Thursday',
+		'fri' => 'Fri',
+		'friday' => 'Friday',
+		'sat' => 'Sat',
+		'saturday' => 'Saturday'
+	]
 ];

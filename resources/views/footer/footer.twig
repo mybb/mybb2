@@ -15,4 +15,33 @@
 			</div>
 		</footer>
 		<script src="{{ asset('assets/js/vendor.js') }}"></script>
+		<script>
+			Lang.addResource({
+				'general': {
+					months: {
+						january: '{{ trans('general.months.january')|e('js') }}',
+						february: '{{ trans('general.months.february')|e('js') }}',
+						march: '{{ trans('general.months.march')|e('js') }}',
+						april: '{{ trans('general.months.april')|e('js') }}',
+						may: '{{ trans('general.months.may')|e('js') }}',
+						june: '{{ trans('general.months.june')|e('js') }}',
+						july: '{{ trans('general.months.july')|e('js') }}',
+						august: '{{ trans('general.months.august')|e('js') }}',
+						september: '{{ trans('general.months.september')|e('js') }}',
+						october: '{{ trans('general.months.october')|e('js') }}',
+						november: '{{ trans('general.months.november')|e('js') }}',
+						december: '{{ trans('general.months.december')|e('js') }}'
+					},
+					dayOfWeek: {
+						sun: '{{ trans('general.dayOfWeek.sun')|e('js') }}',
+						mon: '{{ trans('general.dayOfWeek.mon')|e('js') }}',
+						tue: '{{ trans('general.dayOfWeek.tue')|e('js') }}',
+						wed: '{{ trans('general.dayOfWeek.wed')|e('js') }}',
+						thu: '{{ trans('general.dayOfWeek.thu')|e('js') }}',
+						fri: '{{ trans('general.dayOfWeek.fri')|e('js') }}',
+						sat: '{{ trans('general.dayOfWeek.sat')|e('js') }}'
+					}
+				}
+			});
+		</script>
 		<script src="{{ asset('assets/js/main.js') }}"></script>
