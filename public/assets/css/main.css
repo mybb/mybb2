@@ -3196,6 +3196,7 @@ img.avatar {
   font-size: 0.9em;
   text-decoration: none;
   display: inline-block;
+  line-height: 26px;
   border-radius: 4px; }
   .button:hover, a.button:hover {
     background: #ff7500;
