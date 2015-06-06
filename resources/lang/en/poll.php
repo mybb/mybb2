@@ -8,7 +8,7 @@
 
 return [
 	'poll' => 'Poll',
-	'addPoll' => 'Add a poll',
+	'addPoll' => 'Add Poll',
 	'addPollToX' => 'Add a poll to :name',
 	'editPoll' => 'Edit the poll',
 	'question' => 'Question',

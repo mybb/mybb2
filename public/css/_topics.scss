@@ -238,7 +238,12 @@
 			}
 		}
 
-		.post__foot {
+		textarea {
+			border: none;
+			padding: 0;
+		}
+
+		&.post--quick-reply .post__foot {
 			margin: 5px 0;
 		}
 	}
@@ -300,6 +305,29 @@
 		background: $background-2;
 		border-top: 1px solid $border-1;
 		text-align: center;
+	}
+}
+
+.topic--create, .topic--reply {
+
+	header h1 {
+		display: none;
+	}
+
+	.topic__title {
+		border: none;
+		padding: 0;
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+
+	.post__controls {
+		text-align: left;
+
+		.text {
+			display: inline;
+			font-size: 0.8em;
+		}
 	}
 }
 

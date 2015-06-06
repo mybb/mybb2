@@ -3354,6 +3354,9 @@ section.form {
   border: 1px solid #dfdfdf;
   margin-bottom: 10px;
   border-radius: 4px; }
+  section.form .heading--major {
+    margin: -1px;
+    border-radius: 4px 4px 0 0; }
   section.form .form__section {
     padding: 16px 12px;
     border-bottom: 2px solid #dfdfdf; }
@@ -3922,7 +3925,10 @@ section.container .forum-list {
     float: right; }
     .post.post--reply .full-reply .text {
       display: none; }
-  .post.post--reply .post__foot {
+  .post.post--reply textarea {
+    border: none;
+    padding: 0; }
+  .post.post--reply.post--quick-reply .post__foot {
     margin: 5px 0; }
   .post .quick-quote {
     display: none;
@@ -3969,6 +3975,19 @@ section.container .forum-list {
     background: #f2f2f2;
     border-top: 1px solid #dfdfdf;
     text-align: center; }
+
+.topic--create header h1, .topic--reply header h1 {
+  display: none; }
+.topic--create .topic__title, .topic--reply .topic__title {
+  border: none;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold; }
+.topic--create .post__controls, .topic--reply .post__controls {
+  text-align: left; }
+  .topic--create .post__controls .text, .topic--reply .post__controls .text {
+    display: inline;
+    font-size: 0.8em; }
 
 @media only screen and (min-width: 480px) {
   .post {

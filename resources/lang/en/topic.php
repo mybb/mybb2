@@ -34,6 +34,7 @@ return [
 	'removeQuote' => 'Remove Quote',
 	'quoteSelectionNow' => 'Quote Now',
 	'quoteSelectionLater' => 'Save Quote',
+	'attachFiles' => 'Attach Files',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -43,6 +44,7 @@ return [
 		'title' => 'Title',
 		'enterTitle' => 'Enter a meaningful title...',
 		'content' => 'Content',
+		'writePost' => 'Write your post...',
 		'postTopic' => 'Post Topic'
 	],
 	'multiQuote' => [

@@ -8,40 +8,40 @@
 	<div class="page-content">
 		<header>
 			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
-			<div class="page-buttons">
-				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
-			</div>
 		</header>
-
-		{% include 'topic.preview' with {'preview': preview} %}
 		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'id': 'topicreply'}) }}
-		<section class="form">
-			<div class="form__section">
-				{% if auth_check() == false %}
-					<div class="form__row">
-						<h3>{{ form_label('username', trans('general.username')) }}</h3>
-						{{ form_text('username', username) }}
+		<section class="topic topic--reply">
+			<div class="post post--reply">
+				<div class="post__meta">
+					<a href="index.php?page=profile" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+						{% if auth_check() %}
+							<h3><a href="index.php?page=profile">{{ auth_user.styled_name|raw }}</a></h3>
+						{% else %}
+							{{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
+						{% endif %}
+						<span class="post__date">{{ trans('general.now') }}</span>
+						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
 					</div>
-				{% endif %}
-				<div class="form__row">
-					<h3>{{ form_label('content', trans('topic.reply')) }}</h3>
-					{{ form_textarea('content', content, {'id':'message'}) }}
-					{% include 'topic.quotebar' %}
-				</div>
-				{% if auth_check() == false %}
-					<div class="form__row">
-						{{ captcha() }}
+					<div class="post__body">
+						{{ form_textarea('content', input_get('content'), {'class':'textarea', 'rows': '10', 'id': 'message', 'placeholder': trans('topic.create.writePost'), 'title': trans('topic.create.writePost')}) }}
+                        {% include 'topic.quotebar' %}
 					</div>
-				{% endif %}
+					{% if auth_check() == false %}
+						<div>
+							{{ captcha() }}
+						</div>
+					{% endif %}
+					<div class="post__foot">
+						<ul class="post__controls">
+							<li class="preview"><a href="{{ url_route('topics.reply', [topic.slug, topic.id]) }}" onclick="return submitFormAsGet('topicreply');"><i class="fa fa-edit"></i><span class="text">{{ trans('general.preview') }}</span></a></li>
+							<li class="attach"><a href="#attach"><i class="fa fa-paperclip"></i><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
+						</ul>
+					</div>
 			</div>
 		</section>
+		{% include 'topic.preview' with {'preview': preview} %}
 		<div class="form__submit">
 			{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-			<a href="{{ url_route('topics.reply', [topic.slug, topic.id]) }}" class="button button--secondary"
-			   onclick="return submitFormAsGet('topicreply');">
-				<i class="fa fa-edit"></i>
-				<span class="text">{{ trans('general.preview') }}</span>
-			</a>
 		</div>
 		{{ form_close() }}
 	</div>

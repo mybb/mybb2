@@ -53,6 +53,11 @@ section.form {
 	margin-bottom: 10px;
 	@include border-radius(4px);
 
+	.heading--major {
+		margin: -1px;
+		@include border-radius(corner-values(4px 4px 0 0));
+	}
+
 	.form__section {
 		@extend .clearfix;
 		padding: 16px 12px;
