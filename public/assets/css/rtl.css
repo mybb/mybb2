@@ -3487,7 +3487,7 @@ section.container .forum-list {
   font-size: 1.5em;
   font-weight: bold; }
 .topic--create .post__controls, .topic--reply .post__controls {
-  text-align: left; }
+  text-align: right; }
   .topic--create .post__controls .text, .topic--reply .post__controls .text {
     display: inline;
     font-size: 0.8em; }
