@@ -10,17 +10,11 @@
 	<div class="page-content">
 		<header>
 			<h1>{{ trans('poll.addPollToX', {'name': topic.title}) }}</h1>
-
-			<div class="page-buttons">
-				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i
-							class="fa fa-arrow-circle-{{ langDir.left }}"></i><span
-							class="text">{{ trans('general.cancel') }}</span></a>
-			</div>
 		</header>
 		{{ form_open({'route': ['polls.postCreate', topic.slug, topic.id ], 'method': 'post'}) }}
 		<section class="form" id="add-poll">
 			<div class="form__section">
-				<h2>{{ trans('poll.options') }}</h2>
+				<h2>{{ trans('poll.settings') }}</h2>
 
 				<div class="form__section__container">
 					<div class="form__row">
@@ -28,24 +22,20 @@
 						{{ form_text('question') }}
 					</div>
 					<div class="form__row">
-						<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+						<h3>{{ form_label('poll-end-at', trans('poll.endAt')) }}</h3>
+						<p class="form__description">{{ trans('poll.endAt.desc') }}</p>
 						{{ form_text('endAt', '', {id: 'poll-end-at'}) }}
 					</div>
 					<div class="form__row">
-						<h3>{{ trans('poll.whoVoted') }}</h3>
-
 						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_public', '1') }} {{ trans('poll.whoVoted.desc') }}</label></p>
-					</div>
-					<div class="form__row">
-						<h3>{{ trans('poll.multipleChoice') }}</h3>
-
+							<label>{{ form_checkbox('is_public', '1') }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label></p>
 						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_multiple', '1', false, {'id': 'poll-is-multiple'}) }} {{ trans('poll.multipleChoice.desc') }}</label>
+							<label>{{ form_checkbox('is_multiple', '1', false, {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice') }}</label>
 						</p>
 					</div>
 					<div class="form__row" id="poll-maximum-options">
 						<h3>{{ trans('poll.maxOptions') }}</h3>
+						<p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
 						{{ form_text('maxoptions') }}
 					</div>
 				</div>

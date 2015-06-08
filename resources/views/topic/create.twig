@@ -46,7 +46,7 @@
 			<h3 class="heading heading--major">{{ trans('poll.addPoll') }}</h3>
 			{{ form_hidden('add-poll', input_get('add-poll'), {'id':'add-poll-input'}) }}
 			<div class="form__section">
-				<h2>{{ trans('poll.options') }}</h2>
+				<h2>{{ trans('poll.settings') }}</h2>
 
 				<div class="form__section__container">
 					<div class="form__row">
@@ -55,24 +55,20 @@
 					</div>
 					<div class="form__row">
 						<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+						<p class="form__description">{{ trans('poll.endAt.desc') }}</p>
 						{{ form_text('endAt', input_get('endAt'), {id: 'poll-end-at'}) }}
 					</div>
 					<div class="form__row">
-						<h3>{{ trans('poll.whoVoted') }}</h3>
-
 						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_public', '1', input_get('is_public')) }} {{ trans('poll.whoVoted.desc') }}</label>
+							<label>{{ form_checkbox('is_public', '1', input_get('is_public')) }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label>
 						</p>
-					</div>
-					<div class="form__row">
-						<h3>{{ trans('poll.multipleChoice') }}</h3>
-
 						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_multiple', '1', input_get('is_multiple'), {'id': 'poll-is-multiple'}) }} {{ trans('poll.multipleChoice.desc') }}</label>
+							<label>{{ form_checkbox('is_multiple', '1', input_get('is_multiple'), {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice.desc') }}</label>
 						</p>
 					</div>
 					<div class="form__row" id="poll-maximum-options">
 						<h3>{{ trans('poll.maxOptions') }}</h3>
+						<p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
 						{{ form_text('maxoptions', input_get('maxoptions')) }}
 					</div>
 				</div>

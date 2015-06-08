@@ -3243,7 +3243,7 @@ dl.stats {
     margin: 0;
     padding: 0; }
   .alert.alert--danger {
-    background-color: #c00;
+    background-color: #eb5257;
     color: #fff; }
   .alert.alert--success {
     background-color: #018303;
@@ -4036,7 +4036,7 @@ section.container .forum-list {
 #add-poll .remove-option {
   float: right;
   margin: 3px -20px 0 0;
-  color: #f4645f; }
+  color: #eb5257; }
 
 .poll {
   border: 1px solid #ccc;
@@ -4050,19 +4050,19 @@ section.container .forum-list {
   .poll .poll__options {
     padding: 0; }
   .poll .poll__option {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #dfdfdf;
     padding: 6px 8px; }
     .poll .poll__option:last-child {
       border-bottom: none; }
     .poll .poll__option.poll_option-voted {
-      background: #fbffc0; }
+      background: #ebf4fb; }
   .poll .poll__option__name {
     width: 300px;
     float: left; }
   .poll .poll__option__votes {
     margin-left: 300px;
     width: auto;
-    border: 1px solid #bbb;
+    border: 1px solid #ccc;
     background: #fff;
     height: 20px;
     border-radius: 10px;
