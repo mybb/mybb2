@@ -131,6 +131,8 @@
 				modalFind = "#content";
 			}
 
+			MyBB.Spinner.add();
+
 			$.get('/'+modalSelector, function(response) {
 				var responseObject = $(response);
 
@@ -142,6 +144,8 @@
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
+
+				MyBB.Spinner.remove();
 			});
 		}
 	};
