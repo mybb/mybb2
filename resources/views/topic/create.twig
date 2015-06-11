@@ -25,7 +25,7 @@
 					<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
 				</div>
 				<div class="post__body">
-					{{ form_textarea('content', input_get('content'), {'class':'textarea', 'rows': '10', 'id': 'message', 'placeholder': trans('topic.create.writePost'), 'title': trans('topic.create.writePost')}) }}
+					{{ form_textarea('content', input_get('content'), {'class':'textarea', 'rows': '8', 'id': 'message', 'placeholder': trans('topic.create.writePost'), 'title': trans('topic.create.writePost')}) }}
                     {% include 'topic.quotebar' %}
 				</div>
 				{% if auth_check() == false %}

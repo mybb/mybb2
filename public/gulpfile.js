@@ -52,7 +52,8 @@ var vendor_scripts = [
     paths.bower + "/PowerTip/src/utility.js",
     paths.bower + "/dropit/dropit.js",
 	paths.bower + "/dropzone/dist/dropzone.js",
-	paths.bower + "/datetimepicker/jquery.datetimepicker.js"
+	paths.bower + "/datetimepicker/jquery.datetimepicker.js",
+    paths.bower + "/autosize/dist/autosize.js"
 ];
 
 var scripts = [

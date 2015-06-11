@@ -119,6 +119,8 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
+	autosize($('.post textarea'));
+
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
 		plugins: 'bbcode',
 		style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
