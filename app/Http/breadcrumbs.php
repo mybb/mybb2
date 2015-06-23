@@ -243,6 +243,7 @@ Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
 });
 
 Breadcrumbs::register('admin.users', function ($breadcrumbs) {
+	$breadcrumbs->parent('admin');
 	$breadcrumbs->push('Users & Roles');
 });
 
