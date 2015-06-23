@@ -234,40 +234,40 @@ Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
 });
 
 Breadcrumbs::register('admin', function ($breadcrumbs) {
-	$breadcrumbs->push('Control Panel', route('admin.dashboard'));
+	$breadcrumbs->push(trans('admin::general.control_panel'), route('admin.dashboard'));
 });
 
 Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin');
-	$breadcrumbs->push('Dashboard', route('admin.dashboard'));
+	$breadcrumbs->push(trans('admin::general.dashboard'), route('admin.dashboard'));
 });
 
 Breadcrumbs::register('admin.users', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin');
-	$breadcrumbs->push('Users & Roles');
+	$breadcrumbs->push(trans('admin::general.users_roles'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.users');
-	$breadcrumbs->push('Profile Fields', route('admin.users.profile_fields'));
+	$breadcrumbs->push(trans('admin::profile_fields.title'), route('admin.users.profile_fields'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields.add', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.users.profile_fields');
-	$breadcrumbs->push('Add Profile Field', route('admin.users.profile_fields.add'));
+	$breadcrumbs->push(trans('admin::profile_fields.add_field'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields.edit', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.users.profile_fields');
-	$breadcrumbs->push('Edit Profile Field', route('admin.users.profile_fields.edit'));
+	$breadcrumbs->push(trans('admin::profile_fields.edit_field'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields.edit_options', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.users.profile_fields');
-	$breadcrumbs->push('Edit Profile Field Options', route('admin.users.profile_fields.edit_options'));
+	$breadcrumbs->push(trans('admin::profile_fields.edit_field_options'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields.add_group', function ($breadcrumbs) {
 	$breadcrumbs->parent('admin.users.profile_fields');
-	$breadcrumbs->push('Add Profile Field Group', route('admin.users.profile_fields.add_group'));
+	$breadcrumbs->push(trans('admin::profile_fields.add_group'));
 });
