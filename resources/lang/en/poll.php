@@ -35,5 +35,7 @@ return [
 	'edit' => 'Edit',
 	'isClosed' => 'This poll is closed.',
 	'closePoll' => 'Close Poll:',
-	'closePoll.desc' => "Don't allow users to vote in this poll"
+	'closePoll.desc' => "Don't allow users to vote in this poll",
+	'errorManyOptions' => "You can't add more than one option to the poll| You can't add more than :count options to the poll.",
+	'errorFewOptions' => 'A poll must have at least one option.| A poll must have at least :count options.'
 ];

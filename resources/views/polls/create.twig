@@ -68,3 +68,13 @@
 		{{ form_close() }}
 	</div>
 {% endblock %}
+{% block js %}
+	<script>
+		Lang.addResource({
+			'poll': {
+				'errorManyOptions': '{{ trans('poll.errorManyOptions')|e('js') }}',
+				'errorFewOptions': '{{ trans('poll.errorFewOptions')|e('js') }}'
+			}
+		});
+	</script>
+{% endblock %}

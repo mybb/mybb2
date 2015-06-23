@@ -56,7 +56,7 @@
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like">
@@ -89,4 +89,13 @@
 			{% include 'topic.quickreply' with {'topic': topic} %}
 		</section>
 	</div>
+{% endblock %}
+{% block js %}
+	<script>
+		Lang.addResource({
+			'topic': {
+				'confirmDelete': '{{ trans('topic.confirmDelete')|e('js') }}'
+			}
+		});
+	</script>
 {% endblock %}

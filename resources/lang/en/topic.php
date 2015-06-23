@@ -25,7 +25,7 @@ return [
 	'edit' => 'Edit',
 	'editpost' => 'Edit Post',
 	'delete' => 'Delete',
-	'confirmDelete' => 'Do you really want to delete this post?\nYou will not be able to recover it afterwards!',
+	'confirmDelete' => "Do you really want to delete this post?\nYou will not be able to recover it afterwards!",
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted',
 	'like' => 'Like',
