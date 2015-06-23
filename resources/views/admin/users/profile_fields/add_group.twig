@@ -1,10 +1,10 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>Add Profile Field Group</h1>
+    <h1>{{ trans('admin::profile_fields.add_group') }}</h1>
 
     <div>
-        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> Back</a>
+        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
     </div>
 
     <div>
@@ -12,19 +12,19 @@
         <section class="form">
             <div class="form__section">
                 <div class="form__row">
-                    <h3>{{ form_label('name', 'Name') }}</h3>
+                    <h3>{{ form_label('name', trans('admin::profile_fields.group_name_field')) }}</h3>
                     {{ form_text('name') }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('slug', 'Slug') }}</h3>
+                    <h3>{{ form_label('slug', trans('admin::profile_fields.group_slug_field')) }}</h3>
                     {{ form_text('slug') }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('description', 'Description') }}</h3>
+                    <h3>{{ form_label('description', trans('admin::profile_fields.group_description_field')) }}</h3>
                     {{ form_text('description') }}
                 </div>
                 <div class="form__submit">
-                    {{ form_button('Add', {'type': 'submit', 'class': 'button'}) }}
+                    {{ form_button(trans('admin::profile_fields.group_add'), {'type': 'submit', 'class': 'button'}) }}
                 </div>
             </div>
         </section>

@@ -78,7 +78,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->except(['_token']);
 		$this->profileFieldRepository->create($data);
-		return redirect()->route('admin.users.profile_fields')->withSuccess('Saved!');
+		return redirect()->route('admin.users.profile_fields')->withSuccess(trans('admin::general.success_saved'));
 	}
 
 	/**
@@ -106,7 +106,7 @@ class ProfileFieldController extends AdminController
 	{
 		$field = $this->profileFieldRepository->find($id);
 		$field->update($request->only(['type', 'name', 'description', 'validation_rules']));
-		return redirect()->back()->withSuccess('Saved!');
+		return redirect()->back()->withSuccess(trans('admin::general.success_saved'));
 	}
 
 	/**
@@ -117,7 +117,7 @@ class ProfileFieldController extends AdminController
 	public function deleteProfileField(Request $request)
 	{
 		$this->profileFieldRepository->delete($request->get('profile_field_id'));
-		return redirect()->back()->withSuccess('Deleted!');
+		return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
 	}
 
 	/**
@@ -144,7 +144,7 @@ class ProfileFieldController extends AdminController
 	{
 		$option = ProfileFieldOption::find($request->get('profile_field_option_id'));
 		$option->delete();
-		return redirect()->back()->withSuccess('Deleted!');
+		return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
 	}
 
 	/**
@@ -162,7 +162,7 @@ class ProfileFieldController extends AdminController
 
 		ProfileFieldOption::create($data);
 
-		return redirect()->back()->withSuccess('Created!');
+		return redirect()->back()->withSuccess(trans('admin::general.success_created'));
 	}
 
 	/**
@@ -183,7 +183,7 @@ class ProfileFieldController extends AdminController
 	{
 		$data = $request->only(['name', 'slug', 'description']);
 		$this->profileFieldGroupRepository->create($data);
-		return redirect()->route('admin.users.profile_fields')->withSuccess('Saved!');
+		return redirect()->route('admin.users.profile_fields')->withSuccess(trans('admin::general.success_saved'));
 	}
 
 	/**
@@ -193,6 +193,6 @@ class ProfileFieldController extends AdminController
 	 */
 	public function testSubmit(TestSubmitRequest $request)
 	{
-		return redirect()->back()->withSuccess('Profile field submitted sucessfully!');
+		return redirect()->back()->withSuccess(trans('admin::profile_fields.edit_preview_submit_success'));
 	}
 }

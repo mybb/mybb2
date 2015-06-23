@@ -1,10 +1,10 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>Edit Profile Field</h1>
+    <h1>{{ trans('admin::profile_fields.edit_field') }}</h1>
 
     <div>
-        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> Back</a>
+        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
     </div>
 
     <div>
@@ -18,14 +18,14 @@
         {{ form_hidden('profile_field_id', field.id) }}
         <section class="form">
             <div style="background: #007fd0;">
-                <p style="color: white; margin: 0; padding: 5px 5px 5px 10px;">Preview</p>
+                <p style="color: white; margin: 0; padding: 5px 5px 5px 10px;">{{ trans('admin::profile_fields.edit_preview') }}</p>
             </div>
             <div class="form__section">
                 <div class="form__row">
                     {{ form_render_field(field) }}
                 </div>
                 <div class="form__submit">
-                    <button type="submit" class="button">Submit</button>
+                    <button type="submit" class="button">{{ trans('admin::profile_fields.edit_preview_submit') }}</button>
                 </div>
             </div>
         </section>
