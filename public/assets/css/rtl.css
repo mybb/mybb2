@@ -1,8 +1,8 @@
-/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
  */
 html {
   font-family: sans-serif;
@@ -49,7 +49,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
  */
 [hidden], template {
   display: none; }
@@ -63,7 +63,8 @@ a {
   background-color: transparent; }
 
 /**
- * Improve readability when focused and also mouse hovered in all browsers.
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
  */
 a:active, a:hover {
   outline: 0; }
@@ -257,14 +258,13 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
- *    (include `-moz` to future-proof).
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
  */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  /* 2 */
-  box-sizing: content-box; }
+  box-sizing: content-box;
+  /* 2 */ }
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -2108,7 +2108,8 @@ h1.title {
     padding: 0; }
 
 .user-navigation__links {
-  margin: 0 -8px;
+  margin: 0;
+  padding: 0;
   list-style: none; }
   .user-navigation__links > li {
     float: right;
@@ -2458,7 +2459,8 @@ footer {
     background-size: 137px 40px; } }
 
 html, button, input, select, textarea {
-  color: #222; }
+  color: #222;
+  word-wrap: break-word; }
 
 ::-moz-selection {
   background: #ff7500;
@@ -2631,9 +2633,28 @@ section {
         font-weight: bold;
         background: #007fd0;
         text-decoration: none; }
+  section .sort-results {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-top: 2px solid #dfdfdf;
+    padding: 6px 0;
+    clear: both;
+    border-radius: 0 0 4px 4px; }
+    section .sort-results h3 {
+      display: inline-block;
+      margin: 0 0 0 10px;
+      padding: 0;
+      font-weight: normal;
+      color: #666;
+      font-size: 0.9em; }
+      section .sort-results h3:after {
+        content: ":"; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
+    section.container .sort-results {
+      border-width: 0;
+      border-top-width: 2px; }
   section:last-child {
     margin-bottom: 0; }
 
@@ -2678,6 +2699,7 @@ img.avatar {
   font-size: 0.9em;
   text-decoration: none;
   display: inline-block;
+  line-height: 26px;
   border-radius: 4px; }
   .button:hover, a.button:hover {
     background: #ff7500;
@@ -2724,7 +2746,7 @@ dl.stats {
     margin: 0;
     padding: 0; }
   .alert.alert--danger {
-    background-color: #c00;
+    background-color: #eb5257;
     color: #fff; }
   .alert.alert--success {
     background-color: #018303;
@@ -2735,22 +2757,6 @@ dl.stats {
   padding: 30px 0;
   font-size: 1.2em;
   color: #666; }
-
-.sort-results {
-  text-align: center;
-  border: 1px solid #ccc;
-  border-top: 2px solid #dfdfdf;
-  padding: 6px 0;
-  border-radius: 0 0 4px 4px; }
-  .sort-results h3 {
-    display: inline-block;
-    margin: 0 0 0 10px;
-    padding: 0;
-    font-weight: normal;
-    color: #666;
-    font-size: 0.9em; }
-    .sort-results h3:after {
-      content: ":"; }
 
 @media only screen and (min-width: 768px) {
   .main .page-content--sidebar {
@@ -2851,6 +2857,9 @@ section.form {
   border: 1px solid #dfdfdf;
   margin-bottom: 10px;
   border-radius: 4px; }
+  section.form .heading--major {
+    margin: -1px;
+    border-radius: 4px 4px 0 0; }
   section.form .form__section {
     padding: 16px 12px;
     border-bottom: 2px solid #dfdfdf; }
@@ -3355,7 +3364,7 @@ section.container .forum-list {
     padding: 0 6px 3px 6px; }
     .post .post__body p {
       font-size: 0.9em;
-      margin: 0 0 6px 0; }
+      margin: 0; }
     .post .post__body img {
       max-width: 100%; }
     .post .post__body blockquote {
@@ -3397,7 +3406,7 @@ section.container .forum-list {
         float: right; }
         .post .post__controls li.like .text, .post .post__controls li.quote .text, .post .post__controls li.approve .text, .post .post__controls li.restore .text {
           display: inline; }
-        .post .post__controls li.like .quoteButton .quoteButton__remove, .post .post__controls li.quote .quoteButton .quoteButton__remove, .post .post__controls li.approve .quoteButton .quoteButton__remove, .post .post__controls li.restore .quoteButton .quoteButton__remove {
+        .post .post__controls li.like .quote-button .quote-button__remove, .post .post__controls li.quote .quote-button .quote-button__remove, .post .post__controls li.approve .quote-button .quote-button__remove, .post .post__controls li.restore .quote-button .quote-button__remove {
           display: none; }
     .post .post__controls i {
       font-size: 14px; }
@@ -3419,20 +3428,26 @@ section.container .forum-list {
     float: left; }
     .post.post--reply .full-reply .text {
       display: none; }
-  .post.post--reply .post__foot {
+  .post.post--reply textarea {
+    border: none;
+    padding: 0; }
+  .post.post--reply.post--quick-reply .post__foot {
     margin: 5px 0; }
-  .post .quickQuote {
+  .post .quick-quote {
     display: none;
     background: #444;
     color: #fff;
     border-radius: 4px;
     font: 12px Open Sans, Helvetica Neue, Helvetica, Arial;
-    padding: 2px 6px;
+    padding: 6px 4px;
     position: absolute;
     z-index: 1001; }
-    .post .quickQuote span {
-      cursor: pointer; }
-    .post .quickQuote:before {
+    .post .quick-quote span {
+      cursor: pointer;
+      margin: 0 6px; }
+      .post .quick-quote span:hover {
+        text-decoration: underline; }
+    .post .quick-quote:before {
       content: ' ';
       position: absolute;
       bottom: -6px;
@@ -3442,19 +3457,40 @@ section.container .forum-list {
       border-left: 6px solid transparent;
       border-right: 6px solid transparent; }
 
-#quoteBar {
+.quote-bar {
   border: 1px solid #ccc;
-  padding: 0 10px;
+  padding: 5px 10px;
   font-size: 12px;
   border-radius: 4px; }
 
-.viewQuotes {
+.view-quotes {
   left: 10% !important;
   width: 80% !important;
   margin-left: 0 !important; }
-  .viewQuotes .post-quotes {
+  .view-quotes .view-quotes__quotes {
     overflow: auto;
-    padding: 5px; }
+    padding: 15px 15px 0 15px;
+    margin: 0; }
+  .view-quotes .view-quotes__select-all {
+    bottom: 0;
+    margin: 0;
+    padding: 6px 0;
+    background: #f2f2f2;
+    border-top: 1px solid #dfdfdf;
+    text-align: center; }
+
+.topic--create header h1, .topic--reply header h1 {
+  display: none; }
+.topic--create .topic__title, .topic--reply .topic__title {
+  border: none;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold; }
+.topic--create .post__controls, .topic--reply .post__controls {
+  text-align: right; }
+  .topic--create .post__controls .text, .topic--reply .post__controls .text {
+    display: inline;
+    font-size: 0.8em; }
 
 @media only screen and (min-width: 480px) {
   .post {
@@ -3503,7 +3539,7 @@ section.container .forum-list {
 #add-poll .remove-option {
   float: left;
   margin: 3px 0 0 -20px;
-  color: #f4645f; }
+  color: #eb5257; }
 
 .poll {
   border: 1px solid #ccc;
@@ -3517,19 +3553,19 @@ section.container .forum-list {
   .poll .poll__options {
     padding: 0; }
   .poll .poll__option {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #dfdfdf;
     padding: 6px 8px; }
     .poll .poll__option:last-child {
       border-bottom: none; }
     .poll .poll__option.poll_option-voted {
-      background: #fbffc0; }
+      background: #ebf4fb; }
   .poll .poll__option__name {
     width: 300px;
     float: right; }
   .poll .poll__option__votes {
     margin-right: 300px;
     width: auto;
-    border: 1px solid #bbb;
+    border: 1px solid #ccc;
     background: #fff;
     height: 20px;
     border-radius: 10px;
@@ -3608,6 +3644,8 @@ section.container .forum-list {
       height: 50px; }
   .user-list.online-now .user-list__user .user-list__user__date {
     float: right; }
+  .user-list .sort-results {
+    margin: 0 -12px 0 -12px; }
 
 .user-list--compact a {
   display: inline-block;
@@ -3723,6 +3761,43 @@ ul.notifications {
     font-size: 0.8em;
     color: #666;
     display: block; }
+
+.conversation-list .conversation {
+  padding: 10px 64px 10px 12px;
+  border-bottom: 1px solid #dfdfdf;
+  line-height: 1.4;
+  position: relative; }
+  .conversation-list .conversation .avatar-profile-link {
+    width: 44px;
+    height: 44px;
+    float: right;
+    margin: 10px 10px 0 12px;
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .conversation-list .conversation .avatar-profile-link img.avatar {
+      width: 44px;
+      height: 44px; }
+  .conversation-list .conversation .conversation__title--unread {
+    font-weight: bold; }
+  .conversation-list .conversation .conversation__latest {
+    font-size: 0.8em;
+    color: #999;
+    margin: 0;
+    display: inline-block; }
+    .conversation-list .conversation .conversation__latest time {
+      color: #666; }
+  .conversation-list .conversation .conversation__unread {
+    background: #eb5257;
+    color: #fff;
+    padding: 2px 4px 1px 5px;
+    margin: 0 4px 0 0;
+    font-weight: normal;
+    font-size: 0.8em;
+    text-decoration: none;
+    border-radius: 2px; }
+  .conversation-list .conversation:last-child {
+    border-bottom: 0; }
 
 .inline-moderation {
   border: 1px solid #ddd;
@@ -3857,20 +3932,26 @@ html.js .inline-moderation.floating i {
     position: absolute;
     top: -12.5px;
     left: -12.5px;
-    width: 11px;
-    height: 19px;
+    width: 26px;
+    height: 26px;
     display: block;
     border: 2px solid #fff;
-    padding: 2px 6px 2px 6px;
+    padding: 2px;
     color: #fff;
     background: #333;
     text-align: center;
     text-decoration: none;
     box-shadow: 0 1px 4px #000;
     line-height: 1;
-    border-radius: 15px; }
-    .modal a.close-modal i {
-      font-size: 14px; }
+    border-radius: 15px;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 14px/1;
+    font-family: FontAwesome;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+    .modal a.close-modal:before {
+      content: "\f00d"; }
     .modal a.close-modal:hover {
       background: #bb0000; }
     .modal a.close-modal span {

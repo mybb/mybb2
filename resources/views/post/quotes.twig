@@ -5,9 +5,9 @@
 {% block contents %}
     <div class="page-content">
         <header>
-            <h1>{{ trans('topic.multiQuote.viewAll') }}</h1>
+            <h1>{{ trans('topic.multiQuote.quotes') }}</h1>
         </header>
-        <section class="post-quotes">
+        <section class="view-quotes__quotes">
 			{% for content in contents %}
 				<div class="content-quote" data-id="{{ content.id }}" data-quote="{{ content.quote }}">
 					<div class="post">
@@ -25,7 +25,7 @@
 						</div>
 						<div class="post__foot">
 							<ul class="post__controls">
-									<li class="delete quote__remove"><a href="#remove" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+									<li class="delete quote__remove"><a href="#remove" title="{{ trans('topic.removeQuote') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.removeQuote') }}</span></a></li>
 									<li class="quote quote__select"><a href="#select">
 										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">{{ trans('topic.multiQuote.selectThisPost') }}</span></a>
 									</li>
@@ -34,9 +34,11 @@
 					</div>
 				</div>
 			{% endfor %}
-			<a href="#select-quotes" class="button selectAllQuotes">
+        </section>
+        <div class="view-quotes__select-all">
+			<a href="#select-quotes" class="button select-all-quotes">
 				<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text">{{ trans('topic.multiQuote.selectQuotes') }}</span>
 			</a>
-        </section>
+		</div>
     </div>
 {% endblock %}

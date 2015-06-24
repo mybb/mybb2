@@ -6,27 +6,27 @@
 	.remove-option {
 		float: #{$right};
 		margin: side-values(3px -20px 0 0);
-		color: #f4645f;
+		color: $danger-color;
 	}
 }
 
 .poll {
-	border: 1px solid #ccc;
-	border-radius: 4px;
+	border: 1px solid $border-2;
+	@include border-radius(4px);
 
 	.poll__title {
-		background: #007fd0;
+		background: $primary-color;
 		margin: 0;
 		border-radius: corner-values(3px 3px 0 0);
 		padding: 6px 8px;
-		color: #fff;
+		color: $invert-font-color;
 	}
 
 	.poll__options {
 		padding: 0;
 	}
 	.poll__option {
-		border-bottom: 1px solid #e0e0e0;
+		border-bottom: 1px solid $border-1;
 		padding: 6px 8px;
 
 		&:last-child {
@@ -34,7 +34,7 @@
 		}
 
 		&.poll_option-voted {
-			background: #fbffc0;
+			background: $status-highlight;
 		}
 	}
 
@@ -47,8 +47,8 @@
 	.poll__option__votes {
 		margin-#{$left}: 300px;
 		width: auto;
-		border: 1px solid #bbb;
-		background: #fff;
+		border: 1px solid $border-2;
+		background: $background-default;
 		height: 20px;
 		border-radius: 10px;
 		position: relative;
@@ -58,7 +58,7 @@
 			top: 0;
 			#{$left}: 0;
 			bottom: 0;
-			background: #ccc;
+			background: $border-2;
 			z-index: 1;
 			border-radius: 9px;
 		}
@@ -81,12 +81,12 @@
 	}
 
 	.poll__end-at {
-		border-top: 1px solid #ccc;
+		border-top: 1px solid $border-2;
 		padding: 6px 8px;
 	}
 
 	.poll__vote {
-		border-top: 2px solid #ccc;
+		border-top: 2px solid $border-2;
 		height: 40px;
 
 		.poll__buttons {

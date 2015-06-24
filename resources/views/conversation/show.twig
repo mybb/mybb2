@@ -38,20 +38,22 @@
 			{% for message in messages %}
 				<div class="post">
 					<div class="post__meta">
-
 						<a href="{{ url_route('user.profile', {'slug': message.author.name, 'id': message.author.id}) }}"
 						   class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img
 									src="{{ message.author.avatar }}" class="avatar"
 									alt="{{ message.author.name }}'s avatar"/></a>
-
 						<h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
-						{{ generate_time(message.created_at) }}
-
+						<span class="post__date">{{ generate_time(message.created_at) }}</span>
 					</div>
 					<div class="post__body">
 						<p>
 							{{ message.message_parsed|raw }}
 						</p>
+					</div>
+					<div class="post__foot">
+						<ul class="post__controls">
+							{# like button, quote button #}
+						</ul>
 					</div>
 				</div>
 			{% endfor %}

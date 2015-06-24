@@ -17,10 +17,8 @@ h1.title {
 }
 
 .main-menu {
-	
 	float: $right;
 	margin: side-values(25px 0 0 0);
-
 }
 
 .menu-bar {
@@ -90,7 +88,8 @@ h1.title {
 }
 
 .user-navigation__links {
-	margin: 0 -8px;
+	margin: 0;
+	padding: 0;
 	list-style: none;
 
 	> li {

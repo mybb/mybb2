@@ -7,33 +7,34 @@
 			</header>
 
 			<div class="page-controls">
+				{{ conversations.render|raw }}
 				<div class="page-buttons">
-					<a href="{{ url_route('conversations.compose') }}" class="button button--secondary"><i class="fa fa-pencil-square-o"></i><span class="text">{{ trans('conversations.compose') }}</span></a>
+					<a href="{{ url_route('conversations.compose') }}" class="button"><i class="fa fa-pencil-square-o"></i><span class="text">{{ trans('conversations.compose') }}</span></a>
 				</div>
 			</div>
 
-			<section>
-				<div class="header">
-					<span class="title">{{ trans('conversations.title') }}</span>
-					<span class="last-message">{{ trans('conversations.last_message') }}</span>
-				</div>
-				{{ conversations.render|raw }}
-				{% for conversation in conversations %}
-					<div class="list">
-						<div class="title">
-							{% if conversation.isUnread %}
-								<span class="unread">{{ trans('conversations.new') }}</span>
-							{% endif %}
-							<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
+			<section class="container conversation-list">
+
+					{% for conversation in conversations %}
+						<div class="conversation">
+							<div class="conversation__title{{ conversation.isUnread ? ' conversation__title--unread' }}">
+								<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
+								{% if conversation.isUnread %}
+									<span class="conversation__unread">{{ trans('conversations.new') }}</span>
+								{% endif %}
+							</div>
+							<div class="conversation__latest">
+								<a href="{{ url_route('user.profile', [conversation.lastMessage.author.name, conversation.lastMessage.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': conversation.lastMessage.author.name}) }}"><img src="{{ conversation.lastMessage.author.avatar }}" alt="{{ trans('general.XAvatar', {'name': conversation.lastMessage.author.name}) }}" class="avatar" /></a>
+								{{ generate_time(conversation.lastMessage.created_at) }} {{ trans('general.by') }} {{ render_profile_link(conversation.lastMessage.author) }} 
+							</div>
 						</div>
-						<div class="last-message">{{ trans('general.by') }} {{ render_profile_link(conversation.lastMessage.author) }} {{ generate_time(conversation.lastMessage.created_at) }}</div>
-					</div>
-				{% else %}
-					<div class="no-message">
-						{{ trans('conversations.no_messages') }}
-					</div>
-				{% endfor %}
-				{{ conversations.render|raw }}
+					{% else %}
+						<div class="no-message">
+							{{ trans('conversations.no_messages') }}
+						</div>
+					{% endfor %}
+				</div>
 			</section>
+			{{ conversations.render|raw }}
 		</div>
 {% endblock %}

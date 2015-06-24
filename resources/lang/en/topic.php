@@ -25,17 +25,16 @@ return [
 	'edit' => 'Edit',
 	'editpost' => 'Edit Post',
 	'delete' => 'Delete',
-	'confirmDelete' => 'Do you really want to delete this post?\nYou will not be able to recover it afterwards!',
+	'confirmDelete' => "Do you really want to delete this post?\nYou will not be able to recover it afterwards!",
 	'restore' => 'Restore',
 	'softDeleted' => 'Soft Deleted',
-	'goToXProfile' => "Go to :name's profile",
-	'XAvatar' => ":name's avatar",
 	'like' => 'Like',
 	'unlike' => 'Unlike',
 	'quote' => 'Quote',
 	'removeQuote' => 'Remove Quote',
-	'quoteSelectionNow' => 'Quote now',
-	'quoteSelectionLater' => 'Save quote',
+	'quoteSelectionNow' => 'Quote Now',
+	'quoteSelectionLater' => 'Save Quote',
+	'attachFiles' => 'Attach Files',
 
 	'quickEdit' => 'Quick Edit',
 	'fullEdit' => 'Full Edit',
@@ -45,15 +44,17 @@ return [
 		'title' => 'Title',
 		'enterTitle' => 'Enter a meaningful title...',
 		'content' => 'Content',
+		'writePost' => 'Write your post...',
 		'postTopic' => 'Post Topic'
 	],
 	'multiQuote' => [
 		'desc' => 'You have selected one or more posts to quote.',
 		'select' => 'Quote these posts now',
 		'deselect' => 'deselect them',
-		'viewAll' => 'View all quotes',
+		'viewAll' => 'view all quotes',
+		'quotes' => 'Quotes',
 		'selectThisPost' => 'Select',
-		'selectQuotes' => 'Select all quotes'
+		'selectQuotes' => 'Select All Quotes'
 	],
 
 ];

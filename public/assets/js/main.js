@@ -100,6 +100,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		} else {
@@ -109,6 +110,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		}
@@ -118,7 +120,8 @@
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
@@ -131,17 +134,22 @@
 				modalFind = "#content";
 			}
 
+			MyBB.Spinner.add();
+
 			$.get('/'+modalSelector, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
 				modal.appendTo("body").modal({
-					zIndex: 1000
+					zIndex: 1000,
+					closeText: ''
 				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
+
+				MyBB.Spinner.remove();
 			});
 		}
 	};
@@ -155,6 +163,10 @@
 	{
 		// Show and hide posts
 		$(".postToggle").on("click", this.togglePost).bind(this);
+
+
+		// Confirm Delete
+		$(".delete a").on("click", $.proxy(this.confirmDelete, this));
 	};
 
 	// Show and hide posts
@@ -178,6 +190,10 @@
 		}
 	};
 
+	// Confirm Delete
+	window.MyBB.Posts.prototype.confirmDelete = function confirmDelete(event) {
+		return confirm(Lang.get('topic.confirmDelete'));
+	};
 
 	var posts = new window.MyBB.Posts();
 
@@ -212,7 +228,34 @@
 	window.MyBB.Polls.prototype.timePicker = function timePicker() {
 		$('#poll-end-at').datetimepicker({
 			format: 'Y-m-d H:i:s',
-			lang: $('html').attr('lang'),// TODO: use our i18n
+			lang: 'mybb',
+			i18n: {
+				mybb: {
+					months: [
+						Lang.get('general.months.january'),
+						Lang.get('general.months.february'),
+						Lang.get('general.months.march'),
+						Lang.get('general.months.april'),
+						Lang.get('general.months.may'),
+						Lang.get('general.months.june'),
+						Lang.get('general.months.july'),
+						Lang.get('general.months.august'),
+						Lang.get('general.months.september'),
+						Lang.get('general.months.october'),
+						Lang.get('general.months.november'),
+						Lang.get('general.months.december')
+					],
+					dayOfWeek: [
+						Lang.get('general.dayOfWeek.sun'),
+						Lang.get('general.dayOfWeek.mon'),
+						Lang.get('general.dayOfWeek.tue'),
+						Lang.get('general.dayOfWeek.wed'),
+						Lang.get('general.dayOfWeek.thu'),
+						Lang.get('general.dayOfWeek.fri'),
+						Lang.get('general.dayOfWeek.sat')
+					]
+				}
+			},
 			minDate: 0
 		});
 	};
@@ -231,10 +274,11 @@
 	window.MyBB.Polls.prototype.addOption = function addOption(event) {
 		var num_options = $('#add-poll .poll-option').length;
 		if(num_options >= 10) { // TODO: settings
+			alert(Lang.choice('poll.errorManyOptions', 10)); // TODO: JS Error
 			return false;
 		}
 		var $option = this.optionElement.clone();
-		$option.find('input').attr('name', 'option['+(num_options+1)+']')
+		$option.find('input').attr('name', 'option['+(num_options+1)+']');
 		$('#add-poll .poll-option').last().after($option);
 		$option.slideDown();
 		this.removeOption($option);
@@ -245,8 +289,9 @@
 		$parent.find('.remove-option').click($.proxy(function(event) {
 			var $me = $(event.target),
 				$myParent = $me.parents('.poll-option');
-			if($('.poll-option').length <= 2)
+			if($('.poll-option').length <= 2) // TODO: settings
 			{
+				alert(Lang.choice('poll.errorFewOptions', 2)); // TODO: JS Error
 				return false;
 			}
 
@@ -289,16 +334,16 @@
 	window.MyBB.Quotes = function Quotes() {
 
 		// MultiQuote
-		$(".quoteButton").on("click", this.multiQuoteButton.bind(this));
+		$(".quote-button").on("click", this.multiQuoteButton.bind(this));
 
 		this.showQuoteBar();
 
-		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
-		$("#quoteBar__view").on("click", $.proxy(this.viewQuotes, this));
-		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
+		$(".quote-bar__select").on("click", $.proxy(this.addQuotes, this));
+		$(".quote-bar__view").on("click", $.proxy(this.viewQuotes, this));
+		$(".quote-bar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
-		$('.quickQuote .fast').on('click', $.proxy(this.quickQuote, this));
-		$('.quickQuote .add').on('click', $.proxy(this.quickAddQuote, this));
+		$('.quick-quote .fast').on('click', $.proxy(this.quickQuote, this));
+		$('.quick-quote .add').on('click', $.proxy(this.quickAddQuote, this));
 
 		$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 		$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
@@ -309,8 +354,8 @@
 
 	window.MyBB.Quotes.prototype.quickQuote = function quickQuote(event) {
 		var $me = $(event.target);
-		if (!$me.hasClass('quickQuote')) {
-			$me = $me.parents('.quickQuote');
+		if (!$me.hasClass('quick-quote')) {
+			$me = $me.parents('.quick-quote');
 		}
 
 		var $post = $me.parents('.post');
@@ -326,8 +371,8 @@
 	window.MyBB.Quotes.prototype.quickAddQuote = function quickAddQuote(event) {
 		var $me = $(event.target),
 			quotes = this.getQuotes();
-		if (!$me.hasClass('quickQuote')) {
-			$me = $me.parents('.quickQuote');
+		if (!$me.hasClass('quick-quote')) {
+			$me = $me.parents('.quick-quote');
 		}
 
 		var $post = $me.parents('.post');
@@ -348,7 +393,7 @@
 
 	window.MyBB.Quotes.prototype.checkQuickQuote = function checkQuickQuote(event) {
 		var $me = $(event.target);
-		if ($me.hasClass('quickQuote') || $me.parents('.quickQuote').length) {
+		if ($me.hasClass('quick-quote') || $me.parents('.quick-quote').length) {
 			return false;
 		}
 		if (!$me.hasClass('post')) {
@@ -379,7 +424,7 @@
 		var selection = window.getSelection(),
 			range = selection.getRangeAt(0),
 			rect = range.getBoundingClientRect();
-		$elm = $("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
+		$elm = $("#post-" + pid).find('.quick-quote').show().data('content', $.trim(window.getSelection().toString()));
 		$elm.css({
 			'top': (window.scrollY + rect.top - $elm.outerHeight() - 4) + 'px',
 			'left': (window.scrollX + rect.left - (($elm.outerWidth() - rect.width) / 2)) + 'px'
@@ -387,7 +432,7 @@
 	}
 
 	window.MyBB.Quotes.prototype.hideQuickQuote = function () {
-		$('.post .quickQuote').hide().data('content', '');
+		$('.post .quick-quote').hide().data('content', '');
 	}
 
 	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
@@ -413,8 +458,8 @@
 	window.MyBB.Quotes.prototype.multiQuoteButton = function multiQuoteButton(event) {
 		event.preventDefault();
 		var $me = $(event.target);
-		if (!$me.hasClass('quoteButton')) {
-			$me = $me.parents('.quoteButton');
+		if (!$me.hasClass('quote-button')) {
+			$me = $me.parents('.quote-button');
 		}
 		var $post = $me.parents('.post');
 
@@ -435,12 +480,12 @@
 			});
 			if (!removed) {
 				quotes.push(type + '_' + postId);
-				$me.find('.quoteButton__add').hide();
-				$me.find('.quoteButton__remove').show();
+				$me.find('.quote-button__add').hide();
+				$me.find('.quote-button__remove').show();
 			}
 			else {
-				$me.find('.quoteButton__add').show();
-				$me.find('.quoteButton__remove').hide();
+				$me.find('.quote-button__add').show();
+				$me.find('.quote-button__remove').hide();
 			}
 
 			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
@@ -455,16 +500,16 @@
 		var quotes = this.getQuotes();
 
 		if (quotes.length) {
-			$("#quoteBar").show();
+			$(".quote-bar").show();
 		}
 		else {
-			$("#quoteBar").hide();
+			$(".quote-bar").hide();
 		}
 	};
 
 	window.MyBB.Quotes.prototype.addQuotes = function addQuotes() {
 		var quotes = this.getQuotes(),
-			$quoteBar = $("#quoteBar"),
+			$quoteBar = $(".quote-bar"),
 			$textarea = $($quoteBar.data('textarea'));
 
 		MyBB.Spinner.add();
@@ -515,7 +560,7 @@
 						'data': content
 					}
 				],
-				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
+				'_token': $(".quote-bar").parents('form').find('input[name=_token]').val()
 			},
 			method: 'POST'
 		}).done(function (json) {
@@ -548,20 +593,22 @@
 			url: '/post/quotes/all',
 			data: {
 				'posts': this.getQuotes(),
-				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
+				'_token': $(".quote-bar").parents('form').find('input[name=_token]').val()
 			},
 			method: 'POST'
 		}).done($.proxy(function (data) {
 			var modalContent = $("#content", $(data)),
 				modal = $('<div/>', {
-					"class": "modal-dialog viewQuotes"
+					"class": "modal-dialog view-quotes",
+					closeText: ''
 				});
-			modalContent.find('.post-quotes').css({
-				'max-height': ($(window).height()-100)+'px'
+			modalContent.find('.view-quotes__quotes').css({
+				'max-height': ($(window).height()-250)+'px'
 			});
 			modal.html(modalContent.html());
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 
 			if(Modernizr.touch)
@@ -577,8 +624,8 @@
 
 			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
-			$(".selectAllQuotes").on("click", $.proxy(this.addQuotes, this));
-			$('.modalHide').hide();
+			$(".select-all-quotes").on("click", $.proxy(this.addQuotes, this));
+			$('.modal-hide').hide();
 		}, this)).always(function () {
 			MyBB.Spinner.remove();
 		});
@@ -589,7 +636,7 @@
 	};
 
 	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
-		$quoteBar = $("#quoteBar");
+		$quoteBar = $(".quote-bar");
 		$quoteBar.hide();
 		MyBB.Cookie.unset('quotes');
 		this.quoteButtons();
@@ -599,8 +646,8 @@
 	window.MyBB.Quotes.prototype.quoteButtons = function quoteButtons() {
 		var quotes = this.getQuotes();
 
-		$('.quoteButton__add').show();
-		$('.quoteButton__remove').hide();
+		$('.quote-button__add').show();
+		$('.quote-button__remove').hide();
 
 		$.each(quotes, function (key, quote) {
 			if (typeof quote != 'string') {
@@ -610,8 +657,8 @@
 			type = quote[0];
 			postId = parseInt(quote[1]);
 			var $quoteButton = $("#post-" + postId + "[data-type='" + type + "']").find('.quoteButton');
-			$quoteButton.find('.quoteButton__add').hide();
-			$quoteButton.find('.quoteButton__remove').show();
+			$quoteButton.find('.quote-button__add').hide();
+			$quoteButton.find('.quote-button__remove').show();
 		})
 	}
 
@@ -826,6 +873,8 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
+	autosize($('.post textarea'));
+
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
 		plugins: 'bbcode',
 		style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
@@ -880,9 +929,13 @@ var entityMap = {
 };
 
 function escapeHTML(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entityMap[s];
-	});
+	if(typeof string == 'string') {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+
+	return string;
 }
 
 function submitFormAsGet(id, newRoute) {

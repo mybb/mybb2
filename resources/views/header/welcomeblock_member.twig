@@ -86,7 +86,7 @@
 		<li class="user-navigation__messages dropit-link">
 			<a href="{{ url_route('conversations.index') }}" class="multi-link">
 				<i class="fa fa-comments"></i>
-				<span class="text">{{ trans('conversations.messages') }}</span>
+				<span class="text">{{ trans('conversations.conversations') }}</span>
 				{% if auth_user.unreadConversations.count > 0 %}
 					<span class="unread-count">{{ auth_user.unreadConversations.count }}</span>
 				{% endif %}

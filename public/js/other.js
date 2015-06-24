@@ -119,6 +119,8 @@ $(function () {
 		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
+	autosize($('.post textarea'));
+
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
 		plugins: 'bbcode',
 		style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
@@ -173,9 +175,13 @@ var entityMap = {
 };
 
 function escapeHTML(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entityMap[s];
-	});
+	if(typeof string == 'string') {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+
+	return string;
 }
 
 function submitFormAsGet(id, newRoute) {
