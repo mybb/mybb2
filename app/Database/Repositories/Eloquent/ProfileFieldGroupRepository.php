@@ -50,14 +50,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
 	 */
 	public function getAllForSelectElement()
 	{
-		$groups = $this->getAll();
-		$select = [];
-
-		foreach ($groups as $group) {
-			$select[$group->id] = $group->name;
-		}
-
-		return $select;
+		return $this->profileFieldGroup->lists('name', 'id');
 	}
 
 	/**
