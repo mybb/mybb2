@@ -264,10 +264,33 @@ class PermissionChecker
 			return static::NEVER;
 		}
 
+		// We have a content value so we can save that as permission
 		if ($permissionValues->value !== null) {
 			$this->putCache($role, $permission, $content, $contentID, $permissionValues->value);
 
 			return $permissionValues->value;
+		}
+
+		// We have a content permission without a specific value
+		// Now we need to check whether this role has a content permission (#122)
+		// Unfortunately Laravel doesn't have a subwhere for joins so we can't add it to the query above
+		if ($content != null && $contentID != null) {
+			$contentValues = $this->db->table('permissions')
+				->where('permission_name', '=', $permission)
+				->where('content_name', '=', $content)
+				->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
+					$join->on('permission_id', '=', 'id')
+						->where('role_id', '=', $role->id)
+						->where('content_id', '=', 0);
+				})
+				->first(['value']);
+
+			if ($contentValues != null && $contentValues->value !== null) {
+				$this->putCache($role, $permission, $content, $contentID, $contentValues->value);
+
+				return $contentValues->value;
+			}
+
 		}
 
 		$this->putCache($role, $permission, $content, $contentID, $permissionValues->default_value);
