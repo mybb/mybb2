@@ -34,9 +34,9 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	protected $profileFieldOptionRepository;
 
 	/**
-	 * @param ProfileFieldModel $resource
-	 * @param Guard $guard
-	 * @param UserProfileFieldRepositoryInterface $userProfileFields
+	 * @param ProfileFieldModel                     $resource
+	 * @param Guard                                 $guard
+	 * @param UserProfileFieldRepositoryInterface   $userProfileFields
 	 * @param ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
 	 */
 	public function __construct(

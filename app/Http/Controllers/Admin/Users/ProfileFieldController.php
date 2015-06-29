@@ -42,9 +42,9 @@ class ProfileFieldController extends AdminController
 	private $profilefieldOptionRepository;
 
 	/**
-	 * @param Breadcrumbs $breadcrumbs
-	 * @param ProfileFieldRepositoryInterface $profileFieldRepository
-	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+	 * @param Breadcrumbs                           $breadcrumbs
+	 * @param ProfileFieldRepositoryInterface       $profileFieldRepository
+	 * @param ProfileFieldGroupRepositoryInterface  $profileFieldGroupRepository
 	 * @param ProfileFieldOptionRepositoryInterface $profilefieldOptionRepository
 	 */
 	public function __construct(
@@ -109,7 +109,7 @@ class ProfileFieldController extends AdminController
 	/**
 	 * @param SaveProfileFieldRequest $request
 	 *
-	 * @param int $id
+	 * @param int                     $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */

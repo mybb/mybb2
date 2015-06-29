@@ -12,6 +12,9 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class SaveProfileFieldRequest extends AbstractRequest
 {
+	/**
+	 * @return array
+	 */
 	public function rules()
 	{
 		return [
@@ -20,6 +23,9 @@ class SaveProfileFieldRequest extends AbstractRequest
 		];
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function authorize()
 	{
 		return true;
