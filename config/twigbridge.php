@@ -108,6 +108,7 @@ return [
 			'MyBB\Core\Twig\Extensions\RenderUserProfileLink',
 			'MyBB\Core\Twig\Extensions\ModalAttributes',
 			'MyBB\Core\Twig\Extensions\CurrentPath',
+			'MyBB\Core\Twig\Extensions\Navigation',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*

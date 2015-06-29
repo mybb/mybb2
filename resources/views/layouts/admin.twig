@@ -21,7 +21,7 @@
             <i class="fa fa-home" style="color: #007fd0"></i>
             <h3>Home</h3>
             <ul>
-                <li {{ active == 'dashboard' ? 'class="active"' }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
+                <li {{ active_tab('dashboard') }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
                 <li><a href="">Settings</a></li>
                 <li><a href="">Extensions</a></li>
                 <li><a href="">Languages</a></li>
@@ -35,7 +35,7 @@
             <i class="fa fa-users"></i>
             <h3>{{ trans('admin::nav.users_and_roles') }}</h3>
             <ul>
-                <li {{ active == 'profile-fields' ? 'class="active"' }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
+                <li {{ active_tab('profile-fields') }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
             </ul>
         </li>
         <li>
