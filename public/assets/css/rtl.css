@@ -1,8 +1,8 @@
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
- * 2. Prevent iOS and IE text size adjust after device orientation change,
- *    without disabling user zoom.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
  */
 html {
   font-family: sans-serif;
@@ -49,7 +49,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ * Hide the `template` element in IE 8/9/11, Safari, and Firefox < 22.
  */
 [hidden], template {
   display: none; }
@@ -63,8 +63,7 @@ a {
   background-color: transparent; }
 
 /**
- * Improve readability of focused elements when they are also in an
- * active/hover state.
+ * Improve readability when focused and also mouse hovered in all browsers.
  */
 a:active, a:hover {
   outline: 0; }
@@ -258,13 +257,14 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
+ *    (include `-moz` to future-proof).
  */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  box-sizing: content-box;
-  /* 2 */ }
+  /* 2 */
+  box-sizing: content-box; }
 
 /**
  * Remove inner padding and search cancel button in Safari and Chrome on OS X.
@@ -2710,6 +2710,21 @@ img.avatar {
     color: #007fd0; }
     .button.button--secondary:hover, a.button.button--secondary:hover {
       color: #ff7500; }
+    .button.button--secondary.button--danger, a.button.button--secondary.button--danger {
+      background: none;
+      color: #eb5257; }
+      .button.button--secondary.button--danger:hover, a.button.button--secondary.button--danger:hover {
+        background: none;
+        border-color: #eb5257;
+        color: #ff7500; }
+  .button.button--danger, a.button.button--danger {
+    border-color: #eb5257;
+    color: #fff;
+    background: #eb5257; }
+    .button.button--danger:hover, a.button.button--danger:hover {
+      background: #ff7500;
+      border-color: #ff7500;
+      color: #fff; }
   .button i, a.button i {
     margin-left: 5px;
     font-size: 14px; }
@@ -4399,6 +4414,10 @@ img.jcrop-preview {
     padding: 5px 5px 5px 10px;
     border-radius: 4px;
     width: 81%; }
+    .admin-main-nav li .active {
+      background: #007fd0; }
+      .admin-main-nav li .active a {
+        color: white; }
   .admin-main-nav ul {
     list-style: none;
     text-indent: 0;
@@ -4412,9 +4431,23 @@ img.jcrop-preview {
       margin-left: 5px;
       margin-top: 0; }
 
-.content h1 {
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 10px; }
+#admin-content h1 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px; }
+
+.admin-table {
+  width: 100%; }
+  .admin-table.admin-table--bordered {
+    border: 1px solid #f5f5f5;
+    border-radius: 5px;
+    border-collapse: separate; }
+    .admin-table.admin-table--bordered td {
+      border: 1px solid #f5f5f5; }
+  .admin-table td, .admin-table th {
+    padding: 10px; }
+  .admin-table thead {
+    background: #007fd0;
+    color: #fff; }
 
 .clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   content: " ";

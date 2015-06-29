@@ -373,7 +373,30 @@ img.avatar {
 		&:hover {
 			color: $secondary-color;
 		}
+
+        &.button--danger {
+            background: none;
+            color: $danger-color;
+
+            &:hover {
+                background: none;
+                border-color: $danger-color;
+                color: $secondary-color;
+            }
+        }
 	}
+
+    &.button--danger {
+        border-color: $danger-color;
+        color: $invert-font-color;
+        background: $danger-color;
+
+        &:hover {
+            background: $secondary-color;
+            border-color: $secondary-color;
+            color: $invert-font-color;
+        }
+    }
 
 	i {
 		margin-#{$right}: 5px;
