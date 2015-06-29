@@ -71,7 +71,6 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
 	 */
 	public function delete($id)
 	{
-		$field = $this->find($id);
-		$field->delete();
+		$this->profileField->newQuery()->getQuery()->delete($id);
 	}
 }
