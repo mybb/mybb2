@@ -33,7 +33,7 @@
         </li>
         <li>
             <i class="fa fa-users"></i>
-            <h3>Users & Roles</h3>
+            <h3>{{ trans('admin::nav.users_and_roles') }}</h3>
             <ul>
                 <li {{ active == 'profile-fields' ? 'class="active"' }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
             </ul>
