@@ -82,6 +82,11 @@ class AppServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository'
+		);
+
+		$this->app->bind(
 			'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
 		);

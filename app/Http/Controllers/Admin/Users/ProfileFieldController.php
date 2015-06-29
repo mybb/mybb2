@@ -10,8 +10,8 @@ namespace MyBB\Core\Http\Controllers\Admin\Users;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Models\ProfileFieldOption;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
@@ -34,18 +34,26 @@ class ProfileFieldController extends AdminController
 	private $profileFieldGroupRepository;
 
 	/**
-	 * @param Breadcrumbs                          $breadcrumbs
-	 * @param ProfileFieldRepositoryInterface      $profileFieldRepository
+	 * @var ProfileFieldOptionRepositoryInterface
+	 */
+	private $profilefieldOptionRepository;
+
+	/**
+	 * @param Breadcrumbs $breadcrumbs
+	 * @param ProfileFieldRepositoryInterface $profileFieldRepository
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+	 * @param ProfileFieldOptionRepositoryInterface $profilefieldOptionRepository
 	 */
 	public function __construct(
 		Breadcrumbs $breadcrumbs,
 		ProfileFieldRepositoryInterface $profileFieldRepository,
-		ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+		ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository,
+		ProfileFieldOptionRepositoryInterface $profilefieldOptionRepository
 	) {
 		$this->breadcrumbs = $breadcrumbs;
 		$this->profileFieldRepository = $profileFieldRepository;
 		$this->profileFieldGroupRepository = $profileFieldGroupRepository;
+		$this->profilefieldOptionRepository = $profilefieldOptionRepository;
 	}
 
 	/**
@@ -128,7 +136,7 @@ class ProfileFieldController extends AdminController
 	public function editProfileFieldOptions($id)
 	{
 		$field = $this->profileFieldRepository->find($id);
-		$options = ProfileFieldOption::getForProfileField($field);
+		$options = $this->profilefieldOptionRepository->getForProfileField($field);
 		return view('admin.users.profile_fields.edit_options', [
 			'options' => $options,
 			'field' => $field
@@ -142,7 +150,7 @@ class ProfileFieldController extends AdminController
 	 */
 	public function deleteProfileFieldOption(Request $request)
 	{
-		$option = ProfileFieldOption::find($request->get('profile_field_option_id'));
+		$option = $this->profilefieldOptionRepository->find($request->get('profile_field_option_id'));
 		$option->delete();
 		return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
 	}
@@ -160,7 +168,7 @@ class ProfileFieldController extends AdminController
 			'profile_field_id' => $request->get('profile_field_id')
 		];
 
-		ProfileFieldOption::create($data);
+		$this->profilefieldOptionRepository->create($data);
 
 		return redirect()->back()->withSuccess(trans('admin::general.success_created'));
 	}
