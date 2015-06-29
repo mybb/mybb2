@@ -373,7 +373,18 @@ class AccountController extends AbstractController
 		}
 		$dst_r = imagecreatetruecolor($data['w'], $data['h']);
 
-		imagecopyresampled($dst_r, $image, 0, 0, $data['x'], $data['y'], $data['w'], $data['h'], $data['w'], $data['h']);
+		imagecopyresampled(
+			$dst_r,
+			$image,
+			0,
+			0,
+			$data['x'],
+			$data['y'],
+			$data['w'],
+			$data['h'],
+			$data['w'],
+			$data['h']
+		);
 
 		switch ($ext) {
 			case 'bmp':
