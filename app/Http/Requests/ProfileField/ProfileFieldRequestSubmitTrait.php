@@ -4,7 +4,7 @@ namespace MyBB\Core\Http\Requests\ProfileField;
 
 use MyBB\Core\Database\Models\ProfileField;
 
-trait ProfileFieldRequestTrait
+trait ProfileFieldRequestSubmitTrait
 {
 	/**
 	 * @return array

@@ -14,7 +14,7 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class TestSubmitRequest extends AbstractRequest
 {
-	use ProfileFieldRequestTrait;
+	use ProfileFieldRequestSubmitTrait;
 
 	/**
 	 * @var ProfileFieldRepositoryInterface
