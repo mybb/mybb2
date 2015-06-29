@@ -15,6 +15,7 @@ use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldGroupRequest;
+use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldOptionRequest;
 use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldRequest;
 use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
 
@@ -158,11 +159,11 @@ class ProfileFieldController extends AdminController
 	}
 
 	/**
-	 * @param Request $request
+	 * @param SaveProfileFieldOptionRequest $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function saveNewProfileFieldOption(Request $request)
+	public function saveNewProfileFieldOption(SaveProfileFieldOptionRequest $request)
 	{
 		$data = [
 			'name' => $request->get('name'),

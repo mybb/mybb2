@@ -14,7 +14,7 @@ return [
 	'delete' => 'Delete',
 	'success_saved' => 'Saved!',
 	'success_deleted' => 'Deleted!',
-	'sucesss_created' => 'Created!',
+	'success_created' => 'Created!',
 	'control_panel' => 'Control Panel',
 	'dashboard' => 'Dashboard',
 	'users_roles' => 'Users & Roles'
