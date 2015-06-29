@@ -14,6 +14,7 @@ use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
+use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldRequest;
 use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
 
 class ProfileFieldController extends AdminController
@@ -78,11 +79,11 @@ class ProfileFieldController extends AdminController
 	}
 
 	/**
-	 * @param Request $request
+	 * @param SaveProfileFieldRequest $request
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function saveNewProfileField(Request $request)
+	public function saveNewProfileField(SaveProfileFieldRequest $request)
 	{
 		$data = $request->except(['_token']);
 		$this->profileFieldRepository->create($data);
@@ -104,13 +105,13 @@ class ProfileFieldController extends AdminController
 	}
 
 	/**
-	 * @param Request $request
+	 * @param SaveProfileFieldRequest $request
 	 *
-	 * @param int     $id
+	 * @param int $id
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function saveProfileField(Request $request, $id)
+	public function saveProfileField(SaveProfileFieldRequest $request, $id)
 	{
 		$field = $this->profileFieldRepository->find($id);
 		$field->update($request->only(['type', 'name', 'description', 'validation_rules']));
