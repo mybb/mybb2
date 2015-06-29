@@ -54,6 +54,8 @@ var vendor_scripts = [
 	paths.bower + "/dropzone/dist/dropzone.js",
 	paths.bower + "/datetimepicker/jquery.datetimepicker.js",
     paths.bower + "/autosize/dist/autosize.js",
+	paths.bower + "/jcrop/js/jquery.color.js",
+	paths.bower + "/jcrop/js/jquery.Jcrop.js",
 	paths.bower + "/lang-js/src/lang.js"
 ];
 
@@ -64,6 +66,7 @@ var scripts = [
 	paths.js.src + "/post.js",
 	paths.js.src + "/poll.js",
 	paths.js.src + "/quote.js",
+	paths.js.src + "/avatar.js",
     paths.js.src + "/other.js"
 ];
 

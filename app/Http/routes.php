@@ -108,6 +108,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 	);
 	Route::get('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@getAvatar']);
 	Route::post('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@postAvatar']);
+	Route::post('/avatar/crop', ['as' => 'account.avatar.crop', 'uses' => 'AccountController@postAvatarCrop']);
 	Route::get('/avatar/remove', ['as' => 'account.avatar.remove', 'uses' => 'AccountController@removeAvatar']);
 	Route::get('/notifications', ['as' => 'account.notifications', 'uses' => 'AccountController@getNotifications']);
 	Route::get('/following', ['as' => 'account.following', 'uses' => 'AccountController@getFollowing']);
