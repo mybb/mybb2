@@ -298,7 +298,7 @@ class AccountController extends AbstractController
 			$file->move(public_path('uploads/avatars'), $name);
 			$this->guard->user()->update(['avatar' => $name]);
 
-			if($request->get('ajax', false)) {
+			if ($request->get('ajax', false)) {
 				return response()->json([
 					'needCrop' => true,
 					'avatar' => asset("uploads/avatars/".$name)
@@ -350,8 +350,8 @@ class AccountController extends AbstractController
 			'y2' => $request->get('y2')
 		];
 
-		$avatar = public_path("uploads/avatars/".$this->guard->user()->avatar);
-		if(!file_exists($avatar)) {
+		$avatar = public_path("uploads/avatars/" . $this->guard->user()->avatar);
+		if (!file_exists($avatar)) {
 			return response()->json([
 				'success' => false,
 				'error' => trans('account.avatar_upload')
@@ -363,24 +363,33 @@ class AccountController extends AbstractController
 		$image = imagecreatefromstring(@file_get_contents($avatar));
 		list($width, $height) = getimagesize($avatar);
 
-		if($data['w'] > $width || $data['h'] > $height || $data['x2'] < $data['x'] || $data['y2'] < $data['y'] ||
-			$data['w'] <= 0 || $data['h'] <= 0 || $data['x2']-$data['x'] != $data['w'] || $data['y2']-$data['y'] != $data['h']) {
+		if ($data['w'] > $width || $data['h'] > $height || $data['x2'] < $data['x'] || $data['y2'] < $data['y'] ||
+			$data['w'] <= 0 || $data['h'] <= 0 || $data['x2']-$data['x'] != $data['w']||
+			$data['y2']-$data['y'] != $data['h']) {
 			return response()->json([
 				'success' => false,
 				'error' => trans('account.select_area_crop')
 			]);
 		}
-		$dst_r = imagecreatetruecolor( $data['w'], $data['h'] );
+		$dst_r = imagecreatetruecolor($data['w'], $data['h']);
 
-		imagecopyresampled($dst_r, $image, 0, 0, $data['x'], $data['y'],
-							$data['w'], $data['h'], $data['w'], $data['h']);
+		imagecopyresampled($dst_r, $image, 0, 0, $data['x'], $data['y'], $data['w'], $data['h'], $data['w'], $data['h']);
 
-		switch($ext){
-			case 'bmp': imagewbmp($dst_r, $avatar); break;
-			case 'gif': imagegif($dst_r, $avatar); break;
-			case 'jpg': imagejpeg($dst_r, $avatar); break;
+		switch ($ext) {
+			case 'bmp':
+				imagewbmp($dst_r, $avatar);
+				break;
+			case 'gif':
+				imagegif($dst_r, $avatar);
+				break;
+			case 'jpg':
+			case 'jpeg':
+				imagejpeg($dst_r, $avatar);
+				break;
 			case 'png':
-			default: imagepng($dst_r, $avatar); break;
+			default:
+				imagepng($dst_r, $avatar);
+				break;
 		}
 		return response()->json([
 			'success' => true,
