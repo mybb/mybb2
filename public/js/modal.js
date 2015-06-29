@@ -44,6 +44,7 @@
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
 			$(".password-toggle").hideShowPassword(false, true);
+			new window.MyBB.Avatar();
 		} else {
 			// Assume modal content is coming from an AJAX request
 
@@ -66,10 +67,17 @@
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
+				new window.MyBB.Avatar();
 
+				// Remove modal after close
+				modal.on($.modal.CLOSE, function() {
+					$(this).remove();
+				})
+			}).always(function() {
 				MyBB.Spinner.remove();
 			});
 		}
+
 	};
     
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
