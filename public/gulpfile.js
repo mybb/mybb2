@@ -79,7 +79,16 @@ var css = [
     paths.css.src + "/main.scss"
 ];
 
-gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "rtl_styles", "fonts"]);
+var admin_css = [
+    paths.bower + "/normalize.css/normalize.css",
+    paths.bower + "/fontawesome/scss/font-awesome.scss",
+    paths.bower + "/dropit/dropit.css",
+    paths.bower + "/jquery-dropdown/jquery.dropdown.css",
+    paths.bower + "/datetimepicker/jquery.datetimepicker.css",
+    paths.css.src + "/admin.scss"
+];
+
+gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "admin_styles", "rtl_styles", "admin_rtl_styles", "fonts"]);
 
 gulp.task("clean", function(cb) {
     del(
@@ -98,6 +107,8 @@ gulp.task("watch", ["default"], function() {
     gulp.watch(paths.images.src + "/**/*", ["images"]);
     gulp.watch(paths.css.src + "/**/*.scss", ["styles"]);
     gulp.watch(paths.css.src + "/**/*.scss", ["rtl_styles"]);
+    gulp.watch(paths.css.src + "/**/*.scss", ["admin_styles"]);
+    gulp.watch(paths.css.src + "/**/*.scss", ["admin_rtl_styles"]);
     gulp.watch(paths.fonts.src + "/**/*", ["fonts"]);
 });
 
@@ -152,6 +163,21 @@ gulp.task("styles", function() {
         .pipe(gulp.dest(paths.css.dest));
 });
 
+gulp.task("admin_styles", function() {
+    return gulp.src(admin_css)
+        .pipe(sass({
+            includePaths: [
+                "./app/bower_components"
+            ]
+        }))
+        .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
+        .pipe(concat("admin.css"))
+        .pipe(gulp.dest(paths.css.dest))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(minifycss())
+        .pipe(gulp.dest(paths.css.dest));
+});
+
 gulp.task("rtl_styles", function() {
     return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/rtl.scss"])
         .pipe(sass({
@@ -161,6 +187,21 @@ gulp.task("rtl_styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("rtl.css"))
+        .pipe(gulp.dest(paths.css.dest))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(minifycss())
+        .pipe(gulp.dest(paths.css.dest));
+});
+
+gulp.task("admin_rtl_styles", function() {
+    return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/admin.rtl.scss"])
+        .pipe(sass({
+            includePaths: [
+                "./app/bower_components"
+            ]
+        }))
+        .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
+        .pipe(concat("admin.rtl.css"))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
         .pipe(minifycss())

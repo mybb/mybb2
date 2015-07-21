@@ -1,0 +1,7 @@
+html[dir="rtl"] {
+	direction: rtl;
+}
+
+$dir: rtl;
+
+@import 'main';
