@@ -1,0 +1,101 @@
+.sidebar-menu {
+	margin-#{$left}: -225px;
+	width: 175px;
+	float: $left;
+	padding: side-values(12px 20px 20px 45px);
+
+	.sidebar-menu__main {
+		padding: 0;
+		list-style: none;
+	}
+
+	.sidebar-menu__sub {
+		// display: none;
+		font-size: 0.8em;
+		padding: side-values(6px 0 0 0);
+		margin: side-values(0 0 20px 0);
+		list-style: none;
+
+		a {
+
+			&:link, &:visited {
+				display: block;
+				background: $background-1;
+				border-radius: 3px;
+				text-decoration: none;
+				padding: 2px 8px;
+				margin: 2px;
+			}
+
+			// &.sidebar-menu__active-link, &.active {
+			// 	background: $primary-color;
+			// 	color: $invert-font-color;
+			// }
+
+			&:hover, &:active {
+				background: $secondary-color;
+				color: $invert-font-color;
+				text-decoration: none;
+			}
+		}
+
+		.active a {
+			background: $primary-color;
+				color: $invert-font-color;
+		}
+	}
+
+	h3 {
+		font-size: 1em;
+		font-weight: 600;
+		margin: 10px 0 0 0;
+		padding: 2px 0;
+		border-bottom: 1px solid $border-2;
+
+		a {
+			color: $alt-font-color-4;
+			display: block;
+
+			&:hover {
+				color: $secondary-color;
+				text-decoration: none;
+			}
+		}
+
+		i {
+			float: $left;
+			margin: side-values(6px 0 0 -22px);
+			color: $alt-font-color-2;
+			font-size: 14px;
+		}
+	}
+
+
+	.sidebar-menu__active-section {
+
+		.sidebar-menu__sub {
+			display: block;
+		}
+
+		h2 i {
+			color: $primary-color;
+		}
+	}
+}
+
+
+.page-body {
+	padding: 0 30px;
+}
+
+@media only screen and (min-width: 768px) {
+
+	.sidebar-menu {
+		margin-left: 0;
+	}
+
+	.page-body {
+		margin-left: 230px;
+	}
+
+}

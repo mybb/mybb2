@@ -89,7 +89,6 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 
 
 // Import our sub files
-@import 'header_footer';
 @import 'base';
 @import 'forms';
 @import 'modals';
@@ -97,6 +96,8 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'spinner';
 @import 'plugins';
 @import 'admin';
+@import 'admin_header_footer';
+@import 'admin_menu';
 
 
 // A few helper classes

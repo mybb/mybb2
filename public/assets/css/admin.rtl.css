@@ -4387,67 +4387,6 @@ img.jcrop-preview {
 .dropit .dropit-open .dropit-submenu {
   display: block; }
 
-.admin-header {
-  background: #f2f2f2;
-  overflow: hidden;
-  border-bottom: 2px solid #dfdfdf; }
-  .admin-header .breadcrumb {
-    font-size: 1em;
-    margin: 19px 19px 0 0; }
-    .admin-header .breadcrumb a {
-      color: #007fd0; }
-
-.admin-main-nav {
-  width: 13%;
-  float: left;
-  margin-left: 15px; }
-  .admin-main-nav .fa {
-    color: #666; }
-  .admin-main-nav > ul > li {
-    background: #fff;
-    margin: 5px;
-    padding: 5px;
-    width: 94%; }
-  .admin-main-nav li {
-    background: #fafafa;
-    margin: 5px 5px 5px 23px;
-    padding: 5px 5px 5px 10px;
-    border-radius: 4px;
-    width: 81%; }
-    .admin-main-nav li .active {
-      background: #007fd0; }
-      .admin-main-nav li .active a {
-        color: #fff; }
-  .admin-main-nav ul {
-    list-style: none;
-    text-indent: 0;
-    padding: 0; }
-    .admin-main-nav ul h3 {
-      border-bottom: 1px solid #dfdfdf;
-      padding-bottom: 2px;
-      display: inline-block;
-      width: 85%;
-      margin-bottom: 5px;
-      margin-left: 5px;
-      margin-top: 0; }
-
-#admin-content h1 {
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 15px; }
-
-.admin-table {
-  width: 100%; }
-  .admin-table.admin-table--bordered {
-    border-radius: 5px;
-    border-collapse: separate; }
-    .admin-table.admin-table--bordered td {
-      border-bottom: 1px solid #dfdfdf; }
-  .admin-table td, .admin-table th {
-    padding: 10px; }
-  .admin-table thead {
-    background: #007fd0;
-    color: #fff; }
-
 .clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
   content: " ";
   display: table; }

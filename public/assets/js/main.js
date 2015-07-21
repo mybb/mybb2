@@ -972,6 +972,20 @@ $(function () {
 
 	autosize($('.post textarea'));
 
+	$('a.show-menu__link').click(function(e) {
+		if(menu == 0)
+		{
+			menu = 1;
+			openMenu(e);
+		}
+
+		else
+		{
+			menu = 0;
+			closeMenu(e);
+		}
+	});
+
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
 		plugins: 'bbcode',
 		style: 'js/vendor/sceditor/jquery.sceditor.default.min.css',
@@ -1045,4 +1059,18 @@ function submitFormAsGet(id, newRoute) {
 
 	form.attr('method', 'get').submit();
 	return false;
+}
+
+function openMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '0px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "0px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "225px", marginRight: "-225px"}, 200, function() { });
+}
+
+function closeMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '-225px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "-225px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "0", marginRight: "0"}, 200, function() { });
 }
