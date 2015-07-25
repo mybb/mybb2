@@ -45,6 +45,11 @@ class PermissionsTableSeeder extends Seeder
 				'permission_name' => 'canViewAllOnline',
 				'content_name' => null,
 				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canModerateInline',
+				'content_name' => null,
+				'default_value' => 0
 			]
 		];
 

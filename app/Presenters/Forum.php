@@ -14,10 +14,15 @@ use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Moderation\ModerationRegistry;
 
 class Forum extends BasePresenter
 {
-	/** @var ForumModel $wrappedObject */
+	/**
+	 * @var ModerationRegistry
+	 */
+	protected $moderations;
 
 	/**
 	 * @var Application
@@ -25,13 +30,15 @@ class Forum extends BasePresenter
 	private $app;
 
 	/**
-	 * @param ForumModel  $resource The forum being wrapped by this presenter.
-	 * @param Application $app
+	 * @param ForumModel         $resource    The forum being wrapped by this presenter.
+	 * @param Application        $app
+	 * @param ModerationRegistry $moderations
 	 */
-	public function __construct(ForumModel $resource, Application $app)
+	public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
 	{
 		$this->wrappedObject = $resource;
 		$this->app = $app;
+		$this->moderations = $moderations;
 	}
 
 	/**
@@ -66,5 +73,21 @@ class Forum extends BasePresenter
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return \MyBB\Core\Moderation\ModerationInterface[]
+	 */
+	public function moderations()
+	{
+		$moderations = $this->moderations->getForContent(new Topic());
+		$decorated = [];
+		$presenter = app()->make('autopresenter');
+
+		foreach ($moderations as $moderation) {
+			$decorated[] = $presenter->decorate($moderation);
+		}
+
+		return $decorated;
 	}
 }

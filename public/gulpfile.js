@@ -67,7 +67,8 @@ var scripts = [
 	paths.js.src + "/poll.js",
 	paths.js.src + "/quote.js",
 	paths.js.src + "/avatar.js",
-    paths.js.src + "/other.js"
+    paths.js.src + "/other.js",
+    paths.js.src + "/moderation.js"
 ];
 
 var css = [

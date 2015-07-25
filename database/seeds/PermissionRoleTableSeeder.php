@@ -49,6 +49,12 @@ class PermissionRoleTableSeeder extends Seeder
 				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
 				'value' => 1
 			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canModerateInline')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
 		];
 
 		DB::table('permission_role')->insert($permissions_role);
