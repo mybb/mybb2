@@ -50,7 +50,49 @@ class PermissionRoleTableSeeder extends Seeder
 				'value' => 1
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canModerateInline')
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canModerate')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canApprove')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canClose')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canDeletePosts')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canDeleteTopics')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMergePosts')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMovePosts')
+					->pluck('id'),
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'value' => 1
+			],
+			[
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMoveTopics')
 					->pluck('id'),
 				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
 				'value' => 1

@@ -95,4 +95,12 @@ class DeletePost implements ModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\DeletePostPresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canDeletePosts';
+	}
 }

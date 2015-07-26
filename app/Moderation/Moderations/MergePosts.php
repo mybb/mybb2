@@ -99,4 +99,12 @@ class MergePosts implements ArrayModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\MergePostsPresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canMergePosts';
+	}
 }

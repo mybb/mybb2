@@ -122,4 +122,12 @@ class DeleteTopicTest extends \PHPUnit_Framework_TestCase
 
 		static::assertClassExtends($deleteTopic->getPresenterClass(), 'McCool\LaravelAutoPresenter\BasePresenter');
 	}
+
+	public function testCanGetPermissionNameAsString()
+	{
+		$topicDeleter = Mockery::mock('MyBB\Core\Services\TopicDeleter');
+		$deleteTopic = new DeleteTopic($topicDeleter);
+
+		static::assertInternalType('string', $deleteTopic->getPermissionName());
+	}
 }

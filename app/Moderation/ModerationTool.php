@@ -26,14 +26,21 @@ class ModerationTool implements ModerationInterface
 	protected $description;
 
 	/**
+	 * @var string
+	 */
+	protected $permissionName;
+
+	/**
 	 * @param string                $name
 	 * @param string                $description
+	 * @param string                $permissionName
 	 * @param ModerationInterface[] $moderations
 	 */
-	public function __construct($name, $description, array $moderations = [])
+	public function __construct($name, $description, $permissionName = null, array $moderations = [])
 	{
 		$this->name = $name;
 		$this->description = $description;
+		$this->permissionName = $permissionName;
 
 		foreach ($moderations as $moderation) {
 			$this->addModeration($moderation);
@@ -106,5 +113,13 @@ class ModerationTool implements ModerationInterface
 	public function visible($content)
 	{
 		return true;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return $this->permissionName;
 	}
 }

@@ -136,4 +136,12 @@ class MovePostTest extends \PHPUnit_Framework_TestCase
 
 		static::assertClassExtends($movePost->getPresenterClass(), 'McCool\LaravelAutoPresenter\BasePresenter');
 	}
+
+	public function testCanGetPermissionNameAsString()
+	{
+		$topicRepository = Mockery::mock('MyBB\Core\Database\Repositories\TopicRepositoryInterface');
+		$movePost = new MovePost($topicRepository);
+
+		static::assertInternalType('string', $movePost->getPermissionName());
+	}
 }

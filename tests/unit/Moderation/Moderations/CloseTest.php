@@ -144,4 +144,11 @@ class CloseTest extends \PHPUnit_Framework_TestCase
 
 		static::assertClassExtends($close->getPresenterClass(), 'McCool\LaravelAutoPresenter\BasePresenter');
 	}
+
+	public function testCanGetPermissionNameAsString()
+	{
+		$close = new Close();
+
+		static::assertInternalType('string', $close->getPermissionName());
+	}
 }

@@ -4,6 +4,7 @@ namespace MyBB\Core\Http\Requests\Moderation;
 
 use MyBB\Core\Http\Requests\AbstractRequest;
 use MyBB\Core\Moderation\ModerationRegistry;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Repository\RepositoryFactory;
 
 class ModerationRequest extends AbstractRequest
@@ -19,13 +20,23 @@ class ModerationRequest extends AbstractRequest
 	protected $repositoryFactory;
 
 	/**
-	 * @param ModerationRegistry $moderationRegistry
-	 * @param RepositoryFactory  $repositoryFactory
+	 * @var PermissionChecker
 	 */
-	public function __construct(ModerationRegistry $moderationRegistry, RepositoryFactory $repositoryFactory)
-	{
+	protected $permissionChecker;
+
+	/**
+	 * @param ModerationRegistry $moderationRegistry
+	 * @param RepositoryFactory $repositoryFactory
+	 * @param PermissionChecker $permissionChecker
+	 */
+	public function __construct(
+		ModerationRegistry $moderationRegistry,
+		RepositoryFactory $repositoryFactory,
+		PermissionChecker $permissionChecker
+	) {
 		$this->moderationRegistry = $moderationRegistry;
 		$this->repositoryFactory = $repositoryFactory;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -41,7 +52,7 @@ class ModerationRequest extends AbstractRequest
 	 */
 	public function authorize()
 	{
-		return true; // TODO: check moderation permissions
+		return $this->permissionChecker->hasPermission('user', null, $this->getModeration()->getPermissionName());
 	}
 
 	/**

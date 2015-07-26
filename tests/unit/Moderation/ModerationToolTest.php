@@ -20,7 +20,7 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
 			->withNoArgs()
 			->andReturn('name');
 
-		$tool = new ModerationTool('name', 'description', [$moderation]);
+		$tool = new ModerationTool('name', 'description', null, [$moderation]);
 		static::assertInstanceOf('MyBB\Core\Moderation\ModerationTool', $tool);
 	}
 
@@ -29,7 +29,7 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testCannotBeConstructedWithInvalidModerations()
 	{
-		$tool = new ModerationTool('name', 'description', [new \stdClass()]);
+		$tool = new ModerationTool('name', 'description', null, [new \stdClass()]);
 	}
 
 	public function testModerationCanBeAdded()
@@ -90,7 +90,7 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
 			->with('content')
 			->once();
 
-		$tool = new ModerationTool('name', 'description', [$moderation1]);
+		$tool = new ModerationTool('name', 'description', null, [$moderation1]);
 		$tool->addModeration($moderation2);
 		$tool->apply('content');
 	}
@@ -105,5 +105,11 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
 	{
 		$tool = new ModerationTool('name', 'description');
 		static::assertInternalType('bool', $tool->visible('content'));
+	}
+
+	public function testCanGetPermissionName()
+	{
+		$tool = new ModerationTool('name', 'description', 'permission');
+		static::assertInternalType('string', $tool->getPermissionName());
 	}
 }

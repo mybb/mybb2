@@ -95,4 +95,12 @@ class DeleteTopic implements ModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\DeleteTopicPresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canDeleteTopics';
+	}
 }

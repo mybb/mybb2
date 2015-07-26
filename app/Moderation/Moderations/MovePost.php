@@ -98,4 +98,12 @@ class MovePost implements ModerationInterface, HasPresenter
 	{
 		return $content instanceof Post;
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canMovePosts';
+	}
 }

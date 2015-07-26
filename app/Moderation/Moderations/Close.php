@@ -113,4 +113,12 @@ class Close implements ReversibleModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\ClosePresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canClose';
+	}
 }

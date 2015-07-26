@@ -124,4 +124,12 @@ class MergePostsTest extends \PHPUnit_Framework_TestCase
 
 		static::assertClassExtends($mergePosts->getPresenterClass(), 'McCool\LaravelAutoPresenter\BasePresenter');
 	}
+
+	public function testCanGetPermissionNameAsString()
+	{
+		$postRepository = Mockery::mock('MyBB\Core\Database\Repositories\PostRepositoryInterface');
+		$mergePosts = new MergePosts($postRepository);
+
+		static::assertInternalType('string', $mergePosts->getPermissionName());
+	}
 }

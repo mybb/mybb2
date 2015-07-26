@@ -124,4 +124,12 @@ class DeletePostTest extends \PHPUnit_Framework_TestCase
 
 		static::assertClassExtends($deletePost->getPresenterClass(), 'McCool\LaravelAutoPresenter\BasePresenter');
 	}
+
+	public function testCanGetPermissionNameAsString()
+	{
+		$postRepository = Mockery::mock('MyBB\Core\Database\Repositories\PostRepositoryInterface');
+		$deletePost = new DeletePost($postRepository);
+
+		static::assertInternalType('string', $deletePost->getPermissionName());
+	}
 }

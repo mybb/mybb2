@@ -42,4 +42,9 @@ interface ModerationInterface
 	 * @return bool
 	 */
 	public function visible($content);
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName();
 }

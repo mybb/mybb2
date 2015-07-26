@@ -98,4 +98,12 @@ class MoveTopic implements ModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\MoveTopicPresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canMoveTopics';
+	}
 }

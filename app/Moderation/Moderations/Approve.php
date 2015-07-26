@@ -113,4 +113,12 @@ class Approve implements ReversibleModerationInterface, HasPresenter
 	{
 		return 'MyBB\Core\Presenters\Moderations\ApprovePresenter';
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getPermissionName()
+	{
+		return 'canApprove';
+	}
 }

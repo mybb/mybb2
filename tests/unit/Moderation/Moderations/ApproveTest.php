@@ -131,6 +131,13 @@ class ApproveTest extends \PHPUnit_Framework_TestCase
 		static::assertInternalType('string', $approve->getReverseName());
 	}
 
+	public function testCanGetPermissionNameAsString()
+	{
+		$approve = new Approve();
+
+		static::assertInternalType('string', $approve->getPermissionName());
+	}
+
 	public function testCanGetPresenterClassAsString()
 	{
 		$approve = new Approve();

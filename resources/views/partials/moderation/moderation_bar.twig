@@ -2,14 +2,16 @@
     <h2>With selected {{ moderation_content }}<span class="selection-count"> (1)</span>:</h2>
     <ul class="moderation-controls">
         {% for moderation in moderations %}
-            {% if moderation.fields is not empty %}
-                <li class="{{ moderation.key }}" {{ is_array_moderation(moderation) ? 'data-moderation-multi="true"' }}><a href="#" data-modal="moderate/form/{{ moderation.key }}" onclick="window.MyBB.Moderation.injectModalParams(this);"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
-            {% else %}
-                <li class="{{ moderation.key }}" {{ is_array_moderation(moderation) ? 'data-moderation-multi="true"' }}><a href="#" data-moderate="{{ moderation.key }}"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
-            {% endif %}
+            {% if moderation.getPermissionName is empty or (moderation.getPermissionName is not empty and auth_user.hasPermission(moderation.getPermissionName)) %}
+                {% if moderation.fields is not empty %}
+                    <li class="{{ moderation.key }}" {{ is_array_moderation(moderation) ? 'data-moderation-multi="true"' }}><a href="#" data-modal="moderate/form/{{ moderation.key }}" onclick="window.MyBB.Moderation.injectModalParams(this);"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
+                {% else %}
+                    <li class="{{ moderation.key }}" {{ is_array_moderation(moderation) ? 'data-moderation-multi="true"' }}><a href="#" data-moderate="{{ moderation.key }}"><i class="fa {{ moderation.icon }}"></i><span class="text">{{ moderation.name }}</span></a></li>
+                {% endif %}
 
-            {% if is_reversible_moderation(moderation) %}
-                <li class="{{ moderation.key }}"><a href="#" data-moderate-reverse="{{ moderation.key }}"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseName }}</span></a></li>
+                {% if is_reversible_moderation(moderation) %}
+                    <li class="{{ moderation.key }}"><a href="#" data-moderate-reverse="{{ moderation.key }}"><i class="fa {{ moderation.reverseIcon }}"></i><span class="text">{{ moderation.reverseName }}</span></a></li>
+                {% endif %}
             {% endif %}
         {% endfor %}
         <li class="clear-selection"><a href="#"><i class="fa fa-square-o"></i><span class="text">{{ trans('moderation.inline_clear_selection') }}</span></a></li>
