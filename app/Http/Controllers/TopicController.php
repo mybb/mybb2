@@ -97,12 +97,13 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string $slug
-	 * @param int    $id
+	 * @param Request $request
+	 * @param string  $slug
+	 * @param int     $id
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show($slug = '', $id = 0)
+	public function show(Request $request, $slug = '', $id = 0)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -123,7 +124,9 @@ class TopicController extends AbstractController
 
 		$posts = $this->postRepository->allForTopic($topic, true);
 
-		return view('topic.show', compact('topic', 'posts', 'poll'));
+		$highlight = (int) $request->get('highlight');
+
+		return view('topic.show', compact('topic', 'posts', 'poll', 'highlight'));
 	}
 
 	/**
@@ -149,7 +152,7 @@ class TopicController extends AbstractController
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
 		if (ceil($numPost / $postsPerPage) == 1) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $post->id]);
+			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, 'highlight' => $post->id, '#post-' . $post->id]);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,

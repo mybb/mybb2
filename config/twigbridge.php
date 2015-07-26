@@ -110,6 +110,7 @@ return [
 			'MyBB\Core\Twig\Extensions\CurrentPath',
 			'MyBB\Core\Twig\Extensions\Navigation',
 			'MyBB\Core\Twig\Extensions\Moderation',
+			'MyBB\Core\Twig\Extensions\Presenter',
 			// 'TwigBridge\Extension\Laravel\Legacy\Facades',
 		],
 		/*

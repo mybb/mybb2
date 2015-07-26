@@ -1,0 +1,17 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('moderation.control_panel_title') }}
+{% endblock %}
+{% block contents %}
+    <nav class="section-menu">
+        <ul class="sidebar-navigation">
+            <li {{ active_tab('dashboard') }}><a href="{{ url_route('moderation.control_panel') }}"><i class="fa fa-dashboard fa-fw"></i><span class="text">{{ trans('moderation.dashboard_title') }}</span></a></li>
+            <li {{ active_tab('queue') }}><a href="{{ url_route('moderation.control_panel.queue') }}"><i class="fa fa-list-ul fa-fw"></i><span class="text">{{ trans('moderation.queue_title') }}</span></a></li>
+            <li {{ active_tab('reports') }}><a href=""><i class="fa fa-flag fa-fw"></i><span class="text">{{ trans('moderation.reports_title') }}</span></a></li>
+            <li {{ active_tab('logs') }}><a href="{{ url_route('moderation.control_panel.logs') }}"><i class="fa fa-list-alt fa-fw"></i><span class="text">{{ trans('moderation.logs_title') }}</span></a></li>
+        </ul>
+    </nav>
+    <div class="page-content page-content--menu">
+        {% block inner_contents %}{% endblock %}
+    </div>
+{% endblock %}

@@ -2,8 +2,13 @@
 
 namespace MyBB\Core\Http\Requests\Moderation;
 
+use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Http\Requests\AbstractRequest;
+use MyBB\Core\Moderation\ArrayModerationInterface;
+use MyBB\Core\Moderation\DestinedInterface;
+use MyBB\Core\Moderation\ModerationInterface;
 use MyBB\Core\Moderation\ModerationRegistry;
+use MyBB\Core\Moderation\SourceableInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Repository\RepositoryFactory;
 
@@ -68,7 +73,7 @@ class ModerationRequest extends AbstractRequest
 	}
 
 	/**
-	 * @return \MyBB\Core\Moderation\ModerationInterface|\MyBB\Core\Moderation\ArrayModerationInterface
+	 * @return ModerationInterface|ArrayModerationInterface|DestinedInterface
 	 */
 	public function getModeration()
 	{
@@ -80,7 +85,7 @@ class ModerationRequest extends AbstractRequest
 	/**
 	 * @param string $name
 	 *
-	 * @return \MyBB\Core\Moderation\ModerationInterface
+	 * @return ModerationInterface
 	 */
 	public function getModerationByName($name)
 	{
@@ -106,6 +111,30 @@ class ModerationRequest extends AbstractRequest
 	 */
 	public function getModerationOptions()
 	{
-		return $this->except(['moderation_content', 'moderation_name', 'moderation_ids', '_token']);
+		return $this->except(['moderation_content', 'moderation_name', 'moderation_ids', 'moderation_source_type', 'moderation_source_id', '_token']);
+	}
+
+	/**
+	 * @return ContentInterface
+	 */
+	public function getDestination()
+	{
+		if ($this->getModeration() instanceof DestinedInterface) {
+			$destinationRepository = $this->repositoryFactory->build($this->getModeration()->getDestinationType());
+			return $destinationRepository->find($this->get($this->getModeration()->getDestinationKey()));
+		}
+	}
+
+	/**
+	 * @return ContentInterface
+	 */
+	public function getSource()
+	{
+		if ($this->getModeration() instanceof SourceableInterface) {
+			$sourceRepository = $this->repositoryFactory->build($this->get('moderation_source_type'));
+			if ($sourceRepository) {
+				return $sourceRepository->find($this->get('moderation_source_id'));
+			}
+		}
 	}
 }

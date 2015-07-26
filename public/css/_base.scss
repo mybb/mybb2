@@ -367,7 +367,7 @@ img.avatar {
 
 	&.button--secondary {
 		border: 1px solid $border-1;
-		background: none;
+		background: $background-default;
 		color: $primary-color;
 
 		&:hover {
