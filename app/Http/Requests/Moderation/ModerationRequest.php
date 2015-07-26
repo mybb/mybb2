@@ -26,8 +26,8 @@ class ModerationRequest extends AbstractRequest
 
 	/**
 	 * @param ModerationRegistry $moderationRegistry
-	 * @param RepositoryFactory $repositoryFactory
-	 * @param PermissionChecker $permissionChecker
+	 * @param RepositoryFactory  $repositoryFactory
+	 * @param PermissionChecker  $permissionChecker
 	 */
 	public function __construct(
 		ModerationRegistry $moderationRegistry,
