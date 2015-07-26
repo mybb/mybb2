@@ -52,7 +52,11 @@ class ModerationRequest extends AbstractRequest
 	 */
 	public function authorize()
 	{
-		return $this->permissionChecker->hasPermission('user', null, $this->getModeration()->getPermissionName());
+		if ($this->getModeration()) {
+			return $this->permissionChecker->hasPermission('user', null, $this->getModeration()->getPermissionName());
+		}
+
+		return true;
 	}
 
 	/**
@@ -68,7 +72,9 @@ class ModerationRequest extends AbstractRequest
 	 */
 	public function getModeration()
 	{
-		return $this->moderationRegistry->get($this->get('moderation_name'));
+		if ($this->get('moderation_name')) {
+			return $this->moderationRegistry->get($this->get('moderation_name'));
+		}
 	}
 
 	/**
