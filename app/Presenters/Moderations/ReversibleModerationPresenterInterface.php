@@ -8,6 +8,8 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
+use MyBB\Core\Content\ContentInterface;
+
 interface ReversibleModerationPresenterInterface extends ModerationPresenterInterface
 {
 	/**
@@ -19,4 +21,13 @@ interface ReversibleModerationPresenterInterface extends ModerationPresenterInte
 	 * @return string
 	 */
 	public function reverseName();
+
+	/**
+	 * @param array            $contentCollection
+	 * @param ContentInterface $source
+	 * @param ContentInterface $destination
+	 *
+	 * @return string
+	 */
+	public function reverseDescribe(array $contentCollection, ContentInterface $source = null, ContentInterface $destination = null);
 }

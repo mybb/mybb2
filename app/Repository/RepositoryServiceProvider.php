@@ -17,6 +17,7 @@ class RepositoryServiceProvider extends ServiceProvider
 			return new RepositoryRegistry([
 				'post' => 'MyBB\Core\Database\Repositories\PostRepositoryInterface',
 				'topic' => 'MyBB\Core\Database\Repositories\TopicRepositoryInterface',
+				'forum' => 'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
 			]);
 		});
 	}

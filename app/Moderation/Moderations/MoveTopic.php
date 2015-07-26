@@ -12,9 +12,11 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Moderation\DestinedInterface;
 use MyBB\Core\Moderation\ModerationInterface;
+use MyBB\Core\Moderation\SourceableInterface;
 
-class MoveTopic implements ModerationInterface, HasPresenter
+class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface, SourceableInterface
 {
 	/**
 	 * @var ForumRepositoryInterface
@@ -105,5 +107,21 @@ class MoveTopic implements ModerationInterface, HasPresenter
 	public function getPermissionName()
 	{
 		return 'canMoveTopics';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDestinationType()
+	{
+		return 'forum';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDestinationKey()
+	{
+		return 'forum_id';
 	}
 }

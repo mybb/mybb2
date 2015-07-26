@@ -8,6 +8,8 @@
         {{ form_open({'route': ['moderate'], 'method': 'post'}) }}
         {{ form_hidden('moderation_name', moderation.key) }}
         {{ form_hidden('moderation_content', moderation_content) }}
+        {{ form_hidden('moderation_source_type', moderation_source_type) }}
+        {{ form_hidden('moderation_source_id', moderation_source_id) }}
         {% for id in moderation_ids %}
             {{ form_hidden('moderation_ids[]', id) }}
         {% endfor %}

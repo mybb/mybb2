@@ -10,8 +10,9 @@ namespace MyBB\Core\Moderation\Moderations;
 
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Moderation\ReversibleModerationInterface;
+use MyBB\Core\Moderation\SourceableInterface;
 
-class Close implements ReversibleModerationInterface, HasPresenter
+class Close implements ReversibleModerationInterface, HasPresenter, SourceableInterface
 {
 	/**
 	 * @return string
