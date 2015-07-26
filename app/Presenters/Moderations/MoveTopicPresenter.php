@@ -73,8 +73,8 @@ class MoveTopicPresenter extends BasePresenter implements ModerationPresenterInt
 			(new Field(
 				'select',
 				'forum_id',
-				'Forum',
-				'The forum to move these posts to.'
+				trans('moderation.move_topic_forum_id_name'),
+				trans('moderation.move_topic_forum_id_description')
 			))->setOptions($options),
 		];
 	}

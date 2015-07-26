@@ -50,8 +50,8 @@ class MovePostPresenter extends BasePresenter implements ModerationPresenterInte
 			(new Field(
 				'text',
 				'topic_id',
-				'Topic ID',
-				'The topic ID to move these posts to.'
+				trans('moderation.move_post_topic_id_name'),
+				trans('moderation.move_post_topic_id_description')
 			))->setValidationRules('integer|exists:topics,id'),
 		];
 	}
