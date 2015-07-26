@@ -13,6 +13,8 @@
         $('a[data-moderate]').click($.proxy(function (e) {
             e.preventDefault();
 
+            MyBB.Spinner.add();
+
             $.post('/moderate', {
                 moderation_name: $(e.currentTarget).attr('data-moderate'),
                 moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
@@ -25,6 +27,8 @@
         // inline reverse moderation click handling
         $('a[data-moderate-reverse]').click($.proxy(function (e) {
             e.preventDefault();
+
+            MyBB.Spinner.add();
 
             $.post('/moderate/reverse', {
                 moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
