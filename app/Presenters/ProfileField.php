@@ -87,7 +87,7 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getElementName()
 	{
 		return 'profile_fields[' . $this->id . ']';
 	}

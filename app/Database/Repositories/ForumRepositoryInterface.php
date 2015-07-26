@@ -12,6 +12,7 @@ namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 
 interface ForumRepositoryInterface
 {
@@ -76,4 +77,10 @@ interface ForumRepositoryInterface
 	 * @return mixed
 	 */
 	public function updateLastPost(Forum $forum, Post $post = null);
+
+	/**
+	 * @param Topic $topic
+	 * @param Forum $forum
+	 */
+	public function moveTopicToForum(Topic $topic, Forum $forum);
 }

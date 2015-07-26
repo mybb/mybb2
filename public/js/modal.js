@@ -4,6 +4,7 @@
 	window.MyBB.Modals = function Modals()
 	{
 		$("*[data-modal]").on("click", this.toggleModal).bind(this);
+		$.modal.defaults.closeText = 'x';
 	};
 
 	window.MyBB.Modals.prototype.toggleModal = function toggleModal(event) {
@@ -55,7 +56,15 @@
 
 			MyBB.Spinner.add();
 
-			$.get('/'+modalSelector, function(response) {
+			var modalParams = $(event.currentTarget).attr('data-modal-params');
+			if (modalParams) {
+				modalParams = JSON.parse(modalParams);
+				console.log(modalParams);
+			} else {
+				modalParams = {};
+			}
+
+			$.get('/'+modalSelector, modalParams, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
@@ -79,6 +88,6 @@
 		}
 
 	};
-    
+
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
 })(jQuery, window);

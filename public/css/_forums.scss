@@ -415,8 +415,14 @@ section.container {
 			}
 
 			&.latest-column {
-				width: 30%;
+				width: 20%;
 				text-align: $left;
+			}
+
+		  	&.moderation-column {
+			  	width: 9%;
+			  	float: left;
+			  	text-align: right;
 			}
 		}
 
@@ -447,8 +453,15 @@ section.container {
 			}
 
 			.latest-column {
-				width: 30%;
+				width: 20%;
 				float: $left;
+			}
+
+
+			.moderation-column {
+			  	width: 9%;
+			  	float: left;
+			  	text-align: right;
 			}
 
 			.topic__post--first {
