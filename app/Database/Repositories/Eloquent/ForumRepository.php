@@ -177,12 +177,14 @@ class ForumRepository implements ForumRepositoryInterface
 	 */
 	public function moveTopicToForum(Topic $topic, Forum $forum)
 	{
-		$topic->forum->decrement('num_posts');
+		$topic->forum->decrement('num_topics');
+		$topic->forum->decrement('num_posts', $topic->num_posts);
 
 		$topic->forum_id = $forum->id;
 		$topic->save();
 
-		$topic->forum->increment('num_posts');
+		$topic->forum->increment('num_topics');
+		$topic->forum->increment('num_posts', $topic->num_posts);
 
 		$this->updateLastPost($forum);
 	}
