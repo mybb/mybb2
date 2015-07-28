@@ -91,11 +91,11 @@
 @media only screen and (min-width: 768px) {
 
 	.sidebar-menu {
-		margin-left: 0;
+		margin-#{$left}: 0;
 	}
 
 	.page-body {
-		margin-left: 230px;
+		margin-#{$left}: 230px;
 	}
 
 }

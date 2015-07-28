@@ -1,7 +1,7 @@
 .admin-main-nav {
 	width: 13%;
-	float: left;
-	margin-left: 15px;
+	float: $left;
+	margin-#{$left}: 15px;
 
 	.fa {
 		color: $alt-font-color-1;
@@ -41,7 +41,7 @@
 			display: inline-block;
 			width: 85%;
 			margin-bottom: 5px;
-			margin-left: 5px;
+			margin-#{$left}: 5px;
 			margin-top: 0;
 		}
 	}
