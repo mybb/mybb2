@@ -2449,14 +2449,14 @@ footer {
     margin: 0 auto; } }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
-  .title a#logo {
-    background-image: url("../images/logo2@2x.png");
-    background-size: 188px 55px; } }
-
-@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
-  .title a#logo {
+  h1.title a#logo {
     background-image: url("../images/logo_mobile@2x.png");
     background-size: 137px 40px; } }
+
+@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
+  h1.title a#logo {
+    background-image: url("../images/logo2@2x.png");
+    background-size: 188px 55px; } }
 
 html, button, input, select, textarea {
   color: #222;
