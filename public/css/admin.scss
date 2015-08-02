@@ -95,9 +95,9 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'jcrop';
 @import 'spinner';
 @import 'plugins';
-@import 'admin';
-@import 'admin_header_footer';
-@import 'admin_menu';
+@import 'admin/_main';
+@import 'admin/_header_footer';
+@import 'admin/_menu';
 
 
 // A few helper classes
