@@ -2980,84 +2980,67 @@ img.jcrop-preview {
   overflow: hidden;
   position: relative;
   width: 130px;
-  border: 1px solid #ccc; }
-
-.stepper .stepper-input {
-  background: #fff;
-  border: 0;
-  border-radius: 4px;
-  font-size: 0.9em;
-  margin: 0;
-  overflow: hidden;
-  padding: 4px 10px;
-  text-align: center;
-  width: 100%;
-  width: 60px;
-  margin: 0 35px;
-  box-sizing: border-box;
-  z-index: 49;
-  -moz-appearance: textfield; }
-
-.stepper .stepper-input:focus {
-  outline: 0; }
-
-.stepper .stepper-input::-webkit-inner-spin-button, .stepper .stepper-input::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0; }
-
-.stepper .stepper-input:focus {
-  /*background-color: #fff;*/ }
-
-.stepper .stepper-arrow {
-  cursor: pointer;
-  display: block;
-  height: 100%;
-  padding: 0px 0;
-  position: absolute;
-  width: 35px;
-  text-align: center;
-  z-index: 50;
-  font-weight: bold;
-  color: #666;
-  font-size: 20px; }
-
-.stepper .stepper-arrow:hover {
-  color: #666; }
-
-/*
-.stepper .stepper-arrow i {
-	font-size: 14px;
-	color: #666;
-}
-
-.stepper .stepper-arrow span.text {
-	display: none;
-}
-
-.stepper .stepper-arrow:hover i {
-	color: #ff7500;
-}*/
-.stepper .stepper-arrow.up {
-  float: left;
-  top: 0;
-  left: 0;
-  border-right: 1px solid #ccc; }
-
-.stepper .stepper-arrow.down {
-  float: right;
-  top: 0;
-  right: 0;
-  border-left: 1px solid #ccc; }
-
-.stepper.disabled .stepper-input {
-  background: #fff;
-  border-color: #eee;
-  color: #ccc; }
-
-.stepper.disabled .stepper-arrow {
-  background: #fff;
-  border-color: #eee;
-  cursor: default; }
+  border: 1px solid #dfdfdf; }
+  .stepper .stepper-input {
+    background: #fff;
+    border: 0;
+    font-size: 0.9em;
+    margin: 0;
+    overflow: hidden;
+    padding: 4px 10px;
+    text-align: center;
+    width: 100%;
+    width: 60px;
+    margin: 0 35px;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+    z-index: 49;
+    -moz-appearance: textfield; }
+  .stepper .stepper-input:focus {
+    outline: 0; }
+  .stepper .stepper-input::-webkit-inner-spin-button, .stepper .stepper-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+  .stepper .stepper-arrow {
+    cursor: pointer;
+    display: block;
+    height: 100%;
+    padding: 0px 0;
+    position: absolute;
+    width: 35px;
+    text-align: center;
+    z-index: 50;
+    color: #fff; }
+    .stepper .stepper-arrow:before {
+      font-size: 14px;
+      margin: 0 10px 0 10px;
+      font-family: "FontAwesome";
+      color: #666; }
+    .stepper .stepper-arrow:hover {
+      color: #666; }
+  .stepper .stepper-arrow.up {
+    float: left;
+    top: 0;
+    left: 0;
+    border-right: 1px solid #dfdfdf; }
+    .stepper .stepper-arrow.up:before {
+      content: "\f067"; }
+  .stepper .stepper-arrow.down {
+    float: right;
+    top: 0;
+    right: 0;
+    border-left: 1px solid #dfdfdf; }
+    .stepper .stepper-arrow.down:before {
+      content: "\f068"; }
+  .stepper.disabled .stepper-input {
+    background: #fff;
+    border-color: #dfdfdf;
+    color: #ccc; }
+  .stepper.disabled .stepper-arrow {
+    background: #fff;
+    border-color: #dfdfdf;
+    cursor: default; }
 
 /* hide/show password */
 ::-ms-reveal, ::-ms-clear {
@@ -3066,8 +3049,8 @@ img.jcrop-preview {
 .hideShowPassword-toggle {
   background: transparent;
   border: 0;
-  border-radius: 0.25em;
-  color: #888;
+  border-radius: 2px;
+  color: #999;
   cursor: pointer;
   font-size: 0.75em;
   font-weight: bold;
@@ -3076,11 +3059,10 @@ img.jcrop-preview {
   text-transform: uppercase;
   -moz-appearance: none;
   -webkit-appearance: none; }
-
-.hideShowPassword-toggle:hover, .hideShowPassword-toggle:focus {
-  background-color: #eee;
-  color: #555;
-  outline: transparent; }
+  .hideShowPassword-toggle:hover, .hideShowPassword-toggle:focus {
+    background-color: #eee;
+    color: #666;
+    outline: transparent; }
 
 /*
  * Dropit v1.1.0
@@ -3095,24 +3077,21 @@ img.jcrop-preview {
   list-style: none;
   padding: 0;
   margin: 0; }
-
-.dropit .dropit-trigger {
-  position: relative; }
-
-.dropit .dropit-submenu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  /* dropdown left or right */
-  z-index: 1000;
-  display: none;
-  min-width: 150px;
-  list-style: none;
-  padding: 0;
-  margin: 0; }
-
-.dropit .dropit-open .dropit-submenu {
-  display: block; }
+  .dropit .dropit-trigger {
+    position: relative; }
+  .dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  .dropit .dropit-open .dropit-submenu {
+    display: block; }
 
 .admin-main-nav {
   width: 13%;
