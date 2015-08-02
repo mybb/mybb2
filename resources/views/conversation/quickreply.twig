@@ -13,7 +13,7 @@
 						</a>#}
 					</div>
 					<div class="post__body">
-						{{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '10'}) }}
+						{{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '5', 'placeholder': trans('conversations.leave_reply')}) }}
 					</div>
 					<div class="post__foot">
 						{{ form_button('<i class="fa fa-comment"></i><span class="text">Post Reply</span>', {'type': 'submit', 'class': 'button'}) }}

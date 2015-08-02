@@ -14,7 +14,7 @@ return [
 	'no_unread' => 'You have no conversations with new messages',
 	'view_all' => 'View All Conversations',
 	'participants' => 'Participants',
-	'participants_list' => '(Comma seperated list of usernames)',
+	'participants_list' => 'Comma seperated list of usernames',
 	'title' => 'Title',
 	'message' => 'Message',
 	'create' => 'Start Conversation',
@@ -27,6 +27,7 @@ return [
 	'ignore_conversation' => 'Ignore Conversation',
 	'ignore_conversation_desc' => 'This will ignore the conversation and you won\'t get notifications if new messages are sent to this conversation',
 	'add_participants' => 'Add Participants',
-	'last_read' => 'Last Read',
+	'last_read' => 'Last read:',
 	'reply' => 'Post Reply',
+	'leave_reply' => 'Leave a reply...'
 ];

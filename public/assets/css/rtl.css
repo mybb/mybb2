@@ -3822,6 +3822,34 @@ ul.notifications {
   .conversation-list .conversation:last-child {
     border-bottom: 0; }
 
+.conversation-participants {
+  background: #fafafa;
+  padding: 10px;
+  line-height: 1.4;
+  border-radius: 4px; }
+  .conversation-participants h3 {
+    font-weight: normal;
+    font-size: 0.9em;
+    color: #666;
+    margin: 0 0 10px 0; }
+  .conversation-participants .participant {
+    display: inline-block;
+    width: 200px; }
+    .conversation-participants .participant .avatar-profile-link {
+      width: 36px;
+      height: 36px;
+      float: left;
+      margin: 2px 0 0 10px; }
+      .conversation-participants .participant .avatar-profile-link img.avatar {
+        width: 36px;
+        height: 36px; }
+    .conversation-participants .participant .participant__username {
+      font-size: 0.9em; }
+    .conversation-participants .participant .participant__last-read {
+      display: block;
+      font-size: 0.7em;
+      color: #666; }
+
 .inline-moderation {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -4395,14 +4423,14 @@ img.jcrop-preview {
 .dropit .dropit-open .dropit-submenu {
   display: block; }
 
-.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
+.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .conversation-participants:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after {
+.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
   clear: both; }
 
-.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list, .profile .profile__header {
+.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list, .profile .profile__header, .conversation-participants {
   *zoom: 1; }
 
 .hidden {

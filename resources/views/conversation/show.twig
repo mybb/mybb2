@@ -4,20 +4,9 @@
 	<div class="page-content">
 		<header>
 			<h1>{{ conversation.title }}</h1>
-
-			<p class="description">
-				{% for participant in conversation.participants %}
-					<span class="participant{{ (participant.pivot.ignores) ? ' ignores' }}">{{ render_profile_link(participant, false, false) }}
-						({{ trans('conversations.last_read') }}:
-						{# both values need to be "raw" as twig either escapes both or none #}
-						{{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}
-						)
-					</span>
-				{% endfor %}
-			</p>
 		</header>
-		{{ messages.render|raw }}
 		<div class="page-controls">
+			{{ messages.render|raw }}
 			<div class="page-buttons">
 				<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }}
 						class="button button--secondary"><i class="fa fa-plus"></i><span
@@ -28,6 +17,24 @@
 							class="text">{{ trans('conversations.reply') }}</span></a>
 			</div>
 		</div>
+		<section class="conversation-participants">
+			<h3>Participants</h3>
+			{% for participant in conversation.participants %}
+				<span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
+					<a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>
+					<span class="participant__username">{{ render_profile_link(participant, false, false) }}</span>
+					{# both values need to be "raw" as twig either escapes both or none #}
+					<span class="participant__last-read">{{ trans('conversations.last_read') }} {{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}</span>
+				</span>
+			{% endfor %}
+		</section>
+		{# <div class="conversation-participants">
+			<h3>Participants</h3>
+			{% for participant in conversation.participants %}
+				<span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">{{ render_profile_link(participant, false, false) }}
+				</span>
+			{% endfor %}
+		</div> #}
 		<section class="topic">
 			{% if setting('conversations.message_order', 'desc') == 'desc' %}
 				{% include 'conversation.quickreply' with {'conversation': conversation} %}
