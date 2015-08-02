@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<section class="conversation-participants">
-			<h3>Participants</h3>
+			<h3>{{ trans('conversations.participants') }}</h3>
 			{% for participant in conversation.participants %}
 				<span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
 					<a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>

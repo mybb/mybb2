@@ -94,4 +94,18 @@
 			color: $alt-font-color-1;
 		}
 	}
+
+	&.conversation-participants--compose {
+		margin-bottom: 20px;
+
+		h3 {
+			margin: side-values(0 0 10px 0);
+		}
+
+		input {
+			border: none;
+			background: transparent;
+			padding: 0;
+		}
+	}
 }

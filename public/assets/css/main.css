@@ -4346,6 +4346,14 @@ ul.notifications {
       display: block;
       font-size: 0.7em;
       color: #666; }
+  .conversation-participants.conversation-participants--compose {
+    margin-bottom: 20px; }
+    .conversation-participants.conversation-participants--compose h3 {
+      margin: 0 0 10px 0; }
+    .conversation-participants.conversation-participants--compose input {
+      border: none;
+      background: transparent;
+      padding: 0; }
 
 .inline-moderation {
   border: 1px solid #ddd;

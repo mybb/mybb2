@@ -14,7 +14,7 @@ return [
 	'no_unread' => 'You have no conversations with new messages',
 	'view_all' => 'View All Conversations',
 	'participants' => 'Participants',
-	'participants_list' => 'Comma seperated list of usernames',
+	'participants_list' => 'Enter list of usernames seprated by commas...',
 	'title' => 'Title',
 	'message' => 'Message',
 	'create' => 'Start Conversation',
@@ -29,5 +29,5 @@ return [
 	'add_participants' => 'Add Participants',
 	'last_read' => 'Last read:',
 	'reply' => 'Post Reply',
-	'leave_reply' => 'Leave a reply...'
+	'write_message' => 'Write a message...'
 ];
