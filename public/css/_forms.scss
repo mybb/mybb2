@@ -135,6 +135,24 @@ section.form {
 		margin: side-values(-4px 0 4px 0);
 	}
 
+	.form__radio {
+		padding: side-values(0 0 0 30px);
+		margin-bottom: 20px;
+
+		input[type="radio"] {
+			float: $left;
+			margin: side-values(6px 0 0 -26px);
+		}
+
+		p.form__radio__description {
+			@extend .form__description;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
 	p.form__data {
 		margin: 0;
 		font-size: 0.9em;

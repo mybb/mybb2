@@ -2505,11 +2505,19 @@ section.form {
       display: inline-block; }
     section.form p.form__checkbox:last-child {
       margin-bottom: 0; }
-  section.form p.form__description {
+  section.form p.form__description, section.form .form__radio p.form__radio__description {
     font-size: 0.8em;
     line-height: 1.4;
     color: #666;
     margin: -4px 0 4px 0; }
+  section.form .form__radio {
+    padding: 0 30px 0 0;
+    margin-bottom: 20px; }
+    section.form .form__radio input[type="radio"] {
+      float: right;
+      margin: 6px -26px 0 0; }
+    section.form .form__radio:last-child {
+      margin-bottom: 0; }
   section.form p.form__data {
     margin: 0;
     font-size: 0.9em; }
@@ -2643,7 +2651,6 @@ section.form {
       margin: 0; }
   .modal section.form {
     border: none;
-    padding-bottom: 15px;
     margin: 0;
     overflow: auto; }
     .modal section.form h2 {

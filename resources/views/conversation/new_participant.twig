@@ -11,7 +11,7 @@
 			<div class="form__section">
 				<div class="form__row">
 					<h3>{{ form_label('participants', trans('conversations.participants')) }}</h3>
-					{{ trans('conversations.participants_list') }}
+					<p class="form__description">{{ trans('conversations.participants_desc') }}</p>
 					{# TODO: some sort of autocomplete #}
 					{{ form_text('participants') }}
 				</div>
