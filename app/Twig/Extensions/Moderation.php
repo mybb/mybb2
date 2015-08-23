@@ -49,7 +49,10 @@ class Moderation extends \Twig_Extension
 		return [
 			new \Twig_SimpleFunction('is_reversible_moderation', [$this, 'isReversibleModeration']),
 			new \Twig_SimpleFunction('is_array_moderation', [$this, 'isArrayModeration']),
-			new \Twig_SimpleFunction('render_moderation_button', [$this, 'renderModerationButton'], ['is_safe' => ['html']]),
+			new \Twig_SimpleFunction('render_moderation_button', [
+				$this, 'renderModerationButton'],
+				['is_safe' => ['html']]
+			),
 		];
 	}
 
@@ -79,6 +82,9 @@ class Moderation extends \Twig_Extension
 
 	/**
 	 * @param string $moderationName
+	 *
+	 * @param string $contentName
+	 * @param int    $contentId
 	 *
 	 * @return \Illuminate\View\View
 	 */

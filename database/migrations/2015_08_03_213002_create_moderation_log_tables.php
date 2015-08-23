@@ -49,5 +49,4 @@ class CreateModerationLogTables extends Migration
 		Schema::drop('moderation_log_subjects');
 		Schema::drop('moderation_logs');
 	}
-
 }

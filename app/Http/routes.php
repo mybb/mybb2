@@ -148,11 +148,15 @@ Route::post('/moderate/reverse', ['as' => 'moderate.reverse', 'uses' => 'Moderat
 Route::get('/moderate/form/{moderationName}', ['as' => 'moderate.form', 'uses' => 'ModerationController@form']);
 
 Route::group(['prefix' => 'moderation'], function () {
-	Route::group(['prefix' => 'control-panel', ['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP']], function () {
-		Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
-		Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
-		Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
-	});
+	Route::group([
+		'prefix' => 'control-panel',
+		['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP']],
+		function () {
+			Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
+			Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
+			Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
+		}
+	);
 });
 
 Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {

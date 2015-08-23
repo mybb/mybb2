@@ -60,7 +60,7 @@ abstract class AbstractModerationPresenter extends BasePresenter implements Mode
 	abstract protected function getDescriptionView();
 
 	/**
-	 * @param array $contentCollection
+	 * @param array            $contentCollection
 	 * @param ContentInterface $source
 	 * @param ContentInterface $destination
 	 *

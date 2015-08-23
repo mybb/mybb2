@@ -10,7 +10,9 @@ namespace MyBB\Core\Presenters\Moderations;
 
 use MyBB\Core\Content\ContentInterface;
 
-abstract class AbstractReversibleModerationPresenter extends AbstractModerationPresenter implements ReversibleModerationPresenterInterface
+abstract class AbstractReversibleModerationPresenter
+	extends AbstractModerationPresenter
+	implements ReversibleModerationPresenterInterface
 {
 	/**
 	 * @return string
@@ -26,7 +28,7 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
 	abstract protected function getReverseDescriptionView();
 
 	/**
-	 * @param array $contentCollection
+	 * @param array            $contentCollection
 	 * @param ContentInterface $source
 	 * @param ContentInterface $destination
 	 *
