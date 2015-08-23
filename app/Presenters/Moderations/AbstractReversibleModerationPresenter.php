@@ -10,9 +10,8 @@ namespace MyBB\Core\Presenters\Moderations;
 
 use MyBB\Core\Content\ContentInterface;
 
-abstract class AbstractReversibleModerationPresenter
-	extends AbstractModerationPresenter
-	implements ReversibleModerationPresenterInterface
+abstract class AbstractReversibleModerationPresenter extends AbstractModerationPresenter implements
+	ReversibleModerationPresenterInterface
 {
 	/**
 	 * @return string
