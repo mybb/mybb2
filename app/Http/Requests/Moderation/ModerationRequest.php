@@ -111,7 +111,13 @@ class ModerationRequest extends AbstractRequest
 	 */
 	public function getModerationOptions()
 	{
-		return $this->except(['moderation_content', 'moderation_name', 'moderation_ids', 'moderation_source_type', 'moderation_source_id', '_token']);
+		return $this->except([
+			'moderation_content',
+			'moderation_name',
+			'moderation_ids',
+			'moderation_source_type',
+			'moderation_source_id', '_token'
+		]);
 	}
 
 	/**

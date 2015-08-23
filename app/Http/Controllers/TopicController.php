@@ -30,7 +30,6 @@ use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends AbstractController
 {
@@ -152,7 +151,12 @@ class TopicController extends AbstractController
 		$numPost = $this->postRepository->getNumForPost($post, true);
 
 		if (ceil($numPost / $postsPerPage) == 1) {
-			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id, 'highlight' => $post->id, '#post-' . $post->id]);
+			return redirect()->route('topics.show', [
+				'slug' => $topic->slug,
+				'id' => $topic->id,
+				'highlight' => $post->id,
+				'#post-' . $post->id
+			]);
 		} else {
 			return redirect()->route('topics.show', [
 				'slug' => $topic->slug,

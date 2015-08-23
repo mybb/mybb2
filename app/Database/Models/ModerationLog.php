@@ -21,16 +21,28 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  */
 class ModerationLog extends Model implements HasPresenter
 {
+	/**
+	 * @var string
+	 */
 	protected $table = 'moderation_logs';
 
+	/**
+	 * @var array
+	 */
 	protected $guarded = ['id'];
 
+	/**
+	 * @var array
+	 */
 	protected $casts = [
 		'id' => 'int',
 		'destination_content_id' => 'int',
 		'source_content_id' => 'int'
 	];
 
+	/**
+	 * @var array
+	 */
 	protected $dates = ['created_at'];
 
 	/**

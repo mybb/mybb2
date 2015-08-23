@@ -46,8 +46,11 @@ class ModerationController extends AbstractController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function reverse(ReversibleModerationRequest $request, ModerationLoggerInterface $moderationLogger, Guard $guard)
-	{
+	public function reverse(
+		ReversibleModerationRequest $request,
+		ModerationLoggerInterface $moderationLogger,
+		Guard $guard
+	) {
 		$options = $request->getModerationOptions();
 		foreach ($request->getModeratableContent() as $content) {
 			$request->getModeration()->reverse($content, $options);
@@ -75,11 +78,17 @@ class ModerationController extends AbstractController
 		]);
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function controlPanel()
 	{
 		return view('moderation.dashboard')->withActive('dashboard');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function queue()
 	{
 		$topics = Topic::where('approved', 0)->get();
@@ -91,6 +100,9 @@ class ModerationController extends AbstractController
 		])->withActive('queue');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function logs()
 	{
 		$logs = ModerationLog::all()->reverse();

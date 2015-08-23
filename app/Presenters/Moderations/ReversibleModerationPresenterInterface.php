@@ -29,5 +29,9 @@ interface ReversibleModerationPresenterInterface extends ModerationPresenterInte
 	 *
 	 * @return string
 	 */
-	public function reverseDescribe(array $contentCollection, ContentInterface $source = null, ContentInterface $destination = null);
+	public function reverseDescribe(
+		array $contentCollection,
+		ContentInterface $source = null,
+		ContentInterface $destination = null
+	);
 }

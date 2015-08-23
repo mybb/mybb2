@@ -12,7 +12,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class ModerationLogSubject extends Model
 {
+	/**
+	 * @var string
+	 */
 	protected $table = 'moderation_log_subjects';
 
+	/**
+	 * @var array
+	 */
 	protected $guarded = ['id'];
 }

@@ -34,5 +34,9 @@ interface ModerationPresenterInterface
 	 *
 	 * @return string
 	 */
-	public function describe(array $contentCollection, ContentInterface $source = null, ContentInterface $destination = null);
+	public function describe(
+		array $contentCollection,
+		ContentInterface $source = null,
+		ContentInterface $destination = null
+	);
 }
