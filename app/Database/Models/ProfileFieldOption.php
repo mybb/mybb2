@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string name
  * @property string value
  */
-class ProfileFieldOption extends Model
+class ProfileFieldOption extends AbstractCachingModel
 {
 	/**
 	 * @var string

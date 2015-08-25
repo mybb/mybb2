@@ -14,7 +14,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 /**
  * @property Topic topic
  */
-class Poll extends Model implements HasPresenter
+class Poll extends AbstractCachingModel implements HasPresenter>>>>>>> feature-caching_improvements
 {
 	// @codingStandardsIgnoreStart
 
