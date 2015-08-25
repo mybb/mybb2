@@ -16,6 +16,9 @@ use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Core\Database\Models\Topic as TopicModel;
+use MyBB\Core\Moderation\ModerationRegistry;
+>>>>>>> Stashed changes
 
 class Forum extends BasePresenter
 {
@@ -86,6 +89,22 @@ class Forum extends BasePresenter
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return \MyBB\Core\Moderation\ModerationInterface[]
+	 */
+	public function moderations()
+	{
+		$moderations = $this->moderations->getForContent(new TopicModel());
+		$decorated = [];
+		$presenter = app()->make('autopresenter');
+
+		foreach ($moderations as $moderation) {
+			$decorated[] = $presenter->decorate($moderation);
+		}
+
+		return $decorated;
 	}
 
 	/**
