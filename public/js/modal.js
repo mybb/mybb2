@@ -4,6 +4,7 @@
 	window.MyBB.Modals = function Modals()
 	{
 		$("*[data-modal]").on("click", this.toggleModal).bind(this);
+		$.modal.defaults.closeText = 'x';
 	};
 
 	window.MyBB.Modals.prototype.toggleModal = function toggleModal(event) {
@@ -18,6 +19,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		} else {
@@ -27,6 +29,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		}
@@ -36,11 +39,13 @@
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
 			$(".password-toggle").hideShowPassword(false, true);
+			new window.MyBB.Avatar();
 		} else {
 			// Assume modal content is coming from an AJAX request
 
@@ -49,20 +54,40 @@
 				modalFind = "#content";
 			}
 
-			$.get('/'+modalSelector, function(response) {
+			MyBB.Spinner.add();
+
+			var modalParams = $(event.currentTarget).attr('data-modal-params');
+			if (modalParams) {
+				modalParams = JSON.parse(modalParams);
+				console.log(modalParams);
+			} else {
+				modalParams = {};
+			}
+
+			$.get('/'+modalSelector, modalParams, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
 				modal.appendTo("body").modal({
-					zIndex: 1000
+					zIndex: 1000,
+					closeText: ''
 				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
+				new window.MyBB.Avatar();
+
+				// Remove modal after close
+				modal.on($.modal.CLOSE, function() {
+					$(this).remove();
+				})
+			}).always(function() {
+				MyBB.Spinner.remove();
 			});
 		}
+
 	};
-    
+
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
 })(jQuery, window);

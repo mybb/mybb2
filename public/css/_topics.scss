@@ -122,7 +122,7 @@
 
 		p {
 			font-size: 0.9em;
-			margin: side-values(0 0 6px 0);
+			margin: 0;
 		}
 
 		img {
@@ -193,8 +193,8 @@
 					display: inline;
 				}
 
-				.quoteButton {
-					.quoteButton__remove {
+				.quote-button {
+					.quote-button__remove {
 						display: none;
 					}
 				}
@@ -238,22 +238,33 @@
 			}
 		}
 
-		.post__foot {
+		textarea {
+			border: none;
+			padding: 0;
+		}
+
+		&.post--quick-reply .post__foot {
 			margin: 5px 0;
 		}
 	}
 
-	.quickQuote {
+	.quick-quote {
 		display: none;
 		background: $alt-font-color-4;
 		color: $invert-font-color;
 		@include border-radius(4px);
 		font: 12px $font-stack;
-		padding: 2px 6px;
+		padding: 6px 4px;
 		position: absolute;
 		z-index: 1001;
+
 		span {
 			cursor: pointer;
+			margin: 0 6px;
+
+			&:hover {
+				text-decoration: underline;
+			}
 		}
 
 		&:before {
@@ -269,20 +280,54 @@
 	}
 }
 
-#quoteBar {
+.quote-bar {
 	border: 1px solid #ccc;
-	padding: 0 10px;
+	padding: 5px 10px;
 	font-size: 12px;
 	@include border-radius(4px);
 }
 
-.viewQuotes {
+.view-quotes {
 	left: 10%!important;
 	width: 80%!important;
 	margin-left: 0!important;
-	.post-quotes {
+
+	.view-quotes__quotes {
 		overflow: auto;
-		padding: 5px;
+		padding: side-values(15px 15px 0 15px);
+		margin: 0;
+	}
+
+	.view-quotes__select-all {
+		bottom: 0;
+		margin: 0;
+		padding: 6px 0;
+		background: $background-2;
+		border-top: 1px solid $border-1;
+		text-align: center;
+	}
+}
+
+.topic--create, .topic--reply {
+
+	header h1 {
+		display: none;
+	}
+
+	.topic__title {
+		border: none;
+		padding: 0;
+		font-size: 1.5em;
+		font-weight: bold;
+	}
+
+	.post__controls {
+		text-align: $left;
+
+		.text {
+			display: inline;
+			font-size: 0.8em;
+		}
 	}
 }
 

@@ -10,16 +10,16 @@
 		<section class="form">
 			<div class="form__section">
 				<div class="form__row">
-					<h3>{{ trans('conversations.leave_conversation') }}</h3>
-
-					{{ form_radio('leave', 'leave', true, {'id': 'leave'}) }}
-					{{ form_label('leave', trans('conversations.leave_conversation_desc')) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('conversations.ignore_conversation') }}</h3>
-
-					{{ form_radio('leave', 'ignore', false, {'id': 'ignore'}) }}
-					{{ form_label('ignore', trans('conversations.ignore_conversation_desc')) }}
+					<div class="form__radio">
+						{{ form_radio('leave', 'leave', true, {'id': 'leave'}) }}
+						<h3 class="form__radio__title">{{ form_label('leave', trans('conversations.leave_conversation')) }}</h3>
+						<p class="form__radio__description">{{ form_label('leave', trans('conversations.leave_conversation_desc')) }}</p>
+					</div>
+					<div class="form__radio">
+						{{ form_radio('leave', 'ignore', false, {'id': 'ignore'}) }}
+						<h3 class="form__radio__title">{{ form_label('ignore', trans('conversations.ignore_conversation')) }}</h3>
+						<p class="form__radio__description">{{ form_label('ignore', trans('conversations.ignore_conversation_desc')) }}</p>
+					</div>
 				</div>
 			</div>
 		</section>

@@ -65,8 +65,11 @@ return [
 	'avatar_file' => 'Upload a new avatar',
 	'avatar_file_desc' => 'Choose an avatar on your local computer to upload.',
 	'avatar_link' => 'Avatar URL or Gravatar Email',
+	'crop_file' => 'Crop File',
 	'saved_avatar' => 'Your new avatar was saved successfully',
 	'removed_avatar' => 'Your avatar was removed successfully',
+	'avatar_upload' => 'Please upload a avatar first.',
+	'select_area_crop' => 'Please select a valid area to crop',
 
 	'datetime' => 'Date and Time',
 	'dateformat' => 'Date Format',

@@ -20,103 +20,25 @@ $(function () {
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);
 
-	$('.clear-selection-posts a').click(function(event) {
-		event.preventDefault();
-		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-threads a').click(function(event) {
-		event.preventDefault();
-		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-forums a').click(function(event) {
-		event.preventDefault();
-		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
 	$("#search .search-button").click(function(event) {
 		event.preventDefault();
 		$("#search .search-container").slideDown();
 	});
 
-	$(".post :checkbox").change(function() {
-		$(this).closest(".post").toggleClass("highlight", this.checked);
+	autosize($('.post textarea'));
 
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
+	$('a.show-menu__link').click(function(e) {
+		if(menu == 0)
 		{
-			$('.inline-moderation').addClass('floating');
+			menu = 1;
+			openMenu(e);
 		}
 
-		if(checked_boxes == 0)
+		else
 		{
-			$('.inline-moderation').removeClass('floating');
+			menu = 0;
+			closeMenu(e);
 		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".forum .checkbox-select :checkbox").change(function() {
-		$(this).closest(".forum").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
-	});
-
-	$(".checkbox-select.check-all :checkbox").click(function() {
-		$(this).closest('section').find('input[type=checkbox]').prop('checked', this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.thread').toggleClass("highlight", this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.forum').toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes >= 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
@@ -173,9 +95,13 @@ var entityMap = {
 };
 
 function escapeHTML(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entityMap[s];
-	});
+	if(typeof string == 'string') {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+
+	return string;
 }
 
 function submitFormAsGet(id, newRoute) {
@@ -188,4 +114,18 @@ function submitFormAsGet(id, newRoute) {
 
 	form.attr('method', 'get').submit();
 	return false;
+}
+
+function openMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '0px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "0px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "225px", marginRight: "-225px"}, 200, function() { });
+}
+
+function closeMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '-225px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "-225px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "0", marginRight: "0"}, 200, function() { });
 }

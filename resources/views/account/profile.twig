@@ -9,16 +9,16 @@
 
 	{{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
 	<section class="form">
+
 		{% if auth_user.hasPermission('canUploadAvatar') %}
 			<div class="form__section">
 				<h2>{{ trans('account.avatar') }}</h2>
 				<div class="form__section__container change-avatar">
-					<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+					<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
 					<p>{{ trans('account.avatar_desc') }}</p>
 					<div class="buttons">
-						<a {{ modal_attributes('account.avatar') }} class="button button--secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
+						<a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
 						<a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary"><i class="fa fa-times"></i><span class="text">{{ trans('account.avatar_remove') }}</span></a>
-					</div>
 				</div>
 			</div>
 		{% endif %}

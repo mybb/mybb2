@@ -5,6 +5,10 @@
 	{
 		// Show and hide posts
 		$(".postToggle").on("click", this.togglePost).bind(this);
+
+
+		// Confirm Delete
+		$(".delete a").on("click", $.proxy(this.confirmDelete, this));
 	};
 
 	// Show and hide posts
@@ -28,6 +32,10 @@
 		}
 	};
 
+	// Confirm Delete
+	window.MyBB.Posts.prototype.confirmDelete = function confirmDelete(event) {
+		return confirm(Lang.get('topic.confirmDelete'));
+	};
 
 	var posts = new window.MyBB.Posts();
 

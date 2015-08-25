@@ -18,11 +18,13 @@ use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Moderation\ModerationRegistry;
->>>>>>> Stashed changes
 
 class Forum extends BasePresenter
 {
-	/** @var ForumModel $wrappedObject */
+	/**
+	 * @var ModerationRegistry
+	 */
+	protected $moderations;
 
 	/**
 	 * @var Application
@@ -40,21 +42,24 @@ class Forum extends BasePresenter
 	private $guard;
 
 	/**
-	 * @param ForumModel        $resource          The forum being wrapped by this presenter.
-	 * @param Application       $app
-	 * @param PermissionChecker $permissionChecker
-	 * @param Guard             $guard
+	 * @param ForumModel         $resource          The forum being wrapped by this presenter.
+	 * @param Application        $app
+	 * @param PermissionChecker  $permissionChecker
+	 * @param Guard              $guard
+	 * @param ModerationRegistry $moderations
 	 */
 	public function __construct(
 		ForumModel $resource,
 		Application $app,
 		PermissionChecker $permissionChecker,
-		Guard $guard
+		Guard $guard,
+		ModerationRegistry $moderations
 	) {
 		$this->wrappedObject = $resource;
 		$this->app = $app;
 		$this->permissionChecker = $permissionChecker;
 		$this->guard = $guard;
+		$this->moderations = $moderations;
 	}
 
 	/**

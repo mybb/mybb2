@@ -86,6 +86,7 @@
 	window.MyBB.Modals = function Modals()
 	{
 		$("*[data-modal]").on("click", this.toggleModal).bind(this);
+		$.modal.defaults.closeText = 'x';
 	};
 
 	window.MyBB.Modals.prototype.toggleModal = function toggleModal(event) {
@@ -100,6 +101,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		} else {
@@ -109,6 +111,7 @@
 				modalFind = $(modalOpener).data("modal-find"),
 				modal = $('<div/>', {
 	    			"class": "modal-dialog",
+					closeText: ''
 				}),
 				modalContent = "";
 		}
@@ -118,11 +121,13 @@
 			modalContent = $(modalSelector).html();
 			modal.html(modalContent);
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 			$('.modalHide').hide();
 			$("input[type=number]").stepper();
 			$(".password-toggle").hideShowPassword(false, true);
+			new window.MyBB.Avatar();
 		} else {
 			// Assume modal content is coming from an AJAX request
 
@@ -131,23 +136,44 @@
 				modalFind = "#content";
 			}
 
-			$.get('/'+modalSelector, function(response) {
+			MyBB.Spinner.add();
+
+			var modalParams = $(event.currentTarget).attr('data-modal-params');
+			if (modalParams) {
+				modalParams = JSON.parse(modalParams);
+				console.log(modalParams);
+			} else {
+				modalParams = {};
+			}
+
+			$.get('/'+modalSelector, modalParams, function(response) {
 				var responseObject = $(response);
 
 				modalContent = $(modalFind, responseObject).html();
 				modal.html(modalContent);
 				modal.appendTo("body").modal({
-					zIndex: 1000
+					zIndex: 1000,
+					closeText: ''
 				});
 				$('.modalHide').hide();
 				$("input[type=number]").stepper();
 				$(".password-toggle").hideShowPassword(false, true);
+				new window.MyBB.Avatar();
+
+				// Remove modal after close
+				modal.on($.modal.CLOSE, function() {
+					$(this).remove();
+				})
+			}).always(function() {
+				MyBB.Spinner.remove();
 			});
 		}
+
 	};
-    
+
     var modals = new window.MyBB.Modals(); // TODO: put this elsewhere :)
 })(jQuery, window);
+
 (function($, window) {
     window.MyBB = window.MyBB || {};
 
@@ -155,6 +181,10 @@
 	{
 		// Show and hide posts
 		$(".postToggle").on("click", this.togglePost).bind(this);
+
+
+		// Confirm Delete
+		$(".delete a").on("click", $.proxy(this.confirmDelete, this));
 	};
 
 	// Show and hide posts
@@ -178,6 +208,10 @@
 		}
 	};
 
+	// Confirm Delete
+	window.MyBB.Posts.prototype.confirmDelete = function confirmDelete(event) {
+		return confirm(Lang.get('topic.confirmDelete'));
+	};
 
 	var posts = new window.MyBB.Posts();
 
@@ -212,7 +246,34 @@
 	window.MyBB.Polls.prototype.timePicker = function timePicker() {
 		$('#poll-end-at').datetimepicker({
 			format: 'Y-m-d H:i:s',
-			lang: $('html').attr('lang'),// TODO: use our i18n
+			lang: 'mybb',
+			i18n: {
+				mybb: {
+					months: [
+						Lang.get('general.months.january'),
+						Lang.get('general.months.february'),
+						Lang.get('general.months.march'),
+						Lang.get('general.months.april'),
+						Lang.get('general.months.may'),
+						Lang.get('general.months.june'),
+						Lang.get('general.months.july'),
+						Lang.get('general.months.august'),
+						Lang.get('general.months.september'),
+						Lang.get('general.months.october'),
+						Lang.get('general.months.november'),
+						Lang.get('general.months.december')
+					],
+					dayOfWeek: [
+						Lang.get('general.dayOfWeek.sun'),
+						Lang.get('general.dayOfWeek.mon'),
+						Lang.get('general.dayOfWeek.tue'),
+						Lang.get('general.dayOfWeek.wed'),
+						Lang.get('general.dayOfWeek.thu'),
+						Lang.get('general.dayOfWeek.fri'),
+						Lang.get('general.dayOfWeek.sat')
+					]
+				}
+			},
 			minDate: 0
 		});
 	};
@@ -231,10 +292,11 @@
 	window.MyBB.Polls.prototype.addOption = function addOption(event) {
 		var num_options = $('#add-poll .poll-option').length;
 		if(num_options >= 10) { // TODO: settings
+			alert(Lang.choice('poll.errorManyOptions', 10)); // TODO: JS Error
 			return false;
 		}
 		var $option = this.optionElement.clone();
-		$option.find('input').attr('name', 'option['+(num_options+1)+']')
+		$option.find('input').attr('name', 'option['+(num_options+1)+']');
 		$('#add-poll .poll-option').last().after($option);
 		$option.slideDown();
 		this.removeOption($option);
@@ -245,8 +307,9 @@
 		$parent.find('.remove-option').click($.proxy(function(event) {
 			var $me = $(event.target),
 				$myParent = $me.parents('.poll-option');
-			if($('.poll-option').length <= 2)
+			if($('.poll-option').length <= 2) // TODO: settings
 			{
+				alert(Lang.choice('poll.errorFewOptions', 2)); // TODO: JS Error
 				return false;
 			}
 
@@ -289,16 +352,16 @@
 	window.MyBB.Quotes = function Quotes() {
 
 		// MultiQuote
-		$(".quoteButton").on("click", this.multiQuoteButton.bind(this));
+		$(".quote-button").on("click", this.multiQuoteButton.bind(this));
 
 		this.showQuoteBar();
 
-		$("#quoteBar__select").on("click", $.proxy(this.addQuotes, this));
-		$("#quoteBar__view").on("click", $.proxy(this.viewQuotes, this));
-		$("#quoteBar__deselect").on("click", $.proxy(this.removeQuotes, this));
+		$(".quote-bar__select").on("click", $.proxy(this.addQuotes, this));
+		$(".quote-bar__view").on("click", $.proxy(this.viewQuotes, this));
+		$(".quote-bar__deselect").on("click", $.proxy(this.removeQuotes, this));
 
-		$('.quickQuote .fast').on('click', $.proxy(this.quickQuote, this));
-		$('.quickQuote .add').on('click', $.proxy(this.quickAddQuote, this));
+		$('.quick-quote .fast').on('click', $.proxy(this.quickQuote, this));
+		$('.quick-quote .add').on('click', $.proxy(this.quickAddQuote, this));
 
 		$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 		$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
@@ -309,8 +372,8 @@
 
 	window.MyBB.Quotes.prototype.quickQuote = function quickQuote(event) {
 		var $me = $(event.target);
-		if (!$me.hasClass('quickQuote')) {
-			$me = $me.parents('.quickQuote');
+		if (!$me.hasClass('quick-quote')) {
+			$me = $me.parents('.quick-quote');
 		}
 
 		var $post = $me.parents('.post');
@@ -326,8 +389,8 @@
 	window.MyBB.Quotes.prototype.quickAddQuote = function quickAddQuote(event) {
 		var $me = $(event.target),
 			quotes = this.getQuotes();
-		if (!$me.hasClass('quickQuote')) {
-			$me = $me.parents('.quickQuote');
+		if (!$me.hasClass('quick-quote')) {
+			$me = $me.parents('.quick-quote');
 		}
 
 		var $post = $me.parents('.post');
@@ -348,7 +411,7 @@
 
 	window.MyBB.Quotes.prototype.checkQuickQuote = function checkQuickQuote(event) {
 		var $me = $(event.target);
-		if ($me.hasClass('quickQuote') || $me.parents('.quickQuote').length) {
+		if ($me.hasClass('quick-quote') || $me.parents('.quick-quote').length) {
 			return false;
 		}
 		if (!$me.hasClass('post')) {
@@ -379,7 +442,7 @@
 		var selection = window.getSelection(),
 			range = selection.getRangeAt(0),
 			rect = range.getBoundingClientRect();
-		$elm = $("#post-" + pid).find('.quickQuote').show().data('content', $.trim(window.getSelection().toString()));
+		$elm = $("#post-" + pid).find('.quick-quote').show().data('content', $.trim(window.getSelection().toString()));
 		$elm.css({
 			'top': (window.scrollY + rect.top - $elm.outerHeight() - 4) + 'px',
 			'left': (window.scrollX + rect.left - (($elm.outerWidth() - rect.width) / 2)) + 'px'
@@ -387,7 +450,7 @@
 	}
 
 	window.MyBB.Quotes.prototype.hideQuickQuote = function () {
-		$('.post .quickQuote').hide().data('content', '');
+		$('.post .quick-quote').hide().data('content', '');
 	}
 
 	window.MyBB.Quotes.prototype.getQuotes = function getQuotes() {
@@ -413,8 +476,8 @@
 	window.MyBB.Quotes.prototype.multiQuoteButton = function multiQuoteButton(event) {
 		event.preventDefault();
 		var $me = $(event.target);
-		if (!$me.hasClass('quoteButton')) {
-			$me = $me.parents('.quoteButton');
+		if (!$me.hasClass('quote-button')) {
+			$me = $me.parents('.quote-button');
 		}
 		var $post = $me.parents('.post');
 
@@ -435,12 +498,12 @@
 			});
 			if (!removed) {
 				quotes.push(type + '_' + postId);
-				$me.find('.quoteButton__add').hide();
-				$me.find('.quoteButton__remove').show();
+				$me.find('.quote-button__add').hide();
+				$me.find('.quote-button__remove').show();
 			}
 			else {
-				$me.find('.quoteButton__add').show();
-				$me.find('.quoteButton__remove').hide();
+				$me.find('.quote-button__add').show();
+				$me.find('.quote-button__remove').hide();
 			}
 
 			MyBB.Cookie.set('quotes', JSON.stringify(quotes));
@@ -455,16 +518,16 @@
 		var quotes = this.getQuotes();
 
 		if (quotes.length) {
-			$("#quoteBar").show();
+			$(".quote-bar").show();
 		}
 		else {
-			$("#quoteBar").hide();
+			$(".quote-bar").hide();
 		}
 	};
 
 	window.MyBB.Quotes.prototype.addQuotes = function addQuotes() {
 		var quotes = this.getQuotes(),
-			$quoteBar = $("#quoteBar"),
+			$quoteBar = $(".quote-bar"),
 			$textarea = $($quoteBar.data('textarea'));
 
 		MyBB.Spinner.add();
@@ -515,7 +578,7 @@
 						'data': content
 					}
 				],
-				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
+				'_token': $(".quote-bar").parents('form').find('input[name=_token]').val()
 			},
 			method: 'POST'
 		}).done(function (json) {
@@ -548,20 +611,22 @@
 			url: '/post/quotes/all',
 			data: {
 				'posts': this.getQuotes(),
-				'_token': $("#quoteBar").parents('form').find('input[name=_token]').val()
+				'_token': $(".quote-bar").parents('form').find('input[name=_token]').val()
 			},
 			method: 'POST'
 		}).done($.proxy(function (data) {
 			var modalContent = $("#content", $(data)),
 				modal = $('<div/>', {
-					"class": "modal-dialog viewQuotes"
+					"class": "modal-dialog view-quotes",
+					closeText: ''
 				});
-			modalContent.find('.post-quotes').css({
-				'max-height': ($(window).height()-100)+'px'
+			modalContent.find('.view-quotes__quotes').css({
+				'max-height': ($(window).height()-250)+'px'
 			});
 			modal.html(modalContent.html());
 			modal.appendTo("body").modal({
-				zIndex: 1000
+				zIndex: 1000,
+				closeText: ''
 			});
 
 			if(Modernizr.touch)
@@ -577,8 +642,8 @@
 
 			$('.quote__select').on("click", $.proxy(this.quoteAdd, this));
 			$('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
-			$(".selectAllQuotes").on("click", $.proxy(this.addQuotes, this));
-			$('.modalHide').hide();
+			$(".select-all-quotes").on("click", $.proxy(this.addQuotes, this));
+			$('.modal-hide').hide();
 		}, this)).always(function () {
 			MyBB.Spinner.remove();
 		});
@@ -589,7 +654,7 @@
 	};
 
 	window.MyBB.Quotes.prototype.removeQuotes = function removeQuotes() {
-		$quoteBar = $("#quoteBar");
+		$quoteBar = $(".quote-bar");
 		$quoteBar.hide();
 		MyBB.Cookie.unset('quotes');
 		this.quoteButtons();
@@ -599,8 +664,8 @@
 	window.MyBB.Quotes.prototype.quoteButtons = function quoteButtons() {
 		var quotes = this.getQuotes();
 
-		$('.quoteButton__add').show();
-		$('.quoteButton__remove').hide();
+		$('.quote-button__add').show();
+		$('.quote-button__remove').hide();
 
 		$.each(quotes, function (key, quote) {
 			if (typeof quote != 'string') {
@@ -610,8 +675,8 @@
 			type = quote[0];
 			postId = parseInt(quote[1]);
 			var $quoteButton = $("#post-" + postId + "[data-type='" + type + "']").find('.quoteButton');
-			$quoteButton.find('.quoteButton__add').hide();
-			$quoteButton.find('.quoteButton__remove').show();
+			$quoteButton.find('.quote-button__add').hide();
+			$quoteButton.find('.quote-button__remove').show();
 		})
 	}
 
@@ -705,6 +770,95 @@
 
 })
 (jQuery, window);
+(function ($, window) {
+	window.MyBB = window.MyBB || {};
+
+	window.MyBB.Avatar = function Avatar() {
+		this.dropAvatar();
+	};
+
+	window.MyBB.Avatar.prototype.dropAvatar = function dropAvatar()
+	{
+		var $avatarDrop = $('#avatar-drop');
+		if ($avatarDrop.length == 0 || $avatarDrop.is(':visible') == $('#avatar-drop-area').is(':visible')) {
+			return;
+		}
+
+		var avatarDropUrl = $avatarDrop.attr('action');
+		Dropzone.autoDiscover = false;
+		var avatarDrop = new Dropzone("#avatar-drop", {
+			url: avatarDropUrl + "?ajax=1",
+			acceptedFiles: "image/*",
+			clickable: '#file-input',
+			paramName: "avatar_file",
+			thumbnailWidth: null,
+			thumbnailHeight: null,
+			uploadMultiple: false,
+			init: function () {
+				$("#avatar-drop-area").show();
+			},
+			previewTemplate: '<div style="display:none" />'
+		});
+
+		avatarDrop.on("thumbnail", function (file, dataUrl) {
+			$("#crop").find('.jcrop').find('img').attr('src', dataUrl);//TODO: use better selection
+		});
+
+		avatarDrop.on("sending", function (file) {
+			MyBB.Spinner.add();
+		});
+		avatarDrop.on("complete", function () {
+			MyBB.Spinner.remove();
+		});
+		avatarDrop.on("success", function (file) {
+			var data = $.parseJSON(file.xhr.responseText);
+			if (data.needCrop == true) {
+				$("<a />").data('modal', '#crop').click((new MyBB.Modals()).toggleModal).click(); // TODO: create a method in modal.js for it
+				var $jcrop = $('.modal').find('.jcrop');
+
+				function JcropUpdateInputs(c) {
+					$jcrop.find('.jcrop-x').val(c.x);
+					$jcrop.find('.jcrop-y').val(c.y);
+					$jcrop.find('.jcrop-x2').val(c.x2);
+					$jcrop.find('.jcrop-y2').val(c.y2);
+					$jcrop.find('.jcrop-w').val(c.w);
+					$jcrop.find('.jcrop-h').val(c.h);
+				}
+
+				$jcrop.find('img').Jcrop({
+					onChange: JcropUpdateInputs,
+					onSelect: JcropUpdateInputs
+				});
+
+				$('.modal').find('.crop-img').click(function () {
+					MyBB.Spinner.add();
+					$.post('/account/avatar/crop?ajax=1', {
+						x: $jcrop.find('.jcrop-x').val(),
+						y: $jcrop.find('.jcrop-y').val(),
+						x2: $jcrop.find('.jcrop-x2').val(),
+						y2: $jcrop.find('.jcrop-y2').val(),
+						w: $jcrop.find('.jcrop-w').val(),
+						h: $jcrop.find('.jcrop-h').val(),
+						"_token": $('input[name="_token"]').val()
+					}).done(function (data) {
+						if (data.success) {
+							alert(data.message); // TODO: JS Message
+							$.modal.close();
+							$(".my-avatar").attr('src', data.avatar);
+						} else {
+							alert(data.error);// TODO: JS Error
+						}
+					}).always(function () {
+						MyBB.Spinner.remove();
+					});
+				});
+			}
+		});
+	}
+
+	var avatar = new window.MyBB.Avatar();
+
+})(jQuery, window);
 $('html').addClass('js');
 
 $(function () {
@@ -727,103 +881,25 @@ $(function () {
 	$("input[type=number]").stepper();
 	$(".password-toggle").hideShowPassword(false, true);
 
-	$('.clear-selection-posts a').click(function(event) {
-		event.preventDefault();
-		$('.thread').find('input[type=checkbox]:checked').removeAttr('checked').closest(".post").removeClass("highlight");
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-threads a').click(function(event) {
-		event.preventDefault();
-		$('.thread-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".thread").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
-	$('.clear-selection-forums a').click(function(event) {
-		event.preventDefault();
-		$('.forum-list').find('input[type=checkbox]:checked').removeAttr('checked').closest(".forum").removeClass("highlight");
-		$('.checkbox-select.check-all').find('input[type=checkbox]:checked').removeAttr('checked');
-		$('.inline-moderation').removeClass('floating');
-	});
-
 	$("#search .search-button").click(function(event) {
 		event.preventDefault();
 		$("#search .search-container").slideDown();
 	});
 
-	$(".post :checkbox").change(function() {
-		$(this).closest(".post").toggleClass("highlight", this.checked);
+	autosize($('.post textarea'));
 
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
+	$('a.show-menu__link').click(function(e) {
+		if(menu == 0)
 		{
-			$('.inline-moderation').addClass('floating');
+			menu = 1;
+			openMenu(e);
 		}
 
-		if(checked_boxes == 0)
+		else
 		{
-			$('.inline-moderation').removeClass('floating');
+			menu = 0;
+			closeMenu(e);
 		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".thread .checkbox-select :checkbox").change(function() {
-		$(this).closest(".thread").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
-	});
-
-	$(".forum .checkbox-select :checkbox").change(function() {
-		$(this).closest(".forum").toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes == 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
-	});
-
-	$(".checkbox-select.check-all :checkbox").click(function() {
-		$(this).closest('section').find('input[type=checkbox]').prop('checked', this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.thread').toggleClass("highlight", this.checked);
-		$(this).closest('section').find('.checkbox-select').closest('.forum').toggleClass("highlight", this.checked);
-
-		var checked_boxes = $('.highlight').length;
-
-		if(checked_boxes >= 1)
-		{
-			$('.inline-moderation').addClass('floating');
-		}
-
-		if(checked_boxes == 0)
-		{
-			$('.inline-moderation').removeClass('floating');
-		}
-
-		$('.inline-moderation .selection-count').text(' ('+checked_boxes+')');
 	});
 
 /*	$('.post.reply textarea.editor, .form textarea.editor').sceditor({
@@ -880,9 +956,13 @@ var entityMap = {
 };
 
 function escapeHTML(string) {
-	return String(string).replace(/[&<>"'\/]/g, function (s) {
-		return entityMap[s];
-	});
+	if(typeof string == 'string') {
+		return String(string).replace(/[&<>"'\/]/g, function (s) {
+			return entityMap[s];
+		});
+	}
+
+	return string;
 }
 
 function submitFormAsGet(id, newRoute) {
@@ -896,3 +976,141 @@ function submitFormAsGet(id, newRoute) {
 	form.attr('method', 'get').submit();
 	return false;
 }
+
+function openMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '0px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "0px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "225px", marginRight: "-225px"}, 200, function() { });
+}
+
+function closeMenu(e) {
+	e.preventDefault();
+	$("body").animate({'background-position-x': '-225px'}, 200, function() { });
+	$(".sidebar-menu").animate({marginLeft: "-225px"}, 200, function() { });
+	$(".page-body").animate({marginLeft: "0", marginRight: "0"}, 200, function() { });
+}
+
+(function($, window) {
+    window.MyBB = window.MyBB || {};
+
+    window.MyBB.Moderation = function Moderation()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // inline moderation click handling
+        $('a[data-moderate]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            MyBB.Spinner.add();
+
+            $.post('/moderate', {
+                moderation_name: $(e.currentTarget).attr('data-moderate'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        // inline reverse moderation click handling
+        $('a[data-moderate-reverse]').click($.proxy(function (e) {
+            e.preventDefault();
+
+            MyBB.Spinner.add();
+
+            $.post('/moderate/reverse', {
+                moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
+                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            }, function (response) {
+                document.location.reload();
+            });
+        }, this));
+
+        // moderation bar clear selection handling
+        $('.clear-selection a').click(function(e) {
+            $('[data-moderation-content] input[type=checkbox]:checked').removeAttr('checked');
+            $('[data-moderation-content] .highlight').removeClass('highlight');
+            $('.inline-moderation').removeClass('floating');
+        });
+
+        // post level inline moderation checkbox handling
+        $(".post :checkbox").change(function() {
+            $(this).closest(".post").toggleClass("highlight", this.checked);
+
+            var checked_boxes = $('.highlight').length;
+
+            if(checked_boxes == 1)
+            {
+                $('.inline-moderation').addClass('floating');
+            }
+
+            if (checked_boxes > 1)
+            {
+                $('li[data-moderation-multi]').show();
+            } else {
+                $('li[data-moderation-multi]').hide();
+            }
+
+            if(checked_boxes == 0)
+            {
+                $('.inline-moderation').removeClass('floating');
+            }
+
+            $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+        });
+
+        // topic level inline moderation checkbox handling
+        $(".topic-list .topic :checkbox").change(function() {
+            $(this).closest(".topic").toggleClass("highlight", this.checked);
+
+            var checked_boxes = $('.highlight').length;
+
+            if(checked_boxes == 1)
+            {
+                $('.inline-moderation').addClass('floating');
+            }
+
+            if (checked_boxes > 1)
+            {
+                $('li[data-moderation-multi]').show();
+            } else {
+                $('li[data-moderation-multi]').hide();
+            }
+
+            if(checked_boxes == 0)
+            {
+                $('.inline-moderation').removeClass('floating');
+            }
+
+            $('.inline-moderation .selection-count').text(' ('+checked_boxes+')')
+        });
+
+        $('li[data-moderation-multi]').hide();
+    };
+
+    // get the IDs of elements currently selected
+    window.MyBB.Moderation.getSelectedIds = function getSelectedIds()
+    {
+        return $('input[type=checkbox][data-moderation-id]:checked').map(function () {
+            return $(this).attr('data-moderation-id');
+        }).get();
+    };
+
+    // grab the current selection and inject it into the modal so we can submit through a normal form
+    window.MyBB.Moderation.injectModalParams = function injectFormData(element)
+    {
+        $(element).attr('data-modal-params', JSON.stringify({
+            moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
+            moderation_ids: window.MyBB.Moderation.getSelectedIds()
+        }));
+    };
+
+    var moderation = new window.MyBB.Moderation();
+
+})(jQuery, window);

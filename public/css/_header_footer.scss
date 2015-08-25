@@ -17,10 +17,8 @@ h1.title {
 }
 
 .main-menu {
-	
 	float: $right;
 	margin: side-values(25px 0 0 0);
-
 }
 
 .menu-bar {
@@ -90,7 +88,8 @@ h1.title {
 }
 
 .user-navigation__links {
-	margin: 0 -8px;
+	margin: 0;
+	padding: 0;
 	list-style: none;
 
 	> li {
@@ -611,19 +610,19 @@ footer {
 }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
-	
-	.title a#logo {
-		background-image: url("../images/logo2@2x.png");
-		background-size: 188px 55px;
+
+	h1.title a#logo {
+		background-image: url("../images/logo_mobile@2x.png");
+		background-size: 137px 40px;
 	}
 
 }
 
-@media all and (-webkit-min-device-pixel-ratio: 2), (max-width: 768px) {
-
-	.title a#logo {
-		background-image: url("../images/logo_mobile@2x.png");
-		background-size: 137px 40px;
+@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
+	
+	h1.title a#logo {
+		background-image: url("../images/logo2@2x.png");
+		background-size: 188px 55px;
 	}
 
 }

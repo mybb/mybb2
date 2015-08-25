@@ -213,6 +213,8 @@ class TopicController extends AbstractController
 	 * @param int              $postId
 	 *
 	 * @return \Illuminate\View\View
+	 *
+	 * @throws \Exception
 	 */
 	public function reply($slug, $id, Request $request, MessageFormatter $formatter, $postId = null)
 	{
@@ -227,6 +229,10 @@ class TopicController extends AbstractController
 
 		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canReply')) {
 			throw new AccessDeniedHttpException;
+		}
+
+		if ($topic->closed) {
+			throw new \Exception(trans('topic.closed'));
 		}
 
 		$content = '';

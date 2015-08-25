@@ -94,7 +94,7 @@ class Renderer
 	protected function renderTextarea(RenderableInterface $renderable)
 	{
 		return $this->view->make('partials.form.field_textarea', [
-			'name' => $renderable->getName(),
+			'name' => $renderable->getElementName(),
 			'rows' => 6,
 			'cols' => 40,
 			'value' => $this->getValue($renderable),
@@ -113,8 +113,8 @@ class Renderer
 	{
 		return $this->view->make('partials.form.field_input', [
 			'type' => $renderable->getType(),
-			'name' => $renderable->getName(),
-			'id' => $this->slugify($renderable->getName()),
+			'name' => $renderable->getElementName(),
+			'id' => $this->slugify($renderable->getElementName()),
 			'value' => $this->getValue($renderable),
 			'is_required' => $this->isRequired($renderable),
 			'min_length' => $this->getMinLength($renderable),
@@ -130,7 +130,7 @@ class Renderer
 	protected function renderSelect(RenderableInterface $renderable)
 	{
 		return $this->view->make('partials.form.field_select', [
-			'name' => $renderable->getName(),
+			'name' => $renderable->getElementName(),
 			'options' => $renderable->getOptions(),
 			'selected' => $this->getValue($renderable)
 		])->render();
@@ -143,7 +143,7 @@ class Renderer
 	 */
 	protected function getValue(RenderableInterface $renderable)
 	{
-		$dottedNotation = str_replace(['[', ']'], ['.', ''], $renderable->getName());
+		$dottedNotation = str_replace(['[', ']'], ['.', ''], $renderable->getElementName());
 		if (!is_null($this->request->old($dottedNotation))) {
 			return $this->request->old($dottedNotation);
 		}
@@ -225,7 +225,7 @@ class Renderer
 	{
 		$rules = $this->getValidator($renderable)->getRules();
 
-		return $rules[$renderable->getName()] ? $rules[$renderable->getName()] : [];
+		return $rules[$renderable->getElementName()] ? $rules[$renderable->getElementName()] : [];
 	}
 
 	/**
@@ -235,6 +235,6 @@ class Renderer
 	 */
 	protected function getValidator(RenderableInterface $renderable)
 	{
-		return $this->validator->make([], [$renderable->getName() => $renderable->getValidationRules()]);
+		return $this->validator->make([], [$renderable->getElementName() => $renderable->getValidationRules()]);
 	}
 }

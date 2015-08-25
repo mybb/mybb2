@@ -1,0 +1,78 @@
+.admin-main-nav {
+	width: 13%;
+	float: $left;
+	margin-#{$left}: 15px;
+
+	.fa {
+		color: $alt-font-color-1;
+	}
+
+	& > ul > li {
+		background: $background-default;
+		margin: 5px;
+		padding: 5px;
+		width: 94%;
+	}
+
+	li {
+		background: $background-1;
+		margin: 5px 5px 5px 23px;
+		padding: 5px 5px 5px 10px;
+		border-radius: 4px;
+		width: 81%;
+
+		.active {
+			background: $primary-color;
+
+			a {
+				color: $invert-font-color;
+			}
+		}
+	}
+
+	ul {
+		list-style: none;
+		text-indent: 0;
+		padding: 0;
+
+		h3 {
+			border-bottom: 1px solid $border-1;
+			padding-bottom: 2px;
+			display: inline-block;
+			width: 85%;
+			margin-bottom: 5px;
+			margin-#{$left}: 5px;
+			margin-top: 0;
+		}
+	}
+}
+
+#admin-content {
+	h1 {
+		border-bottom: 2px solid $border-2;
+		padding-bottom: 15px;
+		font-size: 1.5em;
+	}
+}
+
+.admin-table {
+	width: 100%;
+
+	&.admin-table--bordered {
+		border-radius: 5px;
+		border-collapse: separate;
+
+		td {
+			border-bottom: 1px solid $border-1;
+		}
+	}
+
+	td, th {
+		padding: 10px;
+	}
+
+	thead {
+		background: $primary-color;
+		color: $invert-font-color;
+	}
+}

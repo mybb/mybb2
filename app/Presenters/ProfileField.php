@@ -12,6 +12,7 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\ProfileField as ProfileFieldModel;
 use MyBB\Core\Database\Models\ProfileFieldOption;
+use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Form\RenderableInterface;
 
@@ -28,19 +29,27 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	protected $userProfileFields;
 
 	/**
-	 * @param ProfileFieldModel                   $resource
-	 * @param Guard                               $guard
-	 * @param UserProfileFieldRepositoryInterface $userProfileFields
+	 * @var ProfileFieldOptionRepositoryInterface
+	 */
+	protected $profileFieldOptionRepository;
+
+	/**
+	 * @param ProfileFieldModel                     $resource
+	 * @param Guard                                 $guard
+	 * @param UserProfileFieldRepositoryInterface   $userProfileFields
+	 * @param ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
 	 */
 	public function __construct(
 		ProfileFieldModel $resource,
 		Guard $guard,
-		UserProfileFieldRepositoryInterface $userProfileFields
+		UserProfileFieldRepositoryInterface $userProfileFields,
+		ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
 	) {
 		parent::__construct($resource);
 
 		$this->guard = $guard;
 		$this->userProfileFields = $userProfileFields;
+		$this->profileFieldOptionRepository = $profileFieldOptionRepository;
 	}
 
 	/**
@@ -56,7 +65,7 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	 */
 	public function getOptions()
 	{
-		$options = ProfileFieldOption::getForProfileField($this->getWrappedObject());
+		$options = $this->profileFieldOptionRepository->getForProfileField($this->getWrappedObject());
 
 		$formattedOptions = [];
 
@@ -68,9 +77,17 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	}
 
 	/**
+	 * @return array
+	 */
+	public function options()
+	{
+		return $this->getOptions();
+	}
+
+	/**
 	 * @return string
 	 */
-	public function getName()
+	public function getElementName()
 	{
 		return 'profile_fields[' . $this->id . ']';
 	}
@@ -125,5 +142,13 @@ class ProfileField extends BasePresenter implements RenderableInterface
 	public function getValidationRules()
 	{
 		return $this->validation_rules;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function has_validation_rules()
+	{
+		return (bool) $this->getValidationRules();
 	}
 }

@@ -56,7 +56,7 @@
 					{% endif %}
 				</div>
 			</div>
-			<section class="forum topic-list">
+			<section class="forum topic-list" data-moderation-content="topic">
 				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
 				<div class="topic-list__sort-topics">
 					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
@@ -102,10 +102,15 @@
 				</div>
 				<div class="topic-list__container">
 					{% for topic in topics %}
-						<div class="topic{{ topic.trashed ? ' soft-deleted' }}">
+						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
 							<div class="primary-column">
 								<h3 class="topic__title">
-									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+                                   <a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+                                   <span class="topic__icons icons">
+                                   	{% if topic.closed == true %}
+                                   	 <i class="fa fa-lock" title="{{ trans('forum.closedtopic') }}"></i>
+                                   	{% endif %}
+                                   	</span>
 								</h3>
 								<h4>{{ trans('topic.firstpost') }}</h4>
 								<p class="topic__post topic__post--first">
@@ -129,9 +134,12 @@
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
 								</p>
 							</div>
+							<div class="moderation-column">
+								<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ topic.id }}">
+							</div>
 						</div>
 					{% else %}
-						<div class="topic topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
+						<div class="topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
 					{% endfor %}
 				</div>
 
@@ -154,6 +162,7 @@
 				
 			</section>
 			{{ topics.render|raw }}
+			{% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations, 'moderation_content': 'topics'} %}
 			</div>
 		</div>
 {% endblock %}

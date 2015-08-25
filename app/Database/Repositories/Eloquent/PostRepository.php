@@ -10,6 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Support\Collection;
 use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
@@ -356,5 +357,38 @@ class PostRepository implements PostRepositoryInterface
 			->whereHas('topic', function ($query) use ($unviewableForums) {
 				$query->whereNotIn('forum_id', $unviewableForums);
 			})->with(['author', 'topic'])->get();
+	}
+
+	/**
+	 * @param Post[] $posts
+	 *
+	 * @return Post
+	 */
+	public function mergePosts(array $posts)
+	{
+		if (! is_array_of($posts, 'MyBB\Core\Database\Models\Post')) {
+			throw new \InvalidArgumentException('$posts must be an array of Post objects');
+		}
+
+		$collection = new Collection($posts);
+		$collection = $collection->sortBy('created_at');
+
+		$firstPost = $collection->shift();
+		$firstPostContent = $firstPost->content;
+
+		foreach ($collection as $post) {
+			if ($post->author->id !== $firstPost->author->id) {
+				throw new \InvalidArgumentException("All posts being merged must have the same author");
+			}
+
+			$firstPostContent .= "\n[hr]\n". $post->content;
+			$this->deletePost($post);
+		}
+
+		$firstPost->content = $firstPostContent;
+		$firstPost->content_parsed = $this->formatter->parse($firstPost->content);
+		$firstPost->save();
+
+		return $firstPost;
 	}
 }

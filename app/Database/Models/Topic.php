@@ -13,12 +13,15 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Moderation\Moderations\ApprovableInterface;
+use MyBB\Core\Moderation\Moderations\CloseableInterface;
 
 /**
+ * @property int id
  * @property int forum_id
  * @property Forum forum
  */
-class Topic extends Model implements HasPresenter
+class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface
 {
 	use SoftDeletes;
 
@@ -58,6 +61,14 @@ class Topic extends Model implements HasPresenter
 	 * @var array
 	 */
 	protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+
+	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int',
+		'forum_id' => 'int'
+	];
 
 	/**
 	 * Get the presenter class.
@@ -140,5 +151,49 @@ class Topic extends Model implements HasPresenter
 	public function lastPost()
 	{
 		return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function approve()
+	{
+		$result = $this->update(['approved' => 1]);
+
+		if ($result && ! $this->firstPost->approved) {
+			$this->firstPost->approve();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function unapprove()
+	{
+		$result = $this->update(['approved' => 0]);
+
+		if ($result && $this->firstPost->approved) {
+			$this->firstPost->unapprove();
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function close()
+	{
+		return $this->update(['closed' => 1]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function open()
+	{
+		return $this->update(['closed' => 0]);
 	}
 }

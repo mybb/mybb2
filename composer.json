@@ -5,30 +5,31 @@
 	"license": "BSD-3",
 	"type": "project",
 	"require": {
-		"laravel/framework": "~5.0",
-		"rcrowe/twigbridge": "~0.7",
+		"laravel/framework": "5.1.*",
+		"rcrowe/twigbridge": "^0.7.2",
 		"mccool/laravel-auto-presenter": "~3.0@beta",
-		"kalnoy/nestedset": "~2.0",
-		"laravelcollective/html": "~5.0",
+		"kalnoy/nestedset": "^2.4.3",
+		"laravelcollective/html": "~5.1",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
 		"mybb/settings": "dev-master",
 		"davejamesmiller/laravel-breadcrumbs": "dev-master",
 		"doctrine/dbal": "~2.5",
 		"league/fractal": "0.12.*@dev",
-		"jenssegers/date": "~2.0",
-		"greggilbert/recaptcha": "~2.0",
+		"jenssegers/date": "~3.0",
+		"greggilbert/recaptcha": "^2.0.2",
 		"mybb/are-you-a-human": "1.1.*",
-		"mybb/gravatar": "~2.0"
+		"mybb/gravatar": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
-		"barryvdh/laravel-debugbar": "~2.0@dev",
+		"barryvdh/laravel-debugbar": "dev-master",
 		"sjparkinson/static-review": "dev-master",
 		"fabpot/php-cs-fixer": "~2.0@dev",
 		"squizlabs/php_codesniffer": "~2.0@dev",
-		"mockery/mockery": "0.9.*@dev"
+		"mockery/mockery": "0.9.*@dev",
+		"mybb/standards": "dev-master"
 	},
 	"repositories": [
 		{
@@ -40,9 +41,13 @@
 			"url":  "git@github.com:mybb/parser.git"
 		},
 		{
-		  "type": "vcs",
-		  "url":  "git@github.com:mybb/Settings.git"
-		}
+		    "type": "vcs",
+		    "url":  "git@github.com:mybb/Settings.git"
+		},
+        {
+            "type": "vcs",
+            "url": "git@github.com:mybb/standards.git"
+        }
 	],
 	"autoload": {
 		"classmap": [
@@ -50,10 +55,15 @@
 		],
 		"psr-4": {
 			"MyBB\\Core\\": "app/"
-		}
+		},
+	  	"files": [
+		  	"bootstrap/helpers.php"
+		]
 	},
 	"autoload-dev": {
-        "MyBB\\Core\\Test": "tests/src"
+        "psr-4": {
+          "MyBB\\Core\\Test\\": "tests/src"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [
@@ -69,7 +79,9 @@
 			"php artisan key:generate"
 		],
         "test-unit": "vendor/bin/phpunit --testsuite unit",
-        "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report"
+        "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report",
+        "sniff": "vendor/bin/phpcs",
+        "sniff-fix": "vendor/bin/phpcbf"
 	},
 	"config": {
 		"preferred-install": "dist"

@@ -310,6 +310,14 @@ class AccountController extends AbstractController
 			$name = "avatar_{$this->guard->user()->id}_" . time() . "." . $file->getClientOriginalExtension();
 			$file->move(public_path('uploads/avatars'), $name);
 			$this->guard->user()->update(['avatar' => $name]);
+
+			if ($request->get('ajax', false)) {
+				return response()->json([
+					'needCrop' => true,
+					'avatar' => asset("uploads/avatars/".$name)
+				]);
+
+			}
 		} // URL? Email?
 		elseif (filter_var(
 			$request->get('avatar_link'),
@@ -330,6 +338,90 @@ class AccountController extends AbstractController
 
 		return redirect()->route('account.profile')->withSuccess(trans('account.saved_avatar'));
 	}
+
+	/**
+	 * @param Request $request
+	 *
+	 * @return mixed
+	 */
+	public function postAvatarCrop(Request $request)
+	{
+		$this->validate($request, [
+			'w' => 'required|integer',
+			'h' => 'required|integer',
+			'x' => 'required|integer',
+			'x2' => 'required|integer',
+			'y' => 'required|integer',
+			'y2' => 'required|integer'
+		]);
+		$data = [
+			'w' => $request->get('w'),
+			'h' => $request->get('h'),
+			'x' => $request->get('x'),
+			'y' => $request->get('y'),
+			'x2' => $request->get('x2'),
+			'y2' => $request->get('y2')
+		];
+
+		$avatar = public_path("uploads/avatars/" . $this->guard->user()->avatar);
+		if (!file_exists($avatar)) {
+			return response()->json([
+				'success' => false,
+				'error' => trans('account.avatar_upload')
+			]);
+		}
+		$temp = explode('.', $avatar);
+		$ext = $temp[count($temp) - 1];
+
+		$image = imagecreatefromstring(@file_get_contents($avatar));
+		list($width, $height) = getimagesize($avatar);
+
+		if ($data['w'] > $width || $data['h'] > $height || $data['x2'] < $data['x'] || $data['y2'] < $data['y'] ||
+			$data['w'] <= 0 || $data['h'] <= 0 || $data['x2']-$data['x'] != $data['w']||
+			$data['y2']-$data['y'] != $data['h']) {
+			return response()->json([
+				'success' => false,
+				'error' => trans('account.select_area_crop')
+			]);
+		}
+		$dst_r = imagecreatetruecolor($data['w'], $data['h']);
+
+		imagecopyresampled(
+			$dst_r,
+			$image,
+			0,
+			0,
+			$data['x'],
+			$data['y'],
+			$data['w'],
+			$data['h'],
+			$data['w'],
+			$data['h']
+		);
+
+		switch ($ext) {
+			case 'bmp':
+				imagewbmp($dst_r, $avatar);
+				break;
+			case 'gif':
+				imagegif($dst_r, $avatar);
+				break;
+			case 'jpg':
+			case 'jpeg':
+				imagejpeg($dst_r, $avatar);
+				break;
+			case 'png':
+			default:
+				imagepng($dst_r, $avatar);
+				break;
+		}
+		return response()->json([
+			'success' => true,
+			'message' => trans('account.saved_avatar'),
+			'avatar' => asset("uploads/avatars/".$this->guard->user()->avatar)
+		]);
+	}
+
 
 	/**
 	 * @return mixed

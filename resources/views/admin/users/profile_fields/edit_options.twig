@@ -1,0 +1,50 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <h1>{{ trans('admin::profile_fields.edit_field_options') }}</h1>
+
+    <div>
+        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
+    </div>
+
+    <table class="admin-table admin-table--bordered">
+        <thead>
+        <tr>
+            <th>{{ trans('admin::profile_fields.options_name_field') }}</th>
+            <th>{{ trans('admin::profile_fields.options_actions_field') }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for option in options %}
+            <tr>
+                <td>{{ option.name }}</td>
+                <td>
+                    {{ form_open({'route': ['admin.users.profile_fields.delete_option'], 'method': 'post', 'style': 'display: inline;'}) }}
+                    {{ form_hidden('profile_field_option_id', option.id) }}
+                    <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::general.delete') }}</button>
+                    {{ form_close() }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <div style="margin-top: 20px">
+        {{ form_open({'route': ['admin.users.profile_fields.add_option'], 'method': 'post'}) }}
+        {{ form_hidden('profile_field_id', field.id) }}
+        <section class="form">
+            <div class="form__section">
+                <div class="form__row">
+                    <h3>{{ form_label('name', trans('admin::profile_fields.options_name_field')) }}</h3>
+                    {{ form_text('name') }}
+                </div>
+                <div class="form__submit">
+                    {{ form_button(trans('admin::general.add'), {'type': 'submit', 'class': 'button'}) }}
+                </div>
+            </div>
+        </section>
+        {{ form_close() }}
+    </div>
+{% endblock %}
