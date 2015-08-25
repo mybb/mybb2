@@ -72,6 +72,9 @@ class Topic extends BasePresenter
 		return $this->wrappedObject->author;
 	}
 
+	/**
+	 * @return Forum
+	 */
 	public function forum()
 	{
 		if ($this->wrappedObject->forum instanceof \MyBB\Core\Presenters\Forum) {
