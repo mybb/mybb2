@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fbfee0cf98f79fd544b7f5a0b2da8755",
+    "hash": "ef7fc9b1f52b14f6004fb80afd199d33",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -965,52 +965,6 @@
             "time": "2015-03-11 20:06:43"
         },
         {
-            "name": "kalnoy/nestedset",
-            "version": "v2.4.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lazychaser/laravel-nestedset.git",
-                "reference": "93981749a1b3e483aee39d01bbd00b2be27145bb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lazychaser/laravel-nestedset/zipball/93981749a1b3e483aee39d01bbd00b2be27145bb",
-                "reference": "93981749a1b3e483aee39d01bbd00b2be27145bb",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": ">=4.1,<5.2.0",
-                "illuminate/events": ">=4.1,<5.2.0",
-                "illuminate/support": ">=4.1,<5.2.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Kalnoy\\Nestedset\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Kalnoy",
-                    "email": "lazychaser@gmail.com"
-                }
-            ],
-            "description": "Nested Set Model for Laravel 4",
-            "keywords": [
-                "database",
-                "hierarchy",
-                "laravel",
-                "nested sets",
-                "nsm"
-            ],
-            "time": "2015-06-23 11:04:15"
-        },
-        {
             "name": "laravel/framework",
             "version": "v5.1.10",
             "source": {
@@ -1605,12 +1559,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Auth.git",
-                "reference": "f446d175db8fbbef689fd9af9a189b116e047759"
+                "reference": "664aa190ffa32997d29d68800b7c1fad34ed5971"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/mybb/Auth/zipball/664aa190ffa32997d29d68800b7c1fad34ed5971",
-                "reference": "f446d175db8fbbef689fd9af9a189b116e047759",
+                "reference": "664aa190ffa32997d29d68800b7c1fad34ed5971",
                 "shasum": ""
             },
             "require": {
@@ -1637,7 +1591,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-05-12 13:27:55"
+            "time": "2015-08-25 13:20:58"
         },
         {
             "name": "mybb/gravatar",
@@ -1645,12 +1599,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/gravatar.git",
-                "reference": "36a6c04819e54054261678b0013f08218681f7b8"
+                "reference": "03f5dc7d423b37801279736d63e1c8d9c67a4692"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/mybb/gravatar/zipball/03f5dc7d423b37801279736d63e1c8d9c67a4692",
-                "reference": "36a6c04819e54054261678b0013f08218681f7b8",
+                "reference": "03f5dc7d423b37801279736d63e1c8d9c67a4692",
                 "shasum": ""
             },
             "require": {
@@ -1678,7 +1632,7 @@
                 }
             ],
             "description": "Easy Gravatar generation for Laravel 5.0.",
-            "time": "2015-08-18 11:03:39"
+            "time": "2015-08-25 17:34:56"
         },
         {
             "name": "mybb/parser",
@@ -1686,12 +1640,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Parser.git",
-                "reference": "79328c992eeb8884c930a22ea10bb1f20ffc4dcc"
+                "reference": "fd43d8f46885997690d1265c58c3e5b770bf5b33"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/mybb/Parser/zipball/fd43d8f46885997690d1265c58c3e5b770bf5b33",
-                "reference": "79328c992eeb8884c930a22ea10bb1f20ffc4dcc",
+                "reference": "fd43d8f46885997690d1265c58c3e5b770bf5b33",
                 "shasum": ""
             },
             "require": {
@@ -1719,7 +1673,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-06-14 10:09:20"
+            "time": "2015-08-25 13:17:27"
         },
         {
             "name": "mybb/settings",
@@ -1727,12 +1681,12 @@
             "source": {
                 "type": "git",
                 "url": "git@github.com:mybb/Settings.git",
-                "reference": "6fb2970fae628ee2435d8ed5611ed3f18bdc8b4d"
+                "reference": "64ea56d9016cc541d08dbec2cb3878b02f55f952"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/mybb/Settings/zipball/64ea56d9016cc541d08dbec2cb3878b02f55f952",
-                "reference": "6fb2970fae628ee2435d8ed5611ed3f18bdc8b4d",
+                "reference": "64ea56d9016cc541d08dbec2cb3878b02f55f952",
                 "shasum": ""
             },
             "require": {
@@ -1763,7 +1717,7 @@
                 "source": "https://github.com/mybb/Settings/tree/master",
                 "issues": "https://github.com/mybb/Settings/issues"
             },
-            "time": "2015-05-12 13:30:55"
+            "time": "2015-08-25 13:16:31"
         },
         {
             "name": "nesbot/carbon",
