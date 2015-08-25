@@ -16,20 +16,22 @@
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
 				{% if not topic.has_poll %}
-					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">Add a poll</span></a>
+					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
 				{% endif %}
+                {% if not topic.closed %}
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+                {% endif %}
 			</div>
 		</div>
 		{% if topic.has_poll %}
 			{% include "topic.polls" with [poll, topic] %}
 		{% endif %}
-		<section class="topic">
+		<section class="topic" data-moderation-content="post">
 			{% for post in posts %}
-				<div class="post{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
+				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
-						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', {'name': post.author.name}) }}" /></a>
+						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
 						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
 						{{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
 						{% if post.trashed or (topic.trashed and loop.first) %}
@@ -39,12 +41,17 @@
 							<a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
 						{% endif %}
 						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
-						<input type="checkbox" class="post__inline-mod" />
+                        {% if auth_user.hasPermission('canModerate') %}
+						<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ post.id }}">
+                        {% endif %}
 						<a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i></a>
 					</div>
 					<div class="post__body">
+						<div class="quick-quote">
+							<span class="fast">{{ trans('topic.quoteSelectionNow') }}</span>
+							<span class="add">{{ trans('topic.quoteSelectionLater') }}</span>
+						</div>
 						<p>
-							<div class="quickQuote"><span class="fast">{{ trans('topic.quoteSelectionNow') }}</span> | <span class="add">{{ trans('topic.quoteSelectionLater') }}</span></div>
 							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
 						</p>
 					</div>
@@ -53,7 +60,7 @@
 								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}" onclick="return confirm('{{ trans('topic.confirmDelete') }}')"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
 								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like">
@@ -66,8 +73,8 @@
                                     {% endif %}
                                 {{ form_close() }}
                             	</li>
-                                <li class="quote"><a class="quoteButton" href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}">
-										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quoteButton__add">{{ trans('topic.quote') }}</span><span class="text quoteButton__remove">{{ trans('topic.removeQuote') }}</span></a>
+                                <li class="quote"><a class="quote-button" href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}">
+										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
 								</li>
 							{% endif %}
 							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
@@ -81,15 +88,25 @@
 
 					</div>
 				</div>
-				<div id="dropdown-{{ post.id }}" class="dropdown dropdown-tip">
-				    <ul class="dropdown-menu">
-				        <li><a href="#notimplemented">{{ trans('topic.quickEdit') }}</a></li>
-				        <li><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}">{{ trans('topic.fullEdit') }}</a></li>
-				    </ul>
-				</div>
 			{% endfor %}
 			{{ posts.render|raw }}
-			{% include 'topic.quickreply' with {'topic': topic} %}
+            {% if not topic.closed %}
+                {% include 'topic.quickreply' with {'topic': topic} %}
+            {% else %}
+                <p style="text-align:center"><i class="fa fa-lock"></i> {{ trans('topic.closed') }}</p>
+            {% endif %}
 		</section>
+        {% if auth_user.hasPermission('canModerate') %}
+		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
+        {% endif %}
 	</div>
+{% endblock %}
+{% block js %}
+	<script>
+		Lang.addResource({
+			'topic': {
+				'confirmDelete': '{{ trans('topic.confirmDelete')|e('js') }}'
+			}
+		});
+	</script>
 {% endblock %}

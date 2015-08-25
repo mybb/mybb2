@@ -46,11 +46,11 @@ abstract class AbstractCachingModel extends Model
 	public static function find($id, $columns = array('*'))
 	{
 		if ($columns != array('*')) {
-			return parent::find($id, $columns);
+			return static::query()->find($id, $columns);
 		}
 
 		if (!isset(static::$models[get_called_class()][$id])) {
-			static::$models[get_called_class()][$id] = parent::find($id);
+			static::$models[get_called_class()][$id] = static::query()->find($id, $columns);
 		}
 
 		return static::$models[get_called_class()][$id];

@@ -19,5 +19,6 @@ return [
 	'replies' => 'Replies',
 	'latestpost' => 'Latest Post',
 	'author' => 'Author',
-	'sorttopics' => 'Sort Topics'
+	'sorttopics' => 'Sort Topics',
+	'closedtopic' => 'Closed Topic'
 ];

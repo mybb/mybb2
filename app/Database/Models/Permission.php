@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends AbstractCachingModel
 {
-
 	/**
 	 * The database table used by the model.
 	 *

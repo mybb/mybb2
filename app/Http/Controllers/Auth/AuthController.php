@@ -9,10 +9,12 @@
 namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Factory;
 use MyBB\Auth\Contracts\Guard;
+use MyBB\Core\Database\Models\Role;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class AuthController extends Controller
@@ -37,6 +39,11 @@ class AuthController extends Controller
 	private $breadcrumbs;
 
 	/**
+	 * @var Factory
+	 */
+	private $validator;
+
+	/**
 	 * @var Request
 	 */
 	private $request;
@@ -44,16 +51,16 @@ class AuthController extends Controller
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param Guard                                $auth
-	 * @param \Illuminate\Contracts\Auth\Registrar $registrar
-	 * @param Breadcrumbs                          $breadcrumbs
-	 * @param Request                              $request
+	 * @param Guard       $auth
+	 * @param Breadcrumbs $breadcrumbs
+	 * @param Factory     $validator
+	 * @param Request     $request
 	 */
-	public function __construct(Guard $auth, Registrar $registrar, Breadcrumbs $breadcrumbs, Request $request)
+	public function __construct(Guard $auth, Breadcrumbs $breadcrumbs, Factory $validator, Request $request)
 	{
 		$this->auth = $auth;
-		$this->registrar = $registrar;
 		$this->breadcrumbs = $breadcrumbs;
+		$this->validator = $validator;
 		$this->request = $request;
 
 		$this->middleware('guest', ['except' => 'getLogout']);
@@ -86,7 +93,7 @@ class AuthController extends Controller
 			return $captcha;
 		}
 
-		$validator = $this->registrar->validator($this->request->all());
+		$validator = $this->validator($this->request->all());
 
 		if ($validator->fails()) {
 			$this->throwValidationException(
@@ -95,7 +102,7 @@ class AuthController extends Controller
 			);
 		}
 
-		$this->auth->login($this->registrar->create($this->request->all()));
+		$this->auth->login($this->create($this->request->all()));
 
 		return redirect($this->redirectPath());
 	}
@@ -137,7 +144,7 @@ class AuthController extends Controller
 		}
 
 		return redirect('/auth/login')
-			->withInput($this->request->only('username'))
+			->withInput($this->request->only('username', 'remember_me'))
 			->withErrors([
 				'username' => trans('member.invalidCredentials'),
 			]);
@@ -170,5 +177,42 @@ class AuthController extends Controller
 		}
 
 		return '/';
+	}
+
+
+	/**
+	 * Get a validator for an incoming registration request.
+	 *
+	 * @param  array $data
+	 *
+	 * @return \Illuminate\Contracts\Validation\Validator
+	 */
+	protected function validator(array $data)
+	{
+		return $this->validator->make($data, [
+			'name' => 'required|max:255|unique:users',
+			'email' => 'required|email|max:255|unique:users',
+			'password' => 'required|confirmed|min:6',
+		]);
+	}
+
+	/**
+	 * Create a new user instance after a valid registration.
+	 *
+	 * @param  array $data
+	 *
+	 * @return User
+	 */
+	protected function create(array $data)
+	{
+		$user = User::create([
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'password' => bcrypt($data['password']),
+		]);
+
+		$user->roles()->attach(Role::getBySlug('user')->id, ['is_display' => true]);
+
+		return $user;
 	}
 }

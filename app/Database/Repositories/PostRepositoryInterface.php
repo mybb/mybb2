@@ -114,4 +114,11 @@ interface PostRepositoryInterface
 	 * @return mixed
 	 */
 	public function getPostsByIds(array $postIds);
+
+	/**
+	 * @param Post[] $posts
+	 *
+	 * @return Post
+	 */
+	public function mergePosts(array $posts);
 }

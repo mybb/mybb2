@@ -28,7 +28,34 @@
 	window.MyBB.Polls.prototype.timePicker = function timePicker() {
 		$('#poll-end-at').datetimepicker({
 			format: 'Y-m-d H:i:s',
-			lang: $('html').attr('lang'),// TODO: use our i18n
+			lang: 'mybb',
+			i18n: {
+				mybb: {
+					months: [
+						Lang.get('general.months.january'),
+						Lang.get('general.months.february'),
+						Lang.get('general.months.march'),
+						Lang.get('general.months.april'),
+						Lang.get('general.months.may'),
+						Lang.get('general.months.june'),
+						Lang.get('general.months.july'),
+						Lang.get('general.months.august'),
+						Lang.get('general.months.september'),
+						Lang.get('general.months.october'),
+						Lang.get('general.months.november'),
+						Lang.get('general.months.december')
+					],
+					dayOfWeek: [
+						Lang.get('general.dayOfWeek.sun'),
+						Lang.get('general.dayOfWeek.mon'),
+						Lang.get('general.dayOfWeek.tue'),
+						Lang.get('general.dayOfWeek.wed'),
+						Lang.get('general.dayOfWeek.thu'),
+						Lang.get('general.dayOfWeek.fri'),
+						Lang.get('general.dayOfWeek.sat')
+					]
+				}
+			},
 			minDate: 0
 		});
 	};
@@ -47,10 +74,11 @@
 	window.MyBB.Polls.prototype.addOption = function addOption(event) {
 		var num_options = $('#add-poll .poll-option').length;
 		if(num_options >= 10) { // TODO: settings
+			alert(Lang.choice('poll.errorManyOptions', 10)); // TODO: JS Error
 			return false;
 		}
 		var $option = this.optionElement.clone();
-		$option.find('input').attr('name', 'option['+(num_options+1)+']')
+		$option.find('input').attr('name', 'option['+(num_options+1)+']');
 		$('#add-poll .poll-option').last().after($option);
 		$option.slideDown();
 		this.removeOption($option);
@@ -61,8 +89,9 @@
 		$parent.find('.remove-option').click($.proxy(function(event) {
 			var $me = $(event.target),
 				$myParent = $me.parents('.poll-option');
-			if($('.poll-option').length <= 2)
+			if($('.poll-option').length <= 2) // TODO: settings
 			{
+				alert(Lang.choice('poll.errorFewOptions', 2)); // TODO: JS Error
 				return false;
 			}
 

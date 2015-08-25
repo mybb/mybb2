@@ -15,43 +15,46 @@
     <i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
 </div>
 {% include "admin.header" %}
-<nav class="admin-main-nav">
-    <ul>
-        <li>
-            <i class="fa fa-home" style="color: #007fd0"></i>
-            <h3>Home</h3>
-            <ul>
-                <li><a href="">Dashboard</a></li>
-                <li><a href="">Settings</a></li>
-                <li><a href="">Extensions</a></li>
-                <li><a href="">Languages</a></li>
+<div class="main" id="main">
+    <div class="sidebar-menu">
+        <nav id="menu">
+            <ul class="sidebar-menu__main">
+                <li>                    
+                    <h3><a href="{{ url_route('admin.dashboard') }}"><i class="fa fa-home"></i><span class="text">Home</span></a></h3>
+                    <ul class="sidebar-menu__sub">
+                        <li {{ active_tab('dashboard') }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
+                        <li><a href="">Settings</a></li>
+                        <li><a href="">Extensions</a></li>
+                        <li><a href="">Languages</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3><a href="#"><i class="fa fa-comments"></i><span class="text">Forums &amp; Posts</span></a></h3>
+                </li>
+                <li>
+                    <h3><a href="#"><i class="fa fa-users"></i><span class="text">{{ trans('admin::nav.users_and_roles') }}</span></a></h3>
+                    <ul class="sidebar-menu__sub">
+                        <li {{ active_tab('profile-fields') }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <h3><a href="#"><i class="fa fa-eye"></i><span class="text">Templates &amp; Style</span></a></h3>
+                </li>
+                <li>
+                    <h3><a href="#"><i class="fa fa-gear"></i><span class="text">Tools &amp; Maintenance</span></a></h3>
+                </li>
             </ul>
-        </li>
-        <li>
-            <i class="fa fa-comments"></i>
-            <h3>Forums & Posts</h3>
-        </li>
-        <li>
-            <i class="fa fa-users"></i>
-            <h3>Users & Roles</h3>
-        </li>
-        <li>
-            <i class="fa fa-eye"></i>
-            <h3>Templates & Style</h3>
-        </li>
-        <li>
-            <i class="fa fa-gear"></i>
-            <h3>Tools & Maintenance</h3>
-        </li>
-    </ul>
-</nav>
-<div class="main" style="float: left; width: 86%;">
-    <div id="content">
-        {% include "partials.messages" %}
+        </nav>
+    </div>
+    <div class="page-body">
+        <div id="admin-content">
+            {% include "partials.messages" %}
 
-        {% block contents %}{% endblock %}
+            {% block contents %}{% endblock %}
+        </div>
     </div>
 </div>
 {% include "admin.footer" %}
+{% block js %}{% endblock %}
 </body>
 </html>

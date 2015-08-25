@@ -53,6 +53,11 @@ section.form {
 	margin-bottom: 10px;
 	@include border-radius(4px);
 
+	.heading--major {
+		margin: -1px;
+		@include border-radius(corner-values(4px 4px 0 0));
+	}
+
 	.form__section {
 		@extend .clearfix;
 		padding: 16px 12px;
@@ -128,6 +133,24 @@ section.form {
 		line-height: 1.4;
 		color: $alt-font-color-1;
 		margin: side-values(-4px 0 4px 0);
+	}
+
+	.form__radio {
+		padding: side-values(0 0 0 30px);
+		margin-bottom: 20px;
+
+		input[type="radio"] {
+			float: $left;
+			margin: side-values(6px 0 0 -26px);
+		}
+
+		p.form__radio__description {
+			@extend .form__description;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
 	}
 
 	p.form__data {

@@ -44,8 +44,8 @@ $status-pending-border: #f2aaab;
 
 
 // Success / danger colors
-$success-color: #018303;
-$danger-color: #c00;
+$success-color: #68c000;
+$danger-color: #eb5257;
 
 
 // Fonts
@@ -97,11 +97,12 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'polls';
 @import 'users';
 @import 'account';
+@import 'conversations';
 @import 'moderation';
 @import 'modals';
+@import 'jcrop';
 @import 'spinner';
 @import 'plugins';
-@import 'admin';
 
 
 // A few helper classes

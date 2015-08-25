@@ -45,6 +45,46 @@ class PermissionsTableSeeder extends Seeder
 				'permission_name' => 'canViewAllOnline',
 				'content_name' => null,
 				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canModerate',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canApprove',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canClose',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canDeletePosts',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canDeleteTopics',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canMergePosts',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canMovePosts',
+				'content_name' => null,
+				'default_value' => 0
+			],
+			[
+				'permission_name' => 'canMoveTopics',
+				'content_name' => null,
+				'default_value' => 0
 			]
 		];
 

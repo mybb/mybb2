@@ -1,0 +1,15 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <h1>{{ trans('admin::profile_fields.add_field') }}</h1>
+
+    <div>
+        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
+    </div>
+
+    <div>
+        {{ form_open({'route': ['admin.users.profile_fields.add'], 'method': 'post'}) }}
+        {% include "admin.partials.users.profile_field_form" %}
+        {{ form_close() }}
+    </div>
+{% endblock %}

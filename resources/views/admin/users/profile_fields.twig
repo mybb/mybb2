@@ -1,0 +1,45 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <h1>{{ trans('admin::profile_fields.title') }}</h1>
+
+    <div>
+        <a href="{{ url_route('admin.users.profile_fields.add_group') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_group') }}</a>
+        <a href="{{ url_route('admin.users.profile_fields.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_field') }}</a>
+    </div>
+
+    {% for group in profile_field_groups %}
+        <h3>{{ group.name }}</h3>
+        <table class="admin-table admin-table--bordered">
+            <thead>
+            <tr>
+                <th>{{ trans('admin::profile_fields.name_field') }}</th>
+                <th>{{ trans('admin::profile_fields.description_field') }}</th>
+                <th>{{ trans('admin::profile_fields.type_field') }}</th>
+                <th>{{ trans('admin::profile_fields.actions_field') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for field in group.fields %}
+                <tr>
+                    <td>{{ field.name }}</td>
+                    <td>{{ field.description }}</td>
+                    <td>{{ field.type|capitalize }}</td>
+                    <td>
+                        <a href="{{ url_route('admin.users.profile_fields.edit', [field.id]) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::profile_fields.edit') }}</a>
+
+                        {{ form_open({'route': ['admin.users.profile_fields.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
+                        <input type="hidden" name="profile_field_id" value="{{ field.id }}">
+                        <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::profile_fields.delete') }}</button>
+                        {{ form_close() }}
+
+                        {% if field.type == 'select' %}
+                            <a href="{{ url_route('admin.users.profile_fields.edit_options', [field.id]) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> {{ trans('admin::profile_fields.edit_options') }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}

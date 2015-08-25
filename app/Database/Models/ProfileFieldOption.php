@@ -9,7 +9,6 @@
 namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 /**
  * @property string name
@@ -44,15 +43,5 @@ class ProfileFieldOption extends AbstractCachingModel
 	public function getValue()
 	{
 		return $this->value;
-	}
-
-	/**
-	 * @param ProfileField $profileField
-	 *
-	 * @return Collection
-	 */
-	public static function getForProfileField(ProfileField $profileField)
-	{
-		return static::where('profile_field_id', $profileField->id)->get();
 	}
 }

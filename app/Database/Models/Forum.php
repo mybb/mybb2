@@ -10,12 +10,16 @@
 
 namespace MyBB\Core\Database\Models;
 
+use MyBB\Core\Moderation\Moderations\CloseableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Collections\TreeCollection;
 
-class Forum extends AbstractCachingModel implements HasPresenter, InheritPermissionInterface
+/**
+ * @property int id
+ */
+class Forum extends AbstractCachingModel implements HasPresenter, InheritPermissionInterface, CloseableInterface
 {
 	use InheritPermissionableTrait;
 
@@ -49,6 +53,13 @@ class Forum extends AbstractCachingModel implements HasPresenter, InheritPermiss
 	protected $guarded = ['left_id', 'right_id', 'parent_id'];
 
 	/**
+	 * @var array
+	 */
+	protected $casts = [
+		'id' => 'int'
+	];
+
+	/**
 	 * Get the presenter class.
 	 *
 	 * @return string
@@ -68,6 +79,19 @@ class Forum extends AbstractCachingModel implements HasPresenter, InheritPermiss
 		}
 
 		return $this->find($this->parent_id);
+	}
+
+	/**
+	 * Find a model by its primary key.
+	 *
+	 * @param  mixed $id
+	 * @param  array $columns
+	 *
+	 * @return \Illuminate\Support\Collection|static|null
+	 */
+	public static function find($id, $columns = array('*'))
+	{
+		return static::query()->find($id, $columns);
 	}
 
 	/**
@@ -135,5 +159,21 @@ class Forum extends AbstractCachingModel implements HasPresenter, InheritPermiss
 	public function newCollection(array $models = array())
 	{
 		return new TreeCollection($models);
+	}
+
+	 /**
+	 * @return bool|int
+	 */
+	public function close()
+	{
+		return $this->update(['closed' => 1]);
+	}
+
+	/**
+	 * @return bool|int
+	 */
+	public function open()
+	{
+		return $this->update(['closed' => 0]);
 	}
 }

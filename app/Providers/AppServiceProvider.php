@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
 	 */
 	public function boot()
 	{
-		//
+		$this->loadTranslationsFrom(__DIR__ . '/../../resources/lang/admin', 'admin');
 	}
 
 	/**
@@ -79,6 +79,11 @@ class AppServiceProvider extends ServiceProvider
 		$this->app->bind(
 			'MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface',
 			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository'
 		);
 
 		$this->app->bind(
