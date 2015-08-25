@@ -12,7 +12,7 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Post as PostModel;
 use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Moderation\ModerationRegistry;
@@ -73,11 +73,23 @@ class Topic extends BasePresenter
 	}
 
 	/**
+	 * @return Forum
+	 */
+	public function forum()
+	{
+		if ($this->wrappedObject->forum instanceof \MyBB\Core\Presenters\Forum) {
+			return $this->wrappedObject->forum;
+		}
+
+		return $this->app->make('MyBB\Core\Presenters\Forum', [$this->wrappedObject->forum]);
+	}
+
+	/**
 	 * @return \MyBB\Core\Moderation\ModerationInterface[]
 	 */
 	public function moderations()
 	{
-		$moderations = $this->moderations->getForContent(new Post());
+		$moderations = $this->moderations->getForContent(new PostModel());
 		$decorated = [];
 		$presenter = $this->app->make('autopresenter');
 

@@ -19,7 +19,7 @@
 					<div class="poll__option{{ (option.voted)?' poll_option-voted' }}">
 						<div class="poll__option__name">
 							<label>
-								{% if poll.myVote is null %}
+								{% if poll.myVote == false and topic.forum.hasPermission('canVoteInPolls') %}
 									{% if poll.is_multiple %}
 										{{ form_checkbox('option[]', loop.index) }}
 									{% else %}
@@ -57,14 +57,16 @@
 			{% endif %}
 			<div class="poll__vote">
 				<div class="poll__buttons">
-					<a class="button button--secondary"
-					   href="{{ url_route('polls.remove', [topic.slug, topic.id]) }}"><i
-								class="fa fa-trash"></i><span class="text">{{ trans('poll.remove') }}</span></a>
-					<a class="button button--secondary"
-					   href="{{ url_route('polls.edit', [topic.slug, topic.id]) }}"><i
-								class="fa fa-pencil"></i><span class="text">{{ trans('poll.edit') }}</span></a>
+					{% if poll.canEdit() %}
+						<a class="button button--secondary"
+						   href="{{ url_route('polls.remove', [topic.slug, topic.id]) }}"><i
+									class="fa fa-trash"></i><span class="text">{{ trans('poll.remove') }}</span></a>
+						<a class="button button--secondary"
+						   href="{{ url_route('polls.edit', [topic.slug, topic.id]) }}"><i
+									class="fa fa-pencil"></i><span class="text">{{ trans('poll.edit') }}</span></a>
+					{% endif %}
 				</div>
-				{% if not poll.is_closed %}
+				{% if not poll.is_closed and topic.forum.hasPermission('canVoteInPolls') %}
 					{% if poll.myVote %}
 						<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id]) }}"><i
 									class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>

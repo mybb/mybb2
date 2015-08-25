@@ -63,8 +63,19 @@ class CheckAccess
 	{
 		$action = $request->route()->getAction();
 		// Check for additional permissions required
-		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
-		return $this->permissionChecker->hasPermission('user', null, $requiredPermisions);
+		$requiredPermisions = array();
+
+		if (isset($action['permissions'])) {
+			if (!is_array($action['permissions'])) {
+				$requiredPermisions = explode('|', $action['permissions']);
+			} else {
+				foreach ($action['permissions'] as $permission) {
+					$requiredPermisions = array_merge($requiredPermisions, explode('|', $permission));
+				}
+			}
+		}
+
+		return $this->permissionChecker->hasPermission('user', null, array_unique($requiredPermisions));
 	}
 }

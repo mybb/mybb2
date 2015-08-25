@@ -14,7 +14,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 /**
  * @property int id
  */
-class ProfileFieldGroup extends Model implements HasPresenter
+class ProfileFieldGroup extends AbstractCachingModel implements HasPresenter
 {
 	const ABOUT_YOU = 'about-you';
 	const CONTACT_DETAILS = 'contact-details';

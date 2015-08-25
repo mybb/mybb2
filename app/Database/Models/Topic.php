@@ -18,10 +18,10 @@ use MyBB\Core\Moderation\Moderations\CloseableInterface;
 
 /**
  * @property int id
- * @property Forum forum
  * @property int forum_id
+ * @property Forum forum
  */
-class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface
+class Topic extends AbstractCachingModel implements HasPresenter, ApprovableInterface, CloseableInterface
 {
 	use SoftDeletes;
 

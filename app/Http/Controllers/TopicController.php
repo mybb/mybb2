@@ -26,10 +26,12 @@ use MyBB\Core\Exceptions\PostNotFoundException;
 use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
+use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class TopicController extends AbstractController
@@ -70,13 +72,19 @@ class TopicController extends AbstractController
 	private $breadcrumbs;
 
 	/**
-	 * @param PostRepositoryInterface  $postRepository  Post repository instance, used to fetch post details.
-	 * @param TopicRepositoryInterface $topicRepository Topic repository instance, used to fetch topic details.
-	 * @param ForumRepositoryInterface $forumRepository Forum repository interface, used to fetch forum details.
-	 * @param PollRepositoryInterface  $pollRepository  Poll repository interface, used to fetch poll details.
-	 * @param Guard                    $guard           Guard implementation
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @param PostRepositoryInterface  $postRepository    Post repository instance, used to fetch post details.
+	 * @param TopicRepositoryInterface $topicRepository   Topic repository instance, used to fetch topic details.
+	 * @param ForumRepositoryInterface $forumRepository   Forum repository interface, used to fetch forum details.
+	 * @param PollRepositoryInterface  $pollRepository    Poll repository interface, used to fetch poll details.
+	 * @param Guard                    $guard             Guard implementation
 	 * @param QuoteRenderer            $quoteRenderer
 	 * @param Breadcrumbs              $breadcrumbs
+	 * @param PermissionChecker        $permissionChecker
 	 */
 	public function __construct(
 		PostRepositoryInterface $postRepository,
@@ -85,7 +93,8 @@ class TopicController extends AbstractController
 		PollRepositoryInterface $pollRepository,
 		Guard $guard,
 		QuoteRenderer $quoteRenderer,
-		Breadcrumbs $breadcrumbs
+		Breadcrumbs $breadcrumbs,
+		PermissionChecker $permissionChecker
 	) {
 		$this->topicRepository = $topicRepository;
 		$this->postRepository = $postRepository;
@@ -94,6 +103,7 @@ class TopicController extends AbstractController
 		$this->guard = $guard;
 		$this->quoteRenderer = $quoteRenderer;
 		$this->breadcrumbs = $breadcrumbs;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -215,6 +225,12 @@ class TopicController extends AbstractController
 			throw new TopicNotFoundException;
 		}
 
+		$this->breadcrumbs->setCurrentRoute('topics.reply', $topic);
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canReply')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		if ($topic->closed) {
 			throw new \Exception(trans('topic.closed'));
 		}
@@ -228,8 +244,6 @@ class TopicController extends AbstractController
 
 			$content = $this->quoteRenderer->renderFromPost($post);
 		}
-
-		$this->breadcrumbs->setCurrentRoute('topics.reply', $topic);
 
 		$username = trans('general.guest');
 		if ($request->has('content')) {
@@ -278,6 +292,10 @@ class TopicController extends AbstractController
 
 		if (!$topic) {
 			throw new TopicNotFoundException;
+		}
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canReply')) {
+			throw new AccessDeniedHttpException;
 		}
 
 		if (!$this->guard->check()) {
@@ -381,6 +399,10 @@ class TopicController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('topics.create', $forum);
 
+		if (!$this->permissionChecker->hasPermission('forum', $forum->id, 'canPostTopics')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$username = trans('general.guest');
 		$preview = null;
 		if ($request->has('content')) {
@@ -414,6 +436,10 @@ class TopicController extends AbstractController
 	public function postCreate($forumId, CreateRequest $createRequest)
 	{
 		// Forum permissions are checked in "CreateRequest"
+
+		if (!$this->permissionChecker->hasPermission('forum', $forumId, 'canPostTopics')) {
+			throw new AccessDeniedHttpException;
+		}
 
 		if (!$this->guard->check()) {
 			$captcha = $this->checkCaptcha();

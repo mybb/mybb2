@@ -20,7 +20,7 @@ Breadcrumbs::register('forums.all', function ($breadcrumbs) {
 Breadcrumbs::register('forums.show', function ($breadcrumbs, $forum) {
 
 	if ($forum->parent_id) {
-		$breadcrumbs->parent('forums.show', $forum->parent);
+		$breadcrumbs->parent('forums.show', $forum->getParent());
 	} else {
 		$breadcrumbs->parent('forum.index');
 	}

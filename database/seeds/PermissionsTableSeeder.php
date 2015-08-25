@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Database\Seeder;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -18,33 +19,33 @@ class PermissionsTableSeeder extends Seeder
 		$permissions = [
 			[
 				'permission_name' => 'canEnterACP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
 			],
 			[
 				'permission_name' => 'canEnterMCP',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
 			],
 			[
 				'permission_name' => 'canEnterUCP',
-				'content_name' => null,
-				'default_value' => 1
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canViewForum',
-				'content_name' => 'forum',
-				'default_value' => 1
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canUseConversations',
-				'content_name' => null,
-				'default_value' => 1
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
 			],
 			[
 				'permission_name' => 'canViewAllOnline',
-				'content_name' => null,
-				'default_value' => 0
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::NO
 			],
 			[
 				'permission_name' => 'canModerate',
@@ -85,7 +86,67 @@ class PermissionsTableSeeder extends Seeder
 				'permission_name' => 'canMoveTopics',
 				'content_name' => null,
 				'default_value' => 0
-			]
+			],
+			[
+				'permission_name' => 'canPostTopics',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canReply',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canAddPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canEditPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::NO
+			],
+			[
+				'permission_name' => 'canEditOwnPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canVoteInPolls',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canOnlyViewOwnTopics',
+				'content_name'    => 'forum',
+				'default_value'   => PermissionChecker::NO
+			],
+			[
+				'permission_name' => 'canViewProfiles',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canUseCustomTitle',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canUploadAvatar',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canViewWhosOnline',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
+			[
+				'permission_name' => 'canViewMemberlist',
+				'content_name'    => null,
+				'default_value'   => PermissionChecker::YES
+			],
 		];
 
 		DB::table('permissions')->insert($permissions);

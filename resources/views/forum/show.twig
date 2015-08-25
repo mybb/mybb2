@@ -51,7 +51,9 @@
 				<div class="page-buttons">
 					<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
 					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
-					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+					{% if forum.hasPermission('canPostTopics') %}
+						<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+					{% endif %}
 				</div>
 			</div>
 			<section class="forum topic-list" data-moderation-content="topic">

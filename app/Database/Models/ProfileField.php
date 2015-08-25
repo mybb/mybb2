@@ -17,7 +17,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property string validation_rules
  * @property string name
  */
-class ProfileField extends Model implements HasPresenter
+class ProfileField extends AbstractCachingModel implements HasPresenter
 {
 	/**
 	 * @var string

@@ -6,7 +6,9 @@
 					<div class="main-menu__container">
 						<ul>
 							<li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
-							<li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
+							{% if auth_user.hasPermission('canViewMemberlist') %}
+								<li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
+							{% endif %}
 						</ul>
 					</div>
 				</nav>

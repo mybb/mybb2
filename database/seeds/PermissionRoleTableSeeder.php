@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Database\Seeder;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class PermissionRoleTableSeeder extends Seeder
 {
@@ -17,37 +18,142 @@ class PermissionRoleTableSeeder extends Seeder
 
 		$permissions_role = [
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterACP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
-				'value' => 1
+				'permission_id' => $this->perm('canEnterACP'),
+				'role_id'       => $this->role('admin'),
+				'value'         => PermissionChecker::YES,
+				'content_id'    => null
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
-				'value' => 0
+				'permission_id' => $this->perm('canEnterUCP'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
-				'value' => -1
+				'permission_id' => $this->perm('canEnterUCP'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NEVER,
+				'content_id'    => null
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
-				'value' => 0
+				'permission_id' => $this->perm('canUseConversations'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
-				'value' => -1
+				'permission_id' => $this->perm('canUseConversations'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NEVER,
+				'content_id'    => null
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canViewAllOnline')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
-				'value' => 1
+				'permission_id' => $this->perm('canViewAllOnline'),
+				'role_id'       => $this->role('admin'),
+				'value'         => PermissionChecker::YES,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canPostTopics'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canPostTopics'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canReply'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canReply'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canAddPolls'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canAddPolls'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canEditPolls'),
+				'role_id'       => $this->role('admin'),
+				'value'         => PermissionChecker::YES,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canEditOwnPolls'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canEditOwnPolls'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canVoteInPolls'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canVoteInPolls'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => 0
+			],
+			[
+				'permission_id' => $this->perm('canViewProfiles'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NEVER,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canUseCustomTitle'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canUseCustomTitle'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canUploadAvatar'),
+				'role_id'       => $this->role('guest'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canUploadAvatar'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
+			],
+			[
+				'permission_id' => $this->perm('canViewMemberlist'),
+				'role_id'       => $this->role('banned'),
+				'value'         => PermissionChecker::NO,
+				'content_id'    => null
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canModerate')
@@ -100,5 +206,25 @@ class PermissionRoleTableSeeder extends Seeder
 		];
 
 		DB::table('permission_role')->insert($permissions_role);
+	}
+
+	/**
+	 * @param string $permission
+	 *
+	 * @return int
+	 */
+	private function perm($permission)
+	{
+		return DB::table('permissions')->where('permission_name', '=', $permission)->pluck('id');
+	}
+
+	/**
+	 * @param string $role
+	 *
+	 * @return int
+	 */
+	private function role($role)
+	{
+		return DB::table('roles')->where('role_slug', '=', $role)->pluck('id');
 	}
 }

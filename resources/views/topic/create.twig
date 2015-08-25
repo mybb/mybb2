@@ -37,64 +37,68 @@
 					<ul class="post__controls">
 						<li class="preview"><a href="{{ url_route("topics.create", [forum.id]) }}" onclick="return submitFormAsGet('topiccreate');"><i class="fa fa-edit"></i><span class="text">{{ trans('general.preview') }}</span></a></li>
 						<li class="attach"><a href="#attach"><i class="fa fa-paperclip"></i><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
-						<li class="add-poll"><a href="#add-poll" id="add-poll-button"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a></li>
+						{% if forum.hasPermission('canAddPolls') %}
+							<li class="add-poll"><a href="#add-poll" id="add-poll-button"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a></li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>
 		</section>
-		<section class="form" id="add-poll" style="display: none;">
-			<h3 class="heading heading--major">{{ trans('poll.addPoll') }}</h3>
-			{{ form_hidden('add-poll', input_get('add-poll'), {'id':'add-poll-input'}) }}
-			<div class="form__section">
-				<h2>{{ trans('poll.settings') }}</h2>
+		{% if forum.hasPermission('canAddPolls') %}
+			<section class="form" id="add-poll" style="display: none;">
+				<h3 class="heading heading--major">{{ trans('poll.addPoll') }}</h3>
+				{{ form_hidden('add-poll', input_get('add-poll'), {'id':'add-poll-input'}) }}
+				<div class="form__section">
+					<h2>{{ trans('poll.settings') }}</h2>
 
-				<div class="form__section__container">
-					<div class="form__row">
-						<h3>{{ form_label('question', trans('poll.question')) }}</h3>
-						{{ form_text('question', input_get('question')) }}
-					</div>
-					<div class="form__row">
-						<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
-						<p class="form__description">{{ trans('poll.endAt.desc') }}</p>
-						{{ form_text('endAt', input_get('endAt'), {id: 'poll-end-at'}) }}
-					</div>
-					<div class="form__row">
-						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_public', '1', input_get('is_public')) }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label>
-						</p>
-						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_multiple', '1', input_get('is_multiple'), {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice.desc') }}</label>
-						</p>
-					</div>
-					<div class="form__row" id="poll-maximum-options">
-						<h3>{{ trans('poll.maxOptions') }}</h3>
-						<p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
-						{{ form_text('maxoptions', input_get('maxoptions')) }}
+					<div class="form__section__container">
+						<div class="form__row">
+							<h3>{{ form_label('question', trans('poll.question')) }}</h3>
+							{{ form_text('question', input_get('question')) }}
+						</div>
+						<div class="form__row">
+							<h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+							<p class="form__description">{{ trans('poll.endAt.desc') }}</p>
+							{{ form_text('endAt', input_get('endAt'), {id: 'poll-end-at'}) }}
+						</div>
+						<div class="form__row">
+							<p class="form__checkbox">
+								<label>{{ form_checkbox('is_public', '1', input_get('is_public')) }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label>
+							</p>
+							<p class="form__checkbox">
+								<label>{{ form_checkbox('is_multiple', '1', input_get('is_multiple'), {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice.desc') }}</label>
+							</p>
+						</div>
+						<div class="form__row" id="poll-maximum-options">
+							<h3>{{ trans('poll.maxOptions') }}</h3>
+							<p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
+							{{ form_text('maxoptions', input_get('maxoptions')) }}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="form__section">
-				<h2>{{ trans('poll.pollOptions') }}</h2>
+				<div class="form__section">
+					<h2>{{ trans('poll.pollOptions') }}</h2>
 
-				<div class="form__section__container">
-					{% for i in range(1, max(2, input_old('option')|length, input_get('option')|length)) %}
-						<div class="form__row poll-option">
+					<div class="form__section__container">
+						{% for i in range(1, max(2, input_old('option')|length, input_get('option')|length)) %}
+							<div class="form__row poll-option">
+								<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
+											class="fa fa-times"></i></a>
+								{{ form_text('option['~loop.index~']', input_get('option.'~loop.index)) }}
+							</div>
+						{% endfor %}
+						<a href="#newoption" class="button button--secondary" id="new-option"><i
+									class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
+
+						<div class="form__row hidden" id="option-simple">
 							<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
 										class="fa fa-times"></i></a>
-							{{ form_text('option['~loop.index~']', input_get('option.'~loop.index)) }}
+							{{ form_text('option[-1]', input_get('option[-1]')) }}
 						</div>
-					{% endfor %}
-					<a href="#newoption" class="button button--secondary" id="new-option"><i
-								class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
-
-					<div class="form__row hidden" id="option-simple">
-						<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
-									class="fa fa-times"></i></a>
-						{{ form_text('option[-1]', input_get('option[-1]')) }}
 					</div>
 				</div>
-			</div>
-		</section>
+			</section>
+		{% endif %}
 		{% include 'topic.preview' with {'preview': preview} %}
 		{{ form_hidden('forum_id', forum.id) }}
 		<div class="form__submit">

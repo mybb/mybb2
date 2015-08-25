@@ -15,12 +15,15 @@
 			{{ posts.render|raw }}
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				{% if not topic.has_poll %}
+				{% if not topic.has_poll and topic.forum.hasPermission('canAddPolls') %}
 					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
 				{% endif %}
-                {% if not topic.closed %}
-				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
-                {% endif %}
+				{% if topic.forum.hasPermission('canReply') %}
+					<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+				{% endif %}
+				{% if not topic.closed %}
+					<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+				{% endif %}
 			</div>
 		</div>
 		{% if topic.has_poll %}
@@ -91,13 +94,15 @@
 			{% endfor %}
 			{{ posts.render|raw }}
             {% if not topic.closed %}
-                {% include 'topic.quickreply' with {'topic': topic} %}
+				{% if topic.forum.hasPermission('canReply') %}
+					{% include 'topic.quickreply' with {'topic': topic} %}
+				{% endif %}
             {% else %}
                 <p style="text-align:center"><i class="fa fa-lock"></i> {{ trans('topic.closed') }}</p>
             {% endif %}
 		</section>
         {% if auth_user.hasPermission('canModerate') %}
-		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
+			{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
         {% endif %}
 	</div>
 {% endblock %}

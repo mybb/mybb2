@@ -14,6 +14,7 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use Illuminate\Auth\Guard;
 use MyBB\Core\Database\Models\Poll as PollModel;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
 
 class Poll extends BasePresenter
 {
@@ -35,18 +36,26 @@ class Poll extends BasePresenter
 	protected $cache = [];
 
 	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * @param PollModel                   $resource
 	 * @param PollVoteRepositoryInterface $pollVoteRepository
 	 * @param Guard                       $guard
+	 * @param PermissionChecker           $permissionChecker
 	 */
 	public function __construct(
 		PollModel $resource,
 		PollVoteRepositoryInterface $pollVoteRepository,
-		Guard $guard
+		Guard $guard,
+		PermissionChecker $permissionChecker
 	) {
 		$this->wrappedObject = $resource;
 		$this->pollVoteRepository = $pollVoteRepository;
 		$this->guard = $guard;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -134,11 +143,32 @@ class Poll extends BasePresenter
 					$this->guard->user(),
 					$this->wrappedObject
 				);
-			} else {
-				$this->cache['myVote'] = null;
+			}
+
+			if ($this->cache['myVote'] === null) {
+				$this->cache['myVote'] = false;
 			}
 		}
 
 		return $this->cache['myVote'];
+	}
+
+	public function canEdit()
+	{
+		// User can edit all polls
+		if ($this->permissionChecker->hasPermission('forum', $this->wrappedObject->topic->forum_id, 'canEditPolls')) {
+			return true;
+		}
+
+		// Not the author -> not allowed to edit this poll
+		if ($this->wrappedObject->user_id != $this->guard->user()->id) {
+			return false;
+		}
+
+		return $this->permissionChecker->hasPermission(
+			'forum',
+			$this->wrappedObject->topic->forum_id,
+			'canEditOwnPolls'
+		);
 	}
 }

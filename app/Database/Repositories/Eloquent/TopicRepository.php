@@ -131,8 +131,13 @@ class TopicRepository implements TopicRepositoryInterface
 	public function allForUser($userId = 0)
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+		$notSelfViewableForums = $this->permissionChecker->getNegativeIdsForContent('forum', 'canOnlyViewOwnTopics');
 
-		return $this->topicModel->where('user_id', '=', $userId)->whereNotIn('forum_id', $unviewableForums)->get();
+		return $this->topicModel->where('user_id', '=', $userId)->whereNotIn('forum_id', $unviewableForums)
+			->where(function ($query) use ($notSelfViewableForums) {
+				$query->whereIn('forum_id', $notSelfViewableForums)->orWhere('user_id', '=', $this->guard->user()->id);
+			})
+			->get();
 	}
 
 	/**
@@ -145,8 +150,13 @@ class TopicRepository implements TopicRepositoryInterface
 	public function find($id = 0)
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+		$notSelfViewableForums = $this->permissionChecker->getNegativeIdsForContent('forum', 'canOnlyViewOwnTopics');
 
-		return $this->topicModel->withTrashed()->with(['author'])->whereNotIn('forum_id', $unviewableForums)->find($id);
+		return $this->topicModel->withTrashed()->with(['author'])->whereNotIn('forum_id', $unviewableForums)
+			->where(function ($query) use ($notSelfViewableForums) {
+				$query->whereIn('forum_id', $notSelfViewableForums)->orWhere('user_id', '=', $this->guard->user()->id);
+			})
+			->find($id);
 	}
 
 	/**
@@ -174,12 +184,17 @@ class TopicRepository implements TopicRepositoryInterface
 	public function getNewest($num = 20)
 	{
 		$unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
+		$notSelfViewableForums = $this->permissionChecker->getNegativeIdsForContent('forum', 'canOnlyViewOwnTopics');
 
 		return $this->topicModel->orderBy('last_post_id', 'desc')->with([
 			'lastPost',
 			'forum',
 			'lastPost.author'
-		])->whereNotIn('forum_id', $unviewableForums)->take($num)->get();
+		])->whereNotIn('forum_id', $unviewableForums)
+		->where(function ($query) use ($notSelfViewableForums) {
+			$query->whereIn('forum_id', $notSelfViewableForums)->orWhere('user_id', '=', $this->guard->user()->id);
+		})
+		->take($num)->get();
 	}
 
 	/**
@@ -209,9 +224,14 @@ class TopicRepository implements TopicRepositoryInterface
 
 		$topicsPerPage = $this->settings->get('user.topics_per_page', 20);
 
-		return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
-			->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-			->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
+		$baseQuery = $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
+			->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id);
+
+		if ($this->permissionChecker->hasPermission('forum', $forum->id, 'canOnlyViewOwnTopics')) {
+			$baseQuery->where('topics.user_id', '=', $this->guard->user()->id);
+		}
+
+		return $baseQuery->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
 	}
 
 	/**

@@ -71,8 +71,18 @@ Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostControl
 Route::post('post/quotes/all', ['as' => 'post.viewQuotes', 'uses' => 'PostController@viewQuotes']);
 Route::post('post/quotes', ['as' => 'post.quotes', 'uses' => 'PostController@postQuotes']);
 
-Route::get('members', ['as' => 'members', 'uses' => 'MemberController@memberlist']);
-Route::get('members/online', ['as' => 'members.online', 'uses' => 'MemberController@online']);
+Route::get('members', [
+	'as' => 'members',
+	'uses' => 'MemberController@memberlist',
+	'middleware' => 'checkaccess',
+	'permissions' => 'canViewMemberlist'
+]);
+Route::get('members/online', [
+	'as' => 'members.online',
+	'uses' => 'MemberController@online',
+	'middleware' => 'checkaccess',
+	'permissions' => 'canViewWhosOnline'
+]);
 
 Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
 Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);
@@ -161,10 +171,16 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 		'/password/confirm/{token}',
 		['as' => 'account.password.confirm', 'uses' => 'AccountController@confirmPassword']
 	);
-	Route::get('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@getAvatar']);
-	Route::post('/avatar', ['as' => 'account.avatar', 'uses' => 'AccountController@postAvatar']);
-	Route::post('/avatar/crop', ['as' => 'account.avatar.crop', 'uses' => 'AccountController@postAvatarCrop']);
-	Route::get('/avatar/remove', ['as' => 'account.avatar.remove', 'uses' => 'AccountController@removeAvatar']);
+	Route::group([
+		'prefix' => 'avatar',
+		'middleware' => 'checkaccess',
+		'permissions' => 'canUploadAvatar'
+	], function () {
+		Route::get('/', ['as' => 'account.avatar', 'uses' => 'AccountController@getAvatar']);
+		Route::post('/', ['as' => 'account.avatar', 'uses' => 'AccountController@postAvatar']);
+		Route::post('/crop', ['as' => 'account.avatar.crop', 'uses' => 'AccountController@postAvatarCrop']);
+		Route::get('/remove', ['as' => 'account.avatar.remove', 'uses' => 'AccountController@removeAvatar']);
+	});
 	Route::get('/notifications', ['as' => 'account.notifications', 'uses' => 'AccountController@getNotifications']);
 	Route::get('/following', ['as' => 'account.following', 'uses' => 'AccountController@getFollowing']);
 	Route::get('/buddies', ['as' => 'account.buddies', 'uses' => 'AccountController@getBuddies']);
@@ -177,7 +193,7 @@ Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions
 
 Route::group([
 	'prefix' => 'conversations',
-	'middleware' => ['checkaccess','checksetting'],
+	'middleware' => ['checkaccess', 'checksetting'],
 	'permissions' => 'canUseConversations',
 	'setting' => 'conversations.enabled'
 ], function () {

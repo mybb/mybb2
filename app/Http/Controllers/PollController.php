@@ -26,6 +26,8 @@ use MyBB\Core\Exceptions\PollNotFoundException;
 use MyBB\Core\Exceptions\PollNoUndoException;
 use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
+use MyBB\Core\Permissions\PermissionChecker;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PollController extends AbstractController
@@ -61,6 +63,11 @@ class PollController extends AbstractController
 	private $breadcrumbs;
 
 	/**
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
 	 * @param TopicRepositoryInterface    $topicRepository    Topic repository instance, used to fetch topic details.
 	 * @param PollRepositoryInterface     $pollRepository     Poll repository instance, used to fetch poll details.
 	 * @param PollVoteRepositoryInterface $pollVoteRepository PollVote repository instance, used to fetch poll vote
@@ -68,6 +75,7 @@ class PollController extends AbstractController
 	 * @param ForumRepositoryInterface    $forumRepository    Forum repository interface, used to fetch forum details.
 	 * @param Guard                       $guard              Guard implementation
 	 * @param Breadcrumbs                 $breadcrumbs
+	 * @param PermissionChecker           $permissionChecker
 	 */
 	public function __construct(
 		TopicRepositoryInterface $topicRepository,
@@ -75,7 +83,8 @@ class PollController extends AbstractController
 		PollVoteRepositoryInterface $pollVoteRepository,
 		ForumRepositoryInterface $forumRepository,
 		Guard $guard,
-		Breadcrumbs $breadcrumbs
+		Breadcrumbs $breadcrumbs,
+		PermissionChecker $permissionChecker
 	) {
 		$this->topicRepository = $topicRepository;
 		$this->pollRepository = $pollRepository;
@@ -83,6 +92,7 @@ class PollController extends AbstractController
 		$this->forumRepository = $forumRepository;
 		$this->guard = $guard;
 		$this->breadcrumbs = $breadcrumbs;
+		$this->permissionChecker = $permissionChecker;
 	}
 
 	/**
@@ -143,6 +153,10 @@ class PollController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('polls.create', $topic);
 
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canAddPolls')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		return view('polls.create', compact('topic'));
 	}
 
@@ -162,6 +176,10 @@ class PollController extends AbstractController
 		}
 
 		$this->breadcrumbs->setCurrentRoute('polls.create', $topic);
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canAddPolls')) {
+			throw new AccessDeniedHttpException;
+		}
 
 		$poll = [
 			'topic_id' => $id,
@@ -207,6 +225,10 @@ class PollController extends AbstractController
 
 		if (!$topic->has_poll) {
 			throw new PollNotFoundException;
+		}
+
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canVoteInPolls')) {
+			throw new AccessDeniedHttpException;
 		}
 
 		$poll = $topic->poll;
@@ -275,6 +297,10 @@ class PollController extends AbstractController
 			throw new PollNotFoundException;
 		}
 
+		if (!$this->permissionChecker->hasPermission('forum', $topic->forum_id, 'canVoteInPolls')) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$poll = $topic->poll;
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
@@ -327,6 +353,13 @@ class PollController extends AbstractController
 
 		$poll = $topic->poll;
 
+		/** @var \MyBB\Core\Presenters\Poll $decoratedPoll */
+		$decoratedPoll = app()->make('MyBB\\Core\\Presenters\\Poll', [$poll]);
+
+		if (!$decoratedPoll->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
+
 		$this->pollRepository->remove($poll);
 
 		$topic->has_poll = false;
@@ -356,6 +389,13 @@ class PollController extends AbstractController
 
 		$this->breadcrumbs->setCurrentRoute('polls.edit', $topic);
 
+		/** @var \MyBB\Core\Presenters\Poll $decoratedPoll */
+		$decoratedPoll = app()->make('MyBB\\Core\\Presenters\\Poll', [$poll]);
+
+		if (!$decoratedPoll->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
+
 		return view('polls.edit', compact('topic', 'poll'));
 	}
 
@@ -378,8 +418,12 @@ class PollController extends AbstractController
 		}
 
 		$poll = $topic->poll;
+		/** @var \MyBB\Core\Presenters\Poll $pollPresenter */
 		$pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
 
+		if (!$pollPresenter->canEdit()) {
+			throw new AccessDeniedHttpException;
+		}
 
 		$options = [];
 		$i = 0;

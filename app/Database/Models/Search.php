@@ -10,7 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Search extends Model
+class Search extends AbstractCachingModel
 {
 	// @codingStandardsIgnoreStart
 

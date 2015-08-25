@@ -152,12 +152,24 @@ class User extends BasePresenter
 	/**
 	 * @return string
 	 */
+	public function usertitle()
+	{
+		if (!$this->hasPermission('canUseCustomTitle')) {
+			return '';
+		}
+
+		return $this->wrappedObject->usertitle;
+	}
+
+	/**
+	 * @return string
+	 */
 	public function avatar()
 	{
 		$avatar = $this->wrappedObject->avatar;
 
 		// Empty? Default avatar
-		if (empty($avatar)) {
+		if (empty($avatar) || !$this->hasPermission('canUploadAvatar')) {
 			return asset('images/avatar.png');
 		} // Link? Nice!
 		elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {
@@ -197,7 +209,7 @@ class User extends BasePresenter
 	 */
 	public function hasPermission($permission)
 	{
-		return $this->permissionChecker->hasPermission('user', null, $permission);
+		return $this->permissionChecker->hasPermission('user', null, $permission, $this->wrappedObject);
 	}
 
 	/**
@@ -226,8 +238,13 @@ class User extends BasePresenter
 			return false;
 		}
 
+		$lastVisit = $this->wrappedObject->last_visit;
+		if (is_string($lastVisit)) {
+			$lastVisit = new \DateTime($lastVisit);
+		}
+
 		// This user isn't online
-		if (new \DateTime($this->wrappedObject->last_visit) < new \DateTime("{$minutes} minutes ago")) {
+		if ($lastVisit < new \DateTime("{$minutes} minutes ago")) {
 			return false;
 		}
 

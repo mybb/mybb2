@@ -12,9 +12,11 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
+use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Moderation\ModerationRegistry;
 
 class Forum extends BasePresenter
@@ -30,14 +32,33 @@ class Forum extends BasePresenter
 	private $app;
 
 	/**
-	 * @param ForumModel         $resource    The forum being wrapped by this presenter.
+	 * @var PermissionChecker
+	 */
+	private $permissionChecker;
+
+	/**
+	 * @var Guard
+	 */
+	private $guard;
+
+	/**
+	 * @param ForumModel         $resource          The forum being wrapped by this presenter.
 	 * @param Application        $app
+	 * @param PermissionChecker  $permissionChecker
+	 * @param Guard              $guard
 	 * @param ModerationRegistry $moderations
 	 */
-	public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
-	{
+	public function __construct(
+		ForumModel $resource,
+		Application $app,
+		PermissionChecker $permissionChecker,
+		Guard $guard,
+		ModerationRegistry $moderations
+	) {
 		$this->wrappedObject = $resource;
 		$this->app = $app;
+		$this->permissionChecker = $permissionChecker;
+		$this->guard = $guard;
 		$this->moderations = $moderations;
 	}
 
@@ -68,7 +89,7 @@ class Forum extends BasePresenter
 	 */
 	public function hasLastPost()
 	{
-		if ($this->wrappedObject->lastPost == null) {
+		if ($this->lastPost() == null) {
 			return false;
 		}
 
@@ -80,7 +101,7 @@ class Forum extends BasePresenter
 	 */
 	public function moderations()
 	{
-		$moderations = $this->moderations->getForContent(new Topic());
+		$moderations = $this->moderations->getForContent(new TopicModel());
 		$decorated = [];
 		$presenter = app()->make('autopresenter');
 
@@ -89,5 +110,32 @@ class Forum extends BasePresenter
 		}
 
 		return $decorated;
+	}
+
+	/**
+	 * @return Post|null
+	 */
+	public function lastPost()
+	{
+		if (!$this->permissionChecker->hasPermission('forum', $this->wrappedObject->id, 'canOnlyViewOwnTopics')) {
+			return $this->wrappedObject->lastPost;
+		}
+
+		if ($this->wrappedObject->lastPost->topic->user_id == $this->guard->user()->id) {
+			return $this->wrappedObject->lastPost;
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param string $permission
+	 * @param User   $user
+	 *
+	 * @return bool
+	 */
+	public function hasPermission($permission, $user = null)
+	{
+		return $this->permissionChecker->hasPermission('forum', $this->wrappedObject->id, $permission, $user);
 	}
 }

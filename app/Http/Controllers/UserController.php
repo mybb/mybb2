@@ -13,6 +13,8 @@ use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Exceptions\UserNotFoundException;
+use MyBB\Core\Permissions\PermissionChecker;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class UserController extends AbstractController
 {
@@ -43,6 +45,7 @@ class UserController extends AbstractController
 	 * @param int                                  $id
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
 	 * @param Breadcrumbs                          $breadcrumbs
+	 * @param PermissionChecker                    $permissionChecker
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -50,7 +53,8 @@ class UserController extends AbstractController
 		$slug,
 		$id,
 		ProfileFieldGroupRepositoryInterface $profileFieldGroups,
-		Breadcrumbs $breadcrumbs
+		Breadcrumbs $breadcrumbs,
+		PermissionChecker $permissionChecker
 	) {
 		$user = $this->users->find($id);
 
@@ -58,9 +62,13 @@ class UserController extends AbstractController
 			throw new UserNotFoundException;
 		}
 
-		$groups = $profileFieldGroups->getAll();
-
 		$breadcrumbs->setCurrentRoute('user.profile', $user);
+
+		if (!$permissionChecker->hasPermission('user', null, 'canViewProfiles')) {
+			throw new AccessDeniedHttpException;
+		}
+
+		$groups = $profileFieldGroups->getAll();
 
 		return view('user.profile', [
 			'user' => $user,
