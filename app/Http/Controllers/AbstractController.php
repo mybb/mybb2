@@ -18,7 +18,6 @@ use View;
 
 abstract class AbstractController extends BaseController
 {
-
 	use DispatchesCommands;
 	use ValidatesRequests {
 		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
@@ -48,7 +47,7 @@ abstract class AbstractController extends BaseController
 	 */
 	protected function checkCaptcha($redirect = true)
 	{
-		$valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
+		$valid = app('MyBB\Core\Captcha\CaptchaFactory')->validate();
 
 		if ($valid) {
 			return true;

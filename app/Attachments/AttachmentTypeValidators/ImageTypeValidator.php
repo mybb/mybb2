@@ -22,6 +22,8 @@ class ImageTypeValidator implements AttachmentTypeValidator
 	/**
 	 * Validate a given file to ensure it's a valid type.
 	 *
+	 * This validator checks if a file is a valid image using `exif_imagetype`.
+	 *
 	 * @param string $filePath The path to the uploaded file to validate.
 	 * @param AttachmentType $type The attachment type mapped to the file.
 	 * @param User $uploadingUser The user uploading the attachment.
