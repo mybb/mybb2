@@ -14,7 +14,7 @@ use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Moderation\ModerationRegistry;
 
 class Forum extends BasePresenter
@@ -80,7 +80,7 @@ class Forum extends BasePresenter
 	 */
 	public function moderations()
 	{
-		$moderations = $this->moderations->getForContent(new Topic());
+		$moderations = $this->moderations->getForContent(new TopicModel());
 		$decorated = [];
 		$presenter = app()->make('autopresenter');
 

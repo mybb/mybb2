@@ -26,9 +26,9 @@
 		{% if topic.has_poll %}
 			{% include "topic.polls" with [poll, topic] %}
 		{% endif %}
-		<section class="topic" data-moderation-content="post">
+		<section class="topic" data-moderation-content="post" data-moderation-source-type="topic" data-moderation-source-id="{{ topic.id }}">
 			{% for post in posts %}
-				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
+				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
 						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>

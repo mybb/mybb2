@@ -32,5 +32,20 @@ class ModerationServiceProvider extends ServiceProvider
 				$app->make('MyBB\Core\Moderation\Moderations\MoveTopic')
 			]);
 		});
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ModerationLogRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface',
+			'MyBB\Core\Database\Repositories\Eloquent\ModerationLogSubjectRepository'
+		);
+
+		$this->app->bind(
+			'MyBB\Core\Moderation\Logger\ModerationLoggerInterface',
+			'MyBB\Core\Moderation\Logger\DatabaseLogger'
+		);
 	}
 }

@@ -1008,10 +1008,13 @@ function closeMenu(e) {
 
             MyBB.Spinner.add();
 
+            var moderation_content = $('[data-moderation-content]').first();
             $.post('/moderate', {
                 moderation_name: $(e.currentTarget).attr('data-moderate'),
-                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
-                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+                moderation_content: moderation_content.attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds(),
+                moderation_source_type: moderation_content.attr('data-moderation-source-type'),
+                moderation_source_id: moderation_content.attr('data-moderation-source-id')
             }, function (response) {
                 document.location.reload();
             });
@@ -1023,10 +1026,13 @@ function closeMenu(e) {
 
             MyBB.Spinner.add();
 
+            var moderation_content = $('[data-moderation-content]').first();
             $.post('/moderate/reverse', {
                 moderation_name: $(e.currentTarget).attr('data-moderate-reverse'),
-                moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
-                moderation_ids: window.MyBB.Moderation.getSelectedIds()
+                moderation_content: moderation_content.attr('data-moderation-content'),
+                moderation_ids: window.MyBB.Moderation.getSelectedIds(),
+                moderation_source_type: moderation_content.attr('data-moderation-source-type'),
+                moderation_source_id: moderation_content.attr('data-moderation-source-id')
             }, function (response) {
                 document.location.reload();
             });
@@ -1105,9 +1111,12 @@ function closeMenu(e) {
     // grab the current selection and inject it into the modal so we can submit through a normal form
     window.MyBB.Moderation.injectModalParams = function injectFormData(element)
     {
+        var moderation_content = $('[data-moderation-content]').first();
         $(element).attr('data-modal-params', JSON.stringify({
-            moderation_content: $('[data-moderation-content]').first().attr('data-moderation-content'),
-            moderation_ids: window.MyBB.Moderation.getSelectedIds()
+            moderation_content: moderation_content.attr('data-moderation-content'),
+            moderation_ids: window.MyBB.Moderation.getSelectedIds(),
+            moderation_source_type: moderation_content.attr('data-moderation-source-type'),
+            moderation_source_id: moderation_content.attr('data-moderation-source-id')
         }));
     };
 

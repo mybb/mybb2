@@ -10,6 +10,7 @@
 
 namespace MyBB\Core\Database\Models;
 
+use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
@@ -19,7 +20,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 /**
  * @property int id
  */
-class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface
+class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface, ContentInterface
 {
 	use InheritPermissionableTrait;
 
@@ -143,5 +144,37 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	public function open()
 	{
 		return $this->update(['closed' => 0]);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'forum';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return route('forums.show', ['id' => $this->id, 'slug' => $this->slug]);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
 	}
 }

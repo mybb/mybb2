@@ -12,9 +12,11 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Moderation\DestinedInterface;
 use MyBB\Core\Moderation\ModerationInterface;
+use MyBB\Core\Moderation\SourceableInterface;
 
-class MovePost implements ModerationInterface, HasPresenter
+class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, SourceableInterface
 {
 	/**
 	 * @var TopicRepositoryInterface
@@ -105,5 +107,21 @@ class MovePost implements ModerationInterface, HasPresenter
 	public function getPermissionName()
 	{
 		return 'canMovePosts';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDestinationType()
+	{
+		return 'topic';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getDestinationKey()
+	{
+		return 'topic_id';
 	}
 }
