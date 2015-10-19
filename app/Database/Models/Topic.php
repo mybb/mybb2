@@ -13,6 +13,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
 
@@ -21,7 +22,7 @@ use MyBB\Core\Moderation\Moderations\CloseableInterface;
  * @property Forum forum
  * @property int forum_id
  */
-class Topic extends AbstractCachingModel implements HasPresenter, ApprovableInterface, CloseableInterface
+class Topic extends AbstractCachingModel implements HasPresenter, ApprovableInterface, CloseableInterface, ContentInterface
 {
 	use SoftDeletes;
 
@@ -195,5 +196,37 @@ class Topic extends AbstractCachingModel implements HasPresenter, ApprovableInte
 	public function open()
 	{
 		return $this->update(['closed' => 0]);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'topic';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return route('topics.show', ['id' => $this->id, 'slug' => $this->slug]);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return $this->title;
 	}
 }

@@ -8,11 +8,9 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\Approve;
 
-class ApprovePresenter extends BasePresenter implements ReversibleModerationPresenterInterface
+class ApprovePresenter extends AbstractReversibleModerationPresenter implements ReversibleModerationPresenterInterface
 {
 	/**
 	 * @return Approve
@@ -20,14 +18,6 @@ class ApprovePresenter extends BasePresenter implements ReversibleModerationPres
 	public function getWrappedObject()
 	{
 		return parent::getWrappedObject();
-	}
-
-	/**
-	 * @return RenderableInterface[]
-	 */
-	public function fields()
-	{
-		return [];
 	}
 
 	/**
@@ -49,24 +39,16 @@ class ApprovePresenter extends BasePresenter implements ReversibleModerationPres
 	/**
 	 * @return string
 	 */
-	public function key()
+	protected function getDescriptionView()
 	{
-		return $this->getWrappedObject()->getKey();
+		return 'partials.moderation.logs.approve';
 	}
 
 	/**
 	 * @return string
 	 */
-	public function name()
+	protected function getReverseDescriptionView()
 	{
-		return $this->getWrappedObject()->getName();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function reverseName()
-	{
-		return $this->getWrappedObject()->getReverseName();
+		return 'partials.moderation.logs.unapprove';
 	}
 }

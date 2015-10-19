@@ -13,6 +13,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 
@@ -22,7 +23,7 @@ use MyBB\Core\Moderation\Moderations\ApprovableInterface;
  * @property int id
  * @property User author
  */
-class Post extends AbstractCachingModel implements HasPresenter, ApprovableInterface
+class Post extends AbstractCachingModel implements HasPresenter, ApprovableInterface, ContentInterface
 {
 	use SoftDeletes;
 	use LikeableTrait;
@@ -127,5 +128,37 @@ class Post extends AbstractCachingModel implements HasPresenter, ApprovableInter
 		}
 
 		return $result;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return 'post';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUrl()
+	{
+		return route('posts.show', ['id' => $this->id]);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTitle()
+	{
+		return null;
 	}
 }

@@ -2,12 +2,11 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Form\Field;
 use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\MovePost;
 
-class MovePostPresenter extends BasePresenter implements ModerationPresenterInterface
+class MovePostPresenter extends AbstractModerationPresenter implements ModerationPresenterInterface
 {
 	/**
 	 * @return MovePost
@@ -20,25 +19,9 @@ class MovePostPresenter extends BasePresenter implements ModerationPresenterInte
 	/**
 	 * @return string
 	 */
-	public function key()
-	{
-		return $this->getWrappedObject()->getKey();
-	}
-
-	/**
-	 * @return string
-	 */
 	public function icon()
 	{
 		return 'fa-arrow-right';
-	}
-
-	/**
-	 * @return string
-	 */
-	public function name()
-	{
-		return $this->getWrappedObject()->getName();
 	}
 
 	/**
@@ -54,5 +37,13 @@ class MovePostPresenter extends BasePresenter implements ModerationPresenterInte
 				trans('moderation.move_post_topic_id_description')
 			))->setValidationRules('integer|exists:topics,id'),
 		];
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getDescriptionView()
+	{
+		return 'partials.moderation.logs.move';
 	}
 }

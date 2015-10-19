@@ -2291,7 +2291,7 @@ img.avatar {
     border-color: #ff7500; }
   .button.button--secondary, a.button.button--secondary {
     border: 1px solid #dfdfdf;
-    background: none;
+    background: #fff;
     color: #007fd0; }
     .button.button--secondary:hover, a.button.button--secondary:hover {
       color: #ff7500; }

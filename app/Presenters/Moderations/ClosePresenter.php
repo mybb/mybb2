@@ -8,11 +8,9 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\Close;
 
-class ClosePresenter extends BasePresenter implements ReversibleModerationPresenterInterface
+class ClosePresenter extends AbstractReversibleModerationPresenter implements ReversibleModerationPresenterInterface
 {
 	/**
 	 * @return Close
@@ -20,14 +18,6 @@ class ClosePresenter extends BasePresenter implements ReversibleModerationPresen
 	public function getWrappedObject()
 	{
 		return parent::getWrappedObject();
-	}
-
-	/**
-	 * @return RenderableInterface[]
-	 */
-	public function fields()
-	{
-		return [];
 	}
 
 	/**
@@ -41,22 +31,6 @@ class ClosePresenter extends BasePresenter implements ReversibleModerationPresen
 	/**
 	 * @return string
 	 */
-	public function key()
-	{
-		return $this->getWrappedObject()->getKey();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function name()
-	{
-		return $this->getWrappedObject()->getName();
-	}
-
-	/**
-	 * @return string
-	 */
 	public function reverseIcon()
 	{
 		return 'fa-unlock';
@@ -65,8 +39,16 @@ class ClosePresenter extends BasePresenter implements ReversibleModerationPresen
 	/**
 	 * @return string
 	 */
-	public function reverseName()
+	protected function getDescriptionView()
 	{
-		return $this->getWrappedObject()->getReverseName();
+		return 'partials.moderation.logs.close';
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getReverseDescriptionView()
+	{
+		return 'partials.moderation.logs.open';
 	}
 }

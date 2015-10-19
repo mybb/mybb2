@@ -102,4 +102,12 @@ class Post extends BasePresenter
 
 		return false;
 	}
+
+	/**
+	 * @return Topic
+	 */
+	public function topic()
+	{
+		return $this->getWrappedObject()->topic;
+	}
 }

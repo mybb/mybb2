@@ -8,11 +8,9 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Form\RenderableInterface;
 use MyBB\Core\Moderation\Moderations\MergePosts;
 
-class MergePostsPresenter extends BasePresenter implements ModerationPresenterInterface
+class MergePostsPresenter extends AbstractModerationPresenter implements ModerationPresenterInterface
 {
 	/**
 	 * @return MergePosts
@@ -20,14 +18,6 @@ class MergePostsPresenter extends BasePresenter implements ModerationPresenterIn
 	public function getWrappedObject()
 	{
 		return parent::getWrappedObject();
-	}
-
-	/**
-	 * @return RenderableInterface[]
-	 */
-	public function fields()
-	{
-		return [];
 	}
 
 	/**
@@ -41,16 +31,8 @@ class MergePostsPresenter extends BasePresenter implements ModerationPresenterIn
 	/**
 	 * @return string
 	 */
-	public function key()
+	protected function getDescriptionView()
 	{
-		return $this->getWrappedObject()->getKey();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function name()
-	{
-		return $this->getWrappedObject()->getName();
+		return 'partials.moderation.logs.merge';
 	}
 }

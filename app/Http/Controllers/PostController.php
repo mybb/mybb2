@@ -60,6 +60,27 @@ class PostController extends AbstractController
 	}
 
 	/**
+	 * @param int $id
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function show($id)
+	{
+		$post = $this->postsRepository->find($id);
+
+		if ($post) {
+			$topic = $post->topic;
+			return redirect()->route('topics.showPost', [
+				'slug' => $topic->slug,
+				'id' => $topic->id,
+				'postId' => $post->id,
+			]);
+		}
+
+		abort(404);
+	}
+
+	/**
 	 * Handler for POST requests to add a like for a post.
 	 *
 	 * @param LikePostRequest $request

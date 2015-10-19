@@ -87,4 +87,20 @@ class Topic extends BasePresenter
 
 		return $decorated;
 	}
+
+	/**
+	 * @return Post
+	 */
+	public function lastPost()
+	{
+		return $this->getWrappedObject()->lastPost;
+	}
+
+	/**
+	 * @return Forum
+	 */
+	public function forum()
+	{
+		return $this->getWrappedObject()->forum;
+	}
 }

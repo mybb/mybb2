@@ -65,6 +65,7 @@ Route::get('topic/{topicSlug}.{topicId}/poll/remove', ['as' => 'polls.remove', '
 Route::get('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
 Route::post('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']);
 
+Route::get('post/{id}', ['as' => 'posts.show', 'uses' => 'PostController@show']);
 Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
 Route::get('post/{post_id}/likes', ['as' => 'post.likes', 'uses' => 'PostController@getPostLikes']);
 
@@ -145,6 +146,17 @@ Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaControll
 Route::post('/moderate', ['as' => 'moderate', 'uses' => 'ModerationController@moderate']);
 Route::post('/moderate/reverse', ['as' => 'moderate.reverse', 'uses' => 'ModerationController@reverse']);
 Route::get('/moderate/form/{moderationName}', ['as' => 'moderate.form', 'uses' => 'ModerationController@form']);
+
+Route::group(['prefix' => 'moderation'], function () {
+	Route::group([
+		'prefix' => 'control-panel',
+		['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP']
+	], function () {
+			Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
+			Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
+			Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
+	});
+});
 
 Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
 	Route::get('/', ['as' => 'account.index', 'uses' => 'AccountController@index']);

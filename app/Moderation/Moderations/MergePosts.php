@@ -12,8 +12,9 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Moderation\ArrayModerationInterface;
+use MyBB\Core\Moderation\SourceableInterface;
 
-class MergePosts implements ArrayModerationInterface, HasPresenter
+class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableInterface
 {
 	/**
 	 * @var PostRepositoryInterface
