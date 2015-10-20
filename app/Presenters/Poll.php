@@ -44,7 +44,7 @@ class Poll extends BasePresenter
 		PollVoteRepositoryInterface $pollVoteRepository,
 		Guard $guard
 	) {
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->pollVoteRepository = $pollVoteRepository;
 		$this->guard = $guard;
 	}

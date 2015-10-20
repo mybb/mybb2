@@ -15,6 +15,7 @@ use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Moderation\DestinedInterface;
 use MyBB\Core\Moderation\ModerationInterface;
 use MyBB\Core\Moderation\SourceableInterface;
+use MyBB\Core\Presenters\Moderations\MoveTopicPresenter;
 
 class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface, SourceableInterface
 {
@@ -98,7 +99,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\MoveTopicPresenter';
+		return MoveTopicPresenter::class;
 	}
 
 	/**

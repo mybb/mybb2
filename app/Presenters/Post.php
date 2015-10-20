@@ -38,7 +38,7 @@ class Post extends BasePresenter
 	 */
 	public function __construct(PostModel $resource, Guard $guard, Application $app)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->guard = $guard;
 		$this->app = $app;
 	}

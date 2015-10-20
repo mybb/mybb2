@@ -11,6 +11,7 @@ namespace MyBB\Core\Moderation\Moderations;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Moderation\ModerationInterface;
+use MyBB\Core\Presenters\Moderations\DeleteTopicPresenter;
 use MyBB\Core\Services\TopicDeleter;
 
 class DeleteTopic implements ModerationInterface, HasPresenter
@@ -93,7 +94,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\DeleteTopicPresenter';
+		return DeleteTopicPresenter::class;
 	}
 
 	/**

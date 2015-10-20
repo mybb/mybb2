@@ -13,6 +13,7 @@ use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Moderation\ArrayModerationInterface;
 use MyBB\Core\Moderation\SourceableInterface;
+use MyBB\Core\Presenters\Moderations\MergePostsPresenter;
 
 class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableInterface
 {
@@ -98,7 +99,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\MergePostsPresenter';
+		return MergePostsPresenter::class;
 	}
 
 	/**

@@ -38,7 +38,7 @@ class Topic extends BasePresenter
 	 */
 	public function __construct(TopicModel $resource, ModerationRegistry $moderations, Application $app)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->moderations = $moderations;
 		$this->app = $app;
 	}

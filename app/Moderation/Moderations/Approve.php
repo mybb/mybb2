@@ -11,6 +11,7 @@ namespace MyBB\Core\Moderation\Moderations;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Moderation\ReversibleModerationInterface;
 use MyBB\Core\Moderation\SourceableInterface;
+use MyBB\Core\Presenters\Moderations\ApprovePresenter;
 
 class Approve implements ReversibleModerationInterface, HasPresenter, SourceableInterface
 {
@@ -112,7 +113,7 @@ class Approve implements ReversibleModerationInterface, HasPresenter, Sourceable
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\ApprovePresenter';
+		return ApprovePresenter::class;
 	}
 
 	/**

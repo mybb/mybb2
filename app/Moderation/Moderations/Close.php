@@ -11,6 +11,7 @@ namespace MyBB\Core\Moderation\Moderations;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Moderation\ReversibleModerationInterface;
 use MyBB\Core\Moderation\SourceableInterface;
+use MyBB\Core\Presenters\Moderations\ClosePresenter;
 
 class Close implements ReversibleModerationInterface, HasPresenter, SourceableInterface
 {
@@ -112,7 +113,7 @@ class Close implements ReversibleModerationInterface, HasPresenter, SourceableIn
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\ClosePresenter';
+		return ClosePresenter::class;
 	}
 
 	/**
