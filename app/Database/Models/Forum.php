@@ -90,11 +90,11 @@ class Forum extends AbstractCachingModel implements HasPresenter, InheritPermiss
 	 *
 	 * @return \Illuminate\Support\Collection|static|null
 	 */
-	public static function find($id, $columns = array('*'))
+/*	public static function find($id, $columns = array('*'))
 	{
 		return static::query()->find($id, $columns);
 	}
-
+*/
 	/**
 	 * A forum contains many threads.
 	 *
