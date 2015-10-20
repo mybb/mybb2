@@ -8,9 +8,7 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ModerationLogSubject extends Model
+class ModerationLogSubject extends AbstractCachingModel
 {
 	/**
 	 * @var string

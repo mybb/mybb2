@@ -8,18 +8,17 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
- * @property int id
- * @property string moderation
+ * @property int     id
+ * @property string  moderation
  * @property string  destination_content_type
- * @property int   destination_content_id
- * @property string source_content_type
- * @property int  source_content_id
+ * @property int     destination_content_id
+ * @property string  source_content_type
+ * @property int     source_content_id
  */
-class ModerationLog extends Model implements HasPresenter
+class ModerationLog extends AbstractCachingModel implements HasPresenter
 {
 	/**
 	 * @var string
