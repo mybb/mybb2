@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ef7fc9b1f52b14f6004fb80afd199d33",
+    "hash": "e0c608559fa1bb36d98bd7b77112048d",
     "content-hash": "99edecc9b52b0b860bfe56d5924ae16b",
     "packages": [
         {
@@ -269,16 +269,16 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "v1.4.2",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "8c434000f420ade76a07c64cbe08ca47e5c101ca"
+                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/8c434000f420ade76a07c64cbe08ca47e5c101ca",
-                "reference": "8c434000f420ade76a07c64cbe08ca47e5c101ca",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
+                "reference": "2b9cec5a5e722010cbebc91713d4c11eaa064d5e",
                 "shasum": ""
             },
             "require": {
@@ -299,8 +299,8 @@
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Doctrine\\Common\\Cache\\": "lib/"
+                "psr-4": {
+                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -335,7 +335,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-08-31 12:36:41"
+            "time": "2015-11-02 18:35:48"
         },
         {
             "name": "doctrine/collections",
@@ -967,16 +967,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.21",
+            "version": "v5.1.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "21a3f2023c2f59dcd5dc3a0ec5d8ab4c9c2f52a9"
+                "reference": "a4ea877d2bb6a68796b244a741594968796c1c4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/21a3f2023c2f59dcd5dc3a0ec5d8ab4c9c2f52a9",
-                "reference": "21a3f2023c2f59dcd5dc3a0ec5d8ab4c9c2f52a9",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/a4ea877d2bb6a68796b244a741594968796c1c4e",
+                "reference": "a4ea877d2bb6a68796b244a741594968796c1c4e",
                 "shasum": ""
             },
             "require": {
@@ -1092,7 +1092,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-10-28 03:48:55"
+            "time": "2015-11-03 16:32:33"
         },
         {
             "name": "laravelcollective/html",
@@ -2769,16 +2769,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.22.3",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540"
+                "reference": "5868cd822fd6cf626d5f805439575f9c323cee2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ebfc36b7e77b0c1175afe30459cf943010245540",
-                "reference": "ebfc36b7e77b0c1175afe30459cf943010245540",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/5868cd822fd6cf626d5f805439575f9c323cee2a",
+                "reference": "5868cd822fd6cf626d5f805439575f9c323cee2a",
                 "shasum": ""
             },
             "require": {
@@ -2791,7 +2791,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.22-dev"
+                    "dev-master": "1.23-dev"
                 }
             },
             "autoload": {
@@ -2826,7 +2826,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-10-13 07:07:02"
+            "time": "2015-10-29 23:29:01"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -2882,12 +2882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "3cc1de3b6c1b0d8a8972e9a2c2a26d74bb1706fb"
+                "reference": "8a1a99c37e9d5995f4ba14c5289f2e547ad7ba49"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/3cc1de3b6c1b0d8a8972e9a2c2a26d74bb1706fb",
-                "reference": "3cc1de3b6c1b0d8a8972e9a2c2a26d74bb1706fb",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/8a1a99c37e9d5995f4ba14c5289f2e547ad7ba49",
+                "reference": "8a1a99c37e9d5995f4ba14c5289f2e547ad7ba49",
                 "shasum": ""
             },
             "require": {
@@ -2928,7 +2928,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2015-10-26 09:10:50"
+            "time": "2015-10-29 12:07:22"
         },
         {
             "name": "doctrine/instantiator",
@@ -2990,12 +2990,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "955c9000f7460a686cf2a861780458a175d268a0"
+                "reference": "9fab551f0b821ef067dfb02d7a619cb4ace2da80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/955c9000f7460a686cf2a861780458a175d268a0",
-                "reference": "955c9000f7460a686cf2a861780458a175d268a0",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/9fab551f0b821ef067dfb02d7a619cb4ace2da80",
+                "reference": "9fab551f0b821ef067dfb02d7a619cb4ace2da80",
                 "shasum": ""
             },
             "require": {
@@ -3041,7 +3041,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2015-10-27 19:58:26"
+            "time": "2015-11-03 19:15:40"
         },
         {
             "name": "hamcrest/hamcrest-php",
