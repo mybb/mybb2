@@ -449,32 +449,40 @@ h1.title {
 }
 
 footer {
-	border-top: 1px solid $border-1;
-	background: $background-1;
-	border-bottom: 1px solid $border-1;
-	margin-bottom: 30px;
 
-	h3 {
-		float: none;
-		font-size: 0.9em;
+	.footer__navigation {
+		border-top: 1px solid $border-1;
+		background: $background-1;
+		border-bottom: 1px solid $border-1;
+		margin-bottom: 20px;
+
+
+		h3 {
+			float: none;
+			font-size: 0.9em;
+			text-align: center;
+			display: block;
+		}
+
+		.menu-bar a {
+			padding: 5px 12px;
+			font-size: 0.9em;
+		}
+	}
+
+	.footer__copyright {
 		text-align: center;
-		display: block;
-	}
+		
+		p.powered-by {
+			clear: both;
+			font-size: 0.8em;
+			color: $alt-font-color-2;
+			padding: 0 0 20px 0;
+			margin: 0;
 
-	.menu-bar a {
-		padding: 5px 12px;
-		font-size: 0.9em;
-	}
-
-	p.powered-by {
-		clear: both;
-		font-size: 0.8em;
-		color: $alt-font-color-1;
-		padding: 10px 0;
-		margin: 0;
-
-		a {
-			color: $alt-font-color-4;
+			a {
+				color: $alt-font-color-1;
+			}
 		}
 	}
 }
@@ -590,13 +598,13 @@ footer {
 		}
 	}
 
-	footer {
-		padding: side-values(20px 0 10px 0);
+	footer .footer__navigation {
+		padding: side-values(20px 0 20px 0);
 
 		h3 {
 			margin: 0;
 			float: $left;
-			padding: side-values(3px 12px 3px 0);
+			padding: side-values(5px 12px 3px 0);
 		}
 	}
 }

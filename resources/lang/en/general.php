@@ -56,7 +56,7 @@ return [
 	'ascending' => 'Ascending',
 	'descending' => 'Descending',
 
-	'poweredBy' => 'Powered by',
+	'poweredBy' => 'Forum software by',
 	'mybbDesc' => 'The best free and open source forum software',
 
 	'goToXProfile' => "Go to :name's profile",

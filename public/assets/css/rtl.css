@@ -2345,27 +2345,29 @@ h1.title {
     color: #666;
     margin: 0 6px 0 4px; }
 
-footer {
+footer .footer__navigation {
   border-top: 1px solid #dfdfdf;
   background: #fafafa;
   border-bottom: 1px solid #dfdfdf;
-  margin-bottom: 30px; }
-  footer h3 {
+  margin-bottom: 20px; }
+  footer .footer__navigation h3 {
     float: none;
     font-size: 0.9em;
     text-align: center;
     display: block; }
-  footer .menu-bar a {
+  footer .footer__navigation .menu-bar a {
     padding: 5px 12px;
     font-size: 0.9em; }
-  footer p.powered-by {
+footer .footer__copyright {
+  text-align: center; }
+  footer .footer__copyright p.powered-by {
     clear: both;
     font-size: 0.8em;
-    color: #666;
-    padding: 10px 0;
+    color: #999;
+    padding: 0 0 20px 0;
     margin: 0; }
-    footer p.powered-by a {
-      color: #444; }
+    footer .footer__copyright p.powered-by a {
+      color: #666; }
 
 @media only screen and (max-width: 768px) {
   .main-menu.menu-bar {
@@ -2436,12 +2438,12 @@ footer {
     width: 35%;
     clear: none;
     margin-top: 10px; }
-  footer {
-    padding: 20px 0 10px 0; }
-    footer h3 {
+  footer .footer__navigation {
+    padding: 20px 0 20px 0; }
+    footer .footer__navigation h3 {
       margin: 0;
       float: right;
-      padding: 3px 0 3px 12px; } }
+      padding: 5px 0 3px 12px; } }
 
 @media only screen and (min-width: 1140px) {
   .wrapper {
