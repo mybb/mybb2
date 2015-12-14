@@ -3539,8 +3539,6 @@ section.container .forum-list {
 .topic--create header h1, .topic--reply header h1 {
   display: none; }
 .topic--create .topic__title, .topic--reply .topic__title {
-  border: none;
-  padding: 0;
   font-size: 1.5em;
   font-weight: bold; }
 .topic--create .post__controls, .topic--reply .post__controls {
