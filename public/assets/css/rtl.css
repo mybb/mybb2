@@ -3200,7 +3200,7 @@ section.container .forum-list {
     .topic-list .topic .topic__post a.post__date {
       color: #999; }
     .topic-list .topic .topic__post .post__author:after {
-      content: "-"; }
+      content: ","; }
   .topic-list .topic .topic__post--first {
     display: none; }
   .topic-list .topic .topic__post--latest {

@@ -107,12 +107,15 @@
 						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
 							<div class="primary-column">
 								<h3 class="topic__title">
-                                   <a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
-                                   <span class="topic__icons icons">
-                                   	{% if topic.closed == true %}
-                                   	 <i class="fa fa-lock" title="{{ trans('forum.closedtopic') }}"></i>
-                                   	{% endif %}
-                                   	</span>
+									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+									<span class="topic__icons icons">
+										{% if topic.closed == true %}
+										<i class="fa fa-lock fa-fw" title="{{ trans('forum.closedtopic') }}"></i>
+										{% endif %}
+										{% if topic.has_poll == true %}
+                                   		<i class="fa fa-check-square-o fa-fw" title="{{ trans('forum.poll') }}"></i>
+										{% endif %}
+									</span>
 								</h3>
 								<h4>{{ trans('topic.firstpost') }}</h4>
 								<p class="topic__post topic__post--first">
