@@ -3113,16 +3113,21 @@ section.container .forum-list {
 .topic-list .topic-list__sort-topics {
   margin-bottom: 0;
   background: #007fd0;
-  padding: 5px;
+  padding: 5px 12px;
   border: 0;
   color: #fff;
   font-size: 0.9em;
   border-radius: 4px 4px 0 0; }
-  .topic-list .topic-list__sort-topics .primary-column-one, .topic-list .topic-list__sort-topics a.primary-column-two {
+  .topic-list .topic-list__sort-topics .primary-column-one {
     width: 50%; }
   .topic-list .topic-list__sort-topics .latest-column {
-    width: 50%;
+    width: 45%;
     text-align: left; }
+  .topic-list .topic-list__sort-topics .moderation-column {
+    width: 5%;
+    float: left;
+    text-align: left;
+    margin-top: 3px; }
   .topic-list .topic-list__sort-topics .primary-column-two, .topic-list .topic-list__sort-topics .replies-column {
     display: none; }
   .topic-list .topic-list__sort-topics a {
@@ -3154,6 +3159,11 @@ section.container .forum-list {
   position: relative; }
   .topic-list .topic .primary-column {
     position: relative; }
+  .topic-list .topic .moderation-column {
+    float: left;
+    position: absolute;
+    bottom: 10px;
+    right: 12px; }
   .topic-list .topic .topic__title {
     margin: 0;
     padding: 0;
@@ -3169,7 +3179,7 @@ section.container .forum-list {
     font-size: 14px;
     position: absolute;
     top: 0;
-    left: 0;
+    left: 2px;
     margin-right: 16px; }
     .topic-list .topic .topic__icons i {
       margin-right: 8px; }
@@ -3190,7 +3200,7 @@ section.container .forum-list {
     .topic-list .topic .topic__post a.post__date {
       color: #999; }
     .topic-list .topic .topic__post .post__author:after {
-      content: ","; }
+      content: "-"; }
   .topic-list .topic .topic__post--first {
     display: none; }
   .topic-list .topic .topic__post--latest {
@@ -3270,26 +3280,29 @@ section.container .forum-list {
       .forum-list--full-width .forum .forum__topic .avatar-profile-link img.avatar {
         width: 36px;
         height: 36px; }
-  .topic-list .topic-list__sort-topics a.primary-column-one, .topic-list .topic-list__sort-topics a.primary-column-two {
-    width: 29%; }
-  .topic-list .topic-list__sort-topics a.primary-column-two {
+  .topic-list .topic-list__sort-topics .primary-column-one {
+    width: 26%;
+    margin-right: -5px;
+    margin-left: 5px; }
+  .topic-list .topic-list__sort-topics .primary-column-two {
+    width: 26%;
     text-align: left;
     display: inline-block; }
-  .topic-list .topic-list__sort-topics a.replies-column {
+  .topic-list .topic-list__sort-topics .replies-column {
     width: 12%;
     text-align: center;
     display: inline-block; }
-  .topic-list .topic-list__sort-topics a.latest-column {
-    width: 20%;
+  .topic-list .topic-list__sort-topics .latest-column {
+    width: 33%;
     text-align: right; }
-  .topic-list .topic-list__sort-topics a.moderation-column {
-    width: 9%;
-    float: left;
-    text-align: right; }
+  .topic-list .topic-list__sort-topics .moderation-column {
+    width: 3%;
+    float: right;
+    text-align: left; }
   .topic-list .topic {
     padding: 10px 12px; }
     .topic-list .topic .primary-column {
-      width: 58%;
+      width: 52%;
       float: right;
       -ms-box-sizing: border-box;
       box-sizing: border-box; }
@@ -3305,12 +3318,12 @@ section.container .forum-list {
         margin: 10px 0;
         float: none; }
     .topic-list .topic .latest-column {
-      width: 20%;
+      width: 33%;
       float: right; }
     .topic-list .topic .moderation-column {
-      width: 9%;
-      float: left;
-      text-align: right; }
+      width: 3%;
+      float: right;
+      text-align: left; }
     .topic-list .topic .topic__post--first {
       display: inline-block; }
     .topic-list .topic .topic__post--latest .post__author {
@@ -3325,6 +3338,14 @@ section.container .forum-list {
       right: auto; }
   .topic-list.topic-list--compact .avatar-profile-link {
     margin: 0 0 0 12px; } }
+
+@media only screen and (min-width: 1000px) {
+  .topic-list .topic-list__sort-topics .primary-column-one, .topic-list .topic-list__sort-topics .primary-column-two, .topic-list .topic .primary-column-one, .topic-list .topic .primary-column-two {
+    width: 29%; }
+  .topic-list .topic-list__sort-topics .primary-column, .topic-list .topic .primary-column {
+    width: 58%; }
+  .topic-list .topic-list__sort-topics .latest-column, .topic-list .topic .latest-column {
+    width: 27%; } }
 
 .post {
   background-color: #fff;

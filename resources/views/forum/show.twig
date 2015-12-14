@@ -97,6 +97,10 @@
 							{% endif %}
 						{% endif %}
 					</a>
+					<!-- this needs to be hidden if the user is not a moderator -->
+					<span class="sort-column moderation-column">
+						<input type="checkbox" /> <!-- needs JS to do select all -->
+					</span>
 				</div>
 				<div class="topic-list__container">
 					{% for topic in topics %}
@@ -132,6 +136,7 @@
 									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
 								</p>
 							</div>
+							<!-- this needs to be hidden if user is not a moderator -->
 							<div class="moderation-column">
 								<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ topic.id }}">
 							</div>

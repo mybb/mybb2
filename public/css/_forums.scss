@@ -122,7 +122,7 @@ section.container {
 		@extend .clearfix;
 		margin-bottom: 0;
 		background: $primary-color;
-		padding: 5px;
+		padding: 5px 12px;
 		border: 0;
 		color: $invert-font-color;
 		font-size: 0.9em;
@@ -133,8 +133,15 @@ section.container {
 		}
 
 		.latest-column {
-			width: 50%;
+			width: 45%;
 			text-align: $right;
+		}
+
+		.moderation-column {
+			width: 5%;
+			float: $right;
+			text-align: $right;
+			margin-top: 3px;
 		}
 
 		.primary-column-two, .replies-column {
@@ -186,6 +193,13 @@ section.container {
 			position: relative;
 		}
 
+		.moderation-column {
+			float: $right;
+			position: absolute;
+			bottom: 10px;
+			right: 12px;
+		}
+
 		.topic__title {
 			margin: 0;
 			padding: 0;
@@ -207,7 +221,7 @@ section.container {
 			font-size: 14px;
 			position: absolute;
 			top: 0;
-			#{$right}: 0;
+			#{$right}: 2px;
 			margin-#{$left}: 16px;
 
 			i {
@@ -243,7 +257,7 @@ section.container {
 			}
 
 			.post__author:after {
-				content: ",";
+				content: "-";
 			}
 		}
 
@@ -396,33 +410,35 @@ section.container {
 
 	.topic-list {
 
-		.topic-list__sort-topics a {
+		.topic-list__sort-topics {
 
-			&.primary-column-one {
-				width: 29%;
+			.primary-column-one {
+				width: 26%;
+				margin-#{$left}: -5px;
+				margin-#{$right}: 5px;
 			}
 
-			&.primary-column-two {
-				@extend .primary-column-one;
+			.primary-column-two {
+				width: 26%;
 				text-align: $right;
 				display: inline-block;
 			}
 
-			&.replies-column {
+			.replies-column {
 				width: 12%;
 				text-align: center;
 				display: inline-block;
 			}
 
-			&.latest-column {
-				width: 20%;
+			.latest-column {
+				width: 33%;
 				text-align: $left;
 			}
 
-		  	&.moderation-column {
-			  	width: 9%;
-			  	float: left;
-			  	text-align: right;
+			.moderation-column {
+		  		width: 3%;
+		  		float: $left;
+		  		text-align: $right;
 			}
 		}
 
@@ -430,7 +446,7 @@ section.container {
 			padding: 10px 12px;
 			
 			.primary-column {
-				width: 58%;
+				width: 52%;
 				float: $left;
 				@include box-sizing(border-box);
 
@@ -453,15 +469,15 @@ section.container {
 			}
 
 			.latest-column {
-				width: 20%;
+				width: 33%;
 				float: $left;
 			}
 
 
 			.moderation-column {
-			  	width: 9%;
-			  	float: left;
-			  	text-align: right;
+			  	width: 3%;
+			  	float: $left;
+			  	text-align: $right;
 			}
 
 			.topic__post--first {
@@ -492,6 +508,33 @@ section.container {
 			.avatar-profile-link {
 				margin: side-values(0 12px 0 0);
 			}
+		}
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+
+	.topic-list {
+
+		.topic-list__sort-topics,
+		.topic {
+
+			.primary-column-one,
+			.primary-column-two {
+				width: 29%;
+			}
+
+			.primary-column {
+				width: 58%;
+			}
+
+			.latest-column {
+				width: 27%;
+			}
+		}
+
+		.topic {
+
 		}
 	}
 }
