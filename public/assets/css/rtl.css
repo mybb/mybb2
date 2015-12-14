@@ -3600,63 +3600,80 @@ section.container .forum-list {
 
 .poll {
   border: 1px solid #ccc;
+  padding: 12px;
   border-radius: 4px; }
   .poll .poll__title {
-    background: #007fd0;
-    margin: 0;
-    border-radius: 3px 3px 0 0;
-    padding: 6px 8px;
-    color: #fff; }
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-bottom: 1px solid #ccc; }
   .poll .poll__options {
     padding: 0; }
   .poll .poll__option {
     border-bottom: 1px solid #dfdfdf;
-    padding: 6px 8px; }
-    .poll .poll__option:last-child {
-      border-bottom: none; }
-    .poll .poll__option.poll_option-voted {
-      background: #ebf4fb; }
+    padding: 10px 12px; }
+    .poll .poll__option.poll__option--voted .poll__option__name {
+      color: #007fd0;
+      font-weight: bold; }
   .poll .poll__option__name {
-    width: 300px;
-    float: right; }
+    margin-bottom: 8px; }
   .poll .poll__option__votes {
-    margin-right: 300px;
-    width: auto;
-    border: 1px solid #ccc;
+    width: 80%;
+    float: right;
+    position: relative;
+    border: 1px solid #e3e3e3;
     background: #fff;
-    height: 20px;
-    border-radius: 10px;
-    position: relative; }
-    .poll .poll__option__votes-bar {
+    height: 24px;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px; }
+    .poll .poll__option__votes .poll__option__votes__bar {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
-      background: #ccc;
+      background: #007fd0;
       z-index: 1;
-      border-radius: 9px; }
-    .poll .poll__option__votes-title {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1;
-      padding: 3px 0 0 0;
-      z-index: 4; }
-  .poll .poll__option__votes-result {
+      border-radius: 3px; }
+  .poll .poll__option__count {
+    float: right;
+    width: 18%;
+    margin-right: 2%;
+    font-size: 0.9em; }
+  .poll .poll__option__votes--result {
     font-size: 14px; }
-  .poll .poll__end-at {
-    border-top: 1px solid #ccc;
-    padding: 6px 8px; }
   .poll .poll__vote {
-    border-top: 2px solid #ccc;
-    height: 40px; }
+    padding: 12px 0 0 0; }
     .poll .poll__vote .poll__buttons {
       float: left; }
-    .poll .poll__vote .button {
-      line-height: 1.4; }
+  .poll .poll__end-date {
+    font-size: 0.9em;
+    color: #666;
+    padding: 5px 16px 0 16px; }
+    .poll .poll__end-date i {
+      color: #999;
+      margin-right: 5px; }
+  .poll .poll__closed {
+    background: #eb5257;
+    color: #fff;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 5px 11px;
+    margin: 5px; }
+    .poll .poll__closed i {
+      margin-right: 2px; }
+
+@media only screen and (min-width: 768px) {
+  .poll .poll__option__name {
+    width: 50%;
+    float: right;
+    margin-bottom: 0; }
+  .poll .poll__option__votes {
+    width: 40%;
+    float: right; }
+  .poll .poll__option__count {
+    width: 8%;
+    float: right; } }
 
 .user-list {
   padding: 12px 12px 0 12px; }
@@ -4456,14 +4473,14 @@ img.jcrop-preview {
     background: #007fd0;
     color: #fff; }
 
-.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .user-list:before, .profile .profile__header:before, .conversation-participants:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
+.clearfix:before, .wrapper:before, nav.section-menu ul:before, .main .page-controls:before, section.form .form__section:before, .forum-list .forum:before, .topic-list .topic-list__sort-topics:before, .topic-list .topic:before, .poll .poll__option:before, .user-list:before, .profile .profile__header:before, .conversation-participants:before, .clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .poll .poll__option:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
   content: " ";
   display: table; }
 
-.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
+.clearfix:after, .wrapper:after, nav.section-menu ul:after, .main .page-controls:after, section.form .form__section:after, .forum-list .forum:after, .topic-list .topic-list__sort-topics:after, .topic-list .topic:after, .poll .poll__option:after, .user-list:after, .profile .profile__header:after, .conversation-participants:after {
   clear: both; }
 
-.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .user-list, .profile .profile__header, .conversation-participants {
+.clearfix, .wrapper, nav.section-menu ul, .main .page-controls, section.form .form__section, .forum-list .forum, .topic-list .topic-list__sort-topics, .topic-list .topic, .poll .poll__option, .user-list, .profile .profile__header, .conversation-participants {
   *zoom: 1; }
 
 .hidden {

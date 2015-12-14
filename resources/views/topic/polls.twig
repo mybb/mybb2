@@ -4,7 +4,7 @@
 		{{ form_open({'route': ['polls.vote', topic.slug, topic.id], 'method': 'post'}) }}
 		<div class="poll__options">
 			{% for option in poll.options %}
-				<div class="poll__option{{ (option.voted)?' poll_option-voted' }}">
+				<div class="poll__option{{ (option.voted)?' poll__option--voted' }}">
 					<div class="poll__option__name">
 						<label>
 							{% if poll.myVote is null %}
@@ -18,24 +18,15 @@
 						</label>
 					</div>
 					<div class="poll__option__votes">
-						<div class="poll__option__votes-bar"
+						<div class="poll__option__votes__bar"
 							 style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
-						<div class="poll__option__votes-title">
-							{{ option.votes }} / {{ poll.num_votes }}
-						</div>
+					</div>
+					<div class="poll__option__count">
+						{{ option.votes }} / {{ poll.num_votes }}
 					</div>
 				</div>
 			{% endfor %}
 		</div>
-		{% if poll.is_closed or poll.end_at %}
-			<div class="poll__end-at">
-				{% if poll.is_closed %}
-					<i class="fa fa-times"></i> {{ trans('poll.isClosed') }}
-				{% else %}
-					<i class="fa fa-info-circle"></i> {{ trans('poll.closeAtX', {time:human_date(poll.end_at)}) }}
-				{% endif %}
-			</div>
-		{% endif %}
 		<div class="poll__vote">
 			<div class="poll__buttons">
 				<a class="button button--secondary"
@@ -57,6 +48,17 @@
 				{% endif %}
 			{% endif %}
 		</div>
+		{% if poll.is_closed or poll.end_at %}
+			{% if poll.is_closed %}
+				<div class="poll__closed">
+					<i class="fa fa-times"></i> {{ trans('poll.isClosed') }}
+				</div>
+			{% else %}
+				<div class="poll__end-date">
+					<i class="fa fa-clock-o"></i> {{ trans('poll.closeAtX', {time:human_date(poll.end_at)}) }}
+				</div>
+			{% endif %}
+		{% endif %}
 		{{ form_close() }}
 	</section>
 {% endif %}
