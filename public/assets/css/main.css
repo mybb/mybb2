@@ -3820,7 +3820,10 @@ section.container .forum-list {
     .topic-list .topic .moderation-column {
       width: 3%;
       float: left;
-      text-align: right; }
+      text-align: right;
+      position: relative;
+      top: 0;
+      right: 0; }
     .topic-list .topic .topic__post--first {
       display: inline-block; }
     .topic-list .topic .topic__post--latest .post__author {

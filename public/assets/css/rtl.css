@@ -3163,7 +3163,7 @@ section.container .forum-list {
     float: left;
     position: absolute;
     bottom: 10px;
-    right: 12px; }
+    left: 12px; }
   .topic-list .topic .topic__title {
     margin: 0;
     padding: 0;
@@ -3323,7 +3323,10 @@ section.container .forum-list {
     .topic-list .topic .moderation-column {
       width: 3%;
       float: right;
-      text-align: left; }
+      text-align: left;
+      position: relative;
+      top: 0;
+      left: 0; }
     .topic-list .topic .topic__post--first {
       display: inline-block; }
     .topic-list .topic .topic__post--latest .post__author {
