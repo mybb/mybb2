@@ -188,7 +188,7 @@ h1.title {
 	@include border-radius(corner-values(0 4px 4px 4px));
 	border: 2px solid $border-1;
 	border-top: 0;
-	padding: side-values(6px 12px 12px 12px);
+	padding: side-values(6px 12px 6px 12px);
 	font-size: 0.9em;
 	#{$left}: -2px;
 	width: 270px;
@@ -219,6 +219,10 @@ h1.title {
 				@include black-transparency(0.3);
 				padding-#{$right}: 8px;
 			}
+		}
+
+		&:last-child {
+			border-bottom: 0;
 		}
 	}
 

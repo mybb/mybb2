@@ -2173,7 +2173,7 @@ h1.title {
   border-radius: 4px 0 4px 4px;
   border: 2px solid #dfdfdf;
   border-top: 0;
-  padding: 6px 12px 12px 12px;
+  padding: 6px 12px 6px 12px;
   font-size: 0.9em;
   right: -2px;
   width: 270px; }
@@ -2198,6 +2198,8 @@ h1.title {
       .user-navigation ul .user-navigation__dropdown li a i {
         color: rgba(0, 0, 0, 0.3);
         padding-left: 8px; }
+    .user-navigation ul .user-navigation__dropdown li:last-child {
+      border-bottom: 0; }
   .user-navigation ul .user-navigation__dropdown a.avatar-profile-link {
     float: left;
     width: 80px;
