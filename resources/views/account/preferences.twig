@@ -82,17 +82,18 @@
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.message_order') }}</h3>
+					<p class="form__description">{{ trans('account.message_order_description', {'link': url_route('conversations.index')})|raw }}</p>
 					<div class="segmented-control">
 						{# we can't use form_label here as laravel escapes the value and we need html in it #}
 						<span class="segmented-control__block">
 								{{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc'}) }}
 							<label class="segmented-control__button" for="asc">
-								<span class="text">{{ trans('general.ascending') }}</span>
+								<span class="text">{{ trans('account.message_order_asc') }}</span>
 							</label>
 							</span><span class="segmented-control__block">
 								{{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc'}) }}
 							<label class="segmented-control__button" for="desc">
-								<span class="text">{{ trans('general.descending') }}</span>
+								<span class="text">{{ trans('account.message_order_desc') }}</span>
 							</label>
 							</span>
 					</div>

@@ -243,7 +243,7 @@ h1.title {
 		background: $background-1;
 		border: 1px solid $border-1;
 		@include border-radius(3px);
-		margin: side-values(10px 0 0 0);
+		margin: side-values(10px 0 6px 0);
 	}
 
 	h2 {

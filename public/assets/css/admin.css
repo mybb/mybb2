@@ -3523,6 +3523,10 @@ img.jcrop-preview {
       color: #666; }
     .stepper .stepper-arrow:hover {
       color: #666; }
+    .stepper .stepper-arrow:active {
+      background: #007fd0; }
+      .stepper .stepper-arrow:active:before {
+        color: #fff; }
   .stepper .stepper-arrow.up {
     float: right;
     top: 0;

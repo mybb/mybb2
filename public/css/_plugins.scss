@@ -160,6 +160,14 @@
 		&:hover {
 			color: $alt-font-color-1;
 		}
+
+		&:active {
+			background: $primary-color;
+
+			&:before {
+				color: $invert-font-color;
+			}
+		}
 	}
 
 	.stepper-arrow.up {

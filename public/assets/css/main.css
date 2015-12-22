@@ -2709,7 +2709,7 @@ h1.title {
     background: #fafafa;
     border: 1px solid #dfdfdf;
     border-radius: 3px;
-    margin: 10px 0 0 0; }
+    margin: 10px 0 6px 0; }
   .user-navigation ul .user-navigation__dropdown h2 {
     font-size: 1em;
     margin: 0;
@@ -4896,6 +4896,10 @@ img.jcrop-preview {
       color: #666; }
     .stepper .stepper-arrow:hover {
       color: #666; }
+    .stepper .stepper-arrow:active {
+      background: #007fd0; }
+      .stepper .stepper-arrow:active:before {
+        color: #fff; }
   .stepper .stepper-arrow.up {
     float: right;
     top: 0;
