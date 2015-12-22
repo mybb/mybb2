@@ -3,7 +3,7 @@
 {% block contents %}
 	<div class="page-content">
 		<header>
-			<h1>{{ conversation.title }} - {{ trans('conversations.add_participants') }}</h1>
+			<h1>{{ trans('conversations.add_participants') }}</h1>
 		</header>
 
 		{{ form_open({'route': ['conversations.newParticipant', conversation.id], 'method': 'post'}) }}

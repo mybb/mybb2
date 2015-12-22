@@ -1,4 +1,4 @@
-			<div class="post post--reply" id="post-reply">
+			<div class="post post--conversation post--reply" id="post-reply">
 				{{ form_open({'route': ['conversations.reply', conversation.id], 'method': 'post', 'id': 'quickreply'}) }}
 					<div class="post__meta">
 						<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link"><img src="{{ auth_user.avatar }}" alt="Your avatar" class="avatar" /></a>

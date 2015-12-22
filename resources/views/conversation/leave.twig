@@ -3,7 +3,7 @@
 {% block contents %}
 	<div class="page-content">
 		<header>
-			<h1>{{ conversation.title }} - {{ trans('conversations.leave') }}</h1>
+			<h1>{{ trans('conversations.leave') }}</h1>
 		</header>
 
 		{{ form_open({'route': ['conversations.leave', conversation.id], 'method': 'post'}) }}

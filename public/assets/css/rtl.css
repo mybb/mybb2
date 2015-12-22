@@ -2778,7 +2778,7 @@ dl.stats {
 @media only screen and (min-width: 768px) {
   .main .page-content--sidebar {
     float: right;
-    width: 60%; }
+    width: 62%; }
   .main .page-content--centered {
     width: 60%;
     float: none;
@@ -3540,7 +3540,8 @@ section.container .forum-list {
   display: none; }
 .topic--create .topic__title, .topic--reply .topic__title {
   font-size: 1.5em;
-  font-weight: bold; }
+  font-weight: bold;
+  padding: 10px; }
 .topic--create .post__controls, .topic--reply .post__controls {
   text-align: right; }
   .topic--create .post__controls .text, .topic--reply .post__controls .text {
@@ -3586,6 +3587,15 @@ section.container .forum-list {
       .post .avatar-profile-link img.avatar {
         width: 100px;
         height: 100px; }
+    .post.post--conversation {
+      margin-right: 80px; }
+      .post.post--conversation .avatar-profile-link {
+        width: 70px;
+        height: 70px;
+        margin-right: -100px; }
+        .post.post--conversation .avatar-profile-link img.avatar {
+          width: 70px;
+          height: 70px; }
     .post .post__toggle {
       margin-left: 5px; } }
 
@@ -3872,23 +3882,18 @@ ul.notifications {
     border-bottom: 0; }
 
 .conversation-participants {
-  background: #fafafa;
-  padding: 10px;
-  line-height: 1.4;
-  border-radius: 4px; }
+  line-height: 1.4; }
   .conversation-participants h3 {
-    font-weight: normal;
-    font-size: 0.9em;
-    color: #666;
-    margin: 0 0 10px 0; }
+    margin-bottom: 0; }
   .conversation-participants .participant {
-    display: inline-block;
-    width: 200px; }
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #e3e3e3; }
     .conversation-participants .participant .avatar-profile-link {
       width: 36px;
       height: 36px;
       float: left;
-      margin: 2px 0 0 10px; }
+      margin: 0px 0 0 10px; }
       .conversation-participants .participant .avatar-profile-link img.avatar {
         width: 36px;
         height: 36px; }
@@ -3898,10 +3903,18 @@ ul.notifications {
       display: block;
       font-size: 0.7em;
       color: #666; }
+    .conversation-participants .participant:last-child {
+      border-bottom: 0; }
   .conversation-participants.conversation-participants--compose {
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px; }
     .conversation-participants.conversation-participants--compose h3 {
-      margin: 0 0 10px 0; }
+      font-size: 1em;
+      font-weight: normal;
+      margin: 0 0 6px 0;
+      color: #666; }
     .conversation-participants.conversation-participants--compose input {
       border: none;
       background: transparent;
