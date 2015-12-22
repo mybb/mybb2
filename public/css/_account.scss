@@ -23,6 +23,31 @@ section.form {
 	}
 }
 
+.dashboard__account {
+
+	.dashboard__account__container {
+		padding: side-values(20px 20px 20px 140px);
+	}
+
+	.avatar-profile-link {
+		width: 100px;
+		height: 100px;
+		float: $left;
+		display: block;
+		margin: side-values(0 0 0 -120px);
+
+		img.avatar {
+			width: 100px;
+			height: 100px;
+		}
+
+	}
+
+	.dashboard__account__username {
+		margin: side-values(0 0 6px 0);
+	}
+}
+
 // this may need additional revisions once notifications are implemented
 ul.notifications {
 	margin: 0;

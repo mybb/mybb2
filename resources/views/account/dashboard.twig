@@ -6,18 +6,20 @@
 	<header>
 		<h1>{{ trans('account.dashboard') }}</h1>
 	</header>
-
-	{# TODO: add a proper dashboard and move styling to css files #}
-	<section>
+	<section class="dashboard__account">
 		<h2 class="heading heading--major">{{ trans('account.summary') }}</h2>
-		<div style="float: left; padding-left: 130px; margin-top: 10px;">
-			<img src="{{ auth_user.avatar }}" class="avatar" style="width: 100px; height: 100px; float: left; margin: 0 10px 0 -110px;" />
-			<p>
-				{{ auth_user.styled_name|raw }}<br />
-				{{ trans('topic.posts') }}: {{ auth_user.num_posts }}<br />
-				{{ trans('account.email') }}: {{ auth_user.email }}<br />
-				{{ trans('member.joinDate') }}: {{ generate_time(auth_user.created_at) }}
-			</p>
+		<div class="dashboard__account__container">
+			<a href="{{ url_route('user.profile', [auth_user.name, auth_user.id]) }}" class="avatar-profile-link"
+			   title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" class="avatar" /></a>
+			<h3 class="dashboard__account__username">{{ render_profile_link(auth_user) }}</h3>
+			<dl class="dashboard__account__statistics stats">
+				<dt>{{ trans('topic.posts') }}</dt>
+				<dd>{{ auth_user.num_posts }}</dd>
+				<dt>{{ trans('account.email') }}</dt>
+				<dd>{{ auth_user.email }}</dd>
+				<dt>{{ trans('member.joinDate') }}</dt>
+				<dd>{{ generate_time(auth_user.created_at) }}</dd>
+			</dl>
 		</div>
 	</section>
 {% endblock %}

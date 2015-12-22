@@ -4306,6 +4306,20 @@ section.form .form__section__container.change-avatar {
     font-size: 0.9em;
     color: #666; }
 
+.dashboard__account .dashboard__account__container {
+  padding: 20px 20px 20px 140px; }
+.dashboard__account .avatar-profile-link {
+  width: 100px;
+  height: 100px;
+  float: left;
+  display: block;
+  margin: 0 0 0 -120px; }
+  .dashboard__account .avatar-profile-link img.avatar {
+    width: 100px;
+    height: 100px; }
+.dashboard__account .dashboard__account__username {
+  margin: 0 0 6px 0; }
+
 ul.notifications {
   margin: 0;
   font-size: 0.9em;
