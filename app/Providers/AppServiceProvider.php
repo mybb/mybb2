@@ -137,7 +137,7 @@ class AppServiceProvider extends ServiceProvider
 
 				$permissionChecker = $app->make('MyBB\Core\Permissions\PermissionChecker');
 
-				$guard = $app->make('Illuminate\Auth\Guard');
+				$guard = $app->make('Illuminate\Contracts\Auth\Guard');
 
 				return new CachingDecorator($repository, $cache, $permissionChecker, $guard);
 			}
@@ -161,7 +161,7 @@ class AppServiceProvider extends ServiceProvider
 	private function initDefaultUser()
 	{
 		/** @var \MyBB\Auth\Contracts\Guard $guard */
-		$guard = $this->app->make('Illuminate\Auth\Guard');
+		$guard = $this->app->make('Illuminate\Contracts\Auth\Guard');
 		$defaultUser = new User();
 		$defaultUser->name = 'Guest';
 		$defaultUser->id = -1;

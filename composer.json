@@ -5,21 +5,20 @@
 	"license": "BSD-3",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.1.*",
-		"rcrowe/twigbridge": "^0.7.2",
-		"mccool/laravel-auto-presenter": "~3.0@beta",
-		"kalnoy/nestedset": "^2.4.3",
-		"laravelcollective/html": "~5.1",
+		"laravel/framework": "5.2.*",
+		"kalnoy/nestedset": "^4.0",
+		"laravelcollective/html": "5.2.*",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
 		"mybb/settings": "dev-master",
-		"davejamesmiller/laravel-breadcrumbs": "dev-master",
-		"doctrine/dbal": "~2.5",
-		"league/fractal": "0.12.*@dev",
 		"jenssegers/date": "~3.0",
-		"greggilbert/recaptcha": "^2.0.2",
+		"greggilbert/recaptcha": "^2.0.3",
 		"mybb/are-you-a-human": "1.1.*",
-		"mybb/gravatar": "dev-master"
+		"mybb/gravatar": "dev-master",
+		"rcrowe/twigbridge": "^0.9.1",
+		"mccool/laravel-auto-presenter": "^4.2",
+		"league/fractal": "^0.13.0",
+		"davejamesmiller/laravel-breadcrumbs": "^3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -29,7 +28,9 @@
 		"fabpot/php-cs-fixer": "~2.0@dev",
 		"squizlabs/php_codesniffer": "~2.0@dev",
 		"mockery/mockery": "0.9.*@dev",
-		"mybb/standards": "dev-master"
+		"mybb/standards": "dev-master",
+		"symfony/dom-crawler": "~3.0",
+		"symfony/css-selector": "~3.0"
 	},
 	"repositories": [
 		{
@@ -83,12 +84,10 @@
         "sniff": "vendor/bin/phpcs",
         "sniff-fix": "vendor/bin/phpcbf"
 	},
-	"config": {
-		"preferred-install": "dist"
-	},
 	"prefer-stable": true,
 	"minimum-stability": "dev",
 	"config": {
-		"vendor-dir": "vendor"
+		"vendor-dir": "vendor",
+		"preferred-install": "dist"
 	}
 }

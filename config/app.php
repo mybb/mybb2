@@ -3,6 +3,18 @@
 return [
 
 	/*
+    |--------------------------------------------------------------------------
+    | Application Environment
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the "environment" your application is currently
+    | running in. This may determine how you prefer to configure various
+    | services your application utilizes. Set this in your ".env" file.
+    |
+    */
+	'env' => env('APP_ENV', 'production'),
+
+	/*
 	|--------------------------------------------------------------------------
 	| Application Debug Mode
 	|--------------------------------------------------------------------------
@@ -14,6 +26,7 @@ return [
 	*/
 
 	'debug' => env('APP_DEBUG'),
+
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -105,13 +118,11 @@ return [
 		/*
 		 * Laravel Framework Service Providers...
 		 */
-		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
 		'MyBB\Auth\AuthServiceProvider',
 		// Though we're using our own ServiceProvider we're keeping it here to avoid any issues
 		'Illuminate\Bus\BusServiceProvider',
 		'Illuminate\Cache\CacheServiceProvider',
 		'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
-		'Illuminate\Routing\ControllerServiceProvider',
 		'Illuminate\Cookie\CookieServiceProvider',
 		'Illuminate\Database\DatabaseServiceProvider',
 		'Illuminate\Encryption\EncryptionServiceProvider',
@@ -133,7 +144,7 @@ return [
 		 * Extension Service Providers...
 		 */
 		'TwigBridge\ServiceProvider',
-		'McCool\LaravelAutoPresenter\LaravelAutoPresenterServiceProvider',
+		'McCool\LaravelAutoPresenter\AutoPresenterServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'DaveJamesMiller\Breadcrumbs\ServiceProvider',
 		'Jenssegers\Date\DateServiceProvider',
