@@ -20,5 +20,6 @@ return [
 	'latestpost' => 'Latest Post',
 	'author' => 'Author',
 	'sorttopics' => 'Sort Topics',
-	'closedtopic' => 'Closed Topic'
+	'closedtopic' => 'Closed Topic',
+	'poll' => 'Topic Contains Poll'
 ];

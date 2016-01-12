@@ -30,5 +30,6 @@ return [
 	'add_participants' => 'Add Participants',
 	'last_read' => 'Last read:',
 	'reply' => 'Post Reply',
-	'write_message' => 'Write a message...'
+	'write_message' => 'Write a message...',
+	'latest' => 'Latest:',
 ];

@@ -1,17 +1,23 @@
-		<footer>
-			<div class="wrapper">
-				<h3>{{ setting('general.board_name', 'MyBB Community') }}</h3>
-				<nav class="footer-menu menu-bar">
-					<ul>
-						<li><a href="#">Contact</a></li>
-                        {% if setting('general.site_name') is not null %}
-						    <li><a href="{{ setting('general.site_url') }}" target="_blank">{{ setting('general.site_name') }}</a></li>
-                        {% endif %}
-						<li><a href="#">RSS Syndication</a></li>
-						<li><a href="#">Help</a></li>
-					</ul>
-				</nav>
-				<p class="powered-by">{{ trans('general.poweredBy') }} <a href="http://mybb.com" title="{{ trans('general.mybbDesc') }}">MyBB</a></p>
+		<footer class="footer">
+			<div class="footer__navigation">
+				<div class="wrapper">
+					<h3>{{ setting('general.board_name', 'MyBB Community') }}</h3>
+					<nav class="footer-menu menu-bar">
+						<ul>
+							<li><a href="#">Contact</a></li>
+	                        {% if setting('general.site_name') is not null %}
+							    <li><a href="{{ setting('general.site_url') }}" target="_blank">{{ setting('general.site_name') }}</a></li>
+	                        {% endif %}
+							<li><a href="#">RSS Syndication</a></li>
+							<li><a href="#">Help</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<div class="footer__copyright">
+				<div class="wrapper">
+					<p class="powered-by">{{ trans('general.poweredBy') }} <a href="http://mybb.com" title="{{ trans('general.mybbDesc') }}">MyBB</a></p>
+				</div>
 			</div>
 		</footer>
 		<script src="{{ asset('assets/js/vendor.js') }}"></script>

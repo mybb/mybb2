@@ -1,5 +1,6 @@
-var gulp = require("gulp"),
-    gutil = require("gulp-util"),
+"use strict";
+
+let gulp = require("gulp"),
     changed = require("gulp-changed"),
     imagemin = require("gulp-imagemin"),
     concat = require("gulp-concat"),
@@ -7,7 +8,7 @@ var gulp = require("gulp"),
     stripDebug = require("gulp-strip-debug"),
     sass = require("gulp-sass"),
     autoprefixer = require("gulp-autoprefixer"),
-    minifycss = require("gulp-minify-css"),
+    nano = require('gulp-cssnano'),
     rename = require("gulp-rename"),
     del = require("del"),
     source = require('vinyl-source-stream'),
@@ -151,6 +152,7 @@ gulp.task("scripts", function() {
 
 gulp.task("styles", function() {
     return gulp.src(css)
+        .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"
@@ -158,14 +160,17 @@ gulp.task("styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("main.css"))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
-        .pipe(minifycss())
+        .pipe(nano())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task("admin_styles", function() {
     return gulp.src(admin_css)
+        .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"
@@ -173,14 +178,17 @@ gulp.task("admin_styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("admin.css"))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
-        .pipe(minifycss())
+        .pipe(nano())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task("rtl_styles", function() {
     return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/rtl.scss"])
+        .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"
@@ -188,14 +196,17 @@ gulp.task("rtl_styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("rtl.css"))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
-        .pipe(minifycss())
+        .pipe(nano())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest));
 });
 
 gulp.task("admin_rtl_styles", function() {
     return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/admin.rtl.scss"])
+        .pipe(sourcemaps.init())
         .pipe(sass({
             includePaths: [
                 "./app/bower_components"
@@ -203,9 +214,11 @@ gulp.task("admin_rtl_styles", function() {
         }))
         .pipe(autoprefixer("last 2 version", "safari 5", "ie 8", "ie 9", "opera 12.1", "ios 6", "android 4"))
         .pipe(concat("admin.rtl.css"))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest))
         .pipe(rename({suffix: ".min"}))
-        .pipe(minifycss())
+        .pipe(nano())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.css.dest));
 });
 
