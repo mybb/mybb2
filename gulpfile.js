@@ -52,22 +52,22 @@ const vendor_scripts = [
     paths.bower + "/PowerTip/src/tooltipcontroller.js",
     paths.bower + "/PowerTip/src/utility.js",
     paths.bower + "/dropit/dropit.js",
-	paths.bower + "/dropzone/dist/dropzone.js",
-	paths.bower + "/datetimepicker/jquery.datetimepicker.js",
+    paths.bower + "/dropzone/dist/dropzone.js",
+    paths.bower + "/datetimepicker/jquery.datetimepicker.js",
     paths.bower + "/autosize/dist/autosize.js",
-	paths.bower + "/jcrop/js/jquery.color.js",
-	paths.bower + "/jcrop/js/jquery.Jcrop.js",
-	paths.bower + "/lang-js/src/lang.js"
+    paths.bower + "/jcrop/js/jquery.color.js",
+    paths.bower + "/jcrop/js/jquery.Jcrop.js",
+    paths.bower + "/lang-js/src/lang.js"
 ];
 
 const scripts = [
-	paths.js.src + "/cookie.js",
-	paths.js.src + "/spinner.js",
-	paths.js.src + "/modal.js",
-	paths.js.src + "/post.js",
-	paths.js.src + "/poll.js",
-	paths.js.src + "/quote.js",
-	paths.js.src + "/avatar.js",
+    paths.js.src + "/cookie.js",
+    paths.js.src + "/spinner.js",
+    paths.js.src + "/modal.js",
+    paths.js.src + "/post.js",
+    paths.js.src + "/poll.js",
+    paths.js.src + "/quote.js",
+    paths.js.src + "/avatar.js",
     paths.js.src + "/other.js",
     paths.js.src + "/moderation.js"
 ];
@@ -77,7 +77,7 @@ const css = [
     paths.bower + "/fontawesome/scss/font-awesome.scss",
     paths.bower + "/dropit/dropit.css",
     paths.bower + "/jquery-dropdown/jquery.dropdown.css",
-	paths.bower + "/datetimepicker/jquery.datetimepicker.css",
+    paths.bower + "/datetimepicker/jquery.datetimepicker.css",
     paths.css.src + "/main.scss"
 ];
 
@@ -92,7 +92,7 @@ const admin_css = [
 
 gulp.task("default", ["images", "vendor_scripts", "scripts", "styles", "admin_styles", "rtl_styles", "admin_rtl_styles", "fonts"]);
 
-gulp.task("clean", function(cb) {
+gulp.task("clean", function (cb) {
     del(
         [
             paths.js.dest + "/**",
@@ -103,7 +103,7 @@ gulp.task("clean", function(cb) {
         , cb);
 });
 
-gulp.task("watch", ["default"], function() {
+gulp.task("watch", ["default"], function () {
     gulp.watch("./bower_components/**/*.js", ["vendor_scripts"]);
     gulp.watch(paths.js.src + "/**/*.js", ["scripts"]);
     gulp.watch(paths.images.src + "/**/*", ["images"]);
@@ -114,14 +114,14 @@ gulp.task("watch", ["default"], function() {
     gulp.watch(paths.fonts.src + "/**/*", ["fonts"]);
 });
 
-gulp.task("images", function() {
+gulp.task("images", function () {
     return gulp.src(paths.images.src + "/*")
         .pipe(changed(paths.images.dest))
-        .pipe(imagemin({ optimizationLevel: 3, progressive: true, interlaced: true }))
+        .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))
         .pipe(gulp.dest(paths.images.dest));
 });
 
-gulp.task("vendor_scripts", function() {
+gulp.task("vendor_scripts", function () {
     return gulp.src(vendor_scripts)
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat("vendor.js"))
@@ -135,8 +135,8 @@ gulp.task("vendor_scripts", function() {
         .pipe(gulp.dest(paths.js.dest + "/"));
 });
 
-gulp.task("scripts", function() {
-	console.log(paths.js.dest);
+gulp.task("scripts", function () {
+    console.log(paths.js.dest);
     return gulp.src(scripts)
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat("main.js"))
@@ -150,7 +150,7 @@ gulp.task("scripts", function() {
         .pipe(gulp.dest(paths.js.dest + "/"));
 });
 
-gulp.task("styles", function() {
+gulp.task("styles", function () {
     return gulp.src(css)
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -168,7 +168,7 @@ gulp.task("styles", function() {
         .pipe(gulp.dest(paths.css.dest));
 });
 
-gulp.task("admin_styles", function() {
+gulp.task("admin_styles", function () {
     return gulp.src(admin_css)
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -186,7 +186,7 @@ gulp.task("admin_styles", function() {
         .pipe(gulp.dest(paths.css.dest));
 });
 
-gulp.task("rtl_styles", function() {
+gulp.task("rtl_styles", function () {
     return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/rtl.scss"])
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -204,7 +204,7 @@ gulp.task("rtl_styles", function() {
         .pipe(gulp.dest(paths.css.dest));
 });
 
-gulp.task("admin_rtl_styles", function() {
+gulp.task("admin_rtl_styles", function () {
     return gulp.src([paths.bower + "/normalize.css/normalize.css", paths.bower + "/fontawesome/scss/font-awesome.scss", paths.css.src + "/admin.rtl.scss"])
         .pipe(sourcemaps.init())
         .pipe(sass({
@@ -222,6 +222,6 @@ gulp.task("admin_rtl_styles", function() {
         .pipe(gulp.dest(paths.css.dest));
 });
 
-gulp.task("fonts", function() {
+gulp.task("fonts", function () {
     return gulp.src(paths.bower + "/fontawesome/fonts/**.*").pipe(gulp.dest(paths.fonts.dest));
 });
