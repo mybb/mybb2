@@ -1,6 +1,6 @@
 "use strict";
 
-let gulp = require("gulp"),
+const gulp = require("gulp"),
     changed = require("gulp-changed"),
     imagemin = require("gulp-imagemin"),
     concat = require("gulp-concat"),
@@ -18,26 +18,26 @@ let gulp = require("gulp"),
 
 var paths = {
     bower: "./bower_components",
-    dist: "./assets",
+    dist: "./public/assets",
     js: {
-        src: "./js",
-        dest: "./assets/js"
+        src: "./public/js",
+        dest: "./public/assets/js"
     },
     css: {
-        src: "./css",
-        dest: "./assets/css"
+        src: "./public/css",
+        dest: "./public/assets/css"
     },
     images: {
-        src: "./images",
-        dest: "./assets/images"
+        src: "./public/images",
+        dest: "./public/assets/images"
     },
     fonts: {
-        src: "./fonts",
-        dest: "./assets/fonts"
+        src: "./public/fonts",
+        dest: "./public/assets/fonts"
     }
 };
 
-var vendor_scripts = [
+const vendor_scripts = [
     paths.bower + "/jquery/dist/jquery.js",
     paths.bower + "/modernizr/modernizr.js",
     paths.bower + "/jquery-dropdown/jquery.dropdown.js",
@@ -60,7 +60,7 @@ var vendor_scripts = [
 	paths.bower + "/lang-js/src/lang.js"
 ];
 
-var scripts = [
+const scripts = [
 	paths.js.src + "/cookie.js",
 	paths.js.src + "/spinner.js",
 	paths.js.src + "/modal.js",
@@ -72,7 +72,7 @@ var scripts = [
     paths.js.src + "/moderation.js"
 ];
 
-var css = [
+const css = [
     paths.bower + "/normalize.css/normalize.css",
     paths.bower + "/fontawesome/scss/font-awesome.scss",
     paths.bower + "/dropit/dropit.css",
@@ -81,7 +81,7 @@ var css = [
     paths.css.src + "/main.scss"
 ];
 
-var admin_css = [
+const admin_css = [
     paths.bower + "/normalize.css/normalize.css",
     paths.bower + "/fontawesome/scss/font-awesome.scss",
     paths.bower + "/dropit/dropit.css",
