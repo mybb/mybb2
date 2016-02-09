@@ -10,7 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Permission extends Model
+class Permission extends AbstractCachingModel
 {
 	/**
 	 * The database table used by the model.

@@ -19,7 +19,7 @@
 					<div class="poll__option{{ (option.voted)?' poll__option--voted' }}">
 						<div class="poll__option__name">
 							<label>
-								{% if poll.myVote is null %}
+								{% if poll.myVote == false %}
 									{% if poll.is_multiple %}
 										{{ form_checkbox('option[]', loop.index) }}
 									{% else %}

@@ -25,7 +25,7 @@ abstract class AbstractCachingModel extends Model
 		$saved = parent::save($options);
 
 		if ($saved) {
-			static::$models[$this->getKey()] = $this;
+			static::$models[get_class($this)][$this->getKey()] = $this;
 		}
 
 		return $saved;
@@ -37,7 +37,7 @@ abstract class AbstractCachingModel extends Model
 	public function delete()
 	{
 		parent::delete();
-		unset(static::$models[$this->getKey()]);
+		unset(static::$models[get_class($this)][$this->getKey()]);
 	}
 
 	/**
@@ -49,11 +49,10 @@ abstract class AbstractCachingModel extends Model
 			return static::query()->find($id, $columns);
 		}
 
-		if (!isset(static::$models[$id])) {
-			static::$models[$id] = static::query()->find($id, $columns);
-
+		if (!isset(static::$models[get_called_class()][$id])) {
+			static::$models[get_called_class()][$id] = static::query()->find($id, $columns);
 		}
 
-		return static::$models[$id];
+		return static::$models[get_called_class()][$id];
 	}
 }

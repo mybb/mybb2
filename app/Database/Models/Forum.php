@@ -14,22 +14,15 @@ use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
-use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Database\Collections\TreeCollection;
 
 /**
  * @property int id
  */
-class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface, ContentInterface
+class Forum extends AbstractCachingModel implements HasPresenter, InheritPermissionInterface, CloseableInterface, ContentInterface
 {
 	use InheritPermissionableTrait;
-
-	/**
-	 * Nested set column IDs.
-	 */
-	const LFT = 'left_id';
-	const RGT = 'right_id';
-	const PARENT_ID = 'parent_id';
 
 	// @codingStandardsIgnoreStart
 	/**
@@ -78,6 +71,18 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	}
 
 	/**
+	 * @return Forum
+	 */
+	public function getParent()
+	{
+		if ($this->parent_id === null) {
+			return null;
+		}
+
+		return $this->find($this->parent_id);
+	}
+
+	/**
 	 * Find a model by its primary key.
 	 *
 	 * @param  mixed $id
@@ -85,11 +90,11 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	 *
 	 * @return \Illuminate\Support\Collection|static|null
 	 */
-	public static function find($id, $columns = array('*'))
+/*	public static function find($id, $columns = array('*'))
 	{
 		return static::query()->find($id, $columns);
 	}
-
+*/
 	/**
 	 * A forum contains many threads.
 	 *
@@ -131,6 +136,33 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	}
 
 	/**
+	 * Relation to the parent.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function parent()
+	{
+		return $this->belongsTo(get_class($this), 'parent_id');
+	}
+	/**
+	 * Relation to children.
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function children()
+	{
+		return $this->hasMany(get_class($this), 'parent_id');
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function newCollection(array $models = array())
+	{
+		return new TreeCollection($models);
+	}
+
+	 /**
 	 * @return bool|int
 	 */
 	public function close()

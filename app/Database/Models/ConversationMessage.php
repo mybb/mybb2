@@ -22,7 +22,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property Conversation conversation
  * @property User         author
  */
-class ConversationMessage extends Model implements HasPresenter
+class ConversationMessage extends AbstractCachingModel implements HasPresenter
 {
 	/**
 	 * The database table used by the model.

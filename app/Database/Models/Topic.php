@@ -22,7 +22,7 @@ use MyBB\Core\Moderation\Moderations\CloseableInterface;
  * @property Forum forum
  * @property int forum_id
  */
-class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface, ContentInterface
+class Topic extends AbstractCachingModel implements HasPresenter, ApprovableInterface, CloseableInterface, ContentInterface
 {
 	use SoftDeletes;
 

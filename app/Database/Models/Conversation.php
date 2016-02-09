@@ -20,7 +20,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
  * @property ConversationMessage lastMessage
  * @property Collection          participants
  */
-class Conversation extends Model implements HasPresenter
+class Conversation extends AbstractCachingModel implements HasPresenter
 {
 	/**
 	 * The database table used by the model.

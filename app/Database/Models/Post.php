@@ -23,7 +23,7 @@ use MyBB\Core\Moderation\Moderations\ApprovableInterface;
  * @property int id
  * @property User author
  */
-class Post extends Model implements HasPresenter, ApprovableInterface, ContentInterface
+class Post extends AbstractCachingModel implements HasPresenter, ApprovableInterface, ContentInterface
 {
 	use SoftDeletes;
 	use LikeableTrait;
