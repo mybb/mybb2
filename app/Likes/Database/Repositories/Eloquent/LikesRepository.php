@@ -12,8 +12,8 @@
 
 namespace MyBB\Core\Likes\Database\Repositories\Eloquent;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Model;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Likes\Database\Models\Like as LikeModel;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;

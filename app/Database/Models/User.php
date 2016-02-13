@@ -10,19 +10,17 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
-use MyBB\Auth\Authenticatable;
-use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
+use MyBB\Auth\MyBBUserContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 use MyBB\Core\Permissions\Traits\PermissionableTrait;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * @property string id
  */
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasPresenter, PermissionInterface
+class User extends Authenticatable implements MyBBUserContract, CanResetPasswordContract, HasPresenter, PermissionInterface
 {
-	use Authenticatable;
 	use CanResetPassword;
 	use PermissionableTrait;
 
@@ -152,5 +150,37 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			->orderBy('last_message_id', 'desc')
 			->where('conversation_users.has_left', false)
 			->where('conversation_users.ignores', false);
+	}
+
+	/**
+	 * Get the username of the user.
+	 *
+	 * @return string
+	 */
+	public function getUserName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Get the salt for the user.
+	 *
+	 * @return string
+	 */
+	public function getSalt()
+	{
+		return $this->salt;
+	}
+
+	/**
+	 * Get the type of hasher for the user.
+	 *
+	 * Defaults to "core", which sues the built in Laravel hasher (Bcrypt).
+	 *
+	 * @return string
+	 */
+	public function getHasher()
+	{
+		return $this->hasher;
 	}
 }

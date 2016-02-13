@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Query\Builder;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
