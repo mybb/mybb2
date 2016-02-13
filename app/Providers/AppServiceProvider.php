@@ -107,7 +107,8 @@ class AppServiceProvider extends ServiceProvider
 				$repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
 				$cache = $app->make('Illuminate\Contracts\Cache\Repository');
 
-				return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
+
+				//return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
 			}
 		);
 
@@ -143,28 +144,8 @@ class AppServiceProvider extends ServiceProvider
 			}
 		);
 
-		$this->initDefaultUser();
-
-		// Temporary fix for Form...
-		$this->app->bind('Collective\Html\FormBuilder', function ($app) {
-			$form = new \Collective\Html\FormBuilder($app['html'], $app['url'], $app['session.store']->getToken());
-
-			return $form->setSessionStore($app['session.store']);
-		});
+		// TODO: Default user (Guest) = $this->initDefaultUser();
 
 		$this->app->instance('DaveJamesMiller\Breadcrumbs\Manager', $this->app['breadcrumbs']);
-	}
-
-	/**
-	 * Initialise the default (guest) user, using the custom Guard implementation.
-	 */
-	private function initDefaultUser()
-	{
-		/** @var \MyBB\Auth\Contracts\Guard $guard */
-		$guard = $this->app->make('Illuminate\Contracts\Auth\Guard');
-		$defaultUser = new User();
-		$defaultUser->name = 'Guest';
-		$defaultUser->id = -1;
-		$guard->registerDefaultUser($defaultUser);
 	}
 }

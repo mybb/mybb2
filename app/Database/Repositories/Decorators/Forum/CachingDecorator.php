@@ -10,9 +10,9 @@
 
 namespace MyBB\Core\Database\Repositories\Decorators\Forum;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Database\Eloquent\Collection;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;

@@ -8,18 +8,14 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use MyBB\Auth\Contracts\Guard;
-use Settings;
-use View;
 
 abstract class AbstractController extends BaseController
 {
 
-	use DispatchesCommands;
+	use DispatchesJobs;
 	use ValidatesRequests {
 		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
 	}
