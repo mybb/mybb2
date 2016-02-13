@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Providers;
 
+use Collective\Html\FormBuilder;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use MyBB\Core\Database\Models\User;
@@ -147,5 +148,12 @@ class AppServiceProvider extends ServiceProvider
 		// TODO: Default user (Guest) = $this->initDefaultUser();
 
 		$this->app->instance('DaveJamesMiller\Breadcrumbs\Manager', $this->app['breadcrumbs']);
+
+		// Fix for the form builder
+		$this->app->bind(FormBuilder::class, function ($app) {
+			$form = new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->getToken());
+
+			return $form->setSessionStore($app['session.store']);
+		});
 	}
 }

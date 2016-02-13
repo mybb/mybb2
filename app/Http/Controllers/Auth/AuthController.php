@@ -9,10 +9,10 @@
 namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;

@@ -12,7 +12,7 @@
 
 namespace MyBB\Core\Twig\Extensions;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Presenters\User;
 use Twig_SimpleFunction;
 

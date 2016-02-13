@@ -74,195 +74,195 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 
 		DB::table('setting_values')->insert([
 			[
-				'setting_id' => DB::table('settings')->where('name', 'general.board_name')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'general.board_name')->first()->id,
 				'value' => 'MyBB 2.0 Test Install'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->first()->id,
 				'value' => 'MyBB 2.0 Test Install'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'general.site_name')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'general.site_name')->first()->id,
 				'value' => 'MyBB Home'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'general.site_url')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'general.site_url')->first()->id,
 				'value' => 'http://www.mybb.com'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->first()->id,
 				'value' => '15'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'wio.refresh')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'wio.refresh')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.date_format')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.date_format')->first()->id,
 				'value' => 'default'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.time_format')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.time_format')->first()->id,
 				'value' => 'default'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.timezone')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.timezone')->first()->id,
 				'value' => 'default'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.dst')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.dst')->first()->id,
 				'value' => '2'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.follow_started_topics')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.follow_started_topics')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.follow_replied_topics')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.follow_replied_topics')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.show_editor')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.show_editor')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.topics_per_page')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.topics_per_page')->first()->id,
 				'value' => '20'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.posts_per_page')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.posts_per_page')->first()->id,
 				'value' => '10'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.style')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.style')->first()->id,
 				'value' => 'default'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.language')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.language')->first()->id,
 				'value' => 'en'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_like')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_like')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_quote')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_quote')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_post')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_post')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_comment')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_comment')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_like')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_like')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_like')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_like')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_reply')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_reply')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_reply')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_reply')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_message')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_message')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply_message')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply_message')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_group_request')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_group_request')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_moderation_post')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_moderation_post')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_report')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_report')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_username_change')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notify_on_username_change')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.notification_mails')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.notification_mails')->first()->id,
 				'value' => '0'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.showonline')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.showonline')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.receive_messages')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.receive_messages')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.block_blocked_messages')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.block_blocked_messages')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.hide_blocked_posts')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.hide_blocked_posts')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.only_buddy_messages')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.only_buddy_messages')->first()->id,
 				'value' => '0'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.receive_email')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.receive_email')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.dob_privacy')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.dob_privacy')->first()->id,
 				'value' => '2'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->first()->id,
 				'value' => '1'
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->first()->id,
 				'value' => 3,
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->first()->id,
 				'value' => 10,
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_by')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_by')->first()->id,
 				'value' => 'created_at',
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_dir')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_dir')->first()->id,
 				'value' => 'asc',
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->first()->id,
 				'value' => 10,
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->first()->id,
 				'value' => 1,
 			],
 			[
-				'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->pluck('id'),
+				'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->first()->id,
 				'value' => 'desc',
 			],
 		]);

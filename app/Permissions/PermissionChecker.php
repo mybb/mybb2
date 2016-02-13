@@ -125,100 +125,102 @@ class PermissionChecker
 	 */
 	public function hasPermission($content, $contentID, $permission, User $user = null)
 	{
-		$concreteClass = $this->classModel->getClass($content);
-
-		if ($concreteClass == null) {
-			throw new PermissionInvalidContentException($content);
-		}
-
-		if (!($concreteClass instanceof PermissionInterface)) {
-			throw new PermissionImplementInterfaceException($content);
-		}
-
-		if ($user == null) {
-			$user = app('auth.driver')->user();
-		}
-
-		// Handle the array case
-		if (is_array($permission)) {
-			foreach ($permission as $perm) {
-				$hasPermission = $this->hasPermission($content, $contentID, $perm, $user);
-
-				// No need to check more permissions
-				if (!$hasPermission) {
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		// We already calculated the permissions for this user, no need to recheck all roles
-		if (isset($this->permissions[$content][$contentID][$user->getKey()][$permission])) {
-			return $this->permissions[$content][$contentID][$user->getKey()][$permission];
-		}
-
-		// Handle special cases where no role has been set
-		$roles = $user->roles;
-		if ($roles->count() == 0) {
-			if ($user->exists) {
-				// User saved? Something is wrong, attach the registered role
-				$registeredRole = Role::where('role_slug', '=', 'user')->first();
-				$user->roles()->attach($registeredRole->id, ['is_display' => 1]);
-				$roles = [$registeredRole];
-			} else {
-				// Guest
-				if ($this->guestRole == null) {
-					$this->guestRole = Role::where('role_slug', '=', 'guest')->first();
-				}
-				$roles = [$this->guestRole];
-			}
-		}
-
-		// Assume "No" by default
-		$isAllowed = false;
-		foreach ($roles as $role) {
-			$hasPermission = $this->getPermissionForRole($role, $permission, $content, $contentID);
-
-			// If we never want to grant the permission we can skip all other roles. But don't forget to cache it
-			if ($hasPermission == PermissionChecker::NEVER) {
-				$isAllowed = false;
-				break;
-			} // Override our "No" assumption - but don't return yet, we may have a "Never" permission later
-			elseif ($hasPermission == PermissionChecker::YES) {
-				$isAllowed = true;
-			}
-		}
-
-		// No parent? No need to do anything else here
-		if (($concreteClass instanceof InheritPermissionInterface)
-			&& $concreteClass::find($contentID)->getParent() != null
-		) {
-			// If we have a positive permission but need to check parents for negative values do so here
-			if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
-				$isAllowed = $this->hasPermission(
-					$content,
-					$concreteClass::find($contentID)->getParent()->getContentId(),
-					$permission,
-					$user
-				);
-			}
-
-			// Do the same for negative permissions with parent positives
-			if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
-				$isAllowed = $this->hasPermission(
-					$content,
-					$concreteClass::find($contentID)->getParent()->getContentId(),
-					$permission,
-					$user
-				);
-			}
-		}
-
-		// Don't forget to cache the permission for this call
-		$this->permissions[$content][$contentID][$user->getKey()][$permission] = $isAllowed;
-
-		return $isAllowed;
+		// TODO: Permissions should use the new Guard system in Laravel.
+		return true;
+//		$concreteClass = $this->classModel->getClass($content);
+//
+//		if ($concreteClass == null) {
+//			throw new PermissionInvalidContentException($content);
+//		}
+//
+//		if (!($concreteClass instanceof PermissionInterface)) {
+//			throw new PermissionImplementInterfaceException($content);
+//		}
+//
+//		if ($user == null) {
+//			$user = app('auth.driver')->user();
+//		}
+//
+//		// Handle the array case
+//		if (is_array($permission)) {
+//			foreach ($permission as $perm) {
+//				$hasPermission = $this->hasPermission($content, $contentID, $perm, $user);
+//
+//				// No need to check more permissions
+//				if (!$hasPermission) {
+//					return false;
+//				}
+//			}
+//
+//			return true;
+//		}
+//
+//		// We already calculated the permissions for this user, no need to recheck all roles
+//		if (isset($this->permissions[$content][$contentID][$user->getKey()][$permission])) {
+//			return $this->permissions[$content][$contentID][$user->getKey()][$permission];
+//		}
+//
+//		// Handle special cases where no role has been set
+//		$roles = $user->roles;
+//		if ($roles->count() == 0) {
+//			if ($user->exists) {
+//				// User saved? Something is wrong, attach the registered role
+//				$registeredRole = Role::where('role_slug', '=', 'user')->first();
+//				$user->roles()->attach($registeredRole->id, ['is_display' => 1]);
+//				$roles = [$registeredRole];
+//			} else {
+//				// Guest
+//				if ($this->guestRole == null) {
+//					$this->guestRole = Role::where('role_slug', '=', 'guest')->first();
+//				}
+//				$roles = [$this->guestRole];
+//			}
+//		}
+//
+//		// Assume "No" by default
+//		$isAllowed = false;
+//		foreach ($roles as $role) {
+//			$hasPermission = $this->getPermissionForRole($role, $permission, $content, $contentID);
+//
+//			// If we never want to grant the permission we can skip all other roles. But don't forget to cache it
+//			if ($hasPermission == PermissionChecker::NEVER) {
+//				$isAllowed = false;
+//				break;
+//			} // Override our "No" assumption - but don't return yet, we may have a "Never" permission later
+//			elseif ($hasPermission == PermissionChecker::YES) {
+//				$isAllowed = true;
+//			}
+//		}
+//
+//		// No parent? No need to do anything else here
+//		if (($concreteClass instanceof InheritPermissionInterface)
+//			&& $concreteClass::find($contentID)->getParent() != null
+//		) {
+//			// If we have a positive permission but need to check parents for negative values do so here
+//			if ($isAllowed && in_array($permission, $concreteClass::getNegativeParentOverrides())) {
+//				$isAllowed = $this->hasPermission(
+//					$content,
+//					$concreteClass::find($contentID)->getParent()->getContentId(),
+//					$permission,
+//					$user
+//				);
+//			}
+//
+//			// Do the same for negative permissions with parent positives
+//			if (!$isAllowed && in_array($permission, $concreteClass::getPositiveParentOverrides())) {
+//				$isAllowed = $this->hasPermission(
+//					$content,
+//					$concreteClass::find($contentID)->getParent()->getContentId(),
+//					$permission,
+//					$user
+//				);
+//			}
+//		}
+//
+//		// Don't forget to cache the permission for this call
+//		$this->permissions[$content][$contentID][$user->getKey()][$permission] = $isAllowed;
+//
+//		return $isAllowed;
 	}
 
 	/**

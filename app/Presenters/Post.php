@@ -10,9 +10,9 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\Post as PostModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Likes\Database\Models\Like;
@@ -38,7 +38,7 @@ class Post extends BasePresenter
 	 */
 	public function __construct(PostModel $resource, Guard $guard, Application $app)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->guard = $guard;
 		$this->app = $app;
 	}

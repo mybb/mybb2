@@ -9,12 +9,12 @@
 namespace MyBB\Core\Twig\Extensions;
 
 use McCool\LaravelAutoPresenter\BasePresenter;
-use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\LaravelAutoPresenter\AutoPresenter;
 
 class Presenter extends \Twig_Extension
 {
 	/**
-	 * @var PresenterDecorator
+	 * @var AutoPresenter
 	 */
 	protected $decorator;
 
@@ -29,9 +29,9 @@ class Presenter extends \Twig_Extension
 	}
 
 	/**
-	 * @param PresenterDecorator $decorator
+	 * @param AutoPresenter $decorator
 	 */
-	public function __construct(PresenterDecorator $decorator)
+	public function __construct(AutoPresenter $decorator)
 	{
 		$this->decorator = $decorator;
 	}

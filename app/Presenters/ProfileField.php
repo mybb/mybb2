@@ -8,10 +8,9 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Database\Models\ProfileField as ProfileFieldModel;
-use MyBB\Core\Database\Models\ProfileFieldOption;
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Form\RenderableInterface;

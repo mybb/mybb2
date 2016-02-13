@@ -10,12 +10,11 @@
 
 namespace MyBB\Core\Presenters;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Auth\Contracts\Guard;
-use MyBB\Core\Database\Models\Permission;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;

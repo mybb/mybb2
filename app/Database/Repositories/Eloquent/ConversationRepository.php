@@ -10,8 +10,8 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Auth\Guard;
 use Illuminate\Support\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\User;

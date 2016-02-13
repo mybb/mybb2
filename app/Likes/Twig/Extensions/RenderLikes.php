@@ -12,10 +12,10 @@
 
 namespace MyBB\Core\Likes\Twig\Extensions;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Translation\Translator;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Likes\Database\Models\Like;
 use MyBB\Settings\Store;
 use Twig_SimpleFunction;

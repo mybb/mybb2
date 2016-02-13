@@ -142,6 +142,7 @@ return [
 		/**
 		 * Extension Service Providers...
 		 */
+		Collective\Html\HtmlServiceProvider::class,
 		TwigBridge\ServiceProvider::class,
 		McCool\LaravelAutoPresenter\AutoPresenterServiceProvider::class,
 		Barryvdh\Debugbar\ServiceProvider::class,

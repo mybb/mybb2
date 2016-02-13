@@ -4,7 +4,7 @@
 {% endblock %}
 {% block head %}
 	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
-	<link rel="canonical" href="{{ url_route("topics.show", [topic.slug]) }}" />
+	<link rel="canonical" href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" />
 {% endblock %}
 {% block contents %}
 	<div class="page-content">

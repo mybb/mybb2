@@ -17,89 +17,89 @@ class PermissionRoleTableSeeder extends Seeder
 
 		$permissions_role = [
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterACP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterACP')->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterMCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterMCP')->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->first()->id,
 				'value' => 0
 			],
 			[
-				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
+				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canEnterUCP')->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->first()->id,
 				'value' => -1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'banned')->first()->id,
 				'value' => 0
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canUseConversations')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'guest')->first()->id,
 				'value' => -1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canViewAllOnline')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canModerate')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canApprove')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canClose')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canDeletePosts')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canDeleteTopics')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMergePosts')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMovePosts')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 			[
 				'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canMoveTopics')
-					->pluck('id'),
-				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->pluck('id'),
+					->first()->id,
+				'role_id' => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
 				'value' => 1
 			],
 		];

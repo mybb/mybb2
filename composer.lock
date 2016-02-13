@@ -1571,12 +1571,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/Auth.git",
-                "reference": "16f22986f4588d37dedf865feb66b2313eebdde6"
+                "reference": "7adcc94e7cd49fdd1267b78b2abbec3b6da24e87"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/mybb/Auth/zipball/7adcc94e7cd49fdd1267b78b2abbec3b6da24e87",
-                "reference": "16f22986f4588d37dedf865feb66b2313eebdde6",
+                "reference": "7adcc94e7cd49fdd1267b78b2abbec3b6da24e87",
                 "shasum": ""
             },
             "require": {
@@ -1603,7 +1603,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2015-12-27 15:24:37"
+            "time": "2016-02-13 15:32:31"
         },
         {
             "name": "mybb/gravatar",
@@ -1651,12 +1651,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/Parser.git",
-                "reference": "f5497c86d7a61016443e9df7dd4e4097f492982f"
+                "reference": "b681badf68605dc22057a29bdd196710e0441b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Parser/zipball/eed2bf0541a271723de5c181b70c6c50586a4b70",
-                "reference": "f5497c86d7a61016443e9df7dd4e4097f492982f",
+                "url": "https://api.github.com/repos/mybb/Parser/zipball/b681badf68605dc22057a29bdd196710e0441b51",
+                "reference": "b681badf68605dc22057a29bdd196710e0441b51",
                 "shasum": ""
             },
             "require": {
@@ -1684,7 +1684,7 @@
                 "source": "https://github.com/mybb/Parser/tree/master",
                 "issues": "https://github.com/mybb/Parser/issues"
             },
-            "time": "2015-12-27 15:28:50"
+            "time": "2016-02-13 17:05:54"
         },
         {
             "name": "mybb/settings",

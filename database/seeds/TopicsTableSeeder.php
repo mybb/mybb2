@@ -17,8 +17,8 @@ class TopicsTableSeeder extends Seeder
 		$topic = [
 			'title' => 'My Topic',
 			'slug' => 'my-topic',
-			'forum_id' => DB::table('forums')->where('slug', 'my-forum')->pluck('id'),
-			'user_id' => DB::table('users')->where('name', 'Admin')->pluck('id'),
+			'forum_id' => DB::table('forums')->where('slug', 'my-forum')->first()->id,
+			'user_id' => DB::table('users')->where('name', 'Admin')->first()->id,
 			'username' => 'Admin',
 			'first_post_id' => null,
 			'last_post_id' => null,
