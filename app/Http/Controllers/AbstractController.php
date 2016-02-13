@@ -14,7 +14,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 abstract class AbstractController extends BaseController
 {
-
 	use DispatchesJobs;
 	use ValidatesRequests {
 		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;

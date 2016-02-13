@@ -9,6 +9,7 @@
 namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -34,29 +35,34 @@ class AuthController extends Controller
 	use AuthenticatesAndRegistersUsers;
 
 	/**
-	 * @var Breadcrumbs
+	 * @var AuthManager $auth
+	 */
+	private $auth;
+
+	/**
+	 * @var Breadcrumbs $breadcrumbs
 	 */
 	private $breadcrumbs;
 
 	/**
-	 * @var Factory
+	 * @var Factory $validator
 	 */
 	private $validator;
 
 	/**
-	 * @var Request
+	 * @var Request $request
 	 */
 	private $request;
 
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param Guard       $auth
+	 * @param AuthManager       $auth
 	 * @param Breadcrumbs $breadcrumbs
 	 * @param Factory     $validator
 	 * @param Request     $request
 	 */
-	public function __construct(Guard $auth, Breadcrumbs $breadcrumbs, Factory $validator, Request $request)
+	public function __construct(AuthManager $auth, Breadcrumbs $breadcrumbs, Factory $validator, Request $request)
 	{
 		$this->auth = $auth;
 		$this->breadcrumbs = $breadcrumbs;
