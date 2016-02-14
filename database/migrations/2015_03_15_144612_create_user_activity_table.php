@@ -24,7 +24,7 @@ class CreateUserActivityTable extends Migration
 			$table->unsignedInteger('user_id');
 			$table->string('activity_type');
 			$table->unsignedInteger('activity_id');
-			$table->json('extra_details')->nullable();
+			$table->text('extra_details')->nullable();
 			$table->nullableTimestamps();
 
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

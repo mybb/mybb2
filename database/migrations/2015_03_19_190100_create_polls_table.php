@@ -25,7 +25,7 @@ class CreatePollsTable extends Migration
 			$table->unsignedInteger('user_id')->nullable();
 			$table->string('question');
 			$table->unsignedInteger('num_options');
-			$table->json('options');
+			$table->text('options');
 			$table->boolean('is_closed')->default(false);
 			$table->boolean('is_multiple')->default(false);
 			$table->unsignedInteger('max_options');
