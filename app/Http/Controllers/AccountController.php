@@ -8,7 +8,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
