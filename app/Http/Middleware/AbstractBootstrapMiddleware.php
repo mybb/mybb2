@@ -9,11 +9,10 @@
 namespace MyBB\Core\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 
-abstract class AbstractBootstrapMiddleware implements Middleware
+abstract class AbstractBootstrapMiddleware
 {
 	/**
 	 * Handle an incoming request.

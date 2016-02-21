@@ -9,8 +9,8 @@
 namespace MyBB\Core\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\View\Factory;
-use MyBB\Auth\Contracts\Guard;
 
 class ShareViewVariables extends AbstractBootstrapMiddleware
 {

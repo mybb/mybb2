@@ -9,7 +9,6 @@
 namespace MyBB\Core\Http\Middleware;
 
 use Closure;
-use MyBB\Auth\Contracts\Guard;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

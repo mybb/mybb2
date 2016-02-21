@@ -34,7 +34,7 @@ class Kernel extends HttpKernel
 			\Illuminate\Session\Middleware\StartSession::class,
 			\Illuminate\View\Middleware\ShareErrorsFromSession::class,
 			\MyBB\Core\Http\Middleware\VerifyCsrfToken::class,
-			\MyBB\Settings\Middleware\SaveSettingsOnTerminate::class,
+			//\MyBB\Settings\Middleware\SaveSettingsOnTerminate::class,
 			\MyBB\Core\Http\Middleware\SetupLanguage::class,
 			\MyBB\Core\Http\Middleware\ShareViewVariables::class,
 			\MyBB\Core\Http\Middleware\UpdateLastVisit::class,

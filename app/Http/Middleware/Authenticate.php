@@ -9,7 +9,7 @@
 namespace MyBB\Core\Http\Middleware;
 
 use Closure;
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 
 class Authenticate
 {

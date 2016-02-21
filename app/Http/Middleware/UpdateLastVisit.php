@@ -10,8 +10,8 @@ namespace MyBB\Core\Http\Middleware;
 
 use Closure;
 use Illuminate\Config\Repository;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Routing\Router;
-use MyBB\Auth\Contracts\Guard;
 
 class UpdateLastVisit extends AbstractBootstrapMiddleware
 {

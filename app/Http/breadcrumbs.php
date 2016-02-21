@@ -24,7 +24,7 @@ Breadcrumbs::register('forums.show', function ($breadcrumbs, $forum) {
 	} else {
 		$breadcrumbs->parent('forum.index');
 	}
-	$breadcrumbs->push($forum->title, route('forums.show', [$forum->slug, $forum->id]));
+	$breadcrumbs->push($forum->title, route('forums.show', ['slug' => $forum->slug, 'id' => $forum->id]));
 });
 
 Breadcrumbs::register('topics.show', function ($breadcrumbs, $topic) {
@@ -32,43 +32,43 @@ Breadcrumbs::register('topics.show', function ($breadcrumbs, $topic) {
 	if ($topic->forum) {
 		$breadcrumbs->parent('forums.show', $topic->forum);
 	}
-	$breadcrumbs->push($topic->title, route('topics.show', [$topic->slug, $topic->id]));
+	$breadcrumbs->push($topic->title, route('topics.show', ['sug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('topics.reply', function ($breadcrumbs, $topic) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('topic.reply'), route('topics.reply', [$topic->slug, $topic->id]));
+	$breadcrumbs->push(trans('topic.reply'), route('topics.reply', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('topics.edit', function ($breadcrumbs, $topic) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('topic.edit'), route('topics.edit', [$topic->slug, $topic->id]));
+	$breadcrumbs->push(trans('topic.edit'), route('topics.edit', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('topics.create', function ($breadcrumbs, $forum) {
 
 	$breadcrumbs->parent('forums.show', $forum);
-	$breadcrumbs->push(trans('topic.create.title'), route('topics.create', [$forum->slug, $forum->id]));
+	$breadcrumbs->push(trans('topic.create.title'), route('topics.create', ['slug' => $forum->slug, 'id' => $forum->id]));
 });
 
 Breadcrumbs::register('polls.create', function ($breadcrumbs, $topic) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('poll.addPoll'), route('polls.create', [$topic->slug, $topic->id]));
+	$breadcrumbs->push(trans('poll.addPoll'), route('polls.create', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('polls.show', function ($breadcrumbs, $topic) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('poll.pollResults'), route('polls.show', [$topic->slug, $topic->id]));
+	$breadcrumbs->push(trans('poll.pollResults'), route('polls.show', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('polls.edit', function ($breadcrumbs, $topic) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('poll.editPoll'), route('polls.edit', [$topic->slug, $topic->id]));
+	$breadcrumbs->push(trans('poll.editPoll'), route('polls.edit', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
 Breadcrumbs::register('members', function ($breadcrumbs) {
