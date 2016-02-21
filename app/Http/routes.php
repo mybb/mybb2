@@ -7,15 +7,8 @@
  */
 
 /*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-| tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-| quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-|
-*/
+ * API Routes
+ */
 
 Route::group(['prefix' => 'api/v1'], function () {
 	Route::get('topics', ['as' => 'api.v1.topics.all', 'uses' => 'Api\TopicApiController@index']);
@@ -23,41 +16,34 @@ Route::group(['prefix' => 'api/v1'], function () {
 });
 
 /*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+ * Applicaiton Routes
+ */
 
 Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
 
 Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
-Route::get('forum/{slug}.{id}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
+Route::get('forum/{id}/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 
-Route::get('topic/{slug}.{id}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
-Route::get('topic/{slug}.{id}/post/{postId}', ['as' => 'topics.showPost', 'uses' => 'TopicController@showPost']);
-Route::get('topic/{slug}.{id}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
+Route::get('topic/{id}/{slug}', ['as' => 'topics.show', 'uses' => 'TopicController@show']);
+Route::get('topic/{id}/{slug}/post/{postId}', ['as' => 'topics.showPost', 'uses' => 'TopicController@showPost']);
+Route::get('topic/{id}/{slug}/last', ['as' => 'topics.last', 'uses' => 'TopicController@last']);
 
-Route::get('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
-Route::get('topic/{slug}.{id}/reply/{postId}', ['as' => 'topics.quote', 'uses' => 'TopicController@reply']);
+Route::get('topic/{id}/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@reply']);
+Route::get('topic/{id}/{slug}/reply/{postId}', ['as' => 'topics.quote', 'uses' => 'TopicController@reply']);
 
-Route::post('topic/{slug}.{id}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@postReply']);
+Route::post('topic/{id}/{slug}/reply', ['as' => 'topics.reply', 'uses' => 'TopicController@postReply']);
 
-Route::get('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
-Route::post('topic/{slug}.{id}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
+Route::get('topic/{id}/{slug}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@edit']);
+Route::post('topic/{id}/{slug}/edit/{postId}', ['as' => 'topics.edit', 'uses' => 'TopicController@postEdit']);
 
-Route::get('topic/{slug}.{id}/delete/{postId}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
-Route::get('topic/{slug}.{id}/restore/{postId}', ['as' => 'topics.restore', 'uses' => 'TopicController@restore']);
+Route::get('topic/{id}/{slug}/delete/{postId}', ['as' => 'topics.delete', 'uses' => 'TopicController@delete']);
+Route::get('topic/{id}/{slug}/restore/{postId}', ['as' => 'topics.restore', 'uses' => 'TopicController@restore']);
 
 Route::get('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@create']);
 Route::post('topic/create/{forumId}', ['as' => 'topics.create', 'uses' => 'TopicController@postCreate']);
 
-Route::get('topic/{slug}.{id}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
-Route::post('topic/{slug}.{id}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
+Route::get('topic/{id}/{slug}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
+Route::post('topic/{id}/{slug}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
 Route::post('topic/{topicSlug}.{topicId}/poll/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
 Route::get('topic/{topicSlug}.{topicId}/poll/', ['as' => 'polls.show', 'uses' => 'PollController@show']);
 Route::get('topic/{topicSlug}.{topicId}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
@@ -84,7 +70,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('/user/{slug}.{id}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+Route::get('/user/{id}/{slug}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
 	Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
@@ -152,9 +138,9 @@ Route::group(['prefix' => 'moderation'], function () {
 		'prefix' => 'control-panel',
 		['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP']
 	], function () {
-			Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
-			Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
-			Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
+		Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
+		Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
+		Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
 	});
 });
 

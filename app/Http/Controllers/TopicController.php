@@ -102,7 +102,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show(Request $request, $slug = '', $id = 0)
+	public function show(Request $request, $id, $slug)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -136,7 +136,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function showPost(Store $settings, $slug = '', $id = 0, $postId = 0)
+	public function showPost(Store $settings, $id, $slug, $postId = 0)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -174,7 +174,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function last(Store $settings, $slug = '', $id = 0)
+	public function last(Store $settings, $id, $slug)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -213,7 +213,7 @@ class TopicController extends AbstractController
 	 *
 	 * @throws \Exception
 	 */
-	public function reply($slug, $id, Request $request, MessageFormatter $formatter, $postId = null)
+	public function reply($id, $slug, Request $request, MessageFormatter $formatter, $postId = null)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -275,7 +275,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
-	public function postReply($slug, $id, ReplyRequest $replyRequest)
+	public function postReply($id, $slug, ReplyRequest $replyRequest)
 	{
 		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
 
@@ -315,7 +315,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function edit($slug = '', $id = 0, $postId = 0)
+	public function edit($id, $slug, $postId = 0)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -338,7 +338,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Exception|\Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit($slug, $id, $postId, ReplyRequest $replyRequest)
+	public function postEdit($id, $slug, $postId, ReplyRequest $replyRequest)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -482,7 +482,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($slug, $id, $postId, TopicDeleter $topicDeleter)
+	public function delete($id, $slug, $postId, TopicDeleter $topicDeleter)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);
@@ -511,7 +511,7 @@ class TopicController extends AbstractController
 	 *
 	 * @return \Exception|\Illuminate\Http\RedirectResponse
 	 */
-	public function restore($slug = '', $id = 0, $postId = 0)
+	public function restore($id, $slug, $postId = 0)
 	{
 		// Forum permissions are checked in "find"
 		$topic = $this->topicRepository->find($id);

@@ -14,13 +14,13 @@
 				{% for forum in category.children.toTree %}
 					<div class="forum">
 						<div class="forum__info">
-							<h3 class="forum__title"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></h3>
+							<h3 class="forum__title"><a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
 							<p class="forum__description">{{ forum.description }}</p>
 							{% if forum.children.toTree %}
 								<ul class="forum__subforums">
 									<i class="fa fa-level-up"></i>
 									{% for subforum in forum.children.toTree %}
-										<li class="subforum"><a href="{{ url_route("forums.show", [subforum.slug, subforum.id]) }}" class="subforum__title">{{ subforum.title }}</a></li>
+										<li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
 									{% endfor %}
 								</ul>
 							{% endif %}
@@ -28,8 +28,8 @@
 						{% if forum.hasLastPost %}
 							<div class="forum__topic forum__topic--latest">
 								<a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
-								<h4 class="forum__topic__title"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug, forum.lastPost.topic.id]) }}">{{ forum.lastPost.topic.title }}</a></h4>
-								<p class="forum__topic__post">{{ post_date_link(url_route("topics.last", [forum.lastPost.topic.slug, forum.lastPost.topic.id]), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
+								<h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
+								<p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
 							</div>
 						{% endif %}
 					</div>

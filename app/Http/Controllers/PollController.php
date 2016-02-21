@@ -133,7 +133,7 @@ class PollController extends AbstractController
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function create($slug, $id)
+	public function create($id, $slug)
 	{
 		$topic = $this->topicRepository->find($id);
 
@@ -153,7 +153,7 @@ class PollController extends AbstractController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postCreate($slug, $id, CreateRequest $createRequest)
+	public function postCreate($id, $slug, CreateRequest $createRequest)
 	{
 		$topic = $this->topicRepository->find($id);
 

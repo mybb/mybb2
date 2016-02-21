@@ -2,7 +2,7 @@
 {% block title %}{{ forum.title }}{% endblock %}
 {% block head %}
 	<meta name="description" content="{{ forum.description }}" />
-	<link rel="canonical" href="{{ url_route("forums.show", [forum.slug]) }}" />
+	<link rel="canonical" href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}" />
 {% endblock %}
 {% block contents %}
 		<div class="page-content">
@@ -20,13 +20,13 @@
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">
 								<div class="forum__info">
-									<h3 class="forum__title"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></h3>
+									<h3 class="forum__title"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
 									<p class="forum__description">{{ forum.description }} </p>
 									{% if forum.children.count > 0 %}
 										{% for subforum in forum.children.toTree %}
 											<ul class="forum__subforums">
 												<i class="fa fa-level-up"></i>
-												<li class="subforum"><a href="{{ url_route("forums.show", [subforum.slug, subforum.id]) }}" class="subforum__title">{{ subforum.title }}</a></li>
+												<li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
 											</ul>
 										{% endfor %}
 									{% endif %}
@@ -34,8 +34,8 @@
 							   {% if forum.hasLastPost %}
 								   <div class="forum__topic forum__topic--latest">
 									   <a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
-									   <h4 class="forum__topic__title"><a href="{{ url_route("topics.show", [forum.lastPost.topic.slug, forum.lastPost.topic.id]) }}">{{ forum.lastPost.topic.title }}</a></h4>
-									   <p class="forum__topic__post">{{ post_date_link(url_route("topics.last", [forum.lastPost.topic.slug, forum.lastPost.topic.id]), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
+									   <h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
+									   <p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
 								   </div>
 							   {% endif %}
 						   </div>
@@ -51,13 +51,13 @@
 				<div class="page-buttons">
 					<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
 					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
-					<a href="{{ url_route("topics.create", [forum.id]) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
+					<a href="{{ url_route("topics.create", {'id': forum.id}) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
 				</div>
 			</div>
 			<section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">
 				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
 				<div class="topic-list__sort-topics">
-					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
+					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 						{{ trans('forum.topictitle') }}
 						{% if orderBy == 'title' %}
 							{% if orderDir == 'desc' %}
@@ -67,7 +67,7 @@
 							{% endif %}
 						{% endif %}
 					</a>
-					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
+					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
 						{{ trans('forum.startdate') }}
 						{% if orderBy == 'startdate' %}
 							{% if orderDir == 'desc' %}
@@ -77,7 +77,7 @@
 							{% endif %}
 						{% endif %}
 					</a>
-					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
+					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
 						{{ trans('forum.replies') }}
 						{% if orderBy == 'replies' %}
 							{% if orderDir == 'desc' %}
@@ -87,7 +87,7 @@
 							{% endif %}
 						{% endif %}
 					</a>
-					<a href="{{ url_route("forums.show", {0: forum.slug, 1: forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
+					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
 						{{ trans('forum.latestpost') }}
 						{% if orderBy == 'lastpost' %}
 							{% if orderDir == 'desc' %}
@@ -107,7 +107,7 @@
 						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
 							<div class="primary-column">
 								<h3 class="topic__title">
-									<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+									<a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
 									<span class="topic__icons icons">
 										{% if topic.closed == true %}
 										<i class="fa fa-lock fa-fw" title="{{ trans('forum.closedtopic') }}"></i>
@@ -120,7 +120,7 @@
 								<h4>{{ trans('topic.firstpost') }}</h4>
 								<p class="topic__post topic__post--first">
 									<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
-									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.created_at) }}
+									{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
 								</p>
 							</div>
 							<div class="replies-column">
@@ -149,7 +149,7 @@
 					{% endfor %}
 				</div>
 
-				{{ form_open({'url_route': url_route('forums.show', {0: forum.slug, 1: forum.id }), 'method': 'get'}) }}
+				{{ form_open({'url_route': url_route('forums.show', {'slug': forum.slug, 'id': forum.id }), 'method': 'get'}) }}
 				<div class="sort-results">
 					<h3>{{ trans('general.sorting') }}</h3>
 					{{ form_select('orderBy', {

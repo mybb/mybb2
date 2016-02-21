@@ -47,8 +47,8 @@ class UserController extends AbstractController
 	 * @return \Illuminate\View\View
 	 */
 	public function profile(
-		$slug,
 		$id,
+		$slug,
 		ProfileFieldGroupRepositoryInterface $profileFieldGroups,
 		Breadcrumbs $breadcrumbs
 	) {
