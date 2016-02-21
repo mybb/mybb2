@@ -4,7 +4,7 @@
 {% endblock %}
 {% block head %}
 	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
-	<link rel="canonical" href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" />
+	<link rel="canonical" href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}" />
 {% endblock %}
 {% block contents %}
 	<div class="page-content">
@@ -16,7 +16,7 @@
 			<div class="page-buttons">
 				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
 				{% if not topic.has_poll %}
-					<a href="{{ url_route('polls.create', {slug:topic.slug, id:topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
+					<a href="{{ url_route('polls.create', {'slug': topic.slug, 'id': topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
 				{% endif %}
                 {% if not topic.closed %}
 				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
@@ -31,9 +31,9 @@
 				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
-						<a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
+						<a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
 						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
-						{{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
+						{{ post_date_link(url_route('topics.showPost', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}), post.created_at) }}
 						{% if post.trashed or (topic.trashed and loop.first) %}
 							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
@@ -57,12 +57,12 @@
 					</div>
 					<div class="post__foot">
 						<ul class="post__controls">
-								<li class="edit"><a href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
+								<li class="edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
 							{% if post.trashed or (topic.trashed and loop.first) %}
-								<li class="restore"><a href="{{ url_route("topics.restore", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}
-								<li class="delete"><a href="{{ url_route("topics.delete", [topic.slug, topic.id, post.id]) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+								<li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 								<li class="like">
                                 {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
                                     {{ form_hidden('post_id', post.id) }}
@@ -73,7 +73,7 @@
                                     {% endif %}
                                 {{ form_close() }}
                             	</li>
-                                <li class="quote"><a class="quote-button" href="{{ url_route('topics.quote', [topic.slug, topic.id, post.id]) }}">
+                                <li class="quote"><a class="quote-button" href="{{ url_route('topics.quote', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}">
 										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
 								</li>
 							{% endif %}

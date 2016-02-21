@@ -14,9 +14,9 @@
                     <a href="{{ url_route('user.profile', {'slug': topic.lastPost.author.name, 'id': topic.lastPost.author.id}) }}" data-user-id="{{ topic.lastPost.author.id }}" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }} avatar" class="avatar" /></a>
                     <div class="topic__info">
                         {# TODO: the unread class is hardcoded and needs to be properly implemented #}
-                        <h3 class="topic__title topic__title--unread"><a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a></h3>
-                        <p class="topic__post topic__post--latest">{{ post_date_link(url_route("topics.last", [topic.slug, topic.id]), topic.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(topic.lastPost.author) }}</p>
-                        <p class="topic__forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", [topic.forum.slug, topic.forum.id]) }}">{{ topic.forum.title }}</a></p>
+                        <h3 class="topic__title topic__title--unread"><a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a></h3>
+                        <p class="topic__post topic__post--latest">{{ post_date_link(url_route("topics.last", {'slug': topic.slug, 'id': topic.id}), topic.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(topic.lastPost.author) }}</p>
+                        <p class="topic__forum">{{ trans('general.in') }} <a href="{{ url_route("forums.show", {'slug': topic.forum.slug, 'id': topic.forum.id}) }}">{{ topic.forum.title }}</a></p>
                         <p class="topic__replies caption" title="{{ trans_choice('topic.numreplies', topic.replies) }} &middot; {{ trans_choice('topic.numviews', topic.views) }}"><i class="fa fa-comment"></i><span class="count">{{ topic.replies }}</span><span class="text"> {{ trans('topic.replies') }}</span></p>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
 		<div class="forum-list forum-list--compact">
 		{% for category in forums %}
 			<div class="category">
-				<h4><a href="{{ url_route("forums.show", [category.slug, category.id]) }}">{{ category.title }}</a></h4>
+				<h4><a href="{{ url_route("forums.show", {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a></h4>
 				<ul class="category__forums">
 				{% for forum in category.children.toTree %}
-					<li class="category__forum"><a href="{{ url_route("forums.show", [forum.slug, forum.id]) }}">{{ forum.title }}</a></li>
+					<li class="category__forum"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></li>
 				{% else %}
 					{#Do nothing, no subforums for this category#}
 				{% endfor %}
