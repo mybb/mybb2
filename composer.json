@@ -69,16 +69,18 @@
 	},
 	"scripts": {
 		"post-install-cmd": [
+			"php -r \"copy('.env.example', '.env');\"",
+			"php artisan key:generate",
+			"php artisan vendor:publish",
 			"php artisan clear-compiled",
 			"php artisan optimize"
+		],
+		"pre-update-cmd": [
+			"php artisan clear-compiled"
 		],
 		"post-update-cmd": [
-			"php artisan clear-compiled",
+			"php artisan vendor:publish",
 			"php artisan optimize"
-		],
-		"post-create-project-cmd": [
-			"php -r \"copy('.env.example', '.env');\"",
-			"php artisan key:generate"
 		],
         "test-unit": "vendor/bin/phpunit --testsuite unit",
         "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report",
