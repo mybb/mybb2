@@ -13,7 +13,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Breadcrumbs;
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
