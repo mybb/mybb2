@@ -13,7 +13,6 @@
 		"mybb/settings": "dev-master",
 		"jenssegers/date": "~3.0",
 		"greggilbert/recaptcha": "^2.0.3",
-		"mybb/are-you-a-human": "1.1.*",
 		"mybb/gravatar": "dev-master",
 		"rcrowe/twigbridge": "^0.9.1",
 		"mccool/laravel-auto-presenter": "^4.2",
