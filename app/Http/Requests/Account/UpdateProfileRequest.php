@@ -12,11 +12,11 @@ use MyBB\Core\Database\Models\ProfileField;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Http\Requests\AbstractRequest;
-use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequestTrait;
+use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequestSubmitTrait;
 
 class UpdateProfileRequest extends AbstractRequest
 {
-	use ProfileFieldRequestTrait {
+	use ProfileFieldRequestSubmitTrait {
 		rules as traitRules;
 	}
 
@@ -48,6 +48,7 @@ class UpdateProfileRequest extends AbstractRequest
 		ProfileFieldRepositoryInterface $profileFieldsRepository,
 		ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
 	) {
+		parent::__construct();
 		$this->profileFieldsRepository = $profileFieldsRepository;
 		$this->profileFieldGroupRepository = $profileFieldGroupRepository;
 	}
