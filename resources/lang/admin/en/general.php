@@ -17,5 +17,6 @@ return [
 	'success_created' => 'Created!',
 	'control_panel' => 'Control Panel',
 	'dashboard' => 'Dashboard',
-	'users_roles' => 'Users & Roles'
+	'users_roles' => 'Users & Roles',
+	'title' => 'Administration'
 ];

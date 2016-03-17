@@ -18,12 +18,19 @@
                     </a>
                 </li>
                 {% if auth_user.hasPermission('canEnterMCP') %}
-                    <li>
-                        <a href="{{ url_route('moderation.control_panel') }}" class="multi-link">
-                            <i class="fa fa-pencil fa-fw"></i><span class="text">{{ trans('moderation.title') }}</span>
-                        </a>
-                    </li>
-                {% endif %}
+					<li>
+						<a href="{{ url_route('moderation.control_panel') }}" class="multi-link">
+							<i class="fa fa-pencil fa-fw"></i><span class="text">{{ trans('moderation.title') }}</span>
+						</a>
+					</li>
+				{% endif %}
+				{% if auth_user.hasPermission('canEnterACP') %}
+					<li>
+						<a href="{{ url_route('admin.dashboard') }}" class="multi-link">
+							<i class="fa fa-pencil fa-fw"></i><span class="text">{{ trans('admin::general.title') }}</span>
+						</a>
+					</li>
+				{% endif %}
                 <li>
                     <a href="{{ url_route('account.following') }}" class="multi-link">
                         <i class="fa fa-plus fa-fw"></i><span class="text">{{ trans('account.following') }}</span>
