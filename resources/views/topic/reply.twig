@@ -9,7 +9,7 @@
 		<header>
 			<h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
 		</header>
-		{{ form_open({'route': ['topics.reply', topic.slug, topic.id], 'method': 'post', 'id': 'topicreply'}) }}
+		{{ form_open({'route': ['topics.reply', topic.id, topic.slug], 'method': 'post', 'id': 'topicreply'}) }}
 		<section class="topic topic--reply">
 			<div class="post post--reply">
 				<div class="post__meta">
@@ -33,7 +33,7 @@
 					{% endif %}
 					<div class="post__foot">
 						<ul class="post__controls">
-							<li class="preview"><a href="{{ url_route('topics.reply', [topic.slug, topic.id]) }}" onclick="return submitFormAsGet('topicreply');"><i class="fa fa-edit"></i><span class="text">{{ trans('general.preview') }}</span></a></li>
+							<li class="preview"><a href="{{ url_route('topics.reply', [topic.id, topic.slug]) }}" onclick="return submitFormAsGet('topicreply');"><i class="fa fa-edit"></i><span class="text">{{ trans('general.preview') }}</span></a></li>
 							<li class="attach"><a href="#attach"><i class="fa fa-paperclip"></i><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
 						</ul>
 					</div>
