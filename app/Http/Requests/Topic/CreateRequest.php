@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Http\Requests\Topic;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\AbstractRequest;
 use MyBB\Core\Permissions\PermissionChecker;
 

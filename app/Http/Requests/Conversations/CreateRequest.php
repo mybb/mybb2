@@ -10,7 +10,8 @@
 
 namespace MyBB\Core\Http\Requests\Conversations;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
+
 
 class CreateRequest extends ParticipantRequest
 {
