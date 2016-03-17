@@ -1,5 +1,5 @@
 			<div class="post post--reply post--quick-reply" id="post-reply">
-				{{ form_open({'route': ['topics.reply', topic.id, topic.slug], 'method': 'post', 'id': 'quickreply'}) }}
+				<form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="quickreply">
 					<div class="post__meta">
 						<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
 
@@ -10,7 +10,7 @@
 						{% endif %}
 						<span class="post__date">{{ trans('general.now') }}</span>
 						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
-						<a href="{{ url_route("topics.reply", [topic.slug, topic.id]) }}" class="full-reply" title="Open Full Editor"
+						<a href="{{ url_route("topics.reply", {'slug': topic.slug, 'id': topic.id}) }}" class="full-reply" title="Open Full Editor"
 								onclick="return submitFormAsGet('quickreply');">
 							<i class="fa fa-external-link"></i>
 							<span class="text">{{ trans('topic.fullEditor') }}</span>
@@ -30,11 +30,11 @@
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->
-						<a href="{{ url_route('topics.reply', [topic.id, topic.slug]) }}" class="button button--secondary"
+						<a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary"
 						   onclick="return submitFormAsGet('quickreply');">
 							<i class="fa fa-edit"></i>
 							<span class="text">{{ trans('general.preview') }}</span>
 						</a>
 					</div>
-				{{ form_close() }}
+				</form>
 			</div>
