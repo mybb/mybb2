@@ -11,7 +11,7 @@
 namespace MyBB\Core\Http\Requests\Conversations;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Http\Requests\AbstractRequest;
 
