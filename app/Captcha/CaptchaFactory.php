@@ -26,7 +26,6 @@ class CaptchaFactory implements CaptchaInterface
 
 	const NONE = 'none';
 	const MYBB = 'mybb';
-	const AYAH = 'ayah';
 	const RECAPTCHA = 'recaptcha';
 	const NOCAPTCHA = 'nocaptcha';
 

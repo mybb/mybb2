@@ -22,8 +22,6 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
 			['name' => 'wio.minutes'],
 			['name' => 'wio.refresh'],
 			['name' => 'captcha.method'],
-			['name' => 'captcha.ayah_public_key'],
-			['name' => 'captcha.ayah_private_key'],
 			['name' => 'captcha.recaptcha_public_key'],
 			['name' => 'captcha.recaptcha_private_key'],
 			['name' => 'captcha.nocaptcha_public_key'],

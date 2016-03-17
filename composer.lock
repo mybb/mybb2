@@ -1538,34 +1538,6 @@
             "time": "2016-01-26 21:23:30"
         },
         {
-            "name": "mybb/are-you-a-human",
-            "version": "v1.1.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mybb/are-you-a-human.git",
-                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mybb/are-you-a-human/zipball/9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
-                "reference": "9aa2c0c2d1ca5fa9a95b43a56a61eb92c42b6734",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MyBB\\AreYouAHuman\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "The Are You A Human PHP Library for composer",
-            "keywords": [
-                "are-you-a-human",
-                "captcha"
-            ],
-            "time": "2015-03-24 14:51:27"
-        },
-        {
             "name": "mybb/auth",
             "version": "dev-master",
             "source": {
