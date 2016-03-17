@@ -59,37 +59,9 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 
 
 // Our mixins
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-	 -moz-border-radius: $radius;
-	  -ms-border-radius: $radius;
-		  border-radius: $radius;
-}
-
-@mixin box-sizing($sizing) {
-  -webkit-box-sizing: $sizing;
-	 -moz-box-sizing: $sizing;
-	  -ms-box-sizing: $sizing;
-		  box-sizing: $sizing;
-}
-
-@mixin black-transparency($transparency) {
-	color: rgba(0,0,0,$transparency);
-}
-
-@mixin white-transparency($transparency) {
-	color: rgba(255,255,255,$transparency);
-}
-
-@mixin transform($transform) {
-	-webkit-transform: $transform;
-	-moz-transform: $transform;
-	-ms-transform: $transform;
-	-o-transform: $transform;
-}
-
 
 // Import our sub files
+@import "mixins";
 @import 'header_footer';
 @import 'base';
 @import 'forms';
@@ -108,18 +80,8 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 
 
 // A few helper classes
-.clearfix:before,
-.clearfix:after {
-	content: " ";
-	display: table;
-}
-
-.clearfix:after {
-	clear: both;
-}
-
 .clearfix {
-	*zoom: 1;
+	@include clearfix;
 }
 
 .hidden {
