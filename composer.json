@@ -68,11 +68,9 @@
         }
 	},
 	"scripts": {
-		"post-create-project-cmd": [
-			"php artisan key:generate"
-		],
 		"post-install-cmd": [
 			"php -r \"copy('.env.example', '.env');\"",
+			"php artisan key:generate",
 			"php artisan vendor:publish",
 			"php artisan clear-compiled",
 			"php artisan optimize"
