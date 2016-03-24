@@ -13,7 +13,7 @@
 namespace MyBB\Core\Http\Controllers;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
