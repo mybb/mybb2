@@ -323,7 +323,7 @@ class AccountController extends AbstractController
 			$this->guard->user()->update(['avatar' => '']);
 		}
 
-		return redirect()->route('account.profile')->withSuccess('account.saved_avatar');
+		return redirect()->route('account.profile')->withSuccess(trans('account.saved_avatar'));
 	}
 
 	/**
@@ -418,7 +418,7 @@ class AccountController extends AbstractController
 		// TODO: Delete the old file if an uploaded was used
 		$this->guard->user()->update(['avatar' => '']);
 
-		return redirect()->route('account.profile')->withSuccess('account.removed_avatar');
+		return redirect()->route('account.profile')->withSuccess(trans('account.removed_avatar'));
 	}
 
 	/**
