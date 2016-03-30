@@ -85,6 +85,7 @@ class LikesRepository implements LikesRepositoryInterface
 			$existingLike = $this->likesModel->where('user_id', '=', $user->getAuthIdentifier())
 											 ->where('content_id', '=', $content->id)
 											 ->where('content_type', '=', get_class($content))->first();
+			$content->timestamps = false;
 
 			if ($existingLike !== null) {
 				$existingLike->delete();
