@@ -45,12 +45,12 @@ Route::group(['middleware' => ['web']], function() {
 
 	Route::get('topic/{id}/{slug}/poll/create', ['as' => 'polls.create', 'uses' => 'PollController@create']);
 	Route::post('topic/{id}/{slug}/poll/create', ['as' => 'polls.postCreate', 'uses' => 'PollController@postCreate']);
-	Route::post('topic/{topicSlug}.{topicId}/poll/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
-	Route::get('topic/{topicSlug}.{topicId}/poll/', ['as' => 'polls.show', 'uses' => 'PollController@show']);
-	Route::get('topic/{topicSlug}.{topicId}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
-	Route::get('topic/{topicSlug}.{topicId}/poll/remove', ['as' => 'polls.remove', 'uses' => 'PollController@remove']);
-	Route::get('topic/{topicSlug}.{topicId}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
-	Route::post('topic/{topicSlug}.{topicId}/poll/edit',
+	Route::post('topic/{topicId}/{topicSlug}/poll/vote', ['as' => 'polls.vote', 'uses' => 'PollController@vote']);
+	Route::get('topic/{topicId}/{topicSlug}/poll/', ['as' => 'polls.show', 'uses' => 'PollController@show']);
+	Route::get('topic/{topicId}/{topicSlug}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
+	Route::get('topic/{topicId}/{topicSlug}/poll/remove', ['as' => 'polls.remove', 'uses' => 'PollController@remove']);
+	Route::get('topic/{topicId}/{topicSlug}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
+	Route::post('topic/{topicId}/{topicSlug}/poll/edit',
 		['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']);
 
 	Route::get('post/{id}', ['as' => 'posts.show', 'uses' => 'PostController@show']);
