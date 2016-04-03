@@ -12,7 +12,7 @@ use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class PasswordController extends Controller

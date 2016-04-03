@@ -2,7 +2,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\ModerationLog;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;

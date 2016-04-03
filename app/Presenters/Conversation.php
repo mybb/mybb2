@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Presenters;
 
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Conversation as ConversationModel;
