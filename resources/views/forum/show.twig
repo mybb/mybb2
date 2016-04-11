@@ -136,7 +136,7 @@
 									<span class="post__author">
                                         {{ render_profile_link(topic.lastPost.author) }}
                                     </span>
-									{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
+									{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.lastPost.created_at) }}
 								</p>
 							</div>
 							<!-- this needs to be hidden if user is not a moderator -->

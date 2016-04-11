@@ -18,8 +18,8 @@
 						<!-- <button type="submit" class="button button--secondary">
 							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
 						</button>-->
-						<a href="{{ url_route('conversations.read', [conversation.id]) }}" class="button button--secondary"
-						   onclick="return submitFormAsGet('quickreply', '{{ url_route('conversations.read', [conversation.id]) }}');">
+						<a href="{{ url_route('conversations.read', {'id': conversation.id}) }}" class="button button--secondary"
+						   onclick="return submitFormAsGet('quickreply', '{{ url_route('conversations.read', {'id': conversation.id}) }}');">
 							<i class="fa fa-edit"></i>
 							<span class="text">{{ trans('general.preview') }}</span>
 						</a>

@@ -7,7 +7,7 @@
 		</a>
 
 		<div class="user-navigation__dropdown dropdown">
-			<a href="{{ url_route('user.profile', [auth_user.name, auth_user.id]) }}" class="avatar-profile-link"
+			<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link"
 			   title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}"
 																   alt="{{ trans('account.your_avatar') }}"
 																   class="avatar my-avatar"/></a>
@@ -137,7 +137,7 @@
 											src="{{ conversation.lastMessage.author.avatar }}"
 											alt="{{ conversation.lastMessage.author.name }}'s avatar"
 											class="avatar"/></a>
-								<a href="{{ url_route('conversations.read', [conversation.id]) }}"
+								<a href="{{ url_route('conversations.read', {'id': conversation.id}) }}"
 								   class="conversation-title">{{ conversation.title }}</a>
 								{{ trans('general.from') }} <a
 										href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}"

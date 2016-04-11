@@ -11,7 +11,7 @@
 	<section class="forum topic-list">
 		{{ results.render|raw }}
 			{% for post in results %}
-				<h3><a href="{{ url_route('topics.showPost', [post.topic.slug, post.topic.id, post.id]) }}">{{ post.topic.title }}</a></h3>
+				<h3><a href="{{ url_route('topics.showPost', {'slug': post.topic.slug, 'id': post.topic.id, 'postId': post.id}) }}">{{ post.topic.title }}</a></h3>
 				{{ str_limit(post.content_parsed|striptags, 200) }}
 				<hr>
 			{% endfor %}

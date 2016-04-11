@@ -10,7 +10,7 @@
 	<section class="container user-list">
 		{% for user in users %}
 			<div class="user-list__user">
-				<a href="{{ url_route('user.profile', [user.name, user.id]) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
+				<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
 				<h3 class="user-list__user__username">
                     {{ render_profile_link(user) }}
                 </h3>
