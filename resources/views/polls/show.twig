@@ -4,7 +4,7 @@
 {% endblock %}
 {% block head %}
 	<meta name="description" content="{{ poll.question }}"/>
-	<link rel="canonical" href="{{ url_route("polls.show", [topic.slug, topic.id, poll.id]) }}"/>
+	<link rel="canonical" href="{{ url_route("polls.show", {'topicSlug': topic.slug, 'topicId': topic.id, 'pollId': poll.id}) }}"/>
 {% endblock %}
 {% block contents %}
 	<div class="page-content">
@@ -13,7 +13,7 @@
 		</header>
 		<section class="poll">
 			<div class="poll__title">{{ poll.question }}</div>
-			{{ form_open({'route': ['polls.vote', topic.slug, topic.id, poll.id ], 'method': 'post'}) }}
+			{{ form_open({'route': ['polls.vote', topic.id, topic.slug, poll.id ], 'method': 'post'}) }}
 			<div class="poll__options">
 				{% for option in options %}
 					<div class="poll__option{{ (option.voted)?' poll__option--voted' }}">
@@ -49,15 +49,15 @@
 			<div class="poll__vote">
 				<div class="poll__buttons">
 					<a class="button button--secondary"
-					   href="{{ url_route('polls.remove', [topic.slug, topic.id]) }}"><i
+					   href="{{ url_route('polls.remove', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
 								class="fa fa-trash"></i><span class="text">{{ trans('poll.remove') }}</span></a>
 					<a class="button button--secondary"
-					   href="{{ url_route('polls.edit', [topic.slug, topic.id]) }}"><i
+					   href="{{ url_route('polls.edit', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
 								class="fa fa-pencil"></i><span class="text">{{ trans('poll.edit') }}</span></a>
 				</div>
 				{% if not poll.is_closed %}
 					{% if poll.myVote %}
-						<a class="button" href="{{ url_route('polls.undo', [topic.slug, topic.id]) }}"><i
+						<a class="button" href="{{ url_route('polls.undo', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
 									class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
 					{% else %}
 						{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">'~trans('poll.vote')~'</span>', {'type': 'submit', 'class': 'button'}) }}

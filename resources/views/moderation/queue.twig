@@ -29,12 +29,12 @@
                     <div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
                         <div class="primary-column">
                             <h3 class="topic__title">
-                                {{ topic.closed ? '<i class="fa fa-lock"></i>' }} <a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+                                {{ topic.closed ? '<i class="fa fa-lock"></i>' }} <a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
                             </h3>
                             <h4>{{ trans('topic.firstpost') }}</h4>
                             <p class="topic__post topic__post--first">
                                 <span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
-                                {{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.created_at) }}
+                                {{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
                             </p>
                         </div>
                         <div style="text-align: right;">
@@ -53,9 +53,9 @@
             {% for post in queued_posts %}
                 <div class="post{{ not post.approved ? ' pending-approval' }}">
                     <div class="post__meta">
-                        <a href="{{ url_route('user.profile', [post.author.name, post.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
+                        <a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
                         <h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
-                        {{ post_date_link(url_route('topics.showPost', [topic.slug, topic.id, post.id]), post.created_at) }}
+                        {{ post_date_link(url_route('topics.showPost', {'slug': post.topic.slug, 'id': post.topic.id, 'postId': post.id}), post.created_at) }}
                         {% if post.trashed or (topic.trashed and loop.first) %}
                             <span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
                         {% endif %}
@@ -72,7 +72,7 @@
                     </div>
                     <div class="post__foot">
                         <ul class="post__controls">
-                            <a href="{{ url_route('topics.showPost', [post.topic.slug, post.topic.id, post.id]) }}" class="button button--secondary">View&nbsp;<i class="fa fa-external-link"></i></a>
+                            <a href="{{ url_route('topics.showPost', {'slug': post.topic.slug, 'id': post.topic.id, 'postId': post.id}) }}" class="button button--secondary">View&nbsp;<i class="fa fa-external-link"></i></a>
                             {{ render_moderation_button('approve', 'post', post.id) }}
                             {{ render_moderation_button('delete_post', 'post', post.id) }}
                         </ul>

@@ -86,12 +86,12 @@ class PollController extends AbstractController
 	}
 
 	/**
-	 * @param  string $topicSlug
 	 * @param  int    $topicId
+	 * @param  string $topicSlug
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show($topicSlug, $topicId)
+	public function show($topicId, $topicSlug)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -128,8 +128,8 @@ class PollController extends AbstractController
 	}
 
 	/**
-	 * @param string $slug
 	 * @param int    $id
+	 * @param string $slug
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -147,8 +147,8 @@ class PollController extends AbstractController
 	}
 
 	/**
-	 * @param  string        $slug
-	 * @param  int           $id
+	 * @param int           $id
+	 * @param string        $slug
 	 * @param CreateRequest $createRequest
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -191,14 +191,14 @@ class PollController extends AbstractController
 	}
 
 	/**
-	 * @param string $topicSlug
 	 * @param int    $topicId
+	 * @param string $topicSlug
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 *
 	 * @throws \Exception
 	 */
-	public function vote($topicSlug, $topicId)
+	public function vote($topicId, $topicSlug)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -252,19 +252,19 @@ class PollController extends AbstractController
 			$this->pollRepository->editPoll($poll, ['options' => $options]);
 		}
 
-		return redirect()->route('polls.show', [$topicSlug, $topicId]);
+		return redirect()->route('polls.show', ['topicSlug' => $topicSlug, 'topicId' => $topicId]);
 	}
 
 
 	/**
-	 * @param string $topicSlug
 	 * @param int    $topicId
+	 * @param string $topicSlug
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 *
 	 * @throws \Exception
 	 */
-	public function undo($topicSlug, $topicId)
+	public function undo($topicId, $topicSlug)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -305,16 +305,16 @@ class PollController extends AbstractController
 		$poll->update(['options' => $options]);
 		$vote->delete();
 
-		return redirect()->route('polls.show', [$topicSlug, $topicId]);
+		return redirect()->route('polls.show', ['topicSlug' => $topicSlug, 'topicId' => $topicId]);
 	}
 
 	/**
-	 * @param string $topicSlug
 	 * @param int    $topicId
+	 * @param string $topicSlug
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function remove($topicSlug, $topicId)
+	public function remove($topicId, $topicSlug)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -332,16 +332,16 @@ class PollController extends AbstractController
 		$topic->has_poll = false;
 		$topic->save();
 
-		return redirect()->route('topics.show', [$topicSlug, $topicId]);
+		return redirect()->route('topics.show', ['slug' => $topicSlug, 'id' => $topicId]);
 	}
 
 	/**
-	 * @param string $topicSlug
 	 * @param int    $topicId
+	 * @param string $topicSlug
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function edit($topicSlug, $topicId)
+	public function edit($topicId, $topicSlug)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {
@@ -360,13 +360,13 @@ class PollController extends AbstractController
 	}
 
 	/**
-	 * @param string        $topicSlug
 	 * @param int           $topicId
+	 * @param string        $topicSlug
 	 * @param CreateRequest $createRequest
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function postEdit($topicSlug, $topicId, CreateRequest $createRequest)
+	public function postEdit($topicId, $topicSlug, CreateRequest $createRequest)
 	{
 		$topic = $this->topicRepository->find($topicId);
 		if (!$topic) {

@@ -56,12 +56,12 @@
 				<div class="topic{{ topic.trashed ? ' soft-deleted' }}">
 					<div class="primary-column">
 						<h3 class="topic__title">
-							<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}">{{ topic.title }}</a>
+							<a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
 						</h3>
 						<h4>{{ trans('topic.firstpost') }}</h4>
 						<p class="topic__post">
 							<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
-							{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.created_at) }}
+							{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
 						</p>
 					</div>
 					<div class="replies-column">
@@ -72,12 +72,12 @@
 					<div class="latest-column">
 						<h4>{{ trans('topic.latest') }}</h4>
 						<!-- it should be change later -->
-						<a href="{{ url_route('user.profile', [topic.lastPost.author.id, topic.lastPost.author.name]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', {'name': topic.lastPost.author.name}) }}"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ trans('topic.XAvatar', {'name': topic.lastPost.author.name}) }}" class="avatar" /></a>
+						<a href="{{ url_route('user.profile', {'slug': topic.lastPost.author.name, 'id': topic.lastPost.author.id}) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', {'name': topic.lastPost.author.name}) }}"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ trans('topic.XAvatar', {'name': topic.lastPost.author.name}) }}" class="avatar" /></a>
 						<p class="topic__post topic__post--latest">
 							<span class="post__author">
                                 {{ render_profile_link(topic.lastPost.author) }}
                             </span>
-							{{ post_date_link(url_route('topics.last', [topic.slug, topic.id]), topic.lastPost.created_at) }}
+							{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.lastPost.created_at) }}
 						</p>
 					</div>
 				</div>

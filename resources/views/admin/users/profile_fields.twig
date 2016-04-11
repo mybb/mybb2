@@ -26,7 +26,7 @@
                     <td>{{ field.description }}</td>
                     <td>{{ field.type|capitalize }}</td>
                     <td>
-                        <a href="{{ url_route('admin.users.profile_fields.edit', [field.id]) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::profile_fields.edit') }}</a>
+                        <a href="{{ url_route('admin.users.profile_fields.edit', {'id': field.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::profile_fields.edit') }}</a>
 
                         {{ form_open({'route': ['admin.users.profile_fields.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
                         <input type="hidden" name="profile_field_id" value="{{ field.id }}">
@@ -34,7 +34,7 @@
                         {{ form_close() }}
 
                         {% if field.type == 'select' %}
-                            <a href="{{ url_route('admin.users.profile_fields.edit_options', [field.id]) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> {{ trans('admin::profile_fields.edit_options') }}</a>
+                            <a href="{{ url_route('admin.users.profile_fields.edit_options', {'id': field.id}) }}" class="button button--secondary"><i class="fa fa-plus-circle"></i> {{ trans('admin::profile_fields.edit_options') }}</a>
                         {% endif %}
                     </td>
                 </tr>

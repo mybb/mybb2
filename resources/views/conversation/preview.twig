@@ -2,7 +2,7 @@
 	<div class="post post--preview">
 		<div class="post__meta">
 
-			<a href="{{ url_route('user.profile', [preview.author.id, preview.author.name]) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', { 'name':preview.author.name}) }}"><img src="{{ preview.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', { 'name':preview.author.name}) }}" /></a>
+			<a href="{{ url_route('user.profile', {'id': preview.author.id, 'slug': preview.author.name}) }}" class="avatar-profile-link" title="{{ trans('topic.goToXProfile', { 'name':preview.author.name}) }}"><img src="{{ preview.author.avatar }}" class="avatar" alt="{{ trans('topic.XAvatar', { 'name':preview.author.name}) }}" /></a>
 			<h3 class="post__author">{{ render_profile_link(preview.author) }}</h3>
 			{{ generate_time(preview.created_at) }}
 		</div>

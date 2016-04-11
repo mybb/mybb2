@@ -18,13 +18,13 @@
 					{% for conversation in conversations %}
 						<div class="conversation">
 							<div class="conversation__title{{ conversation.isUnread ? ' conversation__title--unread' }}">
-								<a href="{{ url_route('conversations.read', [conversation.id]) }}">{{ conversation.title }}</a>
+								<a href="{{ url_route('conversations.read', {'id': conversation.id}) }}">{{ conversation.title }}</a>
 								{% if conversation.isUnread %}
 									<span class="conversation__unread">{{ trans('conversations.new') }}</span>
 								{% endif %}
 							</div>
 							<div class="conversation__latest">
-								<a href="{{ url_route('user.profile', [conversation.lastMessage.author.name, conversation.lastMessage.author.id]) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': conversation.lastMessage.author.name}) }}"><img src="{{ conversation.lastMessage.author.avatar }}" alt="{{ trans('general.XAvatar', {'name': conversation.lastMessage.author.name}) }}" class="avatar" /></a>{{ trans('conversations.latest') }} {{ generate_time(conversation.lastMessage.created_at) }} {{ trans('general.by') }} {{ render_profile_link(conversation.lastMessage.author) }} 
+								<a href="{{ url_route('user.profile', {'slug': conversation.lastMessage.author.name, 'id': conversation.lastMessage.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': conversation.lastMessage.author.name}) }}"><img src="{{ conversation.lastMessage.author.avatar }}" alt="{{ trans('general.XAvatar', {'name': conversation.lastMessage.author.name}) }}" class="avatar" /></a>{{ trans('conversations.latest') }} {{ generate_time(conversation.lastMessage.created_at) }} {{ trans('general.by') }} {{ render_profile_link(conversation.lastMessage.author) }}
 							</div>
 						</div>
 					{% else %}

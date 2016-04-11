@@ -9,7 +9,7 @@
 	<section class="dashboard__account">
 		<h2 class="heading heading--major">{{ trans('account.summary') }}</h2>
 		<div class="dashboard__account__container">
-			<a href="{{ url_route('user.profile', [auth_user.name, auth_user.id]) }}" class="avatar-profile-link"
+			<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link"
 			   title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" class="avatar" /></a>
 			<h3 class="dashboard__account__username">{{ render_profile_link(auth_user) }}</h3>
 			<dl class="dashboard__account__statistics stats">
