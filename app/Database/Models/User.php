@@ -67,6 +67,13 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 	];
 
 	/**
+	 * Indicates if the model should be timestamped.
+	 *
+	 * @var boolean
+	 */
+	public $timestamps = false;
+
+	/**
 	 * Cache variable for the display role
 	 *
 	 * @var Role

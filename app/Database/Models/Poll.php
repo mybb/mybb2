@@ -21,6 +21,7 @@ class Poll extends Model implements HasPresenter
 	 * @var boolean
 	 */
 	public $incrementing = true;
+	
 	/**
 	 * Indicates if the model should be timestamped.
 	 *

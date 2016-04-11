@@ -35,7 +35,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
 	 *
 	 * @var boolean
 	 */
-	public $timestamps = true;
+	public $timestamps = false;
 
 	// @codingStandardsIgnoreEnd
 

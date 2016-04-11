@@ -33,7 +33,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
 	 *
 	 * @var boolean
 	 */
-	public $timestamps = true;
+	public $timestamps = false;
 
 	// @codingStandardsIgnoreEnd
 
