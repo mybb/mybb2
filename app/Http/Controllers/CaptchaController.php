@@ -8,7 +8,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Auth\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 
