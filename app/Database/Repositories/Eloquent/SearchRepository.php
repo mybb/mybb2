@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use MyBB\Auth\Contracts\Guard;
+use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Database\Models\Search;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 
@@ -46,7 +46,7 @@ class SearchRepository implements SearchRepositoryInterface
 	 */
 	public function find($id)
 	{
-		$userId = $this->guard->user()->id;
+		$userId = $this->guard->user()->getAuthIdentifier();
 		if ($userId <= 0) {
 			$userId = null;
 		}
@@ -67,7 +67,7 @@ class SearchRepository implements SearchRepositoryInterface
 			'id' => md5(uniqid(microtime(), true)),
 			'keywords' => '',
 			'as_topics' => true,
-			'user_id' => $this->guard->user()->id,
+			'user_id' => $this->guard->user()->getAuthIdentifier(),
 			'topics' => '',
 			'posts' => ''
 		], $details);
