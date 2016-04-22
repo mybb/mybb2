@@ -325,7 +325,7 @@ class TopicController extends AbstractController
 			throw new PostNotFoundException;
 		}
 
-		$this->breadcrumbs->setCurrentRoute('topics.edit', $topic);
+		$this->breadcrumbs->setCurrentRoute('topics.edit', $topic, $post);
 
 		return view('topic.edit', compact('post', 'topic'));
 	}
