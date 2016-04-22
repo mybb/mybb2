@@ -41,10 +41,10 @@ Breadcrumbs::register('topics.reply', function ($breadcrumbs, $topic) {
 	$breadcrumbs->push(trans('topic.reply'), route('topics.reply', ['slug' => $topic->slug, 'id' => $topic->id]));
 });
 
-Breadcrumbs::register('topics.edit', function ($breadcrumbs, $topic) {
+Breadcrumbs::register('topics.edit', function ($breadcrumbs, $topic, $post) {
 
 	$breadcrumbs->parent('topics.show', $topic);
-	$breadcrumbs->push(trans('topic.edit'), route('topics.edit', ['slug' => $topic->slug, 'id' => $topic->id]));
+	$breadcrumbs->push(trans('topic.edit'), route('topics.edit', ['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]));
 });
 
 Breadcrumbs::register('topics.create', function ($breadcrumbs, $forum) {
