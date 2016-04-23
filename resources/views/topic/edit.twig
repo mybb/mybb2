@@ -1,17 +1,17 @@
 {% extends "layouts.base" %}
 {% block title %}{{ topic.title }}{% endblock %}
 {% block head %}
-    <link rel="canonical" href="{{ url_route("topics.edit", [topic.slug, topic.id, post.id]) }}" />
+    <link rel="canonical" href="{{ url_route("topics.edit", {'id': topic.id, 'slug': topic.slug, 'postId': post.id}) }}" />
 {% endblock %}
 {% block contents %}
 	<div class="page-content">
 		<header>
 			<h1>{{ trans('topic.editpost') }}</h1>
 			<div class="page-buttons">
-				<a href="{{ url_route("topics.show", [topic.slug, topic.id]) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+				<a href="{{ url_route("topics.show", {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
 			</div>
 		</header>
-		{{ form_open({'route': ['topics.edit', topic.slug, topic.id, post.id], 'method': 'post'}) }}
+		{{ form_open({'route': ['topics.edit', topic.id, topic.slug, post.id], 'method': 'post'}) }}
 		<section class="form">
 			<div class="form__section">
 				{% if topic.first_post_id == post.id %}
