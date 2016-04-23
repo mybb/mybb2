@@ -97,8 +97,8 @@ class TopicController extends AbstractController
 
 	/**
 	 * @param Request $request
-	 * @param string  $slug
 	 * @param int     $id
+	 * @param string  $slug
 	 *
 	 * @return \Illuminate\View\View
 	 */
@@ -130,8 +130,8 @@ class TopicController extends AbstractController
 
 	/**
 	 * @param Store  $settings
-	 * @param string $slug
 	 * @param int    $id
+	 * @param string $slug
 	 * @param int    $postId
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
@@ -152,15 +152,15 @@ class TopicController extends AbstractController
 
 		if (ceil($numPost / $postsPerPage) == 1) {
 			return redirect()->route('topics.show', [
-				'slug' => $topic->slug,
 				'id' => $topic->id,
+				'slug' => $topic->slug,
 				'highlight' => $post->id,
 				'#post-' . $post->id
 			]);
 		} else {
 			return redirect()->route('topics.show', [
-				'slug' => $topic->slug,
 				'id' => $topic->id,
+				'slug' => $topic->slug,
 				'page' => ceil($numPost / $postsPerPage),
 				'#post-' . $post->id
 			]);
@@ -169,8 +169,8 @@ class TopicController extends AbstractController
 
 	/**
 	 * @param Store  $settings
-	 * @param string $slug
 	 * @param int    $id
+	 * @param string $slug
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
@@ -190,12 +190,12 @@ class TopicController extends AbstractController
 		if (ceil($numPost / $postsPerPage) == 1) {
 			return redirect()->route(
 				'topics.show',
-				['slug' => $topic->slug, 'id' => $topic->id, '#post-' . $topic->last_post_id]
+				['id' => $topic->id, 'slug' => $topic->slug, '#post-' . $topic->last_post_id]
 			);
 		} else {
 			return redirect()->route('topics.show', [
-				'slug' => $topic->slug,
 				'id' => $topic->id,
+				'slug' => $topic->slug,
 				'page' => ceil($numPost / $postsPerPage),
 				'#post-' . $topic->last_post_id
 			]);
@@ -203,8 +203,8 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string           $slug
 	 * @param int              $id
+	 * @param string           $slug
 	 * @param Request          $request
 	 * @param MessageFormatter $formatter
 	 * @param int              $postId
@@ -269,15 +269,15 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string       $slug
 	 * @param int          $id
+	 * @param string       $slug
 	 * @param ReplyRequest $replyRequest
 	 *
 	 * @return $this|bool|\Illuminate\Http\RedirectResponse
 	 */
 	public function postReply($id, $slug, ReplyRequest $replyRequest)
 	{
-		$this->failedValidationRedirect = route('topics.reply', ['slug' => $slug, 'id' => $id]);
+		$this->failedValidationRedirect = route('topics.reply', ['id' => $id, 'slug' => $slug]);
 
 		// Forum permissions are checked in "find"
 		/** @var Topic $topic */
@@ -300,17 +300,17 @@ class TopicController extends AbstractController
 		]);
 
 		if ($post) {
-			return redirect()->route('topics.last', ['slug' => $topic->slug, 'id' => $topic->id]);
+			return redirect()->route('topics.last', ['id' => $topic->id, 'slug' => $topic->slug]);
 		}
 
-		return redirect()->route('topic.reply', ['slug' => $topic->slug, 'id' => $topic->id])->withInput()->withErrors([
+		return redirect()->route('topic.reply', ['id' => $topic->id, 'slug' => $topic->slug])->withInput()->withErrors([
 			'content' => trans('errors.error_creating_post')
 		]);
 	}
 
 	/**
-	 * @param string $slug
 	 * @param int    $id
+	 * @param string $slug
 	 * @param int    $postId
 	 *
 	 * @return \Illuminate\View\View
@@ -331,8 +331,8 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string       $slug
 	 * @param int          $id
+	 * @param string       $slug
 	 * @param int          $postId
 	 * @param ReplyRequest $replyRequest
 	 *
@@ -360,13 +360,13 @@ class TopicController extends AbstractController
 		if ($post) {
 			return redirect()->route(
 				'topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+				['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]
 			);
 		}
 
 		return redirect()->route(
 			'topic.edit',
-			['slug' => $slug, 'id' => $id, 'postId' => $postId]
+			['id' => $id, 'slug' => $slug, 'postId' => $postId]
 		)->withInput()->withErrors(['Error editing post']);
 	}
 
@@ -466,7 +466,7 @@ class TopicController extends AbstractController
 				$this->topicRepository->setHasPoll($topic, true);
 			}
 
-			return redirect()->route('topics.show', ['slug' => $topic->slug, 'id' => $topic->id]);
+			return redirect()->route('topics.show', ['id' => $topic->id, 'slug' => $topic->slug]);
 		}
 
 		return redirect()->route('topic.create', ['forumId' => $forumId])->withInput()->withErrors([
@@ -475,8 +475,8 @@ class TopicController extends AbstractController
 	}
 
 	/**
-	 * @param string       $slug
 	 * @param int          $id
+	 * @param string       $slug
 	 * @param int          $postId
 	 * @param TopicDeleter $topicDeleter
 	 *
@@ -496,17 +496,17 @@ class TopicController extends AbstractController
 		if ($post['id'] == $topic['first_post_id']) {
 			$topicDeleter->deleteTopic($topic);
 
-			return redirect()->route('forums.show', ['slug' => $topic->forum['slug'], 'id' => $topic->forum['id']]);
+			return redirect()->route('forums.show', ['id' => $topic->forum['id'], 'slug' => $topic->forum['slug']]);
 		} else {
 			$this->postRepository->deletePost($post);
 
-			return redirect()->route('topics.show', ['slug' => $topic['slug'], 'id' => $topic['id']]);
+			return redirect()->route('topics.show', ['id' => $topic['id'], 'slug' => $topic['slug']]);
 		}
 	}
 
 	/**
-	 * @param string $slug
 	 * @param int    $id
+	 * @param string $slug
 	 * @param int    $postId
 	 *
 	 * @return \Exception|\Illuminate\Http\RedirectResponse
@@ -529,11 +529,11 @@ class TopicController extends AbstractController
 		if ($topic) {
 			return redirect()->route(
 				'topics.showPost',
-				['slug' => $topic->slug, 'id' => $topic->id, 'postId' => $post->id]
+				['id' => $topic->id, 'slug' => $topic->slug, 'postId' => $post->id]
 			);
 		}
 
-		return redirect()->route('topics.showPost', ['slug' => $slug, 'id' => $id, 'postId' => $postId])
+		return redirect()->route('topics.showPost', ['id' => $id, 'slug' => $slug, 'postId' => $postId])
 			->withErrors([trans('errors.error_deleting_topic')]);
 	}
 }
