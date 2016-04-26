@@ -30,7 +30,7 @@ class Conversation extends BasePresenter
 	 */
 	public function __construct(ConversationModel $resource, Guard $guard)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->guard = $guard;
 	}
 

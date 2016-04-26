@@ -12,6 +12,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Moderation\ModerationInterface;
+use MyBB\Core\Presenters\Moderations\DeletePostPresenter;
 
 class DeletePost implements ModerationInterface, HasPresenter
 {
@@ -93,7 +94,7 @@ class DeletePost implements ModerationInterface, HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Moderations\DeletePostPresenter';
+		return DeletePostPresenter::class;
 	}
 
 	/**

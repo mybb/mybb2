@@ -27,7 +27,7 @@ class ProfileFieldGroup extends BasePresenter
 	 */
 	public function __construct(ProfileFieldGroupModel $resource, Application $app)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->app = $app;
 	}
 

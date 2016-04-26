@@ -36,7 +36,7 @@ class Forum extends BasePresenter
 	 */
 	public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
 	{
-		$this->wrappedObject = $resource;
+		parent::__construct($resource);
 		$this->app = $app;
 		$this->moderations = $moderations;
 	}

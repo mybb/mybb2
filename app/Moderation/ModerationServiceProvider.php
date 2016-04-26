@@ -10,7 +10,13 @@ namespace MyBB\Core\Moderation;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use MyBB\Core\Moderation\Moderations\Approve;
+use MyBB\Core\Database\Repositories\Eloquent\ModerationLogRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ModerationLogSubjectRepository;
+use MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface;
+use MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface;
+use MyBB\Core\Moderation\Logger\DatabaseLogger;
+use MyBB\Core\Moderation\Logger\ModerationLoggerInterface;
+use MyBB\Core\Moderation\Moderations;
 
 class ModerationServiceProvider extends ServiceProvider
 {
@@ -21,31 +27,31 @@ class ModerationServiceProvider extends ServiceProvider
 	 */
 	public function register()
 	{
-		$this->app->singleton('MyBB\Core\Moderation\ModerationRegistry', function (Application $app) {
+		$this->app->singleton(ModerationRegistry::class, function (Application $app) {
 			return new ModerationRegistry([
-				$app->make('MyBB\Core\Moderation\Moderations\Approve'),
-				$app->make('MyBB\Core\Moderation\Moderations\MovePost'),
-				$app->make('MyBB\Core\Moderation\Moderations\MergePosts'),
-				$app->make('MyBB\Core\Moderation\Moderations\DeletePost'),
-				$app->make('MyBB\Core\Moderation\Moderations\DeleteTopic'),
-				$app->make('MyBB\Core\Moderation\Moderations\Close'),
-				$app->make('MyBB\Core\Moderation\Moderations\MoveTopic')
+				$app->make(Moderations\Approve::class),
+				$app->make(Moderations\MovePost::class),
+				$app->make(Moderations\MergePosts::class),
+				$app->make(Moderations\DeletePost::class),
+				$app->make(Moderations\DeleteTopic::class),
+				$app->make(Moderations\Close::class),
+				$app->make(Moderations\MoveTopic::class)
 			]);
 		});
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface',
-			'MyBB\Core\Database\Repositories\Eloquent\ModerationLogRepository'
+			ModerationLogRepositoryInterface::class,
+			ModerationLogRepository::class
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface',
-			'MyBB\Core\Database\Repositories\Eloquent\ModerationLogSubjectRepository'
+			ModerationLogSubjectRepositoryInterface::class,
+			ModerationLogSubjectRepository::class
 		);
 
 		$this->app->bind(
-			'MyBB\Core\Moderation\Logger\ModerationLoggerInterface',
-			'MyBB\Core\Moderation\Logger\DatabaseLogger'
+			ModerationLoggerInterface::class,
+			DatabaseLogger::class
 		);
 	}
 }
