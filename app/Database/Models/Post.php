@@ -79,7 +79,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Post';
+		return 'MyBB\Core\Presenters\PostPresenter';
 	}
 
 	/**

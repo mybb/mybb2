@@ -87,7 +87,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\User';
+		return 'MyBB\Core\Presenters\UserPresenter';
 	}
 
 	/**

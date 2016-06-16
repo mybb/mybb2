@@ -46,6 +46,6 @@ class ProfileField extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\ProfileField';
+		return 'MyBB\Core\Presenters\ProfileFieldPresenter';
 	}
 }
