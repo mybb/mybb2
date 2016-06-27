@@ -71,8 +71,9 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 	 *
 	 * @var boolean
 	 */
-	private $timestamps = false;
-
+	// @codingStandardsIgnoreStart
+	public $timestamps = false;
+	// @codingStandardsIgnoreEnd
 	/**
 	 * Cache variable for the display role
 	 *
@@ -189,15 +190,5 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 	public function getHasher()
 	{
 		return $this->hasher;
-	}
-
-	/**
-	 * Return whether or not this model should be timestamped.
-	 *
-	 * @return boolean
-	 */
-	public function shouldBeTimestamped()
-	{
-		return $this->timestamps;
 	}
 }
