@@ -10,6 +10,15 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Permission
+ *
+ * @package MyBB\Core\Database\Models
+ *
+ * @property int $id
+ * @property string permission_display
+ * @property string $slug
+ */
 class Permission extends Model
 {
     /**
@@ -22,6 +31,6 @@ class Permission extends Model
 
     public function roles()
     {
-        $this->belongsToMany('MyBB\Core\Database\Models\Role');
+        $this->belongsToMany(Role::class);
     }
 }
