@@ -10,7 +10,6 @@ namespace MyBB\Core\Http\Controllers\Auth;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Auth\AuthManager;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;

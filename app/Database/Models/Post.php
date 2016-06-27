@@ -28,16 +28,16 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
     use SoftDeletes;
     use LikeableTrait;
 
-	// @codingStandardsIgnoreStart
+    // @codingStandardsIgnoreStart
 
-	/**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var boolean
-	 */
-	public $timestamps = false;
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 
-	// @codingStandardsIgnoreEnd
+    // @codingStandardsIgnoreEnd
 
     /**
      * The table associated with the model.

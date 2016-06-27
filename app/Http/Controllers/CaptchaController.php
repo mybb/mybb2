@@ -8,7 +8,6 @@
 
 namespace MyBB\Core\Http\Controllers;
 
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 
@@ -131,18 +130,35 @@ class CaptchaController extends AbstractController
     }
 
     /**
-     * @param resource $im
+     * @return int|string
      */
-    private function drawLines(&$im)
+    private function getGdVersion()
     {
-        for ($i = 10; $i < $this->img_width; $i += 10) {
-            $color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
-            imageline($im, $i, 0, $i, $this->img_height, $color);
+        if ($this->gd_version != null) {
+            return $this->gd_version;
         }
-        for ($i = 10; $i < $this->img_height; $i += 10) {
-            $color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
-            imageline($im, 0, $i, $this->img_width, $i, $color);
+
+        if (!extension_loaded('gd')) {
+            $this->gd_version = 0;
+
+            return 0;
         }
+
+        if (function_exists("gd_info")) {
+            $gd_info = gd_info();
+            preg_match('/\d/', $gd_info['GD Version'], $gd);
+            $this->gd_version = $gd[0];
+        } else {
+            ob_start();
+            phpinfo(8);
+            $info = ob_get_contents();
+            ob_end_clean();
+            $info = stristr($info, 'gd version');
+            preg_match('/\d/', $info, $gd);
+            $this->gd_version = $gd[0];
+        }
+
+        return $this->gd_version;
     }
 
     /**
@@ -175,6 +191,21 @@ class CaptchaController extends AbstractController
             $pos_x2 = $pos_x + $sq_height;
             $pos_y2 = $pos_y + $sq_width;
             imagefilledrectangle($im, $pos_x, $pos_y, $pos_x2, $pos_y2, $color);
+        }
+    }
+
+    /**
+     * @param resource $im
+     */
+    private function drawLines(&$im)
+    {
+        for ($i = 10; $i < $this->img_width; $i += 10) {
+            $color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
+            imageline($im, $i, 0, $i, $this->img_height, $color);
+        }
+        for ($i = 10; $i < $this->img_height; $i += 10) {
+            $color = imagecolorallocate($im, mt_rand(150, 255), mt_rand(150, 255), mt_rand(150, 255));
+            imageline($im, 0, $i, $this->img_width, $i, $color);
         }
     }
 
@@ -281,37 +312,5 @@ class CaptchaController extends AbstractController
                 imagedestroy($temp_im);
             }
         }
-    }
-
-    /**
-     * @return int|string
-     */
-    private function getGdVersion()
-    {
-        if ($this->gd_version != null) {
-            return $this->gd_version;
-        }
-
-        if (!extension_loaded('gd')) {
-            $this->gd_version = 0;
-
-            return 0;
-        }
-
-        if (function_exists("gd_info")) {
-            $gd_info = gd_info();
-            preg_match('/\d/', $gd_info['GD Version'], $gd);
-            $this->gd_version = $gd[0];
-        } else {
-            ob_start();
-            phpinfo(8);
-            $info = ob_get_contents();
-            ob_end_clean();
-            $info = stristr($info, 'gd version');
-            preg_match('/\d/', $info, $gd);
-            $this->gd_version = $gd[0];
-        }
-
-        return $this->gd_version;
     }
 }

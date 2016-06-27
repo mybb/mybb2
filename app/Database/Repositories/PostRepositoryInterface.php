@@ -10,8 +10,8 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 
 interface PostRepositoryInterface
 {

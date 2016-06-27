@@ -21,29 +21,6 @@ class CreateRequest extends AbstractRequest
     private $guard;
 
     /**
-     * Get the validator instance for the request.
-     *
-     * @return \Illuminate\Validation\Validator
-     */
-    protected function getValidatorInstance()
-    {
-        $validator = parent::getValidatorInstance();
-
-        $validator->addImplicitExtension('option', function ($attribute, $value, $parameters) {
-            foreach ($value as $option) {
-                if (!is_scalar($option)) {
-                    return false;
-                }
-            }
-
-            return true;
-        });
-
-
-        return $validator;
-    }
-
-    /**
      * @param Guard $guard
      */
     public function __construct(Guard $guard)
@@ -91,6 +68,38 @@ class CreateRequest extends AbstractRequest
     }
 
     /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        //return $this->guard->check();
+        return true; // TODO: In dev return, needs replacing for later...
+    }
+
+    /**
+     * Get the validator instance for the request.
+     *
+     * @return \Illuminate\Validation\Validator
+     */
+    protected function getValidatorInstance()
+    {
+        $validator = parent::getValidatorInstance();
+
+        $validator->addImplicitExtension('option', function ($attribute, $value, $parameters) {
+            foreach ($value as $option) {
+                if (!is_scalar($option)) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+
+        return $validator;
+    }
+
+    /**
      * @return array
      */
     public function messages()
@@ -98,14 +107,5 @@ class CreateRequest extends AbstractRequest
         return [
             'option.option' => trans('errors.poll_invalid_options'),
         ];
-    }
-
-    /**
-     * @return bool
-     */
-    public function authorize()
-    {
-        //return $this->guard->check();
-        return true; // TODO: In dev return, needs replacing for later...
     }
 }

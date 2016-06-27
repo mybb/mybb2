@@ -17,7 +17,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
-use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
@@ -28,7 +27,6 @@ use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConversationsController extends AbstractController
 {

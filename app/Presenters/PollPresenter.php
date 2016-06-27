@@ -10,8 +10,8 @@
 
 namespace MyBB\Core\Presenters;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
 use Illuminate\Contracts\Auth\Guard;
+use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Poll as PollModel;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 

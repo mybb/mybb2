@@ -22,11 +22,6 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
     }
 
     /**
-     * @return string
-     */
-    abstract protected function getReverseDescriptionView();
-
-    /**
      * @param array $contentCollection
      * @param ContentInterface $source
      * @param ContentInterface $destination
@@ -59,4 +54,9 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
             'destination_url'   => $destination ? $destination->getUrl() : null,
         ]);
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getReverseDescriptionView();
 }

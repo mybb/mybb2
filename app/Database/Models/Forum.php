@@ -10,12 +10,12 @@
 
 namespace MyBB\Core\Database\Models;
 
+use Kalnoy\Nestedset\Node;
+use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
-use Kalnoy\Nestedset\Node;
-use McCool\LaravelAutoPresenter\HasPresenter;
 
 /**
  * @property int id

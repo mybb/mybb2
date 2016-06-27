@@ -11,8 +11,8 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Contracts\Auth\Guard;
-use MyBB\Core\Database\Models\PollVote;
 use MyBB\Core\Database\Models\Poll;
+use MyBB\Core\Database\Models\PollVote;
 use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 

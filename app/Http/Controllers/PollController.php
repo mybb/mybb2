@@ -14,7 +14,6 @@ namespace MyBB\Core\Http\Controllers;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Http\Request;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
@@ -26,7 +25,6 @@ use MyBB\Core\Exceptions\PollNotFoundException;
 use MyBB\Core\Exceptions\PollNoUndoException;
 use MyBB\Core\Exceptions\TopicNotFoundException;
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PollController extends AbstractController
 {

@@ -16,7 +16,6 @@ use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Settings\Store;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ForumController extends AbstractController
 {

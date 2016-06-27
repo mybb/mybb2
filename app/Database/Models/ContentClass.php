@@ -8,10 +8,6 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Model;
-use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\Permissionable;

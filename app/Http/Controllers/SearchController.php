@@ -10,8 +10,8 @@ namespace MyBB\Core\Http\Controllers;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Http\Requests\Search\SearchRequest;
