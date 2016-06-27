@@ -57,7 +57,7 @@ class AuthController extends Controller
 	/**
 	 * Create a new authentication controller instance.
 	 *
-	 * @param AuthManager       $auth
+	 * @param AuthManager $auth
 	 * @param Breadcrumbs $breadcrumbs
 	 * @param Factory     $validator
 	 * @param Request     $request
