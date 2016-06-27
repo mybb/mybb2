@@ -12,20 +12,20 @@ namespace MyBB\Core\Database\Repositories;
 
 interface RoleRepositoryInterface
 {
-    /**
-     * Get all roles.
-     *
-     * @return mixed
-     */
-    public function all();
+	/**
+	 * Get all roles.
+	 *
+	 * @return mixed
+	 */
+	public function all();
 
-    /**
-     * Find a single role by its slug.
-     *
-     * @param string $slug The slug of the role. Eg: 'user'.
-     *
-     * @return mixed
-     */
-    public function findIdBySlug($slug = '');
+	/**
+	 * Find a single role by its slug.
+	 *
+	 * @param string $slug The slug of the role. Eg: 'user'.
+	 *
+	 * @return mixed
+	 */
+	public function findIdBySlug($slug = '');
 
 }

@@ -16,42 +16,41 @@ use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 
 class RoleRepository implements RoleRepositoryInterface
 {
-    /**
-     * @var Role $roleModel
-     */
-    protected $roleModel;
+	/**
+	 * @var Role $roleModel
+	 */
+	protected $roleModel;
 
 
-    /**
-     * RoleRepository constructor.
-     * @param Role $roleModel The model to use for roles.
-     */
-    public function __construct(
-        Role $roleModel
-    ) {
-        $this->roleModel = $roleModel;
-    }
+	/**
+	 * RoleRepository constructor.
+	 * @param Role $roleModel The model to use for roles.
+	 */
+	public function __construct(Role $roleModel)
+	{
+		$this->roleModel = $roleModel;
+	}
 
-    /**
-     * Get all roles.
-     *
-     * @return mixed
-     */
-    public function all()
-    {
-        return $this->roleModel->all();
-    }
+	/**
+	 * Get all roles.
+	 *
+	 * @return mixed
+	 */
+	public function all()
+	{
+		return $this->roleModel->all();
+	}
 
-    /**
-     * Find a single role id by its slug.
-     *
-     * @param string $slug The slug of the role. Eg: 'user'.
-     *
-     * @return mixed
-     */
-    public function findIdBySlug($slug = '')
-    {
-        return $this->roleModel->where('role_slug', '=', $slug)->value('id');
-    }
+	/**
+	 * Find a single role id by its slug.
+	 *
+	 * @param string $slug The slug of the role. Eg: 'user'.
+	 *
+	 * @return mixed
+	 */
+	public function findIdBySlug($slug = '')
+	{
+		return $this->roleModel->where('role_slug', '=', $slug)->value('id');
+	}
 
 }
