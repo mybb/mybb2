@@ -211,13 +211,13 @@ class AuthController extends Controller
 	 */
 	protected function create(array $data)
 	{
-		$user = User::create([
+		$user = $this->userRepository->create([
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
 		]);
 
-		$user->roles()->attach(Role::where('role_slug', '=', 'user')->pluck('id'), ['is_display' => true]);
+		$user->roles()->attach($this->roleRepository->findIdBySlug('user'), ['is_display' => true]);
 
 		return $user;
 	}
