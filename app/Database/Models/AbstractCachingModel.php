@@ -51,7 +51,6 @@ abstract class AbstractCachingModel extends Model
 
 		if (!isset(static::$models[$id])) {
 			static::$models[$id] = static::query()->find($id, $columns);
-
 		}
 
 		return static::$models[$id];

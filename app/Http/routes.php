@@ -19,7 +19,7 @@ Route::group(['prefix' => 'api/v1'], function () {
  * Applicaiton Routes
  */
 
-Route::group(['middleware' => ['web']], function() {
+Route::group(['middleware' => ['web']], function () {
 	Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
 
 	Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
@@ -50,8 +50,10 @@ Route::group(['middleware' => ['web']], function() {
 	Route::get('topic/{topicId}/{topicSlug}/poll/undo', ['as' => 'polls.undo', 'uses' => 'PollController@undo']);
 	Route::get('topic/{topicId}/{topicSlug}/poll/remove', ['as' => 'polls.remove', 'uses' => 'PollController@remove']);
 	Route::get('topic/{topicId}/{topicSlug}/poll/edit', ['as' => 'polls.edit', 'uses' => 'PollController@edit']);
-	Route::post('topic/{topicId}/{topicSlug}/poll/edit',
-		['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']);
+	Route::post(
+		'topic/{topicId}/{topicSlug}/poll/edit',
+		['as' => 'polls.edit.post', 'uses' => 'PollController@postEdit']
+	);
 
 	Route::get('post/{id}', ['as' => 'posts.show', 'uses' => 'PostController@show']);
 	Route::post('post/{post_id}/like', ['as' => 'posts.like', 'uses' => 'PostController@postToggleLike']);
@@ -154,8 +156,10 @@ Route::group(['middleware' => ['web']], function() {
 		Route::post('/username', ['as' => 'account.username', 'uses' => 'AccountController@postUsername']);
 		Route::get('/email', ['as' => 'account.email', 'uses' => 'AccountController@getEmail']);
 		Route::post('/email', ['as' => 'account.email', 'uses' => 'AccountController@postEmail']);
-		Route::get('/email/confirm/{token}',
-			['as' => 'account.email.confirm', 'uses' => 'AccountController@confirmEmail']);
+		Route::get(
+			'/email/confirm/{token}',
+			['as' => 'account.email.confirm', 'uses' => 'AccountController@confirmEmail']
+		);
 		Route::get('/password', ['as' => 'account.password', 'uses' => 'AccountController@getPassword']);
 		Route::post('/password', ['as' => 'account.password', 'uses' => 'AccountController@postPassword']);
 		Route::get(

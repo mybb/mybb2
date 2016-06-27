@@ -59,7 +59,7 @@ class ConversationMessage extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\ConversationMessage';
+		return 'MyBB\Core\Presenters\ConversationMessagePresenter';
 	}
 
 	/**

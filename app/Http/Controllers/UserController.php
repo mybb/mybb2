@@ -39,8 +39,8 @@ class UserController extends AbstractController
 	}
 
 	/**
-	 * @param string                               $slug
 	 * @param int                                  $id
+	 * @param string                               $slug
 	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroups
 	 * @param Breadcrumbs                          $breadcrumbs
 	 *

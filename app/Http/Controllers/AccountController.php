@@ -303,7 +303,6 @@ class AccountController extends AbstractController
 					'needCrop' => true,
 					'avatar' => asset("uploads/avatars/".$name)
 				]);
-
 			}
 		} // URL? Email?
 		elseif (filter_var(

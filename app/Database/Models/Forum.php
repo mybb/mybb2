@@ -74,7 +74,7 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Forum';
+		return 'MyBB\Core\Presenters\ForumPresenter';
 	}
 
 	/**

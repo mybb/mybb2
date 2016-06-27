@@ -78,7 +78,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\Core\Presenters\Topic';
+		return 'MyBB\Core\Presenters\TopicPresenter';
 	}
 
 	/**

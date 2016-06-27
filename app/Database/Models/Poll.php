@@ -21,7 +21,7 @@ class Poll extends Model implements HasPresenter
 	 * @var boolean
 	 */
 	public $incrementing = true;
-	
+
 	/**
 	 * Indicates if the model should be timestamped.
 	 *
@@ -80,7 +80,7 @@ class Poll extends Model implements HasPresenter
 	 */
 	public function getPresenterClass()
 	{
-		return 'MyBB\\Core\\Presenters\\Poll';
+		return 'MyBB\\Core\\Presenters\\PollPresenter';
 	}
 
 	/**
