@@ -1540,12 +1540,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/parser.git",
-                "reference": "d030e4647985b7f7321bbfd359d8d1d9ad941c93"
+                "reference": "d1b2de0a82fe578106db8dbf0c7d7282fb5adb7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/parser/zipball/d030e4647985b7f7321bbfd359d8d1d9ad941c93",
-                "reference": "d030e4647985b7f7321bbfd359d8d1d9ad941c93",
+                "url": "https://api.github.com/repos/mybb/parser/zipball/d1b2de0a82fe578106db8dbf0c7d7282fb5adb7c",
+                "reference": "d1b2de0a82fe578106db8dbf0c7d7282fb5adb7c",
                 "shasum": ""
             },
             "require": {
@@ -1562,7 +1562,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Mybb\\Parser\\": "src/"
+                    "MyBB\\Parser\\": "src/"
                 }
             },
             "scripts": {
@@ -1589,7 +1589,7 @@
                 "source": "https://github.com/mybb/parser/tree/master",
                 "issues": "https://github.com/mybb/parser/issues"
             },
-            "time": "2016-06-27 19:32:23"
+            "time": "2016-06-27 19:55:14"
         },
         {
             "name": "mybb/settings",
