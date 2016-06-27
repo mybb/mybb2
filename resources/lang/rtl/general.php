@@ -2,6 +2,6 @@
 
 return [
 
-	'language' => 'RTL Lang Test',
-	'direction' => 'rtl',
+    'language'  => 'RTL Lang Test',
+    'direction' => 'rtl',
 ];

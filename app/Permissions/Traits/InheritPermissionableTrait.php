@@ -8,43 +8,41 @@
 
 namespace MyBB\Core\Permissions\Traits;
 
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Services\PermissionChecker;
 
 trait InheritPermissionableTrait
 {
-	use PermissionableTrait;
+    use PermissionableTrait;
 
-	/**
-	 * @return InheritPermissionableTrait
-	 */
-	public function getParent()
-	{
-		return $this->parent;
-	}
+    /**
+     * Returns an array of permissions where a positive permission in one of the parents overrides negative permissions
+     * in its child
+     *
+     * @return array
+     */
+    public static function getPositiveParentOverrides()
+    {
+        return [];
+    }
 
-	/**
-	 * Returns an array of permissions where a positive permission in one of the parents overrides negative permissions
-	 * in its child
-	 *
-	 * @return array
-	 */
-	public static function getPositiveParentOverrides()
-	{
-		return [];
-	}
+    /**
+     * Returns an array of permissions where a negative permission in one of the parents overrides positive permissions
+     * in its child By default the viewable permission is returned
+     *
+     * @return array
+     */
+    public static function getNegativeParentOverrides()
+    {
+        return [
+            static::getViewablePermission(),
+        ];
+    }
 
-	/**
-	 * Returns an array of permissions where a negative permission in one of the parents overrides positive permissions
-	 * in its child By default the viewable permission is returned
-	 *
-	 * @return array
-	 */
-	public static function getNegativeParentOverrides()
-	{
-		return [
-			static::getViewablePermission()
-		];
-	}
+    /**
+     * @return InheritPermissionableTrait
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
 }

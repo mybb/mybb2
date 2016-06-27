@@ -18,34 +18,34 @@ use Twig_SimpleFunction;
 
 class Captcha extends Twig_Extension
 {
-	/**
-	 * @var CaptchaFactory
-	 */
-	protected $captcha;
+    /**
+     * @var CaptchaFactory
+     */
+    protected $captcha;
 
-	/**
-	 * @param CaptchaFactory $captcha
-	 */
-	public function __construct(CaptchaFactory $captcha)
-	{
-		$this->captcha = $captcha;
-	}
+    /**
+     * @param CaptchaFactory $captcha
+     */
+    public function __construct(CaptchaFactory $captcha)
+    {
+        $this->captcha = $captcha;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_Captcha';
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_Captcha';
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new Twig_SimpleFunction('captcha', [$this->captcha, 'render'], ['is_safe' => ['html']]),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('captcha', [$this->captcha, 'render'], ['is_safe' => ['html']]),
+        ];
+    }
 }

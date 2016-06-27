@@ -14,27 +14,27 @@ use Illuminate\Routing\Router;
 
 abstract class AbstractBootstrapMiddleware
 {
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  Request  $request
-	 * @param  \Closure $next
-	 *
-	 * @return mixed
-	 */
-	abstract public function handle($request, Closure $next);
+    /**
+     * Handle an incoming request.
+     *
+     * @param  Request $request
+     * @param  \Closure $next
+     *
+     * @return mixed
+     */
+    abstract public function handle($request, Closure $next);
 
-	/**
-	 * @param Router  $router
-	 * @param Request $request
-	 *
-	 * @return array
-	 */
-	protected function getOptions(Router $router, Request $request)
-	{
-		$collection = $router->getRoutes();
-		$route = $collection->match($request->create($request->path(), $request->method()));
+    /**
+     * @param Router $router
+     * @param Request $request
+     *
+     * @return array
+     */
+    protected function getOptions(Router $router, Request $request)
+    {
+        $collection = $router->getRoutes();
+        $route = $collection->match($request->create($request->path(), $request->method()));
 
-		return $route->getAction();
-	}
+        return $route->getAction();
+    }
 }

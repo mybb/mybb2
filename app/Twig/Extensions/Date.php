@@ -17,39 +17,39 @@ use Twig_SimpleFunction;
 
 class Date extends Twig_Extension
 {
-	/**
-	 * @var ParseDateHelper $_dateParser ;
-	 */
-	protected $dateParser;
+    /**
+     * @var ParseDateHelper $_dateParser ;
+     */
+    protected $dateParser;
 
-	/**
-	 * Create a new settings extension.
-	 *
-	 * @param ParseDateHelper $dateParser Date Parser
-	 */
-	public function __construct(ParseDateHelper $dateParser)
-	{
-		$this->dateParser = $dateParser;
-	}
+    /**
+     * Create a new settings extension.
+     *
+     * @param ParseDateHelper $dateParser Date Parser
+     */
+    public function __construct(ParseDateHelper $dateParser)
+    {
+        $this->dateParser = $dateParser;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_Date';
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_Date';
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new Twig_SimpleFunction('format_date', [$this->dateParser, 'formatDate']),
-			new Twig_SimpleFunction('generate_time', [$this->dateParser, 'generateTime'], ['is_safe' => ['html']]),
-			new Twig_SimpleFunction('human_date', [$this->dateParser, 'humanDate']),
-			new Twig_SimpleFunction('post_date_link', [$this->dateParser, 'postDateLink'], ['is_safe' => ['html']]),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('format_date', [$this->dateParser, 'formatDate']),
+            new Twig_SimpleFunction('generate_time', [$this->dateParser, 'generateTime'], ['is_safe' => ['html']]),
+            new Twig_SimpleFunction('human_date', [$this->dateParser, 'humanDate']),
+            new Twig_SimpleFunction('post_date_link', [$this->dateParser, 'postDateLink'], ['is_safe' => ['html']]),
+        ];
+    }
 }

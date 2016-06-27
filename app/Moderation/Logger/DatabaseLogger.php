@@ -18,101 +18,101 @@ use MyBB\Core\Moderation\ModerationInterface;
 
 class DatabaseLogger implements ModerationLoggerInterface
 {
-	/**
-	 * @var ModerationLogRepositoryInterface
-	 */
-	protected $moderationLogRepository;
+    /**
+     * @var ModerationLogRepositoryInterface
+     */
+    protected $moderationLogRepository;
 
-	/**
-	 * @var ModerationLogSubjectRepositoryInterface
-	 */
-	protected $moderationLogSubjectRepository;
+    /**
+     * @var ModerationLogSubjectRepositoryInterface
+     */
+    protected $moderationLogSubjectRepository;
 
-	/**
-	 * @param ModerationLogRepositoryInterface        $moderationLogRepository
-	 * @param ModerationLogSubjectRepositoryInterface $moderationLogSubjectRepository
-	 */
-	public function __construct(
-		ModerationLogRepositoryInterface $moderationLogRepository,
-		ModerationLogSubjectRepositoryInterface $moderationLogSubjectRepository
-	) {
-		$this->moderationLogRepository = $moderationLogRepository;
-		$this->moderationLogSubjectRepository = $moderationLogSubjectRepository;
-	}
+    /**
+     * @param ModerationLogRepositoryInterface $moderationLogRepository
+     * @param ModerationLogSubjectRepositoryInterface $moderationLogSubjectRepository
+     */
+    public function __construct(
+        ModerationLogRepositoryInterface $moderationLogRepository,
+        ModerationLogSubjectRepositoryInterface $moderationLogSubjectRepository
+    ) {
+        $this->moderationLogRepository = $moderationLogRepository;
+        $this->moderationLogSubjectRepository = $moderationLogSubjectRepository;
+    }
 
-	/**
-	 * @param User                $user
-	 * @param ModerationInterface $moderation
-	 * @param Collection          $contentCollection
-	 * @param string              $ipAddress
-	 * @param bool                $isReverse
-	 * @param ContentInterface    $source
-	 * @param ContentInterface    $destination
-	 */
-	public function log(
-		User $user,
-		ModerationInterface $moderation,
-		Collection $contentCollection,
-		$ipAddress,
-		$isReverse = false,
-		ContentInterface $source = null,
-		ContentInterface $destination = null
-	) {
-		$attributes = [
-			'user_id' => $user->id,
-			'moderation' => $moderation->getKey(),
-			'is_reverse' => $isReverse,
-			'ip_address' => $ipAddress,
-		];
+    /**
+     * @param User $user
+     * @param ModerationInterface $moderation
+     * @param Collection $contentCollection
+     * @param string $ipAddress
+     * @param bool $isReverse
+     * @param ContentInterface $source
+     * @param ContentInterface $destination
+     */
+    public function log(
+        User $user,
+        ModerationInterface $moderation,
+        Collection $contentCollection,
+        $ipAddress,
+        $isReverse = false,
+        ContentInterface $source = null,
+        ContentInterface $destination = null
+    ) {
+        $attributes = [
+            'user_id'    => $user->id,
+            'moderation' => $moderation->getKey(),
+            'is_reverse' => $isReverse,
+            'ip_address' => $ipAddress,
+        ];
 
-		if ($source) {
-			$attributes['source_content_type'] = $source->getType();
-			$attributes['source_content_id'] = $source->getId();
-		}
+        if ($source) {
+            $attributes['source_content_type'] = $source->getType();
+            $attributes['source_content_id'] = $source->getId();
+        }
 
-		if ($destination) {
-			$attributes['destination_content_type'] = $destination->getType();
-			$attributes['destination_content_id'] = $destination->getId();
-		}
+        if ($destination) {
+            $attributes['destination_content_type'] = $destination->getType();
+            $attributes['destination_content_id'] = $destination->getId();
+        }
 
-		$moderationLog = $this->moderationLogRepository->create($attributes);
+        $moderationLog = $this->moderationLogRepository->create($attributes);
 
-		foreach ($contentCollection as $content) {
-			$this->moderationLogSubjectRepository->addContentToLog($moderationLog, $content);
-		}
-	}
+        foreach ($contentCollection as $content) {
+            $this->moderationLogSubjectRepository->addContentToLog($moderationLog, $content);
+        }
+    }
 
-	/**
-	 * @param User              $user
-	 * @param ModerationRequest $request
-	 */
-	public function logFromRequest(User $user, ModerationRequest $request)
-	{
-		$this->log(
-			$user,
-			$request->getModeration(),
-			new Collection($request->getModeratableContent()),
-			$request->getClientIp(),
-			false,
-			$request->getSource(),
-			$request->getDestination()
-		);
-	}
+    /**
+     * @param User $user
+     * @param ModerationRequest $request
+     */
+    public function logFromRequest(User $user, ModerationRequest $request)
+    {
+        $this->log(
+            $user,
+            $request->getModeration(),
+            new Collection($request->getModeratableContent()),
+            $request->getClientIp(),
+            false,
+            $request->getSource(),
+            $request->getDestination()
+        );
+    }
 
-	/**
-	 * @param User              $user
-	 * @param ModerationRequest $request
-	 */
-	public function logReverseFromRequest(User $user, ModerationRequest $request)
-	{
-		$this->log(
-			$user,
-			$request->getModeration(),
-			new Collection($request->getModeratableContent()),
-			$request->getClientIp(),
-			true,
-			$request->getSource(),
-			$request->getDestination()
-		);
-	}
+    /**
+     * @param User $user
+     * @param ModerationRequest $request
+     */
+    public function logReverseFromRequest(User $user, ModerationRequest $request)
+    {
+        $this->log(
+            $user,
+            $request->getModeration(),
+            new Collection($request->getModeratableContent()),
+            $request->getClientIp(),
+            true,
+            $request->getSource(),
+            $request->getDestination()
+        );
+    }
 }

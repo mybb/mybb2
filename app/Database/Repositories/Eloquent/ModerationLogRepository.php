@@ -13,36 +13,36 @@ use MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface;
 
 class ModerationLogRepository implements ModerationLogRepositoryInterface
 {
-	/**
-	 * @var ModerationLog
-	 */
-	protected $moderationLog;
+    /**
+     * @var ModerationLog
+     */
+    protected $moderationLog;
 
-	/**
-	 * @param ModerationLog $moderationLog
-	 */
-	public function __construct(ModerationLog $moderationLog)
-	{
-		$this->moderationLog = $moderationLog;
-	}
+    /**
+     * @param ModerationLog $moderationLog
+     */
+    public function __construct(ModerationLog $moderationLog)
+    {
+        $this->moderationLog = $moderationLog;
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return ModerationLog
-	 */
-	public function find($id)
-	{
-		return $this->moderationLog->find($id);
-	}
+    /**
+     * @param int $id
+     *
+     * @return ModerationLog
+     */
+    public function find($id)
+    {
+        return $this->moderationLog->find($id);
+    }
 
-	/**
-	 * @param array $attributes
-	 *
-	 * @return ModerationLog
-	 */
-	public function create(array $attributes)
-	{
-		return $this->moderationLog->create($attributes);
-	}
+    /**
+     * @param array $attributes
+     *
+     * @return ModerationLog
+     */
+    public function create(array $attributes)
+    {
+        return $this->moderationLog->create($attributes);
+    }
 }

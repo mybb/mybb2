@@ -14,52 +14,52 @@ use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 
 class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterface
 {
-	/**
-	 * @var ProfileFieldGroup
-	 */
-	protected $profileFieldGroup;
+    /**
+     * @var ProfileFieldGroup
+     */
+    protected $profileFieldGroup;
 
-	/**
-	 * @param ProfileFieldGroup $profileFieldGroup
-	 */
-	public function __construct(ProfileFieldGroup $profileFieldGroup)
-	{
-		$this->profileFieldGroup = $profileFieldGroup;
-	}
+    /**
+     * @param ProfileFieldGroup $profileFieldGroup
+     */
+    public function __construct(ProfileFieldGroup $profileFieldGroup)
+    {
+        $this->profileFieldGroup = $profileFieldGroup;
+    }
 
-	/**
-	 * @param string $slug
-	 *
-	 * @return ProfileFieldGroup
-	 */
-	public function getBySlug($slug)
-	{
-		return $this->profileFieldGroup->where('slug', $slug)->first();
-	}
+    /**
+     * @param string $slug
+     *
+     * @return ProfileFieldGroup
+     */
+    public function getBySlug($slug)
+    {
+        return $this->profileFieldGroup->where('slug', $slug)->first();
+    }
 
-	/**
-	 * @return Collection
-	 */
-	public function getAll()
-	{
-		return $this->profileFieldGroup->all();
-	}
+    /**
+     * @return Collection
+     */
+    public function getAll()
+    {
+        return $this->profileFieldGroup->all();
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getAllForSelectElement()
-	{
-		return $this->profileFieldGroup->lists('name', 'id');
-	}
+    /**
+     * @return array
+     */
+    public function getAllForSelectElement()
+    {
+        return $this->profileFieldGroup->lists('name', 'id');
+    }
 
-	/**
-	 * @param array $data
-	 *
-	 * @return ProfileFieldGroup
-	 */
-	public function create(array $data)
-	{
-		return $this->profileFieldGroup->create($data);
-	}
+    /**
+     * @param array $data
+     *
+     * @return ProfileFieldGroup
+     */
+    public function create(array $data)
+    {
+        return $this->profileFieldGroup->create($data);
+    }
 }

@@ -18,36 +18,36 @@ use Twig_SimpleFunction;
 
 class Settings extends Twig_Extension
 {
-	/**
-	 * @var Store $settings ;
-	 */
-	protected $settings;
+    /**
+     * @var Store $settings ;
+     */
+    protected $settings;
 
-	/**
-	 * Create a new settings extension.
-	 *
-	 * @param Store $settings Settings store.
-	 */
-	public function __construct(Store $settings)
-	{
-		$this->settings = $settings;
-	}
+    /**
+     * Create a new settings extension.
+     *
+     * @param Store $settings Settings store.
+     */
+    public function __construct(Store $settings)
+    {
+        $this->settings = $settings;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_Settings';
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_Settings';
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new Twig_SimpleFunction('setting', [$this->settings, 'get']),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('setting', [$this->settings, 'get']),
+        ];
+    }
 }

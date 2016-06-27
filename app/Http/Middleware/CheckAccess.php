@@ -15,56 +15,56 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class CheckAccess
 {
-	/**
-	 * @var Guard
-	 */
-	protected $auth;
+    /**
+     * @var Guard
+     */
+    protected $auth;
 
-	/**
-	 * @var PermissionChecker
-	 */
-	private $permissionChecker;
+    /**
+     * @var PermissionChecker
+     */
+    private $permissionChecker;
 
-	/**
-	 * @param Guard             $auth
-	 * @param PermissionChecker $permissionChecker
-	 */
-	public function __construct(Guard $auth, PermissionChecker $permissionChecker)
-	{
-		$this->auth = $auth;
-		$this->permissionChecker = $permissionChecker;
-	}
+    /**
+     * @param Guard $auth
+     * @param PermissionChecker $permissionChecker
+     */
+    public function __construct(Guard $auth, PermissionChecker $permissionChecker)
+    {
+        $this->auth = $auth;
+        $this->permissionChecker = $permissionChecker;
+    }
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \Closure                 $next
-	 *
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		if ($this->checkPermissions($request)) {
-			return $next($request);
-		}
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if ($this->checkPermissions($request)) {
+            return $next($request);
+        }
 
-		throw new AccessDeniedHttpException;
-	}
+        throw new AccessDeniedHttpException;
+    }
 
-	/**
-	 *  Check Permissions
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
-	 * @return Boolean True if permission check passes, false otherwise
-	 */
-	protected function checkPermissions($request)
-	{
-		$action = $request->route()->getAction();
-		// Check for additional permissions required
-		$requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
+    /**
+     *  Check Permissions
+     *
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return Boolean True if permission check passes, false otherwise
+     */
+    protected function checkPermissions($request)
+    {
+        $action = $request->route()->getAction();
+        // Check for additional permissions required
+        $requiredPermisions = isset($action['permissions']) ? explode('|', $action['permissions']) : false;
 
-		return $this->permissionChecker->hasPermission('user', null, $requiredPermisions);
-	}
+        return $this->permissionChecker->hasPermission('user', null, $requiredPermisions);
+    }
 }

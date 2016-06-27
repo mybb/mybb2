@@ -8,26 +8,26 @@
 
 namespace MyBB\Core\Exceptions;
 
-use \RuntimeException;
+use RuntimeException;
 
 class DateInvalidObjectException extends RuntimeException
 {
-	/**
-	 * @var string
-	 */
-	protected $message = 'errors.invalid_date_object';
+    /**
+     * @var string
+     */
+    protected $message = 'errors.invalid_date_object';
 
-	/**
-	 * @param string     $message
-	 * @param int        $code
-	 * @param \Exception $previous
-	 */
-	public function __construct($message = null, $code = 0, \Exception $previous = null)
-	{
-		if ($message === null) {
-			$message = trans($this->message);
-		}
+    /**
+     * @param string $message
+     * @param int $code
+     * @param \Exception $previous
+     */
+    public function __construct($message = null, $code = 0, \Exception $previous = null)
+    {
+        if ($message === null) {
+            $message = trans($this->message);
+        }
 
-		parent::__construct($message, $code, $previous);
-	}
+        parent::__construct($message, $code, $previous);
+    }
 }

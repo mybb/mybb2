@@ -10,38 +10,38 @@ namespace MyBB\Core\Form;
 
 interface RenderableInterface
 {
-	/**
-	 * @return string
-	 */
-	public function getType();
+    /**
+     * @return string
+     */
+    public function getType();
 
-	/**
-	 * @return array
-	 */
-	public function getOptions();
+    /**
+     * @return array
+     */
+    public function getOptions();
 
-	/**
-	 * @return string
-	 */
-	public function getDescription();
+    /**
+     * @return string
+     */
+    public function getDescription();
 
-	/**
-	 * @return string
-	 */
-	public function getElementName();
+    /**
+     * @return string
+     */
+    public function getElementName();
 
-	/**
-	 * @return string
-	 */
-	public function getLabel();
+    /**
+     * @return string
+     */
+    public function getLabel();
 
-	/**
-	 * @return mixed
-	 */
-	public function getValue();
+    /**
+     * @return mixed
+     */
+    public function getValue();
 
-	/**
-	 * @return array
-	 */
-	public function getValidationRules();
+    /**
+     * @return array
+     */
+    public function getValidationRules();
 }

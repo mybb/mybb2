@@ -12,47 +12,47 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractCachingModel extends Model
 {
-	/**
-	 * @var array
-	 */
-	protected static $models;
+    /**
+     * @var array
+     */
+    protected static $models;
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function save(array $options = array())
-	{
-		$saved = parent::save($options);
+    /**
+     * {@inheritdoc}
+     */
+    public static function find($id, $columns = ['*'])
+    {
+        if ($columns != ['*']) {
+            return static::query()->find($id, $columns);
+        }
 
-		if ($saved) {
-			static::$models[$this->getKey()] = $this;
-		}
+        if (!isset(static::$models[$id])) {
+            static::$models[$id] = static::query()->find($id, $columns);
+        }
 
-		return $saved;
-	}
+        return static::$models[$id];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function delete()
-	{
-		parent::delete();
-		unset(static::$models[$this->getKey()]);
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function save(array $options = [])
+    {
+        $saved = parent::save($options);
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function find($id, $columns = array('*'))
-	{
-		if ($columns != array('*')) {
-			return static::query()->find($id, $columns);
-		}
+        if ($saved) {
+            static::$models[$this->getKey()] = $this;
+        }
 
-		if (!isset(static::$models[$id])) {
-			static::$models[$id] = static::query()->find($id, $columns);
-		}
+        return $saved;
+    }
 
-		return static::$models[$id];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function delete()
+    {
+        parent::delete();
+        unset(static::$models[$this->getKey()]);
+    }
 }

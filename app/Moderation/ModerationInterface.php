@@ -10,41 +10,41 @@ namespace MyBB\Core\Moderation;
 
 interface ModerationInterface
 {
-	/**
-	 * @return string
-	 */
-	public function getKey();
+    /**
+     * @return string
+     */
+    public function getKey();
 
-	/**
-	 * @return string
-	 */
-	public function getName();
+    /**
+     * @return string
+     */
+    public function getName();
 
-	/**
-	 * @param mixed $content
-	 * @param array $options
-	 *
-	 * @return mixed
-	 */
-	public function apply($content, array $options = []);
+    /**
+     * @param mixed $content
+     * @param array $options
+     *
+     * @return mixed
+     */
+    public function apply($content, array $options = []);
 
-	/**
-	 * @param mixed $content
-	 * @param array $options
-	 *
-	 * @return bool
-	 */
-	public function supports($content, array $options = []);
+    /**
+     * @param mixed $content
+     * @param array $options
+     *
+     * @return bool
+     */
+    public function supports($content, array $options = []);
 
-	/**
-	 * @param mixed $content
-	 *
-	 * @return bool
-	 */
-	public function visible($content);
+    /**
+     * @param mixed $content
+     *
+     * @return bool
+     */
+    public function visible($content);
 
-	/**
-	 * @return string
-	 */
-	public function getPermissionName();
+    /**
+     * @return string
+     */
+    public function getPermissionName();
 }

@@ -16,100 +16,100 @@ use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequestSubmitTrait;
 
 class UpdateProfileRequest extends AbstractRequest
 {
-	use ProfileFieldRequestSubmitTrait {
-		rules as traitRules;
-	}
+    use ProfileFieldRequestSubmitTrait {
+        rules as traitRules;
+    }
 
-	/**
-	 * @var ProfileFieldRepositoryInterface
-	 */
-	protected $profileFieldsRepository;
+    /**
+     * @var ProfileFieldRepositoryInterface
+     */
+    protected $profileFieldsRepository;
 
-	/**
-	 * @var array
-	 */
-	protected $profileFields;
+    /**
+     * @var array
+     */
+    protected $profileFields;
 
-	/**
-	 * @var array
-	 */
-	protected $allProfileFields;
+    /**
+     * @var array
+     */
+    protected $allProfileFields;
 
-	/**
-	 * @var ProfileFieldGroupRepositoryInterface
-	 */
-	protected $profileFieldGroupRepository;
+    /**
+     * @var ProfileFieldGroupRepositoryInterface
+     */
+    protected $profileFieldGroupRepository;
 
-	/**
-	 * @param ProfileFieldRepositoryInterface      $profileFieldsRepository
-	 * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
-	 */
-	public function __construct(
-		ProfileFieldRepositoryInterface $profileFieldsRepository,
-		ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
-	) {
-		parent::__construct();
-		$this->profileFieldsRepository = $profileFieldsRepository;
-		$this->profileFieldGroupRepository = $profileFieldGroupRepository;
-	}
+    /**
+     * @param ProfileFieldRepositoryInterface $profileFieldsRepository
+     * @param ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+     */
+    public function __construct(
+        ProfileFieldRepositoryInterface $profileFieldsRepository,
+        ProfileFieldGroupRepositoryInterface $profileFieldGroupRepository
+    ) {
+        parent::__construct();
+        $this->profileFieldsRepository = $profileFieldsRepository;
+        $this->profileFieldGroupRepository = $profileFieldGroupRepository;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function rules()
-	{
-		$rules = $this->traitRules();
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        $rules = $this->traitRules();
 
-		$rules = array_merge($rules, [
-			'date_of_birth_day' => 'integer|min:1|max:31',
-			'date_of_birth_month' => 'integer|min:1|max:12',
-			'date_of_birth_year' => 'integer',
-			'usertitle' => 'string',
-		]);
+        $rules = array_merge($rules, [
+            'date_of_birth_day'   => 'integer|min:1|max:31',
+            'date_of_birth_month' => 'integer|min:1|max:12',
+            'date_of_birth_year'  => 'integer',
+            'usertitle'           => 'string',
+        ]);
 
-		return $rules;
-	}
+        return $rules;
+    }
 
-	/**
-	 * @return ProfileField[]
-	 */
-	public function getProfileFields()
-	{
-		if (!$this->profileFields) {
-			$profileFieldData = $this->get('profile_fields');
-			$this->profileFields = [];
+    /**
+     * @return ProfileField[]
+     */
+    public function getProfileFields()
+    {
+        if (!$this->profileFields) {
+            $profileFieldData = $this->get('profile_fields');
+            $this->profileFields = [];
 
-			foreach ($profileFieldData as $profileFieldId => $value) {
-				if ($value !== '') {
-					$this->profileFields[] = $this->profileFieldsRepository->find($profileFieldId);
-				}
-			}
-		}
+            foreach ($profileFieldData as $profileFieldId => $value) {
+                if ($value !== '') {
+                    $this->profileFields[] = $this->profileFieldsRepository->find($profileFieldId);
+                }
+            }
+        }
 
-		return $this->profileFields;
-	}
+        return $this->profileFields;
+    }
 
-	/**
-	 * @return array
-	 */
-	protected function getAllProfileFields()
-	{
-		if (!$this->allProfileFields) {
-			foreach ($this->profileFieldGroupRepository->getAll() as $profileFieldGroup) {
-				foreach ($profileFieldGroup->getProfileFields()->get() as $profileField) {
-					$this->allProfileFields[] = $profileField;
-				}
-			}
-		}
+    /**
+     * @return array
+     */
+    protected function getAllProfileFields()
+    {
+        if (!$this->allProfileFields) {
+            foreach ($this->profileFieldGroupRepository->getAll() as $profileFieldGroup) {
+                foreach ($profileFieldGroup->getProfileFields()->get() as $profileField) {
+                    $this->allProfileFields[] = $profileField;
+                }
+            }
+        }
 
-		return $this->allProfileFields;
-	}
+        return $this->allProfileFields;
+    }
 }

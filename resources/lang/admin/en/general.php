@@ -7,16 +7,16 @@
  */
 
 return [
-	'back' => 'Back',
-	'see' => 'See',
-	'save' => 'Save',
-	'add' => 'Add',
-	'delete' => 'Delete',
-	'success_saved' => 'Saved!',
-	'success_deleted' => 'Deleted!',
-	'success_created' => 'Created!',
-	'control_panel' => 'Control Panel',
-	'dashboard' => 'Dashboard',
-	'users_roles' => 'Users & Roles',
-	'title' => 'Administration'
+    'back'            => 'Back',
+    'see'             => 'See',
+    'save'            => 'Save',
+    'add'             => 'Add',
+    'delete'          => 'Delete',
+    'success_saved'   => 'Saved!',
+    'success_deleted' => 'Deleted!',
+    'success_created' => 'Created!',
+    'control_panel'   => 'Control Panel',
+    'dashboard'       => 'Dashboard',
+    'users_roles'     => 'Users & Roles',
+    'title'           => 'Administration',
 ];

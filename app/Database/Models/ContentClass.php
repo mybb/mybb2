@@ -8,10 +8,6 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Model;
-use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\Authenticatable;
 use MyBB\Auth\Contracts\UserContract as AuthenticatableContract;
 use MyBB\Core\Traits\Permissionable;
@@ -22,73 +18,73 @@ use MyBB\Core\Traits\Permissionable;
  */
 class ContentClass extends AbstractCachingModel
 {
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'content_class';
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'content_class';
 
-	/**
-	 * The primary key for the model.
-	 *
-	 * @var string
-	 */
-	protected $primaryKey = 'content';
+    /**
+     * The primary key for the model.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'content';
 
-	// @codingStandardsIgnoreStart
+    // @codingStandardsIgnoreStart
 
-	/**
-	 * Indicates if the IDs are auto-incrementing.
-	 *
-	 * @var boolean
-	 */
-	public $incrementing = false;
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var boolean
+     */
+    public $incrementing = false;
 
-	/**
-	 * Indicates if the model should be timestamped.
-	 *
-	 * @var boolean
-	 */
-	public $timestamps = false;
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
 
-	// @codingStandardsIgnoreEnd
+    // @codingStandardsIgnoreEnd
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-	protected $fillable = [
-		'content',
-		'class'
-	];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'content',
+        'class',
+    ];
 
-	/**
-	 * Shortcut for "ContentClass::find($content)->getConcreteClass();"
-	 *
-	 * @param string $content
-	 *
-	 * @return mixed|null Return null if no class is found, otherwise a represantion of the registered class
-	 */
-	public static function getClass($content)
-	{
-		$model = static::find($content);
+    /**
+     * Shortcut for "ContentClass::find($content)->getConcreteClass();"
+     *
+     * @param string $content
+     *
+     * @return mixed|null Return null if no class is found, otherwise a represantion of the registered class
+     */
+    public static function getClass($content)
+    {
+        $model = static::find($content);
 
-		if ($model == null) {
-			return null;
-		}
+        if ($model == null) {
+            return null;
+        }
 
-		return $model->getConcreteClass();
-	}
+        return $model->getConcreteClass();
+    }
 
-	/**
-	 * Return a representation of the class for this content
-	 *
-	 * @return mixed
-	 */
-	public function getConcreteClass()
-	{
-		return app()->make($this->class);
-	}
+    /**
+     * Return a representation of the class for this content
+     *
+     * @return mixed
+     */
+    public function getConcreteClass()
+    {
+        return app()->make($this->class);
+    }
 }

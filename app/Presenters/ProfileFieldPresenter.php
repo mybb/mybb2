@@ -17,137 +17,137 @@ use MyBB\Core\Form\RenderableInterface;
 
 class ProfileField extends BasePresenter implements RenderableInterface
 {
-	/**
-	 * @var Guard
-	 */
-	protected $guard;
+    /**
+     * @var Guard
+     */
+    protected $guard;
 
-	/**
-	 * @var UserProfileFieldRepositoryInterface
-	 */
-	protected $userProfileFields;
+    /**
+     * @var UserProfileFieldRepositoryInterface
+     */
+    protected $userProfileFields;
 
-	/**
-	 * @var ProfileFieldOptionRepositoryInterface
-	 */
-	protected $profileFieldOptionRepository;
+    /**
+     * @var ProfileFieldOptionRepositoryInterface
+     */
+    protected $profileFieldOptionRepository;
 
-	/**
-	 * @param ProfileFieldModel                     $resource
-	 * @param Guard                                 $guard
-	 * @param UserProfileFieldRepositoryInterface   $userProfileFields
-	 * @param ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
-	 */
-	public function __construct(
-		ProfileFieldModel $resource,
-		Guard $guard,
-		UserProfileFieldRepositoryInterface $userProfileFields,
-		ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
-	) {
-		parent::__construct($resource);
+    /**
+     * @param ProfileFieldModel $resource
+     * @param Guard $guard
+     * @param UserProfileFieldRepositoryInterface $userProfileFields
+     * @param ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
+     */
+    public function __construct(
+        ProfileFieldModel $resource,
+        Guard $guard,
+        UserProfileFieldRepositoryInterface $userProfileFields,
+        ProfileFieldOptionRepositoryInterface $profileFieldOptionRepository
+    ) {
+        parent::__construct($resource);
 
-		$this->guard = $guard;
-		$this->userProfileFields = $userProfileFields;
-		$this->profileFieldOptionRepository = $profileFieldOptionRepository;
-	}
+        $this->guard = $guard;
+        $this->userProfileFields = $userProfileFields;
+        $this->profileFieldOptionRepository = $profileFieldOptionRepository;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getOptions()
-	{
-		$options = $this->profileFieldOptionRepository->getForProfileField($this->getWrappedObject());
+    /**
+     * @return array
+     */
+    public function getOptions()
+    {
+        $options = $this->profileFieldOptionRepository->getForProfileField($this->getWrappedObject());
 
-		$formattedOptions = [];
+        $formattedOptions = [];
 
-		foreach ($options as $option) {
-			$formattedOptions[$option->getValue()] = $option->getName();
-		}
+        foreach ($options as $option) {
+            $formattedOptions[$option->getValue()] = $option->getName();
+        }
 
-		return $formattedOptions;
-	}
+        return $formattedOptions;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function options()
-	{
-		return $this->getOptions();
-	}
+    /**
+     * @return array
+     */
+    public function options()
+    {
+        return $this->getOptions();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getElementName()
-	{
-		return 'profile_fields[' . $this->id . ']';
-	}
+    /**
+     * @return string
+     */
+    public function getElementName()
+    {
+        return 'profile_fields[' . $this->id . ']';
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getDescription()
-	{
-		return $this->description;
-	}
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getLabel()
-	{
-		return $this->name;
-	}
+    /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->name;
+    }
 
-	/**
-	 * @param User $user
-	 *
-	 * @return mixed
-	 */
-	public function getValue(User $user = null)
-	{
-		if ($user == null) {
-			$user = $this->guard->user();
-		} else {
-			$user = $user->getWrappedObject();
-		}
+    /**
+     * @param User $user
+     *
+     * @return mixed
+     */
+    public function getValue(User $user = null)
+    {
+        if ($user == null) {
+            $user = $this->guard->user();
+        } else {
+            $user = $user->getWrappedObject();
+        }
 
-		$userProfileField = $this->userProfileFields->findForProfileField($user, $this->getWrappedObject());
+        $userProfileField = $this->userProfileFields->findForProfileField($user, $this->getWrappedObject());
 
-		if ($userProfileField) {
-			return $userProfileField->getValue();
-		}
-	}
+        if ($userProfileField) {
+            return $userProfileField->getValue();
+        }
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function has_value()
-	{
-		return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
-	}
+    /**
+     * @return bool
+     */
+    public function has_value()
+    {
+        return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getValidationRules()
-	{
-		return $this->validation_rules;
-	}
+    /**
+     * @return array
+     */
+    public function getValidationRules()
+    {
+        return $this->validation_rules;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function has_validation_rules()
-	{
-		return (bool) $this->getValidationRules();
-	}
+    /**
+     * @return bool
+     */
+    public function has_validation_rules()
+    {
+        return (bool)$this->getValidationRules();
+    }
 }

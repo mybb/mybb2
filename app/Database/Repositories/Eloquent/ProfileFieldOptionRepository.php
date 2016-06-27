@@ -15,46 +15,46 @@ use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 
 class ProfileFieldOptionRepository implements ProfileFieldOptionRepositoryInterface
 {
-	/**
-	 * @var ProfileFieldOption
-	 */
-	protected $profileFieldOption;
+    /**
+     * @var ProfileFieldOption
+     */
+    protected $profileFieldOption;
 
-	/**
-	 * @param ProfileFieldOption $profileFieldOption
-	 */
-	public function __construct(ProfileFieldOption $profileFieldOption)
-	{
-		$this->profileFieldOption = $profileFieldOption;
-	}
+    /**
+     * @param ProfileFieldOption $profileFieldOption
+     */
+    public function __construct(ProfileFieldOption $profileFieldOption)
+    {
+        $this->profileFieldOption = $profileFieldOption;
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return ProfileFieldOption
-	 */
-	public function find($id)
-	{
-		return $this->profileFieldOption->newQuery()->find($id);
-	}
+    /**
+     * @param int $id
+     *
+     * @return ProfileFieldOption
+     */
+    public function find($id)
+    {
+        return $this->profileFieldOption->newQuery()->find($id);
+    }
 
-	/**
-	 * @param array $data
-	 *
-	 * @return ProfileFieldOption
-	 */
-	public function create(array $data)
-	{
-		return $this->profileFieldOption->create($data);
-	}
+    /**
+     * @param array $data
+     *
+     * @return ProfileFieldOption
+     */
+    public function create(array $data)
+    {
+        return $this->profileFieldOption->create($data);
+    }
 
-	/**
-	 * @param ProfileField $profileField
-	 *
-	 * @return Collection
-	 */
-	public function getForProfileField(ProfileField $profileField)
-	{
-		return $this->profileFieldOption->newQuery()->where('profile_field_id', $profileField->id)->get();
-	}
+    /**
+     * @param ProfileField $profileField
+     *
+     * @return Collection
+     */
+    public function getForProfileField(ProfileField $profileField)
+    {
+        return $this->profileFieldOption->newQuery()->where('profile_field_id', $profileField->id)->get();
+    }
 }

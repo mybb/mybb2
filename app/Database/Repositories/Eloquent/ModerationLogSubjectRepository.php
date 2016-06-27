@@ -16,51 +16,51 @@ use MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface;
 
 class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryInterface
 {
-	/**
-	 * @var ModerationLogSubject
-	 */
-	protected $moderationLogSubject;
+    /**
+     * @var ModerationLogSubject
+     */
+    protected $moderationLogSubject;
 
-	/**
-	 * @param ModerationLogSubject $moderationLogSubject
-	 */
-	public function __construct(ModerationLogSubject $moderationLogSubject)
-	{
-		$this->moderationLogSubject = $moderationLogSubject;
-	}
+    /**
+     * @param ModerationLogSubject $moderationLogSubject
+     */
+    public function __construct(ModerationLogSubject $moderationLogSubject)
+    {
+        $this->moderationLogSubject = $moderationLogSubject;
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return Model
-	 */
-	public function find($id)
-	{
-		return $this->moderationLogSubject->find($id);
-	}
+    /**
+     * @param int $id
+     *
+     * @return Model
+     */
+    public function find($id)
+    {
+        return $this->moderationLogSubject->find($id);
+    }
 
-	/**
-	 * @param ModerationLog    $moderationLog
-	 * @param ContentInterface $content
-	 *
-	 * @return ModerationLogSubject
-	 */
-	public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content)
-	{
-		return $this->create([
-			'moderation_log_id' => $moderationLog->id,
-			'content_type' => $content->getType(),
-			'content_id' => $content->getId(),
-		]);
-	}
+    /**
+     * @param ModerationLog $moderationLog
+     * @param ContentInterface $content
+     *
+     * @return ModerationLogSubject
+     */
+    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content)
+    {
+        return $this->create([
+            'moderation_log_id' => $moderationLog->id,
+            'content_type'      => $content->getType(),
+            'content_id'        => $content->getId(),
+        ]);
+    }
 
-	/**
-	 * @param array $attributes
-	 *
-	 * @return ModerationLogSubject
-	 */
-	public function create(array $attributes)
-	{
-		return $this->moderationLogSubject->create($attributes);
-	}
+    /**
+     * @param array $attributes
+     *
+     * @return ModerationLogSubject
+     */
+    public function create(array $attributes)
+    {
+        return $this->moderationLogSubject->create($attributes);
+    }
 }

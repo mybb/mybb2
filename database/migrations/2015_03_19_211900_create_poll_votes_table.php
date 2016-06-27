@@ -6,37 +6,37 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreatePollVotesTable extends Migration
 {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('poll_votes', function (Blueprint $table) {
-			$table->increments('id');
-			$table->unsignedInteger('poll_id');
-			$table->unsignedInteger('user_id')->nullable();
-			$table->string('vote');
-			$table->nullableTimestamps();
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('poll_votes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('poll_id');
+            $table->unsignedInteger('user_id')->nullable();
+            $table->string('vote');
+            $table->nullableTimestamps();
 
-			$table->foreign('poll_id')->references('id')->on('polls');
-		});
-	}
+            $table->foreign('poll_id')->references('id')->on('polls');
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('poll_votes');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('poll_votes');
+    }
 }

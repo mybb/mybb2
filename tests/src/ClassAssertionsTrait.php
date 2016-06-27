@@ -10,12 +10,12 @@ namespace MyBB\Core\Test;
 
 trait ClassAssertionsTrait
 {
-	/**
-	 * @param mixed  $class
-	 * @param string $extends
-	 */
-	public static function assertClassExtends($class, $extends)
-	{
-		static::assertContains($extends, class_parents($class));
-	}
+    /**
+     * @param mixed $class
+     * @param string $extends
+     */
+    public static function assertClassExtends($class, $extends)
+    {
+        static::assertContains($extends, class_parents($class));
+    }
 }

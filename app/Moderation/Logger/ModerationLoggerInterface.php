@@ -16,36 +16,36 @@ use MyBB\Core\Moderation\ModerationInterface;
 
 interface ModerationLoggerInterface
 {
-	/**
-	 * @param User                $user
-	 * @param ModerationInterface $moderation
-	 * @param Collection          $contentCollection
-	 * @param string              $ipAddress
-	 * @param bool                $isReverse
-	 * @param ContentInterface    $source
-	 * @param ContentInterface    $destination
-	 *
-	 * @return
-	 */
-	public function log(
-		User $user,
-		ModerationInterface $moderation,
-		Collection $contentCollection,
-		$ipAddress,
-		$isReverse = false,
-		ContentInterface $source = null,
-		ContentInterface $destination = null
-	);
+    /**
+     * @param User $user
+     * @param ModerationInterface $moderation
+     * @param Collection $contentCollection
+     * @param string $ipAddress
+     * @param bool $isReverse
+     * @param ContentInterface $source
+     * @param ContentInterface $destination
+     *
+     * @return
+     */
+    public function log(
+        User $user,
+        ModerationInterface $moderation,
+        Collection $contentCollection,
+        $ipAddress,
+        $isReverse = false,
+        ContentInterface $source = null,
+        ContentInterface $destination = null
+    );
 
-	/**
-	 * @param User              $user
-	 * @param ModerationRequest $request
-	 */
-	public function logFromRequest(User $user, ModerationRequest $request);
+    /**
+     * @param User $user
+     * @param ModerationRequest $request
+     */
+    public function logFromRequest(User $user, ModerationRequest $request);
 
-	/**
-	 * @param User              $user
-	 * @param ModerationRequest $request
-	 */
-	public function logReverseFromRequest(User $user, ModerationRequest $request);
+    /**
+     * @param User $user
+     * @param ModerationRequest $request
+     */
+    public function logReverseFromRequest(User $user, ModerationRequest $request);
 }

@@ -17,7 +17,6 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
-use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
@@ -28,275 +27,274 @@ use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
 use MyBB\Parser\MessageFormatter;
 use MyBB\Settings\Store;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ConversationsController extends AbstractController
 {
-	/**
-	 * @var ConversationRepositoryInterface
-	 */
-	private $conversationRepository;
+    /**
+     * @var ConversationRepositoryInterface
+     */
+    private $conversationRepository;
 
-	/**
-	 * @var ConversationMessageRepositoryInterface
-	 */
-	private $conversationMessageRepository;
+    /**
+     * @var ConversationMessageRepositoryInterface
+     */
+    private $conversationMessageRepository;
 
-	/**
-	 * @var Guard
-	 */
-	private $guard;
+    /**
+     * @var Guard
+     */
+    private $guard;
 
-	/**
-	 * @param ConversationRepositoryInterface        $conversationRepository
-	 * @param ConversationMessageRepositoryInterface $conversationMessageRepository
-	 * @param Guard                                  $guard
-	 */
-	public function __construct(
-		ConversationRepositoryInterface $conversationRepository,
-		ConversationMessageRepositoryInterface $conversationMessageRepository,
-		Guard $guard
-	) {
-		$this->conversationRepository = $conversationRepository;
-		$this->conversationMessageRepository = $conversationMessageRepository;
-		$this->guard = $guard;
+    /**
+     * @param ConversationRepositoryInterface $conversationRepository
+     * @param ConversationMessageRepositoryInterface $conversationMessageRepository
+     * @param Guard $guard
+     */
+    public function __construct(
+        ConversationRepositoryInterface $conversationRepository,
+        ConversationMessageRepositoryInterface $conversationMessageRepository,
+        Guard $guard
+    ) {
+        $this->conversationRepository = $conversationRepository;
+        $this->conversationMessageRepository = $conversationMessageRepository;
+        $this->guard = $guard;
 
-		$guard->user()->load('conversations');
-	}
+        $guard->user()->load('conversations');
+    }
 
-	/**
-	 * @return \Illuminate\View\View
-	 */
-	public function index()
-	{
-		$conversations = $this->conversationRepository->getForUser($this->guard->user());
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $conversations = $this->conversationRepository->getForUser($this->guard->user());
 
-		return view('conversation.index', compact('conversations'));
-	}
+        return view('conversation.index', compact('conversations'));
+    }
 
-	/**
-	 * @param Request          $request
-	 * @param MessageFormatter $formatter
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getCompose(Request $request, MessageFormatter $formatter)
-	{
-		$preview = null;
-		if ($request->has('message')) {
-			$preview = new ConversationMessage([
-				'author_id' => $this->guard->user()->id,
-				'message' => $request->get('message'),
-				'message_parsed' => $formatter->parse($request->get('message'), [
-					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
-				]),
-				'created_at' => new \DateTime()
-			]);
-		}
+    /**
+     * @param Request $request
+     * @param MessageFormatter $formatter
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getCompose(Request $request, MessageFormatter $formatter)
+    {
+        $preview = null;
+        if ($request->has('message')) {
+            $preview = new ConversationMessage([
+                'author_id'      => $this->guard->user()->id,
+                'message'        => $request->get('message'),
+                'message_parsed' => $formatter->parse($request->get('message'), [
+                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                ]),
+                'created_at'     => new \DateTime(),
+            ]);
+        }
 
-		return view('conversation.compose', compact('preview'));
-	}
+        return view('conversation.compose', compact('preview'));
+    }
 
-	/**
-	 * @param CreateRequest $request
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postCompose(CreateRequest $request)
-	{
-		try {
-			$conversation = $this->conversationRepository->create([
-				'title' => $request->input('title'),
-				'message' => $request->input('message'),
-				'participants' => $request->getUseridArray('participants')
-			]);
-		} catch (ConversationCantSendToSelfException $exception) {
-			return redirect()->route('conversations.compose')->withInput()->withErrors([
-				'participants' => $exception->getMessage()
-			]);
-		}
+    /**
+     * @param CreateRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postCompose(CreateRequest $request)
+    {
+        try {
+            $conversation = $this->conversationRepository->create([
+                'title'        => $request->input('title'),
+                'message'      => $request->input('message'),
+                'participants' => $request->getUseridArray('participants'),
+            ]);
+        } catch (ConversationCantSendToSelfException $exception) {
+            return redirect()->route('conversations.compose')->withInput()->withErrors([
+                'participants' => $exception->getMessage(),
+            ]);
+        }
 
-		if ($conversation) {
-			return redirect()->route('conversations.read', ['id' => $conversation->id]);
-		}
+        if ($conversation) {
+            return redirect()->route('conversations.read', ['id' => $conversation->id]);
+        }
 
-		return redirect()->route('conversations.compose')->withInput()->withErrors([
-			'content' => 'error'
-		]);
-	}
+        return redirect()->route('conversations.compose')->withInput()->withErrors([
+            'content' => 'error',
+        ]);
+    }
 
-	/**
-	 * @param int              $id
-	 * @param Request          $request
-	 * @param MessageFormatter $formatter
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getRead($id, Request $request, MessageFormatter $formatter)
-	{
-		$conversation = $this->conversationRepository->find($id);
+    /**
+     * @param int $id
+     * @param Request $request
+     * @param MessageFormatter $formatter
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getRead($id, Request $request, MessageFormatter $formatter)
+    {
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		Breadcrumbs::setCurrentRoute('conversations.read', $conversation);
+        Breadcrumbs::setCurrentRoute('conversations.read', $conversation);
 
-		$this->conversationRepository->updateLastRead($conversation, $this->guard->user());
+        $this->conversationRepository->updateLastRead($conversation, $this->guard->user());
 
-		// Load the participants here as we're changing them above and we want to avoid caching issues
-		$conversation->load('participants');
+        // Load the participants here as we're changing them above and we want to avoid caching issues
+        $conversation->load('participants');
 
-		$messages = $this->conversationMessageRepository->getAllForConversation($conversation);
+        $messages = $this->conversationMessageRepository->getAllForConversation($conversation);
 
-		$preview = null;
-		if ($request->has('message')) {
-			$preview = new ConversationMessage([
-				'author_id' => $this->guard->user()->id,
-				'message' => $request->get('message'),
-				'message_parsed' => $formatter->parse($request->get('message'), [
-					MessageFormatter::ME_USERNAME => $this->guard->user()->name,
-				]),
-				'created_at' => new \DateTime()
-			]);
-		}
+        $preview = null;
+        if ($request->has('message')) {
+            $preview = new ConversationMessage([
+                'author_id'      => $this->guard->user()->id,
+                'message'        => $request->get('message'),
+                'message_parsed' => $formatter->parse($request->get('message'), [
+                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                ]),
+                'created_at'     => new \DateTime(),
+            ]);
+        }
 
-		return view('conversation.show', compact('conversation', 'messages', 'preview'));
-	}
+        return view('conversation.show', compact('conversation', 'messages', 'preview'));
+    }
 
-	/**
-	 * @param int          $id
-	 * @param ReplyRequest $request
-	 * @param Store        $settings
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postReply($id, ReplyRequest $request, Store $settings)
-	{
-		$this->failedValidationRedirect = route('conversations.read', ['id' => $id]);
+    /**
+     * @param int $id
+     * @param ReplyRequest $request
+     * @param Store $settings
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postReply($id, ReplyRequest $request, Store $settings)
+    {
+        $this->failedValidationRedirect = route('conversations.read', ['id' => $id]);
 
-		/** @var Conversation $conversation */
-		$conversation = $this->conversationRepository->find($id);
+        /** @var Conversation $conversation */
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		$message = $this->conversationMessageRepository->addMessageToConversation($conversation, [
-			'author_id' => $this->guard->user()->id,
-			'message' => $request->input('message')
-		]);
+        $message = $this->conversationMessageRepository->addMessageToConversation($conversation, [
+            'author_id' => $this->guard->user()->id,
+            'message'   => $request->input('message'),
+        ]);
 
-		if ($message) {
-			$page = 1;
+        if ($message) {
+            $page = 1;
 
-			if ($settings->get('conversations.message_order', 'desc') == 'asc') {
-				$page = (int) ($conversation->messages->count() / $settings->get('user.posts_per_page', 10)) + 1;
-			}
+            if ($settings->get('conversations.message_order', 'desc') == 'asc') {
+                $page = (int)($conversation->messages->count() / $settings->get('user.posts_per_page', 10)) + 1;
+            }
 
-			return redirect()->route('conversations.read', ['id' => $conversation->id, 'page' => $page]);
-		}
+            return redirect()->route('conversations.read', ['id' => $conversation->id, 'page' => $page]);
+        }
 
-		return redirect()->route('conversations.read', ['id' => $conversation->id])->withInput()->withErrors([
-			'content' => 'Error'
-		]);
-	}
+        return redirect()->route('conversations.read', ['id' => $conversation->id])->withInput()->withErrors([
+            'content' => 'Error',
+        ]);
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getLeave($id)
-	{
-		/** @var Conversation $conversation */
-		$conversation = $this->conversationRepository->find($id);
+    /**
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getLeave($id)
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		Breadcrumbs::setCurrentRoute('conversations.leave', $conversation);
+        Breadcrumbs::setCurrentRoute('conversations.leave', $conversation);
 
-		return view('conversation.leave', compact('conversation'));
-	}
+        return view('conversation.leave', compact('conversation'));
+    }
 
-	/**
-	 * @param int     $id
-	 * @param Request $request
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postLeave($id, Request $request)
-	{
-		/** @var Conversation $conversation */
-		$conversation = $this->conversationRepository->find($id);
+    /**
+     * @param int $id
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postLeave($id, Request $request)
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		if ($request->input('leave') == 'leave') {
-			$this->conversationRepository->leaveConversation($conversation, $this->guard->user());
-		} else {
-			$this->conversationRepository->ignoreConversation($conversation, $this->guard->user());
-		}
+        if ($request->input('leave') == 'leave') {
+            $this->conversationRepository->leaveConversation($conversation, $this->guard->user());
+        } else {
+            $this->conversationRepository->ignoreConversation($conversation, $this->guard->user());
+        }
 
-		return redirect()->route('conversations.index')->withSuccess('Conversation left');
-	}
+        return redirect()->route('conversations.index')->withSuccess('Conversation left');
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getNewParticipant($id)
-	{
-		/** @var Conversation $conversation */
-		$conversation = $this->conversationRepository->find($id);
+    /**
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getNewParticipant($id)
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		Breadcrumbs::setCurrentRoute('conversations.newParticipant', $conversation);
+        Breadcrumbs::setCurrentRoute('conversations.newParticipant', $conversation);
 
-		return view('conversation.new_participant', compact('conversation'));
-	}
+        return view('conversation.new_participant', compact('conversation'));
+    }
 
-	/**
-	 * @param int                $id
-	 * @param ParticipantRequest $request
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postNewParticipant($id, ParticipantRequest $request)
-	{
-		/** @var Conversation $conversation */
-		$conversation = $this->conversationRepository->find($id);
+    /**
+     * @param int $id
+     * @param ParticipantRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postNewParticipant($id, ParticipantRequest $request)
+    {
+        /** @var Conversation $conversation */
+        $conversation = $this->conversationRepository->find($id);
 
-		if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
-			throw new ConversationNotFoundException;
-		}
+        if (!$conversation || !$conversation->participants->contains($this->guard->user())) {
+            throw new ConversationNotFoundException;
+        }
 
-		try {
-			$this->conversationRepository->addParticipants($conversation, $request->getUseridArray('participants'));
-		} catch (ConversationCantSendToSelfException $exception) {
-			return redirect()->route(
-				'conversations.newParticipant',
-				['id' => $conversation->id]
-			)->withInput()->withErrors([
-				'participants' => $exception->getMessage()
-			]);
-		} catch (ConversationAlreadyParticipantException $exception) {
-			return redirect()->route(
-				'conversations.newParticipant',
-				['id' => $conversation->id]
-			)->withInput()->withErrors([
-				'participants' => $exception->getMessage()
-			]);
-		}
+        try {
+            $this->conversationRepository->addParticipants($conversation, $request->getUseridArray('participants'));
+        } catch (ConversationCantSendToSelfException $exception) {
+            return redirect()->route(
+                'conversations.newParticipant',
+                ['id' => $conversation->id]
+            )->withInput()->withErrors([
+                'participants' => $exception->getMessage(),
+            ]);
+        } catch (ConversationAlreadyParticipantException $exception) {
+            return redirect()->route(
+                'conversations.newParticipant',
+                ['id' => $conversation->id]
+            )->withInput()->withErrors([
+                'participants' => $exception->getMessage(),
+            ]);
+        }
 
-		return redirect()->route('conversations.read', ['id' => $conversation->id])->withSuccess('Added participants');
-	}
+        return redirect()->route('conversations.read', ['id' => $conversation->id])->withSuccess('Added participants');
+    }
 }
