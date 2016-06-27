@@ -12,22 +12,22 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class SaveProfileFieldRequest extends AbstractRequest
 {
-	/**
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'name' => 'required|string|max:255',
-			'description' => 'required|string|max:255',
-		];
-	}
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name'        => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ];
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 }

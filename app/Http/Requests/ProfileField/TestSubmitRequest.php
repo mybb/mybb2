@@ -14,34 +14,34 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class TestSubmitRequest extends AbstractRequest
 {
-	use ProfileFieldRequestSubmitTrait;
+    use ProfileFieldRequestSubmitTrait;
 
-	/**
-	 * @var ProfileFieldRepositoryInterface
-	 */
-	private $profileFieldRepository;
+    /**
+     * @var ProfileFieldRepositoryInterface
+     */
+    private $profileFieldRepository;
 
-	/**
-	 * @param ProfileFieldRepositoryInterface $profileFieldRepository
-	 */
-	public function __construct(ProfileFieldRepositoryInterface $profileFieldRepository)
-	{
-		$this->profileFieldRepository = $profileFieldRepository;
-	}
+    /**
+     * @param ProfileFieldRepositoryInterface $profileFieldRepository
+     */
+    public function __construct(ProfileFieldRepositoryInterface $profileFieldRepository)
+    {
+        $this->profileFieldRepository = $profileFieldRepository;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
-	/**
-	 * @return ProfileField[]
-	 */
-	protected function getAllProfileFields()
-	{
-		return [$this->profileFieldRepository->find($this->get('profile_field_id'))];
-	}
+    /**
+     * @return ProfileField[]
+     */
+    protected function getAllProfileFields()
+    {
+        return [$this->profileFieldRepository->find($this->get('profile_field_id'))];
+    }
 }

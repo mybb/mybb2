@@ -13,27 +13,27 @@ use MyBB\Core\Database\Models\ProfileFieldGroup;
 
 interface ProfileFieldGroupRepositoryInterface
 {
-	/**
-	 * @return Collection
-	 */
-	public function getAll();
+    /**
+     * @return Collection
+     */
+    public function getAll();
 
-	/**
-	 * @param string $slug
-	 *
-	 * @return ProfileFieldGroup
-	 */
-	public function getBySlug($slug);
+    /**
+     * @param string $slug
+     *
+     * @return ProfileFieldGroup
+     */
+    public function getBySlug($slug);
 
-	/**
-	 * @return array
-	 */
-	public function getAllForSelectElement();
+    /**
+     * @return array
+     */
+    public function getAllForSelectElement();
 
-	/**
-	 * @param array $data
-	 *
-	 * @return ProfileFieldGroup
-	 */
-	public function create(array $data);
+    /**
+     * @param array $data
+     *
+     * @return ProfileFieldGroup
+     */
+    public function create(array $data);
 }

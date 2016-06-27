@@ -19,52 +19,52 @@ use Twig_SimpleFunction;
 class ModalAttributes extends \Twig_Extension
 {
 
-	/**
-	 * Returns the name of the extension.
-	 *
-	 * @return string The extension name
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_ModalAttributes';
-	}
+    /**
+     * Returns the name of the extension.
+     *
+     * @return string The extension name
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_ModalAttributes';
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new Twig_SimpleFunction('modal_attributes', [$this, 'renderModalAttributes'], ['is_safe' => ['html']]),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('modal_attributes', [$this, 'renderModalAttributes'], ['is_safe' => ['html']]),
+        ];
+    }
 
-	/**
-	 * @param string $name       Either the name of a route or a direct path
-	 * @param array  $parameters The parameters passed to the route. Not supported for paths
-	 * @param bool   $isRoute    Indicates whether $name is a route or a path
-	 *
-	 * @return string
-	 */
-	public function renderModalAttributes($name, $parameters = array(), $isRoute = true)
-	{
-		if ($isRoute) {
-			$href = route($name, $parameters);
-			$modal = ltrim(route($name, $parameters, false), '/');
-		} else {
-			$query = array();
-			foreach ($parameters as $key => $value) {
-				$query[] = "{$key}=".urlencode($value);
-			}
+    /**
+     * @param string $name Either the name of a route or a direct path
+     * @param array $parameters The parameters passed to the route. Not supported for paths
+     * @param bool $isRoute Indicates whether $name is a route or a path
+     *
+     * @return string
+     */
+    public function renderModalAttributes($name, $parameters = [], $isRoute = true)
+    {
+        if ($isRoute) {
+            $href = route($name, $parameters);
+            $modal = ltrim(route($name, $parameters, false), '/');
+        } else {
+            $query = [];
+            foreach ($parameters as $key => $value) {
+                $query[] = "{$key}=" . urlencode($value);
+            }
 
-			if (!empty($query)) {
-				$name .= '?'.implode('&', $query);
-			}
+            if (!empty($query)) {
+                $name .= '?' . implode('&', $query);
+            }
 
-			$href = url($name);
-			$modal = ltrim($name, '/');
-		}
+            $href = url($name);
+            $modal = ltrim($name, '/');
+        }
 
-		return "href=\"{$href}\" data-modal=\"{$modal}\"";
-	}
+        return "href=\"{$href}\" data-modal=\"{$modal}\"";
+    }
 }

@@ -12,27 +12,27 @@ use MyBB\Core\Moderation\Moderations\MergePosts;
 
 class MergePostsPresenter extends AbstractModerationPresenter implements ModerationPresenterInterface
 {
-	/**
-	 * @return MergePosts
-	 */
-	public function getWrappedObject()
-	{
-		return parent::getWrappedObject();
-	}
+    /**
+     * @return MergePosts
+     */
+    public function getWrappedObject()
+    {
+        return parent::getWrappedObject();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function icon()
-	{
-		return 'fa-code-fork';
-	}
+    /**
+     * @return string
+     */
+    public function icon()
+    {
+        return 'fa-code-fork';
+    }
 
-	/**
-	 * @return string
-	 */
-	protected function getDescriptionView()
-	{
-		return 'partials.moderation.logs.merge';
-	}
+    /**
+     * @return string
+     */
+    protected function getDescriptionView()
+    {
+        return 'partials.moderation.logs.merge';
+    }
 }

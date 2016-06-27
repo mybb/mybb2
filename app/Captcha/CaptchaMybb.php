@@ -13,68 +13,68 @@ use Illuminate\Http\Request;
 
 class CaptchaMybb implements CaptchaInterface
 {
-	/**
-	 * @var DatabaseManager
-	 */
-	private $database;
+    /**
+     * @var DatabaseManager
+     */
+    private $database;
 
-	/**
-	 * @var Request
-	 */
-	private $request;
+    /**
+     * @var Request
+     */
+    private $request;
 
-	/**
-	 * @param DatabaseManager $database
-	 * @param Request         $request
-	 */
-	public function __construct(DatabaseManager $database, Request $request)
-	{
-		$this->database = $database;
-		$this->request = $request;
-	}
+    /**
+     * @param DatabaseManager $database
+     * @param Request $request
+     */
+    public function __construct(DatabaseManager $database, Request $request)
+    {
+        $this->database = $database;
+        $this->request = $request;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function render()
-	{
-		$imagehash = md5(str_random(12));
+    /**
+     * {@inheritdoc}
+     */
+    public function render()
+    {
+        $imagehash = md5(str_random(12));
 
-		$this->database->table('captcha')->insert([
-			'imagehash' => $imagehash,
-			'imagestring' => str_random(5),
-			'created_at' => new \DateTime()
-		]);
+        $this->database->table('captcha')->insert([
+            'imagehash'   => $imagehash,
+            'imagestring' => str_random(5),
+            'created_at'  => new \DateTime(),
+        ]);
 
-		return view('captcha.mybb', compact('imagehash'));
-	}
+        return view('captcha.mybb', compact('imagehash'));
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function validate()
-	{
-		$check = $this->database->table('captcha')
-			->where('imagehash', '=', $this->request->get('imagehash'))
-			->where('imagestring', '=', $this->request->get('imagestring'));
+    /**
+     * {@inheritdoc}
+     */
+    public function validate()
+    {
+        $check = $this->database->table('captcha')
+            ->where('imagehash', '=', $this->request->get('imagehash'))
+            ->where('imagestring', '=', $this->request->get('imagestring'));
 
-		if ($check->count() != 1) {
-			$this->database->table('captcha')
-				->where('imagehash', '=', $this->request->get('imagehash'))
-				->delete();
+        if ($check->count() != 1) {
+            $this->database->table('captcha')
+                ->where('imagehash', '=', $this->request->get('imagehash'))
+                ->delete();
 
-			return false;
-		}
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function supported()
-	{
-		// We need to be able to create images
-		return function_exists('imagecreatefrompng');
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function supported()
+    {
+        // We need to be able to create images
+        return function_exists('imagecreatefrompng');
+    }
 }

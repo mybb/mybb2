@@ -11,7 +11,7 @@
     <exclude-pattern>tests/report/</exclude-pattern>
 	<exclude-pattern>*/*.blade.php</exclude-pattern>
 
-	<rule ref="vendor/mybb/standards/MyBB2"/>
+	<rule ref="PSR2"/>
 
 	<rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
 		<exclude-pattern>*/database/*</exclude-pattern>

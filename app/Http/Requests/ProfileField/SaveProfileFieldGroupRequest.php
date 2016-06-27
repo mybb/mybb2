@@ -12,23 +12,23 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class SaveProfileFieldGroupRequest extends AbstractRequest
 {
-	/**
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'name' => 'required|string|max:255',
-			'slug' => 'required|string|max:255|alpha_dash',
-			'description' => 'required|string|max:255'
-		];
-	}
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name'        => 'required|string|max:255',
+            'slug'        => 'required|string|max:255|alpha_dash',
+            'description' => 'required|string|max:255',
+        ];
+    }
 }

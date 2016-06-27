@@ -16,32 +16,32 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ProfileFieldOption extends Model
 {
-	/**
-	 * @var string
-	 */
-	protected $table = 'profile_field_options';
-	/**
-	 * @var array
-	 */
-	protected $dates = ['created_at', 'updated_at'];
-	/**
-	 * @var array
-	 */
-	protected $guarded = ['id'];
+    /**
+     * @var string
+     */
+    protected $table = 'profile_field_options';
+    /**
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at'];
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->name;
-	}
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getValue()
-	{
-		return $this->value;
-	}
+    /**
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
 }

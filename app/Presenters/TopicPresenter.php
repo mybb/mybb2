@@ -19,88 +19,88 @@ use MyBB\Core\Moderation\ModerationRegistry;
 
 class Topic extends BasePresenter
 {
-	/** @var TopicModel $wrappedObject */
+    /** @var TopicModel $wrappedObject */
 
-	/**
-	 * @var Application
-	 */
-	private $app;
+    /**
+     * @var Application
+     */
+    private $app;
 
-	/**
-	 * @var ModerationRegistry
-	 */
-	protected $moderations;
+    /**
+     * @var ModerationRegistry
+     */
+    protected $moderations;
 
-	/**
-	 * @param TopicModel         $resource    The thread being wrapped by this presenter.
-	 * @param ModerationRegistry $moderations
-	 * @param Application        $app
-	 */
-	public function __construct(TopicModel $resource, ModerationRegistry $moderations, Application $app)
-	{
-		$this->wrappedObject = $resource;
-		$this->moderations = $moderations;
-		$this->app = $app;
-	}
+    /**
+     * @param TopicModel $resource The thread being wrapped by this presenter.
+     * @param ModerationRegistry $moderations
+     * @param Application $app
+     */
+    public function __construct(TopicModel $resource, ModerationRegistry $moderations, Application $app)
+    {
+        $this->wrappedObject = $resource;
+        $this->moderations = $moderations;
+        $this->app = $app;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function replies()
-	{
-		return $this->wrappedObject->num_posts - 1;
-	}
+    /**
+     * @return int
+     */
+    public function replies()
+    {
+        return $this->wrappedObject->num_posts - 1;
+    }
 
-	/**
-	 * @return User
-	 */
-	public function author()
-	{
-		if ($this->wrappedObject->user_id == null) {
-			$user = new UserModel();
-			if ($this->wrappedObject->username != null) {
-				$user->name = $this->wrappedObject->username;
-			} else {
-				$user->name = trans('general.guest');
-			}
+    /**
+     * @return User
+     */
+    public function author()
+    {
+        if ($this->wrappedObject->user_id == null) {
+            $user = new UserModel();
+            if ($this->wrappedObject->username != null) {
+                $user->name = $this->wrappedObject->username;
+            } else {
+                $user->name = trans('general.guest');
+            }
 
-			$decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
+            $decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
 
-			return $decoratedUser;
-		}
+            return $decoratedUser;
+        }
 
-		return $this->wrappedObject->author;
-	}
+        return $this->wrappedObject->author;
+    }
 
-	/**
-	 * @return \MyBB\Core\Moderation\ModerationInterface[]
-	 */
-	public function moderations()
-	{
-		$moderations = $this->moderations->getForContent(new PostModel());
-		$decorated = [];
-		$presenter = $this->app->make('autopresenter');
+    /**
+     * @return \MyBB\Core\Moderation\ModerationInterface[]
+     */
+    public function moderations()
+    {
+        $moderations = $this->moderations->getForContent(new PostModel());
+        $decorated = [];
+        $presenter = $this->app->make('autopresenter');
 
-		foreach ($moderations as $moderation) {
-			$decorated[] = $presenter->decorate($moderation);
-		}
+        foreach ($moderations as $moderation) {
+            $decorated[] = $presenter->decorate($moderation);
+        }
 
-		return $decorated;
-	}
+        return $decorated;
+    }
 
-	/**
-	 * @return Post
-	 */
-	public function lastPost()
-	{
-		return $this->getWrappedObject()->lastPost;
-	}
+    /**
+     * @return Post
+     */
+    public function lastPost()
+    {
+        return $this->getWrappedObject()->lastPost;
+    }
 
-	/**
-	 * @return Forum
-	 */
-	public function forum()
-	{
-		return $this->getWrappedObject()->forum;
-	}
+    /**
+     * @return Forum
+     */
+    public function forum()
+    {
+        return $this->getWrappedObject()->forum;
+    }
 }

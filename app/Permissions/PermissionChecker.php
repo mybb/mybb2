@@ -20,113 +20,113 @@ use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 
 class PermissionChecker
 {
-	// Constants used as permission value
-	const NEVER = -1;
-	const NO = 0;
-	const YES = 1;
+    // Constants used as permission value
+    const NEVER = -1;
+    const NO = 0;
+    const YES = 1;
 
-	/**
-	 * @var CacheRepository
-	 */
-	private $cache;
+    /**
+     * @var CacheRepository
+     */
+    private $cache;
 
-	/**
-	 * @var DatabaseManager
-	 */
-	private $db;
+    /**
+     * @var DatabaseManager
+     */
+    private $db;
 
-	/**
-	 * @var ContentClass
-	 */
-	private $classModel;
+    /**
+     * @var ContentClass
+     */
+    private $classModel;
 
-	/**
-	 * @var array
-	 */
-	private $permissions;
+    /**
+     * @var array
+     */
+    private $permissions;
 
-	/**
-	 * @var array
-	 */
-	private $unviewableIds;
+    /**
+     * @var array
+     */
+    private $unviewableIds;
 
-	/**
-	 * @var Role
-	 */
-	private $guestRole;
+    /**
+     * @var Role
+     */
+    private $guestRole;
 
-	/**
-	 * @param CacheRepository $cache
-	 * @param DatabaseManager $db
-	 * @param ContentClass    $classModel
-	 */
-	public function __construct(CacheRepository $cache, DatabaseManager $db, ContentClass $classModel)
-	{
-		$this->cache = $cache;
-		$this->db = $db;
-		$this->classModel = $classModel;
-	}
+    /**
+     * @param CacheRepository $cache
+     * @param DatabaseManager $db
+     * @param ContentClass $classModel
+     */
+    public function __construct(CacheRepository $cache, DatabaseManager $db, ContentClass $classModel)
+    {
+        $this->cache = $cache;
+        $this->db = $db;
+        $this->classModel = $classModel;
+    }
 
-	/**
-	 * Get an array of unviewable ids for the registered content type
-	 *
-	 * @param string $content
-	 * @param User   $user
-	 *
-	 * @return array
-	 *
-	 * @throws PermissionInvalidContentException
-	 * @throws PermissionImplementInterfaceException
-	 */
-	public function getUnviewableIdsForContent($content, User $user = null)
-	{
-		$concreteClass = $this->classModel->getClass($content);
+    /**
+     * Get an array of unviewable ids for the registered content type
+     *
+     * @param string $content
+     * @param User $user
+     *
+     * @return array
+     *
+     * @throws PermissionInvalidContentException
+     * @throws PermissionImplementInterfaceException
+     */
+    public function getUnviewableIdsForContent($content, User $user = null)
+    {
+        $concreteClass = $this->classModel->getClass($content);
 
-		if ($concreteClass == null) {
-			throw new PermissionInvalidContentException($content);
-		}
+        if ($concreteClass == null) {
+            throw new PermissionInvalidContentException($content);
+        }
 
-		if (!($concreteClass instanceof PermissionInterface)) {
-			throw new PermissionImplementInterfaceException($content);
-		}
+        if (!($concreteClass instanceof PermissionInterface)) {
+            throw new PermissionImplementInterfaceException($content);
+        }
 
-		if ($this->unviewableIds[$content] != null) {
-			return $this->unviewableIds[$content];
-		}
+        if ($this->unviewableIds[$content] != null) {
+            return $this->unviewableIds[$content];
+        }
 
-		$models = $concreteClass::all();
+        $models = $concreteClass::all();
 
-		$unviewable = [];
-		foreach ($models as $model) {
-			if (!$this->hasPermission($content, $model->getContentId(), $concreteClass::getViewablePermission(), $user)
-			) {
-				$unviewable[] = $model->getContentId();
-			}
-		}
+        $unviewable = [];
+        foreach ($models as $model) {
+            if (!$this->hasPermission($content, $model->getContentId(), $concreteClass::getViewablePermission(), $user)
+            ) {
+                $unviewable[] = $model->getContentId();
+            }
+        }
 
-		$this->unviewableIds[$content] = $unviewable;
+        $this->unviewableIds[$content] = $unviewable;
 
-		return $unviewable;
-	}
+        return $unviewable;
+    }
 
 
-	/**
-	 * Checks whether the specified user has the specified permission
-	 *
-	 * @param string       $content
-	 * @param int          $contentID
-	 * @param array|string $permission
-	 * @param User         $user
-	 *
-	 * @return bool
-	 *
-	 * @throws PermissionInvalidContentException
-	 * @throws PermissionImplementInterfaceException
-	 */
-	public function hasPermission($content, $contentID, $permission, User $user = null)
-	{
-		// TODO: Permissions should use the new Guard system in Laravel.
-		return true;
+    /**
+     * Checks whether the specified user has the specified permission
+     *
+     * @param string $content
+     * @param int $contentID
+     * @param array|string $permission
+     * @param User $user
+     *
+     * @return bool
+     *
+     * @throws PermissionInvalidContentException
+     * @throws PermissionImplementInterfaceException
+     */
+    public function hasPermission($content, $contentID, $permission, User $user = null)
+    {
+        // TODO: Permissions should use the new Guard system in Laravel.
+        return true;
 //		$concreteClass = $this->classModel->getClass($content);
 //
 //		if ($concreteClass == null) {
@@ -221,119 +221,119 @@ class PermissionChecker
 //		$this->permissions[$content][$contentID][$user->getKey()][$permission] = $isAllowed;
 //
 //		return $isAllowed;
-	}
+    }
 
-	/**
-	 * Check whether a specific Role has the specified permission
-	 *
-	 * @param Role        $role       The role to check
-	 * @param string      $permission The permission to check
-	 * @param string|null $content    If the permission is related to some content (eg forum) this string specifies the
-	 *                                type of text
-	 * @param int|null    $contentID  If $content is set this specifies the ID of the content to check
-	 *
-	 * @return PermissionChecker::NEVER|NO|YES
-	 */
-	public function getPermissionForRole(Role $role, $permission, $content = null, $contentID = null)
-	{
-		// Permissions associated with user/groups are saved without content
-		// (all permissions are associated with groups anyways)
-		if ($content == 'user' || $content == 'usergroup') {
-			$content = null;
-			$contentID = null;
-		}
+    /**
+     * Check whether a specific Role has the specified permission
+     *
+     * @param Role $role The role to check
+     * @param string $permission The permission to check
+     * @param string|null $content If the permission is related to some content (eg forum) this string specifies the
+     *                                type of text
+     * @param int|null $contentID If $content is set this specifies the ID of the content to check
+     *
+     * @return PermissionChecker::NEVER|NO|YES
+     */
+    public function getPermissionForRole(Role $role, $permission, $content = null, $contentID = null)
+    {
+        // Permissions associated with user/groups are saved without content
+        // (all permissions are associated with groups anyways)
+        if ($content == 'user' || $content == 'usergroup') {
+            $content = null;
+            $contentID = null;
+        }
 
-		if ($this->hasCache($role, $permission, $content, $contentID)) {
-			return $this->getCache($role, $permission, $content, $contentID);
-		}
+        if ($this->hasCache($role, $permission, $content, $contentID)) {
+            return $this->getCache($role, $permission, $content, $contentID);
+        }
 
-		// Get the value if we have one otherwise the devault value
-		$permissionValues = $this->db->table('permissions')
-			->where('permission_name', '=', $permission)
-			->where('content_name', '=', $content)
-			->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
-				$join->on('permission_id', '=', 'id')
-					->where('role_id', '=', $role->id);
+        // Get the value if we have one otherwise the devault value
+        $permissionValues = $this->db->table('permissions')
+            ->where('permission_name', '=', $permission)
+            ->where('content_name', '=', $content)
+            ->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
+                $join->on('permission_id', '=', 'id')
+                    ->where('role_id', '=', $role->id);
 
-				if ($content != null && $contentID != null) {
-					$join->where('content_id', '=', $contentID);
-				}
-			})
-			->first(['value', 'default_value']);
+                if ($content != null && $contentID != null) {
+                    $join->where('content_id', '=', $contentID);
+                }
+            })
+            ->first(['value', 'default_value']);
 
-		// If the permission doesn't exist return "Never" to break all loops but don't cache it as it may be added later
-		if ($permissionValues == null) {
-			return static::NEVER;
-		}
+        // If the permission doesn't exist return "Never" to break all loops but don't cache it as it may be added later
+        if ($permissionValues == null) {
+            return static::NEVER;
+        }
 
-		// We have a content value so we can save that as permission
-		if ($permissionValues->value !== null) {
-			$this->putCache($role, $permission, $content, $contentID, $permissionValues->value);
+        // We have a content value so we can save that as permission
+        if ($permissionValues->value !== null) {
+            $this->putCache($role, $permission, $content, $contentID, $permissionValues->value);
 
-			return $permissionValues->value;
-		}
+            return $permissionValues->value;
+        }
 
-		// We have a content permission without a specific value
-		// Now we need to check whether this role has a content permission (#122)
-		// Unfortunately Laravel doesn't have a subwhere for joins so we can't add it to the query above
-		if ($content != null && $contentID != null) {
-			$contentValues = $this->db->table('permissions')
-				->where('permission_name', '=', $permission)
-				->where('content_name', '=', $content)
-				->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
-					$join->on('permission_id', '=', 'id')
-						->where('role_id', '=', $role->id)
-						->where('content_id', '=', 0);
-				})
-				->first(['value']);
+        // We have a content permission without a specific value
+        // Now we need to check whether this role has a content permission (#122)
+        // Unfortunately Laravel doesn't have a subwhere for joins so we can't add it to the query above
+        if ($content != null && $contentID != null) {
+            $contentValues = $this->db->table('permissions')
+                ->where('permission_name', '=', $permission)
+                ->where('content_name', '=', $content)
+                ->leftJoin('permission_role', function ($join) use ($role, $content, $contentID) {
+                    $join->on('permission_id', '=', 'id')
+                        ->where('role_id', '=', $role->id)
+                        ->where('content_id', '=', 0);
+                })
+                ->first(['value']);
 
-			if ($contentValues != null && $contentValues->value !== null) {
-				$this->putCache($role, $permission, $content, $contentID, $contentValues->value);
+            if ($contentValues != null && $contentValues->value !== null) {
+                $this->putCache($role, $permission, $content, $contentID, $contentValues->value);
 
-				return $contentValues->value;
-			}
-		}
+                return $contentValues->value;
+            }
+        }
 
-		$this->putCache($role, $permission, $content, $contentID, $permissionValues->default_value);
+        $this->putCache($role, $permission, $content, $contentID, $permissionValues->default_value);
 
-		return $permissionValues->default_value;
-	}
+        return $permissionValues->default_value;
+    }
 
-	/**
-	 * @param Role        $role
-	 * @param string      $permission
-	 * @param string|null $content
-	 * @param int|null    $contentID
-	 *
-	 * @return bool
-	 */
-	private function hasCache(Role $role, $permission, $content, $contentID)
-	{
-		return $this->getCache($role, $permission, $content, $contentID) != null;
-	}
+    /**
+     * @param Role $role
+     * @param string $permission
+     * @param string|null $content
+     * @param int|null $contentID
+     *
+     * @return bool
+     */
+    private function hasCache(Role $role, $permission, $content, $contentID)
+    {
+        return $this->getCache($role, $permission, $content, $contentID) != null;
+    }
 
-	/**
-	 * @param Role        $role
-	 * @param string      $permission
-	 * @param string|null $content
-	 * @param int|null    $contentID
-	 *
-	 * @return mixed
-	 */
-	private function getCache(Role $role, $permission, $content, $contentID)
-	{
-		return $this->cache->get("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}");
-	}
+    /**
+     * @param Role $role
+     * @param string $permission
+     * @param string|null $content
+     * @param int|null $contentID
+     *
+     * @return mixed
+     */
+    private function getCache(Role $role, $permission, $content, $contentID)
+    {
+        return $this->cache->get("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}");
+    }
 
-	/**
-	 * @param Role         $role
-	 * @param string       $permission
-	 * @param string|null  $content
-	 * @param int|null     $contentID
-	 * @param NEVER|NO|YES $value
-	 */
-	private function putCache(Role $role, $permission, $content, $contentID, $value)
-	{
-		$this->cache->forever("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}", $value);
-	}
+    /**
+     * @param Role $role
+     * @param string $permission
+     * @param string|null $content
+     * @param int|null $contentID
+     * @param NEVER|NO|YES $value
+     */
+    private function putCache(Role $role, $permission, $content, $contentID, $value)
+    {
+        $this->cache->forever("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}", $value);
+    }
 }

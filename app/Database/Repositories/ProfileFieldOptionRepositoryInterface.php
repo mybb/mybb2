@@ -13,24 +13,24 @@ use MyBB\Core\Database\Models\ProfileFieldOption;
 
 interface ProfileFieldOptionRepositoryInterface
 {
-	/**
-	 * @param int $id
-	 *
-	 * @return ProfileFieldOption
-	 */
-	public function find($id);
+    /**
+     * @param int $id
+     *
+     * @return ProfileFieldOption
+     */
+    public function find($id);
 
-	/**
-	 * @param array $data
-	 *
-	 * @return ProfileFieldOption
-	 */
-	public function create(array $data);
+    /**
+     * @param array $data
+     *
+     * @return ProfileFieldOption
+     */
+    public function create(array $data);
 
-	/**
-	 * @param ProfileField $profileField
-	 *
-	 * @return ProfileFieldOption[]
-	 */
-	public function getForProfileField(ProfileField $profileField);
+    /**
+     * @param ProfileField $profileField
+     *
+     * @return ProfileFieldOption[]
+     */
+    public function getForProfileField(ProfileField $profileField);
 }

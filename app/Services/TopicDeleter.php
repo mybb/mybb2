@@ -15,79 +15,79 @@ use MyBB\Core\Database\Models\Topic;
 
 class TopicDeleter
 {
-	/**
-	 * @var PostRepositoryInterface
-	 */
-	private $postRepository;
+    /**
+     * @var PostRepositoryInterface
+     */
+    private $postRepository;
 
-	/**
-	 * @var ForumRepositoryInterface
-	 */
-	private $forumRepository;
+    /**
+     * @var ForumRepositoryInterface
+     */
+    private $forumRepository;
 
-	/**
-	 * @var PollRepositoryInterface
-	 */
-	private $pollRepository;
+    /**
+     * @var PollRepositoryInterface
+     */
+    private $pollRepository;
 
-	/**
-	 * @param PostRepositoryInterface  $postRepository
-	 * @param ForumRepositoryInterface $forumRepository
-	 * @param PollRepositoryInterface  $pollRepository
-	 */
-	public function __construct(
-		PostRepositoryInterface $postRepository,
-		ForumRepositoryInterface $forumRepository,
-		PollRepositoryInterface $pollRepository
-	) {
-		$this->postRepository = $postRepository;
-		$this->forumRepository = $forumRepository;
-		$this->pollRepository = $pollRepository;
-	}
+    /**
+     * @param PostRepositoryInterface $postRepository
+     * @param ForumRepositoryInterface $forumRepository
+     * @param PollRepositoryInterface $pollRepository
+     */
+    public function __construct(
+        PostRepositoryInterface $postRepository,
+        ForumRepositoryInterface $forumRepository,
+        PollRepositoryInterface $pollRepository
+    ) {
+        $this->postRepository = $postRepository;
+        $this->forumRepository = $forumRepository;
+        $this->pollRepository = $pollRepository;
+    }
 
-	/**
-	 * @param Topic $topic
-	 *
-	 * @return bool
-	 */
-	public function deleteTopic(Topic $topic)
-	{
-		if ($topic->deleted_at == null) {
-			$topic->forum->decrement('num_topics');
-			$topic->forum->decrement('num_posts', $topic->num_posts);
+    /**
+     * @param Topic $topic
+     *
+     * @return bool
+     */
+    public function deleteTopic(Topic $topic)
+    {
+        if ($topic->deleted_at == null) {
+            $topic->forum->decrement('num_topics');
+            $topic->forum->decrement('num_posts', $topic->num_posts);
 
-			if ($topic->user_id > 0) {
-				$topic->author->decrement('num_topics');
-			}
+            if ($topic->user_id > 0) {
+                $topic->author->decrement('num_topics');
+            }
 
-			$success = $topic->delete();
+            $success = $topic->delete();
 
-			if ($success) {
-				if ($topic->last_post_id == $topic->forum->last_post_id) {
-					$this->forumRepository->updateLastPost($topic->forum);
-				}
-			}
+            if ($success) {
+                if ($topic->last_post_id == $topic->forum->last_post_id) {
+                    $this->forumRepository->updateLastPost($topic->forum);
+                }
+            }
 
-			return $success;
-		} else {
-			// First we need to remove old foreign keys - otherwise we can't delete posts
-			$topic->update([
-				'first_post_id' => null,
-				'last_post_id' => null
-			]);
+            return $success;
+        } else {
+            // First we need to remove old foreign keys - otherwise we can't delete posts
+            $topic->update([
+                'first_post_id' => null,
+                'last_post_id'  => null,
+            ]);
 
-			// Now delete the posts for this topic
-			$this->postRepository->deletePostsForTopic($topic);
+            // Now delete the posts for this topic
+            $this->postRepository->deletePostsForTopic($topic);
 
-			// Don't forget the polls
-			if ($topic->has_poll) {
-				$this->pollRepository->remove($topic->poll);
-			}
+            // Don't forget the polls
+            if ($topic->has_poll) {
+                $this->pollRepository->remove($topic->poll);
+            }
 
-			// And finally delete the topic
-			$topic->forceDelete();
-		}
+            // And finally delete the topic
+            $topic->forceDelete();
+        }
 
-		return true;
-	}
+        return true;
+    }
 }

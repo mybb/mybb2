@@ -10,13 +10,13 @@ namespace MyBB\Core\Moderation;
 
 interface DestinedInterface
 {
-	/**
-	 * @return string
-	 */
-	public function getDestinationType();
+    /**
+     * @return string
+     */
+    public function getDestinationType();
 
-	/**
-	 * @return string
-	 */
-	public function getDestinationKey();
+    /**
+     * @return string
+     */
+    public function getDestinationKey();
 }

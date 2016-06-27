@@ -12,22 +12,23 @@ use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 
 class DashboardController extends AdminController
 {
-	/**
-	 * @var Breadcrumbs
-	 */
-	protected $breadcrumbs;
+    /**
+     * @var Breadcrumbs
+     */
+    protected $breadcrumbs;
 
-	/**
-	 * @param Breadcrumbs $breadcrumbs
-	 */
-	public function __construct(Breadcrumbs $breadcrumbs)
-	{
-		$this->breadcrumbs = $breadcrumbs;
-	}
+    /**
+     * @param Breadcrumbs $breadcrumbs
+     */
+    public function __construct(Breadcrumbs $breadcrumbs)
+    {
+        $this->breadcrumbs = $breadcrumbs;
+    }
 
-	public function index()
-	{
-		$this->breadcrumbs->setCurrentRoute('admin.dashboard');
-		return view('admin.dashboard', ['active_tab' => 'dashboard']);
-	}
+    public function index()
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.dashboard');
+
+        return view('admin.dashboard', ['active_tab' => 'dashboard']);
+    }
 }

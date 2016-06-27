@@ -12,27 +12,27 @@ use MyBB\Core\Moderation\Moderations\DeleteTopic;
 
 class DeleteTopicPresenter extends AbstractModerationPresenter implements ModerationPresenterInterface
 {
-	/**
-	 * @return DeleteTopic
-	 */
-	public function getWrappedObject()
-	{
-		return parent::getWrappedObject();
-	}
+    /**
+     * @return DeleteTopic
+     */
+    public function getWrappedObject()
+    {
+        return parent::getWrappedObject();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function icon()
-	{
-		return 'fa-trash-o';
-	}
+    /**
+     * @return string
+     */
+    public function icon()
+    {
+        return 'fa-trash-o';
+    }
 
-	/**
-	 * @return string
-	 */
-	protected function getDescriptionView()
-	{
-		return 'partials.moderation.logs.delete';
-	}
+    /**
+     * @return string
+     */
+    protected function getDescriptionView()
+    {
+        return 'partials.moderation.logs.delete';
+    }
 }

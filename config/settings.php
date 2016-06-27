@@ -11,20 +11,20 @@
  */
 
 return [
-	/**
-	 * The type of store to use to load settings from.
-	 */
-	'store' => 'database',
-	/**
-	 * The name of the database table containing the settings.
-	 */
-	'settings_table' => 'settings',
-	/**
-	 * The name of the database table containing the setting values.
-	 */
-	'setting_values_table' => 'setting_values',
-	/**
-	 * Cache name for settings when caching core settings.
-	 */
-	'settings_cache_name' => 'mybb.core.settings',
+    /**
+     * The type of store to use to load settings from.
+     */
+    'store' => 'database',
+    /**
+     * The name of the database table containing the settings.
+     */
+    'settings_table' => 'settings',
+    /**
+     * The name of the database table containing the setting values.
+     */
+    'setting_values_table' => 'setting_values',
+    /**
+     * Cache name for settings when caching core settings.
+     */
+    'settings_cache_name' => 'mybb.core.settings',
 ];

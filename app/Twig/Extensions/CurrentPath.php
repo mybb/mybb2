@@ -18,57 +18,57 @@ use Twig_SimpleFunction;
 
 class CurrentPath extends Twig_Extension
 {
-	/**
-	 * @var string
-	 */
-	protected $currentPath;
+    /**
+     * @var string
+     */
+    protected $currentPath;
 
-	/**
-	 * @var Request
-	 */
-	protected $request;
+    /**
+     * @var Request
+     */
+    protected $request;
 
-	/**
-	 * @param Request $request
-	 */
-	public function __construct(Request $request)
-	{
-		$this->request = $request;
-	}
+    /**
+     * @param Request $request
+     */
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_CurrentPath';
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_CurrentPath';
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getFunctions()
-	{
-		return [
-			new Twig_SimpleFunction('current_path', [$this, 'currentPath']),
-		];
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public function getFunctions()
+    {
+        return [
+            new Twig_SimpleFunction('current_path', [$this, 'currentPath']),
+        ];
+    }
 
-	/**
-	 * @return string
-	 */
-	public function currentPath()
-	{
-		if ($this->currentPath == null) {
-			$path = $this->request->path();
+    /**
+     * @return string
+     */
+    public function currentPath()
+    {
+        if ($this->currentPath == null) {
+            $path = $this->request->path();
 
-			if ($path == '/') {
-				$path = '';
-			}
+            if ($path == '/') {
+                $path = '';
+            }
 
-			$this->currentPath = $path;
-		}
+            $this->currentPath = $path;
+        }
 
-		return $this->currentPath;
-	}
+        return $this->currentPath;
+    }
 }

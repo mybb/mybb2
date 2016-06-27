@@ -23,269 +23,270 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends AbstractController
 {
-	/**
-	 * @var PostRepositoryInterface $postsRepository
-	 */
-	private $postsRepository;
-	/**
-	 * @var LikesRepositoryInterface $likesRepository
-	 */
-	private $likesRepository;
-	/**
-	 * @var Store $settings
-	 */
-	private $settings;
+    /**
+     * @var PostRepositoryInterface $postsRepository
+     */
+    private $postsRepository;
+    /**
+     * @var LikesRepositoryInterface $likesRepository
+     */
+    private $likesRepository;
+    /**
+     * @var Store $settings
+     */
+    private $settings;
 
-	/**
-	 * @var QuoteRenderer $quoteRenderer
-	 */
-	private $quoteRenderer;
+    /**
+     * @var QuoteRenderer $quoteRenderer
+     */
+    private $quoteRenderer;
 
-	/**
-	 * @param PostRepositoryInterface  $postRepository
-	 * @param LikesRepositoryInterface $likesRepository
-	 * @param Store                    $settings
-	 * @param QuoteRenderer            $quoteRenderer
-	 */
-	public function __construct(
-		PostRepositoryInterface $postRepository,
-		LikesRepositoryInterface $likesRepository,
-		Store $settings,
-		QuoteRenderer $quoteRenderer
-	) {
-		$this->postsRepository = $postRepository;
-		$this->likesRepository = $likesRepository;
-		$this->settings = $settings;
-		$this->quoteRenderer = $quoteRenderer;
-	}
+    /**
+     * @param PostRepositoryInterface $postRepository
+     * @param LikesRepositoryInterface $likesRepository
+     * @param Store $settings
+     * @param QuoteRenderer $quoteRenderer
+     */
+    public function __construct(
+        PostRepositoryInterface $postRepository,
+        LikesRepositoryInterface $likesRepository,
+        Store $settings,
+        QuoteRenderer $quoteRenderer
+    ) {
+        $this->postsRepository = $postRepository;
+        $this->likesRepository = $likesRepository;
+        $this->settings = $settings;
+        $this->quoteRenderer = $quoteRenderer;
+    }
 
-	/**
-	 * @param int $id
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function show($id)
-	{
-		$post = $this->postsRepository->find($id);
+    /**
+     * @param int $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function show($id)
+    {
+        $post = $this->postsRepository->find($id);
 
-		if ($post) {
-			$topic = $post->topic;
-			return redirect()->route('topics.showPost', [
-				'slug' => $topic->slug,
-				'id' => $topic->id,
-				'postId' => $post->id,
-			]);
-		}
+        if ($post) {
+            $topic = $post->topic;
 
-		abort(404);
-	}
+            return redirect()->route('topics.showPost', [
+                'slug'   => $topic->slug,
+                'id'     => $topic->id,
+                'postId' => $post->id,
+            ]);
+        }
 
-	/**
-	 * Handler for POST requests to add a like for a post.
-	 *
-	 * @param LikePostRequest $request
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function postToggleLike(LikePostRequest $request)
-	{
-		$post = $this->postsRepository->find($request->get('post_id'));
+        abort(404);
+    }
 
-		if (!$post) {
-			throw new PostNotFoundException;
-		}
+    /**
+     * Handler for POST requests to add a like for a post.
+     *
+     * @param LikePostRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postToggleLike(LikePostRequest $request)
+    {
+        $post = $this->postsRepository->find($request->get('post_id'));
 
-		$like = $this->likesRepository->toggleLikeForContent($post);
+        if (!$post) {
+            throw new PostNotFoundException;
+        }
 
-		$redirect = redirect(
-			route(
-				'topics.showPost',
-				[
-					'slug' => $post->topic->slug,
-					'id' => $post->topic_id,
-					'postId' => $post->id,
-				]
-			)
-		);
+        $like = $this->likesRepository->toggleLikeForContent($post);
 
-		if ($like === null) {
-			$redirect = $redirect->withSuccess(trans('post.like_removed'));
-		} else {
-			$redirect = $redirect->withSuccess(trans('post.like_added'));
-		}
+        $redirect = redirect(
+            route(
+                'topics.showPost',
+                [
+                    'slug'   => $post->topic->slug,
+                    'id'     => $post->topic_id,
+                    'postId' => $post->id,
+                ]
+            )
+        );
 
-		return $redirect;
-	}
+        if ($like === null) {
+            $redirect = $redirect->withSuccess(trans('post.like_removed'));
+        } else {
+            $redirect = $redirect->withSuccess(trans('post.like_added'));
+        }
 
-	/**
-	 * SHow all of the likes a post has received.
-	 *
-	 * @param int $postId The ID of the post to show the likes for.
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function getPostLikes($postId)
-	{
-		$post = $this->postsRepository->find($postId);
+        return $redirect;
+    }
 
-		if (!$post) {
-			throw new PostNotFoundException;
-		}
+    /**
+     * SHow all of the likes a post has received.
+     *
+     * @param int $postId The ID of the post to show the likes for.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function getPostLikes($postId)
+    {
+        $post = $this->postsRepository->find($postId);
 
-		$post->load('topic');
+        if (!$post) {
+            throw new PostNotFoundException;
+        }
 
-		$likes = $this->likesRepository->getAllLikesForContentPaginated(
-			$post,
-			$this->settings->get('likes.per_page', 10)
-		);
+        $post->load('topic');
 
-		return view('post.likes', compact('post', 'likes'));
-	}
+        $likes = $this->likesRepository->getAllLikesForContentPaginated(
+            $post,
+            $this->settings->get('likes.per_page', 10)
+        );
 
-	/**
-	 * @param QuotePostRequest $quoteRequest
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response
-	 */
-	public function postQuotes(QuotePostRequest $quoteRequest)
-	{
-		$contents = $quoteRequest->input('posts');
-		$data = $posts = $conversations = []; //TODO: conversations
-		foreach ($contents as $content) {
-			if (is_array($content)) {
-				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
-				$content = $content['id'];
-			} else {
-				$content = (string)$content;
-				$data[] = [$content, ''];
-			}
-			$content = explode('_', $content);
-			switch ($content[0]) {
-				case 'post':
-					$posts[] = (int)$content[1];
-					break;
-				case 'conversation':
-					$conversations[] = (int)$content[1];
-					break;
-			}
-		}
-		$myPosts = $this->postsRepository->getPostsByIds($posts);
-		$posts = [];
+        return view('post.likes', compact('post', 'likes'));
+    }
 
-		$content = "";
+    /**
+     * @param QuotePostRequest $quoteRequest
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function postQuotes(QuotePostRequest $quoteRequest)
+    {
+        $contents = $quoteRequest->input('posts');
+        $data = $posts = $conversations = []; //TODO: conversations
+        foreach ($contents as $content) {
+            if (is_array($content)) {
+                $data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
+                $content = $content['id'];
+            } else {
+                $content = (string)$content;
+                $data[] = [$content, ''];
+            }
+            $content = explode('_', $content);
+            switch ($content[0]) {
+                case 'post':
+                    $posts[] = (int)$content[1];
+                    break;
+                case 'conversation':
+                    $conversations[] = (int)$content[1];
+                    break;
+            }
+        }
+        $myPosts = $this->postsRepository->getPostsByIds($posts);
+        $posts = [];
 
-		foreach ($myPosts as $post) {
-			$posts[$post->id] = $post;
-		}
+        $content = "";
 
-		foreach ($data as $value) {
-			list($type, $id) = explode('_', $value[0]);
-			$value = $value[1];
+        foreach ($myPosts as $post) {
+            $posts[$post->id] = $post;
+        }
 
-			switch ($type) {
-				case 'post':
-					$post = $posts[$id];
-					if ($value) {
-						$oldContent = $post->content;
-						$oldContentParsed = $post->content_parsed;
-						$post->content = $post->content_parsed = $value;
-					}
-					$content .= $this->quoteRenderer->renderFromPost($post);
-					if ($value) {
-						$post->content = $oldContent;
-						$post->content_parsed = $oldContentParsed;
-					}
-					break;
-				case 'conversation':
-					// TODO
-					break;
-			}
-		}
+        foreach ($data as $value) {
+            list($type, $id) = explode('_', $value[0]);
+            $value = $value[1];
 
-		return response()->json([
-			'message' => $content
-		]);
-	}
+            switch ($type) {
+                case 'post':
+                    $post = $posts[$id];
+                    if ($value) {
+                        $oldContent = $post->content;
+                        $oldContentParsed = $post->content_parsed;
+                        $post->content = $post->content_parsed = $value;
+                    }
+                    $content .= $this->quoteRenderer->renderFromPost($post);
+                    if ($value) {
+                        $post->content = $oldContent;
+                        $post->content_parsed = $oldContentParsed;
+                    }
+                    break;
+                case 'conversation':
+                    // TODO
+                    break;
+            }
+        }
 
-	/**
-	 * @param QuotePostRequest $quoteRequest
-	 *
-	 * @return \Illuminate\View\View
-	 */
-	public function viewQuotes(QuotePostRequest $quoteRequest)
-	{
-		$contents = $quoteRequest->input('posts');
-		$data = $posts = $conversations = []; //TODO: conversations
-		foreach ($contents as $content) {
-			if (is_array($content)) {
-				$data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
-				$content = $content['id'];
-			} else {
-				$content = (string)$content;
-				$data[] = [$content, ''];
-			}
-			$content = explode('_', $content);
-			switch ($content[0]) {
-				case 'post':
-					$posts[] = (int)$content[1];
-					break;
-				case 'conversation':
-					$conversations[] = (int)$content[1];
-					break;
-			}
-		}
-		$myPosts = $this->postsRepository->getPostsByIds($posts);
-		$posts = [];
+        return response()->json([
+            'message' => $content,
+        ]);
+    }
 
-		$content = [];
+    /**
+     * @param QuotePostRequest $quoteRequest
+     *
+     * @return \Illuminate\View\View
+     */
+    public function viewQuotes(QuotePostRequest $quoteRequest)
+    {
+        $contents = $quoteRequest->input('posts');
+        $data = $posts = $conversations = []; //TODO: conversations
+        foreach ($contents as $content) {
+            if (is_array($content)) {
+                $data[] = [(string)$content['id'], $content['data']]; // It isn't XSS, we parsed it with JS.
+                $content = $content['id'];
+            } else {
+                $content = (string)$content;
+                $data[] = [$content, ''];
+            }
+            $content = explode('_', $content);
+            switch ($content[0]) {
+                case 'post':
+                    $posts[] = (int)$content[1];
+                    break;
+                case 'conversation':
+                    $conversations[] = (int)$content[1];
+                    break;
+            }
+        }
+        $myPosts = $this->postsRepository->getPostsByIds($posts);
+        $posts = [];
 
-		foreach ($myPosts as $post) {
-			$posts[$post->id] = $post;
-		}
+        $content = [];
 
-		$i = 0;
-		foreach ($data as $value) {
-			list($type, $id) = explode('_', $value[0]);
-			$value = $value[1];
+        foreach ($myPosts as $post) {
+            $posts[$post->id] = $post;
+        }
 
-			switch ($type) {
-				case 'post':
-					$post = $posts[$id];
+        $i = 0;
+        foreach ($data as $value) {
+            list($type, $id) = explode('_', $value[0]);
+            $value = $value[1];
 
-					if ($value) {
-						$oldContent = $post->content;
-						$oldContentParsed = $post->content_parsed;
-						$post->content = $value;
-						$post->content_parsed = e($value);
-					}
+            switch ($type) {
+                case 'post':
+                    $post = $posts[$id];
 
-					$author = $post->author;
-					if ($post->author) {
-						$author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
-					}
+                    if ($value) {
+                        $oldContent = $post->content;
+                        $oldContentParsed = $post->content_parsed;
+                        $post->content = $value;
+                        $post->content_parsed = e($value);
+                    }
 
-					$content[] = [
-						'id' => $i++,
-						'quote' => $this->quoteRenderer->renderFromPost($post),
-						'content_parsed' => $post->content_parsed,
-						'post' => app()->make('MyBB\Core\Presenters\Post', [$post]),
-						'author' => $author
-					];
+                    $author = $post->author;
+                    if ($post->author) {
+                        $author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
+                    }
+
+                    $content[] = [
+                        'id'             => $i++,
+                        'quote'          => $this->quoteRenderer->renderFromPost($post),
+                        'content_parsed' => $post->content_parsed,
+                        'post'           => app()->make('MyBB\Core\Presenters\Post', [$post]),
+                        'author'         => $author,
+                    ];
 
 
-					if ($value) {
-						$post->content = $oldContent;
-						$post->content_parsed = $oldContentParsed;
-					}
-					break;
-				case 'conversation':
-					// TODO
-					break;
-			}
-		}
+                    if ($value) {
+                        $post->content = $oldContent;
+                        $post->content_parsed = $oldContentParsed;
+                    }
+                    break;
+                case 'conversation':
+                    // TODO
+                    break;
+            }
+        }
 
-		return view('post.quotes', [
-			'contents' => $content
-		]);
-	}
+        return view('post.quotes', [
+            'contents' => $content,
+        ]);
+    }
 }

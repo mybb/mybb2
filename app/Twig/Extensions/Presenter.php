@@ -8,51 +8,51 @@
 
 namespace MyBB\Core\Twig\Extensions;
 
-use McCool\LaravelAutoPresenter\BasePresenter;
 use McCool\LaravelAutoPresenter\AutoPresenter;
+use McCool\LaravelAutoPresenter\BasePresenter;
 
 class Presenter extends \Twig_Extension
 {
-	/**
-	 * @var AutoPresenter
-	 */
-	protected $decorator;
+    /**
+     * @var AutoPresenter
+     */
+    protected $decorator;
 
-	/**
-	 * Returns the name of the extension.
-	 *
-	 * @return string The extension name
-	 */
-	public function getName()
-	{
-		return 'MyBB_Twig_Extensions_Presenter';
-	}
+    /**
+     * @param AutoPresenter $decorator
+     */
+    public function __construct(AutoPresenter $decorator)
+    {
+        $this->decorator = $decorator;
+    }
 
-	/**
-	 * @param AutoPresenter $decorator
-	 */
-	public function __construct(AutoPresenter $decorator)
-	{
-		$this->decorator = $decorator;
-	}
+    /**
+     * Returns the name of the extension.
+     *
+     * @return string The extension name
+     */
+    public function getName()
+    {
+        return 'MyBB_Twig_Extensions_Presenter';
+    }
 
-	/**
-	 * @return array
-	 */
-	public function getFunctions()
-	{
-		return [
-			new \Twig_SimpleFunction('present', [$this, 'present']),
-		];
-	}
+    /**
+     * @return array
+     */
+    public function getFunctions()
+    {
+        return [
+            new \Twig_SimpleFunction('present', [$this, 'present']),
+        ];
+    }
 
-	/**
-	 * @param object $object
-	 *
-	 * @return BasePresenter
-	 */
-	public function present($object)
-	{
-		return $this->decorator->decorate($object);
-	}
+    /**
+     * @param object $object
+     *
+     * @return BasePresenter
+     */
+    public function present($object)
+    {
+        return $this->decorator->decorate($object);
+    }
 }

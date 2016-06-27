@@ -14,18 +14,18 @@ use MyBB\Core\Database\Models\ModerationLogSubject;
 
 interface ModerationLogSubjectRepositoryInterface extends RepositoryInterface
 {
-	/**
-	 * @param array $attributes
-	 *
-	 * @return ModerationLogSubject
-	 */
-	public function create(array $attributes);
+    /**
+     * @param array $attributes
+     *
+     * @return ModerationLogSubject
+     */
+    public function create(array $attributes);
 
-	/**
-	 * @param ModerationLog    $moderationLog
-	 * @param ContentInterface $content
-	 *
-	 * @return ModerationLogSubject
-	 */
-	public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content);
+    /**
+     * @param ModerationLog $moderationLog
+     * @param ContentInterface $content
+     *
+     * @return ModerationLogSubject
+     */
+    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content);
 }

@@ -7,8 +7,8 @@
  */
 
 return [
-	'type.post' => 'Post',
-	'type.post.plural' => 'Posts',
-	'type.topic' => 'Topic',
-	'type.topic.plural' => 'Topics'
+    'type.post'         => 'Post',
+    'type.post.plural'  => 'Posts',
+    'type.topic'        => 'Topic',
+    'type.topic.plural' => 'Topics',
 ];

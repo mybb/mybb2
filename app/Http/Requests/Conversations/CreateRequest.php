@@ -14,37 +14,37 @@ use Illuminate\Contracts\Auth\Guard;
 
 class CreateRequest extends ParticipantRequest
 {
-	/**
-	 * @var Guard
-	 */
-	private $guard;
+    /**
+     * @var Guard
+     */
+    private $guard;
 
-	/**
-	 * @param Guard $guard
-	 */
-	public function __construct(Guard $guard)
-	{
-		$this->guard = $guard;
-	}
+    /**
+     * @param Guard $guard
+     */
+    public function __construct(Guard $guard)
+    {
+        $this->guard = $guard;
+    }
 
-	/**
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-			'participants' => 'required|usernameArray',
-			'message' => 'required',
-			'title' => 'required',
-		];
-	}
+    /**
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'participants' => 'required|usernameArray',
+            'message'      => 'required',
+            'title'        => 'required',
+        ];
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		//return $this->guard->check();
-		return true; // TODO: In dev return, needs replacing for later...
-	}
+    /**
+     * @return bool
+     */
+    public function authorize()
+    {
+        //return $this->guard->check();
+        return true; // TODO: In dev return, needs replacing for later...
+    }
 }

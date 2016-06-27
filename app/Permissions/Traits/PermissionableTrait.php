@@ -8,25 +8,23 @@
 
 namespace MyBB\Core\Permissions\Traits;
 
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Models\Role;
 use MyBB\Core\Services\PermissionChecker;
 
 trait PermissionableTrait
 {
-	/**
-	 * @return int
-	 */
-	public function getContentId()
-	{
-		return $this->getKey();
-	}
+    /**
+     * @return string
+     */
+    public static function getViewablePermission()
+    {
+        return 'canView' . ucfirst(class_basename(__CLASS__));
+    }
 
-	/**
-	 * @return string
-	 */
-	public static function getViewablePermission()
-	{
-		return 'canView' . ucfirst(class_basename(__CLASS__));
-	}
+    /**
+     * @return int
+     */
+    public function getContentId()
+    {
+        return $this->getKey();
+    }
 }

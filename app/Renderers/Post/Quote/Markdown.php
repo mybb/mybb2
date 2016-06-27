@@ -13,30 +13,30 @@ use MyBB\Core\Database\Models\Post;
 
 class Markdown implements QuoteInterface
 {
-	/**
-	 * @var Application
-	 */
-	private $app;
+    /**
+     * @var Application
+     */
+    private $app;
 
-	/**
-	 * @param Application $app
-	 */
-	public function __construct(Application $app)
-	{
-		$this->app = $app;
-	}
+    /**
+     * @param Application $app
+     */
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
 
-	/**
-	 * @param Post $post
-	 *
-	 * @return string
-	 */
-	public function renderFromPost(Post $post)
-	{
-		$post = $this->app->make('MyBB\\Core\\Presenters\\Post', [$post]);
-		$message = $post->content;
+    /**
+     * @param Post $post
+     *
+     * @return string
+     */
+    public function renderFromPost(Post $post)
+    {
+        $post = $this->app->make('MyBB\\Core\\Presenters\\Post', [$post]);
+        $message = $post->content;
 
-		// TODO: MarkdownQuoteRenderer
-		return "> {$message}\n\n";
-	}
+        // TODO: MarkdownQuoteRenderer
+        return "> {$message}\n\n";
+    }
 }

@@ -15,75 +15,75 @@ use Illuminate\Routing\Router;
 
 class UpdateLastVisit extends AbstractBootstrapMiddleware
 {
-	/**
-	 * @var Guard
-	 */
-	protected $guard;
+    /**
+     * @var Guard
+     */
+    protected $guard;
 
-	/**
-	 * @var Router
-	 */
-	private $router;
+    /**
+     * @var Router
+     */
+    private $router;
 
-	/**
-	 * @var Repository
-	 */
-	private $config;
+    /**
+     * @var Repository
+     */
+    private $config;
 
-	/**
-	 * @param Guard      $guard
-	 * @param Router     $router
-	 * @param Repository $config
-	 */
-	public function __construct(Guard $guard, Router $router, Repository $config)
-	{
-		$this->guard = $guard;
-		$this->router = $router;
-		$this->config = $config;
-	}
+    /**
+     * @param Guard $guard
+     * @param Router $router
+     * @param Repository $config
+     */
+    public function __construct(Guard $guard, Router $router, Repository $config)
+    {
+        $this->guard = $guard;
+        $this->router = $router;
+        $this->config = $config;
+    }
 
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \Closure                 $next
-	 *
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		// The route settings aren't loaded at this point so we need to get it manually
-		$options = $this->getOptions($this->router, $request);
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        // The route settings aren't loaded at this point so we need to get it manually
+        $options = $this->getOptions($this->router, $request);
 
-		if ($this->isDebugBarRequest($request)) {
-			return $next($request);
-		}
+        if ($this->isDebugBarRequest($request)) {
+            return $next($request);
+        }
 
-		if (!isset($options['noOnline']) || $options['noOnline'] !== true) {
-			if ($this->guard->check()) {
-				$this->guard->user()->update([
-					'last_visit' => new \DateTime(),
-					'last_page' => $request->path()
-				]);
-			}
-		}
+        if (!isset($options['noOnline']) || $options['noOnline'] !== true) {
+            if ($this->guard->check()) {
+                $this->guard->user()->update([
+                    'last_visit' => new \DateTime(),
+                    'last_page'  => $request->path(),
+                ]);
+            }
+        }
 
-		return $next($request);
-	}
+        return $next($request);
+    }
 
-	/**
-	 * @param \Illuminate\Http\Request $request
-	 *
-	 * @return bool
-	 */
-	private function isDebugBarRequest($request)
-	{
-		$enabled = $this->config->get('debugbar.enabled');
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return bool
+     */
+    private function isDebugBarRequest($request)
+    {
+        $enabled = $this->config->get('debugbar.enabled');
 
-		if (!$enabled) {
-			return false;
-		}
+        if (!$enabled) {
+            return false;
+        }
 
-		return starts_with($request->path(), $this->config->get('debugbar.route_prefix'));
-	}
+        return starts_with($request->path(), $this->config->get('debugbar.route_prefix'));
+    }
 }

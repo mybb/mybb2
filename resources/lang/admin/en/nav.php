@@ -7,5 +7,5 @@
  */
 
 return [
-	'users_and_roles' => 'Users & Roles',
+    'users_and_roles' => 'Users & Roles',
 ];

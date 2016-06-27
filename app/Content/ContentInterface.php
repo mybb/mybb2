@@ -10,23 +10,23 @@ namespace MyBB\Core\Content;
 
 interface ContentInterface
 {
-	/**
-	 * @return int
-	 */
-	public function getId();
+    /**
+     * @return int
+     */
+    public function getId();
 
-	/**
-	 * @return string
-	 */
-	public function getType();
+    /**
+     * @return string
+     */
+    public function getType();
 
-	/**
-	 * @return string
-	 */
-	public function getUrl();
+    /**
+     * @return string
+     */
+    public function getUrl();
 
-	/**
-	 * @return string
-	 */
-	public function getTitle();
+    /**
+     * @return string
+     */
+    public function getTitle();
 }

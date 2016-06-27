@@ -14,47 +14,47 @@ use Illuminate\Routing\Controller as BaseController;
 
 abstract class AbstractController extends BaseController
 {
-	use DispatchesJobs;
-	use ValidatesRequests {
-		ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
-	}
+    use DispatchesJobs;
+    use ValidatesRequests {
+        ValidatesRequests::getRedirectUrl as parentGetRedirectUrl;
+    }
 
-	/**
-	 * @var string
-	 */
-	protected $failedValidationRedirect = '';
+    /**
+     * @var string
+     */
+    protected $failedValidationRedirect = '';
 
-	/**
-	 * @return string
-	 */
-	protected function getRedirectUrl()
-	{
-		if (!empty($this->failedValidationRedirect)) {
-			return $this->failedValidationRedirect;
-		}
+    /**
+     * @return string
+     */
+    protected function getRedirectUrl()
+    {
+        if (!empty($this->failedValidationRedirect)) {
+            return $this->failedValidationRedirect;
+        }
 
-		return $this->parentGetRedirectUrl();
-	}
+        return $this->parentGetRedirectUrl();
+    }
 
-	/**
-	 * @param bool $redirect
-	 *
-	 * @return $this|bool
-	 */
-	protected function checkCaptcha($redirect = true)
-	{
-		$valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
+    /**
+     * @param bool $redirect
+     *
+     * @return $this|bool
+     */
+    protected function checkCaptcha($redirect = true)
+    {
+        $valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
 
-		if ($valid) {
-			return true;
-		}
+        if ($valid) {
+            return true;
+        }
 
-		if ($redirect) {
-			return redirect($this->getRedirectUrl())->withInput()->withErrors([
-				'captcha' => trans('errors.invalidCaptcha'),
-			]);
-		}
+        if ($redirect) {
+            return redirect($this->getRedirectUrl())->withInput()->withErrors([
+                'captcha' => trans('errors.invalidCaptcha'),
+            ]);
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

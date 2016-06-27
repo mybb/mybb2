@@ -12,10 +12,10 @@ use MyBB\Core\Database\Models\ModerationLog;
 
 interface ModerationLogRepositoryInterface extends RepositoryInterface
 {
-	/**
-	 * @param array $attributes
-	 *
-	 * @return ModerationLog
-	 */
-	public function create(array $attributes);
+    /**
+     * @param array $attributes
+     *
+     * @return ModerationLog
+     */
+    public function create(array $attributes);
 }

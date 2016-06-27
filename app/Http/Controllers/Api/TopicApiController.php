@@ -15,102 +15,102 @@ use MyBB\Core\Transformers\TopicTransformer;
 
 class TopicApiController extends AbstractApiController
 {
-	/**
-	 * @var TopicRepositoryInterface
-	 */
-	protected $topicRepository;
+    /**
+     * @var TopicRepositoryInterface
+     */
+    protected $topicRepository;
 
-	/**
-	 * @param TopicRepositoryInterface $topicRepository
-	 * @param Manager                  $fractal
-	 */
-	public function __construct(TopicRepositoryInterface $topicRepository, Manager $fractal)
-	{
-		parent::__construct($fractal);
-		$this->topicRepository = $topicRepository;
-	}
+    /**
+     * @param TopicRepositoryInterface $topicRepository
+     * @param Manager $fractal
+     */
+    public function __construct(TopicRepositoryInterface $topicRepository, Manager $fractal)
+    {
+        parent::__construct($fractal);
+        $this->topicRepository = $topicRepository;
+    }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		$topics = $this->topicRepository->all();
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $topics = $this->topicRepository->all();
 
-		if (!$topics) {
-		// TODO: respond with error
-		}
+        if (!$topics) {
+            // TODO: respond with error
+        }
 
-		return $this->respondWithCollection($topics, new TopicTransformer);
-	}
+        return $this->respondWithCollection($topics, new TopicTransformer);
+    }
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        //
+    }
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        //
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        //
+    }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function update($id)
+    {
+        //
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

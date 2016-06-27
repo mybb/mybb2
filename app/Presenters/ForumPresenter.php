@@ -19,75 +19,75 @@ use MyBB\Core\Moderation\ModerationRegistry;
 
 class Forum extends BasePresenter
 {
-	/**
-	 * @var ModerationRegistry
-	 */
-	protected $moderations;
+    /**
+     * @var ModerationRegistry
+     */
+    protected $moderations;
 
-	/**
-	 * @var Application
-	 */
-	private $app;
+    /**
+     * @var Application
+     */
+    private $app;
 
-	/**
-	 * @param ForumModel         $resource    The forum being wrapped by this presenter.
-	 * @param Application        $app
-	 * @param ModerationRegistry $moderations
-	 */
-	public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
-	{
-		$this->wrappedObject = $resource;
-		$this->app = $app;
-		$this->moderations = $moderations;
-	}
+    /**
+     * @param ForumModel $resource The forum being wrapped by this presenter.
+     * @param Application $app
+     * @param ModerationRegistry $moderations
+     */
+    public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
+    {
+        $this->wrappedObject = $resource;
+        $this->app = $app;
+        $this->moderations = $moderations;
+    }
 
-	/**
-	 * @return User
-	 */
-	public function lastPostAuthor()
-	{
-		if ($this->wrappedObject->last_post_user_id == null) {
-			$user = new UserModel();
-			$user->id = 0;
-			if ($this->wrappedObject->lastPost->username != null) {
-				$user->name = $this->wrappedObject->lastPost->username;
-			} else {
-				$user->name = trans('general.guest');
-			}
+    /**
+     * @return User
+     */
+    public function lastPostAuthor()
+    {
+        if ($this->wrappedObject->last_post_user_id == null) {
+            $user = new UserModel();
+            $user->id = 0;
+            if ($this->wrappedObject->lastPost->username != null) {
+                $user->name = $this->wrappedObject->lastPost->username;
+            } else {
+                $user->name = trans('general.guest');
+            }
 
-			$decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
+            $decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
 
-			return $decoratedUser;
-		}
+            return $decoratedUser;
+        }
 
-		return $this->wrappedObject->lastPostAuthor;
-	}
+        return $this->wrappedObject->lastPostAuthor;
+    }
 
-	/**
-	 * @return bool
-	 */
-	public function hasLastPost()
-	{
-		if ($this->wrappedObject->lastPost == null) {
-			return false;
-		}
+    /**
+     * @return bool
+     */
+    public function hasLastPost()
+    {
+        if ($this->wrappedObject->lastPost == null) {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * @return \MyBB\Core\Moderation\ModerationInterface[]
-	 */
-	public function moderations()
-	{
-		$moderations = $this->moderations->getForContent(new TopicModel());
-		$decorated = [];
-		$presenter = app()->make('autopresenter');
+    /**
+     * @return \MyBB\Core\Moderation\ModerationInterface[]
+     */
+    public function moderations()
+    {
+        $moderations = $this->moderations->getForContent(new TopicModel());
+        $decorated = [];
+        $presenter = app()->make('autopresenter');
 
-		foreach ($moderations as $moderation) {
-			$decorated[] = $presenter->decorate($moderation);
-		}
+        foreach ($moderations as $moderation) {
+            $decorated[] = $presenter->decorate($moderation);
+        }
 
-		return $decorated;
-	}
+        return $decorated;
+    }
 }
