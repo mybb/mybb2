@@ -21,7 +21,7 @@ class CreateUserSettingsTable extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->integer('user_id')->unique()->unsigned()
-                  ->nullable(); // Not really nullable but otherwise we would throw errors
+                ->nullable(); // Not really nullable but otherwise we would throw errors
             $table->integer('date_format')->nullable(); // TODO: Still use hardcoded versions? Or allow custom ones?
             $table->integer('time_format')->nullable();
             $table->string('timezone', 4)->nullable(); // TODO: Still use our numeric version? Or real timezones?

@@ -41,7 +41,7 @@ class AddNumPostsToUsersTable extends Migration
                 'num_topics',
                 'avatar',
                 'dob',
-                'usertitle'
+                'usertitle',
             ]);
         });
     }

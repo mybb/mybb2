@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Settings table seeder, creates settings required for an install to function.
  *
@@ -7,7 +8,6 @@
  * @package mybb/core
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
-
 class SettingsTableSeeder extends \Illuminate\Database\Seeder
 {
     public function run()
@@ -73,195 +73,195 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
         DB::table('setting_values')->insert([
             [
                 'setting_id' => DB::table('settings')->where('name', 'general.board_name')->first()->id,
-                'value' => 'MyBB 2.0 Test Install'
+                'value'      => 'MyBB 2.0 Test Install',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'general.board_desc')->first()->id,
-                'value' => 'MyBB 2.0 Test Install'
+                'value'      => 'MyBB 2.0 Test Install',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'general.site_name')->first()->id,
-                'value' => 'MyBB Home'
+                'value'      => 'MyBB Home',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'general.site_url')->first()->id,
-                'value' => 'http://www.mybb.com'
+                'value'      => 'http://www.mybb.com',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'wio.minutes')->first()->id,
-                'value' => '15'
+                'value'      => '15',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'wio.refresh')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.date_format')->first()->id,
-                'value' => 'default'
+                'value'      => 'default',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.time_format')->first()->id,
-                'value' => 'default'
+                'value'      => 'default',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.timezone')->first()->id,
-                'value' => 'default'
+                'value'      => 'default',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.dst')->first()->id,
-                'value' => '2'
+                'value'      => '2',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.follow_started_topics')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.follow_replied_topics')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.show_editor')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.topics_per_page')->first()->id,
-                'value' => '20'
+                'value'      => '20',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.posts_per_page')->first()->id,
-                'value' => '10'
+                'value'      => '10',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.style')->first()->id,
-                'value' => 'default'
+                'value'      => 'default',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.language')->first()->id,
-                'value' => 'en'
+                'value'      => 'en',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_like')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_quote')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_post')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_comment')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_like')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_like')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_comment_reply')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_my_comment_reply')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_new_message')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_reply_message')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_group_request')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_moderation_post')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_report')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notify_on_username_change')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.notification_mails')->first()->id,
-                'value' => '0'
+                'value'      => '0',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.showonline')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.receive_messages')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.block_blocked_messages')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.hide_blocked_posts')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.only_buddy_messages')->first()->id,
-                'value' => '0'
+                'value'      => '0',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.receive_email')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.dob_privacy')->first()->id,
-                'value' => '2'
+                'value'      => '2',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'user.dob_visibility')->first()->id,
-                'value' => '1'
+                'value'      => '1',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'post.likes_to_show')->first()->id,
-                'value' => 3,
+                'value'      => 3,
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'likes.per_page')->first()->id,
-                'value' => 10,
+                'value'      => 10,
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_by')->first()->id,
-                'value' => 'created_at',
+                'value'      => 'created_at',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'memberlist.sort_dir')->first()->id,
-                'value' => 'asc',
+                'value'      => 'asc',
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'memberlist.per_page')->first()->id,
-                'value' => 10,
+                'value'      => 10,
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'conversations.enabled')->first()->id,
-                'value' => 1,
+                'value'      => 1,
             ],
             [
                 'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->first()->id,
-                'value' => 'desc',
+                'value'      => 'desc',
             ],
         ]);
     }

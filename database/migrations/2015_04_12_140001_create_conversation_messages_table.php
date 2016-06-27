@@ -6,8 +6,8 @@
  * @license http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateConversationMessagesTable extends Migration
 {
