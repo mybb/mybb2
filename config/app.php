@@ -153,7 +153,7 @@ return [
 		 * MyBB library service providers
 		 */
         MyBB\Auth\AuthServiceProvider::class,
-        MyBB\Parser\ParserServiceProvider::class,
+        Mybb\Parser\ServiceProvider::class,
         MyBB\Settings\ServiceProvider::class,
 
         /*

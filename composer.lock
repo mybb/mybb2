@@ -613,50 +613,6 @@
             "time": "2014-09-09 13:34:57"
         },
         {
-            "name": "ezyang/htmlpurifier",
-            "version": "v4.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ezyang/htmlpurifier.git",
-                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ezyang/htmlpurifier/zipball/ae1828d955112356f7677c465f94f7deb7d27a40",
-                "reference": "ae1828d955112356f7677c465f94f7deb7d27a40",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "HTMLPurifier": "library/"
-                },
-                "files": [
-                    "library/HTMLPurifier.composer.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Edward Z. Yang",
-                    "email": "admin@htmlpurifier.org",
-                    "homepage": "http://ezyang.com"
-                }
-            ],
-            "description": "Standards compliant HTML filter written in PHP",
-            "homepage": "http://htmlpurifier.org/",
-            "keywords": [
-                "html"
-            ],
-            "time": "2015-08-05 01:03:42"
-        },
-        {
             "name": "greggilbert/recaptcha",
             "version": "2.1.1",
             "source": {
@@ -1148,72 +1104,6 @@
             "time": "2016-01-27 22:29:54"
         },
         {
-            "name": "league/commonmark",
-            "version": "0.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/commonmark.git",
-                "reference": "3eb64850ee688623db494398a5284a7a4cdf7b47"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/commonmark/zipball/3eb64850ee688623db494398a5284a7a4cdf7b47",
-                "reference": "3eb64850ee688623db494398a5284a7a4cdf7b47",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "php": ">=5.4.8"
-            },
-            "replace": {
-                "colinodell/commonmark-php": "*"
-            },
-            "require-dev": {
-                "erusev/parsedown": "~1.0",
-                "jgm/commonmark": "0.22",
-                "jgm/smartpunct": "0.22",
-                "michelf/php-markdown": "~1.4",
-                "mikehaertl/php-shellcommand": "~1.1.0",
-                "phpunit/phpunit": "~4.3|~5.0",
-                "scrutinizer/ocular": "^1.1",
-                "symfony/finder": "~2.3"
-            },
-            "bin": [
-                "bin/commonmark"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.13-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\CommonMark\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Colin O'Dell",
-                    "email": "colinodell@gmail.com",
-                    "homepage": "http://www.colinodell.com",
-                    "role": "Lead Developer"
-                }
-            ],
-            "description": "Markdown parser for PHP based on the CommonMark spec",
-            "homepage": "https://github.com/thephpleague/commonmark",
-            "keywords": [
-                "commonmark",
-                "markdown",
-                "parser"
-            ],
-            "time": "2015-11-04 14:24:41"
-        },
-        {
             "name": "league/flysystem",
             "version": "1.0.24",
             "source": {
@@ -1549,12 +1439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/Auth.git",
-                "reference": "7adcc94e7cd49fdd1267b78b2abbec3b6da24e87"
+                "reference": "0975a3074fd9c6825336662bab7b821910cc2cde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/Auth/zipball/7adcc94e7cd49fdd1267b78b2abbec3b6da24e87",
-                "reference": "7adcc94e7cd49fdd1267b78b2abbec3b6da24e87",
+                "url": "https://api.github.com/repos/mybb/Auth/zipball/0975a3074fd9c6825336662bab7b821910cc2cde",
+                "reference": "0975a3074fd9c6825336662bab7b821910cc2cde",
                 "shasum": ""
             },
             "require": {
@@ -1562,11 +1452,32 @@
                 "illuminate/hashing": "^5.0",
                 "illuminate/support": "^5.0"
             },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "~2.0@dev",
+                "mockery/mockery": "0.9.*@dev",
+                "phpspec/phpspec": "~2.1",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0@dev"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
                     "MyBB\\Auth\\": "src/"
                 }
+            },
+            "scripts": {
+                "test-unit": [
+                    "vendor/bin/phpunit --testsuite unit"
+                ],
+                "test-unit-coverage": [
+                    "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report"
+                ],
+                "sniff": [
+                    "vendor/bin/phpcs"
+                ],
+                "sniff-fix": [
+                    "vendor/bin/phpcbf"
+                ]
             },
             "license": [
                 "BSD-3"
@@ -1581,7 +1492,7 @@
                 "source": "https://github.com/mybb/Auth/tree/master",
                 "issues": "https://github.com/mybb/Auth/issues"
             },
-            "time": "2016-02-13 15:32:31"
+            "time": "2016-06-27 17:43:50"
         },
         {
             "name": "mybb/gravatar",
@@ -1629,25 +1540,41 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mybb/parser.git",
-                "reference": "8505003d0a6a204d67390d985f2c3a37fef602dd"
+                "reference": "d030e4647985b7f7321bbfd359d8d1d9ad941c93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mybb/parser/zipball/8505003d0a6a204d67390d985f2c3a37fef602dd",
-                "reference": "8505003d0a6a204d67390d985f2c3a37fef602dd",
+                "url": "https://api.github.com/repos/mybb/parser/zipball/d030e4647985b7f7321bbfd359d8d1d9ad941c93",
+                "reference": "d030e4647985b7f7321bbfd359d8d1d9ad941c93",
                 "shasum": ""
             },
             "require": {
-                "ezyang/htmlpurifier": "^4.7",
-                "illuminate/database": "^5.0",
-                "illuminate/support": "^5.0",
-                "league/commonmark": "^0.12"
+                "illuminate/config": "^5.2",
+                "illuminate/database": "^5.2",
+                "illuminate/support": "^5.2",
+                "s9e/text-formatter": "^0.5.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0@dev"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "MyBB\\Parser\\": "src/"
+                    "Mybb\\Parser\\": "src/"
                 }
+            },
+            "scripts": {
+                "test-unit": [
+                    "vendor/bin/phpunit --testsuite unit"
+                ],
+                "test-unit-coverage": [
+                    "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report"
+                ],
+                "sniff": [
+                    "vendor/bin/phpcs"
+                ]
             },
             "license": [
                 "BSD-3"
@@ -1662,7 +1589,7 @@
                 "source": "https://github.com/mybb/parser/tree/master",
                 "issues": "https://github.com/mybb/parser/issues"
             },
-            "time": "2016-03-26 18:55:09"
+            "time": "2016-06-27 19:32:23"
         },
         {
             "name": "mybb/settings",
@@ -2027,6 +1954,66 @@
                 "twig"
             ],
             "time": "2016-02-22 07:48:48"
+        },
+        {
+            "name": "s9e/text-formatter",
+            "version": "0.5.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/s9e/TextFormatter.git",
+                "reference": "9d7f0835b23dda0d91007694ddc683ee194ca3a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/9d7f0835b23dda0d91007694ddc683ee194ca3a0",
+                "reference": "9d7f0835b23dda0d91007694ddc683ee194ca3a0",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-filter": "*",
+                "lib-pcre": ">=7.2",
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-curl": "Improves the performance of the MediaEmbed plugin and some JavaScript minifiers",
+                "ext-intl": "Allows international URLs to be accepted by the URL filter",
+                "ext-json": "Enables the generation of a JavaScript parser",
+                "ext-mbstring": "Improves the performance of the PHP renderer",
+                "ext-tokenizer": "Improves the performance of the PHP renderer",
+                "ext-xsl": "Enables the XSLT renderer",
+                "ext-zlib": "Enables gzip compression when scraping content via the MediaEmbed plugin"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "s9e\\TextFormatter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Multi-purpose text formatting and markup library. Plugins offer support for BBCodes, Markdown, emoticons, HTML, embedding media (YouTube, etc...), enhanced typography and more.",
+            "homepage": "https://github.com/s9e/TextFormatter/",
+            "keywords": [
+                "bbcode",
+                "bbcodes",
+                "blog",
+                "censor",
+                "embed",
+                "emoji",
+                "emoticons",
+                "engine",
+                "forum",
+                "html",
+                "markdown",
+                "markup",
+                "media",
+                "parser",
+                "shortcodes"
+            ],
+            "time": "2016-06-14 06:21:24"
         },
         {
             "name": "swiftmailer/swiftmailer",
