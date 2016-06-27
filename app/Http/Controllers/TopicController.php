@@ -446,7 +446,6 @@ class TopicController extends AbstractController
 			if ($pollCreateRequest->input('endAt')) {
 				$poll['end_at'] = new \DateTime($pollCreateRequest->input('endAt'));
 			}
-
 		}
 		$topic = $this->topicRepository->create([
 			'title' => $createRequest->input('title'),

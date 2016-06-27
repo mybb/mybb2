@@ -292,7 +292,6 @@ class PermissionChecker
 
 				return $contentValues->value;
 			}
-
 		}
 
 		$this->putCache($role, $permission, $content, $contentID, $permissionValues->default_value);
