@@ -52,4 +52,13 @@ interface UserRepositoryInterface
 	 * @return mixed
 	 */
 	public function findByUsername($username = '');
+
+	/**
+	 * Create a new user
+	 *
+	 * @param array $details Details about the user.
+	 *
+	 * @return User
+	 */
+	public function create(array $details = []);
 }
