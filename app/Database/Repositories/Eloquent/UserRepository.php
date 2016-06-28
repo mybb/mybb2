@@ -43,8 +43,7 @@ class UserRepository implements UserRepositoryInterface
         User $userModel,
         PermissionChecker $permissionChecker,
         Guard $guard
-    )
-    {
+    ) {
         $this->userModel = $userModel;
         $this->permissionChecker = $permissionChecker;
         $this->guard = $guard;
@@ -70,7 +69,11 @@ class UserRepository implements UserRepositoryInterface
      * @param int $minutes The number of minutes which are considered as "online time"
      * @param string $orderBy
      * @param string $orderDir
+<<<<<<< HEAD
      * @param int $num     The number of users to return. Set to 0 to get all users
+=======
+     * @param int $num The number of users to return. Set to 0 to get all users
+>>>>>>> upstream/master
      *
      * @return mixed
      */

@@ -11,7 +11,6 @@ namespace MyBB\Core\Providers;
 use Collective\Html\FormBuilder;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\Decorators\Forum\CachingDecorator;
 
 class AppServiceProvider extends ServiceProvider
