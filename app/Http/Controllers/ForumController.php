@@ -105,16 +105,15 @@ class ForumController extends AbstractController
 	 * Shows a specific forum.
 	 *
 	 * @param Request $request
-	 * @param string  $slug    The slug of the forum to show.
-	 *
 	 * @param int     $id      The ID of the forum to show.
+	 * @param string  $slug    The slug of the forum to show.
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function show(Request $request, $id = 0, $slug)
+	public function show(Request $request, $id, $slug)
 	{
 		// Forum permissions are checked in "find"
-		$forum = $this->forumRepository->find($id);
+		$forum = $this->forumRepository->findOrFail($id);
 
 		// Load last post information for child forums
 		$forum->load(['children.lastPost', 'children.lastPost.topic', 'children.lastPostAuthor']);
