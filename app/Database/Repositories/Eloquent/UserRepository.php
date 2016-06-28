@@ -136,4 +136,19 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->userModel->whereNname($username)->first();
     }
+
+    /**
+     * Create a new user
+     *
+     * @param array $details Details about the user.
+     *
+     * @return User
+     */
+    public function create(array $details = [])
+    {
+        $user = $this->userModel->create($details);
+        $user->setCreatedAt($user->freshTimestamp())
+            ->setUpdatedAt($user->freshTimestamp())->save();
+        return $user;
+    }
 }

@@ -154,5 +154,10 @@ class AppServiceProvider extends ServiceProvider
 
             return $form->setSessionStore($app['session.store']);
         });
+
+        $this->app->bind(
+            'MyBB\Core\Database\Repositories\RoleRepositoryInterface',
+            'MyBB\Core\Database\Repositories\Eloquent\RoleRepository'
+        );
     }
 }
