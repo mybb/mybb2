@@ -12,7 +12,7 @@ use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\ProfileFieldGroup as ProfileFieldGroupModel;
 
-class ProfileFieldGroup extends BasePresenter
+class ProfileFieldGroupPresenter extends BasePresenter
 {
     /** @var ProfileFieldGroupModel $wrappedObject */
 

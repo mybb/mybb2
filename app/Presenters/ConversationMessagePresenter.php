@@ -13,7 +13,7 @@ namespace MyBB\Core\Presenters;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\ConversationMessage as ConversationMessageModel;
 
-class ConversationMessage extends BasePresenter
+class ConversationMessagePresenter extends BasePresenter
 {
     /** @var ConversationMessageModel $wrappedObject */
 

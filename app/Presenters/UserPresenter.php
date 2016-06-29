@@ -27,7 +27,7 @@ use MyBB\Settings\Models\Setting;
 use MyBB\Settings\Models\SettingValue;
 use MyBB\Settings\Store;
 
-class User extends BasePresenter
+class UserPresenter extends BasePresenter
 {
     /** @var UserModel $wrappedObject */
 

@@ -17,7 +17,7 @@ use MyBB\Core\Database\Models\Post as PostModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Likes\Database\Models\Like;
 
-class Post extends BasePresenter
+class PostPresenter extends BasePresenter
 {
     /** @var PostModel $wrappedObject */
 

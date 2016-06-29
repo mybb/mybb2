@@ -17,7 +17,7 @@ use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Moderation\ModerationRegistry;
 
-class Topic extends BasePresenter
+class TopicPresenter extends BasePresenter
 {
     /** @var TopicModel $wrappedObject */
 

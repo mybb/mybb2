@@ -15,7 +15,7 @@ use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Form\RenderableInterface;
 
-class ProfileField extends BasePresenter implements RenderableInterface
+class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
 {
     /**
      * @var Guard

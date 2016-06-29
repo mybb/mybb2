@@ -14,7 +14,7 @@ use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Conversation as ConversationModel;
 
-class Conversation extends BasePresenter
+class ConversationPresenter extends BasePresenter
 {
     /** @var ConversationModel $wrappedObject */
 

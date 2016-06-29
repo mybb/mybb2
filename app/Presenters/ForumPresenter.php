@@ -17,7 +17,7 @@ use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
 use MyBB\Core\Moderation\ModerationRegistry;
 
-class Forum extends BasePresenter
+class ForumPresenter extends BasePresenter
 {
     /**
      * @var ModerationRegistry

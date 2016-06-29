@@ -15,7 +15,7 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Poll as PollModel;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
 
-class Poll extends BasePresenter
+class PollPresenter extends BasePresenter
 {
     /** @var PollModel $wrappedObject */
 
