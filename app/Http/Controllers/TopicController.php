@@ -28,7 +28,7 @@ use MyBB\Core\Http\Requests\Topic\CreateRequest;
 use MyBB\Core\Http\Requests\Topic\ReplyRequest;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
-use MyBB\Parser\MessageFormatter;
+use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 
 class TopicController extends AbstractController
@@ -206,14 +206,14 @@ class TopicController extends AbstractController
      * @param int $id
      * @param string $slug
      * @param Request $request
-     * @param MessageFormatter $formatter
+     * @param Parser $formatter
      * @param int $postId
      *
      * @return \Illuminate\View\View
      *
      * @throws \Exception
      */
-    public function reply($id, $slug, Request $request, MessageFormatter $formatter, $postId = null)
+    public function reply($id, $slug, Request $request, Parser $formatter, $postId = null)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -259,7 +259,7 @@ class TopicController extends AbstractController
                 'username'       => $username,
                 'content'        => $request->get('content'),
                 'content_parsed' => $formatter->parse($request->get('content'), [
-                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                    Parser::ME_USERNAME => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);
@@ -373,11 +373,11 @@ class TopicController extends AbstractController
     /**
      * @param int $forumId
      * @param Request $request
-     * @param MessageFormatter $formatter
+     * @param Parser $formatter
      *
      * @return \Illuminate\View\View
      */
-    public function create($forumId, Request $request, MessageFormatter $formatter)
+    public function create($forumId, Request $request, Parser $formatter)
     {
         // Forum permissions are checked in "find"
         $forum = $this->forumRepository->find($forumId);
@@ -403,7 +403,7 @@ class TopicController extends AbstractController
                 'username'       => $username,
                 'content'        => $request->get('content'),
                 'content_parsed' => $formatter->parse($request->get('content'), [
-                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                    Parser::ME_USERNAME => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);

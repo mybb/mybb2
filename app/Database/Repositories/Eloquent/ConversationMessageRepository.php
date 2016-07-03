@@ -14,7 +14,7 @@ use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
-use MyBB\Parser\MessageFormatter;
+use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 
 class ConversationMessageRepository implements ConversationMessageRepositoryInterface
@@ -30,7 +30,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     private $userRepository;
 
     /**
-     * @var MessageFormatter
+     * @var Parser
      */
     private $messageFormatter;
 
@@ -42,13 +42,13 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * @param ConversationMessage $conversationMessageModel
      * @param UserRepositoryInterface $userRepository
-     * @param MessageFormatter $messageFormatter
+     * @param Parser $messageFormatter
      * @param Store $settings
      */
     public function __construct(
         ConversationMessage $conversationMessageModel,
         UserRepositoryInterface $userRepository,
-        MessageFormatter $messageFormatter,
+        Parser $messageFormatter,
         Store $settings
     ) {
         $this->conversationMessageModel = $conversationMessageModel;
