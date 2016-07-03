@@ -25,7 +25,7 @@ use MyBB\Core\Exceptions\ConversationNotFoundException;
 use MyBB\Core\Http\Requests\Conversations\CreateRequest;
 use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
 use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
-use MyBB\Parser\MessageFormatter;
+use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 
 class ConversationsController extends AbstractController
@@ -74,11 +74,11 @@ class ConversationsController extends AbstractController
 
     /**
      * @param Request $request
-     * @param MessageFormatter $formatter
+     * @param Parser $formatter
      *
      * @return \Illuminate\View\View
      */
-    public function getCompose(Request $request, MessageFormatter $formatter)
+    public function getCompose(Request $request, Parser $formatter)
     {
         $preview = null;
         if ($request->has('message')) {
@@ -86,7 +86,7 @@ class ConversationsController extends AbstractController
                 'author_id'      => $this->guard->user()->id,
                 'message'        => $request->get('message'),
                 'message_parsed' => $formatter->parse($request->get('message'), [
-                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                    Parser::ME_USERNAME => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);
@@ -126,11 +126,11 @@ class ConversationsController extends AbstractController
     /**
      * @param int $id
      * @param Request $request
-     * @param MessageFormatter $formatter
+     * @param Parser $formatter
      *
      * @return \Illuminate\View\View
      */
-    public function getRead($id, Request $request, MessageFormatter $formatter)
+    public function getRead($id, Request $request, Parser $formatter)
     {
         $conversation = $this->conversationRepository->find($id);
 
@@ -153,7 +153,7 @@ class ConversationsController extends AbstractController
                 'author_id'      => $this->guard->user()->id,
                 'message'        => $request->get('message'),
                 'message_parsed' => $formatter->parse($request->get('message'), [
-                    MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+                    Parser::ME_USERNAME => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);

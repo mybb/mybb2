@@ -19,7 +19,7 @@ use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
-use MyBB\Parser\MessageFormatter;
+use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 
 class PostRepository implements PostRepositoryInterface
@@ -33,7 +33,7 @@ class PostRepository implements PostRepositoryInterface
      */
     protected $guard;
     /**
-     * @var MessageFormatter $formatter
+     * @var Parser $formatter
      */
     protected $formatter;
 
@@ -60,7 +60,7 @@ class PostRepository implements PostRepositoryInterface
     /**
      * @param Post $postModel The model to use for posts.
      * @param Guard $guard Laravel guard instance, used to get user ID.
-     * @param MessageFormatter $formatter Post formatter instance.
+     * @param Parser $formatter Post formatter instance.
      * @param Store $settings The settings container
      * @param ForumRepositoryInterface $forumRepository
      * @param PermissionChecker $permissionChecker
@@ -69,7 +69,7 @@ class PostRepository implements PostRepositoryInterface
     public function __construct(
         Post $postModel,
         Guard $guard,
-        MessageFormatter $formatter,
+        Parser $formatter,
         Store $settings,
         ForumRepositoryInterface $forumRepository,
         PermissionChecker $permissionChecker,
