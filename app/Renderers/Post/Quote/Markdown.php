@@ -33,7 +33,7 @@ class Markdown implements QuoteInterface
      */
     public function renderFromPost(Post $post)
     {
-        $post = $this->app->make('MyBB\\Core\\Presenters\\Post', [$post]);
+        $post = $this->app->make('MyBB\\Core\\Presenters\\PostPresenter', [$post]);
         $message = $post->content;
 
         // TODO: MarkdownQuoteRenderer

@@ -57,14 +57,14 @@ class PostPresenter extends BasePresenter
                 $user->name = trans('general.guest');
             }
 
-            $decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
+            $decoratedUser = $this->app->make('MyBB\Core\Presenters\UserPresenter', [$user]);
 
             return $decoratedUser;
         }
 
         if ($this->wrappedObject->author instanceof UserModel) {
             $this->wrappedObject->author = $this->app->make(
-                'MyBB\Core\Presenters\User',
+                'MyBB\Core\Presenters\UserPresenter',
                 [$this->wrappedObject->author]
             );
         }

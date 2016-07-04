@@ -12,7 +12,7 @@ namespace MyBB\Core\Http\Requests\Poll;
 
 use Illuminate\Contracts\Auth\Guard;
 use MyBB\Core\Http\Requests\AbstractRequest;
-use MyBB\Core\Presenters\Poll as PollPresenter;
+use MyBB\Core\Presenters\PollPresenter;
 
 class VoteRequest extends AbstractRequest
 {

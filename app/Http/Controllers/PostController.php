@@ -261,14 +261,14 @@ class PostController extends AbstractController
 
                     $author = $post->author;
                     if ($post->author) {
-                        $author = app()->make('MyBB\Core\Presenters\User', [$post->author]);
+                        $author = app()->make('MyBB\Core\Presenters\UserPresenter', [$post->author]);
                     }
 
                     $content[] = [
                         'id'             => $i++,
                         'quote'          => $this->quoteRenderer->renderFromPost($post),
                         'content_parsed' => $post->content_parsed,
-                        'post'           => app()->make('MyBB\Core\Presenters\Post', [$post]),
+                        'post'           => app()->make('MyBB\Core\Presenters\PostPresenter', [$post]),
                         'author'         => $author,
                     ];
 

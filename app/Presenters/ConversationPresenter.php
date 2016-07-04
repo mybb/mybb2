@@ -42,7 +42,7 @@ class ConversationPresenter extends BasePresenter
             return $this->wrappedObject->lastMessage;
         }
 
-        return app()->make('MyBB\Core\Presenters\ConversationMessage', [$this->wrappedObject->lastMessage]);
+        return app()->make('MyBB\Core\Presenters\ConversationMessagePresenter', [$this->wrappedObject->lastMessage]);
     }
 
     /**

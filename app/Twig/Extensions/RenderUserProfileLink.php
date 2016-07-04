@@ -13,7 +13,7 @@
 namespace MyBB\Core\Twig\Extensions;
 
 use Illuminate\Contracts\Auth\Guard;
-use MyBB\Core\Presenters\User;
+use MyBB\Core\Presenters\UserPresenter;
 use Twig_SimpleFunction;
 
 class RenderUserProfileLink extends \Twig_Extension
@@ -65,7 +65,7 @@ class RenderUserProfileLink extends \Twig_Extension
      *
      * @return string The rendered profile link.
      */
-    public function renderProfileLink(User $user = null, $includeAvatar = false, $useStyledName = true)
+    public function renderProfileLink(UserPresenter $user = null, $includeAvatar = false, $useStyledName = true)
     {
         if (is_null($user)) {
             $user = $this->guard->user();

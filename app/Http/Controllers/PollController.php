@@ -101,7 +101,7 @@ class PollController extends AbstractController
         }
 
         $poll = $topic->poll;
-        $pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+        $pollPresenter = app()->make('MyBB\Core\Presenters\PollPresenter', [$poll]);
 
         $this->breadcrumbs->setCurrentRoute('polls.show', $topic);
 
@@ -208,7 +208,7 @@ class PollController extends AbstractController
         }
 
         $poll = $topic->poll;
-        $pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+        $pollPresenter = app()->make('MyBB\Core\Presenters\PollPresenter', [$poll]);
 
         $voteRequest = app()->make('MyBB\Core\Http\Requests\Poll\VoteRequest', [$pollPresenter]);
 
@@ -274,7 +274,7 @@ class PollController extends AbstractController
         }
 
         $poll = $topic->poll;
-        $pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+        $pollPresenter = app()->make('MyBB\Core\Presenters\PollPresenter', [$poll]);
 
         if (!$this->guard->check()) {
             throw new PollNoGuestUndoException;
@@ -376,7 +376,7 @@ class PollController extends AbstractController
         }
 
         $poll = $topic->poll;
-        $pollPresenter = app()->make('MyBB\Core\Presenters\Poll', [$poll]);
+        $pollPresenter = app()->make('MyBB\Core\Presenters\PollPresenter', [$poll]);
 
 
         $options = [];

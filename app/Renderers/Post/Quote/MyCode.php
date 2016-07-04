@@ -33,7 +33,7 @@ class MyCode implements QuoteInterface
      */
     public function renderFromPost(Post $post)
     {
-        $post = $this->app->make('MyBB\Core\Presenters\Post', [$post]);
+        $post = $this->app->make('MyBB\Core\Presenters\PostPresenter', [$post]);
         $message = $post->content;
         $slapUsername = $post->author->name;
         $message = preg_replace(

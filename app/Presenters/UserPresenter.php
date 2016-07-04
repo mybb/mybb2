@@ -207,7 +207,7 @@ class UserPresenter extends BasePresenter
         $conversations = $this->conversationRepository->getUnreadForUser($this->wrappedObject);
 
         foreach ($conversations as $key => $conversation) {
-            $conversations[$key] = app()->make('MyBB\Core\Presenters\Conversation', [$conversation]);
+            $conversations[$key] = app()->make('MyBB\Core\Presenters\ConversationPresenter', [$conversation]);
         }
 
         return $conversations;

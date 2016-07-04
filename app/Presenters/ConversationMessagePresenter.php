@@ -34,6 +34,6 @@ class ConversationMessagePresenter extends BasePresenter
             return $this->wrappedObject->author;
         }
 
-        return app()->make('MyBB\Core\Presenters\User', [$this->wrappedObject->author]);
+        return app()->make('MyBB\Core\Presenters\UserPresenter', [$this->wrappedObject->author]);
     }
 }

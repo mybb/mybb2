@@ -55,7 +55,7 @@ class ForumPresenter extends BasePresenter
                 $user->name = trans('general.guest');
             }
 
-            $decoratedUser = $this->app->make('MyBB\Core\Presenters\User', [$user]);
+            $decoratedUser = $this->app->make('MyBB\Core\Presenters\UserPresenter', [$user]);
 
             return $decoratedUser;
         }
