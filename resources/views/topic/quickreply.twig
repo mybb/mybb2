@@ -26,15 +26,9 @@
 						</div>
 					{% endif %}
 					<div class="post__foot">
-						{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-						<!-- <button type="submit" class="button button--secondary">
-							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
-						</button>-->
-						<a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary"
-						   onclick="return submitFormAsGet('quickreply');">
-							<i class="fa fa-edit"></i>
-							<span class="text">{{ trans('general.preview') }}</span>
-						</a>
+						{{ form_button(trans('topic.postreply'), {'type': 'submit', 'class': 'button icon fa-comment'}) }}
+						<!-- <button type="submit" class="button button--secondary icon fa-paperclip">Attach Files</button>-->
+						<a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary icon fa-edit" onclick="return submitFormAsGet('quickreply');">{{ trans('general.preview') }}</a>
 					</div>
 				</form>
 			</div>

@@ -35,7 +35,7 @@
 		</section>
 		{{ form_hidden('url', input_get('url')) }}
 		<div class="form__submit">
-			{{ form_button('<i class="fa fa-user"></i><span class="text">'~trans('member.signup')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			{{ form_button(trans('member.signup'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
 		</div>
 	</div>
 	{{ form_close() }}

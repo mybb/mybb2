@@ -33,15 +33,15 @@
 						{% endif %}
 						<div class="post__foot">
 							<ul class="post__controls">
-								<li class="preview"><a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" onclick="return submitFormAsGet('topicreply');"><i class="fa fa-edit"></i><span class="text">{{ trans('general.preview') }}</span></a></li>
-								<li class="attach"><a href="#attach"><i class="fa fa-paperclip"></i><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
+								<li class="preview"><a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" onclick="return submitFormAsGet('topicreply');" class="icon fa-edit">{{ trans('general.preview') }}</a></li>
+								<li class="attach"><a href="#attach" class="icon fa-paperclip">{{ trans('topic.attachFiles') }}</a></li>
 							</ul>
 						</div>
 				</div>
 			</section>
 			{% include 'topic.preview' with {'preview': preview} %}
 			<div class="form__submit">
-				{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+				{{ form_button(trans('topic.postreply'), {'type': 'submit', 'class': 'button icon fa-comment'}) }}
 			</div>
 		</form>
 	</div>

@@ -7,13 +7,9 @@
 	<div class="page-controls">
 		{{ messages.render|raw }}
 		<div class="page-buttons">
-			<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }}
-					class="button button--secondary"><i class="fa fa-plus"></i><span
-						class="text">{{ trans('conversations.add_participants') }}</span></a>
-			<a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary"><i
-						class="fa fa-sign-out"></i><span class="text">{{ trans('conversations.leave') }}</span></a>
-			<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span
-						class="text">{{ trans('conversations.reply') }}</span></a>
+			<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }} class="button button--secondary icon fa-plus">{{ trans('conversations.add_participants') }}</a>
+			<a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary icon fa-sign-out">{{ trans('conversations.leave') }}</a>
+			<a href="#post-reply" class="button icon fa-comment">{{ trans('conversations.reply') }}</a>
 		</div>
 	</div>
 	<div class="page-content page-content--sidebar">

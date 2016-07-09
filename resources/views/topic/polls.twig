@@ -29,22 +29,18 @@
 		</div>
 		<div class="poll__vote">
 			<div class="poll__buttons">
-				<a class="button button--secondary"
-				   href="{{ url_route('polls.show', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
-							class="fa fa-arrow-right"></i><span class="text">{{ trans('poll.results') }}</span></a>
-				<a class="button button--secondary"
-				   href="{{ url_route('polls.remove', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
-							class="fa fa-trash"></i><span class="text">{{ trans('poll.remove') }}</span></a>
-				<a class="button button--secondary"
-				   href="{{ url_route('polls.edit', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
-							class="fa fa-pencil"></i><span class="text">{{ trans('poll.edit') }}</span></a>
+				<a class="button button--secondary icon fa-arrow-right"
+				   href="{{ url_route('polls.show', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.results') }}</a>
+				<a class="button button--secondary icon fa-trash"
+				   href="{{ url_route('polls.remove', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.remove') }}</a>
+				<a class="button button--secondary icon fa-pencil"
+				   href="{{ url_route('polls.edit', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.edit') }}</a>
 			</div>
 			{% if not poll.is_closed %}
 				{% if poll.myVote %}
-					<a class="button" href="{{ url_route('polls.undo', {'topicSlug': topic.slug, 'topicId': topic.id}) }}"><i
-								class="fa fa-undo"></i><span class="text">{{ trans('poll.undo') }}</span></a>
+					<a class="button icon fa-undo" href="{{ url_route('polls.undo', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.undo') }}</a>
 				{% else %}
-					{{ form_button('<i class="fa fa-arrow-right"></i><span class="text">'~trans('poll.vote')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+					{{ form_button(trans('poll.vote'), {'type': 'submit', 'class': 'button icon fa-arrow-right'}) }}
 				{% endif %}
 			{% endif %}
 		</div>

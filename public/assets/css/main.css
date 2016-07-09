@@ -2257,6 +2257,37 @@
 /*!
 *   MyBB 2.0 - http://mybb.com - @mybb - MIT license
 */
+.icon {
+  text-decoration: none; }
+  .icon:before {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-size: 1em;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: normal;
+    margin-right: 8px;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  .icon.icon--fw:before {
+    width: 1.28571429em;
+    text-align: center; }
+
+.hidden {
+  display: none !important;
+  visibility: hidden; }
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
 h1.title {
   float: left;
   margin: 10px 2% 5px 0; }
@@ -3273,38 +3304,30 @@ a.button {
     .button.button--secondary:hover,
     a.button.button--secondary:hover {
       color: #ff7500; }
-    .button.button--secondary.button--danger,
-    a.button.button--secondary.button--danger {
-      background: none;
-      color: #eb5257; }
-      .button.button--secondary.button--danger:hover,
-      a.button.button--secondary.button--danger:hover {
-        background: none;
-        border-color: #eb5257;
-        color: #ff7500; }
-  .button.button--good,
-  a.button.button--good {
-    border-color: #68c000;
-    color: #fff;
-    background: #68c000; }
   .button.button--danger,
   a.button.button--danger {
-    border-color: #eb5257;
-    color: #fff;
-    background: #eb5257; }
+    background: none;
+    color: #eb5257;
+    border-color: #dfdfdf; }
     .button.button--danger:hover,
     a.button.button--danger:hover {
-      background: #ff7500;
-      border-color: #ff7500;
+      background: #eb5257;
+      border-color: #eb5257;
+      color: #fff; }
+  .button.button--success,
+  a.button.button--success {
+    background: none;
+    color: #68c000;
+    border-color: #dfdfdf; }
+    .button.button--success:hover,
+    a.button.button--success:hover {
+      background: #68c000;
+      border-color: #68c000;
       color: #fff; }
   .button:hover, .button:active,
   a.button:hover,
   a.button:active {
     outline: none; }
-  .button.icon:before,
-  a.button.icon:before {
-    margin-right: 10px;
-    position: relative; }
 
 /*!
 *   MyBB 2.0 - http://mybb.com - @mybb - MIT license
@@ -3748,7 +3771,8 @@ section.container .forum-list {
     padding: 4px;
     text-align: right; }
     .post .post__controls li {
-      display: inline-block; }
+      display: inline-block;
+      font-size: 0.8em; }
       .post .post__controls li a,
       .post .post__controls li button {
         color: #666;

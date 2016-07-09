@@ -84,8 +84,7 @@
 							{{ form_text('option['~loop.index~']', input_get('option.'~loop.index)) }}
 						</div>
 					{% endfor %}
-					<a href="#newoption" class="button button--secondary" id="new-option"><i
-								class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
+					<a href="#newoption" class="button button--secondary icon fa-plus" id="new-option">{{ trans('poll.newOption') }}</a>
 
 					<div class="form__row hidden" id="option-simple">
 						<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
@@ -98,7 +97,7 @@
 		{% include 'topic.preview' with {'preview': preview} %}
 		{{ form_hidden('forum_id', forum.id) }}
 		<div class="form__submit">
-			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('topic.create.postTopic')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			{{ form_button(trans('topic.create.postTopic'), {'type': 'submit', 'class': 'button icon fa-edit'}) }}
 		</div>
 		{{ form_close() }}
 	</div>

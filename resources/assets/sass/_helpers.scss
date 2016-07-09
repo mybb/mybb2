@@ -4,11 +4,12 @@
 	&:before {
 		display: inline-block;
 		font-family: FontAwesome;
-		font-size: 1.25em;
+		font-size: 1em;
 		text-decoration: none;
 		font-style: normal;
 		font-weight: normal;
-		line-height: 1;
+		margin-right: 8px;
+		position: relative;
 		-webkit-font-smoothing:antialiased;
 		-moz-osx-font-smoothing:grayscale;
 	}

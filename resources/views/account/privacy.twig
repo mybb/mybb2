@@ -21,7 +21,7 @@
 					<a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Unavoidably Annoying</a>
 				</div>
 				<div class="buttons">
-					<a href="index.php?page=account/blocked" class="button button--secondary"><i class="fa fa-shield"></i><span class="text">{{ trans('account.manage_blocked') }}</span></a>
+					<a href="index.php?page=account/blocked" class="button button--secondary icon fa-shield">{{ trans('account.manage_blocked') }}</a>
 				</div>
 			</div>
 		</div>
@@ -174,7 +174,7 @@
 		</div>
 	</section>
 	<div class="form__submit">
-		{{ form_button('<i class="fa fa-shield"></i><span class="text">'~trans('account.update_privacy')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+		{{ form_button(trans('account.update_privacy'), {'type': 'submit', 'class': 'button icon fa-shield'}) }}
 	</div>
 	{{ form_close() }}
 

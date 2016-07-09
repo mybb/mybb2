@@ -15,8 +15,8 @@
 				<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
 				<p>{{ trans('account.avatar_desc') }}</p>
 				<div class="buttons">
-					<a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary"><i class="fa fa-picture-o"></i><span class="text">{{ trans('account.avatar_change') }}</span></a>
-					<a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary"><i class="fa fa-times"></i><span class="text">{{ trans('account.avatar_remove') }}</span></a>
+					<a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary icon fa-picture-o">{{ trans('account.avatar_change') }}</a>
+					<a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary icon fa-times">{{ trans('account.avatar_remove') }}</a>
 				</div>
 			</div>
 		</div>
@@ -24,9 +24,9 @@
 			<h2>{{ trans('account.details') }}</h2>
 			<div class="form__section__container">
 				<div class="buttons">
-					<a {{ modal_attributes('account.username') }} class="button button--secondary"><i class="fa fa-user"></i><span class="text">{{ trans('account.change_username') }}</span></a>
-					<a {{ modal_attributes('account.email') }} class="button button--secondary"><i class="fa fa-paper-plane-o"></i><span class="text">{{ trans('account.change_email') }}</span></a>
-					<a {{ modal_attributes('account.password') }} class="button button--secondary"><i class="fa fa-key"></i><span class="text">{{ trans('account.change_password') }}</span></a>
+					<a {{ modal_attributes('account.username') }} class="button button--secondary icon fa-user">{{ trans('account.change_username') }}</a>
+					<a {{ modal_attributes('account.email') }} class="button button--secondary icon fa-paper-plane-o">{{ trans('account.change_email') }}</a>
+					<a {{ modal_attributes('account.password') }} class="button button--secondary icon fa-key">{{ trans('account.change_password') }}</a>
 				</div>
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 		</div>
 	</section>
 	<div class="form__submit">
-		{{ form_button('<i class="fa fa-user"></i><span class="text">'~trans('account.update_profile')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+		{{ form_button(trans('account.update_profile'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
 	</div>
 	{{ form_close() }}
 

@@ -8,7 +8,7 @@
 		<header>
 			<h1>{{ trans('topic.editpost') }}</h1>
 			<div class="page-buttons">
-				<a href="{{ url_route("topics.show", {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary"><i class="fa fa-arrow-circle-{{ langDir.left }}"></i><span class="text">{{ trans('general.cancel') }}</span></a>
+				<a href="{{ url_route("topics.show", {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary icon fa fa-arrow-circle-{{ langDir.left }}">{{ trans('general.cancel') }}</a>
 			</div>
 		</header>
 		{{ form_open({'route': ['topics.edit', topic.id, topic.slug, post.id], 'method': 'post'}) }}
@@ -28,7 +28,7 @@
 			</div>
 		</section>
 		<div class="form__submit">
-			{{ form_button('<i class="fa fa-edit"></i><span class="text">'~trans('topic.editpost')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+			{{ form_button(trans('topic.editpost'), {'type': 'submit', 'class': 'button icon fa-edit'}) }}
 		</div>
 		{{ form_close() }}
 	</div>

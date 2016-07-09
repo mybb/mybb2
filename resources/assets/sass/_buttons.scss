@@ -25,33 +25,28 @@ a.button {
 		&:hover {
 			color: $secondary-color;
 		}
-
-        &.button--danger {
-            background: none;
-            color: $danger-color;
-
-            &:hover {
-                background: none;
-                border-color: $danger-color;
-                color: $secondary-color;
-            }
-        }
 	}
 
-	&.button--good {
-		border-color: $success-color;
-		color: $invert-font-color;
-		background: $success-color;
-	}
-
-    &.button--danger {
-        border-color: $danger-color;
-        color: $invert-font-color;
-        background: $danger-color;
+	&.button--danger {
+        background: none;
+        color: $danger-color;
+        border-color: $border-1;
 
         &:hover {
-            background: $secondary-color;
-            border-color: $secondary-color;
+            background: $danger-color;
+            border-color: $danger-color;
+            color: $invert-font-color;
+        }
+    }
+
+    &.button--success {
+        background: none;
+        color: $success-color;
+        border-color: $border-1;
+
+        &:hover {
+            background: $success-color;
+            border-color: $success-color;
             color: $invert-font-color;
         }
     }
@@ -63,10 +58,5 @@ a.button {
 
 	&:hover, &:active {
 		outline: none;
-	}
-
-	&.icon:before {
-		margin-right: 10px;
-		position: relative;
 	}
 }
