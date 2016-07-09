@@ -47,6 +47,11 @@ $status-pending-border: #f2aaab;
 $success-color: #018303;
 $danger-color: #eb5257;
 
+@import "../../../node_modules/normalize-scss/sass/_normalize";
+@import "../../../node_modules/font-awesome/scss/font-awesome";
+@import "../../../node_modules/@claviska/jquery-dropdown/jquery.dropdown.sass";
+@import "../../../node_modules/datetimepicker/src/DateTimePicker.css";
+
 
 // Fonts
 $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
