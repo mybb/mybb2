@@ -24,10 +24,10 @@ section.form {
 }
 
 .dashboard__account {
-
-	.dashboard__account__container {
-		padding: side-values(20px 20px 20px 140px);
-	}
+	padding: side-values(20px 20px 20px 140px);
+	border: 1px solid $border-1;
+	@include border-radius(4px);
+	@include clearfix();
 
 	.avatar-profile-link {
 		width: 100px;
