@@ -9,6 +9,8 @@ composer.phar
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
 
+## NPM
+npm-debug.log
 
 ### Laravel
 /bootstrap/compiled.php

@@ -1,3 +1,5 @@
+@import "mixins";
+
 #add-poll {
 	.poll-option {
 		padding-#{$right}: 20px;
@@ -29,7 +31,7 @@
 	.poll__option {
 		border-bottom: 1px solid $border-1;
 		padding: 10px 12px;
-		@extend .clearfix;
+		@include clearfix();
 
 		&.poll__option--voted {
 

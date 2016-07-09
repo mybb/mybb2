@@ -2,7 +2,7 @@
 	background: $background-3;
 	border-bottom: 1px solid $border-1;
 	padding: side-values(15px 15px 5px 15px);
-	@extend .clearfix;
+	@include clearfix();
 }
 
 .show-menu {
