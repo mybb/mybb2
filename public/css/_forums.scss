@@ -1,7 +1,9 @@
+@import "mixins";
+
 .forum-list {
 
 	.forum {
-		@extend .clearfix;
+		@include clearfix;
 		padding: 12px;
 		border-bottom: 1px solid $border-2;
 		line-height: 1.4;
@@ -119,7 +121,7 @@ section.container {
 .topic-list {
 
 	.topic-list__sort-topics {
-		@extend .clearfix;
+		@include clearfix;
 		margin-bottom: 0;
 		background: $primary-color;
 		padding: 5px 12px;
@@ -183,7 +185,7 @@ section.container {
 	}
 
 	.topic {
-		@extend .clearfix;
+		@include clearfix;
 		padding: side-values(10px 12px 10px 60px);
 		border-bottom: 1px solid $border-1;
 		line-height: 1.4;

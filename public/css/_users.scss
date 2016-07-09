@@ -1,5 +1,7 @@
+@import "mixins";
+
 .user-list {
-	@extend .clearfix;
+	@include clearfix;
 	padding: side-values(12px 12px 0 12px);
 
 	.user-list__user {
@@ -115,7 +117,7 @@
 .profile {
 
 	.profile__header {
-		@extend .clearfix;
+		@include clearfix;
 		position: relative;
 
 		.avatar {

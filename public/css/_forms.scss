@@ -1,3 +1,5 @@
+@import "mixins";
+
 input[type="text"],
 input[type="url"],
 input[type="number"],
@@ -59,7 +61,7 @@ section.form {
 	}
 
 	.form__section {
-		@extend .clearfix;
+		@include clearfix;
 		padding: 16px 12px;
 		border-bottom: 2px solid $border-1;
 

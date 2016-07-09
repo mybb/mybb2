@@ -1,3 +1,5 @@
+@import "mixins";
+
 html, button, input, select, textarea {
 	color: $font-color;
 	word-wrap: break-word;
@@ -16,7 +18,7 @@ body {
 }
 
 .wrapper {
-	@extend .clearfix;
+	@include clearfix;
 	width: 90%;
 	margin: 0 5%;
 }
@@ -299,7 +301,7 @@ section {
 nav.section-menu {
 	
 	ul {
-		@extend .clearfix;
+		@include clearfix;
 		margin: side-values(0 0 15px 0);
 		padding: 0;
 		list-style: none;
@@ -504,7 +506,7 @@ dl.stats {
 		}
 
 		.page-controls {
-			@extend .clearfix;
+			@include clearfix;
 			margin-top: -20px;
 
 			.page-buttons {
