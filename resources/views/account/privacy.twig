@@ -34,7 +34,7 @@
 					<p class="form__checkbox"><label>{{ form_checkbox('block_blocked_messages', 1, setting('user.block_blocked_messages', true)) }} {{ trans('account.block_blocked_messages') }}</label></p>
 					<p class="form__checkbox"><label>{{ form_checkbox('hide_blocked_posts', 1, setting('user.hide_blocked_posts', true)) }} {{ trans('account.hide_blocked_posts') }}</label></p>
 					{# another raw value #}
-					<p class="form__checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, setting('user.only_buddy_messages', false)) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.buddies')})|raw }}</label></p>
+					<p class="form__checkbox"><label>{{ form_checkbox('only_buddy_messages', 1, setting('user.only_buddy_messages', false)) }} {{ trans('account.only_buddy_messages', {'link': url_route('account.following')})|raw }}</label></p>
 					<p class="form__checkbox"><label>{{ form_checkbox('receive_email', 1, setting('user.receive_email', true)) }} {{ trans('account.receive_email') }}</label></p>
 				</div>
 			</div>
@@ -46,128 +46,104 @@
 					<h3>{{ trans('account.dob_privacy') }}</h3>
 					<p class="form__description">{{ trans('account.dob_privacy_desc') }}</p>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 0, setting('user.dob_privacy', 2) == 0, {'id': 'no_dob'}) }}
-								<label class="segmented-control__button" for="no_dob">
-									<span class="text">{{ trans('general.nothing') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 1, setting('user.dob_privacy', 2) == 1, {'id': 'age_only'}) }}
-								<label class="segmented-control__button" for="age_only">
-									<span class="text">{{ trans('general.age') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dob_privacy', 2, setting('user.dob_privacy', 2) == 2, {'id': 'dob_age'}) }}
-								<label class="segmented-control__button" for="dob_age">
-									<span class="text">{{ trans('general.dob') }}</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_privacy', 0, setting('user.dob_privacy', 2) == 0, {'id': 'no_dob'}) }}
+							<label class="segmented-control__option__button" for="no_dob">{{ trans('general.nothing') }}</label>
+						</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_privacy', 1, setting('user.dob_privacy', 2) == 1, {'id': 'age_only'}) }}
+							<label class="segmented-control__option__button" for="age_only">{{ trans('general.age') }}</label>
+						</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_privacy', 2, setting('user.dob_privacy', 2) == 2, {'id': 'dob_age'}) }}
+							<label class="segmented-control__option__button" for="dob_age">{{ trans('general.dob') }}</label>
+						</span>
 					</div>
 				</div>
 				<div class="form__row">
 					<h3>{{ trans('account.dob_visibility') }}</h3>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 0, setting('user.dob_visibility', 1) == 0, {'id': 'dob_everyone'}) }}
-								<label class="segmented-control__button" for="dob_everyone">
-									<span class="text">{{ trans('general.everyone') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 1, setting('user.dob_visibility', 1) == 1, {'id': 'dob_members'}) }}
-								<label class="segmented-control__button" for="dob_members">
-									<span class="text">{{ trans('member.members') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dob_visibility', 2, setting('user.dob_visibility', 1) == 2, {'id': 'dob_buddies'}) }}
-								<label class="segmented-control__button" for="dob_buddies">
-									<span class="text">{{ trans('account.buddies') }}</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_visibility', 0, setting('user.dob_visibility', 1) == 0, {'id': 'dob_everyone'}) }}
+							<label class="segmented-control__option__button" for="dob_everyone">{{ trans('general.everyone') }}</label>
+						</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_visibility', 1, setting('user.dob_visibility', 1) == 1, {'id': 'dob_members'}) }}
+							<label class="segmented-control__option__button" for="dob_members">{{ trans('member.members') }}</label>
+						</span>
+						<span class="segmented-control__option">
+							{{ form_radio('dob_visibility', 2, setting('user.dob_visibility', 1) == 2, {'id': 'dob_following'}) }}
+							<label class="segmented-control__option__button" for="dob_following">{{ trans('account.following') }}</label>
+						</span>
 					</div>
 				</div>
 				{# everything below refers to profilefields and should be dynamic #}
 				<div class="form__row">
 					<h3>Show your sex to:</h3>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								<input type="radio" name="" id="sex_everyone" checked="checked" />
-								<label class="segmented-control__button" for="sex_everyone">
-									<span class="text">Everyone</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="sex_members" />
-								<label class="segmented-control__button" for="sex_members">
-									<span class="text">Members</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="sex_buddies" />
-								<label class="segmented-control__button" for="sex_buddies">
-									<span class="text">Buddies</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="sex_everyone" checked="checked" />
+							<label class="segmented-control__option__button" for="sex_everyone">Everyone</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="sex_members" />
+							<label class="segmented-control__option__button" for="sex_members">Members</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="sex_following" />
+							<label class="segmented-control__option__button" for="sex_following">Following</label>
+						</span>
 					</div>
 				</div>
 				<div class="form__row">
 					<h3>Show your location to:</h3>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								<input type="radio" name="" id="location_everyone" checked="checked" />
-								<label class="segmented-control__button" for="location_everyone">
-									<span class="text">Everyone</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="location_members" />
-								<label class="segmented-control__button" for="location_members">
-									<span class="text">Members</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="location_buddies" />
-								<label class="segmented-control__button" for="location_buddies">
-									<span class="text">Buddies</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="location_everyone" checked="checked" />
+							<label class="segmented-control__option__button" for="location_everyone">Everyone</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="location_members" />
+							<label class="segmented-control__option__button" for="location_members">Members</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="location_following" />
+							<label class="segmented-control__option__button" for="location_following">Following</label>
+						</span>
 					</div>
 				</div>
 				<div class="form__row">
 					<h3>Show your bio to:</h3>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								<input type="radio" name="" id="bio_everyone" />
-								<label class="segmented-control__button" for="bio_everyone">
-									<span class="text">Everyone</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="bio_members" checked="checked" />
-								<label class="segmented-control__button" for="bio_members">
-									<span class="text">Members</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="bio_buddies" />
-								<label class="segmented-control__button" for="bio_buddies">
-									<span class="text">Buddies</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="bio_everyone" />
+							<label class="segmented-control__option__button" for="bio_everyone">Everyone</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="bio_members" checked="checked" />
+							<label class="segmented-control__option__button" for="bio_members">Members</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="bio_following" />
+							<label class="segmented-control__option__button" for="bio_following">Following</label>
+						</span>
 					</div>
 				</div>
 				<div class="form__row">
 					<h3>Show your contact details to:</h3>
 					<div class="segmented-control">
-							<span class="segmented-control__block">
-								<input type="radio" name="" id="contact_everyone" />
-								<label class="segmented-control__button" for="contact_everyone">
-									<span class="text">Everyone</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="contact_members" />
-								<label class="segmented-control__button" for="contact_members">
-									<span class="text">Members</span>
-								</label>
-							</span><span class="segmented-control__block">
-								<input type="radio" name="" id="contact_buddies" checked="checked" />
-								<label class="segmented-control__button" for="contact_buddies">
-									<span class="text">Buddies</span>
-								</label>
-							</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="contact_everyone" />
+							<label class="segmented-control__option__button" for="contact_everyone">Everyone</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="contact_members" />
+							<label class="segmented-control__option__button" for="contact_members">Members</label>
+						</span>
+						<span class="segmented-control__option">
+							<input type="radio" name="" id="contact_following" checked="checked" />
+							<label class="segmented-control__option__button" for="contact_following">Following</label>
+						</span>
 					</div>
 				</div>
 			</div>

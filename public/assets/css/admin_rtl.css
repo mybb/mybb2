@@ -2622,10 +2622,9 @@ select {
   max-width: 100%;
   border-radius: 4px;
   box-sizing: border-box; }
-
-select[multiple="multiple"] {
-  width: 100%;
-  height: 200px; }
+  select[multiple="multiple"] {
+    width: 100%;
+    height: 200px; }
 
 input.short {
   width: 50px;
@@ -2644,6 +2643,64 @@ textarea {
   outline: 0;
   border-radius: 4px;
   box-sizing: border-box; }
+
+.segmented-control {
+  margin: 5px 0 0 0;
+  border: 1px solid #ccc;
+  font-size: 0.8em;
+  display: inline-block;
+  border-radius: 4px; }
+  .segmented-control .segmented-control__option {
+    display: inline-block;
+    float: right; }
+  .segmented-control .segmented-control__option__button {
+    display: block;
+    padding: 3px 8px;
+    margin: 0;
+    border-right: 1px solid #ccc;
+    border-left: 1px solid transparent;
+    position: relative;
+    z-index: 10;
+    cursor: pointer; }
+  .segmented-control :first-child .segmented-control__option__button {
+    border-right: 1px solid transparent;
+    border-radius: 0 4px 4px 0; }
+  .segmented-control :last-child .segmented-control__option__button {
+    border-radius: 4px 0 0 4px; }
+  .segmented-control input {
+    position: absolute;
+    visibility: hidden; }
+  .segmented-control input:checked + .segmented-control__option__button {
+    background: #007fd0;
+    color: #fff;
+    margin: -1px;
+    border: 1px solid #007fd0;
+    z-index: 15; }
+    .segmented-control input:checked + .segmented-control__option__button i {
+      color: #fff; }
+
+.select-control {
+  font-size: 0.8em; }
+  .select-control .select-control__option {
+    display: block;
+    margin: 0 0 5px 0;
+    padding: 0; }
+  .select-control .select-control__option__button {
+    display: block;
+    padding: 3px 8px;
+    margin: 5px 0 0 10px;
+    background: #fafafa;
+    cursor: pointer;
+    border-radius: 4px; }
+    .select-control .select-control__option__button.icon:before {
+      color: rgba(0, 0, 0, 0.4); }
+  .select-control input {
+    position: absolute;
+    visibility: hidden; }
+  .select-control input:checked + .select-control__option__button {
+    background: #ccc; }
+    .select-control input:checked + .select-control__option__button.icon:before {
+      color: rgba(0, 0, 0, 0.6); }
 
 section.form {
   border: 1px solid #dfdfdf;
@@ -2665,8 +2722,27 @@ section.form {
       color: #007fd0;
       font-size: 1.1em;
       border-bottom: 1px dotted #ccc; }
+      @media only screen and (min-width: 768px) {
+        section.form .form__section h2 {
+          border: 0;
+          float: right;
+          margin: 0;
+          padding: 0;
+          width: 20%;
+          text-align: left; } }
     section.form .form__section:last-child {
       border-bottom: 0; }
+    @media only screen and (min-width: 768px) {
+      section.form .form__section {
+        padding: 20px 12px; } }
+  @media only screen and (min-width: 768px) {
+    section.form .form__section__container {
+      float: right;
+      margin: 0 3% 0 0;
+      padding: 0 20px 0 0;
+      border-right: 1px dotted #ccc;
+      width: 74%;
+      box-sizing: border-box; } }
   section.form .form__row {
     border-bottom: 1px solid #dfdfdf;
     padding: 12px 8px; }
@@ -2733,85 +2809,6 @@ section.form {
     .form__submit .button i {
       font-size: 18px;
       margin-left: 8px; }
-
-.segmented-control {
-  margin: 5px 0 0 0;
-  border: 1px solid #ccc;
-  font-size: 0.8em;
-  display: inline-block;
-  border-radius: 4px; }
-  .segmented-control .segmented-control__block {
-    display: inline-block; }
-  .segmented-control .segmented-control__button {
-    display: block;
-    padding: 3px 8px;
-    margin: 0;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid transparent;
-    position: relative;
-    z-index: 10;
-    cursor: pointer; }
-    .segmented-control .segmented-control__button i {
-      margin: 0 6px 0 0;
-      float: none; }
-  .segmented-control :first-child .segmented-control__button {
-    border-right: 1px solid transparent;
-    border-radius: 0 4px 4px 0; }
-  .segmented-control :last-child .segmented-control__button {
-    border-radius: 4px 0 0 4px; }
-  .segmented-control input {
-    position: absolute;
-    visibility: hidden; }
-  .segmented-control input:checked + .segmented-control__button {
-    background: #007fd0;
-    color: #fff;
-    margin: -1px;
-    border: 1px solid #007fd0;
-    z-index: 15; }
-    .segmented-control input:checked + .segmented-control__button i {
-      color: #fff; }
-
-.select-control {
-  font-size: 0.8em; }
-  .select-control .select-control__block {
-    display: block;
-    margin: 0 0 5px 0;
-    padding: 0; }
-  .select-control .select-control__button {
-    display: block;
-    padding: 3px 8px;
-    margin: 5px 0 0 10px;
-    background: #fafafa;
-    cursor: pointer;
-    border-radius: 4px; }
-    .select-control .select-control__button i {
-      color: rgba(0, 0, 0, 0.4);
-      margin: 0 0 0 4px; }
-  .select-control input {
-    position: absolute;
-    visibility: hidden; }
-  .select-control input:checked + .select-control__button {
-    background: #ccc; }
-    .select-control input:checked + .select-control__button i {
-      color: rgba(0, 0, 0, 0.6); }
-
-@media only screen and (min-width: 768px) {
-  section.form .form__section {
-    padding: 20px 12px; }
-    section.form .form__section h2 {
-      border: 0;
-      float: right;
-      margin: 0;
-      padding: 0;
-      width: 20%;
-      text-align: left; }
-  section.form .form__section__container {
-    float: right;
-    margin: 0 3% 0 0;
-    padding: 0 20px 0 0;
-    border-right: 1px dotted #ccc;
-    width: 74%;
-    box-sizing: border-box; } }
 
 .modal {
   display: none;

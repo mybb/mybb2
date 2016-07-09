@@ -20,22 +20,25 @@ select {
 	max-width: 100%;
 	@include border-radius(4px);
 	@include box-sizing(border-box);
+
+	&[multiple="multiple"] {
+		width: 100%;
+		height: 200px;
+	}
 }
 
-select[multiple="multiple"] {
-	width: 100%;
-	height: 200px;
-}
+input {
+	
+	&.short {
+		width: 50px;
+		font: 12px $font-stack;
+	}
 
-input.short {
-	width: 50px;
-	font: 12px $font-stack;
-}
-
-input.small {
-	width: 50px;
-	margin-#{$left}: 6px;
-	margin-#{$right}: 6px;
+	&.small {
+		width: 50px;
+		margin-#{$left}: 6px;
+		margin-#{$right}: 6px;
+	}
 }
 
 textarea {
@@ -46,6 +49,92 @@ textarea {
 	outline: 0;
 	@include border-radius(4px);
 	@include box-sizing(border-box);
+}
+
+.segmented-control {
+	margin: side-values(5px 0 0 0);
+	border: 1px solid $border-2;
+	font-size: 0.8em;
+	display: inline-block;
+	@include border-radius(4px);
+
+	.segmented-control__option {
+		display: inline-block;
+		float: $left;
+	}
+
+	.segmented-control__option__button {
+		display: block;
+		padding: 3px 8px;
+		margin: 0;
+		border-#{$left}: 1px solid $border-2;
+		border-#{$right}: 1px solid transparent;
+		position: relative;
+		z-index: 10;
+		cursor: pointer;
+	}
+
+	:first-child .segmented-control__option__button {
+		border-#{$left}: 1px solid transparent;
+		@include border-radius(corner-values(4px 0 0 4px));
+	}
+
+	:last-child .segmented-control__option__button {
+		@include border-radius(corner-values(0 4px 4px 0));
+	}
+
+	input {
+		position: absolute;
+		visibility: hidden;
+	}
+
+	input:checked + .segmented-control__option__button {
+		background: $primary-color;
+		color: $invert-font-color;
+		margin: -1px;
+		border: 1px solid $primary-color;
+		z-index: 15;
+
+		i {
+			color: $invert-font-color;
+		}
+	}
+}
+
+.select-control {
+	font-size: 0.8em;
+
+	.select-control__option {
+		display: block;
+		margin: side-values(0 0 5px 0);
+		padding: 0;
+	}
+
+	.select-control__option__button {
+		display: block;
+		padding: 3px 8px;
+		margin: side-values(5px 10px 0 0);
+		background: $background-1;
+		cursor: pointer;
+		@include border-radius(4px);
+
+		&.icon:before {
+			@include black-transparency(0.4);
+		}
+	}
+
+	input {
+		position: absolute;
+		visibility: hidden;
+	}
+
+	input:checked + .select-control__option__button {
+		background: $background-4;
+
+		&.icon:before {
+			@include black-transparency(0.6);
+		}
+	}
 }
 
 section.form {
@@ -69,10 +158,35 @@ section.form {
 			color: $primary-color;
 			font-size: 1.1em;
 			border-bottom: 1px dotted $border-2;
+
+			@include bp-medium {
+				border: 0;
+				float: $left;
+				margin: 0;
+				padding: 0;
+				width: 20%;
+				text-align: $right;
+			}
 		}
 
 		&:last-child {
 			border-bottom: 0;
+		}
+
+		@include bp-medium {
+			padding: 20px 12px;
+		}
+	}
+
+	.form__section__container {
+
+		@include bp-medium {
+			float: $left;
+			margin: side-values(0 0 0 3%);
+			padding: side-values(0 0 0 20px);
+			border-#{$left}: 1px dotted $border-2;
+			width: 74%;
+			@include box-sizing(border-box);
 		}
 	}
 
@@ -184,125 +298,4 @@ section.form {
 			margin-#{$right}: 8px;
 		}
 	}
-}
-
-.segmented-control {
-	margin: side-values(5px 0 0 0);
-	border: 1px solid $border-2;
-	font-size: 0.8em;
-	display: inline-block;
-	@include border-radius(4px);
-
-	.segmented-control__block {
-		display: inline-block;
-	}
-
-	.segmented-control__button {
-		display: block;
-		padding: 3px 8px;
-		margin: 0;
-		border-#{$left}: 1px solid $border-2;
-		border-#{$right}: 1px solid transparent;
-		position: relative;
-		z-index: 10;
-		cursor: pointer;
-
-		i {
-			margin: 0 6px 0 0;
-			float: none;
-		}
-	}
-
-	:first-child .segmented-control__button {
-		border-#{$left}: 1px solid transparent;
-		@include border-radius(corner-values(4px 0 0 4px));
-	}
-
-	:last-child .segmented-control__button {
-		@include border-radius(corner-values(0 4px 4px 0));
-	}
-
-	input {
-		position: absolute;
-		visibility: hidden;
-	}
-
-	input:checked + .segmented-control__button {
-		background: $primary-color;
-		color: $invert-font-color;
-		margin: -1px;
-		border: 1px solid $primary-color;
-		z-index: 15;
-
-		i {
-			color: $invert-font-color;
-		}
-	}
-}
-
-.select-control {
-
-	font-size: 0.8em;
-
-	.select-control__block {
-		display: block;
-		margin: side-values(0 0 5px 0);
-		padding: 0;
-	}
-
-	.select-control__button {
-		display: block;
-		padding: 3px 8px;
-		margin: side-values(5px 10px 0 0);
-		background: $background-1;
-		cursor: pointer;
-		@include border-radius(4px);
-
-		i {
-			@include black-transparency(0.4);
-			margin: side-values(0 4px 0 0);
-		}
-	}
-
-	input {
-		position: absolute;
-		visibility: hidden;
-	}
-
-	input:checked + .select-control__button {
-		background: $background-4;
-
-		i {
-			@include black-transparency(0.6);
-		}
-	}
-}
-
-@media only screen and (min-width: 768px) {
-
-	section.form {
-
-		.form__section {
-			padding: 20px 12px;
-
-			h2 {
-				border: 0;
-				float: $left;
-				margin: 0;
-				padding: 0;
-				width: 20%;
-				text-align: $right;
-			}
-		}
-
-		.form__section__container {
-			float: $left;
-			margin: side-values(0 0 0 3%);
-			padding: side-values(0 0 0 20px);
-			border-#{$left}: 1px dotted $border-2;
-			width: 74%;
-			@include box-sizing(border-box);
-		}
-	}
-
 }
