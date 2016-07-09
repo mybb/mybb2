@@ -2505,47 +2505,6 @@ nav.section-menu ul {
 img.avatar {
   border-radius: 4px; }
 
-.button, a.button {
-  color: #fff;
-  background: #007fd0;
-  border: 1px solid #007fd0;
-  padding: 4px 10px;
-  margin: 5px;
-  font-size: 0.9em;
-  text-decoration: none;
-  display: inline-block;
-  line-height: 26px;
-  border-radius: 4px; }
-  .button:hover, a.button:hover {
-    background: #ff7500;
-    border-color: #ff7500; }
-  .button.button--secondary, a.button.button--secondary {
-    border: 1px solid #dfdfdf;
-    background: #fff;
-    color: #007fd0; }
-    .button.button--secondary:hover, a.button.button--secondary:hover {
-      color: #ff7500; }
-    .button.button--secondary.button--danger, a.button.button--secondary.button--danger {
-      background: none;
-      color: #eb5257; }
-      .button.button--secondary.button--danger:hover, a.button.button--secondary.button--danger:hover {
-        background: none;
-        border-color: #eb5257;
-        color: #ff7500; }
-  .button.button--danger, a.button.button--danger {
-    border-color: #eb5257;
-    color: #fff;
-    background: #eb5257; }
-    .button.button--danger:hover, a.button.button--danger:hover {
-      background: #ff7500;
-      border-color: #ff7500;
-      color: #fff; }
-  .button i, a.button i {
-    margin-left: 5px;
-    font-size: 14px; }
-  .button:hover, .button:active, a.button:hover, a.button:active {
-    outline: none; }
-
 dl.stats {
   line-height: 1.6;
   margin: 0;

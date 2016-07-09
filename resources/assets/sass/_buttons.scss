@@ -1,0 +1,72 @@
+.button,
+a.button {
+	color: $invert-font-color;
+	background: $primary-color;
+	border: 1px solid $primary-color;
+	padding: 4px 10px;
+	margin: 5px;
+	font-size: 0.9em;
+	text-decoration: none;
+	display: inline-block;
+	line-height: 26px;
+	@include border-radius(4px);
+
+	&:hover {
+		background: $secondary-color;
+		border-color: $secondary-color;
+		cursor: pointer;
+	}
+
+	&.button--secondary {
+		border: 1px solid $border-1;
+		background: $background-default;
+		color: $primary-color;
+
+		&:hover {
+			color: $secondary-color;
+		}
+
+        &.button--danger {
+            background: none;
+            color: $danger-color;
+
+            &:hover {
+                background: none;
+                border-color: $danger-color;
+                color: $secondary-color;
+            }
+        }
+	}
+
+	&.button--good {
+		border-color: $success-color;
+		color: $invert-font-color;
+		background: $success-color;
+	}
+
+    &.button--danger {
+        border-color: $danger-color;
+        color: $invert-font-color;
+        background: $danger-color;
+
+        &:hover {
+            background: $secondary-color;
+            border-color: $secondary-color;
+            color: $invert-font-color;
+        }
+    }
+
+	// i {
+	// 	margin-#{$right}: 5px;
+	// 	font-size: 14px;
+	// }
+
+	&:hover, &:active {
+		outline: none;
+	}
+
+	&.icon:before {
+		margin-right: 10px;
+		position: relative;
+	}
+}

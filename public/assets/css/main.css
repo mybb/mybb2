@@ -2254,6 +2254,9 @@
     padding: 0;
     margin: 5px 0; }
 
+/*!
+*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*/
 h1.title {
   float: left;
   margin: 10px 2% 5px 0; }
@@ -2285,7 +2288,6 @@ h1.title {
     float: left;
     text-align: center;
     background: #fafafa;
-    -ms-box-sizing: border-box;
     box-sizing: border-box; }
   .menu-bar ul li .unread-count {
     background: #eb5257;
@@ -2523,7 +2525,6 @@ h1.title {
   background: #fff;
   margin: 0 0 8px 0;
   width: auto;
-  -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
 #search .search__field {
@@ -2539,7 +2540,6 @@ h1.title {
   text-align: right;
   float: right;
   padding-right: 8px;
-  -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
 #search button.search__submit,
@@ -2935,47 +2935,6 @@ nav.section-menu ul {
 img.avatar {
   border-radius: 4px; }
 
-.button, a.button {
-  color: #fff;
-  background: #007fd0;
-  border: 1px solid #007fd0;
-  padding: 4px 10px;
-  margin: 5px;
-  font-size: 0.9em;
-  text-decoration: none;
-  display: inline-block;
-  line-height: 26px;
-  border-radius: 4px; }
-  .button:hover, a.button:hover {
-    background: #ff7500;
-    border-color: #ff7500; }
-  .button.button--secondary, a.button.button--secondary {
-    border: 1px solid #dfdfdf;
-    background: #fff;
-    color: #007fd0; }
-    .button.button--secondary:hover, a.button.button--secondary:hover {
-      color: #ff7500; }
-    .button.button--secondary.button--danger, a.button.button--secondary.button--danger {
-      background: none;
-      color: #eb5257; }
-      .button.button--secondary.button--danger:hover, a.button.button--secondary.button--danger:hover {
-        background: none;
-        border-color: #eb5257;
-        color: #ff7500; }
-  .button.button--danger, a.button.button--danger {
-    border-color: #eb5257;
-    color: #fff;
-    background: #eb5257; }
-    .button.button--danger:hover, a.button.button--danger:hover {
-      background: #ff7500;
-      border-color: #ff7500;
-      color: #fff; }
-  .button i, a.button i {
-    margin-right: 5px;
-    font-size: 14px; }
-  .button:hover, .button:active, a.button:hover, a.button:active {
-    outline: none; }
-
 dl.stats {
   line-height: 1.6;
   margin: 0;
@@ -3288,6 +3247,64 @@ section.form {
     border-left: 1px dotted #ccc;
     width: 74%;
     box-sizing: border-box; } }
+
+.button,
+a.button {
+  color: #fff;
+  background: #007fd0;
+  border: 1px solid #007fd0;
+  padding: 4px 10px;
+  margin: 5px;
+  font-size: 0.9em;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 26px;
+  border-radius: 4px; }
+  .button:hover,
+  a.button:hover {
+    background: #ff7500;
+    border-color: #ff7500;
+    cursor: pointer; }
+  .button.button--secondary,
+  a.button.button--secondary {
+    border: 1px solid #dfdfdf;
+    background: #fff;
+    color: #007fd0; }
+    .button.button--secondary:hover,
+    a.button.button--secondary:hover {
+      color: #ff7500; }
+    .button.button--secondary.button--danger,
+    a.button.button--secondary.button--danger {
+      background: none;
+      color: #eb5257; }
+      .button.button--secondary.button--danger:hover,
+      a.button.button--secondary.button--danger:hover {
+        background: none;
+        border-color: #eb5257;
+        color: #ff7500; }
+  .button.button--good,
+  a.button.button--good {
+    border-color: #68c000;
+    color: #fff;
+    background: #68c000; }
+  .button.button--danger,
+  a.button.button--danger {
+    border-color: #eb5257;
+    color: #fff;
+    background: #eb5257; }
+    .button.button--danger:hover,
+    a.button.button--danger:hover {
+      background: #ff7500;
+      border-color: #ff7500;
+      color: #fff; }
+  .button:hover, .button:active,
+  a.button:hover,
+  a.button:active {
+    outline: none; }
+  .button.icon:before,
+  a.button.icon:before {
+    margin-right: 10px;
+    position: relative; }
 
 /*!
 *   MyBB 2.0 - http://mybb.com - @mybb - MIT license
@@ -4828,22 +4845,5 @@ img.jcrop-preview {
   .table thead {
     background: #007fd0;
     color: #fff; }
-
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
-.hidden {
-  display: none !important;
-  visibility: hidden; }
-
-.visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px; }
 
 /*# sourceMappingURL=main.css.map */

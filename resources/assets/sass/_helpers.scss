@@ -1,0 +1,28 @@
+.icon {
+	text-decoration: none;
+
+	&:before {
+		display: inline-block;
+		font-family: FontAwesome;
+		font-size: 1.25em;
+		text-decoration: none;
+		font-style: normal;
+		font-weight: normal;
+		line-height: 1;
+		-webkit-font-smoothing:antialiased;
+		-moz-osx-font-smoothing:grayscale;
+	}
+
+	&.icon--fw:before {
+		width: 1.28571429em;
+		text-align: center;
+	}
+}
+
+.hidden {
+  @include hidden;
+}
+
+.visuallyhidden {
+  @include visuallyhidden;
+}
