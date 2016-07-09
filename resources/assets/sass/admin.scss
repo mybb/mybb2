@@ -61,39 +61,8 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 // (see https://github.com/tysonmatanich/directional-scss for how to use)
 @import 'directional';
 
-
-// Our mixins
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-	 -moz-border-radius: $radius;
-	  -ms-border-radius: $radius;
-		  border-radius: $radius;
-}
-
-@mixin box-sizing($sizing) {
-  -webkit-box-sizing: $sizing;
-	 -moz-box-sizing: $sizing;
-	  -ms-box-sizing: $sizing;
-		  box-sizing: $sizing;
-}
-
-@mixin black-transparency($transparency) {
-	color: rgba(0,0,0,$transparency);
-}
-
-@mixin white-transparency($transparency) {
-	color: rgba(255,255,255,$transparency);
-}
-
-@mixin transform($transform) {
-	-webkit-transform: $transform;
-	-moz-transform: $transform;
-	-ms-transform: $transform;
-	-o-transform: $transform;
-}
-
-
 // Import our sub files
+@import "mixins";
 @import 'base';
 @import 'forms';
 @import 'modals';
@@ -103,7 +72,6 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 @import 'admin/_main';
 @import 'admin/_header_footer';
 @import 'admin/_menu';
-@import "mixins";
 
 
 // A few helper classes

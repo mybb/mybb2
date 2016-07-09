@@ -2,6 +2,24 @@
 *   MyBB 2.0 - http://mybb.com - @mybb - MIT license
 */
 
+@mixin bp-large {
+  @media only screen and (min-width: 1140px) {
+    @content;
+  }
+}
+
+@mixin bp-medium {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin bp-small {
+  @media only screen and (min-width: 480px) {
+    @content;
+  }
+}
+
 @mixin border-radius($radius) {
   border-radius: $radius;
 }

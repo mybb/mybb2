@@ -2721,9 +2721,6 @@ footer .footer__copyright {
     background-image: url("../images/logo2@2x.png");
     background-size: 188px 55px; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 html, button, input, select, textarea {
   color: #222;
   word-wrap: break-word; }
@@ -3065,9 +3062,6 @@ dl.stats {
     max-width: 1250px;
     margin: 0 auto; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 input[type="text"],
 input[type="url"],
 input[type="number"],
@@ -3330,9 +3324,6 @@ a.button {
   a.button:active {
     outline: none; }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 .forum-list .forum {
   padding: 12px;
   border-bottom: 1px solid #ccc;
@@ -3927,9 +3918,6 @@ section.container .forum-list {
     .post .post__toggle {
       margin-left: 5px; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 #add-poll .poll-option {
   padding-left: 20px; }
 
@@ -4018,9 +4006,6 @@ section.container .forum-list {
     width: 8%;
     float: right; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 .user-list {
   padding: 12px 12px 0 12px; }
   .user-list:after {
@@ -4211,9 +4196,6 @@ ul.notifications {
     color: #666;
     display: block; }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 .conversation-list .conversation {
   padding: 10px 64px 10px 12px;
   border-bottom: 1px solid #dfdfdf;

@@ -2598,9 +2598,6 @@ dl.stats {
     max-width: 1250px;
     margin: 0 auto; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 input[type="text"],
 input[type="url"],
 input[type="number"],
@@ -3488,9 +3485,6 @@ img.jcrop-preview {
   .page-body {
     margin-left: 230px; } }
 
-/*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
-*/
 .hidden {
   display: none !important;
   visibility: hidden; }
