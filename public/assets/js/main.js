@@ -1123,3 +1123,5 @@ function closeMenu(e) {
     var moderation = new window.MyBB.Moderation();
 
 })(jQuery, window);
+
+//# sourceMappingURL=main.js.map
