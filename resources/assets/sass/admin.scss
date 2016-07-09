@@ -19,7 +19,6 @@ $alt-font-color-4: #444;
 // Border colors
 $border-1: #dfdfdf;
 $border-2: #ccc;
-$border-3: #e3e3e3;
 $dark-border-1: #222;
 $primary-color-border: #0a539b;
 
@@ -45,7 +44,7 @@ $status-pending-border: #f2aaab;
 
 
 // Success / danger colors
-$success-color: #68c000;
+$success-color: #018303;
 $danger-color: #eb5257;
 
 
@@ -90,38 +89,19 @@ $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is 
 
 
 // Import our sub files
-@import 'header_footer';
 @import 'base';
 @import 'forms';
-@import 'forums';
-@import 'topics';
-@import 'polls';
-@import 'users';
-@import 'account';
-@import 'conversations';
-@import 'moderation';
 @import 'modals';
 @import 'jcrop';
 @import 'spinner';
 @import 'plugins';
-@import 'tables';
+@import 'admin/_main';
+@import 'admin/_header_footer';
+@import 'admin/_menu';
+@import "mixins";
 
 
 // A few helper classes
-.clearfix:before,
-.clearfix:after {
-	content: " ";
-	display: table;
-}
-
-.clearfix:after {
-	clear: both;
-}
-
-.clearfix {
-	*zoom: 1;
-}
-
 .hidden {
 	display: none !important;
 	visibility: hidden;

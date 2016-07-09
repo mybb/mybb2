@@ -1,3 +1,5 @@
+@import "mixins";
+
 .conversation-list {
 
 	.conversation {
@@ -57,7 +59,7 @@
 	// border: 1px solid $border-1;
 	// background: $background-1;
 	line-height: 1.4;
-	@extend .clearfix;
+	@include clearfix();
 
 	h3 {
 		margin-bottom: 0;

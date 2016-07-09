@@ -1,0 +1,34 @@
+/*!
+*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*/
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+}
+
+@mixin box-sizing($sizing) {
+  box-sizing: $sizing;
+}
+
+@mixin black-transparency($transparency) {
+  color: rgba(0,0,0,$transparency);
+}
+
+@mixin white-transparency($transparency) {
+  color: rgba(255,255,255,$transparency);
+}
+
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
