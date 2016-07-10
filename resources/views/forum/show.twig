@@ -15,7 +15,7 @@
 
 			{% if forum.children.count > 0 %}
 				<section class="container">
-					<h2 class="visuallyhidden">{{ trans('forum.childforums') }}</h2>
+					<h2 class="visually-hidden">{{ trans('forum.childforums') }}</h2>
 					 <div class="forum-list forum-list--full-width">
 						{% for forum in forum.children.toTree %}
 						   <div class="forum">
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 			<section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">
-				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
+				<h2 class="visually-hidden">{{ trans('forum.topics') }}</h2>
 				<div class="topic-list__sort-topics">
 					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
 						{{ trans('forum.topictitle') }}
