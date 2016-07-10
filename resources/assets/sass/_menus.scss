@@ -1,44 +1,41 @@
 .menu-bar {
 
-    ul {
+    .menu-bar__links {
         margin: 0;
         padding: 0;
         list-style: none;
+    }
 
-        li {
+    .menu-bar__links__item__link {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px 0;
+        width: 48%;
+        margin-#{$left}: 1%;
+        margin-#{$right}: 1%;
+        float: $left;
+        text-align: center;
+        background: $background-1;
+        @include box-sizing(border-box);
 
-            a {
-                display: block;
-                margin-bottom: 10px;
-                padding: 8px 0;
-                width: 48%;
-                margin-#{$left}: 1%;
-                margin-#{$right}: 1%;
-                float: $left;
-                text-align: center;
-                background: $background-1;
-                @include box-sizing(border-box);
-
-                @include bp-medium {
-                    width: auto;
-                    background: none;
-                    border-#{$left}: 1px solid $border-1;
-                    margin: 0;
-                    padding: 2px 12px;
-                }
-            }
-
-            .unread-count {
-                background: $unread-count;
-                color: $invert-font-color;
-                padding: side-values(2px 5px 1px 4px);
-                margin: side-values(0 0 0 2px);
-                font-weight: normal;
-                font-size: 0.8em;
-                text-decoration: none;
-                @include border-radius(2px);
-            }
+        @include bp-medium {
+            width: auto;
+            background: none;
+            border-#{$left}: 1px solid $border-1;
+            margin: 0;
+            padding: 2px 12px;
         }
+    }
+
+    .unread-count {
+        background: $unread-count;
+        color: $invert-font-color;
+        padding: side-values(2px 5px 1px 4px);
+        margin: side-values(0 0 0 2px);
+        font-weight: normal;
+        font-size: 0.8em;
+        text-decoration: none;
+        @include border-radius(2px);
     }
 }
 
