@@ -8,6 +8,21 @@
 		margin: side-values(0 0 12px 0);
 		@include border-radius(4px);
 
+		@include bp-medium {
+			float: $left;
+			width: 49.5%;
+			margin: side-values(0 0 12px 0);
+			@include box-sizing(border-box);
+
+			&:nth-child(odd) {
+				margin-#{$right}: 0.5%;
+			}
+
+			&:nth-child(even) {
+				margin-#{$left}: 0.5%;
+			}
+		}
+
 		.avatar-profile-link {
 			float: $left;
 			width: 80px;
@@ -97,7 +112,6 @@
 	}
 }
 
-
 .team-badge {
 	padding: 3px 8px;
 	border: 1px solid $border-1;
@@ -162,23 +176,4 @@
 			border-bottom: none;
 		}
 	}
-}
-
-@media only screen and (min-width: 768px) {
-	
-	.user-list .user-list__user {
-		float: $left;
-		width: 49.5%;
-		margin: side-values(0 0 12px 0);
-		@include box-sizing(border-box);
-
-		&:nth-child(odd) {
-			margin-#{$right}: 0.5%;
-		}
-
-		&:nth-child(even) {
-			margin-#{$left}: 0.5%;
-		}
-	}
-
 }
