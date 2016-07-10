@@ -2894,6 +2894,19 @@ a.button {
   a.button:active {
     outline: none; }
 
+.table {
+  width: 100%; }
+  .table.table--bordered {
+    border-radius: 5px;
+    border-collapse: separate; }
+    .table.table--bordered td {
+      border-bottom: 1px solid #dfdfdf; }
+  .table td, .table th {
+    padding: 10px; }
+  .table thead {
+    background: #007fd0;
+    color: #fff; }
+
 .modal {
   display: none;
   width: 580px;
@@ -3358,48 +3371,6 @@ img.jcrop-preview {
     background-color: #eee;
     color: #666;
     outline: transparent; }
-
-/*
- * Dropit v1.1.0
- * http://dev7studios.com/dropit
- *
- * Copyright 2012, Dev7studios
- * Free to use and abuse under the MIT license.
- * http://www.opensource.org/licenses/mit-license.php
- */
-/* These styles assume you are using ul and li */
-.dropit {
-  list-style: none;
-  padding: 0;
-  margin: 0; }
-  .dropit .dropit-trigger {
-    position: relative; }
-  .dropit .dropit-submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    /* dropdown left or right */
-    z-index: 1000;
-    display: none;
-    min-width: 150px;
-    list-style: none;
-    padding: 0;
-    margin: 0; }
-  .dropit .dropit-open .dropit-submenu {
-    display: block; }
-
-.table {
-  width: 100%; }
-  .table.table--bordered {
-    border-radius: 5px;
-    border-collapse: separate; }
-    .table.table--bordered td {
-      border-bottom: 1px solid #dfdfdf; }
-  .table td, .table th {
-    padding: 10px; }
-  .table thead {
-    background: #007fd0;
-    color: #fff; }
 
 .admin-main-nav {
   width: 13%;

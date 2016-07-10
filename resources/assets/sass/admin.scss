@@ -24,11 +24,14 @@
 @import "form_fields";
 @import "buttons";
 
+@import "tables";
+
 @import "modals";
 @import "jcrop";
 @import "spinner";
-@import "plugins";
-@import "tables";
+@import "tooltips";
+@import "stepper";
+@import "passwords";
 
 @import 'admin/_main';
 @import 'admin/_header_footer';
