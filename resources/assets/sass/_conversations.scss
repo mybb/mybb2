@@ -1,117 +1,117 @@
 .conversation-list {
 
-	.conversation {
-		padding: side-values(10px 12px 10px 64px);
-		border-bottom: 1px solid $border-1;
-		line-height: 1.4;
-		position: relative;
+    .conversation {
+        padding: side-values(10px 12px 10px 64px);
+        border-bottom: 1px solid $border-1;
+        line-height: 1.4;
+        position: relative;
 
-		.avatar-profile-link {
-			width: 44px;
-			height: 44px;
-			float: $left;
-			margin: side-values(10px 12px 0 10px);
-			position: absolute;
-			top: 0;
-			#{$left}: 0;
+        .avatar-profile-link {
+            width: 44px;
+            height: 44px;
+            float: $left;
+            margin: side-values(10px 12px 0 10px);
+            position: absolute;
+            top: 0;
+            #{$left}: 0;
 
-			img.avatar {
-				width: 44px;
-				height: 44px;
-			}
-		}
+            img.avatar {
+                width: 44px;
+                height: 44px;
+            }
+        }
 
-		.conversation__title--unread {
-			font-weight: bold;
-		}
+        .conversation__title--unread {
+            font-weight: bold;
+        }
 
-		.conversation__latest {
-			font-size: 0.8em;
-			color: $alt-font-color-2;
-			margin: 0;
-			display: inline-block;
+        .conversation__latest {
+            font-size: 0.8em;
+            color: $alt-font-color-2;
+            margin: 0;
+            display: inline-block;
 
-			time {
-				color: $alt-font-color-1;
-			}
-		}
+            time {
+                color: $alt-font-color-1;
+            }
+        }
 
-		.conversation__unread {
-			background: $unread-count;
-			color: $invert-font-color;
-			padding: side-values(2px 5px 1px 4px);
-			margin: side-values(0 0 0 4px);
-			font-weight: normal;
-			font-size: 0.8em;
-			text-decoration: none;
-			@include border-radius(2px);
-		}
+        .conversation__unread {
+            background: $unread-count;
+            color: $invert-font-color;
+            padding: side-values(2px 5px 1px 4px);
+            margin: side-values(0 0 0 4px);
+            font-weight: normal;
+            font-size: 0.8em;
+            text-decoration: none;
+            @include border-radius(2px);
+        }
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
 }
 
 .conversation-participants {
-	// border: 1px solid $border-1;
-	// background: $background-1;
-	line-height: 1.4;
-	@include clearfix();
+    // border: 1px solid $border-1;
+    // background: $background-1;
+    line-height: 1.4;
+    @include clearfix();
 
-	h3 {
-		margin-bottom: 0;
-	}
+    h3 {
+        margin-bottom: 0;
+    }
 
-	.participant {
-		display: block;
-		padding: 10px;
-		border-bottom: 1px solid $border-3;
+    .participant {
+        display: block;
+        padding: 10px;
+        border-bottom: 1px solid $border-3;
 
-		.avatar-profile-link {
-			width: 36px;
-			height: 36px;
-			float: left;
-			margin: side-values(0px 10px 0 0);
+        .avatar-profile-link {
+            width: 36px;
+            height: 36px;
+            float: left;
+            margin: side-values(0px 10px 0 0);
 
-			img.avatar {
-				width: 36px;
-				height: 36px;
-			}
-		}
+            img.avatar {
+                width: 36px;
+                height: 36px;
+            }
+        }
 
-		.participant__username {
-			font-size: 0.9em;
-		}
+        .participant__username {
+            font-size: 0.9em;
+        }
 
-		.participant__last-read {
-			display: block;
-			font-size: 0.7em;
-			color: $alt-font-color-1;
-		}
+        .participant__last-read {
+            display: block;
+            font-size: 0.7em;
+            color: $alt-font-color-1;
+        }
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
 
-	&.conversation-participants--compose {
-		margin-bottom: 20px;
-		border: 1px solid $border-2;
-		padding: 10px;
-		@include border-radius(4px);
+    &.conversation-participants--compose {
+        margin-bottom: 20px;
+        border: 1px solid $border-2;
+        padding: 10px;
+        @include border-radius(4px);
 
-		h3 {
-			font-size: 1em;
-			font-weight: normal;
-			margin: side-values(0 0 6px 0);
-			color: $alt-font-color-1;
-		}
+        h3 {
+            font-size: 1em;
+            font-weight: normal;
+            margin: side-values(0 0 6px 0);
+            color: $alt-font-color-1;
+        }
 
-		input {
-			border: none;
-			background: transparent;
-			padding: 0;
-		}
-	}
+        input {
+            border: none;
+            background: transparent;
+            padding: 0;
+        }
+    }
 }

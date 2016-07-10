@@ -1,162 +1,162 @@
 section.form {
-	border: 1px solid $border-1;
-	margin-bottom: 10px;
-	@include border-radius(4px);
+    border: 1px solid $border-1;
+    margin-bottom: 10px;
+    @include border-radius(4px);
 
-	.heading--major {
-		margin: -1px;
-		@include border-radius(corner-values(4px 4px 0 0));
-	}
+    .heading--major {
+        margin: -1px;
+        @include border-radius(corner-values(4px 4px 0 0));
+    }
 
-	.form__section {
-		@include clearfix();
-		padding: 16px 12px;
-		border-bottom: 2px solid $border-1;
+    .form__section {
+        @include clearfix();
+        padding: 16px 12px;
+        border-bottom: 2px solid $border-1;
 
-		h2 {
-			margin: side-values(0 0 12px 0);
-			padding: side-values(0 8px 8px 8px);
-			color: $primary-color;
-			font-size: 1.1em;
-			border-bottom: 1px dotted $border-2;
+        h2 {
+            margin: side-values(0 0 12px 0);
+            padding: side-values(0 8px 8px 8px);
+            color: $primary-color;
+            font-size: 1.1em;
+            border-bottom: 1px dotted $border-2;
 
-			@include bp-medium {
-				border: 0;
-				float: $left;
-				margin: 0;
-				padding: 0;
-				width: 20%;
-				text-align: $right;
-			}
-		}
+            @include bp-medium {
+                border: 0;
+                float: $left;
+                margin: 0;
+                padding: 0;
+                width: 20%;
+                text-align: $right;
+            }
+        }
 
-		&:last-child {
-			border-bottom: 0;
-		}
+        &:last-child {
+            border-bottom: 0;
+        }
 
-		@include bp-medium {
-			padding: 20px 12px;
-		}
-	}
+        @include bp-medium {
+            padding: 20px 12px;
+        }
+    }
 
-	.form__section__container {
+    .form__section__container {
 
-		@include bp-medium {
-			float: $left;
-			margin: side-values(0 0 0 3%);
-			padding: side-values(0 0 0 20px);
-			border-#{$left}: 1px dotted $border-2;
-			width: 74%;
-			@include box-sizing(border-box);
-		}
-	}
+        @include bp-medium {
+            float: $left;
+            margin: side-values(0 0 0 3%);
+            padding: side-values(0 0 0 20px);
+            border-#{$left}: 1px dotted $border-2;
+            width: 74%;
+            @include box-sizing(border-box);
+        }
+    }
 
-	.form__row {
-		border-bottom: 1px solid $border-1;
-		padding: 12px 8px;
+    .form__row {
+        border-bottom: 1px solid $border-1;
+        padding: 12px 8px;
 
-		h3 {
-			margin: side-values(0 0 5px 0);
-			padding: 0;
-			font-size: 1em;
-		}
+        h3 {
+            margin: side-values(0 0 5px 0);
+            padding: 0;
+            font-size: 1em;
+        }
 
-		h4 {
-			font-size: 0.9em;
-			font-weight: normal;
-			text-transform: uppercase;
-			color: $primary-color;
-			margin: 0;
-		}
+        h4 {
+            font-size: 0.9em;
+            font-weight: normal;
+            text-transform: uppercase;
+            color: $primary-color;
+            margin: 0;
+        }
 
-		&:first-child {
-			padding-top: 0;
-		}
+        &:first-child {
+            padding-top: 0;
+        }
 
-		&:last-child {
-			border-bottom: 0;
-			padding-bottom: 6px;
-		}
-	}
+        &:last-child {
+            border-bottom: 0;
+            padding-bottom: 6px;
+        }
+    }
 
-	p.form__checkbox {
-		font-size: 0.9em;
-		margin: 5px 0;
-		padding: side-values(0 0 0 30px);
+    p.form__checkbox {
+        font-size: 0.9em;
+        margin: 5px 0;
+        padding: side-values(0 0 0 30px);
 
-		input[type="checkbox"] {
-			float: $left;
-			margin: side-values(6px 0 0 -26px);
-		}
+        input[type="checkbox"] {
+            float: $left;
+            margin: side-values(6px 0 0 -26px);
+        }
 
-		i {
-			color: $alt-font-color-2;
-			padding-#{$right}: 5px;
-			width: 16px;
-			font-size: 14px;
-			text-align: center;
-			display: inline-block;
-		}
+        i {
+            color: $alt-font-color-2;
+            padding-#{$right}: 5px;
+            width: 16px;
+            font-size: 14px;
+            text-align: center;
+            display: inline-block;
+        }
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
-	p.form__description {
-		font-size: 0.8em;
-		line-height: 1.4;
-		color: $alt-font-color-1;
-		margin: side-values(-4px 0 4px 0);
-	}
+    p.form__description {
+        font-size: 0.8em;
+        line-height: 1.4;
+        color: $alt-font-color-1;
+        margin: side-values(-4px 0 4px 0);
+    }
 
-	.form__radio {
-		padding: side-values(0 0 0 30px);
-		margin-bottom: 20px;
+    .form__radio {
+        padding: side-values(0 0 0 30px);
+        margin-bottom: 20px;
 
-		input[type="radio"] {
-			float: $left;
-			margin: side-values(6px 0 0 -26px);
-		}
+        input[type="radio"] {
+            float: $left;
+            margin: side-values(6px 0 0 -26px);
+        }
 
-		p.form__radio__description {
-			@extend .form__description;
-		}
+        p.form__radio__description {
+            @extend .form__description;
+        }
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
-	p.form__data {
-		margin: 0;
-		font-size: 0.9em;
-	}
+    p.form__data {
+        margin: 0;
+        font-size: 0.9em;
+    }
 
-	label {
-		cursor: pointer;
-	}
+    label {
+        cursor: pointer;
+    }
 
-	.topic-title {
-		font-size: 1.3em;
-	}
+    .topic-title {
+        font-size: 1.3em;
+    }
 
-	.buttons {
-		margin: -5px;
-	}
+    .buttons {
+        margin: -5px;
+    }
 }
 
 .form__submit {
-	text-align: center;
-	padding: 10px 0;
+    text-align: center;
+    padding: 10px 0;
 
-	.button {
-		font-size: 1em;
-		padding: 6px 12px;
+    .button {
+        font-size: 1em;
+        padding: 6px 12px;
 
-		i {
-			font-size: 18px;
-			margin-#{$right}: 8px;
-		}
-	}
+        i {
+            font-size: 18px;
+            margin-#{$right}: 8px;
+        }
+    }
 }

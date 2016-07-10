@@ -2,97 +2,97 @@
 
 /* PowerTip Plugin */
 #powerTip {
-	cursor: default;
-	background-color: #333;
-	background-color: rgba(0, 0, 0, 0.8);
-	border-radius: 4px;
-	color: #fff;
-	display: none;
-	padding: 3px 9px;
-	position: absolute;
-	white-space: nowrap;
-	z-index: 2147483647;
-	font-size: 0.8em;
+    cursor: default;
+    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    color: #fff;
+    display: none;
+    padding: 3px 9px;
+    position: absolute;
+    white-space: nowrap;
+    z-index: 2147483647;
+    font-size: 0.8em;
 }
 #powerTip:before {
-	content: "";
-	position: absolute;
+    content: "";
+    position: absolute;
 }
 #powerTip.n:before, #powerTip.s:before {
-	border-#{$right}: 5px solid transparent;
-	border-#{$left}: 5px solid transparent;
-	#{$left}: 50%;
-	margin-#{$left}: -5px;
+    border-#{$right}: 5px solid transparent;
+    border-#{$left}: 5px solid transparent;
+    #{$left}: 50%;
+    margin-#{$left}: -5px;
 }
 #powerTip.e:before, #powerTip.w:before {
-	border-bottom: 5px solid transparent;
-	border-top: 5px solid transparent;
-	margin-top: -5px;
-	top: 50%;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+    margin-top: -5px;
+    top: 50%;
 }
 #powerTip.n:before {
-	border-top: 5px solid #333;
-	border-top: 5px solid rgba(0, 0, 0, 0.8);
-	bottom: -5px;
+    border-top: 5px solid #333;
+    border-top: 5px solid rgba(0, 0, 0, 0.8);
+    bottom: -5px;
 }
 #powerTip.e:before {
-	border-#{$right}: 5px solid #333;
-	border-#{$right}: 5px solid rgba(0, 0, 0, 0.8);
-	#{$left}: -5px;
+    border-#{$right}: 5px solid #333;
+    border-#{$right}: 5px solid rgba(0, 0, 0, 0.8);
+    #{$left}: -5px;
 }
 #powerTip.s:before {
-	border-bottom: 5px solid #333;
-	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
-	top: -5px;
+    border-bottom: 5px solid #333;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+    top: -5px;
 }
 #powerTip.w:before {
-	border-#{$left}: 5px solid #333;
-	border-#{$left}: 5px solid rgba(0, 0, 0, 0.8);
-	#{$right}: -5px;
+    border-#{$left}: 5px solid #333;
+    border-#{$left}: 5px solid rgba(0, 0, 0, 0.8);
+    #{$right}: -5px;
 }
 #powerTip.ne:before, #powerTip.se:before {
-	border-#{$right}: 5px solid transparent;
-	border-#{$left}: 0;
-	#{$left}: 10px;
+    border-#{$right}: 5px solid transparent;
+    border-#{$left}: 0;
+    #{$left}: 10px;
 }
 #powerTip.nw:before, #powerTip.sw:before {
-	border-#{$left}: 5px solid transparent;
-	border-#{$right}: 0;
-	#{$right}: 10px;
+    border-#{$left}: 5px solid transparent;
+    border-#{$right}: 0;
+    #{$right}: 10px;
 }
 #powerTip.ne:before, #powerTip.nw:before {
-	border-top: 5px solid #333;
-	border-top: 5px solid rgba(0, 0, 0, 0.8);
-	bottom: -5px;
+    border-top: 5px solid #333;
+    border-top: 5px solid rgba(0, 0, 0, 0.8);
+    bottom: -5px;
 }
 #powerTip.se:before, #powerTip.sw:before {
-	border-bottom: 5px solid #333;
-	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
-	top: -5px;
+    border-bottom: 5px solid #333;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+    top: -5px;
 }
 #powerTip.nw-alt:before, #powerTip.ne-alt:before,
 #powerTip.sw-alt:before, #powerTip.se-alt:before {
-	border-top: 5px solid #333;
-	border-top: 5px solid rgba(0, 0, 0, 0.8);
-	bottom: -5px;
-	border-#{$left}: 5px solid transparent;
-	border-#{$right}: 5px solid transparent;
-	#{$left}: 10px;
+    border-top: 5px solid #333;
+    border-top: 5px solid rgba(0, 0, 0, 0.8);
+    bottom: -5px;
+    border-#{$left}: 5px solid transparent;
+    border-#{$right}: 5px solid transparent;
+    #{$left}: 10px;
 }
 #powerTip.ne-alt:before {
-	#{$left}: auto;
-	#{$right}: 10px;
+    #{$left}: auto;
+    #{$right}: 10px;
 }
 #powerTip.sw-alt:before, #powerTip.se-alt:before {
-	border-top: none;
-	border-bottom: 5px solid #333;
-	border-bottom: 5px solid rgba(0, 0, 0, 0.8);
-	bottom: auto;
-	top: -5px;
+    border-top: none;
+    border-bottom: 5px solid #333;
+    border-bottom: 5px solid rgba(0, 0, 0, 0.8);
+    bottom: auto;
+    top: -5px;
 }
 #powerTip.se-alt:before {
-	#{$left}: auto;
-	#{$right}: 10px;
+    #{$left}: auto;
+    #{$right}: 10px;
 }
 
 
@@ -105,106 +105,106 @@
  */ 
 
 .stepper {
-	border-radius: 3px;
-	margin: side-values(0 0 10px 0);
-	overflow: hidden;
-	position: relative;
-	width: 130px;
-	border: 1px solid $border-1;
+    border-radius: 3px;
+    margin: side-values(0 0 10px 0);
+    overflow: hidden;
+    position: relative;
+    width: 130px;
+    border: 1px solid $border-1;
 
-	.stepper-input {
-		background: $background-default;
-		border: 0;
-		font-size: 0.9em;
-		margin: 0;
-		overflow: hidden;
-		padding: 4px 10px;
-		text-align: center;
-		width: 100%;
-		width: 60px;
-		margin: 0 35px;
-		@include box-sizing(border-box);
-		@include border-radius(4px);
-		z-index: 49;
-		-moz-appearance: textfield;
-	}
+    .stepper-input {
+        background: $background-default;
+        border: 0;
+        font-size: 0.9em;
+        margin: 0;
+        overflow: hidden;
+        padding: 4px 10px;
+        text-align: center;
+        width: 100%;
+        width: 60px;
+        margin: 0 35px;
+        @include box-sizing(border-box);
+        @include border-radius(4px);
+        z-index: 49;
+        -moz-appearance: textfield;
+    }
 
-	.stepper-input:focus {
-		outline: 0;
-	}
+    .stepper-input:focus {
+        outline: 0;
+    }
 
-	.stepper-input::-webkit-inner-spin-button,
-	.stepper-input::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
+    .stepper-input::-webkit-inner-spin-button,
+    .stepper-input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-	.stepper-arrow {
-		cursor: pointer;
-		display: block;
-		height: 100%;
-		padding: 0px 0;
-		position: absolute;
-		width: 35px;
-		text-align: center;
-		z-index: 50;
-		color: $background-default;
+    .stepper-arrow {
+        cursor: pointer;
+        display: block;
+        height: 100%;
+        padding: 0px 0;
+        position: absolute;
+        width: 35px;
+        text-align: center;
+        z-index: 50;
+        color: $background-default;
 
-		&:before {
-			font-size: 14px;
-			margin: side-values(0 10px 0 10px);
-			font-family: "FontAwesome";
-			color: $alt-font-color-1;
-		}
+        &:before {
+            font-size: 14px;
+            margin: side-values(0 10px 0 10px);
+            font-family: "FontAwesome";
+            color: $alt-font-color-1;
+        }
 
-		&:hover {
-			color: $alt-font-color-1;
-		}
+        &:hover {
+            color: $alt-font-color-1;
+        }
 
-		&:active {
-			background: $primary-color;
+        &:active {
+            background: $primary-color;
 
-			&:before {
-				color: $invert-font-color;
-			}
-		}
-	}
+            &:before {
+                color: $invert-font-color;
+            }
+        }
+    }
 
-	.stepper-arrow.up {
-		float: $right;
-		top: 0;
-		#{$right}: 0;
-		border-#{$left}: 1px solid $border-1;
+    .stepper-arrow.up {
+        float: $right;
+        top: 0;
+        #{$right}: 0;
+        border-#{$left}: 1px solid $border-1;
 
-		&:before {
-			content: "\f067";
-		}
-	}
+        &:before {
+            content: "\f067";
+        }
+    }
 
-	.stepper-arrow.down {
-		float: $left;
-		top: 0;
-		#{$left}: 0;
-		border-#{$right}: 1px solid $border-1;
+    .stepper-arrow.down {
+        float: $left;
+        top: 0;
+        #{$left}: 0;
+        border-#{$right}: 1px solid $border-1;
 
-		&:before {
-			content: "\f068";
-		}
-	}
+        &:before {
+            content: "\f068";
+        }
+    }
 
-	&.disabled {
-		.stepper-input {
-			background: $background-default;
-			border-color: $border-1;
-			color: $alt-font-color-3;
-		}
+    &.disabled {
+        .stepper-input {
+            background: $background-default;
+            border-color: $border-1;
+            color: $alt-font-color-3;
+        }
 
-		.stepper-arrow {
-			background: $background-default;
-			border-color: $border-1;
-			cursor: default;
-		}
-	}
+        .stepper-arrow {
+            background: $background-default;
+            border-color: $border-1;
+            cursor: default;
+        }
+    }
 }
 
 
@@ -215,25 +215,25 @@
 }
 
 .hideShowPassword-toggle {
-	background: transparent;
-	border: 0;
-	@include border-radius(2px);
-	color: $alt-font-color-2;
-	cursor: pointer;
-	font-size: 0.75em;
-	font-weight: bold;
-	margin-#{$right}: 2px;
-	padding: 3px 8px;
-	text-transform: uppercase;
-	-moz-appearance: none;
-	-webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    @include border-radius(2px);
+    color: $alt-font-color-2;
+    cursor: pointer;
+    font-size: 0.75em;
+    font-weight: bold;
+    margin-#{$right}: 2px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    -moz-appearance: none;
+    -webkit-appearance: none;
 
-	&:hover,
-	&:focus {
-		background-color: $background-3;
-		color: $alt-font-color-1;
-		outline: transparent;
-	}
+    &:hover,
+    &:focus {
+        background-color: $background-3;
+        color: $alt-font-color-1;
+        outline: transparent;
+    }
 }
 
 
@@ -248,27 +248,27 @@
 
 /* These styles assume you are using ul and li */
 .dropit {
-	list-style: none;
-	padding: 0;
-	margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 
-	.dropit-trigger {
-		position: relative;
-	}
+    .dropit-trigger {
+        position: relative;
+    }
 
-	.dropit-submenu {
-		position: absolute;
-		top: 100%;
-		left: 0; /* dropdown left or right */
-		z-index: 1000;
-		display: none;
-		min-width: 150px;
-		list-style: none;
-		padding: 0;
-		margin: 0;
-	}
+    .dropit-submenu {
+        position: absolute;
+        top: 100%;
+        left: 0; /* dropdown left or right */
+        z-index: 1000;
+        display: none;
+        min-width: 150px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-	.dropit-open .dropit-submenu {
-		display: block;
-	}
+    .dropit-open .dropit-submenu {
+        display: block;
+    }
 }

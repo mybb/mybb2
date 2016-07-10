@@ -1,274 +1,274 @@
 section {
 
-	margin-bottom: 30px;
+    margin-bottom: 30px;
 
-	h2 {
-		font-size: 1.2em;
-	}
+    h2 {
+        font-size: 1.2em;
+    }
 
-	.heading {
-		border-bottom: 1px solid $border-1;
-		padding: 8px;
-		margin: side-values(0 0 5px 0);
-	}
+    .heading {
+        border-bottom: 1px solid $border-1;
+        padding: 8px;
+        margin: side-values(0 0 5px 0);
+    }
 
-	.heading--linked {
-		border-bottom: 0;
-		padding: 0;
+    .heading--linked {
+        border-bottom: 0;
+        padding: 0;
 
-		.heading--linked__link {
-			padding: 8px 12px;
-			border-bottom: 1px solid $border-1;
-			display: block;
+        .heading--linked__link {
+            padding: 8px 12px;
+            border-bottom: 1px solid $border-1;
+            display: block;
 
-			.count {
-				float: $right;
-				font-size: 0.8em;
-				color: $alt-font-color-1;
-				font-weight: normal;
+            .count {
+                float: $right;
+                font-size: 0.8em;
+                color: $alt-font-color-1;
+                font-weight: normal;
 
-				.fa {
-					margin-#{$left}: 4px;
-				}
-			}
-		}
-	}
+                .fa {
+                    margin-#{$left}: 4px;
+                }
+            }
+        }
+    }
 
-	.heading--major {
-		background: $primary-color;
-		color: $invert-font-color;
-		border: 0;
-		padding: 8px 12px;
-		margin-bottom: 0;
-		@include border-radius(4px);
-	}
+    .heading--major {
+        background: $primary-color;
+        color: $invert-font-color;
+        border: 0;
+        padding: 8px 12px;
+        margin-bottom: 0;
+        @include border-radius(4px);
+    }
 
-	.heading--major.heading--linked {
-		padding: 0;
+    .heading--major.heading--linked {
+        padding: 0;
 
-		.heading--linked__link {
-			border: none;
-			color: $invert-font-color;
+        .heading--linked__link {
+            border: none;
+            color: $invert-font-color;
 
-			.count {
-				@include white-transparency(0.7);
-			}
-		}
-	}
+            .count {
+                @include white-transparency(0.7);
+            }
+        }
+    }
 
-	&.container {
-		border: 1px solid $border-1;
-		@include border-radius(4px);	
+    &.container {
+        border: 1px solid $border-1;
+        @include border-radius(4px);    
 
-		.sort-results {
-			border-width: 0;
-			border-top-width: 2px;
-		}
-	}
+        .sort-results {
+            border-width: 0;
+            border-top-width: 2px;
+        }
+    }
 
-	&:last-child {
-		margin-bottom: 0;
-	}
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 .sort-results {
-	text-align: center;
-	border: 1px solid $border-2;
-	border-top: 2px solid $border-1;
-	padding: 6px 0;
-	clear: both;
-	@include border-radius(corner-values(0 0 4px 4px));
+    text-align: center;
+    border: 1px solid $border-2;
+    border-top: 2px solid $border-1;
+    padding: 6px 0;
+    clear: both;
+    @include border-radius(corner-values(0 0 4px 4px));
 
-	h3 {
-		display: inline-block;
-		margin: side-values(0 10px 0 0);
-		padding: 0;
-		font-weight: normal;
-		color: $alt-font-color-1;
-		font-size: 0.9em;
+    h3 {
+        display: inline-block;
+        margin: side-values(0 10px 0 0);
+        padding: 0;
+        font-weight: normal;
+        color: $alt-font-color-1;
+        font-size: 0.9em;
 
-		&:after {
-			content: ":";
-		}
-	}
+        &:after {
+            content: ":";
+        }
+    }
 }
 
 .page-tabs {
-	list-style: none;
-	margin: 0;
-	background: $background-1;
-	padding: 8px;
-	border-top: 1px solid $border-1;
-	border-bottom: 1px solid $border-1;
+    list-style: none;
+    margin: 0;
+    background: $background-1;
+    padding: 8px;
+    border-top: 1px solid $border-1;
+    border-bottom: 1px solid $border-1;
 
-	li {
-		display: inline-block;
-		margin: side-values(0 8px 0 0);
+    li {
+        display: inline-block;
+        margin: side-values(0 8px 0 0);
 
-		a {
-			padding: 4px 8px;
-			display: inline-block;
-			background: $background-1;
-			@include border-radius(3px);
-		}
+        a {
+            padding: 4px 8px;
+            display: inline-block;
+            background: $background-1;
+            @include border-radius(3px);
+        }
 
-		a:hover {
-			text-decoration: none;
-			background: $secondary-color;
-			color: $invert-font-color;
-		}
-		
-		&.page-tabs__active {
+        a:hover {
+            text-decoration: none;
+            background: $secondary-color;
+            color: $invert-font-color;
+        }
+        
+        &.page-tabs__active {
 
-			a, a:hover {
-				color: $invert-font-color;
-				font-weight: bold;
-				background: $primary-color;
-				text-decoration: none;
-			}
-		}
-	}
+            a, a:hover {
+                color: $invert-font-color;
+                font-weight: bold;
+                background: $primary-color;
+                text-decoration: none;
+            }
+        }
+    }
 }
 
 dl.stats {
-	line-height: 1.6;
-	margin: 0;
-	font-size: 0.9em;
-	display: table-cell;
+    line-height: 1.6;
+    margin: 0;
+    font-size: 0.9em;
+    display: table-cell;
 
-	dt {
-		float: $left;
-		margin: side-values(0 8px 0 0);
-		color: $alt-font-color-2;
+    dt {
+        float: $left;
+        margin: side-values(0 8px 0 0);
+        color: $alt-font-color-2;
 
-		&:after {
-			content: ":";
-		}
-	}
+        &:after {
+            content: ":";
+        }
+    }
 
-	dd {
-		padding: 0;
-		margin: 0;
-		display: table-cell;
-	}
+    dd {
+        padding: 0;
+        margin: 0;
+        display: table-cell;
+    }
 }
 
 .alert {
-	background-color: $background-1;
-	padding: side-values(10px 12px 10px 40px);
-	margin-top: 10px;
-	margin-bottom: 20px;
-	font-size: 0.9em;
-	@include border-radius(4px);
+    background-color: $background-1;
+    padding: side-values(10px 12px 10px 40px);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    @include border-radius(4px);
 
-	.fa {
-		float: $left;
-		margin: side-values(6px 0 0 -25px);
-	}
+    .fa {
+        float: $left;
+        margin: side-values(6px 0 0 -25px);
+    }
 
-	p {
-		margin: 0;
-		padding: 0;
-	}
+    p {
+        margin: 0;
+        padding: 0;
+    }
 
-	&.alert--danger {
-		background-color: $danger-color;
-		color: $invert-font-color;
-	}
+    &.alert--danger {
+        background-color: $danger-color;
+        color: $invert-font-color;
+    }
 
-	&.alert--success {
-		background-color: $success-color;
-		color: $invert-font-color;
-	}
+    &.alert--success {
+        background-color: $success-color;
+        color: $invert-font-color;
+    }
 }
 
 .error-no-results {
-	text-align: center;
-	padding: 30px 0;
-	font-size: 1.2em;
-	color: $alt-font-color-1;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 1.2em;
+    color: $alt-font-color-1;
 }
 
 .page-buttons {
-	margin: side-values(-10px -5px 15px -5px);
-	text-align: center;
+    margin: side-values(-10px -5px 15px -5px);
+    text-align: center;
 
-	@include bp-medium {
-		float: $right;
-		margin: side-values(-45px -5px 8px 0);
-	}
+    @include bp-medium {
+        float: $right;
+        margin: side-values(-45px -5px 8px 0);
+    }
 }
 
 .pagination {
-	list-style: none;
-	margin: side-values(0 0 25px -5px);
-	padding: 0;
-	font-size: 0.9em;
-	text-align: center;
+    list-style: none;
+    margin: side-values(0 0 25px -5px);
+    padding: 0;
+    font-size: 0.9em;
+    text-align: center;
 
-	@include bp-medium {
-		text-align: $right;
-		margin: side-values(0 -5px 25px -5px);
-	}
-	
-	li {
-		display: inline-block;
-		margin: 0 5px;
+    @include bp-medium {
+        text-align: $right;
+        margin: side-values(0 -5px 25px -5px);
+    }
+    
+    li {
+        display: inline-block;
+        margin: 0 5px;
 
-		a {
-			background: $background-1;
-			padding: 1px 8px;
-			display: inline-block;
-			@include border-radius(4px);
+        a {
+            background: $background-1;
+            padding: 1px 8px;
+            display: inline-block;
+            @include border-radius(4px);
 
-			&:hover {
-				background: $secondary-color;
-				color: $invert-font-color;
-				text-decoration: none;
-			}
-		}
+            &:hover {
+                background: $secondary-color;
+                color: $invert-font-color;
+                text-decoration: none;
+            }
+        }
 
-		&.active {
-			padding: 1px 8px;
-			background: $primary-color;
-			color: $invert-font-color;
-			@include border-radius(4px);
-		}
+        &.active {
+            padding: 1px 8px;
+            background: $primary-color;
+            color: $invert-font-color;
+            @include border-radius(4px);
+        }
 
-		&.disabled {
-			display: none;
-		}
-	}		
+        &.disabled {
+            display: none;
+        }
+    }       
 
-	@include bp-medium {
-		float: $left;
-		text-align: $left;
-		margin: side-values(10px -5px 0 -5px);
-	}
+    @include bp-medium {
+        float: $left;
+        text-align: $left;
+        margin: side-values(10px -5px 0 -5px);
+    }
 }
 
 .page-controls {
-	
-	@include bp-medium {
-		@include clearfix();
-		margin-top: -20px;
+    
+    @include bp-medium {
+        @include clearfix();
+        margin-top: -20px;
 
-		.page-buttons {
-			margin-top: 0;
-		}
+        .page-buttons {
+            margin-top: 0;
+        }
 
-		.pagination + .page-buttons {
-			margin-top: 0;
-		}
-	}
+        .pagination + .page-buttons {
+            margin-top: 0;
+        }
+    }
 }
 
 header + .page-controls {
-	@include bp-medium {
-		margin-top: -20px;
+    @include bp-medium {
+        margin-top: -20px;
 
-		.page-buttons {
-			margin-top: -30px;
-		}
-	}
+        .page-buttons {
+            margin-top: -30px;
+        }
+    }
 }

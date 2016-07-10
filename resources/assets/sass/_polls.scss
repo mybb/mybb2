@@ -1,126 +1,126 @@
 #add-poll {
-	.poll-option {
-		padding-#{$right}: 20px;
-	}
+    .poll-option {
+        padding-#{$right}: 20px;
+    }
 
-	.remove-option {
-		float: #{$right};
-		margin: side-values(3px -20px 0 0);
-		color: $danger-color;
-	}
+    .remove-option {
+        float: #{$right};
+        margin: side-values(3px -20px 0 0);
+        color: $danger-color;
+    }
 }
 
 .poll {
-	border: 1px solid $border-2;
-	padding: 12px;
-	@include border-radius(4px);
+    border: 1px solid $border-2;
+    padding: 12px;
+    @include border-radius(4px);
 
-	.poll__title {
-		font-size: 1.2em;
-		font-weight: bold;
-		padding: 8px 12px;
-		border-bottom: 1px solid $border-2;
-	}
+    .poll__title {
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 8px 12px;
+        border-bottom: 1px solid $border-2;
+    }
 
-	.poll__options {
-		padding: 0;
-	}
+    .poll__options {
+        padding: 0;
+    }
 
-	.poll__option {
-		border-bottom: 1px solid $border-1;
-		padding: 10px 12px;
-		@include clearfix();
+    .poll__option {
+        border-bottom: 1px solid $border-1;
+        padding: 10px 12px;
+        @include clearfix();
 
-		&.poll__option--voted {
+        &.poll__option--voted {
 
-			.poll__option__name {
-				color: $primary-color;
-				font-weight: bold;
-			}
-		}
-	}
+            .poll__option__name {
+                color: $primary-color;
+                font-weight: bold;
+            }
+        }
+    }
 
-	.poll__option__name {
-		margin-bottom: 8px;
+    .poll__option__name {
+        margin-bottom: 8px;
 
-		@include bp-medium {
-			width: 50%;
-			float: $left;
-			margin-bottom: 0;
-		}
-	}
+        @include bp-medium {
+            width: 50%;
+            float: $left;
+            margin-bottom: 0;
+        }
+    }
 
-	.poll__option__votes {
-		width: 80%;
-		float: $left;
-		position: relative;
-		border: 1px solid $border-3;
-		background: $background-default;
-		height: 24px;
-		@include box-sizing(border-box);
-		@include border-radius(4px);
+    .poll__option__votes {
+        width: 80%;
+        float: $left;
+        position: relative;
+        border: 1px solid $border-3;
+        background: $background-default;
+        height: 24px;
+        @include box-sizing(border-box);
+        @include border-radius(4px);
 
-		.poll__option__votes__bar {
-			position: absolute;
-			top: 0;
-			#{$left}: 0;
-			bottom: 0;
-			background: $primary-color;
-			z-index: 1;
-			@include border-radius(3px);
-		}
+        .poll__option__votes__bar {
+            position: absolute;
+            top: 0;
+            #{$left}: 0;
+            bottom: 0;
+            background: $primary-color;
+            z-index: 1;
+            @include border-radius(3px);
+        }
 
-		@include bp-medium {
-			width: 40%;
-			float: $left;
-		}
-	}
+        @include bp-medium {
+            width: 40%;
+            float: $left;
+        }
+    }
 
-	.poll__option__count {
-		float: $left;
-		width: 18%;
-		margin-#{$left}: 2%;
-		font-size: 0.9em;
+    .poll__option__count {
+        float: $left;
+        width: 18%;
+        margin-#{$left}: 2%;
+        font-size: 0.9em;
 
-		@include bp-medium {
-			width: 8%;
-			float: $left;
-		}
-	}
+        @include bp-medium {
+            width: 8%;
+            float: $left;
+        }
+    }
 
-	.poll__option__votes--result {
-		font-size: 14px;
-	}
+    .poll__option__votes--result {
+        font-size: 14px;
+    }
 
-	.poll__vote {
-		padding: 12px 0 0 0;
+    .poll__vote {
+        padding: 12px 0 0 0;
 
-		.poll__buttons {
-			float: $right;
-		}
-	}
+        .poll__buttons {
+            float: $right;
+        }
+    }
 
-	.poll__end-date {
-		font-size: 0.9em;
-		color: $alt-font-color-1;
-		padding: 5px 16px 0 16px;
+    .poll__end-date {
+        font-size: 0.9em;
+        color: $alt-font-color-1;
+        padding: 5px 16px 0 16px;
 
-		i {
-			color: $alt-font-color-2;
-			margin-right: 5px;
-		}
-	}
+        i {
+            color: $alt-font-color-2;
+            margin-right: 5px;
+        }
+    }
 
-	.poll__closed {
-		background: $danger-color;
-		color: $invert-font-color;
-		display: inline-block;
-		@include border-radius(4px);
-		padding: 5px 11px;
-		margin: 5px;
+    .poll__closed {
+        background: $danger-color;
+        color: $invert-font-color;
+        display: inline-block;
+        @include border-radius(4px);
+        padding: 5px 11px;
+        margin: 5px;
 
-		i {
-			margin-right: 2px;
-		}
-	}
+        i {
+            margin-right: 2px;
+        }
+    }
 }

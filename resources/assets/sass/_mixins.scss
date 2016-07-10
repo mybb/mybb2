@@ -3,66 +3,66 @@
 */
 
 @mixin bp-large {
-  @media only screen and (min-width: 1140px) {
-    @content;
-  }
+    @media only screen and (min-width: 1140px) {
+        @content;
+    }
 }
 
 @mixin bp-medium {
-  @media only screen and (min-width: 768px) {
-    @content;
-  }
+    @media only screen and (min-width: 768px) {
+        @content;
+    }
 }
 
 @mixin bp-small {
-  @media only screen and (min-width: 480px) {
-    @content;
-  }
+    @media only screen and (min-width: 480px) {
+        @content;
+    }
 }
 
 @mixin border-radius($radius) {
-  border-radius: $radius;
+    border-radius: $radius;
 }
 
 @mixin box-sizing($sizing) {
-  box-sizing: $sizing;
+    box-sizing: $sizing;
 }
 
 @mixin black-transparency($transparency) {
-  color: rgba(0,0,0,$transparency);
+    color: rgba(0,0,0,$transparency);
 }
 
 @mixin white-transparency($transparency) {
-  color: rgba(255,255,255,$transparency);
+    color: rgba(255,255,255,$transparency);
 }
 
 @mixin transform($transform) {
-  -webkit-transform: $transform;
-  -moz-transform: $transform;
-  -ms-transform: $transform;
-  -o-transform: $transform;
+    -webkit-transform: $transform;
+    -moz-transform: $transform;
+    -ms-transform: $transform;
+    -o-transform: $transform;
 }
 
 @mixin clearfix {
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
 }
 
 @mixin hidden {
-  display: none !important;
-  visibility: hidden;
+    display: none !important;
+    visibility: hidden;
 }
 
 @mixin visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }

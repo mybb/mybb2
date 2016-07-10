@@ -1,106 +1,106 @@
 .form {
 
-	.form__section__container.change-avatar {
-		padding-#{$left}: 130px;
+    .form__section__container.change-avatar {
+        padding-#{$left}: 130px;
 
-		.avatar-profile-link {
-			float: $left;
-			margin: side-values(0 10px 0 -110px);
+        .avatar-profile-link {
+            float: $left;
+            margin: side-values(0 10px 0 -110px);
 
-			img.avatar {
-				width: 100px;
-				height: 100px;
-			}
-		}
+            img.avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
 
-		p {
-			padding: side-values(0 0 0 5px);
-			margin: side-values(0 0 10px 0);
-			font-size: 0.9em;
-			color: $alt-font-color-1;
-		}
-	}
+        p {
+            padding: side-values(0 0 0 5px);
+            margin: side-values(0 0 10px 0);
+            font-size: 0.9em;
+            color: $alt-font-color-1;
+        }
+    }
 }
 
 .dashboard__account {
-	padding: side-values(20px 20px 20px 140px);
-	border: 1px solid $border-1;
-	@include border-radius(4px);
-	@include clearfix();
+    padding: side-values(20px 20px 20px 140px);
+    border: 1px solid $border-1;
+    @include border-radius(4px);
+    @include clearfix();
 
-	.avatar-profile-link {
-		width: 100px;
-		height: 100px;
-		float: $left;
-		display: block;
-		margin: side-values(0 0 0 -120px);
+    .avatar-profile-link {
+        width: 100px;
+        height: 100px;
+        float: $left;
+        display: block;
+        margin: side-values(0 0 0 -120px);
 
-		img.avatar {
-			width: 100px;
-			height: 100px;
-		}
+        img.avatar {
+            width: 100px;
+            height: 100px;
+        }
 
-	}
+    }
 
-	.dashboard__account__username {
-		margin: side-values(0 0 6px 0);
-	}
+    .dashboard__account__username {
+        margin: side-values(0 0 6px 0);
+    }
 }
 
 // this may need additional revisions once notifications are implemented
 .notifications {
-	margin: 0;
-	font-size: 0.9em;
-	line-height: 1.6;
-	list-style: none;
-	padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.6;
+    list-style: none;
+    padding: 0;
 
-	li {
-		overflow: hidden;
-		margin: 0;
-		padding: 8px;
-		border-bottom: 1px solid $border-1;
+    li {
+        overflow: hidden;
+        margin: 0;
+        padding: 8px;
+        border-bottom: 1px solid $border-1;
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
 
-	.avatar-profile-link {
-		float: $left;
-		margin: side-values(0 12px 0 0);
-		width: 40px;
-		height: 40px;
+    .avatar-profile-link {
+        float: $left;
+        margin: side-values(0 12px 0 0);
+        width: 40px;
+        height: 40px;
 
-		img.avatar {
-			width: 40px;
-			height: 40px;
-		}
-	}
+        img.avatar {
+            width: 40px;
+            height: 40px;
+        }
+    }
 
-	h2 a:hover .text,
-	a:hover .text {
-		text-decoration: underline;
-	}
+    h2 a:hover .text,
+    a:hover .text {
+        text-decoration: underline;
+    }
 
-	.notification {
-		text-decoration: none;
-		margin-#{$left}: 52px;
-		padding-#{$left}: 24px;
-		display: block;
-	}
+    .notification {
+        text-decoration: none;
+        margin-#{$left}: 52px;
+        padding-#{$left}: 24px;
+        display: block;
+    }
 
-	.notification__username {
-		font-weight: bold;
-	}
+    .notification__username {
+        font-weight: bold;
+    }
 
-	.fa {
-		color: $alt-font-color-2;
-	}
+    .fa {
+        color: $alt-font-color-2;
+    }
 
-	time {
-		font-size: 0.8em;
-		color: $alt-font-color-1;
-		display: block;
-	}
+    time {
+        font-size: 0.8em;
+        color: $alt-font-color-1;
+        display: block;
+    }
 }

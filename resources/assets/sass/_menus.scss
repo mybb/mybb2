@@ -1,60 +1,60 @@
 nav.section-menu {
 
-	@include bp-medium {
-		float: $left;
-		width: 19%;
-		margin-#{$right}: 3%;
-	}
-	
-	ul {
-		@include clearfix();
-		margin: side-values(0 0 15px 0);
-		padding: 0;
-		list-style: none;
+    @include bp-medium {
+        float: $left;
+        width: 19%;
+        margin-#{$right}: 3%;
+    }
+    
+    ul {
+        @include clearfix();
+        margin: side-values(0 0 15px 0);
+        padding: 0;
+        list-style: none;
 
-		li {
-			float: $left;
-			width: 48%;
-			margin-bottom: 4px;
+        li {
+            float: $left;
+            width: 48%;
+            margin-bottom: 4px;
 
-			&:nth-child(odd) {
-				margin-#{$right}: 2%;
-			}
+            &:nth-child(odd) {
+                margin-#{$right}: 2%;
+            }
 
-			&:nth-child(even) {
-				margin-#{$left}: 2%;
-			}
+            &:nth-child(even) {
+                margin-#{$left}: 2%;
+            }
 
-			a {
-				background: $background-1;
-				display: block;
-				padding: 2px 8px;
-				text-decoration: none;
-				@include border-radius(3px);
+            a {
+                background: $background-1;
+                display: block;
+                padding: 2px 8px;
+                text-decoration: none;
+                @include border-radius(3px);
 
-				&:hover {
-					background-color: $secondary-color;
-					border-color: $secondary-color;
-					color: $invert-font-color;
-				}
-			}
+                &:hover {
+                    background-color: $secondary-color;
+                    border-color: $secondary-color;
+                    color: $invert-font-color;
+                }
+            }
 
-			&.active a {
-				background-color: $primary-color;
-				border-color: $primary-color;
-				color: $invert-font-color;
-			}
-		}
+            &.active a {
+                background-color: $primary-color;
+                border-color: $primary-color;
+                color: $invert-font-color;
+            }
+        }
 
-		@include bp-medium {
-			margin: 0;
+        @include bp-medium {
+            margin: 0;
 
-			li, li:nth-child(odd), li:nth-child(even) {
-				float: none;
-				width: 100%;
-				margin-#{$left}: 0;
-				margin-#{$right}: 0;
-			}
-		}
-	}
+            li, li:nth-child(odd), li:nth-child(even) {
+                float: none;
+                width: 100%;
+                margin-#{$left}: 0;
+                margin-#{$right}: 0;
+            }
+        }
+    }
 }

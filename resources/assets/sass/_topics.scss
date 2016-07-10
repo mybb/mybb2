@@ -1,427 +1,427 @@
 .post {
-	background-color: $background-default;
-	border: 1px solid $border-2;
-	padding: 8px 12px;
-	margin-bottom: 25px;
-	@include border-radius(4px);
+    background-color: $background-default;
+    border: 1px solid $border-2;
+    padding: 8px 12px;
+    margin-bottom: 25px;
+    @include border-radius(4px);
 
-	&.highlight {
-		background-color: $status-highlight;
-		border-color: $status-highlight-border;
-	}
+    &.highlight {
+        background-color: $status-highlight;
+        border-color: $status-highlight-border;
+    }
 
-	&.soft-deleted {
-		background-color: $status-deleted;
-		border-color: $status-deleted-border;
-	}
+    &.soft-deleted {
+        background-color: $status-deleted;
+        border-color: $status-deleted-border;
+    }
 
-	&.pending-approval {
-		background-color: $status-pending;
-		border-color: $status-pending-border;
-	}
+    &.pending-approval {
+        background-color: $status-pending;
+        border-color: $status-pending-border;
+    }
 
-	&.post--hidden {
+    &.post--hidden {
 
-		.post__meta {
-			padding-bottom: 2px;
-		}
+        .post__meta {
+            padding-bottom: 2px;
+        }
 
-		.post__body, .post__controls {
-			display: none;
-		}
-	}
+        .post__body, .post__controls {
+            display: none;
+        }
+    }
 
-	.post__meta {
-		padding: side-values(4px 6px 12px 6px);
+    .post__meta {
+        padding: side-values(4px 6px 12px 6px);
 
-		a:link,
-		a:visited {
-			color: $alt-font-color-1;
-		}
+        a:link,
+        a:visited {
+            color: $alt-font-color-1;
+        }
 
-		a:hover,
-		a:active {
-			color: $secondary-color;
-		}
+        a:hover,
+        a:active {
+            color: $secondary-color;
+        }
 
-		h3 {
-			font-size: 1em;
-			margin: 0;
+        h3 {
+            font-size: 1em;
+            margin: 0;
 
-			a:link,
-			a:visited {
-				color: $primary-color;
-			}
+            a:link,
+            a:visited {
+                color: $primary-color;
+            }
 
-			a:hover,
-			a:active {
-				color: $secondary-color;
-			}
-		}
+            a:hover,
+            a:active {
+                color: $secondary-color;
+            }
+        }
 
-		.post__date, .post__topic {
-			font-size: 0.8em;
-			color: $alt-font-color-1;
-		}
+        .post__date, .post__topic {
+            font-size: 0.8em;
+            color: $alt-font-color-1;
+        }
 
-		.post__edit-log {
-			font-size: 0.7em;
-			margin-#{$left}: 4px;
-		}
+        .post__edit-log {
+            font-size: 0.7em;
+            margin-#{$left}: 4px;
+        }
 
-		.post__status {
-			margin-#{$left}: 16px;
-			font-size: 0.8em;
-			font-weight: bold;
+        .post__status {
+            margin-#{$left}: 16px;
+            font-size: 0.8em;
+            font-weight: bold;
 
-			i {
-				color: $alt-font-color-1;
-				font-size: 14px;
-				margin-#{$right}: 3px;
-			}
-		}
-	}
+            i {
+                color: $alt-font-color-1;
+                font-size: 14px;
+                margin-#{$right}: 3px;
+            }
+        }
+    }
 
-	.post__inline-mod {
-		float: $right;
-		margin: side-values(-20px 0 0 7px);
-	}
+    .post__inline-mod {
+        float: $right;
+        margin: side-values(-20px 0 0 7px);
+    }
 
-	.post__toggle {
-		float: $right;
-		font-size: 14px;
-		margin: side-values(1px 1px 0 0);
+    .post__toggle {
+        float: $right;
+        font-size: 14px;
+        margin: side-values(1px 1px 0 0);
 
-		i {
-			@include black-transparency(0.2);
-		}
+        i {
+            @include black-transparency(0.2);
+        }
 
-		&:hover i {
-			@include black-transparency(0.4);
-		}
-	}
+        &:hover i {
+            @include black-transparency(0.4);
+        }
+    }
 
-	.team-badge {
-		display: none;
-	}
+    .team-badge {
+        display: none;
+    }
 
-	.avatar-profile-link {
-		float: $left;
-		width: 40px;
-		height: 40px;
-		margin: side-values(5px 10px 0 0);
+    .avatar-profile-link {
+        float: $left;
+        width: 40px;
+        height: 40px;
+        margin: side-values(5px 10px 0 0);
 
-		img.avatar {
-			width: 40px;
-			height: 40px;
-		}
-	}
+        img.avatar {
+            width: 40px;
+            height: 40px;
+        }
+    }
 
-	.post__body {
-		padding: side-values(0 6px 3px 6px);
+    .post__body {
+        padding: side-values(0 6px 3px 6px);
 
-		p {
-			font-size: 0.9em;
-			margin: 0;
-		}
+        p {
+            font-size: 0.9em;
+            margin: 0;
+        }
 
-		img {
-			max-width: 100%;
-		}
+        img {
+            max-width: 100%;
+        }
 
-		blockquote {
-			border-left: 2px solid $primary-color;
-			padding: 10px 20px;
-			margin: 20px 12px;
-			font-size: 0.9em;
+        blockquote {
+            border-left: 2px solid $primary-color;
+            padding: 10px 20px;
+            margin: 20px 12px;
+            font-size: 0.9em;
 
-			cite {
-				font-weight: normal;
-				font-size: normal;
-				color: $alt-font-color-1;
-				display: block;
+            cite {
+                font-weight: normal;
+                font-size: normal;
+                color: $alt-font-color-1;
+                display: block;
 
-				.quote-author {
-					font-weight: bold;
-					color: $font-color;
-				}
+                .quote-author {
+                    font-weight: bold;
+                    color: $font-color;
+                }
 
-				.quote-date {
-					color: $alt-font-color-4;
-				}
-			}
-		}
-	}
+                .quote-date {
+                    color: $alt-font-color-4;
+                }
+            }
+        }
+    }
 
-	.post__signature {
-		border-top: 1px dotted $border-2;
-		padding: side-values(6px 6px 0 6px);
-		margin: side-values(12px 0 0 0);
-		font-size: 0.8em;
-	}
+    .post__signature {
+        border-top: 1px dotted $border-2;
+        padding: side-values(6px 6px 0 6px);
+        margin: side-values(12px 0 0 0);
+        font-size: 0.8em;
+    }
 
-	.post__controls {
-		list-style: none;
-		margin: 0;
-		padding: 4px;
-		text-align: $right;
+    .post__controls {
+        list-style: none;
+        margin: 0;
+        padding: 4px;
+        text-align: $right;
 
-		li {
-			display: inline-block;
-			font-size: 0.8em;
+        li {
+            display: inline-block;
+            font-size: 0.8em;
 
-			a,
-			button {
-				color: $alt-font-color-1;
-				padding: 0 5px;
-				background-color: transparent;
-				border: none;
+            a,
+            button {
+                color: $alt-font-color-1;
+                padding: 0 5px;
+                background-color: transparent;
+                border: none;
 
-				&:hover,
-				&:active {
-					color: $secondary-color;
-					text-decoration: none;
-				}
-			}
+                &:hover,
+                &:active {
+                    color: $secondary-color;
+                    text-decoration: none;
+                }
+            }
 
-			&.like,
-			&.quote,
-			&.approve,
-			&.restore {
-				float: $left;
+            &.like,
+            &.quote,
+            &.approve,
+            &.restore {
+                float: $left;
 
-				.text {
-					display: inline;
-				}
+                .text {
+                    display: inline;
+                }
 
-				.quote-button {
-					.quote-button__remove {
-						display: none;
-					}
-				}
-			}
-		}
+                .quote-button {
+                    .quote-button__remove {
+                        display: none;
+                    }
+                }
+            }
+        }
 
-		i {
-			font-size: 14px;
-		}
+        i {
+            font-size: 14px;
+        }
 
-		.text {
-			display: none;
-			font-size: 0.7em;
-			margin-#{$left}: 6px;
-		}
-	}
+        .text {
+            display: none;
+            font-size: 0.7em;
+            margin-#{$left}: 6px;
+        }
+    }
 
-	.post__likes {
-		font-size: 0.8em;
-		padding: side-values(8px 8px 4px 8px);
-		margin: side-values(8px 0 0 0);
-		border-top: 1px solid $border-1;
-		color: $alt-font-color-2;
+    .post__likes {
+        font-size: 0.8em;
+        padding: side-values(8px 8px 4px 8px);
+        margin: side-values(8px 0 0 0);
+        border-top: 1px solid $border-1;
+        color: $alt-font-color-2;
 
-		i {
-			margin-#{$right}: 5px;
-		}
+        i {
+            margin-#{$right}: 5px;
+        }
 
-		a {
-			color: $alt-font-color-1;
-		}
-	}
+        a {
+            color: $alt-font-color-1;
+        }
+    }
 
-	&.post--reply {
+    &.post--reply {
 
-		.full-reply {
-			float: $right;
+        .full-reply {
+            float: $right;
 
-			.text {
-				display: none;
-			}
-		}
+            .text {
+                display: none;
+            }
+        }
 
-		textarea {
-			border: none;
-			padding: 0;
-		}
+        textarea {
+            border: none;
+            padding: 0;
+        }
 
-		&.post--quick-reply .post__foot {
-			margin: 5px 0;
-		}
-	}
+        &.post--quick-reply .post__foot {
+            margin: 5px 0;
+        }
+    }
 
-	.quick-quote {
-		display: none;
-		background: $alt-font-color-4;
-		color: $invert-font-color;
-		@include border-radius(4px);
-		font: 12px $font-stack;
-		padding: 6px 4px;
-		position: absolute;
-		z-index: 1001;
+    .quick-quote {
+        display: none;
+        background: $alt-font-color-4;
+        color: $invert-font-color;
+        @include border-radius(4px);
+        font: 12px $font-stack;
+        padding: 6px 4px;
+        position: absolute;
+        z-index: 1001;
 
-		span {
-			cursor: pointer;
-			margin: 0 6px;
+        span {
+            cursor: pointer;
+            margin: 0 6px;
 
-			&:hover {
-				text-decoration: underline;
-			}
-		}
+            &:hover {
+                text-decoration: underline;
+            }
+        }
 
-		&:before {
-			content: ' ';
-			position: absolute;
-			bottom: -6px;
-			left: 50%;
-			margin-left: -6px;
-			border-top: 6px solid $alt-font-color-4;
-			border-left: 6px solid transparent;
-			border-right: 6px solid transparent;
-		}
-	}
+        &:before {
+            content: ' ';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            margin-left: -6px;
+            border-top: 6px solid $alt-font-color-4;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+        }
+    }
 }
 
 .quote-bar {
-	border: 1px solid #ccc;
-	padding: 5px 10px;
-	font-size: 12px;
-	@include border-radius(4px);
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 12px;
+    @include border-radius(4px);
 }
 
 .view-quotes {
-	left: 10%!important;
-	width: 80%!important;
-	margin-left: 0!important;
+    left: 10%!important;
+    width: 80%!important;
+    margin-left: 0!important;
 
-	.view-quotes__quotes {
-		overflow: auto;
-		padding: side-values(15px 15px 0 15px);
-		margin: 0;
-	}
+    .view-quotes__quotes {
+        overflow: auto;
+        padding: side-values(15px 15px 0 15px);
+        margin: 0;
+    }
 
-	.view-quotes__select-all {
-		bottom: 0;
-		margin: 0;
-		padding: 6px 0;
-		background: $background-2;
-		border-top: 1px solid $border-1;
-		text-align: center;
-	}
+    .view-quotes__select-all {
+        bottom: 0;
+        margin: 0;
+        padding: 6px 0;
+        background: $background-2;
+        border-top: 1px solid $border-1;
+        text-align: center;
+    }
 }
 
 .topic--create, .topic--reply {
 
-	header h1 {
-		display: none;
-	}
+    header h1 {
+        display: none;
+    }
 
-	.topic__title {
-		// border: none;
-		// padding: 0;
-		font-size: 1.5em;
-		font-weight: bold;
-		padding: 10px;
-	}
+    .topic__title {
+        // border: none;
+        // padding: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 10px;
+    }
 
-	.post__controls {
-		text-align: $left;
+    .post__controls {
+        text-align: $left;
 
-		.text {
-			display: inline;
-			font-size: 0.8em;
-		}
-	}
+        .text {
+            display: inline;
+            font-size: 0.8em;
+        }
+    }
 }
 
 @media only screen and (min-width: 480px) {
 
-	.post {
-		margin-#{$left}: 80px;
+    .post {
+        margin-#{$left}: 80px;
 
-		&.post--hidden {
+        &.post--hidden {
 
-			.avatar-profile-link {
-				width: 50px;
-				height: 50px;
-				margin-#{$left}: -80px;
+            .avatar-profile-link {
+                width: 50px;
+                height: 50px;
+                margin-#{$left}: -80px;
 
-				img.avatar {
-					width: 50px;
-					height: 50px;
-				}
-			}
-		}
+                img.avatar {
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+        }
 
-		.post__meta {
-			padding: side-values(4px 6px 8px 6px);
+        .post__meta {
+            padding: side-values(4px 6px 8px 6px);
 
-			h3 {
-				display: inline-block;
-			}
+            h3 {
+                display: inline-block;
+            }
 
-			.post__date, .post__topic {
-				margin: side-values(0 0 0 10px);
-			}
-		}
+            .post__date, .post__topic {
+                margin: side-values(0 0 0 10px);
+            }
+        }
 
-		.avatar-profile-link {
-			float: $left;
-			width: 70px;
-			height: 70px;
-			margin: side-values(-13px 0 0 -100px);
+        .avatar-profile-link {
+            float: $left;
+            width: 70px;
+            height: 70px;
+            margin: side-values(-13px 0 0 -100px);
 
-			img.avatar {
-				width: 70px;
-				height: 70px;
-			}
-		}
+            img.avatar {
+                width: 70px;
+                height: 70px;
+            }
+        }
 
-		.post__inline-mod {
-			margin-top: 7px;
-		}
-	}
+        .post__inline-mod {
+            margin-top: 7px;
+        }
+    }
 }
 
 @media only screen and (min-width: 768px) {
 
-	.post {
-		margin-#{$left}: 110px;
+    .post {
+        margin-#{$left}: 110px;
 
-		.post__meta {
+        .post__meta {
 
-			.team-badge {
-				display: inline;
-			}
-		}
+            .team-badge {
+                display: inline;
+            }
+        }
 
-		.avatar-profile-link {
-			width: 100px;
-			height: 100px;
-			margin-#{$left}: -130px;
+        .avatar-profile-link {
+            width: 100px;
+            height: 100px;
+            margin-#{$left}: -130px;
 
-			img.avatar {
-				width: 100px;
-				height: 100px;
-			}
-		}
+            img.avatar {
+                width: 100px;
+                height: 100px;
+            }
+        }
 
-		&.post--conversation {
-			margin-#{$left}: 80px;
+        &.post--conversation {
+            margin-#{$left}: 80px;
 
-			.avatar-profile-link {
-				width: 70px;
-				height: 70px;
-				margin-#{$left}: -100px;
+            .avatar-profile-link {
+                width: 70px;
+                height: 70px;
+                margin-#{$left}: -100px;
 
-				img.avatar {
-					width: 70px;
-					height: 70px;
-				}
-			}
-		}
+                img.avatar {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+        }
 
-		.post__toggle {
-			margin-#{$right}: 5px;
-		}
-	}
+        .post__toggle {
+            margin-#{$right}: 5px;
+        }
+    }
 }
