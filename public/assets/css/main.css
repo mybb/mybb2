@@ -2722,6 +2722,8 @@ dl.stats {
     .user-bar__links .user-bar__links__item .user-bar__links__item__link:hover, .user-bar__links .user-bar__links__item .user-bar__links__item__link:active {
       background-color: #333;
       text-decoration: none; }
+    .user-bar__links .user-bar__links__item.user-bar__sign-up .user-bar__links__item__link.icon:before, .user-bar__links .user-bar__links__item.user-bar__log-in .user-bar__links__item__link.icon:before {
+      margin-right: 8px; }
   .user-bar__links .dropit-link {
     padding: 12px 8px 12px 0;
     border-left: 2px solid transparent;

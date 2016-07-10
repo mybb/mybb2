@@ -82,6 +82,15 @@
                 text-decoration: none;
             }
         }
+
+        &.user-bar__sign-up,
+        &.user-bar__log-in {
+
+            .user-bar__links__item__link.icon:before {
+                margin-#{$right}: 8px;
+            }
+        }
+
     }
 
     .dropit-link {
