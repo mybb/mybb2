@@ -2307,18 +2307,6 @@ body {
   font: 16px/26px Open Sans, Helvetica Neue, Helvetica, Arial;
   background: #fff; }
 
-.wrapper {
-  width: 90%;
-  margin: 0 5%; }
-  .wrapper:after {
-    content: "";
-    display: table;
-    clear: both; }
-  @media only screen and (min-width: 1140px) {
-    .wrapper {
-      max-width: 1250px;
-      margin: 0 auto; } }
-
 input, select, textarea, button {
   font: 16px Open Sans, Helvetica Neue, Helvetica, Arial; }
 
@@ -2357,6 +2345,18 @@ fieldset {
 textarea {
   resize: vertical; }
 
+.wrapper {
+  width: 90%;
+  margin: 0 5%; }
+  .wrapper:after {
+    content: "";
+    display: table;
+    clear: both; }
+  @media only screen and (min-width: 1140px) {
+    .wrapper {
+      max-width: 1250px;
+      margin: 0 auto; } }
+
 .main {
   padding: 20px 0 30px 0; }
   @media only screen and (min-width: 768px) {
@@ -2370,7 +2370,7 @@ textarea {
     .main .page-content--menu {
       float: left;
       width: 78%; }
-    .main aside {
+    .main .page-sidebar {
       float: right;
       width: 35%;
       margin-top: 0; } }
@@ -2387,11 +2387,11 @@ textarea {
       margin: 0 0 10px 0; }
   .main .page-content--menu header h1 {
     font-size: 1.8em; }
-  .main aside {
+  .main .page-sidebar {
     padding-bottom: 10px;
     font-size: 0.9em;
     margin-top: 30px; }
-    .main aside section {
+    .main .page-sidebar section {
       border: 1px solid #dfdfdf;
       padding: 12px 15px;
       margin-bottom: 30px;
@@ -2588,45 +2588,45 @@ dl.stats {
       margin-top: -30px; } }
 
 @media only screen and (min-width: 768px) {
-  nav.section-menu {
+  .section-menu {
     float: left;
     width: 19%;
     margin-right: 3%; } }
 
-nav.section-menu ul {
+.section-menu ul {
   margin: 0 0 15px 0;
   padding: 0;
   list-style: none; }
-  nav.section-menu ul:after {
+  .section-menu ul:after {
     content: "";
     display: table;
     clear: both; }
-  nav.section-menu ul li {
+  .section-menu ul li {
     float: left;
     width: 48%;
     margin-bottom: 4px; }
-    nav.section-menu ul li:nth-child(odd) {
+    .section-menu ul li:nth-child(odd) {
       margin-right: 2%; }
-    nav.section-menu ul li:nth-child(even) {
+    .section-menu ul li:nth-child(even) {
       margin-left: 2%; }
-    nav.section-menu ul li a {
+    .section-menu ul li a {
       background: #fafafa;
       display: block;
       padding: 2px 8px;
       text-decoration: none;
       border-radius: 3px; }
-      nav.section-menu ul li a:hover {
+      .section-menu ul li a:hover {
         background-color: #ff7500;
         border-color: #ff7500;
         color: #fff; }
-    nav.section-menu ul li.active a {
+    .section-menu ul li.active a {
       background-color: #007fd0;
       border-color: #007fd0;
       color: #fff; }
   @media only screen and (min-width: 768px) {
-    nav.section-menu ul {
+    .section-menu ul {
       margin: 0; }
-      nav.section-menu ul li, nav.section-menu ul li:nth-child(odd), nav.section-menu ul li:nth-child(even) {
+      .section-menu ul li, .section-menu ul li:nth-child(odd), .section-menu ul li:nth-child(even) {
         float: none;
         width: 100%;
         margin-left: 0;
@@ -2691,23 +2691,23 @@ section.form {
     section.form .form__row:last-child {
       border-bottom: 0;
       padding-bottom: 6px; }
-  section.form p.form__checkbox {
+  section.form .form__checkbox {
     font-size: 0.9em;
     margin: 5px 0;
     padding: 0 0 0 30px; }
-    section.form p.form__checkbox input[type="checkbox"] {
+    section.form .form__checkbox input[type="checkbox"] {
       float: left;
       margin: 6px 0 0 -26px; }
-    section.form p.form__checkbox i {
+    section.form .form__checkbox .fa {
       color: #999;
       padding-right: 5px;
       width: 16px;
       font-size: 14px;
       text-align: center;
       display: inline-block; }
-    section.form p.form__checkbox:last-child {
+    section.form .form__checkbox:last-child {
       margin-bottom: 0; }
-  section.form p.form__description, section.form .form__radio p.form__radio__description {
+  section.form .form__description, section.form .form__radio .form__radio__description {
     font-size: 0.8em;
     line-height: 1.4;
     color: #666;
@@ -2720,7 +2720,7 @@ section.form {
       margin: 6px 0 0 -26px; }
     section.form .form__radio:last-child {
       margin-bottom: 0; }
-  section.form p.form__data {
+  section.form .form__data {
     margin: 0;
     font-size: 0.9em; }
   section.form label {
@@ -2736,9 +2736,6 @@ section.form {
   .form__submit .button {
     font-size: 1em;
     padding: 6px 12px; }
-    .form__submit .button i {
-      font-size: 18px;
-      margin-right: 8px; }
 
 input[type="text"],
 input[type="url"],

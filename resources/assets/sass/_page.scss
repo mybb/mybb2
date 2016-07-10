@@ -15,17 +15,6 @@ body {
     background: $background-default;
 }
 
-.wrapper {
-    @include clearfix();
-    width: 90%;
-    margin: 0 5%;
-
-    @include bp-large {
-        max-width: 1250px;
-        margin: 0 auto;
-    }
-}
-
 input, select, textarea, button {
     font: 16px $font-stack;
 }
@@ -74,6 +63,17 @@ textarea {
     resize: vertical;
 }
 
+.wrapper {
+    @include clearfix();
+    width: 90%;
+    margin: 0 5%;
+
+    @include bp-large {
+        max-width: 1250px;
+        margin: 0 auto;
+    }
+}
+
 .main {
     padding: side-values(20px 0 30px 0);
 
@@ -95,7 +95,7 @@ textarea {
             width: 78%;
         }
 
-        aside {
+        .page-sidebar {
             float: $right;
             width: 35%;
             margin-top: 0;
@@ -131,7 +131,7 @@ textarea {
         }
     }
 
-    aside {
+    .page-sidebar {
         padding-bottom: 10px;
         font-size: 0.9em;
         margin-top: 30px;

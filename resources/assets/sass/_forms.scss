@@ -79,7 +79,7 @@ section.form {
         }
     }
 
-    p.form__checkbox {
+    .form__checkbox {
         font-size: 0.9em;
         margin: 5px 0;
         padding: side-values(0 0 0 30px);
@@ -89,7 +89,7 @@ section.form {
             margin: side-values(6px 0 0 -26px);
         }
 
-        i {
+        .fa {
             color: $alt-font-color-2;
             padding-#{$right}: 5px;
             width: 16px;
@@ -103,7 +103,7 @@ section.form {
         }
     }
 
-    p.form__description {
+    .form__description {
         font-size: 0.8em;
         line-height: 1.4;
         color: $alt-font-color-1;
@@ -119,7 +119,7 @@ section.form {
             margin: side-values(6px 0 0 -26px);
         }
 
-        p.form__radio__description {
+        .form__radio__description {
             @extend .form__description;
         }
 
@@ -128,7 +128,7 @@ section.form {
         }
     }
 
-    p.form__data {
+    .form__data {
         margin: 0;
         font-size: 0.9em;
     }
@@ -153,10 +153,5 @@ section.form {
     .button {
         font-size: 1em;
         padding: 6px 12px;
-
-        i {
-            font-size: 18px;
-            margin-#{$right}: 8px;
-        }
     }
 }
