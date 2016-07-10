@@ -3,7 +3,12 @@
     {{ trans('account.following') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
+        <header>
             <h1>{{ trans('account.following') }}</h1>
         </header>
+        <ul class="page-tabs">
+            <li class="page-tabs__active"><a href="#">Forums</a></li>
+            <li><a href="#">Topics</a></li>
+            <li><a href="#">Users</a></li>
+        </ul>
 {% endblock %}

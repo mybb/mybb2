@@ -2445,46 +2445,6 @@ section {
       section .heading--major.heading--linked a:hover .count,
       section .heading--major.heading--linked a:active .count {
         color: #fff; }
-  section .page-tabs {
-    list-style: none;
-    margin: 0;
-    background: #fafafa;
-    padding: 8px;
-    border-top: 1px solid #dfdfdf;
-    border-bottom: 1px solid #dfdfdf; }
-    section .page-tabs li {
-      display: inline-block;
-      margin: 0 0 0 8px; }
-      section .page-tabs li a {
-        padding: 4px 8px;
-        display: inline-block;
-        background: #fafafa;
-        border-radius: 3px; }
-      section .page-tabs li a:hover {
-        text-decoration: none;
-        background: #ff7500;
-        color: #fff; }
-      section .page-tabs li.page-tabs__active a, section .page-tabs li.page-tabs__active a:hover {
-        color: #fff;
-        font-weight: bold;
-        background: #007fd0;
-        text-decoration: none; }
-  section .sort-results {
-    text-align: center;
-    border: 1px solid #ccc;
-    border-top: 2px solid #dfdfdf;
-    padding: 6px 0;
-    clear: both;
-    border-radius: 0 0 4px 4px; }
-    section .sort-results h3 {
-      display: inline-block;
-      margin: 0 0 0 10px;
-      padding: 0;
-      font-weight: normal;
-      color: #666;
-      font-size: 0.9em; }
-      section .sort-results h3:after {
-        content: ":"; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
@@ -2493,6 +2453,48 @@ section {
       border-top-width: 2px; }
   section:last-child {
     margin-bottom: 0; }
+
+.sort-results {
+  text-align: center;
+  border: 1px solid #ccc;
+  border-top: 2px solid #dfdfdf;
+  padding: 6px 0;
+  clear: both;
+  border-radius: 0 0 4px 4px; }
+  .sort-results h3 {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 0;
+    font-weight: normal;
+    color: #666;
+    font-size: 0.9em; }
+    .sort-results h3:after {
+      content: ":"; }
+
+.page-tabs {
+  list-style: none;
+  margin: 0;
+  background: #fafafa;
+  padding: 8px;
+  border-top: 1px solid #dfdfdf;
+  border-bottom: 1px solid #dfdfdf; }
+  .page-tabs li {
+    display: inline-block;
+    margin: 0 0 0 8px; }
+    .page-tabs li a {
+      padding: 4px 8px;
+      display: inline-block;
+      background: #fafafa;
+      border-radius: 3px; }
+    .page-tabs li a:hover {
+      text-decoration: none;
+      background: #ff7500;
+      color: #fff; }
+    .page-tabs li.page-tabs__active a, .page-tabs li.page-tabs__active a:hover {
+      color: #fff;
+      font-weight: bold;
+      background: #007fd0;
+      text-decoration: none; }
 
 dl.stats {
   line-height: 1.6;
