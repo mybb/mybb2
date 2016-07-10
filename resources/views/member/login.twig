@@ -1,36 +1,36 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('member.login') }}
+    {{ trans('member.login') }}
 {% endblock %}
 {% block contents %}
-	{{ form_open({'url': ['auth/login'], 'method': 'post'}) }}
-	<div class="page-content page-content--centered">
-		<header>
-			<h1>{{ trans('member.login') }}</h1>
-		</header>
-		<section class="form">
-			<div class="form__section">
-				<div class="form__row">
-					<h3>{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
-					{{ form_text('username') }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('password', trans('member.password')) }}</h3>
+    {{ form_open({'url': ['auth/login'], 'method': 'post'}) }}
+    <div class="page-content page-content--centered">
+        <header>
+            <h1>{{ trans('member.login') }}</h1>
+        </header>
+        <section class="form">
+            <div class="form__section">
+                <div class="form__row">
+                    <h3>{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
+                    {{ form_text('username') }}
+                </div>
+                <div class="form__row">
+                    <h3>{{ form_label('password', trans('member.password')) }}</h3>
 
-					<p class="form__description"><a href="{{ url('password/email') }}"
-													data-modal="password/email">{{ trans('member.forgotpassword') }}</a>
-					</p>
-					{{ form_password('password', {'class': 'password-toggle'}) }}
-				</div>
-				<div class="form__row">
-					<p class="form__checkbox">{{ form_checkbox('remember_me', 1, true) }} {{ form_label('remember_me', trans('member.remember_me')) }}</p>
-				</div>
-			</div>
-		</section>
-		{{ form_hidden('url', input_get('url')) }}
-		<div class="form__submit">
-			{{ form_button(trans('member.login'), {'type': 'submit', 'class': 'button icon fa-sign-in'}) }}
-		</div>
-	</div>
-	{{ form_close() }}
+                    <p class="form__description"><a href="{{ url('password/email') }}"
+                                                    data-modal="password/email">{{ trans('member.forgotpassword') }}</a>
+                    </p>
+                    {{ form_password('password', {'class': 'password-toggle'}) }}
+                </div>
+                <div class="form__row">
+                    <p class="form__checkbox">{{ form_checkbox('remember_me', 1, true) }} {{ form_label('remember_me', trans('member.remember_me')) }}</p>
+                </div>
+            </div>
+        </section>
+        {{ form_hidden('url', input_get('url')) }}
+        <div class="form__submit">
+            {{ form_button(trans('member.login'), {'type': 'submit', 'class': 'button icon fa-sign-in'}) }}
+        </div>
+    </div>
+    {{ form_close() }}
 {% endblock %}

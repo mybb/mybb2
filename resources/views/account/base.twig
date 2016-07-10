@@ -1,21 +1,21 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{% block inner_title %}{% endblock %}{% if block('inner_title') != '' %} &bull; {% endif %} {{ trans('account.account') }}
+    {% block inner_title %}{% endblock %}{% if block('inner_title') != '' %} &bull; {% endif %} {{ trans('account.account') }}
 {% endblock %}
 {% block contents %}
-		<nav class="section-menu">
-			<ul class="sidebar-navigation">
-				<li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}" class="icon icon--fw fa-dashboard">{{ trans('account.dashboard') }}</a></li>
-				<li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}" class="icon icon--fw fa-user">{{ trans('account.profile') }}</a></li>
-				<li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}" class="icon icon--fw fa-flag">{{ trans('account.notifications') }}</a></li>
-				<li {% if active == 'following' %}class="active"{% endif %}><a href="{{ url_route('account.following') }}" class="icon icon--fw fa-plus">{{ trans('account.following') }}</a></li>
-				<li {% if active == 'preferences' %}class="active"{% endif %}><a href="{{ url_route('account.preferences') }}" class="icon icon--fw fa-cog">{{ trans('account.preferences') }}</a></li>
-				<li {% if active == 'privacy' %}class="active"{% endif %}><a href="{{ url_route('account.privacy') }}" class="icon icon--fw fa-shield">{{ trans('account.privacy') }}</a></li>
-				<li {% if active == 'drafts' %}class="active"{% endif %}><a href="{{ url_route('account.drafts') }}" class="icon icon--fw fa-file-text-o">{{ trans('account.drafts') }}</a></li>
-				<li {% if active == 'files' %}class="active"{% endif %}><a href="#files" class="icon icon--fw fa-paperclip">{{ trans('account.files') }}</a></li>
-			</ul>
-		</nav>
-		<div class="page-content page-content--menu">
-			{% block inner_contents %}{% endblock %}
-		</div>
+        <nav class="section-menu">
+            <ul class="sidebar-navigation">
+                <li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}" class="icon icon--fw fa-dashboard">{{ trans('account.dashboard') }}</a></li>
+                <li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}" class="icon icon--fw fa-user">{{ trans('account.profile') }}</a></li>
+                <li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}" class="icon icon--fw fa-flag">{{ trans('account.notifications') }}</a></li>
+                <li {% if active == 'following' %}class="active"{% endif %}><a href="{{ url_route('account.following') }}" class="icon icon--fw fa-plus">{{ trans('account.following') }}</a></li>
+                <li {% if active == 'preferences' %}class="active"{% endif %}><a href="{{ url_route('account.preferences') }}" class="icon icon--fw fa-cog">{{ trans('account.preferences') }}</a></li>
+                <li {% if active == 'privacy' %}class="active"{% endif %}><a href="{{ url_route('account.privacy') }}" class="icon icon--fw fa-shield">{{ trans('account.privacy') }}</a></li>
+                <li {% if active == 'drafts' %}class="active"{% endif %}><a href="{{ url_route('account.drafts') }}" class="icon icon--fw fa-file-text-o">{{ trans('account.drafts') }}</a></li>
+                <li {% if active == 'files' %}class="active"{% endif %}><a href="#files" class="icon icon--fw fa-paperclip">{{ trans('account.files') }}</a></li>
+            </ul>
+        </nav>
+        <div class="page-content page-content--menu">
+            {% block inner_contents %}{% endblock %}
+        </div>
 {% endblock %}

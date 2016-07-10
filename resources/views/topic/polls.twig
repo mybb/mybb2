@@ -1,60 +1,60 @@
 {% if poll %}
-	<section class="poll">
-		<div class="poll__title">{{ poll.question }}</div>
-		{{ form_open({'route': ['polls.vote', topic.id, topic.slug], 'method': 'post'}) }}
-		<div class="poll__options">
-			{% for option in poll.options %}
-				<div class="poll__option{{ (option.voted)?' poll__option--voted' }}">
-					<div class="poll__option__name">
-						<label>
-							{% if poll.myVote is null %}
-								{% if poll.is_multiple %}
-									{{ form_checkbox('option[]', loop.index) }}
-								{% else %}
-									{{ form_radio('option', loop.index) }}
-								{% endif %}
-							{% endif %}
-							{{ option.option }}
-						</label>
-					</div>
-					<div class="poll__option__votes">
-						<div class="poll__option__votes__bar"
-							 style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
-					</div>
-					<div class="poll__option__count">
-						{{ option.votes }} / {{ poll.num_votes }}
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<div class="poll__vote">
-			<div class="poll__buttons">
-				<a class="button button--secondary icon fa-arrow-right"
-				   href="{{ url_route('polls.show', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.results') }}</a>
-				<a class="button button--secondary icon fa-trash"
-				   href="{{ url_route('polls.remove', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.remove') }}</a>
-				<a class="button button--secondary icon fa-pencil"
-				   href="{{ url_route('polls.edit', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.edit') }}</a>
-			</div>
-			{% if not poll.is_closed %}
-				{% if poll.myVote %}
-					<a class="button icon fa-undo" href="{{ url_route('polls.undo', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.undo') }}</a>
-				{% else %}
-					{{ form_button(trans('poll.vote'), {'type': 'submit', 'class': 'button icon fa-arrow-right'}) }}
-				{% endif %}
-			{% endif %}
-		</div>
-		{% if poll.is_closed or poll.end_at %}
-			{% if poll.is_closed %}
-				<div class="poll__closed">
-					<i class="fa fa-times"></i> {{ trans('poll.isClosed') }}
-				</div>
-			{% else %}
-				<div class="poll__end-date">
-					<i class="fa fa-clock-o"></i> {{ trans('poll.closeAtX', {time:human_date(poll.end_at)}) }}
-				</div>
-			{% endif %}
-		{% endif %}
-		{{ form_close() }}
-	</section>
+    <section class="poll">
+        <div class="poll__title">{{ poll.question }}</div>
+        {{ form_open({'route': ['polls.vote', topic.id, topic.slug], 'method': 'post'}) }}
+        <div class="poll__options">
+            {% for option in poll.options %}
+                <div class="poll__option{{ (option.voted)?' poll__option--voted' }}">
+                    <div class="poll__option__name">
+                        <label>
+                            {% if poll.myVote is null %}
+                                {% if poll.is_multiple %}
+                                    {{ form_checkbox('option[]', loop.index) }}
+                                {% else %}
+                                    {{ form_radio('option', loop.index) }}
+                                {% endif %}
+                            {% endif %}
+                            {{ option.option }}
+                        </label>
+                    </div>
+                    <div class="poll__option__votes">
+                        <div class="poll__option__votes__bar"
+                             style="width: {{ (poll.num_votes == 0)?0:(option.votes/poll.num_votes)*100 }}%"></div>
+                    </div>
+                    <div class="poll__option__count">
+                        {{ option.votes }} / {{ poll.num_votes }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="poll__vote">
+            <div class="poll__buttons">
+                <a class="button button--secondary icon fa-arrow-right"
+                   href="{{ url_route('polls.show', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.results') }}</a>
+                <a class="button button--secondary icon fa-trash"
+                   href="{{ url_route('polls.remove', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.remove') }}</a>
+                <a class="button button--secondary icon fa-pencil"
+                   href="{{ url_route('polls.edit', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.edit') }}</a>
+            </div>
+            {% if not poll.is_closed %}
+                {% if poll.myVote %}
+                    <a class="button icon fa-undo" href="{{ url_route('polls.undo', {'topicSlug': topic.slug, 'topicId': topic.id}) }}">{{ trans('poll.undo') }}</a>
+                {% else %}
+                    {{ form_button(trans('poll.vote'), {'type': 'submit', 'class': 'button icon fa-arrow-right'}) }}
+                {% endif %}
+            {% endif %}
+        </div>
+        {% if poll.is_closed or poll.end_at %}
+            {% if poll.is_closed %}
+                <div class="poll__closed">
+                    <i class="fa fa-times"></i> {{ trans('poll.isClosed') }}
+                </div>
+            {% else %}
+                <div class="poll__end-date">
+                    <i class="fa fa-clock-o"></i> {{ trans('poll.closeAtX', {time:human_date(poll.end_at)}) }}
+                </div>
+            {% endif %}
+        {% endif %}
+        {{ form_close() }}
+    </section>
 {% endif %}

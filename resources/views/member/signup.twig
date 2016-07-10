@@ -1,42 +1,42 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('member.signup') }}
+    {{ trans('member.signup') }}
 {% endblock %}
 {% block contents %}
-	{{ form_open({'url': ['auth/signup'], 'method': 'post'}) }}
-	<div class="page-content page-content--centered">
-		<header>
-			<h1>{{ trans('member.signup') }}</h1>
-		</header>
-		<section class="form">
-			<div class="form__section">
-				<div class="form__row">
-					<h3>{{ form_label('name', trans('member.username')) }}</h3>
-					{{ form_text('name') }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('email', trans('member.email')) }}</h3>
-					{{ form_text('email') }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('password', trans('member.password')) }}</h3>
-					{{ form_password('password', {'class': 'password-toggle'}) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('password_confirmation', trans('member.password')) }}</h3>
+    {{ form_open({'url': ['auth/signup'], 'method': 'post'}) }}
+    <div class="page-content page-content--centered">
+        <header>
+            <h1>{{ trans('member.signup') }}</h1>
+        </header>
+        <section class="form">
+            <div class="form__section">
+                <div class="form__row">
+                    <h3>{{ form_label('name', trans('member.username')) }}</h3>
+                    {{ form_text('name') }}
+                </div>
+                <div class="form__row">
+                    <h3>{{ form_label('email', trans('member.email')) }}</h3>
+                    {{ form_text('email') }}
+                </div>
+                <div class="form__row">
+                    <h3>{{ form_label('password', trans('member.password')) }}</h3>
+                    {{ form_password('password', {'class': 'password-toggle'}) }}
+                </div>
+                <div class="form__row">
+                    <h3>{{ form_label('password_confirmation', trans('member.password')) }}</h3>
 
-					<p class="form__description">{{ trans('member.password_confirm') }}</p>
-					{{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ captcha() }}</h3>
-				</div>
-			</div>
-		</section>
-		{{ form_hidden('url', input_get('url')) }}
-		<div class="form__submit">
-			{{ form_button(trans('member.signup'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
-		</div>
-	</div>
-	{{ form_close() }}
+                    <p class="form__description">{{ trans('member.password_confirm') }}</p>
+                    {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
+                </div>
+                <div class="form__row">
+                    <h3>{{ captcha() }}</h3>
+                </div>
+            </div>
+        </section>
+        {{ form_hidden('url', input_get('url')) }}
+        <div class="form__submit">
+            {{ form_button(trans('member.signup'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
+        </div>
+    </div>
+    {{ form_close() }}
 {% endblock %}

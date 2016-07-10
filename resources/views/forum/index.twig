@@ -2,13 +2,13 @@
 {% block title %}{% endblock %}
 {% block contents %}
 <div class="page-content page-content--sidebar">
-	<header>
-		<h1>{{ setting('general.board_name', 'MyBB Community Forums') }}</h1>
-		<p>{{ setting('general.board_desc', '') }}</p>
-	</header>
-	<section>
-		<h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts" class="heading--linked__link">Latest Discussions <span class="count">42 <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h2>
-		<div class="topic-list topic-list--compact">
+    <header>
+        <h1>{{ setting('general.board_name', 'MyBB Community Forums') }}</h1>
+        <p>{{ setting('general.board_desc', '') }}</p>
+    </header>
+    <section>
+        <h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts" class="heading--linked__link">Latest Discussions <span class="count">42 <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h2>
+        <div class="topic-list topic-list--compact">
             {% for topic in topics %}
                 <div class="topic">
                     <a href="{{ url_route('user.profile', {'slug': topic.lastPost.author.name, 'id': topic.lastPost.author.id}) }}" data-user-id="{{ topic.lastPost.author.id }}" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }} profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }} avatar" class="avatar" /></a>
@@ -25,40 +25,40 @@
                     {{ trans('topic.notfound') }}
                 </div>
             {% endfor %}
-		</div>
-	</section>
+        </div>
+    </section>
 </div>
 
 <aside class="page-sidebar">
-	<section>
-		<h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}" class="heading--linked__link">{{ trans('forum.allforums') }}</a></h3>
+    <section>
+        <h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}" class="heading--linked__link">{{ trans('forum.allforums') }}</a></h3>
 
-		<div class="forum-list forum-list--compact">
-		{% for category in forums %}
-			<div class="category">
-				<h4><a href="{{ url_route("forums.show", {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a></h4>
-				<ul class="category__forums">
-				{% for forum in category.children.toTree %}
-					<li class="category__forum"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></li>
-				{% else %}
-					{#Do nothing, no subforums for this category#}
-				{% endfor %}
-				</ul>
-			</div>
-		{% else %}
-			{{ trans('forum.notfound') }}
-		{% endfor %}
-			</div>
-	</section>
-	<section>
-		<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}" class="heading--linked__link">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
-		<div class="user-list user-list--compact">
-			{% for user in users %}
-				<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
-			{% else %}
-				<div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
-			{% endfor %}
-		</div>
-	</section>
+        <div class="forum-list forum-list--compact">
+        {% for category in forums %}
+            <div class="category">
+                <h4><a href="{{ url_route("forums.show", {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a></h4>
+                <ul class="category__forums">
+                {% for forum in category.children.toTree %}
+                    <li class="category__forum"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></li>
+                {% else %}
+                    {#Do nothing, no subforums for this category#}
+                {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            {{ trans('forum.notfound') }}
+        {% endfor %}
+            </div>
+    </section>
+    <section>
+        <h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}" class="heading--linked__link">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
+        <div class="user-list user-list--compact">
+            {% for user in users %}
+                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
+            {% else %}
+                <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
+            {% endfor %}
+        </div>
+    </section>
 </aside>
 {% endblock %}

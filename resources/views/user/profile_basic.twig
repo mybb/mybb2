@@ -1,37 +1,37 @@
 <div class="page-content page-content--sidebar">
-	{% for group in profile_field_groups %}
-		<section class="profile__field-group">
-			<h2 class="heading heading--major">{{ group.name }}</h2>
-			{% for field in group.fields %}
-				{% if field.has_value %}
-					<div class="profile__field">
-						<h3>{{ field.name }}</h3>
-						<p>{{ field.getValue(user) }}</p>
-					</div>
-				{% endif %}
-			{% endfor %}
-		</section>
-	{% endfor %}
+    {% for group in profile_field_groups %}
+        <section class="profile__field-group">
+            <h2 class="heading heading--major">{{ group.name }}</h2>
+            {% for field in group.fields %}
+                {% if field.has_value %}
+                    <div class="profile__field">
+                        <h3>{{ field.name }}</h3>
+                        <p>{{ field.getValue(user) }}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </section>
+    {% endfor %}
 </div>
 
 <aside class="page-sidebar">
-	<section>
-		<dl class="stats">
-			<dt class="stats__posts">{{ trans('topic.posts') }}</dt>
-			<dd class="stats__posts">{{ user.num_posts }}</dd>
-			<dt class="stats__topics">{{ trans('topic.topics') }}</dt>
-			<dd class="stats__topics">{{ user.num_topics }}</dd>
-			<dt class="stats__join-date">{{ trans('member.joinDate') }}</dt>
-			<dd class="stats__join-date">{{ generate_time(user.created_at) }}</dd>
+    <section>
+        <dl class="stats">
+            <dt class="stats__posts">{{ trans('topic.posts') }}</dt>
+            <dd class="stats__posts">{{ user.num_posts }}</dd>
+            <dt class="stats__topics">{{ trans('topic.topics') }}</dt>
+            <dd class="stats__topics">{{ user.num_topics }}</dd>
+            <dt class="stats__join-date">{{ trans('member.joinDate') }}</dt>
+            <dd class="stats__join-date">{{ generate_time(user.created_at) }}</dd>
 
-			{% if user.isOnline %}
-				<dt class="stats__last-page">{{ trans('member.lastPage') }}</dt>
-				<dd class="stats__last-page">{{ user.last_page|raw }} ({{ generate_time(user.last_visit) }})</dd>
-			{% else %}
-				<dt class="stats__last-visit">{{ trans('member.lastVisit') }}</dt>
-				<dd class="stats__last-visit">{{ generate_time(user.last_visit) }}</dd>
-			{% endif %}
+            {% if user.isOnline %}
+                <dt class="stats__last-page">{{ trans('member.lastPage') }}</dt>
+                <dd class="stats__last-page">{{ user.last_page|raw }} ({{ generate_time(user.last_visit) }})</dd>
+            {% else %}
+                <dt class="stats__last-visit">{{ trans('member.lastVisit') }}</dt>
+                <dd class="stats__last-visit">{{ generate_time(user.last_visit) }}</dd>
+            {% endif %}
 
-		</dl>
-	</section>
+        </dl>
+    </section>
 </aside>

@@ -1,40 +1,40 @@
 {% extends "layouts.base" %}
 {% block title %}{{ trans('conversations.conversations') }} - {{ trans('conversations.compose') }}{% endblock %}
 {% block contents %}
-	<div class="page-content">
-		{{ form_open({'route': ['conversations.compose'], 'method': 'post', 'id': 'compose'}) }}
-		<section class="topic topic--create">
-			<header>
-				<h1>{{ trans('conversations.compose') }}</h1>
-				{{ form_text('title', input_get('title'), {'class': 'topic__title', 'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
-			</header>
-			<div class="conversation-participants conversation-participants--compose">
-				<h3>{{ trans('conversations.participants') }}</h3>
-					{# TODO: some sort of autocomplete #}
-					{{ form_text('participants', input_get('participants'), {'placeholder': trans('conversations.participants_list'), 'title': trans('conversations.participants_list')}) }}
-			</div>
-			<div class="post post--reply">
-				<div class="post__meta">
-					<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
-					<h3><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
-					<span class="post__date">{{ trans('general.now') }}</span>
-				</div>
-				<div class="post__body">
-					{{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '8', 'id': 'message', 'placeholder': trans('conversations.write_message'), 'title': trans('conversations.write_message')}) }}
-				</div>
-				<div class="post__foot">
-					<ul class="post__controls">
-						<li class="preview"><a href="{{ url_route("conversations.compose") }}" onclick="return submitFormAsGet('compose');" class="icon fa-edit">{{ trans('general.preview') }}</a></li>
-						<li class="attach"><a href="#attach" class="icon fa-paperclip">{{ trans('topic.attachFiles') }}</a></li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		{% include 'conversation.preview' with {'preview': preview} %}
-		<div class="form__submit">
-			{{ form_button(trans('conversations.create'), {'type': 'submit', 'class': 'button icon fa-edit'}) }}
-		</div>
-		{{ form_close() }}
-	</div>
+    <div class="page-content">
+        {{ form_open({'route': ['conversations.compose'], 'method': 'post', 'id': 'compose'}) }}
+        <section class="topic topic--create">
+            <header>
+                <h1>{{ trans('conversations.compose') }}</h1>
+                {{ form_text('title', input_get('title'), {'class': 'topic__title', 'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
+            </header>
+            <div class="conversation-participants conversation-participants--compose">
+                <h3>{{ trans('conversations.participants') }}</h3>
+                    {# TODO: some sort of autocomplete #}
+                    {{ form_text('participants', input_get('participants'), {'placeholder': trans('conversations.participants_list'), 'title': trans('conversations.participants_list')}) }}
+            </div>
+            <div class="post post--reply">
+                <div class="post__meta">
+                    <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+                    <h3><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
+                    <span class="post__date">{{ trans('general.now') }}</span>
+                </div>
+                <div class="post__body">
+                    {{ form_textarea('message', input_get('message'), {'class':'textarea', 'rows': '8', 'id': 'message', 'placeholder': trans('conversations.write_message'), 'title': trans('conversations.write_message')}) }}
+                </div>
+                <div class="post__foot">
+                    <ul class="post__controls">
+                        <li class="preview"><a href="{{ url_route("conversations.compose") }}" onclick="return submitFormAsGet('compose');" class="icon fa-edit">{{ trans('general.preview') }}</a></li>
+                        <li class="attach"><a href="#attach" class="icon fa-paperclip">{{ trans('topic.attachFiles') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        {% include 'conversation.preview' with {'preview': preview} %}
+        <div class="form__submit">
+            {{ form_button(trans('conversations.create'), {'type': 'submit', 'class': 'button icon fa-edit'}) }}
+        </div>
+        {{ form_close() }}
+    </div>
 
 {% endblock %}

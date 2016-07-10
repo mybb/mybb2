@@ -1,52 +1,52 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('member.members') }}
+    {{ trans('member.members') }}
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-	<header>
-		<h1>{{ trans('member.members') }}</h1>
-	</header>
-	<section class="container user-list">
-		{% for user in users %}
-			<div class="user-list__user">
-				<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
-				<h3 class="user-list__user__username">
+    <header>
+        <h1>{{ trans('member.members') }}</h1>
+    </header>
+    <section class="container user-list">
+        {% for user in users %}
+            <div class="user-list__user">
+                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
+                <h3 class="user-list__user__username">
                     {{ render_profile_link(user) }}
                 </h3>
-				<h4 class="user-list__user__usertitle">{{ user.usertitle?:user.displayRole.role_display_name }}</h4>
-				<span class="team-badge"><span class="text">{{ user.displayRole.role_display_name }}</span></span>
-				<dl class="user-list__user__user-statistics stats">
-					<dt>{{ trans('member.posts') }}</dt>
-					<dd>{{ user.num_posts }}</dd>
-					<dt>{{ trans('member.topics') }}</dt>
-					<dd>{{ user.num_topics }}</dd>
-					<dt>{{ trans('member.joinDate') }}</dt>
-					<dd>{{ generate_time(user.created_at) }}</dd>
-					<dt>{{ trans('member.lastVisit') }}</dt>
-					<dd>{{ generate_time(user.last_visit) }}</dd>
-				</dl>
-			</div>
-		{% endfor %}
+                <h4 class="user-list__user__usertitle">{{ user.usertitle?:user.displayRole.role_display_name }}</h4>
+                <span class="team-badge"><span class="text">{{ user.displayRole.role_display_name }}</span></span>
+                <dl class="user-list__user__user-statistics stats">
+                    <dt>{{ trans('member.posts') }}</dt>
+                    <dd>{{ user.num_posts }}</dd>
+                    <dt>{{ trans('member.topics') }}</dt>
+                    <dd>{{ user.num_topics }}</dd>
+                    <dt>{{ trans('member.joinDate') }}</dt>
+                    <dd>{{ generate_time(user.created_at) }}</dd>
+                    <dt>{{ trans('member.lastVisit') }}</dt>
+                    <dd>{{ generate_time(user.last_visit) }}</dd>
+                </dl>
+            </div>
+        {% endfor %}
 
-		{{ form_open({'url_route': url_route('members'), 'method': 'get'}) }}
-		<div class="sort-results">
-			<h3>{{ trans('general.sorting') }}</h3>
-			{{ form_select('sortBy', {
-				'name': trans('general.sortby')~' '~trans('general.username'),
-				'created_at': trans('general.sortby')~' '~trans('member.joinDate'),
-				'last_visit': trans('general.sortby')~' '~trans('member.lastVisit'),
-				'num_posts': trans('general.sortby')~' '~trans('member.posts'),
-				'num_topics': trans('general.sortby')~' '~trans('member.topics')
-			}, sortBy) }}
-			{{ form_select('sortDir', {
-				'asc': trans('general.order')~' '~trans('general.ascending'),
-				'desc': trans('general.order')~' '~trans('general.descending')
-			}, sortDir) }}
-			{{ form_button('<span class="text">'~trans('member.sortMembers')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-		</div>
-		{{ form_close() }}
-	</section>
-	{{ users.render|raw }}
+        {{ form_open({'url_route': url_route('members'), 'method': 'get'}) }}
+        <div class="sort-results">
+            <h3>{{ trans('general.sorting') }}</h3>
+            {{ form_select('sortBy', {
+                'name': trans('general.sortby')~' '~trans('general.username'),
+                'created_at': trans('general.sortby')~' '~trans('member.joinDate'),
+                'last_visit': trans('general.sortby')~' '~trans('member.lastVisit'),
+                'num_posts': trans('general.sortby')~' '~trans('member.posts'),
+                'num_topics': trans('general.sortby')~' '~trans('member.topics')
+            }, sortBy) }}
+            {{ form_select('sortDir', {
+                'asc': trans('general.order')~' '~trans('general.ascending'),
+                'desc': trans('general.order')~' '~trans('general.descending')
+            }, sortDir) }}
+            {{ form_button('<span class="text">'~trans('member.sortMembers')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+        </div>
+        {{ form_close() }}
+    </section>
+    {{ users.render|raw }}
 </div>
 {% endblock %}

@@ -1,77 +1,77 @@
 {% extends "account.base" %}
 {% block inner_title %}
-	{{ trans('account.profile') }}
+    {{ trans('account.profile') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-			<h1>{{ trans('account.profile') }}</h1>
-		</header>
+        <header>
+            <h1>{{ trans('account.profile') }}</h1>
+        </header>
 
-	{{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
-	<section class="form">
-		<div class="form__section">
-			<h2>{{ trans('account.avatar') }}</h2>
-			<div class="form__section__container change-avatar">
-				<a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
-				<p>{{ trans('account.avatar_desc') }}</p>
-				<div class="buttons">
-					<a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary icon fa-picture-o">{{ trans('account.avatar_change') }}</a>
-					<a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary icon fa-times">{{ trans('account.avatar_remove') }}</a>
-				</div>
-			</div>
-		</div>
-		<div class="form__section">
-			<h2>{{ trans('account.details') }}</h2>
-			<div class="form__section__container">
-				<div class="buttons">
-					<a {{ modal_attributes('account.username') }} class="button button--secondary icon fa-user">{{ trans('account.change_username') }}</a>
-					<a {{ modal_attributes('account.email') }} class="button button--secondary icon fa-paper-plane-o">{{ trans('account.change_email') }}</a>
-					<a {{ modal_attributes('account.password') }} class="button button--secondary icon fa-key">{{ trans('account.change_password') }}</a>
-				</div>
-			</div>
-		</div>
-		<div class="form__section">
-			<h2>{{ trans('account.roles') }}</h2>
-			<div class="form__section__container">
-				{% for role in auth_user().roles %}
-					{{ role.role_display_name }}
-				{% endfor %}
-			</div>
-		</div>
-		{% for group in profile_field_groups %}
-			<div class="form__section clearfix">
-				<h2>{{ group.name }}</h2>
-				<div class="form__section__container">
-					{% for field in group.fields %}
-						<div class="form__row">
-							{{ form_render_field(field) }}
-						</div>
-					{% endfor %}
-				</div>
-			</div>
-		{% endfor %}
-		<div class="form__section clearfix">
-			<h2>{{ trans('account.about_you') }}</h2>
-			<div class="form__section__container">
-				<div class="form__row">
-					<h3>{{ trans('general.dob') }}</h3>
-					{# Another raw using #}
-					<p class="form__description">{{ trans('account.dob_desc', {'link': url_route('account.privacy')})|raw }}</p>
-					{{ form_selectRange('date_of_birth_day', 1, 31, dob.day) }}
-					{{ form_selectMonth('date_of_birth_month', dob.month) }}
-					{{ form_text('date_of_birth_year', dob.year, {'maxlength': 4, 'class': 'short'}) }}
-				</div>
-				<div class="form__row">
-					<h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
-					<p class="form__description">{{ trans('account.usertitle_desc') }}</p>
-					{{ form_text('usertitle', auth_user().usertitle) }}
-				</div>
-			</div>
-		</div>
-	</section>
-	<div class="form__submit">
-		{{ form_button(trans('account.update_profile'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
-	</div>
-	{{ form_close() }}
+    {{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
+    <section class="form">
+        <div class="form__section">
+            <h2>{{ trans('account.avatar') }}</h2>
+            <div class="form__section__container change-avatar">
+                <a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
+                <p>{{ trans('account.avatar_desc') }}</p>
+                <div class="buttons">
+                    <a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary icon fa-picture-o">{{ trans('account.avatar_change') }}</a>
+                    <a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary icon fa-times">{{ trans('account.avatar_remove') }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="form__section">
+            <h2>{{ trans('account.details') }}</h2>
+            <div class="form__section__container">
+                <div class="buttons">
+                    <a {{ modal_attributes('account.username') }} class="button button--secondary icon fa-user">{{ trans('account.change_username') }}</a>
+                    <a {{ modal_attributes('account.email') }} class="button button--secondary icon fa-paper-plane-o">{{ trans('account.change_email') }}</a>
+                    <a {{ modal_attributes('account.password') }} class="button button--secondary icon fa-key">{{ trans('account.change_password') }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="form__section">
+            <h2>{{ trans('account.roles') }}</h2>
+            <div class="form__section__container">
+                {% for role in auth_user().roles %}
+                    {{ role.role_display_name }}
+                {% endfor %}
+            </div>
+        </div>
+        {% for group in profile_field_groups %}
+            <div class="form__section clearfix">
+                <h2>{{ group.name }}</h2>
+                <div class="form__section__container">
+                    {% for field in group.fields %}
+                        <div class="form__row">
+                            {{ form_render_field(field) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="form__section clearfix">
+            <h2>{{ trans('account.about_you') }}</h2>
+            <div class="form__section__container">
+                <div class="form__row">
+                    <h3>{{ trans('general.dob') }}</h3>
+                    {# Another raw using #}
+                    <p class="form__description">{{ trans('account.dob_desc', {'link': url_route('account.privacy')})|raw }}</p>
+                    {{ form_selectRange('date_of_birth_day', 1, 31, dob.day) }}
+                    {{ form_selectMonth('date_of_birth_month', dob.month) }}
+                    {{ form_text('date_of_birth_year', dob.year, {'maxlength': 4, 'class': 'short'}) }}
+                </div>
+                <div class="form__row">
+                    <h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
+                    <p class="form__description">{{ trans('account.usertitle_desc') }}</p>
+                    {{ form_text('usertitle', auth_user().usertitle) }}
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="form__submit">
+        {{ form_button(trans('account.update_profile'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
+    </div>
+    {{ form_close() }}
 
 {% endblock %}

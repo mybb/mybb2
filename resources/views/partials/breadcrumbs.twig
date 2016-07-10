@@ -3,7 +3,7 @@
         {% for breadcrumb in breadcrumbs %}
             {% if breadcrumb.last == false %}
                 <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a>
-				<i class="fa fa-angle-{{ langDir.right }}"></i>
+                <i class="fa fa-angle-{{ langDir.right }}"></i>
             {% else %}
             {# Hiding last breadcrumb item (duplicates page) title -- uncomment to show #}
             {# <a href="{{ breadcrumb.url }}">{{ breadcrumb.title }}</a> #}

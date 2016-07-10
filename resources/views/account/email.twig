@@ -1,36 +1,36 @@
 {% extends "account.base" %}
 {% block inner_title %}
-	{{ trans('account.email') }}
+    {{ trans('account.email') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-			<h1>{{ trans('account.email') }}</h1>
-		</header>
+        <header>
+            <h1>{{ trans('account.email') }}</h1>
+        </header>
 
-	{# TODO: check whether this get's blocked in the modals, if so move it inside the form #}
-	{% if has_confirmation %}
-		<div class="alert alert-danger">
-			{{ trans('account.unconfirmedChange') }}
-		</div>
-	{% endif %}
-	{{ form_open({'url_route': 'account.email', 'method': 'post'}) }}
-	<section class="form">
-		<div class="form__section">
-			<div class="form__row">
-				<h3>{{ form_label('email', trans('account.new_email')) }}</label></h3>
-				<p class="form__description">{{ trans('account.new_email_desc') }}</p>
-				{{ form_text('email') }}
-			</div>
-			<div class="form__row">
-				<h3>{{ form_label('password', trans('account.current_password')) }}</h3>
-				<p class="form__description">{{ trans('account.current_password_email') }}</p>
-				{{ form_password('password', {'class': 'password-toggle'}) }}
-			</div>
-		</div>
-	</section>
-	<div class="form__submit">
-		{{ form_button(trans('account.change_email'), {'type': 'submit', 'class': 'button icon fa-envelope'}) }}
-	</div>
-	{{ form_close() }}
+    {# TODO: check whether this get's blocked in the modals, if so move it inside the form #}
+    {% if has_confirmation %}
+        <div class="alert alert-danger">
+            {{ trans('account.unconfirmedChange') }}
+        </div>
+    {% endif %}
+    {{ form_open({'url_route': 'account.email', 'method': 'post'}) }}
+    <section class="form">
+        <div class="form__section">
+            <div class="form__row">
+                <h3>{{ form_label('email', trans('account.new_email')) }}</label></h3>
+                <p class="form__description">{{ trans('account.new_email_desc') }}</p>
+                {{ form_text('email') }}
+            </div>
+            <div class="form__row">
+                <h3>{{ form_label('password', trans('account.current_password')) }}</h3>
+                <p class="form__description">{{ trans('account.current_password_email') }}</p>
+                {{ form_password('password', {'class': 'password-toggle'}) }}
+            </div>
+        </div>
+    </section>
+    <div class="form__submit">
+        {{ form_button(trans('account.change_email'), {'type': 'submit', 'class': 'button icon fa-envelope'}) }}
+    </div>
+    {{ form_close() }}
 
 {% endblock %}

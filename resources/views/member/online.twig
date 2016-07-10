@@ -1,32 +1,32 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('member.online') }}
+    {{ trans('member.online') }}
 {% endblock %}
 {% block head %}
-	{% if setting('wio.refresh', 1) > 0 %}
-		<meta http-equiv="refresh" content="{{ setting('wio.refresh', 1)*60 }};URL={{ url_route('members.online', [], false) }}">
-	{% endif %}
+    {% if setting('wio.refresh', 1) > 0 %}
+        <meta http-equiv="refresh" content="{{ setting('wio.refresh', 1)*60 }};URL={{ url_route('members.online', [], false) }}">
+    {% endif %}
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-	<header>
-		<h1>{{ trans('member.online') }}</h1>
-	</header>
-	{{ users.render|raw }}
-	<section class="user-list online-now container">
-		{% for user in users %}
-			<div class="user-list__user">
-				<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
-				<h3 class="user-list__user__username">
+    <header>
+        <h1>{{ trans('member.online') }}</h1>
+    </header>
+    {{ users.render|raw }}
+    <section class="user-list online-now container">
+        {% for user in users %}
+            <div class="user-list__user">
+                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>
+                <h3 class="user-list__user__username">
                     {{ render_profile_link(user) }}
                 </h3>
-				<p class="user-list__user__date">{{ generate_time(user.last_visit) }}</p>
-				<p class="user-list__user__activity">{{ user.last_page|raw }}</p>
-			</div>
-		{% else %}
-			<div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
-		{% endfor %}
-	</section>
-	{{ users.render|raw }}
+                <p class="user-list__user__date">{{ generate_time(user.last_visit) }}</p>
+                <p class="user-list__user__activity">{{ user.last_page|raw }}</p>
+            </div>
+        {% else %}
+            <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
+        {% endfor %}
+    </section>
+    {{ users.render|raw }}
 </div>
 {% endblock %}
