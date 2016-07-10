@@ -42,6 +42,12 @@
 
 	.poll__option__name {
 		margin-bottom: 8px;
+
+		@include bp-medium {
+			width: 50%;
+			float: $left;
+			margin-bottom: 0;
+		}
 	}
 
 	.poll__option__votes {
@@ -63,6 +69,11 @@
 			z-index: 1;
 			@include border-radius(3px);
 		}
+
+		@include bp-medium {
+			width: 40%;
+			float: $left;
+		}
 	}
 
 	.poll__option__count {
@@ -70,6 +81,11 @@
 		width: 18%;
 		margin-#{$left}: 2%;
 		font-size: 0.9em;
+
+		@include bp-medium {
+			width: 8%;
+			float: $left;
+		}
 	}
 
 	.poll__option__votes--result {
@@ -105,28 +121,6 @@
 
 		i {
 			margin-right: 2px;
-		}
-	}
-}
-
-@media only screen and (min-width: 768px) {
-
-	.poll {
-
-		.poll__option__name {
-			width: 50%;
-			float: $left;
-			margin-bottom: 0;
-		}
-
-		.poll__option__votes {
-			width: 40%;
-			float: $left;
-		}
-
-		.poll__option__count {
-			width: 8%;
-			float: $left;
 		}
 	}
 }

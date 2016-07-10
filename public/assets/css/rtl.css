@@ -3946,6 +3946,11 @@ section.container .forum-list {
       font-weight: bold; }
   .poll .poll__option__name {
     margin-bottom: 8px; }
+    @media only screen and (min-width: 768px) {
+      .poll .poll__option__name {
+        width: 50%;
+        float: right;
+        margin-bottom: 0; } }
   .poll .poll__option__votes {
     width: 80%;
     float: right;
@@ -3963,11 +3968,19 @@ section.container .forum-list {
       background: #007fd0;
       z-index: 1;
       border-radius: 3px; }
+    @media only screen and (min-width: 768px) {
+      .poll .poll__option__votes {
+        width: 40%;
+        float: right; } }
   .poll .poll__option__count {
     float: right;
     width: 18%;
     margin-right: 2%;
     font-size: 0.9em; }
+    @media only screen and (min-width: 768px) {
+      .poll .poll__option__count {
+        width: 8%;
+        float: right; } }
   .poll .poll__option__votes--result {
     font-size: 14px; }
   .poll .poll__vote {
@@ -3990,18 +4003,6 @@ section.container .forum-list {
     margin: 5px; }
     .poll .poll__closed i {
       margin-right: 2px; }
-
-@media only screen and (min-width: 768px) {
-  .poll .poll__option__name {
-    width: 50%;
-    float: right;
-    margin-bottom: 0; }
-  .poll .poll__option__votes {
-    width: 40%;
-    float: right; }
-  .poll .poll__option__count {
-    width: 8%;
-    float: right; } }
 
 .user-list {
   padding: 12px 12px 0 12px; }
