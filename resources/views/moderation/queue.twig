@@ -1,6 +1,8 @@
 {% extends "moderation.base" %}
 {% block inner_contents %}
-    <h1>{{ trans('moderation.queue_title') }}</h1>
+    <header>
+        <h1>{{ trans('moderation.queue_title') }}</h1>
+    </header>
 
     {% if queued_topics is empty and queued_posts is empty %}
         <div class="alert alert--success">

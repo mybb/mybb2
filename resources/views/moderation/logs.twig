@@ -1,6 +1,8 @@
 {% extends "moderation.base" %}
 {% block inner_contents %}
-    <h1>{{ trans('moderation.logs_title') }}</h1>
+    <header>
+        <h1>{{ trans('moderation.logs_title') }}</h1>
+    </header>
 
     {% if logs is not empty %}
     <table class="table table--bordered">
