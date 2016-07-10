@@ -21,13 +21,15 @@
 					{{ form_open({'route':'search','id':'search','class':'search'}) }}
 						<a href="{{ url_route('search') }}" class="search__button"><i class="fa fa-search"></i><span class="text">Search</span></a>
 						<div class="search__container">
-							<input type="search" name="keyword" placeholder="" value="" class="search__field" />
-							<span class="search__controls">
-								<button type="submit" class="search__submit">
-									<i class="fa fa-search"></i><span class="text">{{ trans('search.search') }}</span>
-								</button>
-								<a href="{{ url_route('search') }}" class="search__advanced" title="{{ trans('search.advancedSearch') }}"><i class="fa fa-cog"></i><span class="text">{{ trans('search.advanced') }}</span></a>
-							</span>
+							<label>
+								<input type="text" name="keyword" placeholder="{{ trans('search.searchforum') }}" value="" class="search__field" />
+								<span class="search__controls">
+									<button type="submit" class="search__submit icon fa-search">
+										<span class="visuallyhidden">{{ trans('search.search') }}</span>
+									</button>
+									<a href="{{ url_route('search') }}" class="search__advanced icon fa-cog" title="{{ trans('search.advancedSearch') }}"><span class="visuallyhidden">{{ trans('search.advanced') }}</span></a>
+								</span>
+							</label>
 						</div>
 					{{ form_close() }}
 				</div>

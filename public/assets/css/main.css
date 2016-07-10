@@ -2551,12 +2551,14 @@ h1.title {
   clear: both;
   display: none;
   border-radius: 4px;
-  padding: 2px 5px;
+  padding: 2px 0 2px 8px;
   cursor: text;
   background: #fff;
   margin: 0 0 8px 0;
   width: auto;
   box-sizing: border-box; }
+  #search .search__container label {
+    cursor: text; }
 
 #search .search__field {
   border: 0;
@@ -2576,16 +2578,13 @@ h1.title {
 #search button.search__submit,
 #search a.search__advanced {
   height: 24px;
-  margin: 0 0 0 8px;
+  margin: 0;
   padding: 0;
   border: 0;
   cursor: pointer;
   background: none;
-  color: #999;
-  font-size: 14px; }
-  #search button.search__submit .text,
-  #search a.search__advanced .text {
-    display: none; }
+  font-size: 14px;
+  color: #999; }
   #search button.search__submit:hover,
   #search a.search__advanced:hover {
     color: #666; }

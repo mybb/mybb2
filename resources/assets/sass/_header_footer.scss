@@ -389,12 +389,16 @@ h1.title {
 		clear: both;
 		display: none;
 		@include border-radius(4px);
-		padding: 2px 5px;
+		padding: side-values(2px 0 2px 8px);
 		cursor: text;
 		background: #fff;
 		margin: side-values(0 0 8px 0);
 		width: auto;
 		@include box-sizing(border-box);
+
+		label {
+			cursor: text;
+		}
 	}
 
 	.search__field {
@@ -417,17 +421,13 @@ h1.title {
 	button.search__submit,
 	a.search__advanced {
 		height: 24px;
-		margin: side-values(0 0 0 8px);
+		margin: 0;
 		padding: 0;
 		border: 0;
 		cursor: pointer;
 		background: none;
-		color: $alt-font-color-2;
 		font-size: 14px;
-
-		.text {
-			display: none;
-		}
+		color: $alt-font-color-2;
 
 		&:hover {
 			color: $alt-font-color-1;
