@@ -1,5 +1,4 @@
-
-section.form {
+.form {
 
 	.form__section__container.change-avatar {
 		padding-#{$left}: 130px;
@@ -49,7 +48,7 @@ section.form {
 }
 
 // this may need additional revisions once notifications are implemented
-ul.notifications {
+.notifications {
 	margin: 0;
 	font-size: 0.9em;
 	line-height: 1.6;
@@ -67,7 +66,7 @@ ul.notifications {
 		}
 	}
 
-	a.avatar-profile-link {
+	.avatar-profile-link {
 		float: $left;
 		margin: side-values(0 12px 0 0);
 		width: 40px;
@@ -84,7 +83,7 @@ ul.notifications {
 		text-decoration: underline;
 	}
 
-	a.notification {
+	.notification {
 		text-decoration: none;
 		margin-#{$left}: 52px;
 		padding-#{$left}: 24px;
@@ -95,7 +94,7 @@ ul.notifications {
 		font-weight: bold;
 	}
 
-	i {
+	.fa {
 		color: $alt-font-color-2;
 	}
 

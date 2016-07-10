@@ -7,7 +7,7 @@
 		<p>{{ setting('general.board_desc', '') }}</p>
 	</header>
 	<section>
-		<h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts">Latest Discussions <span class="count">42 <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h2>
+		<h2 class="heading heading--linked heading--major"><a href="index.php?page=new-posts" class="heading--linked__link">Latest Discussions <span class="count">42 <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h2>
 		<div class="topic-list topic-list--compact">
             {% for topic in topics %}
                 <div class="topic">
@@ -31,7 +31,7 @@
 
 <aside>
 	<section>
-		<h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}">{{ trans('forum.allforums') }}</a></h3>
+		<h3 class="heading heading--linked"><a href="{{ url_route('forums.all') }}" class="heading--linked__link">{{ trans('forum.allforums') }}</a></h3>
 
 		<div class="forum-list forum-list--compact">
 		{% for category in forums %}
@@ -51,7 +51,7 @@
 			</div>
 	</section>
 		<section>
-			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
+			<h3 class="heading heading--linked"><a href="{{ url_route('members.online') }}" class="heading--linked__link">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
 			<div class="user-list user-list--compact">
 				{% for user in users %}
 					<a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>

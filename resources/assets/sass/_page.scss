@@ -58,6 +58,10 @@ hr {
 
 img {
 	vertical-align: middle;
+
+	&.avatar {
+		@include border-radius(4px);
+	}
 }
 
 fieldset {
@@ -68,10 +72,6 @@ fieldset {
 
 textarea {
 	resize: vertical;
-}
-
-img.avatar {
-	@include border-radius(4px);
 }
 
 .main {

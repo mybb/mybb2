@@ -2346,6 +2346,8 @@ hr {
 
 img {
   vertical-align: middle; }
+  img.avatar {
+    border-radius: 4px; }
 
 fieldset {
   border: 0;
@@ -2354,9 +2356,6 @@ fieldset {
 
 textarea {
   resize: vertical; }
-
-img.avatar {
-  border-radius: 4px; }
 
 .main {
   padding: 20px 0 30px 0; }
@@ -2409,17 +2408,16 @@ section {
   section .heading--linked {
     border-bottom: 0;
     padding: 0; }
-    section .heading--linked a {
+    section .heading--linked .heading--linked__link {
       padding: 8px 12px;
       border-bottom: 1px solid #dfdfdf;
-      text-decoration: none;
       display: block; }
-      section .heading--linked a .count {
+      section .heading--linked .heading--linked__link .count {
         float: right;
         font-size: 0.8em;
         color: #666;
         font-weight: normal; }
-        section .heading--linked a .count i {
+        section .heading--linked .heading--linked__link .count .fa {
           margin-left: 4px; }
   section .heading--major {
     background: #007fd0;
@@ -2430,18 +2428,11 @@ section {
     border-radius: 4px; }
   section .heading--major.heading--linked {
     padding: 0; }
-    section .heading--major.heading--linked a {
+    section .heading--major.heading--linked .heading--linked__link {
       border: none;
-      color: #fff;
-      text-decoration: none; }
-      section .heading--major.heading--linked a .count {
+      color: #fff; }
+      section .heading--major.heading--linked .heading--linked__link .count {
         color: rgba(255, 255, 255, 0.7); }
-    section .heading--major.heading--linked a:hover,
-    section .heading--major.heading--linked a:active {
-      text-decoration: underline; }
-      section .heading--major.heading--linked a:hover .count,
-      section .heading--major.heading--linked a:active .count {
-        color: #fff; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
@@ -2516,7 +2507,7 @@ dl.stats {
   margin-bottom: 20px;
   font-size: 0.9em;
   border-radius: 4px; }
-  .alert i {
+  .alert .fa {
     float: left;
     margin: 6px 0 0 -25px; }
   .alert p {
@@ -4130,15 +4121,15 @@ section.container .forum-list {
   .profile .profile__field:last-child {
     border-bottom: none; }
 
-section.form .form__section__container.change-avatar {
+.form .form__section__container.change-avatar {
   padding-left: 130px; }
-  section.form .form__section__container.change-avatar .avatar-profile-link {
+  .form .form__section__container.change-avatar .avatar-profile-link {
     float: left;
     margin: 0 10px 0 -110px; }
-    section.form .form__section__container.change-avatar .avatar-profile-link img.avatar {
+    .form .form__section__container.change-avatar .avatar-profile-link img.avatar {
       width: 100px;
       height: 100px; }
-  section.form .form__section__container.change-avatar p {
+  .form .form__section__container.change-avatar p {
     padding: 0 0 0 5px;
     margin: 0 0 10px 0;
     font-size: 0.9em;
@@ -4164,40 +4155,40 @@ section.form .form__section__container.change-avatar {
   .dashboard__account .dashboard__account__username {
     margin: 0 0 6px 0; }
 
-ul.notifications {
+.notifications {
   margin: 0;
   font-size: 0.9em;
   line-height: 1.6;
   list-style: none;
   padding: 0; }
-  ul.notifications li {
+  .notifications li {
     overflow: hidden;
     margin: 0;
     padding: 8px;
     border-bottom: 1px solid #dfdfdf; }
-    ul.notifications li:last-child {
+    .notifications li:last-child {
       border-bottom: 0; }
-  ul.notifications a.avatar-profile-link {
+  .notifications .avatar-profile-link {
     float: left;
     margin: 0 12px 0 0;
     width: 40px;
     height: 40px; }
-    ul.notifications a.avatar-profile-link img.avatar {
+    .notifications .avatar-profile-link img.avatar {
       width: 40px;
       height: 40px; }
-  ul.notifications h2 a:hover .text,
-  ul.notifications a:hover .text {
+  .notifications h2 a:hover .text,
+  .notifications a:hover .text {
     text-decoration: underline; }
-  ul.notifications a.notification {
+  .notifications .notification {
     text-decoration: none;
     margin-left: 52px;
     padding-left: 24px;
     display: block; }
-  ul.notifications .notification__username {
+  .notifications .notification__username {
     font-weight: bold; }
-  ul.notifications i {
+  .notifications .fa {
     color: #999; }
-  ul.notifications time {
+  .notifications time {
     font-size: 0.8em;
     color: #666;
     display: block; }

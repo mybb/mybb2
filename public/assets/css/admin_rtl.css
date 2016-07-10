@@ -2349,6 +2349,8 @@ hr {
 
 img {
   vertical-align: middle; }
+  img.avatar {
+    border-radius: 4px; }
 
 fieldset {
   border: 0;
@@ -2357,9 +2359,6 @@ fieldset {
 
 textarea {
   resize: vertical; }
-
-img.avatar {
-  border-radius: 4px; }
 
 .main {
   padding: 20px 0 30px 0; }
@@ -2412,17 +2411,16 @@ section {
   section .heading--linked {
     border-bottom: 0;
     padding: 0; }
-    section .heading--linked a {
+    section .heading--linked .heading--linked__link {
       padding: 8px 12px;
       border-bottom: 1px solid #dfdfdf;
-      text-decoration: none;
       display: block; }
-      section .heading--linked a .count {
+      section .heading--linked .heading--linked__link .count {
         float: left;
         font-size: 0.8em;
         color: #666;
         font-weight: normal; }
-        section .heading--linked a .count i {
+        section .heading--linked .heading--linked__link .count .fa {
           margin-right: 4px; }
   section .heading--major {
     background: #007fd0;
@@ -2433,18 +2431,11 @@ section {
     border-radius: 4px; }
   section .heading--major.heading--linked {
     padding: 0; }
-    section .heading--major.heading--linked a {
+    section .heading--major.heading--linked .heading--linked__link {
       border: none;
-      color: #fff;
-      text-decoration: none; }
-      section .heading--major.heading--linked a .count {
+      color: #fff; }
+      section .heading--major.heading--linked .heading--linked__link .count {
         color: rgba(255, 255, 255, 0.7); }
-    section .heading--major.heading--linked a:hover,
-    section .heading--major.heading--linked a:active {
-      text-decoration: underline; }
-      section .heading--major.heading--linked a:hover .count,
-      section .heading--major.heading--linked a:active .count {
-        color: #fff; }
   section.container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
@@ -2519,7 +2510,7 @@ dl.stats {
   margin-bottom: 20px;
   font-size: 0.9em;
   border-radius: 4px; }
-  .alert i {
+  .alert .fa {
     float: right;
     margin: 6px -25px 0 0; }
   .alert p {
