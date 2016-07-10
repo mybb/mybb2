@@ -2,6 +2,10 @@ h1.title {
 	float: $left;
 	margin: side-values(10px 2% 5px 0);
 
+	@include bp-medium {
+		margin: side-values(20px 2% 15px 0);
+	}
+
 	a#logo {
 		background-image: url("../images/logo_mobile.png");
 		background-repeat: no-repeat;
@@ -10,9 +14,31 @@ h1.title {
 		height: 40px;
 		display: block;
 
+		@include bp-medium {
+			background-image: url("../images/logo2.png");
+			width: 188px;
+			height: 55px;
+		}
+
 		span {
 			display: none;
 		}
+	}	
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+
+	h1.title a#logo {
+		background-image: url("../images/logo_mobile@2x.png");
+		background-size: 137px 40px;
+	}
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
+
+	h1.title a#logo {
+		background-image: url("../images/logo2@2x.png");
+		background-size: 188px 55px;
 	}
 }
 
@@ -549,15 +575,15 @@ footer {
 
 @media only screen and (min-width: 768px) {
 
-	h1.title {
-		margin: side-values(20px 2% 15px 0);
+	// h1.title {
+	// 	margin: side-values(20px 2% 15px 0);
 		
-		a#logo {
-			background-image: url("../images/logo2.png");
-			width: 188px;
-			height: 55px;
-		}
-	}
+	// 	a#logo {
+	// 		background-image: url("../images/logo2.png");
+	// 		width: 188px;
+	// 		height: 55px;
+	// 	}
+	// }
 
 	.main-menu {
 		margin-top: 25px;
@@ -611,30 +637,4 @@ footer {
 			padding: side-values(5px 12px 3px 0);
 		}
 	}
-}
-
-@media only screen and (min-width: 1140px) {
-
-	.wrapper {
-		max-width: 1250px;
-		margin: 0 auto;
-	}
-}
-
-@media all and (-webkit-min-device-pixel-ratio: 2) {
-
-	h1.title a#logo {
-		background-image: url("../images/logo_mobile@2x.png");
-		background-size: 137px 40px;
-	}
-
-}
-
-@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
-	
-	h1.title a#logo {
-		background-image: url("../images/logo2@2x.png");
-		background-size: 188px 55px;
-	}
-
 }

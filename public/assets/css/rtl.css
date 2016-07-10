@@ -2645,6 +2645,9 @@ nav.section-menu ul {
 h1.title {
   float: right;
   margin: 10px 0 5px 2%; }
+  @media only screen and (min-width: 768px) {
+    h1.title {
+      margin: 20px 0 15px 2%; } }
   h1.title a#logo {
     background-image: url("../images/logo_mobile.png");
     background-repeat: no-repeat;
@@ -2652,8 +2655,23 @@ h1.title {
     width: 137px;
     height: 40px;
     display: block; }
+    @media only screen and (min-width: 768px) {
+      h1.title a#logo {
+        background-image: url("../images/logo2.png");
+        width: 188px;
+        height: 55px; } }
     h1.title a#logo span {
       display: none; }
+
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+  h1.title a#logo {
+    background-image: url("../images/logo_mobile@2x.png");
+    background-size: 137px 40px; } }
+
+@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
+  h1.title a#logo {
+    background-image: url("../images/logo2@2x.png");
+    background-size: 188px 55px; } }
 
 .main-menu {
   float: left;
@@ -3019,12 +3037,6 @@ footer .footer__copyright {
             text-decoration: none; } }
 
 @media only screen and (min-width: 768px) {
-  h1.title {
-    margin: 20px 0 15px 2%; }
-    h1.title a#logo {
-      background-image: url("../images/logo2.png");
-      width: 188px;
-      height: 55px; }
   .main-menu {
     margin-top: 25px; }
   .main-menu__button {
@@ -3055,21 +3067,6 @@ footer .footer__copyright {
       margin: 0;
       float: right;
       padding: 5px 0 3px 12px; } }
-
-@media only screen and (min-width: 1140px) {
-  .wrapper {
-    max-width: 1250px;
-    margin: 0 auto; } }
-
-@media all and (-webkit-min-device-pixel-ratio: 2) {
-  h1.title a#logo {
-    background-image: url("../images/logo_mobile@2x.png");
-    background-size: 137px 40px; } }
-
-@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
-  h1.title a#logo {
-    background-image: url("../images/logo2@2x.png");
-    background-size: 188px 55px; } }
 
 section.form {
   border: 1px solid #dfdfdf;
