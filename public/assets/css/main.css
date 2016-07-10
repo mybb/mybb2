@@ -2664,13 +2664,13 @@ dl.stats {
         margin-left: 0;
         margin-right: 0; } }
 
-h1.title {
+.page-title {
   float: left;
   margin: 10px 2% 5px 0; }
   @media only screen and (min-width: 768px) {
-    h1.title {
+    .page-title {
       margin: 20px 2% 15px 0; } }
-  h1.title a#logo {
+  .page-title #logo {
     background-image: url("../images/logo_mobile.png");
     background-repeat: no-repeat;
     background-position: top left;
@@ -2678,85 +2678,94 @@ h1.title {
     height: 40px;
     display: block; }
     @media only screen and (min-width: 768px) {
-      h1.title a#logo {
+      .page-title #logo {
         background-image: url("../images/logo2.png");
         width: 188px;
         height: 55px; } }
-    h1.title a#logo span {
-      display: none; }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
-  h1.title a#logo {
+  .page-title #logo {
     background-image: url("../images/logo_mobile@2x.png");
     background-size: 137px 40px; } }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
-  h1.title a#logo {
+  .page-title #logo {
     background-image: url("../images/logo2@2x.png");
     background-size: 188px 55px; } }
 
-.user-navigation {
+.user-bar {
   clear: both;
   background: #444;
   border-top: 2px solid #222;
   border-bottom: 2px solid #222; }
-  .user-navigation .wrapper {
+  .user-bar .wrapper {
     padding: 0; }
 
-.user-navigation__links {
+.user-bar__links {
   margin: 0;
   padding: 0;
   list-style: none; }
-  .user-navigation__links > li {
+  .user-bar__links .user-bar__links__item {
     float: left;
     margin: 0;
     padding: 12px 6px;
     position: relative; }
-    .user-navigation__links > li > a.icon:before {
+    .user-bar__links .user-bar__links__item .user-bar__links__item__link.icon:before {
+      font-size: 1.1em;
       margin-right: 2px; }
-    .user-navigation__links > li > a:link, .user-navigation__links > li > a:visited {
+    .user-bar__links .user-bar__links__item .user-bar__links__item__link:link, .user-bar__links .user-bar__links__item .user-bar__links__item__link:visited {
       color: #fff;
       padding: 2px 8px;
       display: inline-block;
       margin: -3px 0 -2px 0;
       border-radius: 4px; }
-    .user-navigation__links > li > a:hover, .user-navigation__links > li > a:active {
+    .user-bar__links .user-bar__links__item .user-bar__links__item__link:hover, .user-bar__links .user-bar__links__item .user-bar__links__item__link:active {
       background-color: #333;
       text-decoration: none; }
-  .user-navigation__links > li.dropit-link {
-    padding: 12px 0;
+  .user-bar__links .dropit-link {
+    padding: 12px 8px 12px 0;
     border-left: 2px solid transparent;
     border-right: 2px solid transparent; }
-    .user-navigation__links > li.dropit-link i.fa-caret-down {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.7); }
-    .user-navigation__links > li.dropit-link i.fa-caret-up {
+    @media only screen and (min-width: 768px) {
+      .user-bar__links .dropit-link {
+        padding: 12px 0; } }
+    .user-bar__links .dropit-link .dropit-link__caret {
       display: none; }
-  .user-navigation__links > li.dropit-link.dropit-open {
-    background: #f2f2f2;
-    border: 2px solid #dfdfdf;
-    border-bottom-color: #f2f2f2;
-    margin: -2px 0; }
-    .user-navigation__links > li.dropit-link.dropit-open > a {
-      background: none;
-      color: #444;
-      border-radius: 0; }
-    .user-navigation__links > li.dropit-link.dropit-open i.fa-caret-up {
-      display: inline;
-      font-size: 14px;
-      color: rgba(0, 0, 0, 0.7); }
-    .user-navigation__links > li.dropit-link.dropit-open i.fa-caret-down {
-      display: none; }
-  .user-navigation__links .user-navigation__active-user > a > span.text {
-    font-weight: bold; }
-  .user-navigation__links .user-navigation__sign-up > a {
-    background-color: #007fd0; }
-    .user-navigation__links .user-navigation__sign-up > a:hover {
-      background-color: #ff7500; }
-  .user-navigation__links .user-navigation__notifications > a > span.text,
-  .user-navigation__links .user-navigation__messages > a > span.text {
+      @media only screen and (min-width: 768px) {
+        .user-bar__links .dropit-link .dropit-link__caret {
+          display: inline; } }
+      .user-bar__links .dropit-link .dropit-link__caret.dropit-link__caret--down {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7); }
+      .user-bar__links .dropit-link .dropit-link__caret.dropit-link__caret--up {
+        display: none; }
+    .user-bar__links .dropit-link.dropit-open {
+      background: #f2f2f2;
+      border: 2px solid #dfdfdf;
+      border-bottom-color: #f2f2f2;
+      margin: -2px 0; }
+      .user-bar__links .dropit-link.dropit-open .user-bar__links__item__link {
+        background: none;
+        color: #444;
+        border-radius: 0; }
+      .user-bar__links .dropit-link.dropit-open .dropit-link__caret--up {
+        display: inline;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.7); }
+      .user-bar__links .dropit-link.dropit-open .dropit-link__caret--down {
+        display: none; }
+  .user-bar__links .user-bar__active-user .user-bar__active-user__username {
     display: none; }
-  .user-navigation__links .unread-count {
+  @media only screen and (min-width: 768px) {
+    .user-bar__links .user-bar__active-user .icon:before {
+      display: none; }
+    .user-bar__links .user-bar__active-user .user-bar__active-user__username {
+      display: inline; } }
+  .user-bar__links .user-bar__sign-up .user-bar__links__item__link {
+    background-color: #007fd0; }
+    .user-bar__links .user-bar__sign-up .user-bar__links__item__link:hover {
+      background-color: #ff7500; }
+  .user-bar__links .unread-count {
     background: #eb5257;
     color: #fff;
     border-radius: 2px;
@@ -2766,7 +2775,7 @@ h1.title {
     font-size: 0.8em;
     text-decoration: none; }
 
-.user-navigation ul .user-navigation__dropdown {
+.user-bar__dropdown {
   display: none;
   background: #f2f2f2;
   border-radius: 0 4px 4px 4px;
@@ -2776,17 +2785,17 @@ h1.title {
   font-size: 0.9em;
   left: -2px;
   width: 270px; }
-  .user-navigation ul .user-navigation__dropdown ul {
+  .user-bar__dropdown .account-links {
     margin: 0;
     padding: 0;
     list-style: none; }
-  .user-navigation ul .user-navigation__dropdown li {
+  .user-bar__dropdown .account-links__item {
     float: none;
     margin: 0;
     padding: 0;
     display: block;
     border-bottom: 1px solid #dfdfdf; }
-    .user-navigation ul .user-navigation__dropdown li a {
+    .user-bar__dropdown .account-links__item .account-links__item__link {
       display: block;
       margin: 0;
       padding: 4px;
@@ -2794,135 +2803,125 @@ h1.title {
       border-left: 0;
       text-align: left;
       background: transparent; }
-      .user-navigation ul .user-navigation__dropdown li a i {
-        color: rgba(0, 0, 0, 0.3);
-        padding-right: 8px; }
-    .user-navigation ul .user-navigation__dropdown li:last-child {
+      .user-bar__dropdown .account-links__item .account-links__item__link.icon:before {
+        color: rgba(0, 0, 0, 0.3); }
+    .user-bar__dropdown .account-links__item:last-child {
       border-bottom: 0; }
-  .user-navigation ul .user-navigation__dropdown a.avatar-profile-link {
+  .user-bar__dropdown .avatar-profile-link {
     float: right;
     width: 80px;
     height: 80px;
     margin: 6px 0 0 0; }
-    .user-navigation ul .user-navigation__dropdown a.avatar-profile-link img.avatar {
+    .user-bar__dropdown .avatar-profile-link img.avatar {
       width: 80px;
       height: 80px; }
-  .user-navigation ul .user-navigation__dropdown .notifications-container,
-  .user-navigation ul .user-navigation__dropdown .messages-container {
+  .user-bar__dropdown .dropdown__container {
     background: #fafafa;
     border: 1px solid #dfdfdf;
     border-radius: 3px;
     margin: 10px 0 6px 0; }
-  .user-navigation ul .user-navigation__dropdown h2 {
+  .user-bar__dropdown .dropdown__title {
     font-size: 1em;
     margin: 0;
     padding: 8px 12px 8px 8px;
     color: #444;
     background: #eee;
     border-bottom: 1px solid #dfdfdf; }
-    .user-navigation ul .user-navigation__dropdown h2 a:link,
-    .user-navigation ul .user-navigation__dropdown h2 a:visited {
+    .user-bar__dropdown .dropdown__title .dropdown__title__link:link, .user-bar__dropdown .dropdown__title .dropdown__title__link:visited {
       color: #444;
       display: inline-block;
       background: transparent; }
-    .user-navigation ul .user-navigation__dropdown h2 a:hover,
-    .user-navigation ul .user-navigation__dropdown h2 a:active {
+    .user-bar__dropdown .dropdown__title .dropdown__title__link:hover, .user-bar__dropdown .dropdown__title .dropdown__title__link:active {
       color: #ff7500; }
-    .user-navigation ul .user-navigation__dropdown h2 a.option {
+    .user-bar__dropdown .dropdown__title .dropdown__title__action {
       float: right; }
-      .user-navigation ul .user-navigation__dropdown h2 a.option span.text {
-        display: none; }
-      .user-navigation ul .user-navigation__dropdown h2 a.option i {
+      .user-bar__dropdown .dropdown__title .dropdown__title__action.icon:before {
         color: rgba(0, 0, 0, 0.5); }
-      .user-navigation ul .user-navigation__dropdown h2 a.option:hover i {
-        color: rgba(0, 0, 0, 0.6); }
-  .user-navigation ul .user-navigation__dropdown ul.notifications {
+        .user-bar__dropdown .dropdown__title .dropdown__title__action.icon:before:hover {
+          color: rgba(0, 0, 0, 0.6); }
+  .user-bar__dropdown .notifications {
     margin: 0;
     font-size: 0.8em;
     line-height: 1.6; }
-    .user-navigation ul .user-navigation__dropdown ul.notifications a {
+    .user-bar__dropdown .notifications .notifications__notification__link {
       text-decoration: none;
       padding: 8px 8px 8px 16px;
       overflow: hidden; }
-      .user-navigation ul .user-navigation__dropdown ul.notifications a:hover span.text {
+      .user-bar__dropdown .notifications .notifications__notification__link:hover span.text {
         text-decoration: underline; }
-    .user-navigation ul .user-navigation__dropdown ul.notifications span.username {
+    .user-bar__dropdown .notifications .notifications__notification__username {
       font-weight: bold; }
-    .user-navigation ul .user-navigation__dropdown ul.notifications i {
+    .user-bar__dropdown .notifications i {
       color: rgba(0, 0, 0, 0.3);
       font-size: 14px;
       margin: 4px 0 4px -8px;
       float: left; }
-  .user-navigation ul .user-navigation__dropdown ul.messages {
+  .user-bar__dropdown .messages {
     margin: 0;
     font-size: 0.8em;
     line-height: 1.6; }
-    .user-navigation ul .user-navigation__dropdown ul.messages li {
+    .user-bar__dropdown .messages .messages__conversation {
       padding: 8px;
       color: #666; }
-      .user-navigation ul .user-navigation__dropdown ul.messages li a {
+      .user-bar__dropdown .messages .messages__conversation .messages__conversation__link {
         padding: 0; }
-    .user-navigation ul .user-navigation__dropdown ul.messages a.avatar-profile-link {
+    .user-bar__dropdown .messages .avatar-profile-link {
       float: left;
       margin: 0 8px 0 0;
       width: 40px;
       height: 40px; }
-      .user-navigation ul .user-navigation__dropdown ul.messages a.avatar-profile-link img.avatar {
+      .user-bar__dropdown .messages .avatar-profile-link img.avatar {
         width: 40px;
         height: 40px; }
-    .user-navigation ul .user-navigation__dropdown ul.messages a.conversation-title {
+    .user-bar__dropdown .messages .messages__conversation__title {
       font-weight: bold;
       display: block;
       font-size: 1.1em; }
-    .user-navigation ul .user-navigation__dropdown ul.messages a.message-author {
+    .user-bar__dropdown .messages .messages__conversation__message-author {
       display: inline-block; }
-  .user-navigation ul .user-navigation__dropdown time {
+  .user-bar__dropdown time {
     font-size: 0.9em;
     margin: 3px 0 0 4px;
     color: #666;
     float: right; }
-  .user-navigation ul .user-navigation__dropdown .view-all {
+  .user-bar__dropdown .dropdown__view-all {
     padding: 0; }
-    .user-navigation ul .user-navigation__dropdown .view-all a {
+    .user-bar__dropdown .dropdown__view-all .dropdown__view-all__link {
       text-align: center;
       padding: 8px; }
 
-#search .search__button {
+.search .search__button {
   color: #999;
   float: right;
   margin: 8px 0 0 0;
   padding: 5px 2px; }
   @media only screen and (min-width: 768px) {
-    #search .search__button {
+    .search .search__button {
       display: none; } }
-  #search .search__button i {
-    font-size: 18px; }
-  #search .search__button .text {
-    display: none; }
-  #search .search__button:hover {
+  .search .search__button:hover {
     color: #ccc; }
 
-#search .search__container {
+.search .search__container {
   clear: both;
   display: none;
-  border-radius: 4px;
-  padding: 2px 0 2px 8px;
   cursor: text;
   background: #fff;
+  padding: 2px 0 2px 8px;
   margin: 0 0 8px 0;
   width: auto;
+  border-radius: 4px;
   box-sizing: border-box; }
   @media only screen and (min-width: 768px) {
-    #search .search__container {
+    .search .search__container {
       float: right;
       display: block;
       width: 35%;
       clear: none;
       margin-top: 10px; } }
-  #search .search__container label {
+  .search .search__container label {
     cursor: text; }
 
-#search .search__field {
+.search .search__field {
   border: 0;
   padding: 0;
   margin: 0;
@@ -2930,15 +2929,15 @@ h1.title {
   font-size: 0.9em;
   outline: 0; }
 
-#search .search__controls {
+.search .search__controls {
   width: 24%;
   text-align: right;
   float: right;
   padding-right: 8px;
   box-sizing: border-box; }
 
-#search button.search__submit,
-#search a.search__advanced {
+.search .search__submit,
+.search .search__advanced {
   height: 24px;
   margin: 0;
   padding: 0;
@@ -2947,8 +2946,8 @@ h1.title {
   background: none;
   font-size: 14px;
   color: #999; }
-  #search button.search__submit:hover,
-  #search a.search__advanced:hover {
+  .search .search__submit:hover,
+  .search .search__advanced:hover {
     color: #666; }
 
 .breadcrumb {
@@ -2957,9 +2956,9 @@ h1.title {
   color: #ccc;
   padding: 0;
   margin: 0 0 10px 0; }
-  .breadcrumb a:link, .breadcrumb a:visited, .breadcrumb a:active, .breadcrumb a:hover {
+  .breadcrumb .breadcrumb__link {
     color: #666; }
-  .breadcrumb i {
+  .breadcrumb .breadcrumb__separator {
     color: #666;
     margin: 0 4px 0 6px; }
 

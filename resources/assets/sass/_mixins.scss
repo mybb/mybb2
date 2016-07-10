@@ -3,19 +3,19 @@
 */
 
 @mixin bp-large {
-    @media only screen and (min-width: 1140px) {
+    @media only screen and (min-width: $bp-large) {
         @content;
     }
 }
 
 @mixin bp-medium {
-    @media only screen and (min-width: 768px) {
+    @media only screen and (min-width: $bp-medium) {
         @content;
     }
 }
 
 @mixin bp-small {
-    @media only screen and (min-width: 480px) {
+    @media only screen and (min-width: $bp-small) {
         @content;
     }
 }

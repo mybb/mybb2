@@ -47,3 +47,9 @@ $danger-color: #eb5257;
 
 // Fonts
 $font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
+
+
+// Breakpoints
+$bp-small: 480px;
+$bp-medium: 768px;
+$bp-large: 1140px;

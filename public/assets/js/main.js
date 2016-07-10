@@ -320,9 +320,9 @@
 				this.fixOptionsName();
 			}, this), 500);
 		}, this));
-		if(!Modernizr.touch) {
-			$parent.find('.remove-option').powerTip({ placement: 's', smartPlacement: true });
-		}
+		// if(!Modernizr.touch) {
+		// 	$parent.find('.remove-option').powerTip({ placement: 's', smartPlacement: true });
+		// }
 	};
 
 	window.MyBB.Polls.prototype.fixOptionsName = function() {

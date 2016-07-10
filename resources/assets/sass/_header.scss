@@ -1,4 +1,4 @@
-h1.title {
+.page-title {
     float: $left;
     margin: side-values(10px 2% 5px 0);
 
@@ -6,7 +6,7 @@ h1.title {
         margin: side-values(20px 2% 15px 0);
     }
 
-    a#logo {
+    #logo {
         background-image: url("../images/logo_mobile.png");
         background-repeat: no-repeat;
         background-position: top $left;
@@ -19,30 +19,26 @@ h1.title {
             width: 188px;
             height: 55px;
         }
-
-        span {
-            display: none;
-        }
     }   
 }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
 
-    h1.title a#logo {
+    .page-title #logo {
         background-image: url("../images/logo_mobile@2x.png");
         background-size: 137px 40px;
     }
 }
 
-@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
+@media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-medium) {
 
-    h1.title a#logo {
+    .page-title #logo {
         background-image: url("../images/logo2@2x.png");
         background-size: 188px 55px;
     }
 }
 
-.user-navigation {
+.user-bar {
     clear: both;
     background: $dark-background-2;
     border-top: 2px solid $dark-border-1;
@@ -53,20 +49,21 @@ h1.title {
     }
 }
 
-.user-navigation__links {
+.user-bar__links {
     margin: 0;
     padding: 0;
     list-style: none;
 
-    > li {
+    .user-bar__links__item {
         float: $left;
         margin: 0;
         padding: 12px 6px;
         position: relative;
 
-        > a {
+        .user-bar__links__item__link {
 
             &.icon:before {
+                font-size: 1.1em;
                 margin-#{$right}: 2px;
             }
 
@@ -87,60 +84,80 @@ h1.title {
         }
     }
 
-    > li.dropit-link {
-        padding: 12px 0;
+    .dropit-link {
+        padding: side-values(12px 8px 12px 0);
         border-left: 2px solid transparent;
         border-right: 2px solid transparent;
 
-        i.fa-caret-down {
-            font-size: 14px;
-            @include white-transparency(0.7);
+        @include bp-medium {
+            padding: 12px 0;
         }
 
-        i.fa-caret-up {
+        .dropit-link__caret {
+            display: none;
+
+            @include bp-medium {
+                display: inline;
+            }
+
+            &.dropit-link__caret--down {
+                font-size: 14px;
+                @include white-transparency(0.7);
+            }
+
+            &.dropit-link__caret--up {
+                display: none;
+            }
+        }
+
+        &.dropit-open {
+            background: $background-2;
+            border: 2px solid $border-1;
+            border-bottom-color: $background-2;
+            margin: -2px 0;
+
+            .user-bar__links__item__link {
+                background: none;
+                color: $alt-font-color-4;
+                @include border-radius(0);
+            }
+
+            .dropit-link__caret--up {
+                display: inline;
+                font-size: 14px;
+                @include black-transparency(0.7);
+            }
+
+            .dropit-link__caret--down {
+                display: none;
+            }
+        }
+    }
+
+    .user-bar__active-user {
+
+        .user-bar__active-user__username {
             display: none;
         }
+
+        @include bp-medium {
+
+            .icon:before {
+                display: none;
+            }
+
+            .user-bar__active-user__username {
+                display: inline;
+            }
+        }
     }
 
-    > li.dropit-link.dropit-open {
-        background: $background-2;
-        border: 2px solid $border-1;
-        border-bottom-color: $background-2;
-        margin: -2px 0;
-
-        > a {
-            background: none;
-            color: $alt-font-color-4;
-            @include border-radius(0);
-        }
-
-        i.fa-caret-up {
-            display: inline;
-            font-size: 14px;
-            @include black-transparency(0.7);
-        }
-
-        i.fa-caret-down {
-            display: none;
-        }
-
-    }
-
-    .user-navigation__active-user > a > span.text {
-        font-weight: bold;
-    }
-
-    .user-navigation__sign-up > a {
+    .user-bar__sign-up .user-bar__links__item__link {
         background-color: $primary-color;
 
         &:hover {
             background-color: $secondary-color;
         }
-    }
-
-    .user-navigation__notifications > a > span.text,
-    .user-navigation__messages > a > span.text {
-        display: none;
     }
 
     .unread-count {
@@ -155,7 +172,7 @@ h1.title {
     }
 }
 
-.user-navigation ul .user-navigation__dropdown {
+.user-bar__dropdown {
     display: none;
     background: $background-2;
     @include border-radius(corner-values(0 4px 4px 4px));
@@ -166,20 +183,20 @@ h1.title {
     #{$left}: -2px;
     width: 270px;
 
-    ul {
+    .account-links {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 
-    li {
+    .account-links__item {
         float: none;
         margin: 0;
         padding: 0;
         display: block;
         border-bottom: 1px solid $border-1;
 
-        a {
+        .account-links__item__link {
             display: block;
             margin: 0;
             padding: 4px;
@@ -188,9 +205,8 @@ h1.title {
             text-align: $left;
             background: transparent;
 
-            i {
+            &.icon:before {
                 @include black-transparency(0.3);
-                padding-#{$right}: 8px;
             }
         }
 
@@ -199,7 +215,7 @@ h1.title {
         }
     }
 
-    a.avatar-profile-link {
+    .avatar-profile-link {
         float: $right;
         width: 80px;
         height: 80px;
@@ -211,15 +227,14 @@ h1.title {
         }
     }
 
-    .notifications-container,
-    .messages-container {
+    .dropdown__container {
         background: $background-1;
         border: 1px solid $border-1;
         @include border-radius(3px);
         margin: side-values(10px 0 6px 0);
     }
 
-    h2 {
+    .dropdown__title {
         font-size: 1em;
         margin: 0;
         padding: side-values(8px 12px 8px 8px);
@@ -227,41 +242,40 @@ h1.title {
         background: $background-3;
         border-bottom: 1px solid $border-1;
 
-        a:link,
-        a:visited {
-            color: $alt-font-color-4;
-            display: inline-block;
-            background: transparent;
+        .dropdown__title__link {
+            
+            &:link,
+            &:visited {
+                color: $alt-font-color-4;
+                display: inline-block;
+                background: transparent;
+            }
+
+            &:hover,
+            &:active {
+                color: $secondary-color;
+            }
         }
 
-        a:hover,
-        a:active {
-            color: $secondary-color;
-        }
-
-        a.option {
+        .dropdown__title__action {
             float: $right;
 
-            span.text {
-                display: none;
-            }
-
-            i {
+            &.icon:before {
                 @include black-transparency(0.5);
-            }
 
-            &:hover i {
-                @include black-transparency(0.6);
+                &:hover {
+                    @include black-transparency(0.6);    
+                }
             }
         }
     }
 
-    ul.notifications {
+    .notifications {
         margin: 0;
         font-size: 0.8em;
         line-height: 1.6;
 
-        a {
+        .notifications__notification__link {
             text-decoration: none;
             padding: side-values(8px 8px 8px 16px);
             overflow: hidden;
@@ -271,7 +285,7 @@ h1.title {
             }
         }
 
-        span.username {
+        .notifications__notification__username {
             font-weight: bold
         }
 
@@ -283,21 +297,21 @@ h1.title {
         }
     }
 
-    ul.messages {
+    .messages {
         margin: 0;
         font-size: 0.8em;
         line-height: 1.6;
 
-        li {
+        .messages__conversation {
             padding: 8px;
             color: $alt-font-color-1;
 
-            a {
+            .messages__conversation__link {
                 padding: 0;
             }
         }
 
-        a.avatar-profile-link {
+        .avatar-profile-link {
             float: $left;
             margin: side-values(0 8px 0 0);
             width: 40px;
@@ -309,13 +323,13 @@ h1.title {
             }
         }
 
-        a.conversation-title {
+        .messages__conversation__title {
             font-weight: bold;
             display: block;
             font-size: 1.1em;
         }
 
-        a.message-author {
+        .messages__conversation__message-author {
             display: inline-block;
         }
     }
@@ -327,17 +341,17 @@ h1.title {
         float: $right;
     }
 
-    .view-all {
+    .dropdown__view-all {
         padding: 0;
 
-        a {
+        .dropdown__view-all__link {
             text-align: center;
             padding: 8px;
         }
     }
 }
 
-#search {
+.search {
 
     .search__button {
         color: $alt-font-color-2;
@@ -349,14 +363,6 @@ h1.title {
             display: none;
         }
 
-        i {
-            font-size: 18px;
-        }
-
-        .text {
-            display: none;
-        }
-
         &:hover {
             color: $alt-font-color-3;   
         }
@@ -365,12 +371,12 @@ h1.title {
     .search__container {
         clear: both;
         display: none;
-        @include border-radius(4px);
-        padding: side-values(2px 0 2px 8px);
         cursor: text;
         background: #fff;
+        padding: side-values(2px 0 2px 8px);
         margin: side-values(0 0 8px 0);
         width: auto;
+        @include border-radius(4px);
         @include box-sizing(border-box);
 
         @include bp-medium {
@@ -403,8 +409,8 @@ h1.title {
         @include box-sizing(border-box);
     }
         
-    button.search__submit,
-    a.search__advanced {
+    .search__submit,
+    .search__advanced {
         height: 24px;
         margin: 0;
         padding: 0;
@@ -427,11 +433,11 @@ h1.title {
     padding: 0;
     margin: side-values(0 0 10px 0);
 
-    a:link, a:visited, a:active, a:hover {
+    .breadcrumb__link {
         color: $alt-font-color-1;
     }
 
-    i {
+    .breadcrumb__separator {
         color: $alt-font-color-1;
         margin: side-values(0 4px 0 6px);
     }
