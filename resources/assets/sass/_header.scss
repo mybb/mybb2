@@ -42,66 +42,6 @@ h1.title {
     }
 }
 
-.main-menu {
-    float: $right;
-    margin: side-values(25px 0 0 0);
-}
-
-.menu-bar {
-
-    ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        li {
-
-            a {
-                display: block;
-                margin-bottom: 10px;
-                padding: 8px 0;
-                width: 48%;
-                margin-#{$left}: 1%;
-                margin-#{$right}: 1%;
-                float: $left;
-                text-align: center;
-                background: $background-1;
-                @include box-sizing(border-box);
-            }
-
-            .unread-count {
-                background: $unread-count;
-                color: $invert-font-color;
-                padding: side-values(2px 5px 1px 4px);
-                margin: side-values(0 0 0 2px);
-                font-weight: normal;
-                font-size: 0.8em;
-                text-decoration: none;
-                @include border-radius(2px);
-            }
-        }
-    }
-}
-
-.main-menu__container {
-    display: none;
-}
-
-.main-menu__button {
-    padding-top: 5px;
-    display: inline-block;
-    float: $right;
-
-    i {
-        font-size: 21px;
-        color: $alt-font-color-4;
-    }
-
-    span.text {
-        display: none;
-    }
-}
-
 .user-navigation {
     clear: both;
     background: $dark-background-2;
@@ -124,19 +64,26 @@ h1.title {
         padding: 12px 6px;
         position: relative;
 
-        > a:link,
-        > a:visited {
-            color: $invert-font-color;
-            padding: 2px 8px;
-            display: inline-block;
-            margin: side-values(-3px 0 -2px 0);
-            @include border-radius(4px);
-        }
+        > a {
 
-        > a:hover,
-        > a:active {
-            background-color: $dark-background-1;
-            text-decoration: none;
+            &.icon:before {
+                margin-#{$right}: 2px;
+            }
+
+            &:link,
+            &:visited {
+                color: $invert-font-color;
+                padding: 2px 8px;
+                display: inline-block;
+                margin: side-values(-3px 0 -2px 0);
+                @include border-radius(4px);
+            }
+
+            &:hover,
+            &:active {
+                background-color: $dark-background-1;
+                text-decoration: none;
+            }
         }
     }
 
@@ -398,6 +345,10 @@ h1.title {
         margin: side-values(8px 0 0 0);
         padding: 5px 2px;
 
+        @include bp-medium {
+            display: none;
+        }
+
         i {
             font-size: 18px;
         }
@@ -421,6 +372,14 @@ h1.title {
         margin: side-values(0 0 8px 0);
         width: auto;
         @include box-sizing(border-box);
+
+        @include bp-medium {
+            float: $right;
+            display: block;
+            width: 35%;
+            clear: none;
+            margin-top: 10px;
+        }
 
         label {
             cursor: text;
@@ -475,166 +434,5 @@ h1.title {
     i {
         color: $alt-font-color-1;
         margin: side-values(0 4px 0 6px);
-    }
-}
-
-footer {
-
-    .footer__navigation {
-        border-top: 1px solid $border-1;
-        background: $background-1;
-        border-bottom: 1px solid $border-1;
-        margin-bottom: 20px;
-
-
-        h3 {
-            float: none;
-            font-size: 0.9em;
-            text-align: center;
-            display: block;
-        }
-
-        .menu-bar a {
-            padding: 5px 12px;
-            font-size: 0.9em;
-        }
-    }
-
-    .footer__copyright {
-        text-align: center;
-        
-        p.powered-by {
-            clear: both;
-            font-size: 0.8em;
-            color: $alt-font-color-2;
-            padding: 0 0 20px 0;
-            margin: 0;
-
-            a {
-                color: $alt-font-color-1;
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 768px) { 
-
-    .main-menu.menu-bar {
-        margin-top: 10px;
-
-        &:hover {
-        
-            .main-menu__container {
-                position: absolute;
-                #{$right}: 0;
-                float: $right;
-                width: 100%;
-                padding-top: 45px;
-                display: block;
-            }
-
-            ul {
-                display: block;
-                position: relative;
-                top: 0;
-                border-top: 2px solid $dark-border-1;
-                border-bottom: 2px solid $dark-border-1;
-                #{$right}: 0;
-                z-index: 500;
-                background: $dark-background-2;
-                padding: side-values(1px 2px 2px 2px);
-                text-align: center;
-                
-                li {
-                    display: inline-block;
-
-                    a {
-                        width: auto;
-                        display: inline-block;
-                        margin: 4px;
-                        padding: side-values(7px 8px 6px 8px);
-                        float: none;
-                        background: transparent;
-                        @include border-radius(4px);
-
-                        &:link, &:visited {
-                            color: $invert-font-color;  
-                        }
-
-                        &:hover, &:active {
-                            background: $dark-background-1;
-                            color: $invert-font-color;
-                            text-decoration: none;  
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (min-width: 768px) {
-
-    // h1.title {
-    //  margin: side-values(20px 2% 15px 0);
-        
-    //  a#logo {
-    //      background-image: url("../images/logo2.png");
-    //      width: 188px;
-    //      height: 55px;
-    //  }
-    // }
-
-    .main-menu {
-        margin-top: 25px;
-    }
-
-    .main-menu__button {
-        display: none;
-    }
-
-    .main-menu__container {
-        display: block;
-    }
-
-    .main-menu.menu-bar ul li {
-        display: inline-block;
-    }
-
-    .menu-bar ul li a {
-        width: auto;
-        background: none;
-        border-#{$left}: 1px solid $border-1;
-        margin: 0;
-        padding: 2px 12px;
-    }
-
-    .main-menu.menu-bar ul li:first-child a {
-        border-#{$left}: 0;
-    }
-
-    #search {
-        
-        .search__button {
-            display: none;
-        }
-
-        .search__container {
-            float: $right;
-            display: block;
-            width: 35%;
-            clear: none;
-            margin-top: 10px;
-        }
-    }
-
-    footer .footer__navigation {
-        padding: side-values(20px 0 20px 0);
-
-        h3 {
-            margin: 0;
-            float: $left;
-            padding: side-values(5px 12px 3px 0);
-        }
     }
 }

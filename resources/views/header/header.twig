@@ -1,15 +1,6 @@
         <header>
             <div class="wrapper">
                 <h1 class="title"><a href="{{ url_route('forum.index') }}" id="logo"><span>{{ setting('general.board_name', 'MyBB Community Forums') }}</span></a></h1>
-                <nav class="main-menu menu-bar">
-                    <a class="main-menu__button"><i class="fa fa-bars"></i><span class="text">{{ trans('general.menu') }}</span></a>
-                    <div class="main-menu__container">
-                        <ul>
-                            <li><a href="#" class="multi-link"><span class="text">New Posts</span> <span class="unread-count">42</span></a></li>
-                            <li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
-                        </ul>
-                    </div>
-                </nav>
             </div>
             <nav class="user-navigation">
                 <div class="wrapper">
@@ -19,7 +10,7 @@
                         {% include "header.welcomeblock_guest" %}
                     {% endif %}
                     {{ form_open({'route':'search','id':'search','class':'search'}) }}
-                        <a href="{{ url_route('search') }}" class="search__button"><i class="fa fa-search"></i><span class="text">Search</span></a>
+                        <a href="{{ url_route('search') }}" class="search__button icon fa-search"><span class="visually-hidden">Search</span></a>
                         <div class="search__container">
                             <label>
                                 <input type="text" name="keyword" placeholder="{{ trans('search.searchforum') }}" value="" class="search__field" />

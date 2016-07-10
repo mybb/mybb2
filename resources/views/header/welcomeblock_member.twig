@@ -1,7 +1,7 @@
 <ul class="user-navigation__links">
     <li class="user-navigation__active-user dropit-link">
         <a href="{{ url_route('account.index') }}" class="multi-link base-link">
-            <span class="text">{{ auth_user().name }}</span>
+            <span class="user-navigation__active-user__username">{{ auth_user().name }}</span>
             <i class="fa fa-caret-down"></i>
             <i class="fa fa-caret-up"></i>
         </a>
@@ -50,9 +50,8 @@
         </div>
     </li>
     <li class="user-navigation__notifications dropit-link">
-        <a href="index.php?page=account/notifications" class="multi-link">
-            <i class="fa fa-globe"></i>
-            <span class="text">Notifications</span>
+        <a href="index.php?page=account/notifications" class="icon fa-bell">
+            <span class="visually-hidden">Notifications</span>
             <span class="unread-count">4</span>
             <i class="fa fa-caret-down"></i>
             <i class="fa fa-caret-up"></i>
@@ -107,9 +106,8 @@
     </li>
     {% if setting('conversations.enabled') and auth_user.hasPermission('canUseConversations') %}
         <li class="user-navigation__messages dropit-link">
-            <a href="{{ url_route('conversations.index') }}" class="multi-link">
-                <i class="fa fa-comments"></i>
-                <span class="text">{{ trans('conversations.conversations') }}</span>
+            <a href="{{ url_route('conversations.index') }}" class="multi-link icon fa-envelope">
+                <span class="visually-hidden">{{ trans('conversations.conversations') }}</span>
                 {% if auth_user.unreadConversations.count > 0 %}
                     <span class="unread-count">{{ auth_user.unreadConversations.count }}</span>
                 {% endif %}
@@ -159,4 +157,10 @@
             </div>
         </li>
     {% endif %}
+    <li class="user-navigation__new-posts">
+        <a href="#" class="icon fa-comments" title="New Posts">
+            <span class="visually-hidden">New Posts</span>
+            <span class="unread-count">42</span>
+        </a>
+    </li>
 </ul>

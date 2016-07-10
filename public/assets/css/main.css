@@ -2587,6 +2587,38 @@ dl.stats {
     header + .page-controls .page-buttons {
       margin-top: -30px; } }
 
+.menu-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  .menu-bar ul li a {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    width: 48%;
+    margin-left: 1%;
+    margin-right: 1%;
+    float: left;
+    text-align: center;
+    background: #fafafa;
+    box-sizing: border-box; }
+    @media only screen and (min-width: 768px) {
+      .menu-bar ul li a {
+        width: auto;
+        background: none;
+        border-left: 1px solid #dfdfdf;
+        margin: 0;
+        padding: 2px 12px; } }
+  .menu-bar ul li .unread-count {
+    background: #eb5257;
+    color: #fff;
+    padding: 2px 5px 1px 4px;
+    margin: 0 0 0 2px;
+    font-weight: normal;
+    font-size: 0.8em;
+    text-decoration: none;
+    border-radius: 2px; }
+
 @media only screen and (min-width: 768px) {
   .section-menu {
     float: left;
@@ -2663,48 +2695,6 @@ h1.title {
     background-image: url("../images/logo2@2x.png");
     background-size: 188px 55px; } }
 
-.main-menu {
-  float: right;
-  margin: 25px 0 0 0; }
-
-.menu-bar ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-  .menu-bar ul li a {
-    display: block;
-    margin-bottom: 10px;
-    padding: 8px 0;
-    width: 48%;
-    margin-left: 1%;
-    margin-right: 1%;
-    float: left;
-    text-align: center;
-    background: #fafafa;
-    box-sizing: border-box; }
-  .menu-bar ul li .unread-count {
-    background: #eb5257;
-    color: #fff;
-    padding: 2px 5px 1px 4px;
-    margin: 0 0 0 2px;
-    font-weight: normal;
-    font-size: 0.8em;
-    text-decoration: none;
-    border-radius: 2px; }
-
-.main-menu__container {
-  display: none; }
-
-.main-menu__button {
-  padding-top: 5px;
-  display: inline-block;
-  float: right; }
-  .main-menu__button i {
-    font-size: 21px;
-    color: #444; }
-  .main-menu__button span.text {
-    display: none; }
-
 .user-navigation {
   clear: both;
   background: #444;
@@ -2722,15 +2712,15 @@ h1.title {
     margin: 0;
     padding: 12px 6px;
     position: relative; }
-    .user-navigation__links > li > a:link,
-    .user-navigation__links > li > a:visited {
+    .user-navigation__links > li > a.icon:before {
+      margin-right: 2px; }
+    .user-navigation__links > li > a:link, .user-navigation__links > li > a:visited {
       color: #fff;
       padding: 2px 8px;
       display: inline-block;
       margin: -3px 0 -2px 0;
       border-radius: 4px; }
-    .user-navigation__links > li > a:hover,
-    .user-navigation__links > li > a:active {
+    .user-navigation__links > li > a:hover, .user-navigation__links > li > a:active {
       background-color: #333;
       text-decoration: none; }
   .user-navigation__links > li.dropit-link {
@@ -2902,6 +2892,9 @@ h1.title {
   float: right;
   margin: 8px 0 0 0;
   padding: 5px 2px; }
+  @media only screen and (min-width: 768px) {
+    #search .search__button {
+      display: none; } }
   #search .search__button i {
     font-size: 18px; }
   #search .search__button .text {
@@ -2919,6 +2912,13 @@ h1.title {
   margin: 0 0 8px 0;
   width: auto;
   box-sizing: border-box; }
+  @media only screen and (min-width: 768px) {
+    #search .search__container {
+      float: right;
+      display: block;
+      width: 35%;
+      clear: none;
+      margin-top: 10px; } }
   #search .search__container label {
     cursor: text; }
 
@@ -2968,11 +2968,19 @@ footer .footer__navigation {
   background: #fafafa;
   border-bottom: 1px solid #dfdfdf;
   margin-bottom: 20px; }
+  @media only screen and (min-width: 768px) {
+    footer .footer__navigation {
+      padding: 20px 0 20px 0; } }
   footer .footer__navigation h3 {
     float: none;
     font-size: 0.9em;
     text-align: center;
     display: block; }
+    @media only screen and (min-width: 768px) {
+      footer .footer__navigation h3 {
+        margin: 0;
+        float: left;
+        padding: 5px 12px 3px 0; } }
   footer .footer__navigation .menu-bar a {
     padding: 5px 12px;
     font-size: 0.9em; }
@@ -2987,76 +2995,6 @@ footer .footer__copyright {
     margin: 0; }
     footer .footer__copyright p.powered-by a {
       color: #666; }
-
-@media only screen and (max-width: 768px) {
-  .main-menu.menu-bar {
-    margin-top: 10px; }
-    .main-menu.menu-bar:hover .main-menu__container {
-      position: absolute;
-      right: 0;
-      float: right;
-      width: 100%;
-      padding-top: 45px;
-      display: block; }
-    .main-menu.menu-bar:hover ul {
-      display: block;
-      position: relative;
-      top: 0;
-      border-top: 2px solid #222;
-      border-bottom: 2px solid #222;
-      right: 0;
-      z-index: 500;
-      background: #444;
-      padding: 1px 2px 2px 2px;
-      text-align: center; }
-      .main-menu.menu-bar:hover ul li {
-        display: inline-block; }
-        .main-menu.menu-bar:hover ul li a {
-          width: auto;
-          display: inline-block;
-          margin: 4px;
-          padding: 7px 8px 6px 8px;
-          float: none;
-          background: transparent;
-          border-radius: 4px; }
-          .main-menu.menu-bar:hover ul li a:link, .main-menu.menu-bar:hover ul li a:visited {
-            color: #fff; }
-          .main-menu.menu-bar:hover ul li a:hover, .main-menu.menu-bar:hover ul li a:active {
-            background: #333;
-            color: #fff;
-            text-decoration: none; } }
-
-@media only screen and (min-width: 768px) {
-  .main-menu {
-    margin-top: 25px; }
-  .main-menu__button {
-    display: none; }
-  .main-menu__container {
-    display: block; }
-  .main-menu.menu-bar ul li {
-    display: inline-block; }
-  .menu-bar ul li a {
-    width: auto;
-    background: none;
-    border-left: 1px solid #dfdfdf;
-    margin: 0;
-    padding: 2px 12px; }
-  .main-menu.menu-bar ul li:first-child a {
-    border-left: 0; }
-  #search .search__button {
-    display: none; }
-  #search .search__container {
-    float: right;
-    display: block;
-    width: 35%;
-    clear: none;
-    margin-top: 10px; }
-  footer .footer__navigation {
-    padding: 20px 0 20px 0; }
-    footer .footer__navigation h3 {
-      margin: 0;
-      float: left;
-      padding: 5px 12px 3px 0; } }
 
 section.form {
   border: 1px solid #dfdfdf;

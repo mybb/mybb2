@@ -4,11 +4,12 @@
                     <h3>{{ setting('general.board_name', 'MyBB Community') }}</h3>
                     <nav class="footer-menu menu-bar">
                         <ul>
-                            <li><a href="#">Contact</a></li>
                             {% if setting('general.site_name') is not null %}
                                 <li><a href="{{ setting('general.site_url') }}" target="_blank">{{ setting('general.site_name') }}</a></li>
                             {% endif %}
-                            <li><a href="#">RSS Syndication</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="{{ url_route('members') }}">{{ trans('member.members') }}</a></li>
+                            {#<li><a href="#">RSS Syndication</a></li>#}
                             <li><a href="#">Help</a></li>
                         </ul>
                     </nav>
