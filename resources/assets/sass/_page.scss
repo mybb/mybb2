@@ -143,40 +143,4 @@ img.avatar {
 			@include border-radius(4px);
 		}
 	}
-
-	.page-buttons {
-		margin: side-values(-10px -5px 15px -5px);
-		text-align: center;
-
-		@include bp-medium {
-			float: $right;
-			margin: side-values(-45px -5px 8px 0);
-		}
-	}
-
-	.page-controls {
-
-		@include bp-medium {
-			@include clearfix();
-			margin-top: -20px;
-
-			.page-buttons {
-				margin-top: 0;
-			}
-
-			.pagination + .page-buttons {
-				margin-top: 0;
-			}
-		}
-	}
-
-	header + .page-controls {
-		@include bp-medium {
-			margin-top: -20px;
-
-			.page-buttons {
-				margin-top: -30px;
-			}
-		}
-	}
 }

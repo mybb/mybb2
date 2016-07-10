@@ -2400,29 +2400,6 @@ img.avatar {
       padding: 12px 15px;
       margin-bottom: 30px;
       border-radius: 4px; }
-  .main .page-buttons {
-    margin: -10px -5px 15px -5px;
-    text-align: center; }
-    @media only screen and (min-width: 768px) {
-      .main .page-buttons {
-        float: left;
-        margin: -45px 0 8px -5px; } }
-  @media only screen and (min-width: 768px) {
-    .main .page-controls {
-      margin-top: -20px; }
-      .main .page-controls:after {
-        content: "";
-        display: table;
-        clear: both; }
-      .main .page-controls .page-buttons {
-        margin-top: 0; }
-      .main .page-controls .pagination + .page-buttons {
-        margin-top: 0; } }
-  @media only screen and (min-width: 768px) {
-    .main header + .page-controls {
-      margin-top: -20px; }
-      .main header + .page-controls .page-buttons {
-        margin-top: -30px; } }
 
 section {
   margin-bottom: 30px; }
