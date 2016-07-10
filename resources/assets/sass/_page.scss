@@ -154,48 +154,6 @@ img.avatar {
 		}
 	}
 
-	.pagination {
-		list-style: none;
-		margin: side-values(0 0 25px -5px);
-		padding: 0;
-		font-size: 0.9em;
-		text-align: center;
-
-		@include bp-medium {
-			text-align: $right;
-			margin: side-values(0 -5px 25px -5px);
-		}
-		
-		li {
-			display: inline-block;
-			margin: 0 5px;
-
-			a {
-				background: $background-1;
-				padding: 1px 8px;
-				display: inline-block;
-				@include border-radius(4px);
-
-				&:hover {
-					background: $secondary-color;
-					color: $invert-font-color;
-					text-decoration: none;
-				}
-			}
-
-			&.active {
-				padding: 1px 8px;
-				background: $primary-color;
-				color: $invert-font-color;
-				@include border-radius(4px);
-			}
-
-			&.disabled {
-				display: none;
-			}
-		}		
-	}
-
 	.page-controls {
 
 		@include bp-medium {
@@ -204,12 +162,6 @@ img.avatar {
 
 			.page-buttons {
 				margin-top: 0;
-			}
-
-			.pagination {
-				float: $left;
-				text-align: $left;
-				margin: side-values(10px -5px 0 -5px);
 			}
 
 			.pagination + .page-buttons {

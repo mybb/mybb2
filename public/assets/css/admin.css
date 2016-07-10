@@ -2404,35 +2404,6 @@ img.avatar {
       .main .page-buttons {
         float: right;
         margin: -45px -5px 8px 0; } }
-  .main .pagination {
-    list-style: none;
-    margin: 0 0 25px -5px;
-    padding: 0;
-    font-size: 0.9em;
-    text-align: center; }
-    @media only screen and (min-width: 768px) {
-      .main .pagination {
-        text-align: right;
-        margin: 0 -5px 25px -5px; } }
-    .main .pagination li {
-      display: inline-block;
-      margin: 0 5px; }
-      .main .pagination li a {
-        background: #fafafa;
-        padding: 1px 8px;
-        display: inline-block;
-        border-radius: 4px; }
-        .main .pagination li a:hover {
-          background: #ff7500;
-          color: #fff;
-          text-decoration: none; }
-      .main .pagination li.active {
-        padding: 1px 8px;
-        background: #007fd0;
-        color: #fff;
-        border-radius: 4px; }
-      .main .pagination li.disabled {
-        display: none; }
   @media only screen and (min-width: 768px) {
     .main .page-controls {
       margin-top: -20px; }
@@ -2442,10 +2413,6 @@ img.avatar {
         clear: both; }
       .main .page-controls .page-buttons {
         margin-top: 0; }
-      .main .page-controls .pagination {
-        float: left;
-        text-align: left;
-        margin: 10px -5px 0 -5px; }
       .main .page-controls .pagination + .page-buttons {
         margin-top: 0; } }
   @media only screen and (min-width: 768px) {
@@ -2588,6 +2555,67 @@ dl.stats {
   padding: 30px 0;
   font-size: 1.2em;
   color: #666; }
+
+.page-buttons {
+  margin: -10px -5px 15px -5px;
+  text-align: center; }
+  @media only screen and (min-width: 768px) {
+    .page-buttons {
+      float: right;
+      margin: -45px -5px 8px 0; } }
+
+.pagination {
+  list-style: none;
+  margin: 0 0 25px -5px;
+  padding: 0;
+  font-size: 0.9em;
+  text-align: center; }
+  @media only screen and (min-width: 768px) {
+    .pagination {
+      text-align: right;
+      margin: 0 -5px 25px -5px; } }
+  .pagination li {
+    display: inline-block;
+    margin: 0 5px; }
+    .pagination li a {
+      background: #fafafa;
+      padding: 1px 8px;
+      display: inline-block;
+      border-radius: 4px; }
+      .pagination li a:hover {
+        background: #ff7500;
+        color: #fff;
+        text-decoration: none; }
+    .pagination li.active {
+      padding: 1px 8px;
+      background: #007fd0;
+      color: #fff;
+      border-radius: 4px; }
+    .pagination li.disabled {
+      display: none; }
+  @media only screen and (min-width: 768px) {
+    .pagination {
+      float: left;
+      text-align: left;
+      margin: 10px -5px 0 -5px; } }
+
+@media only screen and (min-width: 768px) {
+  .page-controls {
+    margin-top: -20px; }
+    .page-controls:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .page-controls .page-buttons {
+      margin-top: 0; }
+    .page-controls .pagination + .page-buttons {
+      margin-top: 0; } }
+
+@media only screen and (min-width: 768px) {
+  header + .page-controls {
+    margin-top: -20px; }
+    header + .page-controls .page-buttons {
+      margin-top: -30px; } }
 
 @media only screen and (min-width: 768px) {
   nav.section-menu {

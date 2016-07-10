@@ -201,3 +201,87 @@ dl.stats {
 	font-size: 1.2em;
 	color: $alt-font-color-1;
 }
+
+.page-buttons {
+	margin: side-values(-10px -5px 15px -5px);
+	text-align: center;
+
+	@include bp-medium {
+		float: $right;
+		margin: side-values(-45px -5px 8px 0);
+	}
+}
+
+.pagination {
+	list-style: none;
+	margin: side-values(0 0 25px -5px);
+	padding: 0;
+	font-size: 0.9em;
+	text-align: center;
+
+	@include bp-medium {
+		text-align: $right;
+		margin: side-values(0 -5px 25px -5px);
+	}
+	
+	li {
+		display: inline-block;
+		margin: 0 5px;
+
+		a {
+			background: $background-1;
+			padding: 1px 8px;
+			display: inline-block;
+			@include border-radius(4px);
+
+			&:hover {
+				background: $secondary-color;
+				color: $invert-font-color;
+				text-decoration: none;
+			}
+		}
+
+		&.active {
+			padding: 1px 8px;
+			background: $primary-color;
+			color: $invert-font-color;
+			@include border-radius(4px);
+		}
+
+		&.disabled {
+			display: none;
+		}
+	}		
+
+	@include bp-medium {
+		float: $left;
+		text-align: $left;
+		margin: side-values(10px -5px 0 -5px);
+	}
+}
+
+.page-controls {
+	
+	@include bp-medium {
+		@include clearfix();
+		margin-top: -20px;
+
+		.page-buttons {
+			margin-top: 0;
+		}
+
+		.pagination + .page-buttons {
+			margin-top: 0;
+		}
+	}
+}
+
+header + .page-controls {
+	@include bp-medium {
+		margin-top: -20px;
+
+		.page-buttons {
+			margin-top: -30px;
+		}
+	}
+}
