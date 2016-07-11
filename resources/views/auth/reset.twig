@@ -14,16 +14,16 @@
             <section class="form">
                 <div class="form__section">
                     <div class="form__row">
-                        <h3>{{ form_label('email', trans('member.email')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('email', trans('member.email')) }}</h3>
                         {{ form_text('email') }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('password', trans('member.password')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('password', trans('member.password')) }}</h3>
                         {{ form_password('password', {'class': 'password-toggle'}) }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('password_confirmation', trans('member.password')) }}</label></h3>
-                        <p class="form__description">{{ trans('member.password_confirm') }}</p>
+                        <h3 class="form__row__title">{{ form_label('password_confirmation', trans('member.password')) }}</label></h3>
+                        <p class="form__row__description">{{ trans('member.password_confirm') }}</p>
                         {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
                     </div>
                 </div>

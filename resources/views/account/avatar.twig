@@ -11,8 +11,8 @@
     <section class="form">
         <div class="form__section">
             <div class="form__row">
-                <h3>{{ form_label('avatar_file', trans('account.avatar_file')) }}</label></h3>
-                <p class="form__description">{{ trans('account.avatar_file_desc') }}</p>
+                <h3 class="form__row__title">{{ form_label('avatar_file', trans('account.avatar_file')) }}</label></h3>
+                <p class="form__row__description">{{ trans('account.avatar_file_desc') }}</p>
                 <div class="fallback">
                     {{ form_file('avatar_file') }}
                 </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="form__row">
-                <h3>{{ form_label('avatar_link', trans('account.avatar_link')) }}</h3>
+                <h3 class="form__row__title">{{ form_label('avatar_link', trans('account.avatar_link')) }}</h3>
                 {{ form_text('avatar_link', auth_user.avatar_link) }}
             </div>
         </div>

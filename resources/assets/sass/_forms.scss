@@ -1,4 +1,4 @@
-section.form {
+.form {
     border: 1px solid $border-1;
     margin-bottom: 10px;
     @include border-radius(4px);
@@ -13,7 +13,7 @@ section.form {
         padding: 16px 12px;
         border-bottom: 2px solid $border-1;
 
-        h2 {
+        .form__section__title {
             margin: side-values(0 0 12px 0);
             padding: side-values(0 8px 8px 8px);
             color: $primary-color;
@@ -55,19 +55,19 @@ section.form {
         border-bottom: 1px solid $border-1;
         padding: 12px 8px;
 
-        h3 {
+        .form__row__title {
             margin: side-values(0 0 5px 0);
             padding: 0;
             font-size: 1em;
         }
 
-        h4 {
-            font-size: 0.9em;
-            font-weight: normal;
-            text-transform: uppercase;
-            color: $primary-color;
-            margin: 0;
-        }
+        // h4 {
+        //     font-size: 0.9em;
+        //     font-weight: normal;
+        //     text-transform: uppercase;
+        //     color: $primary-color;
+        //     margin: 0;
+        // }
 
         &:first-child {
             padding-top: 0;
@@ -103,7 +103,7 @@ section.form {
         }
     }
 
-    .form__description {
+    .form__row__description {
         font-size: 0.8em;
         line-height: 1.4;
         color: $alt-font-color-1;
@@ -120,7 +120,7 @@ section.form {
         }
 
         .form__radio__description {
-            @extend .form__description;
+            @extend .form__row__description;
         }
 
         &:last-child {

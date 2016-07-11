@@ -10,7 +10,7 @@
     {{ form_open({'url_route': 'account.privacy', 'method': 'post'}) }}
     <section class="form">
         <div class="form__section">
-            <h2>{{ trans('account.blocked_users') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.blocked_users') }}</h2>
             <div class="form__section__container">
                 <div class="compact-users-list blocked-users">
                     <a href="index.php?page=profile"><img src="{{ asset('images/avatar.png') }}" class="avatar" />Always Annoying</a>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('general.forum') }}</h2>
+            <h2 class="form__section__title">{{ trans('general.forum') }}</h2>
             <div class="form__section__container">
                 <div class="form__row">
                     <p class="form__checkbox"><label>{{ form_checkbox('showonline', 1, setting('user.showonline', true)) }} {{ trans('account.showonline') }}</label></p>
@@ -40,11 +40,11 @@
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.profile') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.profile') }}</h2>
             <div class="form__section__container">
                 <div class="form__row">
-                    <h3>{{ trans('account.dob_privacy') }}</h3>
-                    <p class="form__description">{{ trans('account.dob_privacy_desc') }}</p>
+                    <h3 class="form__row__title">{{ trans('account.dob_privacy') }}</h3>
+                    <p class="form__row__description">{{ trans('account.dob_privacy_desc') }}</p>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             {{ form_radio('dob_privacy', 0, setting('user.dob_privacy', 2) == 0, {'id': 'no_dob'}) }}
@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.dob_visibility') }}</h3>
+                    <h3 class="form__row__title">{{ trans('account.dob_visibility') }}</h3>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             {{ form_radio('dob_visibility', 0, setting('user.dob_visibility', 1) == 0, {'id': 'dob_everyone'}) }}
@@ -79,7 +79,7 @@
                 </div>
                 {# everything below refers to profilefields and should be dynamic #}
                 <div class="form__row">
-                    <h3>Show your sex to:</h3>
+                    <h3 class="form__row__title">Show your gender to:</h3>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             <input type="radio" name="" id="sex_everyone" checked="checked" />
@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>Show your location to:</h3>
+                    <h3 class="form__row__title">Show your location to:</h3>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             <input type="radio" name="" id="location_everyone" checked="checked" />
@@ -113,7 +113,7 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>Show your bio to:</h3>
+                    <h3 class="form__row__title">Show your bio to:</h3>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             <input type="radio" name="" id="bio_everyone" />
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>Show your contact details to:</h3>
+                    <h3 class="form__row__title">Show your contact details to:</h3>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             <input type="radio" name="" id="contact_everyone" />

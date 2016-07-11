@@ -50,12 +50,12 @@
 
                 <div class="form__section__container">
                     <div class="form__row">
-                        <h3>{{ form_label('question', trans('poll.question')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('question', trans('poll.question')) }}</h3>
                         {{ form_text('question', input_get('question')) }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('endAt', trans('poll.endAt')) }}</h3>
-                        <p class="form__description">{{ trans('poll.endAt.desc') }}</p>
+                        <h3 class="form__row__title">{{ form_label('endAt', trans('poll.endAt')) }}</h3>
+                        <p class="form__row__description">{{ trans('poll.endAt.desc') }}</p>
                         {{ form_text('endAt', input_get('endAt'), {id: 'poll-end-at'}) }}
                     </div>
                     <div class="form__row">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="form__row" id="poll-maximum-options">
                         <h3>{{ trans('poll.maxOptions') }}</h3>
-                        <p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
+                        <p class="form__row__description">{{ trans('poll.maxOptions.desc') }}</p>
                         {{ form_text('maxoptions', input_get('maxoptions')) }}
                     </div>
                 </div>

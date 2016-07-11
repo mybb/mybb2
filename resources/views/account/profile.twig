@@ -10,7 +10,7 @@
     {{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}
     <section class="form">
         <div class="form__section">
-            <h2>{{ trans('account.avatar') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.avatar') }}</h2>
             <div class="form__section__container change-avatar">
                 <a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
                 <p>{{ trans('account.avatar_desc') }}</p>
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.details') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.details') }}</h2>
             <div class="form__section__container">
                 <div class="buttons">
                     <a {{ modal_attributes('account.username') }} class="button button--secondary icon fa-user">{{ trans('account.change_username') }}</a>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.roles') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.roles') }}</h2>
             <div class="form__section__container">
                 {% for role in auth_user().roles %}
                     {{ role.role_display_name }}
@@ -40,7 +40,7 @@
         </div>
         {% for group in profile_field_groups %}
             <div class="form__section clearfix">
-                <h2>{{ group.name }}</h2>
+                <h2 class="form__section__title">{{ group.name }}</h2>
                 <div class="form__section__container">
                     {% for field in group.fields %}
                         <div class="form__row">
@@ -51,19 +51,19 @@
             </div>
         {% endfor %}
         <div class="form__section clearfix">
-            <h2>{{ trans('account.about_you') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.about_you') }}</h2>
             <div class="form__section__container">
                 <div class="form__row">
-                    <h3>{{ trans('general.dob') }}</h3>
+                    <h3 class="form__row__title">{{ trans('general.dob') }}</h3>
                     {# Another raw using #}
-                    <p class="form__description">{{ trans('account.dob_desc', {'link': url_route('account.privacy')})|raw }}</p>
+                    <p class="form__row__description">{{ trans('account.dob_desc', {'link': url_route('account.privacy')})|raw }}</p>
                     {{ form_selectRange('date_of_birth_day', 1, 31, dob.day) }}
                     {{ form_selectMonth('date_of_birth_month', dob.month) }}
                     {{ form_text('date_of_birth_year', dob.year, {'maxlength': 4, 'class': 'short'}) }}
                 </div>
                 <div class="form__row">
-                    <h3><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
-                    <p class="form__description">{{ trans('account.usertitle_desc') }}</p>
+                    <h3 class="form__row__title"><label for="usertitle">{{ trans('account.usertitle') }}</label></h3>
+                    <p class="form__row__description">{{ trans('account.usertitle_desc') }}</p>
                     {{ form_text('usertitle', auth_user().usertitle) }}
                 </div>
             </div>

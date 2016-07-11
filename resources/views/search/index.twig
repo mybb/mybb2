@@ -10,21 +10,21 @@
     {{ form_open({'route':'search'}) }}
         <section class="form">
             <div class="form__section">
-                <h2>{{ trans('search.basicsearch') }}</h2>
+                <h2 class="form__section__title">{{ trans('search.basicsearch') }}</h2>
                 <div class="form__section__container">
                     <div class="form__row">
-                        <h3>{{ form_label('keyword', trans('search.keyword')) }}</label></h3>
+                        <h3 class="form__row__title">{{ form_label('keyword', trans('search.keyword')) }}</label></h3>
                         {{ form_text('keyword', '', {'id':'keyword'}) }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('author', trans('search.author')) }}</label></h3>
+                        <h3 class="form__row__title">{{ form_label('author', trans('search.author')) }}</label></h3>
                         {{ form_text('author', '', {'id':'author'}) }}
                         <p class="form__checkbox"><label>{{  form_checkbox('matchusername', '1', false) }}  {{ trans('search.matchusername') }}</label></p>
                     </div>
                 </div>
             </div>
             <div class="form__section">
-                <h2>{{ trans('search.searchoptions') }}</h2>
+                <h2 class="form__section__title">{{ trans('search.searchoptions') }}</h2>
                 <div class="form__section__container">
                     <div class="form__row">
                         {{ trans('search.findtopicswith') }}
@@ -90,10 +90,10 @@
                 </div>
             </div>
             <div class="form__section">
-                <h2>{{ trans('search.filters') }}</h2>
+                <h2 class="form__section__title">{{ trans('search.filters') }}</h2>
                 <div class="form__section__container">
                     <div class="form__row">
-                        <h3><label for="forum_search">Forum</label></h3>
+                        <h3 class="form__row__title"><label for="forum_search">Forum</label></h3>
                         {{ form_select('forums[]', {'-1':trans('search.allforums')}|merge(forums), null, {
                                 'id': 'forum_search',
                                 'multiple': 'multiple'
@@ -101,7 +101,7 @@
                         }}
                     </div>
                     <div class="form__row">
-                        <h3><label for="prefix_search">Thread Prefix</label></h3>
+                        <h3 class="form__row__title"><label for="prefix_search">Thread Prefix</label></h3>
                         <select name="threadprefix" id="prefix_search" multiple="multiple">
                             <option value="any" selected="selected">Find threads with any prefix</option>
                             <option value="0">No prefix</option>
@@ -125,7 +125,7 @@
             </div>
         </section>
         <div class="form__submit">
-            {{ form_button(trans('search.searchforum'), {'type': 'submit', 'class': 'button fa-search'}) }}
+            {{ form_button(trans('search.searchforum'), {'type': 'submit', 'class': 'button icon fa-search'}) }}
         </div>
     {{ form_close() }}
 </div>

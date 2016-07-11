@@ -14,16 +14,15 @@
         {{ form_open({'route': ['polls.postCreate', topic.id, topic.slug], 'method': 'post'}) }}
         <section class="form" id="add-poll">
             <div class="form__section">
-                <h2>{{ trans('poll.settings') }}</h2>
-
+                <h2 class="form__section__title">{{ trans('poll.settings') }}</h2>
                 <div class="form__section__container">
                     <div class="form__row">
-                        <h3>{{ form_label('question', trans('poll.question')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('question', trans('poll.question')) }}</h3>
                         {{ form_text('question') }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('poll-end-at', trans('poll.endAt')) }}</h3>
-                        <p class="form__description">{{ trans('poll.endAt.desc') }}</p>
+                        <h3 class="form__row__title">{{ form_label('poll-end-at', trans('poll.endAt')) }}</h3>
+                        <p class="form__row__description">{{ trans('poll.endAt.desc') }}</p>
                         {{ form_text('endAt', '', {id: 'poll-end-at'}) }}
                     </div>
                     <div class="form__row">
@@ -34,15 +33,14 @@
                         </p>
                     </div>
                     <div class="form__row" id="poll-maximum-options">
-                        <h3>{{ trans('poll.maxOptions') }}</h3>
-                        <p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
+                        <h3 class="form__row__title">{{ trans('poll.maxOptions') }}</h3>
+                        <p class="form__row__description">{{ trans('poll.maxOptions.desc') }}</p>
                         {{ form_text('maxoptions') }}
                     </div>
                 </div>
             </div>
             <div class="form__section">
-                <h2>{{ trans('poll.pollOptions') }}</h2>
-
+                <h2 class="form__section__title">{{ trans('poll.pollOptions') }}</h2>
                 <div class="form__section__container">
                     {% for i in range(1, max(2, input_old('option')|length)) %}
                         <div class="form__row poll-option">
@@ -63,7 +61,7 @@
             </div>
         </section>
         <div class="form__submit">
-            {{ form_button('<i class="fa fa-plus-circle"></i><span class="text">'~trans('poll.postPoll')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+            {{ form_button(trans('poll.postPoll'), {'type': 'submit', 'class': 'button icon fa-plus-circle'}) }}
         </div>
         {{ form_close() }}
     </div>

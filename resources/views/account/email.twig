@@ -17,13 +17,13 @@
     <section class="form">
         <div class="form__section">
             <div class="form__row">
-                <h3>{{ form_label('email', trans('account.new_email')) }}</label></h3>
-                <p class="form__description">{{ trans('account.new_email_desc') }}</p>
+                <h3 class="form__row__title">{{ form_label('email', trans('account.new_email')) }}</label></h3>
+                <p class="form__row__description">{{ trans('account.new_email_desc') }}</p>
                 {{ form_text('email') }}
             </div>
             <div class="form__row">
-                <h3>{{ form_label('password', trans('account.current_password')) }}</h3>
-                <p class="form__description">{{ trans('account.current_password_email') }}</p>
+                <h3 class="form__row__title">{{ form_label('password', trans('account.current_password')) }}</h3>
+                <p class="form__row__description">{{ trans('account.current_password_email') }}</p>
                 {{ form_password('password', {'class': 'password-toggle'}) }}
             </div>
         </div>

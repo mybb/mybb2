@@ -10,8 +10,8 @@
         <section class="form">
             <div class="form__section">
                 <div class="form__row">
-                    <h3>{{ form_label('participants', trans('conversations.participants')) }}</h3>
-                    <p class="form__description">{{ trans('conversations.participants_desc') }}</p>
+                    <h3 class="form__row__title">{{ form_label('participants', trans('conversations.participants')) }}</h3>
+                    <p class="form__row__description">{{ trans('conversations.participants_desc') }}</p>
                     {# TODO: some sort of autocomplete #}
                     {{ form_text('participants') }}
                 </div>

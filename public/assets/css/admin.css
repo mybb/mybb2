@@ -2666,102 +2666,96 @@ dl.stats {
         margin-left: 0;
         margin-right: 0; } }
 
-section.form {
+.form {
   border: 1px solid #dfdfdf;
   margin-bottom: 10px;
   border-radius: 4px; }
-  section.form .heading--major {
+  .form .heading--major {
     margin: -1px;
     border-radius: 4px 4px 0 0; }
-  section.form .form__section {
+  .form .form__section {
     padding: 16px 12px;
     border-bottom: 2px solid #dfdfdf; }
-    section.form .form__section:after {
+    .form .form__section:after {
       content: "";
       display: table;
       clear: both; }
-    section.form .form__section h2 {
+    .form .form__section .form__section__title {
       margin: 0 0 12px 0;
       padding: 0 8px 8px 8px;
       color: #007fd0;
       font-size: 1.1em;
       border-bottom: 1px dotted #ccc; }
       @media only screen and (min-width: 768px) {
-        section.form .form__section h2 {
+        .form .form__section .form__section__title {
           border: 0;
           float: left;
           margin: 0;
           padding: 0;
           width: 20%;
           text-align: right; } }
-    section.form .form__section:last-child {
+    .form .form__section:last-child {
       border-bottom: 0; }
     @media only screen and (min-width: 768px) {
-      section.form .form__section {
+      .form .form__section {
         padding: 20px 12px; } }
   @media only screen and (min-width: 768px) {
-    section.form .form__section__container {
+    .form .form__section__container {
       float: left;
       margin: 0 0 0 3%;
       padding: 0 0 0 20px;
       border-left: 1px dotted #ccc;
       width: 74%;
       box-sizing: border-box; } }
-  section.form .form__row {
+  .form .form__row {
     border-bottom: 1px solid #dfdfdf;
     padding: 12px 8px; }
-    section.form .form__row h3 {
+    .form .form__row .form__row__title {
       margin: 0 0 5px 0;
       padding: 0;
       font-size: 1em; }
-    section.form .form__row h4 {
-      font-size: 0.9em;
-      font-weight: normal;
-      text-transform: uppercase;
-      color: #007fd0;
-      margin: 0; }
-    section.form .form__row:first-child {
+    .form .form__row:first-child {
       padding-top: 0; }
-    section.form .form__row:last-child {
+    .form .form__row:last-child {
       border-bottom: 0;
       padding-bottom: 6px; }
-  section.form .form__checkbox {
+  .form .form__checkbox {
     font-size: 0.9em;
     margin: 5px 0;
     padding: 0 0 0 30px; }
-    section.form .form__checkbox input[type="checkbox"] {
+    .form .form__checkbox input[type="checkbox"] {
       float: left;
       margin: 6px 0 0 -26px; }
-    section.form .form__checkbox .fa {
+    .form .form__checkbox .fa {
       color: #999;
       padding-right: 5px;
       width: 16px;
       font-size: 14px;
       text-align: center;
       display: inline-block; }
-    section.form .form__checkbox:last-child {
+    .form .form__checkbox:last-child {
       margin-bottom: 0; }
-  section.form .form__description, section.form .form__radio .form__radio__description {
+  .form .form__row__description, .form .form__radio .form__radio__description {
     font-size: 0.8em;
     line-height: 1.4;
     color: #666;
     margin: -4px 0 4px 0; }
-  section.form .form__radio {
+  .form .form__radio {
     padding: 0 0 0 30px;
     margin-bottom: 20px; }
-    section.form .form__radio input[type="radio"] {
+    .form .form__radio input[type="radio"] {
       float: left;
       margin: 6px 0 0 -26px; }
-    section.form .form__radio:last-child {
+    .form .form__radio:last-child {
       margin-bottom: 0; }
-  section.form .form__data {
+  .form .form__data {
     margin: 0;
     font-size: 0.9em; }
-  section.form label {
+  .form label {
     cursor: pointer; }
-  section.form .topic-title {
+  .form .topic-title {
     font-size: 1.3em; }
-  section.form .buttons {
+  .form .buttons {
     margin: -5px; }
 
 .form__submit {

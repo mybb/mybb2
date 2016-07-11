@@ -12,15 +12,15 @@
         <section class="form">
             <div class="form__section">
                 <div class="form__row">
-                    <h3>{{ form_label('name', trans('admin::profile_fields.group_name_field')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('name', trans('admin::profile_fields.group_name_field')) }}</h3>
                     {{ form_text('name') }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('slug', trans('admin::profile_fields.group_slug_field')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('slug', trans('admin::profile_fields.group_slug_field')) }}</h3>
                     {{ form_text('slug') }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('description', trans('admin::profile_fields.group_description_field')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('description', trans('admin::profile_fields.group_description_field')) }}</h3>
                     {{ form_text('description') }}
                 </div>
                 <div class="form__submit">

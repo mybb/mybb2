@@ -10,10 +10,10 @@
     {{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}
     <section class="form">
         <div class="form__section">
-            <h2>{{ trans('account.datetime') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.datetime') }}</h2>
             <div class="form__section__container">
                 <div class="form__row">
-                    <h3>{{ form_label('date_format', trans('account.dateformat')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('date_format', trans('account.dateformat')) }}</h3>
                     {# TODO: Make the display dynamic #}
                     {{ form_select('date_format', {
                         'default': trans('account.uselangdefault')~' ('~format_date(null, false, 'default')~')',
@@ -26,7 +26,7 @@
                     }, setting('user.date_format', 'default')) }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.timeformat') }}</h3>
+                    <h3 class="form__row__title">{{ trans('account.timeformat') }}</h3>
                     <div class="segmented-control">
                         {# we can't use form_label here as laravel escapes the value and we need html in it #}
                         <span class="segmented-control__option">
@@ -40,12 +40,12 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('timezone', trans('account.timezone')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('timezone', trans('account.timezone')) }}</h3>
                     {{ form_select('timezone', selectTimezones, timezone) }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.dst') }}</h3>
-                    <p class="form__description">{{ trans('account.dst_desc') }}</p>
+                    <h3 class="form__row__title">{{ trans('account.dst') }}</h3>
+                    <p class="form__row__description">{{ trans('account.dst_desc') }}</p>
                     <div class="segmented-control">
                             {# as above: form_label not usable #}
                             <span class="segmented-control__option">
@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.discussions') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.discussions') }}</h2>
             <div class="form__section__container">
                 <div class="form__row">
                     {# is there a better way than using raw here? #}
@@ -74,8 +74,8 @@
                     <p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, setting('user.show_editor', true)) }} {{ trans('account.show_editor') }}</label></p>
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.message_order') }}</h3>
-                    <p class="form__description">{{ trans('account.message_order_description', {'link': url_route('conversations.index')})|raw }}</p>
+                    <h3 class="form__row__title">{{ trans('account.message_order') }}</h3>
+                    <p class="form__row__description">{{ trans('account.message_order_description', {'link': url_route('conversations.index')})|raw }}</p>
                     <div class="segmented-control">
                         {# we can't use form_label here as laravel escapes the value and we need html in it #}
                         <span class="segmented-control__option">
@@ -89,39 +89,39 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
                     {{ form_input('number', 'topics_per_page', setting('user.topics_per_page', 20), {'min': 5, 'max': 50, 'step': 5}) }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
                     {{ form_input('number', 'posts_per_page', setting('user.posts_per_page', 10), {'min': 5, 'max': 50, 'step': 5}) }}
                 </div>
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.styleLanguage') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.styleLanguage') }}</h2>
             {# TODO: both, styles and languages are dynamic and an array need to be generated in the controller #}
             <div class="form__section__container">
                 <div class="form__row">
-                    <h3>{{ form_label('style', trans('account.style')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('style', trans('account.style')) }}</h3>
                     {{ form_select('style', {
                         'default': trans('account.usedefault')~' - MyBB Default',
                         1: 'MyBB Default',
                     }) }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('language', trans('account.language')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('language', trans('account.language')) }}</h3>
                     {{ form_select('language', languages, selectedLanguage) }}
                 </div>
             </div>
         </div>
         <div class="form__section">
-            <h2>{{ trans('account.notifications') }}</h2>
+            <h2 class="form__section__title">{{ trans('account.notifications') }}</h2>
             {# All of the labels below use HTML as their value and therefor we can't use form_label #}
             <div class="form__section__container">
                 <div class="form__row">
-                    <h3>{{ trans('account.topicsForums') }}</h3>
-                    <p class="form__description">{{ trans('account.notify_me') }}</p>
+                    <h3 class="form__row__title">{{ trans('account.topicsForums') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
                     <div class="select-control">
                         <p class="select-control__option">
                             {{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like'}) }}
@@ -146,8 +146,8 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.messages') }}</h3>
-                    <p class="form__description">{{ trans('account.notify_me') }}</p>
+                    <h3 class="form__row__title">{{ trans('account.messages') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
                     <div class="select-control">
                         <p class="select-control__option">
                             {{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message'}) }}
@@ -160,8 +160,8 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.moderation') }}</h3>
-                    <p class="form__description">{{ trans('account.notify_me') }}</p>
+                    <h3 class="form__row__title">{{ trans('account.moderation') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
                     <div class="select-control">
                         {# TODO: if auth_user().isGroupLeader #}
                             <p class="select-control__option">
@@ -186,9 +186,9 @@
                     </div>
                 </div>
                 <div class="form__row">
-                    <h3>{{ trans('account.notification_mails') }}</h3>
+                    <h3 class="form__row__title">{{ trans('account.notification_mails') }}</h3>
                     {# TODO: raw again - not nice #}
-                    <p class="form__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
+                    <p class="form__row__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
                             {{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails'}) }}

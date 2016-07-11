@@ -11,14 +11,12 @@
         <section class="form">
             <div class="form__section">
                 <div class="form__row">
-                    <h3>{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
+                    <h3 class="form__row__title">{{ form_label('username', trans('member.UsernameOrEmail')) }}</h3>
                     {{ form_text('username') }}
                 </div>
                 <div class="form__row">
-                    <h3>{{ form_label('password', trans('member.password')) }}</h3>
-
-                    <p class="form__description"><a href="{{ url('password/email') }}"
-                                                    data-modal="password/email">{{ trans('member.forgotpassword') }}</a>
+                    <h3 class="form__row__title">{{ form_label('password', trans('member.password')) }}</h3>
+                    <p class="form__row__description"><a href="{{ url('password/email') }}" data-modal="password/email">{{ trans('member.forgotpassword') }}</a>
                     </p>
                     {{ form_password('password', {'class': 'password-toggle'}) }}
                 </div>

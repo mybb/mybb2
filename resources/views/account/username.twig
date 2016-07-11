@@ -11,13 +11,13 @@
     <section class="form">
         <div class="form__section">
             <div class="form__row">
-                <h3>{{ form_label('name', trans('account.new_username')) }}</label></h3>
-                <p class="form__description">{{ trans('account.new_username_desc') }}</p>
+                <h3 class="form__row__title">{{ form_label('name', trans('account.new_username')) }}</label></h3>
+                <p class="form__row__description">{{ trans('account.new_username_desc') }}</p>
                 {{ form_text('name') }}
             </div>
             <div class="form__row">
-                <h3>{{ form_label('password', trans('account.current_password')) }}</h3>
-                <p class="form__description">{{ trans('account.current_password_name') }}</p>
+                <h3 class="form__row__title">{{ form_label('password', trans('account.current_password')) }}</h3>
+                <p class="form__row__description">{{ trans('account.current_password_name') }}</p>
                 {{ form_password('password', {'class': 'password-toggle'}) }}
             </div>
         </div>
