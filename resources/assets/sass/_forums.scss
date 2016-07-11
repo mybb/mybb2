@@ -48,7 +48,7 @@
                 height: 24px;
                 margin: side-values(-3px 12px 0 0);
 
-                img.avatar {
+                .avatar {
                     width: 24px;
                     height: 24px;
                 }
@@ -281,7 +281,7 @@ section.container {
             top: 0;
             #{$left}: 0;
 
-            img.avatar {
+            .avatar {
                 width: 44px;
                 height: 44px;
             }
@@ -399,7 +399,7 @@ section.container {
                     height: 36px;
                     margin: side-values(3px 12px 0 0);
 
-                    img.avatar {
+                    .avatar {
                         width: 36px;
                         height: 36px;
                     }

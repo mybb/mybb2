@@ -2815,7 +2815,7 @@ dl.stats {
     width: 80px;
     height: 80px;
     margin: 6px 0 0 0; }
-    .user-bar__dropdown .avatar-profile-link img.avatar {
+    .user-bar__dropdown .avatar-profile-link .avatar {
       width: 80px;
       height: 80px; }
   .user-bar__dropdown .dropdown__container {
@@ -2873,7 +2873,7 @@ dl.stats {
       margin: 0 8px 0 0;
       width: 40px;
       height: 40px; }
-      .user-bar__dropdown .messages .avatar-profile-link img.avatar {
+      .user-bar__dropdown .messages .avatar-profile-link .avatar {
         width: 40px;
         height: 40px; }
     .user-bar__dropdown .messages .messages__conversation__title {
@@ -3287,7 +3287,7 @@ a.button {
       width: 24px;
       height: 24px;
       margin: -3px 12px 0 0; }
-      .forum-list .forum .forum__topic .avatar-profile-link img.avatar {
+      .forum-list .forum .forum__topic .avatar-profile-link .avatar {
         width: 24px;
         height: 24px; }
     .forum-list .forum .forum__topic .forum__topic__title {
@@ -3441,7 +3441,7 @@ section.container .forum-list {
     position: absolute;
     top: 0;
     left: 0; }
-    .topic-list .topic .avatar-profile-link img.avatar {
+    .topic-list .topic .avatar-profile-link .avatar {
       width: 44px;
       height: 44px; }
   .topic-list .topic .topic__forum {
@@ -3504,7 +3504,7 @@ section.container .forum-list {
       width: 36px;
       height: 36px;
       margin: 3px 12px 0 0; }
-      .forum-list--full-width .forum .forum__topic .avatar-profile-link img.avatar {
+      .forum-list--full-width .forum .forum__topic .avatar-profile-link .avatar {
         width: 36px;
         height: 36px; }
   .topic-list .topic-list__sort-topics .primary-column-one {
@@ -3649,7 +3649,7 @@ section.container .forum-list {
     width: 40px;
     height: 40px;
     margin: 5px 10px 0 0; }
-    .post .avatar-profile-link img.avatar {
+    .post .avatar-profile-link .avatar {
       width: 40px;
       height: 40px; }
   .post .post__body {
@@ -3796,7 +3796,7 @@ section.container .forum-list {
       width: 50px;
       height: 50px;
       margin-left: -80px; }
-      .post.post--hidden .avatar-profile-link img.avatar {
+      .post.post--hidden .avatar-profile-link .avatar {
         width: 50px;
         height: 50px; }
     .post .post__meta {
@@ -3810,7 +3810,7 @@ section.container .forum-list {
       width: 70px;
       height: 70px;
       margin: -13px 0 0 -100px; }
-      .post .avatar-profile-link img.avatar {
+      .post .avatar-profile-link .avatar {
         width: 70px;
         height: 70px; }
     .post .post__inline-mod {
@@ -3825,7 +3825,7 @@ section.container .forum-list {
       width: 100px;
       height: 100px;
       margin-left: -130px; }
-      .post .avatar-profile-link img.avatar {
+      .post .avatar-profile-link .avatar {
         width: 100px;
         height: 100px; }
     .post.post--conversation {
@@ -3834,7 +3834,7 @@ section.container .forum-list {
         width: 70px;
         height: 70px;
         margin-left: -100px; }
-        .post.post--conversation .avatar-profile-link img.avatar {
+        .post.post--conversation .avatar-profile-link .avatar {
           width: 70px;
           height: 70px; }
     .post .post__toggle {
@@ -3955,7 +3955,7 @@ section.container .forum-list {
       width: 80px;
       height: 80px;
       margin: 0 12px 0 0; }
-      .user-list .user-list__user .avatar-profile-link img.avatar {
+      .user-list .user-list__user .avatar-profile-link .avatar {
         width: 80px;
         height: 80px; }
     .user-list .user-list__user .user-list__user__username {
@@ -3981,7 +3981,7 @@ section.container .forum-list {
   .user-list.user-list--online-now .user-list__user .avatar-profile-link {
     width: 50px;
     height: 50px; }
-    .user-list.user-list--online-now .user-list__user .avatar-profile-link img.avatar {
+    .user-list.user-list--online-now .user-list__user .avatar-profile-link .avatar {
       width: 50px;
       height: 50px; }
   .user-list.user-list--online-now .user-list__user .user-list__user__date {
@@ -3992,7 +3992,7 @@ section.container .forum-list {
 .user-list--compact .user-list--compact__user {
   display: inline-block;
   margin: 0 12px 10px 0; }
-  .user-list--compact .user-list--compact__user img.avatar {
+  .user-list--compact .user-list--compact__user .avatar {
     width: 24px;
     height: 24px;
     margin: -2px 8px 0 0; }
@@ -4053,7 +4053,7 @@ section.container .forum-list {
   .form .form__section__container.change-avatar .avatar-profile-link {
     float: left;
     margin: 0 10px 0 -110px; }
-    .form .form__section__container.change-avatar .avatar-profile-link img.avatar {
+    .form .form__section__container.change-avatar .avatar-profile-link .avatar {
       width: 100px;
       height: 100px; }
   .form .form__section__container.change-avatar p {
@@ -4076,7 +4076,7 @@ section.container .forum-list {
     float: left;
     display: block;
     margin: 0 0 0 -120px; }
-    .dashboard__account .avatar-profile-link img.avatar {
+    .dashboard__account .avatar-profile-link .avatar {
       width: 100px;
       height: 100px; }
   .dashboard__account .dashboard__account__username {
@@ -4100,7 +4100,7 @@ section.container .forum-list {
     margin: 0 12px 0 0;
     width: 40px;
     height: 40px; }
-    .notifications .avatar-profile-link img.avatar {
+    .notifications .avatar-profile-link .avatar {
       width: 40px;
       height: 40px; }
   .notifications h2 a:hover .text,
@@ -4133,7 +4133,7 @@ section.container .forum-list {
     position: absolute;
     top: 0;
     left: 0; }
-    .conversation-list .conversation .avatar-profile-link img.avatar {
+    .conversation-list .conversation .avatar-profile-link .avatar {
       width: 44px;
       height: 44px; }
   .conversation-list .conversation .conversation__title--unread {
@@ -4174,7 +4174,7 @@ section.container .forum-list {
       height: 36px;
       float: left;
       margin: 0px 10px 0 0; }
-      .conversation-participants .participant .avatar-profile-link img.avatar {
+      .conversation-participants .participant .avatar-profile-link .avatar {
         width: 36px;
         height: 36px; }
     .conversation-participants .participant .participant__username {
