@@ -3958,19 +3958,19 @@ section.container .forum-list {
       .user-list .user-list__user .avatar-profile-link img.avatar {
         width: 80px;
         height: 80px; }
-    .user-list .user-list__user h3 {
+    .user-list .user-list__user .user-list__user__username {
       margin: 0;
       font-size: 1em; }
-    .user-list .user-list__user h4 {
+    .user-list .user-list__user .user-list__user__user-title {
       font-size: 0.8em;
       font-weight: normal;
       margin: 0; }
-    .user-list .user-list__user p {
+    .user-list .user-list__user .user-list__user__data {
       margin: 0;
       padding: 0;
       font-size: 0.8em;
       color: #999; }
-      .user-list .user-list__user p a {
+      .user-list .user-list__user .user-list__user__data a {
         color: #666; }
     .user-list .user-list__user .team-badge {
       float: right;
@@ -3989,10 +3989,10 @@ section.container .forum-list {
   .user-list .sort-results {
     margin: 0 -12px 0 -12px; }
 
-.user-list--compact a {
+.user-list--compact .user-list--compact__user {
   display: inline-block;
   margin: 0 12px 10px 0; }
-  .user-list--compact a img.avatar {
+  .user-list--compact .user-list--compact__user img.avatar {
     width: 24px;
     height: 24px;
     margin: -2px 8px 0 0; }
@@ -4009,8 +4009,6 @@ section.container .forum-list {
   line-height: 1.6;
   font-size: 0.7em;
   border-radius: 4px; }
-  .team-badge i {
-    margin-right: 5px; }
 
 .profile .profile__header {
   position: relative; }
@@ -4033,18 +4031,18 @@ section.container .forum-list {
 .profile .profile__usertitle {
   margin: 5px 0; }
 
-.profile .profile__field-group h2 {
+.profile .profile__field-group .profile__field-group__title {
   margin-bottom: 0; }
 
 .profile .profile__field {
   padding: 8px;
   border-bottom: 1px solid #dfdfdf;
   font-size: 0.9em; }
-  .profile .profile__field h3 {
+  .profile .profile__field .profile__field__title {
     margin: 0;
     padding: 0;
     font-weight: 600; }
-  .profile .profile__field p {
+  .profile .profile__field .profile__field__data {
     margin: 0;
     padding: 0; }
   .profile .profile__field:last-child {

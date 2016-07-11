@@ -35,23 +35,24 @@
             }
         }
 
-        h3 {
+        .user-list__user__username {
             margin: 0;
             font-size: 1em;
         }
 
-        h4 {
+        .user-list__user__user-title {
             font-size: 0.8em;
             font-weight: normal;
             margin: 0;
         }
 
-        p {
+        .user-list__user__data {
             margin: 0;
             padding: 0;
             font-size: 0.8em;
             color: $alt-font-color-2;
 
+            // would prefer to be .user-list__user__data__link, though currently not supported by templates
             a {
                 color: $alt-font-color-1;
             }
@@ -95,7 +96,7 @@
 
 .user-list--compact {
 
-    a {
+    .user-list--compact__user {
         display: inline-block;
         margin: side-values(0 12px 10px 0);
 
@@ -120,10 +121,6 @@
     line-height: 1.6;
     font-size: 0.7em;
     @include border-radius(4px);
-
-    i {
-        margin-#{$right}: 5px;
-    }
 }
 
 .profile {
@@ -152,8 +149,11 @@
         margin: 5px 0;
     }
 
-    .profile__field-group h2 {
-        margin-bottom: 0;
+    .profile__field-group {
+
+        .profile__field-group__title {
+            margin-bottom: 0;
+        }
     }
 
     .profile__field {
@@ -161,13 +161,13 @@
         border-bottom: 1px solid $border-1;
         font-size: 0.9em;
 
-        h3 {
+        .profile__field__title {
             margin: 0;
             padding: 0;
             font-weight: 600;
         }
 
-        p {
+        .profile__field__data {
             margin: 0;
             padding: 0;
         }

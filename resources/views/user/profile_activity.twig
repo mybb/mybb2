@@ -26,12 +26,12 @@
 
     {% for group in profile_field_groups %}
         <section class="block profile__field-group">
-            <h2 class="block__heading">{{ group.name }}</h2>
+            <h2 class="block__heading profile__field-group__title">{{ group.name }}</h2>
             {% for field in group.fields %}
                 {% if field.has_value %}
                     <div class="profile__field">
-                        <h3>{{ field.name }}</h3>
-                        <p>{{ field.getValue(user) }}</p>
+                        <h3 class="profile__field__title">{{ field.name }}</h3>
+                        <p class="profile__field__data">{{ field.getValue(user) }}</p>
                     </div>
                 {% endif %}
             {% endfor %}

@@ -20,8 +20,8 @@
                 <h3 class="user-list__user__username">
                     {{ render_profile_link(user) }}
                 </h3>
-                <p class="user-list__user__date">{{ generate_time(user.last_visit) }}</p>
-                <p class="user-list__user__activity">{{ user.last_page|raw }}</p>
+                <p class="user-list__user__data user-list__user__date">{{ generate_time(user.last_visit) }}</p>
+                <p class="user-list__user__data user-list__user__activity">{{ user.last_page|raw }}</p>
             </div>
         {% else %}
             <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>

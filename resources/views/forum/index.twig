@@ -54,7 +54,7 @@
         <h3 class="block__heading block__heading--linked"><a href="{{ url_route('members.online') }}" class="block__heading--linked__link">{{ trans('member.online') }} <span class="count">{{ users.count }} <i class="fa fa-angle-{{ langDir.right }}"></i></span></a></h3>
         <div class="user-list user-list--compact">
             {% for user in users %}
-                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
+                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link user-list--compact__user"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
             {% else %}
                 <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
             {% endfor %}
