@@ -2269,13 +2269,19 @@ html[dir="rtl"] {
     text-decoration: none;
     font-style: normal;
     font-weight: normal;
-    margin-right: 8px;
+    margin-left: 8px;
     position: relative;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
   .icon.icon--fw:before {
     width: 1.28571429em;
     text-align: center; }
+  .icon.icon--after {
+    display: inline-block; }
+    .icon.icon--after:before {
+      float: left;
+      margin-left: 0px;
+      margin-right: 8px; }
 
 .hidden {
   display: none !important;
@@ -2419,8 +2425,6 @@ textarea {
         font-size: 0.8em;
         color: #666;
         font-weight: normal; }
-        .block .block__heading--linked .block__heading--linked__link .count .fa {
-          margin-right: 4px; }
   .block .block__heading--major {
     background: #007fd0;
     color: #fff;
@@ -2728,13 +2732,6 @@ dl.stats {
     .form .form__checkbox input[type="checkbox"] {
       float: right;
       margin: 6px -26px 0 0; }
-    .form .form__checkbox .fa {
-      color: #999;
-      padding-left: 5px;
-      width: 16px;
-      font-size: 14px;
-      text-align: center;
-      display: inline-block; }
     .form .form__checkbox:last-child {
       margin-bottom: 0; }
   .form .form__row__description, .form .form__radio .form__radio__description {

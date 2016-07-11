@@ -81,15 +81,6 @@
             margin: side-values(6px 0 0 -26px);
         }
 
-        .fa {
-            color: $alt-font-color-2;
-            padding-#{$right}: 5px;
-            width: 16px;
-            font-size: 14px;
-            text-align: center;
-            display: inline-block;
-        }
-
         &:last-child {
             margin-bottom: 0;
         }

@@ -444,10 +444,9 @@
 
     .breadcrumb__link {
         color: $alt-font-color-1;
-    }
 
-    .breadcrumb__separator {
-        color: $alt-font-color-1;
-        margin: side-values(0 4px 0 6px);
+        &.icon:before {
+            margin: side-values(0 6px 0 12px);
+        }
     }
 }

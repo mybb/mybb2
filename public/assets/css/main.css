@@ -2273,6 +2273,12 @@
   .icon.icon--fw:before {
     width: 1.28571429em;
     text-align: center; }
+  .icon.icon--after {
+    display: inline-block; }
+    .icon.icon--after:before {
+      float: right;
+      margin-right: 0px;
+      margin-left: 8px; }
 
 .hidden {
   display: none !important;
@@ -2416,8 +2422,6 @@ textarea {
         font-size: 0.8em;
         color: #666;
         font-weight: normal; }
-        .block .block__heading--linked .block__heading--linked__link .count .fa {
-          margin-left: 4px; }
   .block .block__heading--major {
     background: #007fd0;
     color: #fff;
@@ -2961,9 +2965,8 @@ dl.stats {
   margin: 0 0 10px 0; }
   .breadcrumb .breadcrumb__link {
     color: #666; }
-  .breadcrumb .breadcrumb__separator {
-    color: #666;
-    margin: 0 4px 0 6px; }
+    .breadcrumb .breadcrumb__link.icon:before {
+      margin: 0 6px 0 12px; }
 
 .footer .footer__navigation {
   border-top: 1px solid #dfdfdf;
@@ -3058,13 +3061,6 @@ dl.stats {
     .form .form__checkbox input[type="checkbox"] {
       float: left;
       margin: 6px 0 0 -26px; }
-    .form .form__checkbox .fa {
-      color: #999;
-      padding-right: 5px;
-      width: 16px;
-      font-size: 14px;
-      text-align: center;
-      display: inline-block; }
     .form .form__checkbox:last-child {
       margin-bottom: 0; }
   .form .form__row__description, .form .form__radio .form__radio__description {
