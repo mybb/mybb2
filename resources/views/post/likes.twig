@@ -17,7 +17,7 @@
                 <a href="#" class="button"><i class="fa fa-plus"></i><span class="text">{{ trans('post.show_topic') }}</span></a>
             </div>
         </div>
-        <section class="post-likes">
+        <section class="block post-likes">
             <ol class="likes">
                 {% for like in likes %}
                     <li class="likes__like like" data-like-id="{{ like.id }}" data-post-id="{{ like.content_id }}">

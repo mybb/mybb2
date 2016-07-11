@@ -2391,55 +2391,55 @@ textarea {
     padding-bottom: 10px;
     font-size: 0.9em;
     margin-top: 30px; }
-    .main .page-sidebar section {
+    .main .page-sidebar .block {
       border: 1px solid #dfdfdf;
       padding: 12px 15px;
       margin-bottom: 30px;
       border-radius: 4px; }
 
-section {
+.block {
   margin-bottom: 30px; }
-  section h2 {
+  .block h2 {
     font-size: 1.2em; }
-  section .heading {
+  .block .block__heading {
     border-bottom: 1px solid #dfdfdf;
     padding: 8px;
     margin: 0 0 5px 0; }
-  section .heading--linked {
+  .block .block__heading--linked {
     border-bottom: 0;
     padding: 0; }
-    section .heading--linked .heading--linked__link {
+    .block .block__heading--linked .block__heading--linked__link {
       padding: 8px 12px;
       border-bottom: 1px solid #dfdfdf;
       display: block; }
-      section .heading--linked .heading--linked__link .count {
+      .block .block__heading--linked .block__heading--linked__link .count {
         float: right;
         font-size: 0.8em;
         color: #666;
         font-weight: normal; }
-        section .heading--linked .heading--linked__link .count .fa {
+        .block .block__heading--linked .block__heading--linked__link .count .fa {
           margin-left: 4px; }
-  section .heading--major {
+  .block .block__heading--major {
     background: #007fd0;
     color: #fff;
     border: 0;
     padding: 8px 12px;
     margin-bottom: 0;
     border-radius: 4px; }
-  section .heading--major.heading--linked {
-    padding: 0; }
-    section .heading--major.heading--linked .heading--linked__link {
-      border: none;
-      color: #fff; }
-      section .heading--major.heading--linked .heading--linked__link .count {
-        color: rgba(255, 255, 255, 0.7); }
-  section.container {
+    .block .block__heading--major.block__heading--linked {
+      padding: 0; }
+      .block .block__heading--major.block__heading--linked .block__heading--linked__link {
+        border: none;
+        color: #fff; }
+        .block .block__heading--major.block__heading--linked .block__heading--linked__link .count {
+          color: rgba(255, 255, 255, 0.7); }
+  .block.block--container {
     border: 1px solid #dfdfdf;
     border-radius: 4px; }
-    section.container .sort-results {
+    .block.block--container .sort-results {
       border-width: 0;
       border-top-width: 2px; }
-  section:last-child {
+  .block:last-child {
     margin-bottom: 0; }
 
 .sort-results {

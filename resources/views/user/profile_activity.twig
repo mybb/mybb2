@@ -1,11 +1,11 @@
 <div class="page-content page-content--sidebar">
-    <section>
-        <h2 class="heading heading--major">{{ trans('member.profile.recentActivity') }}</h2>
+    <section class="block">
+        <h2 class="block__heading block__heading--major">{{ trans('member.profile.recentActivity') }}</h2>
     </section>
 </div>
 
 <aside class="page-sidebar">
-    <section>
+    <section class="block profile__stats">
         <dl class="stats">
             <dt class="stats__posts">{{ trans('topic.posts') }}</dt>
             <dd class="stats__posts">{{ user.num_posts }}</dd>
@@ -25,8 +25,8 @@
     </section>
 
     {% for group in profile_field_groups %}
-        <section class="profile__field-group">
-            <h2 class="heading">{{ group.name }}</h2>
+        <section class="block profile__field-group">
+            <h2 class="block__heading">{{ group.name }}</h2>
             {% for field in group.fields %}
                 {% if field.has_value %}
                     <div class="profile__field">

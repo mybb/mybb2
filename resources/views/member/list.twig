@@ -7,7 +7,7 @@
     <header>
         <h1>{{ trans('member.members') }}</h1>
     </header>
-    <section class="container user-list">
+    <section class="block block--container user-list">
         {% for user in users %}
             <div class="user-list__user">
                 <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>

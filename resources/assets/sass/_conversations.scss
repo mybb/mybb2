@@ -59,7 +59,7 @@
     line-height: 1.4;
     @include clearfix();
 
-    h3 {
+    .conversation-participants__title {
         margin-bottom: 0;
     }
 

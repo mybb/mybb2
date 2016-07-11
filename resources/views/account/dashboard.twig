@@ -6,7 +6,7 @@
     <header>
         <h1>{{ trans('account.dashboard') }}</h1>
     </header>
-    <section class="dashboard__account">
+    <section class="block dashboard__account">
         <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link"
            title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" class="avatar" /></a>
         <h3 class="dashboard__account__username">{{ render_profile_link(auth_user) }}</h3>

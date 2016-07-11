@@ -13,7 +13,7 @@
         <h1>{{ trans('member.online') }}</h1>
     </header>
     {{ users.render|raw }}
-    <section class="user-list online-now container">
+    <section class="block block--container user-list user-list--online-now">
         {% for user in users %}
             <div class="user-list__user">
                 <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" class="avatar-profile-link"><img src="{{ user.avatar }}" class="avatar" /></a>

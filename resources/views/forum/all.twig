@@ -8,8 +8,8 @@
         <h1>{{ trans('forum.allforums') }}</h1>
     </header>
     {% for category in forums %}
-        <section>
-            <h2 class="heading heading--major">{{ category.title }}</h2>
+        <section class="block">
+            <h2 class="block__heading block__heading--major">{{ category.title }}</h2>
              <div class="forum-list forum-list--full-width">
                 {% for forum in category.children.toTree %}
                     <div class="forum">

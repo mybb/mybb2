@@ -14,7 +14,7 @@
             </header>
 
             {% if forum.children.count > 0 %}
-                <section class="container">
+                <section class="block block--container">
                     <h2 class="visually-hidden">{{ trans('forum.childforums') }}</h2>
                      <div class="forum-list forum-list--full-width">
                         {% for forum in forum.children.toTree %}

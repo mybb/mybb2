@@ -50,8 +50,8 @@
         {{ messages.render|raw }}
     </div>
     <aside class="page-sidebar">
-        <section class="conversation-participants">
-            <h3 class="heading">{{ trans('conversations.participants') }}</h3>
+        <section class="block conversation-participants">
+            <h3 class="heading conversation-participants__title">{{ trans('conversations.participants') }}</h3>
             {% for participant in conversation.participants %}
                 <span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
                     <a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>
