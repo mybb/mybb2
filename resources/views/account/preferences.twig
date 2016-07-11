@@ -30,11 +30,11 @@
                     <div class="segmented-control">
                         {# we can't use form_label here as laravel escapes the value and we need html in it #}
                         <span class="segmented-control__option">
-                            {{ form_radio('time_format', 12, setting('user.time_format', trans('general.timeformat')) == 12, {'id': 'twelvehour'}) }}
+                            {{ form_radio('time_format', 12, setting('user.time_format', trans('general.timeformat')) == 12, {'id': 'twelvehour', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="twelvehour">{{ trans('account.12-hour') }}</label>
                         </span>
                         <span class="segmented-control__option">
-                            {{ form_radio('time_format', 24, setting('user.time_format', trans('general.timeformat')) == 24, {'id': 'twentyfourhour'}) }}
+                            {{ form_radio('time_format', 24, setting('user.time_format', trans('general.timeformat')) == 24, {'id': 'twentyfourhour', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="twentyfourhour">{{ trans('account.24-hour') }}</label>
                         </span>
                     </div>
@@ -49,15 +49,15 @@
                     <div class="segmented-control">
                             {# as above: form_label not usable #}
                             <span class="segmented-control__option">
-                                {{ form_radio('dst', 0, setting('user.dst', 2) == 0, {'id': 'dst_on'}) }}
+                                {{ form_radio('dst', 0, setting('user.dst', 2) == 0, {'id': 'dst_on', 'class': 'segmented-control__option__input'}) }}
                                 <label class="segmented-control__option__button" for="dst_on">{{ trans('general.enable') }}</label>
                             </span>
                             <span class="segmented-control__option">
-                                {{ form_radio('dst', 1, setting('user.dst', 2) == 1, {'id': 'dst_off'}) }}
+                                {{ form_radio('dst', 1, setting('user.dst', 2) == 1, {'id': 'dst_off', 'class': 'segmented-control__option__input'}) }}
                                 <label class="segmented-control__option__button" for="dst_off">{{ trans('general.disable') }}</label>
                             </span>
                             <span class="segmented-control__option">
-                                {{ form_radio('dst', 2, setting('user.dst', 2) == 2, {'id': 'dst_auto'}) }}
+                                {{ form_radio('dst', 2, setting('user.dst', 2) == 2, {'id': 'dst_auto', 'class': 'segmented-control__option__input'}) }}
                                 <label class="segmented-control__option__button" for="dst_auto">{{ trans('general.auto') }}</label>
                             </span>
                     </div>
@@ -79,11 +79,11 @@
                     <div class="segmented-control">
                         {# we can't use form_label here as laravel escapes the value and we need html in it #}
                         <span class="segmented-control__option">
-                                {{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc'}) }}
+                                {{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="asc">{{ trans('account.message_order_asc') }}</label>
                         </span>
                         <span class="segmented-control__option">
-                            {{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc'}) }}
+                            {{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="desc">{{ trans('account.message_order_desc') }}</label>
                         </span>
                     </div>
@@ -124,23 +124,23 @@
                     <p class="form__row__description">{{ trans('account.notify_me') }}</p>
                     <div class="select-control">
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like'}) }}
+                            {{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_like" class="select-control__option__button icon icon--fw fa-thumbs-up">{{ trans('account.notify_on_like') }}</label>
                         </p>
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_quote', 1, setting('user.notify_on_quote', true), {'id': 'notify_on_quote'}) }}
+                            {{ form_checkbox('notify_on_quote', 1, setting('user.notify_on_quote', true), {'id': 'notify_on_quote', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_quote" class="select-control__option__button icon icon--fw fa-comment">{{ trans('account.notify_on_quote') }}</label>
                         </p>
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_mention', 1, setting('user.notify_on_mention', true), {'id': 'notify_on_mention'}) }}
+                            {{ form_checkbox('notify_on_mention', 1, setting('user.notify_on_mention', true), {'id': 'notify_on_mention', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_mention" class="select-control__option__button icon icon--fw fa-at">{{ trans('account.notify_on_mention') }}</label>
                         </p>
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_reply', 1,setting('user.notify_on_reply', true), {'id': 'notify_on_reply'}) }}
+                            {{ form_checkbox('notify_on_reply', 1,setting('user.notify_on_reply', true), {'id': 'notify_on_reply', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_reply" class="select-control__option__button icon icon--fw fa-plus">{{ trans('account.notify_on_reply') }}</label>
                         </p>
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_new_post', 1, setting('user.notify_on_new_post', true), {'id': 'notify_on_new_post'}) }}
+                            {{ form_checkbox('notify_on_new_post', 1, setting('user.notify_on_new_post', true), {'id': 'notify_on_new_post', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_new_post" class="select-control__option__button icon icon--fw fa-plus">{{ trans('account.notify_on_new_post') }}</label>
                         </p>
                     </div>
@@ -150,11 +150,11 @@
                     <p class="form__row__description">{{ trans('account.notify_me') }}</p>
                     <div class="select-control">
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message'}) }}
+                            {{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_new_message" class="select-control__option__button icon icon--fw fa-inbox">{{ trans('account.notify_on_new_message') }}</label>
                         </p>
                         <p class="select-control__option">
-                            {{ form_checkbox('notify_on_reply_message', 1, setting('user.notify_on_reply_message', true), {'id': 'notify_on_reply_message'}) }}
+                            {{ form_checkbox('notify_on_reply_message', 1, setting('user.notify_on_reply_message', true), {'id': 'notify_on_reply_message', 'class': 'select-control__option__input'}) }}
                             <label for="notify_on_reply_message" class="select-control__option__button icon icon--fw fa-reply">{{ trans('account.notify_on_reply_message') }}</label>
                         </p>
                     </div>
@@ -165,21 +165,21 @@
                     <div class="select-control">
                         {# TODO: if auth_user().isGroupLeader #}
                             <p class="select-control__option">
-                                {{ form_checkbox('notify_on_group_request', 1, setting('user.notify_on_group_request', true), {'id': 'notify_on_group_request'}) }}
+                                {{ form_checkbox('notify_on_group_request', 1, setting('user.notify_on_group_request', true), {'id': 'notify_on_group_request', 'class': 'select-control__option__input'}) }}
                                 <label for="notify_on_group_request" class="select-control__option__button icon icon--fw fa-users">{{ trans('account.notify_on_group_request') }}</label>
                             </p>
                         {# endif #}
                         {# TODO: if auth_user().isModerator #}
                             <p class="select-control__option">
-                                {{ form_checkbox('notify_on_moderation_post', 1, setting('user.notify_on_moderation_post', true), {'id': 'notify_on_moderation_post'}) }}
+                                {{ form_checkbox('notify_on_moderation_post', 1, setting('user.notify_on_moderation_post', true), {'id': 'notify_on_moderation_post', 'class': 'select-control__option__input'}) }}
                                 <label for="notify_on_moderation_post" class="select-control__option__button icon icon--fw fa-thumb-tack">{{ trans('account.notify_on_moderation_post') }}</label>
                             </p>
                             <p class="select-control__option">
-                                {{ form_checkbox('notify_on_report', 1, setting('user.notify_on_report', true), {'id': 'notify_on_report'}) }}
+                                {{ form_checkbox('notify_on_report', 1, setting('user.notify_on_report', true), {'id': 'notify_on_report', 'class': 'select-control__option__input'}) }}
                                 <label for="notify_on_report" class="select-control__option__button icon icon--fw fa-flag">{{ trans('account.notify_on_report') }}</label>
                             </p>
                             <p class="select-control__option">
-                                {{ form_checkbox('notify_on_username_change', 1, setting('user.notify_on_username_change', true), {'id': 'notify_on_username_change'}) }}
+                                {{ form_checkbox('notify_on_username_change', 1, setting('user.notify_on_username_change', true), {'id': 'notify_on_username_change', 'class': 'select-control__option__input'}) }}
                                 <label for="notify_on_username_change" class="select-control__option__button icon icon--fw fa-pencil-square-o">{{ trans('account.notify_on_username_change') }}</label>
                             </p>
                         {# endif #}
@@ -191,15 +191,15 @@
                     <p class="form__row__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
                     <div class="segmented-control">
                         <span class="segmented-control__option">
-                            {{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails'}) }}
+                            {{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="no_emails">{{ trans('general.none') }}</label>
                         </span>
                         <span class="segmented-control__option">
-                            {{ form_radio('notification_mails', 1, setting('user.notification_mails', 0) == 1, {'id': 'daily_emails'}) }}
+                            {{ form_radio('notification_mails', 1, setting('user.notification_mails', 0) == 1, {'id': 'daily_emails', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="daily_emails">{{ trans('general.daily') }}</label>
                         </span>
                         <span class="segmented-control__option">
-                            {{ form_radio('notification_mails', 2, setting('user.notification_mails', 0) == 2, {'id': 'weekly_emails'}) }}
+                            {{ form_radio('notification_mails', 2, setting('user.notification_mails', 0) == 2, {'id': 'weekly_emails', 'class': 'segmented-control__option__input'}) }}
                             <label class="segmented-control__option__button" for="weekly_emails">{{ trans('general.weekly') }}</label>
                         </span>
                     </div>

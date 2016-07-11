@@ -83,21 +83,17 @@ textarea {
         @include border-radius(corner-values(0 4px 4px 0));
     }
 
-    input {
+    .segmented-control__option__input {
         position: absolute;
         visibility: hidden;
     }
 
-    input:checked + .segmented-control__option__button {
+    .segmented-control__option__input:checked + .segmented-control__option__button {
         background: $primary-color;
         color: $invert-font-color;
         margin: -1px;
         border: 1px solid $primary-color;
         z-index: 15;
-
-        i {
-            color: $invert-font-color;
-        }
     }
 }
 
@@ -123,12 +119,12 @@ textarea {
         }
     }
 
-    input {
+    .select-control__option__input {
         position: absolute;
         visibility: hidden;
     }
 
-    input:checked + .select-control__option__button {
+    .select-control__option__input:checked + .select-control__option__button {
         background: $background-4;
 
         &.icon:before {

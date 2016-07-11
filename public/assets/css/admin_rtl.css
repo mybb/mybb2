@@ -2834,17 +2834,15 @@ textarea {
     border-radius: 0 4px 4px 0; }
   .segmented-control :last-child .segmented-control__option__button {
     border-radius: 4px 0 0 4px; }
-  .segmented-control input {
+  .segmented-control .segmented-control__option__input {
     position: absolute;
     visibility: hidden; }
-  .segmented-control input:checked + .segmented-control__option__button {
+  .segmented-control .segmented-control__option__input:checked + .segmented-control__option__button {
     background: #007fd0;
     color: #fff;
     margin: -1px;
     border: 1px solid #007fd0;
     z-index: 15; }
-    .segmented-control input:checked + .segmented-control__option__button i {
-      color: #fff; }
 
 .select-control {
   font-size: 0.8em; }
@@ -2861,12 +2859,12 @@ textarea {
     border-radius: 4px; }
     .select-control .select-control__option__button.icon:before {
       color: rgba(0, 0, 0, 0.4); }
-  .select-control input {
+  .select-control .select-control__option__input {
     position: absolute;
     visibility: hidden; }
-  .select-control input:checked + .select-control__option__button {
+  .select-control .select-control__option__input:checked + .select-control__option__button {
     background: #ccc; }
-    .select-control input:checked + .select-control__option__button.icon:before {
+    .select-control .select-control__option__input:checked + .select-control__option__button.icon:before {
       color: rgba(0, 0, 0, 0.6); }
 
 .button,
