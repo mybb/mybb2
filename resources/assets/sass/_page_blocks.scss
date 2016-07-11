@@ -1,12 +1,8 @@
 .block {
-
     margin-bottom: 30px;
 
-    h2 {
-        font-size: 1.2em;
-    }
-
     .block__heading {
+        font-size: 1.2em;
         border-bottom: 1px solid $border-1;
         padding: 8px;
         margin: side-values(0 0 5px 0);
@@ -79,7 +75,7 @@
     clear: both;
     @include border-radius(corner-values(0 0 4px 4px));
 
-    h3 {
+    .sort-results__title {
         display: inline-block;
         margin: side-values(0 10px 0 0);
         padding: 0;
@@ -101,26 +97,27 @@
     border-top: 1px solid $border-1;
     border-bottom: 1px solid $border-1;
 
-    li {
+    .page-tabs__item {
         display: inline-block;
         margin: side-values(0 8px 0 0);
 
-        a {
+        .page-tabs__item__link {
             padding: 4px 8px;
             display: inline-block;
             background: $background-1;
             @include border-radius(3px);
-        }
 
-        a:hover {
-            text-decoration: none;
-            background: $secondary-color;
-            color: $invert-font-color;
+            &:hover,
+            &:active {
+                text-decoration: none;
+                background: $secondary-color;
+                color: $invert-font-color;
+            }
         }
         
-        &.page-tabs__active {
+        &.page-tabs__item--active {
 
-            a, a:hover {
+            .page-tabs__item__link {
                 color: $invert-font-color;
                 font-weight: bold;
                 background: $primary-color;
@@ -161,14 +158,14 @@ dl.stats {
     font-size: 0.9em;
     @include border-radius(4px);
 
-    .fa {
-        float: $left;
-        margin: side-values(6px 0 0 -25px);
-    }
-
-    p {
+    .alert__message {
         margin: 0;
         padding: 0;
+
+        &.icon:before {
+            float: $left;
+            margin-#{$left}: -25px;
+        }
     }
 
     &.alert--danger {

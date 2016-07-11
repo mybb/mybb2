@@ -31,7 +31,7 @@
 
         {{ form_open({'url_route': url_route('members'), 'method': 'get'}) }}
         <div class="sort-results">
-            <h3>{{ trans('general.sorting') }}</h3>
+            <h3 class="sort-results__title">{{ trans('general.sorting') }}</h3>
             {{ form_select('sortBy', {
                 'name': trans('general.sortby')~' '~trans('general.username'),
                 'created_at': trans('general.sortby')~' '~trans('member.joinDate'),

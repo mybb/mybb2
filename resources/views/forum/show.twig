@@ -151,7 +151,7 @@
 
                 {{ form_open({'url_route': url_route('forums.show', {'slug': forum.slug, 'id': forum.id }), 'method': 'get'}) }}
                 <div class="sort-results">
-                    <h3>{{ trans('general.sorting') }}</h3>
+                    <h3 class="sort-results__title">{{ trans('general.sorting') }}</h3>
                     {{ form_select('orderBy', {
                         'title': trans('general.sortby')~' '~trans('forum.topictitle'),
                         'startdate': trans('general.sortby')~' '~trans('forum.startdate'),

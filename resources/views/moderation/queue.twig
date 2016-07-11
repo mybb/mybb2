@@ -6,8 +6,7 @@
 
     {% if queued_topics is empty and queued_posts is empty %}
         <div class="alert alert--success">
-            <i class="fa fa-check-circle"></i>
-            <p>{{ trans('moderation.empty_queue') }}</p>
+            <p class="alert__message icon fa-check-circle">{{ trans('moderation.empty_queue') }}</p>
         </div>
     {% else %}
         {% if queued_topics is not empty %}

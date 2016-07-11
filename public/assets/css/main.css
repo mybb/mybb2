@@ -2399,9 +2399,8 @@ textarea {
 
 .block {
   margin-bottom: 30px; }
-  .block h2 {
-    font-size: 1.2em; }
   .block .block__heading {
+    font-size: 1.2em;
     border-bottom: 1px solid #dfdfdf;
     padding: 8px;
     margin: 0 0 5px 0; }
@@ -2449,14 +2448,14 @@ textarea {
   padding: 6px 0;
   clear: both;
   border-radius: 0 0 4px 4px; }
-  .sort-results h3 {
+  .sort-results .sort-results__title {
     display: inline-block;
     margin: 0 10px 0 0;
     padding: 0;
     font-weight: normal;
     color: #666;
     font-size: 0.9em; }
-    .sort-results h3:after {
+    .sort-results .sort-results__title:after {
       content: ":"; }
 
 .page-tabs {
@@ -2466,19 +2465,19 @@ textarea {
   padding: 8px;
   border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf; }
-  .page-tabs li {
+  .page-tabs .page-tabs__item {
     display: inline-block;
     margin: 0 8px 0 0; }
-    .page-tabs li a {
+    .page-tabs .page-tabs__item .page-tabs__item__link {
       padding: 4px 8px;
       display: inline-block;
       background: #fafafa;
       border-radius: 3px; }
-    .page-tabs li a:hover {
-      text-decoration: none;
-      background: #ff7500;
-      color: #fff; }
-    .page-tabs li.page-tabs__active a, .page-tabs li.page-tabs__active a:hover {
+      .page-tabs .page-tabs__item .page-tabs__item__link:hover, .page-tabs .page-tabs__item .page-tabs__item__link:active {
+        text-decoration: none;
+        background: #ff7500;
+        color: #fff; }
+    .page-tabs .page-tabs__item.page-tabs__item--active .page-tabs__item__link {
       color: #fff;
       font-weight: bold;
       background: #007fd0;
@@ -2507,12 +2506,12 @@ dl.stats {
   margin-bottom: 20px;
   font-size: 0.9em;
   border-radius: 4px; }
-  .alert .fa {
-    float: left;
-    margin: 6px 0 0 -25px; }
-  .alert p {
+  .alert .alert__message {
     margin: 0;
     padding: 0; }
+    .alert .alert__message.icon:before {
+      float: left;
+      margin-left: -25px; }
   .alert.alert--danger {
     background-color: #eb5257;
     color: #fff; }
@@ -3841,10 +3840,10 @@ section.container .forum-list {
     .post .post__toggle {
       margin-right: 5px; } }
 
-#add-poll .poll-option {
+.add-poll .poll-option {
   padding-right: 20px; }
 
-#add-poll .remove-option {
+.add-poll .remove-option {
   float: right;
   margin: 3px -20px 0 0;
   color: #eb5257; }
@@ -4551,7 +4550,7 @@ img.jcrop-preview {
   border-radius: 0 0 4px 0;
   font-size: 12px;
   display: none; }
-  #spinner .fa {
+  #spinner i {
     font-size: 16px;
     padding: 0 2px; }
 

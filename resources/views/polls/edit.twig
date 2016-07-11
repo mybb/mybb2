@@ -12,7 +12,7 @@
             <h1>{{ trans('poll.editPoll') }}</h1>
         </header>
         {{ form_open({'route': ['polls.edit', topic.id, topic.slug], 'method': 'post'}) }}
-        <section class="form" id="add-poll">
+        <section class="form add-poll" id="add-poll">
             <div class="form__section">
                 <h2 class="form__section__title">{{ trans('poll.settings') }}</h2>
 
