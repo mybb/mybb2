@@ -4,15 +4,31 @@
 {% endblock %}
 {% block contents %}
         <nav class="section-menu">
-            <ul class="sidebar-navigation">
-                <li {% if active == 'dashboard' %}class="active"{% endif %}><a href="{{ url_route('account.index') }}" class="icon icon--fw fa-dashboard">{{ trans('account.dashboard') }}</a></li>
-                <li {% if active == 'profile' %}class="active"{% endif %}><a href="{{ url_route('account.profile') }}" class="icon icon--fw fa-user">{{ trans('account.profile') }}</a></li>
-                <li {% if active == 'notifications' %}class="active"{% endif %}><a href="{{ url_route('account.notifications') }}" class="icon icon--fw fa-flag">{{ trans('account.notifications') }}</a></li>
-                <li {% if active == 'following' %}class="active"{% endif %}><a href="{{ url_route('account.following') }}" class="icon icon--fw fa-plus">{{ trans('account.following') }}</a></li>
-                <li {% if active == 'preferences' %}class="active"{% endif %}><a href="{{ url_route('account.preferences') }}" class="icon icon--fw fa-cog">{{ trans('account.preferences') }}</a></li>
-                <li {% if active == 'privacy' %}class="active"{% endif %}><a href="{{ url_route('account.privacy') }}" class="icon icon--fw fa-shield">{{ trans('account.privacy') }}</a></li>
-                <li {% if active == 'drafts' %}class="active"{% endif %}><a href="{{ url_route('account.drafts') }}" class="icon icon--fw fa-file-text-o">{{ trans('account.drafts') }}</a></li>
-                <li {% if active == 'files' %}class="active"{% endif %}><a href="#files" class="icon icon--fw fa-paperclip">{{ trans('account.files') }}</a></li>
+            <ul class="section-menu__links sidebar-navigation">
+                <li class="section-menu__links__item {% if active == 'dashboard' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.index') }}" class="section-menu__links__item__link icon icon--fw fa-dashboard">{{ trans('account.dashboard') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'profile' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.profile') }}" class="section-menu__links__item__link icon icon--fw fa-user">{{ trans('account.profile') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'notifications' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.notifications') }}" class="section-menu__links__item__link icon icon--fw fa-flag">{{ trans('account.notifications') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'following' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.following') }}" class="section-menu__links__item__link icon icon--fw fa-plus">{{ trans('account.following') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'preferences' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.preferences') }}" class="section-menu__links__item__link icon icon--fw fa-cog">{{ trans('account.preferences') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'privacy' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.privacy') }}" class="section-menu__links__item__link icon icon--fw fa-shield">{{ trans('account.privacy') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'drafts' %}section-menu__links__item--active{% endif %}">
+                    <a href="{{ url_route('account.drafts') }}" class="section-menu__links__item__link icon icon--fw fa-file-text-o">{{ trans('account.drafts') }}</a>
+                </li>
+                <li class="section-menu__links__item  {% if active == 'files' %}section-menu__links__item--active{% endif %}">
+                    <a href="#files" class="section-menu__links__item__link icon icon--fw fa-paperclip">{{ trans('account.files') }}</a>
+                </li>
             </ul>
         </nav>
         <div class="page-content page-content--menu">

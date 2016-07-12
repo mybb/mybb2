@@ -9,9 +9,9 @@
                 {{ form_text('title', input_get('title'), {'class': 'topic__title', 'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
             </header>
             <div class="conversation-participants conversation-participants--compose">
-                <h3>{{ trans('conversations.participants') }}</h3>
+                <h3 class="conversation-participants__title">{{ trans('conversations.participants') }}</h3>
                     {# TODO: some sort of autocomplete #}
-                    {{ form_text('participants', input_get('participants'), {'placeholder': trans('conversations.participants_list'), 'title': trans('conversations.participants_list')}) }}
+                    {{ form_text('participants', input_get('participants'), {'placeholder': trans('conversations.participants_list'), 'title': trans('conversations.participants_list'), 'class': 'conversation-participants__input'}) }}
             </div>
             <div class="post post--reply">
                 <div class="post__meta">

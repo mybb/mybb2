@@ -13,7 +13,7 @@
             <h2 class="form__section__title">{{ trans('account.avatar') }}</h2>
             <div class="form__section__container change-avatar">
                 <a href="{{ url_route('account.avatar') }}" class="avatar-profile-link" title="{{ trans('account.your_avatar') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar my-avatar" /></a>
-                <p>{{ trans('account.avatar_desc') }}</p>
+                <p class="change-avatar__description">{{ trans('account.avatar_desc') }}</p>
                 <div class="buttons">
                     <a {{ modal_attributes('account.avatar') }} id="avatar-change" class="button button--secondary icon fa-picture-o">{{ trans('account.avatar_change') }}</a>
                     <a href="{{ url_route('account.avatar.remove') }}" class="button button--secondary icon fa-times">{{ trans('account.avatar_remove') }}</a>

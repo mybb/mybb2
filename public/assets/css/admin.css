@@ -2630,40 +2630,40 @@ dl.stats {
     width: 19%;
     margin-right: 3%; } }
 
-.section-menu ul {
+.section-menu .section-menu__links {
   margin: 0 0 15px 0;
   padding: 0;
   list-style: none; }
-  .section-menu ul:after {
+  .section-menu .section-menu__links:after {
     content: "";
     display: table;
     clear: both; }
-  .section-menu ul li {
+  .section-menu .section-menu__links .section-menu__links__item {
     float: left;
     width: 48%;
     margin-bottom: 4px; }
-    .section-menu ul li:nth-child(odd) {
+    .section-menu .section-menu__links .section-menu__links__item:nth-child(odd) {
       margin-right: 2%; }
-    .section-menu ul li:nth-child(even) {
+    .section-menu .section-menu__links .section-menu__links__item:nth-child(even) {
       margin-left: 2%; }
-    .section-menu ul li a {
+    .section-menu .section-menu__links .section-menu__links__item .section-menu__links__item__link {
       background: #fafafa;
       display: block;
       padding: 2px 8px;
       text-decoration: none;
       border-radius: 3px; }
-      .section-menu ul li a:hover {
+      .section-menu .section-menu__links .section-menu__links__item .section-menu__links__item__link:hover {
         background-color: #ff7500;
         border-color: #ff7500;
         color: #fff; }
-    .section-menu ul li.active a {
+    .section-menu .section-menu__links .section-menu__links__item.section-menu__links__item--active .section-menu__links__item__link {
       background-color: #007fd0;
       border-color: #007fd0;
       color: #fff; }
   @media only screen and (min-width: 768px) {
-    .section-menu ul {
+    .section-menu .section-menu__links {
       margin: 0; }
-      .section-menu ul li, .section-menu ul li:nth-child(odd), .section-menu ul li:nth-child(even) {
+      .section-menu .section-menu__links .section-menu__links__item, .section-menu .section-menu__links .section-menu__links__item:nth-child(odd), .section-menu .section-menu__links .section-menu__links__item:nth-child(even) {
         float: none;
         width: 100%;
         margin-left: 0;
@@ -2860,8 +2860,7 @@ textarea {
     .select-control .select-control__option__input:checked + .select-control__option__button.icon:before {
       color: rgba(0, 0, 0, 0.6); }
 
-.button,
-a.button {
+.button {
   color: #fff;
   background: #007fd0;
   border: 1px solid #007fd0;
@@ -2872,42 +2871,34 @@ a.button {
   display: inline-block;
   line-height: 26px;
   border-radius: 4px; }
-  .button:hover,
-  a.button:hover {
+  .button:hover {
     background: #ff7500;
     border-color: #ff7500;
+    text-decoration: none;
     cursor: pointer; }
-  .button.button--secondary,
-  a.button.button--secondary {
+  .button.button--secondary {
     border: 1px solid #dfdfdf;
     background: #fff;
     color: #007fd0; }
-    .button.button--secondary:hover,
-    a.button.button--secondary:hover {
+    .button.button--secondary:hover {
       color: #ff7500; }
-  .button.button--danger,
-  a.button.button--danger {
+  .button.button--danger {
     background: none;
     color: #eb5257;
     border-color: #dfdfdf; }
-    .button.button--danger:hover,
-    a.button.button--danger:hover {
+    .button.button--danger:hover {
       background: #eb5257;
       border-color: #eb5257;
       color: #fff; }
-  .button.button--success,
-  a.button.button--success {
+  .button.button--success {
     background: none;
     color: #68c000;
     border-color: #dfdfdf; }
-    .button.button--success:hover,
-    a.button.button--success:hover {
+    .button.button--success:hover {
       background: #68c000;
       border-color: #68c000;
       color: #fff; }
-  .button:hover, .button:active,
-  a.button:hover,
-  a.button:active {
+  .button:hover, .button:active {
     outline: none; }
 
 .table {
