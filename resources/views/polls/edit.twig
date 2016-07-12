@@ -8,8 +8,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('poll.editPoll') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('poll.editPoll') }}</h1>
         </header>
         {{ form_open({'route': ['polls.edit', topic.id, topic.slug], 'method': 'post'}) }}
         <section class="form add-poll" id="add-poll">

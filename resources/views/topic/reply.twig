@@ -6,8 +6,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
         </header>
         <form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="topicreply">
             <section class="topic topic--reply">

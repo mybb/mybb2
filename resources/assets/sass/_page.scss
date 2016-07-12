@@ -102,17 +102,17 @@ textarea {
         }
     }
 
-    header {
+    .page-header {
         margin-bottom: 20px;
 
-        h1 {
+        .page-title {
             font-size: 2em;
             font-weight: normal;
             margin: side-values(0 0 20px 0);
             padding: 0;
         }
 
-        p {
+        .page-description {
             color: $alt-font-color-1;
             font-size: 0.9em;
             margin: side-values(0 0 10px 0);
@@ -122,11 +122,10 @@ textarea {
 
     .page-content--menu {
 
-        header {
+        .page-header {
 
-            h1 {
+            .page-title {
                 font-size: 1.8em;
-                
             }
         }
     }

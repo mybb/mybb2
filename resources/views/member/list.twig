@@ -4,8 +4,8 @@
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-    <header>
-        <h1>{{ trans('member.members') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('member.members') }}</h1>
     </header>
     <section class="block block--container user-list">
         {% for user in users %}

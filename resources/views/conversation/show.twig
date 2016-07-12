@@ -1,8 +1,8 @@
 {% extends "layouts.base" %}
 {% block title %}{{ conversation.title }}{% endblock %}
 {% block contents %}
-    <header>
-        <h1>{{ conversation.title }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ conversation.title }}</h1>
     </header>
     <div class="page-controls">
         {{ messages.render|raw }}

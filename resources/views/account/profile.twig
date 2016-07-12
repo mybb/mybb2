@@ -3,8 +3,8 @@
     {{ trans('account.profile') }}
 {% endblock %}
 {% block inner_contents %}
-        <header>
-            <h1>{{ trans('account.profile') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.profile') }}</h1>
         </header>
 
     {{ form_open({'url_route': 'account.profile', 'method': 'post'}) }}

@@ -1,8 +1,8 @@
 {% extends "layouts.base" %}
 {% block contents %}
     <div class="page-content page-content--menu">
-        <header>
-            <h1>{{ moderation.name|capitalize }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ moderation.name|capitalize }}</h1>
         </header>
 
         {{ form_open({'route': ['moderate'], 'method': 'post'}) }}

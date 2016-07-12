@@ -2,8 +2,8 @@
 {% block title %}{{ conversation.title }} - {{ trans('conversations.add_participants') }}{% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('conversations.add_participants') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('conversations.add_participants') }}</h1>
         </header>
 
         {{ form_open({'route': ['conversations.newParticipant', conversation.id], 'method': 'post'}) }}

@@ -8,8 +8,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{topic.title }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{topic.title }}</h1>
         </header>
         <div class="page-controls">
             {{ posts.render|raw }}

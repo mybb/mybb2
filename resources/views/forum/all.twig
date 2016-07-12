@@ -4,8 +4,8 @@
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-    <header>
-        <h1>{{ trans('forum.allforums') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('forum.allforums') }}</h1>
     </header>
     {% for category in forums %}
         <section class="block">

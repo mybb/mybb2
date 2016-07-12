@@ -9,8 +9,8 @@
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-    <header>
-        <h1>{{ trans('member.online') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('member.online') }}</h1>
     </header>
     {{ users.render|raw }}
     <section class="block block--container user-list user-list--online-now">

@@ -2383,18 +2383,18 @@ textarea {
       float: left;
       width: 35%;
       margin-top: 0; } }
-  .main header {
+  .main .page-header {
     margin-bottom: 20px; }
-    .main header h1 {
+    .main .page-header .page-title {
       font-size: 2em;
       font-weight: normal;
       margin: 0 0 20px 0;
       padding: 0; }
-    .main header p {
+    .main .page-header .page-description {
       color: #666;
       font-size: 0.9em;
       margin: 0 0 10px 0; }
-  .main .page-content--menu header h1 {
+  .main .page-content--menu .page-header .page-title {
     font-size: 1.8em; }
   .main .page-sidebar {
     padding-bottom: 10px;

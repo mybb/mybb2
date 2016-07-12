@@ -3,8 +3,8 @@
     {{ trans('account.dashboard') }}
 {% endblock %}
 {% block inner_contents %}
-    <header>
-        <h1>{{ trans('account.dashboard') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('account.dashboard') }}</h1>
     </header>
     <section class="block dashboard__account">
         <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link"

@@ -3,13 +3,13 @@
     {{ trans('account.email') }}
 {% endblock %}
 {% block inner_contents %}
-        <header>
-            <h1>{{ trans('account.email') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.email') }}</h1>
         </header>
 
     {# TODO: check whether this get's blocked in the modals, if so move it inside the form #}
     {% if has_confirmation %}
-        <div class="alert alert-danger">
+        <div class="alert alert--danger">
             {{ trans('account.unconfirmedChange') }}
         </div>
     {% endif %}

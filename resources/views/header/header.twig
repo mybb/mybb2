@@ -1,6 +1,6 @@
-        <header>
+        <header class="header">
             <div class="wrapper">
-                <h1 class="page-title"><a href="{{ url_route('forum.index') }}" id="logo"><span class="visually-hidden">{{ setting('general.board_name', 'MyBB Community Forums') }}</span></a></h1>
+                <h1 class="board-name"><a href="{{ url_route('forum.index') }}" id="logo"><span class="visually-hidden">{{ setting('general.board_name', 'MyBB Community Forums') }}</span></a></h1>
             </div>
             <nav class="user-bar">
                 <div class="wrapper">
@@ -12,7 +12,7 @@
                     {{ form_open({'route':'search','id':'search','class':'search'}) }}
                         <a href="{{ url_route('search') }}" class="search__button icon fa-search"><span class="visually-hidden">Search</span></a>
                         <div class="search__container">
-                            <label>
+                            <label class="search__label">
                                 <input type="text" name="keyword" placeholder="{{ trans('search.searchforum') }}" value="" class="search__field" />
                                 <span class="search__controls">
                                     <button type="submit" class="search__submit icon fa-search">

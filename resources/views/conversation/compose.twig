@@ -4,8 +4,8 @@
     <div class="page-content">
         {{ form_open({'route': ['conversations.compose'], 'method': 'post', 'id': 'compose'}) }}
         <section class="topic topic--create">
-            <header>
-                <h1>{{ trans('conversations.compose') }}</h1>
+            <header class="page-header">
+                <h1 class="page-title">{{ trans('conversations.compose') }}</h1>
                 {{ form_text('title', input_get('title'), {'class': 'topic__title', 'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
             </header>
             <div class="conversation-participants conversation-participants--compose">

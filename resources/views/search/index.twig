@@ -4,8 +4,8 @@
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-    <header>
-        <h1>{{ trans('search.search') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('search.search') }}</h1>
     </header>
     {{ form_open({'route':'search'}) }}
         <section class="form">

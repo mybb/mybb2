@@ -2,9 +2,9 @@
 {% block title %}{% endblock %}
 {% block contents %}
 <div class="page-content page-content--sidebar">
-    <header>
-        <h1>{{ setting('general.board_name', 'MyBB Community Forums') }}</h1>
-        <p>{{ setting('general.board_desc', '') }}</p>
+    <header class="page-header">
+        <h1 class="page-title">{{ setting('general.board_name', 'MyBB Community Forums') }}</h1>
+        <p class="page-description">{{ setting('general.board_desc', '') }}</p>
     </header>
     <section class="block">
         <h2 class="block__heading block__heading--linked block__heading--major"><a href="index.php?page=new-posts" class="block__heading--linked__link">Latest Discussions <span class="count icon icon--after fa-angle-{{ langDir.right }}">42</span></a></h2>

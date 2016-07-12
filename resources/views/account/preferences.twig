@@ -3,8 +3,8 @@
     {{ trans('account.preferences') }}
 {% endblock %}
 {% block inner_contents %}
-        <header>
-            <h1>{{ trans('account.preferences') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.preferences') }}</h1>
         </header>
 
     {{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}

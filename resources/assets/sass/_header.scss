@@ -1,30 +1,33 @@
-.page-title {
-    float: $left;
-    margin: side-values(10px 2% 5px 0);
+.header {
 
-    @include bp-medium {
-        margin: side-values(20px 2% 15px 0);
-    }
-
-    #logo {
-        background-image: url("../images/logo_mobile.png");
-        background-repeat: no-repeat;
-        background-position: top $left;
-        width: 137px;
-        height: 40px;
-        display: block;
+    .board-name {
+        float: $left;
+        margin: side-values(10px 2% 5px 0);
 
         @include bp-medium {
-            background-image: url("../images/logo2.png");
-            width: 188px;
-            height: 55px;
+            margin: side-values(20px 2% 15px 0);
         }
-    }   
+
+        #logo {
+            background-image: url("../images/logo_mobile.png");
+            background-repeat: no-repeat;
+            background-position: top $left;
+            width: 137px;
+            height: 40px;
+            display: block;
+
+            @include bp-medium {
+                background-image: url("../images/logo2.png");
+                width: 188px;
+                height: 55px;
+            }
+        }   
+    }
 }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
 
-    .page-title #logo {
+    .header .board-name #logo {
         background-image: url("../images/logo_mobile@2x.png");
         background-size: 137px 40px;
     }
@@ -32,7 +35,7 @@
 
 @media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: $bp-medium) {
 
-    .page-title #logo {
+    .header .board-name #logo {
         background-image: url("../images/logo2@2x.png");
         background-size: 188px 55px;
     }
@@ -396,7 +399,7 @@
             margin-top: 10px;
         }
 
-        label {
+        .search__label {
             cursor: text;
         }
     }

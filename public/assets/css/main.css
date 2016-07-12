@@ -2380,18 +2380,18 @@ textarea {
       float: right;
       width: 35%;
       margin-top: 0; } }
-  .main header {
+  .main .page-header {
     margin-bottom: 20px; }
-    .main header h1 {
+    .main .page-header .page-title {
       font-size: 2em;
       font-weight: normal;
       margin: 0 0 20px 0;
       padding: 0; }
-    .main header p {
+    .main .page-header .page-description {
       color: #666;
       font-size: 0.9em;
       margin: 0 0 10px 0; }
-  .main .page-content--menu header h1 {
+  .main .page-content--menu .page-header .page-title {
     font-size: 1.8em; }
   .main .page-sidebar {
     padding-bottom: 10px;
@@ -2669,13 +2669,13 @@ dl.stats {
         margin-left: 0;
         margin-right: 0; } }
 
-.page-title {
+.header .board-name {
   float: left;
   margin: 10px 2% 5px 0; }
   @media only screen and (min-width: 768px) {
-    .page-title {
+    .header .board-name {
       margin: 20px 2% 15px 0; } }
-  .page-title #logo {
+  .header .board-name #logo {
     background-image: url("../images/logo_mobile.png");
     background-repeat: no-repeat;
     background-position: top left;
@@ -2683,18 +2683,18 @@ dl.stats {
     height: 40px;
     display: block; }
     @media only screen and (min-width: 768px) {
-      .page-title #logo {
+      .header .board-name #logo {
         background-image: url("../images/logo2.png");
         width: 188px;
         height: 55px; } }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) {
-  .page-title #logo {
+  .header .board-name #logo {
     background-image: url("../images/logo_mobile@2x.png");
     background-size: 137px 40px; } }
 
 @media all and (-webkit-min-device-pixel-ratio: 2) and (min-width: 768px) {
-  .page-title #logo {
+  .header .board-name #logo {
     background-image: url("../images/logo2@2x.png");
     background-size: 188px 55px; } }
 
@@ -2925,7 +2925,7 @@ dl.stats {
       width: 35%;
       clear: none;
       margin-top: 10px; } }
-  .search .search__container label {
+  .search .search__container .search__label {
     cursor: text; }
 
 .search .search__field {

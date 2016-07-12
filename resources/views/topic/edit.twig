@@ -5,8 +5,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('topic.editpost') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('topic.editpost') }}</h1>
             <div class="page-buttons">
                 <a href="{{ url_route("topics.show", {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary icon fa fa-arrow-circle-{{ langDir.left }}">{{ trans('general.cancel') }}</a>
             </div>

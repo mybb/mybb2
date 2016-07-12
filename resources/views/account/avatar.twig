@@ -3,8 +3,8 @@
     {{ trans('account.avatar') }}
 {% endblock %}
 {% block inner_contents %}
-        <header>
-            <h1>{{ trans('account.avatar') }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.avatar') }}</h1>
         </header>
 
     {{ form_open({'url_route': 'account.avatar', 'method': 'post', 'files': true, 'id': 'avatar-drop'}) }}
@@ -32,8 +32,8 @@
     {{ form_close() }}
     <div id="crop" style="display: none">
         <div class="page-content page-content--menu">
-            <header>
-                <h1>{{ trans('account.crop_file') }}</h1>
+            <header class="page-header">
+                <h1 class="page-title">{{ trans('account.crop_file') }}</h1>
             </header>
             <div class="jcrop">
                 <img />

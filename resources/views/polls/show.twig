@@ -8,8 +8,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('poll.resultsOfX', {'name':poll.question}) }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('poll.resultsOfX', {'name':poll.question}) }}</h1>
         </header>
         <section class="poll">
             <div class="poll__title">{{ poll.question }}</div>

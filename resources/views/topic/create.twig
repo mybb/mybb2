@@ -9,8 +9,8 @@
         {{ form_open({'route': ['topics.create', forum.id], 'method': 'post', 'id': 'topiccreate'}) }}
 
         <section class="topic topic--create">
-            <header>
-                <h1>{{ trans('topic.create.title') }}</h1>
+            <header class="page-header">
+                <h1 class="page-title">{{ trans('topic.create.title') }}</h1>
                 {{ form_text('title', input_get('title'), {'class': 'topic__title', 'placeholder': trans('topic.create.enterTitle'), 'title': trans('topic.create.enterTitle')}) }}
             </header>
             <div class="post post--reply">

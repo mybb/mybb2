@@ -8,8 +8,8 @@
 {% endblock %}
 {% block contents %}
     <div class="page-content">
-        <header>
-            <h1>{{ trans('post.likes_for_post', {'post_id': post.id, 'topic_title': post.topic.title}) }}</h1>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('post.likes_for_post', {'post_id': post.id, 'topic_title': post.topic.title}) }}</h1>
         </header>
         <div class="page-controls">
             {{ likes.render|raw }}
