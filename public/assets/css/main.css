@@ -3192,7 +3192,8 @@ textarea {
     .select-control .select-control__option__input:checked + .select-control__option__button.icon:before {
       color: rgba(0, 0, 0, 0.6); }
 
-.button {
+.button,
+a.button {
   color: #fff;
   background: #007fd0;
   border: 1px solid #007fd0;
@@ -3203,34 +3204,43 @@ textarea {
   display: inline-block;
   line-height: 26px;
   border-radius: 4px; }
-  .button:hover {
+  .button:hover,
+  a.button:hover {
     background: #ff7500;
     border-color: #ff7500;
     text-decoration: none;
     cursor: pointer; }
-  .button.button--secondary {
+  .button.button--secondary,
+  a.button.button--secondary {
     border: 1px solid #dfdfdf;
     background: #fff;
     color: #007fd0; }
-    .button.button--secondary:hover {
+    .button.button--secondary:hover,
+    a.button.button--secondary:hover {
       color: #ff7500; }
-  .button.button--danger {
+  .button.button--danger,
+  a.button.button--danger {
     background: none;
     color: #eb5257;
     border-color: #dfdfdf; }
-    .button.button--danger:hover {
+    .button.button--danger:hover,
+    a.button.button--danger:hover {
       background: #eb5257;
       border-color: #eb5257;
       color: #fff; }
-  .button.button--success {
+  .button.button--success,
+  a.button.button--success {
     background: none;
     color: #68c000;
     border-color: #dfdfdf; }
-    .button.button--success:hover {
+    .button.button--success:hover,
+    a.button.button--success:hover {
       background: #68c000;
       border-color: #68c000;
       color: #fff; }
-  .button:hover, .button:active {
+  .button:hover, .button:active,
+  a.button:hover,
+  a.button:active {
     outline: none; }
 
 .forum-list .forum {
