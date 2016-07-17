@@ -3584,19 +3584,52 @@ section.container .forum-list {
   padding: 8px 12px;
   margin-bottom: 25px;
   border-radius: 4px; }
-  .post.highlight {
+  @media only screen and (min-width: 480px) {
+    .post {
+      margin-left: 80px; } }
+  @media only screen and (min-width: 768px) {
+    .post {
+      margin-left: 110px; } }
+  .post.post--highlight {
     background-color: #ebf4fb;
     border-color: #afd9fa; }
-  .post.soft-deleted {
+  .post.post--soft-deleted {
     background-color: #ece3fa;
     border-color: #ddcafa; }
-  .post.pending-approval {
+  .post.post--pending-approval {
     background-color: #f2dede;
     border-color: #f2aaab; }
+  @media only screen and (min-width: 480px) {
+    .post.post--hidden .avatar-profile-link {
+      width: 50px;
+      height: 50px;
+      margin-left: -80px; }
+      .post.post--hidden .avatar-profile-link .avatar {
+        width: 50px;
+        height: 50px; } }
   .post.post--hidden .post__meta {
     padding-bottom: 2px; }
   .post.post--hidden .post__body, .post.post--hidden .post__controls {
     display: none; }
+  @media only screen and (min-width: 768px) {
+    .post.post--conversation {
+      margin-left: 80px; }
+      .post.post--conversation .avatar-profile-link {
+        width: 70px;
+        height: 70px;
+        margin-left: -100px; }
+        .post.post--conversation .avatar-profile-link .avatar {
+          width: 70px;
+          height: 70px; } }
+  .post.post--reply .full-reply {
+    float: right; }
+    .post.post--reply .full-reply .text {
+      display: none; }
+  .post.post--reply textarea {
+    border: none;
+    padding: 0; }
+  .post.post--reply.post--quick-reply .post__foot {
+    margin: 5px 0; }
   .post .post__meta {
     padding: 4px 6px 12px 6px; }
     .post .post__meta a:link,
@@ -3628,9 +3661,22 @@ section.container .forum-list {
         color: #666;
         font-size: 14px;
         margin-right: 3px; }
+    @media only screen and (min-width: 480px) {
+      .post .post__meta {
+        padding: 4px 6px 8px 6px; }
+        .post .post__meta h3 {
+          display: inline-block; }
+        .post .post__meta .post__date, .post .post__meta .post__topic {
+          margin: 0 0 0 10px; } }
+    @media only screen and (min-width: 768px) {
+      .post .post__meta .team-badge {
+        display: inline; } }
   .post .post__inline-mod {
     float: right;
     margin: -20px 0 0 7px; }
+    @media only screen and (min-width: 480px) {
+      .post .post__inline-mod {
+        margin-top: 7px; } }
   .post .post__toggle {
     float: right;
     font-size: 14px;
@@ -3639,6 +3685,9 @@ section.container .forum-list {
       color: rgba(0, 0, 0, 0.2); }
     .post .post__toggle:hover i {
       color: rgba(0, 0, 0, 0.4); }
+    @media only screen and (min-width: 768px) {
+      .post .post__toggle {
+        margin-right: 5px; } }
   .post .team-badge {
     display: none; }
   .post .avatar-profile-link {
@@ -3649,6 +3698,23 @@ section.container .forum-list {
     .post .avatar-profile-link .avatar {
       width: 40px;
       height: 40px; }
+    @media only screen and (min-width: 480px) {
+      .post .avatar-profile-link {
+        float: left;
+        width: 70px;
+        height: 70px;
+        margin: -13px 0 0 -100px; }
+        .post .avatar-profile-link .avatar {
+          width: 70px;
+          height: 70px; } }
+    @media only screen and (min-width: 768px) {
+      .post .avatar-profile-link {
+        width: 100px;
+        height: 100px;
+        margin-left: -130px; }
+        .post .avatar-profile-link .avatar {
+          width: 100px;
+          height: 100px; } }
   .post .post__body {
     padding: 0 6px 3px 6px; }
     .post .post__body p {
@@ -3681,32 +3747,31 @@ section.container .forum-list {
     margin: 0;
     padding: 4px;
     text-align: right; }
-    .post .post__controls li {
+    .post .post__controls .post__controls__item {
       display: inline-block;
       font-size: 0.8em; }
-      .post .post__controls li a,
-      .post .post__controls li button {
+      .post .post__controls .post__controls__item .post__controls__item__link {
         color: #666;
         padding: 0 5px;
         background-color: transparent;
-        border: none; }
-        .post .post__controls li a:hover, .post .post__controls li a:active,
-        .post .post__controls li button:hover,
-        .post .post__controls li button:active {
+        border: none;
+        font-size: 1em; }
+        .post .post__controls .post__controls__item .post__controls__item__link:hover, .post .post__controls .post__controls__item .post__controls__item__link:active {
           color: #ff7500;
-          text-decoration: none; }
-      .post .post__controls li.like, .post .post__controls li.quote, .post .post__controls li.approve, .post .post__controls li.restore {
+          text-decoration: none;
+          cursor: pointer; }
+        .post .post__controls .post__controls__item .post__controls__item__link.icon:before {
+          margin-right: 0; }
+      .post .post__controls .post__controls__item.post__controls__item--like, .post .post__controls .post__controls__item.post__controls__item--quote, .post .post__controls .post__controls__item.post__controls__item--approve, .post .post__controls .post__controls__item.post__controls__item--restore {
         float: left; }
-        .post .post__controls li.like .text, .post .post__controls li.quote .text, .post .post__controls li.approve .text, .post .post__controls li.restore .text {
-          display: inline; }
-        .post .post__controls li.like .quote-button .quote-button__remove, .post .post__controls li.quote .quote-button .quote-button__remove, .post .post__controls li.approve .quote-button .quote-button__remove, .post .post__controls li.restore .quote-button .quote-button__remove {
+        .post .post__controls .post__controls__item.post__controls__item--like .text, .post .post__controls .post__controls__item.post__controls__item--quote .text, .post .post__controls .post__controls__item.post__controls__item--approve .text, .post .post__controls .post__controls__item.post__controls__item--restore .text {
+          display: inline;
+          margin-left: 6px; }
+        .post .post__controls .post__controls__item.post__controls__item--like .quote-button .quote-button__remove, .post .post__controls .post__controls__item.post__controls__item--quote .quote-button .quote-button__remove, .post .post__controls .post__controls__item.post__controls__item--approve .quote-button .quote-button__remove, .post .post__controls .post__controls__item.post__controls__item--restore .quote-button .quote-button__remove {
           display: none; }
-    .post .post__controls i {
-      font-size: 14px; }
     .post .post__controls .text {
       display: none;
-      font-size: 0.7em;
-      margin-left: 6px; }
+      font-size: 0.9em; }
   .post .post__likes {
     font-size: 0.8em;
     padding: 8px 8px 4px 8px;
@@ -3717,15 +3782,6 @@ section.container .forum-list {
       margin-right: 5px; }
     .post .post__likes a {
       color: #666; }
-  .post.post--reply .full-reply {
-    float: right; }
-    .post.post--reply .full-reply .text {
-      display: none; }
-  .post.post--reply textarea {
-    border: none;
-    padding: 0; }
-  .post.post--reply.post--quick-reply .post__foot {
-    margin: 5px 0; }
   .post .quick-quote {
     display: none;
     background: #444;
@@ -3772,70 +3828,18 @@ section.container .forum-list {
     border-top: 1px solid #dfdfdf;
     text-align: center; }
 
-.topic--create header h1, .topic--reply header h1 {
+.topic--create .page-title, .topic--reply .page-title {
   display: none; }
 
 .topic--create .topic__title, .topic--reply .topic__title {
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 1.8em;
   padding: 10px; }
 
 .topic--create .post__controls, .topic--reply .post__controls {
   text-align: left; }
   .topic--create .post__controls .text, .topic--reply .post__controls .text {
     display: inline;
-    font-size: 0.8em; }
-
-@media only screen and (min-width: 480px) {
-  .post {
-    margin-left: 80px; }
-    .post.post--hidden .avatar-profile-link {
-      width: 50px;
-      height: 50px;
-      margin-left: -80px; }
-      .post.post--hidden .avatar-profile-link .avatar {
-        width: 50px;
-        height: 50px; }
-    .post .post__meta {
-      padding: 4px 6px 8px 6px; }
-      .post .post__meta h3 {
-        display: inline-block; }
-      .post .post__meta .post__date, .post .post__meta .post__topic {
-        margin: 0 0 0 10px; }
-    .post .avatar-profile-link {
-      float: left;
-      width: 70px;
-      height: 70px;
-      margin: -13px 0 0 -100px; }
-      .post .avatar-profile-link .avatar {
-        width: 70px;
-        height: 70px; }
-    .post .post__inline-mod {
-      margin-top: 7px; } }
-
-@media only screen and (min-width: 768px) {
-  .post {
-    margin-left: 110px; }
-    .post .post__meta .team-badge {
-      display: inline; }
-    .post .avatar-profile-link {
-      width: 100px;
-      height: 100px;
-      margin-left: -130px; }
-      .post .avatar-profile-link .avatar {
-        width: 100px;
-        height: 100px; }
-    .post.post--conversation {
-      margin-left: 80px; }
-      .post.post--conversation .avatar-profile-link {
-        width: 70px;
-        height: 70px;
-        margin-left: -100px; }
-        .post.post--conversation .avatar-profile-link .avatar {
-          width: 70px;
-          height: 70px; }
-    .post .post__toggle {
-      margin-right: 5px; } }
+    margin-left: 6px; }
 
 .add-poll .poll-option {
   padding-right: 20px; }

@@ -35,9 +35,9 @@
                 {% endif %}
                 <div class="post__foot">
                     <ul class="post__controls">
-                        <li class="preview"><a href="{{ url_route("topics.create", [forum.id]) }}" onclick="return submitFormAsGet('topiccreate');" class="icon fa-edit">{{ trans('general.preview') }}</a></li>
-                        <li class="attach"><a href="#attach" class="icon fa-paperclip">{{ trans('topic.attachFiles') }}</a></li>
-                        <li class="add-poll"><a href="#add-poll" id="add-poll-button" class="icon fa-check-square-o">{{ trans('poll.addPoll') }}</a></li>
+                        <li class="post__controls__item post__controls__item--preview"><a href="{{ url_route("topics.create", [forum.id]) }}" onclick="return submitFormAsGet('topiccreate');" class="post__controls__item__link icon fa-edit"><span class="text">{{ trans('general.preview') }}</span></a></li>
+                        <li class="post__controls__item post__controls__item--attach"><a href="#attach" class="post__controls__item__link icon fa-paperclip"><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
+                        <li class="post__controls__item post__controls__item--add-poll"><a href="#add-poll" id="add-poll-button" class="post__controls__item__link icon fa-check-square-o"><span class="text">{{ trans('poll.addPoll') }}</span></a></li>
                     </ul>
                 </div>
             </div>

@@ -28,7 +28,7 @@
         {% endif %}
         <section class="topic" data-moderation-content="post" data-moderation-source-type="topic" data-moderation-source-id="{{ topic.id }}">
             {% for post in posts %}
-                <div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed() or (topic.trashed() and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
+                <div class="post{{ not post.approved ? ' post--pending-approval' }}{{ (post.trashed() or (topic.trashed() and loop.first)) ? ' post--soft-deleted' }} {{ highlight == post.id ? ' post--highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
                     <div class="post__meta">
 
                         <a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
@@ -57,28 +57,28 @@
                     </div>
                     <div class="post__foot">
                         <ul class="post__controls">
-                                <li class="edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-edit" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><span class="text">{{ trans('topic.edit') }}</span></a></li>
                             {% if post.trashed() or (topic.trashed() and loop.first) %}
-                                <li class="restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-                                <li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-circle" title="{{ trans('topic.restore') }}"><span class="text">{{ trans('topic.restore') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-trash-o" title="{{ trans('topic.delete') }}"><span class="text">{{ trans('topic.delete') }}</span></a></li>
                             {% else %}
-                                <li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-                                <li class="like">
+                                <li class="post__controls__item post__controls__item--delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-trash-o" title="{{ trans('topic.delete') }}"><span class="text">{{ trans('topic.delete') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--like">
                                 {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
                                     {{ form_hidden('post_id', post.id) }}
                                     {% if post.hasLikedPost %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">'~trans('topic.unlike')~'</span>', {'type': 'submit', 'class': ''}) }}
+                                        {{ form_button('<span class="text">'~trans('topic.unlike')~'</span>', {'type': 'submit', 'class': 'post__controls__item__link icon fa-thumbs-o-down'}) }}
                                     {% else %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">'~trans('topic.like')~'</span>', {'type': 'submit', 'class': ''}) }}
+                                        {{ form_button('<span class="text">'~trans('topic.like')~'</span>', {'type': 'submit', 'class': 'post__controls__item__link icon fa-thumbs-o-up'}) }}
                                     {% endif %}
                                 {{ form_close() }}
                                 </li>
-                                <li class="quote"><a class="quote-button" href="{{ url_route('topics.quote', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}">
-                                        <i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
+                                <li class="post__controls__item post__controls__item--quote"><a class="post__controls__item__link icon fa-quote-{{ langDir.left }} quote-button" href="{{ url_route('topics.quote', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}">
+                                        <span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
                                 </li>
                             {% endif %}
-                            <li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
-                            <li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
+                            <li class="post__controls__item post__controls__item--report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" class="post__controls__item__link icon fa-flag" title="Report"><span class="text">Report post</span></a></li>
+                            <li class="post__controls__item post__controls__item--warn"><a href="index.php?page=warn-user" class="post__controls__item__link icon fa-warning" title="Warn user"><span class="text">Warn user</span></a></li>
                         </ul>
                         {% if post.num_likes > 0 %}
                             <div class="post__likes">
