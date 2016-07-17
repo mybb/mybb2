@@ -114,7 +114,8 @@ class UserPresenter extends BasePresenter
         Store $settings,
         Guard $guard
     ) {
-        $this->wrappedObject = $resource;
+        parent::__construct($resource);
+
         $this->router = $router;
         $this->forumRepository = $forumRepository;
         $this->topicRepository = $topicRepository;

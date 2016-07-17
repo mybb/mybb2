@@ -14,8 +14,8 @@
 				<h3 class="user-list__user__username">
                     {{ render_profile_link(user) }}
                 </h3>
-				<h4 class="user-list__user__usertitle">{{ user.usertitle?:user.displayRole.role_display_name }}</h4>
-				<span class="team-badge"><span class="text">{{ user.displayRole.role_display_name }}</span></span>
+				<h4 class="user-list__user__usertitle">{{ user.usertitle?:user.displayRole().role_display_name }}</h4>
+				<span class="team-badge"><span class="text">{{ user.displayRole().role_display_name }}</span></span>
 				<dl class="user-list__user__user-statistics stats">
 					<dt>{{ trans('member.posts') }}</dt>
 					<dd>{{ user.num_posts }}</dd>

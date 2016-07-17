@@ -3,7 +3,7 @@
 		<section class="profile__field-group">
 			<h2 class="heading heading--major">{{ group.name }}</h2>
 			{% for field in group.fields %}
-				{% if field.has_value %}
+				{% if field.has_value(user) %}
 					<div class="profile__field">
 						<h3>{{ field.name }}</h3>
 						<p>{{ field.getValue(user) }}</p>
