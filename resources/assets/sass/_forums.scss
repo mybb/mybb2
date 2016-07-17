@@ -24,12 +24,12 @@
             padding: 0;
             font-size: 0.8em;
 
-            li {
+            .forum__subforums__subforum {
                 display: inline-block;
                 margin: side-values(0 12px 4px 0);
             }
 
-            i.fa-level-up {
+            .fa-level-up {
                 margin: side-values(1px 0 0 -16px);
                 color: $alt-font-color-2;
                 float: $left;
@@ -86,12 +86,12 @@
         border-bottom: 1px solid $border-1;
         padding: 8px 12px;
 
-        h4 {
+        .category__title {
             margin: 0;
             font-size: 1em;
         }
 
-        ul {
+        .category__forums {
             list-style: none;
             margin: 0;
             padding: side-values(0 0 0 15px);
@@ -104,7 +104,7 @@
     }
 }
 
-section.container {
+.block--container {
     
     .forum-list {
 

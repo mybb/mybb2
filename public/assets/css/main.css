@@ -3445,10 +3445,10 @@ a.button {
     margin: 2px 0 4px 20px;
     padding: 0;
     font-size: 0.8em; }
-    .forum-list .forum .forum__subforums li {
+    .forum-list .forum .forum__subforums .forum__subforums__subforum {
       display: inline-block;
       margin: 0 12px 4px 0; }
-    .forum-list .forum .forum__subforums i.fa-level-up {
+    .forum-list .forum .forum__subforums .fa-level-up {
       margin: 1px 0 0 -16px;
       color: #999;
       float: left;
@@ -3487,10 +3487,10 @@ a.button {
 .forum-list--compact .category {
   border-bottom: 1px solid #dfdfdf;
   padding: 8px 12px; }
-  .forum-list--compact .category h4 {
+  .forum-list--compact .category .category__title {
     margin: 0;
     font-size: 1em; }
-  .forum-list--compact .category ul {
+  .forum-list--compact .category .category__forums {
     list-style: none;
     margin: 0;
     padding: 0 0 0 15px;
@@ -3498,9 +3498,9 @@ a.button {
   .forum-list--compact .category:last-child {
     border-bottom: 0; }
 
-section.container .forum-list {
+.block--container .forum-list {
   padding: 0 6px; }
-  section.container .forum-list .forum:last-child {
+  .block--container .forum-list .forum:last-child {
     border-bottom: 0; }
 
 .topic-list .topic-list__sort-topics {

@@ -25,7 +25,7 @@
                                         {% for subforum in forum.children.toTree %}
                                             <ul class="forum__subforums">
                                                 <i class="fa fa-level-up"></i>
-                                                <li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
+                                                <li class="forum__subforums__subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
                                             </ul>
                                         {% endfor %}
                                     {% endif %}
