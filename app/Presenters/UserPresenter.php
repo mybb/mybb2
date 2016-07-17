@@ -158,19 +158,19 @@ class UserPresenter extends BasePresenter
 
         // Empty? Default avatar
         if (empty($avatar)) {
-            return asset('images/avatar.png');
+            return asset('assets/images/avatar.png');
         } // Link? Nice!
         elseif (filter_var($avatar, FILTER_VALIDATE_URL) !== false) {
             return $avatar;
         } // Email? Set up Gravatar
         elseif (filter_var($avatar, FILTER_VALIDATE_EMAIL) !== false) {
-            return $this->gravatarGenerator->setDefault(asset('images/avatar.png'))->getGravatar($avatar);
+            return $this->gravatarGenerator->setDefault(asset('assets/images/avatar.png'))->getGravatar($avatar);
         } // File?
         elseif (file_exists(public_path("uploads/avatars/{$avatar}"))) {
             return asset("uploads/avatars/{$avatar}");
         } // Nothing?
         else {
-            return asset('images/avatar.png');
+            return asset('assets/images/avatar.png');
         }
     }
 
