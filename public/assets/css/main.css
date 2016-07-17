@@ -2893,7 +2893,7 @@ dl.stats {
   .user-bar__links .user-bar__links__item {
     float: left;
     margin: 0;
-    padding: 12px 6px;
+    padding: 12px 4px;
     position: relative; }
     .user-bar__links .user-bar__links__item .user-bar__links__item__link.icon:before {
       font-size: 1.1em;
@@ -2956,11 +2956,12 @@ dl.stats {
     background: #eb5257;
     color: #fff;
     border-radius: 2px;
-    padding: 2px 5px 1px 4px;
-    margin: 0 0 0 2px;
+    padding: 1px 5px 2px 4px;
+    margin: 0 0 0 -2px;
     font-weight: normal;
-    font-size: 0.8em;
-    text-decoration: none; }
+    font-size: 0.7em;
+    text-decoration: none;
+    vertical-align: top; }
 
 .user-bar__dropdown {
   display: none;

@@ -60,7 +60,7 @@
     .user-bar__links__item {
         float: $left;
         margin: 0;
-        padding: 12px 6px;
+        padding: 12px 4px;
         position: relative;
 
         .user-bar__links__item__link {
@@ -176,11 +176,12 @@
         background: $unread-count;
         color: $invert-font-color;
         @include border-radius(2px);
-        padding: side-values(2px 5px 1px 4px);
-        margin: side-values(0 0 0 2px);
+        padding: side-values(1px 5px 2px 4px);
+        margin: side-values(0 0 0 -2px);
         font-weight: normal;
-        font-size: 0.8em;
+        font-size: 0.7em;
         text-decoration: none;
+        vertical-align: top;
     }
 }
 
