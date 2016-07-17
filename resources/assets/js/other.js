@@ -12,8 +12,12 @@ $(function () {
         $('span.icons i, a, .caption, time').powerTip({ placement: 's', smartPlacement: true });
     }
 
-    $('.user-navigation__links, #main-menu').dropit({ submenuEl: 'div.dropdown' });
-    $('.dropdown-menu').dropit({ submenuEl: 'ul.dropdown', triggerEl: 'span.dropdown-button' });
+    // var userNavigationDropdown = new Dropit('.user-navigation__links', { submenuEl: 'div.dropdown' });
+    // var mainMenuDropdown = new Dropit('.main-menu__container');
+    var dropdownMenu = new Dropit('.dropdown-menu', { submenuEl: 'ul.dropdown', triggerEl: 'span.dropdown-button' });
+    
+    // $('.user-navigation__links, #main-menu').dropit({ submenuEl: 'div.dropdown' });
+    // $('.dropdown-menu').dropit({ submenuEl: 'ul.dropdown', triggerEl: 'span.dropdown-button' });
     $("input[type=number]").stepper();
     $(".password-toggle").hideShowPassword(false, true);
 
