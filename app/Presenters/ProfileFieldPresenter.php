@@ -11,6 +11,7 @@ namespace MyBB\Core\Presenters;
 use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\ProfileField as ProfileFieldModel;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Form\RenderableInterface;
@@ -125,14 +126,16 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
         if ($userProfileField) {
             return $userProfileField->getValue();
         }
+
+        return null;
     }
 
     /**
      * @return bool
      */
-    public function has_value()
+    public function has_value(UserPresenter $user)
     {
-        return $this->userProfileFields->hasForProfileField($this->guard->user(), $this->getWrappedObject());
+        return $this->userProfileFields->hasForProfileField($user->getWrappedObject(), $this->getWrappedObject());
     }
 
     /**

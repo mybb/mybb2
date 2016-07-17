@@ -15,6 +15,7 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Forum as ForumModel;
 use MyBB\Core\Database\Models\Topic as TopicModel;
 use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Moderation\ModerationRegistry;
 
 class ForumPresenter extends BasePresenter
@@ -36,13 +37,14 @@ class ForumPresenter extends BasePresenter
      */
     public function __construct(ForumModel $resource, Application $app, ModerationRegistry $moderations)
     {
-        $this->wrappedObject = $resource;
+        parent::__construct($resource);
+
         $this->app = $app;
         $this->moderations = $moderations;
     }
 
     /**
-     * @return User
+     * @return User|null
      */
     public function lastPostAuthor()
     {

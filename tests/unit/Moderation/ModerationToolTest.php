@@ -24,14 +24,6 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
         static::assertInstanceOf('MyBB\Core\Moderation\ModerationTool', $tool);
     }
 
-    /**
-     * @expectedException \TypeError
-     */
-    public function testCannotBeConstructedWithInvalidModerations()
-    {
-        $tool = new ModerationTool('name', 'description', null, [new \stdClass()]);
-    }
-
     public function testModerationCanBeAdded()
     {
         $moderation = Mockery::mock('MyBB\Core\Moderation\ModerationInterface');
@@ -41,15 +33,6 @@ class ModerationToolTest extends \PHPUnit_Framework_TestCase
 
         $tool = new ModerationTool('name', 'description');
         $tool->addModeration($moderation);
-    }
-
-    /**
-     * @expectedException \TypeError
-     */
-    public function testInvalidModerationCannotBeAdded()
-    {
-        $tool = new ModerationTool('name', 'description');
-        $tool->addModeration(new \stdClass());
     }
 
     public function testGetters()

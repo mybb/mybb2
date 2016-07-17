@@ -25,15 +25,6 @@ class ModerationRegistryTest extends \PHPUnit_Framework_TestCase
         static::assertInstanceOf('MyBB\Core\Moderation\ModerationRegistry', $registry);
     }
 
-    /**
-     * @expectedException \TypeError
-     */
-    public function testExceptionWhenConstructingWithInvalidObjects()
-    {
-        $moderations = [new \stdClass()];
-        new ModerationRegistry($moderations);
-    }
-
     public function testCanAddModeration()
     {
         $moderation = Mockery::mock('MyBB\Core\Moderation\ModerationInterface');

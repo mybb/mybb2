@@ -16,6 +16,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
+use MyBB\Core\Presenters\TopicPresenter;
 
 /**
  * @property int id
@@ -78,7 +79,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\TopicPresenter';
+        return TopicPresenter::class;
     }
 
     /**
@@ -88,7 +89,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function posts()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\Post');
+        return $this->hasMany(\MyBB\Core\Database\Models\Post::class);
     }
 
     /**
@@ -98,7 +99,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function poll()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Poll');
+        return $this->hasOne(\MyBB\Core\Database\Models\Poll::class);
     }
 
     /**
@@ -108,7 +109,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function contributors()
     {
-        return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\User', 'MyBB\\Core\\Database\\Models\\Post');
+        return $this->hasManyThrough(\MyBB\Core\Database\Models\User::class, \MyBB\Core\Database\Models\Post::class);
     }
 
     /**
@@ -118,7 +119,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function forum()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Forum');
+        return $this->belongsTo(\MyBB\Core\Database\Models\Forum::class);
     }
 
     /**
@@ -128,7 +129,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'user_id');
     }
 
     // TODO: Other relations? Are the below necessary?
@@ -141,7 +142,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function firstPost()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'first_post_id');
+        return $this->hasOne(\MyBB\Core\Database\Models\Post::class, 'id', 'first_post_id');
     }
 
     /**
@@ -151,7 +152,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      */
     public function lastPost()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+        return $this->hasOne(\MyBB\Core\Database\Models\Post::class, 'id', 'last_post_id');
     }
 
     /**
