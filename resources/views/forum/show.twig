@@ -104,7 +104,7 @@
 				</div>
 				<div class="topic-list__container">
 					{% for topic in topics %}
-						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed ? ' soft-deleted' }}">
+						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed() ? ' soft-deleted' }}">
 							<div class="primary-column">
 								<h3 class="topic__title">
 									<a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
@@ -118,7 +118,7 @@
 									</span>
 								</h3>
 								<h4>{{ trans('topic.firstpost') }}</h4>
-								<p class="topic__post topic__post--first">
+								<p class="topic__post topic__post--first">§
 									<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
 									{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
 								</p>

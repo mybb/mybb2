@@ -28,13 +28,13 @@
 		{% endif %}
 		<section class="topic" data-moderation-content="post" data-moderation-source-type="topic" data-moderation-source-id="{{ topic.id }}">
 			{% for post in posts %}
-				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed or (topic.trashed and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
+				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed() or (topic.trashed() and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
 					<div class="post__meta">
 
 						<a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
 						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
 						{{ post_date_link(url_route('topics.showPost', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}), post.created_at) }}
-						{% if post.trashed or (topic.trashed and loop.first) %}
+						{% if post.trashed() or (topic.trashed() and loop.first) %}
 							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
 						{% endif %}
 						{% if post.updated_at != post.created_at %}
@@ -58,7 +58,7 @@
 					<div class="post__foot">
 						<ul class="post__controls">
 								<li class="edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
-							{% if post.trashed or (topic.trashed and loop.first) %}
+							{% if post.trashed() or (topic.trashed() and loop.first) %}
 								<li class="restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
 								<li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
 							{% else %}

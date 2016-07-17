@@ -34,10 +34,12 @@ interface TopicRepositoryInterface
      * Get all topics within a forum.
      *
      * @param Forum $forum The forum the threads belong to.
+     * @param string $orderBy The order by column
+     * @param string $orderDir asc|desc
      *
      * @return mixed
      */
-    public function allForForum(Forum $forum);
+    public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc');
 
     /**
      * Get all topics created by a user.
