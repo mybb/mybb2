@@ -39,6 +39,7 @@ class PostPresenter extends BasePresenter
     public function __construct(PostModel $resource, Guard $guard, Application $app)
     {
         parent::__construct($resource);
+
         $this->guard = $guard;
         $this->app = $app;
     }

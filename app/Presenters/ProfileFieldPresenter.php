@@ -126,6 +126,8 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
         if ($userProfileField) {
             return $userProfileField->getValue();
         }
+
+        return null;
     }
 
     /**

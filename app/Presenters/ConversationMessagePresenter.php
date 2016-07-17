@@ -22,7 +22,7 @@ class ConversationMessagePresenter extends BasePresenter
      */
     public function __construct(ConversationMessageModel $resource)
     {
-        $this->wrappedObject = $resource;
+        parent::__construct($resource);
     }
 
     /**

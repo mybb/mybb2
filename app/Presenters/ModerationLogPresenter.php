@@ -54,6 +54,7 @@ class ModerationLogPresenter extends BasePresenter
         Factory $viewFactory
     ) {
         parent::__construct($resource);
+
         $this->moderationRegistry = $moderationRegistry;
         $this->presenterDecorator = $presenterDecorator;
         $this->repositoryFactory = $repositoryFactory;
@@ -125,6 +126,8 @@ class ModerationLogPresenter extends BasePresenter
                 return $repository->find($log->destination_content_id);
             }
         }
+
+        return null;
     }
 
     /**
@@ -141,6 +144,8 @@ class ModerationLogPresenter extends BasePresenter
                 return $repository->find($log->source_content_id);
             }
         }
+
+        return null;
     }
 
     /**
