@@ -13,115 +13,29 @@
         margin-#{$left}: 110px;
     }
 
-    &.post--highlight {
-        background-color: $status-highlight;
-        border-color: $status-highlight-border;
-    }
-
-    &.post--soft-deleted {
-        background-color: $status-deleted;
-        border-color: $status-deleted-border;
-    }
-
-    &.post--pending-approval {
-        background-color: $status-pending;
-        border-color: $status-pending-border;
-    }
-
-    &.post--hidden {
-
-        @include bp-small {
-
-            .avatar-profile-link {
-                width: 50px;
-                height: 50px;
-                margin-#{$left}: -80px;
-
-                .avatar {
-                    width: 50px;
-                    height: 50px;
-                }
-            }
-        }
-
-        .post__meta {
-            padding-bottom: 2px;
-        }
-
-        .post__body, .post__controls {
-            display: none;
-        }
-    }
-
-    &.post--conversation {
-
-        @include bp-medium {
-            margin-#{$left}: 80px;
-
-            .avatar-profile-link {
-                width: 70px;
-                height: 70px;
-                margin-#{$left}: -100px;
-
-                .avatar {
-                    width: 70px;
-                    height: 70px;
-                }
-            }
-        }
-    }
-
-    &.post--reply {
-
-        .full-reply {
-            float: $right;
-
-            .text {
-                display: none;
-            }
-        }
-
-        textarea {
-            border: none;
-            padding: 0;
-        }
-
-        &.post--quick-reply .post__foot {
-            margin: 5px 0;
-        }
-    }
-
     .post__meta {
         padding: side-values(4px 6px 12px 6px);
 
-        a:link,
-        a:visited {
-            color: $alt-font-color-1;
+        @include bp-small {
+            padding: side-values(4px 6px 8px 6px);
         }
 
-        a:hover,
-        a:active {
-            color: $secondary-color;
-        }
-
-        h3 {
+        .post__author {
             font-size: 1em;
             margin: 0;
 
-            a:link,
-            a:visited {
-                color: $primary-color;
-            }
-
-            a:hover,
-            a:active {
-                color: $secondary-color;
+            @include bp-small {
+                display: inline-block;
             }
         }
 
         .post__date, .post__topic {
             font-size: 0.8em;
             color: $alt-font-color-1;
+
+            @include bp-small {
+                margin: side-values(0 0 0 10px);
+            }
         }
 
         .post__edit-log {
@@ -134,29 +48,10 @@
             font-size: 0.8em;
             font-weight: bold;
 
-            i {
+            &.icon:before {
                 color: $alt-font-color-1;
                 font-size: 14px;
                 margin-#{$right}: 3px;
-            }
-        }
-
-        @include bp-small {
-            padding: side-values(4px 6px 8px 6px);
-
-            h3 {
-                display: inline-block;
-            }
-
-            .post__date, .post__topic {
-                margin: side-values(0 0 0 10px);
-            }
-        }
-
-        @include bp-medium {
-
-            .team-badge {
-                display: inline;
             }
         }
     }
@@ -188,8 +83,12 @@
         }
     }
 
-    .team-badge {
+    .post__badge {
         display: none;
+
+        @include bp-medium {
+            display: inline;
+        }
     }
 
     .avatar-profile-link {
@@ -341,35 +240,134 @@
         }
     }
 
-    .quick-quote {
-        display: none;
-        background: $alt-font-color-4;
-        color: $invert-font-color;
-        @include border-radius(4px);
-        font: 12px $font-stack;
-        padding: 6px 4px;
-        position: absolute;
-        z-index: 1001;
+    &.post--highlight {
+        background-color: $status-highlight;
+        border-color: $status-highlight-border;
+    }
 
-        span {
-            cursor: pointer;
-            margin: 0 6px;
+    &.post--soft-deleted {
+        background-color: $status-deleted;
+        border-color: $status-deleted-border;
+    }
 
-            &:hover {
-                text-decoration: underline;
+    &.post--pending-approval {
+        background-color: $status-pending;
+        border-color: $status-pending-border;
+    }
+
+    &.post--hidden {
+
+        @include bp-small {
+
+            .avatar-profile-link {
+                width: 50px;
+                height: 50px;
+                margin-#{$left}: -80px;
+
+                .avatar {
+                    width: 50px;
+                    height: 50px;
+                }
             }
         }
 
-        &:before {
-            content: ' ';
-            position: absolute;
-            bottom: -6px;
-            left: 50%;
-            margin-left: -6px;
-            border-top: 6px solid $alt-font-color-4;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
+        .post__meta {
+            padding-bottom: 2px;
         }
+
+        .post__body, .post__controls {
+            display: none;
+        }
+    }
+
+    &.post--conversation {
+
+        @include bp-medium {
+            margin-#{$left}: 80px;
+
+            .avatar-profile-link {
+                width: 70px;
+                height: 70px;
+                margin-#{$left}: -100px;
+
+                .avatar {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+        }
+    }
+
+    &.post--reply {
+
+        .full-reply {
+            float: $right;
+
+            .text {
+                display: none;
+            }
+        }
+
+        textarea {
+            border: none;
+            padding: 0;
+        }
+
+        &.post--quick-reply .post__foot {
+            margin: 5px 0;
+        }
+    }
+}
+
+.topic--create, .topic--reply {
+
+    .page-title {
+        display: none;
+    }
+
+    .topic__title {
+        font-size: 1.8em;
+        padding: 10px;
+    }
+
+    .post__controls {
+        text-align: $left;
+
+        .text {
+            display: inline;
+            margin-#{$left}: 6px;
+        }
+    }
+}
+
+.quick-quote {
+    display: none;
+    background: $alt-font-color-4;
+    color: $invert-font-color;
+    @include border-radius(4px);
+    font: 12px $font-stack;
+    padding: 6px 4px;
+    position: absolute;
+    z-index: 1001;
+
+    span {
+        cursor: pointer;
+        margin: 0 6px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &:before {
+        content: ' ';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -6px;
+        border-top: 6px solid $alt-font-color-4;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
     }
 }
 
@@ -398,26 +396,5 @@
         background: $background-2;
         border-top: 1px solid $border-1;
         text-align: center;
-    }
-}
-
-.topic--create, .topic--reply {
-
-    .page-title {
-        display: none;
-    }
-
-    .topic__title {
-        font-size: 1.8em;
-        padding: 10px;
-    }
-
-    .post__controls {
-        text-align: $left;
-
-        .text {
-            display: inline;
-            margin-#{$left}: 6px;
-        }
     }
 }

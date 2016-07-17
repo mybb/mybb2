@@ -35,12 +35,12 @@
                         <h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
                         {{ post_date_link(url_route('topics.showPost', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}), post.created_at) }}
                         {% if post.trashed() or (topic.trashed() and loop.first) %}
-                            <span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
+                            <span class="post__status icon fa-trash-o">{{ trans('topic.softDeleted') }}</span>
                         {% endif %}
                         {% if post.updated_at != post.created_at %}
                             <a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
                         {% endif %}
-                        <!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
+                        <!--<span class="post__badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
                         {% if auth_user.hasPermission('canModerate') %}
                         <input type="checkbox" class="post__inline-mod" data-moderation-id="{{ post.id }}">
                         {% endif %}

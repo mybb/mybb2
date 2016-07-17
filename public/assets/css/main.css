@@ -8,7 +8,6 @@
  */
 /* FONT PATH
  * -------------------------- */
-@import url(../../../node_modules/datetimepicker/src/DateTimePicker.css);
 @font-face {
   font-family: 'FontAwesome';
   src: url("../fonts/fontawesome-webfont.eot?v=4.6.3");
@@ -2254,6 +2253,187 @@
     padding: 0;
     margin: 5px 0; }
 
+/* ----------------------------------------------------------------------------- 
+
+  jQuery DateTimePicker - Responsive flat design jQuery DateTime Picker plugin for Web & Mobile
+  Version 0.1.30
+  Copyright (c)2016 Curious Solutions LLP and Neha Kadam
+  http://curioussolutions.github.io/DateTimePicker
+  https://github.com/CuriousSolutions/DateTimePicker
+
+ ----------------------------------------------------------------------------- */
+.dtpicker-overlay {
+  z-index: 2000;
+  display: none;
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.dtpicker-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.dtpicker-overlay * {
+  box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; }
+
+.dtpicker-bg {
+  width: 100%;
+  height: 100%;
+  font-family: Arial; }
+
+.dtpicker-cont {
+  border: 1px solid #ECF0F1; }
+
+.dtpicker-mobile .dtpicker-cont {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none; }
+
+.dtpicker-content {
+  margin: 0 auto;
+  padding: 1em 0;
+  max-width: 500px;
+  background: #fff; }
+
+.dtpicker-mobile .dtpicker-content {
+  width: 97%; }
+
+.dtpicker-subcontent {
+  position: relative; }
+
+.dtpicker-header {
+  margin: 0.2em 1em; }
+
+.dtpicker-header .dtpicker-title {
+  color: #2980B9;
+  text-align: center;
+  font-size: 1.1em; }
+
+.dtpicker-header .dtpicker-close {
+  position: absolute;
+  top: -0.7em;
+  right: 0.3em;
+  padding: 0.5em 0.5em 1em 1em;
+  color: #FF3B30;
+  font-size: 1.5em;
+  cursor: pointer; }
+
+.dtpicker-header .dtpicker-close:hover {
+  color: #FF3B30; }
+
+.dtpicker-header .dtpicker-value {
+  padding: 0.8em 0.2em 0.2em 0.2em;
+  color: #FF3B30;
+  text-align: center;
+  font-size: 1.4em; }
+
+.dtpicker-components {
+  overflow: hidden;
+  margin: 1em 1em;
+  font-size: 1.3em; }
+
+.dtpicker-components * {
+  margin: 0;
+  padding: 0; }
+
+.dtpicker-components .dtpicker-compOutline {
+  display: inline-block;
+  float: left; }
+
+.dtpicker-comp2 {
+  width: 50%; }
+
+.dtpicker-comp3 {
+  width: 33.3%; }
+
+.dtpicker-comp4 {
+  width: 25%; }
+
+.dtpicker-comp5 {
+  width: 20%; }
+
+.dtpicker-comp6 {
+  width: 16.66%; }
+
+.dtpicker-comp7 {
+  width: 14.285%; }
+
+.dtpicker-components .dtpicker-comp {
+  margin: 2%;
+  text-align: center; }
+
+.dtpicker-components .dtpicker-comp > * {
+  display: block;
+  height: 30px;
+  color: #2980B9;
+  text-align: center;
+  line-height: 30px; }
+
+.dtpicker-components .dtpicker-comp > *:hover {
+  color: #2980B9; }
+
+.dtpicker-components .dtpicker-compButtonEnable {
+  opacity: 1; }
+
+.dtpicker-components .dtpicker-compButtonDisable {
+  opacity: 0.5; }
+
+.dtpicker-components .dtpicker-compButton {
+  background: #FFFFFF;
+  font-size: 140%;
+  cursor: pointer; }
+
+.dtpicker-components .dtpicker-compValue {
+  margin: 0.4em 0;
+  width: 100%;
+  border: none;
+  background: #FFFFFF;
+  font-size: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+
+.dtpicker-overlay .dtpicker-compValue:focus {
+  outline: none;
+  background: #F2FCFF; }
+
+.dtpicker-buttonCont {
+  overflow: hidden;
+  margin: 0.2em 1em; }
+
+.dtpicker-buttonCont .dtpicker-button {
+  display: block;
+  padding: 0.6em 0;
+  width: 47%;
+  background: #FF3B30;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 1.3em;
+  cursor: pointer; }
+
+.dtpicker-buttonCont .dtpicker-button:hover {
+  color: #FFFFFF; }
+
+.dtpicker-singleButton .dtpicker-button {
+  margin: 0.2em auto; }
+
+.dtpicker-twoButtons .dtpicker-buttonSet {
+  float: left; }
+
+.dtpicker-twoButtons .dtpicker-buttonClear {
+  float: right; }
+
 /*!
 *   MyBB 2.0 - http://mybb.com - @mybb - MIT license
 */
@@ -3590,66 +3770,23 @@ section.container .forum-list {
   @media only screen and (min-width: 768px) {
     .post {
       margin-left: 110px; } }
-  .post.post--highlight {
-    background-color: #ebf4fb;
-    border-color: #afd9fa; }
-  .post.post--soft-deleted {
-    background-color: #ece3fa;
-    border-color: #ddcafa; }
-  .post.post--pending-approval {
-    background-color: #f2dede;
-    border-color: #f2aaab; }
-  @media only screen and (min-width: 480px) {
-    .post.post--hidden .avatar-profile-link {
-      width: 50px;
-      height: 50px;
-      margin-left: -80px; }
-      .post.post--hidden .avatar-profile-link .avatar {
-        width: 50px;
-        height: 50px; } }
-  .post.post--hidden .post__meta {
-    padding-bottom: 2px; }
-  .post.post--hidden .post__body, .post.post--hidden .post__controls {
-    display: none; }
-  @media only screen and (min-width: 768px) {
-    .post.post--conversation {
-      margin-left: 80px; }
-      .post.post--conversation .avatar-profile-link {
-        width: 70px;
-        height: 70px;
-        margin-left: -100px; }
-        .post.post--conversation .avatar-profile-link .avatar {
-          width: 70px;
-          height: 70px; } }
-  .post.post--reply .full-reply {
-    float: right; }
-    .post.post--reply .full-reply .text {
-      display: none; }
-  .post.post--reply textarea {
-    border: none;
-    padding: 0; }
-  .post.post--reply.post--quick-reply .post__foot {
-    margin: 5px 0; }
   .post .post__meta {
     padding: 4px 6px 12px 6px; }
-    .post .post__meta a:link,
-    .post .post__meta a:visited {
-      color: #666; }
-    .post .post__meta a:hover,
-    .post .post__meta a:active {
-      color: #ff7500; }
-    .post .post__meta h3 {
+    @media only screen and (min-width: 480px) {
+      .post .post__meta {
+        padding: 4px 6px 8px 6px; } }
+    .post .post__meta .post__author {
       font-size: 1em;
       margin: 0; }
-      .post .post__meta h3 a:link,
-      .post .post__meta h3 a:visited {
-        color: #007fd0; }
-      .post .post__meta h3 a:hover,
-      .post .post__meta h3 a:active {
-        color: #ff7500; }
+      @media only screen and (min-width: 480px) {
+        .post .post__meta .post__author {
+          display: inline-block; } }
     .post .post__meta .post__date, .post .post__meta .post__topic {
       font-size: 0.8em;
       color: #666; }
+      @media only screen and (min-width: 480px) {
+        .post .post__meta .post__date, .post .post__meta .post__topic {
+          margin: 0 0 0 10px; } }
     .post .post__meta .post__edit-log {
       font-size: 0.7em;
       margin-left: 4px; }
@@ -3657,20 +3794,10 @@ section.container .forum-list {
       margin-left: 16px;
       font-size: 0.8em;
       font-weight: bold; }
-      .post .post__meta .post__status i {
+      .post .post__meta .post__status.icon:before {
         color: #666;
         font-size: 14px;
         margin-right: 3px; }
-    @media only screen and (min-width: 480px) {
-      .post .post__meta {
-        padding: 4px 6px 8px 6px; }
-        .post .post__meta h3 {
-          display: inline-block; }
-        .post .post__meta .post__date, .post .post__meta .post__topic {
-          margin: 0 0 0 10px; } }
-    @media only screen and (min-width: 768px) {
-      .post .post__meta .team-badge {
-        display: inline; } }
   .post .post__inline-mod {
     float: right;
     margin: -20px 0 0 7px; }
@@ -3688,8 +3815,11 @@ section.container .forum-list {
     @media only screen and (min-width: 768px) {
       .post .post__toggle {
         margin-right: 5px; } }
-  .post .team-badge {
+  .post .post__badge {
     display: none; }
+    @media only screen and (min-width: 768px) {
+      .post .post__badge {
+        display: inline; } }
   .post .avatar-profile-link {
     float: left;
     width: 40px;
@@ -3782,29 +3912,83 @@ section.container .forum-list {
       margin-right: 5px; }
     .post .post__likes a {
       color: #666; }
-  .post .quick-quote {
-    display: none;
-    background: #444;
-    color: #fff;
-    border-radius: 4px;
-    font: 12px Open Sans, Helvetica Neue, Helvetica, Arial;
-    padding: 6px 4px;
+  .post.post--highlight {
+    background-color: #ebf4fb;
+    border-color: #afd9fa; }
+  .post.post--soft-deleted {
+    background-color: #ece3fa;
+    border-color: #ddcafa; }
+  .post.post--pending-approval {
+    background-color: #f2dede;
+    border-color: #f2aaab; }
+  @media only screen and (min-width: 480px) {
+    .post.post--hidden .avatar-profile-link {
+      width: 50px;
+      height: 50px;
+      margin-left: -80px; }
+      .post.post--hidden .avatar-profile-link .avatar {
+        width: 50px;
+        height: 50px; } }
+  .post.post--hidden .post__meta {
+    padding-bottom: 2px; }
+  .post.post--hidden .post__body, .post.post--hidden .post__controls {
+    display: none; }
+  @media only screen and (min-width: 768px) {
+    .post.post--conversation {
+      margin-left: 80px; }
+      .post.post--conversation .avatar-profile-link {
+        width: 70px;
+        height: 70px;
+        margin-left: -100px; }
+        .post.post--conversation .avatar-profile-link .avatar {
+          width: 70px;
+          height: 70px; } }
+  .post.post--reply .full-reply {
+    float: right; }
+    .post.post--reply .full-reply .text {
+      display: none; }
+  .post.post--reply textarea {
+    border: none;
+    padding: 0; }
+  .post.post--reply.post--quick-reply .post__foot {
+    margin: 5px 0; }
+
+.topic--create .page-title, .topic--reply .page-title {
+  display: none; }
+
+.topic--create .topic__title, .topic--reply .topic__title {
+  font-size: 1.8em;
+  padding: 10px; }
+
+.topic--create .post__controls, .topic--reply .post__controls {
+  text-align: left; }
+  .topic--create .post__controls .text, .topic--reply .post__controls .text {
+    display: inline;
+    margin-left: 6px; }
+
+.quick-quote {
+  display: none;
+  background: #444;
+  color: #fff;
+  border-radius: 4px;
+  font: 12px Open Sans, Helvetica Neue, Helvetica, Arial;
+  padding: 6px 4px;
+  position: absolute;
+  z-index: 1001; }
+  .quick-quote span {
+    cursor: pointer;
+    margin: 0 6px; }
+    .quick-quote span:hover {
+      text-decoration: underline; }
+  .quick-quote:before {
+    content: ' ';
     position: absolute;
-    z-index: 1001; }
-    .post .quick-quote span {
-      cursor: pointer;
-      margin: 0 6px; }
-      .post .quick-quote span:hover {
-        text-decoration: underline; }
-    .post .quick-quote:before {
-      content: ' ';
-      position: absolute;
-      bottom: -6px;
-      left: 50%;
-      margin-left: -6px;
-      border-top: 6px solid #444;
-      border-left: 6px solid transparent;
-      border-right: 6px solid transparent; }
+    bottom: -6px;
+    left: 50%;
+    margin-left: -6px;
+    border-top: 6px solid #444;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent; }
 
 .quote-bar {
   border: 1px solid #ccc;
@@ -3827,19 +4011,6 @@ section.container .forum-list {
     background: #f2f2f2;
     border-top: 1px solid #dfdfdf;
     text-align: center; }
-
-.topic--create .page-title, .topic--reply .page-title {
-  display: none; }
-
-.topic--create .topic__title, .topic--reply .topic__title {
-  font-size: 1.8em;
-  padding: 10px; }
-
-.topic--create .post__controls, .topic--reply .post__controls {
-  text-align: left; }
-  .topic--create .post__controls .text, .topic--reply .post__controls .text {
-    display: inline;
-    margin-left: 6px; }
 
 .add-poll .poll-option {
   padding-right: 20px; }

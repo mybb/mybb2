@@ -15,7 +15,7 @@
                     <div class="post__meta">
                         <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
                             {% if auth_check() %}
-                                <h3><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
+                                <h3 class="post__author"><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
                             {% else %}
                                 {{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
                             {% endif %}
