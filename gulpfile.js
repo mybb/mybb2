@@ -10,6 +10,7 @@ elixir.config.sourcemaps = true;
 const vendor_scripts = [
     "../../../node_modules/jquery/dist/jquery.js",
     // TODO: modernizr...
+    "../../../node_modules/modernizr/modernizr.js",
     "../../../node_modules/@claviska/jquery-dropdown/jquery.dropdown.js",
     "../../../node_modules/jquery-modal/jquery.modal.js",
     "../../../node_modules/jquery.cookie/jquery.cookie.js",
