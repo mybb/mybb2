@@ -22,7 +22,6 @@
             // Make button a plus sign for expanding
             $(event.target).addClass("fa-plus");
             $(event.target).removeClass("fa-minus");
-
         } else {
             // We like this person again
             $(event.target).parent().parent().parent().removeClass("post--hidden");
