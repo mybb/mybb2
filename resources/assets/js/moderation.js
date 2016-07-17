@@ -1,4 +1,4 @@
-(function($, window) {
+(function ($, window) {
     window.MyBB = window.MyBB || {};
 
     window.MyBB.Moderation = function Moderation()
@@ -46,32 +46,29 @@
         }, this));
 
         // moderation bar clear selection handling
-        $('.clear-selection a').click(function(e) {
+        $('.clear-selection a').click(function (e) {
             $('[data-moderation-content] input[type=checkbox]:checked').removeAttr('checked');
             $('[data-moderation-content] .highlight').removeClass('highlight');
             $('.inline-moderation').removeClass('floating');
         });
 
         // post level inline moderation checkbox handling
-        $(".post :checkbox").change(function() {
+        $(".post :checkbox").change(function () {
             $(this).closest(".post").toggleClass("highlight", this.checked);
 
             var checked_boxes = $('.highlight').length;
 
-            if(checked_boxes == 1)
-            {
+            if (checked_boxes == 1) {
                 $('.inline-moderation').addClass('floating');
             }
 
-            if (checked_boxes > 1)
-            {
+            if (checked_boxes > 1) {
                 $('li[data-moderation-multi]').show();
             } else {
                 $('li[data-moderation-multi]').hide();
             }
 
-            if(checked_boxes == 0)
-            {
+            if (checked_boxes == 0) {
                 $('.inline-moderation').removeClass('floating');
             }
 
@@ -79,25 +76,22 @@
         });
 
         // topic level inline moderation checkbox handling
-        $(".topic-list .topic :checkbox").change(function() {
+        $(".topic-list .topic :checkbox").change(function () {
             $(this).closest(".topic").toggleClass("highlight", this.checked);
 
             var checked_boxes = $('.highlight').length;
 
-            if(checked_boxes == 1)
-            {
+            if (checked_boxes == 1) {
                 $('.inline-moderation').addClass('floating');
             }
 
-            if (checked_boxes > 1)
-            {
+            if (checked_boxes > 1) {
                 $('li[data-moderation-multi]').show();
             } else {
                 $('li[data-moderation-multi]').hide();
             }
 
-            if(checked_boxes == 0)
-            {
+            if (checked_boxes == 0) {
                 $('.inline-moderation').removeClass('floating');
             }
 
