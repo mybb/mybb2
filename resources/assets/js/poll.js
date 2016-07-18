@@ -27,7 +27,7 @@
 
     window.MyBB.Polls.prototype.timePicker = function timePicker()
     {
-        $('#poll-end-at').datetimepicker({
+        $('#poll-end-at').DateTimePicker({
             format: 'Y-m-d H:i:s',
             lang: 'mybb',
             i18n: {
