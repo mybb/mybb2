@@ -6,7 +6,7 @@
     #{$left}: 0;
     z-index: 1001;
     padding: 3px 15px;
-    @include border-radius(0 0 4px 0);
+    border-radius: corner-values(0 0 4px 0);
     font-size: 12px;
     display: none;
 

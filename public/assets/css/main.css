@@ -2934,7 +2934,7 @@ dl.stats {
       .user-bar__links .dropit-link.dropit-open .user-bar__links__item__link {
         background: none;
         color: #444;
-        border-radius: 0; }
+        border-radius: none; }
       .user-bar__links .dropit-link.dropit-open .dropit-link__caret--up {
         display: inline;
         font-size: 14px;

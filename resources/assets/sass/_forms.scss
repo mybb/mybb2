@@ -1,11 +1,11 @@
 .form {
     border: 1px solid $border-1;
     margin-bottom: 10px;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     .heading--major {
         margin: -1px;
-        @include border-radius(corner-values(4px 4px 0 0));
+        border-radius: corner-values(4px 4px 0 0);
     }
 
     .form__section {
@@ -47,7 +47,7 @@
             padding: side-values(0 0 0 20px);
             border-#{$left}: 1px dotted $border-2;
             width: 74%;
-            @include box-sizing(border-box);
+            box-sizing: border-box;
         }
     }
 

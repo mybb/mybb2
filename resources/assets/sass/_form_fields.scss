@@ -8,8 +8,8 @@ input[type="password"] {
     width: 100%;
     font-size: 0.9em;
     outline: 0;
-    @include border-radius(4px);
-    @include box-sizing(border-box)
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 select {
@@ -18,8 +18,8 @@ select {
     font-size: 0.9em;
     outline: none;
     max-width: 100%;
-    @include border-radius(4px);
-    @include box-sizing(border-box);
+    border-radius: 4px;
+    box-sizing: border-box;
 
     &[multiple="multiple"] {
         width: 100%;
@@ -47,8 +47,8 @@ textarea {
     width: 100%;
     font-size: 0.9em;
     outline: 0;
-    @include border-radius(4px);
-    @include box-sizing(border-box);
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .segmented-control {
@@ -56,7 +56,7 @@ textarea {
     border: 1px solid $border-2;
     font-size: 0.8em;
     display: inline-block;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     .segmented-control__option {
         display: inline-block;
@@ -76,11 +76,11 @@ textarea {
 
     :first-child .segmented-control__option__button {
         border-#{$left}: 1px solid transparent;
-        @include border-radius(corner-values(4px 0 0 4px));
+        border-radius: corner-values(4px 0 0 4px);
     }
 
     :last-child .segmented-control__option__button {
-        @include border-radius(corner-values(0 4px 4px 0));
+        border-radius: corner-values(0 4px 4px 0);
     }
 
     .segmented-control__option__input {
@@ -112,7 +112,7 @@ textarea {
         margin: side-values(5px 10px 0 0);
         background: $background-1;
         cursor: pointer;
-        @include border-radius(4px);
+        border-radius: 4px;
 
         &.icon:before {
             @include black-transparency(0.4);

@@ -14,7 +14,7 @@
 .poll {
     border: 1px solid $border-2;
     padding: 12px;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     .poll__title {
         font-size: 1.2em;
@@ -58,8 +58,8 @@
         border: 1px solid $border-3;
         background: $background-default;
         height: 24px;
-        @include box-sizing(border-box);
-        @include border-radius(4px);
+        box-sizing: border-box;
+        border-radius: 4px;
 
         .poll__option__votes__bar {
             position: absolute;
@@ -68,7 +68,7 @@
             bottom: 0;
             background: $primary-color;
             z-index: 1;
-            @include border-radius(3px);
+            border-radius: 3px;
         }
 
         @include bp-medium {
@@ -116,7 +116,7 @@
         background: $danger-color;
         color: $invert-font-color;
         display: inline-block;
-        @include border-radius(4px);
+        border-radius: 4px;
         padding: 5px 11px;
         margin: 5px;
 

@@ -25,7 +25,7 @@
 .dashboard__account {
     padding: side-values(20px 20px 20px 140px);
     border: 1px solid $border-1;
-    @include border-radius(4px);
+    border-radius: 4px;
     @include clearfix();
 
     .avatar-profile-link {

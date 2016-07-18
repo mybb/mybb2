@@ -6,13 +6,13 @@
         border: 1px solid $border-1;
         padding: 8px;
         margin: side-values(0 0 12px 0);
-        @include border-radius(4px);
+        border-radius: 4px;
 
         @include bp-medium {
             float: $left;
             width: 49.5%;
             margin: side-values(0 0 12px 0);
-            @include box-sizing(border-box);
+            box-sizing: border-box;
 
             &:nth-child(odd) {
                 margin-#{$right}: 0.5%;
@@ -120,7 +120,7 @@
     display: inline;
     line-height: 1.6;
     font-size: 0.7em;
-    @include border-radius(4px);
+    border-radius: 4px;
 }
 
 .profile {

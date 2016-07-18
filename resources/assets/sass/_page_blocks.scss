@@ -32,7 +32,7 @@
         border: 0;
         padding: 8px 12px;
         margin-bottom: 0;
-        @include border-radius(4px);
+        border-radius: 4px;
 
         &.block__heading--linked {
             padding: 0;
@@ -50,7 +50,7 @@
 
     &.block--container {
         border: 1px solid $border-1;
-        @include border-radius(4px);    
+        border-radius: 4px;    
 
         .sort-results {
             border-width: 0;
@@ -69,7 +69,7 @@
     border-top: 2px solid $border-1;
     padding: 6px 0;
     clear: both;
-    @include border-radius(corner-values(0 0 4px 4px));
+    border-radius: corner-values(0 0 4px 4px);
 
     .sort-results__title {
         display: inline-block;
@@ -101,7 +101,7 @@
             padding: 4px 8px;
             display: inline-block;
             background: $background-1;
-            @include border-radius(3px);
+            border-radius: 3px;
 
             &:hover,
             &:active {
@@ -152,7 +152,7 @@ dl.stats {
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 0.9em;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     .alert__message {
         margin: 0;
@@ -212,7 +212,7 @@ dl.stats {
             background: $background-1;
             padding: 1px 8px;
             display: inline-block;
-            @include border-radius(4px);
+            border-radius: 4px;
 
             &:hover {
                 background: $secondary-color;
@@ -225,7 +225,7 @@ dl.stats {
             padding: 1px 8px;
             background: $primary-color;
             color: $invert-font-color;
-            @include border-radius(4px);
+            border-radius: 4px;
         }
 
         &.disabled {

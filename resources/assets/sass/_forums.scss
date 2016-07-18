@@ -126,7 +126,7 @@
         border: 0;
         color: $invert-font-color;
         font-size: 0.9em;
-        @include border-radius(corner-values(4px 4px 0 0));
+        border-radius: corner-values(4px 4px 0 0);
 
         .primary-column-one {
             width: 50%;
@@ -153,8 +153,8 @@
             float: left;
             padding: 3px 5px;
             font-size: 0.9em;
-            @include box-sizing(border-box);
-            @include border-radius(3px);
+            box-sizing: border-box;
+            border-radius: 3px;
 
             &:link, &:visited {
                 color: $invert-font-color;
@@ -448,7 +448,7 @@
             .primary-column {
                 width: 52%;
                 float: $left;
-                @include box-sizing(border-box);
+                box-sizing: border-box;
 
                 .topic__title {
                     font-size: 1em;

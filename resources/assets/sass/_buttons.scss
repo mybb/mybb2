@@ -9,7 +9,7 @@ a.button {
     text-decoration: none;
     display: inline-block;
     line-height: 26px;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     &:hover {
         background: $secondary-color;

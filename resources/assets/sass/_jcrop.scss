@@ -127,7 +127,6 @@
     .jcrop-handle {
         background-color: #000000;
         border-color: #ffffff;
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
         border-radius: 3px;
     }
 }
@@ -142,7 +141,6 @@
     .jcrop-handle {
         background-color: #ffffff;
         border-color: #000000;
-        //Instead of the line below you could use @includeborder-radius($radius, $vertical-radius)
         border-radius: 3px;
     }
 }

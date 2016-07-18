@@ -44,7 +44,7 @@
             font-weight: normal;
             font-size: 0.8em;
             text-decoration: none;
-            @include border-radius(2px);
+            border-radius: 2px;
         }
 
         &:last-child {
@@ -99,7 +99,7 @@
         margin-bottom: 20px;
         border: 1px solid $border-2;
         padding: 10px;
-        @include border-radius(4px);
+        border-radius: 4px;
 
         .conversation-participants__title {
             font-size: 1em;

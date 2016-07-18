@@ -3,7 +3,7 @@
     width: 580px;
     padding: 0;
     border: 8px solid rgba(0,0,0,0.5);
-    @include border-radius(8px);
+    border-radius: 8px;
 
     .page-content {
         background: $background-default;
@@ -100,8 +100,8 @@
         text-decoration: none;
         box-shadow: 0 1px 4px #000;
         line-height: 1;
-        @include border-radius(15px);
-        @include box-sizing(border-box);
+        border-radius: 15px;
+        box-sizing: border-box;
         font-size: 14px/1;
         font-family: FontAwesome;
         -webkit-font-smoothing: antialiased;
@@ -132,7 +132,7 @@
     margin-#{$right}: -32px;
     margin-top: -32px;
     background: url("../images/spinner.gif") #111 no-repeat center center;
-    @include border-radius(8px);
+    border-radius: 8px;
 }
 
 @media screen and (max-width: 758px) {

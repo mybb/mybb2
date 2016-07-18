@@ -20,14 +20,6 @@
     }
 }
 
-@mixin border-radius($radius) {
-    border-radius: $radius;
-}
-
-@mixin box-sizing($sizing) {
-    box-sizing: $sizing;
-}
-
 @mixin black-transparency($transparency) {
     color: rgba(0,0,0,$transparency);
 }

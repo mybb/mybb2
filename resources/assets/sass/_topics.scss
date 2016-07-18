@@ -3,7 +3,7 @@
     border: 1px solid $border-2;
     padding: 8px 12px;
     margin-bottom: 25px;
-    @include border-radius(4px);
+    border-radius: 4px;
 
     @include bp-small {
         margin-#{$left}: 80px;
@@ -344,7 +344,7 @@
     display: none;
     background: $alt-font-color-4;
     color: $invert-font-color;
-    @include border-radius(4px);
+    border-radius: 4px;
     font: 12px $font-stack;
     padding: 6px 4px;
     position: absolute;
@@ -375,7 +375,7 @@
     border: 1px solid #ccc;
     padding: 5px 10px;
     font-size: 12px;
-    @include border-radius(4px);
+    border-radius: 4px;
 }
 
 .view-quotes {
