@@ -58,3 +58,13 @@
     position: absolute;
     width: 1px;
 }
+
+@mixin avatar($size) {
+    width: #{$size}px;
+    height: #{$size}px;
+
+    .avatar {
+        width: #{$size}px;
+        height: #{$size}px;
+    }
+}

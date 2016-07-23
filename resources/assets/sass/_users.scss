@@ -25,14 +25,8 @@
 
         .avatar-profile-link {
             float: $left;
-            width: 80px;
-            height: 80px;
             margin: side-values(0 12px 0 0);
-        
-            .avatar {
-                width: 80px;
-                height: 80px;
-            }
+            @include avatar(80);
         }
 
         .user-list__user__username {
@@ -74,13 +68,7 @@
         .user-list__user {
             
             .avatar-profile-link {
-                width: 50px;
-                height: 50px;
-
-                .avatar {
-                    width: 50px;
-                    height: 50px;
-                }
+                @include avatar(50);
             }
 
             .user-list__user__date {

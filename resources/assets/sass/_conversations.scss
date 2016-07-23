@@ -7,18 +7,12 @@
         position: relative;
 
         .avatar-profile-link {
-            width: 44px;
-            height: 44px;
             float: $left;
             margin: side-values(10px 12px 0 10px);
             position: absolute;
             top: 0;
             #{$left}: 0;
-
-            .avatar {
-                width: 44px;
-                height: 44px;
-            }
+            @include avatar(44);
         }
 
         .conversation__title--unread {
@@ -69,15 +63,9 @@
         border-bottom: 1px solid $border-3;
 
         .avatar-profile-link {
-            width: 36px;
-            height: 36px;
-            float: left;
+            float: $left;
             margin: side-values(0px 10px 0 0);
-
-            .avatar {
-                width: 36px;
-                height: 36px;
-            }
+            @include avatar(36);
         }
 
         .participant__username {

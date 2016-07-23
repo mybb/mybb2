@@ -230,14 +230,8 @@
 
     .avatar-profile-link {
         float: $right;
-        width: 80px;
-        height: 80px;
-        margin: 6px 0 0 0;
-
-        .avatar {
-            width: 80px;
-            height: 80px;
-        }
+        margin: side-values(6px 0 0 0);
+        @include avatar(80);
     }
 
     .dropdown__container {
@@ -327,13 +321,7 @@
         .avatar-profile-link {
             float: $left;
             margin: side-values(0 8px 0 0);
-            width: 40px;
-            height: 40px;
-
-            .avatar {
-                width: 40px;
-                height: 40px;
-            }
+            @include avatar(40);
         }
 
         .messages__conversation__title {

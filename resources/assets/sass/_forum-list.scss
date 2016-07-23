@@ -44,15 +44,9 @@
             border-top: 1px dotted $border-1;
 
             .avatar-profile-link {
-                float: left;
-                width: 36px;
-                height: 36px;
+                float: $left;
                 margin: side-values(0 0 0 -48px);
-
-                .avatar {
-                    width: 36px;
-                    height: 36px;
-                }
+                @include avatar(36);
             }
 
             .forum__topic__title {
@@ -134,7 +128,6 @@
 .block--container {
     
     .forum-list {
-
         padding: 0 6px;
 
         .forum:last-child {

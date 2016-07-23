@@ -6,11 +6,7 @@
         .avatar-profile-link {
             float: $left;
             margin: side-values(0 10px 0 -110px);
-
-            .avatar {
-                width: 100px;
-                height: 100px;
-            }
+            @include avatar(100);
         }
 
         .change-avatar__description {
@@ -29,17 +25,10 @@
     @include clearfix();
 
     .avatar-profile-link {
-        width: 100px;
-        height: 100px;
         float: $left;
         display: block;
         margin: side-values(0 0 0 -120px);
-
-        .avatar {
-            width: 100px;
-            height: 100px;
-        }
-
+        @include avatar(100);
     }
 
     .dashboard__account__username {
@@ -69,13 +58,7 @@
     .avatar-profile-link {
         float: $left;
         margin: side-values(0 12px 0 0);
-        width: 40px;
-        height: 40px;
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-        }
+        @include avatar(40);
     }
 
     h2 a:hover .text,

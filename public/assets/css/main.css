@@ -2997,9 +2997,9 @@ dl.stats {
       border-bottom: 0; }
   .user-bar__dropdown .avatar-profile-link {
     float: right;
+    margin: 6px 0 0 0;
     width: 80px;
-    height: 80px;
-    margin: 6px 0 0 0; }
+    height: 80px; }
     .user-bar__dropdown .avatar-profile-link .avatar {
       width: 80px;
       height: 80px; }
@@ -3463,9 +3463,9 @@ a.button {
     border-top: 1px dotted #dfdfdf; }
     .forum-list .forum .forum__topic .avatar-profile-link {
       float: left;
+      margin: 0 0 0 -48px;
       width: 36px;
-      height: 36px;
-      margin: 0 0 0 -48px; }
+      height: 36px; }
       .forum-list .forum .forum__topic .avatar-profile-link .avatar {
         width: 36px;
         height: 36px; }
@@ -3627,13 +3627,13 @@ a.button {
     margin: 0;
     display: inline-block; }
   .topic-list .topic .avatar-profile-link {
-    width: 44px;
-    height: 44px;
     float: left;
     margin: 10px 12px 0 6px;
     position: absolute;
     top: 0;
-    left: 0; }
+    left: 0;
+    width: 44px;
+    height: 44px; }
     .topic-list .topic .avatar-profile-link .avatar {
       width: 44px;
       height: 44px; }
@@ -3818,26 +3818,26 @@ a.button {
         display: inline; } }
   .post .avatar-profile-link {
     float: left;
+    margin: 5px 10px 0 0;
     width: 40px;
-    height: 40px;
-    margin: 5px 10px 0 0; }
+    height: 40px; }
     .post .avatar-profile-link .avatar {
       width: 40px;
       height: 40px; }
     @media only screen and (min-width: 480px) {
       .post .avatar-profile-link {
         float: left;
+        margin: -13px 0 0 -100px;
         width: 70px;
-        height: 70px;
-        margin: -13px 0 0 -100px; }
+        height: 70px; }
         .post .avatar-profile-link .avatar {
           width: 70px;
           height: 70px; } }
     @media only screen and (min-width: 768px) {
       .post .avatar-profile-link {
+        margin-left: -130px;
         width: 100px;
-        height: 100px;
-        margin-left: -130px; }
+        height: 100px; }
         .post .avatar-profile-link .avatar {
           width: 100px;
           height: 100px; } }
@@ -3919,9 +3919,9 @@ a.button {
     border-color: #f2aaab; }
   @media only screen and (min-width: 480px) {
     .post.post--hidden .avatar-profile-link {
+      margin-left: -80px;
       width: 50px;
-      height: 50px;
-      margin-left: -80px; }
+      height: 50px; }
       .post.post--hidden .avatar-profile-link .avatar {
         width: 50px;
         height: 50px; } }
@@ -3933,9 +3933,9 @@ a.button {
     .post.post--conversation {
       margin-left: 80px; }
       .post.post--conversation .avatar-profile-link {
+        margin-left: -100px;
         width: 70px;
-        height: 70px;
-        margin-left: -100px; }
+        height: 70px; }
         .post.post--conversation .avatar-profile-link .avatar {
           width: 70px;
           height: 70px; } }
@@ -4120,9 +4120,9 @@ a.button {
           margin-left: 0.5%; } }
     .user-list .user-list__user .avatar-profile-link {
       float: left;
+      margin: 0 12px 0 0;
       width: 80px;
-      height: 80px;
-      margin: 0 12px 0 0; }
+      height: 80px; }
       .user-list .user-list__user .avatar-profile-link .avatar {
         width: 80px;
         height: 80px; }
@@ -4220,7 +4220,9 @@ a.button {
   padding-left: 130px; }
   .form .form__section__container.change-avatar .avatar-profile-link {
     float: left;
-    margin: 0 10px 0 -110px; }
+    margin: 0 10px 0 -110px;
+    width: 100px;
+    height: 100px; }
     .form .form__section__container.change-avatar .avatar-profile-link .avatar {
       width: 100px;
       height: 100px; }
@@ -4239,11 +4241,11 @@ a.button {
     display: table;
     clear: both; }
   .dashboard__account .avatar-profile-link {
-    width: 100px;
-    height: 100px;
     float: left;
     display: block;
-    margin: 0 0 0 -120px; }
+    margin: 0 0 0 -120px;
+    width: 100px;
+    height: 100px; }
     .dashboard__account .avatar-profile-link .avatar {
       width: 100px;
       height: 100px; }
@@ -4294,13 +4296,13 @@ a.button {
   line-height: 1.4;
   position: relative; }
   .conversation-list .conversation .avatar-profile-link {
-    width: 44px;
-    height: 44px;
     float: left;
     margin: 10px 12px 0 10px;
     position: absolute;
     top: 0;
-    left: 0; }
+    left: 0;
+    width: 44px;
+    height: 44px; }
     .conversation-list .conversation .avatar-profile-link .avatar {
       width: 44px;
       height: 44px; }
@@ -4338,10 +4340,10 @@ a.button {
     padding: 10px;
     border-bottom: 1px solid #e3e3e3; }
     .conversation-participants .participant .avatar-profile-link {
-      width: 36px;
-      height: 36px;
       float: left;
-      margin: 0px 10px 0 0; }
+      margin: 0px 10px 0 0;
+      width: 36px;
+      height: 36px; }
       .conversation-participants .participant .avatar-profile-link .avatar {
         width: 36px;
         height: 36px; }

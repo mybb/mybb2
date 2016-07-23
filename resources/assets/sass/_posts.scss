@@ -93,36 +93,18 @@
 
     .avatar-profile-link {
         float: $left;
-        width: 40px;
-        height: 40px;
         margin: side-values(5px 10px 0 0);
-
-        .avatar {
-            width: 40px;
-            height: 40px;
-        }
+        @include avatar(40);
 
         @include bp-small {
             float: $left;
-            width: 70px;
-            height: 70px;
             margin: side-values(-13px 0 0 -100px);
-
-            .avatar {
-                width: 70px;
-                height: 70px;
-            }
+            @include avatar(70);
         }
 
         @include bp-medium {
-            width: 100px;
-            height: 100px;
             margin-#{$left}: -130px;
-
-            .avatar {
-                width: 100px;
-                height: 100px;
-            }
+            @include avatar(100);
         }
     }
 
@@ -260,14 +242,8 @@
         @include bp-small {
 
             .avatar-profile-link {
-                width: 50px;
-                height: 50px;
                 margin-#{$left}: -80px;
-
-                .avatar {
-                    width: 50px;
-                    height: 50px;
-                }
+                @include avatar(50);
             }
         }
 
@@ -286,14 +262,8 @@
             margin-#{$left}: 80px;
 
             .avatar-profile-link {
-                width: 70px;
-                height: 70px;
                 margin-#{$left}: -100px;
-
-                .avatar {
-                    width: 70px;
-                    height: 70px;
-                }
+                @include avatar(70);
             }
         }
     }

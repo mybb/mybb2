@@ -155,18 +155,12 @@
         }
 
         .avatar-profile-link {
-            width: 44px;
-            height: 44px;
             float: $left;
             margin: side-values(10px 12px 0 6px);
             position: absolute;
             top: 0;
             #{$left}: 0;
-
-            .avatar {
-                width: 44px;
-                height: 44px;
-            }
+            @include avatar(44);
         }
 
         .topic__forum {
