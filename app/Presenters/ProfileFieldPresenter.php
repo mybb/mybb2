@@ -113,7 +113,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
      *
      * @return mixed
      */
-    public function getValue(User $user = null)
+    public function getValue(UserPresenter $user = null)
     {
         if ($user == null) {
             $user = $this->guard->user();
