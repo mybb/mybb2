@@ -184,7 +184,7 @@ dl.stats {
 
 .page-buttons {
     @include clearfix();
-    margin: side-values(-10px -5px 15px -5px);
+    margin: side-values(-10px 0 15px 0);
     text-align: center;
 
     @include bp-medium {

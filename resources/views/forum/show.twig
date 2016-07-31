@@ -48,9 +48,9 @@
             <div class="page-controls">
                 {{ topics.render|raw }}
                 <div class="page-buttons">
-                    <a href="#" class="button button--secondary icon fa-circle-o">{{ trans('forum.markread') }}</a>
-                    <a href="#" class="button button--secondary icon fa-plus">{{ trans('forum.follow') }}</a>
-                    <a href="{{ url_route("topics.create", {'id': forum.id}) }}" class="button icon fa-edit">{{ trans('forum.posttopic') }}</a>
+                    <a href="#" class="button button--secondary button--half-width icon fa-circle-o">{{ trans('forum.markread') }}</a>
+                    <a href="#" class="button button--secondary button--half-width icon fa-plus">{{ trans('forum.follow') }}</a>
+                    <a href="{{ url_route("topics.create", {'id': forum.id}) }}" class="button button--full-width icon fa-edit">{{ trans('forum.posttopic') }}</a>
                 </div>
             </div>
             <section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">

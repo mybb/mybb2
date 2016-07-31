@@ -2533,7 +2533,7 @@ dl.stats {
   color: #666; }
 
 .page-buttons {
-  margin: -10px -5px 15px -5px;
+  margin: -10px 0 15px 0;
   text-align: center; }
   .page-buttons:after {
     content: "";
@@ -2896,13 +2896,12 @@ a.button {
   @media only screen and (max-width: 768px) {
     .button.button--full-width,
     a.button.button--full-width {
-      font-size: 1em;
       padding: 8px 10px;
       width: 100%;
+      margin: 5px 0;
       box-sizing: border-box; }
     .button.button--half-width,
     a.button.button--half-width {
-      font-size: 1em;
       padding: 8px 10px;
       width: 49%;
       float: right;

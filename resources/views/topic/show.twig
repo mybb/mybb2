@@ -14,12 +14,12 @@
         <div class="page-controls">
             {{ posts.render|raw }}
             <div class="page-buttons">
-                <a href="#" class="button button--secondary icon fa-plus">Follow</a>
+                <a href="#" class="button {% if not topic.has_poll %}button--half-width{% else %}button--full-width{% endif %} button--secondary icon fa-plus">Follow</a>
                 {% if not topic.has_poll %}
-                    <a href="{{ url_route('polls.create', {'slug': topic.slug, 'id': topic.id}) }}" class="button button--secondary icon fa-check-square-o">{{ trans('poll.addPoll') }}</a>
+                    <a href="{{ url_route('polls.create', {'slug': topic.slug, 'id': topic.id}) }}" class="button button--half-width button--secondary icon fa-check-square-o">{{ trans('poll.addPoll') }}</a>
                 {% endif %}
                 {% if not topic.closed %}
-                <a href="#post-reply" class="button icon fa-comment">{{ trans('topic.postreply') }}</a>
+                <a href="#post-reply" class="button button--full-width icon fa-comment">{{ trans('topic.postreply') }}</a>
                 {% endif %}
             </div>
         </div>
