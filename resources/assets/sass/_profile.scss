@@ -1,0 +1,66 @@
+.profile {
+
+    .profile__header {
+        @include clearfix();
+        position: relative;
+        margin-bottom: 20px;
+
+        .avatar {
+            float: $left;
+            width: 100px;
+            height: 100px;
+            margin-#{$right}: 16px;
+        }
+    }
+
+    .profile__content {
+        margin-top: 20px;
+    }
+
+    .profile__sidebar {
+        margin-top: 20px;
+    }
+
+    .page-controls {
+        padding: 0 5px;
+
+        @include bp-medium {
+            position: relative;
+            margin-top: -95px;
+            right: 0;
+        }
+    }
+
+    .profile__username,
+    .profile__usertitle {
+        margin: 5px 0;
+    }
+
+    .profile__field-group {
+
+        .profile__field-group__title {
+            margin-bottom: 0;
+        }
+    }
+
+    .profile__field {
+        padding: 8px;
+        border-bottom: 1px solid $border-1;
+        font-size: 0.9em;
+
+        .profile__field__title {
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+        }
+
+        .profile__field__data {
+            margin: 0;
+            padding: 0;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}

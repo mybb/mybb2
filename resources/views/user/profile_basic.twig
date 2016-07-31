@@ -1,4 +1,4 @@
-<div class="page-content page-content--sidebar">
+<div class="page-content page-content--sidebar profile__content">
     {% for group in profile_field_groups %}
         <section class="block profile__field-group">
             <h2 class="block__heading block__heading--major profile__field-group__title">{{ group.name }}</h2>
@@ -14,7 +14,7 @@
     {% endfor %}
 </div>
 
-<aside class="page-sidebar">
+<aside class="page-sidebar profile__sidebar">
     <section class="block profile__stats">
         <dl class="stats">
             <dt class="stats__posts">{{ trans('topic.posts') }}</dt>

@@ -4,16 +4,18 @@
 {% endblock %}
 {% block contents %}
     <div class="profile">
-        <header class="profile__header">
+        <header class="page-header profile__header">
             <img src="{{ user.avatar }}" class="avatar">
             <h1 class="profile__username">{{ user.styled_name|raw }}</h1>
             <p class="profile__usertitle">{{ user.usertitle }}</p>
             <span class="team-badge"><span class="text">{{ user.displayRole().role_display_name }}</span></span>
-            <div class="page-buttons">
-                <a href="{{ url_route('account.index') }}" class="button icon fa-comments">Message</a>
-                <a href="{{ url_route('account.index') }}" class="button icon fa-plus">Follow</a>
-            </div>
         </header>
+        <div class="page-controls">
+            <div class="page-buttons">
+                <a href="{{ url_route('conversations.compose') }}" class="button button--half-width icon fa-comments">Message</a>
+                <a href="{{ url_route('account.following') }}" class="button button--half-width icon fa-plus">Follow</a>
+            </div>
+        </div>
         {% include "user.profile_basic" %}
 
     </div>

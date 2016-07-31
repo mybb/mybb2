@@ -2532,6 +2532,10 @@ dl.stats {
 .page-buttons {
   margin: -10px -5px 15px -5px;
   text-align: center; }
+  .page-buttons:after {
+    content: "";
+    display: table;
+    clear: both; }
   @media only screen and (min-width: 768px) {
     .page-buttons {
       float: right;
@@ -2886,6 +2890,28 @@ a.button {
     .button.button--secondary:hover,
     a.button.button--secondary:hover {
       color: #ff7500; }
+  @media only screen and (max-width: 768px) {
+    .button.button--full-width,
+    a.button.button--full-width {
+      font-size: 1em;
+      padding: 8px 10px;
+      width: 100%;
+      box-sizing: border-box; }
+    .button.button--half-width,
+    a.button.button--half-width {
+      font-size: 1em;
+      padding: 8px 10px;
+      width: 49%;
+      float: left;
+      box-sizing: border-box; }
+      .button.button--half-width:nth-child(odd),
+      a.button.button--half-width:nth-child(odd) {
+        margin-left: 0;
+        margin-right: 1%; }
+      .button.button--half-width:nth-child(even),
+      a.button.button--half-width:nth-child(even) {
+        margin-left: 1%;
+        margin-right: 0; } }
   .button.button--danger,
   a.button.button--danger {
     background: none;
