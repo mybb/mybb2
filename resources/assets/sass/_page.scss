@@ -1,0 +1,145 @@
+html, button, input, select, textarea {
+    color: $font-color;
+    word-wrap: break-word;
+}
+
+::selection {
+    background: $secondary-color;
+    color: $invert-font-color;
+    text-shadow: none;
+}
+
+body {
+    margin: 0;
+    font: 16px/26px $font-stack;
+    background: $background-default;
+}
+
+input, select, textarea, button {
+    font: 16px $font-stack;
+}
+
+a:link,
+a:visited {
+    color: $primary-color;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    color: $secondary-color;
+    text-decoration: underline;
+}
+
+a:focus,
+button:focus {
+    outline: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+img {
+    vertical-align: middle;
+
+    &.avatar {
+        border-radius: 4px;
+    }
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.wrapper {
+    @include clearfix();
+    width: 90%;
+    margin: 0 5%;
+
+    @include bp-large {
+        max-width: 1250px;
+        margin: 0 auto;
+    }
+}
+
+.main {
+    padding: side-values(20px 0 30px 0);
+
+    @include bp-medium {
+
+        .page-content--sidebar {
+            float: $left;
+            width: 62%;
+        }
+
+        .page-content--centered {
+            width: 60%;
+            float: none;
+            margin: auto auto;
+        }
+
+        .page-content--menu {
+            float: $left;
+            width: 78%;
+        }
+
+        .page-sidebar {
+            float: $right;
+            width: 35%;
+            margin-top: 0;
+        }
+    }
+
+    .page-header {
+        margin-bottom: 20px;
+
+        .page-title {
+            font-size: 2em;
+            font-weight: normal;
+            margin: side-values(0 0 20px 0);
+            padding: 0;
+        }
+
+        .page-description {
+            color: $alt-font-color-1;
+            font-size: 0.9em;
+            margin: side-values(0 0 10px 0);
+        }
+
+    }
+
+    .page-content--menu {
+
+        .page-header {
+
+            .page-title {
+                font-size: 1.8em;
+            }
+        }
+    }
+
+    .page-sidebar {
+        padding-bottom: 10px;
+        font-size: 0.9em;
+        margin-top: 30px;
+
+        .block {
+            border: 1px solid $border-1;
+            padding: 12px 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+    }
+}

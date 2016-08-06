@@ -1,53 +1,54 @@
-		<footer class="footer">
-			<div class="footer__navigation">
-				<div class="wrapper">
-					<h3>{{ setting('general.board_name', 'MyBB Community') }}</h3>
-					<nav class="footer-menu menu-bar">
-						<ul>
-							<li><a href="#">Contact</a></li>
-	                        {% if setting('general.site_name') is not null %}
-							    <li><a href="{{ setting('general.site_url') }}" target="_blank">{{ setting('general.site_name') }}</a></li>
-	                        {% endif %}
-							<li><a href="#">RSS Syndication</a></li>
-							<li><a href="#">Help</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<div class="footer__copyright">
-				<div class="wrapper">
-					<p class="powered-by">{{ trans('general.poweredBy') }} <a href="http://mybb.com" title="{{ trans('general.mybbDesc') }}">MyBB</a></p>
-				</div>
-			</div>
-		</footer>
-		<script src="{{ asset('assets/js/vendor.js') }}"></script>
-		<script>
-			Lang.addResource({
-				'general': {
-					months: {
-						january: '{{ trans('general.months.january')|e('js') }}',
-						february: '{{ trans('general.months.february')|e('js') }}',
-						march: '{{ trans('general.months.march')|e('js') }}',
-						april: '{{ trans('general.months.april')|e('js') }}',
-						may: '{{ trans('general.months.may')|e('js') }}',
-						june: '{{ trans('general.months.june')|e('js') }}',
-						july: '{{ trans('general.months.july')|e('js') }}',
-						august: '{{ trans('general.months.august')|e('js') }}',
-						september: '{{ trans('general.months.september')|e('js') }}',
-						october: '{{ trans('general.months.october')|e('js') }}',
-						november: '{{ trans('general.months.november')|e('js') }}',
-						december: '{{ trans('general.months.december')|e('js') }}'
-					},
-					dayOfWeek: {
-						sun: '{{ trans('general.dayOfWeek.sun')|e('js') }}',
-						mon: '{{ trans('general.dayOfWeek.mon')|e('js') }}',
-						tue: '{{ trans('general.dayOfWeek.tue')|e('js') }}',
-						wed: '{{ trans('general.dayOfWeek.wed')|e('js') }}',
-						thu: '{{ trans('general.dayOfWeek.thu')|e('js') }}',
-						fri: '{{ trans('general.dayOfWeek.fri')|e('js') }}',
-						sat: '{{ trans('general.dayOfWeek.sat')|e('js') }}'
-					}
-				}
-			});
-		</script>
-		<script src="{{ asset('assets/js/main.js') }}"></script>
+        <footer class="footer">
+            <div class="footer__navigation">
+                <div class="wrapper">
+                    <h3 class="board-name">{{ setting('general.board_name', 'MyBB Community') }}</h3>
+                    <nav class="footer-menu menu-bar">
+                        <ul class="menu-bar__links">
+                            {% if setting('general.site_name') is not null %}
+                                <li class="menu-bar__links__item"><a href="{{ setting('general.site_url') }}" class="menu-bar__links__item__link">{{ setting('general.site_name') }}</a></li>
+                            {% endif %}
+                            <li class="menu-bar__links__item"><a href="#" class="menu-bar__links__item__link">Contact</a></li>
+                            <li class="menu-bar__links__item"><a href="{{ url_route('members') }}" class="menu-bar__links__item__link">{{ trans('member.members') }}</a></li>
+                            {#<li><a href="#">RSS Syndication</a></li>#}
+                            <li class="menu-bar__links__item"><a href="#" class="menu-bar__links__item__link">Help</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer__copyright">
+                <div class="wrapper">
+                    <p class="powered-by">{{ trans('general.poweredBy') }} <a href="http://mybb.com" title="{{ trans('general.mybbDesc') }}" class="powered-by__link">MyBB</a></p>
+                </div>
+            </div>
+        </footer>
+        <script src="{{ asset('assets/js/vendor.js') }}"></script>
+        <script>
+            Lang.addResource({
+                'general': {
+                    months: {
+                        january: '{{ trans('general.months.january')|e('js') }}',
+                        february: '{{ trans('general.months.february')|e('js') }}',
+                        march: '{{ trans('general.months.march')|e('js') }}',
+                        april: '{{ trans('general.months.april')|e('js') }}',
+                        may: '{{ trans('general.months.may')|e('js') }}',
+                        june: '{{ trans('general.months.june')|e('js') }}',
+                        july: '{{ trans('general.months.july')|e('js') }}',
+                        august: '{{ trans('general.months.august')|e('js') }}',
+                        september: '{{ trans('general.months.september')|e('js') }}',
+                        october: '{{ trans('general.months.october')|e('js') }}',
+                        november: '{{ trans('general.months.november')|e('js') }}',
+                        december: '{{ trans('general.months.december')|e('js') }}'
+                    },
+                    dayOfWeek: {
+                        sun: '{{ trans('general.dayOfWeek.sun')|e('js') }}',
+                        mon: '{{ trans('general.dayOfWeek.mon')|e('js') }}',
+                        tue: '{{ trans('general.dayOfWeek.tue')|e('js') }}',
+                        wed: '{{ trans('general.dayOfWeek.wed')|e('js') }}',
+                        thu: '{{ trans('general.dayOfWeek.thu')|e('js') }}',
+                        fri: '{{ trans('general.dayOfWeek.fri')|e('js') }}',
+                        sat: '{{ trans('general.dayOfWeek.sat')|e('js') }}'
+                    }
+                }
+            });
+        </script>
+        <script src="{{ asset('assets/js/main.js') }}"></script>

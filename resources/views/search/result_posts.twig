@@ -1,21 +1,21 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('search.results') }}
+    {{ trans('search.results') }}
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-	<header>
-		<h1>{{ trans('search.results') }}</h1>
-	</header>
-	{# TODO: we need some mockup for it... #}
-	<section class="forum topic-list">
-		{{ results.render|raw }}
-			{% for post in results %}
-				<h3><a href="{{ url_route('topics.showPost', {'slug': post.topic.slug, 'id': post.topic.id, 'postId': post.id}) }}">{{ post.topic.title }}</a></h3>
-				{{ str_limit(post.content_parsed|striptags, 200) }}
-				<hr>
-			{% endfor %}
-		{{ results.render|raw }}
-	</section>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('search.results') }}</h1>
+    </header>
+    {# TODO: we need some mockup for it... #}
+    <section class="forum topic-list">
+        {{ results.render|raw }}
+            {% for post in results %}
+                <h3><a href="{{ url_route('topics.showPost', {'slug': post.topic.slug, 'id': post.topic.id, 'postId': post.id}) }}">{{ post.topic.title }}</a></h3>
+                {{ str_limit(post.content_parsed|striptags, 200) }}
+                <hr>
+            {% endfor %}
+        {{ results.render|raw }}
+    </section>
 </div>
 {% endblock %}

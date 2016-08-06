@@ -1,0 +1,112 @@
+.user-list {
+    @include clearfix();
+    padding: side-values(12px 12px 0 12px);
+
+    .user-list__user {
+        border: 1px solid $border-1;
+        padding: 8px;
+        margin: side-values(0 0 12px 0);
+        border-radius: 4px;
+
+        @include bp-medium {
+            float: $left;
+            width: 49.5%;
+            margin: side-values(0 0 12px 0);
+            box-sizing: border-box;
+
+            &:nth-child(odd) {
+                margin-#{$right}: 0.5%;
+            }
+
+            &:nth-child(even) {
+                margin-#{$left}: 0.5%;
+            }
+        }
+
+        .avatar-profile-link {
+            float: $left;
+            margin: side-values(0 12px 0 0);
+            @include avatar(80);
+        }
+
+        .user-list__user__username {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        .user-list__user__user-title {
+            font-size: 0.8em;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .user-list__user__data {
+            margin: 0;
+            padding: 0;
+            font-size: 0.8em;
+            color: $alt-font-color-2;
+
+            // would prefer to be .user-list__user__data__link, though currently not supported by templates
+            a {
+                color: $alt-font-color-1;
+            }
+        }
+
+        .team-badge {
+            float: right;
+            position: relative;
+            margin: side-values(-48px 0 0 0);
+        }
+
+        .stats {
+            font-size: 0.7em;
+        }
+    }
+
+    &.user-list--online-now {
+        
+        .user-list__user {
+            
+            .avatar-profile-link {
+                @include avatar(50);
+            }
+
+            .user-list__user__date {
+                float: right;
+            }   
+        }
+    }
+
+    .sort-results {
+        margin: side-values(0 -12px 0 -12px);
+    }
+}
+
+.user-list--compact {
+
+    .user-list--compact__user {
+        display: inline-block;
+        margin: side-values(0 12px 10px 0);
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            margin: side-values(-2px 8px 0 0);
+        }
+    }
+
+    .error-no-results {
+        padding: 10px 0;
+        font-size: 1em;
+    }
+}
+
+.team-badge {
+    padding: 3px 8px;
+    border: 1px solid $border-1;
+    color: $alt-font-color-1;
+    display: inline;
+    line-height: 1.6;
+    font-size: 0.7em;
+    border-radius: 4px;
+}

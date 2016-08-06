@@ -1,41 +1,41 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('forum.allforums') }}
+    {{ trans('forum.allforums') }}
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-    <header>
-        <h1>{{ trans('forum.allforums') }}</h1>
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('forum.allforums') }}</h1>
     </header>
     {% for category in forums %}
-		<section>
-			<h2 class="heading heading--major">{{ category.title }}</h2>
-			 <div class="forum-list forum-list--full-width">
-				{% for forum in category.children.toTree %}
-					<div class="forum">
-						<div class="forum__info">
-							<h3 class="forum__title"><a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
-							<p class="forum__description">{{ forum.description }}</p>
-							{% if forum.children.toTree %}
-								<ul class="forum__subforums">
-									<i class="fa fa-level-up"></i>
-									{% for subforum in forum.children.toTree %}
-										<li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
-									{% endfor %}
-								</ul>
-							{% endif %}
-						</div>
-						{% if forum.hasLastPost %}
-							<div class="forum__topic forum__topic--latest">
-								<a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
-								<h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
-								<p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
-							</div>
-						{% endif %}
-					</div>
-				{% endfor %}
-			</div>
-		</section>
-	{% endfor %}
+        <section class="block">
+            <h2 class="block__heading block__heading--major">{{ category.title }}</h2>
+             <div class="forum-list forum-list--full-width">
+                {% for forum in category.children.toTree %}
+                    <div class="forum">
+                        <div class="forum__info">
+                            <h3 class="forum__title"><a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
+                            <p class="forum__description">{{ forum.description }}</p>
+                            {% if forum.children.toTree %}
+                                <ul class="forum__subforums">
+                                    <i class="fa fa-level-up"></i>
+                                    {% for subforum in forum.children.toTree %}
+                                        <li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                        {% if forum.hasLastPost %}
+                            <div class="forum__topic forum__topic--latest">
+                                <a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
+                                <h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
+                                <p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -1,30 +1,30 @@
 {% extends "account.base" %}
 {% block inner_title %}
-	{{ trans('account.username') }}
+    {{ trans('account.username') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-			<h1>{{ trans('account.username') }}</h1>
-		</header>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.username') }}</h1>
+        </header>
 
-	{{ form_open({'url_route': 'account.username', 'method': 'post'}) }}
-	<section class="form">
-		<div class="form__section">
-			<div class="form__row">
-				<h3>{{ form_label('name', trans('account.new_username')) }}</label></h3>
-				<p class="form__description">{{ trans('account.new_username_desc') }}</p>
-				{{ form_text('name') }}
-			</div>
-			<div class="form__row">
-				<h3>{{ form_label('password', trans('account.current_password')) }}</h3>
-				<p class="form__description">{{ trans('account.current_password_name') }}</p>
-				{{ form_password('password', {'class': 'password-toggle'}) }}
-			</div>
-		</div>
-	</section>
-	<div class="form__submit">
-		{{ form_button('<i class="fa fa-user"></i><span class="text">'~trans('account.change_username')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-	</div>
-	{{ form_close() }}
+    {{ form_open({'url_route': 'account.username', 'method': 'post'}) }}
+    <section class="form">
+        <div class="form__section">
+            <div class="form__row">
+                <h3 class="form__row__title">{{ form_label('name', trans('account.new_username')) }}</label></h3>
+                <p class="form__row__description">{{ trans('account.new_username_desc') }}</p>
+                {{ form_text('name') }}
+            </div>
+            <div class="form__row">
+                <h3 class="form__row__title">{{ form_label('password', trans('account.current_password')) }}</h3>
+                <p class="form__row__description">{{ trans('account.current_password_name') }}</p>
+                {{ form_password('password', {'class': 'password-toggle'}) }}
+            </div>
+        </div>
+    </section>
+    <div class="form__submit">
+        {{ form_button(trans('account.change_username'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
+    </div>
+    {{ form_close() }}
 
 {% endblock %}

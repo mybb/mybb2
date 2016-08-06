@@ -1,174 +1,175 @@
 {% extends "layouts.base" %}
 {% block title %}{{ forum.title }}{% endblock %}
 {% block head %}
-	<meta name="description" content="{{ forum.description }}" />
-	<link rel="canonical" href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}" />
+    <meta name="description" content="{{ forum.description }}" />
+    <link rel="canonical" href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}" />
 {% endblock %}
 {% block contents %}
-		<div class="page-content">
-			<header>
-				<h1>{{ forum.title }}</h1>
-				<p class="description">
-					{{ forum.description }}
-				</p>
-			</header>
-
-			{% if forum.children.count > 0 %}
-				<section class="container">
-					<h2 class="visuallyhidden">{{ trans('forum.childforums') }}</h2>
-					 <div class="forum-list forum-list--full-width">
-						{% for forum in forum.children.toTree %}
-						   <div class="forum">
-								<div class="forum__info">
-									<h3 class="forum__title"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
-									<p class="forum__description">{{ forum.description }} </p>
-									{% if forum.children.count > 0 %}
-										{% for subforum in forum.children.toTree %}
-											<ul class="forum__subforums">
-												<i class="fa fa-level-up"></i>
-												<li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
-											</ul>
-										{% endfor %}
-									{% endif %}
-								</div>
-							   {% if forum.hasLastPost %}
-								   <div class="forum__topic forum__topic--latest">
-									   <a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
-									   <h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
-									   <p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
-								   </div>
-							   {% endif %}
-						   </div>
-						{% else %}
-							{{ trans('forum.notfound') }}
-						{% endfor %}
-					</div>
-				</section>
-			{% endif %}
-			
-			<div class="page-controls">
-				{{ topics.render|raw }}
-				<div class="page-buttons">
-					<a href="#" class="button button--secondary"><i class="fa fa-circle-o"></i><span class="text">{{ trans('forum.markread') }}</span></a>
-					<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">{{ trans('forum.follow') }}</span></a>
-					<a href="{{ url_route("topics.create", {'id': forum.id}) }}" class="button"><i class="fa fa-edit"></i><span class="text">{{ trans('forum.posttopic') }}</span></a>
-				</div>
-			</div>
-			<section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">
-				<h2 class="visuallyhidden">{{ trans('forum.topics') }}</h2>
-				<div class="topic-list__sort-topics">
-					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
-						{{ trans('forum.topictitle') }}
-						{% if orderBy == 'title' %}
-							{% if orderDir == 'desc' %}
-								<i class="fa fa-caret-down"></i>
-							{% else %}
-								<i class="fa fa-caret-up"></i>
-							{% endif %}
-						{% endif %}
-					</a>
-					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
-						{{ trans('forum.startdate') }}
-						{% if orderBy == 'startdate' %}
-							{% if orderDir == 'desc' %}
-								<i class="fa fa-caret-down"></i>
-							{% else %}
-								<i class="fa fa-caret-up"></i>
-							{% endif %}
-						{% endif %}
-					</a>
-					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
-						{{ trans('forum.replies') }}
-						{% if orderBy == 'replies' %}
-							{% if orderDir == 'desc' %}
-								<i class="fa fa-caret-down"></i>
-							{% else %}
-								<i class="fa fa-caret-up"></i>
-							{% endif %}
-						{% endif %}
-					</a>
-					<a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
-						{{ trans('forum.latestpost') }}
-						{% if orderBy == 'lastpost' %}
-							{% if orderDir == 'desc' %}
-								<i class="fa fa-caret-down"></i>
-							{% else %}
-								<i class="fa fa-caret-up"></i>
-							{% endif %}
-						{% endif %}
-					</a>
-					<!-- this needs to be hidden if the user is not a moderator -->
-					<span class="sort-column moderation-column">
-						<input type="checkbox" /> <!-- needs JS to do select all -->
-					</span>
-				</div>
-				<div class="topic-list__container">
-					{% for topic in topics %}
-						<div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed() ? ' soft-deleted' }}">
-							<div class="primary-column">
-								<h3 class="topic__title">
-									<a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
-									<span class="topic__icons icons">
-										{% if topic.closed == true %}
-										<i class="fa fa-lock fa-fw" title="{{ trans('forum.closedtopic') }}"></i>
-										{% endif %}
-										{% if topic.has_poll == true %}
-                                   		<i class="fa fa-check-square-o fa-fw" title="{{ trans('forum.poll') }}"></i>
-										{% endif %}
-									</span>
-								</h3>
-								<h4>{{ trans('topic.firstpost') }}</h4>
-								<p class="topic__post topic__post--first">§
-									<span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
-									{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
-								</p>
-							</div>
-							<div class="replies-column">
-								<h4>{{ trans('topic.replies') }}</h4>
-								{# It should be change later #}
-								<p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
-							</div>
-							<div class="latest-column">
-								<h4>{{ trans('topic.latest') }}</h4>
-								<!-- it should be change later -->
-								<a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
-								<p class="topic__post topic__post--latest">
-									<span class="post__author">
+        <div class="page-content">
+            <header class="page-header">
+                <h1 class="page-title">{{ forum.title }}</h1>
+                <p class="description">
+                    {{ forum.description }}
+                </p>
+            </header>
+            {% if forum.children.count > 0 %}
+                <section class="block block--container">
+                    <h2 class="visually-hidden">{{ trans('forum.childforums') }}</h2>
+                     <div class="forum-list forum-list--full-width">
+                        {% for forum in forum.children.toTree %}
+                           <div class="forum">
+                                <div class="forum__info">
+                                    <h3 class="forum__title"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
+                                    <p class="forum__description">{{ forum.description }} </p>
+                                    {% if forum.children.count > 0 %}
+                                        {% for subforum in forum.children.toTree %}
+                                            <ul class="forum__subforums">
+                                                <i class="fa fa-level-up"></i>
+                                                <li class="forum__subforums__subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
+                                            </ul>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                               {% if forum.hasLastPost %}
+                                   <div class="forum__topic forum__topic--latest">
+                                       <a href="" class="avatar-profile-link" title="Go to {{ forum.lastPostAuthor.name }}'s profile"><img src="{{ forum.lastPostAuthor.avatar }}" class="avatar" /></a>
+                                       <h4 class="forum__topic__title"><a href="{{ url_route("topics.show", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}) }}">{{ forum.lastPost.topic.title }}</a></h4>
+                                       <p class="forum__topic__post">{{ post_date_link(url_route("topics.last", {'slug': forum.lastPost.topic.slug, 'id': forum.lastPost.topic.id}), forum.lastPost.created_at) }} {{ trans('general.by') }} {{ render_profile_link(forum.lastPostAuthor) }}</p>
+                                   </div>
+                               {% endif %}
+                           </div>
+                        {% else %}
+                            {{ trans('forum.notfound') }}
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
+            
+            <div class="page-controls">
+                {{ topics.render|raw }}
+                <div class="page-buttons">
+                    <a href="#" class="button button--secondary button--half-width icon fa-circle-o">{{ trans('forum.markread') }}</a>
+                    <a href="#" class="button button--secondary button--half-width icon fa-plus">{{ trans('forum.follow') }}</a>
+                    <a href="{{ url_route("topics.create", {'id': forum.id}) }}" class="button button--full-width icon fa-edit">{{ trans('forum.posttopic') }}</a>
+                </div>
+            </div>
+            <section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">
+                <h2 class="visually-hidden">{{ trans('forum.topics') }}</h2>
+                <div class="topic-list__sort-topics">
+                    <span class="primary-column sort-column">
+                        <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column topic-list__sort-topics__link primary-column__topic-title">
+                            {{ trans('forum.topictitle') }}
+                            {% if orderBy == 'title' %}
+                                {% if orderDir == 'desc' %}
+                                    <i class="fa fa-caret-down"></i>
+                                {% else %}
+                                    <i class="fa fa-caret-up"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                        <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column topic-list__sort-topics__link primary-column__start-date">
+                            {{ trans('forum.startdate') }}
+                            {% if orderBy == 'startdate' %}
+                                {% if orderDir == 'desc' %}
+                                    <i class="fa fa-caret-down"></i>
+                                {% else %}
+                                    <i class="fa fa-caret-up"></i>
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </span>
+                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column topic-list__sort-topics__link replies-column">
+                        {{ trans('forum.replies') }}
+                        {% if orderBy == 'replies' %}
+                            {% if orderDir == 'desc' %}
+                                <i class="fa fa-caret-down"></i>
+                            {% else %}
+                                <i class="fa fa-caret-up"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column topic-list__sort-topics__link latest-column">
+                        {{ trans('forum.latestpost') }}
+                        {% if orderBy == 'lastpost' %}
+                            {% if orderDir == 'desc' %}
+                                <i class="fa fa-caret-down"></i>
+                            {% else %}
+                                <i class="fa fa-caret-up"></i>
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                    <!-- this needs to be hidden if the user is not a moderator -->
+                    <span class="sort-column moderation-column">
+                        <input type="checkbox" /> <!-- needs JS to do select all -->
+                    </span>
+                </div>
+                <div class="topic-list__container">
+                    {% for topic in topics %}
+                        <div class="topic{{ not topic.approved ? ' topic--pending-approval' }}{{ topic.trashed() ? ' topic--soft-deleted' }}">
+                            <div class="primary-column">
+                                <h3 class="topic__title">
+                                    <a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
+                                    <span class="topic__icons icons">
+                                        {% if topic.closed == true %}
+                                        <i class="fa fa-lock fa-fw" title="{{ trans('forum.closedtopic') }}"></i>
+                                        {% endif %}
+                                        {% if topic.has_poll == true %}
+                                           <i class="fa fa-check-square-o fa-fw" title="{{ trans('forum.poll') }}"></i>
+                                        {% endif %}
+                                    </span>
+                                </h3>
+                                <h4 class="topic__first-post__title">{{ trans('topic.firstpost') }}</h4>
+                                <p class="topic__first-post topic__post topic__post--first">
+                                    <span class="post__author">{{ render_profile_link(topic.author) }}</span>
+                                    {{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
+                                </p>
+                            </div>
+                            <div class="replies-column topic__replies">
+                                <h4 class="topic__replies__title">{{ trans('topic.replies') }}</h4>
+                                {# It should be change later #}
+                                <p class="topic__replies__count caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
+                            </div>
+                            <div class="latest-column topic__latest-post">
+                                <h4 class="topic__latest-post__title">{{ trans('topic.latest') }}</h4>
+                                <!-- it should be change later -->
+                                <a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
+                                <p class="topic__latest-post__post topic__post topic__post--latest">
+                                    <span class="post__author">
                                         {{ render_profile_link(topic.lastPost.author) }}
                                     </span>
-									{{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.lastPost.created_at) }}
-								</p>
-							</div>
-							<!-- this needs to be hidden if user is not a moderator -->
-							<div class="moderation-column">
-								<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ topic.id }}">
-							</div>
-						</div>
-					{% else %}
-						<div class="topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
-					{% endfor %}
-				</div>
+                                    {{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.lastPost.created_at) }}
+                                </p>
+                            </div>
+                            <!-- this needs to be hidden if user is not a moderator -->
+                            <div class="moderation-column topic__moderation">
+                                <input type="checkbox" class="post__inline-mod" data-moderation-id="{{ topic.id }}">
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="topic-list__error error error-no-results">{{ trans('topic.notfound') }}</div>
+                    {% endfor %}
+                </div>
 
-				{{ form_open({'url_route': url_route('forums.show', {'slug': forum.slug, 'id': forum.id }), 'method': 'get'}) }}
-				<div class="sort-results">
-					<h3>{{ trans('general.sorting') }}</h3>
-					{{ form_select('orderBy', {
-						'title': trans('general.sortby')~' '~trans('forum.topictitle'),
-						'startdate': trans('general.sortby')~' '~trans('forum.startdate'),
-						'replies': trans('general.sortby')~' '~trans('forum.replies'),
-						'lastpost': trans('general.sortby')~' '~trans('forum.latestpost')
-					}, orderBy) }}
-					{{ form_select('orderDir', {
-						'asc': trans('general.order')~' '~trans('general.ascending'),
-						'desc': trans('general.order')~' '~trans('general.descending')
-					}, orderDir) }}
-					{{ form_button('<span class="text">'~trans('forum.sorttopics')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-				</div>
-				{{ form_close() }}
-				
-			</section>
-			{{ topics.render|raw }}
-			{% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations, 'moderation_content': 'topics'} %}
-			</div>
-		</div>
+                {{ form_open({'url_route': url_route('forums.show', {'slug': forum.slug, 'id': forum.id }), 'method': 'get'}) }}
+                <div class="sort-results">
+                    <h3 class="sort-results__title">{{ trans('general.sorting') }}</h3>
+                    {{ form_select('orderBy', {
+                        'title': trans('general.sortby')~' '~trans('forum.topictitle'),
+                        'startdate': trans('general.sortby')~' '~trans('forum.startdate'),
+                        'replies': trans('general.sortby')~' '~trans('forum.replies'),
+                        'lastpost': trans('general.sortby')~' '~trans('forum.latestpost')
+                    }, orderBy) }}
+                    {{ form_select('orderDir', {
+                        'asc': trans('general.order')~' '~trans('general.ascending'),
+                        'desc': trans('general.order')~' '~trans('general.descending')
+                    }, orderDir) }}
+                    {{ form_button('<span class="text">'~trans('forum.sorttopics')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+                </div>
+                {{ form_close() }}
+                
+            </section>
+            {{ topics.render|raw }}
+            {% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations, 'moderation_content': 'topics'} %}
+            </div>
+        </div>
 {% endblock %}

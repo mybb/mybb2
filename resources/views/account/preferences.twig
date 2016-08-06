@@ -1,296 +1,215 @@
 {% extends "account.base" %}
 {% block inner_title %}
-	{{ trans('account.preferences') }}
+    {{ trans('account.preferences') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-			<h1>{{ trans('account.preferences') }}</h1>
-		</header>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.preferences') }}</h1>
+        </header>
 
-	{{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}
-	<section class="form">
-		<div class="form__section">
-			<h2>{{ trans('account.datetime') }}</h2>
-			<div class="form__section__container">
-				<div class="form__row">
-					<h3>{{ form_label('date_format', trans('account.dateformat')) }}</h3>
-					{# TODO: Make the display dynamic #}
-					{{ form_select('date_format', {
-						'default': trans('account.uselangdefault')~' ('~format_date(null, false, 'default')~')',
-						'm-d-Y': format_date(null, false, 'm-d-Y'),
-						'd-m-Y': format_date(null, false, 'd-m-Y'),
-						'M d, Y': format_date(null, false, 'M d, Y'),
-						'd M Y': format_date(null, false, 'd M Y'),
-						'F d, Y': format_date(null, false, 'F d, Y'),
-						'd F Y': format_date(null, false, 'd F Y')
-					}, setting('user.date_format', 'default')) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.timeformat') }}</h3>
-					<div class="segmented-control">
-						{# we can't use form_label here as laravel escapes the value and we need html in it #}
-						<span class="segmented-control__block">
-							{{ form_radio('time_format', 12, setting('user.time_format', trans('general.timeformat')) == 12, {'id': 'twelvehour'}) }}
-							<label class="segmented-control__button" for="twelvehour">
-								<span class="text">{{ trans('account.12-hour') }}</span>
-							</label>
-						</span><span class="segmented-control__block">
-							{{ form_radio('time_format', 24, setting('user.time_format', trans('general.timeformat')) == 24, {'id': 'twentyfourhour'}) }}
-							<label class="segmented-control__button" for="twentyfourhour">
-								<span class="text">{{ trans('account.24-hour') }}</span>
-							</label>
-						</span>
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('timezone', trans('account.timezone')) }}</h3>
-					{{ form_select('timezone', selectTimezones, timezone) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.dst') }}</h3>
-					<p class="form__description">{{ trans('account.dst_desc') }}</p>
-					<div class="segmented-control">
-							{# as above: form_label not usable #}
-							<span class="segmented-control__block">
-								{{ form_radio('dst', 0, setting('user.dst', 2) == 0, {'id': 'dst_on'}) }}
-								<label class="segmented-control__button" for="dst_on">
-									<span class="text">{{ trans('general.enable') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dst', 1, setting('user.dst', 2) == 1, {'id': 'dst_off'}) }}
-								<label class="segmented-control__button" for="dst_off">
-									<span class="text">{{ trans('general.disable') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('dst', 2, setting('user.dst', 2) == 2, {'id': 'dst_auto'}) }}
-								<label class="segmented-control__button" for="dst_auto">
-									<span class="text">{{ trans('general.auto') }}</span>
-								</label>
-							</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="form__section">
-			<h2>{{ trans('account.discussions') }}</h2>
-			<div class="form__section__container">
-				<div class="form__row">
-					{# is there a better way than using raw here? #}
-					<p class="form__checkbox"><label>{{ form_checkbox('follow_started_topics', 1, setting('user.follow_started_topics', true)) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, setting('user.follow_replied_topics', true)) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
-					<p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, setting('user.show_editor', true)) }} {{ trans('account.show_editor') }}</label></p>
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.message_order') }}</h3>
-					<p class="form__description">{{ trans('account.message_order_description', {'link': url_route('conversations.index')})|raw }}</p>
-					<div class="segmented-control">
-						{# we can't use form_label here as laravel escapes the value and we need html in it #}
-						<span class="segmented-control__block">
-								{{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc'}) }}
-							<label class="segmented-control__button" for="asc">
-								<span class="text">{{ trans('account.message_order_asc') }}</span>
-							</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc'}) }}
-							<label class="segmented-control__button" for="desc">
-								<span class="text">{{ trans('account.message_order_desc') }}</span>
-							</label>
-							</span>
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
-					{{ form_input('number', 'topics_per_page', setting('user.topics_per_page', 20), {'min': 5, 'max': 50, 'step': 5}) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
-					{{ form_input('number', 'posts_per_page', setting('user.posts_per_page', 10), {'min': 5, 'max': 50, 'step': 5}) }}
-				</div>
-			</div>
-		</div>
-		<div class="form__section">
-			<h2>{{ trans('account.styleLanguage') }}</h2>
-			{# TODO: both, styles and languages are dynamic and an array need to be generated in the controller #}
-			<div class="form__section__container">
-				<div class="form__row">
-					<h3>{{ form_label('style', trans('account.style')) }}</h3>
-					{{ form_select('style', {
-						'default': trans('account.usedefault')~' - MyBB Default',
-						1: 'MyBB Default',
-					}) }}
-				</div>
-				<div class="form__row">
-					<h3>{{ form_label('language', trans('account.language')) }}</h3>
-					{{ form_select('language', languages, selectedLanguage) }}
-				</div>
-			</div>
-		</div>
-		<div class="form__section">
-			<h2>{{ trans('account.notifications') }}</h2>
-			{# All of the labels below use HTML as their value and therefor we can't use form_label #}
-			<div class="form__section__container">
-				<div class="form__row">
-					<h3>{{ trans('account.topicsForums') }}</h3>
-					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="select-control">
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like'}) }}
-							<label for="notify_on_like" class="select-control__button">
-								<i class="fa fa-thumbs-up fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_like') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_quote', 1, setting('user.notify_on_quote', true), {'id': 'notify_on_quote'}) }}
-							<label for="notify_on_quote" class="select-control__button">
-								<i class="fa fa-comment fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_quote') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_reply', 1,setting('user.notify_on_reply', true), {'id': 'notify_on_reply'}) }}
-							<label for="notify_on_reply" class="select-control__button">
-								<i class="fa fa-plus fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_reply') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_post', 1, setting('user.notify_on_new_post', true), {'id': 'notify_on_new_post'}) }}
-							<label for="notify_on_new_post" class="select-control__button">
-								<i class="fa fa-plus fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_new_post') }}</span>
-							</label>
-						</p>
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.profiles') }}</h3>
-					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="select-control">
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_comment', 1, setting('user.notify_on_new_comment', true), {'id': 'notify_on_new_comment'}) }}
-							<label for="notify_on_new_comment" class="select-control__button">
-								<i class="fa fa-comment fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_new_comment') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_comment_like', 1, setting('user.notify_on_comment_like', true), {'id': 'notify_on_comment_like'}) }}
-							<label for="notify_on_comment_like" class="select-control__button">
-								<i class="fa fa-thumbs-up fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_comment_like') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_my_comment_like', 1, setting('user.notify_on_my_comment_like', true), {'id': 'notify_on_my_comment_like'}) }}
-							<label for="notify_on_my_comment_like" class="select-control__button">
-								<i class="fa fa-thumbs-up fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_my_comment_like') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_comment_reply', 1, setting('user.notify_on_comment_reply', true), {'id': 'notify_on_comment_reply'}) }}
-							<label for="notify_on_comment_reply" class="select-control__button">
-								<i class="fa fa-comments fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_comment_reply') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_my_comment_reply', 1, setting('user.notify_on_my_comment_reply', true), {'id': 'notify_on_my_comment_reply'}) }}
-							<label for="notify_on_my_comment_reply" class="select-control__button">
-								<i class="fa fa-comments fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_my_comment_reply') }}</span>
-							</label>
-						</p>
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.messages') }}</h3>
-					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="select-control">
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message'}) }}
-							<label for="notify_on_new_message" class="select-control__button">
-								<i class="fa fa-inbox fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_new_message') }}</span>
-							</label>
-						</p>
-						<p class="select-control__block">
-							{{ form_checkbox('notify_on_reply_message', 1, setting('user.notify_on_reply_message', true), {'id': 'notify_on_reply_message'}) }}
-							<label for="notify_on_reply_message" class="select-control__button">
-								<i class="fa fa-reply fa-fw"></i>
-								<span class="text">{{ trans('account.notify_on_reply_message') }}</span>
-							</label>
-						</p>
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.moderation') }}</h3>
-					<p class="form__description">{{ trans('account.notify_me') }}</p>
-					<div class="select-control">
-						{# TODO: if auth_user().isGroupLeader #}
-							<p class="select-control__block">
-								{{ form_checkbox('notify_on_group_request', 1, setting('user.notify_on_group_request', true), {'id': 'notify_on_group_request'}) }}
-								<label for="notify_on_group_request" class="select-control__button">
-									<i class="fa fa-users fa-fw"></i>
-									<span class="text">{{ trans('account.notify_on_group_request') }}</span>
-								</label>
-							</p>
-						{# endif #}
-						{# TODO: if auth_user().isModerator #}
-							<p class="select-control__block">
-								{{ form_checkbox('notify_on_moderation_post', 1, setting('user.notify_on_moderation_post', true), {'id': 'notify_on_moderation_post'}) }}
-								<label for="notify_on_moderation_post" class="select-control__button">
-									<i class="fa fa-thumb-tack fa-fw"></i>
-									<span class="text">{{ trans('account.notify_on_moderation_post') }}</span>
-								</label>
-							</p>
-							<p class="select-control__block">
-								{{ form_checkbox('notify_on_report', 1, setting('user.notify_on_report', true), {'id': 'notify_on_report'}) }}
-								<label for="notify_on_report" class="select-control__button">
-									<i class="fa fa-flag fa-fw"></i>
-									<span class="text">{{ trans('account.notify_on_report') }}</span>
-								</label>
-							</p>
-							<p class="select-control__block">
-								{{ form_checkbox('notify_on_username_change', 1, setting('user.notify_on_username_change', true), {'id': 'notify_on_username_change'}) }}
-								<label for="notify_on_username_change" class="select-control__button">
-									<i class="fa fa-pencil-square-o fa-fw"></i>
-									<span class="text">{{ trans('account.notify_on_username_change') }}</span>
-								</label>
-							</p>
-						{# endif #}
-					</div>
-				</div>
-				<div class="form__row">
-					<h3>{{ trans('account.notification_mails') }}</h3>
-					{# TODO: raw again - not nice #}
-					<p class="form__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
-					<div class="segmented-control">
-							<span class="segmented-control__block">
-								{{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails'}) }}
-								<label class="segmented-control__button" for="no_emails">
-									<span class="text">{{ trans('general.none') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('notification_mails', 1, setting('user.notification_mails', 0) == 1, {'id': 'daily_emails'}) }}
-								<label class="segmented-control__button" for="daily_emails">
-									<span class="text">{{ trans('general.daily') }}</span>
-								</label>
-							</span><span class="segmented-control__block">
-								{{ form_radio('notification_mails', 2, setting('user.notification_mails', 0) == 2, {'id': 'weekly_emails'}) }}
-								<label class="segmented-control__button" for="weekly_emails">
-									<span class="text">{{ trans('general.weekly') }}</span>
-								</label>
-							</span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<div class="form__submit">
-		{{ form_button('<i class="fa fa-cog"></i><span class="text">'~trans('account.update_preferences')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-	</div>
-	{{ form_close() }}
+    {{ form_open({'url_route': 'account.preferences', 'method': 'post'}) }}
+    <section class="form">
+        <div class="form__section">
+            <h2 class="form__section__title">{{ trans('account.datetime') }}</h2>
+            <div class="form__section__container">
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('date_format', trans('account.dateformat')) }}</h3>
+                    {# TODO: Make the display dynamic #}
+                    {{ form_select('date_format', {
+                        'default': trans('account.uselangdefault')~' ('~format_date(null, false, 'default')~')',
+                        'm-d-Y': format_date(null, false, 'm-d-Y'),
+                        'd-m-Y': format_date(null, false, 'd-m-Y'),
+                        'M d, Y': format_date(null, false, 'M d, Y'),
+                        'd M Y': format_date(null, false, 'd M Y'),
+                        'F d, Y': format_date(null, false, 'F d, Y'),
+                        'd F Y': format_date(null, false, 'd F Y')
+                    }, setting('user.date_format', 'default')) }}
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.timeformat') }}</h3>
+                    <div class="segmented-control">
+                        {# we can't use form_label here as laravel escapes the value and we need html in it #}
+                        <span class="segmented-control__option">
+                            {{ form_radio('time_format', 12, setting('user.time_format', trans('general.timeformat')) == 12, {'id': 'twelvehour', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="twelvehour">{{ trans('account.12-hour') }}</label>
+                        </span>
+                        <span class="segmented-control__option">
+                            {{ form_radio('time_format', 24, setting('user.time_format', trans('general.timeformat')) == 24, {'id': 'twentyfourhour', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="twentyfourhour">{{ trans('account.24-hour') }}</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('timezone', trans('account.timezone')) }}</h3>
+                    {{ form_select('timezone', selectTimezones, timezone) }}
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.dst') }}</h3>
+                    <p class="form__row__description">{{ trans('account.dst_desc') }}</p>
+                    <div class="segmented-control">
+                            {# as above: form_label not usable #}
+                            <span class="segmented-control__option">
+                                {{ form_radio('dst', 0, setting('user.dst', 2) == 0, {'id': 'dst_on', 'class': 'segmented-control__option__input'}) }}
+                                <label class="segmented-control__option__button" for="dst_on">{{ trans('general.enable') }}</label>
+                            </span>
+                            <span class="segmented-control__option">
+                                {{ form_radio('dst', 1, setting('user.dst', 2) == 1, {'id': 'dst_off', 'class': 'segmented-control__option__input'}) }}
+                                <label class="segmented-control__option__button" for="dst_off">{{ trans('general.disable') }}</label>
+                            </span>
+                            <span class="segmented-control__option">
+                                {{ form_radio('dst', 2, setting('user.dst', 2) == 2, {'id': 'dst_auto', 'class': 'segmented-control__option__input'}) }}
+                                <label class="segmented-control__option__button" for="dst_auto">{{ trans('general.auto') }}</label>
+                            </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form__section">
+            <h2 class="form__section__title">{{ trans('account.discussions') }}</h2>
+            <div class="form__section__container">
+                <div class="form__row">
+                    {# is there a better way than using raw here? #}
+                    <p class="form__checkbox"><label>{{ form_checkbox('follow_started_topics', 1, setting('user.follow_started_topics', true)) }} {{ trans('account.follow_started_topics', {'link': url_route('account.following')})|raw }}</label></p>
+                    <p class="form__checkbox"><label>{{ form_checkbox('follow_replied_topics', 1, setting('user.follow_replied_topics', true)) }} {{ trans('account.follow_replied_topics', {'link': url_route('account.following')})|raw }}</label></p>
+                    <p class="form__checkbox"><label>{{ form_checkbox('show_editor', 1, setting('user.show_editor', true)) }} {{ trans('account.show_editor') }}</label></p>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.message_order') }}</h3>
+                    <p class="form__row__description">{{ trans('account.message_order_description', {'link': url_route('conversations.index')})|raw }}</p>
+                    <div class="segmented-control">
+                        {# we can't use form_label here as laravel escapes the value and we need html in it #}
+                        <span class="segmented-control__option">
+                                {{ form_radio('message_order', 'asc', setting('conversations.message_order', 'desc') == 'asc', {'id': 'asc', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="asc">{{ trans('account.message_order_asc') }}</label>
+                        </span>
+                        <span class="segmented-control__option">
+                            {{ form_radio('message_order', 'desc', setting('conversations.message_order', 'desc') == 'desc', {'id': 'desc', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="desc">{{ trans('account.message_order_desc') }}</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('topics_per_page', trans('account.topics_per_page')) }}</h3>
+                    {{ form_input('number', 'topics_per_page', setting('user.topics_per_page', 20), {'min': 5, 'max': 50, 'step': 5}) }}
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('posts_per_page', trans('account.posts_per_page')) }}</h3>
+                    {{ form_input('number', 'posts_per_page', setting('user.posts_per_page', 10), {'min': 5, 'max': 50, 'step': 5}) }}
+                </div>
+            </div>
+        </div>
+        <div class="form__section">
+            <h2 class="form__section__title">{{ trans('account.styleLanguage') }}</h2>
+            {# TODO: both, styles and languages are dynamic and an array need to be generated in the controller #}
+            <div class="form__section__container">
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('style', trans('account.style')) }}</h3>
+                    {{ form_select('style', {
+                        'default': trans('account.usedefault')~' - MyBB Default',
+                        1: 'MyBB Default',
+                    }) }}
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ form_label('language', trans('account.language')) }}</h3>
+                    {{ form_select('language', languages, selectedLanguage) }}
+                </div>
+            </div>
+        </div>
+        <div class="form__section">
+            <h2 class="form__section__title">{{ trans('account.notifications') }}</h2>
+            {# All of the labels below use HTML as their value and therefor we can't use form_label #}
+            <div class="form__section__container">
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.topicsForums') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
+                    <div class="select-control">
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_like', 1, setting('user.notify_on_like', true), {'id': 'notify_on_like', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_like" class="select-control__option__button icon icon--fw fa-thumbs-up">{{ trans('account.notify_on_like') }}</label>
+                        </p>
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_quote', 1, setting('user.notify_on_quote', true), {'id': 'notify_on_quote', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_quote" class="select-control__option__button icon icon--fw fa-comment">{{ trans('account.notify_on_quote') }}</label>
+                        </p>
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_mention', 1, setting('user.notify_on_mention', true), {'id': 'notify_on_mention', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_mention" class="select-control__option__button icon icon--fw fa-at">{{ trans('account.notify_on_mention') }}</label>
+                        </p>
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_reply', 1,setting('user.notify_on_reply', true), {'id': 'notify_on_reply', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_reply" class="select-control__option__button icon icon--fw fa-plus">{{ trans('account.notify_on_reply') }}</label>
+                        </p>
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_new_post', 1, setting('user.notify_on_new_post', true), {'id': 'notify_on_new_post', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_new_post" class="select-control__option__button icon icon--fw fa-plus">{{ trans('account.notify_on_new_post') }}</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.messages') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
+                    <div class="select-control">
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_new_message', 1, setting('user.notify_on_new_message', true), {'id': 'notify_on_new_message', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_new_message" class="select-control__option__button icon icon--fw fa-inbox">{{ trans('account.notify_on_new_message') }}</label>
+                        </p>
+                        <p class="select-control__option">
+                            {{ form_checkbox('notify_on_reply_message', 1, setting('user.notify_on_reply_message', true), {'id': 'notify_on_reply_message', 'class': 'select-control__option__input'}) }}
+                            <label for="notify_on_reply_message" class="select-control__option__button icon icon--fw fa-reply">{{ trans('account.notify_on_reply_message') }}</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.moderation') }}</h3>
+                    <p class="form__row__description">{{ trans('account.notify_me') }}</p>
+                    <div class="select-control">
+                        {# TODO: if auth_user().isGroupLeader #}
+                            <p class="select-control__option">
+                                {{ form_checkbox('notify_on_group_request', 1, setting('user.notify_on_group_request', true), {'id': 'notify_on_group_request', 'class': 'select-control__option__input'}) }}
+                                <label for="notify_on_group_request" class="select-control__option__button icon icon--fw fa-users">{{ trans('account.notify_on_group_request') }}</label>
+                            </p>
+                        {# endif #}
+                        {# TODO: if auth_user().isModerator #}
+                            <p class="select-control__option">
+                                {{ form_checkbox('notify_on_moderation_post', 1, setting('user.notify_on_moderation_post', true), {'id': 'notify_on_moderation_post', 'class': 'select-control__option__input'}) }}
+                                <label for="notify_on_moderation_post" class="select-control__option__button icon icon--fw fa-thumb-tack">{{ trans('account.notify_on_moderation_post') }}</label>
+                            </p>
+                            <p class="select-control__option">
+                                {{ form_checkbox('notify_on_report', 1, setting('user.notify_on_report', true), {'id': 'notify_on_report', 'class': 'select-control__option__input'}) }}
+                                <label for="notify_on_report" class="select-control__option__button icon icon--fw fa-flag">{{ trans('account.notify_on_report') }}</label>
+                            </p>
+                            <p class="select-control__option">
+                                {{ form_checkbox('notify_on_username_change', 1, setting('user.notify_on_username_change', true), {'id': 'notify_on_username_change', 'class': 'select-control__option__input'}) }}
+                                <label for="notify_on_username_change" class="select-control__option__button icon icon--fw fa-pencil-square-o">{{ trans('account.notify_on_username_change') }}</label>
+                            </p>
+                        {# endif #}
+                    </div>
+                </div>
+                <div class="form__row">
+                    <h3 class="form__row__title">{{ trans('account.notification_mails') }}</h3>
+                    {# TODO: raw again - not nice #}
+                    <p class="form__row__description">{{ trans('account.notification_mails_desc', {'noti': 'index.php?page=notifications', 'following': url_route('account.following')})|raw }}</p>
+                    <div class="segmented-control">
+                        <span class="segmented-control__option">
+                            {{ form_radio('notification_mails', 0, setting('user.notification_mails', 0) == 0, {'id': 'no_emails', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="no_emails">{{ trans('general.none') }}</label>
+                        </span>
+                        <span class="segmented-control__option">
+                            {{ form_radio('notification_mails', 1, setting('user.notification_mails', 0) == 1, {'id': 'daily_emails', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="daily_emails">{{ trans('general.daily') }}</label>
+                        </span>
+                        <span class="segmented-control__option">
+                            {{ form_radio('notification_mails', 2, setting('user.notification_mails', 0) == 2, {'id': 'weekly_emails', 'class': 'segmented-control__option__input'}) }}
+                            <label class="segmented-control__option__button" for="weekly_emails">{{ trans('general.weekly') }}</label>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="form__submit">
+        {{ form_button(trans('account.update_preferences'), {'type': 'submit', 'class': 'button icon fa-cog'}) }}
+    </div>
+    {{ form_close() }}
 
 {% endblock %}

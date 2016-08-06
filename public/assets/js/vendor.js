@@ -10073,9 +10073,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-/*! modernizr 3.3.1 (Custom Build) | MIT *
- * http://modernizr.com/download/?-classlist-flexbox-flexboxtweener-queryselector-touchevents-video-webp-setclasses !*/
-!function(e,n,t){function o(e,n){return typeof e===n}function r(){var e,n,t,r,i,a,s;for(var l in g)if(g.hasOwnProperty(l)){if(e=[],n=g[l],n.name&&(e.push(n.name.toLowerCase()),n.options&&n.options.aliases&&n.options.aliases.length))for(t=0;t<n.options.aliases.length;t++)e.push(n.options.aliases[t].toLowerCase());for(r=o(n.fn,"function")?n.fn():n.fn,i=0;i<e.length;i++)a=e[i],s=a.split("."),1===s.length?Modernizr[s[0]]=r:(!Modernizr[s[0]]||Modernizr[s[0]]instanceof Boolean||(Modernizr[s[0]]=new Boolean(Modernizr[s[0]])),Modernizr[s[0]][s[1]]=r),b.push((r?"":"no-")+s.join("-"))}}function i(e){var n=_.className,t=Modernizr._config.classPrefix||"";if(T&&(n=n.baseVal),Modernizr._config.enableJSClass){var o=new RegExp("(^|\\s)"+t+"no-js(\\s|$)");n=n.replace(o,"$1"+t+"js$2")}Modernizr._config.enableClasses&&(n+=" "+t+e.join(" "+t),T?_.className.baseVal=n:_.className=n)}function a(){return"function"!=typeof n.createElement?n.createElement(arguments[0]):T?n.createElementNS.call(n,"http://www.w3.org/2000/svg",arguments[0]):n.createElement.apply(n,arguments)}function s(){var e=n.body;return e||(e=a(T?"svg":"body"),e.fake=!0),e}function l(e,t,o,r){var i,l,A,f,u="modernizr",c=a("div"),d=s();if(parseInt(o,10))for(;o--;)A=a("div"),A.id=r?r[o]:u+(o+1),c.appendChild(A);return i=a("style"),i.type="text/css",i.id="s"+u,(d.fake?d:c).appendChild(i),d.appendChild(c),i.styleSheet?i.styleSheet.cssText=e:i.appendChild(n.createTextNode(e)),c.id=u,d.fake&&(d.style.background="",d.style.overflow="hidden",f=_.style.overflow,_.style.overflow="hidden",_.appendChild(d)),l=t(c,e),d.fake?(d.parentNode.removeChild(d),_.style.overflow=f,_.offsetHeight):c.parentNode.removeChild(c),!!l}function A(e,n){return!!~(""+e).indexOf(n)}function f(e){return e.replace(/([A-Z])/g,function(e,n){return"-"+n.toLowerCase()}).replace(/^ms-/,"-ms-")}function u(n,o){var r=n.length;if("CSS"in e&&"supports"in e.CSS){for(;r--;)if(e.CSS.supports(f(n[r]),o))return!0;return!1}if("CSSSupportsRule"in e){for(var i=[];r--;)i.push("("+f(n[r])+":"+o+")");return i=i.join(" or "),l("@supports ("+i+") { #modernizr { position: absolute; } }",function(e){return"absolute"==getComputedStyle(e,null).position})}return t}function c(e){return e.replace(/([a-z])-([a-z])/g,function(e,n,t){return n+t.toUpperCase()}).replace(/^-/,"")}function d(e,n,r,i){function s(){f&&(delete Q.style,delete Q.modElem)}if(i=o(i,"undefined")?!1:i,!o(r,"undefined")){var l=u(e,r);if(!o(l,"undefined"))return l}for(var f,d,p,m,v,h=["modernizr","tspan"];!Q.style;)f=!0,Q.modElem=a(h.shift()),Q.style=Q.modElem.style;for(p=e.length,d=0;p>d;d++)if(m=e[d],v=Q.style[m],A(m,"-")&&(m=c(m)),Q.style[m]!==t){if(i||o(r,"undefined"))return s(),"pfx"==n?m:!0;try{Q.style[m]=r}catch(y){}if(Q.style[m]!=v)return s(),"pfx"==n?m:!0}return s(),!1}function p(e,n){return function(){return e.apply(n,arguments)}}function m(e,n,t){var r;for(var i in e)if(e[i]in n)return t===!1?e[i]:(r=n[e[i]],o(r,"function")?p(r,t||n):r);return!1}function v(e,n,t,r,i){var a=e.charAt(0).toUpperCase()+e.slice(1),s=(e+" "+S.join(a+" ")+a).split(" ");return o(n,"string")||o(n,"undefined")?d(s,n,r,i):(s=(e+" "+E.join(a+" ")+a).split(" "),m(s,n,t))}function h(e,n,o){return v(e,t,t,n,o)}function y(e,n){if("object"==typeof e)for(var t in e)U(e,t)&&y(t,e[t]);else{e=e.toLowerCase();var o=e.split("."),r=Modernizr[o[0]];if(2==o.length&&(r=r[o[1]]),"undefined"!=typeof r)return Modernizr;n="function"==typeof n?n():n,1==o.length?Modernizr[o[0]]=n:(!Modernizr[o[0]]||Modernizr[o[0]]instanceof Boolean||(Modernizr[o[0]]=new Boolean(Modernizr[o[0]])),Modernizr[o[0]][o[1]]=n),i([(n&&0!=n?"":"no-")+o.join("-")]),Modernizr._trigger(e,n)}return Modernizr}var g=[],w={_version:"3.3.1",_config:{classPrefix:"",enableClasses:!0,enableJSClass:!0,usePrefixes:!0},_q:[],on:function(e,n){var t=this;setTimeout(function(){n(t[e])},0)},addTest:function(e,n,t){g.push({name:e,fn:n,options:t})},addAsyncTest:function(e){g.push({name:null,fn:e})}},Modernizr=function(){};Modernizr.prototype=w,Modernizr=new Modernizr;var b=[],_=n.documentElement,T="svg"===_.nodeName.toLowerCase();Modernizr.addTest("queryselector","querySelector"in n&&"querySelectorAll"in n);var x=w._config.usePrefixes?" -webkit- -moz- -o- -ms- ".split(" "):[];w._prefixes=x;var C=w.testStyles=l;Modernizr.addTest("touchevents",function(){var t;if("ontouchstart"in e||e.DocumentTouch&&n instanceof DocumentTouch)t=!0;else{var o=["@media (",x.join("touch-enabled),("),"heartz",")","{#modernizr{top:9px;position:absolute}}"].join("");C(o,function(e){t=9===e.offsetTop})}return t}),Modernizr.addTest("video",function(){var e=a("video"),n=!1;try{(n=!!e.canPlayType)&&(n=new Boolean(n),n.ogg=e.canPlayType('video/ogg; codecs="theora"').replace(/^no$/,""),n.h264=e.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/,""),n.webm=e.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/,""),n.vp9=e.canPlayType('video/webm; codecs="vp9"').replace(/^no$/,""),n.hls=e.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/,""))}catch(t){}return n});var B="Moz O ms Webkit",S=w._config.usePrefixes?B.split(" "):[];w._cssomPrefixes=S;var P={elem:a("modernizr")};Modernizr._q.push(function(){delete P.elem});var Q={style:P.elem.style};Modernizr._q.unshift(function(){delete Q.style});var E=w._config.usePrefixes?B.toLowerCase().split(" "):[];w._domPrefixes=E,w.testAllProps=v,w.testAllProps=h,Modernizr.addTest("flexbox",h("flexBasis","1px",!0)),Modernizr.addTest("flexboxtweener",h("flexAlign","end",!0)),Modernizr.addTest("classlist","classList"in _);var U;!function(){var e={}.hasOwnProperty;U=o(e,"undefined")||o(e.call,"undefined")?function(e,n){return n in e&&o(e.constructor.prototype[n],"undefined")}:function(n,t){return e.call(n,t)}}(),w._l={},w.on=function(e,n){this._l[e]||(this._l[e]=[]),this._l[e].push(n),Modernizr.hasOwnProperty(e)&&setTimeout(function(){Modernizr._trigger(e,Modernizr[e])},0)},w._trigger=function(e,n){if(this._l[e]){var t=this._l[e];setTimeout(function(){var e,o;for(e=0;e<t.length;e++)(o=t[e])(n)},0),delete this._l[e]}},Modernizr._q.push(function(){w.addTest=y}),Modernizr.addAsyncTest(function(){function e(e,n,t){function o(n){var o=n&&"load"===n.type?1==r.width:!1,i="webp"===e;y(e,i?new Boolean(o):o),t&&t(n)}var r=new Image;r.onerror=o,r.onload=o,r.src=n}var n=[{uri:"data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=",name:"webp"},{uri:"data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==",name:"webp.alpha"},{uri:"data:image/webp;base64,UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA",name:"webp.animation"},{uri:"data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=",name:"webp.lossless"}],t=n.shift();e(t.name,t.uri,function(t){if(t&&"load"===t.type)for(var o=0;o<n.length;o++)e(n[o].name,n[o].uri)})}),r(),i(b),delete w.addTest,delete w.addAsyncTest;for(var R=0;R<Modernizr._q.length;R++)Modernizr._q[R]();e.Modernizr=Modernizr}(window,document);
 /*
  * jQuery Dropdown: A simple dropdown plugin
  *
@@ -17340,7 +17337,7 @@ $.cf = {
 
 
 /*!
-	Autosize 3.0.16
+	Autosize 3.0.15
 	license: MIT
 	http://www.jacklmoore.com/autosize
 */
@@ -17449,25 +17446,10 @@ $.cf = {
 			resize();
 		}
 
-		function getParentOverflows(el) {
-			var arr = [];
-
-			while (el && el.parentNode && el.parentNode instanceof Element) {
-				if (el.parentNode.scrollTop) {
-					arr.push({
-						node: el.parentNode,
-						scrollTop: el.parentNode.scrollTop });
-				}
-				el = el.parentNode;
-			}
-
-			return arr;
-		}
-
 		function resize() {
+			var htmlTop = window.pageYOffset;
+			var bodyTop = document.body.scrollTop;
 			var originalHeight = ta.style.height;
-			var overflows = getParentOverflows(ta);
-			var docTop = document.documentElement && document.documentElement.scrollTop; // Needed for Mobile IE (ticket #240)
 
 			ta.style.height = 'auto';
 
@@ -17485,13 +17467,8 @@ $.cf = {
 			clientWidth = ta.clientWidth;
 
 			// prevents scroll-position jumping
-			overflows.forEach(function (el) {
-				el.node.scrollTop = el.scrollTop;
-			});
-
-			if (docTop) {
-				document.documentElement.scrollTop = docTop;
-			}
+			document.documentElement.scrollTop = htmlTop;
+			document.body.scrollTop = bodyTop;
 		}
 
 		function update() {

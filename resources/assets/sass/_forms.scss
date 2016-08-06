@@ -1,310 +1,140 @@
-@import "mixins";
+.form {
+    border: 1px solid $border-1;
+    margin-bottom: 10px;
+    border-radius: 4px;
 
-input[type="text"],
-input[type="url"],
-input[type="number"],
-input[type="email"],
-input[type="password"] {
-	border: 1px solid $border-2;
-	padding: 6px;
-	width: 100%;
-	font-size: 0.9em;
-	outline: 0;
-	@include border-radius(4px);
-	@include box-sizing(border-box)
-}
+    .heading--major {
+        margin: -1px;
+        border-radius: corner-values(4px 4px 0 0);
+    }
 
-select {
-	border: 1px solid $border-2;
-	padding: 4px;
-	font-size: 0.9em;
-	outline: none;
-	max-width: 100%;
-	@include border-radius(4px);
-	@include box-sizing(border-box);
-}
+    .form__section {
+        @include clearfix();
+        padding: 16px 12px;
+        border-bottom: 2px solid $border-1;
 
-select[multiple="multiple"] {
-	width: 100%;
-	height: 200px;
-}
+        .form__section__title {
+            margin: side-values(0 0 12px 0);
+            padding: side-values(0 8px 8px 8px);
+            color: $primary-color;
+            font-size: 1.1em;
+            border-bottom: 1px dotted $border-2;
 
-input.short {
-	width: 50px;
-	font: 12px $font-stack;
-}
+            @include bp-medium {
+                border: 0;
+                float: $left;
+                margin: 0;
+                padding: 0;
+                width: 20%;
+                text-align: $right;
+            }
+        }
 
-input.small {
-	width: 50px;
-	margin-#{$left}: 6px;
-	margin-#{$right}: 6px;
-}
+        &:last-child {
+            border-bottom: 0;
+        }
 
-textarea {
-	border: 1px solid $border-2;
-	padding: 6px;
-	width: 100%;
-	font-size: 0.9em;
-	outline: 0;
-	@include border-radius(4px);
-	@include box-sizing(border-box);
-}
+        @include bp-medium {
+            padding: 20px 12px;
+        }
+    }
 
-section.form {
-	border: 1px solid $border-1;
-	margin-bottom: 10px;
-	@include border-radius(4px);
+    .form__section__container {
 
-	.heading--major {
-		margin: -1px;
-		@include border-radius(corner-values(4px 4px 0 0));
-	}
+        @include bp-medium {
+            float: $left;
+            margin: side-values(0 0 0 3%);
+            padding: side-values(0 0 0 20px);
+            border-#{$left}: 1px dotted $border-2;
+            width: 74%;
+            box-sizing: border-box;
+        }
+    }
 
-	.form__section {
-		@include clearfix();
-		padding: 16px 12px;
-		border-bottom: 2px solid $border-1;
+    .form__row {
+        border-bottom: 1px solid $border-1;
+        padding: 12px 8px;
 
-		h2 {
-			margin: side-values(0 0 12px 0);
-			padding: side-values(0 8px 8px 8px);
-			color: $primary-color;
-			font-size: 1.1em;
-			border-bottom: 1px dotted $border-2;
-		}
+        .form__row__title {
+            margin: side-values(0 0 5px 0);
+            padding: 0;
+            font-size: 1em;
+        }
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+        &:first-child {
+            padding-top: 0;
+        }
 
-	.form__row {
-		border-bottom: 1px solid $border-1;
-		padding: 12px 8px;
+        &:last-child {
+            border-bottom: 0;
+            padding-bottom: 6px;
+        }
+    }
 
-		h3 {
-			margin: side-values(0 0 5px 0);
-			padding: 0;
-			font-size: 1em;
-		}
+    .form__checkbox {
+        font-size: 0.9em;
+        margin: 5px 0;
+        padding: side-values(0 0 0 30px);
 
-		h4 {
-			font-size: 0.9em;
-			font-weight: normal;
-			text-transform: uppercase;
-			color: $primary-color;
-			margin: 0;
-		}
+        input[type="checkbox"] {
+            float: $left;
+            margin: side-values(6px 0 0 -26px);
+        }
 
-		&:first-child {
-			padding-top: 0;
-		}
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
-		&:last-child {
-			border-bottom: 0;
-			padding-bottom: 6px;
-		}
-	}
+    .form__row__description {
+        font-size: 0.8em;
+        line-height: 1.4;
+        color: $alt-font-color-1;
+        margin: side-values(-4px 0 4px 0);
+    }
 
-	p.form__checkbox {
-		font-size: 0.9em;
-		margin: 5px 0;
-		padding: side-values(0 0 0 30px);
+    .form__radio {
+        padding: side-values(0 0 0 30px);
+        margin-bottom: 20px;
 
-		input[type="checkbox"] {
-			float: $left;
-			margin: side-values(6px 0 0 -26px);
-		}
+        input[type="radio"] {
+            float: $left;
+            margin: side-values(6px 0 0 -26px);
+        }
 
-		i {
-			color: $alt-font-color-2;
-			padding-#{$right}: 5px;
-			width: 16px;
-			font-size: 14px;
-			text-align: center;
-			display: inline-block;
-		}
+        .form__radio__description {
+            @extend .form__row__description;
+        }
 
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
 
-	p.form__description {
-		font-size: 0.8em;
-		line-height: 1.4;
-		color: $alt-font-color-1;
-		margin: side-values(-4px 0 4px 0);
-	}
+    .form__data {
+        margin: 0;
+        font-size: 0.9em;
+    }
 
-	.form__radio {
-		padding: side-values(0 0 0 30px);
-		margin-bottom: 20px;
+    label {
+        cursor: pointer;
+    }
 
-		input[type="radio"] {
-			float: $left;
-			margin: side-values(6px 0 0 -26px);
-		}
+    .topic-title {
+        font-size: 1.3em;
+    }
 
-		p.form__radio__description {
-			@extend .form__description;
-		}
-
-		&:last-child {
-			margin-bottom: 0;
-		}
-	}
-
-	p.form__data {
-		margin: 0;
-		font-size: 0.9em;
-	}
-
-	label {
-		cursor: pointer;
-	}
-
-	.topic-title {
-		font-size: 1.3em;
-	}
-
-	.buttons {
-		margin: -5px;
-	}
+    .buttons {
+        margin: -5px;
+    }
 }
 
 .form__submit {
-	text-align: center;
-	padding: 10px 0;
+    text-align: center;
+    padding: 10px 0;
 
-	.button {
-		font-size: 1em;
-		padding: 6px 12px;
-
-		i {
-			font-size: 18px;
-			margin-#{$right}: 8px;
-		}
-	}
-}
-
-.segmented-control {
-	margin: side-values(5px 0 0 0);
-	border: 1px solid $border-2;
-	font-size: 0.8em;
-	display: inline-block;
-	@include border-radius(4px);
-
-	.segmented-control__block {
-		display: inline-block;
-	}
-
-	.segmented-control__button {
-		display: block;
-		padding: 3px 8px;
-		margin: 0;
-		border-#{$left}: 1px solid $border-2;
-		border-#{$right}: 1px solid transparent;
-		position: relative;
-		z-index: 10;
-		cursor: pointer;
-
-		i {
-			margin: 0 6px 0 0;
-			float: none;
-		}
-	}
-
-	:first-child .segmented-control__button {
-		border-#{$left}: 1px solid transparent;
-		@include border-radius(corner-values(4px 0 0 4px));
-	}
-
-	:last-child .segmented-control__button {
-		@include border-radius(corner-values(0 4px 4px 0));
-	}
-
-	input {
-		position: absolute;
-		visibility: hidden;
-	}
-
-	input:checked + .segmented-control__button {
-		background: $primary-color;
-		color: $invert-font-color;
-		margin: -1px;
-		border: 1px solid $primary-color;
-		z-index: 15;
-
-		i {
-			color: $invert-font-color;
-		}
-	}
-}
-
-.select-control {
-
-	font-size: 0.8em;
-
-	.select-control__block {
-		display: block;
-		margin: side-values(0 0 5px 0);
-		padding: 0;
-	}
-
-	.select-control__button {
-		display: block;
-		padding: 3px 8px;
-		margin: side-values(5px 10px 0 0);
-		background: $background-1;
-		cursor: pointer;
-		@include border-radius(4px);
-
-		i {
-			@include black-transparency(0.4);
-			margin: side-values(0 4px 0 0);
-		}
-	}
-
-	input {
-		position: absolute;
-		visibility: hidden;
-	}
-
-	input:checked + .select-control__button {
-		background: $background-4;
-
-		i {
-			@include black-transparency(0.6);
-		}
-	}
-}
-
-@media only screen and (min-width: 768px) {
-
-	section.form {
-
-		.form__section {
-			padding: 20px 12px;
-
-			h2 {
-				border: 0;
-				float: $left;
-				margin: 0;
-				padding: 0;
-				width: 20%;
-				text-align: $right;
-			}
-		}
-
-		.form__section__container {
-			float: $left;
-			margin: side-values(0 0 0 3%);
-			padding: side-values(0 0 0 20px);
-			border-#{$left}: 1px dotted $border-2;
-			width: 74%;
-			@include box-sizing(border-box);
-		}
-	}
-
+    .button {
+        font-size: 1em;
+        padding: 6px 12px;
+    }
 }

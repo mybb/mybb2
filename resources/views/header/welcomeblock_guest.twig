@@ -1,14 +1,8 @@
-						<ul class="user-navigation__links">
-							 <li class="user-navigation__sign-up">
-								<a {{ modal_attributes('auth/signup', {'url': current_path()}, false) }} class="multi-link">
-									<i class="fa fa-user"></i>
-									<span class="text">{{ trans('member.signup') }}</span>
-								</a>
-							</li>
-							<li class="user-navigation__log-in">
-								<a {{ modal_attributes('auth/login', {'url': current_path()}, false) }} class="multi-link">
-									<i class="fa fa-sign-in"></i>
-									<span class="text">{{ trans('member.login') }}</span>
-								</a>
-							</li>
-						</ul>
+                        <ul class="user-bar__links">
+                             <li class="user-bar__links__item user-bar__sign-up">
+                                <a {{ modal_attributes('auth/signup', {'url': current_path()}, false) }} class="user-bar__links__item__link icon fa-user">{{ trans('member.signup') }}</a>
+                            </li>
+                            <li class="user-bar__links__item user-bar__log-in">
+                                <a {{ modal_attributes('auth/login', {'url': current_path()}, false) }} class="user-bar__links__item__link icon fa-sign-in">{{ trans('member.login') }}</a>
+                            </li>
+                        </ul>

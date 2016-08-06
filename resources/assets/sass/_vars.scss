@@ -1,0 +1,55 @@
+// Theme colors
+$primary-color: #007fd0;
+$secondary-color: #ff7500;
+
+
+// Font colors
+$font-color: #222;
+$invert-font-color: #fff;
+$alt-font-color-1: #666;
+$alt-font-color-2: #999;
+$alt-font-color-3: #ccc;
+$alt-font-color-4: #444;
+
+
+// Border colors
+$border-1: #dfdfdf;
+$border-2: #ccc;
+$border-3: #e3e3e3;
+$dark-border-1: #222;
+$primary-color-border: #0a539b;
+
+
+// Background colors
+$background-default: #fff;
+$background-1: #fafafa;
+$background-2: #f2f2f2;
+$background-3: #eee;
+$background-4: #ccc;
+$dark-background-1: #333;
+$dark-background-2: #444;
+$unread-count: #eb5257;
+
+
+// Status background & border colors
+$status-highlight: #ebf4fb;
+$status-highlight-border: #afd9fa;
+$status-deleted: #ece3fa;
+$status-deleted-border: #ddcafa;
+$status-pending: #f2dede;
+$status-pending-border: #f2aaab;
+
+
+// Success / danger colors
+$success-color: #68c000;
+$danger-color: #eb5257;
+
+
+// Fonts
+$font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
+
+
+// Breakpoints
+$bp-small: 480px;
+$bp-medium: 768px;
+$bp-large: 1140px;

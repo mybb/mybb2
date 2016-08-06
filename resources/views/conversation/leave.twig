@@ -1,32 +1,32 @@
 {% extends "layouts.base" %}
 {% block title %}{{ conversation.title }} - {{ trans('conversations.leave') }}{% endblock %}
 {% block contents %}
-	<div class="page-content">
-		<header>
-			<h1>{{ trans('conversations.leave') }}</h1>
-		</header>
+    <div class="page-content">
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('conversations.leave') }}</h1>
+        </header>
 
-		{{ form_open({'route': ['conversations.leave', conversation.id], 'method': 'post'}) }}
-		<section class="form">
-			<div class="form__section">
-				<div class="form__row">
-					<div class="form__radio">
-						{{ form_radio('leave', 'leave', true, {'id': 'leave'}) }}
-						<h3 class="form__radio__title">{{ form_label('leave', trans('conversations.leave_conversation')) }}</h3>
-						<p class="form__radio__description">{{ form_label('leave', trans('conversations.leave_conversation_desc')) }}</p>
-					</div>
-					<div class="form__radio">
-						{{ form_radio('leave', 'ignore', false, {'id': 'ignore'}) }}
-						<h3 class="form__radio__title">{{ form_label('ignore', trans('conversations.ignore_conversation')) }}</h3>
-						<p class="form__radio__description">{{ form_label('ignore', trans('conversations.ignore_conversation_desc')) }}</p>
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="form__submit">
-			{{ form_button('<i class="fa fa-sign-out"></i><span class="text">'~trans('conversations.leave')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-		</div>
-		{{ form_close() }}
+        {{ form_open({'route': ['conversations.leave', conversation.id], 'method': 'post'}) }}
+        <section class="form">
+            <div class="form__section">
+                <div class="form__row">
+                    <div class="form__radio">
+                        {{ form_radio('leave', 'leave', true, {'id': 'leave'}) }}
+                        <h3 class="form__radio__title">{{ form_label('leave', trans('conversations.leave_conversation')) }}</h3>
+                        <p class="form__radio__description">{{ form_label('leave', trans('conversations.leave_conversation_desc')) }}</p>
+                    </div>
+                    <div class="form__radio">
+                        {{ form_radio('leave', 'ignore', false, {'id': 'ignore'}) }}
+                        <h3 class="form__radio__title">{{ form_label('ignore', trans('conversations.ignore_conversation')) }}</h3>
+                        <p class="form__radio__description">{{ form_label('ignore', trans('conversations.ignore_conversation_desc')) }}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="form__submit">
+            {{ form_button('<i class="fa fa-sign-out"></i><span class="text">'~trans('conversations.leave')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+        </div>
+        {{ form_close() }}
 
-	</div>
+    </div>
 {% endblock %}

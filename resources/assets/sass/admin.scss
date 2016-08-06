@@ -1,124 +1,38 @@
 /*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*   MyBB 2 Admin Control Panel Theme - http://mybb.com - @mybb - MIT license
 */
-
-// Theme colors
-$primary-color: #007fd0;
-$secondary-color: #ff7500;
-
-
-// Font colors
-$font-color: #222;
-$invert-font-color: #fff;
-$alt-font-color-1: #666;
-$alt-font-color-2: #999;
-$alt-font-color-3: #ccc;
-$alt-font-color-4: #444;
-
-
-// Border colors
-$border-1: #dfdfdf;
-$border-2: #ccc;
-$dark-border-1: #222;
-$primary-color-border: #0a539b;
-
-
-// Background colors
-$background-default: #fff;
-$background-1: #fafafa;
-$background-2: #f2f2f2;
-$background-3: #eee;
-$background-4: #ccc;
-$dark-background-1:	#333;
-$dark-background-2: #444;
-$unread-count: #eb5257;
-
-
-// Status background & border colors
-$status-highlight: #ebf4fb;
-$status-highlight-border: #afd9fa;
-$status-deleted: #ece3fa;
-$status-deleted-border: #ddcafa;
-$status-pending: #f2dede;
-$status-pending-border: #f2aaab;
-
-
-// Success / danger colors
-$success-color: #018303;
-$danger-color: #eb5257;
 
 @import "../../../node_modules/normalize-scss/sass/_normalize";
 @import "../../../node_modules/font-awesome/scss/font-awesome";
 @import "../../../node_modules/@claviska/jquery-dropdown/jquery.dropdown.sass";
 @import "../../../node_modules/datetimepicker/src/DateTimePicker.css";
 
-
-// Fonts
-$font-stack: Open Sans, Helvetica Neue, Helvetica, Arial; // note: Open Sans is imported in headerinclude.twig template
-
-
 // Directional CSS library
-// (see https://github.com/tysonmatanich/directional-scss for how to use)
-@import 'directional';
+// See https://github.com/tysonmatanich/directional-scss for how to use
+@import "directional";
 
+// Everything else
+@import "vars";
+@import "mixins";
+@import "helpers";
 
-// Our mixins
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-	 -moz-border-radius: $radius;
-	  -ms-border-radius: $radius;
-		  border-radius: $radius;
-}
+@import "page";
+@import "page_blocks";
+@import "menus";
 
-@mixin box-sizing($sizing) {
-  -webkit-box-sizing: $sizing;
-	 -moz-box-sizing: $sizing;
-	  -ms-box-sizing: $sizing;
-		  box-sizing: $sizing;
-}
+@import "forms";
+@import "form_fields";
+@import "buttons";
 
-@mixin black-transparency($transparency) {
-	color: rgba(0,0,0,$transparency);
-}
+@import "tables";
 
-@mixin white-transparency($transparency) {
-	color: rgba(255,255,255,$transparency);
-}
+@import "modals";
+@import "jcrop";
+@import "spinner";
+@import "tooltips";
+@import "stepper";
+@import "passwords";
 
-@mixin transform($transform) {
-	-webkit-transform: $transform;
-	-moz-transform: $transform;
-	-ms-transform: $transform;
-	-o-transform: $transform;
-}
-
-
-// Import our sub files
-@import 'base';
-@import 'forms';
-@import 'modals';
-@import 'jcrop';
-@import 'spinner';
-@import 'plugins';
 @import 'admin/_main';
 @import 'admin/_header_footer';
 @import 'admin/_menu';
-@import "mixins";
-
-
-// A few helper classes
-.hidden {
-	display: none !important;
-	visibility: hidden;
-}
-
-.visuallyhidden {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: 1px;
-	margin: -1px;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-}

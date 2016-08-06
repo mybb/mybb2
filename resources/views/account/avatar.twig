@@ -1,56 +1,56 @@
 {% extends "account.base" %}
 {% block inner_title %}
-	{{ trans('account.avatar') }}
+    {{ trans('account.avatar') }}
 {% endblock %}
 {% block inner_contents %}
-		<header>
-			<h1>{{ trans('account.avatar') }}</h1>
-		</header>
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('account.avatar') }}</h1>
+        </header>
 
-	{{ form_open({'url_route': 'account.avatar', 'method': 'post', 'files': true, 'id': 'avatar-drop'}) }}
-	<section class="form">
-		<div class="form__section">
-			<div class="form__row">
-				<h3>{{ form_label('avatar_file', trans('account.avatar_file')) }}</label></h3>
-				<p class="form__description">{{ trans('account.avatar_file_desc') }}</p>
-				<div class="fallback">
-					{{ form_file('avatar_file') }}
-				</div>
-				<div id="avatar-drop-area" style="display: none">
-					<a class="button" id="file-input" href="#">{{ trans('account.avatar_file') }}</a>
-				</div>
-			</div>
-			<div class="form__row">
-				<h3>{{ form_label('avatar_link', trans('account.avatar_link')) }}</h3>
-				{{ form_text('avatar_link', auth_user.avatar_link) }}
-			</div>
-		</div>
-	</section>
-	<div class="form__submit">
-		{{ form_button('<i class="fa fa-picture-o"></i><span class="text">'~trans('account.avatar_change')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-	</div>
-	{{ form_close() }}
-	<div id="crop" style="display: none">
-		<div class="page-content page-content--menu">
-			<header>
-				<h1>{{ trans('account.crop_file') }}</h1>
-			</header>
-			<div class="jcrop">
-				<img />
+    {{ form_open({'url_route': 'account.avatar', 'method': 'post', 'files': true, 'id': 'avatar-drop'}) }}
+    <section class="form">
+        <div class="form__section">
+            <div class="form__row">
+                <h3 class="form__row__title">{{ form_label('avatar_file', trans('account.avatar_file')) }}</label></h3>
+                <p class="form__row__description">{{ trans('account.avatar_file_desc') }}</p>
+                <div class="fallback">
+                    {{ form_file('avatar_file') }}
+                </div>
+                <div id="avatar-drop-area" style="display: none">
+                    <a class="button" id="file-input" href="#">{{ trans('account.avatar_file') }}</a>
+                </div>
+            </div>
+            <div class="form__row">
+                <h3 class="form__row__title">{{ form_label('avatar_link', trans('account.avatar_link')) }}</h3>
+                {{ form_text('avatar_link', auth_user.avatar_link) }}
+            </div>
+        </div>
+    </section>
+    <div class="form__submit">
+        {{ form_button('<i class="fa fa-picture-o"></i><span class="text">'~trans('account.avatar_change')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+    </div>
+    {{ form_close() }}
+    <div id="crop" style="display: none">
+        <div class="page-content page-content--menu">
+            <header class="page-header">
+                <h1 class="page-title">{{ trans('account.crop_file') }}</h1>
+            </header>
+            <div class="jcrop">
+                <img />
 
-				<input class="jcrop-x" type="hidden">
-				<input class="jcrop-y" type="hidden">
-				<input class="jcrop-x2" type="hidden">
-				<input class="jcrop-y2" type="hidden">
-				<input class="jcrop-w" type="hidden">
-				<input class="jcrop-h" type="hidden">
-			</div>
-			<div class="form__submit">
-				<a href="#crop" class="button crop-img">
-					<i class="fa fa-crop"></i>
-					<span class="text">{{ trans('account.crop_file') }}</span>
-				</a>
-			</div>
-		</div>
-	</div>
+                <input class="jcrop-x" type="hidden">
+                <input class="jcrop-y" type="hidden">
+                <input class="jcrop-x2" type="hidden">
+                <input class="jcrop-y2" type="hidden">
+                <input class="jcrop-w" type="hidden">
+                <input class="jcrop-h" type="hidden">
+            </div>
+            <div class="form__submit">
+                <a href="#crop" class="button crop-img">
+                    <i class="fa fa-crop"></i>
+                    <span class="text">{{ trans('account.crop_file') }}</span>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

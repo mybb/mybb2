@@ -1,176 +1,176 @@
 .modal {
-	display: none;
-	width: 580px;
-	padding: 0;
-	border: 8px solid rgba(0,0,0,0.5);
-	@include border-radius(8px);
+    display: none;
+    width: 580px;
+    padding: 0;
+    border: 8px solid rgba(0,0,0,0.5);
+    border-radius: 8px;
 
-	.page-content {
-		background: $background-default;
-		border: 1px solid rgba(0,0,0,0.7);
-		width: 100%;
-		float: none;
+    .page-content {
+        background: $background-default;
+        border: 1px solid rgba(0,0,0,0.7);
+        width: 100%;
+        float: none;
 
-		header {
-			background: $primary-color;
-			border-bottom: 2px solid $primary-color-border;
+        header {
+            background: $primary-color;
+            border-bottom: 2px solid $primary-color-border;
 
-			h1 {
-				margin: 0;
-				padding: 0;
-				color: $invert-font-color;
-				font-size: 1.2em;
-				padding: 16px;
-			}
+            h1 {
+                margin: 0;
+                padding: 0;
+                color: $invert-font-color;
+                font-size: 1.2em;
+                padding: 16px;
+            }
 
-			.page-controls {
-				margin: side-values(-50px 8px 0 0);
-			}
+            .page-controls {
+                margin: side-values(-50px 8px 0 0);
+            }
 
-			.button,
-			.button.secondary {
-				color: $invert-font-color;
-				background: $primary-color;
-				border-color: rgba(255,255,255,0.3);
+            .button,
+            .button.secondary {
+                color: $invert-font-color;
+                background: $primary-color;
+                border-color: rgba(255,255,255,0.3);
 
-				&:hover {
-					background: $secondary-color;
-					border-color: $secondary-color;
-				}
-			}
-		}
+                &:hover {
+                    background: $secondary-color;
+                    border-color: $secondary-color;
+                }
+            }
+        }
 
-		&.page-content--menu header {
-			margin: 0;
-		}
-	}
+        &.page-content--menu header {
+            margin: 0;
+        }
+    }
 
-	section.form {
-		border: none;
-		margin: 0;
-		overflow: auto;
+    section.form {
+        border: none;
+        margin: 0;
+        overflow: auto;
 
-		h2 {
-			margin: side-values(0 0 12px 0);
-			padding: side-values(0 8px 8px 8px);
-			color: $primary-color;
-			font-size: 1.1em;
-			border-bottom: 1px dotted $border-2;
-			text-align: $left;
-			float: none;
-			width: auto;
-		}
+        h2 {
+            margin: side-values(0 0 12px 0);
+            padding: side-values(0 8px 8px 8px);
+            color: $primary-color;
+            font-size: 1.1em;
+            border-bottom: 1px dotted $border-2;
+            text-align: $left;
+            float: none;
+            width: auto;
+        }
 
-		.form__section__container {
-			float: none;
-			margin: 0;
-			padding: 0;
-			border: none;
-			width: auto;
-		}
+        .form__section__container {
+            float: none;
+            margin: 0;
+            padding: 0;
+            border: none;
+            width: auto;
+        }
 
-		.form_section:last-child {
-			padding-bottom: 0;
-		}
-	}
+        .form_section:last-child {
+            padding-bottom: 0;
+        }
+    }
 
-	.form__submit {
-		margin: 0;
-		padding: 6px 0;
-		background: $background-2;
-		border-top: 1px solid $border-1;
-	}
+    .form__submit {
+        margin: 0;
+        padding: 6px 0;
+        background: $background-2;
+        border-top: 1px solid $border-1;
+    }
 
-	.section-menu {
-		display: none;
-	}
+    .section-menu {
+        display: none;
+    }
 
-	a.close-modal {
-		position: absolute;
-		top: -12.5px;
-		#{$right}: -12.5px;
-		width: 26px;
-		height: 26px;
-		display: block;
-		border: 2px solid $invert-font-color;
-		padding: 2px;
-		color: $invert-font-color;
-		background: $dark-background-1;
-		text-align: center;
-		text-decoration: none;
-		box-shadow: 0 1px 4px #000;
-		line-height: 1;
-		@include border-radius(15px);
-		@include box-sizing(border-box);
-		font-size: 14px/1;
-		font-family: FontAwesome;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
+    a.close-modal {
+        position: absolute;
+        top: -12.5px;
+        #{$right}: -12.5px;
+        width: 26px;
+        height: 26px;
+        display: block;
+        border: 2px solid $invert-font-color;
+        padding: 2px;
+        color: $invert-font-color;
+        background: $dark-background-1;
+        text-align: center;
+        text-decoration: none;
+        box-shadow: 0 1px 4px #000;
+        line-height: 1;
+        border-radius: 15px;
+        box-sizing: border-box;
+        font-size: 14px/1;
+        font-family: FontAwesome;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
 
-		&:before {
-			content: "\f00d";
-		}
+        &:before {
+            content: "\f00d";
+        }
 
-		&:hover {
-			background: #bb0000;
-		}
+        &:hover {
+            background: #bb0000;
+        }
 
-		span {
-			display: none;
-		}
-	}
+        span {
+            display: none;
+        }
+    }
 }
 
 // is this used?
 .modal-spinner {
-	display: none;
-	width: 64px;
-	height: 64px;
-	position: fixed;
-	top: 50%;
-	#{$left}: 50%;
-	margin-#{$right}: -32px;
-	margin-top: -32px;
-	background: url("../images/spinner.gif") #111 no-repeat center center;
-	@include border-radius(8px);
+    display: none;
+    width: 64px;
+    height: 64px;
+    position: fixed;
+    top: 50%;
+    #{$left}: 50%;
+    margin-#{$right}: -32px;
+    margin-top: -32px;
+    background: url("../images/spinner.gif") #111 no-repeat center center;
+    border-radius: 8px;
 }
 
 @media screen and (max-width: 758px) {
 
-	.modal {
-		width: 450px;
-	}
+    .modal {
+        width: 450px;
+    }
 }
 
 @media screen and (max-width: 524px) {
 
-	.modal {
-		width: 290px;
-	}
+    .modal {
+        width: 290px;
+    }
 }
 
 
 @media screen and (max-height: 758px) {
 
-	.modal .page-content section.form {
-		max-height: 400px;
-		overflow: auto;
-	}
+    .modal .page-content section.form {
+        max-height: 400px;
+        overflow: auto;
+    }
 }
 
 @media screen and (max-height: 524px) {
 
-	.modal .page-content section.form {
-		max-height: 300px;
-		overflow: auto;
-	}
+    .modal .page-content section.form {
+        max-height: 300px;
+        overflow: auto;
+    }
 
 }
 
 @media screen and (max-height: 458px) {
 
-	.modal .page-content section.form {
-		max-height: 150px;
-		overflow: auto;
-	}
+    .modal .page-content section.form {
+        max-height: 150px;
+        overflow: auto;
+    }
 }
