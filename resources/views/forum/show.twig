@@ -56,27 +56,29 @@
             <section class="forum topic-list" data-moderation-content="topic" data-moderation-source-type="forum" data-moderation-source-id="{{ forum.id }}">
                 <h2 class="visually-hidden">{{ trans('forum.topics') }}</h2>
                 <div class="topic-list__sort-topics">
-                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column primary-column-one">
-                        {{ trans('forum.topictitle') }}
-                        {% if orderBy == 'title' %}
-                            {% if orderDir == 'desc' %}
-                                <i class="fa fa-caret-down"></i>
-                            {% else %}
-                                <i class="fa fa-caret-up"></i>
+                    <span class="primary-column sort-column">
+                        <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'title', 'orderDir': urlDirs.title}) }}" class="sort-column topic-list__sort-topics__link primary-column__topic-title">
+                            {{ trans('forum.topictitle') }}
+                            {% if orderBy == 'title' %}
+                                {% if orderDir == 'desc' %}
+                                    <i class="fa fa-caret-down"></i>
+                                {% else %}
+                                    <i class="fa fa-caret-up"></i>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </a>
-                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column primary-column-two">
-                        {{ trans('forum.startdate') }}
-                        {% if orderBy == 'startdate' %}
-                            {% if orderDir == 'desc' %}
-                                <i class="fa fa-caret-down"></i>
-                            {% else %}
-                                <i class="fa fa-caret-up"></i>
+                        </a>
+                        <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'startdate', 'orderDir': urlDirs.startdate}) }}" class="sort-column topic-list__sort-topics__link primary-column__start-date">
+                            {{ trans('forum.startdate') }}
+                            {% if orderBy == 'startdate' %}
+                                {% if orderDir == 'desc' %}
+                                    <i class="fa fa-caret-down"></i>
+                                {% else %}
+                                    <i class="fa fa-caret-up"></i>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </a>
-                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column replies-column">
+                        </a>
+                    </span>
+                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'replies', 'orderDir': urlDirs.replies}) }}" class="sort-column topic-list__sort-topics__link replies-column">
                         {{ trans('forum.replies') }}
                         {% if orderBy == 'replies' %}
                             {% if orderDir == 'desc' %}
@@ -86,7 +88,7 @@
                             {% endif %}
                         {% endif %}
                     </a>
-                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column latest-column">
+                    <a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id, 'orderBy': 'lastpost', 'orderDir': urlDirs.lastpost}) }}" class="sort-column topic-list__sort-topics__link latest-column">
                         {{ trans('forum.latestpost') }}
                         {% if orderBy == 'lastpost' %}
                             {% if orderDir == 'desc' %}
@@ -103,7 +105,7 @@
                 </div>
                 <div class="topic-list__container">
                     {% for topic in topics %}
-                        <div class="topic{{ not topic.approved ? ' pending-approval' }}{{ topic.trashed() ? ' soft-deleted' }}">
+                        <div class="topic{{ not topic.approved ? ' topic--pending-approval' }}{{ topic.trashed() ? ' topic--soft-deleted' }}">
                             <div class="primary-column">
                                 <h3 class="topic__title">
                                     <a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
@@ -116,22 +118,22 @@
                                         {% endif %}
                                     </span>
                                 </h3>
-                                <h4>{{ trans('topic.firstpost') }}</h4>
-                                <p class="topic__post topic__post--first">
-                                    <span class="post__author"><a href="index.php?page=user">{{ topic.author.name }}</a></span>
+                                <h4 class="topic__first-post__title">{{ trans('topic.firstpost') }}</h4>
+                                <p class="topic__first-post topic__post topic__post--first">
+                                    <span class="post__author">{{ render_profile_link(topic.author) }}</span>
                                     {{ post_date_link(url_route('topics.last', {'slug': topic.slug, 'id': topic.id}), topic.created_at) }}
                                 </p>
                             </div>
-                            <div class="replies-column">
-                                <h4>{{ trans('topic.replies') }}</h4>
+                            <div class="replies-column topic__replies">
+                                <h4 class="topic__replies__title">{{ trans('topic.replies') }}</h4>
                                 {# It should be change later #}
-                                <p class="thread-replies caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
+                                <p class="topic__replies__count caption" title="{{ trans_choice('topic.numreplies', topic.replies, {'count':topic.replies}) }} &middot; {{ trans_choice('topic.numviews', topic.views, {'count':topic.views}) }}">{{ topic.replies }}</p>
                             </div>
-                            <div class="latest-column">
-                                <h4>{{ trans('topic.latest') }}</h4>
+                            <div class="latest-column topic__latest-post">
+                                <h4 class="topic__latest-post__title">{{ trans('topic.latest') }}</h4>
                                 <!-- it should be change later -->
                                 <a href="" class="avatar-profile-link" title="Go to {{ topic.lastPost.author.name }}'s profile"><img src="{{ topic.lastPost.author.avatar }}" alt="{{ topic.lastPost.author.name }}'s avatar" class="avatar" /></a>
-                                <p class="topic__post topic__post--latest">
+                                <p class="topic__latest-post__post topic__post topic__post--latest">
                                     <span class="post__author">
                                         {{ render_profile_link(topic.lastPost.author) }}
                                     </span>
@@ -139,7 +141,7 @@
                                 </p>
                             </div>
                             <!-- this needs to be hidden if user is not a moderator -->
-                            <div class="moderation-column">
+                            <div class="moderation-column topic__moderation">
                                 <input type="checkbox" class="post__inline-mod" data-moderation-id="{{ topic.id }}">
                             </div>
                         </div>

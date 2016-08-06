@@ -2893,7 +2893,7 @@ a.button {
     .button.button--secondary:hover,
     a.button.button--secondary:hover {
       color: #ff7500; }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 767px) {
     .button.button--full-width,
     a.button.button--full-width {
       padding: 8px 10px;
