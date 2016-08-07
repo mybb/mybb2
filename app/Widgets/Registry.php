@@ -121,6 +121,8 @@ class Registry
                     yield $widgetInstance->render($widgetDetails['parameters']);
                 }
             }
+        } else {
+            $this->widgetPositions[$position] = [];
         }
     }
 

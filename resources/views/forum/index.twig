@@ -50,15 +50,6 @@
         {% endfor %}
             </div>
     </section>
-    <section class="block">
-        <h3 class="block__heading block__heading--linked"><a href="{{ url_route('members.online') }}" class="block__heading--linked__link">{{ trans('member.online') }} <span class="count icon icon--after fa-angle-{{ langDir.right }}">{{ users.count }}</span></a></h3>
-        <div class="user-list user-list--compact">
-            {% for user in users %}
-                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link user-list--compact__user"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
-            {% else %}
-                <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
-            {% endfor %}
-        </div>
-    </section>
+    {{ render_widget('users_online') }}
 </aside>
 {% endblock %}
