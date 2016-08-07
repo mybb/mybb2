@@ -95,7 +95,7 @@ class ForumController extends AbstractController
         // Forum permissions are checked in "getIndexTree" and "getNewest"
         $topics = $this->topicRepository->getNewest();
 
-        return view('forum.index', compact('forums', 'topics'));
+        return view('forum.index', compact('topics'));
     }
 
     /**
