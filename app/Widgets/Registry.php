@@ -64,6 +64,20 @@ class Registry
     }
 
     /**
+     * Register a set of widgets with the registry.
+     *
+     * @param array $widgets The widgets to render, in the form [Widget Name => Widget Class]
+     */
+    public function registerWidgets(array $widgets)
+    {
+        foreach ($widgets as $widgetName => $widgetClass) {
+            if (class_exists($widgetClass)) {
+                $this->widgets[$widgetName] = $widgetClass;
+            }
+        }
+    }
+
+    /**
      * Get the widget with the given name from the registry.
      *
      * @param string $name The name of the widget to retrieve.

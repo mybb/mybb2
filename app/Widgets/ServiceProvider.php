@@ -25,8 +25,11 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $reg = new Registry($this->app);
-        $reg->registerWidget(Widgets\RenderViewWidget::getName(), Widgets\RenderViewWidget::class);
-        $reg->registerWidget(Widgets\UsersOnlineWidget::getName(), Widgets\UsersOnlineWidget::class);
+        $reg->registerWidgets([
+            Widgets\RenderViewWidget::getName() => Widgets\RenderViewWidget::class,
+            Widgets\UsersOnlineWidget::getName() => Widgets\UsersOnlineWidget::class,
+            Widgets\ForumListWidget::getName() => Widgets\ForumListWidget::class,
+        ]);
 
         $this->app->instance(Registry::class, $reg);
     }
