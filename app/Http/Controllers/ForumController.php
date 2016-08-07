@@ -93,7 +93,6 @@ class ForumController extends AbstractController
     public function index(Store $settings)
     {
         // Forum permissions are checked in "getIndexTree" and "getNewest"
-        $forums = $this->forumRepository->getIndexTree();
         $topics = $this->topicRepository->getNewest();
 
         return view('forum.index', compact('forums', 'topics'));
