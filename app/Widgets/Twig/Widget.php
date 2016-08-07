@@ -8,7 +8,6 @@
 
 namespace MyBB\Core\Widgets\Twig;
 
-
 use MyBB\Core\Widgets\Registry;
 
 class Widget extends \Twig_Extension
@@ -43,7 +42,11 @@ class Widget extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('render_widget', [$this->registry, 'renderWidget'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('widget_position', [$this->registry, 'renderWidgetsForPosition'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction(
+                'widget_position',
+                [$this->registry, 'renderWidgetsForPosition'],
+                ['is_safe' => ['html']]
+            ),
         ];
     }
 }

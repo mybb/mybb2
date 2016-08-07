@@ -86,7 +86,8 @@ class Registry
      * @param string $widgetName The name of the widget to add.
      * @param array $parameters An array of parameters to be passed to the widget's `render` method.
      */
-    public function addWidgetForPosition(string $position, string $widgetName, array $parameters = null) {
+    public function addWidgetForPosition(string $position, string $widgetName, array $parameters = null)
+    {
         if (empty($position)) {
             throw new \InvalidArgumentException('Widget position is required.');
         }
