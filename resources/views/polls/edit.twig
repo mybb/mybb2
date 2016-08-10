@@ -1,83 +1,83 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ trans('poll.editPoll') }}
+    {{ trans('poll.editPoll') }}
 {% endblock %}
 {% block head %}
-	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}"/>
-	<link rel="canonical" href="{{ url_route("polls.edit", {'slug': topic.slug, 'id': topic.id}) }}"/>
+    <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}"/>
+    <link rel="canonical" href="{{ url_route("polls.edit", {'slug': topic.slug, 'id': topic.id}) }}"/>
 {% endblock %}
 {% block contents %}
-	<div class="page-content">
-		<header>
-			<h1>{{ trans('poll.editPoll') }}</h1>
-		</header>
-		{{ form_open({'route': ['polls.edit', topic.id, topic.slug], 'method': 'post'}) }}
-		<section class="form" id="add-poll">
-			<div class="form__section">
-				<h2>{{ trans('poll.settings') }}</h2>
+    <div class="page-content">
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('poll.editPoll') }}</h1>
+        </header>
+        {{ form_open({'route': ['polls.edit', topic.id, topic.slug], 'method': 'post'}) }}
+        <section class="form add-poll" id="add-poll">
+            <div class="form__section">
+                <h2 class="form__section__title">{{ trans('poll.settings') }}</h2>
 
-				<div class="form__section__container">
-					<div class="form__row">
-						<h3>{{ form_label('question', trans('poll.question')) }}</h3>
-						{{ form_text('question', poll.question) }}
-					</div>
-					<div class="form__row">
-						<h3>{{ form_label('poll-end-at', trans('poll.endAt')) }}</h3>
-						<p class="form__description">{{ trans('poll.endAt.desc') }}</p>
-						{{ form_text('endAt', poll.end_at, {id: 'poll-end-at'}) }}
-					</div>
-					<div class="form__row">
-						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_public', '1', poll.is_public) }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label></p>
-						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_multiple', '1', poll.is_multiple, {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice.desc') }}</label>
-						</p>
-						<p class="form__checkbox">
-							<label>{{ form_checkbox('is_closed', '1', poll.is_closed) }} <strong>{{ trans('poll.closePoll') }}</strong> {{ trans('poll.closePoll.desc') }}</label>
-						</p>
-					</div>
-					<div class="form__row" id="poll-maximum-options">
-						<h3>{{ trans('poll.maxOptions') }}</h3>
-						<p class="form__description">{{ trans('poll.maxOptions.desc') }}</p>
-						{{ form_text('maxoptions', poll.max_options) }}
-					</div>
-				</div>
-			</div>
-			<div class="form__section">
-				<h2>{{ trans('poll.pollOptions') }}</h2>
+                <div class="form__section__container">
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('question', trans('poll.question')) }}</h3>
+                        {{ form_text('question', poll.question) }}
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('poll-end-at', trans('poll.endAt')) }}</h3>
+                        <p class="form__row__description">{{ trans('poll.endAt.desc') }}</p>
+                        {{ form_text('endAt', poll.end_at, {id: 'poll-end-at'}) }}
+                    </div>
+                    <div class="form__row">
+                        <p class="form__checkbox">
+                            <label>{{ form_checkbox('is_public', '1', poll.is_public) }} <strong>{{ trans('poll.whoVoted') }}</strong> {{ trans('poll.whoVoted.desc') }}</label></p>
+                        <p class="form__checkbox">
+                            <label>{{ form_checkbox('is_multiple', '1', poll.is_multiple, {'id': 'poll-is-multiple'}) }} <strong>{{ trans('poll.multipleChoice') }}</strong> {{ trans('poll.multipleChoice.desc') }}</label>
+                        </p>
+                        <p class="form__checkbox">
+                            <label>{{ form_checkbox('is_closed', '1', poll.is_closed) }} <strong>{{ trans('poll.closePoll') }}</strong> {{ trans('poll.closePoll.desc') }}</label>
+                        </p>
+                    </div>
+                    <div class="form__row" id="poll-maximum-options">
+                        <h3 class="form__row__title">{{ trans('poll.maxOptions') }}</h3>
+                        <p class="form__row__description">{{ trans('poll.maxOptions.desc') }}</p>
+                        {{ form_text('maxoptions', poll.max_options) }}
+                    </div>
+                </div>
+            </div>
+            <div class="form__section">
+                <h2 class="form__section__title">{{ trans('poll.pollOptions') }}</h2>
 
-				<div class="form__section__container">
-					{% for i in range(1, max(2, poll.num_options)) %}
-						<div class="form__row poll-option">
-							<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
-										class="fa fa-times"></i></a>
-							{{ form_text('option['~loop.index~']', poll.options[loop.index-1].option) }}
-						</div>
-					{% endfor %}
-					<a href="#newoption" class="button button--secondary" id="new-option"><i
-								class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
+                <div class="form__section__container">
+                    {% for i in range(1, max(2, poll.num_options)) %}
+                        <div class="form__row poll-option">
+                            <a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
+                                        class="fa fa-times"></i></a>
+                            {{ form_text('option['~loop.index~']', poll.options[loop.index-1].option) }}
+                        </div>
+                    {% endfor %}
+                    <a href="#newoption" class="button button--secondary" id="new-option"><i
+                                class="fa fa-plus"></i><span class="text">{{ trans('poll.newOption') }}</span></a>
 
-					<div class="form__row hidden" id="option-simple">
-						<a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
-									class="fa fa-times"></i></a>
-						{{ form_text('option[-1]') }}
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="form__submit">
-			{{ form_button('<i class="fa fa-pencil"></i><span class="text">'~trans('poll.editPoll')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-		</div>
-		{{ form_close() }}
-	</div>
+                    <div class="form__row hidden" id="option-simple">
+                        <a href="#remove-option" class="remove-option" title="{{ trans('poll.removeOption') }}"><i
+                                    class="fa fa-times"></i></a>
+                        {{ form_text('option[-1]') }}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="form__submit">
+            {{ form_button('<i class="fa fa-pencil"></i><span class="text">'~trans('poll.editPoll')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+        </div>
+        {{ form_close() }}
+    </div>
 {% endblock %}
 {% block js %}
-	<script>
-		Lang.addResource({
-			'poll': {
-				'errorManyOptions': '{{ trans('poll.errorManyOptions')|e('js') }}',
-				'errorFewOptions': '{{ trans('poll.errorFewOptions')|e('js') }}'
-			}
-		});
-	</script>
+    <script>
+        Lang.addResource({
+            'poll': {
+                'errorManyOptions': '{{ trans('poll.errorManyOptions')|e('js') }}',
+                'errorFewOptions': '{{ trans('poll.errorFewOptions')|e('js') }}'
+            }
+        });
+    </script>
 {% endblock %}

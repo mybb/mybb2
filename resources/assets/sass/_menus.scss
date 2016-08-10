@@ -1,0 +1,109 @@
+.menu-bar {
+
+    .menu-bar__links {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .menu-bar__links__item__link {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px 0;
+        width: 48%;
+        margin-#{$left}: 1%;
+        margin-#{$right}: 1%;
+        float: $left;
+        text-align: center;
+        background: $background-1;
+        box-sizing: border-box;
+
+        @include bp-medium {
+            width: auto;
+            background: none;
+            border-#{$left}: 1px solid $border-1;
+            margin: 0;
+            padding: 2px 12px;
+        }
+    }
+
+    .unread-count {
+        background: $unread-count;
+        color: $invert-font-color;
+        padding: side-values(2px 5px 1px 4px);
+        margin: side-values(0 0 0 2px);
+        font-weight: normal;
+        font-size: 0.8em;
+        text-decoration: none;
+        border-radius: 2px;
+    }
+}
+
+.section-menu {
+
+    @include bp-medium {
+        float: $left;
+        width: 19%;
+        margin-#{$right}: 3%;
+    }
+    
+    .section-menu__links {
+        @include clearfix();
+        margin: side-values(0 0 15px 0);
+        padding: 0;
+        list-style: none;
+
+        .section-menu__links__item {
+            float: $left;
+            width: 48%;
+            margin-bottom: 4px;
+
+            &:nth-child(odd) {
+                margin-#{$right}: 2%;
+            }
+
+            &:nth-child(even) {
+                margin-#{$left}: 2%;
+            }
+
+            .section-menu__links__item__link {
+                background: $background-1;
+                display: block;
+                padding: 2px 8px;
+                text-decoration: none;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: $secondary-color;
+                    border-color: $secondary-color;
+                    color: $invert-font-color;
+                }
+            }
+
+            &.section-menu__links__item--active {
+                
+                .section-menu__links__item__link {
+                    background-color: $primary-color;
+                    border-color: $primary-color;
+                    color: $invert-font-color;
+                }
+            }
+        }
+
+        @include bp-medium {
+            margin: 0;
+
+            .section-menu__links__item {
+
+                &,
+                &:nth-child(odd),
+                &:nth-child(even) {
+                    float: none;
+                    width: 100%;
+                    margin-#{$left}: 0;
+                    margin-#{$right}: 0;
+                }
+            }
+        }
+    }
+}

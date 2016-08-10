@@ -1,69 +1,65 @@
 {% extends "layouts.base" %}
 {% block title %}{{ conversation.title }}{% endblock %}
 {% block contents %}
-	<header>
-		<h1>{{ conversation.title }}</h1>
-	</header>
-	<div class="page-controls">
-		{{ messages.render|raw }}
-		<div class="page-buttons">
-			<a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }}
-					class="button button--secondary"><i class="fa fa-plus"></i><span
-						class="text">{{ trans('conversations.add_participants') }}</span></a>
-			<a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary"><i
-						class="fa fa-sign-out"></i><span class="text">{{ trans('conversations.leave') }}</span></a>
-			<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span
-						class="text">{{ trans('conversations.reply') }}</span></a>
-		</div>
-	</div>
-	<div class="page-content page-content--sidebar">
-		<section class="topic">
-			{% if setting('conversations.message_order', 'desc') == 'desc' %}
-				{% include 'conversation.quickreply' with {'conversation': conversation} %}
-				{% include 'conversation.preview' with {'preview': preview} %}
-			{% endif %}
-			
-			{% for message in messages %}
-				<div class="post post--conversation">
-					<div class="post__meta">
-						<a href="{{ url_route('user.profile', {'slug': message.author.name, 'id': message.author.id}) }}"
-						   class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img
-									src="{{ message.author.avatar }}" class="avatar"
-									alt="{{ message.author.name }}'s avatar"/></a>
-						<h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
-						<span class="post__date">{{ generate_time(message.created_at) }}</span>
-					</div>
-					<div class="post__body">
-						<p>
-							{{ message.message_parsed|raw }}
-						</p>
-					</div>
-					<div class="post__foot">
-						<ul class="post__controls">
-							{# like button, quote button #}
-						</ul>
-					</div>
-				</div>
-			{% endfor %}
+    <header class="page-header">
+        <h1 class="page-title">{{ conversation.title }}</h1>
+    </header>
+    <div class="page-controls">
+        {{ messages.render|raw }}
+        <div class="page-buttons">
+            <a {{ modal_attributes('conversations.newParticipant', [conversation.id]) }} class="button button--secondary icon fa-plus">{{ trans('conversations.add_participants') }}</a>
+            <a {{ modal_attributes('conversations.leave', [conversation.id]) }} class="button button--secondary icon fa-sign-out">{{ trans('conversations.leave') }}</a>
+            <a href="#post-reply" class="button icon fa-comment">{{ trans('conversations.reply') }}</a>
+        </div>
+    </div>
+    <div class="page-content page-content--sidebar">
+        <section class="topic">
+            {% if setting('conversations.message_order', 'desc') == 'desc' %}
+                {% include 'conversation.quickreply' with {'conversation': conversation} %}
+                {% include 'conversation.preview' with {'preview': preview} %}
+            {% endif %}
+            
+            {% for message in messages %}
+                <div class="post post--conversation">
+                    <div class="post__meta">
+                        <a href="{{ url_route('user.profile', {'slug': message.author.name, 'id': message.author.id}) }}"
+                           class="avatar-profile-link" title="Go to {{ message.author.name }}'s profile"><img
+                                    src="{{ message.author.avatar }}" class="avatar"
+                                    alt="{{ message.author.name }}'s avatar"/></a>
+                        <h3 class="post__author">{{ render_profile_link(message.author) }}</h3>
+                        <span class="post__date">{{ generate_time(message.created_at) }}</span>
+                    </div>
+                    <div class="post__body">
+                        <p>
+                            {{ message.message_parsed|raw }}
+                        </p>
+                    </div>
+                    <div class="post__foot">
+                        <ul class="post__controls">
+                            {# like button, quote button #}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
 
-			{% if setting('conversations.message_order', 'desc') == 'asc' %}
-				{% include 'conversation.preview' with {'preview': preview} %}
-				{% include 'conversation.quickreply' with {'conversation': conversation} %}
-			{% endif %}
-		</section>
-		{{ messages.render|raw }}
-	</div>
-	<aside>
-		<section class="conversation-participants">
-			<h3 class="heading">{{ trans('conversations.participants') }}</h3>
-			{% for participant in conversation.participants %}
-				<span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
-					<a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>
-					<span class="participant__username">{{ render_profile_link(participant, false, false) }}</span>
-					{# both values need to be "raw" as twig either escapes both or none #}
-					<span class="participant__last-read">{{ trans('conversations.last_read') }} {{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}</span>
-				</span>
-			{% endfor %}
-		</section>
-	</aside>
+            {% if setting('conversations.message_order', 'desc') == 'asc' %}
+                {% include 'conversation.preview' with {'preview': preview} %}
+                {% include 'conversation.quickreply' with {'conversation': conversation} %}
+            {% endif %}
+        </section>
+        {{ messages.render|raw }}
+    </div>
+    <aside class="page-sidebar">
+        <section class="block conversation-participants">
+            <h3 class="heading conversation-participants__title">{{ trans('conversations.participants') }}</h3>
+            {% for participant in conversation.participants %}
+                <span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
+                    <a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>
+                    <span class="participant__username">{{ render_profile_link(participant, false, false) }}</span>
+                    {# both values need to be "raw" as twig either escapes both or none #}
+                    <span class="participant__last-read">{{ trans('conversations.last_read') }} {{ (participant.pivot.last_read is null) ? trans('general.never')|raw : generate_time(participant.pivot.last_read) }}</span>
+                </span>
+            {% endfor %}
+        </section>
+    </aside>
 {% endblock %}

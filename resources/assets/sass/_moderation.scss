@@ -1,88 +1,88 @@
 // STILL NEEDS REWRITE
 
 .inline-moderation {
-	border: 1px solid #ddd;
-	border-radius: 4px;
-	padding: 10px 12px;
-	font-size: 0.9em;
-	text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 0.9em;
+    text-align: center;
 }
 
 html.js .inline-moderation {
-	display: none;
+    display: none;
 }
 
 html.js .inline-moderation.floating {
-	display: block;
-	float: $left;
-	position: fixed;
-	background: #444;
-	border-color: #444;
-	z-index: 1000;
-	bottom: 0;
-	#{$left}: 0;
-	#{$right}: 0;
-	border-radius: 0;
-	border-top: 2px solid #222;
-	width: 100%;
-	box-sizing: border-box;
+    display: block;
+    float: $left;
+    position: fixed;
+    background: #444;
+    border-color: #444;
+    z-index: 1000;
+    bottom: 0;
+    #{$left}: 0;
+    #{$right}: 0;
+    border-radius: 0;
+    border-top: 2px solid #222;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 html.js .inline-moderation.floating h2 {
-	color: #bbb;
+    color: #bbb;
 }
 
 html.js .inline-moderation.floating a:link, 
 html.js .inline-moderation.floating a:visited {
-	color: #ddd;
+    color: #ddd;
 }
 
 html.js .inline-moderation.floating i {
-	color: #bbb;
+    color: #bbb;
 }
 
 .inline-moderation h2 {
-	font-weight: normal;
-	font-size: 1em;
-	color: #666;
-	margin: side-values(0 8px 0 0);
-	padding: 0;
-	border: none;
-	display: inline-block;
+    font-weight: normal;
+    font-size: 1em;
+    color: #666;
+    margin: side-values(0 8px 0 0);
+    padding: 0;
+    border: none;
+    display: inline-block;
 }
 
 .inline-moderation ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: inline-block;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
 }
 
 .inline-moderation ul li {
-	display: inline-block;
-	margin: 0 8px;
+    display: inline-block;
+    margin: 0 8px;
 }
 
 .inline-moderation i {
-	margin-#{$right}: 4px;
+    margin-#{$right}: 4px;
 }
 
 .checkbox-select {
-	float: $right;
-	margin: side-values(-4px 7px 0 12px);
+    float: $right;
+    margin: side-values(-4px 7px 0 12px);
 }
 
 .checkbox-select.check-all {
-	margin: side-values(12px 19px 0 0);
+    margin: side-values(12px 19px 0 0);
 }
 
 @media only screen and (min-width: 480px) {
 
-	.checkbox-select {
-		margin: side-values(12px 0 0 12px);
-	}
+    .checkbox-select {
+        margin: side-values(12px 0 0 12px);
+    }
 
-	.checkbox-select.check-all {
-		margin: side-values(12px 12px 0 0);
-	}
+    .checkbox-select.check-all {
+        margin: side-values(12px 12px 0 0);
+    }
 }

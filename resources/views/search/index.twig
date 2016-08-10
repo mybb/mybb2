@@ -4,129 +4,129 @@
 {% endblock %}
 {% block contents %}
 <div class="page-content">
-	<header>
-		<h1>{{ trans('search.search') }}</h1>
-	</header>
-	{{ form_open({'route':'search'}) }}
-		<section class="form">
-			<div class="form__section">
-				<h2>{{ trans('search.basicsearch') }}</h2>
-				<div class="form__section__container">
-					<div class="form__row">
-						<h3>{{ form_label('keyword', trans('search.keyword')) }}</label></h3>
-						{{ form_text('keyword', '', {'id':'keyword'}) }}
-					</div>
-					<div class="form__row">
-						<h3>{{ form_label('author', trans('search.author')) }}</label></h3>
-						{{ form_text('author', '', {'id':'author'}) }}
-						<p class="form__checkbox"><label>{{  form_checkbox('matchusername', '1', false) }}  {{ trans('search.matchusername') }}</label></p>
-					</div>
-				</div>
-			</div>
-			<div class="form__section">
-				<h2>{{ trans('search.searchoptions') }}</h2>
-				<div class="form__section__container">
-					<div class="form__row">
-						{{ trans('search.findtopicswith') }}
-						&nbsp;
-						{{ form_select('topic_replies_type', {
-							'atleast': trans('search.atleast'),
-							'atmost': trans('search.atmost'),
-							'exactly': trans('search.exactly')
-						}) }}
-						&nbsp;
-						{{ form_text('topic_replies', '', {'class':'short','id':'topic_replies'}) }}
-						&nbsp;
-						{{ trans('search.replies') }}
-					</div>
-					<div class="form__row">
-						{{ trans('search.findpostsfrom') }}
-						&nbsp;
-						{{ form_select('post_date', {
-							'anydate': trans('search.anydate'),
-							'yesterday': trans('general.yesterday'),
-							'oneweek': trans_choice('general.xweekago', 1, {'count':1}),
-							'twoweek': trans_choice('general.xweekago', 2, {'count':2}),
-							'onemonth': trans_choice('general.xmonthago', 1, {'count':1}),
-							'threemonth': trans_choice('general.xmonthago', 3, {'count':3}),
-							'sixmonth': trans_choice('general.xmonthago', 6, {'count':6}),
-							'oneyear': trans_choice('general.xyearago', 1, {'count':1})
-						}) }}
-						&nbsp;
-						{{ trans('general.and') }}
-						&nbsp;
-						{{ form_select('post_date_type', {
-							'newer': trans('search.newer'),
-							'older': trans('search.older'),
-						}) }}
-					</div>
-					<div class="form__row">
-						{{ trans('search.sortby') }}
-						&nbsp;
-						{{ form_select('sortby', {
-							'postdate' : trans('search.postdate'),
-							'author': trans('search.author'),
-							'subject': trans('search.topicsubject'),
-							'forum': trans('search.forum')
-						}) }}
-						&nbsp;
-						{{ trans('general.in') }}
-						&nbsp;
-						{{ form_select('sorttype', {
-							'asc': trans('search.ascending'),
-							'desc': trans('search.descending')
-						}) }}
-						&nbsp;
-						{{ trans('search.order') }}
-					</div>
-					<div class="form__row">
-						{{ trans('search.showresultas') }}
-						&nbsp;
-						{{ form_select('result', {
-							'topics': trans('search.topics'),
-							'posts': trans('search.posts')
-						}) }}
-					</div>
-				</div>
-			</div>
-			<div class="form__section">
-				<h2>{{ trans('search.filters') }}</h2>
-				<div class="form__section__container">
-					<div class="form__row">
-						<h3><label for="forum_search">Forum</label></h3>
-						{{ form_select('forums[]', {'-1':trans('search.allforums')}|merge(forums), null, {
-								'id': 'forum_search',
-								'multiple': 'multiple'
-							})
-						}}
-					</div>
-					<div class="form__row">
-						<h3><label for="prefix_search">Thread Prefix</label></h3>
-						<select name="threadprefix" id="prefix_search" multiple="multiple">
-							<option value="any" selected="selected">Find threads with any prefix</option>
-							<option value="0">No prefix</option>
-							<option value="1">[Installing]</option>
-							<option value="2">[Upgrading]</option>
-							<option value="3">[Error Message]</option>
-							<option value="6">[Performance]</option>
-							<option value="7">[Mail]</option>
-							<option value="8">[How To?]</option>
-							<option value="9">[JavaScript]</option>
-							<option value="10">[General]</option>
-							<option value="11">[For 1.6]</option>
-							<option value="12">[For 1.4]</option>
-							<option value="13">[Security]</option>
-							<option value="14">[recruitment]</option>
-							<option value="15">[status]</option>
-							<option value="16">[away]</option>
-						</select>
-					</div>
-				</div>
-			</div>
-		</section>
-		<div class="form__submit">
-			{{ form_button('<i class="fa fa-search"></i><span class="text">'~trans('search.searchforum')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-		</div>
-	{{ form_close() }}
+    <header class="page-header">
+        <h1 class="page-title">{{ trans('search.search') }}</h1>
+    </header>
+    {{ form_open({'route':'search'}) }}
+        <section class="form">
+            <div class="form__section">
+                <h2 class="form__section__title">{{ trans('search.basicsearch') }}</h2>
+                <div class="form__section__container">
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('keyword', trans('search.keyword')) }}</label></h3>
+                        {{ form_text('keyword', '', {'id':'keyword'}) }}
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('author', trans('search.author')) }}</label></h3>
+                        {{ form_text('author', '', {'id':'author'}) }}
+                        <p class="form__checkbox"><label>{{  form_checkbox('matchusername', '1', false) }}  {{ trans('search.matchusername') }}</label></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form__section">
+                <h2 class="form__section__title">{{ trans('search.searchoptions') }}</h2>
+                <div class="form__section__container">
+                    <div class="form__row">
+                        {{ trans('search.findtopicswith') }}
+                        &nbsp;
+                        {{ form_select('topic_replies_type', {
+                            'atleast': trans('search.atleast'),
+                            'atmost': trans('search.atmost'),
+                            'exactly': trans('search.exactly')
+                        }) }}
+                        &nbsp;
+                        {{ form_text('topic_replies', '', {'class':'short','id':'topic_replies'}) }}
+                        &nbsp;
+                        {{ trans('search.replies') }}
+                    </div>
+                    <div class="form__row">
+                        {{ trans('search.findpostsfrom') }}
+                        &nbsp;
+                        {{ form_select('post_date', {
+                            'anydate': trans('search.anydate'),
+                            'yesterday': trans('general.yesterday'),
+                            'oneweek': trans_choice('general.xweekago', 1, {'count':1}),
+                            'twoweek': trans_choice('general.xweekago', 2, {'count':2}),
+                            'onemonth': trans_choice('general.xmonthago', 1, {'count':1}),
+                            'threemonth': trans_choice('general.xmonthago', 3, {'count':3}),
+                            'sixmonth': trans_choice('general.xmonthago', 6, {'count':6}),
+                            'oneyear': trans_choice('general.xyearago', 1, {'count':1})
+                        }) }}
+                        &nbsp;
+                        {{ trans('general.and') }}
+                        &nbsp;
+                        {{ form_select('post_date_type', {
+                            'newer': trans('search.newer'),
+                            'older': trans('search.older'),
+                        }) }}
+                    </div>
+                    <div class="form__row">
+                        {{ trans('search.sortby') }}
+                        &nbsp;
+                        {{ form_select('sortby', {
+                            'postdate' : trans('search.postdate'),
+                            'author': trans('search.author'),
+                            'subject': trans('search.topicsubject'),
+                            'forum': trans('search.forum')
+                        }) }}
+                        &nbsp;
+                        {{ trans('general.in') }}
+                        &nbsp;
+                        {{ form_select('sorttype', {
+                            'asc': trans('search.ascending'),
+                            'desc': trans('search.descending')
+                        }) }}
+                        &nbsp;
+                        {{ trans('search.order') }}
+                    </div>
+                    <div class="form__row">
+                        {{ trans('search.showresultas') }}
+                        &nbsp;
+                        {{ form_select('result', {
+                            'topics': trans('search.topics'),
+                            'posts': trans('search.posts')
+                        }) }}
+                    </div>
+                </div>
+            </div>
+            <div class="form__section">
+                <h2 class="form__section__title">{{ trans('search.filters') }}</h2>
+                <div class="form__section__container">
+                    <div class="form__row">
+                        <h3 class="form__row__title"><label for="forum_search">Forum</label></h3>
+                        {{ form_select('forums[]', {'-1':trans('search.allforums')}|merge(forums), null, {
+                                'id': 'forum_search',
+                                'multiple': 'multiple'
+                            })
+                        }}
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title"><label for="prefix_search">Thread Prefix</label></h3>
+                        <select name="threadprefix" id="prefix_search" multiple="multiple">
+                            <option value="any" selected="selected">Find threads with any prefix</option>
+                            <option value="0">No prefix</option>
+                            <option value="1">[Installing]</option>
+                            <option value="2">[Upgrading]</option>
+                            <option value="3">[Error Message]</option>
+                            <option value="6">[Performance]</option>
+                            <option value="7">[Mail]</option>
+                            <option value="8">[How To?]</option>
+                            <option value="9">[JavaScript]</option>
+                            <option value="10">[General]</option>
+                            <option value="11">[For 1.6]</option>
+                            <option value="12">[For 1.4]</option>
+                            <option value="13">[Security]</option>
+                            <option value="14">[recruitment]</option>
+                            <option value="15">[status]</option>
+                            <option value="16">[away]</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="form__submit">
+            {{ form_button(trans('search.searchforum'), {'type': 'submit', 'class': 'button icon fa-search'}) }}
+        </div>
+    {{ form_close() }}
 </div>
 {%  endblock %}

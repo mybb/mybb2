@@ -1,40 +1,34 @@
-			<div class="post post--reply post--quick-reply" id="post-reply">
-				<form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="quickreply">
-					<div class="post__meta">
-						<a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
+            <div class="post post--reply post--quick-reply" id="post-reply">
+                <form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="quickreply">
+                    <div class="post__meta">
+                        <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
 
-						{% if auth_check() %}
-							<h3><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
-						{% else %}
-							{{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
-						{% endif %}
-						<span class="post__date">{{ trans('general.now') }}</span>
-						<!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
-						<a href="{{ url_route("topics.reply", {'slug': topic.slug, 'id': topic.id}) }}" class="full-reply" title="Open Full Editor"
-								onclick="return submitFormAsGet('quickreply');">
-							<i class="fa fa-external-link"></i>
-							<span class="text">{{ trans('topic.fullEditor') }}</span>
-						</a>
-					</div>
-					<div class="post__body">
-						{{ form_textarea('content', '', {'class':'textarea', 'rows': '6', 'id': 'message', 'placeholder': trans('topic.create.writePost') }) }}
+                        {% if auth_check() %}
+                            <h3 class="post__author"><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
+                        {% else %}
+                            {{ form_text('username', trans('general.guest'), {'class': 'short'}) }}
+                        {% endif %}
+                        <span class="post__date">{{ trans('general.now') }}</span>
+                        <!-- <span class="team-badge"><i class="fa fa-cogs" style="color: #e34976;"></i><span class="text">MyBB Staff</span></span>-->
+                        <a href="{{ url_route("topics.reply", {'slug': topic.slug, 'id': topic.id}) }}" class="full-reply" title="Open Full Editor"
+                                onclick="return submitFormAsGet('quickreply');">
+                            <i class="fa fa-external-link"></i>
+                            <span class="text">{{ trans('topic.fullEditor') }}</span>
+                        </a>
+                    </div>
+                    <div class="post__body">
+                        {{ form_textarea('content', '', {'class':'textarea', 'rows': '6', 'id': 'message', 'placeholder': trans('topic.create.writePost') }) }}
                         {% include 'topic.quotebar' %}
-					</div>
-					{% if auth_check() == false %}
-						<div>
-							{{ captcha() }}
-						</div>
-					{% endif %}
-					<div class="post__foot">
-						{{ form_button('<i class="fa fa-comment"></i><span class="text">'~trans('topic.postreply')~'</span>', {'type': 'submit', 'class': 'button'}) }}
-						<!-- <button type="submit" class="button button--secondary">
-							<i class="fa fa-paperclip"></i><span class="text">Attach Files</span>
-						</button>-->
-						<a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary"
-						   onclick="return submitFormAsGet('quickreply');">
-							<i class="fa fa-edit"></i>
-							<span class="text">{{ trans('general.preview') }}</span>
-						</a>
-					</div>
-				</form>
-			</div>
+                    </div>
+                    {% if auth_check() == false %}
+                        <div>
+                            {{ captcha() }}
+                        </div>
+                    {% endif %}
+                    <div class="post__foot">
+                        {{ form_button(trans('topic.postreply'), {'type': 'submit', 'class': 'button icon fa-comment'}) }}
+                        <!-- <button type="submit" class="button button--secondary icon fa-paperclip">Attach Files</button>-->
+                        <a href="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" class="button button--secondary icon fa-edit" onclick="return submitFormAsGet('quickreply');">{{ trans('general.preview') }}</a>
+                    </div>
+                </form>
+            </div>

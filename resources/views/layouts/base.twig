@@ -4,28 +4,28 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" dir="{{ trans('general.direction') }}" lang="{{ trans('general.languageCode') }}"> <!--<![endif]-->
     <head>
-		<title>
-			{% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %} {{ setting('general.board_name', 'MyBB Community Forums') }}
-		</title>
-		{% include "partials.headerinclude" %}
-		{% block head %}{% endblock %}
-	</head>
-	<body>
-		<div id="spinner">
-			<i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
-		</div>
-		{% include "header.header" %}
+        <title>
+            {% block title %}{% endblock %}{% if block('title') != '' %} &bull; {% endif %} {{ setting('general.board_name', 'MyBB Community Forums') }}
+        </title>
+        {% include "partials.headerinclude" %}
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <div id="spinner">
+            <i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
+        </div>
+        {% include "header.header" %}
         <div class="main">
             <div class="wrapper">
-				{{ Breadcrumbs.renderIfExists() }}
+                {{ Breadcrumbs.renderIfExists() }}
                 <div id="content">
-					{% include "partials.messages" %}
+                    {% include "partials.messages" %}
 
-    				{% block contents %}{% endblock %}
+                    {% block contents %}{% endblock %}
                 </div>
             </div>
-		</div>
-		{% include "footer.footer" %}
-		{% block js %}{% endblock %}
-	</body>
+        </div>
+        {% include "footer.footer" %}
+        {% block js %}{% endblock %}
+    </body>
 </html>

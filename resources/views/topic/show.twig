@@ -1,112 +1,112 @@
 {% extends "layouts.base" %}
 {% block title %}
-	{{ topic.title }}
+    {{ topic.title }}
 {% endblock %}
 {% block head %}
-	<meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
-	<link rel="canonical" href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}" />
+    <meta name="description" content="{{ str_limit(topic.firstPost.content, 255) }}" />
+    <link rel="canonical" href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}" />
 {% endblock %}
 {% block contents %}
-	<div class="page-content">
-		<header>
-			<h1>{{topic.title }}</h1>
-		</header>
-		<div class="page-controls">
-			{{ posts.render|raw }}
-			<div class="page-buttons">
-				<a href="#" class="button button--secondary"><i class="fa fa-plus"></i><span class="text">Follow</span></a>
-				{% if not topic.has_poll %}
-					<a href="{{ url_route('polls.create', {'slug': topic.slug, 'id': topic.id}) }}" class="button button--secondary"><i class="fa fa-check-square-o"></i><span class="text">{{ trans('poll.addPoll') }}</span></a>
-				{% endif %}
-                {% if not topic.closed %}
-				<a href="#post-reply" class="button"><i class="fa fa-comment"></i><span class="text">{{ trans('topic.postreply') }}</span></a>
+    <div class="page-content">
+        <header class="page-header">
+            <h1 class="page-title">{{topic.title }}</h1>
+        </header>
+        <div class="page-controls">
+            {{ posts.render|raw }}
+            <div class="page-buttons">
+                <a href="#" class="button {% if not topic.has_poll %}button--half-width{% else %}button--full-width{% endif %} button--secondary icon fa-plus">Follow</a>
+                {% if not topic.has_poll %}
+                    <a href="{{ url_route('polls.create', {'slug': topic.slug, 'id': topic.id}) }}" class="button button--half-width button--secondary icon fa-check-square-o">{{ trans('poll.addPoll') }}</a>
                 {% endif %}
-			</div>
-		</div>
-		{% if topic.has_poll %}
-			{% include "topic.polls" with [poll, topic] %}
-		{% endif %}
-		<section class="topic" data-moderation-content="post" data-moderation-source-type="topic" data-moderation-source-id="{{ topic.id }}">
-			{% for post in posts %}
-				<div class="post{{ not post.approved ? ' pending-approval' }}{{ (post.trashed() or (topic.trashed() and loop.first)) ? ' soft-deleted' }} {{ highlight == post.id ? ' highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
-					<div class="post__meta">
+                {% if not topic.closed %}
+                <a href="#post-reply" class="button button--full-width icon fa-comment">{{ trans('topic.postreply') }}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% if topic.has_poll %}
+            {% include "topic.polls" with [poll, topic] %}
+        {% endif %}
+        <section class="topic" data-moderation-content="post" data-moderation-source-type="topic" data-moderation-source-id="{{ topic.id }}">
+            {% for post in posts %}
+                <div class="post{{ not post.approved ? ' post--pending-approval' }}{{ (post.trashed() or (topic.trashed() and loop.first)) ? ' post--soft-deleted' }} {{ highlight == post.id ? ' post--highlight' }}" id="post-{{ post.id }}" data-postid="{{ post.id }}" data-type="post">
+                    <div class="post__meta">
 
-						<a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
-						<h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
-						{{ post_date_link(url_route('topics.showPost', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}), post.created_at) }}
-						{% if post.trashed() or (topic.trashed() and loop.first) %}
-							<span class="post__status"><i class="fa fa-trash-o"></i> {{ trans('topic.softDeleted') }}</span>
-						{% endif %}
-						{% if post.updated_at != post.created_at %}
-							<a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
-						{% endif %}
-						<!--<span class="team-badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
-                        {% if auth_user.hasPermission('canModerate') %}
-						<input type="checkbox" class="post__inline-mod" data-moderation-id="{{ post.id }}">
+                        <a href="{{ url_route('user.profile', {'slug': post.author.name, 'id': post.author.id}) }}" class="avatar-profile-link" title="{{ trans('general.goToXProfile', {'name': post.author.name}) }}"><img src="{{ post.author.avatar }}" class="avatar" alt="{{ trans('general.XAvatar', {'name': post.author.name}) }}" /></a>
+                        <h3 class="post__author">{{ render_profile_link(post.author) }}</h3>
+                        {{ post_date_link(url_route('topics.showPost', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}), post.created_at) }}
+                        {% if post.trashed() or (topic.trashed() and loop.first) %}
+                            <span class="post__status icon fa-trash-o">{{ trans('topic.softDeleted') }}</span>
                         {% endif %}
-						<a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i></a>
-					</div>
-					<div class="post__body">
-						<div class="quick-quote">
-							<span class="fast">{{ trans('topic.quoteSelectionNow') }}</span>
-							<span class="add">{{ trans('topic.quoteSelectionLater') }}</span>
-						</div>
-						<p>
-							{{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
-						</p>
-					</div>
-					<div class="post__foot">
-						<ul class="post__controls">
-								<li class="edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><i class="fa fa-edit"></i><span class="text">{{ trans('topic.edit') }}</span></a></li>
-							{% if post.trashed() or (topic.trashed() and loop.first) %}
-								<li class="restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.restore') }}"><i class="fa fa-circle"></i><span class="text">{{ trans('topic.restore') }}</span></a></li>
-								<li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-							{% else %}
-								<li class="delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" title="{{ trans('topic.delete') }}"><i class="fa fa-trash-o"></i><span class="text">{{ trans('topic.delete') }}</span></a></li>
-								<li class="like">
+                        {% if post.updated_at != post.created_at %}
+                            <a href="index.php?page=edit-log" class="post__edit-log" title="Last edited {{ human_date(post.updated_at) }}"><i class="fa fa-pencil"></i></a>
+                        {% endif %}
+                        <!--<span class="post__badge"><i class="fa fa-group" style="color: #095c66;"></i><span class="text">MyBB Staff</span></span>-->
+                        {% if auth_user.hasPermission('canModerate') %}
+                        <input type="checkbox" class="post__inline-mod" data-moderation-id="{{ post.id }}">
+                        {% endif %}
+                        <a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i></a>
+                    </div>
+                    <div class="post__body">
+                        <div class="quick-quote">
+                            <span class="fast">{{ trans('topic.quoteSelectionNow') }}</span>
+                            <span class="add">{{ trans('topic.quoteSelectionLater') }}</span>
+                        </div>
+                        <p>
+                            {{  post.content_parsed|raw }} {# HTML is filtered by the parser, so show raw HTML. Only do this if you're 100% sure of your variables! #}
+                        </p>
+                    </div>
+                    <div class="post__foot">
+                        <ul class="post__controls">
+                                <li class="post__controls__item post__controls__item--edit"><a href="{{ url_route("topics.edit", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-edit" title="{{ trans('topic.edit') }}" data-dropdown="#dropdown-{{ post.id }}"><span class="text">{{ trans('topic.edit') }}</span></a></li>
+                            {% if post.trashed() or (topic.trashed() and loop.first) %}
+                                <li class="post__controls__item post__controls__item--restore"><a href="{{ url_route("topics.restore", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-circle" title="{{ trans('topic.restore') }}"><span class="text">{{ trans('topic.restore') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-trash-o" title="{{ trans('topic.delete') }}"><span class="text">{{ trans('topic.delete') }}</span></a></li>
+                            {% else %}
+                                <li class="post__controls__item post__controls__item--delete"><a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-trash-o" title="{{ trans('topic.delete') }}"><span class="text">{{ trans('topic.delete') }}</span></a></li>
+                                <li class="post__controls__item post__controls__item--like">
                                 {{ form_open({'route': ['posts.like', post.id], 'method': 'post'}) }}
                                     {{ form_hidden('post_id', post.id) }}
                                     {% if post.hasLikedPost %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-down"></i><span class="text">'~trans('topic.unlike')~'</span>', {'type': 'submit', 'class': ''}) }}
+                                        {{ form_button('<span class="text">'~trans('topic.unlike')~'</span>', {'type': 'submit', 'class': 'post__controls__item__link icon fa-thumbs-o-down'}) }}
                                     {% else %}
-                                        {{ form_button('<i class="fa fa-thumbs-o-up"></i><span class="text">'~trans('topic.like')~'</span>', {'type': 'submit', 'class': ''}) }}
+                                        {{ form_button('<span class="text">'~trans('topic.like')~'</span>', {'type': 'submit', 'class': 'post__controls__item__link icon fa-thumbs-o-up'}) }}
                                     {% endif %}
                                 {{ form_close() }}
-                            	</li>
-                                <li class="quote"><a class="quote-button" href="{{ url_route('topics.quote', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}">
-										<i class="fa fa-quote-{{ langDir.left }}"></i><span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
-								</li>
-							{% endif %}
-							<li class="report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" title="Report"><i class="fa fa-flag"></i><span class="text">Report post</span></a></li>
-							<li class="warn"><a href="index.php?page=warn-user" title="Warn user"><i class="fa fa-warning"></i><span class="text">Warn user</span></a></li>
-						</ul>
+                                </li>
+                                <li class="post__controls__item post__controls__item--quote"><a class="post__controls__item__link icon fa-quote-{{ langDir.left }} quote-button" href="{{ url_route('topics.quote', {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}">
+                                        <span class="text quote-button__add">{{ trans('topic.quote') }}</span><span class="text quote-button__remove">{{ trans('topic.removeQuote') }}</span></a>
+                                </li>
+                            {% endif %}
+                            <li class="post__controls__item post__controls__item--report"><a href="index.php?page=report-post" onclick="modal('report-post'); return false;" class="post__controls__item__link icon fa-flag" title="Report"><span class="text">Report post</span></a></li>
+                            <li class="post__controls__item post__controls__item--warn"><a href="index.php?page=warn-user" class="post__controls__item__link icon fa-warning" title="Warn user"><span class="text">Warn user</span></a></li>
+                        </ul>
                         {% if post.num_likes > 0 %}
                             <div class="post__likes">
                                 {{ render_likes(post.likes, url_route('post.likes', {'post_id': post.id})) }}
                             </div>
                         {% endif %}
 
-					</div>
-				</div>
-			{% endfor %}
-			{{ posts.render|raw }}
+                    </div>
+                </div>
+            {% endfor %}
+            {{ posts.render|raw }}
             {% if not topic.closed %}
                 {% include 'topic.quickreply' with {'topic': topic} %}
             {% else %}
                 <p style="text-align:center"><i class="fa fa-lock"></i> {{ trans('topic.closed') }}</p>
             {% endif %}
-		</section>
+        </section>
         {% if auth_user.hasPermission('canModerate') %}
-		{% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
+        {% include 'partials.moderation.moderation_bar' with {'moderations': topic.moderations, 'moderation_content': 'posts'} %}
         {% endif %}
-	</div>
+    </div>
 {% endblock %}
 {% block js %}
-	<script>
-		Lang.addResource({
-			'topic': {
-				'confirmDelete': '{{ trans('topic.confirmDelete')|e('js') }}'
-			}
-		});
-	</script>
+    <script>
+        Lang.addResource({
+            'topic': {
+                'confirmDelete': '{{ trans('topic.confirmDelete')|e('js') }}'
+            }
+        });
+    </script>
 {% endblock %}

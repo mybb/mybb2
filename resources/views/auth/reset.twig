@@ -7,30 +7,30 @@
         <div class="page-content page-content--centered">
             {{ form_hidden('token', token) }}
 
-            <header>
-                <h1>{{ trans('passwords.resetpw') }}</h1>
+            <header class="page-header">
+                <h1 class="page-title">{{ trans('passwords.resetpw') }}</h1>
             </header>
 
             <section class="form">
                 <div class="form__section">
                     <div class="form__row">
-                        <h3>{{ form_label('email', trans('member.email')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('email', trans('member.email')) }}</h3>
                         {{ form_text('email') }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('password', trans('member.password')) }}</h3>
+                        <h3 class="form__row__title">{{ form_label('password', trans('member.password')) }}</h3>
                         {{ form_password('password', {'class': 'password-toggle'}) }}
                     </div>
                     <div class="form__row">
-                        <h3>{{ form_label('password_confirmation', trans('member.password')) }}</label></h3>
-                        <p class="form__description">{{ trans('member.password_confirm') }}</p>
+                        <h3 class="form__row__title">{{ form_label('password_confirmation', trans('member.password')) }}</label></h3>
+                        <p class="form__row__description">{{ trans('member.password_confirm') }}</p>
                         {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
                     </div>
                 </div>
             </section>
 
             <div class="form__submit">
-                {{ form_button('<i class="fa fa-key"></i><span class="text">'~trans('passwords.resetpw')~'</span>', {'type': 'submit', 'class': 'button'}) }}
+                {{ form_button(trans('passwords.resetpw'), {'type': 'submit', 'class': 'button icon fa-key'}) }}
             </div>
         </div>
     {{ form_close() }}

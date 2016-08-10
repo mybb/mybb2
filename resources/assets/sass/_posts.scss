@@ -1,0 +1,370 @@
+.post {
+    background-color: $background-default;
+    border: 1px solid $border-2;
+    padding: 8px 12px;
+    margin-bottom: 25px;
+    border-radius: 4px;
+
+    @include bp-small {
+        margin-#{$left}: 80px;
+    }
+
+    @include bp-medium {
+        margin-#{$left}: 110px;
+    }
+
+    .post__meta {
+        padding: side-values(4px 6px 12px 6px);
+
+        @include bp-small {
+            padding: side-values(4px 6px 8px 6px);
+        }
+
+        .post__author {
+            font-size: 1em;
+            margin: 0;
+
+            @include bp-small {
+                display: inline-block;
+            }
+        }
+
+        .post__date, .post__topic {
+            font-size: 0.8em;
+            color: $alt-font-color-1;
+
+            @include bp-small {
+                margin: side-values(0 0 0 10px);
+            }
+        }
+
+        .post__edit-log {
+            font-size: 0.7em;
+            margin-#{$left}: 4px;
+        }
+
+        .post__status {
+            margin-#{$left}: 16px;
+            font-size: 0.8em;
+            font-weight: bold;
+
+            &.icon:before {
+                color: $alt-font-color-1;
+                font-size: 14px;
+                margin-#{$right}: 3px;
+            }
+        }
+    }
+
+    .post__inline-mod {
+        float: $right;
+        margin: side-values(-20px 0 0 7px);
+
+        @include bp-small {
+            margin-top: 7px;
+        }
+    }
+
+    .post__toggle {
+        float: $right;
+        font-size: 14px;
+        margin: side-values(1px 1px 0 0);
+
+        i {
+            @include black-transparency(0.2);
+        }
+
+        &:hover i {
+            @include black-transparency(0.4);
+        }
+
+        @include bp-medium {
+            margin-#{$right}: 5px;
+        }
+    }
+
+    .post__badge {
+        display: none;
+
+        @include bp-medium {
+            display: inline;
+        }
+    }
+
+    .avatar-profile-link {
+        float: $left;
+        margin: side-values(5px 10px 0 0);
+        @include avatar(40);
+
+        @include bp-small {
+            float: $left;
+            margin: side-values(-13px 0 0 -100px);
+            @include avatar(70);
+        }
+
+        @include bp-medium {
+            margin-#{$left}: -130px;
+            @include avatar(100);
+        }
+    }
+
+    .post__body {
+        padding: side-values(0 6px 3px 6px);
+
+        p {
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        blockquote {
+            border-left: 2px solid $primary-color;
+            padding: 10px 20px;
+            margin: 20px 12px;
+            font-size: 0.9em;
+
+            cite {
+                font-weight: normal;
+                font-size: normal;
+                color: $alt-font-color-1;
+                display: block;
+
+                .quote-author {
+                    font-weight: bold;
+                    color: $font-color;
+                }
+
+                .quote-date {
+                    color: $alt-font-color-4;
+                }
+            }
+        }
+    }
+
+    .post__signature {
+        border-top: 1px dotted $border-2;
+        padding: side-values(6px 6px 0 6px);
+        margin: side-values(12px 0 0 0);
+        font-size: 0.8em;
+    }
+
+    .post__controls {
+        list-style: none;
+        margin: 0;
+        padding: 4px;
+        text-align: $right;
+
+        .post__controls__item {
+            display: inline-block;
+            font-size: 0.8em;
+
+            .post__controls__item__link {
+                color: $alt-font-color-1;
+                padding: 0 5px;
+                background-color: transparent;
+                border: none;
+                font-size: 1em;
+
+                &:hover,
+                &:active {
+                    color: $secondary-color;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                &.icon:before {
+                    margin-#{$right}: 0;
+                }
+            }
+
+            &.post__controls__item--like,
+            &.post__controls__item--quote,
+            &.post__controls__item--approve,
+            &.post__controls__item--restore {
+                float: $left;
+
+                .text {
+                    display: inline;
+                    margin-#{$left}: 6px;
+                }
+
+                .quote-button {
+
+                    .quote-button__remove {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .text {
+            display: none;
+            font-size: 0.9em;
+        }
+    }
+
+    .post__likes {
+        font-size: 0.8em;
+        padding: side-values(8px 8px 4px 8px);
+        margin: side-values(8px 0 0 0);
+        border-top: 1px solid $border-1;
+        color: $alt-font-color-2;
+
+        i {
+            margin-#{$right}: 5px;
+        }
+
+        a {
+            color: $alt-font-color-1;
+        }
+    }
+
+    &.post--highlight {
+        background-color: $status-highlight;
+        border-color: $status-highlight-border;
+    }
+
+    &.post--soft-deleted {
+        background-color: $status-deleted;
+        border-color: $status-deleted-border;
+    }
+
+    &.post--pending-approval {
+        background-color: $status-pending;
+        border-color: $status-pending-border;
+    }
+
+    &.post--hidden {
+
+        @include bp-small {
+
+            .avatar-profile-link {
+                margin-#{$left}: -80px;
+                @include avatar(50);
+            }
+        }
+
+        .post__meta {
+            padding-bottom: 2px;
+        }
+
+        .post__body, .post__controls {
+            display: none;
+        }
+    }
+
+    &.post--conversation {
+
+        @include bp-medium {
+            margin-#{$left}: 80px;
+
+            .avatar-profile-link {
+                margin-#{$left}: -100px;
+                @include avatar(70);
+            }
+        }
+    }
+
+    &.post--reply {
+
+        .full-reply {
+            float: $right;
+
+            .text {
+                display: none;
+            }
+        }
+
+        textarea {
+            border: none;
+            padding: 0;
+        }
+
+        &.post--quick-reply .post__foot {
+            margin: 5px 0;
+        }
+    }
+}
+
+.topic--create, .topic--reply {
+
+    .page-title {
+        display: none;
+    }
+
+    .topic__title {
+        font-size: 1.8em;
+        padding: 10px;
+    }
+
+    .post__controls {
+        text-align: $left;
+
+        .text {
+            display: inline;
+            margin-#{$left}: 6px;
+        }
+    }
+}
+
+.quick-quote {
+    display: none;
+    background: $alt-font-color-4;
+    color: $invert-font-color;
+    border-radius: 4px;
+    font: 12px $font-stack;
+    padding: 6px 4px;
+    position: absolute;
+    z-index: 1001;
+
+    span {
+        cursor: pointer;
+        margin: 0 6px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &:before {
+        content: ' ';
+        position: absolute;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -6px;
+        border-top: 6px solid $alt-font-color-4;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+    }
+}
+
+.quote-bar {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.view-quotes {
+    left: 10%!important;
+    width: 80%!important;
+    margin-left: 0!important;
+
+    .view-quotes__quotes {
+        overflow: auto;
+        padding: side-values(15px 15px 0 15px);
+        margin: 0;
+    }
+
+    .view-quotes__select-all {
+        bottom: 0;
+        margin: 0;
+        padding: 6px 0;
+        background: $background-2;
+        border-top: 1px solid $border-1;
+        text-align: center;
+    }
+}

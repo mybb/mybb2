@@ -1,0 +1,39 @@
+.icon {
+    text-decoration: none;
+
+    &:before {
+        display: inline-block;
+        font-family: FontAwesome;
+        font-size: 1em;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: normal;
+        margin-#{$right}: 8px;
+        position: relative;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+    }
+
+    &.icon--fw:before {
+        width: 1.28571429em;
+        text-align: center;
+    }
+
+    &.icon--after {
+        display: inline-block;
+        
+        &:before {
+            float: $right;
+            margin-#{$right}: 0px;
+            margin-#{$left}: 8px;
+        }
+    }
+}
+
+.hidden {
+    @include hidden;
+}
+
+.visually-hidden {
+    @include visually-hidden;
+}
