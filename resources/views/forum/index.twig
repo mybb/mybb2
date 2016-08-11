@@ -30,35 +30,7 @@
 </div>
 
 <aside class="page-sidebar">
-    <section class="block">
-        <h3 class="block__heading block__heading--linked"><a href="{{ url_route('forums.all') }}" class="block__heading--linked__link">{{ trans('forum.allforums') }}</a></h3>
-
-        <div class="forum-list forum-list--compact">
-        {% for category in forums %}
-            <div class="forum-list--compact__category">
-                <h4 class="forum-list--compact__category__title"><a href="{{ url_route("forums.show", {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a></h4>
-                <ul class="forum-list--compact__category__forums">
-                {% for forum in category.children.toTree %}
-                    <li class="forum-list--compact__category__forum"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></li>
-                {% else %}
-                    {#Do nothing, no subforums for this category#}
-                {% endfor %}
-                </ul>
-            </div>
-        {% else %}
-            {{ trans('forum.notfound') }}
-        {% endfor %}
-            </div>
-    </section>
-    <section class="block">
-        <h3 class="block__heading block__heading--linked"><a href="{{ url_route('members.online') }}" class="block__heading--linked__link">{{ trans('member.online') }} <span class="count icon icon--after fa-angle-{{ langDir.right }}">{{ users.count }}</span></a></h3>
-        <div class="user-list user-list--compact">
-            {% for user in users %}
-                <a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" data-user-id="{{ user.id }}" class="profile-link user-list--compact__user"><img src="{{ user.avatar }}" class="avatar" />{{ user.styled_name|raw }}</a>
-            {% else %}
-                <div class="user-list__error error error-no-results">{{ trans('member.noOnline') }}</div>
-            {% endfor %}
-        </div>
-    </section>
+    {{ render_widget('forum_list') }}
+    {{ render_widget('users_online') }}
 </aside>
 {% endblock %}

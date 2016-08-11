@@ -163,9 +163,9 @@ return [
         MyBB\Core\Providers\ConfigServiceProvider::class,
         MyBB\Core\Providers\EventServiceProvider::class,
         MyBB\Core\Providers\RouteServiceProvider::class,
-
         MyBB\Core\Moderation\ModerationServiceProvider::class,
         MyBB\Core\Repository\RepositoryServiceProvider::class,
+        MyBB\Core\Widgets\ServiceProvider::class,
     ],
     /*
 	|--------------------------------------------------------------------------
