@@ -57,7 +57,7 @@ class Registry
         }
 
         if (!class_exists($className)) {
-            throw new \InvalidArgumentException("Class ${className} does not exist.");
+            throw new \InvalidArgumentException("Class {$className} does not exist.");
         }
 
         $this->widgets[$name] = $className;
@@ -87,7 +87,7 @@ class Registry
     public function getWidget(string $name) : WidgetInterface
     {
         if (!isset($this->widgets[$name])) {
-            throw new \InvalidArgumentException("Widget '${name}' is not registered.");
+            throw new \InvalidArgumentException("Widget '{$name}' is not registered.");
         }
 
         return $this->app->make($this->widgets[$name]);
