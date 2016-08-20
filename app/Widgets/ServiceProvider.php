@@ -33,4 +33,16 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app->instance(Registry::class, $reg);
     }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            Registry::class,
+        ];
+    }
 }

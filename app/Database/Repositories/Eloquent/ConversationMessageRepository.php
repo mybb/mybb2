@@ -32,7 +32,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * @var Parser
      */
-    private $messageFormatter;
+    private $parser;
 
     /**
      * @var Store
@@ -42,18 +42,18 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * @param ConversationMessage $conversationMessageModel
      * @param UserRepositoryInterface $userRepository
-     * @param Parser $messageFormatter
+     * @param Parser $parser
      * @param Store $settings
      */
     public function __construct(
         ConversationMessage $conversationMessageModel,
         UserRepositoryInterface $userRepository,
-        Parser $messageFormatter,
+        Parser $parser,
         Store $settings
     ) {
         $this->conversationMessageModel = $conversationMessageModel;
         $this->userRepository = $userRepository;
-        $this->messageFormatter = $messageFormatter;
+        $this->parser = $parser;
         $this->settings = $settings;
     }
 
@@ -88,8 +88,8 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
      */
     public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true)
     {
-        $details['message_parsed'] = $this->messageFormatter->parse($details['message'], [
-            MessageFormatter::ME_USERNAME => $this->userRepository->find($details['author_id'])->name,
+        $details['message_parsed'] = $this->parser->parse($details['message'], [
+            'username' => $this->userRepository->find($details['author_id'])->name,
         ]); // TODO: Parser options...
 
         $message = $conversation->messages()->create($details);

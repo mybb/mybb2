@@ -206,14 +206,14 @@ class TopicController extends AbstractController
      * @param int $id
      * @param string $slug
      * @param Request $request
-     * @param Parser $formatter
+     * @param Parser $parser
      * @param int $postId
      *
      * @return \Illuminate\View\View
      *
      * @throws \Exception
      */
-    public function reply($id, $slug, Request $request, Parser $formatter, $postId = null)
+    public function reply($id, $slug, Request $request, Parser $parser, $postId = null)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -258,8 +258,8 @@ class TopicController extends AbstractController
                 'user_id'        => $userId,
                 'username'       => $username,
                 'content'        => $request->get('content'),
-                'content_parsed' => $formatter->parse($request->get('content'), [
-                    Parser::ME_USERNAME => $this->guard->user()->name,
+                'content_parsed' => $parser->parse($request->get('content'), [
+                    'username' => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);
@@ -373,11 +373,11 @@ class TopicController extends AbstractController
     /**
      * @param int $forumId
      * @param Request $request
-     * @param Parser $formatter
+     * @param Parser $parser
      *
      * @return \Illuminate\View\View
      */
-    public function create($forumId, Request $request, Parser $formatter)
+    public function create($forumId, Request $request, Parser $parser)
     {
         // Forum permissions are checked in "find"
         $forum = $this->forumRepository->find($forumId);
@@ -402,8 +402,8 @@ class TopicController extends AbstractController
                 'user_id'        => $userId,
                 'username'       => $username,
                 'content'        => $request->get('content'),
-                'content_parsed' => $formatter->parse($request->get('content'), [
-                    Parser::ME_USERNAME => $this->guard->user()->name,
+                'content_parsed' => $parser->parse($request->get('content'), [
+                    'username' => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);

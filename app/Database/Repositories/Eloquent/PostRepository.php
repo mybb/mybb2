@@ -33,9 +33,9 @@ class PostRepository implements PostRepositoryInterface
      */
     protected $guard;
     /**
-     * @var Parser $formatter
+     * @var Parser $parser
      */
-    protected $formatter;
+    protected $parser;
 
     /**
      * @var Store
@@ -60,7 +60,7 @@ class PostRepository implements PostRepositoryInterface
     /**
      * @param Post $postModel The model to use for posts.
      * @param Guard $guard Laravel guard instance, used to get user ID.
-     * @param Parser $formatter Post formatter instance.
+     * @param Parser $parser Post formatter instance.
      * @param Store $settings The settings container
      * @param ForumRepositoryInterface $forumRepository
      * @param PermissionChecker $permissionChecker
@@ -69,7 +69,7 @@ class PostRepository implements PostRepositoryInterface
     public function __construct(
         Post $postModel,
         Guard $guard,
-        Parser $formatter,
+        Parser $parser,
         Store $settings,
         ForumRepositoryInterface $forumRepository,
         PermissionChecker $permissionChecker,
@@ -77,7 +77,7 @@ class PostRepository implements PostRepositoryInterface
     ) {
         $this->postModel = $postModel;
         $this->guard = $guard;
-        $this->formatter = $formatter;
+        $this->parser = $parser;
         $this->settings = $settings;
         $this->forumRepository = $forumRepository;
         $this->permissionChecker = $permissionChecker;
@@ -187,8 +187,8 @@ class PostRepository implements PostRepositoryInterface
             'content_parsed' => '',
         ], $postDetails);
 
-        $postDetails['content_parsed'] = $this->formatter->parse($postDetails['content'], [
-            MessageFormatter::ME_USERNAME => $this->guard->user()->name,
+        $postDetails['content_parsed'] = $this->parser->parse($postDetails['content'], [
+            'username' => $this->guard->user()->name,
         ]); // TODO: Parser options...
 
         if ($postDetails['user_id'] > 0) {
@@ -234,12 +234,12 @@ class PostRepository implements PostRepositoryInterface
         if ($postDetails['content']) {
             $options = [];
             if ($post->user_id > 0) {
-                $options[MessageFormatter::ME_USERNAME] = $post->author->name;
+                $options['username'] = $post->author->name;
             } else {
-                $options[MessageFormatter::ME_USERNAME] = trans('general.guest');
+                $options['username'] = trans('general.guest');
             }
 
-            $postDetails['content_parsed'] = $this->formatter->parse(
+            $postDetails['content_parsed'] = $this->parser->parse(
                 $postDetails['content'],
                 $options
             ); // TODO: Parser options...
@@ -386,7 +386,7 @@ class PostRepository implements PostRepositoryInterface
         }
 
         $firstPost->content = $firstPostContent;
-        $firstPost->content_parsed = $this->formatter->parse($firstPost->content);
+        $firstPost->content_parsed = $this->parser->parse($firstPost->content);
         $firstPost->save();
 
         return $firstPost;

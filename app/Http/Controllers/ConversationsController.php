@@ -74,19 +74,19 @@ class ConversationsController extends AbstractController
 
     /**
      * @param Request $request
-     * @param Parser $formatter
+     * @param Parser $parser
      *
      * @return \Illuminate\View\View
      */
-    public function getCompose(Request $request, Parser $formatter)
+    public function getCompose(Request $request, Parser $parser)
     {
         $preview = null;
         if ($request->has('message')) {
             $preview = new ConversationMessage([
                 'author_id'      => $this->guard->user()->id,
                 'message'        => $request->get('message'),
-                'message_parsed' => $formatter->parse($request->get('message'), [
-                    Parser::ME_USERNAME => $this->guard->user()->name,
+                'message_parsed' => $parser->parse($request->get('message'), [
+                    'username' => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);
@@ -126,11 +126,11 @@ class ConversationsController extends AbstractController
     /**
      * @param int $id
      * @param Request $request
-     * @param Parser $formatter
+     * @param Parser $parser
      *
      * @return \Illuminate\View\View
      */
-    public function getRead($id, Request $request, Parser $formatter)
+    public function getRead($id, Request $request, Parser $parser)
     {
         $conversation = $this->conversationRepository->find($id);
 
@@ -152,8 +152,8 @@ class ConversationsController extends AbstractController
             $preview = new ConversationMessage([
                 'author_id'      => $this->guard->user()->id,
                 'message'        => $request->get('message'),
-                'message_parsed' => $formatter->parse($request->get('message'), [
-                    Parser::ME_USERNAME => $this->guard->user()->name,
+                'message_parsed' => $parser->parse($request->get('message'), [
+                    'username' => $this->guard->user()->name,
                 ]),
                 'created_at'     => new \DateTime(),
             ]);

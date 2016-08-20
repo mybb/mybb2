@@ -139,6 +139,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+        // Register widgets before Twig
+        MyBB\Core\Widgets\ServiceProvider::class,
+
         /**
          * Extension Service Providers...
          */
@@ -165,7 +168,6 @@ return [
         MyBB\Core\Providers\RouteServiceProvider::class,
         MyBB\Core\Moderation\ModerationServiceProvider::class,
         MyBB\Core\Repository\RepositoryServiceProvider::class,
-        MyBB\Core\Widgets\ServiceProvider::class,
     ],
     /*
 	|--------------------------------------------------------------------------

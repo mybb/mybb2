@@ -9,9 +9,43 @@
 namespace MyBB\Core\Providers;
 
 use Collective\Html\FormBuilder;
+use DaveJamesMiller\Breadcrumbs\Manager;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Cache\Repository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
+use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
 use MyBB\Core\Database\Repositories\Decorators\Forum\CachingDecorator;
+use MyBB\Core\Database\Repositories\Eloquent\ConversationMessageRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ConversationRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ForumRepository;
+use MyBB\Core\Database\Repositories\Eloquent\PollRepository;
+use MyBB\Core\Database\Repositories\Eloquent\PollVoteRepository;
+use MyBB\Core\Database\Repositories\Eloquent\PostRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository;
+use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository;
+use MyBB\Core\Database\Repositories\Eloquent\SearchRepository;
+use MyBB\Core\Database\Repositories\Eloquent\TopicRepository;
+use MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository;
+use MyBB\Core\Database\Repositories\Eloquent\UserRepository;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollRepositoryInterface;
+use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
+use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
+use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository;
+use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
+use MyBB\Core\Permissions\PermissionChecker;
+use MyBB\Core\Renderers\Post\Quote\MyCode;
+use MyBB\Core\Renderers\Post\Quote\QuoteInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,108 +71,87 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            'Illuminate\Contracts\Auth\Registrar',
-            'MyBB\Core\Services\Registrar'
+            PostRepositoryInterface::class,
+            PostRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\PostRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\PostRepository'
+            TopicRepositoryInterface::class,
+            TopicRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\TopicRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\TopicRepository'
+            UserRepositoryInterface::class,
+            UserRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\UserRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\UserRepository'
+            SearchRepositoryInterface::class,
+            SearchRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\SearchRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\SearchRepository'
+            PollRepositoryInterface::class,
+            PollRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\PollRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\PollRepository'
+            PollVoteRepositoryInterface::class,
+            PollVoteRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\PollVoteRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\PollVoteRepository'
+            ProfileFieldGroupRepositoryInterface::class,
+            ProfileFieldGroupRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository'
+            ProfileFieldRepositoryInterface::class,
+            ProfileFieldRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository'
+            ProfileFieldOptionRepositoryInterface::class,
+            ProfileFieldOptionRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository'
+            UserProfileFieldRepositoryInterface::class,
+            UserProfileFieldRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository'
+            ConversationRepositoryInterface::class,
+            ConversationRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\ConversationRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\ConversationRepository'
+            ConversationMessageRepositoryInterface::class,
+            ConversationMessageRepository::class
         );
 
         $this->app->bind(
-            'MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\ConversationMessageRepository'
+            QuoteInterface::class,
+            MyCode::class
         );
 
         $this->app->bind(
-            'MyBB\Parser\Parser\CustomCodes\CustomCodeRepositoryInterface',
+            LikesRepositoryInterface::class,
+            LikesRepository::class
+        );
+
+        $this->app->singleton(PermissionChecker::class);
+
+        $this->app->bind(
+            ForumRepositoryInterface::class,
             function (Application $app) {
-                $repository = $app->make('MyBB\Parser\Parser\CustomCodes\CustomMyCodeRepository');
-                $cache = $app->make('Illuminate\Contracts\Cache\Repository');
+                $repository = $app->make(ForumRepository::class);
 
+                $cache = $app->make(Repository::class);
 
-                //return new \MyBB\Parser\Parser\CustomCodes\CachingDecorator($repository, $cache);
-            }
-        );
+                $permissionChecker = $app->make(PermissionChecker::class);
 
-        $this->app->bind(
-            'MyBB\Core\Renderers\Post\Quote\QuoteInterface',
-            'MyBB\Core\Renderers\Post\Quote\MyCode'
-        );
-
-        $this->app->bind(
-            'MyBB\Parser\Parser\ParserInterface',
-            'MyBB\Parser\Parser\MyCode'
-        );
-
-        $this->app->bind(
-            'MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface',
-            'MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository'
-        );
-
-        $this->app->singleton('MyBB\Core\Permissions\PermissionChecker');
-
-        $this->app->bind(
-            'MyBB\Core\Database\Repositories\ForumRepositoryInterface',
-            function (Application $app) {
-                $repository = $app->make('MyBB\Core\Database\Repositories\Eloquent\ForumRepository');
-
-                $cache = $app->make('Illuminate\Contracts\Cache\Repository');
-
-                $permissionChecker = $app->make('MyBB\Core\Permissions\PermissionChecker');
-
-                $guard = $app->make('Illuminate\Contracts\Auth\Guard');
+                $guard = $app->make(Guard::class);
 
                 return new CachingDecorator($repository, $cache, $permissionChecker, $guard);
             }
@@ -146,7 +159,7 @@ class AppServiceProvider extends ServiceProvider
 
         // TODO: Default user (Guest) = $this->initDefaultUser();
 
-        $this->app->instance('DaveJamesMiller\Breadcrumbs\Manager', $this->app['breadcrumbs']);
+        $this->app->instance(Manager::class, $this->app['breadcrumbs']);
 
         // Fix for the form builder
         $this->app->bind(FormBuilder::class, function ($app) {
