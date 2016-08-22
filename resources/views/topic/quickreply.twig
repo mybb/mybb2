@@ -1,5 +1,6 @@
             <div class="post post--reply post--quick-reply" id="post-reply">
                 <form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="quickreply">
+                    {{ csrf_field() }}
                     <div class="post__meta">
                         <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
 

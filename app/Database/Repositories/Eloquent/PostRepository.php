@@ -201,6 +201,7 @@ class PostRepository implements PostRepositoryInterface
         }
 
         $post = $topic->posts()->create($postDetails);
+        $post->setCreatedAt($post->freshTimestamp())->setUpdatedAt($post->freshTimestamp())->save();
 
         if ($post !== false) {
             $topic->increment('num_posts');

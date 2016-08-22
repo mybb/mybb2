@@ -111,4 +111,20 @@ class PostPresenter extends BasePresenter
     {
         return $this->getWrappedObject()->topic;
     }
+
+    /**
+     * @return string
+     */
+    public function created_at()
+    {
+        return $this->wrappedObject->created_at;
+    }
+
+    /**
+     * @return string
+     */
+    public function updated_at()
+    {
+        return $this->wrappedObject->updated_at;
+    }
 }
