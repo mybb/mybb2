@@ -13,8 +13,8 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;
-use MyBB\Core\Database\Models\Role;
-use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;
 
 class AuthController extends Controller
@@ -54,19 +54,38 @@ class AuthController extends Controller
     private $request;
 
     /**
+     * @var RoleRepositoryInterface
+     */
+    private $roleRepository;
+    /**
+     * @var UserRepositoryInterface
+     */
+    private $userRepository;
+
+    /**
      * Create a new authentication controller instance.
      *
      * @param AuthManager $auth
      * @param Breadcrumbs $breadcrumbs
      * @param Factory $validator
      * @param Request $request
+     * @param RoleRepositoryInterface $roleRepository
+     * @param UserRepositoryInterface $userRepository
      */
-    public function __construct(AuthManager $auth, Breadcrumbs $breadcrumbs, Factory $validator, Request $request)
-    {
+    public function __construct(
+        AuthManager $auth,
+        Breadcrumbs $breadcrumbs,
+        Factory $validator,
+        Request $request,
+        RoleRepositoryInterface $roleRepository,
+        UserRepositoryInterface $userRepository
+    ) {
         $this->auth = $auth;
         $this->breadcrumbs = $breadcrumbs;
         $this->validator = $validator;
         $this->request = $request;
+        $this->userRepository = $userRepository;
+        $this->roleRepository = $roleRepository;
 
         $this->middleware('guest', ['except' => 'getLogout']);
     }
@@ -210,14 +229,12 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
+        $user = $this->userRepository->create([
             'name'     => $data['name'],
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
-        $user->roles()->attach(Role::where('role_slug', '=', 'user')->pluck('id'), ['is_display' => true]);
-
+        $user->roles()->attach($this->roleRepository->findIdBySlug('user'), ['is_display' => true]);
         return $user;
     }
 }
