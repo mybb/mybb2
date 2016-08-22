@@ -10,6 +10,7 @@
             <h1 class="page-title">{{ trans('topic.postreplytotopic', {'title':topic.title}) }}</h1>
         </header>
         <form method="post" action="{{ url_route('topics.reply', {'id': topic.id, 'slug': topic.slug}) }}" id="topicreply">
+            {{ csrf_field() }}
             <section class="topic topic--reply">
                 <div class="post post--reply">
                     <div class="post__meta">
