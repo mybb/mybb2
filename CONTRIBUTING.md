@@ -96,6 +96,5 @@ JavaScript should follow the [JavaScript conventions laid out by Douglas Crockfo
 
 Core CSS styling is built using the [SASS](http://sass-lang.com) pre-processor. CSS code should follow the [enhanced BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) where fitting, and focus upon providing reusable CSS components rather than replicating styles. CSS should follow [the standards laid out by @mdo](http://codeguide.co/#css).
 
-##Contributor License Agreement
-
-Contributors to this project should understand and ensure they agree to the terms described in our [Contributor License Agreement](#TODO). All contributors are required to accept this agreement before their contributions will be accepted into the project.
+##Code of Conduct
+Contributors to this project should understand and ensure they agree to the terms described in our Code of Conduct available at https://mybb.com/about/conduct/.
