@@ -80,6 +80,26 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
 
         Route::group(['prefix' => 'users'], function () {
+			Route::get('/', [
+                'as'   => 'admin.users',
+                'uses' => 'Admin\Users\UserController@users',
+            ]);
+            Route::get('/edit/{id}', [
+                'as'   => 'admin.users.edit',
+                'uses' => 'Admin\Users\UserController@editUser',
+            ]);
+            Route::post('/edit/{id}', [
+                'as'   => 'admin.users.edit',
+                'uses' => 'Admin\Users\UserController@saveUser',
+            ]);
+            Route::get('/add', [
+                'as'   => 'admin.users.add',
+                'uses' => 'Admin\Users\UserController@addUser',
+            ]);
+            Route::post('/add', [
+                'as'   => 'admin.users.add',
+                'uses' => 'Admin\Users\UserController@saveNewUser',
+            ]);
             Route::get('/profile-fields', [
                 'as'   => 'admin.users.profile_fields',
                 'uses' => 'Admin\Users\ProfileFieldController@profileFields',

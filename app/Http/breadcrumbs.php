@@ -253,6 +253,21 @@ Breadcrumbs::register('admin.users', function ($breadcrumbs) {
     $breadcrumbs->push(trans('admin::general.users_roles'));
 });
 
+Breadcrumbs::register('admin.users.list', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.users');
+    $breadcrumbs->push(trans('admin::users.title'));
+});
+
+Breadcrumbs::register('admin.users.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.users.list');
+    $breadcrumbs->push(trans('admin::users.edit_title'));
+});
+
+Breadcrumbs::register('admin.users.add', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.users.list');
+    $breadcrumbs->push(trans('admin::users.add_title'));
+});
+
 Breadcrumbs::register('admin.users.profile_fields', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.users');
     $breadcrumbs->push(trans('admin::profile_fields.title'), route('admin.users.profile_fields'));

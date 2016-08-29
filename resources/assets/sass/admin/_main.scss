@@ -71,6 +71,18 @@
 		padding: 10px;
 	}
 
+	td {
+        &.avatar-cell {
+            width: 44px;
+            padding-right: 0px;
+            
+            img {
+                width: 44px;
+                height: 44px;
+            }
+        }
+    }
+
 	thead {
 		background: $primary-color;
 		color: $invert-font-color;
