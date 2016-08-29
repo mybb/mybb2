@@ -1,0 +1,13 @@
+{% extends "layouts.admin" %}
+{% block title %}{{ trans('admin::users.edit_title') }}{% endblock %}
+{% block contents %}
+    <h1>{{ trans('admin::users.edit_title') }}</h1>
+    
+    <div>
+        <a href="{{ url_route('admin.users') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
+    </div>
+    
+    {{ form_open({'route': ['admin.users.edit', user.id], 'method': 'post'}) }}
+    {% include "admin.partials.users.user_form" with [user] %}
+    {{ form_close() }}
+{% endblock %}

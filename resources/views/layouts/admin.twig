@@ -34,6 +34,7 @@
                 <li>
                     <h3><a href="#"><i class="fa fa-users"></i><span class="text">{{ trans('admin::nav.users_and_roles') }}</span></a></h3>
                     <ul class="sidebar-menu__sub">
+                        <li {{ active_tab('users') }}><a href="{{ url_route('admin.users') }}">Users</a></li>
                         <li {{ active_tab('profile-fields') }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
                     </ul>
                 </li>

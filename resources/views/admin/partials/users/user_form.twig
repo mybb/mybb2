@@ -1,0 +1,31 @@
+<section class="form">
+    <div class="form__section">
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('name', trans('admin::users.name')) }}</h3>
+            {{ form_text('name', user ? user.name) }}
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('email', trans('admin::users.mail')) }}</h3>
+            {{ form_text('email', user ? user.email ) }}
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('password', trans('admin::users.password')) }}</h3>
+            {{ form_password('password', {'class': 'password-toggle'}) }}
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('password_confirmation', trans('admin::users.password_confirm')) }}</h3>
+            {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('role', trans('admin::users.role')) }}</h3>
+            {{ form_select('role', roles, role ? role.role_slug : 'user') }}
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ form_label('usertitle', trans('admin::users.usertitle')) }}</h3>
+            {{ form_text('usertitle', user ? user.usertitle) }}
+        </div>
+        <div class="form__submit">
+            {{ form_button(trans('admin::general.save'), {'type': 'submit', 'class': 'button'}) }}
+        </div>
+    </div>
+</section>
