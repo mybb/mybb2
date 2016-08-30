@@ -48,7 +48,7 @@ elixir(mix => {
     mix
         .sass("main.scss", "public/assets/css/main.css")
         .sass("admin.scss", "public/assets/css/admin.css")
-        .sass("rtl.scss", "public/assets/css/rtl.css")
+        .sass("main.rtl.scss", "public/assets/css/rtl.css")
         .sass("admin.rtl.scss", "public/assets/css/admin_rtl.css")
         .copy("node_modules/font-awesome/fonts", "public/assets/fonts")
         .task("images", "resources/assets/images/**/*")
