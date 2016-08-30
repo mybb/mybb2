@@ -3465,6 +3465,12 @@ img.jcrop-preview {
       border-bottom: 1px solid #dfdfdf; }
   .admin-table td, .admin-table th {
     padding: 10px; }
+  .admin-table td.avatar-cell {
+    width: 44px;
+    padding-right: 0px; }
+    .admin-table td.avatar-cell img {
+      width: 44px;
+      height: 44px; }
   .admin-table thead {
     background: #007fd0;
     color: #fff; }
