@@ -13,6 +13,7 @@ namespace MyBB\Core\Presenters;
 use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\Conversation as ConversationModel;
+use MyBB\Core\Database\Models\User;
 
 class ConversationPresenter extends BasePresenter
 {
@@ -35,15 +36,15 @@ class ConversationPresenter extends BasePresenter
     }
 
     /**
-     * @return ConversationMessage
+     * @return ConversationMessagePresenter
      */
     public function lastMessage()
     {
-        if ($this->wrappedObject->lastMessage instanceof ConversationMessage) {
+        if ($this->wrappedObject->lastMessage instanceof ConversationMessagePresenter) {
             return $this->wrappedObject->lastMessage;
         }
 
-        return app()->make('MyBB\Core\Presenters\ConversationMessagePresenter', [$this->wrappedObject->lastMessage]);
+        return app()->make(\MyBB\Core\Presenters\ConversationMessagePresenter::class, [$this->wrappedObject->lastMessage]);
     }
 
     /**

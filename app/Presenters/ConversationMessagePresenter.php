@@ -26,14 +26,14 @@ class ConversationMessagePresenter extends BasePresenter
     }
 
     /**
-     * @return User
+     * @return UserPresenter
      */
     public function author()
     {
-        if ($this->wrappedObject->author instanceof User) {
+        if ($this->wrappedObject->author instanceof UserPresenter) {
             return $this->wrappedObject->author;
         }
 
-        return app()->make('MyBB\Core\Presenters\UserPresenter', [$this->wrappedObject->author]);
+        return app()->make(\MyBB\Core\Presenters\UserPresenter::class, [$this->wrappedObject->author]);
     }
 }
