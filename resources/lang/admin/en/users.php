@@ -21,4 +21,6 @@ return [
     'usertitle'  => 'User Title',
     'password'         => 'Password',
     'password_confirm' => 'Confirm Password',
+    'error_creating_user' => 'Sorry, there was an error creating the user',
+    'user_create_success' => 'User created successfully!',
 ];

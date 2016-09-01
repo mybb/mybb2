@@ -1,3 +1,6 @@
+{% if user is defined %}
+    {{ form_hidden('user_id', user.id) }}
+{% endif %}
 <section class="form">
     <div class="form__section">
         <div class="form__row">
@@ -20,10 +23,12 @@
             <h3 class="form__row__title">{{ form_label('role', trans('admin::users.role')) }}</h3>
             {{ form_select('role', roles, role ? role.role_slug : 'user') }}
         </div>
+        {% if user is defined %}
         <div class="form__row">
             <h3 class="form__row__title">{{ form_label('usertitle', trans('admin::users.usertitle')) }}</h3>
             {{ form_text('usertitle', user ? user.usertitle) }}
         </div>
+        {% endif %}
         <div class="form__submit">
             {{ form_button(trans('admin::general.save'), {'type': 'submit', 'class': 'button'}) }}
         </div>

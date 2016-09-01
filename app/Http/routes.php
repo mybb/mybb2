@@ -98,7 +98,7 @@ Route::group(['middleware' => ['web']], function () {
             ]);
             Route::post('/add', [
                 'as'   => 'admin.users.add',
-                'uses' => 'Admin\Users\UserController@saveNewUser',
+                'uses' => 'Admin\Users\UserController@create',
             ]);
             Route::get('/profile-fields', [
                 'as'   => 'admin.users.profile_fields',
