@@ -91,14 +91,20 @@ class UserController extends AdminController
     {
         $user = $this->userRepository->find($id);
         
+        $values = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'usertitle' => $request->input('usertitle'),
+        ];
+        
         if ($request->has('password')) {
-            $request['password'] = bcrypt($request->input('password'));
+            $values['password'] = bcrypt($request->input('password'));
         }
         
-        $user->update($request->only('name', 'email', 'password', 'usertitle'));
-        $user->update(['updated_at' => $user->freshTimestamp()]);
+        $user->update($values);
+        $user->setUpdatedAt($user->freshTimestamp())->save();
         
-        $role = $this->roleRepository->findIdBySlug($request['role']);
+        $role = $this->roleRepository->findIdBySlug($request->input('role'));
         $user->roles()->update(['role_id' => $role]);
         
         return redirect()->back()->withSuccess(trans('admin::general.success_saved'));
