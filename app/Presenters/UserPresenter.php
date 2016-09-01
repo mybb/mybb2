@@ -373,14 +373,4 @@ class UserPresenter extends BasePresenter
 
         return $data;
     }
-
-    public function created_at()
-    {
-        return $this->wrappedObject->created_at;
-    }
-
-    public function last_visit()
-    {
-        return $this->wrappedObject->last_visit;
-    }
 }

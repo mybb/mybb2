@@ -26,6 +26,7 @@ use MyBB\Core\Database\Repositories\Eloquent\PostRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository;
+use MyBB\Core\Database\Repositories\Eloquent\RoleRepository;
 use MyBB\Core\Database\Repositories\Eloquent\SearchRepository;
 use MyBB\Core\Database\Repositories\Eloquent\TopicRepository;
 use MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository;
@@ -37,6 +38,7 @@ use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
@@ -140,6 +142,11 @@ class AppServiceProvider extends ServiceProvider
             LikesRepository::class
         );
 
+        $this->app->bind(
+            RoleRepositoryInterface::class,
+            RoleRepository::class
+        );
+
         $this->app->singleton(PermissionChecker::class);
 
         $this->app->bind(
@@ -167,10 +174,5 @@ class AppServiceProvider extends ServiceProvider
 
             return $form->setSessionStore($app['session.store']);
         });
-
-        $this->app->bind(
-            'MyBB\Core\Database\Repositories\RoleRepositoryInterface',
-            'MyBB\Core\Database\Repositories\Eloquent\RoleRepository'
-        );
     }
 }
