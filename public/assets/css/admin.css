@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*!
-*   MyBB 2 Admin Control Panel Theme - http://mybb.com - @mybb - MIT license
+*   MyBB 2 Admin Control Panel Theme - https://mybb.com - @mybb - MIT license
 */
 /*!
  *  Font Awesome 4.6.3 by @davegandy - http://fontawesome.io - @fontawesome
@@ -2395,8 +2395,7 @@ textarea {
     font-size: 1.8em; }
   .main .page-sidebar {
     padding-bottom: 10px;
-    font-size: 0.9em;
-    margin-top: 30px; }
+    font-size: 0.9em; }
     .main .page-sidebar .block {
       border: 1px solid #dfdfdf;
       padding: 12px 15px;
@@ -2746,6 +2745,9 @@ dl.stats {
     .form .form__radio input[type="radio"] {
       float: left;
       margin: 6px 0 0 -26px; }
+    .form .form__radio .form__radio__title {
+      font-size: 1em;
+      margin: 10px 0 5px 0; }
     .form .form__radio:last-child {
       margin-bottom: 0; }
   .form .form__data {

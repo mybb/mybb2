@@ -102,6 +102,11 @@
             margin: side-values(6px 0 0 -26px);
         }
 
+        .form__radio__title {
+            font-size: 1em;
+            margin: side-values(10px 0 5px 0);
+        }
+
         .form__radio__description {
             @extend .form__row__description;
         }

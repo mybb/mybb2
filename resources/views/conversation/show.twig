@@ -18,7 +18,7 @@
                 {% include 'conversation.quickreply' with {'conversation': conversation} %}
                 {% include 'conversation.preview' with {'preview': preview} %}
             {% endif %}
-            
+
             {% for message in messages %}
                 <div class="post post--conversation">
                     <div class="post__meta">
@@ -51,7 +51,7 @@
     </div>
     <aside class="page-sidebar">
         <section class="block conversation-participants">
-            <h3 class="heading conversation-participants__title">{{ trans('conversations.participants') }}</h3>
+            <h3 class="block__heading conversation-participants__title">{{ trans('conversations.participants') }}</h3>
             {% for participant in conversation.participants %}
                 <span class="participant{{ (participant.pivot.ignores) ? ' participant--ignores' }}">
                     <a href="{{ url_route('user.profile', {'slug': participant.name, 'id': participant.id}) }}" data-user-id="{{ participant.id }}" class="avatar-profile-link"><img src="{{ participant.avatar }}" class="avatar" /></a>

@@ -16,7 +16,7 @@
             <div class="post post--reply">
                 <div class="post__meta">
                     <a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}" class="avatar-profile-link" title="{{ trans('account.goToYourProfile') }}"><img src="{{ auth_user.avatar }}" alt="{{ trans('account.your_avatar') }}" class="avatar" /></a>
-                    <h3><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
+                    <h3 class="post__author"><a href="{{ url_route('user.profile', {'slug': auth_user.name, 'id': auth_user.id}) }}">{{ auth_user.styled_name|raw }}</a></h3>
                     <span class="post__date">{{ trans('general.now') }}</span>
                 </div>
                 <div class="post__body">
@@ -24,8 +24,8 @@
                 </div>
                 <div class="post__foot">
                     <ul class="post__controls">
-                        <li class="preview"><a href="{{ url_route("conversations.compose") }}" onclick="return submitFormAsGet('compose');" class="icon fa-edit">{{ trans('general.preview') }}</a></li>
-                        <li class="attach"><a href="#attach" class="icon fa-paperclip">{{ trans('topic.attachFiles') }}</a></li>
+                        <li class="post__controls__item post__controls__item--preview"><a href="{{ url_route("conversations.compose") }}" onclick="return submitFormAsGet('compose');" class="post__controls__item__link icon fa-edit"><span class="text">{{ trans('general.preview') }}</span></a></li>
+                        <li class="post__controls__item post__controls__item--attach"><a href="#attach" class="post__controls__item__link icon fa-paperclip"><span class="text">{{ trans('topic.attachFiles') }}</span></a></li>
                     </ul>
                 </div>
             </div>
