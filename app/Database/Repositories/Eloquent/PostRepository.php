@@ -181,15 +181,21 @@ class PostRepository implements PostRepositoryInterface
     {
 
         $postDetails = array_merge([
-            'user_id'        => $this->guard->user()->id,
+            'user_id'        => 0,
             'username'       => null,
             'content'        => '',
             'content_parsed' => '',
         ], $postDetails);
 
-        $postDetails['content_parsed'] = $this->parser->parse($postDetails['content'], [
-            'username' => $this->guard->user()->name,
-        ]); // TODO: Parser options...
+        if ($this->guard->user()) {
+            $postDetails['user_id'] = $this->guard->user()->id;
+            $postDetails['content_parsed'] = $this->parser->parse($postDetails['content'], [
+                'username' => $this->guard->user()->name,
+            ]);
+        } else {
+            $postDetails['content_parsed'] = $this->parser->parse($postDetails['content']);
+        }
+		// TODO: Parser options...
 
         if ($postDetails['user_id'] > 0) {
             $postDetails['username'] = User::find($postDetails['user_id'])->name;
