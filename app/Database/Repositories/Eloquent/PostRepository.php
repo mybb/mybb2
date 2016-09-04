@@ -195,7 +195,7 @@ class PostRepository implements PostRepositoryInterface
         } else {
             $postDetails['content_parsed'] = $this->parser->parse($postDetails['content']);
         }
-		// TODO: Parser options...
+        // TODO: Parser options...
 
         if ($postDetails['user_id'] > 0) {
             $postDetails['username'] = User::find($postDetails['user_id'])->name;

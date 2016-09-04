@@ -260,7 +260,7 @@ class TopicRepository implements TopicRepositoryInterface
                 'user_id'  => $details['user_id'],
                 'username' => $details['username'],
             ]);
-			$topic->setCreatedAt($topic->freshTimestamp())->setUpdatedAt($topic->freshTimestamp())->save();
+            $topic->setCreatedAt($topic->freshTimestamp())->setUpdatedAt($topic->freshTimestamp())->save();
 
             $firstPost = $this->postRepository->addPostToTopic($topic, [
                 'content'  => $details['content'],
