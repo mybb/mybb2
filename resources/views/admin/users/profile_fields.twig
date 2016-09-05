@@ -1,13 +1,14 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>{{ trans('admin::profile_fields.title') }}</h1>
-
-    <div>
-        <a href="{{ url_route('admin.users.profile_fields.add_group') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_group') }}</a>
-        <a href="{{ url_route('admin.users.profile_fields.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_field') }}</a>
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::profile_fields.title') }}</h1>
+        <div class="admin-body__header__buttons">
+            <a href="{{ url_route('admin.users.profile_fields.add_group') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_group') }}</a>
+            <a href="{{ url_route('admin.users.profile_fields.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::profile_fields.add_field') }}</a>
+        </div>
     </div>
-
+    <div class="admin-body__content">
     {% for group in profile_field_groups %}
         <h3>{{ group.name }}</h3>
         <table class="admin-table admin-table--bordered">
@@ -42,4 +43,5 @@
             </tbody>
         </table>
     {% endfor %}
+    </div>
 {% endblock %}

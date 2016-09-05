@@ -1,13 +1,10 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>{{ trans('admin::profile_fields.add_group') }}</h1>
-
-    <div>
-        <a href="{{ url_route('admin.users.profile_fields') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::profile_fields.add_group') }}</h1>
     </div>
-
-    <div>
+    <div class="admin-body__content">
         {{ form_open({'route': ['admin.users.profile_fields.add_group', field.id], 'method': 'post'}) }}
         <section class="form">
             <div class="form__section">
@@ -23,11 +20,11 @@
                     <h3 class="form__row__title">{{ form_label('description', trans('admin::profile_fields.group_description_field')) }}</h3>
                     {{ form_text('description') }}
                 </div>
-                <div class="form__submit">
-                    {{ form_button(trans('admin::profile_fields.group_add'), {'type': 'submit', 'class': 'button'}) }}
-                </div>
             </div>
         </section>
+        <div class="form__submit">
+            {{ form_button(trans('admin::profile_fields.save_group'), {'type': 'submit', 'class': 'button icon fa-tags'}) }}
+        </div>
         {{ form_close() }}
     </div>
 {% endblock %}

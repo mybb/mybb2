@@ -36,4 +36,7 @@ return [
     'options_name_field'          => 'Name',
     'options_actions_field'       => 'Actions',
     'edit_preview_submit_success' => 'Profile field submitted sucessfully!',
+    'save_group'                  => 'Save Profile Field Group',
+    'save_field'                  => 'Save Profile Field',
+    'add_option'                  => 'Add Profile Field Option'
 ];

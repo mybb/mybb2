@@ -29,6 +29,6 @@ class DashboardController extends AdminController
     {
         $this->breadcrumbs->setCurrentRoute('admin.dashboard');
 
-        return view('admin.dashboard', ['active_tab' => 'dashboard']);
+        return view('admin.dashboard')->withActive("dashboard");
     }
 }

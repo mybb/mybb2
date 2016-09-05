@@ -8,6 +8,7 @@
 
 return [
     'title'      => 'Users',
+    'save_user'  => 'Save User',
     'add_user'   => 'Add User',
     'add_title'  => 'New User',
     'user'       => 'User',

@@ -2438,7 +2438,7 @@ html[dir="rtl"] {
   float: right; }
 
 /*!
-*   MyBB 2.0 - http://mybb.com - @mybb - MIT license
+*   MyBB 2.0 - https://mybb.com - @mybb - MIT license
 */
 .icon {
   text-decoration: none; }
@@ -2647,7 +2647,7 @@ textarea {
 .page-tabs {
   list-style: none;
   margin: 0;
-  background: #fafafa;
+  background: #f7f7f7;
   padding: 8px;
   border-top: 1px solid #dfdfdf;
   border-bottom: 1px solid #dfdfdf; }
@@ -2657,7 +2657,7 @@ textarea {
     .page-tabs .page-tabs__item .page-tabs__item__link {
       padding: 4px 8px;
       display: inline-block;
-      background: #fafafa;
+      background: #f7f7f7;
       border-radius: 3px; }
       .page-tabs .page-tabs__item .page-tabs__item__link:hover, .page-tabs .page-tabs__item .page-tabs__item__link:active {
         text-decoration: none;
@@ -2686,7 +2686,7 @@ dl.stats {
     display: table-cell; }
 
 .alert {
-  background-color: #fafafa;
+  background-color: #f7f7f7;
   padding: 10px 40px 10px 12px;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -2737,7 +2737,7 @@ dl.stats {
     display: inline-block;
     margin: 0 5px; }
     .pagination li a {
-      background: #fafafa;
+      background: #f7f7f7;
       padding: 1px 8px;
       display: inline-block;
       border-radius: 4px; }
@@ -2790,7 +2790,7 @@ dl.stats {
   margin-left: 1%;
   float: right;
   text-align: center;
-  background: #fafafa;
+  background: #f7f7f7;
   box-sizing: border-box; }
   @media only screen and (min-width: 768px) {
     .menu-bar .menu-bar__links__item__link {
@@ -2833,7 +2833,7 @@ dl.stats {
     .section-menu .section-menu__links .section-menu__links__item:nth-child(even) {
       margin-right: 2%; }
     .section-menu .section-menu__links .section-menu__links__item .section-menu__links__item__link {
-      background: #fafafa;
+      background: #f7f7f7;
       display: block;
       padding: 2px 8px;
       text-decoration: none;
@@ -3010,7 +3010,7 @@ dl.stats {
       width: 80px;
       height: 80px; }
   .user-bar__dropdown .dropdown__container {
-    background: #fafafa;
+    background: #f7f7f7;
     border: 1px solid #dfdfdf;
     border-radius: 3px;
     margin: 10px 0 6px 0; }
@@ -3157,7 +3157,7 @@ dl.stats {
 
 .footer .footer__navigation {
   border-top: 1px solid #dfdfdf;
-  background: #fafafa;
+  background: #f7f7f7;
   border-bottom: 1px solid #dfdfdf;
   margin-bottom: 20px; }
   @media only screen and (min-width: 768px) {
@@ -3369,7 +3369,7 @@ textarea {
     display: block;
     padding: 3px 8px;
     margin: 5px 0 0 10px;
-    background: #fafafa;
+    background: #f7f7f7;
     cursor: pointer;
     border-radius: 4px; }
     .select-control .select-control__option__button.icon:before {

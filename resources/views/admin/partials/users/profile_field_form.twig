@@ -31,8 +31,8 @@
             <p class="form__row__description">{{ trans('admin::general.see') }} <a href="http://laravel.com/docs/5.0/validation#available-validation-rules">Laravel Validation Rules</a></p>
             {{ form_text('validation_rules', field is defined and field.has_validation_rules ? field.validation_rules) }}
         </div>
-        <div class="form__submit">
-            {{ form_button(trans('admin::general.save'), {'type': 'submit', 'class': 'button'}) }}
-        </div>
     </div>
 </section>
+<div class="form__submit">
+    {{ form_button(trans('admin::profile_fields.save_field'), {'type': 'submit', 'class': 'button icon fa-tag'}) }}
+</div>

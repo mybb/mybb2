@@ -1,57 +1,47 @@
-.admin-main-nav {
-	width: 13%;
-	float: $left;
-	margin-#{$left}: 15px;
+.admin-layout {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
 
-	.fa {
-		color: $alt-font-color-1;
-	}
+.main {
+	padding: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex: 1;
+}
 
-	& > ul > li {
-		background: $background-default;
-		margin: 5px;
-		padding: 5px;
-		width: 94%;
-	}
+.admin-body {
+	border-top: 2px solid $border-1;
+	flex: 1;
 
-	li {
+	.admin-body__header {
 		background: $background-1;
-		margin: 5px 5px 5px 23px;
-		padding: 5px 5px 5px 10px;
-		border-radius: 4px;
-		width: 81%;
+		border-bottom: 2px solid $border-1;
+		padding: 30px;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
 
-		.active {
-			background: $primary-color;
+		.admin-body__header__title {
+			margin: 5px 0;
+			font-size: 2em;
+			font-weight: normal;
+			flex: 1;
+		}
 
-			a {
-				color: $invert-font-color;
+		.admin-body__header__buttons {
+
+			.button {
+				margin: side-values(0 0 0 5px);
 			}
 		}
 	}
 
-	ul {
-		list-style: none;
-		text-indent: 0;
-		padding: 0;
-
-		h3 {
-			border-bottom: 1px solid $border-1;
-			padding-bottom: 2px;
-			display: inline-block;
-			width: 85%;
-			margin-bottom: 5px;
-			margin-#{$left}: 5px;
-			margin-top: 0;
-		}
-	}
-}
-
-#admin-content {
-	h1 {
-		border-bottom: 2px solid $border-2;
-		padding-bottom: 15px;
-		font-size: 1.5em;
+	.admin-body__content {
+		padding: 30px;
 	}
 }
 
@@ -75,7 +65,7 @@
         &.avatar-cell {
             width: 44px;
             padding-right: 0px;
-            
+
             img {
                 width: 44px;
                 height: 44px;

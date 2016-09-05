@@ -1,33 +1,33 @@
 {% extends "layouts.admin" %}
 {% block title %}{{ trans('admin::users.title') }}{% endblock %}
 {% block contents %}
-    <h1>{{ trans('admin::users.title') }}</h1>
-    
-    <div>
-        <a href="{{ url_route('admin.users.add') }}" class="button button"><i class="fa fa-plus"></i> {{ trans(('admin::users.add_user')) }}</a>
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::users.title') }}</h1>
+        <div class="admin-body__header__buttons"><a href="{{ url_route('admin.users.add') }}" class="button icon fa-plus">{{ trans(('admin::users.add_user')) }}</a></div>
     </div>
-
-    <table class="admin-table admin-table--bordered users">
-        <thead>
-            <tr>
-                <th colspan="2">{{ trans('admin::users.user') }}</th>
-                <th>{{ trans('admin::users.mail') }}</th>
-                <th>{{ trans('admin::users.regdate') }}</th>
-                <th>{{ trans('admin::users.action') }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td class="avatar-cell"><img src="{{ user.avatar }}"></td>
-                <td>{{ user.styled_name|raw }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ generate_time(user.created_at) }}</td>
-                <td>
-                    <a href="{{ url_route('admin.users.edit', {'id': user.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::users.edit') }}</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="admin-body__content">
+        <table class="admin-table admin-table--bordered users">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ trans('admin::users.user') }}</th>
+                    <th>{{ trans('admin::users.mail') }}</th>
+                    <th>{{ trans('admin::users.regdate') }}</th>
+                    <th>{{ trans('admin::users.action') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td class="avatar-cell"><img src="{{ user.avatar }}"></td>
+                    <td>{{ user.styled_name|raw }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ generate_time(user.created_at) }}</td>
+                    <td>
+                        <a href="{{ url_route('admin.users.edit', {'id': user.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::users.edit') }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

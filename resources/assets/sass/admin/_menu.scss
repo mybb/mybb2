@@ -1,83 +1,89 @@
-.sidebar-menu {
-	margin-#{$left}: -225px;
-	width: 175px;
-	float: $left;
-	padding: side-values(12px 20px 20px 45px);
+.admin-menu {
+	flex: 0 0 200px;
+	border-top: 2px solid $dark-border-1;
+	background: $dark-background-1;
+	padding: side-values(10px 20px 20px 20px);
 
-	.sidebar-menu__main {
+	.admin-menu__list {
 		padding: 0;
+		margin: 0;
 		list-style: none;
 	}
 
-	.sidebar-menu__sub {
-		// display: none;
-		font-size: 0.8em;
-		padding: side-values(6px 0 0 0);
-		margin: side-values(0 0 20px 0);
-		list-style: none;
-
-		a {
-
-			&:link, &:visited {
-				display: block;
-				background: $background-1;
-				border-radius: 3px;
-				text-decoration: none;
-				padding: 2px 8px;
-				margin: 2px;
-			}
-
-			// &.sidebar-menu__active-link, &.active {
-			// 	background: $primary-color;
-			// 	color: $invert-font-color;
-			// }
-
-			&:hover, &:active {
-				background: $secondary-color;
-				color: $invert-font-color;
-				text-decoration: none;
-			}
-		}
-
-		.active a {
-			background: $primary-color;
-				color: $invert-font-color;
-		}
-	}
-
-	h3 {
-		font-size: 1em;
-		font-weight: 600;
+	.admin-menu__section__title {
+		font-size: 0.9em;
+		font-weight: 400;
 		margin: 10px 0 0 0;
-		padding: 2px 0;
-		border-bottom: 1px solid $border-2;
+		padding: 0;
 
-		a {
-			color: $alt-font-color-4;
+		.admin-menu__section__title__link {
+			color: $invert-font-color;
+			text-transform: uppercase;
 			display: block;
+			color: #ccc;
+			padding: 2px 0;
+			border-bottom: 1px solid #666;
 
 			&:hover {
 				color: $secondary-color;
 				text-decoration: none;
 			}
 		}
+	}
 
-		i {
-			float: $left;
-			margin: side-values(6px 0 0 -22px);
-			color: $alt-font-color-2;
-			font-size: 14px;
+	.admin-menu__section__list {
+		display: none;
+		font-size: 0.8em;
+		padding: side-values(6px 0 0 0);
+		margin: side-values(0 0 20px 0);
+		list-style: none;
+
+		.admin-menu__section__item__link {
+
+			&:link, &:visited {
+				display: block;
+				border-radius: 3px;
+				text-decoration: none;
+				padding: 1px 8px;
+				margin: 2px 0;
+				color: $invert-font-color;
+
+				&:before {
+					color: #aaa;
+				}
+			}
+
+			&:hover, &:active {
+				background: $secondary-color;
+				color: $invert-font-color;
+				text-decoration: none;
+
+				&:before {
+					color: $invert-font-color;
+				}
+			}
+		}
+
+		.admin-menu__section__item--active {
+
+			.admin-menu__section__item__link {
+				background: $primary-color;
+				color: $invert-font-color;
+
+				&:before {
+					color: $invert-font-color;
+				}
+			}
 		}
 	}
 
+	.admin-menu__section--active {
 
-	.sidebar-menu__active-section {
-
-		.sidebar-menu__sub {
+		.admin-menu__section__list {
 			display: block;
 		}
 
-		h2 i {
+		.admin-menu__section__title i {
 			color: $primary-color;
 		}
 	}

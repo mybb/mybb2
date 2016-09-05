@@ -1,17 +1,14 @@
 <header class="admin-header">
     <div class="header-bar">
+        <h1 class="title admin-header__logo"><a href="{{ url_route('forum.index') }}" id="logo"><span class="visually-hidden">MyBB Admin Control Panel</span></a></h1>
         <div class="show-menu">
             <a href="#" class="show-menu__link">
                 <i class="fa fa-bars"></i>
                 <span class="text">Show Menu</span>
             </a>
         </div>
-        <div class="user-menu">
-            <a href="#" class="multi-link">{{ auth_user().name }} <i class="fa fa-caret-down"></i></a>
-        </div>
-        <div class="breadcrumb">
-            <h1 class="title breadcrumb__logo"><a href="{{ url_route('forum.index') }}" id="logo"><span>Control Panel</span></a></h1>
-            <div class="breadcrumb__trail">
+        <div class="admin-header__breadcrumb">
+            <div class="admin-header__breadcrumb__trail">
                 {{ Breadcrumbs.renderIfExists() }}
             </div>
         </div>

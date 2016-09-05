@@ -29,8 +29,8 @@
             {{ form_text('usertitle', user ? user.usertitle) }}
         </div>
         {% endif %}
-        <div class="form__submit">
-            {{ form_button(trans('admin::general.save'), {'type': 'submit', 'class': 'button'}) }}
-        </div>
     </div>
 </section>
+<div class="form__submit">
+    {{ form_button(trans('admin::users.save_user'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
+</div>

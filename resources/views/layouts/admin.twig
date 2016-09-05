@@ -10,49 +10,61 @@
     {% include "admin.partials.headerinclude" %}
     {% block head %}{% endblock %}
 </head>
-<body>
+<body class="admin-layout">
 <div id="spinner">
     <i class="fa fa-spinner fa-pulse"></i> {{ trans('general.loading') }}
 </div>
 {% include "admin.header" %}
 <div class="main" id="main">
-    <div class="sidebar-menu">
-        <nav id="menu">
-            <ul class="sidebar-menu__main">
-                <li>                    
-                    <h3><a href="{{ url_route('admin.dashboard') }}"><i class="fa fa-home"></i><span class="text">Home</span></a></h3>
-                    <ul class="sidebar-menu__sub">
-                        <li {{ active_tab('dashboard') }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
-                        <li><a href="">Settings</a></li>
-                        <li><a href="">Extensions</a></li>
-                        <li><a href="">Languages</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3><a href="#"><i class="fa fa-comments"></i><span class="text">Forums &amp; Posts</span></a></h3>
-                </li>
-                <li>
-                    <h3><a href="#"><i class="fa fa-users"></i><span class="text">{{ trans('admin::nav.users_and_roles') }}</span></a></h3>
-                    <ul class="sidebar-menu__sub">
-                        <li {{ active_tab('users') }}><a href="{{ url_route('admin.users') }}">Users</a></li>
-                        <li {{ active_tab('profile-fields') }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h3><a href="#"><i class="fa fa-eye"></i><span class="text">Templates &amp; Style</span></a></h3>
-                </li>
-                <li>
-                    <h3><a href="#"><i class="fa fa-gear"></i><span class="text">Tools &amp; Maintenance</span></a></h3>
-                </li>
-            </ul>
-        </nav>
-    </div>
-    <div class="page-body">
-        <div id="admin-content">
-            {% include "partials.messages" %}
-
-            {% block contents %}{% endblock %}
-        </div>
+    <nav class="admin-menu">
+        <ul class="admin-menu__list">
+            <li class="admin-menu__section{% if active == 'dashboard' %} admin-menu__section--active{% endif %}">
+                <h3 class="admin-menu__section__title"><a href="{{ url_route('admin.dashboard') }}" class="admin-menu__section__title__link">Home</a></h3>
+                <ul class="admin-menu__section__list">
+                    <li class="admin-menu__section__item{% if active == 'dashboard' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.dashboard') }}" class="admin-menu__section__item__link icon icon--fw fa-dashboard">Dashboard</a></li>
+                    <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-cog">Settings</a></li>
+                    <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-rocket">Extensions</a></li>
+                    <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-language">Languages</a></li>
+                </ul>
+            </li>
+            <li class="admin-menu__section">
+                <h3 class="admin-menu__section__title"><a href="#" class="admin-menu__section__title__link">Forums &amp; Posts</a></h3>
+                <ul class="admin-menu__section__list">
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-sitemap">Forum Management</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-paperclip">Attachments</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-wrench">Moderator Tools</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-filter">Word Filters</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-paragraph">MyCode</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-tags">Topic Prefixes</a></li>
+                </ul>
+            </li>
+            <li class="admin-menu__section{% if active == 'users' %} admin-menu__section--active{% endif %}{% if active == 'profile-fields' %} admin-menu__section--active{% endif %}">
+                <h3 class="admin-menu__section__title"><a href="{{ url_route('admin.users') }}" class="admin-menu__section__title__link">{{ trans('admin::nav.users_and_roles') }}</a></h3>
+                <ul class="admin-menu__section__list">
+                    <li class="admin-menu__section__item{% if active == 'users' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.users') }}" class="admin-menu__section__item__link icon icon--fw fa-user">Users</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-users">Roles</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-gavel">Banning</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-arrow-circle-up">Role Promotions</a></li>
+                    <li class="admin-menu__section__item{% if active == 'profile-fields' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.users.profile_fields') }}" class="admin-menu__section__item__link icon icon--fw fa-tag">Profile Fields</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-star">User Titles</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-warning">Warnings</a></li>
+                </ul>
+            </li>
+            <li class="admin-menu__section">
+                <h3 class="admin-menu__section__title"><a href="#" class="admin-menu__section__title__link">Templates &amp; Style</a></h3>
+                <ul class="admin-menu__section__list">
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-paint-brush">Themes</a></li>
+                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-code">Templates</a></li>
+                </ul>
+            </li>
+            <li class="admin-menu__section">
+                <h3 class="admin-menu__section__title"><a href="#" class="admin-menu__section__title__link">Tools &amp; Maintenance</a></h3>
+            </li>
+        </ul>
+    </nav>
+    <div class="admin-body">
+        {% include "partials.messages" %}
+        {% block contents %}{% endblock %}
     </div>
 </div>
 {% include "admin.footer" %}
