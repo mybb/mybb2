@@ -25,6 +25,7 @@
     "@claviska/jquery-dropdown": "^2.0.3",
     "Stepper": "git+ssh://git@github.com/FormStoneClassic/Stepper.git",
     "autosize": "^3.0.15",
+    "browserify": "^13.1.0",
     "datetimepicker": "^0.1.30",
     "dropit": "^1.0.0",
     "dropzone": "^4.3.0",
@@ -32,6 +33,9 @@
     "font-awesome": "^4.6.3",
     "gulp": "^3.9.1",
     "gulp-imagemin": "^3.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.13.6",
+    "gulp-uglify": "^2.0.0",
     "hideshowpassword": "^2.0.10",
     "jquery": "^3.1.0",
     "jquery-jcrop": "^0.9.13",
@@ -41,6 +45,9 @@
     "lang.js": "git+ssh://git@github.com/euantorano/Lang.js.git",
     "laravel-elixir": "^5.0.0",
     "modernizr": "^3.3.1",
-    "normalize-scss": "^5.0.3"
+    "normalize-scss": "^5.0.3",
+    "tsify": "^1.0.5",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }

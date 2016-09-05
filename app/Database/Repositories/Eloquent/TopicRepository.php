@@ -226,7 +226,7 @@ class TopicRepository implements TopicRepositoryInterface
         $details = array_merge([
             'title'         => '',
             'forum_id'      => 0,
-            'user_id'       => $this->guard->user()->id,
+            'user_id'       => 0,
             'username'      => null,
             'first_post_id' => 0,
             'last_post_id'  => 0,
@@ -236,6 +236,10 @@ class TopicRepository implements TopicRepositoryInterface
         ], $details);
 
         $details['slug'] = $this->createSlugForTitle($details['title']);
+
+        if ($this->guard->user()) {
+            $details['user_id'] = $this->guard->user()->id;
+        }
 
         if ($details['user_id'] > 0) {
             $details['username'] = User::find($details['user_id'])->name; // TODO: Use User Repository!
@@ -256,7 +260,7 @@ class TopicRepository implements TopicRepositoryInterface
                 'user_id'  => $details['user_id'],
                 'username' => $details['username'],
             ]);
-			$topic->setCreatedAt($topic->freshTimestamp())->setUpdatedAt($topic->freshTimestamp())->save();
+            $topic->setCreatedAt($topic->freshTimestamp())->setUpdatedAt($topic->freshTimestamp())->save();
 
             $firstPost = $this->postRepository->addPostToTopic($topic, [
                 'content'  => $details['content'],

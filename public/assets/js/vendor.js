@@ -10210,9 +10210,19 @@ if (jQuery) (function ($) {
 })(jQuery);
 /*
     A simple jQuery modal (http://github.com/kylefox/jquery-modal)
-    Version 0.7.0
+    Version 0.7.1
 */
-(function($) {
+
+(function (factory) {
+  // Making your jQuery plugin work better with npm tools
+  // http://blog.npmjs.org/post/112712169830/making-your-jquery-plugin-work-better-with-npm
+  if(typeof module === "object" && typeof module.exports === "object") {
+    factory(require("jquery"), window, document);
+  }
+  else {
+    factory(jQuery, window, document);
+  }
+}(function($, window, document, undefined) {
 
   var modals = [],
       getCurrent = function() {
@@ -10435,7 +10445,7 @@ if (jQuery) (function ($) {
     event.preventDefault();
     $(this).modal();
   });
-})(jQuery);
+}));
 
 /*!
  * jQuery Cookie Plugin v1.4.1
@@ -14571,12 +14581,27 @@ Dropit.prototype = {
 /* ----------------------------------------------------------------------------- 
 
   jQuery DateTimePicker - Responsive flat design jQuery DateTime Picker plugin for Web & Mobile
-  Version 0.1.30
+  Version 0.1.32
   Copyright (c)2016 Curious Solutions LLP and Neha Kadam
   http://curioussolutions.github.io/DateTimePicker
   https://github.com/CuriousSolutions/DateTimePicker
 
  ----------------------------------------------------------------------------- */
+
+/* Support Object.keys in IE8 */
+if (!Object.keys) {
+    Object.keys = function(obj) {
+        var keys = [];
+
+        for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                keys.push(i);
+            }
+        }
+
+        return keys;
+    };
+}
 
 $.DateTimePicker = $.DateTimePicker || {
 
@@ -14620,6 +14645,7 @@ $.DateTimePicker = $.DateTimePicker || {
 		secondsInterval: 1,
 		roundOffSeconds: true,
 	
+		showHeader: true,
 		titleContentDate: "Set Date",
 		titleContentTime: "Set Time",
 		titleContentDateTime: "Set Date & Time",
@@ -14630,14 +14656,21 @@ $.DateTimePicker = $.DateTimePicker || {
     	incrementButtonContent: "+",
     	decrementButtonContent: "-",
 		setValueInTextboxOnEveryClick: false,
+		readonlyInputs: false,
 	
 		animationDuration: 400,
 
 		touchHoldInterval: 300, // in Milliseconds
 		captureTouchHold: false, // capture Touch Hold Event
+
+		mouseHoldInterval: 50, // in Milliseconds
+		captureMouseHold: false, // capture Mouse Hold Event
 	
 		isPopup: true,
 		parentElement: "body",
+
+		isInline: false,
+		inputElement: null,
 
 		language: "",
 	
@@ -14693,7 +14726,8 @@ $.DateTimePicker = $.DateTimePicker || {
 
 		sTouchButton: null,
 		iTouchStart: null,
-		oTimeInterval: null
+		oTimeInterval: null,
+		bIsTouchDevice: "ontouchstart" in document.documentElement
 	}
 
 };
@@ -14724,15 +14758,15 @@ $.cf = {
 
 (function (factory) 
 {
-    if(typeof define === 'function' && define.amd) 
+    if(typeof define === "function" && define.amd) 
     {
         // AMD. Register as an anonymous module.
-        define(['jquery'], factory);
+        define(["jquery"], factory);
     }
-    else if(typeof exports === 'object') 
+    else if(typeof exports === "object") 
     {
         // Node/CommonJS
-        module.exports = factory(require('jquery'));
+        module.exports = factory(require("jquery"));
     }
     else 
     {
@@ -14764,7 +14798,7 @@ $.cf = {
 		var oDTP = $(this).data(),
 		sArrDataKeys = oDTP ? Object.keys(oDTP) : [],
 		iKey, sKey;
-		
+
 		if(typeof options === "string")
 		{			
 			if($.cf._isValid(oDTP))
@@ -14778,14 +14812,12 @@ $.cf = {
 							sKey = sArrDataKeys[iKey];
 							if(sKey.search("plugin_DateTimePicker") !== -1)
 							{
-								$(document).unbind("click.DateTimePicker");
-								$(document).unbind("keydown.DateTimePicker");
-								$(document).unbind("keyup.DateTimePicker");
+								$(document).unbind("click.DateTimePicker keydown.DateTimePicker keyup.DateTimePicker");
 							
 								$(this).children().remove();
 								$(this).removeData();
 								$(this).unbind();
-								$(this).removeClass("dtpicker-overlay dtpicker-mobile");
+								$(this).removeClass("dtpicker-overlay dtpicker-mobile dtpicker-inline");
 
 								oDTP = oDTP[sKey];
 							
@@ -14843,10 +14875,15 @@ $.cf = {
 			oDTP._setTimeFormatArray(); // Set TimeFormatArray
 			oDTP._setDateTimeFormatArray(); // Set DateTimeFormatArray
 		
-			if(oDTP.settings.isPopup)
+			if(oDTP.settings.isPopup && !oDTP.settings.isInline)
 			{
 				oDTP._createPicker();
 				$(oDTP.element).addClass("dtpicker-mobile");
+			}
+			if(oDTP.settings.isInline)
+			{
+				oDTP._createPicker();
+				oDTP._showPicker(oDTP.settings.inputElement);
 			}
 
 			if(oDTP.settings.init)
@@ -15071,11 +15108,18 @@ $.cf = {
 		{
 			var oDTP = this;
 		
-			$(oDTP.element).addClass("dtpicker-overlay");
-			$(".dtpicker-overlay").click(function(e)
+			if(oDTP.settings.isInline)
 			{
-				oDTP._hidePicker("");
-			});
+				$(oDTP.element).addClass("dtpicker-inline");
+			}
+			else
+			{
+				$(oDTP.element).addClass("dtpicker-overlay");
+				$(".dtpicker-overlay").click(function(e)
+				{
+					oDTP._hidePicker("");
+				});
+			}
 		
 			var sTempStr = "";	
 			sTempStr += "<div class='dtpicker-bg'>";
@@ -15093,23 +15137,26 @@ $.cf = {
 		{
 			var oDTP = this;
 		
-			oDTP.oData.oInputElement = null;
-
-			$(oDTP.settings.parentElement).find("input[type='date'], input[type='time'], input[type='datetime']").each(function()
+			if(!oDTP.settings.isInline)
 			{
-				$(this).attr("data-field", $(this).attr("type"));
-				$(this).attr("type", "text");
-			});	
-        
-			var sel = "[data-field='date'], [data-field='time'], [data-field='datetime']";
-			$(oDTP.settings.parentElement).off("focus", sel, oDTP._inputFieldFocus);
-			$(oDTP.settings.parentElement).on ("focus", sel, {"obj": oDTP}, oDTP._inputFieldFocus);
-		
-			$(oDTP.settings.parentElement).off("click", sel, oDTP._inputFieldClick);
-			$(oDTP.settings.parentElement).on ("click", sel, {"obj": oDTP}, oDTP._inputFieldClick);
+				oDTP.oData.oInputElement = null;
 
-			if(oDTP.settings.addEventHandlers) //this is not an event-handler really. Its just a function called
-				oDTP.settings.addEventHandlers.call(oDTP); // which could add EventHandlers
+				$(oDTP.settings.parentElement).find("input[type='date'], input[type='time'], input[type='datetime']").each(function()
+				{
+					$(this).attr("data-field", $(this).attr("type"));
+					$(this).attr("type", "text");
+				});	
+	        
+				var sel = "[data-field='date'], [data-field='time'], [data-field='datetime']";
+				$(oDTP.settings.parentElement).off("focus", sel, oDTP._inputFieldFocus)
+											  .on ("focus", sel, {"obj": oDTP}, oDTP._inputFieldFocus)
+											  
+				$(oDTP.settings.parentElement).off("click", sel, oDTP._inputFieldClick)
+											  .on ("click", sel, {"obj": oDTP}, oDTP._inputFieldClick);
+			}
+
+			if(oDTP.settings.addEventHandlers)
+				oDTP.settings.addEventHandlers.call(oDTP);
 		},
 	
 		_inputFieldFocus: function(e)
@@ -15248,7 +15295,10 @@ $.cf = {
 			var oDTP = this;
 			
 			if(oDTP.oData.oInputElement !== null)
-				oDTP._hidePicker(0, oElement);
+			{
+				if(!oDTP.settings.isInline)
+					oDTP._hidePicker(0, oElement);
+			}
 			else
 				oDTP._showPicker(oElement);
 		},
@@ -15265,10 +15315,14 @@ $.cf = {
 				{
 					if(oDTP.settings.buttonClicked)
 						oDTP.settings.buttonClicked.call(oDTP, "TAB", oDTP.oData.oInputElement);
-					oDTP._hidePicker(0);
+					if(!oDTP.settings.isInline)
+						oDTP._hidePicker(0);
 				}
 				else
-					oDTP._hidePicker("");					
+				{
+					if(!oDTP.settings.isInline)
+						oDTP._hidePicker("");
+				}
 			}
 		},
 
@@ -15434,7 +15488,8 @@ $.cf = {
 			{
 				oDTP._setValueOfElement("");
 			}
-			oDTP._hidePicker("");
+			if(!oDTP.settings.isInline)
+				oDTP._hidePicker("");
 		},
 	
 		_setOutputOnIncrementOrDecrement: function()
@@ -15473,7 +15528,7 @@ $.cf = {
 						oDTP.setIsPopup(false);
 				}
 			
-				if(!oDTP.settings.isPopup)
+				if(!oDTP.settings.isPopup && !oDTP.settings.isInline)
 				{
 					oDTP._createPicker();
 				
@@ -15727,8 +15782,9 @@ $.cf = {
 		_hidePicker: function(iDuration, oElementToShow)
 		{
 			var oDTP = this;
+			
 			var oElement = oDTP.oData.oInputElement;
-
+			
 			if(oDTP.settings.beforeHide)
 				oDTP.settings.beforeHide.call(oDTP, oElement);
 
@@ -15744,19 +15800,17 @@ $.cf = {
 			$(oDTP.element).fadeOut(iDuration);
 			if(iDuration === 0)
 			{
-				$(oDTP.element).find('.dtpicker-subcontent').html("");
+				$(oDTP.element).find(".dtpicker-subcontent").html("");
 			}
 			else
 			{
 				setTimeout(function()
 				{
-					$(oDTP.element).find('.dtpicker-subcontent').html("");
+					$(oDTP.element).find(".dtpicker-subcontent").html("");
 				}, iDuration);
 			}
 
-			$(document).unbind("click.DateTimePicker");
-			$(document).unbind("keydown.DateTimePicker");
-			$(document).unbind("keyup.DateTimePicker");
+			$(document).unbind("click.DateTimePicker keydown.DateTimePicker keyup.DateTimePicker");
 
 			if(oDTP.settings.afterHide)
 			{
@@ -15949,12 +16003,15 @@ $.cf = {
 			}
 		
 			var sHeader = "";
-			sHeader += "<div class='dtpicker-header'>";
-			sHeader += "<div class='dtpicker-title'>" + sTitleContent + "</div>";
-			if(bDisplayHeaderCloseButton)
-				sHeader += "<a class='dtpicker-close'>&times;</a>";
-			sHeader += "<div class='dtpicker-value'></div>";
-			sHeader += "</div>";
+			if(oDTP.settings.showHeader)
+			{
+				sHeader += "<div class='dtpicker-header'>";
+				sHeader += "<div class='dtpicker-title'>" + sTitleContent + "</div>";
+				if(bDisplayHeaderCloseButton)
+					sHeader += "<a class='dtpicker-close'>&times;</a>";
+				sHeader += "<div class='dtpicker-value'></div>";
+				sHeader += "</div>";
+			}
 		
 			//--------------------------------------------------------------------
 		
@@ -15968,7 +16025,10 @@ $.cf = {
 				sDTPickerComp += "<div class='dtpicker-compOutline " + sColumnClass + "'>";
 				sDTPickerComp += "<div class='dtpicker-comp " + sFieldName + "'>";
 				sDTPickerComp += "<a class='dtpicker-compButton increment'>" + oDTP.settings.incrementButtonContent + "</a>";
-				sDTPickerComp += "<input type='text' class='dtpicker-compValue'></input>";
+				if(oDTP.settings.readonlyInputs)
+					sDTPickerComp += "<input type='text' class='dtpicker-compValue' readonly>";
+				else
+					sDTPickerComp += "<input type='text' class='dtpicker-compValue'>";
 				sDTPickerComp += "<a class='dtpicker-compButton decrement'>" + oDTP.settings.decrementButtonContent + "</a>";
 				if(oDTP.settings.labels)
 					sDTPickerComp += "<div class='dtpicker-label'>" + oDTP.settings.labels[sFieldName] + "</div>";
@@ -15998,7 +16058,7 @@ $.cf = {
 		
 			var sTempStr = sHeader + sDTPickerComp + sDTPickerButtons;
 		
-			$(oDTP.element).find('.dtpicker-subcontent').html(sTempStr);
+			$(oDTP.element).find(".dtpicker-subcontent").html(sTempStr);
 		
 			oDTP._setCurrentDate();
 			oDTP._addEventHandlersForPicker();
@@ -16007,116 +16067,186 @@ $.cf = {
 		_addEventHandlersForPicker: function()
 		{
 			var oDTP = this;
+			var classType, keyCode, $nextElem;
 		
-			$(document).on("click.DateTimePicker", function(e)
+			if(!oDTP.settings.isInline)
 			{
-				oDTP._hidePicker("");
-			});
+				$(document).on("click.DateTimePicker", function(e)
+				{
+					oDTP._hidePicker("");
+				});
+			}
 		
 			$(document).on("keydown.DateTimePicker", function(e)
 			{
-				if(! $('.dtpicker-compValue').is(':focus') && parseInt(e.keyCode ? e.keyCode : e.which) === 9)
+				keyCode = parseInt(e.keyCode ? e.keyCode : e.which);
+				if(! $(".dtpicker-compValue").is(":focus") && keyCode === 9) // TAB
 				{
 					oDTP._setButtonAction(true);
 					$("[tabIndex=" + (oDTP.oData.iTabIndex + 1) + "]").focus();
 					return false;
 				}
-			});
-
-			$(document).on("keydown.DateTimePicker", function(e)
-			{
-				if(! $('.dtpicker-compValue').is(':focus') && parseInt(e.keyCode ? e.keyCode : e.which) !== 9)
+				else if($(".dtpicker-compValue").is(":focus"))
 				{
-					oDTP._hidePicker("");
+					/*if(keyCode === 37) // Left Arrow
+					{
+						oDTP._setButtonAction(true);
+						$nextElem = $(".dtpicker-compValue:focus").parent().prev().children(".dtpicker-compValue");
+						$nextElem.focus();
+						console.log('Left Arrow ');
+						console.log($nextElem);
+						return false;
+					}
+					else if(keyCode === 39) // Right Arrow
+					{
+						oDTP._setButtonAction(true);
+						var compVal = $(".dtpicker-compValue:focus");
+						$nextElem = $(".dtpicker-compValue:focus").parent(".dtpicker-comp").next().children(".dtpicker-compValue");
+						$nextElem.focus();
+						console.log('Right Arrow ');
+						console.log($nextElem);
+						return false;
+					}
+					else*/
+					if(keyCode === 38) // Up Arrow
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "inc");
+						return false;
+					}
+					else if(keyCode === 40) // Down Arrow
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "dec");
+						return false;
+					}
 				}
 			});
+
+			if(!oDTP.settings.isInline)
+			{
+				$(document).on("keydown.DateTimePicker", function(e)
+				{
+					keyCode = parseInt(e.keyCode ? e.keyCode : e.which);
+					console.log("keydown " + keyCode);
+					if(! $(".dtpicker-compValue").is(":focus") && keyCode !== 9)
+					{
+						//if(keyCode !== 37 && keyCode !== 39)
+							oDTP._hidePicker("");
+					}
+				});
+			}
 
 			$(".dtpicker-cont *").click(function(e)
 			{
 				e.stopPropagation();
 			});
 		
-			$('.dtpicker-compValue').not('.month .dtpicker-compValue, .meridiem .dtpicker-compValue').keyup(function() 
-			{ 
-				this.value = this.value.replace(/[^0-9\.]/g,'');
-			});
+			if(!oDTP.settings.readonlyInputs)
+			{
+				$(".dtpicker-compValue").not(".month .dtpicker-compValue, .meridiem .dtpicker-compValue").keyup(function() 
+				{ 
+					this.value = this.value.replace(/[^0-9\.]/g,"");
+				});
 
-			$('.dtpicker-compValue').focus(function()
-			{
-				oDTP.oData.bElemFocused = true;
-				$(this).select();
-			});
-		
-			$('.dtpicker-compValue').blur(function()
-			{
-				oDTP._getValuesFromInputBoxes();
-				oDTP._setCurrentDate();
-			
-				oDTP.oData.bElemFocused = false;
-				var $oParentElem = $(this).parent().parent();
-				setTimeout(function()
+				$(".dtpicker-compValue").focus(function()
 				{
-					if($oParentElem.is(':last-child') && !oDTP.oData.bElemFocused)
-					{
-						oDTP._setButtonAction(false);
-					}
-				}, 50);			
-			});
-		
-			$(".dtpicker-compValue").keyup(function(e)
-			{
-				var $oTextField = $(this),
-			
-				sTextBoxVal = $oTextField.val(),
-				iLength = sTextBoxVal.length,
-				sNewTextBoxVal;
-			
-				if($oTextField.parent().hasClass("day") || $oTextField.parent().hasClass("hour") || $oTextField.parent().hasClass("minutes") || $oTextField.parent().hasClass("meridiem"))
-				{
-					if(iLength > 2)
-					{
-						sNewTextBoxVal = sTextBoxVal.slice(0, 2);
-						$oTextField.val(sNewTextBoxVal);
-					}
-				}
-				else if($oTextField.parent().hasClass("month"))
-				{
-					if(iLength > 3)
-					{
-						sNewTextBoxVal = sTextBoxVal.slice(0, 3);
-						$oTextField.val(sNewTextBoxVal);
-					}
-				}
-				else if($oTextField.parent().hasClass("year"))
-				{
-					if(iLength > 4)
-					{
-						sNewTextBoxVal = sTextBoxVal.slice(0, 4);
-						$oTextField.val(sNewTextBoxVal);
-					}
-				}
-				
-				if(parseInt(e.keyCode ? e.keyCode : e.which) === 9)
+					oDTP.oData.bElemFocused = true;
 					$(this).select();
+				});
+			
+				$(".dtpicker-compValue").blur(function()
+				{
+					oDTP._getValuesFromInputBoxes();
+					oDTP._setCurrentDate();
+				
+					oDTP.oData.bElemFocused = false;
+					var $oParentElem = $(this).parent().parent();
+					setTimeout(function()
+					{
+						if($oParentElem.is(":last-child") && !oDTP.oData.bElemFocused)
+						{
+							oDTP._setButtonAction(false);
+						}
+					}, 50);			
+				});
+			
+				$(".dtpicker-compValue").keyup(function(e)
+				{
+					var $oTextField = $(this),
+				
+					sTextBoxVal = $oTextField.val(),
+					iLength = sTextBoxVal.length,
+					sNewTextBoxVal;
+				
+					if($oTextField.parent().hasClass("day") || $oTextField.parent().hasClass("hour") || $oTextField.parent().hasClass("minutes") || $oTextField.parent().hasClass("meridiem"))
+					{
+						if(iLength > 2)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 2);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					else if($oTextField.parent().hasClass("month"))
+					{
+						if(iLength > 3)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 3);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					else if($oTextField.parent().hasClass("year"))
+					{
+						if(iLength > 4)
+						{
+							sNewTextBoxVal = sTextBoxVal.slice(0, 4);
+							$oTextField.val(sNewTextBoxVal);
+						}
+					}
+					
+					if(parseInt(e.keyCode ? e.keyCode : e.which) === 9)
+						$(this).select();
+				});
+			}
+
+			$(oDTP.element).find(".dtpicker-compValue").on("mousewheel DOMMouseScroll onmousewheel", function(e)
+			{
+				if($(".dtpicker-compValue").is(":focus"))
+				{
+					var delta = Math.max(-1, Math.min(1, e.originalEvent.wheelDelta));
+
+					if(delta > 0)
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "inc");
+					}
+					else
+					{
+						classType = $(".dtpicker-compValue:focus").parent().attr("class");
+						oDTP._incrementDecrementActionsUsingArrowAndMouse(classType, "dec");
+					}
+					return false;
+				}
 			});
 
 			//-----------------------------------------------------------------------
 		
-			$(oDTP.element).find('.dtpicker-close').click(function(e)
+			$(oDTP.element).find(".dtpicker-close").click(function(e)
 			{
 				if(oDTP.settings.buttonClicked)
 					oDTP.settings.buttonClicked.call(oDTP, "CLOSE", oDTP.oData.oInputElement);
-				oDTP._hidePicker("");
+				if(!oDTP.settings.isInline)
+					oDTP._hidePicker("");
 			});
 		
-			$(oDTP.element).find('.dtpicker-buttonSet').click(function(e)
+			$(oDTP.element).find(".dtpicker-buttonSet").click(function(e)
 			{
 				if(oDTP.settings.buttonClicked)
 					oDTP.settings.buttonClicked.call(oDTP, "SET", oDTP.oData.oInputElement);
 				oDTP._setButtonAction(false);
 			});
 		
-			$(oDTP.element).find('.dtpicker-buttonClear').click(function(e)
+			$(oDTP.element).find(".dtpicker-buttonClear").click(function(e)
 			{
 				if(oDTP.settings.buttonClicked)
 					oDTP.settings.buttonClicked.call(oDTP, "CLEAR", oDTP.oData.oInputElement);
@@ -16125,9 +16255,16 @@ $.cf = {
 		
 			// ----------------------------------------------------------------------------
 		
-			if(oDTP.settings.captureTouchHold)
+			//console.log((oDTP.settings.captureTouchHold || oDTP.settings.captureMouseHold));
+			if(oDTP.settings.captureTouchHold || oDTP.settings.captureMouseHold)
 			{
-				$(".dtpicker-cont *").on('touchstart touchmove touchend', function(e)
+				var sHoldEvents = "";
+				if(oDTP.settings.captureTouchHold && oDTP.oData.bIsTouchDevice)
+					sHoldEvents += "touchstart touchmove touchend ";
+				if(oDTP.settings.captureMouseHold)
+					sHoldEvents += "mousedown mouseup";
+ 
+				$(".dtpicker-cont *").on(sHoldEvents, function(e)
 				{
 					oDTP._clearIntervalForTouchEvents();
 				});
@@ -16302,7 +16439,7 @@ $.cf = {
 		{
 			var oDTP = this;
 
-			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on('touchstart', function(e)
+			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on("touchstart mousedown", function(e)
 			{
 				e.stopPropagation();
 				if(!$.cf._isValid(oDTP.oData.sTouchButton))
@@ -16314,13 +16451,13 @@ $.cf = {
 				}
 			});
 
-			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on('touchend', function(e)
+			$(oDTP.element).find("." + type + " .increment, ." + type + " .increment *").on("touchend mouseup", function(e)
 			{
 				e.stopPropagation();
 				oDTP._clearIntervalForTouchEvents();
 			});
 
-			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on('touchstart', function(e)
+			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on("touchstart mousedown", function(e)
 			{
 				e.stopPropagation();
 				if(!$.cf._isValid(oDTP.oData.sTouchButton))
@@ -16332,7 +16469,7 @@ $.cf = {
 				}
 			});
 
-			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on('touchend', function(e)
+			$(oDTP.element).find("." + type + " .decrement, ." + type + " .decrement *").on("touchend mouseup", function(e)
 			{
 				e.stopPropagation();
 				oDTP._clearIntervalForTouchEvents();
@@ -16343,6 +16480,7 @@ $.cf = {
 		{
 			var oDTP = this;
 
+			var iInterval = oDTP.oData.bIsTouchDevice ? oDTP.settings.touchHoldInterval : oDTP.settings.mouseHoldInterval;
 			if(!$.cf._isValid(oDTP.oData.oTimeInterval))
 			{
 				var iDiff;
@@ -16350,7 +16488,7 @@ $.cf = {
 				oDTP.oData.oTimeInterval = setInterval(function()
 				{
 					iDiff = ((new Date()).getTime() - oDTP.oData.iTouchStart);
-					if(iDiff > oDTP.settings.touchHoldInterval && $.cf._isValid(oDTP.oData.sTouchButton))
+					if(iDiff > iInterval && $.cf._isValid(oDTP.oData.sTouchButton))
 					{
 						if(oDTP.oData.sTouchButton === "day-inc")
 						{
@@ -16406,7 +16544,7 @@ $.cf = {
 
 						oDTP.oData.iTouchStart = (new Date()).getTime();
 					}
-				}, oDTP.settings.touchHoldInterval);
+				}, iInterval);
 			}
 		},
 
@@ -16421,6 +16559,45 @@ $.cf = {
 				oDTP.oData.iTouchStart = 0;
 			}
 			oDTP.oData.oTimeInterval = null;
+		},
+
+		_incrementDecrementActionsUsingArrowAndMouse: function(type, action)
+		{
+			var oDTP = this;
+
+			if(type.includes("day"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentDay++;
+				else if (action === "dec") oDTP.oData.iCurrentDay--;
+			}
+			else if(type.includes("month"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentMonth++;
+				else if (action === "dec") oDTP.oData.iCurrentMonth--;
+			}
+			else if(type.includes("year"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentYear++;
+				else if (action === "dec") oDTP.oData.iCurrentYear--;
+			}
+			else if(type.includes("hour"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentHour++;
+				else if (action === "dec") oDTP.oData.iCurrentHour--;
+			}
+			else if(type.includes("minutes"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentMinutes += oDTP.settings.minuteInterval;
+				else if (action === "dec") oDTP.oData.iCurrentMinutes -= oDTP.settings.minuteInterval;
+			}
+			else if(type.includes("seconds"))
+			{
+				if (action === "inc") oDTP.oData.iCurrentSeconds += oDTP.settings.secondsInterval;
+				else if (action === "dec") oDTP.oData.iCurrentSeconds -= oDTP.settings.secondsInterval;
+			}
+
+			oDTP._setCurrentDate();
+			oDTP._setOutputOnIncrementOrDecrement();
 		},
 	
 		//-----------------------------------------------------------------
@@ -16718,7 +16895,7 @@ $.cf = {
 			}
 			else
 			{
-				if (Object.prototype.toString.call(oDTP.oData.dCurrentDate) === '[object Date]' && isFinite(oDTP.oData.dCurrentDate))
+				if (Object.prototype.toString.call(oDTP.oData.dCurrentDate) === "[object Date]" && isFinite(oDTP.oData.dCurrentDate))
     		  			dTemp = new Date(oDTP.oData.dCurrentDate);
   				else 
     					dTemp = new Date();
@@ -16899,21 +17076,21 @@ $.cf = {
 			
 				oFormattedDate = oDTP._formatDate();
 
-				$(oDTP.element).find('.day .dtpicker-compValue').val(oFormattedDate.dd);
+				$(oDTP.element).find(".day .dtpicker-compValue").val(oFormattedDate.dd);
 			
 				if(oDTP.oData.bDateMode)
 				{
 					if(oDTP.oData.bArrMatchFormat[4])  // "MM-yyyy"
-						$(oDTP.element).find('.month .dtpicker-compValue').val(oFormattedDate.MM);
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.MM);
 					else if(oDTP.oData.bArrMatchFormat[6])  // "MMMM yyyy"
-						$(oDTP.element).find('.month .dtpicker-compValue').val(oFormattedDate.month);
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.month);
 					else
-						$(oDTP.element).find('.month .dtpicker-compValue').val(oFormattedDate.monthShort);
+						$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.monthShort);
 				}
 				else
-					$(oDTP.element).find('.month .dtpicker-compValue').val(oFormattedDate.monthShort);
+					$(oDTP.element).find(".month .dtpicker-compValue").val(oFormattedDate.monthShort);
 			
-				$(oDTP.element).find('.year .dtpicker-compValue').val(oFormattedDate.yyyy);
+				$(oDTP.element).find(".year .dtpicker-compValue").val(oFormattedDate.yyyy);
 			
 				if(oDTP.settings.formatHumanDate)
 				{
@@ -16939,10 +17116,10 @@ $.cf = {
 				oFormattedTime = oDTP._formatTime();
 			
 				if(oDTP.oData.bIs12Hour)
-					$(oDTP.element).find('.meridiem .dtpicker-compValue').val(oDTP.oData.sCurrentMeridiem);
-				$(oDTP.element).find('.hour .dtpicker-compValue').val(oFormattedTime.hour);
-				$(oDTP.element).find('.minutes .dtpicker-compValue').val(oFormattedTime.mm);
-				$(oDTP.element).find('.seconds .dtpicker-compValue').val(oFormattedTime.ss);
+					$(oDTP.element).find(".meridiem .dtpicker-compValue").val(oDTP.oData.sCurrentMeridiem);
+				$(oDTP.element).find(".hour .dtpicker-compValue").val(oFormattedTime.hour);
+				$(oDTP.element).find(".minutes .dtpicker-compValue").val(oFormattedTime.mm);
+				$(oDTP.element).find(".seconds .dtpicker-compValue").val(oFormattedTime.ss);
 			
 				if(oDTP.settings.formatHumanDate)
 				{
@@ -16995,7 +17172,7 @@ $.cf = {
 					sDateTime = sTime;
 			}
 
-			$(oDTP.element).find('.dtpicker-value').html(sDateTime);
+			$(oDTP.element).find(".dtpicker-value").html(sDateTime);
 
 			oDTP._setButtons();
 		},
@@ -17093,7 +17270,7 @@ $.cf = {
 		_setButtons: function()
 		{
 			var oDTP = this;
-			$(oDTP.element).find('.dtpicker-compButton').removeClass("dtpicker-compButtonDisable").addClass('dtpicker-compButtonEnable');
+			$(oDTP.element).find(".dtpicker-compButton").removeClass("dtpicker-compButtonDisable").addClass("dtpicker-compButtonEnable");
 		
 			var dTempDate;
 			if(oDTP.oData.dMaxValue !== null)
@@ -17238,35 +17415,38 @@ $.cf = {
 		setIsPopup: function(bIsPopup)
 		{
 			var oDTP = this;
-			oDTP.settings.isPopup = bIsPopup;
 		
-			if($(oDTP.element).css("display") !== "none")
-				oDTP._hidePicker(0);
-		
-			if(oDTP.settings.isPopup)
+			if(!oDTP.settings.isInline)
 			{
-				$(oDTP.element).addClass("dtpicker-mobile");
-				
-				$(oDTP.element).css({position: "fixed", top: 0, left: 0, width: "100%", height: "100%"});
-			}
-			else
-			{
-				$(oDTP.element).removeClass("dtpicker-mobile");
-				
-				if(oDTP.oData.oInputElement !== null)
+				oDTP.settings.isPopup = bIsPopup;
+
+				if($(oDTP.element).css("display") !== "none")
+					oDTP._hidePicker(0);
+			
+				if(oDTP.settings.isPopup)
 				{
-					var iElemTop = $(oDTP.oData.oInputElement).offset().top + $(oDTP.oData.oInputElement).outerHeight(),
-					iElemLeft = $(oDTP.oData.oInputElement).offset().left,
-					iElemWidth =  $(oDTP.oData.oInputElement).outerWidth();
-				
-					$(oDTP.element).css({position: "absolute", top: iElemTop, left: iElemLeft, width: iElemWidth, height: "auto"});
+					$(oDTP.element).addClass("dtpicker-mobile");
+					
+					$(oDTP.element).css({position: "fixed", top: 0, left: 0, width: "100%", height: "100%"});
+				}
+				else
+				{
+					$(oDTP.element).removeClass("dtpicker-mobile");
+					
+					if(oDTP.oData.oInputElement !== null)
+					{
+						var iElemTop = $(oDTP.oData.oInputElement).offset().top + $(oDTP.oData.oInputElement).outerHeight(),
+						iElemLeft = $(oDTP.oData.oInputElement).offset().left,
+						iElemWidth =  $(oDTP.oData.oInputElement).outerWidth();
+					
+						$(oDTP.element).css({position: "absolute", top: iElemTop, left: iElemLeft, width: iElemWidth, height: "auto"});
+					}
 				}
 			}
 		},
 	
 		_compareDates: function(dDate1, dDate2)
 		{
-			dDate1 = new Date(dDate1.getDate(), dDate1.getMonth(), dDate1.getFullYear(), 0, 0, 0, 0);
 			dDate1 = new Date(dDate1.getDate(), dDate1.getMonth(), dDate1.getFullYear(), 0, 0, 0, 0);
 			var iDateDiff = (dDate1.getTime() - dDate2.getTime()) / 864E5;
 			return (iDateDiff === 0) ? iDateDiff: (iDateDiff/Math.abs(iDateDiff));
@@ -17302,14 +17482,10 @@ $.cf = {
 
 		_determineMeridiemFromHourAndMinutes: function(iHour, iMinutes)
 		{
-			if(iHour > 12) 
+			if(iHour > 12 || (iHour === 12 && iMinutes >= 0)) 
 			{
 				return "PM";
-			} 
-			else if(iHour === 12 && iMinutes >= 0) 
-			{
-				return "PM";
-			} 
+			}
 			else 
 			{
 				return "AM";
@@ -17337,7 +17513,7 @@ $.cf = {
 
 
 /*!
-	Autosize 3.0.15
+	Autosize 3.0.17
 	license: MIT
 	http://www.jacklmoore.com/autosize
 */
@@ -17386,23 +17562,14 @@ $.cf = {
 	}
 
 	function assign(ta) {
-		var _ref = arguments[1] === undefined ? {} : arguments[1];
-
-		var _ref$setOverflowX = _ref.setOverflowX;
-		var setOverflowX = _ref$setOverflowX === undefined ? true : _ref$setOverflowX;
-		var _ref$setOverflowY = _ref.setOverflowY;
-		var setOverflowY = _ref$setOverflowY === undefined ? true : _ref$setOverflowY;
-
 		if (!ta || !ta.nodeName || ta.nodeName !== 'TEXTAREA' || set.has(ta)) return;
 
 		var heightOffset = null;
-		var overflowY = null;
 		var clientWidth = ta.clientWidth;
+		var cachedHeight = null;
 
 		function init() {
 			var style = window.getComputedStyle(ta, null);
-
-			overflowY = style.overflowY;
 
 			if (style.resize === 'vertical') {
 				ta.style.resize = 'none';
@@ -17437,19 +17604,30 @@ $.cf = {
 				ta.style.width = width;
 			}
 
-			overflowY = value;
-
-			if (setOverflowY) {
-				ta.style.overflowY = value;
-			}
+			ta.style.overflowY = value;
 
 			resize();
 		}
 
+		function getParentOverflows(el) {
+			var arr = [];
+
+			while (el && el.parentNode && el.parentNode instanceof Element) {
+				if (el.parentNode.scrollTop) {
+					arr.push({
+						node: el.parentNode,
+						scrollTop: el.parentNode.scrollTop });
+				}
+				el = el.parentNode;
+			}
+
+			return arr;
+		}
+
 		function resize() {
-			var htmlTop = window.pageYOffset;
-			var bodyTop = document.body.scrollTop;
 			var originalHeight = ta.style.height;
+			var overflows = getParentOverflows(ta);
+			var docTop = document.documentElement && document.documentElement.scrollTop; // Needed for Mobile IE (ticket #240)
 
 			ta.style.height = 'auto';
 
@@ -17467,28 +17645,37 @@ $.cf = {
 			clientWidth = ta.clientWidth;
 
 			// prevents scroll-position jumping
-			document.documentElement.scrollTop = htmlTop;
-			document.body.scrollTop = bodyTop;
+			overflows.forEach(function (el) {
+				el.node.scrollTop = el.scrollTop;
+			});
+
+			if (docTop) {
+				document.documentElement.scrollTop = docTop;
+			}
 		}
 
 		function update() {
-			var startHeight = ta.style.height;
-
 			resize();
 
-			var style = window.getComputedStyle(ta, null);
+			var computed = window.getComputedStyle(ta, null);
+			var computedHeight = Math.round(parseFloat(computed.height));
+			var styleHeight = Math.round(parseFloat(ta.style.height));
 
-			if (style.height !== ta.style.height) {
-				if (overflowY !== 'visible') {
+			// The computed height not matching the height set via resize indicates that
+			// the max-height has been exceeded, in which case the overflow should be set to visible.
+			if (computedHeight !== styleHeight) {
+				if (computed.overflowY !== 'visible') {
 					changeOverflow('visible');
 				}
 			} else {
-				if (overflowY !== 'hidden') {
+				// Normally keep overflow set to hidden, to avoid flash of scrollbar as the textarea expands.
+				if (computed.overflowY !== 'hidden') {
 					changeOverflow('hidden');
 				}
 			}
 
-			if (startHeight !== ta.style.height) {
+			if (cachedHeight !== computedHeight) {
+				cachedHeight = computedHeight;
 				var evt = createEvent('autosize:resized');
 				ta.dispatchEvent(evt);
 			}
@@ -17531,11 +17718,8 @@ $.cf = {
 		ta.addEventListener('input', update, false);
 		ta.addEventListener('autosize:update', update, false);
 		set.add(ta);
-
-		if (setOverflowX) {
-			ta.style.overflowX = 'hidden';
-			ta.style.wordWrap = 'break-word';
-		}
+		ta.style.overflowX = 'hidden';
+		ta.style.wordWrap = 'break-word';
 
 		init();
 	}

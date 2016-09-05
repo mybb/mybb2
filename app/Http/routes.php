@@ -80,7 +80,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
 
         Route::group(['prefix' => 'users'], function () {
-			Route::get('/', [
+            Route::get('/', [
                 'as'   => 'admin.users',
                 'uses' => 'Admin\Users\UserController@users',
             ]);
