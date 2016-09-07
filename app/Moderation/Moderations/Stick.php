@@ -28,7 +28,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
      */
     public function getName()
     {
-        return 'Stick';
+        return 'forum.moderate.stick';
     }
 
     /**
@@ -103,7 +103,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
      */
     public function getReverseName()
     {
-        return 'Unstick';
+        return 'forum.moderate.unstick';
     }
 
     /**

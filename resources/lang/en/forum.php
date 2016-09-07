@@ -23,4 +23,9 @@ return [
     'closedtopic' => 'Closed Topic',
     'stickytopic' => 'Sticky Topic',
     'poll'        => 'Topic Contains Poll',
+
+    'moderate' => [
+        'stick'    => 'Stick',
+        'unstick'  => 'Unstick',
+    ],
 ];
