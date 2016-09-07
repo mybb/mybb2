@@ -27,7 +27,7 @@ class Close implements ReversibleModerationInterface, HasPresenter, SourceableIn
      */
     public function getName()
     {
-        return 'Close';
+        return 'moderation.moderate.close';
     }
 
     /**
@@ -102,7 +102,7 @@ class Close implements ReversibleModerationInterface, HasPresenter, SourceableIn
      */
     public function getReverseName()
     {
-        return 'Open';
+        return 'moderation.moderate.open';
     }
 
     /**

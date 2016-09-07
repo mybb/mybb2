@@ -42,7 +42,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
      */
     public function getName()
     {
-        return 'Merge';
+        return 'moderation.moderate.merge';
     }
 
     /**
