@@ -1,6 +1,6 @@
 <?php
 /**
- * Thread model class.
+ * Topic model class.
  *
  * @author    MyBB Group
  * @version   2.0.0
@@ -16,6 +16,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
+use MyBB\Core\Moderation\Moderations\StickableInterface;
 use MyBB\Core\Presenters\TopicPresenter;
 
 /**
@@ -23,7 +24,7 @@ use MyBB\Core\Presenters\TopicPresenter;
  * @property Forum forum
  * @property int forum_id
  */
-class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface, ContentInterface
+class Topic extends Model implements HasPresenter, ApprovableInterface, CloseableInterface, StickableInterface, ContentInterface
 {
     use SoftDeletes;
 
@@ -103,7 +104,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     }
 
     /**
-     * A thread has many contributors (authors of posts belonging to the thread).
+     * A topic has many contributors (authors of posts belonging to the topic).
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
@@ -113,7 +114,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     }
 
     /**
-     * A thread belongs to one forum.
+     * A topic belongs to one forum.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -123,7 +124,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     }
 
     /**
-     * A thread is created by (and belongs to) a user/author.
+     * A topic is created by (and belongs to) a user/author.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -136,7 +137,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     // TODO: Will probably be quicker to store last post and first post ID than alternatives...
 
     /**
-     * A thread has a single first post.
+     * A topic has a single first post.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -146,7 +147,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     }
 
     /**
-     * A thread has a single last post.
+     * A topic has a single last post.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -197,6 +198,22 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     public function open()
     {
         return $this->update(['closed' => 0]);
+    }
+
+    /**
+     * @return bool|int
+     */
+    public function stick()
+    {
+        return $this->update(['sticky' => 1]);
+    }
+
+    /**
+     * @return bool|int
+     */
+    public function unstick()
+    {
+        return $this->update(['sticky' => 0]);
     }
 
     /**

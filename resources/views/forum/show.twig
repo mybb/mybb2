@@ -110,6 +110,9 @@
                                 <h3 class="topic__title">
                                     <a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
                                     <span class="topic__icons icons">
+                                        {% if topic.sticky == true %}
+                                        <i class="fa fa-thumb-tack fa-fw" title="{{ trans('forum.stickytopic') }}"></i>
+                                        {% endif %}
                                         {% if topic.closed == true %}
                                         <i class="fa fa-lock fa-fw" title="{{ trans('forum.closedtopic') }}"></i>
                                         {% endif %}

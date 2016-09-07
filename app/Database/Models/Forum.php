@@ -14,13 +14,15 @@ use Kalnoy\Nestedset\Node;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
+use MyBB\Core\Moderation\Moderations\StickableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
+use MyBB\Core\Presenters\ForumPresenter;
 
 /**
  * @property int id
  */
-class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface, ContentInterface
+class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface, StickableInterface, ContentInterface
 {
     use InheritPermissionableTrait;
 
@@ -74,7 +76,7 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ForumPresenter';
+        return ForumPresenter::class;
     }
 
     /**
@@ -91,23 +93,23 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
     }
 
     /**
-     * A forum contains many threads.
+     * A forum contains many topics.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function topics()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\Topic');
+        return $this->hasMany(\MyBB\Core\Database\Models\Topic::class);
     }
 
     /**
-     * A forum contains many posts, through its threads.
+     * A forum contains many posts, through its topics.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function posts()
     {
-        return $this->hasManyThrough('MyBB\\Core\\Database\\Models\\Post', 'MyBB\\Core\\Database\\Models\\Topic');
+        return $this->hasManyThrough(\MyBB\Core\Database\Models\Post::class, \MyBB\Core\Database\Models\Topic::class);
     }
 
     /**
@@ -117,7 +119,7 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
      */
     public function lastPost()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\Post', 'id', 'last_post_id');
+        return $this->hasOne(\MyBB\Core\Database\Models\Post::class, 'id', 'last_post_id');
     }
 
     /**
@@ -127,7 +129,7 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
      */
     public function lastPostAuthor()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\User', 'id', 'last_post_user_id');
+        return $this->hasOne(\MyBB\Core\Database\Models\User::class, 'id', 'last_post_user_id');
     }
 
     /**
@@ -144,6 +146,22 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
     public function open()
     {
         return $this->update(['closed' => 0]);
+    }
+
+    /**
+     * @return bool|int
+     */
+    public function stick()
+    {
+        return $this->update(['sticky' => 1]);
+    }
+
+    /**
+     * @return bool|int
+     */
+    public function unstick()
+    {
+        return $this->update(['sticky' => 0]);
     }
 
     /**

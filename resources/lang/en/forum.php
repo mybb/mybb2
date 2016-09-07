@@ -21,5 +21,6 @@ return [
     'author'      => 'Author',
     'sorttopics'  => 'Sort Topics',
     'closedtopic' => 'Closed Topic',
+    'stickytopic' => 'Sticky Topic',
     'poll'        => 'Topic Contains Poll',
 ];

@@ -62,6 +62,11 @@ class PermissionsTableSeeder extends Seeder
                 'default_value'   => 0,
             ],
             [
+                'permission_name' => 'canStick',
+                'content_name'    => null,
+                'default_value'   => 0,
+            ],
+            [
                 'permission_name' => 'canDeletePosts',
                 'content_name'    => null,
                 'default_value'   => 0,

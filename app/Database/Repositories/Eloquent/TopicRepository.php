@@ -69,7 +69,7 @@ class TopicRepository implements TopicRepositoryInterface
     private $permissionChecker;
 
     /**
-     * @param Topic $topicModel The model to use for threads.
+     * @param Topic $topicModel The model to use for topics.
      * @param Guard $guard Laravel guard instance, used to get user ID.
      * @param PostRepositoryInterface $postRepository Used to manage posts for topics.
      * @param Str $stringUtils String utilities, used for creating slugs.
@@ -102,7 +102,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * Get all threads.
+     * Get all topics.
      *
      * @return mixed
      */
@@ -122,7 +122,7 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * Get all threads created by a user.
+     * Get all topics created by a user.
      *
      * @param int $userId The ID of the user.
      *
@@ -138,7 +138,7 @@ class TopicRepository implements TopicRepositoryInterface
     /**
      * Find a single topic by ID.
      *
-     * @param int $id The ID of the thread to find.
+     * @param int $id The ID of the topic to find.
      *
      * @return mixed
      */
@@ -152,7 +152,7 @@ class TopicRepository implements TopicRepositoryInterface
     /**
      * Find a single topic by its slug.
      *
-     * @param string $slug The slug of the thread. Eg: 'my-first-thread'.
+     * @param string $slug The slug of the topic. Eg: 'my-first-topic'.
      *
      * @return mixed
      */
@@ -183,9 +183,9 @@ class TopicRepository implements TopicRepositoryInterface
     }
 
     /**
-     * Get all threads within a forum.
+     * Get all topics within a forum.
      *
-     * @param Forum $forum The forum the threads belong to.
+     * @param Forum $forum The forum the topics belong to.
      * @param string $orderBy The order by column
      * @param string $orderDir asc|desc
      *
@@ -211,7 +211,7 @@ class TopicRepository implements TopicRepositoryInterface
 
         return $this->topicModel->withTrashed()->with(['author', 'lastPost', 'lastPost.author'])
             ->leftJoin('posts', 'last_post_id', '=', 'posts.id')->where('forum_id', '=', $forum->id)
-            ->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
+            ->orderBy('sticky', 'desc')->orderBy($orderBy, $orderDir)->paginate($topicsPerPage, ['topics.*']);
     }
 
     /**
