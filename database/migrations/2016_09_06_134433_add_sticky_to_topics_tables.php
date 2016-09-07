@@ -5,27 +5,27 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddStickyToTopicsTables extends Migration
 {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::table('topics', function (Blueprint $table) {
-			$table->tinyInteger('sticky')->unsigned()->default(0)->index();
-		});
-	}
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('topics', function (Blueprint $table) {
+            $table->boolean('sticky')->default(0)->index();
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::table('topics', function (Blueprint $table) {
-			$table->dropColumn('sticky');
-		});
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('topics', function (Blueprint $table) {
+            $table->dropColumn('sticky');
+        });
+    }
 }

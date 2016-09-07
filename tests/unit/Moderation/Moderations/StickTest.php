@@ -13,7 +13,7 @@ class StickTest extends \PHPUnit_Framework_TestCase
     public function testCanBeConstructed()
     {
         $stick = new Stick();
-        static::assertInstanceOf('MyBB\Core\Moderation\Moderations\Stick', $stick);
+        static::assertInstanceOf(\MyBB\Core\Moderation\Moderations\Stick::class, $stick);
     }
 
     public function testCanStickStickableInterface()
@@ -40,7 +40,7 @@ class StickTest extends \PHPUnit_Framework_TestCase
 
     public function testHasKeyThatIsAString()
     {
-        $stick = new stick();
+        $stick = new Stick();
         $key = $stick->getKey();
         static::assertInternalType('string', $key);
     }
