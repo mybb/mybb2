@@ -73,6 +73,12 @@ class PermissionRoleTableSeeder extends Seeder
                 'value'         => 1,
             ],
             [
+                'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canStick')
+                    ->first()->id,
+                'role_id'       => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,
+                'value'         => 1,
+            ],
+            [
                 'permission_id' => DB::table('permissions')->where('permission_name', '=', 'canDeletePosts')
                     ->first()->id,
                 'role_id'       => DB::table('roles')->where('role_slug', '=', 'admin')->first()->id,

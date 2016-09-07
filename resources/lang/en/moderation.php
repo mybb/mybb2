@@ -19,4 +19,7 @@ return [
     'reports_title'                   => 'Reports',
     'logs_title'                      => 'Logs',
     'empty_queue'                     => 'The moderation queue is empty.',
+
+    'sticked'                         => 'Sticked',
+    'unsticked'                       => 'Unsticked',
 ];
