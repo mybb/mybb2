@@ -47,7 +47,7 @@ class Approve implements ReversibleModerationInterface, HasPresenter, Sourceable
      */
     public function getName()
     {
-        return 'Approve';
+        return 'moderation.moderate.approve';
     }
 
     /**
@@ -92,7 +92,7 @@ class Approve implements ReversibleModerationInterface, HasPresenter, Sourceable
      */
     public function getReverseName()
     {
-        return 'Unapprove';
+        return 'moderation.moderate.unapprove';
     }
 
     /**

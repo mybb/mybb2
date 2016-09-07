@@ -1,5 +1,5 @@
 <div class="inline-moderation">
-    <h2>With selected {{ moderation_content }}<span class="selection-count"> (1)</span>:</h2>
+    <h2>{{ trans('moderation.with_selected') }} {{ moderation_content }}<span class="selection-count"> (1)</span>:</h2>
     <ul class="moderation-controls">
         {% for moderation in moderations %}
             {% if moderation.getPermissionName is empty or (moderation.getPermissionName is not empty and auth_user.hasPermission(moderation.getPermissionName)) %}

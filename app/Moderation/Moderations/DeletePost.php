@@ -41,7 +41,7 @@ class DeletePost implements ModerationInterface, HasPresenter
      */
     public function getName()
     {
-        return 'Delete';
+        return 'moderation.moderate.delete';
     }
 
     /**

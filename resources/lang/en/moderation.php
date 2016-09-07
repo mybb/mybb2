@@ -8,6 +8,7 @@
 
 return [
     'title'                           => 'Moderation',
+    'with_selected'                   => 'With selected',
     'inline_clear_selection'          => 'Clear Selection',
     'move_topic_forum_id_name'        => 'Forum ID',
     'move_topic_forum_id_description' => 'The forum to move these topics to.',
@@ -20,6 +21,27 @@ return [
     'logs_title'                      => 'Logs',
     'empty_queue'                     => 'The moderation queue is empty.',
 
-    'sticked'                         => 'Sticked',
-    'unsticked'                       => 'Unsticked',
+    'moderate' => [
+        'stick'     => 'Stick',
+        'unstick'   => 'Unstick',
+        'move'      => 'Move',
+        'merge'     => 'Merge',
+        'delete'    => 'Delete',
+        'close'     => 'Close',
+        'open'      => 'Open',
+        'approve'   => 'Approve',
+        'unapprove' => 'Unapprove',
+    ],
+
+    'log' => [
+        'sticked'     => 'Sticked',
+        'unsticked'   => 'Unsticked',
+        'unapproved'  => 'Unapproved',
+        'approved'    => 'Approved',
+        'closed'      => 'Closed',
+        'opened'      => 'Opened',
+        'deleted'     => 'Deleted',
+        'merged'      => 'Merged',
+        'moved'       => 'Moved',
+    ],
 ];

@@ -44,7 +44,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
      */
     public function getName()
     {
-        return 'Move';
+        return 'moderation.moderate.move';
     }
 
     /**
