@@ -10,6 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\ProfileFieldPresenter;
 
 /**
  * @property int id
@@ -46,6 +47,6 @@ class ProfileField extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ProfileFieldPresenter';
+        return ProfileFieldPresenter::class;
     }
 }

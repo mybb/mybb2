@@ -24,7 +24,7 @@ class Role extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('MyBB\Core\Database\Models\User');
+        return $this->belongsToMany(\MyBB\Core\Database\Models\User::class);
     }
 
     /**
@@ -32,6 +32,6 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany('MyBB\Core\Database\Models\Permission');
+        return $this->belongsToMany(\MyBB\Core\Database\Models\Permission::class);
     }
 }

@@ -11,6 +11,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\ConversationPresenter;
 
 /**
  * @property int id
@@ -67,7 +68,7 @@ class Conversation extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ConversationPresenter';
+        return ConversationPresenter::class;
     }
 
     /**
@@ -75,7 +76,7 @@ class Conversation extends Model implements HasPresenter
      */
     public function messages()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\ConversationMessage');
+        return $this->hasMany(\MyBB\Core\Database\Models\ConversationMessage::class);
     }
 
     /**
@@ -83,7 +84,7 @@ class Conversation extends Model implements HasPresenter
      */
     public function lastMessage()
     {
-        return $this->hasOne('MyBB\\Core\\Database\\Models\\ConversationMessage', 'id', 'last_message_id');
+        return $this->hasOne(\MyBB\Core\Database\Models\ConversationMessage::class, 'id', 'last_message_id');
     }
 
     /**
@@ -91,7 +92,7 @@ class Conversation extends Model implements HasPresenter
      */
     public function participants()
     {
-        return $this->belongsToMany('MyBB\\Core\\Database\\Models\\User', 'conversation_users')
+        return $this->belongsToMany(\MyBB\Core\Database\Models\User::class, 'conversation_users')
             ->withPivot('last_read', 'has_left', 'ignores');
     }
 }

@@ -10,6 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\PollPresenter;
 
 class Poll extends Model implements HasPresenter
 {
@@ -80,7 +81,7 @@ class Poll extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\\Core\\Presenters\\PollPresenter';
+        return PollPresenter::class;
     }
 
     /**
@@ -90,7 +91,7 @@ class Poll extends Model implements HasPresenter
      */
     public function topic()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic')->withTrashed();
+        return $this->belongsTo(\MyBB\Core\Database\Models\Topic::class)->withTrashed();
     }
 
     /**
@@ -100,7 +101,7 @@ class Poll extends Model implements HasPresenter
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'user_id');
     }
 
     /**
@@ -110,6 +111,6 @@ class Poll extends Model implements HasPresenter
      */
     public function votes()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\PollVote');
+        return $this->hasMany(\MyBB\Core\Database\Models\PollVote::class);
     }
 }

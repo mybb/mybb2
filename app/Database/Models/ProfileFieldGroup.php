@@ -10,6 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\ProfileFieldGroupPresenter;
 
 /**
  * @property int id
@@ -49,7 +50,7 @@ class ProfileFieldGroup extends Model implements HasPresenter
      */
     public function getProfileFields()
     {
-        return $this->hasMany('MyBB\Core\Database\Models\ProfileField', 'profile_field_group_id');
+        return $this->hasMany(\MyBB\Core\Database\Models\ProfileField::class, 'profile_field_group_id');
     }
 
     /**
@@ -59,6 +60,6 @@ class ProfileFieldGroup extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ProfileFieldGroupPresenter';
+        return ProfileFieldGroupPresenter::class;
     }
 }

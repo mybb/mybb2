@@ -33,7 +33,7 @@ class UserProfileField extends Model
      */
     public function getProfileField()
     {
-        return $this->belongsTo('MyBB\Core\Database\Models\ProfileField', 'profile_field_id', null, 'profileField');
+        return $this->belongsTo(\MyBB\Core\Database\Models\ProfileField::class, 'profile_field_id', null, 'profileField');
     }
 
     /**

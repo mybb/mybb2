@@ -15,6 +15,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\MyBBUserContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 use MyBB\Core\Permissions\Traits\PermissionableTrait;
+use MyBB\Core\Presenters\UserPresenter;
 
 /**
  * @property string id
@@ -88,7 +89,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\UserPresenter';
+        return UserPresenter::class;
     }
 
     /**
@@ -117,7 +118,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      */
     public function roles()
     {
-        return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Role')->withPivot('is_display');
+        return $this->belongsToMany(\MyBB\Core\Database\Models\Role::class)->withPivot('is_display');
     }
 
     /**
@@ -142,7 +143,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      */
     public function activity()
     {
-        return $this->hasMany('MyBB\\Core\\Database\\Models\\UserActivity');
+        return $this->hasMany(\MyBB\Core\Database\Models\UserActivity::class);
     }
 
     /**
@@ -150,7 +151,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      */
     public function conversations()
     {
-        return $this->belongsToMany('MyBB\\Core\\Database\\Models\\Conversation', 'conversation_users')->withPivot(
+        return $this->belongsToMany(\MyBB\Core\Database\Models\Conversation::class, 'conversation_users')->withPivot(
             'last_read',
             'has_left',
             'ignores'
