@@ -22,6 +22,6 @@ class Permission extends Model
 
     public function roles()
     {
-        $this->belongsToMany('MyBB\Core\Database\Models\Role');
+        $this->belongsToMany(\MyBB\Core\Database\Models\Role::class);
     }
 }

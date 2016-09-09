@@ -59,7 +59,7 @@ class PollVote extends Model
      */
     public function poll()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Poll');
+        return $this->belongsTo(\MyBB\Core\Database\Models\Poll::class);
     }
 
     /**
@@ -69,6 +69,6 @@ class PollVote extends Model
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'user_id');
     }
 }

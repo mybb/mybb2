@@ -16,6 +16,7 @@ use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Likes\Traits\LikeableTrait;
 use MyBB\Core\Moderation\Moderations\ApprovableInterface;
+use MyBB\Core\Presenters\PostPresenter;
 
 /**
  * @property int topic_id
@@ -79,17 +80,17 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\PostPresenter';
+        return PostPresenter::class;
     }
 
     /**
-     * A post belongs to a thread.
+     * A post belongs to a topic.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function topic()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Topic')->withTrashed();
+        return $this->belongsTo(\MyBB\Core\Database\Models\Topic::class)->withTrashed();
     }
 
     /**
@@ -99,7 +100,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'user_id');
     }
 
     /**

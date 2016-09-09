@@ -11,6 +11,7 @@ namespace MyBB\Core\Database\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\ConversationMessagePresenter;
 
 /**
  * @property int id
@@ -59,7 +60,7 @@ class ConversationMessage extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ConversationMessagePresenter';
+        return ConversationMessagePresenter::class;
     }
 
     /**
@@ -67,7 +68,7 @@ class ConversationMessage extends Model implements HasPresenter
      */
     public function conversation()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\Conversation');
+        return $this->belongsTo(\MyBB\Core\Database\Models\Conversation::class);
     }
 
     /**
@@ -75,6 +76,6 @@ class ConversationMessage extends Model implements HasPresenter
      */
     public function author()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'author_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'author_id');
     }
 }

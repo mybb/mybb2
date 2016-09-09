@@ -10,6 +10,7 @@ namespace MyBB\Core\Database\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
+use MyBB\Core\Presenters\ModerationLogPresenter;
 
 /**
  * @property int id
@@ -52,7 +53,7 @@ class ModerationLog extends Model implements HasPresenter
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\ModerationLogPresenter';
+        return ModerationLogPresenter::class;
     }
 
     /**
@@ -60,7 +61,7 @@ class ModerationLog extends Model implements HasPresenter
      */
     public function subjects()
     {
-        return $this->hasMany('MyBB\Core\Database\Models\ModerationLogSubject');
+        return $this->hasMany(\MyBB\Core\Database\Models\ModerationLogSubject::class);
     }
 
     /**
@@ -68,6 +69,6 @@ class ModerationLog extends Model implements HasPresenter
      */
     public function user()
     {
-        return $this->belongsTo('MyBB\Core\Database\Models\User');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class);
     }
 }
