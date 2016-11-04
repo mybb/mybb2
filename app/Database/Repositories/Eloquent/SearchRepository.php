@@ -38,20 +38,20 @@ class SearchRepository implements SearchRepositoryInterface
     }
 
     /**
-     * Find a single searchlog by ID.
+     * Find a single searchlog by token.
      *
-     * @param string $id The ID of the search to find.
+     * @param string $token The token of the search to find.
      *
      * @return mixed
      */
-    public function find($id)
+    public function find($token)
     {
-        $userId = $this->guard->user()->getAuthIdentifier();
+        $userId = $this->guard->user() != null ? $this->guard->user()->getAuthIdentifier() : null;
         if ($userId <= 0) {
             $userId = null;
         }
 
-        return $this->searchModel->where('user_id', $userId)->find($id);
+        return $this->searchModel->where('user_id', $userId)->find($token);
     }
 
     /**
@@ -64,10 +64,10 @@ class SearchRepository implements SearchRepositoryInterface
     public function create(array $details = [])
     {
         $details = array_merge([
-            'id'        => md5(uniqid(microtime(), true)),
+            'token'     => md5(uniqid(microtime(), true)),
             'keywords'  => '',
             'as_topics' => true,
-            'user_id'   => $this->guard->user()->getAuthIdentifier(),
+            'user_id'   => $this->guard->user() != null ? $this->guard->user()->getAuthIdentifier() : null,
             'topics'    => '',
             'posts'     => '',
         ], $details);

@@ -35,7 +35,7 @@ class Search extends Model
      * @var array
      */
     protected $fillable = [
-        'id',
+        'token',
         'as_topics',
         'user_id',
         'topics',
@@ -53,7 +53,7 @@ class Search extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'token';
     /**
      * The database table used by the model.
      *

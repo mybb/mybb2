@@ -247,23 +247,23 @@ class SearchController extends AbstractController
         ]);
 
         return redirect()->route('search.results', [
-            'id'       => $searchlog->id,
+            'token'    => $searchlog->token,
             'orderBy'  => $searchRequest->sortby,
             'orderDir' => $searchRequest->sorttype,
         ]);
     }
 
     /**
-     * @param int $id
+     * @param string $token
      * @param Request $request
      * @param Breadcrumbs $breadcrumbs
      *
      * @return \Illuminate\View\View
      */
-    public function results($id, Request $request, Breadcrumbs $breadcrumbs)
+    public function results($token, Request $request, Breadcrumbs $breadcrumbs)
     {
         // TODO: sorts
-        $search = $this->searchRepository->find($id);
+        $search = $this->searchRepository->find($token);
         if (!$search) {
             throw new NotFoundHttpException();
         }
