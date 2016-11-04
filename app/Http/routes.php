@@ -67,7 +67,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('search', ['as' => 'search', 'uses' => 'SearchController@index']);
     Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);
-    Route::get('search/{id}', ['as' => 'search.results', 'uses' => 'SearchController@results']);
+    Route::get('search/{token}', ['as' => 'search.results', 'uses' => 'SearchController@results']);
 
     Route::controllers([
         'auth'     => 'Auth\AuthController',
