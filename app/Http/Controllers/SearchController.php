@@ -247,7 +247,7 @@ class SearchController extends AbstractController
         ]);
 
         return redirect()->route('search.results', [
-            'token'       => $searchlog->id,
+            'token'    => $searchlog->token,
             'orderBy'  => $searchRequest->sortby,
             'orderDir' => $searchRequest->sorttype,
         ]);
