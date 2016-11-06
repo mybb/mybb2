@@ -21,7 +21,7 @@ export default class Cookie {
      *
      * @return The value of the cookie, or null if it doesn't exist.
      */
-    get(name: string): string {
+    public get(name: string): string {
         name = encodeURIComponent(this.prefix + name);
         name = name.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 
@@ -40,7 +40,7 @@ export default class Cookie {
      * @param value The value of the cookie to set.
      * @param expires Either a date to expire the cookie at, or a number of days for the cookie to last (default: 5 years).
      */
-    set(name: string, value: string, expires: number | Date = 157680000): void {
+    public set(name: string, value: string, expires: number | Date = 157680000): void {
         name = encodeURIComponent(this.prefix + name);
         name = name.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
 
@@ -81,7 +81,18 @@ export default class Cookie {
      *
      * @param name The name of the cookie to remove.
      */
-    unset(name: string): void {
+    public unset(name: string): void {
         this.set(name, "", -1);
+    }
+
+    /**
+     * Check if the given cookie is set.
+     *
+     * @param name The name of the cookie to check for.
+     *
+     * @return {boolean} True if the cookie is set, false otherwise.
+     */
+    public has(name: string): boolean {
+        return (this.get(name) !== null);
     }
 }

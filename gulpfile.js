@@ -4,12 +4,13 @@ const
     gulp = require("gulp"),
     imagemin = require('gulp-imagemin'),
     elixir = require("laravel-elixir"),
-    browserify = require('browserify'),
-    source = require('vinyl-source-stream'),
-    tsify = require("tsify"),
-    uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
-    buffer = require('vinyl-buffer');
+    rollup = require('rollup-stream'),
+    typescript = require('rollup-plugin-typescript'),
+    babel = require("rollup-plugin-babel"),
+    uglify = require('rollup-plugin-uglify'),
+    source = require('vinyl-source-stream');
+
 
 elixir.config.sourcemaps = true;
 
@@ -39,21 +40,35 @@ gulp.task("images", () => {
 });
 
 gulp.task("typescript", () => {
-    return browserify({
-        basedir: ".",
-        debug : !gulp.env.production,
-        entries: ["resources/assets/typescript/mybb.ts"],
-        cache: {},
-        packageCache: {}
-    })
-        .plugin(tsify)
-        .bundle()
-        .pipe(source("mybb.js"))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest("public/assets/js"));
+    return rollup({
+            entry: 'resources/assets/typescript/mybb.ts',
+            format: 'iife',
+            sourceMap: 'inline',
+            plugins: [
+                typescript(),
+                babel({
+                    exclude: 'node_modules/**',
+                }),
+                //uglify()
+            ]
+        }).pipe(source('mybb.js'))
+        .pipe(gulp.dest('./public/assets/js'));
+
+    // return browserify({
+    //     basedir: ".",
+    //     debug : !gulp.env.production,
+    //     entries: ["resources/assets/typescript/mybb.ts"],
+    //     cache: {},
+    //     packageCache: {}
+    // })
+    //     .plugin(tsify)
+    //     .bundle()
+    //     .pipe(source("mybb.js"))
+    //     .pipe(buffer())
+    //     .pipe(sourcemaps.init({loadMaps: true}))
+    //     .pipe(uglify())
+    //     .pipe(sourcemaps.write('./'))
+    //     .pipe(gulp.dest("public/assets/js"));
 });
 
 elixir(mix => {
