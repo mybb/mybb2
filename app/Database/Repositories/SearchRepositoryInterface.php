@@ -14,13 +14,13 @@ interface SearchRepositoryInterface
 {
 
     /**
-     * Find a single search log by ID.
+     * Find a single search log by token.
      *
-     * @param string $id The ID of the search log to find.
+     * @param string $token The token of the search log to find.
      *
      * @return mixed
      */
-    public function find($id);
+    public function find($token);
 
     /**
      * Create a new searchlog

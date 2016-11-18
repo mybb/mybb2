@@ -4,19 +4,19 @@ const
     gulp = require("gulp"),
     imagemin = require('gulp-imagemin'),
     elixir = require("laravel-elixir"),
-    browserify = require('browserify'),
-    source = require('vinyl-source-stream'),
-    tsify = require("tsify"),
-    uglify = require('gulp-uglify'),
     sourcemaps = require('gulp-sourcemaps'),
-    buffer = require('vinyl-buffer');
+    rollup = require('rollup-stream'),
+    typescript = require('rollup-plugin-typescript'),
+    babel = require("rollup-plugin-babel"),
+    uglify = require('rollup-plugin-uglify'),
+    source = require('vinyl-source-stream'),
+    modernizr = require('gulp-modernizr');
+
 
 elixir.config.sourcemaps = true;
 
 const vendor_scripts = [
     "../../../node_modules/jquery/dist/jquery.js",
-    // TODO: modernizr...
-    "../../../node_modules/modernizr/modernizr.js",
     "../../../node_modules/@claviska/jquery-dropdown/jquery.dropdown.js",
     "../../../node_modules/jquery-modal/jquery.modal.js",
     "../../../node_modules/jquery.cookie/jquery.cookie.js",
@@ -39,21 +39,25 @@ gulp.task("images", () => {
 });
 
 gulp.task("typescript", () => {
-    return browserify({
-        basedir: ".",
-        debug : !gulp.env.production,
-        entries: ["resources/assets/typescript/mybb.ts"],
-        cache: {},
-        packageCache: {}
-    })
-        .plugin(tsify)
-        .bundle()
-        .pipe(source("mybb.js"))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(uglify())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest("public/assets/js"));
+    return rollup({
+            entry: 'resources/assets/typescript/mybb.ts',
+            format: 'iife',
+            sourceMap: 'inline',
+            plugins: [
+                typescript(),
+                babel({
+                    exclude: 'node_modules/**',
+                }),
+                //uglify()
+            ]
+        }).pipe(source('mybb.js'))
+        .pipe(gulp.dest('./public/assets/js'));
+});
+
+gulp.task("modernizr", function() {
+    gulp.src('./public/assets/*.js')
+        .pipe(modernizr())
+        .pipe(gulp.dest("./public/assets/js/"))
 });
 
 elixir(mix => {
@@ -64,5 +68,7 @@ elixir(mix => {
         .copy("node_modules/font-awesome/fonts", "public/assets/fonts")
         .task("images", "resources/assets/images/**/*")
         .scripts(vendor_scripts, "public/assets/js/vendor.js")
-        .task("typescript", "resources/assets/typescript/**/*");
+        .task("typescript", "resources/assets/typescript/**/*")
+        // Run modernizr last as it analyses our JS files
+        .task("modernizr");
 });

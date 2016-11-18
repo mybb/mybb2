@@ -28,17 +28,21 @@ export default class Spinner {
     }
 
     public add() {
-        if (Spinner.numInProgress++ === 1) {
-            let spinnerElement = this.assertSpinnerElementExists();
+        let numInProgress = Spinner.numInProgress + 1;
+        if (numInProgress === 1) {
+            Spinner.numInProgress = numInProgress;
 
+            let spinnerElement = this.assertSpinnerElementExists();
             spinnerElement.style.display = "block";
         }
     }
 
     public remove() {
-        if (Spinner.numInProgress-- === 0) {
-            let spinnerElement = this.assertSpinnerElementExists();
+        let numInProgress = Spinner.numInProgress - 1;
+        if (numInProgress === 0) {
+            Spinner.numInProgress = numInProgress;
 
+            let spinnerElement = this.assertSpinnerElementExists();
             spinnerElement.style.display = "none";
         }
     }

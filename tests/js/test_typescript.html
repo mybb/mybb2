@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test MyBB 2.0 TypeScript</title>
+
+    <script type="text/javascript" src="../../public/assets/js/mybb.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        window.onload = function () {
+            console.log("Cookies:");
+            console.log(mybb.cookie);
+
+            mybb.cookie.set("test", "this is a test!");
+            console.log("Has test cookie?");
+            console.log(mybb.cookie.has("test"));
+            console.log(mybb.cookie.get("test"));
+
+            mybb.spinner.add();
+
+            window.setInterval(function () {
+                mybb.spinner.remove();
+            }, 3000);
+        };
+    </script>
+</body>
+</html>

@@ -53,7 +53,7 @@
         </div>
         <div class="topic-list__container">
             {% for topic in results %}
-                <div class="topic{{ topic.trashed ? ' soft-deleted' }}">
+                <div class="topic{{ topic.trashed() ? ' soft-deleted' }}">
                     <div class="primary-column">
                         <h3 class="topic__title">
                             <a href="{{ url_route("topics.show", {'slug': topic.slug, 'id': topic.id}) }}">{{ topic.title }}</a>
