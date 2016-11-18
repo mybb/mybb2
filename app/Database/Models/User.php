@@ -48,6 +48,8 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
         'last_page',
         'num_posts',
         'num_topics',
+        'warn_points',
+        'warned',
     ];
 
     /**

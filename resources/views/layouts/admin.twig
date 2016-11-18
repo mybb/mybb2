@@ -19,7 +19,7 @@
     <div class="sidebar-menu">
         <nav id="menu">
             <ul class="sidebar-menu__main">
-                <li>                    
+                <li>
                     <h3><a href="{{ url_route('admin.dashboard') }}"><i class="fa fa-home"></i><span class="text">Home</span></a></h3>
                     <ul class="sidebar-menu__sub">
                         <li {{ active_tab('dashboard') }}><a href="{{ url_route('admin.dashboard') }}">Dashboard</a></li>
@@ -36,6 +36,7 @@
                     <ul class="sidebar-menu__sub">
                         <li {{ active_tab('users') }}><a href="{{ url_route('admin.users') }}">Users</a></li>
                         <li {{ active_tab('profile-fields') }}><a href="{{ url_route('admin.users.profile_fields') }}">Profile Fields</a></li>
+                        <li {{ active_tab('warnings') }}><a href="{{ url_route('admin.warnings.warning_types') }}">Warning System</a></li>
                     </ul>
                 </li>
                 <li>

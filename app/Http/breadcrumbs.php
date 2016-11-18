@@ -292,3 +292,20 @@ Breadcrumbs::register('admin.users.profile_fields.add_group', function ($breadcr
     $breadcrumbs->parent('admin.users.profile_fields');
     $breadcrumbs->push(trans('admin::profile_fields.add_group'));
 });
+
+Breadcrumbs::register('admin.warnings.warning_types', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.users.profile_fields');
+    $breadcrumbs->push(trans('admin::profile_fields.add_group'));
+});
+
+// TODO fix this breadcrumb
+Breadcrumbs::register('moderation.control_panel', function ($breadcrumbs) {
+    $breadcrumbs->parent('forum.index');
+    $breadcrumbs->push(trans('warnings.warn_user'));
+});
+
+Breadcrumbs::register('moderation.warnings.warn_user', function ($breadcrumbs) {
+    $breadcrumbs->parent('moderation.control_panel');
+    $breadcrumbs->push(trans('warnings.warn_user'));
+});
+

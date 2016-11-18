@@ -1,0 +1,9 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('warnings.warn_user') }}
+{% endblock %}
+{% block contents %}
+    {{ warn.reason }}
+    {{ snapshot }}
+
+{% endblock %}

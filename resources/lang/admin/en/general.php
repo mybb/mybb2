@@ -12,6 +12,7 @@ return [
     'save'            => 'Save',
     'add'             => 'Add',
     'delete'          => 'Delete',
+    'edit'            => 'Edit',
     'success_saved'   => 'Saved!',
     'success_deleted' => 'Deleted!',
     'success_created' => 'Created!',
@@ -19,4 +20,7 @@ return [
     'dashboard'       => 'Dashboard',
     'users_roles'     => 'Users & Roles',
     'title'           => 'Administration',
+    'yes'             => 'Yes',
+    'no'              => 'No',
+    'actions_field'   => 'Actions',
 ];

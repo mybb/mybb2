@@ -151,4 +151,19 @@ class UserRepository implements UserRepositoryInterface
             ->setUpdatedAt($user->freshTimestamp())->save();
         return $user;
     }
+
+    /**
+     * Update user
+     *
+     * @param User $user The user to edit
+     * @param array $userDetails The details of the user.
+     *
+     * @return User
+     */
+    public function updateUser(User $user, array $userDetails = [])
+    {
+        $user->update($userDetails);
+
+        return $user;
+    }
 }
