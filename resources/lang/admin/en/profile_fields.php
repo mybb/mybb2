@@ -13,7 +13,6 @@ return [
     'name_field'                  => 'Name',
     'description_field'           => 'Description',
     'type_field'                  => 'Type',
-    'actions_field'               => 'Actions',
     'edit'                        => 'Edit',
     'delete'                      => 'Delete',
     'edit_options'                => 'Edit Options',

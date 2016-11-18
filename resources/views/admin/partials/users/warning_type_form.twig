@@ -1,0 +1,53 @@
+<section class="form">
+    {{ csrf_field() }}
+    {% if warningType is defined and warningType.id is defined %}
+        <input type="hidden" name="warningType_id" value="{{ warningType.id }}"/>
+    {% endif %}
+    <div class="form__section">
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="reason"> {{ trans('admin::warnings.reason') }} </label>
+            </h3>
+            <input type="text" name="reason" id="reason" value="{{ warningType.reason }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="multiple">{{ trans('admin::warnings.expires_after') }}</label>
+            </h3>
+            <input type="text" name="multiple" id="multiple" value="{{ warningType.expiration_multiple }}"/>
+            <select name="type">
+                <option value="day">{{ trans('admin::warnings.hour') }}</option>
+                <option value="day">{{ trans('admin::warnings.day') }}</option>
+                <option value="week">{{ trans('admin::warnings.week') }}</option>
+                <option value="month">{{ trans('admin::warnings.month') }}</option>
+                <option value="never">{{ trans('admin::warnings.never') }}</option>
+            </select>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="points">{{ trans('admin::warnings.points_add') }}</label>
+            </h3>
+            <input type="number" name="points" id="points" value="{{ warningType.points }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">{{ trans('admin::warnings.must_acknowledge') }}</h3>
+            <div class="segmented-control">
+                            <span class="segmented-control__option">
+                                <input id="must_acknowledge_yes" class="segmented-control__option__input" name="must_acknowledge" type="radio" value="1" {{ warningType.must_acknowledge == 1 or not(warningType is defined) ? 'checked="checked"' }}>
+                                <label class="segmented-control__option__button" for="must_acknowledge_yes">{{ trans('admin::general.yes') }}</label>
+                            </span>
+                            <span class="segmented-control__option">
+                                <input id="must_acknowledge_no" class="segmented-control__option__input" name="must_acknowledge" type="radio" value="0" {{ warningType is defined and warningType.must_acknowledge == 0 ? 'checked="checked"' }}>
+                                <label class="segmented-control__option__button" for="must_acknowledge_no">{{ trans('admin::general.no') }}</label>
+                            </span>
+                            <span class="segmented-control__option">
+                                <input id="must_acknowledge_issuer" class="segmented-control__option__input" name="must_acknowledge" type="radio" value="2" {{ warningType is defined and warningType.must_acknowledge == 2 ? 'checked="checked"' }}>
+                                <label class="segmented-control__option__button" for="must_acknowledge_issuer">{{ trans('admin::warnings.issuer_discretion') }}</label>
+                            </span>
+            </div>
+        </div>
+        <div class="form__submit">
+            <button type="submit" class="button">{{ trans('admin::general.save') }}</button>
+        </div>
+    </div>
+</section>

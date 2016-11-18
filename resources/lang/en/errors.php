@@ -37,4 +37,8 @@ return [
     'permission_implement_interface'   => "The registered class for ':class' needs to implement PermissionInterface",
     'invalid_date_object'              => '$date needs to be either an integer (timestamp) or an instance of either DateTime or Date',
     'user_not_found'                   => 'Sorry, the specified user could not be found.',
+    'warnings_content_invalid_class'   => "Failed to load Warnings Content Class ':class'",
+    'user_not_belongs_to_content'      => ':user is not author of this content',
+    'warning_type_not_found'           => 'Warning Type not found',
+    'warning_not_found'           => 'Warning not found',
 ];

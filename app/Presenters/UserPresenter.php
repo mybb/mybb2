@@ -373,4 +373,15 @@ class UserPresenter extends BasePresenter
 
         return $data;
     }
+
+    /**
+     * @return int
+     */
+    public function getWarningPercent()
+    {
+        if(!$this->settings->get('warnings.max_points'))
+            return $this->wrappedObject->warn_points / 1 * 100;
+        else
+            return $this->wrappedObject->warn_points / $this->settings->get('warnings.max_points') * 100;
+    }
 }

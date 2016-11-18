@@ -1,0 +1,53 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('warnings.warn_user') }}
+{% endblock %}
+{% block contents %}
+    <table>
+        <thead>
+            <tr>
+                <td> reason </td>
+                <td> points </td>
+                <td> created_at </td>
+                <td> Issued By </td>
+                <td> Expires </td>
+                <td> More </td>
+            </tr>
+        </thead>
+        <tr><td colspan="6">Active</td> </tr>
+        {% for warn in warns[0] %}
+            <tr>
+                <td>{{ warn.reason }}</td>
+                <td>+{{ warn.points }}</td>
+                <td>{{ warn.created_at }}</td>
+                <td>{{ render_profile_link(warn.issued) }}</td>
+                <td>
+                    {% if not warn.expires_at %}
+                        never
+                    {% else %}
+                        {{ warn.expires_at }}
+                    {% endif %}
+                </td>
+                <td> more route </td>
+            </tr>
+        {% endfor %}
+        <tr><td colspan="6">Expired</td> </tr>
+        {% for warn in warns[1] %}
+            <tr>
+                <td>{{ warn.reason }}</td>
+                <td>+{{ warn.points }}</td>
+                <td>{{ warn.created_at }}</td>
+                <td>{{ render_profile_link(warn.issued) }}</td>
+                <td>
+                    {% if warn.revoked_at %}
+                        revoked
+                    {% else %}
+                        Already expired
+                    {% endif %}
+                </td>
+                <td> more route </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
