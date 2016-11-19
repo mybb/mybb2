@@ -24,4 +24,8 @@ return [
     'saved_warn'        => 'The warning level of :user has been increased to :warning_level%.',
     'must_acknowledge'  => 'User must acknowledge with warn?',
     'warning_level'     => 'Warning Level',
+    'details'           => 'View details',
+    'revoke'            => 'Revoke',
+    'warn_revoked'      => 'Warn has been successfully revoked',
+    'revoke_reason'     => 'Revoke reason',
 ];

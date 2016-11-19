@@ -8,6 +8,8 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\Warning;
+
 interface WarningsRepositoryInterface
 {
 
@@ -15,7 +17,7 @@ interface WarningsRepositoryInterface
      * Create new warning
      *
      * @param array $details
-     * @return mixed
+     * @return Warning
      */
     public function create(array $details = []);
 
@@ -23,7 +25,7 @@ interface WarningsRepositoryInterface
      * Get all warnings for user.
      *
      * @param int $userId
-     * @return mixed
+     * @return Warning
      */
     public function findForUser($userId);
 
@@ -31,7 +33,16 @@ interface WarningsRepositoryInterface
      * Find warning by id
      *
      * @param int $warnId
-     * @return mixed
+     * @return Warning
      */
     public function find($warnId);
+
+    /**
+     * Revoke warning
+     *
+     * @param Warning $warning
+     * @param string $reason
+     * @return Warning
+     */
+    public function revoke(Warning $warning, $reason);
 }

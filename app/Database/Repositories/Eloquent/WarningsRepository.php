@@ -67,4 +67,18 @@ class WarningsRepository implements WarningsRepositoryInterface
     {
         return $this->warningModel->find($warnId);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function revoke(Warning $warning, $reason)
+    {
+        $warning->update([
+            'revoked_at'    => date("Y-m-d H:i:s"),
+            'expires_at'    => date("Y-m-d H:i:s"),
+            'revoked_by'    => $this->guard->user()->id,
+            'revoke_reason' => $reason,
+            'expired'       => 1,
+        ]);
+    }
 }

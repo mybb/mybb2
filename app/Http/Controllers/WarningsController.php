@@ -17,6 +17,7 @@ use MyBB\Core\Exceptions\WarningTypeNotFoundException;
 use MyBB\Core\Exceptions\WarningNotFoundException;
 use MyBB\Core\Warnings\WarningsManager;
 use MyBB\Core\Http\Requests\Warnings\WarnUserRequest;
+use MyBB\Core\Http\Requests\Warnings\RevokeWarnRequest;
 use MyBB\Settings\Store;
 use Illuminate\Contracts\Auth\Guard;
 use Carbon\Carbon;
@@ -230,5 +231,23 @@ class WarningsController extends AbstractController
         $snapshot = $warningContent->getWarningPreviewView($warn->snapshot);
 
         return view('warnings.warn_details', compact('warn', 'snapshot'));
+    }
+
+    /**
+     * @param RevokeWarnRequest $request
+     * @return mixed
+     */
+    public function revokeWarn(RevokeWarnRequest $request)
+    {
+        $warn = $this->warnings->find($request->input('id'));
+        if (!$warn || $warn->expired || $warn->revoked_at) {
+            throw new WarningNotFoundException;
+        }
+
+        $this->warnings->revoke($warn, $request->input('reason'));
+
+        return redirect()->route('warnings.show', [
+            'warnId' => $warn->id,
+        ])->withSuccess(trans('warnings.warn_revoked'));
     }
 }

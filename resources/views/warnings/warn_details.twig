@@ -3,7 +3,36 @@
     {{ trans('warnings.warn_user') }}
 {% endblock %}
 {% block contents %}
-    {{ warn.reason }}
-    {{ snapshot }}
 
+    {% if warn.revoked_at %}
+        Status: Revoked
+    {% elseif warn.expired %}
+        Status: Already expired
+    {% else %}
+        Expires at {{ warn.expires_at }}
+    {% endif %}<br>
+    Warn reason {{ warn.reason }} <br>
+    {% if snapshot %}
+        Inappropriate content {{ snapshot }} <br>
+    {% endif %}
+    IssuedBy {{ render_profile_link(warn.issued()) }} <br>
+    Created at {{ format_date(warn.created_at) }} <br>
+    Warn points +{{ warn.points }} <br>
+
+    <hr>
+    {% if not warn.revoked_at and not warn.expired %}
+        <form method="post" action="{{ route('moderation.warnings.warn_revoke') }}">
+            <textarea name="reason" placeholder="{{ trans('warnings.revoke_reason') }}"></textarea>
+            {{ csrf_field() }}
+            <input type="hidden" value="{{ warn.id }}" name="id">
+            <button type="submit" class="button icon">{{ trans('warnings.revoke') }}</button>
+        </form>
+    {% endif %}
+
+    {% if warn.revoked_at %}
+        WARN REVOKED <br>
+        Revoked at {{ warn.revoked_at }} <br>
+        Revoked by {{ render_profile_link(warn.revoked_By)}} <br>
+        Revoked reason {{ warn.revoke_reason }} <br>
+    {% endif %}
 {% endblock %}

@@ -12,6 +12,7 @@
         </header>
         <div class="page-controls">
             <div class="page-buttons">
+                <a href="{{ route('moderation.warnings.warn_user', {'userId': user.id, 'contentType': 'user', 'contentId': user.id}) }}" class="button button--half-width icon fa-warning">Warn user</a>
                 <a href="{{ url_route('conversations.compose') }}" class="button button--half-width icon fa-comments">Message</a>
                 <a href="{{ url_route('account.following') }}" class="button button--half-width icon fa-plus">Follow</a>
             </div>

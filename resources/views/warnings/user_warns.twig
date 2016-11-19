@@ -19,16 +19,18 @@
             <tr>
                 <td>{{ warn.reason }}</td>
                 <td>+{{ warn.points }}</td>
-                <td>{{ warn.created_at }}</td>
+                <td>{{ format_date(warn.created_at) }}</td>
                 <td>{{ render_profile_link(warn.issued) }}</td>
                 <td>
                     {% if not warn.expires_at %}
                         never
                     {% else %}
-                        {{ warn.expires_at }}
+                        {{ format_date(warn.expires_at) }}
                     {% endif %}
                 </td>
-                <td> more route </td>
+                <td>
+                    <a href="{{ route('warnings.show', {'warnId': warn.id}) }}">{{ trans('warnings.details') }}</a>
+                </td>
             </tr>
         {% endfor %}
         <tr><td colspan="6">Expired</td> </tr>
@@ -36,7 +38,7 @@
             <tr>
                 <td>{{ warn.reason }}</td>
                 <td>+{{ warn.points }}</td>
-                <td>{{ warn.created_at }}</td>
+                <td>{{ format_date(warn.created_at) }}</td>
                 <td>{{ render_profile_link(warn.issued) }}</td>
                 <td>
                     {% if warn.revoked_at %}
@@ -45,7 +47,9 @@
                         Already expired
                     {% endif %}
                 </td>
-                <td> more route </td>
+                <td>
+                    <a href="{{ route('warnings.show', {'warnId': warn.id}) }}">{{ trans('warnings.details') }}</a>
+                </td>
             </tr>
         {% endfor %}
     </table>

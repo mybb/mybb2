@@ -36,4 +36,16 @@ class WarningsPresenter extends BasePresenter
 
         return app()->make(\MyBB\Core\Presenters\UserPresenter::class, [$this->wrappedObject->author]);
     }
+
+    /**
+     * @return UserPresenter
+     */
+    public function revoked_By()
+    {
+        if ($this->wrappedObject->author instanceof UserPresenter) {
+            return $this->wrappedObject->author;
+        }
+
+        return app()->make(\MyBB\Core\Presenters\UserPresenter::class, [$this->wrappedObject->author]);
+    }
 }

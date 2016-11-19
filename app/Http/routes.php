@@ -211,6 +211,10 @@ Route::group(['middleware' => ['web']], function () {
             ['as' => 'moderation.warnings.warn_user',
              'uses' => 'WarningsController@createWarnUser']
         );
+        Route::post('/warn/revoke',
+            ['as' => 'moderation.warnings.warn_revoke',
+             'uses' => 'WarningsController@revokeWarn']
+        );
     });
 
     Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
