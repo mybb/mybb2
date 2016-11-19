@@ -45,11 +45,11 @@ interface WarningTypesRepositoryInterface
     public function delete($id);
 
     /**
-     * Edit single warning type by id
+     * Edit single warning type
      *
-     * @param int $id
+     * @param WarningType $warningType
+     * @param array $warningTypeDetails
      * @return mixed
      */
     public function edit(WarningType $warningType, array $warningTypeDetails = []);
-
 }

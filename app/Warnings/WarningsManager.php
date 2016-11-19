@@ -11,7 +11,8 @@ namespace MyBB\Core\Warnings;
 use Illuminate\Contracts\Foundation\Application;
 use MyBB\Core\Exceptions\WarningsContentInvalidClassException;
 
-class WarningsManager {
+class WarningsManager
+{
 
     /**
      * @var Application
@@ -35,7 +36,7 @@ class WarningsManager {
     public function getWarningContentClass($contentName)
     {
 
-        $contentClass = 'MyBB\\Core\\Warnings\\Warnings' . ucfirst($contentName) .'s';
+        $contentClass = 'MyBB\\Core\\Warnings\\Warnings' . ucfirst($contentName) . 's';
 
         if (!class_exists($contentClass)) {
             throw new WarningsContentInvalidClassException($contentClass);

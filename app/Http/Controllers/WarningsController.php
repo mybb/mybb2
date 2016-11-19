@@ -70,8 +70,7 @@ class WarningsController extends AbstractController
         WarningsManager $WarningsManager,
         Guard $guard,
         Store $settings
-    )
-    {
+    ) {
         $this->users = $users;
         $this->warnings = $warnings;
         $this->warningTypesRepository = $warningTypes;
@@ -89,21 +88,29 @@ class WarningsController extends AbstractController
     public function warnUser($userId, $contentType, $contentId)
     {
         $user = $this->users->find($userId);
-        if (!$user)
+        if (!$user) {
             throw new UserNotFoundException;
+        }
 
         //todo check if user is warnable
 
         $warningContent = $this->WarningsManager->getWarningContentClass($contentType);
         $content = $warningContent->getWarningContent($contentId);
-        if ($user->id != $content['user_id'])
+        if ($user->id != $content['user_id']) {
             throw new UserNotBelongsToThisContentException($user->name);
+        }
 
         $previewContent = $warningContent->getWarningPreviewView($content['content']);
 
         $warningTypes = $this->warningTypesRepository->all();
 
-        return view('warnings.warn_user', compact('user', 'contentType', 'contentId', 'warningTypes', 'previewContent'));
+        return view('warnings.warn_user', compact(
+            'user',
+            'contentType',
+            'contentId',
+            'warningTypes',
+            'previewContent'
+        ));
     }
 
     /**
@@ -121,8 +128,9 @@ class WarningsController extends AbstractController
 
         $warningContent = $this->WarningsManager->getWarningContentClass($contentType);
         $content = $warningContent->getWarningContent($contentId);
-        if ($user->id != $content['user_id'])
+        if ($user->id != $content['user_id']) {
             throw new UserNotBelongsToThisContentException($user->name);
+        }
 
         $dataToSave['user_id'] = $user->id;
         if ($contentType !== null & $contentId !== null) {
@@ -130,35 +138,39 @@ class WarningsController extends AbstractController
             $dataToSave['content_id'] = (int)$contentId;
         }
 
-        if ($content['content'])
+        if ($content['content']) {
             $dataToSave['snapshot'] = $content['content'];
+        }
 
         $warningType = $inputs['warningType'];
         if ($warningType == 'custom') {
             $dataToSave['reason'] = $inputs['custom_reason'];
             $dataToSave['points'] = (int)$inputs['custom_points'];
             $dataToSave['must_acknowledge'] = (int)$inputs['must_acknowledge']['custom'];
-            if (!$inputs['custom_expires_at'] && isset($inputs['custom_never']))
+            if (!$inputs['custom_expires_at'] && isset($inputs['custom_never'])) {
                 $dataToSave['expires_at'] = null;
-            else
+            } else {
                 $dataToSave['expires_at'] = Carbon::parse($inputs['custom_expires_at'])->timestamp;
+            }
         } else {
             // grab warn from warning types
             $warn = $this->warningTypesRepository->find((int)$warningType);
-            if (!$warn)
+            if (!$warn) {
                 throw new WarningTypeNotFoundException();
+            }
 
             $dataToSave['reason'] = $warn->reason;
             $dataToSave['points'] = $warn->points;
 
-            if ($warn->must_acknowledge == 2)
+            if ($warn->must_acknowledge == 2) {
                 $dataToSave['must_acknowledge'] = (int)$inputs['must_acknowledge'][$warn->id];
-            else
+            } else {
                 $dataToSave['must_acknowledge'] = $warn->must_acknowledge;
+            }
 
-            if ($warn->expiration_type == 'never')
+            if ($warn->expiration_type == 'never') {
                 $dataToSave['expires_at'] = null;
-            else {
+            } else {
                 $timeToAddMethod = 'add' . ucfirst($warn->expiration_type) . 's';
                 $dataToSave['expires_at'] = Carbon::now()->{$timeToAddMethod}($warn->expiration_multiple)->timestamp;
             }
@@ -166,13 +178,15 @@ class WarningsController extends AbstractController
 
         // Are you trying add more points to this user than max points value is?
         $final_points = $user->warn_points + $dataToSave['points'];
-        if($final_points > $this->settings->get('warnings.max_points'))
+        if ($final_points > $this->settings->get('warnings.max_points')) {
             $updateUser['warn_points'] = $this->settings->get('warnings.max_points');
-        else
+        } else {
             $updateUser['warn_points'] = $final_points;
+        }
 
-        if(!$user->warned && $dataToSave['must_acknowledge'])
+        if (!$user->warned && $dataToSave['must_acknowledge']) {
             $updateUser['warned'] = 1;
+        }
 
         $this->warnings->create($dataToSave);
         // todo add warning levels
@@ -188,6 +202,11 @@ class WarningsController extends AbstractController
         ]));
     }
 
+    /**
+     * @param $id
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showWarnsForUser($id, $slug)
     {
         $warns = $this->warnings->findForUser($id);
@@ -195,12 +214,17 @@ class WarningsController extends AbstractController
         return view('warnings.user_warns', compact('warns'));
     }
 
+    /**
+     * @param $warnId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function warnDetails($warnId)
     {
         $warn = $this->warnings->find($warnId);
 
-        if(!$warn)
+        if (!$warn) {
             throw new WarningNotFoundException;
+        }
 
         $warningContent = $this->WarningsManager->getWarningContentClass($warn->content_type);
         $snapshot = $warningContent->getWarningPreviewView($warn->snapshot);

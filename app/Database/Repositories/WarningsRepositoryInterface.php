@@ -10,16 +10,6 @@ namespace MyBB\Core\Database\Repositories;
 
 interface WarningsRepositoryInterface
 {
-    /**
-     * Get all users.
-     *
-     * @param string $sortBy
-     * @param string $sortDir
-     * @param int $perPage
-     *
-     * @return mixed
-     */
-    //public function allForUser($user_id);
 
     /**
      * Create new warning
@@ -29,8 +19,19 @@ interface WarningsRepositoryInterface
      */
     public function create(array $details = []);
 
+    /**
+     * Get all warnings for user.
+     *
+     * @param int $userId
+     * @return mixed
+     */
     public function findForUser($userId);
 
+    /**
+     * Find warning by id
+     *
+     * @param int $warnId
+     * @return mixed
+     */
     public function find($warnId);
-
 }

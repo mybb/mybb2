@@ -8,7 +8,6 @@
 
 namespace MyBB\Core\Warnings;
 
-
 interface WarnableContentInterface
 {
 

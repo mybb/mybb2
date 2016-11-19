@@ -29,8 +29,8 @@ class WarningsPosts implements WarnableContentInterface
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getContentType()
     {
         return 'post';
@@ -42,8 +42,9 @@ class WarningsPosts implements WarnableContentInterface
     public function getWarningContent($contentId)
     {
         $post = $this->contentRepository->find($contentId);
-        if(!$post)
+        if (!$post) {
             throw new PostNotFoundException;
+        }
 
         $content = [
             'user_id' => $post->user_id,
@@ -62,5 +63,4 @@ class WarningsPosts implements WarnableContentInterface
 
         return view('warnings.content_post_preview', compact('content'));
     }
-
 }

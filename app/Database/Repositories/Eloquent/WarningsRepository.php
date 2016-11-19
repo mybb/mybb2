@@ -27,6 +27,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * WarningsRepository constructor.
      * @param Warning $warning
+     * @param Guard $guard
      */
     public function __construct(Warning $warning, Guard $guard)
     {
@@ -52,7 +53,11 @@ class WarningsRepository implements WarningsRepositoryInterface
      */
     public function findForUser($userId)
     {
-        return $this->warningModel->where('user_id', $userId)->with(['issuedBy'])->orderBy('created_at', 'desc')->get()->groupBy('expired');
+        return $this->warningModel->where('user_id', $userId)
+            ->with(['issuedBy'])
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->groupBy('expired');
     }
 
     /**
@@ -62,5 +67,4 @@ class WarningsRepository implements WarningsRepositoryInterface
     {
         return $this->warningModel->find($warnId);
     }
-
 }

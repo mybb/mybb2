@@ -18,7 +18,6 @@ class WarningTypesRepository implements WarningTypesRepositoryInterface
      */
     protected $warningTypeModel;
 
-
     /**
      * WarningsRepository constructor.
      * @param WarningType $warningType
@@ -68,8 +67,6 @@ class WarningTypesRepository implements WarningTypesRepositoryInterface
     public function edit(WarningType $warningType, array $warningTypeDetails = [])
     {
         $warningType->update($warningTypeDetails);
-
         return $warningType;
     }
-
 }

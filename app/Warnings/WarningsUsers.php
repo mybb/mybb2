@@ -29,8 +29,8 @@ class WarningsUsers implements WarnableContentInterface
     }
 
     /**
-    * {@inheritdoc}
-    */
+     * {@inheritdoc}
+     */
     public function getContentType()
     {
         return 'user';
@@ -42,8 +42,9 @@ class WarningsUsers implements WarnableContentInterface
     public function getWarningContent($contentId)
     {
         $user = $this->contentRepository->find($contentId);
-        if(!$user)
+        if (!$user) {
             throw new UserNotFoundException;
+        }
 
         $content = [
             'user_id' => $user->id,
@@ -60,5 +61,4 @@ class WarningsUsers implements WarnableContentInterface
     {
         return false;
     }
-
 }

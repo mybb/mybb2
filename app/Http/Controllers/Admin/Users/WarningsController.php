@@ -36,8 +36,7 @@ class WarningsController extends AdminController
     public function __construct(
         Breadcrumbs $breadcrumbs,
         WarningTypes $warningTypes
-    )
-    {
+    ){
         $this->breadcrumbs = $breadcrumbs;
         $this->warningTypesRepository = $warningTypes;
     }
@@ -73,7 +72,8 @@ class WarningsController extends AdminController
             'must_acknowledge'    => $request->input('must_acknowledge'),
         ]);
 
-        return redirect()->route('admin.warnings.warning_types')->withSuccess(trans('admin::warnings.warning_type_create_success'));
+        return redirect()->route('admin.warnings.warning_types')
+            ->withSuccess(trans('admin::warnings.warning_type_create_success'));
     }
 
     /**
@@ -90,6 +90,7 @@ class WarningsController extends AdminController
     }
 
     /**
+     * @param $id
      * @param CreateWarningTypeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -108,7 +109,8 @@ class WarningsController extends AdminController
             'must_acknowledge'    => $request->input('must_acknowledge'),
         ]);
 
-        return redirect()->route('admin.warnings.warning_types')->withSuccess(trans('admin::warnings.warning_type_edit_success'));
+        return redirect()->route('admin.warnings.warning_types')
+            ->withSuccess(trans('admin::warnings.warning_type_edit_success'));
     }
 
     /**

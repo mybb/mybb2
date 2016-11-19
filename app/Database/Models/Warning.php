@@ -34,7 +34,7 @@ class Warning extends Model
      */
     public function getPresenterClass()
     {
-        return 'MyBB\Core\Presenters\WarningsPresenter';
+        return \MyBB\Core\Presenters\WarningsPresenter::class;
     }
 
     /**
@@ -44,7 +44,7 @@ class Warning extends Model
      */
     public function issuedBy()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'user_id');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'user_id');
     }
 
     /**
@@ -54,7 +54,6 @@ class Warning extends Model
      */
     public function revokedBy()
     {
-        return $this->belongsTo('MyBB\\Core\\Database\\Models\\User', 'revoked_by');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class, 'revoked_by');
     }
-
 }

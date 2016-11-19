@@ -308,4 +308,3 @@ Breadcrumbs::register('moderation.warnings.warn_user', function ($breadcrumbs) {
     $breadcrumbs->parent('moderation.control_panel');
     $breadcrumbs->push(trans('warnings.warn_user'));
 });
-

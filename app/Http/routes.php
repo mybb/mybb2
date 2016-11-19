@@ -75,7 +75,10 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
     Route::get('/user/{id}/{slug}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
-    Route::get('/user/{id}/{slug}/warns', ['as' => 'user.profile.warns', 'uses' => 'WarningsController@showWarnsForUser']);
+    Route::get(
+        '/user/{id}/{slug}/warns',
+        ['as' => 'user.profile.warns', 'uses' => 'WarningsController@showWarnsForUser']
+    );
     Route::get('/warnings/show/{warnId}', ['as' => 'warnings.show', 'uses' => 'WarningsController@warnDetails']);
 
     Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
@@ -191,12 +194,23 @@ Route::group(['middleware' => ['web']], function () {
             ['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP'],
         ], function () {
             Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
-            Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
-            Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
+            Route::get('/queue',
+                ['as' => 'moderation.control_panel.queue',
+                 'uses' => 'ModerationController@queue']
+            );
+            Route::get('/logs',
+                ['as' => 'moderation.control_panel.logs',
+                 'uses' => 'ModerationController@logs']
+            );
         });
-        Route::get('/warn/{userId}/{contentType}/{contentId}', ['as' => 'moderation.warnings.warn_user', 'uses' => 'WarningsController@warnUser']);
-        Route::post('/warn/{userId}/{contentType}/{contentId}', ['as' => 'moderation.warnings.warn_user', 'uses' => 'WarningsController@createWarnUser']);
-
+        Route::get('/warn/{userId}/{contentType}/{contentId}',
+            ['as' => 'moderation.warnings.warn_user',
+             'uses' => 'WarningsController@warnUser']
+        );
+        Route::post('/warn/{userId}/{contentType}/{contentId}',
+            ['as' => 'moderation.warnings.warn_user',
+             'uses' => 'WarningsController@createWarnUser']
+        );
     });
 
     Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {
