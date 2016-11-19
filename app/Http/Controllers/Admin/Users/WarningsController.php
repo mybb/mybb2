@@ -36,7 +36,7 @@ class WarningsController extends AdminController
     public function __construct(
         Breadcrumbs $breadcrumbs,
         WarningTypes $warningTypes
-    ){
+    ) {
         $this->breadcrumbs = $breadcrumbs;
         $this->warningTypesRepository = $warningTypes;
     }
