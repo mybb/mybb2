@@ -294,8 +294,18 @@ Breadcrumbs::register('admin.users.profile_fields.add_group', function ($breadcr
 });
 
 Breadcrumbs::register('admin.warnings.warning_types', function ($breadcrumbs) {
-    $breadcrumbs->parent('admin.users.profile_fields');
-    $breadcrumbs->push(trans('admin::profile_fields.add_group'));
+    $breadcrumbs->parent('admin.users');
+    $breadcrumbs->push(trans('admin::warnings.warning_types'));
+});
+
+Breadcrumbs::register('admin.warnings.add_warning_type', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.warnings.warning_types');
+    $breadcrumbs->push(trans('admin::warnings.warning_types'));
+});
+
+Breadcrumbs::register('admin.warnings.warning_types.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.warnings.warning_types');
+    $breadcrumbs->push(trans('admin::warnings.warning_types'));
 });
 
 // TODO fix this breadcrumb

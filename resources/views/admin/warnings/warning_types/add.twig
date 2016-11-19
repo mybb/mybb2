@@ -1,13 +1,10 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>{{ trans('admin::warnings.add_warning_type') }}</h1>
-
-    <div>
-        <a href="{{ url_route('admin.warnings.warning_types') }}" class="button button--secondary"><i class="fa fa-chevron-left"></i> {{ trans('admin::general.back') }}</a>
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::warnings.add_warning_type') }}</h1>
     </div>
-
-    <div>
+    <div class="admin-body__content">
         <form method="post" action="{{ url_route('admin.warnings.add_warning_type') }}">
             {% include "admin.partials.users.warning_type_form" %}
         </form>

@@ -1,14 +1,12 @@
 {% extends "layouts.admin" %}
 {% block title %}{% endblock %}
 {% block contents %}
-    <h1>{{ trans('admin::warnings.warning_types') }}</h1>
-
-    <div>
-        <a href="{{ url_route('admin.warnings.add_warning_type') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::warnings.add_warning_type') }}</a>
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::warnings.warning_types') }}</h1>
+        <div class="admin-body__header__buttons"><a href="{{ url_route('admin.warnings.add_warning_type') }}" class="button icon fa-plus">{{ trans('admin::warnings.add_warning_type') }}</a></div>
     </div>
-
-    <div>
-        <table class="admin-table admin-table--bordered">
+    <div class="admin-body__content">
+        <table class="admin-table admin-table--bordered warning-types">
             <thead>
             <tr>
                 <th>{{ trans('admin::warnings.reason_field') }}</th>
