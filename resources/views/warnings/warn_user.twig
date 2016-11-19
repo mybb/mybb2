@@ -6,9 +6,6 @@
     <div class="page-content">
         <header class="page-header">
             <h1 class="page-title">{{ trans('warnings.warn_user') }} {{ user.name }}</h1>
-            <div class="page-buttons">
-                <a href="// TODO" class="button button--secondary icon fa fa-arrow-circle-{{ langDir.left }}">{{ trans('general.cancel') }}</a>
-            </div>
         </header>
         <form method="post" action="{{ route('moderation.warnings.warn_user', {'userId': user.id, 'contentType': contentType, 'contentId': contentId}) }}">
             {{ csrf_field() }}
@@ -17,7 +14,7 @@
                     <div class="form__section">
                         <h2 class="form__section__title">{{ trans('warnings.warn_preview') }}</h2>
                         <div class="form__section__container">
-                            {{ previewContent }} {{ user.getWarningPercent }}
+                            {{ previewContent }}
                         </div>
                     </div>
                 {% endif %}
