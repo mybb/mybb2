@@ -68,6 +68,9 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'memberlist.per_page'],
             ['name' => 'conversations.enabled'],
             ['name' => 'conversations.message_order'],
+            ['name' => 'warnings.max_points'],
+            ['name' => 'warnings.allow_zero'],
+            ['name' => 'warnings.allow_custom'],
         ]);
 
         DB::table('setting_values')->insert([
@@ -262,6 +265,18 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             [
                 'setting_id' => DB::table('settings')->where('name', 'conversations.message_order')->first()->id,
                 'value'      => 'desc',
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'warnings.max_points')->first()->id,
+                'value'      => 10,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'warnings.allow_zero')->first()->id,
+                'value'      => 1,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'warnings.allow_custom')->first()->id,
+                'value'      => 1,
             ],
         ]);
     }

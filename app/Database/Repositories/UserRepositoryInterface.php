@@ -10,6 +10,8 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use MyBB\Core\Database\Models\User;
+
 interface UserRepositoryInterface
 {
     /**
@@ -61,4 +63,14 @@ interface UserRepositoryInterface
      * @return User
      */
     public function create(array $details = []);
+
+    /**
+     * Update user
+     *
+     * @param User $user The user to edit
+     * @param array $userDetails The details of the user.
+     *
+     * @return User
+     */
+    public function update(User $user, array $userDetails = []);
 }

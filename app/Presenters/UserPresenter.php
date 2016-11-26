@@ -277,7 +277,6 @@ class UserPresenter extends BasePresenter
 
             if (!isset($langOptions['langString'])) {
                 $langString = 'online.' . $route->getName();
-                ;
             } else {
                 $langString = 'online.' . $langOptions['langString'];
                 unset($langOptions['langString']);
@@ -372,5 +371,17 @@ class UserPresenter extends BasePresenter
         // TODO: Here's a nice place for a plugin hook
 
         return $data;
+    }
+
+    /**
+     * @return int
+     */
+    public function getWarningPercent()
+    {
+        if (!$this->settings->get('warnings.max_points')) {
+            return $this->wrappedObject->warn_points / 1 * 100;
+        } else {
+            return $this->wrappedObject->warn_points / $this->settings->get('warnings.max_points') * 100;
+        }
     }
 }

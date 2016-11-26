@@ -1,0 +1,18 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('warnings.warn_user') }}
+{% endblock %}
+{% block contents %}
+
+    <h1>{{ trans('warnings.ack.information') }}</h1>
+    {% include 'warnings.warn' with {'warn': warn} %}
+
+
+    <form method="post" action="{{ route('warnings.ack') }}">
+        {{ csrf_field() }}
+        <input type="hidden" name="id" value="{{ warn.id }}">
+        <div class="form__submit">
+            <button type="submit" class="button">{{ trans('warnings.ack.confirm') }}</button>
+        </div>
+    </form>
+{% endblock %}

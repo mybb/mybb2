@@ -23,6 +23,8 @@
             <dd class="stats__topics">{{ user.num_topics }}</dd>
             <dt class="stats__join-date">{{ trans('member.joinDate') }}</dt>
             <dd class="stats__join-date">{{ generate_time(user.created_at) }}</dd>
+            <dt class="stats__warning-percent">{{ trans('warnings.warning_level') }}</dt>
+            <dd class="stats__warning-percent"><a href="{{ route('user.profile.warns', {'id': user.id, 'slug': user.name}) }}">{{ user.getWarningPercent }}%</a></dd>
 
             {% if user.isOnline %}
                 <dt class="stats__last-page">{{ trans('member.lastPage') }}</dt>

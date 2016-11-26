@@ -1,0 +1,95 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('warnings.warn_user') }}
+{% endblock %}
+{% block contents %}
+    <div class="page-content">
+        <header class="page-header">
+            <h1 class="page-title">{{ trans('warnings.warn_user') }} {{ user.name }}</h1>
+        </header>
+        <form method="post" action="{{ route('moderation.warnings.warn_user', {'userId': user.id, 'contentType': contentType, 'contentId': contentId}) }}">
+            {{ csrf_field() }}
+            <section class="form">
+                {% if previewContent %}
+                    <div class="form__section">
+                        <h2 class="form__section__title">{{ trans('warnings.warn_preview') }}</h2>
+                        <div class="form__section__container">
+                            {{ previewContent }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="form__section">
+                    <h2 class="form__section__title">{{ trans('warnings.warn_details') }}</h2>
+                    <div class="form__section__container">
+                        <div class="form__row">
+                            <h3 class="form__row__title">{{ trans('warnings.pick_reason') }}</h3>
+                            {% for warningType in warningTypes %}
+                                <label for="type_{{ warningType.id }}">
+                                <input type="radio" name="warningType" id="type_{{ warningType.id }}" value="{{ warningType.id }}"/> {{ warningType.reason }} </label>
+                                | {{ warningType.points }}
+                                |
+                                {% if warningType.expiration_multiple %}
+                                    {{ warningType.expiration_multiple }}
+                                {% endif %}
+                                {{ trans_choice('admin::warnings.expiration.' ~ warningType.expiration_type, warningType.expiration_multiple) }}
+                                {% if warningType.must_acknowledge == 2 %}
+
+                                        <h3 class="form__row__title">{{ trans('warnings.must_acknowledge') }}</h3>
+                                        <div class="segmented-control">
+                                            <span class="segmented-control__option">
+                                                <input id="must_acknowledge_yes_{{ warningType.id }}" class="segmented-control__option__input" checked="checked" name="must_acknowledge[{{ warningType.id }}]" type="radio" value="1">
+                                                <label class="segmented-control__option__button" for="must_acknowledge_yes_{{ warningType.id }}">{{ trans('admin::general.yes') }}</label>
+                                            </span>
+                                            <span class="segmented-control__option">
+                                                <input id="must_acknowledge_no_{{ warningType.id }}" class="segmented-control__option__input" name="must_acknowledge[{{ warningType.id }}]" type="radio" value="0">
+                                                <label class="segmented-control__option__button" for="must_acknowledge_no_{{ warningType.id }}">{{ trans('admin::general.no') }}</label>
+                                            </span>
+                                        </div>
+
+                                {% endif %}
+                                <br>
+                            {% endfor %}
+
+                            {% if setting('warnings.allow_custom') %}
+                            <label for="type_custom">
+                                <input type="radio" name="warningType" id="type_custom" value="custom"/> {{ trans('warnings.pick_custom') }}
+                            </label>
+
+                                <div class="form__row">
+                                    <h3 class="form__row__title"><label for="custom_reason">{{ trans('warnings.custom_reason') }}</label></h3>
+                                    <input type="text" name="custom_reason" id="custom_reason"/>
+                                </div>
+                                <div class="form__row">
+                                    <h3 class="form__row__title"><label for="custom_points">{{ trans('warnings.custom_points') }}</label></h3>
+                                    <p class="form__row__description">{{ trans('warnings.points_range', {'min': minPoints, 'max': setting('warnings.max_points')}) }}</p>
+                                    <input type="number" name="custom_points" id="custom_points"/>
+                                </div>
+                                <div class="form__row">
+                                    <h3 class="form__row__title"><label for="custom_expiration">{{ trans('warnings.custom_expiration') }}</label></h3>
+                                    <p class="form__row__description">{{ trans('warnings.custom_never') }}</p>
+                                    <input type="text" name="custom_expires_at" id="custom_expiration"/>
+                                </div>
+                                <div class="form__row">
+                                    <h3 class="form__row__title">{{ trans('warnings.must_acknowledge') }}</h3>
+                                    <div class="segmented-control">
+                                        <span class="segmented-control__option">
+                                            <input id="must_acknowledge_yes" class="segmented-control__option__input" checked="checked" name="must_acknowledge[custom]" type="radio" value="1">
+                                            <label class="segmented-control__option__button" for="must_acknowledge_yes">{{ trans('admin::general.yes') }}</label>
+                                        </span>
+                                        <span class="segmented-control__option">
+                                            <input id="must_acknowledge_no" class="segmented-control__option__input" name="must_acknowledge[custom]" type="radio" value="0">
+                                            <label class="segmented-control__option__button" for="must_acknowledge_no">{{ trans('admin::general.no') }}</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="form__submit">
+                <button type="submit" class="button">{{ trans('warnings.warn_user') }}</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

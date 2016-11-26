@@ -75,6 +75,13 @@ Route::group(['middleware' => ['web']], function () {
     ]);
 
     Route::get('/user/{id}/{slug}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+    Route::get(
+        '/user/{id}/{slug}/warns',
+        ['as' => 'user.profile.warns', 'uses' => 'WarningsController@showWarnsForUser']
+    );
+    Route::get('/warnings/show/{warnId}', ['as' => 'warnings.show', 'uses' => 'WarningsController@warnDetails']);
+    Route::get('/warnings/ack', ['as' => 'warnings.ack', 'uses' => 'WarningsController@acknowledgeWithWarn']);
+    Route::post('/warnings/ack', ['as' => 'warnings.ack', 'uses' => 'WarningsController@postAcknowledgeWithWarn']);
 
     Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);
@@ -149,6 +156,32 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'Admin\Users\ProfileFieldController@testSubmit',
             ]);
         });
+        Route::group(['prefix' => 'warnings'], function () {
+            Route::get('warning-types', [
+                'as'   => 'admin.warnings.warning_types',
+                'uses' => 'Admin\Users\WarningsController@warningTypes',
+            ]);
+            Route::get('warning-types/add', [
+                'as'   => 'admin.warnings.add_warning_type',
+                'uses' => 'Admin\Users\WarningsController@addWarningType',
+            ]);
+            Route::post('warning-types/add', [
+                'as'   => 'admin.warnings.add_warning_type',
+                'uses' => 'Admin\Users\WarningsController@createWarningType',
+            ]);
+            Route::get('warning-types/edit/{id}', [
+                'as'   => 'admin.warnings.warning_types.edit',
+                'uses' => 'Admin\Users\WarningsController@editWarningType',
+            ]);
+            Route::post('warning-types/edit/{id}', [
+                'as'   => 'admin.warnings.warning_types.edit',
+                'uses' => 'Admin\Users\WarningsController@saveWarningType',
+            ]);
+            Route::post('warning-types/delete', [
+                'as'   => 'admin.warnings.warning_types.delete',
+                'uses' => 'Admin\Users\WarningsController@deleteWarningType',
+            ]);
+        });
     });
 
     Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);
@@ -163,9 +196,27 @@ Route::group(['middleware' => ['web']], function () {
             ['middleware' => 'checkaccess', 'permissions' => 'canEnterMCP'],
         ], function () {
             Route::get('/', ['as' => 'moderation.control_panel', 'uses' => 'ModerationController@controlPanel']);
-            Route::get('/queue', ['as' => 'moderation.control_panel.queue', 'uses' => 'ModerationController@queue']);
-            Route::get('/logs', ['as' => 'moderation.control_panel.logs', 'uses' => 'ModerationController@logs']);
+            Route::get('/queue', [
+                'as'   => 'moderation.control_panel.queue',
+                'uses' => 'ModerationController@queue',
+            ]);
+            Route::get('/logs', [
+                'as'   => 'moderation.control_panel.logs',
+                'uses' => 'ModerationController@logs',
+            ]);
         });
+        Route::get('/warn/{userId}/{contentType}/{contentId}', [
+            'as'   => 'moderation.warnings.warn_user',
+            'uses' => 'WarningsController@warnUser',
+        ]);
+        Route::post('/warn/{userId}/{contentType}/{contentId}', [
+            'as'   => 'moderation.warnings.warn_user',
+            'uses' => 'WarningsController@createWarnUser',
+        ]);
+        Route::post('/warn/revoke', [
+            'as'   => 'moderation.warnings.warn_revoke',
+            'uses' => 'WarningsController@revokeWarn',
+        ]);
     });
 
     Route::group(['prefix' => 'account', 'middleware' => 'checkaccess', 'permissions' => 'canEnterUCP'], function () {

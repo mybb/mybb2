@@ -1,0 +1,53 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::warnings.warning_types') }}</h1>
+        <div class="admin-body__header__buttons"><a href="{{ url_route('admin.warnings.add_warning_type') }}" class="button icon fa-plus">{{ trans('admin::warnings.add_warning_type') }}</a></div>
+    </div>
+    <div class="admin-body__content">
+        <table class="admin-table admin-table--bordered warning-types">
+            <thead>
+            <tr>
+                <th>{{ trans('admin::warnings.reason_field') }}</th>
+                <th>{{ trans('admin::warnings.points_field') }}</th>
+                <th>{{ trans('admin::warnings.expiration_time_field') }}</th>
+                <th>{{ trans('admin::warnings.must_acknowledge_field') }}</th>
+                <th>{{ trans('admin::general.actions_field') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for warningType in warningTypes %}
+                <tr>
+                    <td>{{ warningType.reason }}</td>
+                    <td>{{ warningType.points }}</td>
+                    <td>
+                        {% if warningType.expiration_type != 'never' %}
+                            {{ warningType.expiration_multiple }}
+                        {% endif %}
+                        {{ trans_choice('admin::warnings.expiration.' ~ warningType.expiration_type, warningType.expiration_multiple) }}
+                    </td>
+                    <td>
+                        {% if warningType.must_acknowledge == 1 %}
+                            {{ trans('admin::general.yes') }}
+                        {% elseif warningType.must_acknowledge == 2 %}
+                            {{ trans('admin::warnings.issuer_discretion') }}
+                        {% else %}
+                            {{ trans('admin::general.no') }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{{ url_route('admin.warnings.warning_types.edit', {'id': warningType.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::general.edit') }}</a>
+
+                        <form method="post" action="{{ route('admin.warnings.warning_types.delete') }}" style="display:inline;">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="warning_type_id" value="{{ warningType.id }}">
+                            <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::general.delete') }}</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

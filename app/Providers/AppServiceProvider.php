@@ -31,6 +31,8 @@ use MyBB\Core\Database\Repositories\Eloquent\SearchRepository;
 use MyBB\Core\Database\Repositories\Eloquent\TopicRepository;
 use MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository;
 use MyBB\Core\Database\Repositories\Eloquent\UserRepository;
+use MyBB\Core\Database\Repositories\Eloquent\WarningsRepository;
+use MyBB\Core\Database\Repositories\Eloquent\WarningTypesRepository;
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollRepositoryInterface;
 use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
@@ -43,6 +45,8 @@ use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Database\Repositories\WarningsRepositoryInterface;
+use MyBB\Core\Database\Repositories\WarningTypesRepositoryInterface;
 use MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
@@ -145,6 +149,16 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             RoleRepositoryInterface::class,
             RoleRepository::class
+        );
+
+        $this->app->bind(
+            WarningsRepositoryInterface::class,
+            WarningsRepository::class
+        );
+
+        $this->app->bind(
+            WarningTypesRepositoryInterface::class,
+            WarningTypesRepository::class
         );
 
         $this->app->singleton(PermissionChecker::class);
