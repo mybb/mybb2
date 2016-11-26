@@ -31,7 +31,7 @@
                                 {% if warningType.expiration_multiple %}
                                     {{ warningType.expiration_multiple }}
                                 {% endif %}
-                                {{ warningType.expiration_type }}
+                                {{ trans_choice('admin::warnings.expiration.' ~ warningType.expiration_type, warningType.expiration_multiple) }}
                                 {% if warningType.must_acknowledge == 2 %}
 
                                         <h3 class="form__row__title">{{ trans('warnings.must_acknowledge') }}</h3>
@@ -50,7 +50,7 @@
                                 <br>
                             {% endfor %}
 
-                            {% if true %} {# TODO use setting #}
+                            {% if setting('warnings.allow_custom') %}
                             <label for="type_custom">
                                 <input type="radio" name="warningType" id="type_custom" value="custom"/> {{ trans('warnings.pick_custom') }}
                             </label>
@@ -61,14 +61,13 @@
                                 </div>
                                 <div class="form__row">
                                     <h3 class="form__row__title"><label for="custom_points">{{ trans('warnings.custom_points') }}</label></h3>
+                                    <p class="form__row__description">{{ trans('warnings.points_range', {'min': minPoints, 'max': setting('warnings.max_points')}) }}</p>
                                     <input type="number" name="custom_points" id="custom_points"/>
                                 </div>
                                 <div class="form__row">
                                     <h3 class="form__row__title"><label for="custom_expiration">{{ trans('warnings.custom_expiration') }}</label></h3>
+                                    <p class="form__row__description">{{ trans('warnings.custom_never') }}</p>
                                     <input type="text" name="custom_expires_at" id="custom_expiration"/>
-                                    <p class="form__checkbox">
-                                        <label><input name="custom_never" type="checkbox" value="1"> <strong>{{ trans('warnings.never') }}</strong> {{ trans('warnings.custom_never') }}</label>
-                                    </p>
                                 </div>
                                 <div class="form__row">
                                     <h3 class="form__row__title">{{ trans('warnings.must_acknowledge') }}</h3>

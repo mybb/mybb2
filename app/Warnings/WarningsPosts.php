@@ -31,14 +31,6 @@ class WarningsPosts implements WarnableContentInterface
     /**
      * {@inheritdoc}
      */
-    public function getContentType()
-    {
-        return 'post';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getWarningContent($contentId)
     {
         $post = $this->contentRepository->find($contentId);
@@ -61,6 +53,6 @@ class WarningsPosts implements WarnableContentInterface
     {
         //todo use post parser
 
-        return view('warnings.content_post_preview', compact('content'));
+        return view('warnings.contents.post', compact('content'));
     }
 }

@@ -12,13 +12,6 @@ interface WarnableContentInterface
 {
 
     /**
-     * Get name of content type
-     *
-     * @return string
-     */
-    public function getContentType();
-
-    /**
      * @param integer $contentId
      * @return array
      */

@@ -1,0 +1,26 @@
+{% if warn.revoked_at %}
+    Status: Revoked
+{% elseif warn.expired %}
+    Status: Already expired
+{% elseif not warn.expires_at %}
+    Expiration time: never
+{% else %}
+    Expires at {{ format_date(warn.expires_at) }}
+{% endif %}<br>
+
+Warn reason {{ warn.reason }} <br>
+
+{% if warn.snapshot %}
+    Inappropriate content {{ warn.formatSnapshot() }}<br>
+{% endif %}
+
+IssuedBy {{ render_profile_link(warn.issued_by()) }} <br>
+Created at {{ format_date(warn.created_at) }} <br>
+Warn points +{{ warn.points }} <br>
+
+{% if warn.revoked_at %}
+    WARN REVOKED <br>
+    Revoked by: {{ render_profile_link(warn.revoked_by()) }} <br>
+    Revoked at: {{ format_date(warn.revoked_at) }} <br>
+    Revoke reason: {{ warn.revoke_reason }} <br>
+{% endif %}

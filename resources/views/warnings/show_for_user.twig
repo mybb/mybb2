@@ -20,7 +20,7 @@
                 <td>{{ warn.reason }}</td>
                 <td>+{{ warn.points }}</td>
                 <td>{{ format_date(warn.created_at) }}</td>
-                <td>{{ render_profile_link(warn.issued) }}</td>
+                <td>{{ render_profile_link(warn.issued_by) }}</td>
                 <td>
                     {% if not warn.expires_at %}
                         never
@@ -39,7 +39,7 @@
                 <td>{{ warn.reason }}</td>
                 <td>+{{ warn.points }}</td>
                 <td>{{ format_date(warn.created_at) }}</td>
-                <td>{{ render_profile_link(warn.issued) }}</td>
+                <td>{{ render_profile_link(warn.issued_by) }}</td>
                 <td>
                     {% if warn.revoked_at %}
                         revoked

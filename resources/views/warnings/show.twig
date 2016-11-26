@@ -1,0 +1,19 @@
+{% extends "layouts.base" %}
+{% block title %}
+    {{ trans('warnings.warn_user') }}
+{% endblock %}
+{% block contents %}
+
+    {% include 'warnings.warn' with {'warn': warm} %}
+
+    <hr>
+    {% if not warn.revoked_at and not warn.expired %}
+        <form method="post" action="{{ route('moderation.warnings.warn_revoke') }}">
+            <textarea name="reason" placeholder="{{ trans('warnings.revoke_reason') }}"></textarea>
+            {{ csrf_field() }}
+            <input type="hidden" value="{{ warn.id }}" name="id">
+            <button type="submit" class="button icon">{{ trans('warnings.revoke') }}</button>
+        </form>
+    {% endif %}
+
+{% endblock %}

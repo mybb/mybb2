@@ -308,10 +308,9 @@ Breadcrumbs::register('admin.warnings.warning_types.edit', function ($breadcrumb
     $breadcrumbs->push(trans('admin::warnings.warning_types'));
 });
 
-// TODO fix this breadcrumb
 Breadcrumbs::register('moderation.control_panel', function ($breadcrumbs) {
     $breadcrumbs->parent('forum.index');
-    $breadcrumbs->push(trans('warnings.warn_user'));
+    $breadcrumbs->push(trans('moderation.title'));
 });
 
 Breadcrumbs::register('moderation.warnings.warn_user', function ($breadcrumbs) {

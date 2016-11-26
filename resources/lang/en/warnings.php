@@ -16,7 +16,7 @@ return [
     'custom_reason'     => 'Custom warning reason',
     'custom_points'     => 'Warning points to add for user',
     'custom_expiration' => 'Warn will expire at',
-    'custom_never'      => 'warn will never expire, but it can be revoke any time by moderator',
+    'custom_never'      => 'Leave blank if warn should not have expiration time. It can be revoked any time by moderator',
     'never'             => 'Never',
     'warn_details'      => 'Warn details',
     'pick_reason'       => 'Choose warn reason',
@@ -28,4 +28,18 @@ return [
     'revoke'            => 'Revoke',
     'warn_revoked'      => 'Warn has been successfully revoked',
     'revoke_reason'     => 'Revoke reason',
+    'points_range'      => 'You may choose between :min and :max points',
+    'expiration'        => [
+        'hour'  => 'hour|hours',
+        'day'   => 'day|days',
+        'week'  => 'week|weeks',
+        'month' => 'month|months',
+        'year'  => 'year|years',
+        'never' => 'never',
+    ],
+    'ack'               => [
+        'information' => 'Before continue browsing forum you need to acknowledge with your last warning',
+        'confirm'     => 'I understood',
+        'success'     => 'You can now browse forum.',
+    ],
 ];

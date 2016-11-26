@@ -45,4 +45,29 @@ interface WarningsRepositoryInterface
      * @return Warning
      */
     public function revoke(Warning $warning, $reason);
+
+    /**
+     * Update given warning
+     *
+     * @param Warning $warning
+     * @param array $details
+     * @return mixed
+     */
+    public function update(Warning $warning, $details = []);
+
+    /**
+     * Get last warning with acknowledge flag for given user
+     *
+     * @param $userId
+     * @return Warning
+     */
+    public function lastAckWarn($userId);
+
+    /**
+     * Warnings with acknowledge flag count for given user
+     *
+     * @param $userId
+     * @return integer
+     */
+    public function ackWarnCount($userId);
 }

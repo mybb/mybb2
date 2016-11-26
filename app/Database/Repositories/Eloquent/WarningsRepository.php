@@ -73,12 +73,41 @@ class WarningsRepository implements WarningsRepositoryInterface
      */
     public function revoke(Warning $warning, $reason)
     {
-        $warning->update([
+        return $warning->update([
             'revoked_at'    => date("Y-m-d H:i:s"),
             'expires_at'    => date("Y-m-d H:i:s"),
             'revoked_by'    => $this->guard->user()->id,
             'revoke_reason' => $reason,
             'expired'       => 1,
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Warning $warning, $details = [])
+    {
+        return $warning->update($details);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function lastAckWarn($userId)
+    {
+        return $this->warningModel->where('user_id', $userId)
+            ->where('must_acknowledge', 1)
+            ->orderBy('created_at', 'desc')
+            ->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function ackWarnCount($userId)
+    {
+        return $this->warningModel->where('user_id', $userId)
+            ->where('must_acknowledge', 1)
+            ->count();
     }
 }

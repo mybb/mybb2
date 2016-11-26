@@ -72,5 +72,5 @@ interface UserRepositoryInterface
      *
      * @return User
      */
-    public function updateUser(User $user, array $userDetails = []);
+    public function update(User $user, array $userDetails = []);
 }

@@ -80,6 +80,8 @@ Route::group(['middleware' => ['web']], function () {
         ['as' => 'user.profile.warns', 'uses' => 'WarningsController@showWarnsForUser']
     );
     Route::get('/warnings/show/{warnId}', ['as' => 'warnings.show', 'uses' => 'WarningsController@warnDetails']);
+    Route::get('/warnings/ack', ['as' => 'warnings.ack', 'uses' => 'WarningsController@acknowledgeWithWarn']);
+    Route::post('/warnings/ack', ['as' => 'warnings.ack', 'uses' => 'WarningsController@postAcknowledgeWithWarn']);
 
     Route::group(['prefix' => 'admin', 'middleware' => 'checkaccess', 'permissions' => 'canEnterACP'], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'Admin\DashboardController@index']);

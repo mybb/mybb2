@@ -31,14 +31,6 @@ class WarningsUsers implements WarnableContentInterface
     /**
      * {@inheritdoc}
      */
-    public function getContentType()
-    {
-        return 'user';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getWarningContent($contentId)
     {
         $user = $this->contentRepository->find($contentId);

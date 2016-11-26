@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Http\Controllers;
 
+use Illuminate\Auth\Access\Response;
 use MyBB\Core\Database\Repositories\WarningsRepositoryInterface;
 use MyBB\Core\Database\Repositories\WarningTypesRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
@@ -18,6 +19,8 @@ use MyBB\Core\Exceptions\WarningNotFoundException;
 use MyBB\Core\Warnings\WarningsManager;
 use MyBB\Core\Http\Requests\Warnings\WarnUserRequest;
 use MyBB\Core\Http\Requests\Warnings\RevokeWarnRequest;
+use MyBB\Core\Http\Requests\Warnings\AckWithWarnRequest;
+use MyBB\Core\Presenters\UserPresenter;
 use MyBB\Settings\Store;
 use Illuminate\Contracts\Auth\Guard;
 use Carbon\Carbon;
@@ -105,12 +108,19 @@ class WarningsController extends AbstractController
 
         $warningTypes = $this->warningTypesRepository->all();
 
-        return view('warnings.warn_user', compact(
+        if ($this->settings->get('warnings.allow_zero')) {
+            $minPoints = 0;
+        } else {
+            $minPoints = 1;
+        }
+
+        return view('warnings.create', compact(
             'user',
             'contentType',
             'contentId',
             'warningTypes',
-            'previewContent'
+            'previewContent',
+            'minPoints'
         ));
     }
 
@@ -144,11 +154,16 @@ class WarningsController extends AbstractController
         }
 
         $warningType = $inputs['warningType'];
-        if ($warningType == 'custom') {
+        if ($warningType === 'custom') {
+            if (!$this->settings->get('warnings.allow_custom')) {
+                return abort(404);
+            }
+
             $dataToSave['reason'] = $inputs['custom_reason'];
             $dataToSave['points'] = (int)$inputs['custom_points'];
             $dataToSave['must_acknowledge'] = (int)$inputs['must_acknowledge']['custom'];
-            if (!$inputs['custom_expires_at'] && isset($inputs['custom_never'])) {
+
+            if (!$inputs['custom_expires_at']) {
                 $dataToSave['expires_at'] = null;
             } else {
                 $dataToSave['expires_at'] = Carbon::parse($inputs['custom_expires_at'])->timestamp;
@@ -191,8 +206,8 @@ class WarningsController extends AbstractController
 
         $this->warnings->create($dataToSave);
         // todo add warning levels
-        $this->users->updateUser($user, $updateUser);
-        $userPresenter = app()->make('MyBB\Core\Presenters\UserPresenter', [$user]);
+        $this->users->update($user, $updateUser);
+        $userPresenter = app()->make(UserPresenter::class, [$user]);
 
         return redirect()->route('user.profile', [
             'id'   => $user->id,
@@ -212,7 +227,7 @@ class WarningsController extends AbstractController
     {
         $warns = $this->warnings->findForUser($id);
 
-        return view('warnings.user_warns', compact('warns'));
+        return view('warnings.show_for_user', compact('warns'));
     }
 
     /**
@@ -230,12 +245,12 @@ class WarningsController extends AbstractController
         $warningContent = $this->WarningsManager->getWarningContentClass($warn->content_type);
         $snapshot = $warningContent->getWarningPreviewView($warn->snapshot);
 
-        return view('warnings.warn_details', compact('warn', 'snapshot'));
+        return view('warnings.show', compact('warn', 'snapshot'));
     }
 
     /**
      * @param RevokeWarnRequest $request
-     * @return mixed
+     * @return Response
      */
     public function revokeWarn(RevokeWarnRequest $request)
     {
@@ -245,9 +260,59 @@ class WarningsController extends AbstractController
         }
 
         $this->warnings->revoke($warn, $request->input('reason'));
+        $this->recountUserAck($warn->owner);
 
         return redirect()->route('warnings.show', [
             'warnId' => $warn->id,
         ])->withSuccess(trans('warnings.warn_revoked'));
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function acknowledgeWithWarn()
+    {
+        if (!$this->guard->user()->warned) {
+            return abort(404);
+        }
+
+        $warn = $this->warnings->lastAckWarn($this->guard->user()->id);
+        if (!$warn) {
+            //there is no warnings with acknowledge flag - fix user
+            $this->guard->user()->update(['warned' => 0]);
+            return redirect()->route('forum.index');
+        }
+
+        return view('warnings.acknowledge', compact('warn'));
+    }
+
+    /**
+     * @param AckWithWarnRequest $request
+     * @return mixed
+     */
+    public function postAcknowledgeWithWarn(AckWithWarnRequest $request)
+    {
+        $warn = $this->warnings->find($request->input('id'));
+        $this->warnings->update($warn, ['must_acknowledge' => 0]);
+        $this->recountUserAck($this->guard->user());
+
+        return redirect()->route('forum.index')->withSuccess(trans('warnings.ack.success'));
+    }
+
+    /**
+     * Update acknowledge user flag
+     *
+     * @param $user
+     * @return \MyBB\Core\Database\Models\User
+     */
+    private function recountUserAck($user)
+    {
+        if ($this->warnings->ackWarnCount($user->id) > 0) {
+            $update['warned'] = 1;
+        } else {
+            $update['warned'] = 0;
+        }
+
+        return $this->users->update($user, $update);
     }
 }
