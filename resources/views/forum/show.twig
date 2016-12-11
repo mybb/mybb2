@@ -16,13 +16,13 @@
                 <section class="block block--container">
                     <h2 class="visually-hidden">{{ trans('forum.childforums') }}</h2>
                      <div class="forum-list forum-list--full-width">
-                        {% for forum in forum.children.toTree %}
+                        {% for forum in forum.children %}
                            <div class="forum">
                                 <div class="forum__info">
                                     <h3 class="forum__title"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
                                     <p class="forum__description">{{ forum.description }} </p>
                                     {% if forum.children.count > 0 %}
-                                        {% for subforum in forum.children.toTree %}
+                                        {% for subforum in forum.children %}
                                             <ul class="forum__subforums">
                                                 <i class="fa fa-level-up"></i>
                                                 <li class="forum__subforums__subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
@@ -44,7 +44,7 @@
                     </div>
                 </section>
             {% endif %}
-            
+
             <div class="page-controls">
                 {{ topics.render|raw }}
                 <div class="page-buttons">
@@ -169,7 +169,7 @@
                     {{ form_button('<span class="text">'~trans('forum.sorttopics')~'</span>', {'type': 'submit', 'class': 'button'}) }}
                 </div>
                 {{ form_close() }}
-                
+
             </section>
             {{ topics.render|raw }}
             {% include 'partials.moderation.moderation_bar' with {'moderations': forum.moderations, 'moderation_content': 'topics'} %}
