@@ -219,8 +219,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
         'Twig' => TwigBridge\Facade\Twig::class,
-        'NestedSet' => Kalnoy\Nestedset\NestedSet::class,
-        'Node' => Kalnoy\Nestedset\Node::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Date' => Jenssegers\Date\Date::class,
 

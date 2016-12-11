@@ -6,7 +6,6 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.2.*",
-		"kalnoy/nestedset": "^4.0",
 		"laravelcollective/html": "5.2.*",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",

@@ -9,17 +9,19 @@
     </header>
     {% for category in forums %}
         <section class="block">
-            <h2 class="block__heading block__heading--major">{{ category.title }}</h2>
+            <h2 class="block__heading block__heading--linked block__heading--major">
+                <a class="block__heading--linked__link" href="{{ url_route('forums.show', {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a>
+            </h2>
              <div class="forum-list forum-list--full-width">
-                {% for forum in category.children.toTree %}
+                {% for forum in category.children %}
                     <div class="forum">
                         <div class="forum__info">
                             <h3 class="forum__title"><a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></h3>
                             <p class="forum__description">{{ forum.description }}</p>
-                            {% if forum.children.toTree %}
+                            {% if forum.children.count > 0 %}
                                 <ul class="forum__subforums">
                                     <i class="fa fa-level-up"></i>
-                                    {% for subforum in forum.children.toTree %}
+                                    {% for subforum in forum.children %}
                                         <li class="subforum"><a href="{{ url_route("forums.show", {'slug': subforum.slug, 'id': subforum.id}) }}" class="subforum__title">{{ subforum.title }}</a></li>
                                     {% endfor %}
                                 </ul>

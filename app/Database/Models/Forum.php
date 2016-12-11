@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Database\Models;
 
-use Kalnoy\Nestedset\Node;
+use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Moderation\Moderations\CloseableInterface;
@@ -18,20 +18,14 @@ use MyBB\Core\Moderation\Moderations\StickableInterface;
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use MyBB\Core\Presenters\ForumPresenter;
+use MyBB\Core\Database\Collections\TreeCollection;
 
 /**
  * @property int id
  */
-class Forum extends Node implements HasPresenter, InheritPermissionInterface, CloseableInterface, StickableInterface, ContentInterface
+class Forum extends Model implements HasPresenter, InheritPermissionInterface, CloseableInterface, StickableInterface, ContentInterface
 {
     use InheritPermissionableTrait;
-
-    /**
-     * Nested set column IDs.
-     */
-    const LFT = 'left_id';
-    const RGT = 'right_id';
-    const PARENT_ID = 'parent_id';
 
     // @codingStandardsIgnoreStart
     /**
@@ -77,6 +71,17 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
     public function getPresenterClass()
     {
         return ForumPresenter::class;
+    }
+
+    /**
+     * @return Forum
+     */
+    public function getParent()
+    {
+        if ($this->parent_id === null) {
+            return null;
+        }
+        return $this->find($this->parent_id);
     }
 
     /**
@@ -130,6 +135,35 @@ class Forum extends Node implements HasPresenter, InheritPermissionInterface, Cl
     public function lastPostAuthor()
     {
         return $this->hasOne(\MyBB\Core\Database\Models\User::class, 'id', 'last_post_user_id');
+    }
+
+    /**
+     * Parent relation (self-referential) 1-1.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(get_class($this), 'parent_id');
+    }
+
+    /**
+     * Children relation (self-referential) 1-N.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function children()
+    {
+        return $this->hasMany(get_class($this), 'parent_id')
+            ->orderBy('left_id');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function newCollection(array $models = [])
+    {
+        return new TreeCollection($models);
     }
 
     /**
