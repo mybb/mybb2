@@ -29,7 +29,7 @@ class ForumRepository implements ForumRepositoryInterface
     private $permissionChecker;
 
     /**
-     * @param Forum $forumModel The model to use for forums.
+     * @param Forum $forumModel                    The model to use for forums.
      * @param PermissionChecker $permissionChecker The permission class
      */
     public function __construct(
@@ -62,7 +62,22 @@ class ForumRepository implements ForumRepositoryInterface
     {
         $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
-        return $this->forumModel->with(['children', 'parent'])->whereNotIn('id', $unviewable)->find($id);
+        $parent = $this->forumModel
+            ->select('left_id', 'right_id')
+            ->whereNotIn('id', $unviewable)
+            ->find($id);
+
+        if (!$parent) {
+            return $parent;
+        }
+
+        $forums = $this->forumModel
+            ->with(['lastPost', 'lastPost.topic', 'lastPostAuthor'])
+            ->whereNotIn('id', $unviewable)
+            ->whereBetween('left_id', [$parent->left_id, $parent->right_id])
+            ->get();
+
+        return $forums->toTree();
     }
 
     /**
@@ -74,7 +89,25 @@ class ForumRepository implements ForumRepositoryInterface
      */
     public function findBySlug($slug = '')
     {
-        return $this->forumModel->whereSlug($slug)->with(['children', 'parent'])->first();
+        $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
+
+        $parent = $this->forumModel
+            ->select('left_id', 'right_id')
+            ->whereNotIn('id', $unviewable)
+            ->whereSlug($slug)
+            ->first();
+
+        if (!$parent) {
+            return $parent;
+        }
+
+        $forums = $this->forumModel
+            ->with(['lastPost', 'lastPost.topic', 'lastPostAuthor'])
+            ->whereNotIn('id', $unviewable)
+            ->whereBetween('left_id', [$parent->left_id, $parent->right_id])
+            ->get();
+
+        return $forums->toTree();
     }
 
     /**
@@ -86,21 +119,20 @@ class ForumRepository implements ForumRepositoryInterface
      */
     public function getIndexTree($checkPermissions = true)
     {
-        $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
-
         // TODO: The caching decorator would also cache the relations here
-        $baseQuery = $this->forumModel->where('parent_id', '=', null);
+        $baseQuery = $this->forumModel;
 
         if ($checkPermissions) {
+            $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
             $baseQuery = $baseQuery->whereNotIn('id', $unviewable);
         }
 
-        return $baseQuery->with([
-            'children',
-            'children.lastPost',
-            'children.lastPost.topic',
-            'children.lastPostAuthor',
+        $res = $baseQuery->with([
+            'lastPost',
+            'lastPost.topic',
+            'lastPostAuthor',
         ])->get();
+        return $res->toTree();
     }
 
     /**

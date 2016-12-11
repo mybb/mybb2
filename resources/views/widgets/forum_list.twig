@@ -6,7 +6,7 @@
             <div class="forum-list--compact__category">
                 <h4 class="forum-list--compact__category__title"><a href="{{ url_route("forums.show", {'slug': category.slug, 'id': category.id}) }}">{{ category.title }}</a></h4>
                 <ul class="forum-list--compact__category__forums">
-                    {% for forum in category.children.toTree %}
+                    {% for forum in category.children %}
                         <li class="forum-list--compact__category__forum"><a href="{{ url_route("forums.show", {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a></li>
                     {% else %}
                         {#Do nothing, no subforums for this category#}
