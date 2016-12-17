@@ -123,8 +123,7 @@ class Application extends Container implements ApplicationContract
 
     public function isUpToDate()
     {
-        //todo: Rewrite settings repository
-        $settings = $this->make('MyBB\Settings\SettingsRepositoryInterface');
+        $settings = $this->make('MyBB\Core\Settings\SettingsRepositoryInterface');
 
         try {
             $version = $settings->get('version');

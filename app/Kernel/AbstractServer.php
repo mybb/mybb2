@@ -165,7 +165,8 @@ abstract class AbstractServer
 
         $this->registerCache($app);
 
-        //todo: Register Settings, Local, and Database providors here
+        //todo: Register Local, Twig, Database, and other needed providors here
+        $app->register('MyBB\Core\Settings\SettingsServiceProvider');
         $app->register('Illuminate\Bus\BusServiceProvider');
         $app->register('Illuminate\Filesystem\FilesystemServiceProvider');
         $app->register('Illuminate\Hashing\HashServiceProvider');
@@ -174,8 +175,7 @@ abstract class AbstractServer
         $app->register('Illuminate\Validation\ValidationServiceProvider');
 
         if ($app->isInstalled() && $app->isUpToDate()) {
-            //todo: Implement new settings repository interface
-            //$settings = $app->make('MyBB\Settings\SettingsRepositoryInterface');
+            $settings = $app->make('MyBB\Core\Settings\SettingsRepositoryInterface');
 
             $config->set('mail.driver', $settings->get('mail_driver'));
             $config->set('mail.host', $settings->get('mail_host'));
@@ -186,7 +186,7 @@ abstract class AbstractServer
             $config->set('mail.username', $settings->get('mail_username'));
             $config->set('mail.password', $settings->get('mail_password'));
 
-            //todo: Register Core, API, Forum, and Admin ServiceProviders here
+            //todo: Register API, Forum, and Admin ServiceProviders here
 
             foreach ($this->extendCallbacks as $callback) {
                 $app->call($callback);
