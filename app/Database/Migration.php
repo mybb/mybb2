@@ -1,0 +1,114 @@
+<?php
+
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
+ */
+
+namespace MyBB\Core\Database;
+
+use MyBB\Core\Settings\SettingsRepositoryInterface;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Schema\Builder;
+
+/**
+ * Migration factory.
+ *
+ * Implements some handy shortcuts for creating typical migrations.
+ */
+abstract class Migration
+{
+    /**
+     * Create a table.
+     */
+    public static function createTable($name, callable $definition)
+    {
+        return [
+            'up' => function (Builder $schema) use ($name, $definition) {
+                $schema->create($name, $definition);
+            },
+            'down' => function (Builder $schema) use ($name) {
+                $schema->drop($name);
+            }
+        ];
+    }
+
+    /**
+     * Rename a table.
+     */
+    public static function renameTable($from, $to)
+    {
+        return [
+            'up' => function (Builder $schema) use ($from, $to) {
+                $schema->rename($from, $to);
+            },
+            'down' => function (Builder $schema) use ($from, $to) {
+                $schema->rename($to, $from);
+            }
+        ];
+    }
+
+    /**
+     * Add columns to a table.
+     */
+    public static function addColumns($tableName, array $columnDefinitions)
+    {
+        return [
+            'up' => function (Builder $schema) use ($tableName, $columnDefinitions) {
+                $schema->table($tableName, function (Blueprint $table) use ($columnDefinitions) {
+                    foreach ($columnDefinitions as $columnName => $options) {
+                        $type = array_shift($options);
+                        $table->addColumn($type, $columnName, $options);
+                    }
+                });
+            },
+            'down' => function (Builder $schema) use ($tableName, $columnDefinitions) {
+                $schema->table($tableName, function (Blueprint $table) use ($columnDefinitions) {
+                    $table->dropColumn(array_keys($columnDefinitions));
+                });
+            }
+        ];
+    }
+
+    /**
+     * Rename a column.
+     */
+    public static function renameColumn($tableName, $from, $to)
+    {
+        return [
+            'up' => function (Builder $schema) use ($tableName, $from, $to) {
+                $schema->table($tableName, function (Blueprint $table) use ($from, $to) {
+                    $table->renameColumn($from, $to);
+                });
+            },
+            'down' => function (Builder $schema) use ($tableName, $from, $to) {
+                $schema->table($tableName, function (Blueprint $table) use ($from, $to) {
+                    $table->renameColumn($to, $from);
+                });
+            }
+        ];
+    }
+
+    /**
+     * Add default values for config values.
+     * @param array $defaults
+     * @return array
+     */
+    public static function addSettings(array $defaults)
+    {
+        return [
+            'up' => function (SettingsRepositoryInterface $settings) use ($defaults) {
+                foreach ($defaults as $key => $value) {
+                    $settings->set($key, $value);
+                }
+            },
+            'down' => function (SettingsRepositoryInterface $settings) use ($defaults) {
+                foreach (array_keys($defaults) as $key) {
+                    $settings->delete($key);
+                }
+            }
+        ];
+    }
+}
