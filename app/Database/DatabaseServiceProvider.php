@@ -1,18 +1,16 @@
 <?php
 
-/*
- * This file is part of Flarum.
- *
- * (c) Toby Zerner <toby.zerner@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
+/**
+ * @author    MyBB Group
+ * @version   2.0.0
+ * @package   mybb/core
+ * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
 namespace MyBB\Core\Database;
 
-use Flarum\Foundation\AbstractServiceProvider;
-use Flarum\Foundation\Application;
+use MyBB\Core\Kernel\AbstractServiceProvider;
+use MyBB\Core\Kernel\Application;
 use Illuminate\Database\ConnectionResolver;
 use Illuminate\Database\Connectors\ConnectionFactory;
 use PDO;
@@ -24,7 +22,7 @@ class DatabaseServiceProvider extends AbstractServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('flarum.db', function () {
+        $this->app->singleton('mybb.db', function () {
             $factory = new ConnectionFactory($this->app);
 
             $connection = $factory->make($this->app->config('database'));
@@ -34,20 +32,20 @@ class DatabaseServiceProvider extends AbstractServiceProvider
             return $connection;
         });
 
-        $this->app->alias('flarum.db', 'Illuminate\Database\ConnectionInterface');
+        $this->app->alias('mybb.db', 'Illuminate\Database\ConnectionInterface');
 
         $this->app->singleton('Illuminate\Database\ConnectionResolverInterface', function () {
             $resolver = new ConnectionResolver([
-                'flarum' => $this->app->make('flarum.db'),
+                'mybb' => $this->app->make('mybb.db'),
             ]);
-            $resolver->setDefaultConnection('flarum');
+            $resolver->setDefaultConnection('mybb');
 
             return $resolver;
         });
 
         $this->app->alias('Illuminate\Database\ConnectionResolverInterface', 'db');
 
-        $this->app->singleton('Flarum\Database\MigrationRepositoryInterface', function ($app) {
+        $this->app->singleton('MyBB\Core\Database\MigrationRepositoryInterface', function ($app) {
             return new DatabaseMigrationRepository($app['db'], 'migrations');
         });
 
