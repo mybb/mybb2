@@ -166,7 +166,7 @@ abstract class AbstractServer
         $this->registerCache($app);
 
         //todo: Register Local, Twig, Database, and other needed providors here
-        $app->register('MyBB\Core\Settings\SettingsServiceProvider');
+        $app->register(\MyBB\Core\Settings\SettingsRepositoryInterface::class);
         $app->register('Illuminate\Bus\BusServiceProvider');
         $app->register('Illuminate\Filesystem\FilesystemServiceProvider');
         $app->register('Illuminate\Hashing\HashServiceProvider');
@@ -192,7 +192,8 @@ abstract class AbstractServer
                 $app->call($callback);
             }
 
-            //todo: Register ExtensionServiceProvider here
+            //register the ExtensionServiceProvider
+            $app->register(\MyBB\Core\Extension\ExtensionServiceProvider::class);
         }
 
         $app->boot();

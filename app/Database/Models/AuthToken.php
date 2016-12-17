@@ -42,7 +42,7 @@ class AuthToken extends AbstractModel
      *
      * @return static
      */
-    public static function generate($payload)
+    public function generate($payload)
     {
         $token = new static;
 

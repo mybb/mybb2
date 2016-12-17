@@ -20,7 +20,7 @@ class ConfigureModelDates
     /**
      * @var AbstractModel
      */
-    public $model;
+    public $modelClass;
 
     /**
      * @var array
@@ -28,21 +28,21 @@ class ConfigureModelDates
     public $dates;
 
     /**
-     * @param AbstractModel $model
+     * @param AbstractModel $modelClass
      * @param array $dates
      */
-    public function __construct(AbstractModel $model, array &$dates)
+    public function __construct(AbstractModel $modelClass, array &$dates)
     {
-        $this->model = $model;
+        $this->model = $modelClass;
         $this->dates = &$dates;
     }
 
     /**
-     * @param string $model
+     * @param string $modelClass
      * @return bool
      */
-    public function isModel($model)
+    public function isModel(string $modelClass)
     {
-        return $this->model instanceof $model;
+        return $this->modelClass instanceof $modelClass;
     }
 }

@@ -16,7 +16,7 @@ class ConfigureModelDefaultAttributes
     /**
      * @var AbstractModel
      */
-    public $model;
+    public $modelClass;
 
     /**
      * @var array
@@ -24,21 +24,21 @@ class ConfigureModelDefaultAttributes
     public $attributes;
 
     /**
-     * @param AbstractModel $model
+     * @param AbstractModel $modelClass
      * @param array $attributes
      */
-    public function __construct(AbstractModel $model, array &$attributes)
+    public function __construct(AbstractModel $modelClass, array &$attributes)
     {
-        $this->model = $model;
+        $this->modelClass = $modelClass;
         $this->attributes = &$attributes;
     }
 
     /**
-     * @param string $model
+     * @param string $modelClass
      * @return bool
      */
-    public function isModel($model)
+    public function isModel($modelClass)
     {
-        return $this->model instanceof $model;
+        return $this->modelClass instanceof $modelClass;
     }
 }

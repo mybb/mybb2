@@ -32,7 +32,7 @@ class MigrationCreator
      * @param Filesystem $files
      * @param string $publicPath
      */
-    public function __construct(Filesystem $files, $publicPath)
+    public function __construct(Filesystem $files, string $publicPath)
     {
         $this->files = $files;
         $this->publicPath = $publicPath;

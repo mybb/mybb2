@@ -202,6 +202,6 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      */
     public function accessTokens()
     {
-        return $this->hasMany('MyBB\Core\Database\Models\AccessToken');
+        return $this->hasMany(\MyBB\Core\Database\Models\AccessToken::class);
     }
 }

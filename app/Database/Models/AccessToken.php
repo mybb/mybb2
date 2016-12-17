@@ -65,6 +65,6 @@ class AccessToken extends AbstractModel
      */
     public function user()
     {
-        return $this->belongsTo('MyBB\Core\Database\Models\User');
+        return $this->belongsTo(\MyBB\Core\Database\Models\User::class);
     }
 }

@@ -93,8 +93,10 @@ abstract class Migration
 
     /**
      * Add default values for config values.
+     * @param array $defaults
+     * @return array
      */
-    public static function addSettings($defaults)
+    public static function addSettings(array $defaults)
     {
         return [
             'up' => function (SettingsRepositoryInterface $settings) use ($defaults) {
