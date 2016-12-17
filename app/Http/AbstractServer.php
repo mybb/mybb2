@@ -7,6 +7,7 @@
  * @license   http://www.mybb.com/licenses/bsd3 BSD-3
  */
 
+use MyBB\Core\Database\Models\AccessToken;
 use MyBB\Core\Kernel\AbstractServer as BaseAbstractServer;
 use MyBB\Core\Kernel\Application;
 use Psr\Http\Message\ResponseInterface;
@@ -56,7 +57,8 @@ abstract class AbstractServer extends BaseAbstractServer
     private function collectGarbage()
     {
         if ($this->hitsLottery()) {
-            //todo: Implement AccessToken, EmailToken, and PasswordToken models
+            //todo: Implement EmailToken, and PasswordToken models
+            AccessToken::whereRaw('last_activity <= ? - lifetime', [time()])->delete();
 
             $earliestToKeep = date('Y-m-d H:i:s', time() - 24 * 60 * 60);
         }

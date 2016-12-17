@@ -194,4 +194,14 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
     {
         return $this->hasher;
     }
+
+    /**
+     * Define the relationship with the user's access tokens.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function accessTokens()
+    {
+        return $this->hasMany('MyBB\Core\Database\Models\AccessToken');
+    }
 }
