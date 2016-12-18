@@ -69,10 +69,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('search', ['as' => 'search.post', 'uses' => 'SearchController@makeSearch']);
     Route::get('search/{token}', ['as' => 'search.results', 'uses' => 'SearchController@results']);
 
-    Route::controllers([
-        'auth'     => 'Auth\AuthController',
-        'password' => 'Auth\PasswordController',
-    ]);
+    Auth::routes();
 
     Route::get('/user/{id}/{slug}', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
     Route::get(
