@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "185a1cd6b7b2450159336ef87ff1f170",
-    "content-hash": "14da9d41621da379ad1fe118397300ed",
+    "hash": "771bb2b550cb69bf58c4ddbd37fe55c2",
+    "content-hash": "63d79d5c691bfcd08365f6295873c1d4",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -4866,8 +4866,6 @@
         "mybb/settings": 20,
         "mybb/gravatar": 20,
         "barryvdh/laravel-debugbar": 20,
-        "friendsofphp/php-cs-fixer": 20,
-        "squizlabs/php_codesniffer": 20,
         "mockery/mockery": 20
     },
     "prefer-stable": true,

@@ -28,11 +28,11 @@
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
 		"barryvdh/laravel-debugbar": "dev-master",
-		"friendsofphp/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev",
 		"mockery/mockery": "0.9.*@dev",
 		"symfony/dom-crawler": "~3.0",
-		"symfony/css-selector": "~3.0"
+		"symfony/css-selector": "~3.0",
+		"squizlabs/php_codesniffer": "^2.7",
+		"friendsofphp/php-cs-fixer": "^2.0"
 	},
 	"repositories": [
 		{
