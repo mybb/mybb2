@@ -1,0 +1,12 @@
+<div>
+    <a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a> | Level: {{ level }}
+    <span style="float:right">
+        <a href="#">Edit</a>
+        <a href="#">Delete</a>
+        {{ admin_delete_button('admin.forums.delete', forum.id) }}
+        <a href="#">Move topics</a>
+    </span>
+    <br>
+        <small>{{ forum.description }}</small>
+    <hr>
+</div>

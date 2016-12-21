@@ -23,4 +23,5 @@ return [
     'yes'             => 'Yes',
     'no'              => 'No',
     'actions_field'   => 'Actions',
+    'error.try_again' => 'Something went wrong. Try again.',
 ];

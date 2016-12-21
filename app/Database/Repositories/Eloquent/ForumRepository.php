@@ -10,10 +10,13 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use Illuminate\Database\DatabaseManager;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic
+};
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, TopicRepositoryInterface
+};
 use MyBB\Core\Permissions\PermissionChecker;
 
 class ForumRepository implements ForumRepositoryInterface
@@ -24,20 +27,36 @@ class ForumRepository implements ForumRepositoryInterface
     protected $forumModel;
 
     /**
+     * @var Topic
+     */
+    protected $topicRepository;
+
+    /**
      * @var PermissionChecker
      */
     private $permissionChecker;
 
     /**
+     * @var DatabaseManager
+     */
+    protected $dbManager;
+
+    /**
      * @param Forum $forumModel                    The model to use for forums.
      * @param PermissionChecker $permissionChecker The permission class
+     * @param DatabaseManager $dbManager
+     * @param TopicRepositoryInterface $topicRepository
      */
     public function __construct(
         Forum $forumModel,
-        PermissionChecker $permissionChecker
+        PermissionChecker $permissionChecker,
+        DatabaseManager $dbManager,
+        TopicRepositoryInterface $topicRepository
     ) {
         $this->forumModel = $forumModel;
         $this->permissionChecker = $permissionChecker;
+        $this->dbManager = $dbManager;
+        $this->topicRepository = $topicRepository;
     }
 
     /**
@@ -77,7 +96,7 @@ class ForumRepository implements ForumRepositoryInterface
             ->whereBetween('left_id', [$parent->left_id, $parent->right_id])
             ->get();
 
-        return $forums->toTree();
+        return $forums->toTree()->first();
     }
 
     /**
@@ -107,7 +126,7 @@ class ForumRepository implements ForumRepositoryInterface
             ->whereBetween('left_id', [$parent->left_id, $parent->right_id])
             ->get();
 
-        return $forums->toTree();
+        return $forums->toTree()->first();
     }
 
     /**
@@ -136,6 +155,14 @@ class ForumRepository implements ForumRepositoryInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getForum(int $id)
+    {
+        return $this->forumModel->find($id);
+    }
+
+    /**
      * Increment the number of posts in the forum by one.
      *
      * @param int $id The ID of the forum to increment the post count for.
@@ -144,7 +171,7 @@ class ForumRepository implements ForumRepositoryInterface
      */
     public function incrementPostCount($id = 0)
     {
-        $forum = $this->find($id);
+        $forum = $this->forumModel->find($id);
 
         if ($forum) {
             $forum->increment('num_posts');
@@ -162,7 +189,7 @@ class ForumRepository implements ForumRepositoryInterface
      */
     public function incrementTopicCount($id = 0)
     {
-        $forum = $this->find($id);
+        $forum = $this->forumModel->find($id);
 
         if ($forum) {
             $forum->increment('num_topics');
@@ -219,5 +246,39 @@ class ForumRepository implements ForumRepositoryInterface
         $topic->forum->increment('num_posts', $topic->num_posts);
 
         $this->updateLastPost($forum);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create(array $details = [])
+    {
+        return $this->dbManager->transaction(function () use ($details) {
+            $this->forumModel->where('left_id', '>=', $details['left_id'])->increment('left_id', 2);
+            $this->forumModel->where('right_id', '>=', $details['left_id'])->increment('right_id', 2);
+            $this->forumModel->create($details);
+        }, 2);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        $result = $this->forumModel->select('id')->first();
+        return !(bool)$result;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(Forum $forum)
+    {
+        return $this->dbManager->transaction(function () use ($forum) {
+            $forums = $this->forumModel->whereBetween('left_id', [$forum->left_id, $forum->right_id])->get();
+            $forumsIds = $forums->pluck('id')->toArray();
+            $this->topicRepository->deleteTopicsForForums($forumsIds);
+            $this->forumModel->destroy($forumsIds);
+        });
     }
 }

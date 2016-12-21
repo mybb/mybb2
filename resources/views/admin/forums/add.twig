@@ -1,0 +1,117 @@
+{% extends "layouts.admin" %}
+{% block title %} {# todo add title #} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans('admin::forums.add_forum') }}</h1>
+    </div>
+    <div class="admin-body__content">
+        <form method="POST" action="{{ route('admin.forums.add') }}">
+            <section class="form">
+                {{ csrf_field() }}
+                <div class="form__section">
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ trans('admin::forums.forum_type') }}</h3>
+                        <p class="form__row__description">{{ trans('admin::forums.forum_type.desc') }}</p>
+                        <div class="segmented-control">
+                            {% if forums.count > 0 %}
+                                <span class="segmented-control__option">
+                                    <input id="type_forum" class="segmented-control__option__input js-forum_type" name="type" type="radio" value="1" checked{# warningType is defined and warningType.must_acknowledge == 0 ? 'checked="checked"' #}>
+                                    <label class="segmented-control__option__button" for="type_forum">{{ trans('admin::forums.forum') }}</label>
+                                </span>
+                            {% endif %}
+                            <span class="segmented-control__option">
+                                <input id="type_category" class="segmented-control__option__input js-forum_type" name="type" type="radio" value="0" {{ (forums.count <= 0) ? 'checked' : '' }}{# warningType.must_acknowledge == 1 or not(warningType is defined) ? 'checked="checked"' #}>
+                                <label class="segmented-control__option__button" for="type_category">{{ trans('admin::forums.category') }}</label>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">
+                            <label for="title"> {{ trans('admin::forums.title') }} </label>
+                        </h3>
+                        <input type="text" name="title" id="title" value="{{ old('title') }}">
+                    </div>
+                    <div class="form__row">
+                        {# TODO js autogenerate slug from forum title #}
+                        <h3 class="form__row__title">
+                            <label for="slug"> {{ trans('admin::forums.slug') }} </label>
+                        </h3>
+                        <p class="form__row__description">{{ trans('admin::forums.slug.desc') }}</p>
+                        <input type="text" name="slug" id="slug" value="{{ old('slug') }}">
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">
+                            <label for="description"> {{ trans('admin::forums.description') }} </label>
+                        </h3>
+                        <textarea name="description" id="description">{{ old('description') }}</textarea>
+                    </div>
+                    {% if forums.count > 0 %}
+                        <div class="form__row">
+                            {# TODO js hide if category is selected #}
+                            <h3 class="form__row__title">
+                                <label for="parent"> {{ trans('admin::forums.parent') }} </label>
+                            </h3>
+                            <p class="form__row__description">{{ trans('admin::forums.parent.desc') }}</p>
+                            <select id="parent" name="parent">
+                                {# todo make it better #}
+                                {% for category in forums %}
+                                    <option value="{{ category.id }}">{{ category.title }}</option>
+                                    {% for forum in category.children %}
+                                        <option value="{{ forum.id }}">--{{ forum.title }}</option>
+                                        {% for subforum in forum.children %}
+                                            <option value="{{ subforum.id }}">----{{ subforum.title }}</option>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form__row">
+                            {# TODO js show only children of parent forum #}
+                            {# Maybe something different than select? IMHO sortable items would be nice concept http://i.imgur.com/KyLvVIL.png #}
+                            <h3 class="form__row__title">
+                                <label for="order"> {{ trans('admin::forums.order') }} </label>
+                            </h3>
+                            <p class="form__row__description">{{ trans('admin::forums.order.desc') }}</p>
+                            <div class="segmented-control">
+                                <span class="segmented-control__option">
+                                    <input id="order_before" class="segmented-control__option__input js-forum_type" name="order_position" type="radio" value="0" {# warningType.must_acknowledge == 1 or not(warningType is defined) ? 'checked="checked"' #}>
+                                    <label class="segmented-control__option__button" for="order_before">{{ trans('admin::forums.before') }}</label>
+                                </span>
+                                <span class="segmented-control__option">
+                                    <input id="order_after" class="segmented-control__option__input js-forum_type" name="order_position" type="radio" value="1" checked{# warningType is defined and warningType.must_acknowledge == 0 ? 'checked="checked"' #}>
+                                    <label class="segmented-control__option__button" for="order_after">{{ trans('admin::forums.after') }}</label>
+                                </span>
+                            </div>
+                            <select id="order" name="order">
+                                <option value="0">NuLL</option>
+                                {% for category in forums %}
+                                    <option value="{{ category.id }}">{{ category.title }}</option>
+                                    {% for forum in category.children %}
+                                        <option value="{{ forum.id }}">--{{ forum.title }}</option>
+                                        {% for subforum in forum.children %}
+                                            <option value="{{ subforum.id }}">----{{ subforum.title }}</option>
+                                        {% endfor %}
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    <div class="form__row">
+                        <h3 class="form__row__title">
+                            <label for="link"> {{ trans('admin::forums.forum_link') }} </label>
+                        </h3>
+                        <p class="form__row__description">{{ trans('admin::forums.forum_link.desc') }}</p>
+                        <input type="text" name="link" id="link">
+                    </div>
+                    <div class="form__row">
+                        <p class="form__checkbox">
+                            <label><input type="checkbox" value="1" name="open" id="open" checked> <strong>{{ trans('admin::forums.is_open') }}</strong> {{ trans('admin::forums.is_open.desc') }}</label></p>
+                    </div>
+                    <div class="form__submit">
+                        <button type="submit" class="button">{{ trans('admin::general.save') }}</button>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+{% endblock %}

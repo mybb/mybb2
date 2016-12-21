@@ -27,10 +27,10 @@
                     <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-language">Languages</a></li>
                 </ul>
             </li>
-            <li class="admin-menu__section">
-                <h3 class="admin-menu__section__title"><a href="#" class="admin-menu__section__title__link">Forums &amp; Posts</a></h3>
+            <li class="admin-menu__section{% if active == 'forums' %} admin-menu__section--active{% endif %}">
+                <h3 class="admin-menu__section__title"><a href="{{ url_route('admin.forums') }}" class="admin-menu__section__title__link">Forums &amp; Posts</a></h3>
                 <ul class="admin-menu__section__list">
-                    <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-sitemap">Forum Management</a></li>
+                    <li class="admin-menu__section__item{% if active == 'forums' %} admin-menu__section--active{% endif %}"><a href="{{ url_route('admin.forums') }}" class="admin-menu__section__item__link icon icon--fw fa-sitemap">Forum Management</a></li>
                     <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-paperclip">Attachments</a></li>
                     <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-wrench">Moderator Tools</a></li>
                     <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-filter">Word Filters</a></li>
@@ -38,7 +38,7 @@
                     <li class="admin-menu__section__item"><a href="#" class="admin-menu__section__item__link icon icon--fw fa-tags">Topic Prefixes</a></li>
                 </ul>
             </li>
-            <li class="admin-menu__section{% if active == 'users' or active == 'warnings' %} admin-menu__section--active{% endif %}{% if active == 'profile-fields' %} admin-menu__section--active{% endif %}">
+            <li class="admin-menu__section{% if active == 'users' or active == 'warnings' or active == 'profile-fields' %} admin-menu__section--active{% endif %}">
                 <h3 class="admin-menu__section__title"><a href="{{ url_route('admin.users') }}" class="admin-menu__section__title__link">{{ trans('admin::nav.users_and_roles') }}</a></h3>
                 <ul class="admin-menu__section__list">
                     <li class="admin-menu__section__item{% if active == 'users' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.users') }}" class="admin-menu__section__item__link icon icon--fw fa-user">Users</a></li>

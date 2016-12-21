@@ -197,4 +197,42 @@ class CachingDecorator implements ForumRepositoryInterface
 
         return $this->decoratedRepository->moveTopicToForum($topic, $forum);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create(array $details = [])
+    {
+        $this->cache->forget('forums.index_tree');
+        $this->cache->forget('forums.all');
+
+        return $this->decoratedRepository->create($details);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForum(int $id)
+    {
+        return $this->decoratedRepository->getForum($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        return $this->decoratedRepository->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(Forum $forum)
+    {
+        $this->cache->forget('forums.index_tree');
+        $this->cache->forget('forums.all');
+
+        return $this->decoratedRepository->delete($id);
+    }
 }
