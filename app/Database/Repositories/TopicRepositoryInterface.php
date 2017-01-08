@@ -146,12 +146,4 @@ interface TopicRepositoryInterface
      * @return int
      */
     public function countTopicsForForum(int $forumId);
-
-    /**
-     * Delete all topics for forum
-     *
-     * @param int $forumId Forum id
-     * @return mixed
-     */
-    public function deleteTopicsForForum(int $forumId);
 }

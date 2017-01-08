@@ -36,9 +36,8 @@ class AdminDeleteButton extends Twig_Extension
     }
 
     /**
-     * @param $forums
-     * @param int $level
-     * @param string $template
+     * @param $for
+     * @param $id
      * @return string
      */
     public function deleteButton($for, $id)

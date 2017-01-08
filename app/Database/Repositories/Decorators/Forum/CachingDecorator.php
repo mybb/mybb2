@@ -233,6 +233,27 @@ class CachingDecorator implements ForumRepositoryInterface
         $this->cache->forget('forums.index_tree');
         $this->cache->forget('forums.all');
 
-        return $this->decoratedRepository->delete($id);
+        return $this->decoratedRepository->delete($forum);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update(Forum $forum, $details)
+    {
+        $this->cache->forget('forums.index_tree');
+        $this->cache->forget('forums.all');
+
+        return $this->decoratedRepository->update($forum, $details);
+    }
+
+     /**
+     * {@inheritdoc}
+     */
+    public function changeParent(Forum $forum, int $newParent)
+    {
+        $this->decoratedRepository->changeParent($forum, $newParent);
+        $this->cache->forget('forums.index_tree');
+        return $this->cache->forget('forums.all');
     }
 }

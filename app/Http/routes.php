@@ -195,6 +195,18 @@ Route::group(['middleware' => ['web']], function () {
                 'as'   => 'admin.forums.add',
                 'uses' => 'Admin\Forums\ForumsController@create',
             ]);
+            Route::post('/delete', [
+                'as'   => 'admin.forums.delete',
+                'uses' => 'Admin\Forums\ForumsController@delete',
+            ]);
+            Route::get('/edit/{id}', [
+                'as'   => 'admin.forums.edit',
+                'uses' => 'Admin\Forums\ForumsController@edit',
+            ]);
+            Route::post('/edit/{id}', [
+                'as'   => 'admin.forums.edit',
+                'uses' => 'Admin\Forums\ForumsController@update',
+            ]);
         });
     });
 

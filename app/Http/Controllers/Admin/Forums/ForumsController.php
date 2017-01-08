@@ -10,9 +10,8 @@ namespace MyBB\Core\Http\Controllers\Admin\Forums;
 
 use Illuminate\Http\Request;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use MyBB\Core\Database\Repositories\{
-    ForumRepositoryInterface, TopicRepositoryInterface
-};
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
+use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 use MyBB\Core\Http\Requests\Forums\CreateForumRequest;
@@ -86,7 +85,6 @@ class ForumsController extends AdminController
                 return back()->withInput()->withErrors(trans('admin::forums.error.create_category'));
             }
         } else {
-
             if ((bool)$request->get('order')) {
                 $forumOrder = $this->forumRepository->getForum($request->get('order'));
             } else {
@@ -117,7 +115,7 @@ class ForumsController extends AdminController
         }
 
         if (!(bool)$request->get('open')) {
-            $details['close'] = 1;
+            $details['closed'] = 1;
         }
 
         try {
@@ -150,15 +148,63 @@ class ForumsController extends AdminController
         return redirect()->route('admin.forums')->withSuccess(trans('admin::general.success_deleted'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $forum = $this->forumRepository->getForum($id);
-        return view('admin.forums.edit', compact('forum'))->withActive('forums');
+        $forums = $this->forumRepository->all()->toTree();
+        return view('admin.forums.edit', compact('forum', 'forums'))->withActive('forums');
     }
 
-    public function update()
+    /**
+     * @param $id
+     * @param CreateForumRequest $request
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    public function update($id, CreateForumRequest $request)
     {
+        $forum = $this->forumRepository->getForum($request->get('id'));
+        if (!$forum) {
+            throw new ForumNotFoundException;
+        }
 
+        $details = [
+            'slug'        => str_slug($request->get('slug')),
+            'title'       => $request->get('title'),
+            'description' => $request->get('description'),
+            'link'        => $request->get('link'),
+        ];
+
+        if (!(bool)$request->get('open')) {
+            $details['closed'] = 1;
+        }
+
+        // change forum type
+        if (!(bool)$request->get('type') && $forum->parent_id) {
+            // change from forum to category
+            $details['parent_id'] = null;
+        } elseif ((bool)$request->get('type') && !$forum->parent_id) {
+            // change from category to forum
+            $details['parent_id'] = $request->get('parent');
+        }
+
+        //todo set order
+
+        $this->forumRepository->update($forum, $details);
+
+        // change parent forum
+        if ($request->get('parent') != $forum->parent_id) {
+            // move node to new parent
+            try {
+                $this->forumRepository->changeParent($forum, $request->get('parent'));
+            } catch (\Exception $e) {
+                return back()->withErrors(trans('admin::general.error.try_again'));
+            }
+        }
+
+        return redirect()->route('admin.forums')->withSuccess(trans('admin::general.success_saved'));
     }
-    
 }

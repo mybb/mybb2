@@ -92,4 +92,20 @@ class ForumPresenter extends BasePresenter
 
         return $decorated;
     }
+
+    /**
+     * @return null|string
+     */
+    public function link()
+    {
+        return $this->wrappedObject->link;
+    }
+
+    /**
+     * @return null|integer
+     */
+    public function parent_id()
+    {
+        return $this->wrappedObject->parent_id;
+    }
 }

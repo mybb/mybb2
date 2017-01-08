@@ -19,16 +19,22 @@ class CreateForumRequest extends AbstractRequest
      */
     public function rules()
     {
-        return [
+        $return = [
             'type'           => 'required|integer',
             'title'          => 'required|string|max:255',
-            'slug'           => 'required|string|max:255|unique:forums,slug',
+            //'slug'           => 'required|string|max:255|unique:forums,slug',
             'parent'         => 'required_if:type,1|integer',
-            'order'          => 'required|integer', // todo required if there are forums
-            'order_position' => 'required_unless:order,0|integer|in:0,1',
+            //todo add order rule
             'link'           => 'url|max:255',
             'open'           => 'integer',
         ];
+        // TODO temporary solution, probably need to create separately request for edit.
+        if ($this->input('id')) {
+            $return['slug'] = 'required|string|max:255|unique:forums,slug,'.$this->input('id');
+        } else {
+            $return['slug'] = 'required|string|max:255|unique:forums,slug';
+        }
+        return $return;
     }
 
     /**

@@ -37,17 +37,18 @@ class ListAllForums extends Twig_Extension
 
     /**
      * @param $forums
-     * @param int $level
      * @param string $template
+     * @param null $options
+     * @param int $level
      * @return string
      */
-    public function renderForums($forums, $level = 1, $template = 'admin.forums.forum-item')
+    public function renderForums($forums, $template = 'admin.forums.forum-item', $options = null, $level = 1)
     {
         $result = '';
         foreach ($forums as $forum) {
-            $result .= view($template, compact('forum', 'level'))->render();
+            $result .= view($template, compact('forum', 'level', 'options'))->render();
             if ($forum->children->count() > 0) {
-                $result .= $this->renderForums($forum->children, ++$level, $template);
+                $result .= $this->renderForums($forum->children, $template, $options, ++$level);
             }
         }
         return $result;

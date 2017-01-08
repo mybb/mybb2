@@ -7,8 +7,9 @@
  */
 
 return [
-    'management'            => 'Forum Management',
+    'management'            => 'Forums Management',
     'add_forum'             => 'Add Forum',
+    'edit_forum'            => 'Edit Forum',
     'category'              => 'Category',
     'forum'                 => 'Forum',
     'forum_type'            => 'Forum type',

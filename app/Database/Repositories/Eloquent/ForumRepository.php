@@ -11,12 +11,10 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Database\DatabaseManager;
-use MyBB\Core\Database\Models\{
-    Forum, Post, Topic
-};
-use MyBB\Core\Database\Repositories\{
-    ForumRepositoryInterface, TopicRepositoryInterface
-};
+use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 
 class ForumRepository implements ForumRepositoryInterface
@@ -25,11 +23,6 @@ class ForumRepository implements ForumRepositoryInterface
      * @var Forum $forumModel
      */
     protected $forumModel;
-
-    /**
-     * @var Topic
-     */
-    protected $topicRepository;
 
     /**
      * @var PermissionChecker
@@ -45,18 +38,15 @@ class ForumRepository implements ForumRepositoryInterface
      * @param Forum $forumModel                    The model to use for forums.
      * @param PermissionChecker $permissionChecker The permission class
      * @param DatabaseManager $dbManager
-     * @param TopicRepositoryInterface $topicRepository
      */
     public function __construct(
         Forum $forumModel,
         PermissionChecker $permissionChecker,
-        DatabaseManager $dbManager,
-        TopicRepositoryInterface $topicRepository
+        DatabaseManager $dbManager
     ) {
         $this->forumModel = $forumModel;
         $this->permissionChecker = $permissionChecker;
         $this->dbManager = $dbManager;
-        $this->topicRepository = $topicRepository;
     }
 
     /**
@@ -272,13 +262,24 @@ class ForumRepository implements ForumRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function update(Forum $forum, $details)
+    {
+        return $forum->update($details);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function delete(Forum $forum)
     {
-        return $this->dbManager->transaction(function () use ($forum) {
-            $forums = $this->forumModel->whereBetween('left_id', [$forum->left_id, $forum->right_id])->get();
-            $forumsIds = $forums->pluck('id')->toArray();
-            $this->topicRepository->deleteTopicsForForums($forumsIds);
-            $this->forumModel->destroy($forumsIds);
-        });
+        //TODO implement function
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeParent(Forum $forum, int $newParent)
+    {
+        //TODO implement function
     }
 }

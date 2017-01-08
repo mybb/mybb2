@@ -11,9 +11,9 @@
 namespace MyBB\Core\Database\Repositories;
 
 use Doctrine\Common\Collections\Collection;
-use MyBB\Core\Database\Models\{
-    Forum, Post, Topic
-};
+use MyBB\Core\Database\Models\Forum;
+use MyBB\Core\Database\Models\Post;
+use MyBB\Core\Database\Models\Topic;
 
 interface ForumRepositoryInterface
 {
@@ -111,8 +111,24 @@ interface ForumRepositoryInterface
     /**
      * Delete forum by id. Removes all related forums/subforums/topics/posts
      *
-     * @param int $id
+     * @param Forum $forum
      * @return bool
      */
     public function delete(Forum $forum);
+
+    /**
+     * Update forum
+     *
+     * @param Forum $forum
+     * @param $details
+     * @return mixed
+     */
+    public function update(Forum $forum, $details);
+
+    /**
+     * @param Forum $forum
+     * @param int $newParent
+     * @return mixed
+     */
+    public function changeParent(Forum $forum, int $newParent);
 }

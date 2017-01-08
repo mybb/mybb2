@@ -112,6 +112,7 @@ return [
             \MyBB\Core\Twig\Extensions\Moderation::class,
             \MyBB\Core\Twig\Extensions\Presenter::class,
             \MyBB\Core\Twig\Extensions\ListAllForums::class,
+            \MyBB\Core\Twig\Extensions\AdminDeleteButton::class,
             \MyBB\Core\Widgets\Twig\Widget::class,
             // 'TwigBridge\Extension\Laravel\Legacy\Facades',
         ],

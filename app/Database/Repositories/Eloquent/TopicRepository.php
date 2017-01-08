@@ -421,12 +421,4 @@ class TopicRepository implements TopicRepositoryInterface
     {
         return $this->topicModel->where('forum_id', $forumId)->count();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteTopicsForForum(int $forumId)
-    {
-        return $this->topicModel->where('forum_id', $forumId)->delete();
-    }
 }
