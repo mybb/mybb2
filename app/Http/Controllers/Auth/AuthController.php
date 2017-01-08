@@ -13,6 +13,7 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory;
+use MyBB\Core\Database\Models\User;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 use MyBB\Core\Http\Controllers\AbstractController as Controller;
@@ -234,7 +235,9 @@ class AuthController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
         $user->roles()->attach($this->roleRepository->findIdBySlug('user'), ['is_display' => true]);
+
         return $user;
     }
 }

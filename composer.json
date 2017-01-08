@@ -1,12 +1,17 @@
 {
 	"name": "mybb/core",
 	"description": "MyBB 2.0 Core.",
-	"keywords": ["mybb", "forum", "laravel"],
+	"keywords": [
+		"mybb",
+		"forum",
+		"laravel"
+	],
 	"license": "BSD-3",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.2.*",
-		"laravelcollective/html": "5.2.*",
+		"php": ">=7.0.0",
+		"laravel/framework": "5.3.*",
+		"laravelcollective/html": "5.3.*",
 		"mybb/auth": "dev-master",
 		"mybb/parser": "dev-master",
 		"mybb/settings": "dev-master",
@@ -23,31 +28,29 @@
 		"phpunit/phpunit": "~4.0",
 		"phpspec/phpspec": "~2.1",
 		"barryvdh/laravel-debugbar": "dev-master",
-		"sjparkinson/static-review": "dev-master",
-		"friendsofphp/php-cs-fixer": "~2.0@dev",
-		"squizlabs/php_codesniffer": "~2.0@dev",
 		"mockery/mockery": "0.9.*@dev",
-		"mybb/standards": "dev-master",
 		"symfony/dom-crawler": "~3.0",
-		"symfony/css-selector": "~3.0"
+		"symfony/css-selector": "~3.0",
+		"squizlabs/php_codesniffer": "^2.7",
+		"friendsofphp/php-cs-fixer": "^2.0"
 	},
 	"repositories": [
 		{
 			"type": "vcs",
-			"url":  "git@github.com:mybb/auth.git"
+			"url": "git@github.com:mybb/auth.git"
 		},
 		{
 			"type": "vcs",
-			"url":  "git@github.com:mybb/parser.git"
+			"url": "git@github.com:mybb/parser.git"
 		},
 		{
-		    "type": "vcs",
-		    "url":  "git@github.com:mybb/Settings.git"
+			"type": "vcs",
+			"url": "git@github.com:mybb/Settings.git"
 		},
-        {
-            "type": "vcs",
-            "url": "git@github.com:mybb/standards.git"
-        }
+		{
+			"type": "vcs",
+			"url": "git@github.com:mybb/standards.git"
+		}
 	],
 	"autoload": {
 		"classmap": [
@@ -56,14 +59,14 @@
 		"psr-4": {
 			"MyBB\\Core\\": "app/"
 		},
-	  	"files": [
-		  	"bootstrap/helpers.php"
+		"files": [
+			"bootstrap/helpers.php"
 		]
 	},
 	"autoload-dev": {
-        "psr-4": {
-          "MyBB\\Core\\Test\\": "tests/src"
-        }
+		"psr-4": {
+			"MyBB\\Core\\Test\\": "tests/src"
+		}
 	},
 	"scripts": {
 		"post-install-cmd": [
@@ -80,10 +83,10 @@
 			"php artisan vendor:publish",
 			"php artisan optimize"
 		],
-        "test-unit": "vendor/bin/phpunit --testsuite unit",
-        "test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report",
-        "sniff": "vendor/bin/phpcs",
-        "sniff-fix": "vendor/bin/phpcbf"
+		"test-unit": "vendor/bin/phpunit --testsuite unit",
+		"test-unit-coverage": "vendor/bin/phpunit --testsuite unit --coverage-text --coverage-html=./tests/report",
+		"sniff": "vendor/bin/phpcs",
+		"sniff-fix": "vendor/bin/phpcbf"
 	},
 	"prefer-stable": true,
 	"minimum-stability": "dev",
