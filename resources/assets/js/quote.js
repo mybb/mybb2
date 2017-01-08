@@ -276,7 +276,7 @@
                     closeText: ''
                 });
                 modalContent.find('.view-quotes__quotes').css({
-                    'max-height': ($(window).height()-250)+'px'
+                    'max-height': ($(window).height() - 250) + 'px'
                 });
                 modal.html(modalContent.html());
                 modal.appendTo("body").modal({
@@ -284,18 +284,17 @@
                     closeText: ''
                 });
 
-                if (Modernizr.touch) {
-                    $('.radio-buttons .radio-button, .checkbox-buttons .checkbox-button').click(function () {
+            if (Modernizr.touch) {
+                $('.radio-buttons .radio-button, .checkbox-buttons .checkbox-button').click(function () {
+                });
+            } else {
+                $('span.icons i, a, .caption, time').powerTip({placement: 's', smartPlacement: true});
+            }
 
-                    });
-                } else {
-                    $('span.icons i, a, .caption, time').powerTip({ placement: 's', smartPlacement: true });
-                }
-
-                $('.quote__select').on("click", $.proxy(this.quoteAdd, this));
-                $('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
-                $(".select-all-quotes").on("click", $.proxy(this.addQuotes, this));
-                $('.modal-hide').hide();
+            $('.quote__select').on("click", $.proxy(this.quoteAdd, this));
+            $('.quote__remove').on("click", $.proxy(this.quoteRemove, this));
+            $(".select-all-quotes").on("click", $.proxy(this.addQuotes, this));
+            $('.modal-hide').hide();
         }, this)).always(function () {
             MyBB.Spinner.remove();
         });
@@ -360,7 +359,7 @@
 
         while ($post.next().length) {
             $post = $post.next();
-            $post.data('id', $post.data('id')-1);
+            $post.data('id', $post.data('id') - 1);
         }
 
         this.quoteButtons();
@@ -383,7 +382,7 @@
 
         while ($post.next().length) {
             $post = $post.next();
-            $post.data('id', $post.data('id')-1);
+            $post.data('id', $post.data('id') - 1);
         }
 
         this.quoteButtons();

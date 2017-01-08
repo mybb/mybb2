@@ -9,7 +9,6 @@
 namespace MyBB\Core\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-use Illuminate\Routing\Router;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -26,15 +25,16 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router $router
-     *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        $router->pattern('id', '\d+');
+        parent::boot();
 
-        parent::boot($router);
+        /** @var \Illuminate\Routing\Router $router */
+        $router = $this->app['router'];
+
+        $router->pattern('id', '\d+');
     }
 
     /**

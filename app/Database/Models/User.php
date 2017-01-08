@@ -11,6 +11,7 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Auth\MyBBUserContract;
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
@@ -24,6 +25,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 {
     use CanResetPassword;
     use PermissionableTrait;
+    use Notifiable;
 
     /**
      * The database table used by the model.
@@ -77,6 +79,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
 	// @codingStandardsIgnoreStart
 	public $timestamps = false;
 	// @codingStandardsIgnoreEnd
+
     /**
      * Cache variable for the display role
      *
@@ -133,7 +136,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
             if ($this->id <= 0) {
                 $this->displayRole = Role::where('role_slug', 'guest')->first();
             } else {
-                $this->displayRole = $this->roles->whereLoose('pivot.is_display', true)->first();
+                $this->displayRole = $this->roles->where('pivot.is_display', true)->first();
             }
         }
 
