@@ -48,7 +48,7 @@ class ListAllForums extends Twig_Extension
         foreach ($forums as $forum) {
             $result .= view($template, compact('forum', 'level', 'options'))->render();
             if ($forum->children->count() > 0) {
-                $result .= $this->renderForums($forum->children, $template, $options, ++$level);
+                $result .= $this->renderForums($forum->children, $template, $options, $level + 1);
             }
         }
         return $result;
