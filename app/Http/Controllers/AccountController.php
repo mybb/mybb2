@@ -15,7 +15,14 @@ use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Http\Requests\Account\CropAvatarRequest;
+use MyBB\Core\Http\Requests\Account\UpdateAvatarRequest;
+use MyBB\Core\Http\Requests\Account\UpdateEmailRequest;
+use MyBB\Core\Http\Requests\Account\UpdatePasswordRequest;
+use MyBB\Core\Http\Requests\Account\UpdatePreferencesRequest;
+use MyBB\Core\Http\Requests\Account\UpdatePrivacyRequest;
 use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
+use MyBB\Core\Http\Requests\Account\UpdateUsernameRequest;
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 
@@ -102,19 +109,12 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdateUsernameRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postUsername(Request $request)
+    public function postUsername(UpdateUsernameRequest $request)
     {
-        $this->failedValidationRedirect = route('account.username');
-
-        $this->validate($request, [
-            'name'     => 'required|max:255|unique:users',
-            'password' => 'required',
-        ]);
-
         if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
             // Valid password so update
             $this->guard->user()->update($request->only('name'));
@@ -142,19 +142,12 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdateEmailRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEmail(Request $request)
+    public function postEmail(UpdateEmailRequest $request)
     {
-        $this->failedValidationRedirect = route('account.email');
-
-        $this->validate($request, [
-            'email'    => 'required|email|max:255|unique:users',
-            'password' => 'required',
-        ]);
-
         if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
             ConfirmationManager::send(
                 'email',
@@ -209,20 +202,13 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdatePasswordRequest $request
      * @param BcryptHasher $hasher
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPassword(Request $request, BcryptHasher $hasher)
+    public function postPassword(UpdatePasswordRequest $request, BcryptHasher $hasher)
     {
-        $this->failedValidationRedirect = route('account.password');
-
-        $this->validate($request, [
-            'password1' => 'required|min:6',
-            'password'  => 'required',
-        ]);
-
         if ($this->guard->getProvider()->validateCredentials($this->guard->user(), $request->only('password'))) {
             // Don't save the password in plaintext!
             ConfirmationManager::send(
@@ -275,19 +261,12 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdateAvatarRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postAvatar(Request $request)
+    public function postAvatar(UpdateAvatarRequest $request)
     {
-        $this->failedValidationRedirect = route('account.avatar');
-
-        // TODO: validation. Upload size, valid link, valid email
-        $this->validate($request, [
-            'avatar_file' => 'image',
-        ]);
-
         // TODO: Delete the old file if an uploaded was used
 
         // File?
@@ -326,20 +305,12 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param CropAvatarRequest $request
      *
      * @return mixed
      */
-    public function postAvatarCrop(Request $request)
+    public function postAvatarCrop(CropAvatarRequest $request)
     {
-        $this->validate($request, [
-            'w'  => 'required|integer',
-            'h'  => 'required|integer',
-            'x'  => 'required|integer',
-            'x2' => 'required|integer',
-            'y'  => 'required|integer',
-            'y2' => 'required|integer',
-        ]);
         $data = [
             'w'  => $request->get('w'),
             'h'  => $request->get('h'),
@@ -492,42 +463,14 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdatePreferencesRequest $request
      * @param Store $settings
      * @param Translator $trans
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPreferences(Request $request, Store $settings, Translator $trans)
+    public function postPreferences(UpdatePreferencesRequest $request, Store $settings, Translator $trans)
     {
-        $this->validate($request, [
-            'dst'                        => 'required|in:0,1,2',
-            'follow_started_topics'      => 'boolean',
-            'follow_replies_topics'      => 'boolean',
-            'show_editor'                => 'boolean',
-            'topics_per_page'            => 'integer|min:5|max:50',
-            'posts_per_page'             => 'integer|min:5|max:50',
-            'style'                      => '', // exists:styles
-            'language'                   => 'required', // test whether exists?
-            'message_order'              => 'in:asc,desc',
-            'notify_on_like'             => 'boolean',
-            'notify_on_quote'            => 'boolean',
-            'notify_on_reply'            => 'boolean',
-            'notify_on_new_post'         => 'boolean',
-            'notify_on_new_comment'      => 'boolean',
-            'notify_on_comment_like'     => 'boolean',
-            'notify_on_my_comment_like'  => 'boolean',
-            'notify_on_comment_reply'    => 'boolean',
-            'notify_on_my_comment_reply' => 'boolean',
-            'notify_on_new_message'      => 'boolean',
-            'notify_on_reply_message'    => 'boolean',
-            'notify_on_group_request'    => 'boolean',
-            'notify_on_moderation_post'  => 'boolean',
-            'notify_on_report'           => 'boolean',
-            'notify_on_username_change'  => 'boolean',
-            'notification_mails'         => 'required|in:0,1,2',
-        ]);
-
         $input = $request->except(['_token']);
 
         // Make checkboxes booleans
@@ -592,24 +535,13 @@ class AccountController extends AbstractController
     }
 
     /**
-     * @param Request $request
+     * @param UpdatePrivacyRequest $request
      * @param Store $settings
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPrivacy(Request $request, Store $settings)
+    public function postPrivacy(UpdatePrivacyRequest $request, Store $settings)
     {
-        $this->validate($request, [
-            'showonline'             => 'boolean',
-            'receive_messages'       => 'boolean',
-            'block_blocked_messages' => 'boolean',
-            'hide_blocked_posts'     => 'boolean',
-            'only_buddy_messages'    => 'boolean',
-            'receive_email'          => 'boolean',
-            'dob_privacy'            => 'required|in:0,1,2',
-            'dob_visibility'         => 'required|in:0,1,2',
-        ]);
-
         $input = $request->except(['_token']);
 
         $input['showonline'] = isset($input['showonline']);
