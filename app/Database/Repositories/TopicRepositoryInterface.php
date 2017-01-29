@@ -138,4 +138,12 @@ interface TopicRepositoryInterface
      * @param Topic $topic
      */
     public function movePostToTopic(Post $post, Topic $topic);
+
+    /**
+     * Count topics for forum
+     *
+     * @param int $forumId Forum id
+     * @return int
+     */
+    public function countTopicsForForum(int $forumId);
 }

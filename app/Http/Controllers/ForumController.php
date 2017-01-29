@@ -110,7 +110,7 @@ class ForumController extends AbstractController
     public function show(Request $request, $id, $slug)
     {
         // Forum permissions are checked in "find"
-        $forum = $this->forumRepository->find($id)->first();
+        $forum = $this->forumRepository->find($id);
 
         if (!$forum) {
             throw new ForumNotFoundException;

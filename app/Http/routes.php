@@ -179,6 +179,32 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'Admin\Users\WarningsController@deleteWarningType',
             ]);
         });
+        Route::group(['prefix' => 'forums'], function () {
+            Route::get('/', [
+                'as'   => 'admin.forums',
+                'uses' => 'Admin\Forums\ForumsController@show',
+            ]);
+            Route::get('/add', [
+                'as'   => 'admin.forums.add',
+                'uses' => 'Admin\Forums\ForumsController@add',
+            ]);
+            Route::post('/add', [
+                'as'   => 'admin.forums.add',
+                'uses' => 'Admin\Forums\ForumsController@create',
+            ]);
+            Route::post('/delete', [
+                'as'   => 'admin.forums.delete',
+                'uses' => 'Admin\Forums\ForumsController@delete',
+            ]);
+            Route::get('/edit/{id}', [
+                'as'   => 'admin.forums.edit',
+                'uses' => 'Admin\Forums\ForumsController@edit',
+            ]);
+            Route::post('/edit/{id}', [
+                'as'   => 'admin.forums.edit',
+                'uses' => 'Admin\Forums\ForumsController@update',
+            ]);
+        });
     });
 
     Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);

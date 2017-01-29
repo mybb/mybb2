@@ -39,11 +39,7 @@
                     <td>
                         <a href="{{ url_route('admin.warnings.warning_types.edit', {'id': warningType.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::general.edit') }}</a>
 
-                        <form method="post" action="{{ route('admin.warnings.warning_types.delete') }}" style="display:inline;">
-                            {{ csrf_field() }}
-                            <input type="hidden" name="warning_type_id" value="{{ warningType.id }}">
-                            <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::general.delete') }}</button>
-                        </form>
+                        {{ admin_delete_button('admin.warnings.warning_types.delete', warningType.id) }}
                     </td>
                 </tr>
             {% endfor %}

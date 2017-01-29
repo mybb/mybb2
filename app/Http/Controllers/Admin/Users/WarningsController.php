@@ -119,7 +119,7 @@ class WarningsController extends AdminController
      */
     public function deleteWarningType(Request $request)
     {
-        $this->warningTypesRepository->delete($request->input('warning_type_id'));
+        $this->warningTypesRepository->delete($request->input('id'));
 
         return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
     }

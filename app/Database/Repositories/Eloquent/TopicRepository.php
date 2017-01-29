@@ -413,4 +413,12 @@ class TopicRepository implements TopicRepositoryInterface
             'last_post_user_id' => $post->author->id,
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countTopicsForForum(int $forumId)
+    {
+        return $this->topicModel->where('forum_id', $forumId)->count();
+    }
 }

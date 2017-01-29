@@ -10,6 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
+use Doctrine\Common\Collections\Collection;
 use MyBB\Core\Database\Models\Forum;
 use MyBB\Core\Database\Models\Post;
 use MyBB\Core\Database\Models\Topic;
@@ -83,4 +84,51 @@ interface ForumRepositoryInterface
      * @param Forum $forum
      */
     public function moveTopicToForum(Topic $topic, Forum $forum);
+
+    /**
+     * Create new forum
+     *
+     * @param array $details
+     * @return mixed
+     */
+    public function create(array $details = []);
+
+    /**
+     * Return single forum by id (without any relations, just forum)
+     *
+     * @param int $id Forum id
+     * @return Collection
+     */
+    public function getForum(int $id);
+
+    /**
+     * Check if there are already created any forums
+     *
+     * @return bool
+     */
+    public function isEmpty();
+
+    /**
+     * Delete forum by id. Removes all related forums/subforums/topics/posts
+     *
+     * @param Forum $forum
+     * @return bool
+     */
+    public function delete(Forum $forum);
+
+    /**
+     * Update forum
+     *
+     * @param Forum $forum
+     * @param $details
+     * @return mixed
+     */
+    public function update(Forum $forum, $details);
+
+    /**
+     * @param Forum $forum
+     * @param int $newParent
+     * @return mixed
+     */
+    public function changeParent(Forum $forum, int $newParent);
 }

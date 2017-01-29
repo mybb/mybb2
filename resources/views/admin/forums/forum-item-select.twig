@@ -1,0 +1,8 @@
+<option value="{{ forum.id }}"
+        {{ options.active is defined and options.active == forum.id ? 'selected'}}
+        >
+    {% for level in 1..level %}
+        -
+    {% endfor %}
+    {{ forum.title }}
+</option>

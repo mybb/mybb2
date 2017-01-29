@@ -54,7 +54,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
      *
      * @var array
      */
-    protected $guarded = ['left_id', 'right_id', 'parent_id'];
+    protected $guarded = [];
 
     /**
      * @var array
