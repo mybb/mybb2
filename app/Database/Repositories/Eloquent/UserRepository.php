@@ -179,8 +179,8 @@ class UserRepository implements UserRepositoryInterface
        $user = $this->userModel->find($id);
 	   //$user->activity()->detach();
 	   $user->conversations()->detach();
-	   $user->topics()->update(['user_id' => null,'username' => "Deleted User"]);
-	   $user->posts()->update(['user_id' => null,'username' => "Deleted User"]);
+	   $user->topics()->update(['user_id' => null,'username' => ""]);
+	   $user->posts()->update(['user_id' => null,'username' => ""]);
 	   $user->roles()->detach();
 	   return $user->delete();
     }
