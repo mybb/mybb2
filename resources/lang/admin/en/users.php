@@ -17,7 +17,7 @@ return [
     'regdate'    => 'Registered',
     'action'     => 'Actions',
     'edit'       => 'Edit',
-	'delete'     => 'Delete',
+    'delete'     => 'Delete',
     'edit_title' => 'Edit User',
     'name'       => 'Username',
     'usertitle'  => 'User Title',

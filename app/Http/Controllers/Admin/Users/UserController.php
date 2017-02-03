@@ -123,13 +123,13 @@ class UserController extends AdminController
         
         return view('admin.users.add', compact('roles'))->withActive("users");
     }
-	
-	/**
+    
+    /**
      * Delete the selected user
      *
      * @return \Illuminate\View\View
      */
-	 public function deleteUser(Request $request)
+    public function deleteUser(Request $request)
     {
         $this->userRepository->delete($request->get('user_id'));
 

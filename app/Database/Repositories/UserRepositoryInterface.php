@@ -73,8 +73,8 @@ interface UserRepositoryInterface
      * @return User
      */
     public function update(User $user, array $userDetails = []);
-	
-	/**
+    
+    /**
      * Delete a user
      *
      * @param int $id The ID of the user you want to delete.

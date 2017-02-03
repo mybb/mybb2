@@ -150,16 +150,16 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
     {
         return $this->hasMany(\MyBB\Core\Database\Models\UserActivity::class);
     }
-	
-	/**
+    
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function topics()
     {
         return $this->hasMany(\MyBB\Core\Database\Models\Topic::class);
     }
-	
-	/**
+    
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function posts()
