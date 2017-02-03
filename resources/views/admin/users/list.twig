@@ -24,6 +24,10 @@
                     <td>{{ generate_time(user.created_at) }}</td>
                     <td>
                         <a href="{{ url_route('admin.users.edit', {'id': user.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::users.edit') }}</a>
+						{{ form_open({'route': ['admin.users.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
+                        <input type="hidden" name="user_id" value="{{ user.id }}">
+                        <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::users.delete') }}</button>
+                        {{ form_close() }}
                     </td>
                 </tr>
             {% endfor %}

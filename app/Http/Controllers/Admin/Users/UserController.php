@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Http\Controllers\Admin\Users;
 
+use Illuminate\Http\Request;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
 use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
@@ -121,6 +122,18 @@ class UserController extends AdminController
         $roles = $this->roles();
         
         return view('admin.users.add', compact('roles'))->withActive("users");
+    }
+    
+    /**
+     * Delete the selected user
+     *
+     * @return \Illuminate\View\View
+     */
+    public function deleteUser(Request $request)
+    {
+        $this->userRepository->delete($request->get('user_id'));
+
+        return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
     }
     
     /**

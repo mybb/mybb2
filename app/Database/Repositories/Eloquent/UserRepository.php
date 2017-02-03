@@ -166,4 +166,22 @@ class UserRepository implements UserRepositoryInterface
 
         return $user;
     }
+    
+    /**
+     * Delete a user
+     *
+     * @param int $id The ID of the user you want to delete.
+     *
+     * @return mixed
+     */
+    public function delete($id = 0)
+    {
+        $user = $this->userModel->find($id);
+        //$user->activity()->detach();
+        $user->conversations()->detach();
+        $user->topics()->update(['user_id' => null,'username' => ""]);
+        $user->posts()->update(['user_id' => null,'username' => ""]);
+        $user->roles()->detach();
+        return $user->delete();
+    }
 }
