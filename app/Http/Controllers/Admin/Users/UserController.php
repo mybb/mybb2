@@ -60,7 +60,9 @@ class UserController extends AdminController
         $username = $request->input('username', '');
         $email = $request->input('email', '');
         $role = $this->roleRepository->findIdBySlug($request->input('role'));
-        if($role==null) $role = 0;
+        if ($role==null) {
+            $role = 0;
+        }
         
         $this->breadcrumbs->setCurrentRoute('admin.users.list');
         $users = $this->userRepository->search($username, $email, $role);
