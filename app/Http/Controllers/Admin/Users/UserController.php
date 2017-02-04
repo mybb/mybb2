@@ -55,12 +55,19 @@ class UserController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function users()
+    public function users(Request $request)
     {
+        $username = $request->input('username', '');
+        $email = $request->input('email', '');
+        $role = $this->roleRepository->findIdBySlug($request->input('role'));
+        if($role==null) $role = 0;
+        
         $this->breadcrumbs->setCurrentRoute('admin.users.list');
-        $users = $this->userRepository->all();
+        $users = $this->userRepository->search($username, $email, $role);
+        $roles = $this->roles();
+        $roles["any"] = "Any";
 
-        return view('admin.users.list', compact('users'))->withActive("users");
+        return view('admin.users.list', compact('users', 'roles', 'username', 'email'))->withActive("users");
     }
     
     /**
