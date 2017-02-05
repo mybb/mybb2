@@ -34,26 +34,25 @@
             </tbody>
         </table>
         <form method="get" action="{{ url_route('admin.users') }}">
-		<section class="form" style="margin-left: 10px;">
-            <div class="form__section">
-                <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('username', trans('admin::users.name')) }}
-                    </h3>
-                    <input type="text" name="username" id="username" value="{{ username }}"/>
+            <section class="form" style="margin-left: 10px;">
+                <div class="form__section">
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('username', trans('admin::users.name')) }}</h3>
+                        <input type="text" name="username" id="username" value="{{ username }}"/>
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('email', trans('admin::users.mail')) }}</h3>
+                        <input type="text" name="email" id="email" value="{{ email }}"/>
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('role', trans('admin::users.role')) }}</h3>
+                        {{ form_select('role', roles, role ? role.role_slug : 'any') }}
+                    </div>
+                    <div class="form__submit">
+                        <button type="submit" class="button">Search</button>
+                    </div>
                 </div>
-                <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('email', trans('admin::users.mail')) }}</h3>
-                    <input type="text" name="email" id="email" value="{{ email }}"/>
-                </div>
-                <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('role', trans('admin::users.role')) }}</h3>
-                    {{ form_select('role', roles, role ? role.role_slug : 'any') }}
-                </div>
-                <div class="form__submit">
-                    <button type="submit" class="button">Search</button>
-                </div>
-            </div>
-        </section>
+            </section>
         </form>
     </div>
 {% endblock %}

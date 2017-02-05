@@ -37,7 +37,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function search($username = "", $email = "", int $role_id = 0, $sortBy = 'created_at', $sortDir = 'asc', $perPage = 10);
+    public function search(string $username = "", string $email = "", int $role_id = 0, string $sortBy = 'created_at', string $sortDir = 'asc', int $perPage = 10);
     
     /**
      * Get all users active in the last x minutes
