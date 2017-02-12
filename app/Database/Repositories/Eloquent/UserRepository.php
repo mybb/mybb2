@@ -62,6 +62,27 @@ class UserRepository implements UserRepositoryInterface
     {
         return $this->userModel->orderBy($sortBy, $sortDir)->paginate($perPage);
     }
+    
+    /**
+     * Get all users who match a certain set of criteria.
+     *
+     * @param string username
+     * @param string email
+     * @param int role_id
+     * @param string $sortBy
+     * @param string $sortDir
+     * @param int $perPage
+     *
+     * @return mixed
+     */
+    public function search(string $username = "", string $email = "", int $roleId = 0, string $sortBy = 'created_at', string $sortDir = 'asc', int $perPage = 10)
+    {
+        if ($role_id == 0) {
+            return $this->userModel->where('name', 'like', "%{$username}%")->where('email', 'like', "%{$email}%")->orderBy($sortBy, $sortDir)->paginate($perPage);
+        }
+        
+        // to-do: role search
+    }
 
     /**
      * Get all users active in the last x minutes

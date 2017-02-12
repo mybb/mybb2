@@ -24,7 +24,21 @@ interface UserRepositoryInterface
      * @return mixed
      */
     public function all($sortBy = 'created_at', $sortDir = 'desc', $perPage = 10);
-
+    
+    /**
+     * Get all users who match a certain set of criteria.
+     *
+     * @param string username
+     * @param string email
+     * @param int role_id
+     * @param string $sortBy
+     * @param string $sortDir
+     * @param int $perPage
+     *
+     * @return mixed
+     */
+    public function search(string $username = "", string $email = "", int $role_id = 0, string $sortBy = 'created_at', string $sortDir = 'asc', int $perPage = 10);
+    
     /**
      * Get all users active in the last x minutes
      *

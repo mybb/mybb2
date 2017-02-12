@@ -5,8 +5,8 @@
         <h1 class="admin-body__header__title">{{ trans('admin::users.title') }}</h1>
         <div class="admin-body__header__buttons"><a href="{{ url_route('admin.users.add') }}" class="button icon fa-plus">{{ trans(('admin::users.add_user')) }}</a></div>
     </div>
-    <div class="admin-body__content">
-        <table class="admin-table admin-table--bordered users">
+    <div class="admin-body__content" style="display: flex;flex-direction: row;">
+        <table class="admin-table admin-table--bordered users" style="width:79%;">
             <thead>
                 <tr>
                     <th colspan="2">{{ trans('admin::users.user') }}</th>
@@ -19,8 +19,8 @@
             {% for user in users %}
                 <tr>
                     <td class="avatar-cell"><img src="{{ user.avatar }}"></td>
-                    <td>{{ user.styled_name|raw }}</td>
-                    <td>{{ user.email }}</td>
+                    <td><a href="{{ url_route('user.profile', {'slug': user.name, 'id': user.id}) }}" title="{{ trans('general.goToXProfile', {'name': user.name}) }}">{{ user.styled_name|raw }}</a></td>
+                    <td><a href="{{ url_route('admin.users', {'email': user.email}) }}">{{ user.email }}</a></td>
                     <td>{{ generate_time(user.created_at) }}</td>
                     <td>
                         <a href="{{ url_route('admin.users.edit', {'id': user.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::users.edit') }}</a>
@@ -33,5 +33,26 @@
             {% endfor %}
             </tbody>
         </table>
+        <form method="get" action="{{ url_route('admin.users') }}">
+            <section class="form" style="margin-left: 10px;">
+                <div class="form__section">
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('username', trans('admin::users.name')) }}</h3>
+                        <input type="text" name="username" id="username" value="{{ username }}"/>
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('email', trans('admin::users.mail')) }}</h3>
+                        <input type="text" name="email" id="email" value="{{ email }}"/>
+                    </div>
+                    <div class="form__row">
+                        <h3 class="form__row__title">{{ form_label('role', trans('admin::users.role')) }}</h3>
+                        {{ form_select('role', roles, role ? role.role_slug : 'any') }}
+                    </div>
+                    <div class="form__submit">
+                        <button type="submit" class="button">Search</button>
+                    </div>
+                </div>
+            </section>
+        </form>
     </div>
 {% endblock %}
