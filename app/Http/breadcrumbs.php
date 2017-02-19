@@ -177,7 +177,7 @@ Breadcrumbs::register('auth.signup', function ($breadcrumbs) {
     $breadcrumbs->push(trans('member.signup'), url('auth/signup'));
 });
 
-Breadcrumbs::register('auth.login', function ($breadcrumbs) {
+Breadcrumbs::register('Illuminate\Auth\Events\Login', function ($breadcrumbs) {
 
     $breadcrumbs->parent('forum.index');
     $breadcrumbs->push(trans('member.login'), url('auth/login'));
