@@ -1,0 +1,29 @@
+{% extends "layouts.admin" %}
+{% block title %} {{ trans('admin::settings.board_settings') }} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans('admin::settings.board_settings') }} </h1>
+    </div>
+    <div class="admin-body__content">
+
+        {% for group in core %}
+            <a href="{{ route('admin.settings.edit', {'group': group.group, 'package': group.package.dotNotation}) }}">
+                    {{ trans('admin::settings.' ~ group.group ~ '.__group.title') }}
+            </a> <br>
+            {{ trans('admin::settings.' ~ group.group ~ '.__group.desc') }}
+        <br>
+        {% endfor %}
+
+        {% if extensions %}
+            <h1>{{ trans('admin::settings.extensions') }}</h1>
+            {% for group in extensions %}
+                <a href="{{ route('admin.settings.edit', {'group': group.group, 'package': group.package.dotNotation}) }}">
+                    {{ trans(group.package.split[1] ~ '::settings.' ~ group.group ~ '.__group.title') }}
+                </a> <br>
+                {{ trans(group.package.split[1] ~ '::settings.' ~ group.group ~ '.__group.desc') }}
+                <br>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="segmented-control">
+    <span class="segmented-control__option">
+        <input id="{{ setting.name }}_yes" class="segmented-control__option__input" name="setting[{{ setting.name }}]" type="radio" value="1" {{ setting.value ? 'checked'}}>
+        <label class="segmented-control__option__button" for="{{ setting.name }}_yes">{{ trans('admin::settings.yes') }}</label>
+    </span>
+    <span class="segmented-control__option">
+        <input id="{{ setting.name }}_no" class="segmented-control__option__input" name="setting[{{ setting.name }}]" type="radio" value="0" {{ not setting.value ? 'checked' }}>
+        <label class="segmented-control__option__button" for="{{ setting.name }}_no">{{ trans('admin::settings.no') }}</label>
+    </span>
+</div>

@@ -282,4 +282,12 @@ class ForumRepository implements ForumRepositoryInterface
     {
         //TODO implement function
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onlyChildren()
+    {
+        return $this->forumModel->where('parent_id', '!=', null)->get();
+    }
 }

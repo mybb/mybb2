@@ -49,6 +49,8 @@ use MyBB\Core\Database\Repositories\WarningsRepositoryInterface;
 use MyBB\Core\Database\Repositories\WarningTypesRepositoryInterface;
 use MyBB\Core\Likes\Database\Repositories\Eloquent\LikesRepository;
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
+use MyBB\Settings\Repositories\SettingRepositoryInterface;
+use MyBB\Settings\Repositories\Eloquent\SettingRepository;
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Renderers\Post\Quote\MyCode;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface;
@@ -79,6 +81,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             PostRepositoryInterface::class,
             PostRepository::class
+        );
+
+        $this->app->bind(
+            SettingRepositoryInterface::class,
+            SettingRepository::class
         );
 
         $this->app->bind(

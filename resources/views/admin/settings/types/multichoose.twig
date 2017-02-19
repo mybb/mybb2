@@ -1,0 +1,7 @@
+<select name="setting[{{ setting.name }}][]" id="{{ setting.name }}" multiple>
+    {% for option in setting.options|split('|') %}
+        <option value="{{ option }}" {{ option in setting.value|split('|') ? 'selected' }}>
+            {{ trans(packageName ~ '::settings.' ~ setting.name ~ '.__option.' ~ option) }}
+        </option>
+    {% endfor %}
+</select>

@@ -131,4 +131,11 @@ interface ForumRepositoryInterface
      * @return mixed
      */
     public function changeParent(Forum $forum, int $newParent);
+
+    /**
+     * Get only children forums
+     *
+     * @return mixed
+     */
+    public function onlyChildren();
 }

@@ -18,11 +18,11 @@
 <div class="main" id="main">
     <nav class="admin-menu">
         <ul class="admin-menu__list">
-            <li class="admin-menu__section{% if active == 'dashboard' %} admin-menu__section--active{% endif %}">
+            <li class="admin-menu__section{% if active == 'dashboard' or active == 'settings' %} admin-menu__section--active{% endif %}">
                 <h3 class="admin-menu__section__title"><a href="{{ url_route('admin.dashboard') }}" class="admin-menu__section__title__link">Home</a></h3>
                 <ul class="admin-menu__section__list">
                     <li class="admin-menu__section__item{% if active == 'dashboard' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.dashboard') }}" class="admin-menu__section__item__link icon icon--fw fa-dashboard">Dashboard</a></li>
-                    <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-cog">Settings</a></li>
+                    <li class="admin-menu__section__item{% if active == 'settings' %} admin-menu__section__item--active{% endif %}"><a href="{{ url_route('admin.settings') }}" class="admin-menu__section__item__link icon icon--fw fa-cog">Settings</a></li>
                     <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-rocket">Extensions</a></li>
                     <li class="admin-menu__section__item"><a href="" class="admin-menu__section__item__link icon icon--fw fa-language">Languages</a></li>
                 </ul>

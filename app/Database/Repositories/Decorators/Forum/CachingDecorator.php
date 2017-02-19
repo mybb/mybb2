@@ -247,7 +247,7 @@ class CachingDecorator implements ForumRepositoryInterface
         return $this->decoratedRepository->update($forum, $details);
     }
 
-     /**
+    /**
      * {@inheritdoc}
      */
     public function changeParent(Forum $forum, int $newParent)
@@ -255,5 +255,13 @@ class CachingDecorator implements ForumRepositoryInterface
         $this->decoratedRepository->changeParent($forum, $newParent);
         $this->cache->forget('forums.index_tree');
         return $this->cache->forget('forums.all');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function onlyChildren()
+    {
+        return $this->decoratedRepository->onlyChildren();
     }
 }

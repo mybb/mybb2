@@ -1,0 +1,13 @@
+ {% for option in setting.options|split('|') %}
+  <input
+          type="radio"
+          name="setting[{{ setting.name }}]"
+          value="{{ option }}"
+          id="{{ setting.name ~ option }}"
+          {{ setting.value == option ? 'checked' }}
+  >
+  <label for="{{ setting.name ~ option }}">
+      {{ trans(packageName ~ '::settings.' ~ setting.name ~ '.__option.' ~ option) }}
+  </label>
+  <br>
+ {% endfor %}

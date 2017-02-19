@@ -1,0 +1,6 @@
+ <input
+         type="text"
+         name="setting[{{ setting.name }}]"
+         value="{{ old('setting['~setting.name~']') ? old('setting['~setting.name~']') : setting.value }}"
+         id="{{ setting.name }}"
+ >
