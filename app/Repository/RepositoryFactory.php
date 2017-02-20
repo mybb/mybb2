@@ -28,11 +28,11 @@ class RepositoryFactory
     }
 
     /**
-     * @param string $key
+     * @param string|null $key
      *
      * @return RepositoryInterface
      */
-    public function build(string $key)
+    public function build($key = null)
     {
         $class = $this->registry->get($key);
         if ($class) {
