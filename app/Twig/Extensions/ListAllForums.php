@@ -47,7 +47,7 @@ class ListAllForums extends Twig_Extension
         string $template = 'admin.forums.forum-item',
         $options = null,
         int $level = 1
-       ) : string {
+    ) : string {
         $result = '';
         foreach ($forums as $forum) {
             $result .= view($template, compact('forum', 'level', 'options'))->render();

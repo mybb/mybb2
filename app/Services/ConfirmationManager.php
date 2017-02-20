@@ -26,7 +26,8 @@ class ConfirmationManager
      * @param bool $delete Whether or not old tokens for this type/user combination should be deleted
      */
     public static function send(
-        string $type, User $user,
+        string $type,
+        User $user,
         string $route,
         $newData = null,
         array $langData = [],
