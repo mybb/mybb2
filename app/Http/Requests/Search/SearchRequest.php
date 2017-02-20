@@ -37,7 +37,7 @@ class SearchRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'keyword'            => 'required|min:3',
@@ -57,7 +57,7 @@ class SearchRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...

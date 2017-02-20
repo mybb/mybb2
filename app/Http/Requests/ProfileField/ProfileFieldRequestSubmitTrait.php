@@ -9,7 +9,7 @@ trait ProfileFieldRequestSubmitTrait
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         $rules = [];
 
@@ -25,7 +25,7 @@ trait ProfileFieldRequestSubmitTrait
     /**
      * @return array
      */
-    public function attributes()
+    public function attributes() : array
     {
         $attributes = [];
 

@@ -49,7 +49,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllLikesByUserPaginated($user, $perPage = 20)
+    public function getAllLikesByUserPaginated($user, int $perPage = 20)
     {
         return $this->likesModel->where('user_id', '=', $this->getUserIdForUser($user))->paginate($perPage);
     }
@@ -63,7 +63,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllLikesForContentPaginated(Model $content, $perPage = 10)
+    public function getAllLikesForContentPaginated(Model $content, int $perPage = 10)
     {
         return $this->likesModel->where('content_id', '=', $content->id)->where(
             'content_type',
@@ -152,7 +152,7 @@ class LikesRepository implements LikesRepositoryInterface
      *
      * @return int The user's ID.
      */
-    protected function getUserIdForUser($user)
+    protected function getUserIdForUser($user) : int
     {
         if (is_object($user) && $user instanceof User) {
             $user = $user->getAuthIdentifier();

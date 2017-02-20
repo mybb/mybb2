@@ -34,7 +34,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'move_post';
     }
@@ -42,7 +42,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'moderation.moderate.move';
     }
@@ -76,7 +76,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         return $content instanceof Post && array_key_exists('topic_id', $options);
     }
@@ -86,7 +86,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return 'MyBB\Core\Presenters\Moderations\MovePostPresenter';
     }
@@ -96,7 +96,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return $content instanceof Post;
     }
@@ -104,7 +104,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return 'canMovePosts';
     }
@@ -112,7 +112,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
     /**
      * @return string
      */
-    public function getDestinationType()
+    public function getDestinationType() : string
     {
         return 'topic';
     }
@@ -120,7 +120,7 @@ class MovePost implements ModerationInterface, HasPresenter, DestinedInterface, 
     /**
      * @return string
      */
-    public function getDestinationKey()
+    public function getDestinationKey() : string
     {
         return 'topic_id';
     }

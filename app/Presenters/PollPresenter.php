@@ -55,7 +55,7 @@ class PollPresenter extends BasePresenter
      *
      * @return array
      */
-    public function options()
+    public function options() : array
     {
         if (!isset($this->cache['options'])) {
             $this->cache['options'] = $this->wrappedObject->options;
@@ -76,7 +76,7 @@ class PollPresenter extends BasePresenter
     /**
      * @return integer
      */
-    public function num_votes()
+    public function num_votes() : int
     {
         if (!isset($this->cache['num_votes'])) {
             $options = $this->options();
@@ -93,7 +93,7 @@ class PollPresenter extends BasePresenter
     /**
      * @return integer
      */
-    public function num_options()
+    public function num_options() : int
     {
         if (!isset($this->cache['num_options'])) {
             $this->cache['num_options'] = count($this->options());
@@ -105,7 +105,7 @@ class PollPresenter extends BasePresenter
     /**
      * @return bool
      */
-    public function is_closed()
+    public function is_closed() : bool
     {
         return ($this->wrappedObject->is_closed ||
             ($this->wrappedObject->end_at && new \DateTime($this->wrappedObject->end_at) < new \DateTime)

@@ -76,7 +76,7 @@ class UpdateLastVisit extends AbstractBootstrapMiddleware
      *
      * @return bool
      */
-    private function isDebugBarRequest($request)
+    private function isDebugBarRequest($request) : bool
     {
         $enabled = $this->config->get('debugbar.enabled');
 

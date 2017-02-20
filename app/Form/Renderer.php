@@ -47,7 +47,7 @@ class Renderer
      *
      * @return string
      */
-    public function render(RenderableInterface $renderable)
+    public function render(RenderableInterface $renderable) : string
     {
         $html = '';
 
@@ -91,7 +91,7 @@ class Renderer
      *
      * @return string
      */
-    protected function renderTextarea(RenderableInterface $renderable)
+    protected function renderTextarea(RenderableInterface $renderable) : string
     {
         return $this->view->make('partials.form.field_textarea', [
             'name'        => $renderable->getElementName(),
@@ -109,7 +109,7 @@ class Renderer
      *
      * @return string
      */
-    protected function renderInput(RenderableInterface $renderable)
+    protected function renderInput(RenderableInterface $renderable) : string
     {
         return $this->view->make('partials.form.field_input', [
             'type'        => $renderable->getType(),
@@ -127,7 +127,7 @@ class Renderer
      *
      * @return string
      */
-    protected function renderSelect(RenderableInterface $renderable)
+    protected function renderSelect(RenderableInterface $renderable) : string
     {
         return $this->view->make('partials.form.field_select', [
             'name'     => $renderable->getElementName(),
@@ -162,7 +162,7 @@ class Renderer
      *
      * @return string
      */
-    protected function slugify($string)
+    protected function slugify(string $string) : string
     {
         return Str::slug($string);
     }
@@ -172,7 +172,7 @@ class Renderer
      *
      * @return int
      */
-    protected function getMinLength(RenderableInterface $renderable)
+    protected function getMinLength(RenderableInterface $renderable) : int
     {
         return (int)$this->extractValueByKeyFromRules('min', $renderable);
     }
@@ -182,7 +182,7 @@ class Renderer
      *
      * @return int
      */
-    protected function getMaxLength(RenderableInterface $renderable)
+    protected function getMaxLength(RenderableInterface $renderable) : int
     {
         return (int)$this->extractValueByKeyFromRules('max', $renderable);
     }
@@ -193,7 +193,7 @@ class Renderer
      *
      * @return string
      */
-    protected function extractValueByKeyFromRules($key, RenderableInterface $renderable)
+    protected function extractValueByKeyFromRules(string $key, RenderableInterface $renderable) : string
     {
         $rules = $this->getRules($renderable);
 
@@ -211,7 +211,7 @@ class Renderer
      *
      * @return bool
      */
-    protected function isRequired(RenderableInterface $renderable)
+    protected function isRequired(RenderableInterface $renderable) : bool
     {
         return in_array('required', $this->getRules($renderable));
     }
@@ -221,7 +221,7 @@ class Renderer
      *
      * @return array
      */
-    protected function getRules(RenderableInterface $renderable)
+    protected function getRules(RenderableInterface $renderable) : array
     {
         $rules = $this->getValidator($renderable)->getRules();
 

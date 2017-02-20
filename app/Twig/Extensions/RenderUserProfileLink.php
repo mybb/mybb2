@@ -40,7 +40,7 @@ class RenderUserProfileLink extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return static::NAME;
     }
@@ -65,7 +65,7 @@ class RenderUserProfileLink extends \Twig_Extension
      *
      * @return string The rendered profile link.
      */
-    public function renderProfileLink(UserPresenter $user = null, $includeAvatar = false, $useStyledName = true)
+    public function renderProfileLink(UserPresenter $user = null, bool $includeAvatar = false, bool $useStyledName = true) : string
     {
         if (is_null($user)) {
             $user = $this->guard->user();

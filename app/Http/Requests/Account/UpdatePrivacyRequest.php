@@ -15,7 +15,7 @@ class UpdatePrivacyRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'showonline'             => 'boolean',
@@ -32,7 +32,7 @@ class UpdatePrivacyRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

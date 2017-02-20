@@ -10,6 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
+use Illuminate\Database\Eloquent\Collection;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
@@ -60,7 +61,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function all()
+    public function all() : Collection
     {
         return $this->conversationMessageModel->all();
     }
@@ -68,7 +69,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         return $this->conversationMessageModel->with(['messages'])->find($id);
     }
@@ -76,7 +77,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function getAllForConversation(Conversation $conversation)
+    public function getAllForConversation(Conversation $conversation) : Collection
     {
         return $this->conversationMessageModel->where('conversation_id', $conversation->id)
             ->orderBy('created_at', $this->settings->get('conversations.message_order', 'desc'))
@@ -86,7 +87,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true)
+    public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true) : ConversationMessage
     {
         $details['message_parsed'] = $this->parser->parse($details['message'], [
             'username' => $this->userRepository->find($details['author_id'])->name,

@@ -55,7 +55,7 @@ class ConversationPresenter extends BasePresenter
      *
      * @return bool
      */
-    public function isUnread(User $user = null)
+    public function isUnread(User $user = null) : bool
     {
         if ($user == null) {
             $user = $this->guard->user();

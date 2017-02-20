@@ -193,7 +193,7 @@ class AuthController extends Controller
      *
      * @return string
      */
-    public function redirectPath()
+    public function redirectPath() : string
     {
         $redirectUrl = $this->request->input('url');
 

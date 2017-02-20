@@ -17,7 +17,7 @@ class AckWithWarnRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'id'     => 'required|integer|exists:warnings,id',
@@ -27,7 +27,7 @@ class AckWithWarnRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

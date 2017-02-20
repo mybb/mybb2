@@ -13,27 +13,27 @@ interface RenderableInterface
     /**
      * @return string
      */
-    public function getType();
+    public function getType() : string;
 
     /**
      * @return array
      */
-    public function getOptions();
+    public function getOptions() : array;
 
     /**
      * @return string
      */
-    public function getDescription();
+    public function getDescription() : string;
 
     /**
      * @return string
      */
-    public function getElementName();
+    public function getElementName() : string;
 
     /**
      * @return string
      */
-    public function getLabel();
+    public function getLabel() : string;
 
     /**
      * @return mixed
@@ -43,5 +43,5 @@ interface RenderableInterface
     /**
      * @return array
      */
-    public function getValidationRules();
+    public function getValidationRules() : array;
 }

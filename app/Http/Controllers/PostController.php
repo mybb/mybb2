@@ -63,7 +63,7 @@ class PostController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function show($id)
+    public function show(int $id)
     {
         $post = $this->postsRepository->find($id);
 
@@ -124,7 +124,7 @@ class PostController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function getPostLikes($postId)
+    public function getPostLikes(int $postId)
     {
         $post = $this->postsRepository->find($postId);
 

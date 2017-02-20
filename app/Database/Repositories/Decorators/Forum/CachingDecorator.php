@@ -81,7 +81,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         return $this->decoratedRepository->find($id);
     }
@@ -93,7 +93,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlug($slug = '')
+    public function findBySlug(string $slug = '')
     {
         return $this->decoratedRepository->findBySlug($slug);
     }
@@ -105,7 +105,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function getIndexTree($checkPermissions = true)
+    public function getIndexTree(bool $checkPermissions = true)
     {
         if (($forums = $this->cache->get('forums.index_tree')) == null) {
             $forums = $this->decoratedRepository->getIndexTree(false);
@@ -126,7 +126,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function incrementPostCount($id = 0)
+    public function incrementPostCount(int $id = 0)
     {
         // TODO: It'd be better to update the cache instead of forgetting it
         $this->cache->forget('forums.index_tree');
@@ -142,7 +142,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function incrementTopicCount($id = 0)
+    public function incrementTopicCount(int $id = 0)
     {
         // TODO: It'd be better to update the cache instead of forgetting it
         $this->cache->forget('forums.index_tree');
@@ -174,7 +174,7 @@ class CachingDecorator implements ForumRepositoryInterface
      *
      * @return Collection
      */
-    private function filterUnviewableForums(Collection $forums)
+    private function filterUnviewableForums(Collection $forums) : Collection
     {
         return $forums->filter(function (Forum $forum) {
             return $this->permissionChecker->hasPermission(
@@ -220,7 +220,7 @@ class CachingDecorator implements ForumRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmpty()
+    public function isEmpty() : bool
     {
         return $this->decoratedRepository->isEmpty();
     }
@@ -228,7 +228,7 @@ class CachingDecorator implements ForumRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function delete(Forum $forum)
+    public function delete(Forum $forum) : bool
     {
         $this->cache->forget('forums.index_tree');
         $this->cache->forget('forums.all');

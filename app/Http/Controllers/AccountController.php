@@ -173,7 +173,7 @@ class AccountController extends AbstractController
      *
      * @return $this
      */
-    public function confirmEmail($token)
+    public function confirmEmail(string $token)
     {
         $email = ConfirmationManager::get('email', $token);
 
@@ -234,7 +234,7 @@ class AccountController extends AbstractController
      *
      * @return $this
      */
-    public function confirmPassword($token)
+    public function confirmPassword(string $token)
     {
         $password = ConfirmationManager::get('password', $token);
 

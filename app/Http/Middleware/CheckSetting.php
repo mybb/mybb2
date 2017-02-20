@@ -51,7 +51,7 @@ class CheckSetting
      *
      * @return Boolean True if setting is true
      */
-    protected function checkSetting($request)
+    protected function checkSetting($request) : bool
     {
         $action = $request->route()->getAction();
 

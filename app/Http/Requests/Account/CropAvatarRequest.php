@@ -15,7 +15,7 @@ class CropAvatarRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'w'  => 'required|integer',
@@ -30,7 +30,7 @@ class CropAvatarRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

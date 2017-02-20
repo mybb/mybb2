@@ -39,7 +39,7 @@ class UserProfileField extends Model
     /**
      * @param string $value
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
     }
@@ -47,7 +47,7 @@ class UserProfileField extends Model
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue() : string
     {
         return $this->value;
     }

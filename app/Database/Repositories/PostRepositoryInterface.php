@@ -22,7 +22,7 @@ interface PostRepositoryInterface
      *
      * @return mixed
      */
-    public function allForUser($userId = 0);
+    public function allForUser(int $userId = 0);
 
     /**
      * Get all posts for a thread.
@@ -40,7 +40,7 @@ interface PostRepositoryInterface
      *
      * @return mixed
      */
-    public function getNewest($num = 20);
+    public function getNewest(int $num = 20);
 
     /**
      * Find a single post by its ID.
@@ -49,7 +49,7 @@ interface PostRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0);
+    public function find(int $id = 0);
 
     /**
      * Get's the number of this post in the thread. Eg '1' for the first, '2' for the second etc
@@ -59,7 +59,7 @@ interface PostRepositoryInterface
      *
      * @return int
      */
-    public function getNumForPost(Post $post, $withTrashed = false);
+    public function getNumForPost(Post $post, bool $withTrashed = false) : int;
 
     /**
      * Add a post to a topic.
@@ -120,5 +120,5 @@ interface PostRepositoryInterface
      *
      * @return Post
      */
-    public function mergePosts(array $posts);
+    public function mergePosts(array $posts) : Post;
 }

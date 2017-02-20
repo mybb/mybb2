@@ -100,7 +100,7 @@ class ProfileFieldController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function editProfileField($id)
+    public function editProfileField(int $id)
     {
         $this->breadcrumbs->setCurrentRoute('admin.users.profile_fields.edit');
         $field = $this->profileFieldRepository->find($id);
@@ -117,7 +117,7 @@ class ProfileFieldController extends AdminController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveProfileField(SaveProfileFieldRequest $request, $id)
+    public function saveProfileField(SaveProfileFieldRequest $request, int $id)
     {
         $field = $this->profileFieldRepository->find($id);
         $field->update($request->only(['type', 'name', 'description', 'validation_rules']));
@@ -142,7 +142,7 @@ class ProfileFieldController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function editProfileFieldOptions($id)
+    public function editProfileFieldOptions(int $id)
     {
         $field = $this->profileFieldRepository->find($id);
         $options = $this->profilefieldOptionRepository->getForProfileField($field);

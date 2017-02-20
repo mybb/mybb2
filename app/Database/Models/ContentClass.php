@@ -67,7 +67,7 @@ class ContentClass extends AbstractCachingModel
      *
      * @return mixed|null Return null if no class is found, otherwise a represantion of the registered class
      */
-    public static function getClass($content)
+    public static function getClass(string $content)
     {
         $model = static::find($content);
 

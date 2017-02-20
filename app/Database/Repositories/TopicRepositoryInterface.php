@@ -39,7 +39,7 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc');
+    public function allForForum(Forum $forum, string $orderBy = 'posts.created_at', string $orderDir = 'desc');
 
     /**
      * Get all topics created by a user.
@@ -48,7 +48,7 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function allForUser($userId = 0);
+    public function allForUser(int $userId = 0);
 
     /**
      * Find a single topic by ID.
@@ -57,7 +57,7 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0);
+    public function find(int $id = 0);
 
     /**
      * Find a single topic by its slug.
@@ -66,7 +66,7 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlug($slug = '');
+    public function findBySlug(string $slug = '');
 
     /**
      * Find a single topic with a specific slug and ID.
@@ -76,14 +76,14 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlugAndId($slug = '', $id = 0);
+    public function findBySlugAndId(string $slug = '', int $id = 0);
 
     /**
      * @param int $num
      *
      * @return mixed
      */
-    public function getNewest($num = 20);
+    public function getNewest(int $num = 20);
 
     /**
      * Create a new topic
@@ -112,7 +112,7 @@ interface TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function setHasPoll(Topic $topic, $hasPoll);
+    public function setHasPoll(Topic $topic, bool $hasPoll);
 
     /**
      * Restore a topic
@@ -145,5 +145,5 @@ interface TopicRepositoryInterface
      * @param int $forumId Forum id
      * @return int
      */
-    public function countTopicsForForum(int $forumId);
+    public function countTopicsForForum(int $forumId) : int;
 }

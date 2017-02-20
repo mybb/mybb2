@@ -60,11 +60,11 @@ class PollRepository implements PollRepositoryInterface
     /**
      * Find a single poll by ID.
      *
-     * @param string $id The ID of the poll to find.
+     * @param int $id The ID of the poll to find.
      *
      * @return Poll
      */
-    public function find($id)
+    public function find(int $id) : Poll
     {
         return $this->pollModel->with(['author', 'topic'])->find($id);
     }
@@ -76,7 +76,7 @@ class PollRepository implements PollRepositoryInterface
      *
      * @return Poll
      */
-    public function create(array $details = [])
+    public function create(array $details = []) : Poll
     {
         $details = array_merge([
             'user_id' => $this->guard->user()->getAuthIdentifier(),
@@ -98,7 +98,7 @@ class PollRepository implements PollRepositoryInterface
      *
      * @return Poll
      */
-    public function getForTopic(Topic $topic)
+    public function getForTopic(Topic $topic) : Poll
     {
         return $this->pollModel->with(['author'])->where('topic_id', $topic->id)->first();
     }
@@ -110,7 +110,7 @@ class PollRepository implements PollRepositoryInterface
      *
      * @return bool
      */
-    public function remove(Poll $poll)
+    public function remove(Poll $poll) : bool
     {
         $this->dbManager->transaction(function () use (&$poll) {
             $this->pollVoteRepository->removeAllByPoll($poll);
@@ -131,7 +131,7 @@ class PollRepository implements PollRepositoryInterface
      *
      * @return Poll
      */
-    public function editPoll(Poll $poll, array $pollDetails)
+    public function editPoll(Poll $poll, array $pollDetails) : Poll
     {
         $poll->update($pollDetails);
 

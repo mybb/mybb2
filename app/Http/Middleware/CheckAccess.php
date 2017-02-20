@@ -59,7 +59,7 @@ class CheckAccess
      *
      * @return Boolean True if permission check passes, false otherwise
      */
-    protected function checkPermissions($request)
+    protected function checkPermissions($request) : bool
     {
         $action = $request->route()->getAction();
         // Check for additional permissions required

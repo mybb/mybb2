@@ -32,7 +32,7 @@ class WarnUserRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         $p_max = $this->settings->get('warnings.max_points');
         $p_min = $this->settings->get('warnings.allow_zero');
@@ -56,7 +56,7 @@ class WarnUserRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

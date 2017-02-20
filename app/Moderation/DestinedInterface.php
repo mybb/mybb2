@@ -13,10 +13,10 @@ interface DestinedInterface
     /**
      * @return string
      */
-    public function getDestinationType();
+    public function getDestinationType() : string;
 
     /**
      * @return string
      */
-    public function getDestinationKey();
+    public function getDestinationKey() : string;
 }

@@ -15,7 +15,7 @@ class SaveProfileFieldGroupRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }
@@ -23,7 +23,7 @@ class SaveProfileFieldGroupRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'name'        => 'required|string|max:255',

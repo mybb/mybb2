@@ -17,5 +17,5 @@ interface QuoteInterface
      *
      * @return string
      */
-    public function renderFromPost(Post $post);
+    public function renderFromPost(Post $post) : string;
 }

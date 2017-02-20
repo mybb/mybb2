@@ -31,7 +31,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'delete_topic';
     }
@@ -39,7 +39,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'moderation.moderate.delete';
     }
@@ -71,7 +71,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         return $content instanceof Topic;
     }
@@ -81,7 +81,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return $content instanceof Topic;
     }
@@ -91,7 +91,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return 'MyBB\Core\Presenters\Moderations\DeleteTopicPresenter';
     }
@@ -99,7 +99,7 @@ class DeleteTopic implements ModerationInterface, HasPresenter
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return 'canDeleteTopics';
     }

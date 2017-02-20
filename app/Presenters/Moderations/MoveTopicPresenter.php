@@ -37,7 +37,7 @@ class MoveTopicPresenter extends AbstractModerationPresenter implements Moderati
     /**
      * @return string
      */
-    public function icon()
+    public function icon() : string
     {
         return 'fa-arrow-right';
     }
@@ -67,7 +67,7 @@ class MoveTopicPresenter extends AbstractModerationPresenter implements Moderati
     /**
      * @return string
      */
-    protected function getDescriptionView()
+    protected function getDescriptionView() : string
     {
         return 'partials.moderation.logs.move';
     }

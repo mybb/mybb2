@@ -23,7 +23,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function all($sortBy = 'created_at', $sortDir = 'desc', $perPage = 10);
+    public function all(string $sortBy = 'created_at', string $sortDir = 'desc', int $perPage = 10);public function all($sortBy = 'created_at', $sortDir = 'desc', $perPage = 10);
     
     /**
      * Get all users who match a certain set of criteria.
@@ -49,7 +49,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function online($minutes = 15, $orderBy = 'last_visit', $orderDir = 'desc', $num = 20);
+    public function online(int $minutes = 15, string $orderBy = 'last_visit', string $orderDir = 'desc', int $num = 20);
 
     /**
      * Find a single user by ID.
@@ -58,7 +58,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0);
+    public function find(int $id = 0);
 
     /**
      * Find a single user by its username.
@@ -67,7 +67,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function findByUsername($username = '');
+    public function findByUsername(string $username = '');
 
     /**
      * Create a new user
@@ -76,7 +76,7 @@ interface UserRepositoryInterface
      *
      * @return User
      */
-    public function create(array $details = []);
+    public function create(array $details = []) : User;
 
     /**
      * Update user
@@ -86,7 +86,7 @@ interface UserRepositoryInterface
      *
      * @return User
      */
-    public function update(User $user, array $userDetails = []);
+    public function update(User $user, array $userDetails = []) : User;
     
     /**
      * Delete a user
@@ -95,5 +95,5 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function delete($id = 0);
+    public function delete(int $id = 0);
 }

@@ -260,7 +260,7 @@ class SearchController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function results($token, Request $request, Breadcrumbs $breadcrumbs)
+    public function results(string $token, Request $request, Breadcrumbs $breadcrumbs)
     {
         // TODO: sorts
         $search = $this->searchRepository->find($token);

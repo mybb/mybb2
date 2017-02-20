@@ -42,7 +42,7 @@ class CaptchaFactory implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function render($captcha = false)
+    public function render($captcha = false) : string
     {
         $captcha = $this->getCaptchaClass($captcha);
 
@@ -57,7 +57,7 @@ class CaptchaFactory implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function validate($captcha = false)
+    public function validate($captcha = false) : bool
     {
         $captcha = $this->getCaptchaClass($captcha);
 
@@ -72,7 +72,7 @@ class CaptchaFactory implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function supported()
+    public function supported() : bool
     {
         return true;
     }
@@ -84,7 +84,7 @@ class CaptchaFactory implements CaptchaInterface
      *
      * @throws CaptchaInvalidClassException
      */
-    private function getCaptchaClass($captchaName)
+    private function getCaptchaClass(string $captchaName)
     {
         if ($captchaName == false) {
             $captchaName = $this->settings->get('captcha.method', static::NONE);

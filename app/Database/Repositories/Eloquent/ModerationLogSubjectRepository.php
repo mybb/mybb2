@@ -24,7 +24,7 @@ class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryIn
     /**
      * @param ModerationLogSubject $moderationLogSubject
      */
-    public function __construct(ModerationLogSubject $moderationLogSubject)
+    public function __construct(ModerationLogSubject $moderationLogSubject) : ModerationLogSubject
     {
         $this->moderationLogSubject = $moderationLogSubject;
     }
@@ -34,7 +34,7 @@ class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryIn
      *
      * @return Model
      */
-    public function find($id)
+    public function find(int $id) : Model
     {
         return $this->moderationLogSubject->find($id);
     }
@@ -45,7 +45,7 @@ class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryIn
      *
      * @return ModerationLogSubject
      */
-    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content)
+    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content) : ModerationLogSubject
     {
         return $this->create([
             'moderation_log_id' => $moderationLog->id,
@@ -59,7 +59,7 @@ class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryIn
      *
      * @return ModerationLogSubject
      */
-    public function create(array $attributes)
+    public function create(array $attributes) : ModerationLogSubject
     {
         return $this->moderationLogSubject->create($attributes);
     }

@@ -31,7 +31,7 @@ class Form extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return 'MyBB_Twig_Extensions_Form';
     }
@@ -52,7 +52,7 @@ class Form extends \Twig_Extension
      *
      * @return bool
      */
-    public function isRenderable($content)
+    public function isRenderable($content) : bool
     {
         return $content instanceof RenderableInterface;
     }

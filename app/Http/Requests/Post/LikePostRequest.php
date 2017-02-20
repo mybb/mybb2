@@ -31,7 +31,7 @@ class LikePostRequest extends AbstractRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return $this->rules;
     }
@@ -43,7 +43,7 @@ class LikePostRequest extends AbstractRequest
      *
      * @return bool
      */
-    public function authorize(Guard $guard)
+    public function authorize(Guard $guard) : bool
     {
         if (!$guard->check()) {
             return false;

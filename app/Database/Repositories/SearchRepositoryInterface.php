@@ -20,7 +20,7 @@ interface SearchRepositoryInterface
      *
      * @return mixed
      */
-    public function find($token);
+    public function find(string $token);
 
     /**
      * Create a new searchlog

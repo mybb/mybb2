@@ -70,7 +70,7 @@ class PasswordController extends Controller
     /**
      * @return string
      */
-    protected function getEmailSubject()
+    protected function getEmailSubject() : string
     {
         return trans('passwords.email_subject');
     }

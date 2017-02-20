@@ -15,11 +15,11 @@ interface WarnableContentInterface
      * @param integer $contentId
      * @return array
      */
-    public function getWarningContent($contentId);
+    public function getWarningContent(int $contentId) : array;
 
     /**
-     * @param string $content
+     * @param string|null $content
      * @return string
      */
-    public function getWarningPreviewView($content);
+    public function getWarningPreviewView(string $content = null) : string;
 }

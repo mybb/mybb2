@@ -68,7 +68,7 @@ class ForumPresenter extends BasePresenter
     /**
      * @return bool
      */
-    public function hasLastPost()
+    public function hasLastPost() : bool
     {
         if ($this->wrappedObject->lastPost == null) {
             return false;

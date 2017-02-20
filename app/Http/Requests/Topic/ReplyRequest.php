@@ -37,7 +37,7 @@ class ReplyRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'content' => 'required',
@@ -47,7 +47,7 @@ class ReplyRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...
@@ -56,7 +56,7 @@ class ReplyRequest extends AbstractRequest
     /**
      * @return string
      */
-    protected function getRedirectUrl()
+    protected function getRedirectUrl() : string
     {
         return $this->redirector->getUrlGenerator()->route($this->redirectRoute, $this->route()->parameters());
     }

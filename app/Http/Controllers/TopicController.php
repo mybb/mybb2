@@ -102,7 +102,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function show(Request $request, $id, $slug)
+    public function show(Request $request, int $id, string $slug)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -136,7 +136,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function showPost(Store $settings, $id, $slug, $postId = 0)
+    public function showPost(Store $settings, int $id, string $slug, int $postId = 0)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -174,7 +174,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function last(Store $settings, $id, $slug)
+    public function last(Store $settings, int $id, string $slug)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -213,7 +213,7 @@ class TopicController extends AbstractController
      *
      * @throws \Exception
      */
-    public function reply($id, $slug, Request $request, Parser $parser, $postId = null)
+    public function reply(int $id, string $slug, Request $request, Parser $parser, int $postId = null)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -275,7 +275,7 @@ class TopicController extends AbstractController
      *
      * @return $this|bool|\Illuminate\Http\RedirectResponse
      */
-    public function postReply($id, $slug, ReplyRequest $replyRequest)
+    public function postReply(int $id, string $slug, ReplyRequest $replyRequest)
     {
         $this->failedValidationRedirect = route('topics.reply', ['id' => $id, 'slug' => $slug]);
 
@@ -315,7 +315,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function edit($id, $slug, $postId = 0)
+    public function edit(int $id, string $slug, int $postId = 0)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -338,7 +338,7 @@ class TopicController extends AbstractController
      *
      * @return \Exception|\Illuminate\Http\RedirectResponse
      */
-    public function postEdit($id, $slug, $postId, ReplyRequest $replyRequest)
+    public function postEdit(int $id, string $slug, int $postId, ReplyRequest $replyRequest)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -377,7 +377,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function create($forumId, Request $request, Parser $parser)
+    public function create(int $forumId, Request $request, Parser $parser)
     {
         // Forum permissions are checked in "find"
         $forum = $this->forumRepository->find($forumId);
@@ -418,7 +418,7 @@ class TopicController extends AbstractController
      *
      * @return $this|bool|\Illuminate\Http\RedirectResponse
      */
-    public function postCreate($forumId, CreateRequest $createRequest)
+    public function postCreate(int $forumId, CreateRequest $createRequest)
     {
         // Forum permissions are checked in "CreateRequest"
 
@@ -481,7 +481,7 @@ class TopicController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function delete($id, $slug, $postId, TopicDeleter $topicDeleter)
+    public function delete(int $id, string $slug, int $postId, TopicDeleter $topicDeleter)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);
@@ -510,7 +510,7 @@ class TopicController extends AbstractController
      *
      * @return \Exception|\Illuminate\Http\RedirectResponse
      */
-    public function restore($id, $slug, $postId = 0)
+    public function restore(int $id, string $slug, int $postId = 0)
     {
         // Forum permissions are checked in "find"
         $topic = $this->topicRepository->find($id);

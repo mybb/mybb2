@@ -15,17 +15,17 @@ interface ModerationPresenterInterface
     /**
      * @return string
      */
-    public function icon();
+    public function icon() : string;
 
     /**
      * @return string
      */
-    public function key();
+    public function key() : string;
 
     /**
      * @return string
      */
-    public function name();
+    public function name() : string;
 
     /**
      * @param array $contentCollection

@@ -30,7 +30,7 @@ abstract class AbstractBootstrapMiddleware
      *
      * @return array
      */
-    protected function getOptions(Router $router, Request $request)
+    protected function getOptions(Router $router, Request $request) : array
     {
         $collection = $router->getRoutes();
         $route = $collection->match($request->create($request->path(), $request->method()));

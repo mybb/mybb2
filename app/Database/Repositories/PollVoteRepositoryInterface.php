@@ -11,6 +11,7 @@
 namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Database\Models\Poll;
+use MyBB\Core\Database\Models\PollVote;
 use MyBB\Core\Database\Models\User;
 
 interface PollVoteRepositoryInterface
@@ -18,11 +19,11 @@ interface PollVoteRepositoryInterface
     /**
      * Find a single vote by ID.
      *
-     * @param string $id The ID of the vote to find.
+     * @param int $id The ID of the vote to find.
      *
      * @return \MyBB\Core\Database\Models\PollVote
      */
-    public function find($id);
+    public function find(int $id) : PollVote;
 
     /**
      * Create a new vote
@@ -31,7 +32,7 @@ interface PollVoteRepositoryInterface
      *
      * @return \MyBB\Core\Database\Models\PollVote
      */
-    public function create(array $details = []);
+    public function create(array $details = []) : PollVote;
 
     /**
      * @param User $user
@@ -39,7 +40,7 @@ interface PollVoteRepositoryInterface
      *
      * @return \MyBB\Core\Database\Models\PollVote
      */
-    public function findForUserPoll(User $user, Poll $poll);
+    public function findForUserPoll(User $user, Poll $poll) : PollVote;
 
     /**
      * @param Poll $poll

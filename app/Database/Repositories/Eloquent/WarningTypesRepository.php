@@ -31,7 +31,7 @@ class WarningTypesRepository implements WarningTypesRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $details = [])
+    public function create(array $details = []) : WarningType
     {
         $warningType = $this->warningTypeModel->create($details);
         return $warningType;
@@ -48,7 +48,7 @@ class WarningTypesRepository implements WarningTypesRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
+    public function find(int $id)
     {
         return $this->warningTypeModel->find($id);
     }
@@ -56,7 +56,7 @@ class WarningTypesRepository implements WarningTypesRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         return $this->warningTypeModel->newQuery()->getQuery()->delete($id);
     }

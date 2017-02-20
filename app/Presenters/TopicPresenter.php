@@ -47,7 +47,7 @@ class TopicPresenter extends BasePresenter
     /**
      * @return int
      */
-    public function replies()
+    public function replies() : int
     {
         return $this->wrappedObject->num_posts - 1;
     }

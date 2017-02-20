@@ -15,7 +15,7 @@ trait PermissionableTrait
     /**
      * @return string
      */
-    public static function getViewablePermission()
+    public static function getViewablePermission() : string
     {
         return 'canView' . ucfirst(class_basename(__CLASS__));
     }
@@ -23,7 +23,7 @@ trait PermissionableTrait
     /**
      * @return int
      */
-    public function getContentId()
+    public function getContentId() : int
     {
         return $this->getKey();
     }
