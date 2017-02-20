@@ -21,7 +21,7 @@ interface ConversationMessageRepositoryInterface
      *
      * @return Collection
      */
-    public function all();
+    public function all() : Collection;
 
     /**
      * Get a single message by id
@@ -30,14 +30,14 @@ interface ConversationMessageRepositoryInterface
      *
      * @return ConversationMessage|null
      */
-    public function find($id = 0);
+    public function find(int $id = 0);
 
     /**
      * @param Conversation $conversation
      *
      * @return Collection
      */
-    public function getAllForConversation(Conversation $conversation);
+    public function getAllForConversation(Conversation $conversation) : Collection;
 
     /**
      * @param Conversation $conversation
@@ -47,7 +47,7 @@ interface ConversationMessageRepositoryInterface
      *
      * @return ConversationMessage
      */
-    public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true);
+    public function addMessageToConversation(Conversation $conversation, array $details, $checkParticipants = true) : ConversationMessage;
 
     /**
      * @param Conversation $conversation

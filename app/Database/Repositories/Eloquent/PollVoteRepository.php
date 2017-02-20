@@ -42,11 +42,11 @@ class PollVoteRepository implements PollVoteRepositoryInterface
     /**
      * Find a single poll vote by ID.
      *
-     * @param string $id The ID of the vote to find.
+     * @param int $id The ID of the vote to find.
      *
      * @return PollVote
      */
-    public function find($id)
+    public function find(int $id) : PollVote
     {
         return $this->voteModel->with(['author', 'poll'])->find($id);
     }
@@ -58,7 +58,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
      *
      * @return PollVote
      */
-    public function create(array $details = [])
+    public function create(array $details = []) : PollVote
     {
         $details = array_merge([
             'user_id' => $this->guard->user()->getAuthIdentifier(),
@@ -79,7 +79,7 @@ class PollVoteRepository implements PollVoteRepositoryInterface
      *
      * @return PollVote
      */
-    public function findForUserPoll(User $user, Poll $poll)
+    public function findForUserPoll(User $user, Poll $poll) : PollVote
     {
         return $this->voteModel->where('user_id', $user->id)->where('poll_id', $poll->id)->first();
     }

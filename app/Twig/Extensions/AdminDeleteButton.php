@@ -40,7 +40,7 @@ class AdminDeleteButton extends Twig_Extension
      * @param $id
      * @return string
      */
-    public function deleteButton($for, $id)
+    public function deleteButton($for, $id) : string
     {
         return view('admin.partials.delete_button', compact('for', 'id'))->render();
     }

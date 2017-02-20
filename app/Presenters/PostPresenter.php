@@ -78,7 +78,7 @@ class PostPresenter extends BasePresenter
      *
      * @return bool Whether the post has been liked by the current user.
      */
-    public function hasLikedPost()
+    public function hasLikedPost() : bool
     {
         if ($this->guard->check()) {
             $user = $this->guard->user();
@@ -115,7 +115,7 @@ class PostPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function created_at()
+    public function created_at() : string
     {
         return $this->wrappedObject->created_at;
     }
@@ -123,7 +123,7 @@ class PostPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function updated_at()
+    public function updated_at() : string
     {
         return $this->wrappedObject->updated_at;
     }

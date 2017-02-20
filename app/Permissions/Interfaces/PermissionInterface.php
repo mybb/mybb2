@@ -27,10 +27,10 @@ interface PermissionInterface
     /**
      * @return string
      */
-    public static function getViewablePermission();
+    public static function getViewablePermission() : string;
 
     /**
      * @return int
      */
-    public function getContentId();
+    public function getContentId() : int;
 }

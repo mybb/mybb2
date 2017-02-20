@@ -32,7 +32,7 @@ class RepositoryFactory
      *
      * @return RepositoryInterface
      */
-    public function build($key)
+    public function build(string $key)
     {
         $class = $this->registry->get($key);
         if ($class) {

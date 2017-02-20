@@ -20,7 +20,7 @@ trait InheritPermissionableTrait
      *
      * @return array
      */
-    public static function getPositiveParentOverrides()
+    public static function getPositiveParentOverrides() : array
     {
         return [];
     }
@@ -31,7 +31,7 @@ trait InheritPermissionableTrait
      *
      * @return array
      */
-    public static function getNegativeParentOverrides()
+    public static function getNegativeParentOverrides() : array
     {
         return [
             static::getViewablePermission(),

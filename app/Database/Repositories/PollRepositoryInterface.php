@@ -18,11 +18,11 @@ interface PollRepositoryInterface
     /**
      * Find a single poll by ID.
      *
-     * @param string $id The ID of the poll to find.
+     * @param int $id The ID of the poll to find.
      *
      * @return \MyBB\Core\Database\Models\Poll
      */
-    public function find($id);
+    public function find(int $id) : Poll;
 
     /**
      * Create a new poll
@@ -31,7 +31,7 @@ interface PollRepositoryInterface
      *
      * @return \MyBB\Core\Database\Models\Poll
      */
-    public function create(array $details = []);
+    public function create(array $details = []) : Poll;
 
     /**
      * Find poll of a topic
@@ -40,7 +40,7 @@ interface PollRepositoryInterface
      *
      * @return \MyBB\Core\Database\Models\Poll
      */
-    public function getForTopic(Topic $topic);
+    public function getForTopic(Topic $topic) : Poll;
 
     /**
      * Remove the poll
@@ -49,7 +49,7 @@ interface PollRepositoryInterface
      *
      * @return bool
      */
-    public function remove(Poll $poll);
+    public function remove(Poll $poll) : bool;
 
     /**
      * Edit a poll
@@ -59,5 +59,5 @@ interface PollRepositoryInterface
      *
      * @return Poll
      */
-    public function editPoll(Poll $poll, array $pollDetails);
+    public function editPoll(Poll $poll, array $pollDetails) : Poll;
 }

@@ -68,7 +68,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return ForumPresenter::class;
     }
@@ -76,7 +76,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
     /**
      * @return Forum
      */
-    public function getParent()
+    public function getParent() : Forum
     {
         if ($this->parent_id === null) {
             return null;
@@ -92,7 +92,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
      *
      * @return \Illuminate\Support\Collection|static|null
      */
-    public static function find($id, $columns = ['*'])
+    public static function find($id, array $columns = ['*'])
     {
         return static::query()->find($id, $columns);
     }
@@ -201,7 +201,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
     /**
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -209,7 +209,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'forum';
     }
@@ -217,7 +217,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl() : string
     {
         return route('forums.show', ['id' => $this->id, 'slug' => $this->slug]);
     }
@@ -225,7 +225,7 @@ class Forum extends Model implements HasPresenter, InheritPermissionInterface, C
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }

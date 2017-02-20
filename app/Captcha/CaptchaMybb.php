@@ -36,7 +36,7 @@ class CaptchaMybb implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render() : string
     {
         $imagehash = md5(str_random(12));
 
@@ -52,7 +52,7 @@ class CaptchaMybb implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function validate()
+    public function validate() : bool
     {
         $check = $this->database->table('captcha')
             ->where('imagehash', '=', $this->request->get('imagehash'))
@@ -72,7 +72,7 @@ class CaptchaMybb implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function supported()
+    public function supported() : bool
     {
         // We need to be able to create images
         return function_exists('imagecreatefrompng');

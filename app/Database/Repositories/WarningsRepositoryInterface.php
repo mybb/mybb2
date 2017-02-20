@@ -19,7 +19,7 @@ interface WarningsRepositoryInterface
      * @param array $details
      * @return Warning
      */
-    public function create(array $details = []);
+    public function create(array $details = []) : Warning;
 
     /**
      * Get all warnings for user.
@@ -27,7 +27,7 @@ interface WarningsRepositoryInterface
      * @param int $userId
      * @return Warning
      */
-    public function findForUser($userId);
+    public function findForUser(int $userId) : Warning;
 
     /**
      * Find warning by id
@@ -35,7 +35,7 @@ interface WarningsRepositoryInterface
      * @param int $warnId
      * @return Warning
      */
-    public function find($warnId);
+    public function find(int $warnId) : Warning;
 
     /**
      * Revoke warning
@@ -44,7 +44,7 @@ interface WarningsRepositoryInterface
      * @param string $reason
      * @return Warning
      */
-    public function revoke(Warning $warning, $reason);
+    public function revoke(Warning $warning, string $reason) : Warning;
 
     /**
      * Update given warning
@@ -53,15 +53,15 @@ interface WarningsRepositoryInterface
      * @param array $details
      * @return mixed
      */
-    public function update(Warning $warning, $details = []);
+    public function update(Warning $warning, array $details = []);
 
     /**
      * Get last warning with acknowledge flag for given user
      *
-     * @param $userId
+     * @param int $userId
      * @return Warning
      */
-    public function lastAckWarn($userId);
+    public function lastAckWarn(int $userId) : Warning;
 
     /**
      * Warnings with acknowledge flag count for given user
@@ -69,5 +69,5 @@ interface WarningsRepositoryInterface
      * @param $userId
      * @return integer
      */
-    public function ackWarnCount($userId);
+    public function ackWarnCount(int $userId) : int;
 }

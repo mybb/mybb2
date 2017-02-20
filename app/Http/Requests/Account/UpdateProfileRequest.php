@@ -56,7 +56,7 @@ class UpdateProfileRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }
@@ -64,7 +64,7 @@ class UpdateProfileRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         $rules = $this->traitRules();
 
@@ -100,7 +100,7 @@ class UpdateProfileRequest extends AbstractRequest
     /**
      * @return array
      */
-    protected function getAllProfileFields()
+    protected function getAllProfileFields() : array
     {
         if (!$this->allProfileFields) {
             foreach ($this->profileFieldGroupRepository->getAll() as $profileFieldGroup) {

@@ -20,7 +20,7 @@ class UpdateUsernameRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'name'     => 'required|max:255|unique:users',
@@ -31,7 +31,7 @@ class UpdateUsernameRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

@@ -42,7 +42,7 @@ trait LikeableTrait
      *
      * @return int
      */
-    public function getNumLikes()
+    public function getNumLikes() : int
     {
         return (int)$this->{$this->numLikesColumn};
     }

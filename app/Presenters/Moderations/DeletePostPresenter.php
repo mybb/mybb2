@@ -23,7 +23,7 @@ class DeletePostPresenter extends AbstractModerationPresenter implements Moderat
     /**
      * @return string
      */
-    public function icon()
+    public function icon() : string
     {
         return 'fa-trash-o';
     }
@@ -31,7 +31,7 @@ class DeletePostPresenter extends AbstractModerationPresenter implements Moderat
     /**
      * @return string
      */
-    protected function getDescriptionView()
+    protected function getDescriptionView() : string
     {
         return 'partials.moderation.logs.delete';
     }

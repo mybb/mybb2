@@ -31,7 +31,7 @@ class Markdown implements QuoteInterface
      *
      * @return string
      */
-    public function renderFromPost(Post $post)
+    public function renderFromPost(Post $post) : string
     {
         $post = $this->app->make('MyBB\\Core\\Presenters\\PostPresenter', [$post]);
         $message = $post->content;

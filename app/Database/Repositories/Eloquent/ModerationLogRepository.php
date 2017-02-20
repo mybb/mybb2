@@ -31,7 +31,7 @@ class ModerationLogRepository implements ModerationLogRepositoryInterface
      *
      * @return ModerationLog
      */
-    public function find($id)
+    public function find(int $id) : ModerationLog
     {
         return $this->moderationLog->find($id);
     }
@@ -41,7 +41,7 @@ class ModerationLogRepository implements ModerationLogRepositoryInterface
      *
      * @return ModerationLog
      */
-    public function create(array $attributes)
+    public function create(array $attributes) : ModerationLog
     {
         return $this->moderationLog->create($attributes);
     }

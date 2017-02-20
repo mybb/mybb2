@@ -73,7 +73,7 @@ class TopicApiController extends AbstractApiController
      *
      * @return Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         //
     }
@@ -85,7 +85,7 @@ class TopicApiController extends AbstractApiController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         //
     }
@@ -97,7 +97,7 @@ class TopicApiController extends AbstractApiController
      *
      * @return Response
      */
-    public function update($id)
+    public function update(int $id)
     {
         //
     }
@@ -109,7 +109,7 @@ class TopicApiController extends AbstractApiController
      *
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         //
     }

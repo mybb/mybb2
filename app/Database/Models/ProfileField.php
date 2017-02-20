@@ -45,7 +45,7 @@ class ProfileField extends Model implements HasPresenter
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return ProfileFieldPresenter::class;
     }

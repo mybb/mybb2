@@ -13,15 +13,15 @@ interface CaptchaInterface
     /**
      * @return string
      */
-    public function render();
+    public function render() : string;
 
     /**
      * @return bool
      */
-    public function validate();
+    public function validate() : bool;
 
     /**
      * @return bool
      */
-    public function supported();
+    public function supported() : bool;
 }

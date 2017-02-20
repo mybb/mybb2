@@ -78,7 +78,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return PostPresenter::class;
     }
@@ -134,7 +134,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
     /**
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -142,7 +142,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'post';
     }
@@ -150,7 +150,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl() : string
     {
         return route('posts.show', ['id' => $this->id]);
     }
@@ -158,7 +158,7 @@ class Post extends Model implements HasPresenter, ApprovableInterface, ContentIn
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return null;
     }

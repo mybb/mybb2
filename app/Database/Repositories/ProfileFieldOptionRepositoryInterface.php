@@ -18,14 +18,14 @@ interface ProfileFieldOptionRepositoryInterface
      *
      * @return ProfileFieldOption
      */
-    public function find($id);
+    public function find(int $id) : ProfileFieldOption;
 
     /**
      * @param array $data
      *
      * @return ProfileFieldOption
      */
-    public function create(array $data);
+    public function create(array $data) : ProfileFieldOption;
 
     /**
      * @param ProfileField $profileField

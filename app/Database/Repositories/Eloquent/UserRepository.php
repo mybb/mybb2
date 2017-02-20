@@ -58,7 +58,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function all($sortBy = 'created_at', $sortDir = 'asc', $perPage = 10)
+    public function all(string $sortBy = 'created_at', string $sortDir = 'asc', int $perPage = 10)
     {
         return $this->userModel->orderBy($sortBy, $sortDir)->paginate($perPage);
     }
@@ -77,7 +77,7 @@ class UserRepository implements UserRepositoryInterface
      */
     public function search(string $username = "", string $email = "", int $roleId = 0, string $sortBy = 'created_at', string $sortDir = 'asc', int $perPage = 10)
     {
-        if ($role_id == 0) {
+        if ($roleId == 0) {
             return $this->userModel->where('name', 'like', "%{$username}%")->where('email', 'like', "%{$email}%")->orderBy($sortBy, $sortDir)->paginate($perPage);
         }
         
@@ -94,7 +94,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function online($minutes = 15, $orderBy = 'last_visit', $orderDir = 'desc', $num = 20)
+    public function online(int $minutes = 15, string $orderBy = 'last_visit', string $orderDir = 'desc', int $num = 20)
     {
         // If the user visited the logout page as last he's not online anymore
         /** @var Builder $baseQuery */
@@ -141,7 +141,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         return $this->userModel->find($id);
     }
@@ -153,7 +153,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function findByUsername($username = '')
+    public function findByUsername(string $username = '')
     {
         return $this->userModel->whereNname($username)->first();
     }
@@ -165,7 +165,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return User
      */
-    public function create(array $details = [])
+    public function create(array $details = []) : User
     {
         $user = $this->userModel->create($details);
         $user->setCreatedAt($user->freshTimestamp())
@@ -181,7 +181,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return User
      */
-    public function update(User $user, array $userDetails = [])
+    public function update(User $user, array $userDetails = []) : User
     {
         $user->update($userDetails);
 
@@ -195,7 +195,7 @@ class UserRepository implements UserRepositoryInterface
      *
      * @return mixed
      */
-    public function delete($id = 0)
+    public function delete(int $id = 0)
     {
         $user = $this->userModel->find($id);
         //$user->activity()->detach();

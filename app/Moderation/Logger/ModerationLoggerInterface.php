@@ -31,8 +31,8 @@ interface ModerationLoggerInterface
         User $user,
         ModerationInterface $moderation,
         Collection $contentCollection,
-        $ipAddress,
-        $isReverse = false,
+        string $ipAddress,
+        bool $isReverse = false,
         ContentInterface $source = null,
         ContentInterface $destination = null
     );

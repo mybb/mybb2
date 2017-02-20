@@ -22,7 +22,7 @@ class UserNotFoundException extends NotFoundHttpException
      * @param \Exception $previous
      * @param int $code
      */
-    public function __construct($message = null, \Exception $previous = null, $code = 0)
+    public function __construct($message = null, \Exception $previous = null, int $code = 0)
     {
         if ($message === null) {
             $message = trans($this->message);

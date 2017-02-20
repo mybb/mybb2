@@ -36,7 +36,7 @@ abstract class AbstractApiController extends BaseController
     /**
      * @return int
      */
-    public function getStatusCode()
+    public function getStatusCode() : int
     {
         return $this->statusCode;
     }
@@ -46,7 +46,7 @@ abstract class AbstractApiController extends BaseController
      *
      * @return $this
      */
-    public function setStatusCode($statusCode)
+    public function setStatusCode(int $statusCode)
     {
         $this->statusCode = $statusCode;
 

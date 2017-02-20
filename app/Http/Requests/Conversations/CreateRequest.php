@@ -30,7 +30,7 @@ class CreateRequest extends ParticipantRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'participants' => 'required|usernameArray',
@@ -42,7 +42,7 @@ class CreateRequest extends ParticipantRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...

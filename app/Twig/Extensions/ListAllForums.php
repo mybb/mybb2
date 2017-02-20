@@ -42,7 +42,7 @@ class ListAllForums extends Twig_Extension
      * @param int $level
      * @return string
      */
-    public function renderForums($forums, $template = 'admin.forums.forum-item', $options = null, $level = 1)
+    public function renderForums($forums, string $template = 'admin.forums.forum-item', $options = null, int $level = 1) : string
     {
         $result = '';
         foreach ($forums as $forum) {

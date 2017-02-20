@@ -39,7 +39,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides() : array
     {
         return [
             Registry::class,

@@ -128,7 +128,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function allForUser($userId = 0)
+    public function allForUser(int $userId = 0)
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -142,7 +142,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -156,7 +156,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlug($slug = '')
+    public function findBySlug(string $slug = '')
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -171,7 +171,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function getNewest($num = 20)
+    public function getNewest(int $num = 20)
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -191,7 +191,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function allForForum(Forum $forum, $orderBy = 'posts.created_at', $orderDir = 'desc')
+    public function allForForum(Forum $forum, string $orderBy = 'posts.created_at', string $orderDir = 'desc')
     {
         // Build the correct order_by column - nice versions may be submitted
         switch ($orderBy) {
@@ -290,7 +290,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return string The slugged title.
      */
-    private function createSlugForTitle($title = '')
+    private function createSlugForTitle(string $title = '') : string
     {
         $title = (string)$title;
         $sluggedTitle = $this->stringUtils->slug($title, '-');
@@ -322,7 +322,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function setHasPoll(Topic $topic, $hasPoll)
+    public function setHasPoll(Topic $topic, bool $hasPoll)
     {
         return $this->editTopic($topic, [
             'has_poll' => $hasPoll,
@@ -364,7 +364,7 @@ class TopicRepository implements TopicRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlugAndId($slug = '', $id = 0)
+    public function findBySlugAndId(string $slug = '', int $id = 0)
     {
         return $this->topicModel->withTrashed()->with(['author'])->where('slug', '=', $slug)->where('id', '=', $id)
             ->first();
@@ -417,7 +417,7 @@ class TopicRepository implements TopicRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function countTopicsForForum(int $forumId)
+    public function countTopicsForForum(int $forumId) : int
     {
         return $this->topicModel->where('forum_id', $forumId)->count();
     }

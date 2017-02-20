@@ -41,7 +41,7 @@ abstract class AbstractModerationPresenter extends BasePresenter implements Mode
     /**
      * @return string
      */
-    public function key()
+    public function key() : string
     {
         return $this->getWrappedObject()->getKey();
     }
@@ -49,7 +49,7 @@ abstract class AbstractModerationPresenter extends BasePresenter implements Mode
     /**
      * @return string
      */
-    public function name()
+    public function name() : string
     {
         return $this->getWrappedObject()->getName();
     }
@@ -57,7 +57,7 @@ abstract class AbstractModerationPresenter extends BasePresenter implements Mode
     /**
      * @return string
      */
-    abstract protected function getDescriptionView();
+    abstract protected function getDescriptionView() : string;
 
     /**
      * @param array $contentCollection
@@ -70,7 +70,7 @@ abstract class AbstractModerationPresenter extends BasePresenter implements Mode
         array $contentCollection,
         ContentInterface $source = null,
         ContentInterface $destination = null
-    ) {
+    ) : string {
         $content = reset($contentCollection);
         $count = count($contentCollection);
 

@@ -67,7 +67,7 @@ class ForumRepository implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -96,7 +96,7 @@ class ForumRepository implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function findBySlug($slug = '')
+    public function findBySlug(string $slug = '')
     {
         $unviewable = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -126,7 +126,7 @@ class ForumRepository implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function getIndexTree($checkPermissions = true)
+    public function getIndexTree(bool $checkPermissions = true)
     {
         // TODO: The caching decorator would also cache the relations here
         $baseQuery = $this->forumModel;
@@ -159,7 +159,7 @@ class ForumRepository implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function incrementPostCount($id = 0)
+    public function incrementPostCount(int $id = 0)
     {
         $forum = $this->forumModel->find($id);
 
@@ -177,7 +177,7 @@ class ForumRepository implements ForumRepositoryInterface
      *
      * @return mixed
      */
-    public function incrementTopicCount($id = 0)
+    public function incrementTopicCount(int $id = 0)
     {
         $forum = $this->forumModel->find($id);
 
@@ -253,7 +253,7 @@ class ForumRepository implements ForumRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmpty()
+    public function isEmpty() : bool
     {
         $result = $this->forumModel->select('id')->first();
         return !(bool)$result;
@@ -270,9 +270,10 @@ class ForumRepository implements ForumRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function delete(Forum $forum)
+    public function delete(Forum $forum) : bool
     {
         //TODO implement function
+		return false;
     }
 
     /**

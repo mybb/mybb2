@@ -16,7 +16,7 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
     /**
      * @return string
      */
-    public function reverseName()
+    public function reverseName() : string
     {
         return $this->getWrappedObject()->getReverseName();
     }
@@ -32,7 +32,7 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
         array $contentCollection,
         ContentInterface $source = null,
         ContentInterface $destination = null
-    ) {
+    ) : string {
         $content = reset($contentCollection);
         $count = count($contentCollection);
 
@@ -58,5 +58,5 @@ abstract class AbstractReversibleModerationPresenter extends AbstractModerationP
     /**
      * @return string
      */
-    abstract protected function getReverseDescriptionView();
+    abstract protected function getReverseDescriptionView() : string;
 }

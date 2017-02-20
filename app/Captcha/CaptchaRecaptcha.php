@@ -69,7 +69,7 @@ class CaptchaRecaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render() : string
     {
         return $this->recaptcha->render();
     }
@@ -77,7 +77,7 @@ class CaptchaRecaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function validate()
+    public function validate() : bool
     {
         $challenge = $this->request->get('recaptcha_challenge_field');
         $value = $this->request->get('recaptcha_response_field');
@@ -95,7 +95,7 @@ class CaptchaRecaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function supported()
+    public function supported() : bool
     {
         // ReCaptcha is supported when we have a public and private key
 

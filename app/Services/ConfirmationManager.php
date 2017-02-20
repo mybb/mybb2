@@ -25,7 +25,7 @@ class ConfirmationManager
      * @param array $langData Array of additional language data
      * @param bool $delete Whether or not old tokens for this type/user combination should be deleted
      */
-    public static function send($type, User $user, $route, $newData = null, $langData = [], $delete = true)
+    public static function send(string $type, User $user, string $route, $newData = null, array $langData = [], bool $delete = true)
     {
         // Generate the token - always needed
         $token = str_random();
@@ -76,7 +76,7 @@ class ConfirmationManager
      *
      * @return mixed returns the new data passed to send on success or false on failure
      */
-    public static function get($type, $token, $delete = true)
+    public static function get(string $type, string $token, bool $delete = true)
     {
         $baseQuery = DB::table('confirmations')->where('type', $type)->where('token', $token);
 
@@ -100,7 +100,7 @@ class ConfirmationManager
      *
      * @return bool
      */
-    public static function has($type, User $user)
+    public static function has(string $type, User $user) : bool
     {
         $count = DB::table('confirmations')->where('type', $type)->where('user_id', $user->id)->count();
 

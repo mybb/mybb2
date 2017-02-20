@@ -31,7 +31,7 @@ class CreateRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         $rules = [
             'question'    => 'required',
@@ -51,7 +51,7 @@ class CreateRequest extends AbstractRequest
      *
      * @return array
      */
-    public function options()
+    public function options() : array
     {
         $input = $this->input('option');
         $options = [];
@@ -70,7 +70,7 @@ class CreateRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...
@@ -102,7 +102,7 @@ class CreateRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages() : array
     {
         return [
             'option.option' => trans('errors.poll_invalid_options'),

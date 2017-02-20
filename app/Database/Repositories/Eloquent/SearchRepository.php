@@ -44,7 +44,7 @@ class SearchRepository implements SearchRepositoryInterface
      *
      * @return mixed
      */
-    public function find($token)
+    public function find(string $token)
     {
         $userId = $this->guard->user() != null ? $this->guard->user()->getAuthIdentifier() : null;
         if ($userId <= 0) {
