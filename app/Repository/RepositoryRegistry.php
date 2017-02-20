@@ -29,11 +29,11 @@ class RepositoryRegistry implements RegistryInterface
     }
 
     /**
-     * @param string $key
+     * @param string|null $key
      *
      * @return string
      */
-    public function get(string $key) : string
+    public function get(string $key = null)
     {
         return $this->repositories[$key];
     }
