@@ -1,0 +1,26 @@
+{% extends "layouts.admin" %}
+{% block title %} {{ trans(packageName ~ '::settings.' ~ group ~ '.__group.title') }} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans(packageName ~ '::settings.' ~ group ~ '.__group.title') }} </h1>
+    </div>
+    <div class="admin-body__content">
+        <form action="{{ route('admin.settings.edit', {'package': package, 'group': group}) }}" method="post">
+            {{ csrf_field() }}
+            <section class="form">
+                <div class="form__section">
+                {% for setting in settings %}
+                    <div class="form__row">
+                        <label for="{{ setting.name }}"> {{ trans(packageName ~ '::settings.' ~ setting.name ~ '.title') }} </label>
+                        <p class="form__row__description">{{ trans(packageName ~ '::settings.' ~ setting.name ~ '.desc')|nl2br }}</p>
+                        {% include "admin.settings.types." ~ setting.setting_type with [setting] %}
+                    </div>
+                {% endfor %}
+                </div>
+                <div class="form__submit">
+                    <button type="submit" class="button">{{ trans('admin::general.save') }}</button>
+                </div>
+            </section>
+        </form>
+    </div>
+{% endblock %}

@@ -209,6 +209,20 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'Admin\Forums\ForumsController@update',
             ]);
         });
+        Route::group(['prefix' => 'settings'], function () {
+            Route::get('/', [
+                'as'   => 'admin.settings',
+                'uses' => 'Admin\Settings\SettingsController@listGroups',
+            ]);
+            Route::get('edit/{group}/{package?}', [
+                'as'   => 'admin.settings.edit',
+                'uses' => 'Admin\Settings\SettingsController@editGroupOfSettings',
+            ]);
+            Route::post('edit/{group}/{package?}', [
+                'as'   => 'admin.settings.edit',
+                'uses' => 'Admin\Settings\SettingsController@saveGroupOfSettings',
+            ]);
+        });
     });
 
     Route::get('captcha/{imagehash}', ['as' => 'captcha', 'uses' => 'CaptchaController@captcha', 'noOnline' => true]);

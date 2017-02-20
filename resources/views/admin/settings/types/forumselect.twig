@@ -1,0 +1,17 @@
+<input type="radio" value="0" name="setting[{{ setting.name }}]" id="{{ setting.name }}_all" {{ setting.value == 0 ? 'checked' }}>
+<label for="{{ setting.name }}_all">{{ trans('admin::settings.forum.all') }}</label>
+
+<input type="radio" value="1" name="setting[{{ setting.name }}]" id="{{ setting.name }}_select" {{ setting.value and setting.value != 0 ? 'checked' }}>
+<label for="{{ setting.name }}_select">{{ trans('admin::settings.forum.select') }}</label>
+
+{# todo need some js for showing/hiding select dependends on selected radio #}
+<select name="setting[{{ setting.name }}_select][]" id="{{ setting.name }}" multiple>
+    {% for forum in forums %}
+        <option value="{{ forum.id }}" {{ forum.id in setting.value|split('|') ? 'selected' }}>
+            {{ forum.title }}
+        </option>
+    {% endfor %}
+</select>
+
+<input type="radio" value="-1" name="setting[{{ setting.name }}]" id="{{ setting.name }}_none" {{ setting.value == null ? 'checked' }}>
+<label for="{{ setting.name }}_none">{{ trans('admin::settings.forum.none') }}</label>

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Settings\Repositories\SettingRepositoryInterface;
 use MyBB\Core\Http\Requests\Account\CropAvatarRequest;
 use MyBB\Core\Http\Requests\Account\UpdateAvatarRequest;
 use MyBB\Core\Http\Requests\Account\UpdateEmailRequest;
@@ -34,13 +35,20 @@ class AccountController extends AbstractController
     private $guard;
 
     /**
+     * @var SettingRepositoryInterface
+     */
+    private $settingRepository;
+
+    /**
      * Create a new controller instance.
      *
      * @param Guard $guard
+     * @param SettingRepositoryInterface $settingRepository
      */
-    public function __construct(Guard $guard)
+    public function __construct(Guard $guard, SettingRepositoryInterface $settingRepository)
     {
         $this->guard = $guard;
+        $this->settingRepository = $settingRepository;
     }
 
     /**
@@ -171,7 +179,7 @@ class AccountController extends AbstractController
     /**
      * @param string $token
      *
-     * @return $this
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function confirmEmail($token)
     {
@@ -464,12 +472,11 @@ class AccountController extends AbstractController
 
     /**
      * @param UpdatePreferencesRequest $request
-     * @param Store $settings
      * @param Translator $trans
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPreferences(UpdatePreferencesRequest $request, Store $settings, Translator $trans)
+    public function postPreferences(UpdatePreferencesRequest $request, Translator $trans)
     {
         $input = $request->except(['_token']);
 
@@ -521,7 +528,8 @@ class AccountController extends AbstractController
             $modifiedSettings["user.{$key}"] = $value;
         }
 
-        $settings->set($modifiedSettings, null, true);
+        $user = $this->guard->user();
+        $this->settingRepository->updateSettings($modifiedSettings, $user->getAuthIdentifier());
 
         return redirect()->route('account.preferences')->withSuccess(trans('account.saved_preferences'));
     }
@@ -536,11 +544,10 @@ class AccountController extends AbstractController
 
     /**
      * @param UpdatePrivacyRequest $request
-     * @param Store $settings
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postPrivacy(UpdatePrivacyRequest $request, Store $settings)
+    public function postPrivacy(UpdatePrivacyRequest $request)
     {
         $input = $request->except(['_token']);
 
@@ -557,7 +564,8 @@ class AccountController extends AbstractController
             $modifiedSettings["user.{$key}"] = $value;
         }
 
-        $settings->set($modifiedSettings, null, true);
+        $user = $this->guard->user();
+        $this->settingRepository->updateSettings($modifiedSettings, $user->getAuthIdentifier());
 
         return redirect()->route('account.privacy')->withSuccess(trans('account.saved_privacy'));
     }
