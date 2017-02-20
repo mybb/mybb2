@@ -27,7 +27,7 @@ abstract class AbstractController extends BaseController
     /**
      * @return string
      */
-    protected function getRedirectUrl()
+    protected function getRedirectUrl() : string
     {
         if (!empty($this->failedValidationRedirect)) {
             return $this->failedValidationRedirect;
@@ -41,7 +41,7 @@ abstract class AbstractController extends BaseController
      *
      * @return $this|bool
      */
-    protected function checkCaptcha($redirect = true)
+    protected function checkCaptcha(bool $redirect = true)
     {
         $valid = app()->make('MyBB\Core\Captcha\CaptchaFactory')->validate();
 

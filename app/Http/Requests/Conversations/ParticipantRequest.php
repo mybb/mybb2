@@ -58,7 +58,7 @@ class ParticipantRequest extends AbstractRequest
      *
      * @return array
      */
-    public function getUsernameArray($attribute)
+    public function getUsernameArray($attribute) : array
     {
         $value = $this->input($attribute);
 
@@ -76,7 +76,7 @@ class ParticipantRequest extends AbstractRequest
      *
      * @throws ModelNotFoundException
      */
-    public function getUseridArray($attribute)
+    public function getUseridArray($attribute) : array
     {
         $usernames = $this->getUsernameArray($attribute);
 
@@ -97,7 +97,7 @@ class ParticipantRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'participants' => 'required|usernameArray',
@@ -107,7 +107,7 @@ class ParticipantRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...

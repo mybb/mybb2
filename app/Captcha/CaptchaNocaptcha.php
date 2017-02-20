@@ -69,7 +69,7 @@ class CaptchaNocaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function render()
+    public function render() : string
     {
         return $this->nocaptcha->render();
     }
@@ -77,7 +77,7 @@ class CaptchaNocaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function validate()
+    public function validate() : bool
     {
         $value = $this->request->get('g-recaptcha-response');
 
@@ -95,7 +95,7 @@ class CaptchaNocaptcha implements CaptchaInterface
     /**
      * {@inheritdoc}
      */
-    public function supported()
+    public function supported() : bool
     {
         // NoCaptcha is supported when we have a public and private key
 

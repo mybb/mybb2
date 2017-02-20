@@ -17,5 +17,5 @@ interface ModerationLogRepositoryInterface extends RepositoryInterface
      *
      * @return ModerationLog
      */
-    public function create(array $attributes);
+    public function create(array $attributes) : ModerationLog;
 }

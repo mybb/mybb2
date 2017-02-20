@@ -31,7 +31,7 @@ class WarningsPosts implements WarnableContentInterface
     /**
      * {@inheritdoc}
      */
-    public function getWarningContent($contentId)
+    public function getWarningContent(int $contentId)
     {
         $post = $this->contentRepository->find($contentId);
         if (!$post) {

@@ -76,7 +76,7 @@ class WarningsPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function formatSnapshot()
+    public function formatSnapshot() : string
     {
         $warningContent = $this->warningsManager->getWarningContentClass($this->wrappedObject->content_type);
         $snapshot = $warningContent->getWarningPreviewView($this->wrappedObject->snapshot);

@@ -57,7 +57,7 @@ class CurrentPath extends Twig_Extension
     /**
      * @return string
      */
-    public function currentPath()
+    public function currentPath() : string
     {
         if ($this->currentPath == null) {
             $path = $this->request->path();

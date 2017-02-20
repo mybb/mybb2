@@ -55,7 +55,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }
@@ -63,7 +63,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions() : array
     {
         $options = $this->profileFieldOptionRepository->getForProfileField($this->getWrappedObject());
 
@@ -79,7 +79,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return array
      */
-    public function options()
+    public function options() : array
     {
         return $this->getOptions();
     }
@@ -87,7 +87,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return string
      */
-    public function getElementName()
+    public function getElementName() : string
     {
         return 'profile_fields[' . $this->id . ']';
     }
@@ -95,7 +95,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -103,7 +103,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabel() : string
     {
         return $this->name;
     }
@@ -133,7 +133,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return bool
      */
-    public function has_value(UserPresenter $user)
+    public function has_value(UserPresenter $user) : bool
     {
         return $this->userProfileFields->hasForProfileField($user->getWrappedObject(), $this->getWrappedObject());
     }
@@ -141,7 +141,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return array
      */
-    public function getValidationRules()
+    public function getValidationRules() : array
     {
         return $this->validation_rules;
     }
@@ -149,7 +149,7 @@ class ProfileFieldPresenter extends BasePresenter implements RenderableInterface
     /**
      * @return bool
      */
-    public function has_validation_rules()
+    public function has_validation_rules() : bool
     {
         return (bool)$this->getValidationRules();
     }

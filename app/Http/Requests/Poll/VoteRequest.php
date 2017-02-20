@@ -85,7 +85,7 @@ class VoteRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         $rules = [
             'option' => 'required|votes|votes_maxOptions',
@@ -97,7 +97,7 @@ class VoteRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages() : array
     {
         return [
             'option.votes_maxOptions' => trans('errors.poll_very_votes', ['count' => $this->poll->max_options]),
@@ -108,7 +108,7 @@ class VoteRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         //return $this->guard->check();
         return true; // TODO: In dev return, needs replacing for later...

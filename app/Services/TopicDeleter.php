@@ -50,7 +50,7 @@ class TopicDeleter
      *
      * @return bool
      */
-    public function deleteTopic(Topic $topic)
+    public function deleteTopic(Topic $topic) : bool
     {
         if ($topic->deleted_at == null) {
             $topic->forum->decrement('num_topics');

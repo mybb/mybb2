@@ -77,10 +77,10 @@ class WarningsController extends AdminController
     }
 
     /**
-     * @param $id WarningType id
+     * @param int $id WarningType id
      * @return mixed
      */
-    public function editWarningType($id)
+    public function editWarningType(int $id)
     {
         $warningType = $this->warningTypesRepository->find($id);
         if (!$warningType) {
@@ -90,11 +90,11 @@ class WarningsController extends AdminController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param CreateWarningTypeRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveWarningType($id, CreateWarningTypeRequest $request)
+    public function saveWarningType(int $id, CreateWarningTypeRequest $request)
     {
         $warningType = $this->warningTypesRepository->find($id);
         if (!$warningType) {

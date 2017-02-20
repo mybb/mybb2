@@ -32,7 +32,7 @@ interface ConversationRepositoryInterface
      *
      * @return Conversation|null
      */
-    public function find($id = 0);
+    public function find(int $id = 0);
 
     /**
      * @param User $user
@@ -53,7 +53,7 @@ interface ConversationRepositoryInterface
      *
      * @return Conversation
      */
-    public function create(array $conversation);
+    public function create(array $conversation) : Conversation;
 
     /**
      * @param Conversation $conversation

@@ -36,7 +36,7 @@ class Moderation extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return 'MyBB_Twig_Extensions_Moderation';
     }
@@ -62,7 +62,7 @@ class Moderation extends \Twig_Extension
      *
      * @return bool
      */
-    public function isReversibleModeration($moderation)
+    public function isReversibleModeration($moderation) : bool
     {
         return $moderation instanceof ReversibleModerationInterface
         || $moderation instanceof ReversibleModerationPresenterInterface;
@@ -73,7 +73,7 @@ class Moderation extends \Twig_Extension
      *
      * @return bool
      */
-    public function isArrayModeration($moderation)
+    public function isArrayModeration($moderation) : bool
     {
         if ($moderation instanceof BasePresenter) {
             return $moderation->getWrappedObject() instanceof ArrayModerationInterface;
@@ -90,7 +90,7 @@ class Moderation extends \Twig_Extension
      *
      * @return \Illuminate\View\View
      */
-    public function renderModerationButton($moderationName, $contentName, $contentId)
+    public function renderModerationButton(string $moderationName, string $contentName, int $contentId)
     {
         $moderation = $this->moderationRegistry->get($moderationName);
 

@@ -78,7 +78,7 @@ class RecountCommand extends Command
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions() : array
     {
         return [
             ['forums', 'f', InputOption::VALUE_NONE, 'Recount forum counters', null],

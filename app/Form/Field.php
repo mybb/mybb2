@@ -45,7 +45,7 @@ class Field implements RenderableInterface
      * @param string $label
      * @param string $description
      */
-    public function __construct($type, $elementName, $label, $description)
+    public function __construct(string $type, string $elementName, string $label, string $description)
     {
         $this->type = $type;
         $this->elementName = $elementName;
@@ -56,7 +56,7 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return $this->type;
     }
@@ -64,7 +64,7 @@ class Field implements RenderableInterface
     /**
      * @return array
      */
-    public function getOptions()
+    public function getOptions() : array
     {
         return $this->options;
     }
@@ -84,7 +84,7 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }
@@ -92,7 +92,7 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getElementName()
+    public function getElementName() : string
     {
         return $this->elementName;
     }
@@ -100,7 +100,7 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getLabel()
+    public function getLabel() : string
     {
         return $this->label;
     }
@@ -108,7 +108,7 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue() : string
     {
         return $this->value;
     }
@@ -118,7 +118,7 @@ class Field implements RenderableInterface
      *
      * @return $this
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = (string)$value;
 
@@ -126,9 +126,9 @@ class Field implements RenderableInterface
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getValidationRules()
+    public function getValidationRules() : string
     {
         return $this->validationRules;
     }
@@ -138,7 +138,7 @@ class Field implements RenderableInterface
      *
      * @return $this
      */
-    public function setValidationRules($validationRules)
+    public function setValidationRules(string $validationRules)
     {
         $this->validationRules = $validationRules;
 

@@ -33,7 +33,7 @@ class ProfileFieldOptionRepository implements ProfileFieldOptionRepositoryInterf
      *
      * @return ProfileFieldOption
      */
-    public function find($id)
+    public function find(int $id) : ProfileFieldOption
     {
         return $this->profileFieldOption->newQuery()->find($id);
     }
@@ -43,7 +43,7 @@ class ProfileFieldOptionRepository implements ProfileFieldOptionRepositoryInterf
      *
      * @return ProfileFieldOption
      */
-    public function create(array $data)
+    public function create(array $data) : ProfileFieldOption
     {
         return $this->profileFieldOption->create($data);
     }
@@ -53,7 +53,7 @@ class ProfileFieldOptionRepository implements ProfileFieldOptionRepositoryInterf
      *
      * @return Collection
      */
-    public function getForProfileField(ProfileField $profileField)
+    public function getForProfileField(ProfileField $profileField) : Collection
     {
         return $this->profileFieldOption->newQuery()->where('profile_field_id', $profileField->id)->get();
     }

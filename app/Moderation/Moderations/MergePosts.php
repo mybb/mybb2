@@ -32,7 +32,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'merge_posts';
     }
@@ -40,7 +40,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'moderation.moderate.merge';
     }
@@ -72,7 +72,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         if (!is_array($content)) {
             return false;
@@ -86,7 +86,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return $content instanceof Post;
     }
@@ -96,7 +96,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return 'MyBB\Core\Presenters\Moderations\MergePostsPresenter';
     }
@@ -104,7 +104,7 @@ class MergePosts implements ArrayModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return 'canMergePosts';
     }

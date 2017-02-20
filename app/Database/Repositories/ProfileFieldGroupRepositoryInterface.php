@@ -16,24 +16,24 @@ interface ProfileFieldGroupRepositoryInterface
     /**
      * @return Collection
      */
-    public function getAll();
+    public function getAll() : Collection;
 
     /**
      * @param string $slug
      *
      * @return ProfileFieldGroup
      */
-    public function getBySlug($slug);
+    public function getBySlug(string $slug) : ProfileFieldGroup;
 
     /**
      * @return array
      */
-    public function getAllForSelectElement();
+    public function getAllForSelectElement() : array;
 
     /**
      * @param array $data
      *
      * @return ProfileFieldGroup
      */
-    public function create(array $data);
+    public function create(array $data) : ProfileFieldGroup;
 }

@@ -58,7 +58,7 @@ class ConversationMessage extends Model implements HasPresenter
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return ConversationMessagePresenter::class;
     }

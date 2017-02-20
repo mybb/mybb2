@@ -25,7 +25,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllLikesByUserPaginated($user, $perPage = 20);
+    public function getAllLikesByUserPaginated($user, int $perPage = 20);
 
     /**
      * Retrieve all of the likes a piece of content has received.
@@ -36,7 +36,7 @@ interface LikesRepositoryInterface
      *
      * @return mixed
      */
-    public function getAllLikesForContentPaginated(Model $content, $perPage = 10);
+    public function getAllLikesForContentPaginated(Model $content, int $perPage = 10);
 
     /**
      * Get all of the likes for a set of entries of a specific content type.

@@ -18,7 +18,7 @@ class TopicTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(Topic $topic)
+    public function transform(Topic $topic) : array
     {
         return [
             'title'         => $topic->title,

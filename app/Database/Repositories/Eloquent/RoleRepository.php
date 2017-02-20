@@ -43,7 +43,7 @@ class RoleRepository implements RoleRepositoryInterface
     /**
      * Find a single role id by its slug.
      *
-     * @param string $slug The slug of the role. Eg: 'user'.
+     * @param string|null $slug The slug of the role. Eg: 'user'.
      *
      * @return mixed
      */

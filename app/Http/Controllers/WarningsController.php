@@ -84,12 +84,12 @@ class WarningsController extends AbstractController
     }
 
     /**
-     * @param $userId
+     * @param int $userId
      * @param $contentType
-     * @param $contentId
+     * @param int $contentId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function warnUser($userId, $contentType, $contentId)
+    public function warnUser(int $userId, $contentType, int $contentId)
     {
         $user = $this->users->find($userId);
         if (!$user) {
@@ -125,13 +125,13 @@ class WarningsController extends AbstractController
     }
 
     /**
-     * @param $userId
+     * @param int $userId
      * @param $contentType
-     * @param $contentId
+     * @param int $contentId
      * @param WarnUserRequest $request
      * @return mixed
      */
-    public function createWarnUser($userId, $contentType, $contentId, WarnUserRequest $request)
+    public function createWarnUser(int $userId, $contentType, int $contentId, WarnUserRequest $request)
     {
         $dataToSave = [];
         $user = $this->users->find($userId);
@@ -219,11 +219,11 @@ class WarningsController extends AbstractController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showWarnsForUser($id, $slug)
+    public function showWarnsForUser(int $id, $slug)
     {
         $warns = $this->warnings->findForUser($id);
 
@@ -231,10 +231,10 @@ class WarningsController extends AbstractController
     }
 
     /**
-     * @param $warnId
+     * @param int $warnId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function warnDetails($warnId)
+    public function warnDetails(int $warnId)
     {
         $warn = $this->warnings->find($warnId);
 

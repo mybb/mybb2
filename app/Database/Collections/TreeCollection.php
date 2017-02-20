@@ -31,10 +31,10 @@ class TreeCollection extends Collection
     /**
      * Fill `children` relationships for every node in collection.
      *
-     * @param $result
+     * @param array $result
      * @return array
      */
-    protected function hierarchical($result)
+    protected function hierarchical(array $result) : array
     {
         foreach ($result as $key => $node) {
             $node->setRelation('children', new Collection);

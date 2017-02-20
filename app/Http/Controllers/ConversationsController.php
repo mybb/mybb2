@@ -130,7 +130,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function getRead($id, Request $request, Parser $parser)
+    public function getRead(int $id, Request $request, Parser $parser)
     {
         $conversation = $this->conversationRepository->find($id);
 
@@ -169,7 +169,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postReply($id, ReplyRequest $request, Store $settings)
+    public function postReply(int $id, ReplyRequest $request, Store $settings)
     {
         $this->failedValidationRedirect = route('conversations.read', ['id' => $id]);
 
@@ -205,7 +205,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function getLeave($id)
+    public function getLeave(int $id)
     {
         /** @var Conversation $conversation */
         $conversation = $this->conversationRepository->find($id);
@@ -225,7 +225,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postLeave($id, Request $request)
+    public function postLeave(int $id, Request $request)
     {
         /** @var Conversation $conversation */
         $conversation = $this->conversationRepository->find($id);
@@ -248,7 +248,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function getNewParticipant($id)
+    public function getNewParticipant(int $id)
     {
         /** @var Conversation $conversation */
         $conversation = $this->conversationRepository->find($id);
@@ -268,7 +268,7 @@ class ConversationsController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postNewParticipant($id, ParticipantRequest $request)
+    public function postNewParticipant(int $id, ParticipantRequest $request)
     {
         /** @var Conversation $conversation */
         $conversation = $this->conversationRepository->find($id);

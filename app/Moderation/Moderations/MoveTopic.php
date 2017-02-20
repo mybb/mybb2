@@ -34,7 +34,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'move_topic';
     }
@@ -42,7 +42,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'moderation.moderate.move';
     }
@@ -76,7 +76,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         return $content instanceof Topic && array_key_exists('forum_id', $options);
     }
@@ -86,7 +86,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return $content instanceof Topic;
     }
@@ -96,7 +96,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return 'MyBB\Core\Presenters\Moderations\MoveTopicPresenter';
     }
@@ -104,7 +104,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return 'canMoveTopics';
     }
@@ -112,7 +112,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
     /**
      * @return string
      */
-    public function getDestinationType()
+    public function getDestinationType() : string
     {
         return 'forum';
     }
@@ -120,7 +120,7 @@ class MoveTopic implements ModerationInterface, HasPresenter, DestinedInterface,
     /**
      * @return string
      */
-    public function getDestinationKey()
+    public function getDestinationKey() : string
     {
         return 'forum_id';
     }

@@ -22,7 +22,7 @@ class UserNotBelongsToThisContentException extends NotFoundHttpException
      * @param \Exception $previous
      * @param int $code
      */
-    public function __construct($user, \Exception $previous = null, $code = 0)
+    public function __construct(string $user, \Exception $previous = null, int $code = 0)
     {
         $message = trans($this->message, compact('user'));
 

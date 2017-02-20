@@ -23,17 +23,17 @@ class RepositoryRegistry implements RegistryInterface
      * @param string $key
      * @param string $className
      */
-    public function addRepository($key, $className)
+    public function addRepository(string $key, string $className)
     {
         $this->repositories[$key] = $className;
     }
 
     /**
-     * @param string $key
+     * @param string|null $key
      *
      * @return string
      */
-    public function get($key)
+    public function get(string $key = null)
     {
         return $this->repositories[$key];
     }

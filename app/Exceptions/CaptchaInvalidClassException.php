@@ -22,7 +22,7 @@ class CaptchaInvalidClassException extends RuntimeException
      * @param int $code
      * @param \Exception $previous
      */
-    public function __construct($class, $code = 0, \Exception $previous = null)
+    public function __construct(string $class, int $code = 0, \Exception $previous = null)
     {
         $message = trans($this->message, compact('class'));
 

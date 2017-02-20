@@ -20,7 +20,7 @@ class UpdatePasswordRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'password1' => 'required|min:6',
@@ -31,7 +31,7 @@ class UpdatePasswordRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

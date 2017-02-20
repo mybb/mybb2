@@ -32,12 +32,16 @@ class ModerationTool implements ModerationInterface
 
     /**
      * @param string $name
-     * @param string $description
+     * @param string $desc
      * @param string $permissionName
      * @param ModerationInterface[] $moderations
      */
-    public function __construct($name, $description, $permissionName = null, array $moderations = [])
-    {
+    public function __construct(
+        string $name,
+        string $description,
+        string $permissionName = null,
+        array $moderations = []
+    ) {
         $this->name = $name;
         $this->description = $description;
         $this->permissionName = $permissionName;
@@ -58,7 +62,7 @@ class ModerationTool implements ModerationInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -84,7 +88,7 @@ class ModerationTool implements ModerationInterface
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         return true;
     }
@@ -92,7 +96,7 @@ class ModerationTool implements ModerationInterface
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'custom-tool';
     }
@@ -102,7 +106,7 @@ class ModerationTool implements ModerationInterface
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return true;
     }
@@ -110,7 +114,7 @@ class ModerationTool implements ModerationInterface
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return $this->permissionName;
     }
@@ -118,7 +122,7 @@ class ModerationTool implements ModerationInterface
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription() : string
     {
         return $this->description;
     }

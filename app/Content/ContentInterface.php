@@ -13,20 +13,20 @@ interface ContentInterface
     /**
      * @return int
      */
-    public function getId();
+    public function getId() : int;
 
     /**
      * @return string
      */
-    public function getType();
+    public function getType() : string;
 
     /**
      * @return string
      */
-    public function getUrl();
+    public function getUrl() : string;
 
     /**
      * @return string
      */
-    public function getTitle();
+    public function getTitle() : string;
 }

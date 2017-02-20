@@ -58,7 +58,7 @@ class RenderLikes extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return 'MyBB_Core_Likes_Twig_Extensions_RenderLikes';
     }
@@ -82,7 +82,7 @@ class RenderLikes extends \Twig_Extension
      *
      * @return string
      */
-    public function render(Collection $likesCollection, $viewAllLikesLink)
+    public function render(Collection $likesCollection, string $viewAllLikesLink) : string
     {
         $numLikesToList = $this->settings->get('posts.likes_to_show', 3);
         $numOtherLikes = $likesCollection->count() - $numLikesToList;

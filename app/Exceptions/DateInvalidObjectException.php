@@ -22,7 +22,7 @@ class DateInvalidObjectException extends RuntimeException
      * @param int $code
      * @param \Exception $previous
      */
-    public function __construct($message = null, $code = 0, \Exception $previous = null)
+    public function __construct(string $message = null, int $code = 0, \Exception $previous = null)
     {
         if ($message === null) {
             $message = trans($this->message);

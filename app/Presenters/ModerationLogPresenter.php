@@ -72,7 +72,7 @@ class ModerationLogPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function description()
+    public function description() : string
     {
         $moderation = $this->moderationRegistry->get($this->getWrappedObject()->moderation);
         $moderation = $this->presenterDecorator->decorate($moderation);
@@ -153,7 +153,7 @@ class ModerationLogPresenter extends BasePresenter
      *
      * @return string
      */
-    private function getUserProfileLink(UserModel $user)
+    private function getUserProfileLink(UserModel $user) : string
     {
         return $this->viewFactory->make('user.profile_link', [
             'user'          => $user,

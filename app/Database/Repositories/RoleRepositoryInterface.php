@@ -22,7 +22,7 @@ interface RoleRepositoryInterface
     /**
      * Find a single role by its slug.
      *
-     * @param string $slug The slug of the role. Eg: 'user'.
+     * @param string|null $slug The slug of the role. Eg: 'user'.
      *
      * @return mixed
      */

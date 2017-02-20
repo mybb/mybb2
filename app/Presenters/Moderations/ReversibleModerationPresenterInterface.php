@@ -15,12 +15,12 @@ interface ReversibleModerationPresenterInterface extends ModerationPresenterInte
     /**
      * @return string
      */
-    public function reverseIcon();
+    public function reverseIcon() : string;
 
     /**
      * @return string
      */
-    public function reverseName();
+    public function reverseName() : string;
 
     /**
      * @param array $contentCollection

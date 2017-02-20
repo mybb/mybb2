@@ -33,7 +33,7 @@ class WarningsManager
      * @return WarnableContentInterface
      * @throws WarningsContentInvalidClassException
      */
-    public function getWarningContentClass($contentName)
+    public function getWarningContentClass(string $contentName)
     {
 
         $contentClass = 'MyBB\\Core\\Warnings\\Warnings' . ucfirst($contentName) . 's';

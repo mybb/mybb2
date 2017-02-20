@@ -149,10 +149,10 @@ class ForumsController extends AdminController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         $forum = $this->forumRepository->getForum($id);
         $forums = $this->forumRepository->all()->toTree();
@@ -160,11 +160,11 @@ class ForumsController extends AdminController
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @param CreateForumRequest $request
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
-    public function update($id, CreateForumRequest $request)
+    public function update(int $id, CreateForumRequest $request)
     {
         $forum = $this->forumRepository->getForum($request->get('id'));
         if (!$forum) {

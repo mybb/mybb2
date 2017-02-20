@@ -19,7 +19,7 @@ interface ModerationLogSubjectRepositoryInterface extends RepositoryInterface
      *
      * @return ModerationLogSubject
      */
-    public function create(array $attributes);
+    public function create(array $attributes) : ModerationLogSubject;
 
     /**
      * @param ModerationLog $moderationLog
@@ -27,5 +27,5 @@ interface ModerationLogSubjectRepositoryInterface extends RepositoryInterface
      *
      * @return ModerationLogSubject
      */
-    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content);
+    public function addContentToLog(ModerationLog $moderationLog, ContentInterface $content) : ModerationLogSubject;
 }

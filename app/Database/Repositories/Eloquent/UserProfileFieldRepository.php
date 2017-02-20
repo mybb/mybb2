@@ -38,7 +38,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function create(User $user, ProfileField $profileField, $value)
+    public function create(User $user, ProfileField $profileField, string $value) : UserProfileField
     {
         return $this->userProfileField->create([
             'user_id'          => $user->getId(),
@@ -52,7 +52,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function find($id)
+    public function find(int $id) : UserProfileField
     {
         return $this->userProfileField->find($id);
     }
@@ -63,7 +63,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function findForProfileField(User $user, ProfileField $profileField)
+    public function findForProfileField(User $user, ProfileField $profileField) : UserProfileField
     {
         return $this->userProfileField->where('user_id', $user->getId())
             ->where('profile_field_id', $profileField->id)
@@ -78,7 +78,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function updateOrCreate(User $user, ProfileField $profileField, $value)
+    public function updateOrCreate(User $user, ProfileField $profileField, string $value) : UserProfileField
     {
         $userProfileField = $this->findForProfileField($user, $profileField);
 
@@ -97,7 +97,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return Collection
      */
-    public function findForUser(User $user)
+    public function findForUser(User $user) : Collection
     {
         return $this->userProfileField->where('user_id', $user->getId())->get();
     }
@@ -108,7 +108,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return Collection
      */
-    public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group)
+    public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group) : Collection
     {
         $userFields = $this->userProfileField->where('user_id', $user->getId())
             ->whereHas('getProfileField', function (Builder $q) use ($group) {
@@ -125,7 +125,7 @@ class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface
      *
      * @return bool
      */
-    public function hasForProfileField(User $user, ProfileField $profileField)
+    public function hasForProfileField(User $user, ProfileField $profileField) : bool
     {
         return $this->userProfileField->where('user_id', $user->getId())
             ->where('profile_field_id', $profileField->id)
