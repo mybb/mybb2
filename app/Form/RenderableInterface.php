@@ -41,7 +41,7 @@ interface RenderableInterface
     public function getValue();
 
     /**
-     * @return array
+     * @return string
      */
-    public function getValidationRules() : array;
+    public function getValidationRules() : string;
 }
