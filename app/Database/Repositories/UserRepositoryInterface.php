@@ -23,7 +23,7 @@ interface UserRepositoryInterface
      *
      * @return mixed
      */
-    public function all(string $sortBy = 'created_at', string $sortDir = 'desc', int $perPage = 10);
+    public function all(string $sortBy = 'created_at', string $sortDir = 'desc', int $perPage = 10);public function all($sortBy = 'created_at', $sortDir = 'desc', $perPage = 10);
     
     /**
      * Get all users who match a certain set of criteria.
