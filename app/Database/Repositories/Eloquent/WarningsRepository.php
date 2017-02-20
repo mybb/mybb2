@@ -38,7 +38,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $details = [])
+    public function create(array $details = []) : Warning
     {
         $details = array_merge([
             'issued_by' => $this->guard->user()->id,
@@ -51,7 +51,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findForUser($userId)
+    public function findForUser(int $userId) : Warning
     {
         return $this->warningModel->where('user_id', $userId)
             ->with(['issuedBy'])
@@ -63,7 +63,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($warnId)
+    public function find(int $warnId) : Warning
     {
         return $this->warningModel->find($warnId);
     }
@@ -71,7 +71,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function revoke(Warning $warning, $reason)
+    public function revoke(Warning $warning, string $reason) : Warning
     {
         return $warning->update([
             'revoked_at'    => date("Y-m-d H:i:s"),
@@ -85,7 +85,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function update(Warning $warning, $details = [])
+    public function update(Warning $warning, array $details = [])
     {
         return $warning->update($details);
     }
@@ -93,7 +93,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function lastAckWarn($userId)
+    public function lastAckWarn(int $userId) : Warning
     {
         return $this->warningModel->where('user_id', $userId)
             ->where('must_acknowledge', 1)
@@ -104,7 +104,7 @@ class WarningsRepository implements WarningsRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function ackWarnCount($userId)
+    public function ackWarnCount(int $userId) : int
     {
         return $this->warningModel->where('user_id', $userId)
             ->where('must_acknowledge', 1)

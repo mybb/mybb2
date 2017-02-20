@@ -23,7 +23,7 @@ class ClosePresenter extends AbstractReversibleModerationPresenter implements Re
     /**
      * @return string
      */
-    public function icon()
+    public function icon() : string
     {
         return 'fa-lock';
     }
@@ -31,7 +31,7 @@ class ClosePresenter extends AbstractReversibleModerationPresenter implements Re
     /**
      * @return string
      */
-    public function reverseIcon()
+    public function reverseIcon() : string
     {
         return 'fa-unlock';
     }
@@ -39,7 +39,7 @@ class ClosePresenter extends AbstractReversibleModerationPresenter implements Re
     /**
      * @return string
      */
-    protected function getDescriptionView()
+    protected function getDescriptionView() : string
     {
         return 'partials.moderation.logs.close';
     }
@@ -47,7 +47,7 @@ class ClosePresenter extends AbstractReversibleModerationPresenter implements Re
     /**
      * @return string
      */
-    protected function getReverseDescriptionView()
+    protected function getReverseDescriptionView() : string
     {
         return 'partials.moderation.logs.open';
     }

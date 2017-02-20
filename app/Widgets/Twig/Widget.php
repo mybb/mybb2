@@ -30,7 +30,7 @@ class Widget extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return 'MyBB_Widgets_Twig_Extensions_Widget';
     }

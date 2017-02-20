@@ -40,7 +40,7 @@ class ModerationRegistry implements RegistryInterface
      *
      * @return ModerationInterface
      */
-    public function get($key)
+    public function get(string $key)
     {
         return $this->moderations[$key];
     }

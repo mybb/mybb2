@@ -47,7 +47,7 @@ class ModerationRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [];
     }
@@ -55,7 +55,7 @@ class ModerationRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         if ($this->getModeration()) {
             return $this->permissionChecker->hasPermission('user', null, $this->getModeration()->getPermissionName());
@@ -87,7 +87,7 @@ class ModerationRequest extends AbstractRequest
      *
      * @return ModerationInterface
      */
-    public function getModerationByName($name)
+    public function getModerationByName(string $name)
     {
         return $this->moderationRegistry->get($name);
     }
@@ -95,7 +95,7 @@ class ModerationRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function getModeratableContent()
+    public function getModeratableContent() : array
     {
         $content = [];
 
@@ -109,7 +109,7 @@ class ModerationRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function getModerationOptions()
+    public function getModerationOptions() : array
     {
         return $this->except([
             'moderation_content',

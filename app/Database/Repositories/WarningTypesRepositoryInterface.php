@@ -19,7 +19,7 @@ interface WarningTypesRepositoryInterface
      * @param array $details
      * @return WarningType
      */
-    public function create(array $details = []);
+    public function create(array $details = []) : WarningType;
 
     /**
      * Return all warning types
@@ -34,7 +34,7 @@ interface WarningTypesRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function find($id);
+    public function find(int $id);
 
     /**
      * Delete single warning type by id
@@ -42,7 +42,7 @@ interface WarningTypesRepositoryInterface
      * @param int $id
      * @return mixed
      */
-    public function delete($id);
+    public function delete(int $id);
 
     /**
      * Edit single warning type

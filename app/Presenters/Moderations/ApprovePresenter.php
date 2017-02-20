@@ -23,7 +23,7 @@ class ApprovePresenter extends AbstractReversibleModerationPresenter implements 
     /**
      * @return string
      */
-    public function icon()
+    public function icon() : string
     {
         return 'fa-check';
     }
@@ -31,7 +31,7 @@ class ApprovePresenter extends AbstractReversibleModerationPresenter implements 
     /**
      * @return string
      */
-    public function reverseIcon()
+    public function reverseIcon() : string
     {
         return 'fa-minus';
     }
@@ -39,7 +39,7 @@ class ApprovePresenter extends AbstractReversibleModerationPresenter implements 
     /**
      * @return string
      */
-    protected function getDescriptionView()
+    protected function getDescriptionView() : string
     {
         return 'partials.moderation.logs.approve';
     }
@@ -47,7 +47,7 @@ class ApprovePresenter extends AbstractReversibleModerationPresenter implements 
     /**
      * @return string
      */
-    protected function getReverseDescriptionView()
+    protected function getReverseDescriptionView() : string
     {
         return 'partials.moderation.logs.unapprove';
     }

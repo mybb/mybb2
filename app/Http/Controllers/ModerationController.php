@@ -67,7 +67,7 @@ class ModerationController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function form(ModerationRequest $request, $moderationName)
+    public function form(ModerationRequest $request, string $moderationName)
     {
         return view('partials.moderation.moderation_form', [
             'moderation'             => $request->getModerationByName($moderationName),

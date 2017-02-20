@@ -21,5 +21,5 @@ interface ReversibleModerationInterface extends ModerationInterface
     /**
      * @return string
      */
-    public function getReverseName();
+    public function getReverseName() : string;
 }

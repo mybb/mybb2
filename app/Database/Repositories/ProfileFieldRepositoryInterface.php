@@ -19,29 +19,29 @@ interface ProfileFieldRepositoryInterface
      *
      * @return ProfileField
      */
-    public function create(array $data);
+    public function create(array $data) : ProfileField;
 
     /**
      * @param int $id
      *
      * @return ProfileField
      */
-    public function find($id);
+    public function find(int $id) : ProfileField;
 
     /**
      * @param int $id
      */
-    public function delete($id);
+    public function delete(int $id);
 
     /**
      * @return Collection
      */
-    public function getAll();
+    public function getAll() : Collection;
 
     /**
      * @param ProfileFieldGroup $group
      *
      * @return Collection
      */
-    public function getForGroup(ProfileFieldGroup $group);
+    public function getForGroup(ProfileFieldGroup $group) : Collection;
 }

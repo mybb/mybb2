@@ -18,7 +18,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getKey()
+    public function getKey() : string
     {
         return 'stick';
     }
@@ -26,7 +26,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return 'moderation.moderate.stick';
     }
@@ -70,7 +70,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
      *
      * @return bool
      */
-    public function supports($content, array $options = [])
+    public function supports($content, array $options = []) : bool
     {
         return $content instanceof StickableInterface;
     }
@@ -80,7 +80,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
      *
      * @return bool
      */
-    public function visible($content)
+    public function visible($content) : bool
     {
         return $content instanceof StickableInterface;
     }
@@ -101,7 +101,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getReverseName()
+    public function getReverseName() : string
     {
         return 'moderation.moderate.unstick';
     }
@@ -111,7 +111,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return StickPresenter::class;
     }
@@ -119,7 +119,7 @@ class Stick implements ReversibleModerationInterface, HasPresenter, SourceableIn
     /**
      * @return string
      */
-    public function getPermissionName()
+    public function getPermissionName() : string
     {
         return 'canStick';
     }

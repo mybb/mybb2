@@ -13,12 +13,12 @@ interface ModerationInterface
     /**
      * @return string
      */
-    public function getKey();
+    public function getKey() : string;
 
     /**
      * @return string
      */
-    public function getName();
+    public function getName() : string;
 
     /**
      * @param mixed $content
@@ -34,17 +34,17 @@ interface ModerationInterface
      *
      * @return bool
      */
-    public function supports($content, array $options = []);
+    public function supports($content, array $options = []) : bool;
 
     /**
      * @param mixed $content
      *
      * @return bool
      */
-    public function visible($content);
+    public function visible($content) : bool;
 
     /**
      * @return string
      */
-    public function getPermissionName();
+    public function getPermissionName() : string;
 }

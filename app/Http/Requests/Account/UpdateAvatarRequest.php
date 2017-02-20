@@ -20,7 +20,7 @@ class UpdateAvatarRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         // TODO: validation. Upload size, valid link, valid email
         return [
@@ -31,7 +31,7 @@ class UpdateAvatarRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

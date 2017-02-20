@@ -91,7 +91,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return mixed
      */
-    public function allForUser($userId = 0)
+    public function allForUser(int $userId = 0)
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -103,7 +103,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return mixed
      */
-    public function getNewest($num = 20)
+    public function getNewest(int $num = 20)
     {
         $unviewableForums = $this->permissionChecker->getUnviewableIdsForContent('forum');
 
@@ -121,7 +121,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return mixed
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         return $this->postModel->with(['likes', 'author'])->withTrashed()->find($id);
     }
@@ -134,7 +134,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return mixed
      */
-    public function allForTopic(Topic $topic, $withTrashed = false)
+    public function allForTopic(Topic $topic, bool $withTrashed = false)
     {
         $postsPerPage = $this->settings->get('user.posts_per_page', 10);
 
@@ -155,7 +155,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return int
      */
-    public function getNumForPost(Post $post, $withTrashed = false)
+    public function getNumForPost(Post $post, bool $withTrashed = false) : int
     {
         // Get all posts in this thread created before this one...
         $baseQuery = $this->postModel->where('topic_id', '=', $post->topic_id)
@@ -371,7 +371,7 @@ class PostRepository implements PostRepositoryInterface
      *
      * @return Post
      */
-    public function mergePosts(array $posts)
+    public function mergePosts(array $posts) : Post
     {
         if (!is_array_of($posts, 'MyBB\Core\Database\Models\Post')) {
             throw new \InvalidArgumentException('$posts must be an array of Post objects');

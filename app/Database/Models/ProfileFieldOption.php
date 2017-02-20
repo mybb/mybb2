@@ -32,7 +32,7 @@ class ProfileFieldOption extends Model
     /**
      * @return string
      */
-    public function getName()
+    public function getName() : string
     {
         return $this->name;
     }
@@ -40,7 +40,7 @@ class ProfileFieldOption extends Model
     /**
      * @return string
      */
-    public function getValue()
+    public function getValue() : string
     {
         return $this->value;
     }

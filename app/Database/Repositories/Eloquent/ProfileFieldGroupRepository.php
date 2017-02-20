@@ -32,7 +32,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
      *
      * @return ProfileFieldGroup
      */
-    public function getBySlug($slug)
+    public function getBySlug(string $slug) : ProfileFieldGroup
     {
         return $this->profileFieldGroup->where('slug', $slug)->first();
     }
@@ -40,7 +40,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
     /**
      * @return Collection
      */
-    public function getAll()
+    public function getAll() : Collection
     {
         return $this->profileFieldGroup->all();
     }
@@ -48,7 +48,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
     /**
      * @return array
      */
-    public function getAllForSelectElement()
+    public function getAllForSelectElement() : array
     {
         return $this->profileFieldGroup->lists('name', 'id');
     }
@@ -58,7 +58,7 @@ class ProfileFieldGroupRepository implements ProfileFieldGroupRepositoryInterfac
      *
      * @return ProfileFieldGroup
      */
-    public function create(array $data)
+    public function create(array $data) : ProfileFieldGroup
     {
         return $this->profileFieldGroup->create($data);
     }

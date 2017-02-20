@@ -23,7 +23,7 @@ interface UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function create(User $user, ProfileField $profileField, $value);
+    public function create(User $user, ProfileField $profileField, string $value) : UserProfileField;
 
     /**
      * @param User $user
@@ -32,21 +32,21 @@ interface UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function updateOrCreate(User $user, ProfileField $profileField, $value);
+    public function updateOrCreate(User $user, ProfileField $profileField, string $value) : UserProfileField;
 
     /**
      * @param int $id
      *
      * @return UserProfileField
      */
-    public function find($id);
+    public function find(int $id) : UserProfileField;
 
     /**
      * @param User $user
      *
      * @return Collection
      */
-    public function findForUser(User $user);
+    public function findForUser(User $user) : Collection;
 
     /**
      * @param User $user
@@ -54,7 +54,7 @@ interface UserProfileFieldRepositoryInterface
      *
      * @return UserProfileField
      */
-    public function findForProfileField(User $user, ProfileField $profileField);
+    public function findForProfileField(User $user, ProfileField $profileField) : UserProfileField;
 
     /**
      * @param User $user
@@ -62,7 +62,7 @@ interface UserProfileFieldRepositoryInterface
      *
      * @return Collection
      */
-    public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group);
+    public function findForProfileFieldGroup(User $user, ProfileFieldGroup $group) : Collection;
 
     /**
      * @param User $user
@@ -70,5 +70,5 @@ interface UserProfileFieldRepositoryInterface
      *
      * @return bool
      */
-    public function hasForProfileField(User $user, ProfileField $profileField);
+    public function hasForProfileField(User $user, ProfileField $profileField) : bool;
 }

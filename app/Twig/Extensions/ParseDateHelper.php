@@ -36,7 +36,7 @@ class ParseDateHelper
      *
      * @return string
      */
-    public function formatDate($date = null, $showTime = true, $format = null)
+    public function formatDate($date = null, bool $showTime = true, string $format = null) : string
     {
         // Get the user format if none was specified
         if ($format == null) {
@@ -83,7 +83,7 @@ class ParseDateHelper
      *
      * @return string
      */
-    public function humanDate($date = null)
+    public function humanDate($date = null) : string
     {
         $date = $this->getDateObject($date);
 
@@ -107,7 +107,7 @@ class ParseDateHelper
      *
      * @return string
      */
-    public function generateTime($date = null, $showFormat = null, $attributeFormat = null)
+    public function generateTime($date = null, string $showFormat = null, string $attributeFormat = null) : string
     {
         $date = $this->getDateObject($date);
 
@@ -130,8 +130,12 @@ class ParseDateHelper
      *
      * @return string
      */
-    public function postDateLink($url, $date = null, $showFormat = null, $attributeFormat = null)
-    {
+    public function postDateLink(
+        string $url,
+        $date = null,
+        string $showFormat = null,
+        string $attributeFormat = null
+    ) : string {
         $date = $this->getDateObject($date);
 
         if ($showFormat != null) {
@@ -177,7 +181,7 @@ class ParseDateHelper
     /**
      * @return string
      */
-    private function at()
+    private function at() : string
     {
         $at = str_split(trans('general.at'));
         $escapedAt = '';

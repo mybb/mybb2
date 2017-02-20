@@ -77,7 +77,7 @@ class PermissionChecker
      * @throws PermissionInvalidContentException
      * @throws PermissionImplementInterfaceException
      */
-    public function getUnviewableIdsForContent($content, User $user = null)
+    public function getUnviewableIdsForContent(string $content, User $user = null) : array
     {
         $concreteClass = $this->classModel->getClass($content);
 
@@ -113,7 +113,7 @@ class PermissionChecker
      * Checks whether the specified user has the specified permission
      *
      * @param string $content
-     * @param int $contentID
+     * @param int|null $contentID
      * @param array|string $permission
      * @param User $user
      *
@@ -122,7 +122,7 @@ class PermissionChecker
      * @throws PermissionInvalidContentException
      * @throws PermissionImplementInterfaceException
      */
-    public function hasPermission($content, $contentID, $permission, User $user = null)
+    public function hasPermission(string $content, $contentID, $permission, User $user = null) : bool
     {
         // TODO: Permissions should use the new Guard system in Laravel.
         return true;
@@ -233,7 +233,7 @@ class PermissionChecker
      *
      * @return PermissionChecker::NEVER|NO|YES
      */
-    public function getPermissionForRole(Role $role, $permission, $content = null, $contentID = null)
+    public function getPermissionForRole(Role $role, string $permission, $content = null, $contentID = null)
     {
         // Permissions associated with user/groups are saved without content
         // (all permissions are associated with groups anyways)
@@ -306,7 +306,7 @@ class PermissionChecker
      *
      * @return bool
      */
-    private function hasCache(Role $role, $permission, $content, $contentID)
+    private function hasCache(Role $role, string $permission, $content, $contentID) : bool
     {
         return $this->getCache($role, $permission, $content, $contentID) != null;
     }
@@ -319,7 +319,7 @@ class PermissionChecker
      *
      * @return mixed
      */
-    private function getCache(Role $role, $permission, $content, $contentID)
+    private function getCache(Role $role, string $permission, $content, $contentID)
     {
         return $this->cache->get("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}");
     }
@@ -331,7 +331,7 @@ class PermissionChecker
      * @param int|null $contentID
      * @param NEVER|NO|YES $value
      */
-    private function putCache(Role $role, $permission, $content, $contentID, $value)
+    private function putCache(Role $role, string $permission, $content, $contentID, $value)
     {
         $this->cache->forever("permission.{$role->role_slug}.{$permission}.{$content}.{$contentID}", $value);
     }

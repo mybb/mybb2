@@ -17,7 +17,7 @@ class ParserCallbacks
      *
      * @return string
      */
-    public static function getPostLink($pid)
+    public static function getPostLink(int $pid) : string
     {
         $post = Post::find($pid);
 

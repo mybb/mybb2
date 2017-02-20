@@ -132,7 +132,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function styled_name()
+    public function styled_name() : string
     {
         if (empty($this->wrappedObject->name)) {
             $this->wrappedObject->name = trans('general.guest');
@@ -152,7 +152,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function avatar()
+    public function avatar() : string
     {
         $avatar = $this->wrappedObject->avatar;
 
@@ -177,7 +177,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function avatar_link()
+    public function avatar_link() : string
     {
         $avatar = $this->wrappedObject->avatar;
 
@@ -195,7 +195,7 @@ class UserPresenter extends BasePresenter
      *
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission($permission) : bool
     {
         return $this->permissionChecker->hasPermission('user', null, $permission);
     }
@@ -217,7 +217,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return bool
      */
-    public function isOnline()
+    public function isOnline() : bool
     {
         $minutes = $this->settings->get('wio.minutes', 15);
 
@@ -261,7 +261,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return string
      */
-    public function last_page()
+    public function last_page() : string
     {
         $lang = null;
 
@@ -305,7 +305,7 @@ class UserPresenter extends BasePresenter
      *
      * @return array
      */
-    private function getWioData($route, array $parameters)
+    private function getWioData(string $route, array $parameters) : array
     {
         $data = [];
 
@@ -376,7 +376,7 @@ class UserPresenter extends BasePresenter
     /**
      * @return int
      */
-    public function getWarningPercent()
+    public function getWarningPercent() : int
     {
         if (!$this->settings->get('warnings.max_points')) {
             return $this->wrappedObject->warn_points / 1 * 100;

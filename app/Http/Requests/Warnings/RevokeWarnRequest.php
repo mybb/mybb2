@@ -17,7 +17,7 @@ class RevokeWarnRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'reason' => 'required|string',
@@ -28,7 +28,7 @@ class RevokeWarnRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

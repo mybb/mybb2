@@ -31,7 +31,7 @@ class WarningsUsers implements WarnableContentInterface
     /**
      * {@inheritdoc}
      */
-    public function getWarningContent($contentId)
+    public function getWarningContent(int $contentId) : array
     {
         $user = $this->contentRepository->find($contentId);
         if (!$user) {
@@ -49,7 +49,7 @@ class WarningsUsers implements WarnableContentInterface
     /**
      * {@inheritdoc}
      */
-    public function getWarningPreviewView($content)
+    public function getWarningPreviewView(string $content = null) : string
     {
         return false;
     }

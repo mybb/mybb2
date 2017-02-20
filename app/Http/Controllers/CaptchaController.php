@@ -68,7 +68,7 @@ class CaptchaController extends AbstractController
     /**
      * @param string $imagehash
      */
-    public function captcha($imagehash)
+    public function captcha(string $imagehash)
     {
         $baseQuery = $this->database->table('captcha')
             ->where('imagehash', '=', $imagehash)
@@ -225,7 +225,7 @@ class CaptchaController extends AbstractController
      * @param resource $im
      * @param string $string
      */
-    private function drawString(&$im, $string)
+    private function drawString(&$im, string $string)
     {
         // Check whether we have true-type fonts and if so use them
         $ttf_fonts = [];

@@ -92,7 +92,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return UserPresenter::class;
     }
@@ -100,7 +100,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
     /**
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return (int)$this->id;
     }
@@ -113,7 +113,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      *
      * @return \Illuminate\Support\Collection|static|null
      */
-    public static function find($id, $columns = ['*'])
+    public static function find($id, array $columns = ['*'])
     {
         return static::query()->find($id, $columns);
     }
@@ -129,7 +129,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
     /**
      * @return Role
      */
-    public function displayRole()
+    public function displayRole() : Role
     {
         if ($this->displayRole == null) {
             // Do we have a guest?
@@ -187,7 +187,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      *
      * @return string
      */
-    public function getUserName()
+    public function getUserName() : string
     {
         return $this->name;
     }
@@ -197,7 +197,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      *
      * @return string
      */
-    public function getSalt()
+    public function getSalt() : string
     {
         return $this->salt;
     }
@@ -209,7 +209,7 @@ class User extends Authenticatable implements MyBBUserContract, CanResetPassword
      *
      * @return string
      */
-    public function getHasher()
+    public function getHasher() : string
     {
         return $this->hasher;
     }

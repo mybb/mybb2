@@ -15,7 +15,7 @@ class UpdatePreferencesRequest extends AbstractRequest
     /**
      * @return array
      */
-    public function rules()
+    public function rules() : array
     {
         return [
             'dst'                        => 'required|in:0,1,2',
@@ -50,7 +50,7 @@ class UpdatePreferencesRequest extends AbstractRequest
     /**
      * @return bool
      */
-    public function authorize()
+    public function authorize() : bool
     {
         return true;
     }

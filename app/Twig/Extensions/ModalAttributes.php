@@ -23,7 +23,7 @@ class ModalAttributes extends \Twig_Extension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName() : string
     {
         return 'MyBB_Twig_Extensions_ModalAttributes';
     }
@@ -45,7 +45,7 @@ class ModalAttributes extends \Twig_Extension
      *
      * @return string
      */
-    public function renderModalAttributes($name, $parameters = [], $isRoute = true)
+    public function renderModalAttributes(string $name, array $parameters = [], bool $isRoute = true) : string
     {
         if ($isRoute) {
             $href = route($name, $parameters);

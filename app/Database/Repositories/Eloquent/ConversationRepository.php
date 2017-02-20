@@ -80,7 +80,7 @@ class ConversationRepository implements ConversationRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id = 0)
+    public function find(int $id = 0)
     {
         return $this->conversationModel->find($id);
     }
@@ -162,7 +162,7 @@ class ConversationRepository implements ConversationRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(array $details)
+    public function create(array $details) : Conversation
     {
         $conversation = null;
 

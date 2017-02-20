@@ -107,7 +107,7 @@ class ForumController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function show(Request $request, $id, $slug)
+    public function show(Request $request, int $id, string $slug)
     {
         // Forum permissions are checked in "find"
         $forum = $this->forumRepository->find($id);

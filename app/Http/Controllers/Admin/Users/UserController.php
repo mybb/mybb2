@@ -79,7 +79,7 @@ class UserController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function editUser($id)
+    public function editUser(int $id)
     {
         $this->breadcrumbs->setCurrentRoute('admin.users.edit');
         $user = $this->userRepository->find($id);
@@ -97,7 +97,7 @@ class UserController extends AdminController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveUser(SaveUserRequest $request, $id)
+    public function saveUser(SaveUserRequest $request, int $id)
     {
         $user = $this->userRepository->find($id);
         
@@ -176,7 +176,7 @@ class UserController extends AdminController
      *
      * @return array $roles_list
      */
-    protected function roles()
+    protected function roles() : array
     {
         $roles = $this->roleRepository->all();
         

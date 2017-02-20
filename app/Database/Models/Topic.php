@@ -78,7 +78,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
      *
      * @return string
      */
-    public function getPresenterClass()
+    public function getPresenterClass() : string
     {
         return TopicPresenter::class;
     }
@@ -219,7 +219,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     /**
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -227,7 +227,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     /**
      * @return string
      */
-    public function getType()
+    public function getType() : string
     {
         return 'topic';
     }
@@ -235,7 +235,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     /**
      * @return string
      */
-    public function getUrl()
+    public function getUrl() : string
     {
         return route('topics.show', ['id' => $this->id, 'slug' => $this->slug]);
     }
@@ -243,7 +243,7 @@ class Topic extends Model implements HasPresenter, ApprovableInterface, Closeabl
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }

@@ -89,7 +89,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function show($topicId, $topicSlug)
+    public function show(int $topicId, string $topicSlug)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {
@@ -131,7 +131,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function create($id, $slug)
+    public function create(int $id, string $slug)
     {
         $topic = $this->topicRepository->find($id);
 
@@ -151,7 +151,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postCreate($id, $slug, CreateRequest $createRequest)
+    public function postCreate(int $id, string $slug, CreateRequest $createRequest)
     {
         $topic = $this->topicRepository->find($id);
 
@@ -196,7 +196,7 @@ class PollController extends AbstractController
      *
      * @throws \Exception
      */
-    public function vote($topicId, $topicSlug)
+    public function vote(int $topicId, string $topicSlug)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {
@@ -262,7 +262,7 @@ class PollController extends AbstractController
      *
      * @throws \Exception
      */
-    public function undo($topicId, $topicSlug)
+    public function undo(int $topicId, string $topicSlug)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {
@@ -312,7 +312,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove($topicId, $topicSlug)
+    public function remove(int $topicId, string $topicSlug)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {
@@ -339,7 +339,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\View\View
      */
-    public function edit($topicId, $topicSlug)
+    public function edit(int $topicId, string $topicSlug)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {
@@ -364,7 +364,7 @@ class PollController extends AbstractController
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postEdit($topicId, $topicSlug, CreateRequest $createRequest)
+    public function postEdit(int $topicId, string $topicSlug, CreateRequest $createRequest)
     {
         $topic = $this->topicRepository->find($topicId);
         if (!$topic) {

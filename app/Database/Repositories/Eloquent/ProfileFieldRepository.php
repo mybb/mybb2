@@ -33,7 +33,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
      *
      * @return ProfileField
      */
-    public function create(array $data)
+    public function create(array $data) : ProfileField
     {
         return $this->profileField->create($data);
     }
@@ -41,7 +41,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
     /**
      * @return Collection
      */
-    public function getAll()
+    public function getAll() : Collection
     {
         return $this->profileField->all();
     }
@@ -51,7 +51,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
      *
      * @return ProfileField
      */
-    public function find($id)
+    public function find(int $id) : ProfileField
     {
         return $this->profileField->find($id);
     }
@@ -61,7 +61,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
      *
      * @return Collection
      */
-    public function getForGroup(ProfileFieldGroup $group)
+    public function getForGroup(ProfileFieldGroup $group) : Collection
     {
         return $this->profileField->where('profile_field_group_id', $group->getId())->get();
     }
@@ -69,7 +69,7 @@ class ProfileFieldRepository implements ProfileFieldRepositoryInterface
     /**
      * @param int $id
      */
-    public function delete($id)
+    public function delete(int $id)
     {
         $this->profileField->newQuery()->getQuery()->delete($id);
     }
