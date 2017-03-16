@@ -1,0 +1,44 @@
+<?php
+
+namespace DummyNamespace;
+
+use MyBB\Core\Database\Models\Task;
+use MyBB\Core\Tasking\AbstractTask;
+
+class DummyClass extends AbstractTask
+{
+    /**
+     * The name of the console command.
+     *
+     * @var string
+     */
+    protected $name = 'task:command';
+
+    /**
+     * The task description.
+     *
+     * @var string
+     */
+    protected $description = 'Task description';
+
+    /**
+     * Create a new task instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Main task method.
+     *
+     * @param Task $task Task Model
+     * @return void
+     */
+    public function fire(Task $task)
+    {
+        // Task body
+    }
+}

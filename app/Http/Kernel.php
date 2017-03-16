@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \MyBB\Core\Http\Middleware\ShareViewVariables::class,
             \MyBB\Core\Http\Middleware\UpdateLastVisit::class,
             \MyBB\Core\Http\Middleware\AckWithWarn::class,
+            \MyBB\Core\Http\Middleware\RunTasks::class,
         ],
         'api' => [
             'throttle:60,1',

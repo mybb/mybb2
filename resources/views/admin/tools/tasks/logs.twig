@@ -1,0 +1,32 @@
+{% extends "layouts.admin" %}
+{% block title %} {{ trans('admin::tasks.task_logs') }} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans('admin::tasks.task_logs') }} </h1>
+        <div class="admin-body__header__buttons">
+            <a href="{{ url_route('admin.tools.tasks') }}" class="button">{{ trans(('admin::tasks.scheduled_tasks')) }}</a>
+            <a href="{{ url_route('admin.tools.tasks.create') }}" class="button icon fa-plus">{{ trans(('admin::tasks.add_task')) }}</a>
+        </div>
+    </div>
+    <div class="admin-body__content">
+        <table>
+            <tr>
+                <td>{{ trans('admin::tasks.task') }}</td>
+                <td>{{ trans('admin::tasks.content') }}</td>
+                <td>{{ trans('admin::general.created_at') }}</td>
+            </tr>
+            {% for log in logs %}
+                <tr>
+                    <td>
+                        <a href="{{ route('admin.tools.tasks.edit', {'id': log.task_id}) }}">
+                            {{ trans(log.task.name) }}
+                        </a>
+                    </td>
+                    <td>{{ log.content }}</td>
+                    <td>{{ format_date(log.created_at) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        {{ logs.links()|raw }}
+    </div>
+{% endblock %}

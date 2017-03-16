@@ -11,5 +11,5 @@ interface RepositoryInterface
      *
      * @return Model
      */
-    public function find(int $id) : Model;
+    public function find(int $id);
 }

@@ -1,0 +1,12 @@
+{% extends "layouts.admin" %}
+{% block title %} {{ trans('admin::tasks.edit') }} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans('admin::tasks.edit') }} </h1>
+    </div>
+    <div class="admin-body__content">
+        <form method="post" action="{{ url_route('admin.tools.tasks.edit', {id: task.id}) }}">
+            {% include "admin.partials.tools.task_form" with [task] %}
+        </form>
+    </div>
+{% endblock %}

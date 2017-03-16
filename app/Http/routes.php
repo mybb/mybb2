@@ -14,7 +14,6 @@ Route::group(['prefix' => 'api/v1'], function () {
     Route::get('topics', ['as' => 'api.v1.topics.all', 'uses' => 'Api\TopicApiController@index']);
     Route::get('topic/{slug}', ['as' => 'api.v1.topics.show', 'uses' => 'Api\TopicApiController@show']);
 });
-
 /*
  * Applicaiton Routes
  */
@@ -221,6 +220,44 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('edit/{group}/{package?}', [
                 'as'   => 'admin.settings.edit',
                 'uses' => 'Admin\Settings\SettingsController@saveGroupOfSettings',
+            ]);
+        });
+        Route::group(['prefix' => 'tools'], function () {
+            Route::get('/tasks', [
+                'as'   => 'admin.tools.tasks',
+                'uses' => 'Admin\Tools\TasksController@show',
+            ]);
+            Route::get('/tasks/run/{id}', [
+                'as'   => 'admin.tools.tasks.run',
+                'uses' => 'Admin\Tools\TasksController@run',
+            ]);
+            Route::get('/tasks/edit/{id}', [
+                'as'   => 'admin.tools.tasks.edit',
+                'uses' => 'Admin\Tools\TasksController@edit',
+            ]);
+            Route::post('/tasks/edit/{id}', [
+                'as'   => 'admin.tools.tasks.edit',
+                'uses' => 'Admin\Tools\TasksController@update',
+            ]);
+            Route::get('/tasks/create', [
+                'as'   => 'admin.tools.tasks.create',
+                'uses' => 'Admin\Tools\TasksController@create',
+            ]);
+            Route::post('/tasks/create', [
+                'as'   => 'admin.tools.tasks.create',
+                'uses' => 'Admin\Tools\TasksController@save',
+            ]);
+            Route::post('/tasks/disable-enable', [
+                'as'   => 'admin.tools.tasks.disable_enable',
+                'uses' => 'Admin\Tools\TasksController@disableEnable',
+            ]);
+            Route::post('/tasks/delete', [
+                'as'   => 'admin.tools.tasks.delete',
+                'uses' => 'Admin\Tools\TasksController@delete',
+            ]);
+            Route::get('/tasks/logs/{id?}', [
+                'as'   => 'admin.tools.tasks.logs',
+                'uses' => 'Admin\Tools\TasksController@logs',
             ]);
         });
     });

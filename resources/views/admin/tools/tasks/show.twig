@@ -1,0 +1,48 @@
+{% extends "layouts.admin" %}
+{% block title %} {{ trans('admin::tasks.scheduled_tasks') }} {% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title"> {{ trans('admin::tasks.scheduled_tasks') }} </h1>
+        <div class="admin-body__header__buttons">
+            <a href="{{ url_route('admin.tools.tasks.create') }}" class="button icon fa-plus">{{ trans(('admin::tasks.add_task')) }}</a>
+            <a href="{{ url_route('admin.tools.tasks.logs') }}" class="button">{{ trans(('admin::tasks.view_logs')) }}</a>
+        </div>
+    </div>
+    <div class="admin-body__content">
+        <table>
+            <tr>
+                <td></td>
+                <td>{{ trans('admin::tasks.last_run') }}</td>
+                <td>{{ trans('admin::tasks.next_run') }}</td>
+                <td>Enabled</td>
+                <td></td>
+            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td>
+                        {{ trans(task.name) }} <br>
+                        <small>{{ trans(task.desc) }}</small>
+                    </td>
+                    <td>{{ format_date(task.last_run) }}</td>
+                    <td>{{ format_date(task.next_run) }}</td>
+                    <td>{{ task.enabled }}</td>
+                    <td>
+                        <a href="{{ route('admin.tools.tasks.edit', {'id': task.id}) }}">{{ trans('admin::tasks.edit') }}</a>
+                        <br>
+                        {{ admin_delete_button('admin.tools.tasks.delete', task.id) }} <br>
+                        <a href="{{ route('admin.tools.tasks.run', {'id': task.id}) }}"> {{ trans('admin::tasks.run') }}</a>
+                        <br>
+                        <form method="post" action="{{ route('admin.tools.tasks.disable_enable') }}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ task.id }}">
+                            <button type="submit" class="button button--secondary">
+                                {{ task.enabled == 0 ? trans('admin::tasks.enable') : trans('admin::tasks.disable') }}
+                            </button>
+                        </form>
+                        <a href="{{ route('admin.tools.tasks.logs', {'id': task.id}) }}"> {{ trans('admin::tasks.show_logs') }}</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -142,4 +142,19 @@ return [
             'desc'  => 'The maximum warning points that can be given to a user before it is considered a warning level of 100%.',
         ],
     ],
+
+    'tasks' => [
+        '__group'      => [
+            'title' => 'Task system',
+            'desc'  => 'Task system',
+        ],
+        'on_page' => [
+            'title' => 'Run on page tasks?',
+            'desc'  => '',
+        ],
+        'interval'   => [
+            'title' => 'Tasks interval',
+            'desc'  => 'Set tasks run interval (in minutes).',
+        ],
+    ],
 ];

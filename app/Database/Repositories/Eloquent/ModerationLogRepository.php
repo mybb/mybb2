@@ -31,7 +31,7 @@ class ModerationLogRepository implements ModerationLogRepositoryInterface
      *
      * @return ModerationLog
      */
-    public function find(int $id) : ModerationLog
+    public function find(int $id)
     {
         return $this->moderationLog->find($id);
     }
@@ -44,5 +44,14 @@ class ModerationLogRepository implements ModerationLogRepositoryInterface
     public function create(array $attributes) : ModerationLog
     {
         return $this->moderationLog->create($attributes);
+    }
+
+    /**
+     * @param string $timestamp
+     * @return mixed
+     */
+    public function deleteOlderThan($timestamp)
+    {
+        return $this->moderationLog->where('created_at', '<', $timestamp)->delete();
     }
 }

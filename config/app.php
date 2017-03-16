@@ -178,6 +178,7 @@ return [
         MyBB\Core\Moderation\ModerationServiceProvider::class,
         MyBB\Core\Repository\RepositoryServiceProvider::class,
         MyBB\Core\Providers\BroadcastServiceProvider::class,
+        MyBB\Core\Tasking\ServiceProvider::class,
     ],
     /*
 	|--------------------------------------------------------------------------
