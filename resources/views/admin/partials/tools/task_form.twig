@@ -8,13 +8,13 @@
             <h3 class="form__row__title">
                 <label for="name"> {{ trans('admin::tasks.title') }} </label>
             </h3>
-            <input type="text" name="name" id="name" value="{{ task ? trans(task.name) : old('name') }}"/>
+            <input type="text" name="name" id="name" value="{{ errors.any ? old('name') : task ? trans(task.name) }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
                 <label for="desc"> {{ trans('admin::tasks.desc') }} </label>
             </h3>
-            <input type="text" name="desc" id="desc" value="{{ task ? trans(task.desc) : old('desc') }}"/>
+            <input type="text" name="desc" id="desc" value="{{ errors.any ? old('desc') : task ? trans(task.desc) }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
@@ -23,7 +23,7 @@
             <p class="form__row__description">
                 {{ trans('admin::tasks.namespace_desc') }}
             </p>
-            <input type="text" name="namespace" id="namespace" value="{{ task ? task.namespace : old('namespace') }}"/>
+            <input type="text" name="namespace" id="namespace" value="{{ errors.any ? old('namespace') : task ? task.namespace }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
@@ -32,7 +32,7 @@
             <p class="form__row__description">
                 {{ trans('admin::tasks.time.minutes_desc') }}
             </p>
-            <input type="text" name="time[minutes]" id="minutes" value="{{ task ? time[0] : old('time[minutes]') }}"/>
+            <input type="text" name="time[minutes]" id="minutes" value="{{ errors.any ? old('time.minutes') : task ? time[0] : "*" }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
@@ -41,7 +41,7 @@
             <p class="form__row__description">
                 {{ trans('admin::tasks.time.hours_desc') }}
             </p>
-            <input type="text" name="time[hours]" id="hours" value="{{ task ? time[1] : old('time[hours]') }}"/>
+            <input type="text" name="time[hours]" id="hours" value="{{ errors.any ? old('time.hours') : task ? time[1] : "*" }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
@@ -50,7 +50,7 @@
             <p class="form__row__description">
                 {{ trans('admin::tasks.time.days_desc') }}
             </p>
-            <input type="text" name="time[days]" id="days" value="{{ task ? time[2] : old('time[days]') }}"/>
+            <input type="text" name="time[days]" id="days" value="{{ errors.any ? old('time.days') : task ? time[2] : "*" }}"/>
         </div>
         <div class="form__row">
             <h3 class="form__row__title">
@@ -60,11 +60,11 @@
                 {{ trans('admin::tasks.time.months_desc') }}
             </p>
             <select name="time[month][]" id="months" multiple>
-                <option value="*" {{ task is defined and "*" in time[3] or task is not defined and not errors.any or old('time[month]') == "*" ? 'selected' }}>
+                <option value="*" {{ task is defined and "*" in time[3] or task is not defined and not errors.any or old('time.month') == "*" ? 'selected' }}>
                     {{ trans('admin::tasks.time.every_month') }}
                 </option>
                 {% for i in 1..12 %}
-                    <option value="{{ i }}" {{ task is defined and i in time[3] or old('time[month]') == i ? 'selected' }}>
+                    <option value="{{ i }}" {{ task is defined and i in time[3] or old('time.month') == i ? 'selected' }}>
                         {{ trans('admin::general.month.' ~ i) }}
                     </option>
                 {% endfor %}
@@ -78,11 +78,11 @@
                 {{ trans('admin::tasks.time.weekdays_desc') }}
             </p>
             <select name="time[weekday][]" id="weekdays" multiple>
-                <option value="*" {{ task is defined and "*" in time[4] or task is not defined and not errors.any or old('time[weekday]') == "*" ? 'selected' }}>
+                <option value="*" {{ task is defined and "*" in time[4] or task is not defined and not errors.any or old('time.weekday') == "*" ? 'selected' }}>
                     {{ trans('admin::tasks.time.every_weekday') }}
                 </option>
                 {% for i in 1..7 %}
-                    <option value="{{ i }}" {{ task is defined and i in time[4] or old('time[weekday]') == i ? 'selected' }}>
+                    <option value="{{ i }}" {{ task is defined and i in time[4] or old('time.weekday') == i ? 'selected' }}>
                         {{ trans('admin::general.weekday.' ~ i) }}
                     </option>
                 {% endfor %}

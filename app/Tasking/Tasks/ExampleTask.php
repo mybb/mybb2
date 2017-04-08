@@ -50,6 +50,7 @@ class ExampleTask extends AbstractTask
     {
         // Custom log
         $this->tasksRepository->createLog($task, 'Custom task log');
+        //sleep(10);
 
         throw new TaskFailedException('There was an error');
     }

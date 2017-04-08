@@ -19,18 +19,11 @@ class Task extends Model
     public $timestamps = false;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are not mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'namespace',
-        'last_run',
-        'next_run',
-        'enabled',
-        'logging',
-        'frequency'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * A Task has many logs.

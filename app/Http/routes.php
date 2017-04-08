@@ -21,6 +21,12 @@ Route::group(['prefix' => 'api/v1'], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::get('/', ['as' => 'forum.index', 'uses' => 'ForumController@index']);
 
+    Route::get('/schedule-manager', [
+        'as' => 'forum.schedule-manager',
+        'uses' => 'ScheduleManagerController@sendFakeImage',
+        'middleware' => ['runtasks'],
+    ]);
+
     Route::get('forums', ['as' => 'forums.all', 'uses' => 'ForumController@all']);
     Route::get('forum/{id}/{slug}', ['as' => 'forums.show', 'uses' => 'ForumController@show']);
 

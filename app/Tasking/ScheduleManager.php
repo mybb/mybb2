@@ -119,11 +119,10 @@ class ScheduleManager
             $this->tasksRepository->update($task, ['enabled' => 0]);
             return false;
         }
-
         // Everything ok, run our task
         try {
-            $taskClass->fire($task);
             $this->tasksRepository->setTaskAsExecuted($task);
+            $taskClass->fire($task);
         } catch (TaskFailedException $e) {
             $this->tasksRepository
                 ->createLog($task, trans('admin::tasks.execution_error', ['message' => $e->getMessage()]));
@@ -139,7 +138,7 @@ class ScheduleManager
     /**
      * Update tasks cache (only when page scheduler is used)
      *
-     * @return bool
+     * @return bool|void
      */
     private function updateTasksCache()
     {

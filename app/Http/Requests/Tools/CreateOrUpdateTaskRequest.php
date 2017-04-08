@@ -21,7 +21,7 @@ class CreateOrUpdateTaskRequest extends AbstractRequest
     public function rules(): array
     {
         return [
-            'id'             => 'required|integer',
+            'id'             => 'integer',
             'name'           => 'required|string',
             'desc'           => 'required|string',
             'namespace'      => 'required|string',

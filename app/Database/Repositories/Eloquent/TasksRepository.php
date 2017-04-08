@@ -174,7 +174,11 @@ class TasksRepository implements TasksRepositoryInterface
      */
     public function getLogsForTask(int $taskId, int $paginate = 50) : LengthAwarePaginator
     {
-        return $this->taskLogsModel->where('task_id', $taskId)->orderBy('created_at', 'desc')->with(['task'])->paginate($paginate);
+        return $this->taskLogsModel
+            ->where('task_id', $taskId)
+            ->orderBy('created_at', 'desc')
+            ->with(['task'])
+            ->paginate($paginate);
     }
 
     /**

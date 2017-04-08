@@ -39,7 +39,6 @@ class Kernel extends HttpKernel
             \MyBB\Core\Http\Middleware\ShareViewVariables::class,
             \MyBB\Core\Http\Middleware\UpdateLastVisit::class,
             \MyBB\Core\Http\Middleware\AckWithWarn::class,
-            \MyBB\Core\Http\Middleware\RunTasks::class,
         ],
         'api' => [
             'throttle:60,1',
@@ -59,5 +58,6 @@ class Kernel extends HttpKernel
         'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkaccess'  => \MyBB\Core\Http\Middleware\CheckAccess::class,
         'checksetting' => \MyBB\Core\Http\Middleware\CheckSetting::class,
+        'runtasks'     => \MyBB\Core\Http\Middleware\RunTasks::class,
     ];
 }

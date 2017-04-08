@@ -44,20 +44,9 @@ class RunTasks extends AbstractBootstrapMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
-    }
-
-    /**
-     * Perform any final actions for the request lifecycle.
-     *
-     * @param $request
-     * @param $response
-     * @return void
-     */
-    public function terminate($request, $response)
-    {
         if ($this->settings->get('tasks.on_page')) {
             $this->schedule->runTasksFromWeb();
         }
+        return $next($request);
     }
 }

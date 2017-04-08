@@ -22,8 +22,8 @@ class TasksTableSeeder extends Seeder
                 'frequency' => '0 0 * * *', // Every day at 00:00
                 'name'      => 'admin::tasks.tasks.log_pruning',
                 'desc'      => 'admin::tasks.tasks.log_pruning_desc',
-                'last_run'  => new DateTime,
-                'next_run'  => new DateTime,
+                'last_run'  => time(),
+                'next_run'  => time(),
                 'enabled'   => 1,
                 'logging'   => 1,
             ],
