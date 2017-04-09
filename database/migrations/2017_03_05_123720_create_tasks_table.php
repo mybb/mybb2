@@ -33,6 +33,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExit('tasks');
+        Schema::dropIfExists('tasks');
     }
 }

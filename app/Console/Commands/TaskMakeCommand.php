@@ -79,6 +79,7 @@ class TaskMakeCommand extends GeneratorCommand
                 'last_run'  => time(),
                 'next_run'  => time(),
             ]);
+
             if ($task) {
                 $this->info('Task successfully inserted to database');
             }

@@ -3,23 +3,28 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Mockery;
+use Illuminate\Support\Collection;
+use MyBB\Core\Database\Models\Task;
+use MyBB\Core\Database\Models\TaskLog;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\Paginator;
 
 class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     public function testCanBeConstructed()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
         $repository = new TasksRepository($task, $taskLog);
 
-        static::assertInstanceOf('MyBB\Core\Database\Repositories\Eloquent\TasksRepository', $repository);
+        static::assertInstanceOf(TasksRepository::class, $repository);
     }
 
     public function testCanRetrieveAllTasks()
     {
-        $collection = Mockery::mock('Illuminate\Support\Collection');
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $collection = Mockery::mock(Collection::class);
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
 
         $task->shouldReceive('all')
             ->withNoArgs()
@@ -32,8 +37,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRetrieveOneTask()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
 
         $task->shouldReceive('find')
             ->with(1)
@@ -46,8 +51,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanUpdateTask()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
         $details = ['foo' => 'bar'];
 
         $task->shouldReceive('update')
@@ -62,8 +67,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanCreateTask()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
         $details = ['foo' => 'bar'];
 
         $task->shouldReceive('create')
@@ -77,8 +82,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDeleteTaskWithLogs()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
 
         $task->shouldReceive('logs')
             ->withNoArgs()
@@ -99,10 +104,10 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveEnabledTasks()
     {
-        $collection = Mockery::mock('Illuminate\Support\Collection');
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
+        $collection = Mockery::mock(Collection::class);
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
 
         $builder->shouldReceive('get')
             ->withNoArgs()
@@ -119,9 +124,9 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveTaskToRun()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
 
         $builder->shouldReceive('first')
             ->withNoArgs()
@@ -142,10 +147,10 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveTasksToRun()
     {
-        $collection = Mockery::mock('Illuminate\Support\Collection');
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
+        $collection = Mockery::mock(Collection::class);
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
 
         $builder->shouldReceive('get')
             ->withNoArgs()
@@ -166,8 +171,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanSetTaskAsExecuted()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
         $cron = Mockery::mock('Cron\CronExpression');
 
         $cron->shouldReceive('factory')
@@ -197,9 +202,9 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testRetrieveNumberOfTaskToRun()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
 
         $builder->shouldReceive('count')
             ->withNoArgs()
@@ -216,8 +221,8 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanCreateLog()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
 
         $task->shouldReceive('getAttribute')
             ->with('logging')
@@ -238,10 +243,10 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRetrieveLogsForSpecifiedTask()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
-        $paginator = Mockery::mock('Illuminate\Pagination\LengthAwarePaginator');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
+        $paginator = Mockery::mock(Paginator::class);
 
         $taskLog->shouldReceive('where')
             ->with('task_id', 1)
@@ -255,7 +260,7 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
             ->with(['task'])
             ->andReturn($builder);
 
-        $builder->shouldReceive('paginate')
+        $builder->shouldReceive('simplePaginate')
             ->with(50)
             ->andReturn($paginator);
 
@@ -266,10 +271,10 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanRetrieveLogsTasks()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
-        $paginator = Mockery::mock('Illuminate\Pagination\LengthAwarePaginator');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
+        $paginator = Mockery::mock(Paginator::class);
 
         $taskLog->shouldReceive('orderBy')
             ->with('created_at', 'desc')
@@ -279,7 +284,7 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
             ->with(['task'])
             ->andReturn($builder);
 
-        $builder->shouldReceive('paginate')
+        $builder->shouldReceive('simplePaginate')
             ->with(50)
             ->andReturn($paginator);
 
@@ -290,9 +295,9 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testCanDeleteLogsOlderThanTimestamp()
     {
-        $task = Mockery::mock('MyBB\Core\Database\Models\Task');
-        $taskLog = Mockery::mock('MyBB\Core\Database\Models\TaskLog');
-        $builder = Mockery::mock('\Illuminate\Database\Eloquent\Builder');
+        $task = Mockery::mock(Task::class);
+        $taskLog = Mockery::mock(TaskLog::class);
+        $builder = Mockery::mock(Builder::class);
 
         $taskLog->shouldReceive('where')
             ->with('created_at', '<', '2017-01-01 00:00')

@@ -18,7 +18,6 @@ use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
 
 class ScheduleManager
 {
-
     /**
      * @var Application
      */

@@ -10,7 +10,6 @@ namespace MyBB\Core\Http\Controllers;
 
 class ScheduleManagerController extends AbstractController
 {
-
     /**
      * @return Illuminate/Http/Response
      */

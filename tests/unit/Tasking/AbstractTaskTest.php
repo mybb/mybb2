@@ -8,8 +8,8 @@ class AbstractTaskTest extends \PHPUnit_Framework_TestCase
 {
     public function testCanBeFired()
     {
-        $task = Mockery::mock('MyBB\Core\Tasking\AbstractTask');
-        $taskModel = Mockery::mock('MyBB\Core\Database\Models\Task');
+        $task = Mockery::mock(AbstractTask::class);
+        $taskModel = Mockery::mock(\MyBB\Core\Database\Models\Task::class);
 
         $task->shouldReceive('fire')
             ->with($taskModel)
@@ -18,7 +18,7 @@ class AbstractTaskTest extends \PHPUnit_Framework_TestCase
 
     public function testIsCommand()
     {
-        $task = Mockery::mock('MyBB\Core\Tasking\AbstractTask');
-        static::assertInstanceOf('Illuminate\Console\Command', $task);
+        $task = Mockery::mock(AbstractTask::class);
+        static::assertInstanceOf(\Illuminate\Console\Command::class, $task);
     }
 }

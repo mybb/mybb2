@@ -28,6 +28,6 @@ class CreateTaskLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExit('task_logs');
+        Schema::dropIfExists('task_logs');
     }
 }

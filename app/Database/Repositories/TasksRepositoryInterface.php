@@ -9,7 +9,7 @@
 namespace MyBB\Core\Database\Repositories;
 
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use MyBB\Core\Database\Models\Task;
 
 interface TasksRepositoryInterface
@@ -104,17 +104,17 @@ interface TasksRepositoryInterface
      *
      * @param int $taskId Task id
      * @param int $paginate
-     * @return LengthAwarePaginator
+     * @return Paginator
      */
-    public function getLogsForTask(int $taskId, int $paginate = 50) : LengthAwarePaginator;
+    public function getLogsForTask(int $taskId, int $paginate = 50) : Paginator;
 
     /**
      * Get all logs
      *
      * @param int $paginate
-     * @return LengthAwarePaginator
+     * @return Paginator
      */
-    public function getLogs(int $paginate = 50) : LengthAwarePaginator;
+    public function getLogs(int $paginate = 50) : Paginator;
 
     /**
      * Delete logs older than given timestamp

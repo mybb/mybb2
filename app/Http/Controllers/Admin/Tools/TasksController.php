@@ -20,7 +20,6 @@ use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
 
 class TasksController extends AdminController
 {
-
     /**
      * @var TasksRepositoryInterface
      */
@@ -106,7 +105,6 @@ class TasksController extends AdminController
         $time[3] = explode(',', $time[3]);
         $time[4] = explode(',', $time[4]);
 
-
         return view('admin.tools.tasks.edit', compact('task', 'time'))->withActive('tasks');
     }
 
@@ -124,18 +122,18 @@ class TasksController extends AdminController
         }
 
         // Format time inputs to cron expression
-        $cron_format = $this->timeInputsToCronExpression($request->get('time'));
+        $cronFormat = $this->timeInputsToCronExpression($request->get('time'));
         // Calculate next run date
         $dt = new \DateTime();
-        $cron = CronExpression::factory($cron_format);
-        $next_run = $cron->getNextRunDate($dt->setTimestamp($task->last_run))->getTimestamp();
+        $cron = CronExpression::factory($cronFormat);
+        $nextRun = $cron->getNextRunDate($dt->setTimestamp($task->last_run))->getTimestamp();
 
         $this->tasksRepository->update($task, [
             'name'      => $inputs['name'],
             'desc'      => $inputs['desc'],
             'namespace' => $inputs['namespace'],
-            'frequency' => $cron_format,
-            'next_run'  => $next_run,
+            'frequency' => $cronFormat,
+            'next_run'  => $nextRun,
             'logging'   => isset($inputs['logging']),
             'enabled'   => isset($inputs['enabled']),
         ]);
@@ -160,13 +158,13 @@ class TasksController extends AdminController
     {
         $inputs = $request->except('_csrf');
         // Format time inputs to cron expression
-        $cron_format = $this->timeInputsToCronExpression($request->get('time'));
+        $cronFormat = $this->timeInputsToCronExpression($request->get('time'));
 
         $this->tasksRepository->createTask([
             'name'      => $inputs['name'],
             'desc'      => $inputs['desc'],
             'namespace' => $inputs['namespace'],
-            'frequency' => $cron_format,
+            'frequency' => $cronFormat,
             'last_run'  => time(),
             'next_run'  => time(),
             'logging'   => isset($inputs['logging']),
@@ -238,21 +236,21 @@ class TasksController extends AdminController
      */
     private function timeInputsToCronExpression(array $inputs = []): string
     {
-        $cron_format = '';
+        $cronFormat = '';
         foreach ($inputs as $key => $value) {
             if ($key === 'month' || $key === 'weekday') {
                 if (in_array('*', $value)) {
-                    $cron_format .= ' *';
+                    $cronFormat .= ' *';
                 } else {
-                    $cron_format .= ' ' . implode(',', $value);
+                    $cronFormat .= ' ' . implode(',', $value);
                 }
             } elseif ($key === 'minutes') {
-                $cron_format .= $value;
+                $cronFormat .= $value;
             } else {
-                $cron_format .= ' ' . $value;
+                $cronFormat .= ' ' . $value;
             }
         }
 
-        return $cron_format;
+        return $cronFormat;
     }
 }

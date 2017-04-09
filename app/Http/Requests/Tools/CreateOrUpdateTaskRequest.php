@@ -14,7 +14,6 @@ use MyBB\Core\Http\Requests\AbstractRequest;
 
 class CreateOrUpdateTaskRequest extends AbstractRequest
 {
-
     /**
      * @return array
      */

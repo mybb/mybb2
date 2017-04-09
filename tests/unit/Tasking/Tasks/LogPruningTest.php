@@ -3,30 +3,31 @@
 namespace MyBB\Core\Tasking\Tasks;
 
 use Mockery;
+use MyBB\Core\Tasking\AbstractTask;
 
 class LogPruningTest extends \PHPUnit_Framework_TestCase
 {
     public function testCanBeConstructed()
     {
-        $tasksRepository = Mockery::mock('MyBB\Core\Database\Repositories\TasksRepositoryInterface');
-        $settings = Mockery::mock('MyBB\Settings\Store');
-        $moderationLog = Mockery::mock('MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface');
+        $tasksRepository = Mockery::mock(\MyBB\Core\Database\Repositories\TasksRepositoryInterface::class);
+        $settings = Mockery::mock(\MyBB\Settings\Store::class);
+        $moderationLog = Mockery::mock(\MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface::class);
 
         $task = new LogPruningTask($settings, $tasksRepository, $moderationLog);
 
-        static::assertInstanceOf('MyBB\Core\Tasking\Tasks\LogPruningTask', $task);
-        static::assertInstanceOf('MyBB\Core\Tasking\AbstractTask', $task);
+        static::assertInstanceOf(LogPruningTask::class, $task);
+        static::assertInstanceOf(AbstractTask::class, $task);
     }
 
     public function testHasName()
     {
-        $task = Mockery::mock('MyBB\Core\Tasking\Tasks\LogPruningTask');
+        $task = Mockery::mock(LogPruningTask::class);
         static::assertInternalType('string', $this->getProtectedProperty($task, 'name'));
     }
 
     public function testHasDescription()
     {
-        $task = Mockery::mock('MyBB\Core\Tasking\Tasks\LogPruningTask');
+        $task = Mockery::mock(LogPruningTask::class);
         static::assertInternalType('string', $this->getProtectedProperty($task, 'description'));
     }
 

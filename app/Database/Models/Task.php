@@ -32,6 +32,6 @@ class Task extends Model
      */
     public function logs()
     {
-        return $this->hasMany(\MyBB\Core\Database\Models\TaskLog::class);
+        return $this->belongsTo(\MyBB\Core\Database\Models\TaskLog::class);
     }
 }

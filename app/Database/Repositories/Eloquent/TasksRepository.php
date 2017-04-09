@@ -9,7 +9,7 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Pagination\Paginator;
 use MyBB\Core\Database\Models\Task;
 use MyBB\Core\Database\Models\TaskLog;
 use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
@@ -17,7 +17,6 @@ use Cron\CronExpression;
 
 class TasksRepository implements TasksRepositoryInterface
 {
-
     /**
      * @var Task
      */
@@ -170,26 +169,26 @@ class TasksRepository implements TasksRepositoryInterface
      *
      * @param int $taskId Task id
      * @param int $paginate
-     * @return LengthAwarePaginator
+     * @return Paginator
      */
-    public function getLogsForTask(int $taskId, int $paginate = 50) : LengthAwarePaginator
+    public function getLogsForTask(int $taskId, int $paginate = 50) : Paginator
     {
         return $this->taskLogsModel
             ->where('task_id', $taskId)
             ->orderBy('created_at', 'desc')
             ->with(['task'])
-            ->paginate($paginate);
+            ->simplePaginate($paginate);
     }
 
     /**
      * Get all logs
      *
      * @param int $paginate
-     * @return LengthAwarePaginator
+     * @return Paginator
      */
-    public function getLogs(int $paginate = 50) : LengthAwarePaginator
+    public function getLogs(int $paginate = 50) : Paginator
     {
-        return $this->taskLogsModel->orderBy('created_at', 'desc')->with(['task'])->paginate($paginate);
+        return $this->taskLogsModel->orderBy('created_at', 'desc')->with(['task'])->simplePaginate($paginate);
     }
 
     /**
