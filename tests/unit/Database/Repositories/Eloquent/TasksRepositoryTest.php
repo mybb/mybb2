@@ -89,7 +89,7 @@ class TasksRepositoryTest extends \PHPUnit_Framework_TestCase
             ->withNoArgs()
             ->andReturn($taskLog);
 
-        $taskLog->shouldReceive('detach')
+        $taskLog->shouldReceive('delete')
             ->withNoArgs()
             ->andReturn(true);
 

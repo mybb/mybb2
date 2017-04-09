@@ -91,7 +91,7 @@ class TasksRepository implements TasksRepositoryInterface
      */
     public function deleteWithLogs(Task $task)
     {
-        $task->logs()->detach();
+        $task->logs()->delete();
         return $task->delete();
     }
 
