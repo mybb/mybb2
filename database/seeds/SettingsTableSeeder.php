@@ -71,6 +71,10 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'warnings.max_points', 'setting_type' => 'number'],
             ['name' => 'warnings.allow_zero', 'setting_type' => 'switch'],
             ['name' => 'warnings.allow_custom', 'setting_type' => 'switch'],
+            ['name' => 'tasks.on_page', 'setting_type' => 'switch'],
+            ['name' => 'tasks.interval', 'setting_type' => 'number'],
+            ['name' => 'tasks.max_log_life', 'setting_type' => 'number'],
+            ['name' => 'moderation.max_log_life', 'setting_type' => 'number'],
         ]);
 
         DB::table('setting_values')->insert([
@@ -277,6 +281,22 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             [
                 'setting_id' => DB::table('settings')->where('name', 'warnings.allow_custom')->first()->id,
                 'value'      => 1,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'tasks.interval')->first()->id,
+                'value'      => 1,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'tasks.on_page')->first()->id,
+                'value'      => 1,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'tasks.max_log_life')->first()->id,
+                'value'      => 30,
+            ],
+            [
+                'setting_id' => DB::table('settings')->where('name', 'moderation.max_log_life')->first()->id,
+                'value'      => 30,
             ],
         ]);
     }

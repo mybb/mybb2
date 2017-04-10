@@ -28,6 +28,7 @@ use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository;
 use MyBB\Core\Database\Repositories\Eloquent\RoleRepository;
 use MyBB\Core\Database\Repositories\Eloquent\SearchRepository;
+use MyBB\Core\Database\Repositories\Eloquent\TasksRepository;
 use MyBB\Core\Database\Repositories\Eloquent\TopicRepository;
 use MyBB\Core\Database\Repositories\Eloquent\UserProfileFieldRepository;
 use MyBB\Core\Database\Repositories\Eloquent\UserRepository;
@@ -42,6 +43,7 @@ use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
+use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
 use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 use MyBB\Core\Database\Repositories\UserRepositoryInterface;
@@ -166,6 +168,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             WarningTypesRepositoryInterface::class,
             WarningTypesRepository::class
+        );
+
+        $this->app->bind(
+            TasksRepositoryInterface::class,
+            TasksRepository::class
         );
 
         $this->app->singleton(PermissionChecker::class);

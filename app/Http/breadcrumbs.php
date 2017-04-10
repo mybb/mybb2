@@ -308,6 +308,26 @@ Breadcrumbs::register('admin.warnings.warning_types.edit', function ($breadcrumb
     $breadcrumbs->push(trans('admin::warnings.warning_types'));
 });
 
+Breadcrumbs::register('admin.tools.tasks', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push(trans('admin::tasks.scheduled_tasks'));
+});
+
+Breadcrumbs::register('admin.tools.tasks.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.tools.tasks');
+    $breadcrumbs->push(trans('admin::tasks.add_task'));
+});
+
+Breadcrumbs::register('admin.tools.tasks.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.tools.tasks');
+    $breadcrumbs->push(trans('admin::tasks.edit'));
+});
+
+Breadcrumbs::register('admin.tools.tasks.logs', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.tools.tasks');
+    $breadcrumbs->push(trans('admin::tasks.view_logs'));
+});
+
 Breadcrumbs::register('moderation.control_panel', function ($breadcrumbs) {
     $breadcrumbs->parent('forum.index');
     $breadcrumbs->push(trans('moderation.title'));

@@ -18,4 +18,10 @@ interface ModerationLogRepositoryInterface extends RepositoryInterface
      * @return ModerationLog
      */
     public function create(array $attributes) : ModerationLog;
+
+    /**
+     * @param string $timestamp
+     * @return mixed
+     */
+    public function deleteOlderThan($timestamp);
 }

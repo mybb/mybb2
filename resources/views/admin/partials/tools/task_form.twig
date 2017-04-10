@@ -1,0 +1,125 @@
+<section class="form">
+    {% if task is defined %}
+        <input type="hidden" name="id" value="{{ task.id }}">
+    {% endif %}
+    {{ csrf_field() }}
+    <div class="form__section">
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="name"> {{ trans('admin::tasks.title') }} </label>
+            </h3>
+            <input type="text" name="name" id="name" value="{{ errors.any ? old('name') : task ? trans(task.name) }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="desc"> {{ trans('admin::tasks.desc') }} </label>
+            </h3>
+            <input type="text" name="desc" id="desc" value="{{ errors.any ? old('desc') : task ? trans(task.desc) }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="namespace"> {{ trans('admin::tasks.namespace') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.namespace_desc') }}
+            </p>
+            <input type="text" name="namespace" id="namespace" value="{{ errors.any ? old('namespace') : task ? task.namespace }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="minutes"> {{ trans('admin::tasks.time.minutes') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.time.minutes_desc') }}
+            </p>
+            <input type="text" name="time[minutes]" id="minutes" value="{{ errors.any ? old('time.minutes') : task ? time[0] : "*" }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="hours"> {{ trans('admin::tasks.time.hours') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.time.hours_desc') }}
+            </p>
+            <input type="text" name="time[hours]" id="hours" value="{{ errors.any ? old('time.hours') : task ? time[1] : "*" }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="days"> {{ trans('admin::tasks.time.days') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.time.days_desc') }}
+            </p>
+            <input type="text" name="time[days]" id="days" value="{{ errors.any ? old('time.days') : task ? time[2] : "*" }}"/>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="months"> {{ trans('admin::tasks.time.months') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.time.months_desc') }}
+            </p>
+            <select name="time[month][]" id="months" multiple>
+                <option value="*" {{ task is defined and "*" in time[3] or task is not defined and not errors.any or old('time.month') == "*" ? 'selected' }}>
+                    {{ trans('admin::tasks.time.every_month') }}
+                </option>
+                {% for i in 1..12 %}
+                    <option value="{{ i }}" {{ task is defined and i in time[3] or old('time.month') == i ? 'selected' }}>
+                        {{ trans('admin::general.month.' ~ i) }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="weekdays"> {{ trans('admin::tasks.time.weekdays') }} </label>
+            </h3>
+            <p class="form__row__description">
+                {{ trans('admin::tasks.time.weekdays_desc') }}
+            </p>
+            <select name="time[weekday][]" id="weekdays" multiple>
+                <option value="*" {{ task is defined and "*" in time[4] or task is not defined and not errors.any or old('time.weekday') == "*" ? 'selected' }}>
+                    {{ trans('admin::tasks.time.every_weekday') }}
+                </option>
+                {% for i in 1..7 %}
+                    <option value="{{ i }}" {{ task is defined and i in time[4] or old('time.weekday') == i ? 'selected' }}>
+                        {{ trans('admin::general.weekday.' ~ i) }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="logging"> {{ trans('admin::tasks.logging') }} </label>
+            </h3>
+            <div class="segmented-control">
+                <span class="segmented-control__option">
+                    <input id="logging_yes" class="segmented-control__option__input" name="logging" type="radio" value="1" {{ task is defined and task.logging or not errors.any or old('logging') == 1 ? 'checked'}}>
+                    <label class="segmented-control__option__button" for="logging_yes">{{ trans('admin::general.yes') }}</label>
+                </span>
+                <span class="segmented-control__option">
+                    <input id="logging_no" class="segmented-control__option__input" name="logging" type="radio" value="0" {{ task is defined and not task.logging or errors.any and old('logging') == 0  ? 'checked' }}>
+                    <label class="segmented-control__option__button" for="logging_no">{{ trans('admin::general.no') }}</label>
+                </span>
+            </div>
+        </div>
+        <div class="form__row">
+            <h3 class="form__row__title">
+                <label for="enabled"> {{ trans('admin::tasks.enabled') }} </label>
+            </h3>
+            <div class="segmented-control">
+                <span class="segmented-control__option">
+                    <input id="enabled_yes" class="segmented-control__option__input" name="enabled" type="radio" value="1" {{ task is defined and task.enabled or not errors.any or old('enabled') == 1 ? 'checked'}}>
+                    <label class="segmented-control__option__button" for="enabled_yes">{{ trans('admin::general.yes') }}</label>
+                </span>
+                <span class="segmented-control__option">
+                    <input id="enabled_no" class="segmented-control__option__input" name="enabled" type="radio" value="0" {{ task is defined and not task.enabled or errors.any and old('enabled') == 0  ? 'checked' }}>
+                    <label class="segmented-control__option__button" for="enabled_no">{{ trans('admin::general.no') }}</label>
+                </span>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="form__submit">
+    <button type="submit" class="button">{{ trans('admin::general.save') }}</button>
+</div>

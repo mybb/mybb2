@@ -14,3 +14,9 @@
         <p class="alert__message icon fa-check-circle">{{ session_get('success') }}</p>
     </div>
 {% endif %}
+
+{% if session_has('error') %}
+    <div class="alert alert--danger">
+        <p class="alert__message icon fa-warning">{{ session_get('error') }}</p>
+    </div>
+{% endif %}

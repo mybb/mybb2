@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'throttle'     => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'checkaccess'  => \MyBB\Core\Http\Middleware\CheckAccess::class,
         'checksetting' => \MyBB\Core\Http\Middleware\CheckSetting::class,
+        'runtasks'     => \MyBB\Core\Http\Middleware\RunTasks::class,
     ];
 }

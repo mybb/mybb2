@@ -39,7 +39,9 @@ return [
     'user_not_found'                   => 'Sorry, the specified user could not be found.',
     'warnings_content_invalid_class'   => "Failed to load Warnings Content Class ':class'",
     'user_not_belongs_to_content'      => ':user is not author of this content',
-    'warning_type_not_found'           => 'Warning Type not found',
-    'warning_not_found'                => 'Warning not found',
-    'setting_not_found'                => 'Setting group nof found',
+    'warning_type_not_found'           => 'Sorry, the specified Warning Type group could not be found.',
+    'warning_not_found'                => 'Sorry, the specified Warning could not be found.',
+    'setting_not_found'                => 'Sorry, the specified Setting group could not be found.',
+    'task_failed'                      => 'The error occurred while executing task',
+    'task_not_found'                   => 'Sorry, the specified Task could not be found.',
 ];

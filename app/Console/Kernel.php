@@ -10,6 +10,9 @@ namespace MyBB\Core\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use MyBB\Core\Tasking\ScheduleManager;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Events\Dispatcher;
 
 class Kernel extends ConsoleKernel
 {
@@ -19,8 +22,23 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'MyBB\Core\Console\Commands\RecountCommand',
+        Commands\RecountCommand::class,
+        Commands\TaskMakeCommand::class,
     ];
+
+    protected $app;
+
+    /**
+     * Kernel constructor.
+     * @param Application $app
+     * @param Dispatcher $events
+     */
+    public function __construct(Application $app, Dispatcher $events)
+    {
+        parent::__construct($app, $events);
+
+        $this->app = $app;
+    }
 
     /**
      * Define the application's command schedule.
@@ -31,5 +49,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $manager = $this->app->make(ScheduleManager::class);
+        $manager->runTasksFromCLI($schedule);
     }
 }

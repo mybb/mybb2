@@ -52,3 +52,6 @@
             });
         </script>
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        {% if setting('tasks.on_page') %}
+            <img src="{{ route('forum.schedule-manager') }}"/>
+        {% endif %}
