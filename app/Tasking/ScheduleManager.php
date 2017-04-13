@@ -70,12 +70,12 @@ class ScheduleManager
      * Run tasks from Command Line
      *
      * @param Schedule $schedule
-     * @return bool
+     * @return void
      */
     public function runTasksFromCLI(Schedule $schedule)
     {
         // Check if we can grab tasks from database.
-        if ($this->dbManager->connection()) {
+        try {
             $tasks = $this->tasksRepository->getEnabledTasks();
             foreach ($tasks as $task) {
                 $schedule->call(function () use ($task) {
@@ -84,6 +84,8 @@ class ScheduleManager
                     ->name($task->namespace)
                     ->withoutOverlapping();
             }
+        } catch (\Exception $e) {
+            unset($e);
         }
     }
 

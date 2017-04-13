@@ -68,21 +68,25 @@ class TaskMakeCommand extends GeneratorCommand
     {
         $fileCreated = parent::fire();
 
-        if ($this->dbManager->connection() && $fileCreated !== false && !$this->option('no-database')) {
-            $task = $this->tasksRepository->createTask([
-                'namespace' => $this->getDefaultNamespace('MyBB\Core') . '\\' . $this->argument('name'),
-                'frequency' => $this->option('frequency'),
-                'name'      => $this->option('name'),
-                'desc'      => $this->option('description'),
-                'logging'   => 1,
-                'enabled'   => (int)$this->option('enabled'),
-                'last_run'  => time(),
-                'next_run'  => time(),
-            ]);
+        try {
+            if ($fileCreated !== false && !$this->option('no-database')) {
+                $task = $this->tasksRepository->createTask([
+                    'namespace' => $this->getDefaultNamespace('MyBB\Core') . '\\' . $this->argument('name'),
+                    'frequency' => $this->option('frequency'),
+                    'name'      => $this->option('name'),
+                    'desc'      => $this->option('desc'),
+                    'logging'   => 1,
+                    'enabled'   => (int)$this->option('enabled'),
+                    'last_run'  => time(),
+                    'next_run'  => time(),
+                ]);
 
-            if ($task) {
-                $this->info('Task successfully inserted to database');
+                if ($task) {
+                    $this->info('Task successfully inserted to database');
+                }
             }
+        } catch (\Exception $e) {
+            unset($e);
         }
     }
 
@@ -143,7 +147,7 @@ class TaskMakeCommand extends GeneratorCommand
         return [
             ['command', null, InputOption::VALUE_OPTIONAL, 'The terminal command that should be assigned.', 'command'],
             ['frequency', 'f', InputOption::VALUE_OPTIONAL, 'Frequency of task execution.', '* * * * *'],
-            ['name', 'n', InputOption::VALUE_OPTIONAL, 'Task display name language path.', 'admin::tasks.task'],
+            ['name', null, InputOption::VALUE_OPTIONAL, 'Task display name language path.', 'admin::tasks.task'],
             ['desc', 'd', InputOption::VALUE_OPTIONAL, 'Task description language path.', 'admin::tasks.task'],
             ['enabled', 'e', InputOption::VALUE_OPTIONAL, 'Enable task?', 0],
             ['no-database', null, InputOption::VALUE_NONE, 'Do not insert task to database', null],
