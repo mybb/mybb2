@@ -8,7 +8,6 @@
 
 namespace MyBB\Core\Tasking;
 
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
@@ -40,30 +39,22 @@ class ScheduleManager
     private $cache;
 
     /**
-     * @var DatabaseManager
-     */
-    protected $dbManager;
-
-    /**
      * ScheduleManager constructor.
      * @param Application $app
      * @param TasksRepositoryInterface $tasksRepository
      * @param Store $settings
      * @param CacheRepository $cache
-     * @param DatabaseManager $dbManager
      */
     public function __construct(
         Application $app,
         TasksRepositoryInterface $tasksRepository,
         Store $settings,
-        CacheRepository $cache,
-        DatabaseManager $dbManager
+        CacheRepository $cache
     ) {
         $this->app = $app;
         $this->tasksRepository = $tasksRepository;
         $this->settings = $settings;
         $this->cache = $cache;
-        $this->dbManager = $dbManager;
     }
 
     /**

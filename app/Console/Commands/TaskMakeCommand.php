@@ -3,7 +3,6 @@
 namespace MyBB\Core\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -33,11 +32,6 @@ class TaskMakeCommand extends GeneratorCommand
     protected $type = 'MyBB Task';
 
     /**
-     * @var DatabaseManager
-     */
-    protected $dbManager;
-
-    /**
      * @var TasksRepositoryInterface
      */
     protected $tasksRepository;
@@ -45,17 +39,14 @@ class TaskMakeCommand extends GeneratorCommand
     /**
      * TaskMakeCommand constructor.
      * @param Filesystem $files
-     * @param DatabaseManager $dbManager
      * @param TasksRepositoryInterface $tasksRepository
      */
     public function __construct(
         Filesystem $files,
-        DatabaseManager $dbManager,
         TasksRepositoryInterface $tasksRepository
     ) {
         parent::__construct($files);
 
-        $this->dbManager = $dbManager;
         $this->tasksRepository = $tasksRepository;
     }
 
