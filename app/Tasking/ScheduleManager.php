@@ -8,6 +8,7 @@
 
 namespace MyBB\Core\Tasking;
 
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
@@ -39,38 +40,50 @@ class ScheduleManager
     private $cache;
 
     /**
+     * @var DatabaseManager
+     */
+    protected $dbManager;
+
+    /**
      * ScheduleManager constructor.
      * @param Application $app
      * @param TasksRepositoryInterface $tasksRepository
      * @param Store $settings
      * @param CacheRepository $cache
+     * @param DatabaseManager $dbManager
      */
     public function __construct(
         Application $app,
         TasksRepositoryInterface $tasksRepository,
         Store $settings,
-        CacheRepository $cache
+        CacheRepository $cache,
+        DatabaseManager $dbManager
     ) {
         $this->app = $app;
         $this->tasksRepository = $tasksRepository;
         $this->settings = $settings;
         $this->cache = $cache;
+        $this->dbManager = $dbManager;
     }
 
     /**
      * Run tasks from Command Line
      *
      * @param Schedule $schedule
+     * @return bool
      */
     public function runTasksFromCLI(Schedule $schedule)
     {
-        $tasks = $this->tasksRepository->getEnabledTasks();
-        foreach ($tasks as $task) {
-            $schedule->call(function () use ($task) {
-                $this->runTask($task);
-            })->cron($task->frequency)
-                ->name($task->namespace)
-                ->withoutOverlapping();
+        // Check if we can grab tasks from database.
+        if ($this->dbManager->connection()) {
+            $tasks = $this->tasksRepository->getEnabledTasks();
+            foreach ($tasks as $task) {
+                $schedule->call(function () use ($task) {
+                    $this->runTask($task);
+                })->cron($task->frequency)
+                    ->name($task->namespace)
+                    ->withoutOverlapping();
+            }
         }
     }
 
@@ -79,7 +92,7 @@ class ScheduleManager
      *
      * @return bool
      */
-    public function runTasksFromWeb() : bool
+    public function runTasksFromWeb(): bool
     {
         if ($this->cache->has('tasks.fired')) {
             // Nothing to do at this moment. Tasks were ran recently
