@@ -29,6 +29,7 @@ return [
     'noOnline'           => 'Nobody is online',
     'profileOf'          => 'Profile of :name',
     'sortMembers'        => 'Sort members',
+    'successRegister'    => 'Your account has been successfully registered.',
 
     'profile' => [
         'recentActivity' => 'Recent Activity',

@@ -3,7 +3,8 @@
     {{ trans('member.signup') }}
 {% endblock %}
 {% block contents %}
-    {{ form_open({'url': ['auth/signup'], 'method': 'post'}) }}
+    <form role="form" method="POST" action="{{ url('/register') }}">
+    {{ csrf_field() }}
     <div class="page-content page-content--centered">
         <header class="page-header">
             <h1 class="page-title">{{ trans('member.signup') }}</h1>
@@ -11,31 +12,33 @@
         <section class="form">
             <div class="form__section">
                 <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('name', trans('member.username')) }}</h3>
-                    {{ form_text('name') }}
+                    <h3 class="form__row__title"><label for="name">{{ trans('member.username') }}</label></h3>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}" required autofocus>
                 </div>
                 <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('email', trans('member.email')) }}</h3>
-                    {{ form_text('email') }}
+                    <h3 class="form__row__title"><label for="email">{{ trans('member.email') }}</label></h3>
+                    <input type="text" name="email" id="email" value="{{ old('email') }}" required>
                 </div>
                 <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('password', trans('member.password')) }}</h3>
-                    {{ form_password('password', {'class': 'password-toggle'}) }}
+                    <h3 class="form__row__title"><label for="password">{{ trans('member.password') }}</label></h3>
+                    <input type="password" name="password" id="password" class="password-toggle" required>
                 </div>
                 <div class="form__row">
-                    <h3 class="form__row__title">{{ form_label('password_confirmation', trans('member.password')) }}</h3>
+                    <h3 class="form__row__title"><label for="password_confirmation">{{ trans('member.password') }}</label></h3>
                     <p class="form__row__description">{{ trans('member.password_confirm') }}</p>
-                    {{ form_password('password_confirmation', {'class': 'password-toggle'}) }}
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="password-toggle" required>
                 </div>
                 <div class="form__row">
                     {{ captcha() }}
                 </div>
             </div>
         </section>
-        {{ form_hidden('url', input_get('url')) }}
+        <input type="hidden" name="url" value="{{ input_get('url') }}">
         <div class="form__submit">
-            {{ form_button(trans('member.signup'), {'type': 'submit', 'class': 'button icon fa-user'}) }}
+            <button type="submit" class="button icon fa-user">
+                {{ trans('member.signup') }}
+            </button>
         </div>
     </div>
-    {{ form_close() }}
+    </form>
 {% endblock %}
