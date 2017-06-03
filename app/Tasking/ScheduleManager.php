@@ -61,16 +61,22 @@ class ScheduleManager
      * Run tasks from Command Line
      *
      * @param Schedule $schedule
+     * @return void
      */
     public function runTasksFromCLI(Schedule $schedule)
     {
-        $tasks = $this->tasksRepository->getEnabledTasks();
-        foreach ($tasks as $task) {
-            $schedule->call(function () use ($task) {
-                $this->runTask($task);
-            })->cron($task->frequency)
-                ->name($task->namespace)
-                ->withoutOverlapping();
+        // Check if we can grab tasks from database.
+        try {
+            $tasks = $this->tasksRepository->getEnabledTasks();
+            foreach ($tasks as $task) {
+                $schedule->call(function () use ($task) {
+                    $this->runTask($task);
+                })->cron($task->frequency)
+                    ->name($task->namespace)
+                    ->withoutOverlapping();
+            }
+        } catch (\Exception $e) {
+            unset($e);
         }
     }
 
@@ -79,7 +85,7 @@ class ScheduleManager
      *
      * @return bool
      */
-    public function runTasksFromWeb() : bool
+    public function runTasksFromWeb(): bool
     {
         if ($this->cache->has('tasks.fired')) {
             // Nothing to do at this moment. Tasks were ran recently
