@@ -101,7 +101,11 @@ Route::group(['middleware' => ['web']], function () {
                 'as'   => 'admin.users.edit',
                 'uses' => 'Admin\Users\UserController@saveUser',
             ]);
-            Route::post('/delete', [
+            Route::get('/delete/{id}', [
+                'as'   => 'admin.users.delete',
+                'uses' => 'Admin\Users\UserController@delete',
+            ]);
+            Route::post('/delete/{id}', [
                 'as'   => 'admin.users.delete',
                 'uses' => 'Admin\Users\UserController@deleteUser',
             ]);

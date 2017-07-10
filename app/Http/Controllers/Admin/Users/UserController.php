@@ -83,6 +83,9 @@ class UserController extends AdminController
     {
         $this->breadcrumbs->setCurrentRoute('admin.users.edit');
         $user = $this->userRepository->find($id);
+        if (!$user) {
+            return redirect()->back()->withError(trans('errors.user_not_found'));
+        }
         $role = $user->displayRole();
         $roles = $this->roles();
         
@@ -134,11 +137,31 @@ class UserController extends AdminController
     }
     
     /**
-     * Delete the selected user
+     * Show a confirmation page to delete the selected user.
+     *
+     * @param int $id
      *
      * @return \Illuminate\View\View
      */
-    public function deleteUser(Request $request)
+    public function delete(int $id)
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.users.delete');
+        $user = $this->userRepository->find($id);
+        if (!$user) {
+            return redirect()->back()->withError(trans('errors.user_not_found'));
+        }
+        
+        return view('admin.users.delete', compact('user'))->withActive('users');
+    }
+    
+    /**
+     * Delete the selected user
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\View\View
+     */
+    public function deleteUser(int $id)
     {
         $this->userRepository->delete($request->get('user_id'));
 

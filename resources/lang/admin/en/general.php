@@ -18,6 +18,7 @@ return [
     'success_created' => 'Created!',
     'control_panel'   => 'Control Panel',
     'dashboard'       => 'Dashboard',
+    'forums_posts'    => 'Forums & Posts',
     'users_roles'     => 'Users & Roles',
     'title'           => 'Administration',
     'yes'             => 'Yes',

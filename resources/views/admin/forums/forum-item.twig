@@ -1,7 +1,7 @@
 <div>
     <a href="{{ url_route('forums.show', {'slug': forum.slug, 'id': forum.id}) }}">{{ forum.title }}</a> | Level: {{ level }}
     <span style="float:right">
-        <a href="{{ route('admin.forums.edit', {'id': forum.id}) }}">{{ trans('admin::general.edit') }}</a>
+        <a href="{{ route('admin.forums.edit', {'id': forum.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::general.edit') }}</a>
         {{ admin_delete_button('admin.forums.delete', forum.id) }}
     </span>
     <br>

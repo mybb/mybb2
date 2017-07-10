@@ -248,14 +248,39 @@ Breadcrumbs::register('admin.dashboard', function ($breadcrumbs) {
     $breadcrumbs->push(trans('admin::general.dashboard'), route('admin.dashboard'));
 });
 
+Breadcrumbs::register('admin.forums', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin');
+    $breadcrumbs->push(trans('admin::general.forums_posts'), route('admin.forums'));
+});
+
+Breadcrumbs::register('admin.forums.management', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.forums');
+    $breadcrumbs->push(trans('admin::forums.management'), route('admin.forums'));
+});
+
+Breadcrumbs::register('admin.forums.add', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.forums.management');
+    $breadcrumbs->push(trans('admin::forums.add_forum'));
+});
+
+Breadcrumbs::register('admin.forums.delete', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.forums.management');
+    $breadcrumbs->push(trans('admin::forums.delete_forum'));
+});
+
+Breadcrumbs::register('admin.forums.edit', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.forums.management');
+    $breadcrumbs->push(trans('admin::forums.edit_forum'));
+});
+
 Breadcrumbs::register('admin.users', function ($breadcrumbs) {
     $breadcrumbs->parent('admin');
-    $breadcrumbs->push(trans('admin::general.users_roles'));
+    $breadcrumbs->push(trans('admin::general.users_roles'), route('admin.users'));
 });
 
 Breadcrumbs::register('admin.users.list', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.users');
-    $breadcrumbs->push(trans('admin::users.title'));
+    $breadcrumbs->push(trans('admin::users.title'), route('admin.users'));
 });
 
 Breadcrumbs::register('admin.users.edit', function ($breadcrumbs) {
@@ -266,6 +291,11 @@ Breadcrumbs::register('admin.users.edit', function ($breadcrumbs) {
 Breadcrumbs::register('admin.users.add', function ($breadcrumbs) {
     $breadcrumbs->parent('admin.users.list');
     $breadcrumbs->push(trans('admin::users.add_title'));
+});
+
+Breadcrumbs::register('admin.users.delete', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.users.list');
+    $breadcrumbs->push(trans('admin::users.delete_title'));
 });
 
 Breadcrumbs::register('admin.users.profile_fields', function ($breadcrumbs) {

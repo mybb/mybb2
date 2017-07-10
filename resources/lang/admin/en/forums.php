@@ -10,6 +10,7 @@ return [
     'management'            => 'Forums Management',
     'add_forum'             => 'Add Forum',
     'edit_forum'            => 'Edit Forum',
+    'delete_forum'          => 'Delete Forum',
     'category'              => 'Category',
     'forum'                 => 'Forum',
     'forum_type'            => 'Forum type',
