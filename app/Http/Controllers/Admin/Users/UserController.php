@@ -163,7 +163,7 @@ class UserController extends AdminController
      */
     public function deleteUser(int $id)
     {
-        $this->userRepository->delete($request->get('user_id'));
+        $this->userRepository->delete($id);
 
         return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
     }
