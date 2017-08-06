@@ -21,7 +21,6 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'general.site_url', 'setting_type' => 'string'],
             ['name' => 'wio.minutes', 'setting_type' => 'number'],
             ['name' => 'wio.refresh', 'setting_type' => 'number'],
-            ['name' => 'captcha.method', 'setting_type' => 'choose', 'options' => 'captcha|recaptcha'],
             ['name' => 'captcha.recaptcha_public_key', 'setting_type' => 'string'],
             ['name' => 'captcha.recaptcha_private_key', 'setting_type' => 'string'],
             ['name' => 'captcha.nocaptcha_public_key', 'setting_type' => 'string'],
@@ -29,7 +28,6 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'user.date_format', 'setting_type' => 'string'],
             ['name' => 'user.time_format', 'setting_type' => 'number'],
             ['name' => 'user.timezone', 'setting_type' => 'string'],
-            ['name' => 'user.dst', 'setting_type' => 'radio', 'options' => 'enable|disable|auto'],
             ['name' => 'user.follow_started_topics', 'setting_type' => 'checkbox'],
             ['name' => 'user.follow_replied_topics', 'setting_type' => 'checkbox'],
             ['name' => 'user.show_editor', 'setting_type' => 'checkbox'],
@@ -59,15 +57,10 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'user.hide_blocked_posts', 'setting_type' => 'checkbox'],
             ['name' => 'user.only_buddy_messages', 'setting_type' => 'checkbox'],
             ['name' => 'user.receive_email', 'setting_type' => 'checkbox'],
-            ['name' => 'user.dob_privacy', 'setting_type' => 'radio', 'options' => 'nothing|age|dob'],
-            ['name' => 'user.dob_visibility', 'setting_type' => 'radio', 'options' => 'everyone|members|following'],
             ['name' => 'post.likes_to_show', 'setting_type' => 'number'],
             ['name' => 'likes.per_page', 'setting_type' => 'number'],
-            ['name' => 'memberlist.sort_by', 'setting_type' => 'choose', 'options' => 'created_at|num_posts|num_topics|name'],
-            ['name' => 'memberlist.sort_dir', 'setting_type' => 'choose', 'options' => 'desc|asc'],
             ['name' => 'memberlist.per_page', 'setting_type' => 'number'],
             ['name' => 'conversations.enabled', 'setting_type' => 'switch'],
-            ['name' => 'conversations.message_order', 'setting_type' => 'choose', 'options' => 'desc|asc'],
             ['name' => 'warnings.max_points', 'setting_type' => 'number'],
             ['name' => 'warnings.allow_zero', 'setting_type' => 'switch'],
             ['name' => 'warnings.allow_custom', 'setting_type' => 'switch'],
@@ -75,6 +68,16 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'tasks.interval', 'setting_type' => 'number'],
             ['name' => 'tasks.max_log_life', 'setting_type' => 'number'],
             ['name' => 'moderation.max_log_life', 'setting_type' => 'number'],
+        ]);
+
+	    DB::table('settings')->insert([
+		    ['name' => 'captcha.method', 'setting_type' => 'choose', 'options' => 'captcha|recaptcha'],
+		    ['name' => 'user.dst', 'setting_type' => 'radio', 'options' => 'enable|disable|auto'],
+		    ['name' => 'user.dob_privacy', 'setting_type' => 'radio', 'options' => 'nothing|age|dob'],
+		    ['name' => 'user.dob_visibility', 'setting_type' => 'radio', 'options' => 'everyone|members|following'],
+		    ['name' => 'memberlist.sort_by', 'setting_type' => 'choose', 'options' => 'created_at|num_posts|num_topics|name'],
+		    ['name' => 'memberlist.sort_dir', 'setting_type' => 'choose', 'options' => 'desc|asc'],
+		    ['name' => 'conversations.message_order', 'setting_type' => 'choose', 'options' => 'desc|asc'],
         ]);
 
         DB::table('setting_values')->insert([
