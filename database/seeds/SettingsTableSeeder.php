@@ -70,14 +70,17 @@ class SettingsTableSeeder extends \Illuminate\Database\Seeder
             ['name' => 'moderation.max_log_life', 'setting_type' => 'number'],
         ]);
 
-	    DB::table('settings')->insert([
-		    ['name' => 'captcha.method', 'setting_type' => 'choose', 'options' => 'captcha|recaptcha'],
-		    ['name' => 'user.dst', 'setting_type' => 'radio', 'options' => 'enable|disable|auto'],
-		    ['name' => 'user.dob_privacy', 'setting_type' => 'radio', 'options' => 'nothing|age|dob'],
-		    ['name' => 'user.dob_visibility', 'setting_type' => 'radio', 'options' => 'everyone|members|following'],
-		    ['name' => 'memberlist.sort_by', 'setting_type' => 'choose', 'options' => 'created_at|num_posts|num_topics|name'],
-		    ['name' => 'memberlist.sort_dir', 'setting_type' => 'choose', 'options' => 'desc|asc'],
-		    ['name' => 'conversations.message_order', 'setting_type' => 'choose', 'options' => 'desc|asc'],
+        DB::table('settings')->insert([
+            ['name' => 'captcha.method', 'setting_type' => 'choose', 'options' => 'captcha|recaptcha'],
+            ['name' => 'user.dst', 'setting_type' => 'radio', 'options' => 'enable|disable|auto'],
+            ['name' => 'user.dob_privacy', 'setting_type' => 'radio', 'options' => 'nothing|age|dob'],
+            ['name' => 'user.dob_visibility', 'setting_type' => 'radio', 'options' => 'everyone|members|following'],
+            ['name'         => 'memberlist.sort_by',
+             'setting_type' => 'choose',
+             'options'      => 'created_at|num_posts|num_topics|name'
+            ],
+            ['name' => 'memberlist.sort_dir', 'setting_type' => 'choose', 'options' => 'desc|asc'],
+            ['name' => 'conversations.message_order', 'setting_type' => 'choose', 'options' => 'desc|asc'],
         ]);
 
         DB::table('setting_values')->insert([
