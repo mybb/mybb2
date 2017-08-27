@@ -6,7 +6,8 @@
     </div>
     <div class="admin-body__content">
         <p>Are you sure you want to delete the user "{{ user.name }}"?</p>
-        {{ form_open({'route': ['admin.users.delete', user.id], 'method': 'post'}) }}
+        {{ form_open({'route': ['admin.users.delete'], 'method': 'post'}) }}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
         <a href="{{ url_route('admin.users') }}" class="button button--secondary"><i class="fa fa-arrow-left"></i> {{ trans('admin::general.back') }}</a>
         <button type="submit" class="button button--danger"><i class="fa fa-remove"></i> {{ trans('admin::users.delete') }}</button>
         {{ form_close() }}

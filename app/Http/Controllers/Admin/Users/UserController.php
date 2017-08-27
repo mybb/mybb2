@@ -161,9 +161,9 @@ class UserController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function deleteUser(int $id)
+    public function deleteUser(Request $request)
     {
-        $this->userRepository->delete($id);
+        $this->userRepository->delete($request->get('user_id'));
 
         return redirect()->back()->withSuccess(trans('admin::general.success_deleted'));
     }

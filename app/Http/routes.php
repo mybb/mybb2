@@ -105,7 +105,7 @@ Route::group(['middleware' => ['web']], function () {
                 'as'   => 'admin.users.delete',
                 'uses' => 'Admin\Users\UserController@delete',
             ]);
-            Route::post('/delete/{id}', [
+            Route::post('/delete', [
                 'as'   => 'admin.users.delete',
                 'uses' => 'Admin\Users\UserController@deleteUser',
             ]);
