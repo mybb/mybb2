@@ -40,9 +40,9 @@ gulp.task("images", () => {
 
 gulp.task("typescript", () => {
     return rollup({
-            entry: 'resources/assets/typescript/mybb.ts',
+            input: 'resources/assets/typescript/mybb.ts',
             format: 'iife',
-            sourceMap: 'inline',
+            sourcemap: 'inline',
             plugins: [
                 typescript(),
                 babel({
@@ -55,7 +55,7 @@ gulp.task("typescript", () => {
 });
 
 gulp.task("modernizr", function() {
-    gulp.src('./public/assets/*.js')
+    gulp.src('./public/assets/**/*.js')
         .pipe(modernizr())
         .pipe(gulp.dest("./public/assets/js/"))
 });
