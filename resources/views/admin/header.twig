@@ -1,6 +1,11 @@
 <header class="admin-header">
     <div class="header-bar">
-        <h1 class="title admin-header__logo"><a href="{{ url_route('forum.index') }}" id="logo"><span class="visually-hidden">MyBB Admin Control Panel</span></a></h1>
+        <h1 class="title admin-header__logo">
+            <a href="{{ url_route('forum.index') }}" id="logo">
+                {{ source('assets/images/logo-knockout.svg') }}
+                <span class="visually-hidden">MyBB Admin Control Panel</span>
+            </a>
+        </h1>
         <div class="show-menu">
             <a href="#" class="show-menu__link">
                 <i class="fa fa-bars"></i>
