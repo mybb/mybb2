@@ -1,6 +1,6 @@
 /*!
  * modernizr v3.5.0
- * Build https://modernizr.com/download?-applicationcache-audio-backgroundsize-borderimage-borderradius-boxshadow-canvas-canvastext-capture-checked-contains-cors-cssanimations-csscolumns-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-flexbox-flexboxlegacy-fontface-generatedcontent-geolocation-hashchange-hidden-history-hsla-inlinesvg-input-inputtypes-json-localstorage-multiplebgs-opacity-postmessage-rgba-search-sessionstorage-smil-svg-svgclippaths-target-textshadow-touchevents-video-webgl-websockets-websqldatabase-webworkers-addtest-fnbind-printshiv-testprop-dontmin
+ * Build https://modernizr.com/download?-applicationcache-audio-backgroundsize-borderimage-borderradius-boxshadow-canvas-canvastext-capture-checked-contains-cors-cssanimations-csscolumns-cssgradients-cssreflections-csstransforms-csstransforms3d-csstransitions-flexbox-flexboxlegacy-fontface-generatedcontent-geolocation-hashchange-hidden-history-hsla-inlinesvg-input-inputtypes-json-localstorage-multiplebgs-opacity-performance-placeholder-pointerevents-postmessage-rgba-search-sessionstorage-smil-supports-svg-svgclippaths-target-textshadow-time-touchevents-video-webgl-websockets-websqldatabase-webworkers-addtest-fnbind-printshiv-testprop-dontmin
  *
  * Copyright (c)
  *  Faruk Ates
@@ -1561,369 +1561,6 @@ Detects support for the ':target' CSS pseudo-class.
 
 /*!
 {
-  "name": "Cross-Origin Resource Sharing",
-  "property": "cors",
-  "caniuse": "cors",
-  "authors": ["Theodoor van Donge"],
-  "notes": [{
-    "name": "MDN documentation",
-    "href": "https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS"
-  }],
-  "polyfills": ["pmxdr", "ppx", "flxhr"]
-}
-!*/
-/* DOC
-Detects support for Cross-Origin Resource Sharing: method of performing XMLHttpRequests across domains.
-*/
-
-  Modernizr.addTest('cors', 'XMLHttpRequest' in window && 'withCredentials' in new XMLHttpRequest());
-
-
-  /**
-   * Modernizr.hasEvent() detects support for a given event
-   *
-   * @memberof Modernizr
-   * @name Modernizr.hasEvent
-   * @optionName Modernizr.hasEvent()
-   * @optionProp hasEvent
-   * @access public
-   * @function hasEvent
-   * @param  {string|*} eventName - the name of an event to test for (e.g. "resize")
-   * @param  {Element|string} [element=HTMLDivElement] - is the element|document|window|tagName to test on
-   * @returns {boolean}
-   * @example
-   *  `Modernizr.hasEvent` lets you determine if the browser supports a supplied event.
-   *  By default, it does this detection on a div element
-   *
-   * ```js
-   *  hasEvent('blur') // true;
-   * ```
-   *
-   * However, you are able to give an object as a second argument to hasEvent to
-   * detect an event on something other than a div.
-   *
-   * ```js
-   *  hasEvent('devicelight', window) // true;
-   * ```
-   *
-   */
-
-  var hasEvent = (function() {
-
-    // Detect whether event support can be detected via `in`. Test on a DOM element
-    // using the "blur" event b/c it should always exist. bit.ly/event-detection
-    var needsFallback = !('onblur' in document.documentElement);
-
-    function inner(eventName, element) {
-
-      var isSupported;
-      if (!eventName) { return false; }
-      if (!element || typeof element === 'string') {
-        element = createElement(element || 'div');
-      }
-
-      // Testing via the `in` operator is sufficient for modern browsers and IE.
-      // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and
-      // "resize", whereas `in` "catches" those.
-      eventName = 'on' + eventName;
-      isSupported = eventName in element;
-
-      // Fallback technique for old Firefox - bit.ly/event-detection
-      if (!isSupported && needsFallback) {
-        if (!element.setAttribute) {
-          // Switch to generic element if it lacks `setAttribute`.
-          // It could be the `document`, `window`, or something else.
-          element = createElement('div');
-        }
-
-        element.setAttribute(eventName, '');
-        isSupported = typeof element[eventName] === 'function';
-
-        if (element[eventName] !== undefined) {
-          // If property was created, "remove it" by setting value to `undefined`.
-          element[eventName] = undefined;
-        }
-        element.removeAttribute(eventName);
-      }
-
-      return isSupported;
-    }
-    return inner;
-  })();
-
-
-  ModernizrProto.hasEvent = hasEvent;
-  
-/*!
-{
-  "name": "input[search] search event",
-  "property": "search",
-  "tags": ["input","search"],
-  "authors": ["Calvin Webster"],
-  "notes": [{
-    "name": "Wufoo demo",
-    "href": "https://www.wufoo.com/html5/types/5-search.html?"
-  }, {
-    "name": "CSS Tricks",
-    "href": "https://css-tricks.com/webkit-html5-search-inputs/"
-  }]
-}
-!*/
-/* DOC
-There is a custom `search` event implemented in webkit browsers when using an `input[search]` element.
-*/
-
-  Modernizr.addTest('inputsearchevent',  hasEvent('search'));
-
-/*!
-{
-  "name": "JSON",
-  "property": "json",
-  "caniuse": "json",
-  "notes": [{
-    "name": "MDN documentation",
-    "href": "https://developer.mozilla.org/en-US/docs/Glossary/JSON"
-  }],
-  "polyfills": ["json2"]
-}
-!*/
-/* DOC
-Detects native support for JSON handling functions.
-*/
-
-  // this will also succeed if you've loaded the JSON2.js polyfill ahead of time
-  //   ... but that should be obvious. :)
-
-  Modernizr.addTest('json', 'JSON' in window && 'parse' in JSON && 'stringify' in JSON);
-
-
-  /**
-   * List of property values to set for css tests. See ticket #21
-   * http://git.io/vUGl4
-   *
-   * @memberof Modernizr
-   * @name Modernizr._prefixes
-   * @optionName Modernizr._prefixes
-   * @optionProp prefixes
-   * @access public
-   * @example
-   *
-   * Modernizr._prefixes is the internal list of prefixes that we test against
-   * inside of things like [prefixed](#modernizr-prefixed) and [prefixedCSS](#-code-modernizr-prefixedcss). It is simply
-   * an array of kebab-case vendor prefixes you can use within your code.
-   *
-   * Some common use cases include
-   *
-   * Generating all possible prefixed version of a CSS property
-   * ```js
-   * var rule = Modernizr._prefixes.join('transform: rotate(20deg); ');
-   *
-   * rule === 'transform: rotate(20deg); webkit-transform: rotate(20deg); moz-transform: rotate(20deg); o-transform: rotate(20deg); ms-transform: rotate(20deg);'
-   * ```
-   *
-   * Generating all possible prefixed version of a CSS value
-   * ```js
-   * rule = 'display:' +  Modernizr._prefixes.join('flex; display:') + 'flex';
-   *
-   * rule === 'display:flex; display:-webkit-flex; display:-moz-flex; display:-o-flex; display:-ms-flex; display:flex'
-   * ```
-   */
-
-  // we use ['',''] rather than an empty array in order to allow a pattern of .`join()`ing prefixes to test
-  // values in feature detects to continue to work
-  var prefixes = (ModernizrProto._config.usePrefixes ? ' -webkit- -moz- -o- -ms- '.split(' ') : ['','']);
-
-  // expose these for the plugin API. Look in the source for how to join() them against your input
-  ModernizrProto._prefixes = prefixes;
-
-  
-/*!
-{
-  "name": "Touch Events",
-  "property": "touchevents",
-  "caniuse" : "touch",
-  "tags": ["media", "attribute"],
-  "notes": [{
-    "name": "Touch Events spec",
-    "href": "https://www.w3.org/TR/2013/WD-touch-events-20130124/"
-  }],
-  "warnings": [
-    "Indicates if the browser supports the Touch Events spec, and does not necessarily reflect a touchscreen device"
-  ],
-  "knownBugs": [
-    "False-positive on some configurations of Nokia N900",
-    "False-positive on some BlackBerry 6.0 builds – https://github.com/Modernizr/Modernizr/issues/372#issuecomment-3112695"
-  ]
-}
-!*/
-/* DOC
-Indicates if the browser supports the W3C Touch Events API.
-
-This *does not* necessarily reflect a touchscreen device:
-
-* Older touchscreen devices only emulate mouse events
-* Modern IE touch devices implement the Pointer Events API instead: use `Modernizr.pointerevents` to detect support for that
-* Some browsers & OS setups may enable touch APIs when no touchscreen is connected
-* Future browsers may implement other event models for touch interactions
-
-See this article: [You Can't Detect A Touchscreen](http://www.stucox.com/blog/you-cant-detect-a-touchscreen/).
-
-It's recommended to bind both mouse and touch/pointer events simultaneously – see [this HTML5 Rocks tutorial](http://www.html5rocks.com/en/mobile/touchandmouse/).
-
-This test will also return `true` for Firefox 4 Multitouch support.
-*/
-
-  // Chrome (desktop) used to lie about its support on this, but that has since been rectified: http://crbug.com/36415
-  Modernizr.addTest('touchevents', function() {
-    var bool;
-    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
-      bool = true;
-    } else {
-      // include the 'heartz' as a way to have a non matching MQ to help terminate the join
-      // https://git.io/vznFH
-      var query = ['@media (', prefixes.join('touch-enabled),('), 'heartz', ')', '{#modernizr{top:9px;position:absolute}}'].join('');
-      testStyles(query, function(node) {
-        bool = node.offsetTop === 9;
-      });
-    }
-    return bool;
-  });
-
-/*!
-{
-  "name": "CSS HSLA Colors",
-  "caniuse": "css3-colors",
-  "property": "hsla",
-  "tags": ["css"]
-}
-!*/
-
-  Modernizr.addTest('hsla', function() {
-    var style = createElement('a').style;
-    style.cssText = 'background-color:hsla(120,40%,100%,.5)';
-    return contains(style.backgroundColor, 'rgba') || contains(style.backgroundColor, 'hsla');
-  });
-
-/*!
-{
-  "name": "CSS Opacity",
-  "caniuse": "css-opacity",
-  "property": "opacity",
-  "tags": ["css"]
-}
-!*/
-
-  // Browsers that actually have CSS Opacity implemented have done so
-  // according to spec, which means their return values are within the
-  // range of [0.0,1.0] - including the leading zero.
-
-  Modernizr.addTest('opacity', function() {
-    var style = createElement('a').style;
-    style.cssText = prefixes.join('opacity:.55;');
-
-    // The non-literal . in this regex is intentional:
-    // German Chrome returns this value as 0,55
-    // github.com/Modernizr/Modernizr/issues/#issue/59/comment/516632
-    return (/^0.55$/).test(style.opacity);
-  });
-
-/*!
-{
-  "name": "CSS rgba",
-  "caniuse": "css3-colors",
-  "property": "rgba",
-  "tags": ["css"],
-  "notes": [{
-    "name": "CSSTricks Tutorial",
-    "href": "https://css-tricks.com/rgba-browser-support/"
-  }]
-}
-!*/
-
-  Modernizr.addTest('rgba', function() {
-    var style = createElement('a').style;
-    style.cssText = 'background-color:rgba(150,255,150,.5)';
-
-    return ('' + style.backgroundColor).indexOf('rgba') > -1;
-  });
-
-/*!
-{
-  "name": "[hidden] Attribute",
-  "property": "hidden",
-  "tags": ["dom"],
-  "notes": [{
-    "name": "WHATWG: The hidden attribute",
-    "href": "https://developers.whatwg.org/editing.html#the-hidden-attribute"
-  }, {
-    "name": "original implementation of detect code",
-    "href": "https://github.com/aFarkas/html5shiv/blob/bf4fcc4/src/html5shiv.js#L38"
-  }],
-  "polyfills": ["html5shiv"],
-  "authors": ["Ron Waldon (@jokeyrhyme)"]
-}
-!*/
-/* DOC
-Does the browser support the HTML5 [hidden] attribute?
-*/
-
-  Modernizr.addTest('hidden', 'hidden' in createElement('a'));
-
-/*!
-{
-  "name": "ES5 String.prototype.contains",
-  "property": "contains",
-  "authors": ["Robert Kowalski"],
-  "tags": ["es6"]
-}
-!*/
-/* DOC
-Check if browser implements ECMAScript 6 `String.prototype.contains` per specification.
-*/
-
-  Modernizr.addTest('contains', is(String.prototype.contains, 'function'));
-
-/*!
-{
-  "name": "input[capture] Attribute",
-  "property": "capture",
-  "tags": ["video", "image", "audio", "media", "attribute"],
-  "notes": [{
-    "name": "W3C draft: HTML Media Capture",
-    "href": "https://www.w3.org/TR/html-media-capture/"
-  }]
-}
-!*/
-/* DOC
-When used on an `<input>`, this attribute signifies that the resource it takes should be generated via device's camera, camcorder, sound recorder.
-*/
-
-  // testing for capture attribute in inputs
-  Modernizr.addTest('capture', ('capture' in createElement('input')));
-
-/*!
-{
-  "name": "Application Cache",
-  "property": "applicationcache",
-  "caniuse": "offline-apps",
-  "tags": ["storage", "offline"],
-  "notes": [{
-    "name": "MDN documentation",
-    "href": "https://developer.mozilla.org/en/docs/HTML/Using_the_application_cache"
-  }],
-  "polyfills": ["html5gears"]
-}
-!*/
-/* DOC
-Detects support for the Application Cache, for storing data to enable web-based applications run offline.
-
-The API has been [heavily criticized](http://alistapart.com/article/application-cache-is-a-douchebag) and discussions are underway to address this.
-*/
-
-  Modernizr.addTest('applicationcache', 'applicationCache' in window);
-
-/*!
-{
   "name" : "HTML5 Audio Element",
   "property": "audio",
   "tags" : ["html5", "audio", "media"]
@@ -2048,39 +1685,6 @@ Detects support for the Geolocation API for users to provide their location to w
 
 /*!
 {
-  "name": "Hashchange event",
-  "property": "hashchange",
-  "caniuse": "hashchange",
-  "tags": ["history"],
-  "notes": [{
-    "name": "MDN documentation",
-    "href": "https://developer.mozilla.org/en-US/docs/Web/API/window.onhashchange"
-  }],
-  "polyfills": [
-    "jquery-hashchange",
-    "moo-historymanager",
-    "jquery-ajaxy",
-    "hasher",
-    "shistory"
-  ]
-}
-!*/
-/* DOC
-Detects support for the `hashchange` event, fired when the current location fragment changes.
-*/
-
-  Modernizr.addTest('hashchange', function() {
-    if (hasEvent('hashchange', window) === false) {
-      return false;
-    }
-
-    // documentMode logic from YUI to filter out IE8 Compat Mode
-    //   which false positives.
-    return (document.documentMode === undefined || document.documentMode > 7);
-  });
-
-/*!
-{
   "name": "History API",
   "property": "history",
   "caniuse": "history",
@@ -2190,6 +1794,103 @@ Modernizr.input.step
     return attrs;
   })(inputattrs);
 
+
+  /**
+   * Modernizr.hasEvent() detects support for a given event
+   *
+   * @memberof Modernizr
+   * @name Modernizr.hasEvent
+   * @optionName Modernizr.hasEvent()
+   * @optionProp hasEvent
+   * @access public
+   * @function hasEvent
+   * @param  {string|*} eventName - the name of an event to test for (e.g. "resize")
+   * @param  {Element|string} [element=HTMLDivElement] - is the element|document|window|tagName to test on
+   * @returns {boolean}
+   * @example
+   *  `Modernizr.hasEvent` lets you determine if the browser supports a supplied event.
+   *  By default, it does this detection on a div element
+   *
+   * ```js
+   *  hasEvent('blur') // true;
+   * ```
+   *
+   * However, you are able to give an object as a second argument to hasEvent to
+   * detect an event on something other than a div.
+   *
+   * ```js
+   *  hasEvent('devicelight', window) // true;
+   * ```
+   *
+   */
+
+  var hasEvent = (function() {
+
+    // Detect whether event support can be detected via `in`. Test on a DOM element
+    // using the "blur" event b/c it should always exist. bit.ly/event-detection
+    var needsFallback = !('onblur' in document.documentElement);
+
+    function inner(eventName, element) {
+
+      var isSupported;
+      if (!eventName) { return false; }
+      if (!element || typeof element === 'string') {
+        element = createElement(element || 'div');
+      }
+
+      // Testing via the `in` operator is sufficient for modern browsers and IE.
+      // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and
+      // "resize", whereas `in` "catches" those.
+      eventName = 'on' + eventName;
+      isSupported = eventName in element;
+
+      // Fallback technique for old Firefox - bit.ly/event-detection
+      if (!isSupported && needsFallback) {
+        if (!element.setAttribute) {
+          // Switch to generic element if it lacks `setAttribute`.
+          // It could be the `document`, `window`, or something else.
+          element = createElement('div');
+        }
+
+        element.setAttribute(eventName, '');
+        isSupported = typeof element[eventName] === 'function';
+
+        if (element[eventName] !== undefined) {
+          // If property was created, "remove it" by setting value to `undefined`.
+          element[eventName] = undefined;
+        }
+        element.removeAttribute(eventName);
+      }
+
+      return isSupported;
+    }
+    return inner;
+  })();
+
+
+  ModernizrProto.hasEvent = hasEvent;
+  
+/*!
+{
+  "name": "input[search] search event",
+  "property": "search",
+  "tags": ["input","search"],
+  "authors": ["Calvin Webster"],
+  "notes": [{
+    "name": "Wufoo demo",
+    "href": "https://www.wufoo.com/html5/types/5-search.html?"
+  }, {
+    "name": "CSS Tricks",
+    "href": "https://css-tricks.com/webkit-html5-search-inputs/"
+  }]
+}
+!*/
+/* DOC
+There is a custom `search` event implemented in webkit browsers when using an `input[search]` element.
+*/
+
+  Modernizr.addTest('inputsearchevent',  hasEvent('search'));
+
 /*!
 {
   "name": "Form input types",
@@ -2297,163 +1998,6 @@ Modernizr.inputtypes.week
     }
     return inputs;
   })(inputtypes);
-
-/*!
-{
-  "name": "postMessage",
-  "property": "postmessage",
-  "caniuse": "x-doc-messaging",
-  "notes": [{
-    "name": "W3C Spec",
-    "href": "http://www.w3.org/TR/html5/comms.html#posting-messages"
-  }],
-  "polyfills": ["easyxdm", "postmessage-jquery"]
-}
-!*/
-/* DOC
-Detects support for the `window.postMessage` protocol for cross-document messaging.
-*/
-
-  Modernizr.addTest('postmessage', 'postMessage' in window);
-
-/*!
-{
-  "name": "SVG",
-  "property": "svg",
-  "caniuse": "svg",
-  "tags": ["svg"],
-  "authors": ["Erik Dahlstrom"],
-  "polyfills": [
-    "svgweb",
-    "raphael",
-    "amplesdk",
-    "canvg",
-    "svg-boilerplate",
-    "sie",
-    "dojogfx",
-    "fabricjs"
-  ]
-}
-!*/
-/* DOC
-Detects support for SVG in `<embed>` or `<object>` elements.
-*/
-
-  Modernizr.addTest('svg', !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
-
-/*!
-{
-  "name": "HTML5 Video",
-  "property": "video",
-  "caniuse": "video",
-  "tags": ["html5"],
-  "knownBugs": [
-    "Without QuickTime, `Modernizr.video.h264` will be `undefined`; https://github.com/Modernizr/Modernizr/issues/546"
-  ],
-  "polyfills": [
-    "html5media",
-    "mediaelementjs",
-    "sublimevideo",
-    "videojs",
-    "leanbackplayer",
-    "videoforeverybody"
-  ]
-}
-!*/
-/* DOC
-Detects support for the video element, as well as testing what types of content it supports.
-
-Subproperties are provided to describe support for `ogg`, `h264` and `webm` formats, e.g.:
-
-```javascript
-Modernizr.video         // true
-Modernizr.video.ogg     // 'probably'
-```
-*/
-
-  // Codec values from : github.com/NielsLeenheer/html5test/blob/9106a8/index.html#L845
-  //                     thx to NielsLeenheer and zcorpan
-
-  // Note: in some older browsers, "no" was a return value instead of empty string.
-  //   It was live in FF3.5.0 and 3.5.1, but fixed in 3.5.2
-  //   It was also live in Safari 4.0.0 - 4.0.4, but fixed in 4.0.5
-
-  Modernizr.addTest('video', function() {
-    var elem = createElement('video');
-    var bool = false;
-
-    // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
-    try {
-      bool = !!elem.canPlayType
-      if (bool) {
-        bool = new Boolean(bool);
-        bool.ogg = elem.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '');
-
-        // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
-        bool.h264 = elem.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '');
-
-        bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '');
-
-        bool.vp9 = elem.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '');
-
-        bool.hls = elem.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '');
-      }
-    } catch (e) {}
-
-    return bool;
-  });
-
-/*!
-{
-  "name": "WebGL",
-  "property": "webgl",
-  "caniuse": "webgl",
-  "tags": ["webgl", "graphics"],
-  "polyfills": ["jebgl", "cwebgl", "iewebgl"]
-}
-!*/
-
-  Modernizr.addTest('webgl', function() {
-    var canvas = createElement('canvas');
-    var supports = 'probablySupportsContext' in canvas ? 'probablySupportsContext' :  'supportsContext';
-    if (supports in canvas) {
-      return canvas[supports]('webgl') || canvas[supports]('experimental-webgl');
-    }
-    return 'WebGLRenderingContext' in window;
-  });
-
-/*!
-{
-  "name": "WebSockets Support",
-  "property": "websockets",
-  "authors": ["Phread [fearphage]", "Mike Sherov [mikesherov]", "Burak Yigit Kaya [BYK]"],
-  "caniuse": "websockets",
-  "tags": ["html5"],
-  "warnings": [
-    "This test will reject any old version of WebSockets even if it is not prefixed such as in Safari 5.1"
-  ],
-  "notes": [{
-    "name": "CLOSING State and Spec",
-    "href": "https://www.w3.org/TR/websockets/#the-websocket-interface"
-  }],
-  "polyfills": [
-    "sockjs",
-    "socketio",
-    "kaazing-websocket-gateway",
-    "websocketjs",
-    "atmosphere",
-    "graceful-websocket",
-    "portal",
-    "datachannel"
-  ]
-}
-!*/
-
-  var supports = false;
-  try {
-    supports = 'WebSocket' in window && window.WebSocket.CLOSING === 2;
-  } catch (e) {}
-  Modernizr.addTest('websockets', supports);
 
 
   /**
@@ -2579,6 +2123,727 @@ Modernizr.video.ogg     // 'probably'
   ModernizrProto.testAllProps = testPropsAll;
 
   
+
+  /**
+   * atRule returns a given CSS property at-rule (eg @keyframes), possibly in
+   * some prefixed form, or false, in the case of an unsupported rule
+   *
+   * @memberof Modernizr
+   * @name Modernizr.atRule
+   * @optionName Modernizr.atRule()
+   * @optionProp atRule
+   * @access public
+   * @function atRule
+   * @param {string} prop - String name of the @-rule to test for
+   * @returns {string|boolean} The string representing the (possibly prefixed)
+   * valid version of the @-rule, or `false` when it is unsupported.
+   * @example
+   * ```js
+   *  var keyframes = Modernizr.atRule('@keyframes');
+   *
+   *  if (keyframes) {
+   *    // keyframes are supported
+   *    // could be `@-webkit-keyframes` or `@keyframes`
+   *  } else {
+   *    // keyframes === `false`
+   *  }
+   * ```
+   *
+   */
+
+  var atRule = function(prop) {
+    var length = prefixes.length;
+    var cssrule = window.CSSRule;
+    var rule;
+
+    if (typeof cssrule === 'undefined') {
+      return undefined;
+    }
+
+    if (!prop) {
+      return false;
+    }
+
+    // remove literal @ from beginning of provided property
+    prop = prop.replace(/^@/, '');
+
+    // CSSRules use underscores instead of dashes
+    rule = prop.replace(/-/g, '_').toUpperCase() + '_RULE';
+
+    if (rule in cssrule) {
+      return '@' + prop;
+    }
+
+    for (var i = 0; i < length; i++) {
+      // prefixes gives us something like -o-, and we want O_
+      var prefix = prefixes[i];
+      var thisRule = prefix.toUpperCase() + '_' + rule;
+
+      if (thisRule in cssrule) {
+        return '@-' + prefix.toLowerCase() + '-' + prop;
+      }
+    }
+
+    return false;
+  };
+
+  ModernizrProto.atRule = atRule;
+
+  
+
+  /**
+   * prefixed returns the prefixed or nonprefixed property name variant of your input
+   *
+   * @memberof Modernizr
+   * @name Modernizr.prefixed
+   * @optionName Modernizr.prefixed()
+   * @optionProp prefixed
+   * @access public
+   * @function prefixed
+   * @param {string} prop - String name of the property to test for
+   * @param {object} [obj] - An object to test for the prefixed properties on
+   * @param {HTMLElement} [elem] - An element used to test specific properties against
+   * @returns {string|false} The string representing the (possibly prefixed) valid
+   * version of the property, or `false` when it is unsupported.
+   * @example
+   *
+   * Modernizr.prefixed takes a string css value in the DOM style camelCase (as
+   * opposed to the css style kebab-case) form and returns the (possibly prefixed)
+   * version of that property that the browser actually supports.
+   *
+   * For example, in older Firefox...
+   * ```js
+   * prefixed('boxSizing')
+   * ```
+   * returns 'MozBoxSizing'
+   *
+   * In newer Firefox, as well as any other browser that support the unprefixed
+   * version would simply return `boxSizing`. Any browser that does not support
+   * the property at all, it will return `false`.
+   *
+   * By default, prefixed is checked against a DOM element. If you want to check
+   * for a property on another object, just pass it as a second argument
+   *
+   * ```js
+   * var rAF = prefixed('requestAnimationFrame', window);
+   *
+   * raf(function() {
+   *  renderFunction();
+   * })
+   * ```
+   *
+   * Note that this will return _the actual function_ - not the name of the function.
+   * If you need the actual name of the property, pass in `false` as a third argument
+   *
+   * ```js
+   * var rAFProp = prefixed('requestAnimationFrame', window, false);
+   *
+   * rafProp === 'WebkitRequestAnimationFrame' // in older webkit
+   * ```
+   *
+   * One common use case for prefixed is if you're trying to determine which transition
+   * end event to bind to, you might do something like...
+   * ```js
+   * var transEndEventNames = {
+   *     'WebkitTransition' : 'webkitTransitionEnd', * Saf 6, Android Browser
+   *     'MozTransition'    : 'transitionend',       * only for FF < 15
+   *     'transition'       : 'transitionend'        * IE10, Opera, Chrome, FF 15+, Saf 7+
+   * };
+   *
+   * var transEndEventName = transEndEventNames[ Modernizr.prefixed('transition') ];
+   * ```
+   *
+   * If you want a similar lookup, but in kebab-case, you can use [prefixedCSS](#modernizr-prefixedcss).
+   */
+
+  var prefixed = ModernizrProto.prefixed = function(prop, obj, elem) {
+    if (prop.indexOf('@') === 0) {
+      return atRule(prop);
+    }
+
+    if (prop.indexOf('-') != -1) {
+      // Convert kebab-case to camelCase
+      prop = cssToDOM(prop);
+    }
+    if (!obj) {
+      return testPropsAll(prop, 'pfx');
+    } else {
+      // Testing DOM property e.g. Modernizr.prefixed('requestAnimationFrame', window) // 'mozRequestAnimationFrame'
+      return testPropsAll(prop, obj, elem);
+    }
+  };
+
+  
+/*!
+{
+  "name": "Navigation Timing API",
+  "property": "performance",
+  "caniuse": "nav-timing",
+  "tags": ["performance"],
+  "authors": ["Scott Murphy (@uxder)"],
+  "notes": [{
+    "name": "W3C Spec",
+    "href": "https://www.w3.org/TR/navigation-timing/"
+  },{
+    "name": "HTML5 Rocks article",
+    "href": "http://www.html5rocks.com/en/tutorials/webperformance/basics/"
+  }],
+  "polyfills": ["perfnow"]
+}
+!*/
+/* DOC
+Detects support for the Navigation Timing API, for measuring browser and connection performance.
+*/
+
+  Modernizr.addTest('performance', !!prefixed('performance', window));
+
+/*!
+{
+  "name": "DOM Pointer Events API",
+  "property": "pointerevents",
+  "tags": ["input"],
+  "authors": ["Stu Cox"],
+  "notes": [
+    {
+      "name": "W3C spec",
+      "href": "https://www.w3.org/TR/pointerevents/"
+    }
+  ],
+  "warnings": ["This property name now refers to W3C DOM PointerEvents: https://github.com/Modernizr/Modernizr/issues/548#issuecomment-12812099"],
+  "polyfills": ["handjs","pep"]
+}
+!*/
+/* DOC
+Detects support for the DOM Pointer Events API, which provides a unified event interface for pointing input devices, as implemented in IE10+.
+*/
+
+  // **Test name hijacked!**
+  // Now refers to W3C DOM PointerEvents spec rather than the CSS pointer-events property.
+  Modernizr.addTest('pointerevents', function() {
+    // Cannot use `.prefixed()` for events, so test each prefix
+    var bool = false,
+      i = domPrefixes.length;
+
+    // Don't forget un-prefixed...
+    bool = Modernizr.hasEvent('pointerdown');
+
+    while (i-- && !bool) {
+      if (hasEvent(domPrefixes[i] + 'pointerdown')) {
+        bool = true;
+      }
+    }
+    return bool;
+  });
+
+/*!
+{
+  "name": "SVG",
+  "property": "svg",
+  "caniuse": "svg",
+  "tags": ["svg"],
+  "authors": ["Erik Dahlstrom"],
+  "polyfills": [
+    "svgweb",
+    "raphael",
+    "amplesdk",
+    "canvg",
+    "svg-boilerplate",
+    "sie",
+    "dojogfx",
+    "fabricjs"
+  ]
+}
+!*/
+/* DOC
+Detects support for SVG in `<embed>` or `<object>` elements.
+*/
+
+  Modernizr.addTest('svg', !!document.createElementNS && !!document.createElementNS('http://www.w3.org/2000/svg', 'svg').createSVGRect);
+
+/*!
+{
+  "name": "HTML5 Video",
+  "property": "video",
+  "caniuse": "video",
+  "tags": ["html5"],
+  "knownBugs": [
+    "Without QuickTime, `Modernizr.video.h264` will be `undefined`; https://github.com/Modernizr/Modernizr/issues/546"
+  ],
+  "polyfills": [
+    "html5media",
+    "mediaelementjs",
+    "sublimevideo",
+    "videojs",
+    "leanbackplayer",
+    "videoforeverybody"
+  ]
+}
+!*/
+/* DOC
+Detects support for the video element, as well as testing what types of content it supports.
+
+Subproperties are provided to describe support for `ogg`, `h264` and `webm` formats, e.g.:
+
+```javascript
+Modernizr.video         // true
+Modernizr.video.ogg     // 'probably'
+```
+*/
+
+  // Codec values from : github.com/NielsLeenheer/html5test/blob/9106a8/index.html#L845
+  //                     thx to NielsLeenheer and zcorpan
+
+  // Note: in some older browsers, "no" was a return value instead of empty string.
+  //   It was live in FF3.5.0 and 3.5.1, but fixed in 3.5.2
+  //   It was also live in Safari 4.0.0 - 4.0.4, but fixed in 4.0.5
+
+  Modernizr.addTest('video', function() {
+    var elem = createElement('video');
+    var bool = false;
+
+    // IE9 Running on Windows Server SKU can cause an exception to be thrown, bug #224
+    try {
+      bool = !!elem.canPlayType
+      if (bool) {
+        bool = new Boolean(bool);
+        bool.ogg = elem.canPlayType('video/ogg; codecs="theora"').replace(/^no$/, '');
+
+        // Without QuickTime, this value will be `undefined`. github.com/Modernizr/Modernizr/issues/546
+        bool.h264 = elem.canPlayType('video/mp4; codecs="avc1.42E01E"').replace(/^no$/, '');
+
+        bool.webm = elem.canPlayType('video/webm; codecs="vp8, vorbis"').replace(/^no$/, '');
+
+        bool.vp9 = elem.canPlayType('video/webm; codecs="vp9"').replace(/^no$/, '');
+
+        bool.hls = elem.canPlayType('application/x-mpegURL; codecs="avc1.42E01E"').replace(/^no$/, '');
+      }
+    } catch (e) {}
+
+    return bool;
+  });
+
+/*!
+{
+  "name": "WebGL",
+  "property": "webgl",
+  "caniuse": "webgl",
+  "tags": ["webgl", "graphics"],
+  "polyfills": ["jebgl", "cwebgl", "iewebgl"]
+}
+!*/
+
+  Modernizr.addTest('webgl', function() {
+    var canvas = createElement('canvas');
+    var supports = 'probablySupportsContext' in canvas ? 'probablySupportsContext' :  'supportsContext';
+    if (supports in canvas) {
+      return canvas[supports]('webgl') || canvas[supports]('experimental-webgl');
+    }
+    return 'WebGLRenderingContext' in window;
+  });
+
+
+  /**
+   * List of property values to set for css tests. See ticket #21
+   * http://git.io/vUGl4
+   *
+   * @memberof Modernizr
+   * @name Modernizr._prefixes
+   * @optionName Modernizr._prefixes
+   * @optionProp prefixes
+   * @access public
+   * @example
+   *
+   * Modernizr._prefixes is the internal list of prefixes that we test against
+   * inside of things like [prefixed](#modernizr-prefixed) and [prefixedCSS](#-code-modernizr-prefixedcss). It is simply
+   * an array of kebab-case vendor prefixes you can use within your code.
+   *
+   * Some common use cases include
+   *
+   * Generating all possible prefixed version of a CSS property
+   * ```js
+   * var rule = Modernizr._prefixes.join('transform: rotate(20deg); ');
+   *
+   * rule === 'transform: rotate(20deg); webkit-transform: rotate(20deg); moz-transform: rotate(20deg); o-transform: rotate(20deg); ms-transform: rotate(20deg);'
+   * ```
+   *
+   * Generating all possible prefixed version of a CSS value
+   * ```js
+   * rule = 'display:' +  Modernizr._prefixes.join('flex; display:') + 'flex';
+   *
+   * rule === 'display:flex; display:-webkit-flex; display:-moz-flex; display:-o-flex; display:-ms-flex; display:flex'
+   * ```
+   */
+
+  // we use ['',''] rather than an empty array in order to allow a pattern of .`join()`ing prefixes to test
+  // values in feature detects to continue to work
+  var prefixes = (ModernizrProto._config.usePrefixes ? ' -webkit- -moz- -o- -ms- '.split(' ') : ['','']);
+
+  // expose these for the plugin API. Look in the source for how to join() them against your input
+  ModernizrProto._prefixes = prefixes;
+
+  
+/*!
+{
+  "name": "CSS Opacity",
+  "caniuse": "css-opacity",
+  "property": "opacity",
+  "tags": ["css"]
+}
+!*/
+
+  // Browsers that actually have CSS Opacity implemented have done so
+  // according to spec, which means their return values are within the
+  // range of [0.0,1.0] - including the leading zero.
+
+  Modernizr.addTest('opacity', function() {
+    var style = createElement('a').style;
+    style.cssText = prefixes.join('opacity:.55;');
+
+    // The non-literal . in this regex is intentional:
+    // German Chrome returns this value as 0,55
+    // github.com/Modernizr/Modernizr/issues/#issue/59/comment/516632
+    return (/^0.55$/).test(style.opacity);
+  });
+
+/*!
+{
+  "name": "CSS Supports",
+  "property": "supports",
+  "caniuse": "css-featurequeries",
+  "tags": ["css"],
+  "builderAliases": ["css_supports"],
+  "notes": [{
+    "name": "W3 Spec",
+    "href": "http://dev.w3.org/csswg/css3-conditional/#at-supports"
+  },{
+    "name": "Related Github Issue",
+    "href": "https://github.com/Modernizr/Modernizr/issues/648"
+  },{
+    "name": "W3 Info",
+    "href": "http://dev.w3.org/csswg/css3-conditional/#the-csssupportsrule-interface"
+  }]
+}
+!*/
+
+  var newSyntax = 'CSS' in window && 'supports' in window.CSS;
+  var oldSyntax = 'supportsCSS' in window;
+  Modernizr.addTest('supports', newSyntax || oldSyntax);
+
+/*!
+{
+  "name": "time Element",
+  "property": "time",
+  "tags": ["elem"],
+  "builderAliases": ["elem_time"],
+  "notes": [{
+    "name": "WhatWG Spec",
+    "href": "https://html.spec.whatwg.org/multipage/semantics.html#the-time-element"
+  }]
+}
+!*/
+
+  Modernizr.addTest('time', 'valueAsDate' in createElement('time'));
+
+/*!
+{
+  "name": "ES5 String.prototype.contains",
+  "property": "contains",
+  "authors": ["Robert Kowalski"],
+  "tags": ["es6"]
+}
+!*/
+/* DOC
+Check if browser implements ECMAScript 6 `String.prototype.contains` per specification.
+*/
+
+  Modernizr.addTest('contains', is(String.prototype.contains, 'function'));
+
+/*!
+{
+  "name": "placeholder attribute",
+  "property": "placeholder",
+  "tags": ["forms", "attribute"],
+  "builderAliases": ["forms_placeholder"]
+}
+!*/
+/* DOC
+Tests for placeholder attribute in inputs and textareas
+*/
+
+  Modernizr.addTest('placeholder', ('placeholder' in createElement('input') && 'placeholder' in createElement('textarea')));
+
+/*!
+{
+  "name": "Cross-Origin Resource Sharing",
+  "property": "cors",
+  "caniuse": "cors",
+  "authors": ["Theodoor van Donge"],
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en-US/docs/HTTP/Access_control_CORS"
+  }],
+  "polyfills": ["pmxdr", "ppx", "flxhr"]
+}
+!*/
+/* DOC
+Detects support for Cross-Origin Resource Sharing: method of performing XMLHttpRequests across domains.
+*/
+
+  Modernizr.addTest('cors', 'XMLHttpRequest' in window && 'withCredentials' in new XMLHttpRequest());
+
+/*!
+{
+  "name": "JSON",
+  "property": "json",
+  "caniuse": "json",
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en-US/docs/Glossary/JSON"
+  }],
+  "polyfills": ["json2"]
+}
+!*/
+/* DOC
+Detects native support for JSON handling functions.
+*/
+
+  // this will also succeed if you've loaded the JSON2.js polyfill ahead of time
+  //   ... but that should be obvious. :)
+
+  Modernizr.addTest('json', 'JSON' in window && 'parse' in JSON && 'stringify' in JSON);
+
+/*!
+{
+  "name": "Touch Events",
+  "property": "touchevents",
+  "caniuse" : "touch",
+  "tags": ["media", "attribute"],
+  "notes": [{
+    "name": "Touch Events spec",
+    "href": "https://www.w3.org/TR/2013/WD-touch-events-20130124/"
+  }],
+  "warnings": [
+    "Indicates if the browser supports the Touch Events spec, and does not necessarily reflect a touchscreen device"
+  ],
+  "knownBugs": [
+    "False-positive on some configurations of Nokia N900",
+    "False-positive on some BlackBerry 6.0 builds – https://github.com/Modernizr/Modernizr/issues/372#issuecomment-3112695"
+  ]
+}
+!*/
+/* DOC
+Indicates if the browser supports the W3C Touch Events API.
+
+This *does not* necessarily reflect a touchscreen device:
+
+* Older touchscreen devices only emulate mouse events
+* Modern IE touch devices implement the Pointer Events API instead: use `Modernizr.pointerevents` to detect support for that
+* Some browsers & OS setups may enable touch APIs when no touchscreen is connected
+* Future browsers may implement other event models for touch interactions
+
+See this article: [You Can't Detect A Touchscreen](http://www.stucox.com/blog/you-cant-detect-a-touchscreen/).
+
+It's recommended to bind both mouse and touch/pointer events simultaneously – see [this HTML5 Rocks tutorial](http://www.html5rocks.com/en/mobile/touchandmouse/).
+
+This test will also return `true` for Firefox 4 Multitouch support.
+*/
+
+  // Chrome (desktop) used to lie about its support on this, but that has since been rectified: http://crbug.com/36415
+  Modernizr.addTest('touchevents', function() {
+    var bool;
+    if (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch) {
+      bool = true;
+    } else {
+      // include the 'heartz' as a way to have a non matching MQ to help terminate the join
+      // https://git.io/vznFH
+      var query = ['@media (', prefixes.join('touch-enabled),('), 'heartz', ')', '{#modernizr{top:9px;position:absolute}}'].join('');
+      testStyles(query, function(node) {
+        bool = node.offsetTop === 9;
+      });
+    }
+    return bool;
+  });
+
+/*!
+{
+  "name": "CSS HSLA Colors",
+  "caniuse": "css3-colors",
+  "property": "hsla",
+  "tags": ["css"]
+}
+!*/
+
+  Modernizr.addTest('hsla', function() {
+    var style = createElement('a').style;
+    style.cssText = 'background-color:hsla(120,40%,100%,.5)';
+    return contains(style.backgroundColor, 'rgba') || contains(style.backgroundColor, 'hsla');
+  });
+
+/*!
+{
+  "name": "CSS rgba",
+  "caniuse": "css3-colors",
+  "property": "rgba",
+  "tags": ["css"],
+  "notes": [{
+    "name": "CSSTricks Tutorial",
+    "href": "https://css-tricks.com/rgba-browser-support/"
+  }]
+}
+!*/
+
+  Modernizr.addTest('rgba', function() {
+    var style = createElement('a').style;
+    style.cssText = 'background-color:rgba(150,255,150,.5)';
+
+    return ('' + style.backgroundColor).indexOf('rgba') > -1;
+  });
+
+/*!
+{
+  "name": "[hidden] Attribute",
+  "property": "hidden",
+  "tags": ["dom"],
+  "notes": [{
+    "name": "WHATWG: The hidden attribute",
+    "href": "https://developers.whatwg.org/editing.html#the-hidden-attribute"
+  }, {
+    "name": "original implementation of detect code",
+    "href": "https://github.com/aFarkas/html5shiv/blob/bf4fcc4/src/html5shiv.js#L38"
+  }],
+  "polyfills": ["html5shiv"],
+  "authors": ["Ron Waldon (@jokeyrhyme)"]
+}
+!*/
+/* DOC
+Does the browser support the HTML5 [hidden] attribute?
+*/
+
+  Modernizr.addTest('hidden', 'hidden' in createElement('a'));
+
+/*!
+{
+  "name": "input[capture] Attribute",
+  "property": "capture",
+  "tags": ["video", "image", "audio", "media", "attribute"],
+  "notes": [{
+    "name": "W3C draft: HTML Media Capture",
+    "href": "https://www.w3.org/TR/html-media-capture/"
+  }]
+}
+!*/
+/* DOC
+When used on an `<input>`, this attribute signifies that the resource it takes should be generated via device's camera, camcorder, sound recorder.
+*/
+
+  // testing for capture attribute in inputs
+  Modernizr.addTest('capture', ('capture' in createElement('input')));
+
+/*!
+{
+  "name": "Application Cache",
+  "property": "applicationcache",
+  "caniuse": "offline-apps",
+  "tags": ["storage", "offline"],
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en/docs/HTML/Using_the_application_cache"
+  }],
+  "polyfills": ["html5gears"]
+}
+!*/
+/* DOC
+Detects support for the Application Cache, for storing data to enable web-based applications run offline.
+
+The API has been [heavily criticized](http://alistapart.com/article/application-cache-is-a-douchebag) and discussions are underway to address this.
+*/
+
+  Modernizr.addTest('applicationcache', 'applicationCache' in window);
+
+/*!
+{
+  "name": "Hashchange event",
+  "property": "hashchange",
+  "caniuse": "hashchange",
+  "tags": ["history"],
+  "notes": [{
+    "name": "MDN documentation",
+    "href": "https://developer.mozilla.org/en-US/docs/Web/API/window.onhashchange"
+  }],
+  "polyfills": [
+    "jquery-hashchange",
+    "moo-historymanager",
+    "jquery-ajaxy",
+    "hasher",
+    "shistory"
+  ]
+}
+!*/
+/* DOC
+Detects support for the `hashchange` event, fired when the current location fragment changes.
+*/
+
+  Modernizr.addTest('hashchange', function() {
+    if (hasEvent('hashchange', window) === false) {
+      return false;
+    }
+
+    // documentMode logic from YUI to filter out IE8 Compat Mode
+    //   which false positives.
+    return (document.documentMode === undefined || document.documentMode > 7);
+  });
+
+/*!
+{
+  "name": "postMessage",
+  "property": "postmessage",
+  "caniuse": "x-doc-messaging",
+  "notes": [{
+    "name": "W3C Spec",
+    "href": "http://www.w3.org/TR/html5/comms.html#posting-messages"
+  }],
+  "polyfills": ["easyxdm", "postmessage-jquery"]
+}
+!*/
+/* DOC
+Detects support for the `window.postMessage` protocol for cross-document messaging.
+*/
+
+  Modernizr.addTest('postmessage', 'postMessage' in window);
+
+/*!
+{
+  "name": "WebSockets Support",
+  "property": "websockets",
+  "authors": ["Phread [fearphage]", "Mike Sherov [mikesherov]", "Burak Yigit Kaya [BYK]"],
+  "caniuse": "websockets",
+  "tags": ["html5"],
+  "warnings": [
+    "This test will reject any old version of WebSockets even if it is not prefixed such as in Safari 5.1"
+  ],
+  "notes": [{
+    "name": "CLOSING State and Spec",
+    "href": "https://www.w3.org/TR/websockets/#the-websocket-interface"
+  }],
+  "polyfills": [
+    "sockjs",
+    "socketio",
+    "kaazing-websocket-gateway",
+    "websocketjs",
+    "atmosphere",
+    "graceful-websocket",
+    "portal",
+    "datachannel"
+  ]
+}
+!*/
+
+  var supports = false;
+  try {
+    supports = 'WebSocket' in window && window.WebSocket.CLOSING === 2;
+  } catch (e) {}
+  Modernizr.addTest('websockets', supports);
+
 
   /**
    * testAllProps determines whether a given CSS property is supported in the browser
@@ -2959,30 +3224,6 @@ Detects support for the Flexible Box Layout model, a.k.a. Flexbox, which allows 
     return navigator.userAgent.indexOf('Android 2.') === -1 &&
            testAllProps('transform', 'scale(1)', true);
   });
-
-/*!
-{
-  "name": "CSS Supports",
-  "property": "supports",
-  "caniuse": "css-featurequeries",
-  "tags": ["css"],
-  "builderAliases": ["css_supports"],
-  "notes": [{
-    "name": "W3 Spec",
-    "href": "http://dev.w3.org/csswg/css3-conditional/#at-supports"
-  },{
-    "name": "Related Github Issue",
-    "href": "https://github.com/Modernizr/Modernizr/issues/648"
-  },{
-    "name": "W3 Info",
-    "href": "http://dev.w3.org/csswg/css3-conditional/#the-csssupportsrule-interface"
-  }]
-}
-!*/
-
-  var newSyntax = 'CSS' in window && 'supports' in window.CSS;
-  var oldSyntax = 'supportsCSS' in window;
-  Modernizr.addTest('supports', newSyntax || oldSyntax);
 
 /*!
 {

@@ -10,13 +10,18 @@
 
 .admin-header__logo {
 	background-color: $primary-color;
-	background-image: url("../images/admin_logo.png");
-	background-repeat: no-repeat;
-	background-position: 20px 12px;
 	flex: 0 0 200px;
 	height: 35px;
 	padding: 10px 20px;
 	margin: 0;
+	
+	svg {
+		height: 100%;
+		width: auto;
+		* {
+			fill: #FFF;
+		}
+	}
 
 	.admin-header__logo__text {
 		@include visually-hidden;
