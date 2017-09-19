@@ -2,37 +2,10 @@
 *   MyBB 2 Admin Control Panel Theme - https://mybb.com - @mybb - MIT license
 */
 
-@import "../../../node_modules/normalize-scss/sass/_normalize";
-@import "../../../node_modules/font-awesome/scss/font-awesome";
-@import "../../../node_modules/@claviska/jquery-dropdown/jquery.dropdown.sass";
-@import "../../../node_modules/datetimepicker/src/DateTimePicker.css";
-
-// Directional CSS library
-// See https://github.com/tysonmatanich/directional-scss for how to use
-@import "directional";
-
-// Everything else
-@import "vars";
-@import "mixins";
-@import "helpers";
-
-@import "page";
-@import "page_blocks";
-@import "menus";
-
-@import "forms";
-@import "form_fields";
-@import "buttons";
-
-@import "tables";
-
-@import "modals";
-@import "jcrop";
-@import "spinner";
-@import "tooltips";
-@import "stepper";
-@import "passwords";
-
-@import 'admin/_main';
-@import 'admin/_header_footer';
-@import 'admin/_menu';
+@import "utils/module";
+@import "base/module";
+@import "vendor/module";
+@import "components/admin/module";
+@import "layout/admin/module";
+@import "pages/admin/module";
+@import "themes/module";
