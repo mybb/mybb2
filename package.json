@@ -27,17 +27,9 @@
     "autosize": "^4.0.0",
     "babel-core": "^6.26.0",
     "babel-preset-es2015-rollup": "^3.0.0",
-<<<<<<< HEAD
     "datetimepicker": "^0.1.30",
     "dropit": "^1.0.0",
     "dropzone": "^5.1.1",
-=======
-    "css-loader": "^0.28.7",
-    "datetimepicker": "^0.1.30",
-    "dropit": "^1.0.0",
-    "dropzone": "^5.1.1",
-    "extract-text-webpack-plugin": "^3.0.0",
->>>>>>> mybb/master
     "fastclick": "^1.0.6",
     "file-loader": "^0.11.2",
     "font-awesome": "^4.6.3",
@@ -57,10 +49,6 @@
     "modernizr": "^3.3.1",
     "node-sass": "^4.5.3",
     "normalize-scss": "^7.0.0",
-<<<<<<< HEAD
-=======
-    "resolve-url-loader": "^2.1.0",
->>>>>>> mybb/master
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^2.0.1",
