@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Test MyBB 2.0 TypeScript</title>
-
-    <script type="text/javascript" src="../../public/assets/js/mybb.js"></script>
 </head>
 <body>
+
+                <div style="background: blue;" class="post" id="post-1234" data-postid="1234" data-type="post">
+                    <div class="post__meta">
+                        <a href="#" class="post__toggle"><i class="fa fa-minus postToggle"></i>Toggle</a>
+                    </div>
+                    <div class="post__foot">
+                        <ul class="post__controls">
+                            <li class="post__controls__item post__controls__item--delete">
+                                <a href="{{ url_route("topics.delete", {'slug': topic.slug, 'id': topic.id, 'postId': post.id}) }}" class="post__controls__item__link icon fa-trash-o" title="{{ trans('topic.delete') }}">
+                                    <span class="text">{{ trans('topic.delete') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+    <script type="text/javascript" src="../../public/assets/js/mybb.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             console.log("Cookies:");
