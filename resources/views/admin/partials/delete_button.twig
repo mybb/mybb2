@@ -1,5 +1,5 @@
 <form method="post" action="{{ route(for) }}" style="display:inline;">
     {{ csrf_field() }}
     <input type="hidden" name="id" value="{{ id }}">
-    <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::general.delete') }}</button>
+    <button type="submit" class="button button--danger"><i class="fa fa-remove"></i> {{ trans('admin::general.delete') }}</button>
 </form>
