@@ -15,13 +15,13 @@ export default class Post {
         const _this = this;
 
         if (postToggles.length > 0) {
-            utils.forEach(postToggles, function(i, toggle) {
+            utils.forEach(postToggles, (i, toggle) => {
                 toggle.addEventListener('click', _this.togglePost);
             }, this);
         }
         
         if (postDeletes.length > 0) {
-            utils.forEach(postDeletes, function(i, toggle) {
+            utils.forEach(postDeletes, (i, toggle) => {
                 toggle.addEventListener('click', _this.togglePost);
             }, this);
         }
