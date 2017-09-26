@@ -29,12 +29,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        parent::boot();
-
         /** @var \Illuminate\Routing\Router $router */
         $router = $this->app['router'];
 
         $router->pattern('id', '\d+');
+
+        parent::boot();
     }
 
     /**
