@@ -43,5 +43,5 @@ interface RenderableInterface
     /**
      * @return string
      */
-    public function getValidationRules() : string;
+    public function getValidationRules() : array;
 }
