@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\Paginator;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
 
@@ -21,7 +21,7 @@ interface ConversationMessageRepositoryInterface
      *
      * @return Collection
      */
-    public function all() : Collection;
+    public function all() : Paginator;
 
     /**
      * Get a single message by id
@@ -37,7 +37,7 @@ interface ConversationMessageRepositoryInterface
      *
      * @return Collection
      */
-    public function getAllForConversation(Conversation $conversation) : Collection;
+    public function getAllForConversation(Conversation $conversation) : Paginator;
 
     /**
      * @param Conversation $conversation
