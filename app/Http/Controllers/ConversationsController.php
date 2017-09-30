@@ -58,8 +58,6 @@ class ConversationsController extends AbstractController
         $this->conversationRepository = $conversationRepository;
         $this->conversationMessageRepository = $conversationMessageRepository;
         $this->guard = $guard;
-
-        $guard->user()->load('conversations');
     }
 
     /**

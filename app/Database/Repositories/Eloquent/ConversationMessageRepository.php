@@ -10,7 +10,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\Paginator;
 use MyBB\Core\Database\Models\Conversation;
 use MyBB\Core\Database\Models\ConversationMessage;
 use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
@@ -61,7 +61,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function all() : Collection
+    public function all() : Paginator
     {
         return $this->conversationMessageModel->all();
     }
@@ -77,7 +77,7 @@ class ConversationMessageRepository implements ConversationMessageRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function getAllForConversation(Conversation $conversation) : Collection
+    public function getAllForConversation(Conversation $conversation) : Paginator
     {
         return $this->conversationMessageModel->where('conversation_id', $conversation->id)
             ->orderBy('created_at', $this->settings->get('conversations.message_order', 'desc'))
