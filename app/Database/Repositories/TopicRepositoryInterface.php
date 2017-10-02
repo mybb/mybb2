@@ -10,9 +10,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic
+};
 
 interface TopicRepositoryInterface
 {

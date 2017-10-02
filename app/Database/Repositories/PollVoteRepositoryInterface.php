@@ -10,9 +10,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\Poll;
-use MyBB\Core\Database\Models\PollVote;
-use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Models\{
+    Poll, PollVote, User
+};
 
 interface PollVoteRepositoryInterface
 {

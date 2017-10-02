@@ -9,8 +9,9 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
-use MyBB\Core\Database\Models\ProfileField;
-use MyBB\Core\Database\Models\ProfileFieldOption;
+use MyBB\Core\Database\Models\{
+    ProfileField, ProfileFieldOption
+};
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 
 class ProfileFieldOptionRepository implements ProfileFieldOptionRepositoryInterface

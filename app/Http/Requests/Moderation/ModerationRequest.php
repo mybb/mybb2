@@ -4,11 +4,9 @@ namespace MyBB\Core\Http\Requests\Moderation;
 
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Http\Requests\AbstractRequest;
-use MyBB\Core\Moderation\ArrayModerationInterface;
-use MyBB\Core\Moderation\DestinedInterface;
-use MyBB\Core\Moderation\ModerationInterface;
-use MyBB\Core\Moderation\ModerationRegistry;
-use MyBB\Core\Moderation\SourceableInterface;
+use MyBB\Core\Moderation\{
+    ArrayModerationInterface, DestinedInterface, ModerationInterface, ModerationRegistry, SourceableInterface
+};
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Core\Repository\RepositoryFactory;
 

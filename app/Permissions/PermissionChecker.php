@@ -10,11 +10,12 @@ namespace MyBB\Core\Permissions;
 
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Database\DatabaseManager;
-use MyBB\Core\Database\Models\ContentClass;
-use MyBB\Core\Database\Models\Role;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Exceptions\PermissionImplementInterfaceException;
-use MyBB\Core\Exceptions\PermissionInvalidContentException;
+use MyBB\Core\Database\Models\{
+    ContentClass, Role, User
+};
+use MyBB\Core\Exceptions\{
+    PermissionImplementInterfaceException, PermissionInvalidContentException
+};
 use MyBB\Core\Permissions\Interfaces\PermissionInterface;
 
 class PermissionChecker

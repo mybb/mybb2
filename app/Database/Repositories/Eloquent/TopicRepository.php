@@ -13,14 +13,12 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Str;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic, User
+};
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, PollRepositoryInterface, PostRepositoryInterface, TopicRepositoryInterface
+};
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Settings\Store;
 

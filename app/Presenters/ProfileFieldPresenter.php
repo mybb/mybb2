@@ -10,10 +10,12 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Database\Models\ProfileField as ProfileFieldModel;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
-use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Models\{
+    ProfileField as ProfileFieldModel, User
+};
+use MyBB\Core\Database\Repositories\{
+    ProfileFieldOptionRepositoryInterface, UserProfileFieldRepositoryInterface
+};
 use MyBB\Core\Form\RenderableInterface;
 
 class ProfileFieldPresenter extends BasePresenter implements RenderableInterface

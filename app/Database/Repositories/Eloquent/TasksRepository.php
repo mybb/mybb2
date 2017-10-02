@@ -10,8 +10,9 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Support\Collection;
 use Illuminate\Contracts\Pagination\Paginator;
-use MyBB\Core\Database\Models\Task;
-use MyBB\Core\Database\Models\TaskLog;
+use MyBB\Core\Database\Models\{
+    Task, TaskLog
+};
 use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
 use Cron\CronExpression;
 

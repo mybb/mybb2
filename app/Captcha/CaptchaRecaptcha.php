@@ -8,8 +8,9 @@
 
 namespace MyBB\Core\Captcha;
 
-use Greggilbert\Recaptcha\Recaptcha;
-use Greggilbert\Recaptcha\Service\CheckRecaptcha;
+use Greggilbert\Recaptcha\{
+    Recaptcha, Service\CheckRecaptcha
+};
 use Illuminate\Config\Repository;
 use Illuminate\Http\Request;
 use MyBB\Settings\Store;

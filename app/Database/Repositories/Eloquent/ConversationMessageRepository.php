@@ -11,10 +11,12 @@
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Contracts\Pagination\Paginator;
-use MyBB\Core\Database\Models\Conversation;
-use MyBB\Core\Database\Models\ConversationMessage;
-use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
-use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Database\Models\{
+    Conversation, ConversationMessage
+};
+use MyBB\Core\Database\Repositories\{
+    ConversationMessageRepositoryInterface, UserRepositoryInterface
+};
 use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 

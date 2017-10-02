@@ -9,8 +9,9 @@
 namespace MyBB\Core\Http\Requests\Account;
 
 use MyBB\Core\Database\Models\ProfileField;
-use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
-use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ProfileFieldGroupRepositoryInterface, ProfileFieldRepositoryInterface
+};
 use MyBB\Core\Http\Requests\AbstractRequest;
 use MyBB\Core\Http\Requests\ProfileField\ProfileFieldRequestSubmitTrait;
 

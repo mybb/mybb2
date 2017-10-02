@@ -2,8 +2,9 @@
 
 namespace MyBB\Core\Presenters\Moderations;
 
-use MyBB\Core\Form\Field;
-use MyBB\Core\Form\RenderableInterface;
+use MyBB\Core\Form\{
+    Field, RenderableInterface
+};
 use MyBB\Core\Moderation\Moderations\MovePost;
 
 class MovePostPresenter extends AbstractModerationPresenter implements ModerationPresenterInterface

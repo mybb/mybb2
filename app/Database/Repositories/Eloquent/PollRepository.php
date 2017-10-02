@@ -12,10 +12,12 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
-use MyBB\Core\Database\Models\Poll;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
+use MyBB\Core\Database\Models\{
+    Poll, Topic
+};
+use MyBB\Core\Database\Repositories\{
+    PollRepositoryInterface, PollVoteRepositoryInterface
+};
 
 class PollRepository implements PollRepositoryInterface
 {

@@ -4,8 +4,9 @@ namespace MyBB\Core\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\{
+    InputOption, InputArgument
+};
 use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
 
 class TaskMakeCommand extends GeneratorCommand

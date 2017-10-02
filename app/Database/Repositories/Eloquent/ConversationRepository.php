@@ -13,12 +13,15 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
-use MyBB\Core\Database\Models\Conversation;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
-use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
-use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
-use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
+use MyBB\Core\Database\Models\{
+    Conversation, User
+};
+use MyBB\Core\Database\Repositories\{
+    ConversationMessageRepositoryInterface, ConversationRepositoryInterface
+};
+use MyBB\Core\Exceptions\{
+    ConversationAlreadyParticipantException, ConversationCantSendToSelfException
+};
 use MyBB\Settings\Store;
 
 class ConversationRepository implements ConversationRepositoryInterface

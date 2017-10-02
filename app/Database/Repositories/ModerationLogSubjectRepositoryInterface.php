@@ -9,8 +9,9 @@
 namespace MyBB\Core\Database\Repositories;
 
 use MyBB\Core\Content\ContentInterface;
-use MyBB\Core\Database\Models\ModerationLog;
-use MyBB\Core\Database\Models\ModerationLogSubject;
+use MyBB\Core\Database\Models\{
+    ModerationLog, ModerationLogSubject
+};
 
 interface ModerationLogSubjectRepositoryInterface extends RepositoryInterface
 {
