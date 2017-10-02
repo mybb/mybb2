@@ -3,13 +3,15 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Contracts\Auth\Guard;
-use MyBB\Core\Database\Models\ModerationLog;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Http\Requests\Moderation\ModerationRequest;
-use MyBB\Core\Http\Requests\Moderation\ReversibleModerationRequest;
-use MyBB\Core\Moderation\ArrayModerationInterface;
-use MyBB\Core\Moderation\Logger\ModerationLoggerInterface;
+use MyBB\Core\Database\Models\{
+    ModerationLog, Post, Topic
+};
+use MyBB\Core\Http\Requests\Moderation\{
+    ModerationRequest, ReversibleModerationRequest
+};
+use MyBB\Core\Moderation\{
+    ArrayModerationInterface, Logger\ModerationLoggerInterface
+};
 
 class ModerationController extends AbstractController
 {

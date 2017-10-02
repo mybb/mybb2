@@ -14,8 +14,9 @@ namespace MyBB\Core\Http\Controllers;
 
 use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Exceptions\PostNotFoundException;
-use MyBB\Core\Http\Requests\Post\LikePostRequest;
-use MyBB\Core\Http\Requests\Post\QuotePostRequest;
+use MyBB\Core\Http\Requests\Post\{
+    LikePostRequest, QuotePostRequest
+};
 use MyBB\Core\Likes\Database\Repositories\LikesRepositoryInterface;
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Settings\Store;

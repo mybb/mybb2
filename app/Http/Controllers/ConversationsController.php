@@ -15,16 +15,18 @@ namespace MyBB\Core\Http\Controllers;
 use Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Models\Conversation;
-use MyBB\Core\Database\Models\ConversationMessage;
-use MyBB\Core\Database\Repositories\ConversationMessageRepositoryInterface;
-use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
-use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
-use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
-use MyBB\Core\Exceptions\ConversationNotFoundException;
-use MyBB\Core\Http\Requests\Conversations\CreateRequest;
-use MyBB\Core\Http\Requests\Conversations\ParticipantRequest;
-use MyBB\Core\Http\Requests\Conversations\ReplyRequest;
+use MyBB\Core\Database\Models\{
+    Conversation, ConversationMessage
+};
+use MyBB\Core\Database\Repositories\{
+    ConversationMessageRepositoryInterface, ConversationRepositoryInterface
+};
+use MyBB\Core\Exceptions\{
+    ConversationAlreadyParticipantException, ConversationCantSendToSelfException, ConversationNotFoundException
+};
+use MyBB\Core\Http\Requests\Conversations\{
+    CreateRequest, ParticipantRequest, ReplyRequest
+};
 use MyBB\Parser\Parser;
 use MyBB\Settings\Store;
 

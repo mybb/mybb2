@@ -9,17 +9,16 @@
 namespace MyBB\Core\Http\Controllers;
 
 use Illuminate\Auth\Access\Response;
-use MyBB\Core\Database\Repositories\WarningsRepositoryInterface;
-use MyBB\Core\Database\Repositories\WarningTypesRepositoryInterface;
-use MyBB\Core\Database\Repositories\UserRepositoryInterface;
-use MyBB\Core\Exceptions\UserNotFoundException;
-use MyBB\Core\Exceptions\UserNotBelongsToThisContentException;
-use MyBB\Core\Exceptions\WarningTypeNotFoundException;
-use MyBB\Core\Exceptions\WarningNotFoundException;
+use MyBB\Core\Database\Repositories\{
+    WarningsRepositoryInterface, WarningTypesRepositoryInterface, UserRepositoryInterface
+};
+use MyBB\Core\Exceptions\{
+    UserNotFoundException, UserNotBelongsToThisContentException, WarningTypeNotFoundException, WarningNotFoundException
+};
 use MyBB\Core\Warnings\WarningsManager;
-use MyBB\Core\Http\Requests\Warnings\WarnUserRequest;
-use MyBB\Core\Http\Requests\Warnings\RevokeWarnRequest;
-use MyBB\Core\Http\Requests\Warnings\AckWithWarnRequest;
+use MyBB\Core\Http\Requests\Warnings\{
+    WarnUserRequest, RevokeWarnRequest, AckWithWarnRequest
+};
 use MyBB\Core\Presenters\UserPresenter;
 use MyBB\Settings\Store;
 use Illuminate\Contracts\Auth\Guard;
