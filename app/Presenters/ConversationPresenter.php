@@ -12,8 +12,9 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Contracts\Auth\Guard;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Database\Models\Conversation as ConversationModel;
-use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Models\{
+    Conversation as ConversationModel, User
+};
 
 class ConversationPresenter extends BasePresenter
 {

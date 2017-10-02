@@ -9,11 +9,13 @@
 namespace MyBB\Core\Presenters;
 
 use Illuminate\Contracts\View\Factory;
-use McCool\LaravelAutoPresenter\BasePresenter;
-use McCool\LaravelAutoPresenter\PresenterDecorator;
+use McCool\LaravelAutoPresenter\{
+    BasePresenter, PresenterDecorator
+};
 use MyBB\Core\Content\ContentInterface;
-use MyBB\Core\Database\Models\ModerationLog;
-use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Models\{
+    ModerationLog, User as UserModel
+};
 use MyBB\Core\Moderation\ModerationRegistry;
 use MyBB\Core\Repository\RepositoryFactory;
 

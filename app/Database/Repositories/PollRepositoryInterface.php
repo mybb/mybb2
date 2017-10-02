@@ -10,8 +10,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\Poll;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\{
+    Poll, Topic
+};
 
 interface PollRepositoryInterface
 {

@@ -10,7 +10,9 @@ namespace MyBB\Core\Tasking;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Contracts\Cache\{
+    Repository as CacheRepository
+};
 use MyBB\Settings\Store;
 use MyBB\Core\Database\Models\Task;
 use MyBB\Core\Exceptions\TaskFailedException;

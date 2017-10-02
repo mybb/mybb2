@@ -10,8 +10,9 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 use MyBB\Core\Content\ContentInterface;
-use MyBB\Core\Database\Models\ModerationLog;
-use MyBB\Core\Database\Models\ModerationLogSubject;
+use MyBB\Core\Database\Models\{
+    ModerationLog, ModerationLogSubject
+};
 use MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface;
 
 class ModerationLogSubjectRepository implements ModerationLogSubjectRepositoryInterface

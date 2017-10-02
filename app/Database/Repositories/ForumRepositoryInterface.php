@@ -11,9 +11,9 @@
 namespace MyBB\Core\Database\Repositories;
 
 use Doctrine\Common\Collections\Collection;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic
+};
 
 interface ForumRepositoryInterface
 {

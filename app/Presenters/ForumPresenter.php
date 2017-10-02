@@ -12,10 +12,9 @@ namespace MyBB\Core\Presenters;
 
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Database\Models\Forum as ForumModel;
-use MyBB\Core\Database\Models\Topic as TopicModel;
-use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Models\{
+    Forum as ForumModel, Topic as TopicModel, User as UserModel, User
+};
 use MyBB\Core\Moderation\ModerationRegistry;
 
 class ForumPresenter extends BasePresenter

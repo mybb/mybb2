@@ -10,8 +10,9 @@ namespace MyBB\Core\Http\Controllers\Admin\Forums;
 
 use Illuminate\Http\Request;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, TopicRepositoryInterface
+};
 use MyBB\Core\Exceptions\ForumNotFoundException;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 use MyBB\Core\Http\Requests\Forums\CreateForumRequest;

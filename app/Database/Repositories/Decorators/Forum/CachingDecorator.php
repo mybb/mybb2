@@ -13,9 +13,9 @@ namespace MyBB\Core\Database\Repositories\Decorators\Forum;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use Illuminate\Database\Eloquent\Collection;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic
+};
 use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
 use MyBB\Core\Permissions\PermissionChecker;
 

@@ -16,15 +16,14 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Translation\Translator;
 use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\User as UserModel;
-use MyBB\Core\Database\Repositories\ConversationRepositoryInterface;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
-use MyBB\Core\Database\Repositories\UserRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ConversationRepositoryInterface, ForumRepositoryInterface, PostRepositoryInterface, TopicRepositoryInterface, UserRepositoryInterface
+};
 use MyBB\Core\Permissions\PermissionChecker;
 use MyBB\Gravatar\Generator;
-use MyBB\Settings\Models\Setting;
-use MyBB\Settings\Models\SettingValue;
+use MyBB\Settings\Models\{
+    Setting, SettingValue
+};
 use MyBB\Settings\Store;
 
 class UserPresenter extends BasePresenter

@@ -9,9 +9,9 @@
 namespace MyBB\Core\Services;
 
 use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\PostRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, PollRepositoryInterface, PostRepositoryInterface
+};
 
 class TopicDeleter
 {

@@ -11,8 +11,9 @@ namespace MyBB\Core\Moderation\Logger;
 use Illuminate\Support\Collection;
 use MyBB\Core\Content\ContentInterface;
 use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Repositories\ModerationLogRepositoryInterface;
-use MyBB\Core\Database\Repositories\ModerationLogSubjectRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ModerationLogRepositoryInterface, ModerationLogSubjectRepositoryInterface
+};
 use MyBB\Core\Http\Requests\Moderation\ModerationRequest;
 use MyBB\Core\Moderation\ModerationInterface;
 

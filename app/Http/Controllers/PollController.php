@@ -14,16 +14,12 @@ namespace MyBB\Core\Http\Controllers;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollVoteRepositoryInterface;
-use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
-use MyBB\Core\Exceptions\PollAlreadyVotedException;
-use MyBB\Core\Exceptions\PollClosedException;
-use MyBB\Core\Exceptions\PollNoGuestUndoException;
-use MyBB\Core\Exceptions\PollNotFoundException;
-use MyBB\Core\Exceptions\PollNoUndoException;
-use MyBB\Core\Exceptions\TopicNotFoundException;
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, PollRepositoryInterface, PollVoteRepositoryInterface, TopicRepositoryInterface
+};
+use MyBB\Core\Exceptions\{
+    PollAlreadyVotedException, PollClosedException, PollNoGuestUndoException, PollNotFoundException, PollNoUndoException, TopicNotFoundException
+};
 use MyBB\Core\Http\Requests\Poll\CreateRequest;
 
 class PollController extends AbstractController

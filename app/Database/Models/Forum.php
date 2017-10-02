@@ -13,8 +13,9 @@ namespace MyBB\Core\Database\Models;
 use Illuminate\Database\Eloquent\Model;
 use McCool\LaravelAutoPresenter\HasPresenter;
 use MyBB\Core\Content\ContentInterface;
-use MyBB\Core\Moderation\Moderations\CloseableInterface;
-use MyBB\Core\Moderation\Moderations\StickableInterface;
+use MyBB\Core\Moderation\Moderations\{
+    CloseableInterface, StickableInterface
+};
 use MyBB\Core\Permissions\Interfaces\InheritPermissionInterface;
 use MyBB\Core\Permissions\Traits\InheritPermissionableTrait;
 use MyBB\Core\Presenters\ForumPresenter;

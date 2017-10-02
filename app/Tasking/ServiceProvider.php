@@ -8,8 +8,9 @@
 
 namespace MyBB\Core\Tasking;
 
-use MyBB\Core\Tasking\Tasks\ExampleTask;
-use MyBB\Core\Tasking\Tasks\LogPruningTask;
+use MyBB\Core\Tasking\Tasks\{
+    ExampleTask, LogPruningTask
+};
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

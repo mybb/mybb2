@@ -13,17 +13,13 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
-use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ProfileFieldGroupRepositoryInterface, UserProfileFieldRepositoryInterface
+};
 use MyBB\Settings\Repositories\SettingRepositoryInterface;
-use MyBB\Core\Http\Requests\Account\CropAvatarRequest;
-use MyBB\Core\Http\Requests\Account\UpdateAvatarRequest;
-use MyBB\Core\Http\Requests\Account\UpdateEmailRequest;
-use MyBB\Core\Http\Requests\Account\UpdatePasswordRequest;
-use MyBB\Core\Http\Requests\Account\UpdatePreferencesRequest;
-use MyBB\Core\Http\Requests\Account\UpdatePrivacyRequest;
-use MyBB\Core\Http\Requests\Account\UpdateProfileRequest;
-use MyBB\Core\Http\Requests\Account\UpdateUsernameRequest;
+use MyBB\Core\Http\Requests\Account\{
+    CropAvatarRequest, UpdateAvatarRequest, UpdateEmailRequest, UpdatePasswordRequest, UpdatePreferencesRequest, UpdatePrivacyRequest, UpdateProfileRequest, UpdateUsernameRequest
+};
 use MyBB\Core\Services\ConfirmationManager;
 use MyBB\Settings\Store;
 

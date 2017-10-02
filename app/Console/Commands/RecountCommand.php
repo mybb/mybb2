@@ -10,10 +10,9 @@ namespace MyBB\Core\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use MyBB\Core\Database\Models\Forum;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Models\User;
+use MyBB\Core\Database\Models\{
+    Forum, Post, Topic, User
+};
 use Symfony\Component\Console\Input\InputOption;
 
 class RecountCommand extends Command

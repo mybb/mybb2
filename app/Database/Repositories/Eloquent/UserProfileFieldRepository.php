@@ -10,10 +10,9 @@ namespace MyBB\Core\Database\Repositories\Eloquent;
 
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Collection;
-use MyBB\Core\Database\Models\ProfileField;
-use MyBB\Core\Database\Models\ProfileFieldGroup;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Database\Models\UserProfileField;
+use MyBB\Core\Database\Models\{
+    ProfileField, ProfileFieldGroup, User, UserProfileField
+};
 use MyBB\Core\Database\Repositories\UserProfileFieldRepositoryInterface;
 
 class UserProfileFieldRepository implements UserProfileFieldRepositoryInterface

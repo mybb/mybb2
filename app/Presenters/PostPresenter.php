@@ -13,8 +13,9 @@ namespace MyBB\Core\Presenters;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Foundation\Application;
 use McCool\LaravelAutoPresenter\BasePresenter;
-use MyBB\Core\Database\Models\Post as PostModel;
-use MyBB\Core\Database\Models\User as UserModel;
+use MyBB\Core\Database\Models\{
+    Post as PostModel, User as UserModel
+};
 use MyBB\Core\Likes\Database\Models\Like;
 
 class PostPresenter extends BasePresenter

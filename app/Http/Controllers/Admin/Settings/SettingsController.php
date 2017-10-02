@@ -10,8 +10,9 @@ namespace MyBB\Core\Http\Controllers\Admin\Settings;
 
 use Illuminate\Http\Request;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, RoleRepositoryInterface
+};
 use MyBB\Core\Exceptions\SettingNotFoundException;
 use MyBB\Core\Http\Controllers\Admin\AdminController;
 use MyBB\Settings\Repositories\SettingRepositoryInterface;

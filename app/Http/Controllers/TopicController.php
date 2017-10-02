@@ -15,17 +15,18 @@ namespace MyBB\Core\Http\Controllers;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Models\Post;
-use MyBB\Core\Database\Models\Topic;
-use MyBB\Core\Database\Repositories\ForumRepositoryInterface;
-use MyBB\Core\Database\Repositories\PollRepositoryInterface;
-use MyBB\Core\Database\Repositories\PostRepositoryInterface;
-use MyBB\Core\Database\Repositories\TopicRepositoryInterface;
-use MyBB\Core\Exceptions\ForumNotFoundException;
-use MyBB\Core\Exceptions\PostNotFoundException;
-use MyBB\Core\Exceptions\TopicNotFoundException;
-use MyBB\Core\Http\Requests\Topic\CreateRequest;
-use MyBB\Core\Http\Requests\Topic\ReplyRequest;
+use MyBB\Core\Database\Models\{
+    Post, Topic
+};
+use MyBB\Core\Database\Repositories\{
+    ForumRepositoryInterface, PollRepositoryInterface, PostRepositoryInterface, TopicRepositoryInterface
+};
+use MyBB\Core\Exceptions\{
+    ForumNotFoundException, PostNotFoundException, TopicNotFoundException
+};
+use MyBB\Core\Http\Requests\Topic\{
+    CreateRequest, ReplyRequest
+};
 use MyBB\Core\Renderers\Post\Quote\QuoteInterface as QuoteRenderer;
 use MyBB\Core\Services\TopicDeleter;
 use MyBB\Parser\Parser;

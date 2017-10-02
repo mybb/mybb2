@@ -8,8 +8,9 @@
 
 namespace MyBB\Core\Database\Repositories;
 
-use MyBB\Core\Database\Models\ProfileField;
-use MyBB\Core\Database\Models\ProfileFieldOption;
+use MyBB\Core\Database\Models\{
+    ProfileField, ProfileFieldOption
+};
 
 interface ProfileFieldOptionRepositoryInterface
 {

@@ -10,14 +10,13 @@ namespace MyBB\Core\Http\Controllers\Admin\Users;
 
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
 use Illuminate\Http\Request;
-use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
-use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
-use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    ProfileFieldGroupRepositoryInterface, ProfileFieldOptionRepositoryInterface, ProfileFieldRepositoryInterface
+};
 use MyBB\Core\Http\Controllers\Admin\AdminController;
-use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldGroupRequest;
-use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldOptionRequest;
-use MyBB\Core\Http\Requests\ProfileField\SaveProfileFieldRequest;
-use MyBB\Core\Http\Requests\ProfileField\TestSubmitRequest;
+use MyBB\Core\Http\Requests\ProfileField\{
+    SaveProfileFieldGroupRequest, SaveProfileFieldOptionRequest, SaveProfileFieldRequest, TestSubmitRequest
+};
 
 class ProfileFieldController extends AdminController
 {

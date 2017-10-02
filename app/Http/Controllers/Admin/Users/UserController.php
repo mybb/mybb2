@@ -10,11 +10,13 @@ namespace MyBB\Core\Http\Controllers\Admin\Users;
 
 use Illuminate\Http\Request;
 use DaveJamesMiller\Breadcrumbs\Manager as Breadcrumbs;
-use MyBB\Core\Database\Repositories\UserRepositoryInterface;
-use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
+use MyBB\Core\Database\Repositories\{
+    UserRepositoryInterface, RoleRepositoryInterface
+};
 use MyBB\Core\Http\Controllers\Admin\AdminController;
-use MyBB\Core\Http\Requests\User\CreateRequest;
-use MyBB\Core\Http\Requests\User\SaveUserRequest;
+use MyBB\Core\Http\Requests\User\{
+    CreateRequest, SaveUserRequest
+};
 
 class UserController extends AdminController
 {

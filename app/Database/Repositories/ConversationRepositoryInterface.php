@@ -11,10 +11,12 @@
 namespace MyBB\Core\Database\Repositories;
 
 use Illuminate\Database\Eloquent\Collection;
-use MyBB\Core\Database\Models\Conversation;
-use MyBB\Core\Database\Models\User;
-use MyBB\Core\Exceptions\ConversationAlreadyParticipantException;
-use MyBB\Core\Exceptions\ConversationCantSendToSelfException;
+use MyBB\Core\Database\Models\{
+    Conversation, User
+};
+use MyBB\Core\Exceptions\{
+    ConversationAlreadyParticipantException, ConversationCantSendToSelfException
+};
 
 interface ConversationRepositoryInterface
 {

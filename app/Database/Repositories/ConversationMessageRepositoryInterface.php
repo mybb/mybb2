@@ -11,8 +11,9 @@
 namespace MyBB\Core\Database\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
-use MyBB\Core\Database\Models\Conversation;
-use MyBB\Core\Database\Models\ConversationMessage;
+use MyBB\Core\Database\Models\{
+    Conversation, ConversationMessage
+};
 
 interface ConversationMessageRepositoryInterface
 {
