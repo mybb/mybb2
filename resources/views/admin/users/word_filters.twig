@@ -1,0 +1,38 @@
+{% extends "layouts.admin" %}
+{% block title %}{% endblock %}
+{% block contents %}
+    <div class="admin-body__header">
+        <h1 class="admin-body__header__title">{{ trans('admin::word_filters.title') }}</h1>
+        <div class="admin-body__header__buttons">
+            <a href="{{ url_route('admin.users.word_filters.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::word_filters.add') }}</a>
+        </div>
+    </div>
+    <div class="admin-body__content" style="display: flex;flex-direction: row;">
+        <table class="admin-table admin-table--bordered users" style="width:79%;">
+            <thead>
+            <tr>
+                <th>{{ trans('admin::word_filters.find_field') }}</th>
+                <th>{{ trans('admin::word_filters.replace_field') }}</th>
+                <th>{{ trans('admin::general.actions_field') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for filter in word_filter_items %}
+                <tr>
+                    <td>{{ filter.find }}</td>
+                    <td>{{ filter.replace }}</td>
+                    <td>
+                        <a href="{{ url_route('admin.users.word_filters.edit', {'id': filter.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::word_filters.edit') }}</a>
+
+                        {{ form_open({'route': ['admin.users.word_filters.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
+                        <input type="hidden" name="word_filter_id" value="{{ filter.id }}">
+                        <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::word_filters.delete') }}</button>
+                        {{ form_close() }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+    </div>
+{% endblock %}

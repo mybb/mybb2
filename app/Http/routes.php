@@ -117,6 +117,10 @@ Route::group(['middleware' => ['web']], function () {
                 'as'   => 'admin.users.add',
                 'uses' => 'Admin\Users\UserController@create',
             ]);
+            Route::get('/word-filters/',[
+                'as' => 'admin.word_filters.index',
+                'uses' => 'Admin\Users\WordFilterController@index',
+            ]);
             Route::get('/profile-fields', [
                 'as'   => 'admin.users.profile_fields',
                 'uses' => 'Admin\Users\ProfileFieldController@profileFields',
