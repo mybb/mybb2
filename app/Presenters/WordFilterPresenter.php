@@ -13,35 +13,25 @@ use McCool\LaravelAutoPresenter\BasePresenter;
 use MyBB\Core\Database\Models\WordFilter as WordFilterModel;
 use MyBB\Core\Form\RenderableInterface;
 
-class WordFilterPresenter extends BasePresenter implements RenderableInterface
+class WordFilterPresenter extends BasePresenter
 {
     /**
      * @var Guard
      */
     protected $guard;
 
-    /**
-     * @param WordFilterModel $resource
-     * @param Guard $guard
-     */
     public function __construct(WordFilterModel $resource, Guard $guard) {
         parent::__construct($resource);
         $this->guard = $guard;
     }
 	
-	/**
-     * @return string
-     */
-    public function find() : string
+	public function find() : string
     {
-        return $this->find;
+        return $this->wrappedObject->find;
     }
 	
-	/**
-     * @return string
-     */
-    public function replace() : string
+	public function replace() : string
     {
-        return $this->replace;
+        return $this->wrappedObject->replace;
     }
 }

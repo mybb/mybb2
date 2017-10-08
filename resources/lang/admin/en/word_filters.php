@@ -8,10 +8,9 @@
 
 return [
     'title'                       => 'Word Filters',
-    'add'                   => 'Add Word Filter',
-    'name_field'                  => 'Name',
-    'description_field'           => 'Description',
-    'type_field'                  => 'Type',
+    'add_button'                   => 'Add Word Filter',
+    'find_field'                  => 'Find',
+    'replace_field'           => 'Replacement',
     'edit'                        => 'Edit',
     'delete'                      => 'Delete',
 ];

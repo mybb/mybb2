@@ -8,7 +8,7 @@
 
 namespace MyBB\Core\Database\Repositories\Eloquent;
 
-use Illuminate\Support\Collection;
+use MyBB\Core\Database\Repositories\Collection;
 use MyBB\Core\Database\Models\WordFilter;
 use MyBB\Core\Database\Repositories\WordFilterRepositoryInterface;
 
@@ -27,7 +27,7 @@ class WordFilterRepository implements WordFilterRepositoryInterface
         $this->wordFilter = $wordFilter;
     }
 
-    public function getAll() : Collection
+    public function getAll() : \Illuminate\Database\Eloquent\Collection
     {
         return $this->wordFilter->all();
     }

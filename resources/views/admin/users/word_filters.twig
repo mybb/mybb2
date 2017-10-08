@@ -4,7 +4,7 @@
     <div class="admin-body__header">
         <h1 class="admin-body__header__title">{{ trans('admin::word_filters.title') }}</h1>
         <div class="admin-body__header__buttons">
-            <a href="{{ url_route('admin.users.word_filters.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::word_filters.add') }}</a>
+            <a href="{{ url_route('admin.word_filters.add') }}" class="button"><i class="fa fa-plus"></i> {{ trans('admin::word_filters.add_button') }}</a>
         </div>
     </div>
     <div class="admin-body__content" style="display: flex;flex-direction: row;">
@@ -22,9 +22,9 @@
                     <td>{{ filter.find }}</td>
                     <td>{{ filter.replace }}</td>
                     <td>
-                        <a href="{{ url_route('admin.users.word_filters.edit', {'id': filter.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::word_filters.edit') }}</a>
+                        <a href="{{ url_route('admin.word_filters.edit', {'id': filter.id}) }}" class="button button--secondary"><i class="fa fa-pencil"></i> {{ trans('admin::word_filters.edit') }}</a>
 
-                        {{ form_open({'route': ['admin.users.word_filters.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
+                        {{ form_open({'route': ['admin.word_filters.delete'], 'method': 'post', 'style': 'display: inline;'}) }}
                         <input type="hidden" name="word_filter_id" value="{{ filter.id }}">
                         <button type="submit" class="button button--secondary button--danger"><i class="fa fa-remove"></i> {{ trans('admin::word_filters.delete') }}</button>
                         {{ form_close() }}
@@ -33,6 +33,5 @@
             {% endfor %}
             </tbody>
         </table>
-    {% endfor %}
     </div>
 {% endblock %}

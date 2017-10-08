@@ -42,4 +42,44 @@ class WordFilterController extends AdminController
             'word_filter_items' => $this->wordFilterRepository->getAll(),
         ])->withActive('word-filters');
     }
+    
+    // TODO Implement this properly, this is a placeholder
+    public function add() : \Illuminate\View\View
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.word_filters.index');
+        
+		return view('admin.users.word_filters', [
+            'word_filter_items' => $this->wordFilterRepository->getAll(),
+        ])->withActive('word-filters');
+    }
+    
+    // TODO Implement this properly, this is a placeholder
+    /*public function addSubmit(WordFilterRequest $request) : \Illuminate\View\View
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.word_filters.index');
+        
+		return view('admin.users.word_filters', [
+            'word_filter_items' => $this->wordFilterRepository->getAll(),
+        ])->withActive('word-filters');
+    }*/
+    
+    // TODO Implement this properly, this is a placeholder
+    public function edit() : \Illuminate\View\View
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.word_filters.index');
+        
+		return view('admin.users.word_filters', [
+            'word_filter_items' => $this->wordFilterRepository->getAll(),
+        ])->withActive('word-filters');
+    }
+    
+    // TODO Implement this properly, this is a placeholder
+    public function delete() : \Illuminate\View\View
+    {
+        $this->breadcrumbs->setCurrentRoute('admin.word_filters.index');
+        
+		return view('admin.users.word_filters', [
+            'word_filter_items' => $this->wordFilterRepository->getAll(),
+        ])->withActive('word-filters');
+    }
 }

@@ -26,6 +26,7 @@ use MyBB\Core\Database\Repositories\Eloquent\PostRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldGroupRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldOptionRepository;
 use MyBB\Core\Database\Repositories\Eloquent\ProfileFieldRepository;
+use MyBB\Core\Database\Repositories\Eloquent\WordFilterRepository;
 use MyBB\Core\Database\Repositories\Eloquent\RoleRepository;
 use MyBB\Core\Database\Repositories\Eloquent\SearchRepository;
 use MyBB\Core\Database\Repositories\Eloquent\TasksRepository;
@@ -41,6 +42,7 @@ use MyBB\Core\Database\Repositories\PostRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldGroupRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldOptionRepositoryInterface;
 use MyBB\Core\Database\Repositories\ProfileFieldRepositoryInterface;
+use MyBB\Core\Database\Repositories\WordFilterRepositoryInterface;
 use MyBB\Core\Database\Repositories\RoleRepositoryInterface;
 use MyBB\Core\Database\Repositories\SearchRepositoryInterface;
 use MyBB\Core\Database\Repositories\TasksRepositoryInterface;
@@ -133,6 +135,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             UserProfileFieldRepositoryInterface::class,
             UserProfileFieldRepository::class
+        );
+        
+        $this->app->bind(
+            WordFilterRepositoryInterface::class,
+            WordFilterRepository::class
         );
 
         $this->app->bind(
