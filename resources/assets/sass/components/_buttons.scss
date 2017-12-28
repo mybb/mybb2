@@ -12,6 +12,7 @@ a.button {
     border-radius: 4px;
 
     &:hover {
+        color: $invert-font-color;
         background: $secondary-color;
         border-color: $secondary-color;
         text-decoration: none;
@@ -39,7 +40,7 @@ a.button {
 
         &.button--half-width {
             padding: 8px 10px;
-            width: 49%;            
+            width: 49%;
             float: $left;
             box-sizing: border-box;
 
