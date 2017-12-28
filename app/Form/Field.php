@@ -35,7 +35,7 @@ class Field implements RenderableInterface
     protected $value;
 
     /**
-     * @var string
+     * @var array
      */
     protected $validationRules;
 
@@ -128,19 +128,19 @@ class Field implements RenderableInterface
     /**
      * @return string
      */
-    public function getValidationRules() : string
+    public function getValidationRules() : array
     {
         return $this->validationRules;
     }
 
     /**
-     * @param string $validationRules
+     * @param string $validationRule
      *
      * @return $this
      */
-    public function setValidationRules(string $validationRules)
+    public function setValidationRule(string $validationRule)
     {
-        $this->validationRules = $validationRules;
+        $this->validationRules = [$this->elementName => $validationRule];
 
         return $this;
     }

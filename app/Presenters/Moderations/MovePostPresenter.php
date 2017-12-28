@@ -36,7 +36,7 @@ class MovePostPresenter extends AbstractModerationPresenter implements Moderatio
                 'topic_id',
                 trans('moderation.move_post_topic_id_name'),
                 trans('moderation.move_post_topic_id_description')
-            ))->setValidationRules('integer|exists:topics,id'),
+            ))->setValidationRule('integer|exists:topics,id'),
         ];
     }
 
