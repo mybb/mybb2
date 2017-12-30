@@ -4188,6 +4188,7 @@ a.button {
 
 .button:hover,
 a.button:hover {
+  color: #fff;
   background: #ff7500;
   border-color: #ff7500;
   text-decoration: none;
@@ -4485,7 +4486,7 @@ input, select, textarea, button {
   font: 16px Open Sans, Helvetica Neue, Helvetica, Arial;
 }
 
-a:link,
+a,
 a:visited {
   color: #007fd0;
   text-decoration: none;
