@@ -30,12 +30,12 @@ class FieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = new Field('type', 'element', 'label', 'description');
         $field->setOptions(['options' => 'options']);
-        $field->setValidationRules('rules');
+        $field->setValidationRule('rules');
         $field->setValue('foo');
 
         $expectations = [
             'getOptions'         => ['options' => 'options'],
-            'getValidationRules' => 'rules',
+            'getValidationRules' => ['element' => 'rules'],
             'getValue'           => 'foo',
         ];
 
