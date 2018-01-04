@@ -38,7 +38,7 @@
         </div>
     </li>
     <li class="user-bar__links__item user-bar__notifications dropit-link">
-        <a href="index.php?page=account/notifications" class="user-bar__links__item__link icon fa-bell">
+        <a href="{{ url_route('account.notifications') }}" class="user-bar__links__item__link icon fa-bell">
             <span class="visually-hidden">Notifications</span>
             <span class="unread-count">4</span>
             <i class="dropit-link__caret dropit-link__caret--down fa fa-caret-down"></i>
@@ -48,8 +48,8 @@
         <div class="user-bar__dropdown dropdown">
             <div class="dropdown__container dropdown__container--notifications">
                 <h2 class="dropdown__title">
-                    <a href="index.php?page=account/notifications" class="dropdown__title__link">Notifications</a>
-                    <a href="index.php?page=account/preferences" title="{{ trans('account.notify_preferences') }}"
+                    <a href="{{ url_route('account.notifications') }}" class="dropdown__title__link">Notifications</a>
+                    <a href="{{ url_route('account.preferences') }}" title="{{ trans('account.notify_preferences') }}"
                        class="dropdown__title__action icon fa-cog"><span class="visually-hidden">{{ trans('account.preferences') }}</span></a>
                 </h2>
                 <ul class="notifications">
@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li class="notifications__view-all dropdown__view-all">
-                        <a href="index.php?page=account/notifications" class="dropdown__view-all__link">View All Recent Notifications</a>
+                        <a href="{{ url_route('account.notifications') }}" class="dropdown__view-all__link">View All Recent Notifications</a>
                     </li>
                 </ul>
             </div>
