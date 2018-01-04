@@ -92,9 +92,9 @@ The MyBB team utilise both [PHP CodeSniffer](https://github.com/squizlabs/PHP_Co
 
 JavaScript should follow the [JavaScript conventions laid out by Douglas Crockford](http://javascript.crockford.com/code.html).
 
-### SCSS/CSS
+### SASS/CSS
 
-Core CSS styling is built using the [SCSS](http://sass-lang.com) pre-processor. CSS code should follow the [enhanced BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) where fitting, and focus upon providing reusable CSS components rather than replicating styles. CSS should follow [the standards laid out by @mdo](http://codeguide.co/#css).
+Core CSS styling is built using the [SASS](http://sass-lang.com) pre-processor. CSS code should follow the [enhanced BEM syntax](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) where fitting, and focus upon providing reusable CSS components rather than replicating styles. CSS should follow [the standards laid out by @mdo](http://codeguide.co/#css).
 
 ## Code of Conduct
 Contributors to this project should understand and ensure they agree to the terms described in our Code of Conduct available at https://mybb.com/about/conduct/.
