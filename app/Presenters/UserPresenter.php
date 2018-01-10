@@ -213,9 +213,6 @@ class UserPresenter extends BasePresenter
         return $conversations;
     }
 
-    /**
-     * @return bool
-     */
     public function isOnline() : bool
     {
         $minutes = $this->settings->get('wio.minutes', 15);
@@ -224,13 +221,10 @@ class UserPresenter extends BasePresenter
         if ($this->wrappedObject->last_page == 'auth/logout') {
             return false;
         }
-
-        // This user isn't online
+        
         if (new \DateTime($this->wrappedObject->last_visit) < new \DateTime("{$minutes} minutes ago")) {
             return false;
         }
-
-        // The user is online, now permissions
 
         // We're either testing our own account or have permissions to view everyone
         if ($this->permissionChecker->hasPermission('user', null, 'canViewAllOnline')
@@ -240,21 +234,12 @@ class UserPresenter extends BasePresenter
         }
 
         // Next we need to get the setting for this user
-
-        // First get the id of our setting
         $settingId = Setting::where('name', 'user.showonline')->first()->id;
-
-        // Now the value
         $settingValue = SettingValue::where('user_id', '=', $this->wrappedObject->id)
-            ->where('setting_id', '=', $settingId)->first();
-
-        // Either the value isn't set (good) or true (better), let's show this user as online
-        if ($settingValue == null || $settingValue->value == true) {
-            return true;
-        }
-
-        // Still here? Then the viewing user doesn't have the permissions and we show him as offline
-        return false;
+            ->where('setting_id', '=', $settingId)
+            ->first();
+            
+        return ($settingValue == null || $settingValue->value == true);
     }
 
     /**
